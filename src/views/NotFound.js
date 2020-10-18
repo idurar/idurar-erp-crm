@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "./Layout";
+import DashboardLayout from "./DashboardLayout";
 const NotFound = () => <p>Not found </p>;
 
 export default NotFound;

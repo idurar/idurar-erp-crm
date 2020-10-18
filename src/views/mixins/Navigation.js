@@ -1,60 +1,50 @@
-import React, { useState } from "react";
-import { menu } from "./Menu";
-import { icon } from "./Helper";
+import React from "react";
+import { Layout, Menu } from "antd";
+import {
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
-import { useLocation } from "react-router";
+const { Sider } = Layout;
+const { SubMenu } = Menu;
+
+// class SiderDemo extends React.Component {
+//   state = {
+//     collapsed: false,
+//   };
+
+//   onCollapse = (collapsed) => {
+//     console.log(collapsed);
+//     this.setState({ collapsed });
+//   };
+// }
 
 function Navigation() {
-  const currentPath = useLocation().pathname;
-  const [open, setOpen] = useState(false);
-
   return (
-    <nav>
-      <a href="/">
-        <div className="logo"></div>
-      </a>
-      <ul className="navMenu">
-        {menu.map((item, index) => (
-          <li
-            key={index}
-            className={item.submenu ? "toggle" : ""}
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
-            {item.submenu && (
-              <>
-                <p>{item.title}</p>
-                <ul className={open === true ? "subMenu show" : "subMenu"}>
-                  {item.submenu.map((submenu, index) => (
-                    <li key={index}>
-                      <a
-                        href={submenu.slug}
-                        className={
-                          currentPath === submenu.slug ? "nav__active" : ""
-                        }
-                      >
-                        <p>{submenu.title}</p>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-
-            {!item.submenu && (
-              <a
-                href={item.slug}
-                className={currentPath === item.slug ? "nav__active" : ""}
-              >
-                <p>{item.title}</p>
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <Sider collapsible>
+      <div className="logo" />
+      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        <Menu.Item key="1" icon={<PieChartOutlined />}>
+          Option 1
+        </Menu.Item>
+        <Menu.Item key="2" icon={<DesktopOutlined />}>
+          Option 2
+        </Menu.Item>
+        <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+          <Menu.Item key="3">Tom</Menu.Item>
+          <Menu.Item key="4">Bill</Menu.Item>
+          <Menu.Item key="5">Alex</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
+          <Menu.Item key="6">Team 1</Menu.Item>
+          <Menu.Item key="8">Team 2</Menu.Item>
+        </SubMenu>
+        <Menu.Item key="9" icon={<FileOutlined />} />
+      </Menu>
+    </Sider>
   );
 }
-
 export default Navigation;
