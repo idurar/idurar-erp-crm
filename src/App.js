@@ -2,14 +2,16 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import StorePicker from './views/StorePicker'
 import NotFound from "./views/NotFound";
-import Dashboard from "./views/Dashboard";
+import DashboardPage from "./views/DashboardPage";
+import LoginPage from "./views/LoginPage";
 import "./App.less";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/" component={DashboardPage} />
+        <Route exact path="/login" component={LoginPage} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

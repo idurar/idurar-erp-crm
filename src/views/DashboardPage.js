@@ -4,7 +4,7 @@ import { Layout, Breadcrumb } from "antd";
 
 const { Content } = Layout;
 
-const Dashboard = () => (
+const DashboardPage = () => (
   <DashboardLayout
     contentLayout={
       <Content style={{ margin: "0 16px" }}>
@@ -23,4 +23,4 @@ const Dashboard = () => (
   />
 );
 
-export default Dashboard;
+export default DashboardPage;
