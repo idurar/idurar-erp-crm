@@ -1,5 +1,5 @@
 {
-  "name": "antd-react-crm",
+  "name": "reactcedimed",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,9 +7,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "antd": "^4.7.0",
+    "antd": "^4.8.0",
     "craco-less": "^1.17.0",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"
