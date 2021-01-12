@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import Axios from "axios";
+import ErrorNotice from "../misc/ErrorNotice";
+import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
+
 import { Form, Input, Button, Checkbox, Layout, Row, Col, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+
 const { Content, Footer } = Layout;
+
 // import DashboardLayout from "./DashboardLayout";
 
-const LoginPage = () => {
+const LoginPage = ({ controller }) => {
+  const [error, setError] = useState();
+
+  const { setUserData } = useContext(UserContext);
+  const history = useHistory();
+
+  const onFinish = async (values) => {
+    console.log("Received values of form: ", values);
+    try {
+      const email = values.username;
+      const password = values.password;
+
+      const loginRes = await Axios.post(API_BASE_URL + `login`, {
+        email,
+        password,
+      });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem(ACCESS_TOKEN_NAME, loginRes.data.token);
+      history.push("/");
+    } catch (err) {
+      console.log(err.response.data);
+      err.response.data.error && setError(err.response.data.error);
+    }
+  };
   return (
     <>
       <Layout className="layout">
@@ -18,14 +52,22 @@ const LoginPage = () => {
               }}
             >
               <h1>Login</h1>
+              {error && (
+                <ErrorNotice
+                  message={error}
+                  clearError={() => setError(undefined)}
+                />
+              )}
               <Divider />
               <div className="site-layout-content">
                 {" "}
                 <Form
                   name="normal_login"
                   className="login-form"
-                  initialValues={{ remember: true }}
-                  // onFinish={onFinish}
+                  initialValues={{
+                    remember: true,
+                  }}
+                  onFinish={onFinish}
                 >
                   <Form.Item
                     name="username"
@@ -90,4 +132,5 @@ const LoginPage = () => {
     </>
   );
 };
+
 export default LoginPage;
