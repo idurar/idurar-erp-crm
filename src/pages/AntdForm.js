@@ -3,7 +3,6 @@ import {
   Form,
   Select,
   InputNumber,
-  DatePicker,
   Switch,
   Slider,
   Button,
@@ -12,11 +11,13 @@ import {
   Space,
   Divider,
 } from "antd";
-
+import { DatePicker, TimePicker, Calendar } from "../antdcomponents";
+import format from "dayjs";
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const { Option } = Select;
 const { Title } = Typography;
 
-function Dashboard() {
+function AntdForm() {
   let refFromUseRef = useRef(null);
   return (
     <>
@@ -81,4 +82,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default AntdForm;
