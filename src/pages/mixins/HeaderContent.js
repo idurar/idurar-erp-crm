@@ -25,7 +25,7 @@ export default function HeaderContent() {
   };
   const menu = (
     <Menu>
-      <Menu.Item onClick={() => onLogout()}>logout</Menu.Item>
+      <Menu.Item onClick={onLogout}>logout</Menu.Item>
       {/* <Menu.Item onClick={() => logout(userData, setUserData)}>
         logout
       </Menu.Item> */}
