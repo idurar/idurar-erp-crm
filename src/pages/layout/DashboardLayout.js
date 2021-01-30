@@ -1,7 +1,7 @@
 import React from "react";
-import HeaderContent from "./mixins/HeaderContent";
-import FooterContent from "./mixins/FooterContent";
-import Navigation from "./mixins/Navigation";
+import HeaderContent from "./HeaderContent";
+import FooterContent from "./FooterContent";
+import Navigation from "./Navigation";
 import { Layout } from "antd";
 
 function DashboardLayout({ contentLayout }) {
