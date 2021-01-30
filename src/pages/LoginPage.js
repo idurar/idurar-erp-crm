@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
 import ErrorNotice from "../misc/ErrorNotice";
+import { login } from "../auth/auth.service";
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
 
 import { Form, Input, Button, Checkbox, Layout, Row, Col, Divider } from "antd";
@@ -18,26 +19,18 @@ const LoginPage = ({ controller }) => {
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
-  const onFinish = async (values) => {
-    console.log("Received values of form: ", values);
-    try {
-      const email = values.username;
-      const password = values.password;
-
-      const loginRes = await Axios.post(API_BASE_URL + `login`, {
+  const onFinish = (values) => {
+    const email = values.username;
+    const password = values.password;
+    login(
+      {
         email,
         password,
-      });
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-      });
-      localStorage.setItem(ACCESS_TOKEN_NAME, loginRes.data.token);
-      history.push("/");
-    } catch (err) {
-      console.log(err.response.data);
-      err.response.data.error && setError(err.response.data.error);
-    }
+      },
+      setUserData,
+      setError,
+      history
+    );
   };
   return (
     <>
