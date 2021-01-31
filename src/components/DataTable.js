@@ -14,6 +14,8 @@ import {
   Col,
 } from "antd";
 
+import FormPatient from "./FormPatient";
+
 import { UserOutlined } from "@ant-design/icons";
 
 import { listSync } from "../axiosRequest";
@@ -89,7 +91,7 @@ export default function DataTable({ target, columns }) {
         extra={[
           <Button key="2">Refresh</Button>,
           <Button key="1" type="primary" onClick={showModal}>
-            Add new Patient
+            Add new Customer
           </Button>,
         ]}
         style={{
@@ -110,14 +112,13 @@ export default function DataTable({ target, columns }) {
         </Row>
       </PageHeader>
       <Modal
-        title="Basic Modal"
+        title="Add new Customer"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <FormPatient />
       </Modal>
       <Table
         columns={columns}

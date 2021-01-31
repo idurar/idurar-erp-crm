@@ -1,29 +1,42 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Radio,
-  Select,
-  Cascader,
-  DatePicker,
-  InputNumber,
-  TreeSelect,
-  Switch,
-} from "antd";
-
+import { Form, Input, Button, Radio, Select, Switch } from "antd";
+import { DatePicker, TimePicker, Calendar } from "../antdcomponents";
+import dayjs from "dayjs";
+import { createSync } from "../axiosRequest";
 export default function FormPatient() {
+  const [form] = Form.useForm();
+  const onFinish = (fieldsValue) => {
+    // Should format date value before submit.
+    const values = {
+      ...fieldsValue,
+      birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
+    };
+
+    const ajaxCall = createSync("patient", values);
+    ajaxCall.then(function (response) {
+      if (response === undefined || response.success === false) {
+        return;
+      }
+      form.resetFields();
+      console.log("Sent values of form: ", response);
+    });
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 6, span: 14 },
+  };
+  const dateFormat = "DD/MM/YYYY";
   return (
     <>
       <Form
+        form={form}
         labelCol={{
-          span: 4,
+          span: 6,
         }}
         wrapperCol={{
           span: 14,
         }}
         layout="horizontal"
-        size="large"
+        onFinish={onFinish}
       >
         <Form.Item
           label="name"
@@ -59,7 +72,7 @@ export default function FormPatient() {
             },
           ]}
         >
-          <DatePicker />
+          <DatePicker format={dateFormat} />
         </Form.Item>
         <Form.Item
           label="Gender"
@@ -93,15 +106,24 @@ export default function FormPatient() {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Enabled" name="enabled">
-          <Switch />
+        <Form.Item
+          name="tel"
+          label="Phone Number"
+          rules={[
+            {
+              required: true,
+              message: "Please input your phone!",
+            },
+          ]}
+        >
+          <Input />
         </Form.Item>
-        <Form.Item label="Button">
-          <Button>Button</Button>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </>
   );
 }
-
-ReactDOM.render(<FormSizeDemo />, mountNode);
