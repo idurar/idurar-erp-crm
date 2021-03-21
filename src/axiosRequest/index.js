@@ -1,9 +1,16 @@
 import axios from "axios";
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
 
+const token = window.localStorage.getItem(ACCESS_TOKEN_NAME) || "";
+let headerToken = {
+  [ACCESS_TOKEN_NAME]: token,
+};
+
 export const createSync = async (target, jsonData, option = {}) => {
   const result = await axios
-    .post(API_BASE_URL + target + "/create", jsonData)
+    .post(API_BASE_URL + target + "/create", jsonData, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -15,7 +22,7 @@ export const createSync = async (target, jsonData, option = {}) => {
       // const result = error.response.data.result;
       // const message = error.response.data.message;
       // const data = { success, result, message };
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -23,7 +30,9 @@ export const createSync = async (target, jsonData, option = {}) => {
 };
 export const readSync = async (target, id, option = {}) => {
   const result = await axios
-    .get(API_BASE_URL + target + "/read/" + id)
+    .get(API_BASE_URL + target + "/read/" + id, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -31,7 +40,7 @@ export const readSync = async (target, id, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -39,7 +48,9 @@ export const readSync = async (target, id, option = {}) => {
 };
 export const updateSync = async (target, id, jsonData, option = {}) => {
   const result = await axios
-    .patch(API_BASE_URL + target + "/update/" + id, jsonData)
+    .patch(API_BASE_URL + target + "/update/" + id, jsonData, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -47,7 +58,7 @@ export const updateSync = async (target, id, jsonData, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -56,7 +67,9 @@ export const updateSync = async (target, id, jsonData, option = {}) => {
 
 export const deleteSync = async (target, id, option = {}) => {
   const result = await axios
-    .delete(API_BASE_URL + target + "/delete/" + id)
+    .delete(API_BASE_URL + target + "/delete/" + id, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -64,7 +77,7 @@ export const deleteSync = async (target, id, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -85,7 +98,9 @@ export const filterSync = async (target, option = {}) => {
   query = `?${filter}${equal}`;
 
   const result = await axios
-    .get(API_BASE_URL + target + "/filter" + query)
+    .get(API_BASE_URL + target + "/filter" + query, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -93,7 +108,7 @@ export const filterSync = async (target, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -122,6 +137,7 @@ export const searchSync = async (target, source, option = {}) => {
   const result = await axios
     .get(API_BASE_URL + target + "/search" + query, {
       cancelToken: source.token,
+      headers: headerToken,
     })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
@@ -132,7 +148,7 @@ export const searchSync = async (target, source, option = {}) => {
       if (error.response === undefined) {
         return { success: false };
       } else {
-        return error.response.data;
+        return error.response;
       }
     })
     .finally(function () {});
@@ -154,7 +170,9 @@ export const listSync = async (target, option = {}) => {
   }
 
   const result = await axios
-    .get(API_BASE_URL + target + "/list" + query)
+    .get(API_BASE_URL + target + "/list" + query, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -162,7 +180,7 @@ export const listSync = async (target, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -171,7 +189,9 @@ export const listSync = async (target, option = {}) => {
 
 export const postDataSync = async (targetUrl, jsonData, option = {}) => {
   const result = await axios
-    .post(API_BASE_URL + targetUrl, jsonData)
+    .post(API_BASE_URL + targetUrl, jsonData, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -179,7 +199,7 @@ export const postDataSync = async (targetUrl, jsonData, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 
@@ -187,7 +207,9 @@ export const postDataSync = async (targetUrl, jsonData, option = {}) => {
 };
 export const getDataSync = async (targetUrl, option = {}) => {
   const result = await axios
-    .get(API_BASE_URL + targetUrl)
+    .get(API_BASE_URL + targetUrl, {
+      headers: headerToken,
+    })
     .then((response) => {
       // returning the data here allows the caller to get it through another .then(...)
       //console.log(response.data);
@@ -195,7 +217,7 @@ export const getDataSync = async (targetUrl, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response.data;
+      return error.response;
     })
     .finally(function () {});
 

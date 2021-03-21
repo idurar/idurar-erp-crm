@@ -6,9 +6,8 @@ import { store } from "./redux/helpers";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <App />,
+
   document.getElementById("root")
 );
 

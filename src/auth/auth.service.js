@@ -9,16 +9,17 @@ export function logout(setUserData) {
   });
 }
 export const login = async (loginUser, setUserData, setError, history) => {
+  let loginRes = null;
   try {
-    const loginRes = await Axios.post(API_BASE_URL + `login`, loginUser);
+    loginRes = await Axios.post(API_BASE_URL + `login`, loginUser);
     setUserData({
-      token: loginRes.data.token,
-      user: loginRes.data.user,
+      token: loginRes.data.result.token,
+      user: loginRes.data.result.user,
     });
-    localStorage.setItem(ACCESS_TOKEN_NAME, loginRes.data.token);
+    localStorage.setItem(ACCESS_TOKEN_NAME, loginRes.data.result.token);
     history.push("/");
   } catch (err) {
-    console.log(err.response.data);
-    err.response.data.error && setError(err.response.data.error);
+    console.log(err.response);
+    err.response.data.message && setError(err.response.data.message);
   }
 };
