@@ -112,7 +112,7 @@ export default function DataTable({ target, columns }) {
         </Row>
       </PageHeader>
       <Modal
-        title="Add new Customer"
+        title="Add new Patient"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}

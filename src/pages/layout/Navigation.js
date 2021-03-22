@@ -38,6 +38,10 @@ function Navigation() {
             <Link to="/customer" />
             Customer Page
           </Menu.Item>
+          <Menu.Item key="21" icon={<CustomerServiceOutlined />}>
+            <Link to="/patient" />
+            Patient Page
+          </Menu.Item>
           <Menu.Item key="3" icon={<DesktopOutlined />}>
             <Link to="/days" />
             Days Page

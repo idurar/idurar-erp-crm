@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import DashboardPage from "./pages/DashboardPage";
 import DaysPage from "./pages/DaysPage";
 import CustomerPage from "./pages/CustomerPage";
+import PatientPage from "./pages/PatientPage";
 import AntdForm from "./pages/AntdForm";
 import LoginPage from "./pages/LoginPage";
 import "./App.less";
@@ -23,6 +24,7 @@ function App() {
           <Switch>
             <PrivateRoute component={DashboardPage} path="/" exact />
             <PrivateRoute component={CustomerPage} path="/customer" exact />
+            <PrivateRoute component={PatientPage} path="/patient" exact />
             <PrivateRoute component={DaysPage} path="/days" exact />
             <PrivateRoute component={AntdForm} path="/antd" exact />
 
