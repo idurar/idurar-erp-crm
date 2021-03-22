@@ -34,7 +34,7 @@ const INITIAL_STATE = {
   currentItem: null,
 };
 
-const reducer = (state = INITIAL_STATE, action) => {
+const shoppingReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
       // Great Item data from products array
@@ -80,4 +80,4 @@ const reducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default reducer;
+export default shoppingReducer;
