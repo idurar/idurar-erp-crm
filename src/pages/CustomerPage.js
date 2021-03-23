@@ -4,6 +4,9 @@ import { Layout, Breadcrumb } from "antd";
 import { DatePicker, TimePicker, Calendar } from "../antdcomponents";
 import DataTable from "../components/DataTable";
 import format from "dayjs";
+import CustomerTable from "../components/customerTable";
+
+
 const { Content } = Layout;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 function CustomerPage() {
@@ -30,7 +33,8 @@ function CustomerPage() {
     <DashboardLayout
       contentLayout={
         <Content style={{ margin: "0 16px" }}>
-          <DataTable target={target} columns={columns} />
+          {/* <DataTable target={target} columns={columns} /> */}
+          <CustomerTable columns={columns} />
         </Content>
       }
     />

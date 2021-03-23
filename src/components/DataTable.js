@@ -55,6 +55,7 @@ export default function DataTable({ target, columns }) {
           total: response.pagination.count,
         },
       });
+      console.log(response);
     });
   };
   useEffect(() => {
