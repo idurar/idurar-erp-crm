@@ -25,6 +25,7 @@ export default function DataTable({ target, columns }) {
     data: [],
     pagination: {
       defaultCurrent: 1,
+      current: 1,
       pageSize: 10,
       total: 1,
     },
@@ -33,9 +34,9 @@ export default function DataTable({ target, columns }) {
 
   const fetchData = (state) => {
     const { pagination } = state;
-
+    console.log(pagination);
     setState({ loading: true });
-    const ajaxCall = listSync(target, { page: pagination.defaultCurrent });
+    const ajaxCall = listSync({ target, option: { page: pagination.current } });
     ajaxCall.then(function (response) {
       if (response === undefined || response.success === false) {
         setState({
@@ -50,8 +51,8 @@ export default function DataTable({ target, columns }) {
         loading: false,
         data: response.result,
         pagination: {
-          defaultCurrent: response.pagination.page,
-          pageSize: response.result.length,
+          ...state.pagination,
+          current: parseInt(response.pagination.page),
           total: response.pagination.count,
         },
       });

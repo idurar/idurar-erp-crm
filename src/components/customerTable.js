@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import { Button, PageHeader, Row, Statistic, Table, Tag } from 'antd';
-import { connect } from 'react-redux';
-import Modal from 'antd/lib/modal/Modal';
-import FormCustomer from './formCustomer';
+import React, { useState, useEffect } from "react";
+import { Button, PageHeader, Row, Statistic, Table, Tag } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import Modal from "antd/lib/modal/Modal";
+import FormCustomer from "./formCustomer";
+import { loadCustomers } from "../redux/customer/actions";
 
+export default function CustomerTable({ entity, columns }) {
+  const dispatch = useDispatch();
 
+  let customers = useSelector((state) => state.customers);
 
-const CustomerTable = ({columns, customer}) => {
+  const handelDataTableLoad = (customers) => {
+    const { pagination } = customers;
+    dispatch(loadCustomers(entity, pagination.current));
+  };
+  useEffect(() => {
+    handelDataTableLoad(customers);
+  }, []);
+
+  const handleTableChange = (pagination) => {
+    handelDataTableLoad({ pagination });
+  };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -21,7 +35,7 @@ const CustomerTable = ({columns, customer}) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  return(
+  return (
     <>
       <PageHeader
         onBack={() => window.history.back()}
@@ -40,40 +54,41 @@ const CustomerTable = ({columns, customer}) => {
         }}
       >
         <Row>
-            <Statistic title="Status" value="Pending" />
-            <Statistic
-              title="Price"
-              prefix="$"
-              value={568.08}
-              style={{
-                margin: "0 32px",
-              }}
-            />
-            <Statistic title="Balance" prefix="$" value={3345.08} />
-          </Row>
+          <Statistic title="Status" value="Pending" />
+          <Statistic
+            title="Price"
+            prefix="$"
+            value={568.08}
+            style={{
+              margin: "0 32px",
+            }}
+          />
+          <Statistic title="Balance" prefix="$" value={3345.08} />
+        </Row>
       </PageHeader>
-      <Modal 
+      <Modal
         title="Add new Patient"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
       >
-        <FormCustomer />
+        <FormCustomer
+          entity={entity}
+          closeModel={() => {
+            setIsModalVisible(false);
+          }}
+        />
       </Modal>
-      <Table 
+
+      <Table
         columns={columns}
         rowKey={(record) => record._id}
-        //customer is the data from redux
-        dataSource={customer}
+        dataSource={customers.list}
+        pagination={customers.pagination}
+        loading={customers.loading}
+        onChange={handleTableChange}
       />
     </>
-  )
+  );
 }
-const mapStateToProps = (state) => {
-  return {
-    customer: state.customer.customers
-  };
-};
-
-export default connect(mapStateToProps, null)(CustomerTable);

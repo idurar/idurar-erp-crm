@@ -5,7 +5,7 @@ import { reducer as customerReducer } from "./customer";
 
 const rootReducer = combineReducers({
   shop: shoppingReducer,
-  customer: customerReducer
+  customers: customerReducer,
 });
 
 export default rootReducer;

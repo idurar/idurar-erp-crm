@@ -1,22 +1,26 @@
 import React from "react";
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input } from "antd";
 import { addNewCustomer } from "../redux/customer/actions";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
+import { createSync } from "../axiosRequest";
 
-const FormCustomer = ({addNewCustomer}) => {
+export default function FormCustomer({ entity, closeModel }) {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
 
-  const onFinish = (item) => {
-    console.log("fieldsValues", item);
-    // switch the new customer to reducer Redux
-    addNewCustomer(item);
-  }
+  const onFinish = (values) => {
+    console.log("fieldsValues", values);
+    dispatch(addNewCustomer(entity, values));
+    form.resetFields();
+    // close Model Form
+    closeModel();
+  };
   const tailLayout = {
     wrapperCol: { offset: 6, span: 14 },
   };
 
-  return(
+  return (
     <>
       <Form
         form={form}
@@ -65,6 +69,19 @@ const FormCustomer = ({addNewCustomer}) => {
         >
           <Input />
         </Form.Item>
+
+        <Form.Item
+          name="phone"
+          label="Phone"
+          rules={[
+            {
+              required: true,
+              message: "Please input your phone!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           name="email"
           label="E-mail"
@@ -88,13 +105,13 @@ const FormCustomer = ({addNewCustomer}) => {
         </Form.Item>
       </Form>
     </>
-  )
+  );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addNewCustomer: item => dispatch(addNewCustomer(item)),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addNewCustomer: (item) => dispatch(addNewCustomer(item)),
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(FormCustomer) ;
+// export default connect(null, mapDispatchToProps)(FormCustomer);
