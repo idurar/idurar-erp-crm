@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
-
+import history from "../utils/history";
 const handelToken = () => {
   const token = window.localStorage.getItem(ACCESS_TOKEN_NAME) || "";
   let headerToken = {
@@ -28,6 +28,7 @@ const errorHandler = (error, emptyResult) => {
   if (error.response) {
     if (error.response.data.jwtExpired) {
       localStorage.removeItem(ACCESS_TOKEN_NAME);
+      history.push("/login");
     }
     return errorHandler(error, null);
   } else {

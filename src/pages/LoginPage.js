@@ -17,7 +17,7 @@ const LoginPage = ({ controller }) => {
   const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
-  const history = useHistory();
+  // const history = useHistory();
 
   const onFinish = (values) => {
     const email = values.username;
@@ -28,8 +28,7 @@ const LoginPage = ({ controller }) => {
         password,
       },
       setUserData,
-      setError,
-      history
+      setError
     );
   };
   return (
