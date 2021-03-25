@@ -10,7 +10,31 @@ const handelToken = () => {
   return headers;
 };
 
-export const createSync = async (target, jsonData, option = {}) => {
+const errorHandler = (error, emptyResult) => {
+  // handle error
+  // let errorMessage = "Unknown Error";
+  // if (error.response) {
+  //   if (error.response.data.message) {
+  //     errorMessage = error.response.data.message;
+  //   } else {
+  //     errorMessage = error.message;
+  //   }
+  // }
+  const response = {
+    success: false,
+    result: emptyResult,
+    message: "Unknown Error",
+  };
+  if (error.response) {
+    if (error.response.data.jwtExpired) {
+      localStorage.removeItem(ACCESS_TOKEN_NAME);
+    }
+    return errorHandler(error, null);
+  } else {
+    return response;
+  }
+};
+export const createSync = async ({ target, jsonData, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .post(API_BASE_URL + target + "/create", jsonData, headersObj)
@@ -25,13 +49,13 @@ export const createSync = async (target, jsonData, option = {}) => {
       // const result = error.response.data.result;
       // const message = error.response.data.message;
       // const data = { success, result, message };
-      return error.response;
+      return errorHandler(error, null);
     })
     .finally(function () {});
 
   return result;
 };
-export const readSync = async (target, id, option = {}) => {
+export const readSync = async ({ target, id, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .get(API_BASE_URL + target + "/read/" + id, headersObj)
@@ -42,13 +66,13 @@ export const readSync = async (target, id, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response;
+      return errorHandler(error, null);
     })
     .finally(function () {});
 
   return result;
 };
-export const updateSync = async (target, id, jsonData, option = {}) => {
+export const updateSync = async ({ target, id, jsonData, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .patch(API_BASE_URL + target + "/update/" + id, jsonData, headersObj)
@@ -59,14 +83,14 @@ export const updateSync = async (target, id, jsonData, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response;
+      return errorHandler(error, null);
     })
     .finally(function () {});
 
   return result;
 };
 
-export const deleteSync = async (target, id, option = {}) => {
+export const deleteSync = async ({ target, id, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .delete(API_BASE_URL + target + "/delete/" + id, headersObj)
@@ -77,14 +101,14 @@ export const deleteSync = async (target, id, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response;
+      return errorHandler(error, null);
     })
     .finally(function () {});
 
   return result;
 };
 
-export const filterSync = async (target, option = {}) => {
+export const filterSync = async ({ target, option = {} }) => {
   let query = "";
 
   let filter = "";
@@ -107,7 +131,7 @@ export const filterSync = async (target, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response;
+      return errorHandler(error, []);
     })
     .finally(function () {});
 
@@ -119,7 +143,7 @@ export const axiosRequest = () => {
   const source = CancelToken.source();
   return source;
 };
-export const searchSync = async (target, source, option = {}) => {
+export const searchSync = async ({ target, source, option = {} }) => {
   let query = "";
   if (option != {}) {
     let fields = "";
@@ -143,17 +167,13 @@ export const searchSync = async (target, source, option = {}) => {
       return response.data;
     })
     .catch(function (error) {
-      if (error.response === undefined) {
-        return { success: false };
-      } else {
-        return error.response;
-      }
+      return errorHandler(error, []);
     })
     .finally(function () {});
 
   return result;
 };
-export const listSync = async (target, option = {}) => {
+export const listSync = async ({ target, option = {} }) => {
   let query = "";
   if (option != {}) {
     let page = "";
@@ -171,25 +191,17 @@ export const listSync = async (target, option = {}) => {
   const result = await axios
     .get(API_BASE_URL + target + "/list" + query, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      console.log("response.data");
-      console.log(response.data);
       return response.data;
     })
     .catch(function (error) {
-      // handle error
-      console.log("error.response");
-      console.log(error.response);
-      if (error.response.data.jwtExpired) {
-        localStorage.removeItem(ACCESS_TOKEN_NAME);
-      } else return error.response;
+      return errorHandler(error, []);
     })
     .finally(function () {});
 
   return result;
 };
 
-export const postDataSync = async (targetUrl, jsonData, option = {}) => {
+export const postDataSync = async ({ targetUrl, jsonData, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .post(API_BASE_URL + targetUrl, jsonData, headersObj)
@@ -200,13 +212,13 @@ export const postDataSync = async (targetUrl, jsonData, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response;
+      return errorHandler(error, null);
     })
     .finally(function () {});
 
   return result;
 };
-export const getDataSync = async (targetUrl, option = {}) => {
+export const getDataSync = async ({ targetUrl, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .get(API_BASE_URL + targetUrl, headersObj)
@@ -217,7 +229,7 @@ export const getDataSync = async (targetUrl, option = {}) => {
     })
     .catch(function (error) {
       // handle error
-      return error.response;
+      return errorHandler(error, null);
     })
     .finally(function () {});
 

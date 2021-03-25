@@ -1,13 +1,12 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import DashboardLayout from "./layout/DashboardLayout";
-import { Layout, Breadcrumb } from "antd";
-import { DatePicker, TimePicker, Calendar } from "../antdcomponents";
-import DataTable from "../components/DataTable";
-import format from "dayjs";
+import { Layout } from "antd";
+import CustomerTable from "../components/customerTable";
+
 const { Content } = Layout;
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+
 function CustomerPage() {
-  const target = "client";
+  const entity = "client";
   const columns = [
     {
       title: "Company",
@@ -26,11 +25,12 @@ function CustomerPage() {
       dataIndex: "email",
     },
   ];
+
   return (
     <DashboardLayout
       contentLayout={
         <Content style={{ margin: "0 16px" }}>
-          <DataTable target={target} columns={columns} />
+          <CustomerTable entity={entity} columns={columns} />
         </Content>
       }
     />

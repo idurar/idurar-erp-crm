@@ -7,9 +7,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "antd": "^4.8.0",
+    "antd": "^4.14.1",
     "axios": "^0.21.0",
     "craco-less": "^1.17.0",
+    "dayjs": "^1.10.4",
     "react": "^17.0.1",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.2",
@@ -48,9 +49,11 @@
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.2.1"
   }
 }
