@@ -1,6 +1,8 @@
 import axios from "axios";
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
-import history from "../utils/history";
+import errorHandler from "./errorHandler";
+import successHandler from "./successHandler";
+
 const handelToken = () => {
   const token = window.localStorage.getItem(ACCESS_TOKEN_NAME) || "";
   let headerToken = {
@@ -10,47 +12,34 @@ const handelToken = () => {
   return headers;
 };
 
-const errorHandler = (error, emptyResult) => {
-  // handle error
-  // let errorMessage = "Unknown Error";
-  // if (error.response) {
-  //   if (error.response.data.message) {
-  //     errorMessage = error.response.data.message;
-  //   } else {
-  //     errorMessage = error.message;
-  //   }
-  // }
-  const response = {
-    success: false,
-    result: emptyResult,
-    message: "Unknown Error",
-  };
-  if (error.response) {
-    if (error.response.data.jwtExpired) {
-      localStorage.removeItem(ACCESS_TOKEN_NAME);
-      history.push("/login");
-    }
-    return errorHandler(error, null);
-  } else {
-    return response;
-  }
-};
+// const successHandler = (response) => {
+//   const { data } = response;
+//   if (!data || !data.success || data.success === false) {
+//     response = {
+//       ...response,
+//       status: 404,
+//       url: null,
+//       data: {
+//         success: false,
+//         result: null,
+//       },
+//     };
+//     return errorHandler({ response });
+//   } else {
+//     return data;
+//   }
+// };
+
 export const createSync = async ({ target, jsonData, option = {} }) => {
   const headersObj = handelToken();
   const result = await axios
     .post(API_BASE_URL + target + "/create", jsonData, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
-      // const success = error.response.data.success;
-      // const result = error.response.data.result;
-      // const message = error.response.data.message;
-      // const data = { success, result, message };
-      return errorHandler(error, null);
+      return errorHandler(error);
     })
     .finally(function () {});
 
@@ -61,13 +50,11 @@ export const readSync = async ({ target, id, option = {} }) => {
   const result = await axios
     .get(API_BASE_URL + target + "/read/" + id, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
-      return errorHandler(error, null);
+      return errorHandler(error);
     })
     .finally(function () {});
 
@@ -78,13 +65,11 @@ export const updateSync = async ({ target, id, jsonData, option = {} }) => {
   const result = await axios
     .patch(API_BASE_URL + target + "/update/" + id, jsonData, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
-      return errorHandler(error, null);
+      return errorHandler(error);
     })
     .finally(function () {});
 
@@ -96,13 +81,11 @@ export const deleteSync = async ({ target, id, option = {} }) => {
   const result = await axios
     .delete(API_BASE_URL + target + "/delete/" + id, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
-      return errorHandler(error, null);
+      return errorHandler(error);
     })
     .finally(function () {});
 
@@ -126,9 +109,7 @@ export const filterSync = async ({ target, option = {} }) => {
   const result = await axios
     .get(API_BASE_URL + target + "/filter" + query, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
@@ -163,9 +144,7 @@ export const searchSync = async ({ target, source, option = {} }) => {
   const result = await axios
     .get(API_BASE_URL + target + "/search" + query, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       return errorHandler(error, []);
@@ -192,10 +171,10 @@ export const listSync = async ({ target, option = {} }) => {
   const result = await axios
     .get(API_BASE_URL + target + "/list" + query, headersObj)
     .then((response) => {
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
-      return errorHandler(error, []);
+      return errorHandler(error);
     })
     .finally(function () {});
 
@@ -207,13 +186,11 @@ export const postDataSync = async ({ targetUrl, jsonData, option = {} }) => {
   const result = await axios
     .post(API_BASE_URL + targetUrl, jsonData, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
-      return errorHandler(error, null);
+      return errorHandler(error);
     })
     .finally(function () {});
 
@@ -224,13 +201,11 @@ export const getDataSync = async ({ targetUrl, option = {} }) => {
   const result = await axios
     .get(API_BASE_URL + targetUrl, headersObj)
     .then((response) => {
-      // returning the data here allows the caller to get it through another .then(...)
-      //console.log(response.data);
-      return response.data;
+      return successHandler(response);
     })
     .catch(function (error) {
       // handle error
-      return errorHandler(error, null);
+      return errorHandler(error);
     })
     .finally(function () {});
 

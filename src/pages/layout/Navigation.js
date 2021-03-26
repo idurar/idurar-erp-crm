@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import NavigationContext from "../../context/NavigationContext";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Icon } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -34,9 +34,11 @@ function Navigation() {
             <Link to="/" />
             Home Page
           </Menu.Item>
-          <Menu.Item key="2" icon={<CustomerServiceOutlined />}>
-            <Link to="/customer" />
-            Customer Page
+          <Menu.Item key="2">
+            <Link to="/customer">
+              <CustomerServiceOutlined />
+              <span>Customer Page</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key="21" icon={<CustomerServiceOutlined />}>
             <Link to="/patient" />

@@ -1,12 +1,10 @@
-import { notification } from "antd";
-
 const codeMessage = {
   200: "The server successfully returned the requested data. ",
   201: "Create or modify data successfully. ",
   202: "A request has entered the background queue (asynchronous task). ",
   204: "Delete data successfully. ",
   400: "There was an error in the request sent, and the server did not create or modify data. ",
-  401: "The user does not have permission (the token, username, password are wrong). ",
+  401: "The user does not have permission please try to login again. ",
   403: "The user is authorized, but access is forbidden. ",
   404: "The request sent is for a record that does not exist, and the server is not operating. ",
   406: "The requested format is not available. ",
@@ -18,25 +16,4 @@ const codeMessage = {
   504: "The gateway has timed out. ",
 };
 
-const errorHandler = (error) => {
-  const { response } = error;
-
-  if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
-    notification.error({
-      message: `Request error ${status}: ${url}`,
-      description: errorText,
-    });
-  } else if (!response) {
-    notification.error({
-      description: "Your network is abnormal and cannot connect to the server",
-      message: "Network abnormal",
-    });
-  }
-
-  return response;
-};
-
-const request = () => {};
-export default request;
+export default codeMessage;

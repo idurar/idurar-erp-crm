@@ -19,7 +19,7 @@ export const login = async (loginUser, setUserData, setError) => {
     localStorage.setItem(ACCESS_TOKEN_NAME, loginRes.data.result.token);
     history.push("/");
   } catch (err) {
-    console.log(err.response);
+    // console.log(err.response);
     err.response.data.message && setError(err.response.data.message);
   }
 };
