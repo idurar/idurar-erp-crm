@@ -1,9 +1,37 @@
 import React from "react";
 import DashboardLayout from "./layout/DashboardLayout";
-import { Layout } from "antd";
+import { Dropdown, Layout, Menu } from "antd";
+import { MoreOutlined, EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons"
 import CustomerTable from "../components/customerTable";
 
 const { Content } = Layout;
+
+const menu = row => {
+
+  function Show(){
+    console.log(row._id)
+  }
+  function Edit(){
+    console.log(row._id)
+  }
+  function Delete(){
+    console.log(row._id)
+  }
+
+  return(
+    <Menu>
+    <Menu.Item icon={<EyeOutlined />} onClick={Show}>
+      Show
+    </Menu.Item>
+    <Menu.Item icon={<EditOutlined />} onClick={Edit}>
+      Edit
+    </Menu.Item>
+    <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
+      Delete
+    </Menu.Item>
+  </Menu>
+  )
+}
 
 function CustomerPage() {
   const entity = "client";
@@ -24,6 +52,14 @@ function CustomerPage() {
       title: "Email",
       dataIndex: "email",
     },
+    {
+      title: "Action",
+      render : row => (
+        <Dropdown overlay={menu(row)} >
+          <MoreOutlined size={18}  style={{cursor: "pointer"}}/>
+        </Dropdown>
+      )
+    }
   ];
 
   return (
