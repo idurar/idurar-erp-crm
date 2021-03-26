@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.7.0",
+    "@react-pdf/renderer": "^1.6.14",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -11,14 +12,18 @@
     "axios": "^0.21.0",
     "craco-less": "^1.17.0",
     "dayjs": "^1.10.4",
+    "history": "^4.10.1",
     "react": "^17.0.1",
     "react-dom": "^16.14.0",
+    "react-loadable": "^5.5.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "styled-components": "^5.2.1",
     "swr": "^0.3.8"
   },
   "scripts": {
