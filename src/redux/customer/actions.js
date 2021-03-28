@@ -12,7 +12,7 @@ export const addNewCustomer = (target, jsonData) => async (dispatch) => {
       refreshTable(target, 1, dispatch);
     } else {
       dispatch({
-        type: actionTypes.FAILLED_REQUEST,
+        type: actionTypes.FAILED_REQUEST,
         payload: response,
       });
     }
@@ -36,7 +36,7 @@ const refreshTable = (target, currentPage, dispatch) => {
       });
     } else {
       dispatch({
-        type: actionTypes.FAILLED_REQUEST,
+        type: actionTypes.FAILED_REQUEST,
         payload: response,
       });
     }

@@ -19,9 +19,12 @@ const LoginPage = ({ controller }) => {
   const { setUserData } = useContext(UserContext);
   // const history = useHistory();
 
+  // function handleChange(e) {
+  //   const { name, value } = e.target;
+  //   setInputs((inputs) => ({ ...inputs, [name]: value }));
+  // }
   const onFinish = (values) => {
-    const email = values.username;
-    const password = values.password;
+    const { email, password } = values;
     login(
       {
         email,
@@ -62,11 +65,11 @@ const LoginPage = ({ controller }) => {
                   onFinish={onFinish}
                 >
                   <Form.Item
-                    name="username"
+                    name="email"
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Username!",
+                        message: "Please input your Email!",
                       },
                     ]}
                   >

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
+
+import * as authService from "../auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
@@ -9,7 +10,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem(ACCESS_TOKEN_NAME) ? (
+        authService.token.get() ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />

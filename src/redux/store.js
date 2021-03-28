@@ -3,9 +3,9 @@ import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
 
 import rootReducer from "./rootReducer";
+import storePersist from "./storePersist";
 
 const logger = createLogger();
-
 let middleware = [thunk];
 
 let configStore = applyMiddleware(...middleware);
@@ -16,6 +16,20 @@ if (process.env.NODE_ENV == "development") {
   middleware = [...middleware, logger];
   configStore = composeEnhancers(applyMiddleware(...middleware));
 }
-const store = createStore(rootReducer, configStore);
+
+const authValue = storePersist.get("auth");
+let initialState = {
+  auth: {
+    current: {},
+    loading: false,
+    isLoggedIn: true,
+  },
+};
+
+if (auth) {
+  initialState = { auth: { authValue } };
+}
+
+const store = createStore(rootReducer, initialState, configStore);
 
 export default store;

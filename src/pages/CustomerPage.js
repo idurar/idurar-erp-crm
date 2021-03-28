@@ -11,31 +11,31 @@ import CustomerTable from "../components/customerTable";
 
 const { Content } = Layout;
 
-const menu = (row) => {
-  function Show() {
-    console.log(row._id);
-  }
-  function Edit() {
-    console.log(row._id);
-  }
-  function Delete() {
-    console.log(row._id);
-  }
+// const menu = (row) => {
+//   function Show() {
+//     console.log(row._id);
+//   }
+//   function Edit() {
+//     console.log(row._id);
+//   }
+//   function Delete() {
+//     console.log(row._id);
+//   }
 
-  return (
-    <Menu style={{ width: 120 }}>
-      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
-        Show
-      </Menu.Item>
-      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
-        Edit
-      </Menu.Item>
-      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
-        Delete
-      </Menu.Item>
-    </Menu>
-  );
-};
+//   return (
+//     <Menu style={{ width: 120 }}>
+//       <Menu.Item icon={<EyeOutlined />} onClick={Show}>
+//         Show
+//       </Menu.Item>
+//       <Menu.Item icon={<EditOutlined />} onClick={Edit}>
+//         Edit
+//       </Menu.Item>
+//       <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
+//         Delete
+//       </Menu.Item>
+//     </Menu>
+//   );
+// };
 
 function CustomerPage() {
   const entity = "client";
@@ -56,20 +56,14 @@ function CustomerPage() {
       title: "Email",
       dataIndex: "email",
     },
-    {
-      title: "Action",
-      render: (row) => (
-        <Dropdown overlay={menu} trigger={["click"]}>
-          <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
-        </Dropdown>
-
-        // (
-        //   <Dropdown overlay={menu(row)}>
-        //     <MoreOutlined size={18} style={{ cursor: "pointer" }} />
-        //   </Dropdown>
-        // )
-      ),
-    },
+    // {
+    //   title: "",
+    //   render: (row) => (
+    //     <Dropdown overlay={menu(row)} trigger={["click"]}>
+    //       <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
+    //     </Dropdown>
+    //   ),
+    // },
   ];
 
   return (

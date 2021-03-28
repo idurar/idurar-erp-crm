@@ -16,7 +16,7 @@ const errorHandler = (error, emptyResult = null) => {
     return {
       success: false,
       result: emptyResult,
-      message: "Your network is abnormal and cannot connect to the server",
+      message: "Cannot connect to the server, Check your internet network",
     };
   } else if (response && response.status) {
     const message = response.data && response.data.message;
