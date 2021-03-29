@@ -17,12 +17,9 @@ if (process.env.NODE_ENV == "development") {
   configStore = composeEnhancers(applyMiddleware(...middleware));
 }
 
-const auth = storePersist.get("auth");
-let initialState = {};
-
-if (auth) {
-  initialState = { auth };
-}
+const initialState = storePersist.get("auth")
+  ? { auth: storePersist.get("auth") }
+  : {};
 
 const store = createStore(rootReducer, initialState, configStore);
 
