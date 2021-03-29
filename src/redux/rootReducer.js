@@ -11,19 +11,6 @@ const appReducer = combineReducers({
   customers: customerReducer,
 });
 
-// // Reset all reducers.
-// const resetReducer = combineReducers({
-//   state: (state = {}) => state,
-// });
-// const rootReducer = (state, action) => {
-//   // Clear all data in redux store to initial.
-//   if (action.type !== actionTypes.LOGOUT_SUCCESS) {
-//     return appReducer(state, action);
-//   } else {
-//     return resetReducer(state, action);
-//   }
-// };
-
 const rootReducer = (state, action) => {
   if (action.type === actionTypes.LOGOUT_SUCCESS) {
     state = undefined;
