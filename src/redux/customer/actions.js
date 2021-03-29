@@ -1,5 +1,5 @@
 import * as actionTypes from "./types";
-import { listSync, createSync } from "../../axiosRequest";
+import { listSync, createSync } from "@/axiosRequest";
 
 export const addNewCustomer = (target, jsonData) => async (dispatch) => {
   const ajaxCall = createSync({ target, jsonData });

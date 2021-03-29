@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import { addNewCustomer } from "../redux/customer/actions";
+import { addNewCustomer } from "@/redux/customer/actions";
 import { useDispatch } from "react-redux";
 
-import { createSync } from "../axiosRequest";
+import { createSync } from "@/axiosRequest";
 
 export default function FormCustomer({ entity, closeModel }) {
   const [form] = Form.useForm();

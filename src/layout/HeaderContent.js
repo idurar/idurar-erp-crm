@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
-import NavigationContext from "../context/NavigationContext";
+import NavigationContext from "@/context/NavigationContext";
 import { Layout, Avatar, Menu, Dropdown, Button } from "antd";
 
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
-import { logout } from "../redux/auth/actions";
+import { logout } from "@/redux/auth/actions";
 const { Header } = Layout;
 
 // import { useHistory } from "react-router-dom";
