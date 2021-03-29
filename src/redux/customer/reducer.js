@@ -14,7 +14,7 @@ const INITIAL_STATE = {
 
 const customerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.FAILLED_REQUEST:
+    case actionTypes.FAILED_REQUEST:
       return {
         ...state,
         loading: false,

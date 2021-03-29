@@ -1,5 +1,4 @@
 import { notification } from "antd";
-import { ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
 import history from "../utils/history";
 import codeMessage from "./codeMessage";
 
@@ -16,7 +15,7 @@ const errorHandler = (error, emptyResult = null) => {
     return {
       success: false,
       result: emptyResult,
-      message: "Your network is abnormal and cannot connect to the server",
+      message: "Cannot connect to the server, Check your internet network",
     };
   } else if (response && response.status) {
     const message = response.data && response.data.message;
@@ -30,8 +29,7 @@ const errorHandler = (error, emptyResult = null) => {
       description: errorText,
     });
     if (error.response.data.jwtExpired) {
-      localStorage.removeItem(ACCESS_TOKEN_NAME);
-      history.push("/login");
+      history.push("/logout");
     }
     return response.data;
   } else {

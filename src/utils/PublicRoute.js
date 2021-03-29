@@ -1,17 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
+import * as authService from "../auth";
 
-const PublicRoute = ({ component: Component, restricted, ...rest }) => {
+const PublicRoute = ({ component: Component, ...rest }) => {
   return (
+    // Show the component only when the user is logged in
+    // Otherwise, redirect the user to /signin page
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem(ACCESS_TOKEN_NAME) && restricted ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
+        authService.token.get() ? <Redirect to="/" /> : <Component {...props} />
       }
     />
   );

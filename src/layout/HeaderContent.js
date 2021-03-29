@@ -1,28 +1,23 @@
 import React, { useState, useContext } from "react";
-
+import { useDispatch } from "react-redux";
 import NavigationContext from "../../context/NavigationContext";
-import UserContext from "../../context/UserContext";
 import { Layout, Avatar, Menu, Dropdown, Button } from "antd";
-import { Row, Col } from "antd";
-import {
-  MenuOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
-import { logout } from "../../auth/auth.service";
+
+import { MenuOutlined, UserOutlined } from "@ant-design/icons";
+import { logout } from "../../redux/auth/actions";
 const { Header } = Layout;
 
 // import { useHistory } from "react-router-dom";
 
 export default function HeaderContent() {
-  const { setUserData } = useContext(UserContext);
+  // const { setUserData } = useContext(UserContext);
+  const dispatch = useDispatch();
   const { collapsed, setCollapsed } = useContext(NavigationContext);
 
   const menu = (
     <Menu>
       {/* <Menu.Item onClick={onLogout}>logout</Menu.Item> */}
-      <Menu.Item onClick={() => logout(setUserData)}>logout</Menu.Item>
+      <Menu.Item onClick={() => dispatch(logout())}>logout</Menu.Item>
       <Menu.Item>
         <a
           target="_blank"

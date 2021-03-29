@@ -1,0 +1,6 @@
+export const FAILED_REQUEST = "FAILED_REQUEST";
+export const LOADING_REQUEST = "LOADING_REQUEST";
+
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";

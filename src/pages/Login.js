@@ -1,35 +1,26 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import UserContext from "../context/UserContext";
-import Axios from "axios";
-import ErrorNotice from "../misc/ErrorNotice";
-import { login } from "../auth/auth.service";
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
+import React from "react";
 
 import { Form, Input, Button, Checkbox, Layout, Row, Col, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
+import { useDispatch } from "react-redux";
+import { login } from "../redux/auth/actions";
+
 const { Content, Footer } = Layout;
 
-// import DashboardLayout from "./DashboardLayout";
+const LoginPage = () => {
+  // const [error, setError] = useState();
 
-const LoginPage = ({ controller }) => {
-  const [error, setError] = useState();
-
-  const { setUserData } = useContext(UserContext);
+  // const { setUserData } = useContext(UserContext);
   // const history = useHistory();
 
+  // function handleChange(e) {
+  //   const { name, value } = e.target;
+  //   setInputs((inputs) => ({ ...inputs, [name]: value }));
+  // }
+  const dispatch = useDispatch();
   const onFinish = (values) => {
-    const email = values.username;
-    const password = values.password;
-    login(
-      {
-        email,
-        password,
-      },
-      setUserData,
-      setError
-    );
+    dispatch(login(values));
   };
   return (
     <>
@@ -44,12 +35,12 @@ const LoginPage = ({ controller }) => {
               }}
             >
               <h1>Login</h1>
-              {error && (
+              {/* {error && (
                 <ErrorNotice
                   message={error}
                   clearError={() => setError(undefined)}
                 />
-              )}
+              )} */}
               <Divider />
               <div className="site-layout-content">
                 {" "}
@@ -62,11 +53,11 @@ const LoginPage = ({ controller }) => {
                   onFinish={onFinish}
                 >
                   <Form.Item
-                    name="username"
+                    name="email"
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Username!",
+                        message: "Please input your Email!",
                       },
                     ]}
                   >
