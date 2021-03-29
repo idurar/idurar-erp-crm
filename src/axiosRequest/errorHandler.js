@@ -1,5 +1,4 @@
 import { notification } from "antd";
-import { ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
 import history from "../utils/history";
 import codeMessage from "./codeMessage";
 
@@ -30,8 +29,7 @@ const errorHandler = (error, emptyResult = null) => {
       description: errorText,
     });
     if (error.response.data.jwtExpired) {
-      localStorage.removeItem(ACCESS_TOKEN_NAME);
-      history.push("/login");
+      history.push("/logout");
     }
     return response.data;
   } else {

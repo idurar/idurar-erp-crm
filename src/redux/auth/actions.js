@@ -1,13 +1,14 @@
 import * as actionTypes from "./types";
 import * as authService from "../../auth";
 import storePersist from "../storePersist";
+import history from "../../utils/history";
 
-export const login = ({ loginUserData }) => async (dispatch) => {
+export const login = (loginUserData) => async (dispatch) => {
   dispatch({
     type: actionTypes.LOADING_REQUEST,
     payload: { loading: true },
   });
-  const ajaxCall = authService.login({ loginUserData });
+  const ajaxCall = authService.login(loginUserData);
   ajaxCall.then(function (data) {
     if (data.success === true) {
       const authValue = {
@@ -20,6 +21,7 @@ export const login = ({ loginUserData }) => async (dispatch) => {
         type: actionTypes.LOGIN_SUCCESS,
         payload: data.result.user,
       });
+      history.push("/");
     } else {
       dispatch({
         type: actionTypes.FAILED_REQUEST,
@@ -31,8 +33,8 @@ export const login = ({ loginUserData }) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   authService.logout();
-  storePersist.clear();
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
+  history.push("/login");
 };

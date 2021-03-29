@@ -1,34 +1,16 @@
 import axios from "axios";
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
+import { token } from "../auth";
 import errorHandler from "./errorHandler";
 import successHandler from "./successHandler";
 
 const handelToken = () => {
-  const token = window.localStorage.getItem(ACCESS_TOKEN_NAME) || "";
   let headerToken = {
-    [ACCESS_TOKEN_NAME]: token,
+    [ACCESS_TOKEN_NAME]: token.get(),
   };
   const headers = { headers: headerToken };
   return headers;
 };
-
-// const successHandler = (response) => {
-//   const { data } = response;
-//   if (!data || !data.success || data.success === false) {
-//     response = {
-//       ...response,
-//       status: 404,
-//       url: null,
-//       data: {
-//         success: false,
-//         result: null,
-//       },
-//     };
-//     return errorHandler({ response });
-//   } else {
-//     return data;
-//   }
-// };
 
 export const createSync = async ({ target, jsonData, option = {} }) => {
   const headersObj = handelToken();

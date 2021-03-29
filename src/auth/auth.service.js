@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import Axios from "axios";
 import errorHandler from "../axiosRequest/errorHandler";
 import successHandler from "../axiosRequest/successHandler";
+import storePersist from "../redux/storePersist";
 
 export const token = {
   get: () => {
@@ -18,10 +19,10 @@ export const token = {
   },
 };
 
-export const login = async ({ loginUserData }) => {
-  result = await Axios.post(API_BASE_URL + `login`, loginUserData)
+export const login = async (loginUserData) => {
+  const result = await Axios.post(API_BASE_URL + `login`, loginUserData)
     .then((response) => {
-      token.set(loginRes.data.result.token);
+      token.set(response.data.result.token);
       return successHandler(response);
     })
     .catch(function (error) {
@@ -33,4 +34,5 @@ export const login = async ({ loginUserData }) => {
 
 export const logout = () => {
   token.remove();
+  storePersist.clear();
 };
