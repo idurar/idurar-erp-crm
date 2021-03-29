@@ -1,9 +1,9 @@
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
+import { API_BASE_URL, ACCESS_TOKEN_NAME } from "@/config/serverApiConfig";
 import Cookies from "js-cookie";
 import Axios from "axios";
-import errorHandler from "../axiosRequest/errorHandler";
-import successHandler from "../axiosRequest/successHandler";
-import storePersist from "../redux/storePersist";
+import errorHandler from "@/axiosRequest/errorHandler";
+import successHandler from "@/axiosRequest/successHandler";
+import storePersist from "@/redux/storePersist";
 
 export const token = {
   get: () => {

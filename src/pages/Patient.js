@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import DashboardLayout from "../layout/DashboardLayout";
+import DashboardLayout from "@/layout/DashboardLayout";
 import { Layout, Breadcrumb } from "antd";
-import { DatePicker, TimePicker, Calendar } from "../antdcomponents";
-import DataTable from "../components/DataTable";
+import { DatePicker, TimePicker, Calendar } from "@/antdcomponents";
+import DataTable from "@/components/DataTable";
 import format from "dayjs";
 const { Content } = Layout;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;

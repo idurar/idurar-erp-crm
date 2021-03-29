@@ -4,7 +4,7 @@ import { Form, Input, Button, Checkbox, Layout, Row, Col, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import { useDispatch } from "react-redux";
-import { login } from "../redux/auth/actions";
+import { login } from "@/redux/auth/actions";
 
 const { Content, Footer } = Layout;
 

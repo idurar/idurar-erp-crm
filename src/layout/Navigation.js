@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import NavigationContext from "../context/NavigationContext";
+import NavigationContext from "@/context/NavigationContext";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Layout, Menu, Icon } from "antd";
 import {

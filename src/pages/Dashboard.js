@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import DashboardLayout from "../layout/DashboardLayout";
+import DashboardLayout from "@/layout/DashboardLayout";
 import { Layout, Breadcrumb } from "antd";
 
 const { Content } = Layout;

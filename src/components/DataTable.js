@@ -18,7 +18,7 @@ import FormPatient from "./FormPatient";
 
 import { UserOutlined } from "@ant-design/icons";
 
-import { listSync } from "../axiosRequest";
+import { listSync } from "@/axiosRequest";
 
 export default function DataTable({ target, columns }) {
   const [state, setState] = useState({

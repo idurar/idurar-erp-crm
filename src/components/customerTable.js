@@ -18,7 +18,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "antd/lib/modal/Modal";
 import FormCustomer from "./formCustomer";
-import { loadCustomers } from "../redux/customer/actions";
+import { loadCustomers } from "@/redux/customer/actions";
 
 export default function CustomerTable({ entity, columns }) {
   const dropDownRowMenu = (currentRow) => {

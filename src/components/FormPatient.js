@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Radio, Select, Switch } from "antd";
-import { DatePicker, TimePicker, Calendar } from "../antdcomponents";
+import { DatePicker, TimePicker, Calendar } from "@/antdcomponents";
 import dayjs from "dayjs";
-import { createSync } from "../axiosRequest";
+import { createSync } from "@/axiosRequest";
 export default function FormPatient() {
   const [form] = Form.useForm();
   const onFinish = (fieldsValue) => {

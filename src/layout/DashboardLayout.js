@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import navigationContext from "../context/NavigationContext";
+import navigationContext from "@/context/NavigationContext";
 import HeaderContent from "./HeaderContent";
 import FooterContent from "./FooterContent";
 import Navigation from "./Navigation";

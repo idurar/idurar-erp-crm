@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../config/serverApiConfig";
-import { token } from "../auth";
+import { API_BASE_URL, ACCESS_TOKEN_NAME } from "@/config/serverApiConfig";
+import { token } from "@/auth";
 import errorHandler from "./errorHandler";
 import successHandler from "./successHandler";
 

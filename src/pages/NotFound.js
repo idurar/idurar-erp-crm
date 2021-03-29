@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button, Result } from "antd";
-import history from "../utils/history";
+import history from "@/utils/history";
 const NotFound = () => {
   useEffect(() => {
     // history.location.pathname = "/notfound";

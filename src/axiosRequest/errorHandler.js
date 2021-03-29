@@ -1,5 +1,5 @@
 import { notification } from "antd";
-import history from "../utils/history";
+import history from "@/utils/history";
 import codeMessage from "./codeMessage";
 
 const errorHandler = (error, emptyResult = null) => {

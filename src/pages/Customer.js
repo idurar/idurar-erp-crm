@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardLayout from "../layout/DashboardLayout";
+import DashboardLayout from "@/layout/DashboardLayout";
 import { Dropdown, Layout, Menu } from "antd";
 import {
   EllipsisOutlined,
@@ -7,7 +7,7 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import CustomerTable from "../components/customerTable";
+import CustomerTable from "@/components/customerTable";
 
 const { Content } = Layout;
 
