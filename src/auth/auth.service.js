@@ -1,8 +1,8 @@
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "@/config/serverApiConfig";
 import Cookies from "js-cookie";
-import Axios from "axios";
-import errorHandler from "@/axiosRequest/errorHandler";
-import successHandler from "@/axiosRequest/successHandler";
+import axios from "axios";
+import errorHandler from "@/request/errorHandler";
+import successHandler from "@/request/successHandler";
 import storePersist from "@/redux/storePersist";
 
 export const token = {
@@ -20,16 +20,13 @@ export const token = {
 };
 
 export const login = async (loginUserData) => {
-  const result = await Axios.post(API_BASE_URL + `login`, loginUserData)
-    .then((response) => {
-      token.set(response.data.result.token);
-      return successHandler(response);
-    })
-    .catch(function (error) {
-      return errorHandler(error);
-    })
-    .finally(function () {});
-  return result;
+  try {
+    const response = await axios.post(API_BASE_URL + `login`, loginUserData);
+    token.set(response.data.result.token);
+    return successHandler(response);
+  } catch (error) {
+    return errorHandler(error);
+  }
 };
 
 export const logout = () => {

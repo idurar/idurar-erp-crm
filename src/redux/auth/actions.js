@@ -8,27 +8,26 @@ export const login = (loginUserData) => async (dispatch) => {
     type: actionTypes.LOADING_REQUEST,
     payload: { loading: true },
   });
-  const ajaxCall = authService.login(loginUserData);
-  ajaxCall.then(function (data) {
-    if (data.success === true) {
-      const authValue = {
-        current: data.result.user,
-        loading: false,
-        isLoggedIn: true,
-      };
-      storePersist.set("auth", authValue);
-      dispatch({
-        type: actionTypes.LOGIN_SUCCESS,
-        payload: data.result.user,
-      });
-      history.push("/");
-    } else {
-      dispatch({
-        type: actionTypes.FAILED_REQUEST,
-        payload: data,
-      });
-    }
-  });
+  const data = await authService.login(loginUserData);
+
+  if (data.success === true) {
+    const authValue = {
+      current: data.result.user,
+      loading: false,
+      isLoggedIn: true,
+    };
+    storePersist.set("auth", authValue);
+    dispatch({
+      type: actionTypes.LOGIN_SUCCESS,
+      payload: data.result.user,
+    });
+    history.push("/");
+  } else {
+    dispatch({
+      type: actionTypes.FAILED_REQUEST,
+      payload: data,
+    });
+  }
 };
 
 export const logout = () => async (dispatch) => {
