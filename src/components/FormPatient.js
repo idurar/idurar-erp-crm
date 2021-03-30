@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Radio, Select, Switch } from "antd";
 import { DatePicker, TimePicker, Calendar } from "@/components/antd";
 import dayjs from "dayjs";
-import { createSync } from "@/axiosRequest";
+import { request } from "@/request";
 export default function FormPatient() {
   const [form] = Form.useForm();
   const onFinish = (fieldsValue) => {
@@ -12,7 +12,7 @@ export default function FormPatient() {
       birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
     };
 
-    const ajaxCall = createSync("patient", values);
+    const ajaxCall = request.create("patient", values);
     ajaxCall.then(function (response) {
       if (response === undefined || response.success === false) {
         return;

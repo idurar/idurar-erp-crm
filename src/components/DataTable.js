@@ -16,9 +16,7 @@ import {
 
 import FormPatient from "./FormPatient";
 
-import { UserOutlined } from "@ant-design/icons";
-
-import { listSync } from "@/axiosRequest";
+import { request } from "@/request";
 
 export default function DataTable({ target, columns }) {
   const [state, setState] = useState({
@@ -36,7 +34,7 @@ export default function DataTable({ target, columns }) {
     const { pagination } = state;
     console.log(pagination);
     setState({ loading: true });
-    const ajaxCall = listSync({ target, option: { page: pagination.current } });
+    const ajaxCall = request.list(target, { page: pagination.current });
     ajaxCall.then(function (response) {
       if (response === undefined || response.success === false) {
         setState({
