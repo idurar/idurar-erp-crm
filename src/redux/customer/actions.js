@@ -1,4 +1,5 @@
 import * as actionTypes from "./types";
+import * as uiActionTypes from "../ui/types";
 import { request } from "@/request";
 
 export const addNewCustomer = (target, jsonData) => async (dispatch) => {
@@ -18,6 +19,10 @@ export const addNewCustomer = (target, jsonData) => async (dispatch) => {
 };
 
 const refreshTable = async (target, currentPage, dispatch) => {
+  dispatch({
+    type: uiActionTypes.START_LOADING,
+    payload: { actionName: "loadCustomers" },
+  });
   dispatch({
     type: actionTypes.LOADING_CUSTOMERS,
     payload: { loading: true },

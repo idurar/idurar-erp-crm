@@ -11,8 +11,10 @@ const axiosInstance = axios.create({
   timeout: 15000,
   headers: headersInstance,
 });
+
 const request = {
   create: async (target, jsonData, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.post(target + "/create", jsonData);
       return successHandler(response);
@@ -21,6 +23,7 @@ const request = {
     }
   },
   read: async (target, id, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.get(target + "/read/" + id);
       return successHandler(response);
@@ -29,6 +32,7 @@ const request = {
     }
   },
   update: async (target, id, jsonData, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.patch(
         target + "/update/" + id,
@@ -41,6 +45,7 @@ const request = {
   },
 
   delete: async (target, id, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.delete(target + "/delete/" + id);
       return successHandler(response);
@@ -50,18 +55,11 @@ const request = {
   },
 
   filter: async (target, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
-      let query = "";
-
-      let filter = "";
-      let equal = "";
-      if (option.filter) {
-        filter = "filter=" + option.filter;
-      }
-      if (option.equal) {
-        equal = "&equal=" + option.equal;
-      }
-      query = `?${filter}${equal}`;
+      let filter = option.filter ? "filter=" + option.filter : "";
+      let equal = option.equal ? "&equal=" + option.equal : "";
+      let query = `?${filter}${equal}`;
 
       const response = await axiosInstance.get(target + "/filter" + query);
       return successHandler(response);
@@ -71,17 +69,12 @@ const request = {
   },
 
   search: async (target, source, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       let query = "";
       if (option != {}) {
         let fields = option.fields ? "fields=" + option.fields : "";
         let question = option.question ? "&q=" + option.question : "";
-        // if (option.fields) {
-        //   fields = "fields=" + option.fields;
-        // }
-        // if (option.question) {
-        //   question = "&q=" + option.question;
-        // }
         query = `?${fields}${question}`;
       }
       headersInstance.cancelToken = source.token;
@@ -95,17 +88,12 @@ const request = {
   },
 
   list: async (target, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       let query = "";
       if (option != {}) {
-        let page = "";
-        let items = "";
-        if (option.page) {
-          page = "page=" + option.page;
-        }
-        if (option.items) {
-          items = "&items=" + option.items;
-        }
+        let page = option.page ? "page=" + option.page : "";
+        let items = option.items ? "&items=" + option.items : "";
         query = `?${page}${items}`;
       }
 
@@ -117,6 +105,7 @@ const request = {
   },
 
   post: async (targetUrl, jsonData, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.post(targetUrl, jsonData);
       return successHandler(response);
@@ -125,6 +114,7 @@ const request = {
     }
   },
   get: async (targetUrl, option = {}) => {
+    axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.get(targetUrl);
       return successHandler(response);

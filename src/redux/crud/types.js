@@ -1,5 +1,5 @@
 export const FAILED_REQUEST = "FAILED_REQUEST";
-export const LOADING_REQUEST = "LOADING_REQUEST";
+export const LOADING_LIST = "LOADING_LIST";
 
 export const LIST_ITEMS = "LIST_ITEMS";
 
