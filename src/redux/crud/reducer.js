@@ -1,65 +1,88 @@
 import * as actionTypes from "./types";
 
 const INITIAL_STATE = {
-  list: [],
-  loading: false,
-  pagination: {
-    current: 1,
-    defaultCurrent: 1,
-    pageSize: 10,
-    total: 1,
-  },
   current: {
-    item: null,
-    loading: false,
+    result: null,
   },
-  update: null,
-  read: null,
-  delete: null,
-  search: null,
+  list: {
+    result: {
+      data: [],
+      pagination: {
+        current: 1,
+        defaultCurrent: 1,
+        pageSize: 10,
+        total: 1,
+      },
+    },
+    loading: false,
+    success: false,
+  },
+  create: {
+    result: null,
+    loading: false,
+    success: false,
+  },
+  update: {
+    result: null,
+    loading: false,
+    success: false,
+  },
+  delete: {
+    result: null,
+    loading: false,
+    success: false,
+  },
+  read: {
+    result: null,
+    loading: false,
+    success: false,
+  },
+  search: {
+    result: [],
+    loading: false,
+    success: false,
+  },
 };
 
 const crudReducer = (state = INITIAL_STATE, action) => {
+  const { payload, keyState } = action;
   switch (action.type) {
-    case actionTypes.FAILED_REQUEST:
+    case actionTypes.RESET_STATE:
+      return INITIAL_STATE;
+    case actionTypes.CURRENT_ITEM:
       return {
         ...state,
-        loading: false,
-      };
-    case actionTypes.LOADING_LIST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionTypes.CREATE_ITEM:
-      return {
-        ...state,
-        current: { item: action.payload, loading: false },
-      };
-    case actionTypes.UPDATE_ITEM:
-      return {
-        ...state,
-        current: { item: action.payload, loading: false },
-      };
-    case actionTypes.DELETE_ITEM:
-      return {
-        ...state,
-        current: { item: null, loading: false },
-      };
-    case actionTypes.LIST_ITEMS:
-      return {
-        ...state,
-        list: action.payload.result || [...state.list],
-        loading: false,
-        pagination: {
-          ...state.pagination,
-          current: parseInt(action.payload.pagination.page) || [
-            ...state.pagination["current"],
-          ],
-          pageSize: action.payload.pagination.pageSize || 10,
-          total: action.payload.pagination.count || 10,
+        current: {
+          result: payload,
         },
       };
+    case actionTypes.REQUEST_LOADING:
+      return {
+        ...state,
+        [keyState]: {
+          ...state[keyState],
+          loading: true,
+        },
+      };
+    case actionTypes.REQUEST_FAILED:
+      return {
+        ...state,
+        [keyState]: {
+          ...state[keyState],
+          loading: false,
+          success: false,
+        },
+      };
+    case actionTypes.REQUEST_SUCCESS:
+      return {
+        ...state,
+        [keyState]: {
+          result: payload,
+          loading: false,
+          success: true,
+        },
+      };
+
     default:
       return state;
   }
