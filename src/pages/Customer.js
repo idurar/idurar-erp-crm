@@ -2,7 +2,7 @@ import React from "react";
 import DashboardLayout from "@/layout/DashboardLayout";
 import { Layout } from "antd";
 
-import CustomerTable from "@/components/customerTable";
+import CustomerTable from "@/components/CustomerTable";
 
 const { Content } = Layout;
 

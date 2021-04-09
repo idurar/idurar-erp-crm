@@ -8,7 +8,6 @@ import {
   Statistic,
   Table,
   Tag,
-  Modal,
 } from "antd";
 import {
   EllipsisOutlined,
@@ -17,9 +16,9 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import Modal from "antd/lib/modal/Modal";
 import FormCustomer from "./formCustomer";
-import { listAction } from "@/redux/crud/actions";
-import { selectListItems } from "@/redux/crud/selectors";
+import { loadCustomers } from "@/redux/customer/actions";
 
 export default function CustomerTable({ entity, columns }) {
   const dropDownRowMenu = (currentRow) => {
@@ -61,18 +60,14 @@ export default function CustomerTable({ entity, columns }) {
   ];
   const dispatch = useDispatch();
 
-  let {
-    result: listResult,
-    isLoading: listIsLoading,
-    isSuccess: listIsSuccess,
-  } = useSelector(selectListItems);
+  let customers = useSelector((state) => state.customers);
 
-  const handelDataTableLoad = (listResult) => {
-    const { pagination } = listResult;
-    dispatch(listAction(entity, pagination.current));
+  const handelDataTableLoad = (customers) => {
+    const { pagination } = customers;
+    dispatch(loadCustomers(entity, pagination.current));
   };
   useEffect(() => {
-    handelDataTableLoad(listResult);
+    handelDataTableLoad(customers);
   }, []);
 
   const handleTableChange = (pagination) => {
@@ -141,9 +136,9 @@ export default function CustomerTable({ entity, columns }) {
       <Table
         columns={columns}
         rowKey={(record) => record._id}
-        dataSource={listResult.items}
-        pagination={listResult.pagination}
-        loading={listIsLoading}
+        dataSource={customers.list}
+        pagination={customers.pagination}
+        loading={customers.loading}
         onChange={handleTableChange}
       />
     </>

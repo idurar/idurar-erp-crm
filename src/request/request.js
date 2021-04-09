@@ -13,29 +13,29 @@ const axiosInstance = axios.create({
 });
 
 const request = {
-  create: async (target, jsonData, option = {}) => {
+  create: async (entity, jsonData, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
-      const response = await axiosInstance.post(target + "/create", jsonData);
+      const response = await axiosInstance.post(entity + "/create", jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
-  read: async (target, id, option = {}) => {
+  read: async (entity, id, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
-      const response = await axiosInstance.get(target + "/read/" + id);
+      const response = await axiosInstance.get(entity + "/read/" + id);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
-  update: async (target, id, jsonData, option = {}) => {
+  update: async (entity, id, jsonData, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.patch(
-        target + "/update/" + id,
+        entity + "/update/" + id,
         jsonData
       );
       return successHandler(response);
@@ -44,31 +44,31 @@ const request = {
     }
   },
 
-  delete: async (target, id, option = {}) => {
+  delete: async (entity, id, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
-      const response = await axiosInstance.delete(target + "/delete/" + id);
+      const response = await axiosInstance.delete(entity + "/delete/" + id);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  filter: async (target, option = {}) => {
+  filter: async (entity, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
       let filter = option.filter ? "filter=" + option.filter : "";
       let equal = option.equal ? "&equal=" + option.equal : "";
       let query = `?${filter}${equal}`;
 
-      const response = await axiosInstance.get(target + "/filter" + query);
+      const response = await axiosInstance.get(entity + "/filter" + query);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  search: async (target, source, option = {}) => {
+  search: async (entity, source, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
       let query = "";
@@ -78,7 +78,7 @@ const request = {
         query = `?${fields}${question}`;
       }
       headersInstance.cancelToken = source.token;
-      const response = await axiosInstance.get(target + "/search" + query, {
+      const response = await axiosInstance.get(entity + "/search" + query, {
         headers: headersInstance,
       });
       return successHandler(response);
@@ -87,7 +87,7 @@ const request = {
     }
   },
 
-  list: async (target, option = {}) => {
+  list: async (entity, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
       let query = "";
@@ -97,26 +97,26 @@ const request = {
         query = `?${page}${items}`;
       }
 
-      const response = await axiosInstance.get(target + "/list" + query);
+      const response = await axiosInstance.get(entity + "/list" + query);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  post: async (targetUrl, jsonData, option = {}) => {
+  post: async (entityUrl, jsonData, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
-      const response = await axiosInstance.post(targetUrl, jsonData);
+      const response = await axiosInstance.post(entityUrl, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
-  get: async (targetUrl, option = {}) => {
+  get: async (entityUrl, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
-      const response = await axiosInstance.get(targetUrl);
+      const response = await axiosInstance.get(entityUrl);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);

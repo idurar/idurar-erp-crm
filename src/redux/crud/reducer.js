@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   },
   list: {
     result: {
-      data: [],
+      items: [],
       pagination: {
         current: 1,
         defaultCurrent: 1,
@@ -14,33 +14,33 @@ const INITIAL_STATE = {
         total: 1,
       },
     },
-    loading: false,
-    success: false,
+    isLoading: false,
+    isSuccess: false,
   },
   create: {
     result: null,
-    loading: false,
-    success: false,
+    isLoading: false,
+    isSuccess: false,
   },
   update: {
     result: null,
-    loading: false,
-    success: false,
+    isLoading: false,
+    isSuccess: false,
   },
   delete: {
     result: null,
-    loading: false,
-    success: false,
+    isLoading: false,
+    isSuccess: false,
   },
   read: {
     result: null,
-    loading: false,
-    success: false,
+    isLoading: false,
+    isSuccess: false,
   },
   search: {
     result: [],
-    loading: false,
-    success: false,
+    isLoading: false,
+    isSuccess: false,
   },
 };
 
@@ -61,7 +61,7 @@ const crudReducer = (state = INITIAL_STATE, action) => {
         ...state,
         [keyState]: {
           ...state[keyState],
-          loading: true,
+          isLoading: true,
         },
       };
     case actionTypes.REQUEST_FAILED:
@@ -69,8 +69,8 @@ const crudReducer = (state = INITIAL_STATE, action) => {
         ...state,
         [keyState]: {
           ...state[keyState],
-          loading: false,
-          success: false,
+          isLoading: false,
+          isSuccess: false,
         },
       };
     case actionTypes.REQUEST_SUCCESS:
@@ -78,8 +78,8 @@ const crudReducer = (state = INITIAL_STATE, action) => {
         ...state,
         [keyState]: {
           result: payload,
-          loading: false,
-          success: true,
+          isLoading: false,
+          isSuccess: true,
         },
       };
 

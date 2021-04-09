@@ -2,14 +2,14 @@ import * as actionTypes from "./types";
 import * as uiActionTypes from "../ui/types";
 import { request } from "@/request";
 
-export const addNewCustomer = (target, jsonData) => async (dispatch) => {
-  const data = await request.create(target, jsonData);
+export const addNewCustomer = (entity, jsonData) => async (dispatch) => {
+  const data = await request.create(entity, jsonData);
   if (data.success === true) {
     dispatch({
       type: actionTypes.ADD_NEW_CUSTOMER,
       payload: data,
     });
-    refreshTable(target, 1, dispatch);
+    refreshTable(entity, 1, dispatch);
   } else {
     dispatch({
       type: actionTypes.FAILED_REQUEST,
@@ -18,16 +18,16 @@ export const addNewCustomer = (target, jsonData) => async (dispatch) => {
   }
 };
 
-const refreshTable = async (target, currentPage, dispatch) => {
-  dispatch({
-    type: uiActionTypes.START_LOADING,
-    payload: { actionName: "loadCustomers" },
-  });
+const refreshTable = async (entity, currentPage, dispatch) => {
+  // dispatch({
+  //   type: uiActionTypes.START_LOADING,
+  //   payload: { actionName: "loadCustomers" },
+  // });
   dispatch({
     type: actionTypes.LOADING_CUSTOMERS,
     payload: { loading: true },
   });
-  const data = await request.list(target, { page: currentPage });
+  const data = await request.list(entity, { page: currentPage });
 
   if (data.success === true) {
     dispatch({
@@ -42,6 +42,6 @@ const refreshTable = async (target, currentPage, dispatch) => {
   }
 };
 
-export const loadCustomers = (target, currentPage) => async (dispatch) => {
-  refreshTable(target, currentPage, dispatch);
+export const loadCustomers = (entity, currentPage) => async (dispatch) => {
+  refreshTable(entity, currentPage, dispatch);
 };

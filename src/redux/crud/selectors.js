@@ -1,13 +1,35 @@
 import { createSelector } from "reselect";
 
-const selectUser = (state) => state.user;
+const selectCrud = (state) => state.crud;
 
-export const selectCurrentUser = createSelector(
-  [selectUser],
-  (user) => user.currentUser
+export const selectCurrentItem = createSelector(
+  [selectCrud],
+  (crud) => crud.current
 );
-export const selectDisplayName = createSelector(
-  [selectCurrentUser],
-  (currentUser) => currentUser.displayName
+
+export const selectListItems = createSelector(
+  [selectCrud],
+  (crud) => crud.list
 );
-export const SelectHidden = createSelector([selectUser], (user) => user.hidden);
+
+export const selectCreatedItem = createSelector(
+  [selectCrud],
+  (crud) => crud.create
+);
+
+export const selectUpdatedItem = createSelector(
+  [selectCrud],
+  (crud) => crud.update
+);
+
+export const selectReadItem = createSelector([selectCrud], (crud) => crud.read);
+
+export const selectDeletedItem = createSelector(
+  [selectCrud],
+  (crud) => crud.delete
+);
+
+export const selectSearchedItems = createSelector(
+  [selectCrud],
+  (crud) => crud.search
+);

@@ -5,8 +5,6 @@ export const REQUEST_LOADING = "REQUEST_LOADING";
 export const REQUEST_SUCCESS = "REQUEST_SUCCESS";
 export const REQUEST_FAILED = "REQUEST_FAILED";
 
-export const LIST_SUCCESS = "LIST_SUCCESS";
-
 // export const LIST_REQUEST = "LIST_REQUEST";
 // export const LIST_SUCCESS = "LIST_SUCCESS";
 // export const LIST_FAILED = "LIST_FAILED";
