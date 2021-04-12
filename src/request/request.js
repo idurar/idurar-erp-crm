@@ -9,7 +9,12 @@ const headersInstance = { [ACCESS_TOKEN_NAME]: tokenCookies.get() };
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 15000,
-  headers: headersInstance,
+  headers: {
+    ...headersInstance,
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
+    Expires: "0",
+  },
 });
 
 const request = {
@@ -89,6 +94,7 @@ const request = {
 
   list: async (entity, option = {}) => {
     axiosInstance.defaults.headers = headersInstance;
+    console.log(headersInstance);
     try {
       let query = "";
       if (option != {}) {
