@@ -2,12 +2,12 @@ import React, { useRef, useState } from "react";
 import DashboardLayout from "@/layout/DashboardLayout";
 import { Layout, Breadcrumb } from "antd";
 import { DatePicker, TimePicker, Calendar } from "@/components/antd";
-import DataTable from "@/components/DataTable";
-import format from "dayjs";
+import CrudPanel from "@/components/CrudPanel";
+
 const { Content } = Layout;
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+
 function CustomerPage() {
-  const target = "patient";
+  const entity = "patient";
   const columns = [
     {
       title: "Name",
@@ -30,7 +30,7 @@ function CustomerPage() {
     <DashboardLayout
       contentLayout={
         <Content style={{ margin: "0 16px" }}>
-          <DataTable target={target} columns={columns} />
+          <CrudPanel entity={entity} columns={columns} />
         </Content>
       }
     />

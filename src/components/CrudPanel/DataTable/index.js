@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Dropdown, Menu, Table } from "antd";
 import {
   EllipsisOutlined,
@@ -7,25 +7,35 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import { listAction } from "@/redux/crud/actions";
 import { selectListItems } from "@/redux/crud/selectors";
 
-export default function DataTable({ entity, columns, handleTableChange }) {
-  const dropDownRowMenu = (currentRow) => {
-    return (
-      <Menu style={{ width: 130 }}>
-        <Menu.Item icon={<EyeOutlined />} onClick={Show}>
-          Show
-        </Menu.Item>
-        <Menu.Item icon={<EditOutlined />} onClick={Edit}>
-          Edit
-        </Menu.Item>
-        <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
-          Delete
-        </Menu.Item>
-      </Menu>
-    );
-  };
+const dropDownRowMenu = (currentRow) => {
+  function Show() {
+    console.log(currentRow._id);
+  }
+  function Edit() {
+    console.log(currentRow._id);
+  }
+  function Delete() {
+    console.log(currentRow._id);
+  }
+  return (
+    <Menu style={{ width: 130 }}>
+      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
+        Show
+      </Menu.Item>
+      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
+        Edit
+      </Menu.Item>
+      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
+        Delete
+      </Menu.Item>
+    </Menu>
+  );
+};
 
+export default function DataTable({ entity, columns }) {
   columns = [
     ...columns,
     {
@@ -38,20 +48,32 @@ export default function DataTable({ entity, columns, handleTableChange }) {
     },
   ];
 
-  let {
+  const {
     result: listResult,
     isLoading: listIsLoading,
     isSuccess: listIsSuccess,
   } = useSelector(selectListItems);
 
+  const { pagination, items } = listResult;
+
+  const dispatch = useDispatch();
+
+  const handelDataTableLoad = useCallback((pagination) => {
+    dispatch(listAction(entity, pagination.current));
+  }, []);
+
+  useEffect(() => {
+    handelDataTableLoad(pagination);
+  }, []);
+
   return (
     <Table
       columns={columns}
-      rowKey={(record) => record._id}
-      dataSource={listResult.items}
-      pagination={listResult.pagination}
+      rowKey={(item) => item._id}
+      dataSource={items}
+      pagination={pagination}
       loading={listIsLoading}
-      onChange={handleTableChange}
+      onChange={handelDataTableLoad}
     />
   );
 }

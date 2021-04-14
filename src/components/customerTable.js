@@ -144,7 +144,7 @@ export default function CustomerTable({ entity, columns }) {
 
       <Table
         columns={columns}
-        rowKey={(record) => record._id}
+        rowKey={(item) => item._id}
         dataSource={listResult.items}
         pagination={listResult.pagination}
         loading={listIsLoading}
