@@ -8,7 +8,7 @@ const headersInstance = { [ACCESS_TOKEN_NAME]: tokenCookies.get() };
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 15000,
+  timeout: 30000,
   headers: headersInstance,
 });
 

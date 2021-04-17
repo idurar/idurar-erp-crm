@@ -1,19 +1,34 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 import DataTable from "./DataTable";
+import { useCrudContext, CrudProvider } from "./Context";
+import uniqueid from "@/utils/uniqueid";
 
+function Count() {
+  const { state } = useCrudContext();
+  return <span>{`${state.count}`}</span>;
+}
+
+function CounterButton() {
+  const { crudContextAction } = useCrudContext();
+  return <Button onClick={crudContextAction.increment}>Count Increment</Button>;
+}
 export default function CrudPanel({ entity, columns }) {
   return (
-    <>
+    <CrudProvider>
       <PageHeader
         onBack={() => window.history.back()}
         title="Customer Page"
         ghost={false}
-        tags={<Tag color="blue">Running</Tag>}
+        tags={
+          <Tag color="blue">
+            the count is :<Count />
+          </Tag>
+        }
         subTitle="This is customer page"
         extra={[
-          <Button key="2">Refresh</Button>,
-          <Button key="1" type="primary">
+          <CounterButton key={`${uniqueid()}`} />,
+          <Button key={`${uniqueid()}`} type="primary">
             Add new Customer
           </Button>,
         ]}
@@ -36,6 +51,6 @@ export default function CrudPanel({ entity, columns }) {
       </PageHeader>
 
       <DataTable columns={columns} entity={entity} />
-    </>
+    </CrudProvider>
   );
 }
