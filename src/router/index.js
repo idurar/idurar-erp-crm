@@ -18,8 +18,6 @@ function Router() {
       <PrivateRoute path="/" component={Dashboard} exact />
       <PrivateRoute component={Customer} path="/customer" exact />
       <PrivateRoute component={Patient} path="/patient" exact />
-      <PrivateRoute component={Days} path="/days" exact />
-      <PrivateRoute component={AntdForm} path="/antd" exact />
       <PrivateRoute component={Logout} path="/logout" exact />
       <PublicRoute component={Login} path="/login" exact />
       <Route

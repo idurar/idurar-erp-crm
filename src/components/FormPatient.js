@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Radio, Select, Switch } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/antd";
+import { DatePicker, TimePicker, Calendar } from "@/components/Antd";
 import dayjs from "dayjs";
 import { request } from "@/request";
 export default function FormPatient() {

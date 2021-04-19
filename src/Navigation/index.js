@@ -1,32 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
-import NavigationContext from "@/context/NavigationContext";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Layout, Menu, Icon } from "antd";
+import { Link } from "react-router-dom";
+import { Layout, Menu } from "antd";
 import {
   DesktopOutlined,
-  PieChartOutlined,
   CustomerServiceOutlined,
   DashboardOutlined,
-  FileOutlined,
   TeamOutlined,
   UserOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 function Navigation() {
-  const { collapsed } = useContext(NavigationContext);
+  const [collapsed, setCollapsed] = useState(true);
+
+  const onCollapse = () => {
+    setCollapsed(!collapsed);
+  };
   return (
     <>
       <Sider
-        trigger={null}
         collapsible
         collapsed={collapsed}
-        // onCollapse={() => onSetCollapsed(collapsed)}
+        onCollapse={onCollapse}
+        style={{
+          zIndex: 1000,
+        }}
       >
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">

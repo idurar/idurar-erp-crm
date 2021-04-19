@@ -1,13 +1,11 @@
-import React, { useRef, useState } from "react";
-import DashboardLayout from "@/layout/DashboardLayout";
-import { Layout, Breadcrumb } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/antd";
-import DataTable from "@/components/DataTable";
-import format from "dayjs";
-const { Content } = Layout;
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+import React from "react";
+
+import { DefaultLayout } from "@/layout";
+import CrudPanel from "@/components/CrudPanel";
+import FormPatient from "@/components/FormPatient";
+
 function CustomerPage() {
-  const target = "patient";
+  const entity = "patient";
   const columns = [
     {
       title: "Name",
@@ -27,13 +25,9 @@ function CustomerPage() {
     },
   ];
   return (
-    <DashboardLayout
-      contentLayout={
-        <Content style={{ margin: "0 16px" }}>
-          <DataTable target={target} columns={columns} />
-        </Content>
-      }
-    />
+    <DefaultLayout>
+      <CrudPanel entity={entity} columns={columns} newForm={<FormPatient />} />
+    </DefaultLayout>
   );
 }
 

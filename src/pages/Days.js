@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import DashboardLayout from "@/layout/DashboardLayout";
+import { DefaultLayout } from "@/layout";
 import { Layout, Breadcrumb } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/antd";
+import { DatePicker, TimePicker, Calendar } from "@/components/Antd";
 import format from "dayjs";
 const { Content } = Layout;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
@@ -13,7 +13,7 @@ function DaysPage() {
     console.log(value, mode);
   }
   return (
-    <DashboardLayout
+    <DefaultLayout
       contentLayout={
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>

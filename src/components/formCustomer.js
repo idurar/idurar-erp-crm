@@ -105,11 +105,3 @@ export default function FormCustomer({ entity, closeModel }) {
     </>
   );
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addNewCustomer: (item) => dispatch(addNewCustomer(item)),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(FormCustomer);
