@@ -17,7 +17,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import FormCustomer from "./formCustomer";
+import FormCustomer from "./FormCustomer";
 import { listAction } from "@/redux/crud/actions";
 import { selectListItems } from "@/redux/crud/selectors";
 const dropDownRowMenu = (currentRow) => {

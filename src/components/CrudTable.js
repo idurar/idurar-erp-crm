@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "antd/lib/modal/Modal";
-import FormCustomer from "./formCustomer";
+import FormCustomer from "./FormCustomer";
 import { listAction } from "@/redux/crud/actions";
 
 export default function CrudTable({ entity, columns }) {

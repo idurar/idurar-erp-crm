@@ -1,8 +1,9 @@
 import React from "react";
-import DashboardLayout from "@/layout/DashboardLayout";
+import { DefaultLayout } from "@/layout";
 import { Layout } from "antd";
 
-import CustomerTable from "@/components/CustomerTable";
+import CrudPanel from "@/components/CrudPanel";
+import FormCustomer from "@/components/FormCustomer";
 
 const { Content } = Layout;
 
@@ -28,13 +29,15 @@ function CustomerPage() {
   ];
 
   return (
-    <DashboardLayout
-      contentLayout={
-        <Content style={{ margin: "0 16px" }}>
-          <CustomerTable entity={entity} columns={columns} />
-        </Content>
-      }
-    />
+    <DefaultLayout>
+      <Content style={{ margin: "0 16px" }}>
+        <CrudPanel
+          entity={entity}
+          columns={columns}
+          newForm={<FormCustomer />}
+        />
+      </Content>
+    </DefaultLayout>
   );
 }
 

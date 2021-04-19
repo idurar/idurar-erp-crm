@@ -1,4 +1,4 @@
-export default function uniqueid() {
+export default function uniqueId() {
   // always start with a letter (for DOM friendlyness)
   var idstr = String.fromCharCode(Math.floor(Math.random() * 25 + 65));
   do {

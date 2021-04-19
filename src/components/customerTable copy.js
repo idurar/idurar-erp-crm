@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "antd/lib/modal/Modal";
-import FormCustomer from "./formCustomer";
+import FormCustomer from "./FormCustomer";
 import { loadCustomers } from "@/redux/customer/actions";
 
 export default function CustomerTable({ entity, columns }) {

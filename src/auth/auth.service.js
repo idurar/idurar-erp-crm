@@ -5,6 +5,8 @@ import errorHandler from "@/request/errorHandler";
 import successHandler from "@/request/successHandler";
 import storePersist from "@/redux/storePersist";
 
+import { getCookie, setCookie, deleteCookie } from "./cookie";
+
 export const login = async (loginUserData) => {
   try {
     const response = await axios.post(
@@ -22,33 +24,6 @@ export const logout = () => {
   token.remove();
   storePersist.clear();
 };
-
-function getCookie(cookieName) {
-  var name = cookieName + "=";
-  var ca = document.cookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function setCookie(cookieName, cookieValue, expireDays = 1) {
-  var d = new Date();
-  d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-  var expires = "expires=" + d.toUTCString();
-  document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
-}
-
-function deleteCookie(cookieName) {
-  document.cookie = cookieName + "=; Max-Age=-99999999;";
-  return true;
-}
 
 export const token = {
   get: () => {

@@ -1,36 +1,38 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 import DataTable from "./DataTable";
-import { useCrudContext, CrudProvider } from "./Context";
-import uniqueid from "@/utils/uniqueid";
+import CreateModal from "./CreateModal";
+import { useDispatch } from "react-redux";
+import { resetCrudState } from "@/redux/crud/actions";
+import { useUiContext } from "@/context/ui";
+import uniqueId from "@/utils/uniqueId";
 
-function Count() {
-  const { state } = useCrudContext();
-  return <span>{`${state.count}`}</span>;
-}
-
-function CounterButton() {
-  const { crudContextAction } = useCrudContext();
-  return <Button onClick={crudContextAction.increment}>Count Increment</Button>;
-}
-export default function CrudPanel({ entity, columns }) {
+function AddNewItem() {
+  const { uiContextAction } = useUiContext();
   return (
-    <CrudProvider>
+    <Button onClick={uiContextAction.panel.open} type="primary">
+      Add new Customer
+    </Button>
+  );
+}
+export default function CrudPanel({ columns, entity, newForm }) {
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    dispatch(resetCrudState());
+  }, []);
+
+  return (
+    <>
       <PageHeader
         onBack={() => window.history.back()}
         title="Customer Page"
         ghost={false}
-        tags={
-          <Tag color="blue">
-            the count is :<Count />
-          </Tag>
-        }
+        tags={<Tag color="blue">Running</Tag>}
         subTitle="This is customer page"
         extra={[
-          <CounterButton key={`${uniqueid()}`} />,
-          <Button key={`${uniqueid()}`} type="primary">
-            Add new Customer
-          </Button>,
+          <Button key={`${uniqueId()}`}>Refresh</Button>,
+          <AddNewItem key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: "20px 0px",
@@ -49,8 +51,9 @@ export default function CrudPanel({ entity, columns }) {
           <Statistic title="Balance" prefix="$" value={3345.08} />
         </Row>
       </PageHeader>
-
       <DataTable columns={columns} entity={entity} />
-    </CrudProvider>
+
+      <CreateModal newForm={newForm}></CreateModal>
+    </>
   );
 }

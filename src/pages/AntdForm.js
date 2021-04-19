@@ -11,9 +11,8 @@ import {
   Space,
   Divider,
 } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/antd";
-import format from "dayjs";
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+import { DatePicker } from "@/components/Antd";
+
 const { Option } = Select;
 const { Title } = Typography;
 

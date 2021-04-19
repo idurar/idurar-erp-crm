@@ -1,10 +1,8 @@
-import React, { useRef, useState } from "react";
-import DashboardLayout from "@/layout/DashboardLayout";
-import { Layout, Breadcrumb } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/antd";
-import CrudPanel from "@/components/CrudPanel";
+import React from "react";
 
-const { Content } = Layout;
+import { DefaultLayout } from "@/layout";
+import CrudPanel from "@/components/CrudPanel";
+import FormPatient from "@/components/FormPatient";
 
 function CustomerPage() {
   const entity = "patient";
@@ -27,13 +25,9 @@ function CustomerPage() {
     },
   ];
   return (
-    <DashboardLayout
-      contentLayout={
-        <Content style={{ margin: "0 16px" }}>
-          <CrudPanel entity={entity} columns={columns} />
-        </Content>
-      }
-    />
+    <DefaultLayout>
+      <CrudPanel entity={entity} columns={columns} newForm={<FormPatient />} />
+    </DefaultLayout>
   );
 }
 

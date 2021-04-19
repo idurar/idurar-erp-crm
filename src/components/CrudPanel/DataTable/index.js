@@ -63,7 +63,7 @@ export default function DataTable({ entity, columns }) {
   }, []);
 
   useEffect(() => {
-    handelDataTableLoad(pagination);
+    dispatch(listAction(entity));
   }, []);
 
   return (

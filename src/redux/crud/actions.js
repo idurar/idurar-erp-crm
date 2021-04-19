@@ -1,6 +1,12 @@
 import * as actionTypes from "./types";
 import { request } from "@/request";
 
+export const resetCrudState = () => async (dispatch) => {
+  dispatch({
+    type: actionTypes.RESET_STATE,
+  });
+};
+
 export const createAction = (entity, jsonData) => async (dispatch) => {
   dispatch({
     type: actionTypes.REQUEST_LOADING,

@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
-import DashboardLayout from "@/layout/DashboardLayout";
+import { DefaultLayout } from "@/layout";
 import { Layout, Breadcrumb } from "antd";
 
 const { Content } = Layout;
 
 const DashboardPage = () => (
-  <DashboardLayout
+  <DefaultLayout
     contentLayout={
       <Content style={{ margin: "0 16px" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
