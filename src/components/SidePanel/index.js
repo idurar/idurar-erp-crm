@@ -2,6 +2,7 @@ import React from "react";
 import { useUiContext } from "@/context/ui";
 import { Layout } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import Accordion from "../Accordion";
 
 const { Sider } = Layout;
 
@@ -29,7 +30,7 @@ export default function SidePanel({ children }) {
         background: "#FFF",
       }}
     >
-      {children}
+      <Accordion>{children}</Accordion>
     </Sider>
   );
 }
