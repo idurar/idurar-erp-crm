@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useUiContext } from "@/context/ui";
 import { Layout } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import Accordion from "../Accordion";
+import CollapseBox from "../CollapseBox";
 
 const { Sider } = Layout;
 
 export default function SidePanel({ children }) {
   const { state, uiContextAction } = useUiContext();
-  const { isPanelCollapsed } = state;
-  const { panel } = uiContextAction;
+  const { isPanelCollapsed, isAccordionCollapsed } = state;
+  const { panel, accordion } = uiContextAction;
 
   const collapsePanel = () => {
     panel.collapse();
+  };
+
+  const collapseAccordion = () => {
+    accordion.collapse();
   };
 
   return (
@@ -30,7 +34,12 @@ export default function SidePanel({ children }) {
         background: "#FFF",
       }}
     >
-      <Accordion>{children}</Accordion>
+      <CollapseBox
+        isCollapsed={isAccordionCollapsed}
+        onCollapse={collapseAccordion}
+      >
+        {children}
+      </CollapseBox>
     </Sider>
   );
 }
