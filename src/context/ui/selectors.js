@@ -6,8 +6,8 @@ const contextSelectors = (state) => {
     isPanelOpen: () => {
       return state.isPanelOpen;
     },
-    isAccordionOpen: () => {
-      return state.isAccordionOpen;
+    isBoxOpen: () => {
+      return state.isBoxOpen;
     },
   };
 };

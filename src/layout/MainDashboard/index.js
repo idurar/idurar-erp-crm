@@ -1,7 +1,7 @@
 import React from "react";
 import { UiContextProvider } from "@/context/ui";
 
-import Navigation from "@/Navigation";
+import Navigation from "@/components/Navigation";
 
 import { Layout } from "antd";
 

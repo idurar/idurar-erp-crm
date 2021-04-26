@@ -52,8 +52,28 @@ export default function CrudPanel({ columns, entity, newForm }) {
         </Row>
       </PageHeader>
       <DataTable columns={columns} entity={entity} />
-
-      <CreateModal newForm={newForm}></CreateModal>
     </>
   );
 }
+
+// export default function DefaultLayout({ children, SidePanelContent }) {
+//   return (
+//     <MainDashboard>
+//       <SidePanel>{SidePanelContent}</SidePanel>
+//       <Layout className="site-layout">
+//         <HeaderContent />
+//         <Content
+//           className="site-layout-background"
+//           style={{
+//             padding: "50px 40px",
+//             margin: "50px auto",
+//             width: "100%",
+//             maxWidth: "1000px",
+//           }}
+//         >
+//           {children}
+//         </Content>
+//       </Layout>
+//     </MainDashboard>
+//   );
+// }
