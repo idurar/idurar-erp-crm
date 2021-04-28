@@ -6,7 +6,21 @@ export const resetCrudState = () => async (dispatch) => {
     type: actionTypes.RESET_STATE,
   });
 };
+export const currentAction = (actionType, data) => async (dispatch) => {
+  dispatch({
+    type: actionTypes.CURRENT_ACTION,
+    keyState: actionType,
+    payload: data,
+  });
+};
 
+export const resetAction = (actionType) => async (dispatch) => {
+  dispatch({
+    type: actionTypes.RESET_ACTION,
+    keyState: actionType,
+    payload: null,
+  });
+};
 export const createAction = (entity, jsonData) => async (dispatch) => {
   dispatch({
     type: actionTypes.REQUEST_LOADING,

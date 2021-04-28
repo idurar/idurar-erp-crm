@@ -88,8 +88,10 @@ const request = {
   },
 
   list: async (entity, option = {}) => {
-    axiosInstance.defaults.headers = headersInstance;
-    console.log(headersInstance);
+    axiosInstance.defaults.headers = {
+      [ACCESS_TOKEN_NAME]: tokenCookies.get(),
+    };
+    console.log(tokenCookies.get());
     try {
       let query = "";
       if (option != {}) {
