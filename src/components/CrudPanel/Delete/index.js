@@ -1,57 +1,42 @@
-import React, { useState, useCallback, useEffect } from "react";
-import {
-  Dropdown,
-  Menu,
-  Button,
-  PageHeader,
-  Row,
-  Statistic,
-  Table,
-  Tag,
-  Modal,
-} from "antd";
-import {
-  EllipsisOutlined,
-  EyeOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import FormCustomer from "./formCustomer";
-import { listAction } from "@/redux/crud/actions";
-import { selectListItems } from "@/redux/crud/selectors";
+import React, { useEffect, useState } from "react";
+import { Modal } from "antd";
+import Loading from "@/components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAction } from "@/redux/crud/actions";
+import { useUiContext } from "@/context/ui";
+import { selectDeletedItem } from "@/redux/crud/selectors";
 
-const [isModalVisible, setIsModalVisible] = useState(false);
+export default function Delete({ entity }) {
+  const dispatch = useDispatch();
+  const { current, result, isLoading, isSuccess } = useSelector(
+    selectDeletedItem
+  );
+  const { state, uiContextAction } = useUiContext();
+  const { isModalOpen } = state;
+  const { modal } = uiContextAction;
+  const [displayItem, setDisplayItem] = useState("");
 
-const showModal = () => {
-  setIsModalVisible(true);
-};
+  useEffect(() => {
+    if (isSuccess) modal.close();
+    if (current) setDisplayItem(current._id);
+  }, [isSuccess, current]);
 
-const handleOk = () => {
-  setIsModalVisible(false);
-};
-
-const handleCancel = () => {
-  setIsModalVisible(false);
-};
-
-export default function CustomerTable({ entity, columns }) {
+  const handleOk = () => {
+    const id = current._id;
+    dispatch(deleteAction(entity, id));
+  };
+  const handleCancel = () => {
+    if (!isLoading) modal.close();
+  };
   return (
-    <>
-      <Modal
-        title="Add new Patient"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <FormCustomer
-          entity={entity}
-          closeModel={() => {
-            setIsModalVisible(false);
-          }}
-        />
-      </Modal>{" "}
-    </>
+    <Modal
+      title="Remove Item"
+      visible={isModalOpen}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      confirmLoading={isLoading}
+    >
+      <p>Do you want delete : {displayItem}</p>
+    </Modal>
   );
 }

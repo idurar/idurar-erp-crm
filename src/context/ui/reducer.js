@@ -1,10 +1,10 @@
 import * as actionTypes from "./types";
 
 export const initialState = {
-  count: 0,
   isModalOpen: false,
   isPanelCollapsed: false,
   isBoxCollapsed: false,
+  isReadBoxOpen: false,
 };
 
 export function contextReducer(state, action) {
@@ -48,6 +48,21 @@ export function contextReducer(state, action) {
       return {
         ...state,
         isBoxCollapsed: !state.isBoxCollapsed,
+      };
+    case actionTypes.OPEN_READ_BOX:
+      return {
+        ...state,
+        isReadBoxOpen: true,
+      };
+    case actionTypes.CLOSE_READ_BOX:
+      return {
+        ...state,
+        isReadBoxOpen: false,
+      };
+    case actionTypes.COLLAPSE_READ_BOX:
+      return {
+        ...state,
+        isReadBoxOpen: !state.isReadBoxOpen,
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

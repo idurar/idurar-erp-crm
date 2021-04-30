@@ -32,6 +32,17 @@ const contextActions = (dispatch) => {
         dispatch({ type: actionTypes.COLLAPSE_BOX });
       },
     },
+    readBox: {
+      open: () => {
+        dispatch({ type: actionTypes.OPEN_READ_BOX });
+      },
+      close: () => {
+        dispatch({ type: actionTypes.CLOSE_READ_BOX });
+      },
+      collapse: () => {
+        dispatch({ type: actionTypes.COLLAPSE_READ_BOX });
+      },
+    },
   };
 };
 

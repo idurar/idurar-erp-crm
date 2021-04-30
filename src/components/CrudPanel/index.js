@@ -3,6 +3,7 @@ import React, { useLayoutEffect } from "react";
 import DataTable from "./DataTable";
 import Create from "./Create";
 import Update from "./Update";
+import Delete from "./Delete";
 
 import { useDispatch } from "react-redux";
 import { resetCrudState } from "@/redux/crud/actions";
@@ -27,6 +28,7 @@ function CrudPanel({ columns, entity, createForm, updateForm }) {
       sidePanelTopContent={<Update entity={entity} formElements={form} />}
     >
       <DataTable columns={columns} entity={entity} />
+      <Delete entity={entity} />
     </CrudLayout>
   );
 }

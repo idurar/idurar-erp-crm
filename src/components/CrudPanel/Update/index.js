@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAction } from "@/redux/crud/actions";
 import { useUiContext } from "@/context/ui";
@@ -10,15 +10,47 @@ import Loading from "@/components/Loading";
 
 export default function Update({ entity, formElements }) {
   const dispatch = useDispatch();
-  const { result, isLoading, isSuccess } = useSelector(selectUpdatedItem);
+  const { current, result, isLoading, isSuccess } = useSelector(
+    selectUpdatedItem
+  );
+
   const [form] = Form.useForm();
-  const onSubmit = (values) => {
-    const id = result.current._id;
+
+  const onSubmit = (fieldsValue) => {
+    let values = {};
+    if (fieldsValue) {
+      if (fieldsValue.birthday) {
+        values = {
+          ...fieldsValue,
+          birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
+        };
+      }
+      if (fieldsValue.date) {
+        values = {
+          ...fieldsValue,
+          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
+        };
+      }
+    }
+
+    const id = current._id;
     dispatch(updateAction(entity, id, values));
   };
   useEffect(() => {
+    console.log(current);
+    if (current) {
+      if (current.birthday) {
+        current.birthday = dayjs(current.birthday);
+      }
+      if (current.date) {
+        current.date = dayjs(current.date);
+      }
+    }
+
+    form.setFieldsValue(current);
+    // console.log(form.getFieldsValue());
     if (isSuccess) form.resetFields();
-  }, [isSuccess, result]);
+  }, [isSuccess, current]);
 
   return (
     <Loading isLoading={isLoading}>
