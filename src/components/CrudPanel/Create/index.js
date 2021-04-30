@@ -12,7 +12,23 @@ export default function Create({ entity, formElements }) {
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
-  const onSubmit = (values) => {
+  const onSubmit = (fieldsValue) => {
+    let values = {};
+    if (fieldsValue) {
+      if (fieldsValue.birthday) {
+        values = {
+          ...fieldsValue,
+          birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
+        };
+      }
+      if (fieldsValue.date) {
+        values = {
+          ...fieldsValue,
+          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
+        };
+      }
+    }
+
     dispatch(createAction(entity, values));
   };
   useEffect(() => {

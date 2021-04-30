@@ -8,8 +8,8 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { listAction } from "@/redux/crud/actions";
-import { selectListItems } from "@/redux/crud/selectors";
+import { listAction, currentAction } from "@/redux/crud/actions";
+import { selectListItems, selectItemById } from "@/redux/crud/selectors";
 import { useUiContext } from "@/context/ui";
 import uniqueId from "@/utils/uniqueId";
 
@@ -21,15 +21,25 @@ function AddNewItem() {
     </Button>
   );
 }
-const dropDownRowMenu = (currentRow) => {
-  function Show() {
-    console.log(currentRow._id);
-  }
+function DropDownRowMenu({ row }) {
+  const dispatch = useDispatch();
+  const { uiContextAction } = useUiContext();
+  const { panel, collapsedBox, modal } = uiContextAction;
+  const item = useSelector(selectItemById(row._id));
+  const Show = () => {
+    console.log(item);
+    dispatch(currentAction("read", item));
+  };
   function Edit() {
-    console.log(currentRow._id);
+    console.log(item);
+    dispatch(currentAction("update", item));
+    panel.open();
+    collapsedBox.open();
   }
   function Delete() {
-    console.log(currentRow._id);
+    console.log(item);
+    dispatch(currentAction("delete", item));
+    modal.open();
   }
   return (
     <Menu style={{ width: 130 }}>
@@ -44,7 +54,7 @@ const dropDownRowMenu = (currentRow) => {
       </Menu.Item>
     </Menu>
   );
-};
+}
 
 export default function DataTable({ entity, columns }) {
   columns = [
@@ -52,7 +62,7 @@ export default function DataTable({ entity, columns }) {
     {
       title: "",
       render: (row) => (
-        <Dropdown overlay={dropDownRowMenu(row)} trigger={["click"]}>
+        <Dropdown overlay={DropDownRowMenu({ row })} trigger={["click"]}>
           <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
         </Dropdown>
       ),
