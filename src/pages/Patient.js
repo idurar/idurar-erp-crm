@@ -5,7 +5,8 @@ import FormPatient from "@/forms/FormPatient";
 
 function Patient() {
   const entity = "patient";
-  const columns = [
+
+  const dataTableColumns = [
     {
       title: "Name",
       dataIndex: "name",
@@ -23,8 +24,32 @@ function Patient() {
       dataIndex: "sexe",
     },
   ];
+  const readColumns = [
+    {
+      title: "Nom",
+      dataIndex: "name",
+    },
+    {
+      title: "Prenom",
+      dataIndex: "surname",
+    },
+    {
+      title: "Date de naissance",
+      dataIndex: "birthday",
+    },
+    {
+      title: "Sexe",
+      dataIndex: "sexe",
+    },
+  ];
+  const config = { entity, readColumns, dataTableColumns };
   return (
-    <CrudPanel entity={entity} columns={columns} createForm={<FormPatient />} />
+    <CrudPanel
+      entity={entity}
+      dataTableColumns={dataTableColumns}
+      createForm={<FormPatient />}
+      config={config}
+    />
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createAction } from "@/redux/crud/actions";
+import { crud } from "@/redux/crud/actions";
 import { useUiContext } from "@/context/ui";
 import { selectCreatedItem } from "@/redux/crud/selectors";
 
@@ -29,7 +29,7 @@ export default function Create({ entity, formElements }) {
       }
     }
 
-    dispatch(createAction(entity, values));
+    dispatch(crud.create(entity, values));
   };
   useEffect(() => {
     if (isSuccess) form.resetFields();

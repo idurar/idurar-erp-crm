@@ -11,6 +11,7 @@ export default function SidePanel({
   searchForm,
   topContent,
   bottomContent,
+  fixHeaderPanel,
 }) {
   const { state, uiContextAction } = useUiContext();
   const { isPanelCollapsed, isBoxCollapsed } = state;
@@ -50,6 +51,7 @@ export default function SidePanel({
         // left: styleSider,
       }}
     >
+      {fixHeaderPanel}
       <CollapseBox
         buttonTitle="Add new Customer"
         isPanelCollapsed={isPanelCollapsed}

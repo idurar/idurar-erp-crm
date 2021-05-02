@@ -5,7 +5,29 @@ import FormCustomer from "@/forms/FormCustomer";
 
 function Customer() {
   const entity = "client";
-  const columns = [
+  const readColumns = [
+    {
+      title: "Company",
+      dataIndex: "company",
+    },
+    {
+      title: "Manager Surname",
+      dataIndex: "managerSurname",
+    },
+    {
+      title: "Manager Name",
+      dataIndex: "managerName",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+    },
+  ];
+  const dataTableColumns = [
     {
       title: "Company",
       dataIndex: "company",
@@ -26,7 +48,8 @@ function Customer() {
   return (
     <CrudPanel
       entity={entity}
-      columns={columns}
+      dataTableColumns={dataTableColumns}
+      readColumns={readColumns}
       createForm={<FormCustomer />}
     />
   );

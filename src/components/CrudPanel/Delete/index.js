@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import Loading from "@/components/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAction } from "@/redux/crud/actions";
+import { crud } from "@/redux/crud/actions";
 import { useUiContext } from "@/context/ui";
 import { selectDeletedItem } from "@/redux/crud/selectors";
 
@@ -23,7 +23,7 @@ export default function Delete({ entity }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(deleteAction(entity, id));
+    dispatch(crud.delete(entity, id));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
