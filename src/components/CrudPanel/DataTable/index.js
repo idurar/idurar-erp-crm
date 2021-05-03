@@ -8,7 +8,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { listAction, currentAction } from "@/redux/crud/actions";
+import { crud } from "@/redux/crud/actions";
 import { selectListItems, selectItemById } from "@/redux/crud/selectors";
 import { useUiContext } from "@/context/ui";
 import uniqueId from "@/utils/uniqueId";
@@ -23,22 +23,23 @@ function AddNewItem() {
 }
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, modal } = uiContextAction;
+  const { state, uiContextAction } = useUiContext();
+  const { panel, collapsedBox, modal, readBox } = uiContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
-    console.log(item);
-    dispatch(currentAction("read", item));
+    dispatch(crud.currentItem(item));
+    panel.open();
+    collapsedBox.open();
+    readBox.open();
   };
   function Edit() {
-    console.log(item);
-    dispatch(currentAction("update", item));
+    dispatch(crud.currentAction("update", item));
+    readBox.close();
     panel.open();
     collapsedBox.open();
   }
   function Delete() {
-    console.log(item);
-    dispatch(currentAction("delete", item));
+    dispatch(crud.currentAction("delete", item));
     modal.open();
   }
   return (
@@ -56,9 +57,9 @@ function DropDownRowMenu({ row }) {
   );
 }
 
-export default function DataTable({ entity, columns }) {
-  columns = [
-    ...columns,
+export default function DataTable({ entity, dataTableColumns }) {
+  dataTableColumns = [
+    ...dataTableColumns,
     {
       title: "",
       render: (row) => (
@@ -80,11 +81,11 @@ export default function DataTable({ entity, columns }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    dispatch(listAction(entity, pagination.current));
+    dispatch(crud.list(entity, pagination.current));
   }, []);
 
   useEffect(() => {
-    dispatch(listAction(entity));
+    dispatch(crud.list(entity));
   }, []);
 
   return (
@@ -117,7 +118,7 @@ export default function DataTable({ entity, columns }) {
         </Row>
       </PageHeader>
       <Table
-        columns={columns}
+        columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={items}
         pagination={pagination}

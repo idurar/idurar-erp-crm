@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createAction } from "@/redux/crud/actions";
+import { crud } from "@/redux/crud/actions";
 import { useUiContext } from "@/context/ui";
 import { selectCreatedItem } from "@/redux/crud/selectors";
 
@@ -11,6 +11,8 @@ import Loading from "@/components/Loading";
 export default function Create({ entity, formElements }) {
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
+  const { state, uiContextAction } = useUiContext();
+  const { panel, collapsedBox, modal, readBox } = uiContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
     let values = {};
@@ -29,10 +31,17 @@ export default function Create({ entity, formElements }) {
       }
     }
 
-    dispatch(createAction(entity, values));
+    dispatch(crud.create(entity, values));
   };
+
   useEffect(() => {
-    if (isSuccess) form.resetFields();
+    if (isSuccess) {
+      readBox.open();
+      collapsedBox.open();
+      panel.open();
+      form.resetFields();
+      dispatch(crud.resetAction("create"));
+    }
   }, [isSuccess]);
 
   return (

@@ -12,12 +12,14 @@ export default function CrudLayout({
   children,
   sidePanelTopContent,
   sidePanelBottomContent,
+  fixHeaderPanel,
 }) {
   return (
     <DefaultLayout>
       <SidePanel
         topContent={sidePanelTopContent}
         bottomContent={sidePanelBottomContent}
+        fixHeaderPanel={fixHeaderPanel}
       ></SidePanel>
       <Layout className="site-layout">
         <HeaderContent />
