@@ -37,7 +37,6 @@ function DropDownRowMenu({ row }) {
     readBox.close();
     panel.open();
     collapsedBox.open();
-    console.log(state);
   }
   function Delete() {
     dispatch(crud.currentAction("delete", item));

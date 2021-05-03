@@ -97,12 +97,12 @@ export const crud = {
 
     if (data.success === true) {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "read",
+        type: actionTypes.CURRENT_ITEM,
         payload: data.result,
       });
       dispatch({
-        type: actionTypes.CURRENT_ITEM,
+        type: actionTypes.REQUEST_SUCCESS,
+        keyState: "read",
         payload: data.result,
       });
     } else {

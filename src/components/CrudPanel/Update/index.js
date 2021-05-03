@@ -14,19 +14,21 @@ export default function Update({ isOpen, entity, formElements }) {
     selectUpdatedItem
   );
 
+  const { state, uiContextAction } = useUiContext();
+  const { panel, collapsedBox, modal, readBox } = uiContextAction;
+
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    let values = {};
     if (fieldsValue) {
       if (fieldsValue.birthday) {
-        values = {
+        fieldsValue = {
           ...fieldsValue,
           birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
         };
       }
       if (fieldsValue.date) {
-        values = {
+        fieldsValue = {
           ...fieldsValue,
           birthday: fieldsValue["date"].format("DD/MM/YYYY"),
         };
@@ -34,10 +36,10 @@ export default function Update({ isOpen, entity, formElements }) {
     }
 
     const id = current._id;
-    dispatch(crud.update(entity, id, values));
+    console.log(fieldsValue);
+    dispatch(crud.update(entity, id, fieldsValue));
   };
   useEffect(() => {
-    console.log(current);
     if (current) {
       if (current.birthday) {
         current.birthday = dayjs(current.birthday);
@@ -47,11 +49,19 @@ export default function Update({ isOpen, entity, formElements }) {
       }
       form.setFieldsValue(current);
     }
-
     // console.log(form.getFieldsValue());
-    if (isSuccess) form.resetFields();
-  }, [isSuccess, current]);
-  const { state, uiContextAction } = useUiContext();
+  }, [current]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      readBox.open();
+      collapsedBox.open();
+      panel.open();
+      form.resetFields();
+      dispatch(crud.resetAction("update"));
+    }
+  }, [isSuccess]);
+
   const { isReadBoxOpen } = state;
 
   const show = isReadBoxOpen

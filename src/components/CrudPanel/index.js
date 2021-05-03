@@ -13,10 +13,10 @@ import { useUiContext } from "@/context/ui";
 
 import { CrudLayout } from "@/layout";
 
-function SidePanelTopContent({ entity, config, formElements }) {
+function SidePanelTopContent({ entity, readColumns, formElements }) {
   return (
     <>
-      <Read config={config} />
+      <Read readColumns={readColumns} />
       <Update entity={entity} formElements={formElements} />
     </>
   );
@@ -25,7 +25,7 @@ function SidePanelTopContent({ entity, config, formElements }) {
 function CrudPanel({
   entity,
   dataTableColumns,
-  config,
+  readColumns,
   createForm,
   updateForm,
 }) {
@@ -45,7 +45,7 @@ function CrudPanel({
       }
       sidePanelTopContent={
         <SidePanelTopContent
-          config={config}
+          readColumns={readColumns}
           entity={entity}
           formElements={form}
         />

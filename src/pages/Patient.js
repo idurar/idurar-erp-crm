@@ -42,13 +42,13 @@ function Patient() {
       dataIndex: "sexe",
     },
   ];
-  const config = { entity, readColumns, dataTableColumns };
+
   return (
     <CrudPanel
       entity={entity}
       dataTableColumns={dataTableColumns}
       createForm={<FormPatient />}
-      config={config}
+      readColumns={readColumns}
     />
   );
 }
