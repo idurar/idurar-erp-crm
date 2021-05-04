@@ -3,9 +3,10 @@ import React from "react";
 import { Form, Input, Button, Checkbox, Layout, Row, Col, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
-import { useDispatch } from "react-redux";
 import { login } from "@/redux/auth/actions";
-
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "@/redux/auth/actions";
+import { selectAuth } from "@/redux/auth/selectors";
 const { Content, Footer } = Layout;
 
 const LoginPage = () => {
@@ -13,7 +14,7 @@ const LoginPage = () => {
 
   // const { setUserData } = useContext(UserContext);
   // const history = useHistory();
-
+  const { loading: isLoading } = useSelector(selectAuth);
   // function handleChange(e) {
   //   const { name, value } = e.target;
   //   setInputs((inputs) => ({ ...inputs, [name]: value }));
@@ -96,6 +97,7 @@ const LoginPage = () => {
                       type="primary"
                       htmlType="submit"
                       className="login-form-button"
+                      loading={isLoading}
                     >
                       Log in
                     </Button>
