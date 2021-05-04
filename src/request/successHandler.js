@@ -30,13 +30,13 @@ const successHandler = (response, typeNotification = {}) => {
     const message = data && data.message;
     const successText = message || codeMessage[response.status];
     const { status } = response;
-    notification.config({
-      duration: 20,
-    });
-    notification.success({
-      message: `Request success`,
-      description: successText,
-    });
+    // notification.config({
+    //   duration: 20,
+    // });
+    // notification.success({
+    //   message: `Request success`,
+    //   description: successText,
+    // });
   }
 
   return data;

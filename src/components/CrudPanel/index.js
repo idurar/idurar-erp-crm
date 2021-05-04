@@ -26,6 +26,7 @@ function CrudPanel({
   entity,
   dataTableColumns,
   readColumns,
+  searchConfig,
   createForm,
   updateForm,
 }) {
@@ -39,7 +40,7 @@ function CrudPanel({
 
   return (
     <CrudLayout
-      fixHeaderPanel={<Search entity={entity} />}
+      fixHeaderPanel={<Search entity={entity} searchConfig={searchConfig} />}
       sidePanelBottomContent={
         <Create entity={entity} formElements={createForm} />
       }

@@ -11,6 +11,10 @@ const axiosInstance = axios.create({
   timeout: 30000,
   headers: headersInstance,
 });
+// let isConnected = true;
+// window.onoffline = (event) => {
+//   isConnected = false;
+// };
 
 const request = {
   create: async (entity, jsonData, option = {}) => {
