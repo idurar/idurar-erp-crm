@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import { reducer as authReducer } from "./auth";
 import { reducer as uiReducer } from "./ui";
 import { reducer as crudReducer } from "./crud";
-import { reducer as customerReducer } from "./customer";
+import { reducer as notifyReducer } from "./notify";
 
 import * as actionTypes from "./auth/types";
 
@@ -12,7 +12,7 @@ import * as actionTypes from "./auth/types";
 const appReducer = combineReducers({
   auth: authReducer,
   ui: uiReducer,
-  customers: customerReducer,
+  notify: notifyReducer,
   crud: crudReducer,
 });
 

@@ -5,7 +5,10 @@ import FormPatient from "@/forms/FormPatient";
 
 function Patient() {
   const entity = "patient";
-
+  const searchConfig = {
+    displayLabels: ["name", "surname", "birthday"],
+    searchFields: "name,surname,birthday",
+  };
   const dataTableColumns = [
     {
       title: "Name",
@@ -49,6 +52,7 @@ function Patient() {
       dataTableColumns={dataTableColumns}
       createForm={<FormPatient />}
       readColumns={readColumns}
+      searchConfig={searchConfig}
     />
   );
 }

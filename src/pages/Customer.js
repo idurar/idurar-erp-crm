@@ -5,6 +5,10 @@ import FormCustomer from "@/forms/FormCustomer";
 
 function Customer() {
   const entity = "client";
+  const searchConfig = {
+    displayLabels: ["company"],
+    searchFields: "company,managerSurname,managerName",
+  };
   const readColumns = [
     {
       title: "Company",
@@ -50,6 +54,7 @@ function Customer() {
       entity={entity}
       dataTableColumns={dataTableColumns}
       readColumns={readColumns}
+      searchConfig={searchConfig}
       createForm={<FormCustomer />}
     />
   );

@@ -4,14 +4,15 @@ import codeMessage from "./codeMessage";
 
 const errorHandler = (error, emptyResult = null) => {
   const { response } = error;
+
   if (!response) {
-    notification.config({
-      duration: 20,
-    });
-    notification.error({
-      message: "No internet connection",
-      description: "Cannot connect to the server, Check your internet network",
-    });
+    // notification.config({
+    //   duration: 20,
+    // });
+    // notification.error({
+    //   message: "No internet connection",
+    //   description: "Cannot connect to the server, Check your internet network",
+    // });
     return {
       success: false,
       result: emptyResult,
