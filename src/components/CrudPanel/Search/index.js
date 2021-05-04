@@ -6,8 +6,7 @@ import { request } from "@/request";
 import { useUiContext } from "@/context/ui";
 import { selectSearchedItems } from "@/redux/crud/selectors";
 
-import { Button, Form, Empty } from "antd";
-import Loading from "@/components/Loading";
+import { Empty } from "antd";
 
 export default function Search({ entity, searchConfig }) {
   const { displayLabels, searchFields } = searchConfig;
@@ -16,8 +15,8 @@ export default function Search({ entity, searchConfig }) {
   const [openStatus, setOpenStatus] = useState(false);
   const [options, setOptions] = useState([]);
 
-  const { state, uiContextAction } = useUiContext();
-  const { panel, collapsedBox, modal, readBox } = uiContextAction;
+  const { uiContextAction } = useUiContext();
+  const { panel, collapsedBox, readBox } = uiContextAction;
 
   let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
@@ -49,11 +48,10 @@ export default function Search({ entity, searchConfig }) {
   };
 
   const onSelect = (data) => {
-    console.log("onSelect", data);
     const currentItem = result.find((item) => {
       return item._id === data;
     });
-    console.log("currentItem", currentItem);
+
     dispatch(crud.currentItem(currentItem));
     panel.open();
     collapsedBox.open();
