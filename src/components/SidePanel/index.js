@@ -7,8 +7,6 @@ import CollapseBox from "../CollapseBox";
 const { Sider } = Layout;
 
 export default function SidePanel({
-  panelTitle,
-  searchForm,
   topContent,
   bottomContent,
   fixHeaderPanel,
@@ -16,16 +14,14 @@ export default function SidePanel({
   const { state, uiContextAction } = useUiContext();
   const { isPanelCollapsed, isBoxCollapsed } = state;
   const { panel, collapsedBox } = uiContextAction;
-  // const [styleSider, setStyleSider] = useState("0px");
+  const [styleSider, setStyleSider] = useState("0px");
 
-  // const [siderCollapse, setSiderCollapse] = useState(isPanelCollapsed);
-
-  // useEffect(() => {
-  //   setSiderCollapse(isPanelCollapsed);
-  //   // setTimeout(() => {
-  //   //   setSiderCollapse(isPanelCollapsed);
-  //   // }, 200);
-  // }, [isPanelCollapsed]);
+  useEffect(() => {
+    isPanelCollapsed ? setStyleSider("-400px") : setStyleSider("0px");
+    setTimeout(() => {
+      setStyleSider("0px");
+    }, 300);
+  }, [isPanelCollapsed]);
 
   const collapsePanel = () => {
     panel.collapse();
@@ -41,14 +37,15 @@ export default function SidePanel({
       width={400}
       collapsible
       collapsed={isPanelCollapsed}
-      collapsedWidth={0}
+      collapsedWidth={"0px"}
       onCollapse={collapsePanel}
       zeroWidthTriggerStyle={{
         right: "-50px",
+        top: "15px",
       }}
       style={{
         background: "#FFF",
-        // left: styleSider,
+        left: styleSider,
       }}
     >
       {fixHeaderPanel}

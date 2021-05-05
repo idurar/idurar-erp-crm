@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
-
+import { Row, Col, Button, Typography } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import DataTable from "./DataTable";
 import Create from "./Create";
 import Update from "./Update";
@@ -13,6 +14,8 @@ import { useUiContext } from "@/context/ui";
 
 import { CrudLayout } from "@/layout";
 
+const { Title } = Typography;
+
 function SidePanelTopContent({ entity, readColumns, formElements }) {
   return (
     <>
@@ -22,7 +25,44 @@ function SidePanelTopContent({ entity, readColumns, formElements }) {
   );
 }
 
+function FixHeaderPanel({ config }) {
+  const { uiContextAction } = useUiContext();
+  const { collapsedBox } = uiContextAction;
+
+  const addNewItem = () => {
+    collapsedBox.close();
+  };
+  return (
+    <div className="box">
+      <Row gutter={12}>
+        <Col className="gutter-row" span={21}>
+          <h1 style={{ fontSize: 20, marginBottom: 20 }}>
+            {config.panelTitle}
+          </h1>
+        </Col>
+      </Row>
+      <Row gutter={12}>
+        <Col className="gutter-row" span={21}>
+          <Search
+            config={config}
+            entity={config.entity}
+            searchConfig={config.searchConfig}
+          />
+        </Col>
+        <Col className="gutter-row" span={3}>
+          <Button
+            onClick={addNewItem}
+            block={true}
+            icon={<PlusOutlined />}
+          ></Button>
+        </Col>
+      </Row>
+    </div>
+  );
+}
+
 function CrudPanel({
+  config,
   entity,
   dataTableColumns,
   readColumns,
@@ -40,9 +80,9 @@ function CrudPanel({
 
   return (
     <CrudLayout
-      fixHeaderPanel={<Search entity={entity} searchConfig={searchConfig} />}
+      fixHeaderPanel={<FixHeaderPanel config={config} />}
       sidePanelBottomContent={
-        <Create entity={entity} formElements={createForm} />
+        <Create config={config} entity={entity} formElements={createForm} />
       }
       sidePanelTopContent={
         <SidePanelTopContent
@@ -52,8 +92,12 @@ function CrudPanel({
         />
       }
     >
-      <DataTable dataTableColumns={dataTableColumns} entity={entity} />
-      <Delete entity={entity} />
+      <DataTable
+        config={config}
+        dataTableColumns={dataTableColumns}
+        entity={entity}
+      />
+      <Delete config={config} entity={entity} />
     </CrudLayout>
   );
 }

@@ -4,7 +4,7 @@ export const initialState = {
   isModalOpen: false,
   isPanelCollapsed: false,
   isBoxCollapsed: false,
-  isReadBoxOpen: false,
+  isReadBoxOpen: true,
 };
 
 export function contextReducer(state, action) {
