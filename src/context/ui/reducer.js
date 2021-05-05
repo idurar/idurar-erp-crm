@@ -3,8 +3,8 @@ import * as actionTypes from "./types";
 export const initialState = {
   isModalOpen: false,
   isPanelCollapsed: false,
-  isBoxCollapsed: false,
-  isReadBoxOpen: false,
+  isBoxCollapsed: true,
+  isReadBoxOpen: true,
 };
 
 export function contextReducer(state, action) {

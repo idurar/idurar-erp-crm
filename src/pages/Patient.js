@@ -6,7 +6,7 @@ import FormPatient from "@/forms/FormPatient";
 function Patient() {
   const entity = "patient";
   const searchConfig = {
-    displayLabels: ["name", "surname", "birthday"],
+    displayLabels: ["name", "surname"],
     searchFields: "name,surname,birthday",
   };
   const dataTableColumns = [
@@ -45,7 +45,16 @@ function Patient() {
       dataIndex: "sexe",
     },
   ];
-
+  const panelTitle = "Patient";
+  const dataTableTitle = "Patients Lists";
+  const config = {
+    entity,
+    panelTitle,
+    dataTableTitle,
+    readColumns,
+    dataTableColumns,
+    searchConfig,
+  };
   return (
     <CrudPanel
       entity={entity}
@@ -53,6 +62,7 @@ function Patient() {
       createForm={<FormPatient />}
       readColumns={readColumns}
       searchConfig={searchConfig}
+      config={config}
     />
   );
 }

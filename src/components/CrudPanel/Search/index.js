@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { AutoComplete } from "antd";
+
+import { AutoComplete, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { request } from "@/request";
@@ -8,8 +10,9 @@ import { selectSearchedItems } from "@/redux/crud/selectors";
 
 import { Empty } from "antd";
 
-export default function Search({ entity, searchConfig }) {
-  const { displayLabels, searchFields } = searchConfig;
+export default function Search({ entity, config, searchConfig }) {
+  console.log("config", config);
+  const { displayLabels, searchFields } = config.searchConfig;
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [openStatus, setOpenStatus] = useState(false);
@@ -85,7 +88,7 @@ export default function Search({ entity, searchConfig }) {
       value={value}
       options={options}
       style={{
-        width: 200,
+        width: "100%",
       }}
       onSelect={onSelect}
       onSearch={onSearch}
@@ -96,6 +99,8 @@ export default function Search({ entity, searchConfig }) {
       notFoundContent={!isSuccess ? <Empty /> : ""}
       allowClear={true}
       placeholder="control mode"
-    />
+    >
+      <Input suffix={<SearchOutlined />} />
+    </AutoComplete>
   );
 }

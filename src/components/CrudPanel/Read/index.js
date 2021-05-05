@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import { Row, Col, Button } from "antd";
 import { useSelector } from "react-redux";
 
 import { useUiContext } from "@/context/ui";
@@ -34,18 +34,19 @@ export default function Read({ readColumns }) {
 
   const itemsList = listState.map((item) => {
     return (
-      <div key={item.propsKey}>
-        <p>{item.label}</p>
-        <p> : </p>
-        <p>{item.value}</p>
-      </div>
+      <Row key={item.propsKey} gutter={12}>
+        <Col className="gutter-row" span={8}>
+          <p>{item.label}</p>
+        </Col>
+        <Col className="gutter-row" span={2}>
+          <p> : </p>
+        </Col>
+        <Col className="gutter-row" span={14}>
+          <p>{item.value}</p>
+        </Col>
+      </Row>
     );
   });
 
-  return (
-    <div style={show}>
-      <p>This show content area</p>
-      {itemsList}
-    </div>
-  );
+  return <div style={show}>{itemsList}</div>;
 }
