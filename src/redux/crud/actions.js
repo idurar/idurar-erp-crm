@@ -40,10 +40,10 @@ export const crud = {
       const result = {
         items: data.result,
         pagination: {
-          current: data.pagination.page,
-          defaultCurrent: 1,
+          current: parseInt(data.pagination.page, 10),
+          // defaultCurrent: data.pagination.page,
           pageSize: 10,
-          total: data.pagination.count,
+          total: parseInt(data.pagination.count, 10),
         },
       };
       dispatch({

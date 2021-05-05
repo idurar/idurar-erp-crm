@@ -15,8 +15,14 @@ import uniqueId from "@/utils/uniqueId";
 
 function AddNewItem() {
   const { uiContextAction } = useUiContext();
+  const { collapsedBox, panel } = uiContextAction;
+  const handelClick = () => {
+    panel.open();
+    collapsedBox.close();
+  };
+
   return (
-    <Button onClick={uiContextAction.panel.open} type="primary">
+    <Button onClick={handelClick} type="primary">
       Add new Customer
     </Button>
   );
@@ -97,7 +103,9 @@ export default function DataTable({ entity, dataTableColumns }) {
         tags={<Tag color="blue">Running</Tag>}
         subTitle="This is customer page"
         extra={[
-          <Button key={`${uniqueId()}`}>Refresh</Button>,
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
+            Refresh
+          </Button>,
           <AddNewItem key={`${uniqueId()}`} />,
         ]}
         style={{

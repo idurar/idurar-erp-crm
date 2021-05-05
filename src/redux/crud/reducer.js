@@ -9,7 +9,7 @@ const INITIAL_STATE = {
       items: [],
       pagination: {
         current: 1,
-        defaultCurrent: 1,
+        // defaultCurrent: 1,
         pageSize: 10,
         total: 1,
       },
