@@ -7,6 +7,7 @@ import CollapseBox from "../CollapseBox";
 const { Sider } = Layout;
 
 export default function SidePanel({
+  config,
   topContent,
   bottomContent,
   fixHeaderPanel,
@@ -15,11 +16,20 @@ export default function SidePanel({
   const { isPanelCollapsed, isBoxCollapsed } = state;
   const { panel, collapsedBox } = uiContextAction;
   const [styleSider, setStyleSider] = useState("0px");
+  const [opacitySider, setOpacitySider] = useState("1");
 
   useEffect(() => {
-    isPanelCollapsed ? setStyleSider("-400px") : setStyleSider("0px");
+    if (isPanelCollapsed) {
+      setStyleSider("-400px");
+      setOpacitySider(0);
+    } else {
+      setStyleSider("0px");
+      setOpacitySider(1);
+    }
+
     setTimeout(() => {
       setStyleSider("0px");
+      setOpacitySider(1);
     }, 300);
   }, [isPanelCollapsed]);
 
@@ -46,6 +56,7 @@ export default function SidePanel({
       style={{
         background: "#FFF",
         left: styleSider,
+        opacity: opacitySider,
       }}
     >
       {fixHeaderPanel}

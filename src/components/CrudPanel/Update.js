@@ -8,14 +8,13 @@ import { selectUpdatedItem } from "@/redux/crud/selectors";
 import { Button, Form } from "antd";
 import Loading from "@/components/Loading";
 
-export default function Update({ isOpen, entity, formElements }) {
+export default function Update({ config, formElements }) {
+  let { entity } = config;
   const dispatch = useDispatch();
-  const { current, result, isLoading, isSuccess } = useSelector(
-    selectUpdatedItem
-  );
+  const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
   const { state, uiContextAction } = useUiContext();
-  const { panel, collapsedBox, modal, readBox } = uiContextAction;
+  const { panel, collapsedBox, readBox } = uiContextAction;
 
   const [form] = Form.useForm();
 

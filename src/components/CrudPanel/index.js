@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import { Row, Col, Button, Typography } from "antd";
+import React, { useLayoutEffect } from "react";
+import { Row, Col, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import DataTable from "./DataTable";
 import Create from "./Create";
@@ -14,13 +14,11 @@ import { useUiContext } from "@/context/ui";
 
 import { CrudLayout } from "@/layout";
 
-const { Title } = Typography;
-
-function SidePanelTopContent({ entity, readColumns, formElements }) {
+function SidePanelTopContent({ config, formElements }) {
   return (
     <>
-      <Read readColumns={readColumns} />
-      <Update entity={entity} formElements={formElements} />
+      <Read config={config} />
+      <Update config={config} formElements={formElements} />
     </>
   );
 }
@@ -43,11 +41,7 @@ function FixHeaderPanel({ config }) {
       </Row>
       <Row gutter={12}>
         <Col className="gutter-row" span={21}>
-          <Search
-            config={config}
-            entity={config.entity}
-            searchConfig={config.searchConfig}
-          />
+          <Search config={config} />
         </Col>
         <Col className="gutter-row" span={3}>
           <Button
@@ -61,16 +55,7 @@ function FixHeaderPanel({ config }) {
   );
 }
 
-function CrudPanel({
-  config,
-  entity,
-  dataTableColumns,
-  readColumns,
-  searchConfig,
-  createForm,
-  updateForm,
-}) {
-  console.log("config", config);
+function CrudPanel({ config, createForm, updateForm }) {
   const dispatch = useDispatch();
   let form = {};
   updateForm === undefined ? (form = createForm) : (form = updateForm);
@@ -81,24 +66,17 @@ function CrudPanel({
 
   return (
     <CrudLayout
+      config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
       sidePanelBottomContent={
-        <Create config={config} entity={entity} formElements={createForm} />
+        <Create config={config} formElements={createForm} />
       }
       sidePanelTopContent={
-        <SidePanelTopContent
-          readColumns={readColumns}
-          entity={entity}
-          formElements={form}
-        />
+        <SidePanelTopContent config={config} formElements={form} />
       }
     >
-      <DataTable
-        config={config}
-        dataTableColumns={dataTableColumns}
-        entity={entity}
-      />
-      <Delete config={config} entity={entity} />
+      <DataTable config={config} />
+      <Delete config={config} />
     </CrudLayout>
   );
 }

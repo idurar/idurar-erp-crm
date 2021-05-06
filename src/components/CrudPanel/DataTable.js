@@ -29,7 +29,7 @@ function AddNewItem() {
 }
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
-  const { state, uiContextAction } = useUiContext();
+  const { uiContextAction } = useUiContext();
   const { panel, collapsedBox, modal, readBox } = uiContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
@@ -63,7 +63,8 @@ function DropDownRowMenu({ row }) {
   );
 }
 
-export default function DataTable({ entity, dataTableColumns }) {
+export default function DataTable({ config }) {
+  let { entity, dataTableColumns } = config;
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -76,11 +77,9 @@ export default function DataTable({ entity, dataTableColumns }) {
     },
   ];
 
-  const {
-    result: listResult,
-    isLoading: listIsLoading,
-    isSuccess: listIsSuccess,
-  } = useSelector(selectListItems);
+  const { result: listResult, isLoading: listIsLoading } = useSelector(
+    selectListItems
+  );
 
   const { pagination, items } = listResult;
 
@@ -112,7 +111,7 @@ export default function DataTable({ entity, dataTableColumns }) {
           padding: "20px 0px",
         }}
       >
-        <Row>
+        {/* <Row>
           <Statistic title="Status" value="Pending" />
           <Statistic
             title="Price"
@@ -123,7 +122,7 @@ export default function DataTable({ entity, dataTableColumns }) {
             }}
           />
           <Statistic title="Balance" prefix="$" value={3345.08} />
-        </Row>
+        </Row> */}
       </PageHeader>
       <Table
         columns={dataTableColumns}

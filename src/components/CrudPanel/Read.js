@@ -6,7 +6,8 @@ import { useUiContext } from "@/context/ui";
 import { selectCurrentItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
-export default function Read({ readColumns }) {
+export default function Read({ config }) {
+  let { readColumns } = config;
   const { result: currentResult } = useSelector(selectCurrentItem);
   const { state } = useUiContext();
   const { isReadBoxOpen } = state;
