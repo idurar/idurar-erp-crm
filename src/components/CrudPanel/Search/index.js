@@ -11,11 +11,10 @@ import { selectSearchedItems } from "@/redux/crud/selectors";
 import { Empty } from "antd";
 
 export default function Search({ entity, config, searchConfig }) {
-  console.log("config", config);
+  console.log("render search component");
   const { displayLabels, searchFields } = config.searchConfig;
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const [openStatus, setOpenStatus] = useState(false);
   const [options, setOptions] = useState([]);
 
   const { uiContextAction } = useUiContext();
@@ -23,15 +22,12 @@ export default function Search({ entity, config, searchConfig }) {
 
   let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
-  let optionResults = [];
 
   const isTyping = useRef(false);
-  const isSearching = useRef(false);
+
   let delayTimer = null;
   useEffect(() => {
-    if (isLoading) {
-      setOptions([{ label: "... Searching" }]);
-    }
+    isLoading && setOptions([{ label: "... Searching" }]);
   }, [isLoading]);
   const onSearch = (searchText) => {
     isTyping.current = true;
@@ -47,7 +43,7 @@ export default function Search({ entity, config, searchConfig }) {
         );
       }
       isTyping.current = false;
-    }, 1000);
+    }, 500);
   };
 
   const onSelect = (data) => {
@@ -68,12 +64,9 @@ export default function Search({ entity, config, searchConfig }) {
     const currentValue = currentItem ? currentItem.label : data;
     setValue(currentValue);
   };
-  const onClose = () => {
-    setOpenStatus(false);
-    // setOptions([]);
-  };
+
   useEffect(() => {
-    optionResults = [];
+    let optionResults = [];
 
     result.map((item) => {
       const labels = displayLabels.map((x) => item[x]).join(" ");
@@ -93,9 +86,6 @@ export default function Search({ entity, config, searchConfig }) {
       onSelect={onSelect}
       onSearch={onSearch}
       onChange={onChange}
-      // onBlur={onClose}
-      // open={openStatus}
-      // backfill={true}
       notFoundContent={!isSuccess ? <Empty /> : ""}
       allowClear={true}
       placeholder="control mode"

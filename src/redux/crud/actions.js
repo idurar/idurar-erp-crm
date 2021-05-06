@@ -41,7 +41,6 @@ export const crud = {
         items: data.result,
         pagination: {
           current: parseInt(data.pagination.page, 10),
-          // defaultCurrent: data.pagination.page,
           pageSize: 10,
           total: parseInt(data.pagination.count, 10),
         },

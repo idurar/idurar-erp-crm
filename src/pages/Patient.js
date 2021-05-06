@@ -3,7 +3,7 @@ import React from "react";
 import CrudPanel from "@/components/CrudPanel";
 import FormPatient from "@/forms/FormPatient";
 
-function Patient() {
+export default function Patient() {
   const entity = "patient";
   const searchConfig = {
     displayLabels: ["name", "surname"],
@@ -66,5 +66,3 @@ function Patient() {
     />
   );
 }
-
-export default Patient;

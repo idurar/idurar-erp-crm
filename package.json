@@ -17,7 +17,6 @@
     "history": "^4.10.1",
     "immer": "^9.0.1",
     "react": "^17.0.1",
-    "react-dom": "^16.14.0",
     "react-error-boundary": "^3.1.1",
     "react-loadable": "^5.5.0",
     "react-redux": "^7.2.2",
@@ -65,6 +64,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "react-dom": "^17.0.2"
   }
 }
