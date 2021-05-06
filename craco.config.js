@@ -18,6 +18,10 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "src/"),
     },
+    output: {
+      publicPath: "/",
+      path: path.join(__dirname, "root"),
+    },
   },
   jest: {
     configure: {

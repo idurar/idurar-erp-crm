@@ -5,19 +5,24 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import PageLoader from "@/components/PageLoader";
 
-const routes = [
-  {
-    path: "/",
-    name: "Framer Motion",
-    // component: lazy(() => import("@/pages/Dashboard")),
-  },
-];
-const Dashboard = lazy(() => import("@/pages/Dashboard"));
-const Patient = lazy(() => import("@/pages/Patient"));
-const Customer = lazy(() => import("@/pages/Customer"));
-const Login = lazy(() => import("@/pages/Login"));
-const Logout = lazy(() => import("@/pages/Logout"));
-const NotFound = lazy(() => import("@/pages/NotFound"));
+const Dashboard = lazy(() =>
+  import(/*webpackChunkName:'DashboardPage'*/ "@/pages/Dashboard")
+);
+const Patient = lazy(() =>
+  import(/*webpackChunkName:'PatientPage'*/ "@/pages/Patient")
+);
+const Customer = lazy(() =>
+  import(/*webpackChunkName:'CustomerPage'*/ "@/pages/Customer")
+);
+const Login = lazy(() =>
+  import(/*webpackChunkName:'LoginPage'*/ "@/pages/Login")
+);
+const Logout = lazy(() =>
+  import(/*webpackChunkName:'LogoutPage'*/ "@/pages/Logout")
+);
+const NotFound = lazy(() =>
+  import(/*webpackChunkName:'NotFoundPage'*/ "@/pages/NotFound")
+);
 
 function Router() {
   const location = useLocation();
