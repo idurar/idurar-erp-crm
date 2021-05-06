@@ -8,11 +8,12 @@ import { selectCreatedItem } from "@/redux/crud/selectors";
 import { Button, Form } from "antd";
 import Loading from "@/components/Loading";
 
-export default function Create({ entity, formElements }) {
+export default function Create({ config, formElements }) {
+  let { entity } = config;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
-  const { state, uiContextAction } = useUiContext();
-  const { panel, collapsedBox, modal, readBox } = uiContextAction;
+  const { uiContextAction } = useUiContext();
+  const { panel, collapsedBox, readBox } = uiContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
     let values = {};

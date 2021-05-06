@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
-import Loading from "@/components/Loading";
+
 import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { useUiContext } from "@/context/ui";
 import { selectDeletedItem } from "@/redux/crud/selectors";
 
-export default function Delete({ entity }) {
+export default function Delete({ config }) {
+  let { entity } = config;
   const dispatch = useDispatch();
-  const { current, result, isLoading, isSuccess } = useSelector(
-    selectDeletedItem
-  );
+  const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, uiContextAction } = useUiContext();
   const { isModalOpen } = state;
   const { modal } = uiContextAction;

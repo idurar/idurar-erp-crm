@@ -10,6 +10,7 @@ const { Content } = Layout;
 
 export default function CrudLayout({
   children,
+  config,
   sidePanelTopContent,
   sidePanelBottomContent,
   fixHeaderPanel,
@@ -17,6 +18,7 @@ export default function CrudLayout({
   return (
     <DefaultLayout>
       <SidePanel
+        config={config}
         topContent={sidePanelTopContent}
         bottomContent={sidePanelBottomContent}
         fixHeaderPanel={fixHeaderPanel}

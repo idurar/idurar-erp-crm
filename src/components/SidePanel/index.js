@@ -7,6 +7,7 @@ import CollapseBox from "../CollapseBox";
 const { Sider } = Layout;
 
 export default function SidePanel({
+  config,
   topContent,
   bottomContent,
   fixHeaderPanel,

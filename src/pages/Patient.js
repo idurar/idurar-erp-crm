@@ -55,14 +55,5 @@ export default function Patient() {
     dataTableColumns,
     searchConfig,
   };
-  return (
-    <CrudPanel
-      entity={entity}
-      dataTableColumns={dataTableColumns}
-      createForm={<FormPatient />}
-      readColumns={readColumns}
-      searchConfig={searchConfig}
-      config={config}
-    />
-  );
+  return <CrudPanel createForm={<FormPatient />} config={config} />;
 }
