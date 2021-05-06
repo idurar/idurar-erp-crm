@@ -49,13 +49,24 @@ function Customer() {
       dataIndex: "email",
     },
   ];
+  const panelTitle = "Patient";
+  const dataTableTitle = "Patients Lists";
+  const config = {
+    entity,
+    panelTitle,
+    dataTableTitle,
+    readColumns,
+    dataTableColumns,
+    searchConfig,
+  };
   return (
     <CrudPanel
       entity={entity}
       dataTableColumns={dataTableColumns}
+      createForm={<FormCustomer />}
       readColumns={readColumns}
       searchConfig={searchConfig}
-      createForm={<FormCustomer />}
+      config={config}
     />
   );
 }

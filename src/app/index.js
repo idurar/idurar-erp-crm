@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Router as RouterHistory } from "react-router-dom";
 import { Provider } from "react-redux";
 import Router from "@/router";

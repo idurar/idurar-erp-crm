@@ -70,6 +70,7 @@ function CrudPanel({
   createForm,
   updateForm,
 }) {
+  console.log("config", config);
   const dispatch = useDispatch();
   let form = {};
   updateForm === undefined ? (form = createForm) : (form = updateForm);

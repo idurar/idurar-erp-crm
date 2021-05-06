@@ -1,4 +1,5 @@
 {
+    
     "plugins": [
         [
             "import", {
@@ -10,3 +11,20 @@
     ]
 }
 
+
+// {
+//     "presets": [
+//         "@babel/env",
+//         "@babel/preset-react"
+//     ],
+//     "plugins": [
+//         "syntax-dynamic-import",
+//         [
+//             "import",
+//             {
+//                 "libraryName": "antd"
+//                 // "style": true, // or 'css'
+//             }
+//         ]
+//     ]
+// }
