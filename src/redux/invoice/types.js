@@ -1,0 +1,9 @@
+export const RESET_STATE = "RESET_STATE";
+export const CURRENT_ITEM = "CURRENT_ITEM";
+
+export const REQUEST_LOADING = "REQUEST_LOADING";
+export const REQUEST_SUCCESS = "REQUEST_SUCCESS";
+export const REQUEST_FAILED = "REQUEST_FAILED";
+
+export const CURRENT_ACTION = "CURRENT_ACTION";
+export const RESET_ACTION = "RESET_ACTION";

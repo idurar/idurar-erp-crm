@@ -8,22 +8,16 @@ import { Layout } from "antd";
 
 const { Content } = Layout;
 
-export default function CrudLayout({
-  children,
-  config,
-  sidePanelTopContent,
-  sidePanelBottomContent,
-  fixHeaderPanel,
-}) {
+export default function InvoiceLayout({ children, config }) {
   return (
     <DefaultLayout>
       <Layout style={{ minHeight: "100vh" }}>
-        <SidePanel
+        {/* <SidePanel
           config={config}
           topContent={sidePanelTopContent}
           bottomContent={sidePanelBottomContent}
           fixHeaderPanel={fixHeaderPanel}
-        ></SidePanel>
+        ></SidePanel> */}
         <Layout className="site-layout">
           <HeaderContent />
           <Content
@@ -32,7 +26,7 @@ export default function CrudLayout({
               padding: "50px 40px",
               margin: "50px auto",
               width: "100%",
-              maxWidth: "1000px",
+              maxWidth: "1200px",
             }}
           >
             {children}

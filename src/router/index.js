@@ -14,6 +14,9 @@ const Patient = lazy(() =>
 const Customer = lazy(() =>
   import(/*webpackChunkName:'CustomerPage'*/ "@/pages/Customer")
 );
+const Invoice = lazy(() =>
+  import(/*webpackChunkName:'InvoicePage'*/ "@/pages/Invoice")
+);
 const Login = lazy(() =>
   import(/*webpackChunkName:'LoginPage'*/ "@/pages/Login")
 );
@@ -33,6 +36,7 @@ function Router() {
           <PrivateRoute path="/" component={Dashboard} exact />
           <PrivateRoute component={Customer} path="/customer" exact />
           <PrivateRoute component={Patient} path="/patient" exact />
+          <PrivateRoute component={Invoice} path="/invoice" exact />
           <PrivateRoute component={Logout} path="/logout" exact />
           <PublicRoute component={Login} path="/login" exact />
           <Route path="/loader" component={PageLoader} />
