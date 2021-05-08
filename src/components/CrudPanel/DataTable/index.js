@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { Dropdown, Menu, Table } from "antd";
+import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 import {
   EllipsisOutlined,
   EyeOutlined,
@@ -9,7 +10,17 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { listAction } from "@/redux/crud/actions";
 import { selectListItems } from "@/redux/crud/selectors";
+import { useUiContext } from "@/context/ui";
+import uniqueId from "@/utils/uniqueId";
 
+function AddNewItem() {
+  const { uiContextAction } = useUiContext();
+  return (
+    <Button onClick={uiContextAction.panel.open} type="primary">
+      Add new Customer
+    </Button>
+  );
+}
 const dropDownRowMenu = (currentRow) => {
   function Show() {
     console.log(currentRow._id);
@@ -67,13 +78,42 @@ export default function DataTable({ entity, columns }) {
   }, []);
 
   return (
-    <Table
-      columns={columns}
-      rowKey={(item) => item._id}
-      dataSource={items}
-      pagination={pagination}
-      loading={listIsLoading}
-      onChange={handelDataTableLoad}
-    />
+    <>
+      <PageHeader
+        onBack={() => window.history.back()}
+        title="Customer Page"
+        ghost={false}
+        tags={<Tag color="blue">Running</Tag>}
+        subTitle="This is customer page"
+        extra={[
+          <Button key={`${uniqueId()}`}>Refresh</Button>,
+          <AddNewItem key={`${uniqueId()}`} />,
+        ]}
+        style={{
+          padding: "20px 0px",
+        }}
+      >
+        <Row>
+          <Statistic title="Status" value="Pending" />
+          <Statistic
+            title="Price"
+            prefix="$"
+            value={568.08}
+            style={{
+              margin: "0 32px",
+            }}
+          />
+          <Statistic title="Balance" prefix="$" value={3345.08} />
+        </Row>
+      </PageHeader>
+      <Table
+        columns={columns}
+        rowKey={(item) => item._id}
+        dataSource={items}
+        pagination={pagination}
+        loading={listIsLoading}
+        onChange={handelDataTableLoad}
+      />
+    </>
   );
 }

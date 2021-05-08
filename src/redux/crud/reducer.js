@@ -19,26 +19,31 @@ const INITIAL_STATE = {
   },
   create: {
     result: null,
+    current: null,
     isLoading: false,
     isSuccess: false,
   },
   update: {
     result: null,
+    current: null,
     isLoading: false,
     isSuccess: false,
   },
   delete: {
     result: null,
+    current: null,
     isLoading: false,
     isSuccess: false,
   },
   read: {
     result: null,
+    current: null,
     isLoading: false,
     isSuccess: false,
   },
   search: {
     result: [],
+    current: null,
     isLoading: false,
     isSuccess: false,
   },
@@ -82,7 +87,21 @@ const crudReducer = (state = INITIAL_STATE, action) => {
           isSuccess: true,
         },
       };
-
+    case actionTypes.CURRENT_ACTION:
+      return {
+        ...state,
+        [keyState]: {
+          ...state[keyState],
+          current: payload,
+        },
+      };
+    case actionTypes.RESET_ACTION:
+      return {
+        ...state,
+        [keyState]: {
+          ...INITIAL_STATE[keyState],
+        },
+      };
     default:
       return state;
   }

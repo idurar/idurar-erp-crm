@@ -1,13 +1,9 @@
 import React from "react";
-import { DefaultLayout } from "@/layout";
-import { Layout } from "antd";
 
 import CrudPanel from "@/components/CrudPanel";
-import FormCustomer from "@/components/FormCustomer";
+import FormCustomer from "@/forms/FormCustomer";
 
-const { Content } = Layout;
-
-function CustomerPage() {
+function Customer() {
   const entity = "client";
   const columns = [
     {
@@ -27,18 +23,13 @@ function CustomerPage() {
       dataIndex: "email",
     },
   ];
-
   return (
-    <DefaultLayout>
-      <Content style={{ margin: "0 16px" }}>
-        <CrudPanel
-          entity={entity}
-          columns={columns}
-          newForm={<FormCustomer />}
-        />
-      </Content>
-    </DefaultLayout>
+    <CrudPanel
+      entity={entity}
+      columns={columns}
+      createForm={<FormCustomer />}
+    />
   );
 }
 
-export default CustomerPage;
+export default Customer;
