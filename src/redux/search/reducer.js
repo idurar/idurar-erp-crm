@@ -9,7 +9,7 @@ const INITIAL_REF_STATE = {
 const INITIAL_STATE = {};
 
 const searchReducer = (state = INITIAL_STATE, action) => {
-  const { payload, keyState } = action;
+  const { payload = null, keyState = null } = action;
   switch (action.type) {
     case actionTypes.INIT_STATE: {
       let newState = {};
