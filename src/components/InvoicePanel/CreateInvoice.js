@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import Loading from "@/components/Loading";
-
+import SearchBox from "@/components/SearchBox";
 import { Dropdown, Menu, Table } from "antd";
 import { Button, PageHeader, Form, Row, Col, Statistic, Tag } from "antd";
 import {
@@ -36,10 +36,6 @@ export default function CreateInvoice({ config }) {
 
   const dispatch = useDispatch();
 
-  const handelDataTableLoad = useCallback((pagination) => {
-    // dispatch(crud.list(entity, pagination.current));
-  }, []);
-
   useEffect(() => {}, []);
 
   return (
@@ -71,6 +67,12 @@ export default function CreateInvoice({ config }) {
           <Statistic title="Balance" prefix="$" value={3345.08} />
         </Row>
       </PageHeader>
+      <SearchBox
+        entity={"client"}
+        keyRef={"client"}
+        displayLabels={["company"]}
+        searchFields={"company,managerSurname,managerName"}
+      />
     </>
   );
 }

@@ -20,14 +20,15 @@ export const search = {
     });
   },
 
-  selected: (keyRef) => async (dispatch) => {
+  selected: (keyRef, data) => async (dispatch) => {
     dispatch({
       type: actionTypes.CURRENT_SELECTED,
       keyState: keyRef,
+      payload: data,
     });
   },
 
-  search: (entity, keyRef, source, option) => async (dispatch) => {
+  list: (entity, keyRef, source, option) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: keyRef,

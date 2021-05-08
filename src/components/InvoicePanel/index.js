@@ -3,6 +3,7 @@ import { Row, Col, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import DataTable from "./DataTable";
 import CreateInvoice from "./CreateInvoice";
+import { useSearchBox } from "@/components/SearchBox";
 import Update from "./UpdateInvoice";
 import Delete from "./DeleteInvoice";
 import Read from "./ReadInvoice";
@@ -10,22 +11,24 @@ import Search from "./SearchInvoice";
 
 import { useDispatch } from "react-redux";
 import { invoice } from "@/redux/invoice/actions";
+import { search } from "@/redux/search/actions";
 import { useUiContext } from "@/context/ui";
 
 import { InvoiceLayout } from "@/layout";
 
-export default function InvoicePanel({ config, createForm, updateForm }) {
+export default function InvoicePanel({ config }) {
   const dispatch = useDispatch();
-  let form = {};
-  updateForm === undefined ? (form = createForm) : (form = updateForm);
-
+  const { selected } = useSearchBox("client");
   useLayoutEffect(() => {
     dispatch(invoice.resetState());
+    dispatch(search.resetState());
+    dispatch(search.init(["client"]));
   }, []);
 
   return (
     <InvoiceLayout config={config}>
       {/* <DataTable config={config} /> */}
+      <p>Invoice Panel : {selected && selected.company}</p>
       <CreateInvoice config={config} />
       <Delete config={config} />
     </InvoiceLayout>
