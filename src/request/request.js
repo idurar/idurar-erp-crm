@@ -78,7 +78,7 @@ const request = {
     };
     try {
       let query = "";
-      if (option != {}) {
+      if (option !== {}) {
         let fields = option.fields ? "fields=" + option.fields : "";
         let question = option.question ? "&q=" + option.question : "";
         query = `?${fields}${question}`;
@@ -101,7 +101,7 @@ const request = {
     console.log(tokenCookies.get());
     try {
       let query = "";
-      if (option != {}) {
+      if (option !== {}) {
         let page = option.page ? "page=" + option.page : "";
         let items = option.items ? "&items=" + option.items : "";
         query = `?${page}${items}`;
@@ -147,7 +147,7 @@ export default request;
 //     loader.init(option.loaderWarpper);
 //   }
 //   let query = "";
-//   if (option != {}) {
+//   if (option !=={}) {
 //     let fields = "";
 //     let question = "";
 //     if (option.fields) {

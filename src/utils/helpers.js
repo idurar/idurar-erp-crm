@@ -32,7 +32,7 @@ Object.byString = function (o, s) {
   var a = s.split(".");
   for (var i = 0, n = a.length; i < n; ++i) {
     var k = a[i];
-    if (o != null) {
+    if (o !== null) {
       if (k in o) {
         o = o[k];
       } else {
@@ -50,7 +50,7 @@ Object.byString = function (o, s) {
 */
 export function has(obj, key) {
   return key.split(".").every(function (x) {
-    if (typeof obj != "object" || obj === null || x in obj === false)
+    if (typeof obj !== "object" || obj === null || x in obj === false)
       /// !x in obj or  x in obj === true *** if you find any bug
       return false;
     obj = obj[x];
@@ -62,7 +62,7 @@ export function has(obj, key) {
  convert indexes to properties
 */
 export function valueByString(obj, string, devider) {
-  if (devider == undefined) {
+  if (devider === undefined) {
     devider = "|";
   }
   return string
@@ -83,8 +83,8 @@ export function toFormData(form) {
     const element = elements[i];
     const name = element.name;
 
-    if (name && element.dataset.disabled != "true") {
-      if (element.type == "file") {
+    if (name && element.dataset.disabled !== "true") {
+      if (element.type === "file") {
         const file = element.files[0];
         formData.append(name, file);
       } else {
