@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { AutoComplete } from "antd";
+import { AutoComplete, Input } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
 import { search } from "@/redux/search/actions";
@@ -28,11 +28,11 @@ export default function SearchBox({
   keyRef,
   displayLabels,
   searchFields,
+  value = "",
+  onChange,
 }) {
-  console.log("render search component");
-
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+  const [fieldValue, setValue] = useState(value);
 
   const [options, setOptions] = useState([]);
 
@@ -69,11 +69,14 @@ export default function SearchBox({
     dispatch(search.selected(keyRef, currentItem));
   };
 
-  const onChange = (data) => {
+  const handelChange = (data) => {
     const currentItem = options.find((item) => {
       return item.value === data;
     });
     const currentValue = currentItem ? currentItem.label : data;
+    if (onChange) {
+      onChange(data);
+    }
     setValue(currentValue);
   };
 
@@ -89,14 +92,14 @@ export default function SearchBox({
 
   return (
     <AutoComplete
-      value={value}
+      value={fieldValue}
       options={options}
       style={{
         width: "100%",
       }}
       onSelect={onSelect}
       onSearch={onSearch}
-      onChange={onChange}
+      onChange={handelChange}
       //   notFoundContent={!isSuccess ? <Empty /> : ""}
       allowClear={true}
       placeholder="Start Searching here"

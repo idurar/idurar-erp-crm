@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-
+import { Form, Input, Radio, Select, Switch } from "antd";
+import { DatePicker, TimePicker, Calendar } from "@/components/Antd";
 import Loading from "@/components/Loading";
 import SearchBox from "@/components/SearchBox";
 import { Dropdown, Menu, Table } from "antd";
-import { Button, PageHeader, Form, Row, Col, Statistic, Tag } from "antd";
+import { Button, PageHeader, Row, Col, Statistic, Tag } from "antd";
 import {
   EllipsisOutlined,
   EyeOutlined,
@@ -15,6 +16,8 @@ import { crud } from "@/redux/crud/actions";
 import { selectListItems, selectItemById } from "@/redux/crud/selectors";
 import { useUiContext } from "@/context/ui";
 import uniqueId from "@/utils/uniqueId";
+
+import InvoiceForm from "./InvoiceForm";
 
 function AddNewItem() {
   const { uiContextAction } = useUiContext();
@@ -37,6 +40,26 @@ export default function CreateInvoice({ config }) {
   const dispatch = useDispatch();
 
   useEffect(() => {}, []);
+
+  const [form] = Form.useForm();
+  const onSubmit = (fieldsValue) => {
+    console.log("fieldsValue", fieldsValue);
+    let values = {};
+    if (fieldsValue) {
+      if (fieldsValue.birthday) {
+        values = {
+          ...fieldsValue,
+          birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
+        };
+      }
+      if (fieldsValue.date) {
+        values = {
+          ...fieldsValue,
+          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
+        };
+      }
+    }
+  };
 
   return (
     <>
@@ -67,12 +90,14 @@ export default function CreateInvoice({ config }) {
           <Statistic title="Balance" prefix="$" value={3345.08} />
         </Row>
       </PageHeader>
-      <SearchBox
-        entity={"client"}
-        keyRef={"client"}
-        displayLabels={["company"]}
-        searchFields={"company,managerSurname,managerName"}
-      />
+      <Form form={form} layout="vertical" onFinish={onSubmit}>
+        <InvoiceForm />
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 }
