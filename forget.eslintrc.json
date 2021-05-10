@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb","some-other-config-you-use",
+  "extends": ["plugin:react/recommended", "airbnb",
     "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
@@ -14,8 +14,8 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
-    // ...
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn" 
   }
 }
