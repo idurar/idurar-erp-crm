@@ -49,7 +49,7 @@ function Customer() {
       dataIndex: "email",
     },
   ];
-  const panelTitle = "Patient";
+  const panelTitle = "Customer Panel";
   const dataTableTitle = "Patients Lists";
   const config = {
     entity,

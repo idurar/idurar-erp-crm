@@ -29,7 +29,7 @@ export default function InvoicePanel({ config }) {
   return (
     <InvoiceLayout config={config}>
       {/* <DataTable config={config} /> */}
-      <p>Invoice Panel : {selected && selected.company}</p>
+      <p>Just Invoice Panel : {selected && selected.company}</p>
       <CreateInvoice config={config} />
       <Delete config={config} />
     </InvoiceLayout>

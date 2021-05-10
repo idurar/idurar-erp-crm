@@ -45,7 +45,7 @@ export default function Invoice() {
       dataIndex: "sexe",
     },
   ];
-  const panelTitle = "Patient";
+  const panelTitle = "Patient Panel";
   const dataTableTitle = "Patients Lists";
   const config = {
     entity,
