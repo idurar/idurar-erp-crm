@@ -26,7 +26,7 @@ export default function InvoiceLayout({ children, config }) {
               padding: "50px 40px",
               margin: "50px auto",
               width: "100%",
-              maxWidth: "1200px",
+              maxWidth: "1100px",
             }}
           >
             {children}

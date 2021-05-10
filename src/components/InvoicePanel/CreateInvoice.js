@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
-import { Form, Input, Radio, Select, Switch } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/Antd";
+import { Form, Divider } from "antd";
+
 import Loading from "@/components/Loading";
 import SearchBox from "@/components/SearchBox";
-import { Dropdown, Menu, Table } from "antd";
+
 import { Button, PageHeader, Row, Col, Statistic, Tag } from "antd";
-import {
-  EllipsisOutlined,
-  EyeOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+
 import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { selectListItems, selectItemById } from "@/redux/crud/selectors";
@@ -40,8 +35,8 @@ export default function CreateInvoice({ config }) {
   const dispatch = useDispatch();
 
   useEffect(() => {}, []);
-
   const [form] = Form.useForm();
+
   const onSubmit = (fieldsValue) => {
     console.log("fieldsValue", fieldsValue);
     let values = {};
@@ -90,6 +85,7 @@ export default function CreateInvoice({ config }) {
           <Statistic title="Balance" prefix="$" value={3345.08} />
         </Row>
       </PageHeader>
+      <Divider dashed />
       <Form form={form} layout="vertical" onFinish={onSubmit}>
         <InvoiceForm />
         <Form.Item>
@@ -101,54 +97,3 @@ export default function CreateInvoice({ config }) {
     </>
   );
 }
-
-// export default function CreateInvoice({ config, formElements }) {
-//   let { entity } = config;
-//   const dispatch = useDispatch();
-//   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
-//   const { uiContextAction } = useUiContext();
-//   const { panel, collapsedBox, readBox } = uiContextAction;
-//   const [form] = Form.useForm();
-//   const onSubmit = (fieldsValue) => {
-//     let values = {};
-//     if (fieldsValue) {
-//       if (fieldsValue.birthday) {
-//         values = {
-//           ...fieldsValue,
-//           birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
-//         };
-//       }
-//       if (fieldsValue.date) {
-//         values = {
-//           ...fieldsValue,
-//           birthday: fieldsValue["date"].format("DD/MM/YYYY"),
-//         };
-//       }
-//     }
-
-//     dispatch(crud.create(entity, values));
-//   };
-
-//   useEffect(() => {
-//     if (isSuccess) {
-//       readBox.open();
-//       collapsedBox.open();
-//       panel.open();
-//       form.resetFields();
-//       dispatch(crud.resetAction("create"));
-//     }
-//   }, [isSuccess]);
-
-//   return (
-//     <Loading isLoading={isLoading}>
-//       <Form form={form} layout="vertical" onFinish={onSubmit}>
-//         {formElements}
-//         <Form.Item>
-//           <Button type="primary" htmlType="submit">
-//             Submit
-//           </Button>
-//         </Form.Item>
-//       </Form>
-//     </Loading>
-//   );
-// }
