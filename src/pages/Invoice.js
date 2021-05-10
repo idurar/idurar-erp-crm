@@ -1,6 +1,7 @@
 import React from "react";
 
-import CrudPanel from "@/components/CrudPanel";
+import InvoicePanel from "@/components/InvoicePanel";
+import { InvoiceLayout } from "@/layout";
 import FormPatient from "@/forms/FormPatient";
 
 export default function Invoice() {
@@ -55,5 +56,5 @@ export default function Invoice() {
     dataTableColumns,
     searchConfig,
   };
-  return <CrudPanel createForm={<FormPatient />} config={config} />;
+  return <InvoicePanel config={config} />;
 }
