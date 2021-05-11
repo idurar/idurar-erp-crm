@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Divider } from "antd";
 
-import Loading from "@/components/Loading";
-import SearchBox from "@/components/SearchBox";
+import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 
-import { Button, PageHeader, Row, Col, Statistic, Tag } from "antd";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
-import { selectListItems, selectItemById } from "@/redux/crud/selectors";
+
 import { useUiContext } from "@/context/ui";
 import uniqueId from "@/utils/uniqueId";
 
@@ -33,9 +30,25 @@ export default function CreateInvoice({ config }) {
   let { entity } = config;
 
   const dispatch = useDispatch();
-
-  useEffect(() => {}, []);
   const [form] = Form.useForm();
+  const [subTotal, setSubTotal] = useState(0);
+  const handelValuesChange = (changedValues, values) => {
+    const items = values["items"];
+    let subTotal = 0;
+
+    if (items) {
+      items.map((item) => {
+        if (item) {
+          if (item.quantity && item.price) {
+            let total = item["quantity"] * item["price"];
+            //sub total
+            subTotal += total;
+          }
+        }
+      });
+      setSubTotal(subTotal);
+    }
+  };
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
@@ -98,8 +111,13 @@ export default function CreateInvoice({ config }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Form form={form} layout="vertical" onFinish={onSubmit}>
-        <InvoiceForm />
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onSubmit}
+        onValuesChange={handelValuesChange}
+      >
+        <InvoiceForm subTotal={subTotal} />
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
