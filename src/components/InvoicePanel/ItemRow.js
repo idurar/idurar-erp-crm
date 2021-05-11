@@ -75,7 +75,6 @@ export default function ItemRow({ name, fieldKey, remove }) {
               formatter={(value) =>
                 `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
               }
-              //   onChange={handelTotalValue}
             />
           </Form.Item>
         </Form.Item>

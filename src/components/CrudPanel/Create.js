@@ -16,23 +16,22 @@ export default function Create({ config, formElements }) {
   const { panel, collapsedBox, readBox } = uiContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
-    let values = {};
     if (fieldsValue) {
       if (fieldsValue.birthday) {
-        values = {
+        fieldsValue = {
           ...fieldsValue,
           birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
         };
       }
       if (fieldsValue.date) {
-        values = {
+        fieldsValue = {
           ...fieldsValue,
-          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
+          date: fieldsValue["date"].format("DD/MM/YYYY"),
         };
       }
     }
 
-    dispatch(crud.create(entity, values));
+    dispatch(crud.create(entity, fieldsValue));
   };
 
   useEffect(() => {

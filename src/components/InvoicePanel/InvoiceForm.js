@@ -6,8 +6,24 @@ import SearchBox from "@/components/SearchBox";
 import { PlusOutlined } from "@ant-design/icons";
 import ItemRow from "./ItemRow";
 
-export default function InvoiceForm() {
+export default function InvoiceForm({ subTotal }) {
   const { Option } = Select;
+  const [total, setTotal] = useState(0);
+  const [taxRate, setTaxRate] = useState(0);
+  const [taxTotal, setTaxTotal] = useState(0);
+  const handelTaxChange = (value) => {
+    setTaxRate(value);
+  };
+  useEffect(() => {
+    const currentTotal = subTotal * taxRate + subTotal;
+    setTaxTotal(subTotal * taxRate);
+    setTotal(currentTotal);
+  }, [subTotal, taxRate]);
+
+  const addField = useRef(false);
+  useEffect(() => {
+    addField.current.click();
+  }, []);
 
   return (
     <>
@@ -97,8 +113,8 @@ export default function InvoiceForm() {
         </Col>
         <Col className="gutter-row" span={8}>
           <Form.Item
-            label="Invoice Date"
             name="date"
+            label="Invoice Date"
             rules={[
               {
                 required: false,
@@ -111,8 +127,8 @@ export default function InvoiceForm() {
         </Col>
         <Col className="gutter-row" span={7}>
           <Form.Item
-            label="Invoice Expire Date"
             name="expiredDate"
+            label="Invoice Expire Date"
             rules={[
               {
                 required: false,
@@ -125,8 +141,24 @@ export default function InvoiceForm() {
         </Col>
       </Row>
       <Divider dashed />
-      <Space></Space>
-      <Form.List name="itemsList">
+      <Row gutter={[12, 12]} style={{ position: "relative" }}>
+        <Col className="gutter-row" span={6}>
+          <p>Item</p>
+        </Col>
+        <Col className="gutter-row" span={8}>
+          <p>Description</p>
+        </Col>
+        <Col className="gutter-row" span={3}>
+          <p>Quantity</p>
+        </Col>
+        <Col className="gutter-row" span={3}>
+          <p>Price</p>
+        </Col>
+        <Col className="gutter-row" span={4}>
+          <p>Total</p>
+        </Col>
+      </Row>
+      <Form.List name="items">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, fieldKey, ...restField }) => (
@@ -144,6 +176,7 @@ export default function InvoiceForm() {
                 onClick={() => add()}
                 block
                 icon={<PlusOutlined />}
+                ref={addField}
               >
                 Add field
               </Button>
@@ -151,6 +184,85 @@ export default function InvoiceForm() {
           </>
         )}
       </Form.List>
+      <Divider dashed />
+      <div style={{ width: "300px", float: "right" }}>
+        <Row gutter={[12, -5]}>
+          <Col className="gutter-row" span={10}>
+            <p
+              style={{
+                paddingLeft: "12px",
+                paddingTop: "5px",
+              }}
+            >
+              Sub Total :
+            </p>
+          </Col>
+
+          <Col className="gutter-row" span={14}>
+            <Form.Item>
+              <InputNumber
+                readOnly
+                style={{ width: "100%" }}
+                value={subTotal}
+                formatter={(value) =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                }
+              />
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={10}>
+            <Form.Item
+              name="taxRate"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input your taxRate!",
+                },
+              ]}
+              initialValue="0"
+            >
+              <Select value="0" onChange={handelTaxChange} bordered={false}>
+                <Option value="0">Tax 0 %</Option>
+                <Option value="0.19">Tax 19 %</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={14}>
+            <Form.Item>
+              <InputNumber
+                readOnly
+                style={{ width: "100%" }}
+                value={taxTotal}
+                formatter={(value) =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                }
+              />
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={10}>
+            <p
+              style={{
+                paddingLeft: "12px",
+                paddingTop: "5px",
+              }}
+            >
+              Total :
+            </p>
+          </Col>
+          <Col className="gutter-row" span={14}>
+            <Form.Item>
+              <InputNumber
+                readOnly
+                style={{ width: "100%" }}
+                value={total}
+                formatter={(value) =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                }
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+      </div>
     </>
   );
 }
