@@ -38,22 +38,34 @@ export default function CreateInvoice({ config }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    console.log("fieldsValue", fieldsValue);
-    let values = {};
     if (fieldsValue) {
-      if (fieldsValue.birthday) {
-        values = {
+      if (fieldsValue.expiredDate) {
+        const newDate = fieldsValue["expiredDate"].format("DD/MM/YYYY");
+        fieldsValue = {
           ...fieldsValue,
-          birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
+          expiredDate: newDate,
         };
       }
       if (fieldsValue.date) {
-        values = {
+        const newDate = fieldsValue["date"].format("DD/MM/YYYY");
+        fieldsValue = {
           ...fieldsValue,
-          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
+          date: newDate,
+        };
+      }
+      if (fieldsValue.items) {
+        let newList = [...fieldsValue.items];
+        newList.map((item) => {
+          item.total = item.quantity * item.price;
+        });
+        fieldsValue = {
+          ...fieldsValue,
+          items: newList,
         };
       }
     }
+    dispatch(crud.create("invoice", fieldsValue));
+    console.log("fieldsValue", fieldsValue);
   };
 
   return (

@@ -97,8 +97,8 @@ export default function InvoiceForm() {
         </Col>
         <Col className="gutter-row" span={8}>
           <Form.Item
-            label="Invoice Date"
             name="date"
+            label="Invoice Date"
             rules={[
               {
                 required: false,
@@ -111,8 +111,8 @@ export default function InvoiceForm() {
         </Col>
         <Col className="gutter-row" span={7}>
           <Form.Item
-            label="Invoice Expire Date"
             name="expiredDate"
+            label="Invoice Expire Date"
             rules={[
               {
                 required: false,
@@ -126,7 +126,7 @@ export default function InvoiceForm() {
       </Row>
       <Divider dashed />
       <Space></Space>
-      <Form.List name="itemsList">
+      <Form.List name="items">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, fieldKey, ...restField }) => (

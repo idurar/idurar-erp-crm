@@ -39,7 +39,7 @@ function FixHeaderPanel({ config }) {
           </h1>
         </Col>
       </Row>
-      <Row gutter={12}>
+      <Row gutter={8}>
         <Col className="gutter-row" span={21}>
           <Search config={config} />
         </Col>

@@ -17,8 +17,9 @@ const axiosInstance = axios.create({
 // };
 
 const request = {
-  create: async (entity, jsonData, option = {}) => {
-    axiosInstance.defaults.headers = headersInstance;
+  create: async (entity, jsonData) => {
+    // axiosInstance.defaults.headers = headersInstance;
+    console.log("jsonData", jsonData);
     try {
       const response = await axiosInstance.post(entity + "/create", jsonData);
       return successHandler(response);
@@ -26,7 +27,7 @@ const request = {
       return errorHandler(error);
     }
   },
-  read: async (entity, id, option = {}) => {
+  read: async (entity, id) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.get(entity + "/read/" + id);
@@ -35,7 +36,7 @@ const request = {
       return errorHandler(error);
     }
   },
-  update: async (entity, id, jsonData, option = {}) => {
+  update: async (entity, id, jsonData) => {
     axiosInstance.defaults.headers = headersInstance;
     try {
       const response = await axiosInstance.patch(
