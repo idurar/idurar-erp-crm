@@ -8,7 +8,13 @@ function Customer() {
   const searchConfig = {
     displayLabels: ["company"],
     searchFields: "company,managerSurname,managerName",
+    outputField: "_id",
   };
+
+  const panelTitle = "Customer Panel";
+  const dataTableTitle = "Patients Lists";
+  const entityDisplayLabels = ["company"];
+
   const readColumns = [
     {
       title: "Company",
@@ -49,8 +55,7 @@ function Customer() {
       dataIndex: "email",
     },
   ];
-  const panelTitle = "Customer Panel";
-  const dataTableTitle = "Patients Lists";
+
   const config = {
     entity,
     panelTitle,
@@ -58,6 +63,7 @@ function Customer() {
     readColumns,
     dataTableColumns,
     searchConfig,
+    entityDisplayLabels,
   };
   return (
     <CrudPanel

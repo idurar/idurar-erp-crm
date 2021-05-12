@@ -12,8 +12,8 @@ import { Empty } from "antd";
 
 export default function Search({ config }) {
   let { entity, searchConfig } = config;
-  console.log("render search component");
-  const { displayLabels, searchFields } = searchConfig;
+
+  const { displayLabels, searchFields, outputField = "_id" } = searchConfig;
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -49,7 +49,7 @@ export default function Search({ config }) {
 
   const onSelect = (data) => {
     const currentItem = result.find((item) => {
-      return item._id === data;
+      return item[outputField] === data;
     });
 
     dispatch(crud.currentItem(currentItem));
@@ -71,7 +71,7 @@ export default function Search({ config }) {
 
     result.map((item) => {
       const labels = displayLabels.map((x) => item[x]).join(" ");
-      optionResults.push({ label: labels, value: item._id });
+      optionResults.push({ label: labels, value: item[outputField] });
     });
 
     setOptions(optionResults);
@@ -89,7 +89,7 @@ export default function Search({ config }) {
       onChange={onChange}
       notFoundContent={!isSuccess ? <Empty /> : ""}
       allowClear={true}
-      placeholder="control mode"
+      placeholder="Your Search here"
     >
       <Input suffix={<SearchOutlined />} />
     </AutoComplete>

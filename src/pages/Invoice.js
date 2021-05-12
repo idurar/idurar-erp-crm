@@ -11,6 +11,7 @@ export default function Invoice() {
     displayLabels: ["name", "surname"],
     searchFields: "name,surname,birthday",
   };
+  const entityDisplayLabels = ["number", "client.company"];
   const dataTableColumns = [
     {
       title: "Number",
@@ -78,6 +79,7 @@ export default function Invoice() {
     readColumns,
     dataTableColumns,
     searchConfig,
+    entityDisplayLabels,
   };
   return <InvoicePanel config={config} />;
 }
