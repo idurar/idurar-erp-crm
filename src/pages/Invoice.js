@@ -3,29 +3,52 @@ import React from "react";
 import InvoicePanel from "@/components/InvoicePanel";
 import { InvoiceLayout } from "@/layout";
 import FormPatient from "@/forms/FormPatient";
+import { Table, Tag, Radio, Space } from "antd";
 
 export default function Invoice() {
-  const entity = "patient";
+  const entity = "invoice";
   const searchConfig = {
     displayLabels: ["name", "surname"],
     searchFields: "name,surname,birthday",
   };
   const dataTableColumns = [
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Number",
+      dataIndex: "number",
     },
     {
-      title: "Surname",
-      dataIndex: "surname",
+      title: "Client",
+      dataIndex: ["client", "company"],
     },
     {
-      title: "Birthday",
-      dataIndex: "birthday",
+      title: "Date",
+      dataIndex: "date",
     },
     {
-      title: "Gender",
-      dataIndex: "sexe",
+      title: "Due date",
+      dataIndex: "expiredDate",
+    },
+    {
+      title: "SubTotal",
+      dataIndex: "subTotal",
+
+      render: (subTotal) =>
+        `$ ${subTotal}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+    },
+    {
+      title: "Total",
+      dataIndex: "total",
+
+      render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (status) => {
+        let color = status === "Draft" ? "volcano" : "green";
+
+        return <Tag color={color}>{status.toUpperCase()}</Tag>;
+      },
     },
   ];
   const readColumns = [
@@ -46,8 +69,8 @@ export default function Invoice() {
       dataIndex: "sexe",
     },
   ];
-  const panelTitle = "Patient";
-  const dataTableTitle = "Patients Lists";
+  const panelTitle = "invoice";
+  const dataTableTitle = "invoices Lists";
   const config = {
     entity,
     panelTitle,

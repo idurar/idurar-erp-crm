@@ -28,7 +28,7 @@ export default function InvoicePanel({ config }) {
 
   return (
     <InvoiceLayout config={config}>
-      {/* <DataTable config={config} /> */}
+      <DataTable config={config} />
 
       <CreateInvoice config={config} />
       <Delete config={config} />
