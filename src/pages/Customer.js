@@ -8,7 +8,7 @@ function Customer() {
   const searchConfig = {
     displayLabels: ["company"],
     searchFields: "company,managerSurname,managerName",
-    outputField: "_id",
+    outputValue: "_id",
   };
 
   const panelTitle = "Customer Panel";

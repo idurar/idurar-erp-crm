@@ -5,23 +5,17 @@ import { DeleteOutlined } from "@ant-design/icons";
 export default function ItemRow({
   field,
   remove,
-  itemsTotals = [],
+
   current = null,
 }) {
   const [totalState, setTotal] = useState(undefined);
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
-  // useEffect(() => {
-  //   console.log(itemsTotals);
-  //   setTotal(itemsTotals[field.fieldKey]);
-  // }, [itemsTotals]);
   const updateQt = (value) => {
-    console.log("quantity change:", value);
     setQuantity(value);
   };
   const updatePrice = (value) => {
-    console.log("price change:", value);
     setPrice(value);
   };
 
@@ -37,8 +31,6 @@ export default function ItemRow({
   }, [current]);
 
   useEffect(() => {
-    console.log("price change:", price);
-    console.log("quantity change:", quantity);
     const currentTotal = price * quantity;
 
     setTotal(currentTotal);

@@ -78,7 +78,6 @@ export default function CreateInvoice({ config }) {
       }
     }
     dispatch(crud.create("invoice", fieldsValue));
-    console.log("fieldsValue", fieldsValue);
   };
 
   return (

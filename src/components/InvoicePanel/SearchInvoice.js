@@ -13,7 +13,7 @@ import { Empty } from "antd";
 export default function Search({ config }) {
   let { entity, searchConfig } = config;
 
-  const { displayLabels, searchFields, outputField = "_id" } = searchConfig;
+  const { displayLabels, searchFields, outputValue = "_id" } = searchConfig;
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -49,7 +49,7 @@ export default function Search({ config }) {
 
   const onSelect = (data) => {
     const currentItem = result.find((item) => {
-      return item[outputField] === data;
+      return item[outputValue] === data;
     });
 
     dispatch(crud.currentItem(currentItem));
@@ -71,7 +71,7 @@ export default function Search({ config }) {
 
     result.map((item) => {
       const labels = displayLabels.map((x) => item[x]).join(" ");
-      optionResults.push({ label: labels, value: item[outputField] });
+      optionResults.push({ label: labels, value: item[outputValue] });
     });
 
     setOptions(optionResults);

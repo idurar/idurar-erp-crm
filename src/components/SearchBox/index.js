@@ -28,7 +28,7 @@ export default function SearchBox({
   keyRef,
   displayLabels,
   searchFields,
-  outputField = "_id",
+  outputValue = "_id",
   value = "",
   onChange, /// this form item handel
   onUpdateValue = null,
@@ -66,7 +66,7 @@ export default function SearchBox({
 
   const onSelect = (data) => {
     const currentItem = result.find((item) => {
-      return item[outputField] === data;
+      return item[outputValue] === data;
     });
     dispatch(search.selected(keyRef, currentItem));
   };
@@ -83,10 +83,12 @@ export default function SearchBox({
   };
   let optionResults = [];
   useEffect(() => {
-    console.log("onUpdateValue", onUpdateValue);
     if (onUpdateValue) {
       const labels = displayLabels.map((x) => onUpdateValue[x]).join(" ");
-      optionResults.push({ label: labels, value: onUpdateValue[outputField] });
+      optionResults.push({ label: labels, value: onUpdateValue[outputValue] });
+      if (onChange) {
+        onChange(onUpdateValue[outputValue]);
+      }
       setValue(labels);
       setOptions(optionResults);
     }
@@ -96,7 +98,7 @@ export default function SearchBox({
     if (!onUpdateValue) {
       result.map((item) => {
         const labels = displayLabels.map((x) => item[x]).join(" ");
-        optionResults.push({ label: labels, value: item[outputField] });
+        optionResults.push({ label: labels, value: item[outputValue] });
       });
 
       setOptions(optionResults);

@@ -9,7 +9,6 @@ import ItemRow from "./ItemRow";
 export default function InvoiceForm({
   subTotal,
   autoCompleteUpdate = null,
-  itemsTotal,
   current = null,
 }) {
   const { Option } = Select;
@@ -21,7 +20,7 @@ export default function InvoiceForm({
   };
   useEffect(() => {
     if (current) {
-      const { subTotal = 0, taxRate = 0, total = 0 } = current;
+      const { taxRate = 0 } = current;
       setTaxRate(taxRate);
     }
   }, [current]);
@@ -178,7 +177,6 @@ export default function InvoiceForm({
                 key={field.key}
                 remove={remove}
                 field={field}
-                itemsTotal={itemsTotal}
                 current={current}
               ></ItemRow>
             ))}
