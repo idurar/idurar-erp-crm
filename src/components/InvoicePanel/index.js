@@ -5,7 +5,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import DataTable from "./DataTable";
 import CreateInvoice from "./CreateInvoice";
 import { useSearchBox } from "@/components/SearchBox";
-import Update from "./UpdateInvoice";
+import UpdateInvoice from "./UpdateInvoice";
 import Delete from "./DeleteInvoice";
 import Read from "./ReadInvoice";
 import Search from "./SearchInvoice";
@@ -29,8 +29,8 @@ export default function InvoicePanel({ config }) {
   return (
     <InvoiceLayout config={config}>
       <DataTable config={config} />
-
-      <CreateInvoice config={config} />
+      <UpdateInvoice config={config} />
+      {/* <CreateInvoice config={config} /> */}
       <Delete config={config} />
     </InvoiceLayout>
   );

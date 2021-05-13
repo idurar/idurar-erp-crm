@@ -6,7 +6,12 @@ import SearchBox from "@/components/SearchBox";
 import { PlusOutlined } from "@ant-design/icons";
 import ItemRow from "./ItemRow";
 
-export default function InvoiceForm({ subTotal }) {
+export default function InvoiceForm({
+  subTotal,
+  autoCompleteUpdate = null,
+  itemsTotal,
+  current = null,
+}) {
   const { Option } = Select;
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
@@ -14,6 +19,12 @@ export default function InvoiceForm({ subTotal }) {
   const handelTaxChange = (value) => {
     setTaxRate(value);
   };
+  useEffect(() => {
+    if (current) {
+      const { subTotal = 0, taxRate = 0, total = 0 } = current;
+      setTaxRate(taxRate);
+    }
+  }, [current]);
   useEffect(() => {
     const currentTotal = subTotal * taxRate + subTotal;
     setTaxTotal(subTotal * taxRate);
@@ -44,6 +55,7 @@ export default function InvoiceForm({ subTotal }) {
               keyRef={"client"}
               displayLabels={["company"]}
               searchFields={"company,managerSurname,managerName"}
+              onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
         </Col>
@@ -161,13 +173,13 @@ export default function InvoiceForm({ subTotal }) {
       <Form.List name="items">
         {(fields, { add, remove }) => (
           <>
-            {fields.map(({ key, name, fieldKey, ...restField }) => (
+            {fields.map((field) => (
               <ItemRow
-                key={key}
-                name={name}
-                fieldKey={fieldKey}
+                key={field.key}
                 remove={remove}
-                restField={restField}
+                field={field}
+                itemsTotal={itemsTotal}
+                current={current}
               ></ItemRow>
             ))}
             <Form.Item>
@@ -221,10 +233,15 @@ export default function InvoiceForm({ subTotal }) {
               ]}
               initialValue="0"
             >
-              <Select value="0" onChange={handelTaxChange} bordered={false}>
-                <Option value="0">Tax 0 %</Option>
-                <Option value="0.19">Tax 19 %</Option>
-              </Select>
+              <Select
+                value={taxRate}
+                onChange={handelTaxChange}
+                bordered={false}
+                options={[
+                  { value: 0, label: "Tax 0 %" },
+                  { value: 0.19, label: "Tax 19 %" },
+                ]}
+              ></Select>
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={14}>

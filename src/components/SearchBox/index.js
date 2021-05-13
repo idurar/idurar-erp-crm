@@ -31,6 +31,7 @@ export default function SearchBox({
   outputField = "_id",
   value = "",
   onChange, /// this form item handel
+  onUpdateValue = null,
 }) {
   const dispatch = useDispatch();
   const [fieldValue, setValue] = useState(value);
@@ -80,17 +81,27 @@ export default function SearchBox({
     }
     setValue(currentValue);
   };
+  let optionResults = [];
+  useEffect(() => {
+    console.log("onUpdateValue", onUpdateValue);
+    if (onUpdateValue) {
+      const labels = displayLabels.map((x) => onUpdateValue[x]).join(" ");
+      optionResults.push({ label: labels, value: onUpdateValue[outputField] });
+      setValue(labels);
+      setOptions(optionResults);
+    }
+  }, [onUpdateValue]);
 
   useEffect(() => {
-    let optionResults = [];
-    result.map((item) => {
-      const labels = displayLabels.map((x) => item[x]).join(" ");
-      optionResults.push({ label: labels, value: item[outputField] });
-    });
+    if (!onUpdateValue) {
+      result.map((item) => {
+        const labels = displayLabels.map((x) => item[x]).join(" ");
+        optionResults.push({ label: labels, value: item[outputField] });
+      });
 
-    setOptions(optionResults);
+      setOptions(optionResults);
+    }
   }, [result]);
-
   return (
     <AutoComplete
       value={fieldValue}
