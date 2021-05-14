@@ -21,15 +21,15 @@ const contextActions = (dispatch) => {
         dispatch({ type: actionTypes.COLLAPSE_PANEL });
       },
     },
-    accordion: {
+    collapsedBox: {
       open: () => {
-        dispatch({ type: actionTypes.OPEN_ACCORDION });
+        dispatch({ type: actionTypes.OPEN_BOX });
       },
       close: () => {
-        dispatch({ type: actionTypes.CLOSE_ACCORDION });
+        dispatch({ type: actionTypes.CLOSE_BOX });
       },
       collapse: () => {
-        dispatch({ type: actionTypes.COLLAPSE_ACCORDION });
+        dispatch({ type: actionTypes.COLLAPSE_BOX });
       },
     },
   };

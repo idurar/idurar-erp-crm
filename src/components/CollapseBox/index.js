@@ -2,45 +2,66 @@ import React, { useState } from "react";
 import { Button, Row, Col } from "antd";
 
 const CollapseBoxButton = ({ onChange, title }) => {
-  return <Button onClick={onChange}>{title}</Button>;
+  return (
+    <div className="collapseBoxHeader" onClick={onChange}>
+      {title}
+    </div>
+  );
 };
 
 const TopCollapseBox = ({ isOpen, children }) => {
-  const show = isOpen ? { display: "block" } : { display: "none" };
+  const show = isOpen
+    ? { display: "block", opacity: 1 }
+    : { display: "none", opacity: 0 };
   return (
-    <div style={show}>
-      <Row>
-        <Col span={24}> {children}</Col>
-      </Row>
+    <div className="TopCollapseBox">
+      <div style={show}>
+        <Row>
+          <Col span={24}> {children}</Col>
+        </Row>
+      </div>
     </div>
   );
 };
 
 const BottomCollapseBox = ({ isOpen, children }) => {
-  const show = isOpen ? { display: "none" } : { display: "block" };
+  const show = isOpen
+    ? { display: "none", opacity: 0 }
+    : { display: "block", opacity: 1 };
   return (
-    <div style={show}>
-      <Row>
-        <Col span={24}> {children}</Col>
-      </Row>
+    <div className="BottomCollapseBox">
+      <div style={show}>
+        <Row>
+          <Col span={24}> {children}</Col>
+        </Row>
+      </div>
     </div>
   );
 };
 
 export default function CollapseBox({
-  TopCollapseContent,
-  BottoCollapseContent,
-  ButtonTitle,
+  topContent,
+  bottomContent,
+  buttonTitle,
   isCollapsed,
   onCollapse,
+  isPanelCollapsed,
 }) {
+  const collapsed = isCollapsed ? "collapsed" : "";
+  const isDiplayed = isPanelCollapsed ? "-400px" : "0px";
   return (
-    <>
-      <TopCollapseBox isOpen={isCollapsed}>{TopCollapseContent}</TopCollapseBox>
-      <CollapseBoxButton title={ButtonTitle} onChange={onCollapse} />
-      <BottomCollapseBox isOpen={isCollapsed}>
-        {BottoCollapseContent}
-      </BottomCollapseBox>
-    </>
+    <div
+      className="panelBox"
+      style={{ width: "400px", marginLeft: isDiplayed }}
+    >
+      <TopCollapseBox isOpen={isCollapsed}>{topContent}</TopCollapseBox>
+      <div className={"collapseBox " + collapsed}>
+        <CollapseBoxButton title={buttonTitle} onChange={onCollapse} />
+        <div className="whiteBg"></div>
+        <BottomCollapseBox isOpen={isCollapsed}>
+          {bottomContent}
+        </BottomCollapseBox>
+      </div>
+    </div>
   );
 }

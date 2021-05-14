@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DefaultLayout } from "@/layout";
+import { CrudLayout } from "@/layout";
 import CrudPanel from "@/components/CrudPanel";
 import FormPatient from "@/components/FormPatient";
 
@@ -25,8 +25,8 @@ function CustomerPage() {
     },
   ];
   return (
-    <DefaultLayout
-      SidePanelContent={
+    <CrudLayout
+      sidePanelTopContent={
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -41,7 +41,7 @@ function CustomerPage() {
       }
     >
       <CrudPanel entity={entity} columns={columns} newForm={<FormPatient />} />
-    </DefaultLayout>
+    </CrudLayout>
   );
 }
 

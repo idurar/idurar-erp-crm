@@ -4,7 +4,7 @@ export const initialState = {
   count: 0,
   isModalOpen: false,
   isPanelCollapsed: false,
-  isAccordionCollapsed: false,
+  isBoxCollapsed: false,
 };
 
 export function contextReducer(state, action) {
@@ -34,20 +34,20 @@ export function contextReducer(state, action) {
         ...state,
         isPanelCollapsed: !state.isPanelCollapsed,
       };
-    case actionTypes.OPEN_ACCORDION:
+    case actionTypes.OPEN_BOX:
       return {
         ...state,
-        isAccordionCollapsed: true,
+        isBoxCollapsed: true,
       };
-    case actionTypes.CLOSE_ACCORDION:
+    case actionTypes.CLOSE_BOX:
       return {
         ...state,
-        isAccordionCollapsed: false,
+        isBoxCollapsed: false,
       };
-    case actionTypes.COLLAPSE_ACCORDION:
+    case actionTypes.COLLAPSE_BOX:
       return {
         ...state,
-        isAccordionCollapsed: !state.isAccordionCollapsed,
+        isBoxCollapsed: !state.isBoxCollapsed,
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
