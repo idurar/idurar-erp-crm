@@ -3,10 +3,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { AutoComplete, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
+import { invoice } from "@/redux/invoice/actions";
 import { request } from "@/request";
-import { useUiContext } from "@/context/ui";
-import { selectSearchedItems } from "@/redux/crud/selectors";
+import { useInvoiceContext } from "@/context/invoice";
+import { selectSearchedItems } from "@/redux/invoice/selectors";
 
 import { Empty } from "antd";
 
@@ -18,8 +18,8 @@ export default function Search({ config }) {
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
 
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, readBox } = uiContextAction;
+  const { invoiceContextAction } = useInvoiceContext();
+  const { panel, collapsedBox, readBox } = invoiceContextAction;
 
   let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
@@ -37,7 +37,7 @@ export default function Search({ config }) {
     delayTimer = setTimeout(function () {
       if (isTyping.current && searchText !== "") {
         dispatch(
-          crud.search(entity, source, {
+          invoice.search(entity, source, {
             question: searchText,
             fields: searchFields,
           })
@@ -52,7 +52,7 @@ export default function Search({ config }) {
       return item[outputValue] === data;
     });
 
-    dispatch(crud.currentItem(currentItem));
+    dispatch(invoice.currentItem(currentItem));
     panel.open();
     collapsedBox.open();
     readBox.open();

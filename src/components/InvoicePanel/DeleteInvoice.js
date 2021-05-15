@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { useUiContext } from "@/context/ui";
-import { selectDeletedItem } from "@/redux/crud/selectors";
+import { invoice } from "@/redux/invoice/actions";
+import { useInvoiceContext } from "@/context/invoice";
+import { selectDeletedItem } from "@/redux/invoice/selectors";
 import { valueByString } from "@/utils/helpers";
 
 export default function Delete({ config }) {
@@ -16,9 +16,9 @@ export default function Delete({ config }) {
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
-  const { state, uiContextAction } = useUiContext();
+  const { state, invoiceContextAction } = useInvoiceContext();
   const { isModalOpen } = state;
-  const { modal } = uiContextAction;
+  const { modal } = invoiceContextAction;
   const [displayItem, setDisplayItem] = useState("");
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Delete({ config }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(crud.delete(entity, id));
+    dispatch(invoice.delete(entity, id));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();

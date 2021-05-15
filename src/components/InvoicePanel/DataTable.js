@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { Dropdown, Menu, Table } from "antd";
-import { Button, PageHeader, Row, Statistic, Tag } from "antd";
+import { Button, PageHeader, Tag } from "antd";
 import {
   EllipsisOutlined,
   EyeOutlined,
@@ -8,14 +8,14 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { selectListItems, selectItemById } from "@/redux/crud/selectors";
-import { useUiContext } from "@/context/ui";
+import { invoice } from "@/redux/invoice/actions";
+import { selectListItems, selectItemById } from "@/redux/invoice/selectors";
+import { useInvoiceContext } from "@/context/invoice";
 import uniqueId from "@/utils/uniqueId";
 
 function AddNewItem() {
-  const { uiContextAction } = useUiContext();
-  const { collapsedBox, panel } = uiContextAction;
+  const { invoiceContextAction } = useInvoiceContext();
+  const { collapsedBox, panel } = invoiceContextAction;
   const handelClick = () => {
     panel.open();
     collapsedBox.close();
@@ -29,24 +29,17 @@ function AddNewItem() {
 }
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, modal, readBox } = uiContextAction;
+  const { invoiceContextAction } = useInvoiceContext();
+  const { panel, collapsedBox, modal, readBox } = invoiceContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
-    dispatch(crud.currentItem(item));
-    panel.open();
-    collapsedBox.open();
-    readBox.open();
+    dispatch(invoice.currentItem(item));
   };
   function Edit() {
-    dispatch(crud.currentAction("update", item));
-    readBox.close();
-    panel.open();
-    collapsedBox.open();
+    dispatch(invoice.currentAction("update", item));
   }
   function Delete() {
-    dispatch(crud.currentAction("delete", item));
-    modal.open();
+    dispatch(invoice.currentAction("delete", item));
   }
   return (
     <Menu style={{ width: 130 }}>
@@ -86,11 +79,11 @@ export default function DataTable({ config }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    dispatch(crud.list(entity, pagination.current));
+    dispatch(invoice.list(entity, pagination.current));
   }, []);
 
   useEffect(() => {
-    dispatch(crud.list(entity));
+    dispatch(invoice.list(entity));
   }, []);
 
   return (
@@ -110,20 +103,7 @@ export default function DataTable({ config }) {
         style={{
           padding: "20px 0px",
         }}
-      >
-        {/* <Row>
-          <Statistic title="Status" value="Pending" />
-          <Statistic
-            title="Price"
-            prefix="$"
-            value={568.08}
-            style={{
-              margin: "0 32px",
-            }}
-          />
-          <Statistic title="Balance" prefix="$" value={3345.08} />
-        </Row> */}
-      </PageHeader>
+      ></PageHeader>
       <Table
         columns={dataTableColumns}
         rowKey={(item) => item._id}

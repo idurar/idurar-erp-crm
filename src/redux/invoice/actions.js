@@ -17,14 +17,14 @@ export const invoice = {
   currentItem: (data) => async (dispatch) => {
     dispatch({
       type: actionTypes.CURRENT_ITEM,
-      payload: data,
+      payload: { ...data },
     });
   },
   currentAction: (actionType, data) => async (dispatch) => {
     dispatch({
       type: actionTypes.CURRENT_ACTION,
       keyState: actionType,
-      payload: data,
+      payload: { ...data },
     });
   },
   list: (entity, currentPage = 1) => async (dispatch) => {
@@ -64,7 +64,7 @@ export const invoice = {
       keyState: "create",
       payload: null,
     });
-
+    console.log("jsonData action redux", jsonData);
     let data = await request.create(entity, jsonData);
 
     if (data.success === true) {
@@ -191,70 +191,3 @@ export const invoice = {
     }
   },
 };
-
-////////////////////////// **** crudAction **** //////////////////////////
-
-// export const crudAction = (requestType, entity, ...args) => async (
-//   dispatch
-// ) => {
-//   dispatch({
-//     type: actionTypes.REQUEST_LOADING,
-//     keyState: requestType,
-//     payload: null,
-//   });
-
-//   let data = { success: false };
-
-//   switch (requestType) {
-//     case requestType === "list": {
-//       const [currentPage] = args;
-//       data = await request.list(entity, { page: currentPage });
-//     }
-//     case requestType === "create": {
-//       const [jsonData] = args;
-//       data = await request.create(entity, jsonData);
-//     }
-//     case requestType === "read": {
-//       const [itemId] = args;
-//       data = await request.read(entity, itemId);
-//     }
-//     case requestType === "update": {
-//       const [jsonData, itemId] = args;
-//       data = await request.update(entity, itemId, jsonData);
-//     }
-//     case requestType === "delete": {
-//       const [itemId] = args;
-//       data = await request.delete(entity, itemId);
-//     }
-//     case requestType === "search": {
-//       const [source, option] = args;
-//       data = await request.search(entity, source, option);
-//     }
-//   }
-
-//   if (data.success === true) {
-//     const result =
-//       requestType === "list"
-//         ? {
-//             items: data.result,
-//             pagination: {
-//               current: data.pagination.page,
-//               defaultCurrent: 1,
-//               pageSize: 10,
-//               total: data.pagination.count,
-//             },
-//           }
-//         : data.result;
-//     dispatch({
-//       type: actionTypes.REQUEST_SUCCESS,
-//       keyState: requestType,
-//       payload: result,
-//     });
-//   } else {
-//     dispatch({
-//       type: actionTypes.REQUEST_FAILED,
-//       keyState: requestType,
-//       payload: null,
-//     });
-//   }
-// };

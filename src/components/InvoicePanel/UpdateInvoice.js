@@ -4,17 +4,17 @@ import dayjs from "dayjs";
 import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
+import { invoice } from "@/redux/invoice/actions";
 
-import { useUiContext } from "@/context/ui";
+import { useInvoiceContext } from "@/context/invoice";
 import uniqueId from "@/utils/uniqueId";
-import { selectUpdatedItem } from "@/redux/crud/selectors";
+import { selectUpdatedItem } from "@/redux/invoice/selectors";
 import Loading from "@/components/Loading";
 import InvoiceForm from "./InvoiceForm";
 
 function AddNewItem() {
-  const { uiContextAction } = useUiContext();
-  const { collapsedBox, panel } = uiContextAction;
+  const { invoiceContextAction } = useInvoiceContext();
+  const { collapsedBox, panel } = invoiceContextAction;
   const handelClick = () => {
     panel.open();
     collapsedBox.close();
@@ -82,8 +82,15 @@ export default function UpdateInvoice({ config }) {
 
     const id = current._id;
 
-    dispatch(crud.update(entity, id, fieldsValue));
+    dispatch(invoice.update(entity, id, fieldsValue));
   };
+  useEffect(() => {
+    if (isSuccess) {
+      form.resetFields();
+      setSubTotal(0);
+      dispatch(invoice.resetAction("update"));
+    }
+  }, [isSuccess]);
 
   useEffect(() => {
     if (current) {
@@ -114,10 +121,10 @@ export default function UpdateInvoice({ config }) {
     <>
       <PageHeader
         onBack={() => window.history.back()}
-        title="Customer Page"
+        title="Update Invoice"
         ghost={false}
-        tags={<Tag color="blue">Running</Tag>}
-        subTitle="This is customer page"
+        tags={<Tag color="volcano">Draft</Tag>}
+        subTitle="This is update page"
         extra={[
           <Button key={`${uniqueId()}`}>Refresh</Button>,
           <AddNewItem key={`${uniqueId()}`} />,
