@@ -17,14 +17,14 @@ export const crud = {
   currentItem: (data) => async (dispatch) => {
     dispatch({
       type: actionTypes.CURRENT_ITEM,
-      payload: data,
+      payload: { ...data },
     });
   },
   currentAction: (actionType, data) => async (dispatch) => {
     dispatch({
       type: actionTypes.CURRENT_ACTION,
       keyState: actionType,
-      payload: data,
+      payload: { ...data },
     });
   },
   list: (entity, currentPage = 1) => async (dispatch) => {

@@ -1,83 +1,166 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Form, Divider } from "antd";
 import dayjs from "dayjs";
-import { useDispatch, useSelector } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { useUiContext } from "@/context/ui";
-import { selectUpdatedItem } from "@/redux/crud/selectors";
+import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 
-import { Button, Form } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { invoice } from "@/redux/invoice/actions";
+
+import { useInvoiceContext } from "@/context/invoice";
+import uniqueId from "@/utils/uniqueId";
+import { selectUpdatedItem } from "@/redux/invoice/selectors";
 import Loading from "@/components/Loading";
+import InvoiceForm from "./InvoiceForm";
 
-export default function Update({ config, formElements }) {
+function SaveForm({ form }) {
+  const handelClick = () => {
+    form.submit();
+  };
+
+  return (
+    <Button onClick={handelClick} type="primary">
+      Save Invoice
+    </Button>
+  );
+}
+
+export default function UpdateInvoice({ config }) {
   let { entity } = config;
+  const { invoiceContextAction } = useInvoiceContext();
+  const { updatePanel } = invoiceContextAction;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
-
-  const { state, uiContextAction } = useUiContext();
-  const { panel, collapsedBox, readBox } = uiContextAction;
-
   const [form] = Form.useForm();
+  const [subTotal, setSubTotal] = useState(0);
+  const [autoCompleteValue, setAutoCompleteValue] = useState("");
+
+  const handelValuesChange = (changedValues, values) => {
+    const items = values["items"];
+    let subTotal = 0;
+
+    if (items) {
+      items.map((item) => {
+        if (item) {
+          if (item.quantity && item.price) {
+            let total = item["quantity"] * item["price"];
+            //sub total
+            subTotal += total;
+          }
+        }
+      });
+      setSubTotal(subTotal);
+    }
+  };
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
-      if (fieldsValue.birthday) {
+      if (fieldsValue.expiredDate) {
         fieldsValue = {
           ...fieldsValue,
-          birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
+          expiredDate: fieldsValue["expiredDate"].format("DD/MM/YYYY"),
         };
       }
       if (fieldsValue.date) {
         fieldsValue = {
           ...fieldsValue,
-          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
+          date: fieldsValue["date"].format("DD/MM/YYYY"),
+        };
+      }
+      if (fieldsValue.items) {
+        let newList = [...fieldsValue.items];
+        newList.map((item) => {
+          item.total = item.quantity * item.price;
+        });
+        fieldsValue = {
+          ...fieldsValue,
+          items: newList,
         };
       }
     }
 
     const id = current._id;
-    console.log(fieldsValue);
-    dispatch(crud.update(entity, id, fieldsValue));
+
+    dispatch(invoice.update(entity, id, fieldsValue));
   };
   useEffect(() => {
-    if (current) {
-      if (current.birthday) {
-        current.birthday = dayjs(current.birthday);
-      }
-      if (current.date) {
-        current.date = dayjs(current.date);
-      }
-      form.setFieldsValue(current);
-    }
-    // console.log(form.getFieldsValue());
-  }, [current]);
-
-  useEffect(() => {
     if (isSuccess) {
-      readBox.open();
-      collapsedBox.open();
-      panel.open();
       form.resetFields();
-      dispatch(crud.resetAction("update"));
+      setSubTotal(0);
+      dispatch(invoice.resetAction("update"));
     }
   }, [isSuccess]);
 
-  const { isReadBoxOpen } = state;
+  useEffect(() => {
+    if (current) {
+      if (current.client) {
+        const tmpValue = { ...current.client };
+        setAutoCompleteValue(tmpValue);
 
-  const show = isReadBoxOpen
-    ? { display: "none", opacity: 0 }
-    : { display: "block", opacity: 1 };
+        current.client = undefined;
+      }
+      if (current.date) {
+        current.date = dayjs(current.date, "DD/MM/YYYY");
+      }
+      if (current.expiredDate) {
+        current.expiredDate = dayjs(current.expiredDate, "DD/MM/YYYY");
+      }
+      if (!current.taxRate) {
+        current.taxRate = 0;
+      }
+
+      const { subTotal } = current;
+
+      form.setFieldsValue(current);
+      setSubTotal(subTotal);
+    }
+  }, [current]);
+
   return (
-    <div style={show}>
+    <>
+      <PageHeader
+        onBack={() => updatePanel.close()}
+        title="Update Invoice"
+        ghost={false}
+        tags={<Tag color="volcano">Draft</Tag>}
+        subTitle="This is update page"
+        extra={[<SaveForm form={form} key={`${uniqueId()}`} />]}
+        style={{
+          padding: "20px 0px",
+        }}
+      >
+        <Row>
+          <Statistic title="Status" value="Pending" />
+          <Statistic
+            title="Price"
+            prefix="$"
+            value={568.08}
+            style={{
+              margin: "0 32px",
+            }}
+          />
+          <Statistic title="Balance" prefix="$" value={3345.08} />
+        </Row>
+      </PageHeader>
+      <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form form={form} layout="vertical" onFinish={onSubmit}>
-          {formElements}
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={onSubmit}
+          onValuesChange={handelValuesChange}
+        >
+          <InvoiceForm
+            subTotal={subTotal}
+            autoCompleteUpdate={autoCompleteValue}
+            current={current}
+          />
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Submit
+              Save
             </Button>
           </Form.Item>
         </Form>
       </Loading>
-    </div>
+    </>
   );
 }

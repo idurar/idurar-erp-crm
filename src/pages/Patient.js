@@ -9,6 +9,8 @@ export default function Invoice() {
     displayLabels: ["name", "surname"],
     searchFields: "name,surname,birthday",
   };
+  const entityDisplayLabels = ["name", "surname"];
+
   const dataTableColumns = [
     {
       title: "Name",
@@ -54,6 +56,7 @@ export default function Invoice() {
     readColumns,
     dataTableColumns,
     searchConfig,
+    entityDisplayLabels,
   };
   return <CrudPanel createForm={<FormPatient />} config={config} />;
 }

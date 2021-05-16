@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, Input, InputNumber, Space, Row, Col } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
-export default function ItemRow({ name, fieldKey, remove }) {
+export default function ItemRow({
+  field,
+  remove,
+
+  current = null,
+}) {
   const [totalState, setTotal] = useState(undefined);
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
@@ -15,17 +20,28 @@ export default function ItemRow({ name, fieldKey, remove }) {
   };
 
   useEffect(() => {
+    if (current) {
+      const { items } = current;
+      const item = items[field.fieldKey];
+      if (item) {
+        setQuantity(item.quantity);
+        setPrice(item.price);
+      }
+    }
+  }, [current]);
+
+  useEffect(() => {
     const currentTotal = price * quantity;
 
-    setTotal(currentTotal);
+    setTotal(currentTotal.toFixed(2));
   }, [price, quantity]);
 
   return (
     <Row gutter={[12, 12]} style={{ position: "relative" }}>
       <Col className="gutter-row" span={6}>
         <Form.Item
-          name={[name, "itemName"]}
-          fieldKey={[fieldKey, "itemName"]}
+          name={[field.name, "itemName"]}
+          fieldKey={[field.fieldKey, "itemName"]}
           rules={[{ required: true, message: "Missing itemName name" }]}
         >
           <Input placeholder="Item Name" />
@@ -33,8 +49,8 @@ export default function ItemRow({ name, fieldKey, remove }) {
       </Col>
       <Col className="gutter-row" span={8}>
         <Form.Item
-          name={[name, "description"]}
-          fieldKey={[fieldKey, "description"]}
+          name={[field.name, "description"]}
+          fieldKey={[field.fieldKey, "description"]}
           rules={[{ required: true, message: "Missing item description" }]}
         >
           <Input placeholder="description Name" />
@@ -42,8 +58,8 @@ export default function ItemRow({ name, fieldKey, remove }) {
       </Col>
       <Col className="gutter-row" span={3}>
         <Form.Item
-          name={[name, "quantity"]}
-          fieldKey={[fieldKey, "quantity"]}
+          name={[field.name, "quantity"]}
+          fieldKey={[field.fieldKey, "quantity"]}
           rules={[{ required: true, message: "Missing item quantity" }]}
         >
           <InputNumber style={{ width: "100%" }} min={1} onChange={updateQt} />
@@ -51,8 +67,8 @@ export default function ItemRow({ name, fieldKey, remove }) {
       </Col>
       <Col className="gutter-row" span={3}>
         <Form.Item
-          name={[name, "price"]}
-          fieldKey={[fieldKey, "price"]}
+          name={[field.name, "price"]}
+          fieldKey={[field.fieldKey, "price"]}
           rules={[{ required: true, message: "Missing item price" }]}
         >
           <InputNumber
@@ -66,7 +82,7 @@ export default function ItemRow({ name, fieldKey, remove }) {
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={4}>
-        <Form.Item name={[name, "total"]}>
+        <Form.Item name={[field.name, "total"]}>
           <Form.Item noStyle>
             <InputNumber
               readOnly
@@ -81,7 +97,7 @@ export default function ItemRow({ name, fieldKey, remove }) {
       </Col>
 
       <div style={{ position: "absolute", right: "-20px", top: " 5px" }}>
-        <DeleteOutlined onClick={() => remove(name)} />
+        <DeleteOutlined onClick={() => remove(field.name)} />
       </div>
     </Row>
   );

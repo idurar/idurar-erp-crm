@@ -3,23 +3,23 @@ import React, { useEffect, useState, useRef } from "react";
 import { AutoComplete, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
+import { invoice } from "@/redux/invoice/actions";
 import { request } from "@/request";
-import { useUiContext } from "@/context/ui";
-import { selectSearchedItems } from "@/redux/crud/selectors";
+import { useInvoiceContext } from "@/context/invoice";
+import { selectSearchedItems } from "@/redux/invoice/selectors";
 
 import { Empty } from "antd";
 
 export default function Search({ config }) {
   let { entity, searchConfig } = config;
-  console.log("render search component");
-  const { displayLabels, searchFields } = searchConfig;
+
+  const { displayLabels, searchFields, outputValue = "_id" } = searchConfig;
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
 
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, readBox } = uiContextAction;
+  const { invoiceContextAction } = useInvoiceContext();
+  const { panel, collapsedBox, readBox } = invoiceContextAction;
 
   let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
@@ -37,7 +37,7 @@ export default function Search({ config }) {
     delayTimer = setTimeout(function () {
       if (isTyping.current && searchText !== "") {
         dispatch(
-          crud.search(entity, source, {
+          invoice.search(entity, source, {
             question: searchText,
             fields: searchFields,
           })
@@ -49,10 +49,10 @@ export default function Search({ config }) {
 
   const onSelect = (data) => {
     const currentItem = result.find((item) => {
-      return item._id === data;
+      return item[outputValue] === data;
     });
 
-    dispatch(crud.currentItem(currentItem));
+    dispatch(invoice.currentItem(currentItem));
     panel.open();
     collapsedBox.open();
     readBox.open();
@@ -71,7 +71,7 @@ export default function Search({ config }) {
 
     result.map((item) => {
       const labels = displayLabels.map((x) => item[x]).join(" ");
-      optionResults.push({ label: labels, value: item._id });
+      optionResults.push({ label: labels, value: item[outputValue] });
     });
 
     setOptions(optionResults);
@@ -89,7 +89,7 @@ export default function Search({ config }) {
       onChange={onChange}
       notFoundContent={!isSuccess ? <Empty /> : ""}
       allowClear={true}
-      placeholder="control mode"
+      placeholder="Your Search here"
     >
       <Input suffix={<SearchOutlined />} />
     </AutoComplete>

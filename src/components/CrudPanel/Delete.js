@@ -5,9 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { useUiContext } from "@/context/ui";
 import { selectDeletedItem } from "@/redux/crud/selectors";
+import { valueByString } from "@/utils/helpers";
 
 export default function Delete({ config }) {
-  let { entity } = config;
+  let {
+    entity,
+    entityDisplayLabels,
+    deleteMessage = "Do you want delete : ",
+    deleteModalDelete = "Remove Item",
+  } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, uiContextAction } = useUiContext();
@@ -17,7 +23,13 @@ export default function Delete({ config }) {
 
   useEffect(() => {
     if (isSuccess) modal.close();
-    if (current) setDisplayItem(current._id);
+    if (current) {
+      let labels = entityDisplayLabels
+        .map((x) => valueByString(current, x))
+        .join(" ");
+
+      setDisplayItem(labels);
+    }
   }, [isSuccess, current]);
 
   const handleOk = () => {
@@ -29,13 +41,16 @@ export default function Delete({ config }) {
   };
   return (
     <Modal
-      title="Remove Item"
+      title={deleteModalDelete}
       visible={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}
     >
-      <p>Do you want delete : {displayItem}</p>
+      <p>
+        {deleteMessage}
+        {displayItem}
+      </p>
     </Modal>
   );
 }

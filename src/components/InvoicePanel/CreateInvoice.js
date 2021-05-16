@@ -1,35 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Divider } from "antd";
 
 import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 
-import { useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { invoice } from "@/redux/invoice/actions";
+import { selectCreatedItem } from "@/redux/invoice/selectors";
 
-import { useUiContext } from "@/context/ui";
+import { useInvoiceContext } from "@/context/invoice";
 import uniqueId from "@/utils/uniqueId";
 
 import InvoiceForm from "./InvoiceForm";
+import Loading from "@/components/Loading";
 
-function AddNewItem() {
-  const { uiContextAction } = useUiContext();
-  const { collapsedBox, panel } = uiContextAction;
+function SaveForm({ form }) {
   const handelClick = () => {
-    panel.open();
-    collapsedBox.close();
+    form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary">
-      Add new Customer
+      Save Invoice
     </Button>
   );
 }
 
 export default function CreateInvoice({ config }) {
   let { entity } = config;
-
+  const { invoiceContextAction } = useInvoiceContext();
+  const { createPanel } = invoiceContextAction;
   const dispatch = useDispatch();
+  const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const handelValuesChange = (changedValues, values) => {
@@ -49,6 +50,14 @@ export default function CreateInvoice({ config }) {
       setSubTotal(subTotal);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      form.resetFields();
+      dispatch(invoice.resetAction("create"));
+      setSubTotal(0);
+    }
+  }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
@@ -77,22 +86,18 @@ export default function CreateInvoice({ config }) {
         };
       }
     }
-    dispatch(crud.create("invoice", fieldsValue));
-    console.log("fieldsValue", fieldsValue);
+    dispatch(invoice.create(entity, fieldsValue));
   };
 
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
-        title="Customer Page"
+        onBack={() => createPanel.close()}
+        title="Create Invoice"
         ghost={false}
-        tags={<Tag color="blue">Running</Tag>}
-        subTitle="This is customer page"
-        extra={[
-          <Button key={`${uniqueId()}`}>Refresh</Button>,
-          <AddNewItem key={`${uniqueId()}`} />,
-        ]}
+        tags={<Tag color="volcano">Draft</Tag>}
+        subTitle="This is create page"
+        extra={[<SaveForm form={form} key={`${uniqueId()}`} />]}
         style={{
           padding: "20px 0px",
         }}
@@ -111,19 +116,21 @@ export default function CreateInvoice({ config }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={onSubmit}
-        onValuesChange={handelValuesChange}
-      >
-        <InvoiceForm subTotal={subTotal} />
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+      <Loading isLoading={isLoading}>
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={onSubmit}
+          onValuesChange={handelValuesChange}
+        >
+          <InvoiceForm subTotal={subTotal} />
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+      </Loading>
     </>
   );
 }
