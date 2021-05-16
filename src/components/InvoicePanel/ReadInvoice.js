@@ -64,9 +64,11 @@ const Item = ({ item }) => {
 };
 
 export default function ReadInvoice({ config }) {
+  const { invoiceContextAction } = useInvoiceContext();
+  const { readPanel } = invoiceContextAction;
   const { result: currentResult } = useSelector(selectCurrentItem);
   const { state } = useInvoiceContext();
-  const { isReadBoxOpen } = state;
+
   const [itemslist, setItemsList] = useState([]);
   const [currentInvoice, setCurrentInvoice] = useState({
     status: "",
@@ -101,7 +103,7 @@ export default function ReadInvoice({ config }) {
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
+        onBack={() => readPanel.close()}
         title={`Invoice # ${currentInvoice.number}/${
           currentInvoice.year || ""
         }`}

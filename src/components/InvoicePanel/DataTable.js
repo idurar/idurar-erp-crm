@@ -15,31 +15,33 @@ import uniqueId from "@/utils/uniqueId";
 
 function AddNewItem() {
   const { invoiceContextAction } = useInvoiceContext();
-  const { collapsedBox, panel } = invoiceContextAction;
+  const { createPanel } = invoiceContextAction;
   const handelClick = () => {
-    panel.open();
-    collapsedBox.close();
+    createPanel.open();
   };
 
   return (
     <Button onClick={handelClick} type="primary">
-      Add new Customer
+      Add new Invoice
     </Button>
   );
 }
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
   const { invoiceContextAction } = useInvoiceContext();
-  const { panel, collapsedBox, modal, readBox } = invoiceContextAction;
+  const { readPanel, updatePanel, modal } = invoiceContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
     dispatch(invoice.currentItem(item));
+    readPanel.open();
   };
   function Edit() {
     dispatch(invoice.currentAction("update", item));
+    updatePanel.open();
   }
   function Delete() {
     dispatch(invoice.currentAction("delete", item));
+    modal.open();
   }
   return (
     <Menu style={{ width: 130 }}>
@@ -89,11 +91,11 @@ export default function DataTable({ config }) {
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
-        title="Customer Page"
-        ghost={false}
-        tags={<Tag color="blue">Running</Tag>}
-        subTitle="This is customer page"
+        // onBack={() => window.history.back()}
+        title="Invoices List"
+        ghost={true}
+        // tags={<Tag color="blue">Running</Tag>}
+        // subTitle="This is customer page"
         extra={[
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
             Refresh

@@ -26,8 +26,8 @@ export default function InvoiceForm({
   }, [current]);
   useEffect(() => {
     const currentTotal = subTotal * taxRate + subTotal;
-    setTaxTotal(subTotal * taxRate);
-    setTotal(currentTotal);
+    setTaxTotal((subTotal * taxRate).toFixed(2));
+    setTotal(currentTotal.toFixed(2));
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);

@@ -12,24 +12,22 @@ import { selectUpdatedItem } from "@/redux/invoice/selectors";
 import Loading from "@/components/Loading";
 import InvoiceForm from "./InvoiceForm";
 
-function AddNewItem() {
-  const { invoiceContextAction } = useInvoiceContext();
-  const { collapsedBox, panel } = invoiceContextAction;
+function SaveForm({ form }) {
   const handelClick = () => {
-    panel.open();
-    collapsedBox.close();
+    form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary">
-      Add new Customer
+      Save Invoice
     </Button>
   );
 }
 
 export default function UpdateInvoice({ config }) {
   let { entity } = config;
-
+  const { invoiceContextAction } = useInvoiceContext();
+  const { updatePanel } = invoiceContextAction;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
@@ -120,15 +118,12 @@ export default function UpdateInvoice({ config }) {
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
+        onBack={() => updatePanel.close()}
         title="Update Invoice"
         ghost={false}
         tags={<Tag color="volcano">Draft</Tag>}
         subTitle="This is update page"
-        extra={[
-          <Button key={`${uniqueId()}`}>Refresh</Button>,
-          <AddNewItem key={`${uniqueId()}`} />,
-        ]}
+        extra={[<SaveForm form={form} key={`${uniqueId()}`} />]}
         style={{
           padding: "20px 0px",
         }}
@@ -161,7 +156,7 @@ export default function UpdateInvoice({ config }) {
           />
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Submit
+              Save
             </Button>
           </Form.Item>
         </Form>

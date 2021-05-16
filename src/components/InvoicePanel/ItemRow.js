@@ -33,7 +33,7 @@ export default function ItemRow({
   useEffect(() => {
     const currentTotal = price * quantity;
 
-    setTotal(currentTotal);
+    setTotal(currentTotal.toFixed(2));
   }, [price, quantity]);
 
   return (

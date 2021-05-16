@@ -17,7 +17,7 @@ export default function Delete({ config }) {
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, invoiceContextAction } = useInvoiceContext();
-  const { isModalOpen } = state;
+  const { deleteModal } = state;
   const { modal } = invoiceContextAction;
   const [displayItem, setDisplayItem] = useState("");
 
@@ -42,7 +42,7 @@ export default function Delete({ config }) {
   return (
     <Modal
       title={deleteModalDelete}
-      visible={isModalOpen}
+      visible={deleteModal.isOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}
