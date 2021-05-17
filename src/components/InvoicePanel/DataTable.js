@@ -6,12 +6,14 @@ import {
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
+  FilePdfOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { invoice } from "@/redux/invoice/actions";
 import { selectListItems, selectItemById } from "@/redux/invoice/selectors";
 import { useInvoiceContext } from "@/context/invoice";
 import uniqueId from "@/utils/uniqueId";
+import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
 
 function AddNewItem() {
   const { invoiceContextAction } = useInvoiceContext();
@@ -26,7 +28,7 @@ function AddNewItem() {
     </Button>
   );
 }
-function DropDownRowMenu({ row }) {
+function DropDownRowMenu({ row, entity }) {
   const dispatch = useDispatch();
   const { invoiceContextAction } = useInvoiceContext();
   const { readPanel, updatePanel, modal } = invoiceContextAction;
@@ -43,6 +45,12 @@ function DropDownRowMenu({ row }) {
     dispatch(invoice.currentAction("delete", item));
     modal.open();
   }
+  function Download() {
+    window.open(
+      `${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`,
+      "_blank"
+    );
+  }
   return (
     <Menu style={{ width: 130 }}>
       <Menu.Item icon={<EyeOutlined />} onClick={Show}>
@@ -50,6 +58,9 @@ function DropDownRowMenu({ row }) {
       </Menu.Item>
       <Menu.Item icon={<EditOutlined />} onClick={Edit}>
         Edit
+      </Menu.Item>
+      <Menu.Item icon={<FilePdfOutlined />} onClick={Download}>
+        Download
       </Menu.Item>
       <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
         Delete
@@ -65,7 +76,10 @@ export default function DataTable({ config }) {
     {
       title: "",
       render: (row) => (
-        <Dropdown overlay={DropDownRowMenu({ row })} trigger={["click"]}>
+        <Dropdown
+          overlay={DropDownRowMenu({ row, entity })}
+          trigger={["click"]}
+        >
           <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
         </Dropdown>
       ),
