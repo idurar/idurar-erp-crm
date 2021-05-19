@@ -87,6 +87,7 @@ export default function UpdateInvoice({ config }) {
       form.resetFields();
       setSubTotal(0);
       dispatch(invoice.resetAction("update"));
+      updatePanel.close();
     }
   }, [isSuccess]);
 

@@ -56,6 +56,7 @@ export default function CreateInvoice({ config }) {
       form.resetFields();
       dispatch(invoice.resetAction("create"));
       setSubTotal(0);
+      createPanel.close();
     }
   }, [isSuccess]);
 

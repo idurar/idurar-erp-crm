@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Form, Divider } from "antd";
-import dayjs from "dayjs";
+import { Divider } from "antd";
+
 import {
   Button,
   PageHeader,
@@ -10,6 +10,7 @@ import {
   Statistic,
   Tag,
 } from "antd";
+import { EditOutlined, FilePdfOutlined } from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
 import { invoice } from "@/redux/invoice/actions";
@@ -17,8 +18,10 @@ import { invoice } from "@/redux/invoice/actions";
 import { useInvoiceContext } from "@/context/invoice";
 import uniqueId from "@/utils/uniqueId";
 
-import { selectCurrentItem } from "@/redux/invoice/selectors";
+import { selectCurrentItem, selectItemById } from "@/redux/invoice/selectors";
+
 import { valueByString } from "@/utils/helpers";
+import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
 
 const Item = ({ item }) => {
   console.info("item item : ", item);
@@ -64,10 +67,14 @@ const Item = ({ item }) => {
 };
 
 export default function ReadInvoice({ config }) {
+  const { entity } = config;
+  const dispatch = useDispatch();
   const { invoiceContextAction } = useInvoiceContext();
-  const { readPanel } = invoiceContextAction;
+
   const { result: currentResult } = useSelector(selectCurrentItem);
   const { state } = useInvoiceContext();
+
+  const { readPanel, updatePanel } = invoiceContextAction;
 
   const [itemslist, setItemsList] = useState([]);
   const [currentInvoice, setCurrentInvoice] = useState({
@@ -110,7 +117,31 @@ export default function ReadInvoice({ config }) {
         ghost={false}
         tags={<Tag color="volcano">Draft</Tag>}
         subTitle="This is cuurent invoice page"
-        extra={[<Button key={`${uniqueId()}`}>Download PDF</Button>]}
+        extra={[
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              window.open(
+                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentInvoice._id}.pdf`,
+                "_blank"
+              );
+            }}
+            icon={<FilePdfOutlined />}
+          >
+            Download PDF
+          </Button>,
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              dispatch(invoice.currentAction("update", currentInvoice));
+              updatePanel.open();
+            }}
+            type="primary"
+            icon={<EditOutlined />}
+          >
+            Edit Invoice
+          </Button>,
+        ]}
         style={{
           padding: "20px 0px",
         }}
