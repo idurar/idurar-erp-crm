@@ -5,8 +5,8 @@ import { ErpLayout } from "@/layout";
 import FormPatient from "@/forms/FormPatient";
 import { Table, Tag, Radio, Space } from "antd";
 
-export default function Invoice() {
-  const entity = "invoice";
+export default function Quote() {
+  const entity = "quote";
   const searchConfig = {
     displayLabels: ["name", "surname"],
     searchFields: "name,surname,birthday",
@@ -53,13 +53,13 @@ export default function Invoice() {
     },
   ];
 
-  const panelTitle = "invoice";
-  const dataTableTitle = "invoices Lists";
-  const ADD_NEW_ENTITY = "Add new invoice";
-  const DATATABLE_TITLE = "invoices List";
-  const ENTITY_NAME = "invoice";
-  const CREATE_ENTITY = "Create invoice";
-  const UPDATE_ENTITY = "Update invoice";
+  const panelTitle = "quote";
+  const dataTableTitle = "quotes Lists";
+  const ADD_NEW_ENTITY = "Add new quote";
+  const DATATABLE_TITLE = "quotes List";
+  const ENTITY_NAME = "quote";
+  const CREATE_ENTITY = "Create quote";
+  const UPDATE_ENTITY = "Update quote";
 
   const config = {
     entity,
