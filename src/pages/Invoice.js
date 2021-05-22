@@ -1,7 +1,7 @@
 import React from "react";
 
-import InvoicePanel from "@/components/InvoicePanel";
-import { InvoiceLayout } from "@/layout";
+import ErpPanel from "@/components/ErpPanel";
+import { ErpLayout } from "@/layout";
 import FormPatient from "@/forms/FormPatient";
 import { Table, Tag, Radio, Space } from "antd";
 
@@ -72,14 +72,25 @@ export default function Invoice() {
   ];
   const panelTitle = "invoice";
   const dataTableTitle = "invoices Lists";
+  const ADD_NEW_ENTITY = "Add new invoice";
+  const DATATABLE_TITLE = "invoices List";
+  const ENTITY_NAME = "invoice";
+  const CREATE_ENTITY = "Create invoice";
+  const UPDATE_ENTITY = "Update invoice";
+
   const config = {
     entity,
     panelTitle,
     dataTableTitle,
+    ENTITY_NAME,
+    CREATE_ENTITY,
+    ADD_NEW_ENTITY,
+    UPDATE_ENTITY,
+    DATATABLE_TITLE,
     readColumns,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
-  return <InvoicePanel config={config} />;
+  return <ErpPanel config={config} />;
 }

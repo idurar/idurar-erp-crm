@@ -10,12 +10,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { selectListItems, selectItemById } from "@/redux/crud/selectors";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import uniqueId from "@/utils/uniqueId";
 
 function AddNewItem() {
-  const { uiContextAction } = useUiContext();
-  const { collapsedBox, panel } = uiContextAction;
+  const { crudContextAction } = useCrudContext();
+  const { collapsedBox, panel } = crudContextAction;
   const handelClick = () => {
     panel.open();
     collapsedBox.close();
@@ -29,8 +29,8 @@ function AddNewItem() {
 }
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, modal, readBox } = uiContextAction;
+  const { crudContextAction } = useCrudContext();
+  const { panel, collapsedBox, modal, readBox } = crudContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
     dispatch(crud.currentItem(item));

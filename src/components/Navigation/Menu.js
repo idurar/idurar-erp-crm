@@ -37,7 +37,7 @@ exports.menu = [
     submenu: [
       { slug: "/customer", title: "Client", icon: "accounting" },
       { slug: "/supplier", title: "Fournisseur", icon: "accounting" },
-      { slug: "/invoice", title: "Facture", icon: "accounting" },
+      { slug: "/erp", title: "Facture", icon: "accounting" },
       { slug: "/quote", title: "Devis", icon: "accounting" },
       { slug: "/orderform", title: "Bon de commande", icon: "accounting" },
       { slug: "/clientpayment", title: "Regelement", icon: "accounting" },

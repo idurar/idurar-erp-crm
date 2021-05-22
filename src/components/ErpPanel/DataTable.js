@@ -9,40 +9,41 @@ import {
   FilePdfOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { invoice } from "@/redux/invoice/actions";
-import { selectListItems, selectItemById } from "@/redux/invoice/selectors";
-import { useInvoiceContext } from "@/context/invoice";
+import { erp } from "@/redux/erp/actions";
+import { selectListItems, selectItemById } from "@/redux/erp/selectors";
+import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uniqueId";
 import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
-
-function AddNewItem() {
-  const { invoiceContextAction } = useInvoiceContext();
-  const { createPanel } = invoiceContextAction;
+import { RedoOutlined, PlusOutlined } from "@ant-design/icons";
+function AddNewItem({ config }) {
+  const { ADD_NEW_ENTITY, DATATABLE_TITLE } = config;
+  const { erpContextAction } = useErpContext();
+  const { createPanel } = erpContextAction;
   const handelClick = () => {
     createPanel.open();
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
-      Add new Invoice
+    <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
+      {ADD_NEW_ENTITY}
     </Button>
   );
 }
 function DropDownRowMenu({ row, entity }) {
   const dispatch = useDispatch();
-  const { invoiceContextAction } = useInvoiceContext();
-  const { readPanel, updatePanel, modal } = invoiceContextAction;
+  const { erpContextAction } = useErpContext();
+  const { readPanel, updatePanel, modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
-    dispatch(invoice.currentItem(item));
+    dispatch(erp.currentItem(item));
     readPanel.open();
   };
   function Edit() {
-    dispatch(invoice.currentAction("update", item));
+    dispatch(erp.currentAction("update", item));
     updatePanel.open();
   }
   function Delete() {
-    dispatch(invoice.currentAction("delete", item));
+    dispatch(erp.currentAction("delete", item));
     modal.open();
   }
   function Download() {
@@ -71,6 +72,7 @@ function DropDownRowMenu({ row, entity }) {
 
 export default function DataTable({ config }) {
   let { entity, dataTableColumns } = config;
+  const { DATATABLE_TITLE } = config;
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -95,26 +97,27 @@ export default function DataTable({ config }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    dispatch(invoice.list(entity, pagination.current));
+    dispatch(erp.list(entity, pagination.current));
   }, []);
 
   useEffect(() => {
-    dispatch(invoice.list(entity));
+    dispatch(erp.list(entity));
   }, []);
 
   return (
     <>
       <PageHeader
-        // onBack={() => window.history.back()}
-        title="Invoices List"
+        title={DATATABLE_TITLE}
         ghost={true}
-        // tags={<Tag color="blue">Running</Tag>}
-        // subTitle="This is customer page"
         extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
+          <Button
+            onClick={handelDataTableLoad}
+            key={`${uniqueId()}`}
+            icon={<RedoOutlined />}
+          >
             Refresh
           </Button>,
-          <AddNewItem key={`${uniqueId()}`} />,
+          <AddNewItem config={config} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: "20px 0px",

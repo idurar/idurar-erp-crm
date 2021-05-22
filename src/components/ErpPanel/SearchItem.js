@@ -3,10 +3,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { AutoComplete, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { invoice } from "@/redux/invoice/actions";
+import { erp } from "@/redux/erp/actions";
 import { request } from "@/request";
-import { useInvoiceContext } from "@/context/invoice";
-import { selectSearchedItems } from "@/redux/invoice/selectors";
+import { useErpContext } from "@/context/erp";
+import { selectSearchedItems } from "@/redux/erp/selectors";
 
 import { Empty } from "antd";
 
@@ -18,8 +18,8 @@ export default function Search({ config }) {
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
 
-  const { invoiceContextAction } = useInvoiceContext();
-  const { panel, collapsedBox, readBox } = invoiceContextAction;
+  const { erpContextAction } = useErpContext();
+  const { panel, collapsedBox, readBox } = erpContextAction;
 
   let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
@@ -37,7 +37,7 @@ export default function Search({ config }) {
     delayTimer = setTimeout(function () {
       if (isTyping.current && searchText !== "") {
         dispatch(
-          invoice.search(entity, source, {
+          erp.search(entity, source, {
             question: searchText,
             fields: searchFields,
           })
@@ -52,7 +52,7 @@ export default function Search({ config }) {
       return item[outputValue] === data;
     });
 
-    dispatch(invoice.currentItem(currentItem));
+    dispatch(erp.currentItem(currentItem));
     panel.open();
     collapsedBox.open();
     readBox.open();

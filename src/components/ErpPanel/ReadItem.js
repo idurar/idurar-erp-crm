@@ -10,15 +10,20 @@ import {
   Statistic,
   Tag,
 } from "antd";
-import { EditOutlined, FilePdfOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  FilePdfOutlined,
+  RollbackOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import { invoice } from "@/redux/invoice/actions";
+import { erp } from "@/redux/erp/actions";
 
-import { useInvoiceContext } from "@/context/invoice";
+import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uniqueId";
 
-import { selectCurrentItem, selectItemById } from "@/redux/invoice/selectors";
+import { selectCurrentItem, selectItemById } from "@/redux/erp/selectors";
 
 import { valueByString } from "@/utils/helpers";
 import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
@@ -66,18 +71,18 @@ const Item = ({ item }) => {
   );
 };
 
-export default function ReadInvoice({ config }) {
-  const { entity } = config;
+export default function ReadItem({ config }) {
+  const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
-  const { invoiceContextAction } = useInvoiceContext();
+  const { erpContextAction } = useErpContext();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
-  const { state } = useInvoiceContext();
+  const { state } = useErpContext();
 
-  const { readPanel, updatePanel } = invoiceContextAction;
+  const { readPanel, updatePanel } = erpContextAction;
 
   const [itemslist, setItemsList] = useState([]);
-  const [currentInvoice, setCurrentInvoice] = useState({
+  const [currentErp, setCurrentErp] = useState({
     status: "",
     client: {
       company: "",
@@ -99,7 +104,7 @@ export default function ReadInvoice({ config }) {
       const { items } = currentResult;
 
       setItemsList(items);
-      setCurrentInvoice(currentResult);
+      setCurrentErp(currentResult);
     }
   }, [currentResult]);
 
@@ -111,18 +116,16 @@ export default function ReadInvoice({ config }) {
     <>
       <PageHeader
         onBack={() => readPanel.close()}
-        title={`Invoice # ${currentInvoice.number}/${
-          currentInvoice.year || ""
-        }`}
+        title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ""}`}
         ghost={false}
         tags={<Tag color="volcano">Draft</Tag>}
-        subTitle="This is cuurent invoice page"
+        // subTitle="This is cuurent erp page"
         extra={[
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
               window.open(
-                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentInvoice._id}.pdf`,
+                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
                 "_blank"
               );
             }}
@@ -133,13 +136,13 @@ export default function ReadInvoice({ config }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              dispatch(invoice.currentAction("update", currentInvoice));
+              dispatch(erp.currentAction("update", currentErp));
               updatePanel.open();
             }}
             type="primary"
             icon={<EditOutlined />}
           >
-            Edit Invoice
+            Edit Erp
           </Button>,
         ]}
         style={{
@@ -147,11 +150,11 @@ export default function ReadInvoice({ config }) {
         }}
       >
         <Row>
-          <Statistic title="Status" value={currentInvoice.status} />
+          <Statistic title="Status" value={currentErp.status} />
           <Statistic
             title="SubTotal"
             prefix="$"
-            value={currentInvoice.subTotal}
+            value={currentErp.subTotal}
             style={{
               margin: "0 32px",
             }}
@@ -159,7 +162,7 @@ export default function ReadInvoice({ config }) {
           <Statistic
             title="Total"
             prefix="$"
-            value={currentInvoice.total}
+            value={currentErp.total}
             style={{
               margin: "0 32px",
             }}
@@ -167,7 +170,7 @@ export default function ReadInvoice({ config }) {
           <Statistic
             title="Balance"
             prefix="$"
-            value={currentInvoice.credit}
+            value={currentErp.credit}
             style={{
               margin: "0 32px",
             }}
@@ -175,15 +178,15 @@ export default function ReadInvoice({ config }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`Client : ${currentInvoice.client.company}`}>
+      <Descriptions title={`Client : ${currentErp.client.company}`}>
         <Descriptions.Item label="Address">
-          {currentInvoice.client.address}
+          {currentErp.client.address}
         </Descriptions.Item>
         <Descriptions.Item label="E-mail">
-          {currentInvoice.client.email}
+          {currentErp.client.email}
         </Descriptions.Item>
         <Descriptions.Item label="Phone">
-          {currentInvoice.client.phone}
+          {currentErp.client.phone}
         </Descriptions.Item>
       </Descriptions>
       <Divider />
@@ -241,18 +244,18 @@ export default function ReadInvoice({ config }) {
           <Col className="gutter-row" span={12}>
             <p>
               {`$ `}
-              {currentInvoice.subTotal
+              {currentErp.subTotal
                 .toFixed(2)
                 .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             </p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>Tax Total ({currentInvoice.taxRate * 100} %) :</p>
+            <p>Tax Total ({currentErp.taxRate * 100} %) :</p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>
               {`$ `}
-              {currentInvoice.taxTotal
+              {currentErp.taxTotal
                 .toFixed(2)
                 .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             </p>
@@ -263,7 +266,7 @@ export default function ReadInvoice({ config }) {
           <Col className="gutter-row" span={12}>
             <p>
               {`$ `}
-              {currentInvoice.total
+              {currentErp.total
                 .toFixed(2)
                 .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             </p>

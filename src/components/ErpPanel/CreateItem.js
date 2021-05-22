@@ -4,31 +4,31 @@ import { Form, Divider } from "antd";
 import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
-import { invoice } from "@/redux/invoice/actions";
-import { selectCreatedItem } from "@/redux/invoice/selectors";
+import { erp } from "@/redux/erp/actions";
+import { selectCreatedItem } from "@/redux/erp/selectors";
 
-import { useInvoiceContext } from "@/context/invoice";
+import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uniqueId";
 
-import InvoiceForm from "./InvoiceForm";
+import ErpForm from "./ErpForm";
 import Loading from "@/components/Loading";
-
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 function SaveForm({ form }) {
   const handelClick = () => {
     form.submit();
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
-      Save Invoice
+    <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
+      Save Erp
     </Button>
   );
 }
 
-export default function CreateInvoice({ config }) {
-  let { entity } = config;
-  const { invoiceContextAction } = useInvoiceContext();
-  const { createPanel } = invoiceContextAction;
+export default function CreateItem({ config }) {
+  let { entity, CREATE_ENTITY } = config;
+  const { erpContextAction } = useErpContext();
+  const { createPanel } = erpContextAction;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
@@ -54,7 +54,7 @@ export default function CreateInvoice({ config }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(invoice.resetAction("create"));
+      dispatch(erp.resetAction("create"));
       setSubTotal(0);
       createPanel.close();
     }
@@ -87,18 +87,27 @@ export default function CreateInvoice({ config }) {
         };
       }
     }
-    dispatch(invoice.create(entity, fieldsValue));
+    dispatch(erp.create(entity, fieldsValue));
   };
 
   return (
     <>
       <PageHeader
         onBack={() => createPanel.close()}
-        title="Create Invoice"
+        title={CREATE_ENTITY}
         ghost={false}
         tags={<Tag color="volcano">Draft</Tag>}
-        subTitle="This is create page"
-        extra={[<SaveForm form={form} key={`${uniqueId()}`} />]}
+        // subTitle="This is create page"
+        extra={[
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => createPanel.close()}
+            icon={<CloseCircleOutlined />}
+          >
+            Cancel
+          </Button>,
+          <SaveForm form={form} key={`${uniqueId()}`} />,
+        ]}
         style={{
           padding: "20px 0px",
         }}
@@ -124,7 +133,7 @@ export default function CreateInvoice({ config }) {
           onFinish={onSubmit}
           onValuesChange={handelValuesChange}
         >
-          <InvoiceForm subTotal={subTotal} />
+          <ErpForm subTotal={subTotal} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save

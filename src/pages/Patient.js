@@ -3,7 +3,7 @@ import React from "react";
 import CrudPanel from "@/components/CrudPanel";
 import FormPatient from "@/forms/FormPatient";
 
-export default function Invoice() {
+export default function Erp() {
   const entity = "patient";
   const searchConfig = {
     displayLabels: ["name", "surname"],

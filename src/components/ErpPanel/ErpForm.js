@@ -6,7 +6,7 @@ import SearchBox from "@/components/SearchBox";
 import { PlusOutlined } from "@ant-design/icons";
 import ItemRow from "./ItemRow";
 
-export default function InvoiceForm({
+export default function ErpForm({
   subTotal,
   autoCompleteUpdate = null,
   current = null,
@@ -60,7 +60,7 @@ export default function InvoiceForm({
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="Invoice Number"
+            label="Erp Number"
             name="number"
             rules={[
               {
@@ -110,7 +110,7 @@ export default function InvoiceForm({
         </Col>
         <Col className="gutter-row" span={9}>
           <Form.Item
-            label="Invoice Note"
+            label="Erp Note"
             name="note"
             rules={[
               {
@@ -125,7 +125,7 @@ export default function InvoiceForm({
         <Col className="gutter-row" span={8}>
           <Form.Item
             name="date"
-            label="Invoice Date"
+            label="Erp Date"
             rules={[
               {
                 required: false,
@@ -139,7 +139,7 @@ export default function InvoiceForm({
         <Col className="gutter-row" span={7}>
           <Form.Item
             name="expiredDate"
-            label="Invoice Expire Date"
+            label="Erp Expire Date"
             rules={[
               {
                 required: false,

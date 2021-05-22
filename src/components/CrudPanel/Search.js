@@ -5,7 +5,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { request } from "@/request";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import { selectSearchedItems } from "@/redux/crud/selectors";
 
 import { Empty } from "antd";
@@ -18,8 +18,8 @@ export default function Search({ config }) {
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
 
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, readBox } = uiContextAction;
+  const { crudContextAction } = useCrudContext();
+  const { panel, collapsedBox, readBox } = crudContextAction;
 
   let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);

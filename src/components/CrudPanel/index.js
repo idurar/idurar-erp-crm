@@ -10,7 +10,7 @@ import Search from "./Search";
 
 import { useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 
 import { CrudLayout } from "@/layout";
 
@@ -24,8 +24,8 @@ function SidePanelTopContent({ config, formElements }) {
 }
 
 function FixHeaderPanel({ config }) {
-  const { uiContextAction } = useUiContext();
-  const { collapsedBox } = uiContextAction;
+  const { crudContextAction } = useCrudContext();
+  const { collapsedBox } = crudContextAction;
 
   const addNewItem = () => {
     collapsedBox.close();

@@ -1,7 +1,7 @@
 import * as actionTypes from "./types";
 import { request } from "@/request";
 
-export const invoice = {
+export const erp = {
   resetState: () => async (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,

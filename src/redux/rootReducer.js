@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
 
 import { reducer as authReducer } from "./auth";
-import { reducer as uiReducer } from "./ui";
 import { reducer as crudReducer } from "./crud";
-import { reducer as invoiceReducer } from "./invoice";
+import { reducer as erpReducer } from "./erp";
 import { reducer as notifyReducer } from "./notify";
 import { reducer as searchReducer } from "./search";
 
@@ -13,10 +12,9 @@ import * as actionTypes from "./auth/types";
 
 const appReducer = combineReducers({
   auth: authReducer,
-  ui: uiReducer,
   notify: notifyReducer,
   crud: crudReducer,
-  invoice: invoiceReducer,
+  erp: erpReducer,
   search: searchReducer,
 });
 

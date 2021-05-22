@@ -4,13 +4,14 @@ import dayjs from "dayjs";
 import { Button, PageHeader, Row, Statistic, Tag } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
-import { invoice } from "@/redux/invoice/actions";
+import { erp } from "@/redux/erp/actions";
 
-import { useInvoiceContext } from "@/context/invoice";
+import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uniqueId";
-import { selectUpdatedItem } from "@/redux/invoice/selectors";
+import { selectUpdatedItem } from "@/redux/erp/selectors";
 import Loading from "@/components/Loading";
-import InvoiceForm from "./InvoiceForm";
+import ErpForm from "./ErpForm";
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 function SaveForm({ form }) {
   const handelClick = () => {
@@ -18,16 +19,16 @@ function SaveForm({ form }) {
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
-      Save Invoice
+    <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
+      Save Erp
     </Button>
   );
 }
 
-export default function UpdateInvoice({ config }) {
-  let { entity } = config;
-  const { invoiceContextAction } = useInvoiceContext();
-  const { updatePanel } = invoiceContextAction;
+export default function UpdateItem({ config }) {
+  let { entity, UPDATE_ENTITY } = config;
+  const { erpContextAction } = useErpContext();
+  const { updatePanel } = erpContextAction;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
@@ -80,13 +81,13 @@ export default function UpdateInvoice({ config }) {
 
     const id = current._id;
 
-    dispatch(invoice.update(entity, id, fieldsValue));
+    dispatch(erp.update(entity, id, fieldsValue));
   };
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
       setSubTotal(0);
-      dispatch(invoice.resetAction("update"));
+      dispatch(erp.resetAction("update"));
       updatePanel.close();
     }
   }, [isSuccess]);
@@ -120,11 +121,20 @@ export default function UpdateInvoice({ config }) {
     <>
       <PageHeader
         onBack={() => updatePanel.close()}
-        title="Update Invoice"
+        title={UPDATE_ENTITY}
         ghost={false}
         tags={<Tag color="volcano">Draft</Tag>}
         subTitle="This is update page"
-        extra={[<SaveForm form={form} key={`${uniqueId()}`} />]}
+        extra={[
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => updatePanel.close()}
+            icon={<CloseCircleOutlined />}
+          >
+            Cancel
+          </Button>,
+          <SaveForm form={form} key={`${uniqueId()}`} />,
+        ]}
         style={{
           padding: "20px 0px",
         }}
@@ -150,7 +160,7 @@ export default function UpdateInvoice({ config }) {
           onFinish={onSubmit}
           onValuesChange={handelValuesChange}
         >
-          <InvoiceForm
+          <ErpForm
             subTotal={subTotal}
             autoCompleteUpdate={autoCompleteValue}
             current={current}

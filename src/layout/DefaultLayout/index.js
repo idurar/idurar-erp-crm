@@ -1,9 +1,9 @@
 import React from "react";
 
-import { UiContextProvider } from "@/context/ui";
+import { CrudContextProvider } from "@/context/crud";
 
 function DefaultLayout({ children }) {
-  return <UiContextProvider>{children}</UiContextProvider>;
+  return <CrudContextProvider>{children}</CrudContextProvider>;
 }
 
 export default DefaultLayout;
