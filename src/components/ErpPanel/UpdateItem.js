@@ -89,6 +89,7 @@ export default function UpdateItem({ config }) {
       setSubTotal(0);
       dispatch(erp.resetAction("update"));
       updatePanel.close();
+      dispatch(erp.list(entity));
     }
   }, [isSuccess]);
 

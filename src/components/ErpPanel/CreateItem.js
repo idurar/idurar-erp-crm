@@ -57,6 +57,7 @@ export default function CreateItem({ config }) {
       dispatch(erp.resetAction("create"));
       setSubTotal(0);
       createPanel.close();
+      dispatch(erp.list(entity));
     }
   }, [isSuccess]);
 

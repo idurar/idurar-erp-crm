@@ -41,6 +41,7 @@ export default function Create({ config, formElements }) {
       panel.open();
       form.resetFields();
       dispatch(crud.resetAction("create"));
+      dispatch(crud.list(entity));
     }
   }, [isSuccess]);
 

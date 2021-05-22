@@ -58,6 +58,7 @@ export default function Update({ config, formElements }) {
       panel.open();
       form.resetFields();
       dispatch(crud.resetAction("update"));
+      dispatch(crud.list(entity));
     }
   }, [isSuccess]);
 

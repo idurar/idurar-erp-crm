@@ -73,6 +73,7 @@ export const crud = {
         keyState: "create",
         payload: data.result,
       });
+
       dispatch({
         type: actionTypes.CURRENT_ITEM,
         payload: data.result,

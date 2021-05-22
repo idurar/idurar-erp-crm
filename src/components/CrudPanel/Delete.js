@@ -22,7 +22,10 @@ export default function Delete({ config }) {
   const [displayItem, setDisplayItem] = useState("");
 
   useEffect(() => {
-    if (isSuccess) modal.close();
+    if (isSuccess) {
+      modal.close();
+      dispatch(crud.list(entity));
+    }
     if (current) {
       let labels = entityDisplayLabels
         .map((x) => valueByString(current, x))
