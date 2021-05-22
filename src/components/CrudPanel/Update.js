@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import { selectUpdatedItem } from "@/redux/crud/selectors";
 
 import { Button, Form } from "antd";
@@ -13,8 +13,8 @@ export default function Update({ config, formElements }) {
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
-  const { state, uiContextAction } = useUiContext();
-  const { panel, collapsedBox, readBox } = uiContextAction;
+  const { state, crudContextAction } = useCrudContext();
+  const { panel, collapsedBox, readBox } = crudContextAction;
 
   const [form] = Form.useForm();
 

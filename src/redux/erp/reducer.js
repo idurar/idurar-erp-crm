@@ -49,7 +49,7 @@ const INITIAL_STATE = {
   },
 };
 
-const invoiceReducer = (state = INITIAL_STATE, action) => {
+const erpReducer = (state = INITIAL_STATE, action) => {
   const { payload, keyState } = action;
   switch (action.type) {
     case actionTypes.RESET_STATE:
@@ -107,4 +107,4 @@ const invoiceReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default invoiceReducer;
+export default erpReducer;

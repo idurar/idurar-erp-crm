@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import { Layout } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import CollapseBox from "../CollapseBox";
@@ -12,9 +12,9 @@ export default function SidePanel({
   bottomContent,
   fixHeaderPanel,
 }) {
-  const { state, uiContextAction } = useUiContext();
+  const { state, crudContextAction } = useCrudContext();
   const { isPanelCollapsed, isBoxCollapsed } = state;
-  const { panel, collapsedBox } = uiContextAction;
+  const { panel, collapsedBox } = crudContextAction;
   const [styleSider, setStyleSider] = useState("0px");
   const [opacitySider, setOpacitySider] = useState("1");
 

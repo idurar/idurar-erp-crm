@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import { selectCreatedItem } from "@/redux/crud/selectors";
 
 import { Button, Form } from "antd";
@@ -12,8 +12,8 @@ export default function Create({ config, formElements }) {
   let { entity } = config;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
-  const { uiContextAction } = useUiContext();
-  const { panel, collapsedBox, readBox } = uiContextAction;
+  const { crudContextAction } = useCrudContext();
+  const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {

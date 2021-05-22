@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Row, Col, Button } from "antd";
 import { useSelector } from "react-redux";
 
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import { selectCurrentItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
 export default function Read({ config }) {
   let { readColumns } = config;
   const { result: currentResult } = useSelector(selectCurrentItem);
-  const { state } = useUiContext();
+  const { state } = useCrudContext();
   const { isReadBoxOpen } = state;
   const [listState, setListState] = useState([]);
 

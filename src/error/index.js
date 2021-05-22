@@ -7,7 +7,7 @@ export default function ErrorFallback({ error }) {
     </div>
   );
 }
-const ui = (
+const crud = (
   <ErrorBoundary
     fallbackRender={({ error, resetErrorBoundary }) => (
       <div role="alert">

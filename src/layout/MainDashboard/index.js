@@ -1,5 +1,5 @@
 import React from "react";
-import { UiContextProvider } from "@/context/ui";
+import { CrudContextProvider } from "@/context/crud";
 
 import Navigation from "@/components/Navigation";
 
@@ -9,7 +9,7 @@ function MainDashboard({ children }) {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Navigation />
-      <UiContextProvider>{children}</UiContextProvider>
+      <CrudContextProvider>{children}</CrudContextProvider>
     </Layout>
   );
 }

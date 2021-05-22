@@ -1,15 +1,15 @@
 import React from "react";
 
-import InvoiceContextLayout from "../InvoiceContextLayout";
+import ErpContextLayout from "../ErpContextLayout";
 import HeaderContent from "../HeaderContent";
 
 import { Layout } from "antd";
 
 const { Content } = Layout;
 
-export default function InvoiceLayout({ children, config }) {
+export default function ErpLayout({ children, config }) {
   return (
-    <InvoiceContextLayout>
+    <ErpContextLayout>
       <Layout className="site-layout">
         <HeaderContent />
         <Content
@@ -24,6 +24,6 @@ export default function InvoiceLayout({ children, config }) {
           {children}
         </Content>
       </Layout>
-    </InvoiceContextLayout>
+    </ErpContextLayout>
   );
 }

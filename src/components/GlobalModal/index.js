@@ -1,11 +1,11 @@
 import React from "react";
 import { Modal } from "antd";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 
 export default function GlobalModal({ children }) {
-  const { state, uiContextAction } = useUiContext();
+  const { state, crudContextAction } = useCrudContext();
   const { isModalOpen } = state;
-  const { modal } = uiContextAction;
+  const { modal } = crudContextAction;
 
   const handleOk = () => {
     modal.close();

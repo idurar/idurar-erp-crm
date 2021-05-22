@@ -3,7 +3,7 @@ import { Modal } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
-import { useUiContext } from "@/context/ui";
+import { useCrudContext } from "@/context/crud";
 import { selectDeletedItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
@@ -16,9 +16,9 @@ export default function Delete({ config }) {
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
-  const { state, uiContextAction } = useUiContext();
+  const { state, crudContextAction } = useCrudContext();
   const { isModalOpen } = state;
-  const { modal } = uiContextAction;
+  const { modal } = crudContextAction;
   const [displayItem, setDisplayItem] = useState("");
 
   useEffect(() => {

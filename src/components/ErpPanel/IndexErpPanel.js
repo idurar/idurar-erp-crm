@@ -1,19 +1,17 @@
 import React, { useLayoutEffect } from "react";
 
-import { Row, Col, Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import DataTable from "./DataTable";
-import CreateInvoice from "./CreateInvoice";
+import CreateItem from "./CreateItem";
 import { useSearchBox } from "@/components/SearchBox";
-import UpdateInvoice from "./UpdateInvoice";
-import Delete from "./DeleteInvoice";
-import ReadInvoice from "./ReadInvoice";
-import Search from "./SearchInvoice";
+import UpdateItem from "./UpdateItem";
+import Delete from "./DeleteItem";
+import ReadItem from "./ReadItem";
+import Search from "./SearchItem";
 
 import { useDispatch } from "react-redux";
-import { invoice } from "@/redux/invoice/actions";
+import { erp } from "@/redux/erp/actions";
 import { search } from "@/redux/search/actions";
-import { useInvoiceContext } from "@/context/invoice";
+import { useErpContext } from "@/context/erp";
 
 const Visibility = ({ isVisible, children }) => {
   const show = isVisible
@@ -22,13 +20,12 @@ const Visibility = ({ isVisible, children }) => {
   return <div style={show}>{children}</div>;
 };
 
-export default function IndexInvoicePanel({ config }) {
+export default function IndexErpPanel({ config }) {
   const dispatch = useDispatch();
-  const { selected } = useSearchBox("client");
-  const { state } = useInvoiceContext();
+  const { state } = useErpContext();
   const { update, read, create, listDataTable, deleteModal } = state;
   useLayoutEffect(() => {
-    dispatch(invoice.resetState());
+    dispatch(erp.resetState());
     dispatch(search.resetState());
     dispatch(search.init(["client"]));
   }, []);
@@ -39,13 +36,13 @@ export default function IndexInvoicePanel({ config }) {
         <DataTable config={config} />
       </Visibility>
       <Visibility isVisible={read.isOpen}>
-        <ReadInvoice config={config} />
+        <ReadItem config={config} />
       </Visibility>
       <Visibility isVisible={update.isOpen}>
-        <UpdateInvoice config={config} />
+        <UpdateItem config={config} />
       </Visibility>
       <Visibility isVisible={create.isOpen}>
-        <CreateInvoice config={config} />
+        <CreateItem config={config} />
       </Visibility>
 
       <Delete config={config} isVisible={deleteModal.isOpen} />
