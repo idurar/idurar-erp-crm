@@ -105,6 +105,7 @@ const LoginPage = () => {
                   </Form.Item>
                 </Form>
               </div>
+          
             </Content>
           </Col>
         </Row>
