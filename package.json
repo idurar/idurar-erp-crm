@@ -59,6 +59,7 @@
   "devDependencies": {
     "@craco/craco": "^6.1.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@testing-library/react-hooks": "^7.0.0",
     "craco-less": "^1.17.1",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.1.0",
@@ -70,11 +71,16 @@
     "eslint-plugin-testing-library": "^4.6.0",
     "prettier": "2.2.1",
     "react-reconciler": "^0.26.2",
-    "react-refresh": "^0.10.0"
+    "react-refresh": "^0.10.0",
+    "redux-mock-store": "^1.5.4",
+    "redux-testkit": "^1.0.6"
   },
   "jest": {
     "transformIgnorePatterns": [
       "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/src/$1"
+    }
   }
 }

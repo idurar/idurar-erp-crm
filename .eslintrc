@@ -4,6 +4,7 @@
         "testing-library","jest-dom"
     ],
     "rules": {
+        "import/prefer-default-export": "off",
         "testing-library/await-async-query": "error",
         "testing-library/no-await-sync-query": "error",
         "testing-library/no-debug": "warn",
@@ -12,6 +13,7 @@
         "jest-dom/prefer-enabled-disabled": "error",
         "jest-dom/prefer-required": "error",
         "jest-dom/prefer-to-have-attribute": "error"
+        
     },
     "extends": [
     "plugin:testing-library/react"

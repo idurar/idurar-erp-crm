@@ -6,47 +6,66 @@ import history from "@/utils/history";
 import store from "@/redux/store";
 import { notification, Layout } from "antd";
 import Navigation from "@/components/Navigation";
+import { Button, Result } from "antd";
 import * as authService from "@/auth";
-import {} from "antd";
+import useNetwork from "./useNetwork";
 
 function App() {
-  const [isConnected, setNetwork] = useState(true);
+  // const [isOnline, setNetwork] = useState(true);
 
-  notification.config({
-    duration: 30,
-  });
+  // notification.config({
+  //   duration: 30,
+  // });
 
-  window.ononline = (event) => {
-    setNetwork(true);
-  };
+  // window.ononline = (event) => {
+  //   setNetwork(true);
+  // };
 
-  window.onoffline = (event) => {
-    setNetwork(false);
-  };
+  // window.onoffline = (event) => {
+  //   setNetwork(false);
+  // };
 
-  useEffect(() => {
-    if (isConnected) {
-      console.log("network is Connected ");
-    } else {
-      notification.error({
-        message: "No internet connection",
-        description:
-          "Cannot connect to the server, Check your internet network",
-      });
-    }
-  }, [isConnected]);
-  return (
-    <RouterHistory history={history}>
-      <Provider store={store}>
-        <Layout style={{ minHeight: "100vh" }}>
-          {authService.token.get() ? <Navigation /> : ""}
+  // useEffect(() => {
+  //   if (isOnline) {
+  //     console.log("network is Connected ");
+  //   } else {
+  //     notification.error({
+  //       message: "No internet connection",
+  //       description:
+  //         "Cannot connect to the server, Check your internet network",
+  //     });
+  //   }
+  // }, [isOnline]);
+  const { isOnline } = useNetwork();
+
+  if (!isOnline)
+    return (
+      <>
+        <Result
+          status="404"
+          title="No Internet Connection"
+          subTitle="Check your Internet Connection or your network."
+          extra={
+            <Button href="/" type="primary">
+              Try Again
+            </Button>
+          }
+        />
+      </>
+    );
+  else
+    return (
+      <RouterHistory history={history}>
+        <Provider store={store}>
           <Layout style={{ minHeight: "100vh" }}>
-            <Router />
+            {authService.token.get() ? <Navigation /> : ""}
+            <Layout style={{ minHeight: "100vh" }}>
+              <Router />
+            </Layout>
           </Layout>
-        </Layout>
-      </Provider>
-    </RouterHistory>
-  );
+        </Provider>
+      </RouterHistory>
+    );
 }
 
 export default App;
