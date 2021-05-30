@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Radio, Select, Switch } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/Antd";
+import { DatePicker, TimePicker, Calendar } from "@/components/CustomAntd";
 
 export default function FormPatient() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "antd";
 import { Input, Form, Checkbox, Select } from "antd";
-import { DatePicker } from "@/components/Antd";
+import { DatePicker } from "@/components/CustomAntd";
 // mapping of our components
 const componentMapping = {
   input: Input,
