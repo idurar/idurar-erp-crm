@@ -9,7 +9,9 @@ const headersInstance = { [ACCESS_TOKEN_NAME]: tokenCookies.get() };
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
-  headers: headersInstance,
+  headers: {
+    ...headersInstance,
+  },
 });
 // let isConnected = true;
 // window.onoffline = (event) => {
@@ -18,7 +20,9 @@ const axiosInstance = axios.create({
 
 const request = {
   create: async (entity, jsonData) => {
-    // axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     console.log("jsonData", jsonData);
     try {
       const response = await axiosInstance.post(entity + "/create", jsonData);
@@ -28,7 +32,9 @@ const request = {
     }
   },
   read: async (entity, id) => {
-    axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     try {
       const response = await axiosInstance.get(entity + "/read/" + id);
       return successHandler(response);
@@ -37,7 +43,9 @@ const request = {
     }
   },
   update: async (entity, id, jsonData) => {
-    axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     try {
       const response = await axiosInstance.patch(
         entity + "/update/" + id,
@@ -50,7 +58,9 @@ const request = {
   },
 
   delete: async (entity, id, option = {}) => {
-    axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     try {
       const response = await axiosInstance.delete(entity + "/delete/" + id);
       return successHandler(response);
@@ -60,7 +70,9 @@ const request = {
   },
 
   filter: async (entity, option = {}) => {
-    axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     try {
       let filter = option.filter ? "filter=" + option.filter : "";
       let equal = option.equal ? "&equal=" + option.equal : "";
@@ -116,7 +128,9 @@ const request = {
   },
 
   post: async (entityUrl, jsonData, option = {}) => {
-    axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     try {
       const response = await axiosInstance.post(entityUrl, jsonData);
       return successHandler(response);
@@ -125,7 +139,9 @@ const request = {
     }
   },
   get: async (entityUrl, option = {}) => {
-    axiosInstance.defaults.headers = headersInstance;
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
     try {
       const response = await axiosInstance.get(entityUrl);
       return successHandler(response);
