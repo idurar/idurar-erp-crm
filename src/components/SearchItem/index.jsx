@@ -10,7 +10,7 @@ import { selectSearchedItems } from "@/redux/crud/selectors";
 
 import { Empty } from "antd";
 
-export default function Search({ config }) {
+export default function SearchItem({ config }) {
   let { entity, searchConfig } = config;
 
   const { displayLabels, searchFields, outputValue = "_id" } = searchConfig;

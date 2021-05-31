@@ -8,7 +8,7 @@ import { request } from "@/request";
 
 import { searchState } from "@/redux/search/selectors";
 
-export const useSearchBox = (keyRef) => {
+export const useSearchField = (keyRef) => {
   let state = useSelector(searchState);
   let [currentState, setCurrentState] = useState({
     result: [],
@@ -23,7 +23,7 @@ export const useSearchBox = (keyRef) => {
   return currentState;
 };
 
-export default function SearchBox({
+export default function SearchField({
   entity,
   keyRef,
   displayLabels,
@@ -40,7 +40,7 @@ export default function SearchBox({
 
   let source = request.source();
 
-  let { result, isLoading, isSuccess } = useSearchBox(keyRef);
+  let { result, isLoading, isSuccess } = useSearchField(keyRef);
   const isTyping = useRef(false);
 
   let delayTimer = null;
