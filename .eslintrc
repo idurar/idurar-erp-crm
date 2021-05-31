@@ -1,14 +1,10 @@
 
 {
-    // "parserOptions": {
-    //     "sourceType": "module",
-    //     "ecmaVersion": 11
-    // },
     "plugins": [
         "testing-library","jest-dom"
     ],
     "rules": {
-        "import/prefer-default-export": "off",
+        
         "testing-library/await-async-query": "error",
         "testing-library/no-await-sync-query": "error",
         "testing-library/no-debug": "warn",
@@ -19,7 +15,8 @@
         "jest-dom/prefer-to-have-attribute": "error"
         
     },
+   "parser": "babel-eslint",
     "extends": [
-    "plugin:testing-library/react"
+        "plugin:testing-library/react"
     ]
 }
