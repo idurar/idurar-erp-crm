@@ -29,9 +29,9 @@ export function get(obj, key) {
 Object.byString = function (o, s) {
   s = s.replace(/\[(\w+)\]/g, ".$1"); // convert indexes to properties
   s = s.replace(/^\./, ""); // strip a leading dot
-  var a = s.split(".");
-  for (var i = 0, n = a.length; i < n; ++i) {
-    var k = a[i];
+  let a = s.split(".");
+  for (let i = 0, n = a.length; i < n; ++i) {
+    let k = a[i];
     if (o !== null) {
       if (k in o) {
         o = o[k];
@@ -77,7 +77,7 @@ export function valueByString(obj, string, devider) {
  Submit multi-part form using ajax.
 */
 export function toFormData(form) {
-  var formData = new FormData();
+  let formData = new FormData();
   const elements = form.querySelectorAll("input, select, textarea");
   for (let i = 0; i < elements.length; ++i) {
     const element = elements[i];

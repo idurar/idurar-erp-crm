@@ -3,9 +3,6 @@ const path = require("path");
 const CracoAlias = require("craco-alias");
 
 module.exports = {
-  plugins: [],
-};
-module.exports = {
   plugins: [
     {
       plugin: CracoAlias,
@@ -14,7 +11,6 @@ module.exports = {
         baseUrl: "./",
         aliases: {
           "@": "./src",
-          // "@": "./",
         },
       },
     },
