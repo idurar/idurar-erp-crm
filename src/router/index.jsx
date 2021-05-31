@@ -8,9 +8,8 @@ import PageLoader from "@/components/PageLoader";
 const Dashboard = lazy(() =>
   import(/*webpackChunkName:'DashboardPage'*/ "@/pages/Dashboard")
 );
-const Patient = lazy(() =>
-  import(/*webpackChunkName:'PatientPage'*/ "@/pages/Patient")
-);
+const User = lazy(() => import(/*webpackChunkName:'UserPage'*/ "@/pages/User"));
+
 const Customer = lazy(() =>
   import(/*webpackChunkName:'CustomerPage'*/ "@/pages/Customer")
 );
@@ -38,7 +37,7 @@ function Router() {
         <Switch location={location} key={location.pathname}>
           <PrivateRoute path="/" component={Dashboard} exact />
           <PrivateRoute component={Customer} path="/customer" exact />
-          <PrivateRoute component={Patient} path="/patient" exact />
+          <PrivateRoute component={User} path="/user" exact />
           <PrivateRoute component={Invoice} path="/invoice" exact />
           <PrivateRoute component={Quote} path="/quote" exact />
           <PrivateRoute component={Logout} path="/logout" exact />
