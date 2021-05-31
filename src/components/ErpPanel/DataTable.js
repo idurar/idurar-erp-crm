@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { erp } from "@/redux/erp/actions";
 import { selectListItems, selectItemById } from "@/redux/erp/selectors";
 import { useErpContext } from "@/context/erp";
-import uniqueId from "@/utils/asdasd";
+import uniqueId from "@/utils/uinqueId";
 import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
 import { RedoOutlined, PlusOutlined } from "@ant-design/icons";
 function AddNewItem({ config }) {

@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { selectListItems, selectItemById } from "@/redux/crud/selectors";
 import { useCrudContext } from "@/context/crud";
-import uniqueId from "@/utils/asdasd";
+import uniqueId from "@/utils/uinqueId";
 
 function AddNewItem() {
   const { crudContextAction } = useCrudContext();
