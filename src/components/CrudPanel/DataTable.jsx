@@ -13,9 +13,10 @@ import { selectListItems, selectItemById } from "@/redux/crud/selectors";
 import { useCrudContext } from "@/context/crud";
 import uniqueId from "@/utils/uinqueId";
 
-function AddNewItem() {
+function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
   const { collapsedBox, panel } = crudContextAction;
+  const { ADD_NEW_ENTITY } = config;
   const handelClick = () => {
     panel.open();
     collapsedBox.close();
@@ -23,7 +24,7 @@ function AddNewItem() {
 
   return (
     <Button onClick={handelClick} type="primary">
-      Add new Customer
+      {ADD_NEW_ENTITY}
     </Button>
   );
 }
@@ -64,7 +65,7 @@ function DropDownRowMenu({ row }) {
 }
 
 export default function DataTable({ config }) {
-  let { entity, dataTableColumns } = config;
+  let { entity, dataTableColumns, dataTableTitle } = config;
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -97,33 +98,18 @@ export default function DataTable({ config }) {
     <>
       <PageHeader
         onBack={() => window.history.back()}
-        title="Customer Page"
+        title={dataTableTitle}
         ghost={false}
-        tags={<Tag color="blue">Running</Tag>}
-        subTitle="This is customer page"
         extra={[
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
             Refresh
           </Button>,
-          <AddNewItem key={`${uniqueId()}`} />,
+          <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}
         style={{
           padding: "20px 0px",
         }}
-      >
-        {/* <Row>
-          <Statistic title="Status" value="Pending" />
-          <Statistic
-            title="Price"
-            prefix="$"
-            value={568.08}
-            style={{
-              margin: "0 32px",
-            }}
-          />
-          <Statistic title="Balance" prefix="$" value={3345.08} />
-        </Row> */}
-      </PageHeader>
+      ></PageHeader>
       <Table
         columns={dataTableColumns}
         rowKey={(item) => item._id}

@@ -1,7 +1,7 @@
 import React from "react";
 
 import CrudPanel from "@/components/CrudPanel";
-import FormCustomer from "@/forms/FormCustomer";
+import CustomerForm from "@/forms/CustomerForm";
 
 function Customer() {
   const entity = "client";
@@ -56,10 +56,20 @@ function Customer() {
     },
   ];
 
+  const ADD_NEW_ENTITY = "Add new customer";
+  const DATATABLE_TITLE = "customers List";
+  const ENTITY_NAME = "customer";
+  const CREATE_ENTITY = "Create customer";
+  const UPDATE_ENTITY = "Update customer";
   const config = {
     entity,
     panelTitle,
     dataTableTitle,
+    ENTITY_NAME,
+    CREATE_ENTITY,
+    ADD_NEW_ENTITY,
+    UPDATE_ENTITY,
+    DATATABLE_TITLE,
     readColumns,
     dataTableColumns,
     searchConfig,
@@ -69,7 +79,7 @@ function Customer() {
     <CrudPanel
       entity={entity}
       dataTableColumns={dataTableColumns}
-      createForm={<FormCustomer />}
+      createForm={<CustomerForm />}
       readColumns={readColumns}
       searchConfig={searchConfig}
       config={config}

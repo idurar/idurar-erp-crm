@@ -2,7 +2,7 @@ import React from "react";
 
 import ErpPanel from "@/components/ErpPanel";
 import { ErpLayout } from "@/layout";
-import FormPatient from "@/forms/FormPatient";
+import PatientForm from "@/forms/PatientForm";
 import { Table, Tag, Radio, Space } from "antd";
 
 export default function Invoice() {

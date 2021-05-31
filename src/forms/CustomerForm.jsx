@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 
-export default function FormCustomer() {
+export default function CustomerForm() {
   return (
     <>
       <Form.Item
