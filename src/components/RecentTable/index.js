@@ -1,6 +1,6 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Dropdown, Menu, Table } from "antd";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { request } from "@/request";
 
 import {
@@ -9,16 +9,8 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { selectListItems, selectItemById } from "@/redux/crud/selectors";
-import { useCrudContext } from "@/context/crud";
-import uniqueId from "@/utils/uinqueId";
 
 function DropDownRowMenu({ row }) {
-  //   const dispatch = useDispatch();
-
-  //   const item = useSelector(selectItemById(row._id));
   const Show = () => {};
   function Edit() {}
   function Delete() {}
