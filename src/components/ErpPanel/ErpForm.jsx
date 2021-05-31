@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, Input, InputNumber, Button, Select, Divider, Space } from "antd";
 import { DatePicker } from "@/components/CustomAntd";
 import { Row, Col } from "antd";
-import SearchBox from "@/components/SearchBox";
+import SearchField from "@/components/SearchField";
 import { PlusOutlined } from "@ant-design/icons";
 import ItemRow from "./ItemRow";
 
@@ -49,7 +49,7 @@ export default function ErpForm({
               },
             ]}
           >
-            <SearchBox
+            <SearchField
               entity={"client"}
               keyRef={"client"}
               displayLabels={["company"]}

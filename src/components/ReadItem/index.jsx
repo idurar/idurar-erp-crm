@@ -6,7 +6,7 @@ import { useCrudContext } from "@/context/crud";
 import { selectCurrentItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
-export default function Read({ config }) {
+export default function ReadItem({ config }) {
   let { readColumns } = config;
   const { result: currentResult } = useSelector(selectCurrentItem);
   const { state } = useCrudContext();

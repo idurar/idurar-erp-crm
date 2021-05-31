@@ -8,7 +8,7 @@ import { selectCreatedItem } from "@/redux/crud/selectors";
 import { Button, Form } from "antd";
 import Loading from "@/components/Loading";
 
-export default function Create({ config, formElements }) {
+export default function CreateForm({ config, formElements }) {
   let { entity } = config;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);

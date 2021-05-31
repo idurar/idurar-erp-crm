@@ -1,12 +1,12 @@
 import React, { useLayoutEffect } from "react";
 import { Row, Col, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import DataTable from "./DataTable";
-import Create from "./Create";
-import Update from "./Update";
-import Delete from "./Delete";
-import Read from "./Read";
-import Search from "./Search";
+import DataTable from "@/components/DataTable";
+import CreateForm from "@/components/CreateForm";
+import UpdateForm from "@/components/UpdateForm";
+import DeleteModal from "@/components/DeleteModal";
+import ReadItem from "@/components/ReadItem";
+import SearchItem from "@/components/SearchItem";
 
 import { useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
@@ -17,8 +17,8 @@ import { CrudLayout } from "@/layout";
 function SidePanelTopContent({ config, formElements }) {
   return (
     <>
-      <Read config={config} />
-      <Update config={config} formElements={formElements} />
+      <ReadItem config={config} />
+      <UpdateForm config={config} formElements={formElements} />
     </>
   );
 }
@@ -41,7 +41,7 @@ function FixHeaderPanel({ config }) {
       </Row>
       <Row gutter={8}>
         <Col className="gutter-row" span={21}>
-          <Search config={config} />
+          <SearchItem config={config} />
         </Col>
         <Col className="gutter-row" span={3}>
           <Button
@@ -69,14 +69,14 @@ function CrudPanel({ config, createForm, updateForm }) {
       config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
       sidePanelBottomContent={
-        <Create config={config} formElements={createForm} />
+        <CreateForm config={config} formElements={createForm} />
       }
       sidePanelTopContent={
         <SidePanelTopContent config={config} formElements={form} />
       }
     >
       <DataTable config={config} />
-      <Delete config={config} />
+      <DeleteModal config={config} />
     </CrudLayout>
   );
 }

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { useCrudContext } from "@/context/crud";
 import userEvent from "@testing-library/user-event";
-import Read from "./Read";
+import ReadItem from "./index";
 import { renderHook } from "@testing-library/react-hooks";
 
 const middlewares = [thunk]; // add your middlewares like `redux-thunk`
@@ -81,7 +81,7 @@ describe("Test Read", () => {
     const { debug } = render(
       <Provider store={store}>
         <CrudContextProvider>
-          <Read config={config} />
+          <ReadItem config={config} />
         </CrudContextProvider>
       </Provider>
     );

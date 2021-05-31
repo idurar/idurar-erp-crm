@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 
 import DataTable from "./DataTable";
 import CreateItem from "./CreateItem";
-import { useSearchBox } from "@/components/SearchBox";
+import { useSearchField } from "@/components/SearchField";
 import UpdateItem from "./UpdateItem";
 import Delete from "./DeleteItem";
 import ReadItem from "./ReadItem";

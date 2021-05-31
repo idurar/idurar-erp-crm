@@ -7,7 +7,7 @@ import { useCrudContext } from "@/context/crud";
 import { selectDeletedItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
-export default function Delete({ config }) {
+export default function DeleteModal({ config }) {
   let {
     entity,
     entityDisplayLabels,
