@@ -1,5 +1,9 @@
 
 {
+    // "parserOptions": {
+    //     "sourceType": "module",
+    //     "ecmaVersion": 11
+    // },
     "plugins": [
         "testing-library","jest-dom"
     ],

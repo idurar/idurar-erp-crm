@@ -60,6 +60,7 @@
     "@craco/craco": "^6.1.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@testing-library/react-hooks": "^7.0.0",
+    "craco-alias": "^3.0.1",
     "craco-less": "^1.17.1",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.1.0",
