@@ -30,7 +30,10 @@ export default function UserForm() {
           },
         ]}
       >
-        <SelectAsync entity={"role"}></SelectAsync>
+        <SelectAsync
+          entity={"role"}
+          displayLabels={["displayName"]}
+        ></SelectAsync>
       </Form.Item>
       <Form.Item
         label="E-mail"
