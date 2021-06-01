@@ -20,19 +20,6 @@ const Logout = () => {
     asyncLogout();
   }, []);
 
-  return (
-    <>
-      {/* <Result
-        status="404"
-        title="404"
-        subTitle="You are login Out , See you later"
-        extra={
-          <Button href="/" type="primary">
-            Back Home
-          </Button>
-        }
-      /> */}
-    </>
-  );
+  return <></>;
 };
 export default Logout;

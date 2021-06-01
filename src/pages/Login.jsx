@@ -65,7 +65,7 @@ const LoginPage = () => {
                     <Input
                       prefix={<UserOutlined className="site-form-item-icon" />}
                       placeholder="admin@demo.com"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </Form.Item>
                   <Form.Item
@@ -81,7 +81,7 @@ const LoginPage = () => {
                       prefix={<LockOutlined className="site-form-item-icon" />}
                       type="password"
                       placeholder="admin123"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </Form.Item>
                   <Form.Item>
