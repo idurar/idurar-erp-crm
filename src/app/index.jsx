@@ -8,34 +8,9 @@ import { notification, Layout } from "antd";
 import Navigation from "@/components/Navigation";
 import { Button, Result } from "antd";
 import * as authService from "@/auth";
-import useNetwork from "./useNetwork";
+import useNetwork from "@/hooks/useNetwork";
 
 function App() {
-  // const [isOnline, setNetwork] = useState(true);
-
-  // notification.config({
-  //   duration: 30,
-  // });
-
-  // window.ononline = (event) => {
-  //   setNetwork(true);
-  // };
-
-  // window.onoffline = (event) => {
-  //   setNetwork(false);
-  // };
-
-  // useEffect(() => {
-  //   if (isOnline) {
-  //     console.log("network is Connected ");
-  //   } else {
-  //     notification.error({
-  //       message: "No internet connection",
-  //       description:
-  //         "Cannot connect to the server, Check your internet network",
-  //     });
-  //   }
-  // }, [isOnline]);
   const { isOnline } = useNetwork();
 
   if (!isOnline)

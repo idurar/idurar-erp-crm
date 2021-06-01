@@ -13,10 +13,6 @@ const axiosInstance = axios.create({
     ...headersInstance,
   },
 });
-// let isConnected = true;
-// window.onoffline = (event) => {
-//   isConnected = false;
-// };
 
 const request = {
   create: async (entity, jsonData) => {
@@ -158,45 +154,3 @@ const request = {
   },
 };
 export default request;
-
-// export const searchSync = (target, source, option = {}) => {
-//   if (option.loaderWarpper) {
-//     loader.init(option.loaderWarpper);
-//   }
-//   let query = "";
-//   if (option !=={}) {
-//     let fields = "";
-//     let question = "";
-//     if (option.fields) {
-//       fields = "fields=" + option.fields;
-//     }
-//     if (option.question) {
-//       question = "&q=" + option.question;
-//     }
-//     query = `?${fields}${question}`;
-//   }
-
-//   const result = axios
-//     .get(baseUrl + target + "/search" + query, {
-//       cancelToken: source.token,
-//     })
-//     .then((response) => {
-//       // returning the data here allows the caller to get it through another .then(...)
-//       //console.log(response.data);
-//       return response.data;
-//     })
-//     .catch(function (error) {
-//       if (error.response === undefined) {
-//         return { success: false };
-//       } else {
-//         return error.response.data;
-//       }
-//     })
-//     .finally(function () {
-//       if (option.loaderWarpper) {
-//         loader.remove(option.loaderWarpper);
-//       }
-//     });
-
-//   return result;
-// };

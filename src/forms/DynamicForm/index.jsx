@@ -28,7 +28,7 @@ function FormElement({
   message = "Field is required!",
 }) {
   // dinamically select a component from componentMapping object
-
+  const { Option } = Select;
   const Component = componentMapping[fieldType];
 
   return (
@@ -41,11 +41,10 @@ function FormElement({
       {
         <Select>
           {selectOptions.map((optionField) => (
-            <option key={optionField.key} value={optionField.key}>
+            <Option key={optionField.key} value={optionField.key}>
               {optionField.value}
-            </option>
+            </Option>
           ))}
-          ;
         </Select>
       }
       else if(fieldType === "date"){<DatePicker format={"DD/MM/YYYY"} />}

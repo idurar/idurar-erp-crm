@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Select } from "antd";
-
+import SelectAsync from "@/components/SelectAsync";
 export default function UserForm() {
   return (
     <>
@@ -30,10 +30,7 @@ export default function UserForm() {
           },
         ]}
       >
-        <Select>
-          <Select.Option value="Admin">Admin</Select.Option>
-          <Select.Option value="Editor">Editor</Select.Option>
-        </Select>
+        <SelectAsync entity={"role"}></SelectAsync>
       </Form.Item>
       <Form.Item
         label="E-mail"
@@ -45,7 +42,7 @@ export default function UserForm() {
           },
         ]}
       >
-        <Input autocomplete="off" />
+        <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
         label="Password"
@@ -57,7 +54,7 @@ export default function UserForm() {
           },
         ]}
       >
-        <Input type="password" autocomplete="off" />
+        <Input type="password" autoComplete="off" />
       </Form.Item>
     </>
   );
