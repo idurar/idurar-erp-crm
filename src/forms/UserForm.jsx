@@ -1,7 +1,9 @@
 import React from "react";
 import { Form, Input, Select } from "antd";
+import SelectAsync from "@/components/SelectAsync";
+import SearchField from "@/components/SearchField";
 
-export default function UserForm() {
+export default function UserForm({ autoCompleteUpdate = null }) {
   return (
     <>
       <Form.Item
@@ -16,8 +18,26 @@ export default function UserForm() {
       >
         <Select>
           <Select.Option value="employee">Employee</Select.Option>
-          <Select.Option value="amin">Admin</Select.Option>
+          {/* <Select.Option value="amin">Admin</Select.Option> */}
         </Select>
+      </Form.Item>
+      <Form.Item
+        label="Employee"
+        name="employee"
+        rules={[
+          {
+            required: true,
+            message: "This Field is required",
+          },
+        ]}
+      >
+        <SearchField
+          entity={"employee"}
+          keyRef={"employee"}
+          displayLabels={["name", "surname"]}
+          searchFields={"name,surame"}
+          onUpdateValue={autoCompleteUpdate}
+        />
       </Form.Item>
 
       <Form.Item
@@ -30,10 +50,10 @@ export default function UserForm() {
           },
         ]}
       >
-        <Select>
-          <Select.Option value="Admin">Admin</Select.Option>
-          <Select.Option value="Editor">Editor</Select.Option>
-        </Select>
+        <SelectAsync
+          entity={"role"}
+          displayLabels={["displayName"]}
+        ></SelectAsync>
       </Form.Item>
       <Form.Item
         label="E-mail"
@@ -45,7 +65,7 @@ export default function UserForm() {
           },
         ]}
       >
-        <Input autocomplete="off" />
+        <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
         label="Password"
@@ -57,7 +77,7 @@ export default function UserForm() {
           },
         ]}
       >
-        <Input type="password" autocomplete="off" />
+        <Input type="password" autoComplete="off" />
       </Form.Item>
     </>
   );

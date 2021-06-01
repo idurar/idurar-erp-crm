@@ -2,7 +2,7 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 
 import userEvent from "@testing-library/user-event";
-import useNetwork from "./useNetwork";
+import useNetwork from "./index";
 import { renderHook } from "@testing-library/react-hooks";
 
 const mockDispatch = jest.fn();
