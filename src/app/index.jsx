@@ -4,16 +4,15 @@ import { Provider } from "react-redux";
 import Router from "@/router";
 import history from "@/utils/history";
 import store from "@/redux/store";
-import { notification, Layout } from "antd";
-import Navigation from "@/components/Navigation";
+
 import { Button, Result } from "antd";
-import * as authService from "@/auth";
+
 import useNetwork from "@/hooks/useNetwork";
 
 function App() {
-  const { isOnline } = useNetwork();
+  const { isOnline: isNetwork } = useNetwork();
 
-  if (!isOnline)
+  if (!isNetwork)
     return (
       <>
         <Result
@@ -28,19 +27,15 @@ function App() {
         />
       </>
     );
-  else
+  else {
     return (
       <RouterHistory history={history}>
         <Provider store={store}>
-          <Layout style={{ minHeight: "100vh" }}>
-            {authService.token.get() ? <Navigation /> : ""}
-            <Layout style={{ minHeight: "100vh" }}>
-              <Router />
-            </Layout>
-          </Layout>
+          <Router />
         </Provider>
       </RouterHistory>
     );
+  }
 }
 
 export default App;
