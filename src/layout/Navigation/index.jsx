@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
   DesktopOutlined,
+  SettingOutlined,
   CustomerServiceOutlined,
+  FileTextOutlined,
+  FileSyncOutlined,
   DashboardOutlined,
   TeamOutlined,
   UserOutlined,
@@ -38,18 +41,27 @@ function Navigation() {
           <Menu.Item key="2">
             <Link to="/customer">
               <CustomerServiceOutlined />
-              <span>Customer Page</span>
+              <span>Customer</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="21" icon={<CustomerServiceOutlined />}>
-            <Link to="/patient" />
-            Patient Page
+          <Menu.Item key="21" icon={<FileTextOutlined />}>
+            <Link to="/invoice" />
+            Invoice
           </Menu.Item>
-          <Menu.Item key="3" icon={<DesktopOutlined />}>
-            <Link to="/days" />
-            Days Page
+          <Menu.Item key="3" icon={<FileSyncOutlined />}>
+            <Link to="/quote" />
+            Quote
           </Menu.Item>
-          <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+          <Menu.Item key="31" icon={<TeamOutlined />}>
+            <Link to="/user" />
+            Users Management
+          </Menu.Item>
+
+          <Menu.Item key="31" icon={<SettingOutlined />}>
+            <Link to="/settings" />
+            Settings
+          </Menu.Item>
+          {/* <SubMenu key="sub1" icon={<UserOutlined />} title="User">
             <Menu.Item key="4">Tom</Menu.Item>
             <Menu.Item key="5">Bill</Menu.Item>
             <Menu.Item key="6">Alex</Menu.Item>
@@ -57,7 +69,7 @@ function Navigation() {
           <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
             <Menu.Item key="7">Team 1</Menu.Item>
             <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
         </Menu>
       </Sider>
     </>

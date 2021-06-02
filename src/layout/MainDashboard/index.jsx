@@ -1,7 +1,7 @@
 import React from "react";
 import { CrudContextProvider } from "@/context/crud";
 
-import Navigation from "@/components/Navigation";
+import Navigation from "@/layout/Navigation";
 
 import { Layout } from "antd";
 

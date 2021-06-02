@@ -6,7 +6,7 @@ import AuthRouter from "./AuthRouter";
 import AppRouter from "./AppRouter";
 
 import { Layout } from "antd";
-import Navigation from "@/components/Navigation";
+import Navigation from "@/layout/Navigation";
 
 import { useSelector } from "react-redux";
 import { selectAuth } from "@/redux/auth/selectors";
