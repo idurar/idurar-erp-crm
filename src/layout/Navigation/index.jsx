@@ -57,7 +57,7 @@ function Navigation() {
             Users Management
           </Menu.Item>
 
-          <Menu.Item key="31" icon={<SettingOutlined />}>
+          <Menu.Item key="32" icon={<SettingOutlined />}>
             <Link to="/settings" />
             Settings
           </Menu.Item>
