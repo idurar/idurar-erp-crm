@@ -19,9 +19,7 @@ const Invoice = lazy(() =>
 const Quote = lazy(() =>
   import(/*webpackChunkName:'QuotePage'*/ "@/pages/Quote")
 );
-const Login = lazy(() =>
-  import(/*webpackChunkName:'LoginPage'*/ "@/pages/Login")
-);
+
 const Logout = lazy(() =>
   import(/*webpackChunkName:'LogoutPage'*/ "@/pages/Logout")
 );

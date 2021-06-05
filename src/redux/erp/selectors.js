@@ -1,39 +1,36 @@
 import { createSelector } from "reselect";
 
-const selectCrud = (state) => state.crud;
+const selectErp = (state) => state.erp;
 
 export const selectCurrentItem = createSelector(
-  [selectCrud],
-  (crud) => crud.current
+  [selectErp],
+  (erp) => erp.current
 );
 
-export const selectListItems = createSelector(
-  [selectCrud],
-  (crud) => crud.list
-);
+export const selectListItems = createSelector([selectErp], (erp) => erp.list);
 export const selectItemById = (itemId) =>
   createSelector(selectListItems, (list) =>
     list.result.items.find((item) => item._id === itemId)
   );
 
 export const selectCreatedItem = createSelector(
-  [selectCrud],
-  (crud) => crud.create
+  [selectErp],
+  (erp) => erp.create
 );
 
 export const selectUpdatedItem = createSelector(
-  [selectCrud],
-  (crud) => crud.update
+  [selectErp],
+  (erp) => erp.update
 );
 
-export const selectReadItem = createSelector([selectCrud], (crud) => crud.read);
+export const selectReadItem = createSelector([selectErp], (erp) => erp.read);
 
 export const selectDeletedItem = createSelector(
-  [selectCrud],
-  (crud) => crud.delete
+  [selectErp],
+  (erp) => erp.delete
 );
 
 export const selectSearchedItems = createSelector(
-  [selectCrud],
-  (crud) => crud.search
+  [selectErp],
+  (erp) => erp.search
 );
