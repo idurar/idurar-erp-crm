@@ -7,11 +7,11 @@ export default function SelectAsync({
   entity,
   displayLabels = ["name"],
   outputValue = "_id",
-  onChange, /// this form item handel
-  onUpdateValue = null,
+  value,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
+  const [currentValue, setCurrentValue] = useState(undefined);
   const [isLoadingLabel, setLoadingLabel] = useState("List is Loading");
   const asyncList = () => {
     return request.list(entity);
@@ -31,11 +31,21 @@ export default function SelectAsync({
   const labels = (optionField) => {
     return displayLabels.map((x) => optionField[x]).join(" ");
   };
+  useEffect(() => {
+    // this for update Form , it's for setField
+    if (value) {
+      setCurrentValue(value);
+    }
+  }, [value]);
 
   return (
     <Select
       loading={isLoading}
       disabled={isLoading}
+      value={currentValue}
+      onChange={(newValue) => {
+        setCurrentValue(newValue);
+      }}
       //   defaultValue={isLoadingLabel}
       //   ref={isLoadingRef}
     >

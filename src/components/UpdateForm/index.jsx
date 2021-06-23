@@ -48,7 +48,6 @@ export default function UpdateForm({ config, formElements }) {
       }
       form.setFieldsValue(current);
     }
-    // console.log(form.getFieldsValue());
   }, [current]);
 
   useEffect(() => {

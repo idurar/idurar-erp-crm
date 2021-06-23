@@ -3,7 +3,10 @@ import { Form, Input, Select } from "antd";
 import SelectAsync from "@/components/SelectAsync";
 import SearchField from "@/components/SearchField";
 
-export default function UserForm({ autoCompleteUpdate = null }) {
+export default function UserForm({
+  autoCompleteUpdate = null,
+  isUpdateForm = false,
+}) {
   return (
     <>
       <Form.Item
@@ -42,7 +45,7 @@ export default function UserForm({ autoCompleteUpdate = null }) {
 
       <Form.Item
         label="Role"
-        name="role"
+        name={isUpdateForm ? ["role", "_id"] : "role"}
         rules={[
           {
             required: true,
