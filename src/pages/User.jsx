@@ -55,6 +55,7 @@ export default function User() {
       entity={entity}
       dataTableColumns={dataTableColumns}
       createForm={<UserForm />}
+      updateForm={<UserForm isUpdateForm={true} />}
       readColumns={readColumns}
       searchConfig={searchConfig}
       config={config}
