@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Select } from "antd";
 import SelectAsync from "@/components/SelectAsync";
-import SearchField from "@/components/SearchField";
+import AutoCompleteAsync from "@/components/AutoCompleteAsync";
 
 export default function UserForm({
   autoCompleteUpdate = null,
@@ -34,12 +34,11 @@ export default function UserForm({
           },
         ]}
       >
-        <SearchField
+        <AutoCompleteAsync
           entity={"employee"}
           keyRef={"employee"}
           displayLabels={["name", "surname"]}
           searchFields={"name,surame"}
-          onUpdateValue={autoCompleteUpdate}
         />
       </Form.Item>
 

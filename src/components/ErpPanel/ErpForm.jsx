@@ -2,15 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, Input, InputNumber, Button, Select, Divider, Space } from "antd";
 import { DatePicker } from "@/components/CustomAntd";
 import { Row, Col } from "antd";
-import SearchField from "@/components/SearchField";
+import AutoCompleteAsync from "@/components/AutoCompleteAsync";
 import { PlusOutlined } from "@ant-design/icons";
 import ItemRow from "./ItemRow";
 
-export default function ErpForm({
-  subTotal,
-  autoCompleteUpdate = null,
-  current = null,
-}) {
+export default function ErpForm({ subTotal, current = null }) {
   const { Option } = Select;
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
@@ -49,12 +45,12 @@ export default function ErpForm({
               },
             ]}
           >
-            <SearchField
+            <AutoCompleteAsync
               entity={"client"}
               keyRef={"client"}
               displayLabels={["company"]}
               searchFields={"company,managerSurname,managerName"}
-              onUpdateValue={autoCompleteUpdate}
+              // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
         </Col>

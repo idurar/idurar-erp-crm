@@ -80,7 +80,10 @@ export default function UpdateItem({ config }) {
     }
 
     const id = current._id;
-
+    console.log(
+      "🚀 ~ file: UpdateItem.jsx ~ line 88 ~ onSubmit ~ fieldsValue",
+      fieldsValue
+    );
     dispatch(erp.update(entity, id, fieldsValue));
   };
   useEffect(() => {
@@ -95,12 +98,12 @@ export default function UpdateItem({ config }) {
 
   useEffect(() => {
     if (current) {
-      if (current.client) {
-        const tmpValue = { ...current.client };
-        setAutoCompleteValue(tmpValue);
+      // if (current.client) {
+      //   const tmpValue = { ...current.client };
+      //   setAutoCompleteValue(tmpValue);
 
-        current.client = undefined;
-      }
+      //   current.client = undefined;
+      // }
       if (current.date) {
         current.date = dayjs(current.date, "DD/MM/YYYY");
       }
@@ -163,7 +166,7 @@ export default function UpdateItem({ config }) {
         >
           <ErpForm
             subTotal={subTotal}
-            autoCompleteUpdate={autoCompleteValue}
+            // autoCompleteUpdate={autoCompleteValue}
             current={current}
           />
           <Form.Item>
