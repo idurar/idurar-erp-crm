@@ -8,6 +8,7 @@ export default function SelectAsync({
   displayLabels = ["name"],
   outputValue = "_id",
   value,
+  onChange,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
@@ -21,12 +22,6 @@ export default function SelectAsync({
     isSuccess ? setOptions(result) : setOptions([]);
     setIsLoading(fetchIsLoading);
   }, [fetchIsLoading]);
-  //   const isLoadingRef = useRef();
-  //   useEffect(() => {
-  //     isLoading ? setLoadingLabel("List is Loading") : setLoadingLabel("");
-  //     isLoadingRef.current.values = isLoadingLabel;
-  //     console.log("isLoading :", isLoading, " ", isLoadingLabel);
-  //   }, [isLoading]);
 
   const labels = (optionField) => {
     return displayLabels.map((x) => optionField[x]).join(" ");
@@ -45,9 +40,10 @@ export default function SelectAsync({
       value={currentValue}
       onChange={(newValue) => {
         setCurrentValue(newValue);
+        if (onChange) {
+          onChange(newValue);
+        }
       }}
-      //   defaultValue={isLoadingLabel}
-      //   ref={isLoadingRef}
     >
       {selectOptions.map((optionField) => (
         <Select.Option
