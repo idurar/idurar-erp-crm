@@ -8,7 +8,7 @@ import { request } from "@/request";
 
 import { searchState } from "@/redux/search/selectors";
 
-export const useSearchField = (keyRef) => {
+export const useAutoComplete = (keyRef) => {
   let state = useSelector(searchState);
   let [currentState, setCurrentState] = useState({
     result: [],
@@ -23,25 +23,25 @@ export const useSearchField = (keyRef) => {
   return currentState;
 };
 
-export default function SearchField({
+export default function AutoCompleteAsync({
   entity,
   keyRef,
   displayLabels,
   searchFields,
   outputValue = "_id",
-  value = "",
-  onChange, /// this form item handel
-  onUpdateValue = null,
+  value: formItemValue, /// this is for update
+  onChange, /// this is for update
 }) {
   const dispatch = useDispatch();
-  const [fieldValue, setValue] = useState(value);
+  const [fieldValue, setValue] = useState(formItemValue);
 
   const [options, setOptions] = useState([]);
 
   let source = request.source();
 
-  let { result, isLoading, isSuccess } = useSearchField(keyRef);
+  let { result, isLoading, isSuccess } = useAutoComplete(keyRef);
   const isTyping = useRef(false);
+  const isSelect = useRef(false);
 
   let delayTimer = null;
   useEffect(() => {
@@ -65,6 +65,7 @@ export default function SearchField({
   };
 
   const onSelect = (data) => {
+    isSelect.current = true;
     const currentItem = result.find((item) => {
       return item[outputValue] === data;
     });
@@ -75,35 +76,45 @@ export default function SearchField({
     const currentItem = options.find((item) => {
       return item.value === data;
     });
+
     const currentValue = currentItem ? currentItem.label : data;
+
+    setValue(currentValue);
     if (onChange) {
       onChange(data);
     }
-    setValue(currentValue);
   };
   let optionResults = [];
+  const isUpdating = useRef(true);
   useEffect(() => {
-    if (onUpdateValue) {
-      const labels = displayLabels.map((x) => onUpdateValue[x]).join(" ");
-      optionResults.push({ label: labels, value: onUpdateValue[outputValue] });
-      if (onChange) {
-        onChange(onUpdateValue[outputValue]);
-      }
+    // this for update Form , it's for setField
+    if (formItemValue && !isTyping.current && !isSelect.current) {
+      console.log(
+        "🚀 ~ file: index.jsx ~ line 90 ~ useEffect ~ formItemValue",
+        formItemValue
+      );
+      isUpdating.current = false;
+      // optionResults = [];
+      const labels = displayLabels.map((x) => formItemValue[x]).join(" ");
+      optionResults.push({ label: labels, value: formItemValue[outputValue] });
       setValue(labels);
       setOptions(optionResults);
+      // if (onChange) {
+      //   onChange(formItemValue[outputValue]);
+      // }
     }
-  }, [onUpdateValue]);
+  }, [formItemValue]);
 
   useEffect(() => {
-    if (!onUpdateValue) {
-      result.map((item) => {
-        const labels = displayLabels.map((x) => item[x]).join(" ");
-        optionResults.push({ label: labels, value: item[outputValue] });
-      });
+    // optionResults = [];
 
-      setOptions(optionResults);
-    }
+    result.map((item) => {
+      const labels = displayLabels.map((x) => item[x]).join(" ");
+      optionResults.push({ label: labels, value: item[outputValue] });
+    });
+    setOptions(optionResults);
   }, [result]);
+
   return (
     <AutoComplete
       value={fieldValue}
