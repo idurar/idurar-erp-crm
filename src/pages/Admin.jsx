@@ -1,25 +1,24 @@
 import React from "react";
 
 import CrudPanel from "@/components/CrudPanel";
-import UserForm from "@/forms/UserForm";
+import AdminForm from "@/forms/AdminForm";
 
-export default function User() {
-  const entity = "user";
+export default function Admin() {
+  const entity = "admin";
   const searchConfig = {
     displayLabels: ["name,email"],
     searchFields: "email,name,surname",
     outputValue: "_id",
   };
 
-  const panelTitle = "User Panel";
-  const dataTableTitle = "User Lists";
+  const panelTitle = "Admin Panel";
+  const dataTableTitle = "Admin Lists";
   const entityDisplayLabels = ["email"];
 
   const readColumns = [
     { title: "Name", dataIndex: "name" },
     { title: "Surname", dataIndex: "surname" },
     { title: "Email", dataIndex: "email" },
-    { title: "Type de Compte", dataIndex: "accountType" },
     { title: "Role d'utilisateur", dataIndex: "role.displayName" },
   ];
 
@@ -27,14 +26,13 @@ export default function User() {
     { title: "Name", dataIndex: "name" },
     { title: "Surname", dataIndex: "surname" },
     { title: "Email", dataIndex: "email" },
-    { title: "Type de Compte", dataIndex: "accountType" },
     { title: "Role d'utilisateur", dataIndex: ["role", "displayName"] },
   ];
-  const ADD_NEW_ENTITY = "Add new user";
-  const DATATABLE_TITLE = "users List";
-  const ENTITY_NAME = "user";
-  const CREATE_ENTITY = "Create user";
-  const UPDATE_ENTITY = "Update user";
+  const ADD_NEW_ENTITY = "Add new admin";
+  const DATATABLE_TITLE = "Admins List";
+  const ENTITY_NAME = "admin";
+  const CREATE_ENTITY = "Create admin";
+  const UPDATE_ENTITY = "Update admin";
 
   const config = {
     entity,
@@ -54,8 +52,8 @@ export default function User() {
     <CrudPanel
       entity={entity}
       dataTableColumns={dataTableColumns}
-      createForm={<UserForm />}
-      updateForm={<UserForm isUpdateForm={true} />}
+      createForm={<AdminForm />}
+      updateForm={<AdminForm isUpdateForm={true} />}
       readColumns={readColumns}
       searchConfig={searchConfig}
       config={config}

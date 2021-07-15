@@ -3,27 +3,12 @@ import { Form, Input, Select } from "antd";
 import SelectAsync from "@/components/SelectAsync";
 import AutoCompleteAsync from "@/components/AutoCompleteAsync";
 
-export default function UserForm({
+export default function AdminForm({
   autoCompleteUpdate = null,
   isUpdateForm = false,
 }) {
   return (
     <>
-      <Form.Item
-        label="Account Type"
-        name="accountType"
-        rules={[
-          {
-            required: true,
-            message: "This Field is required",
-          },
-        ]}
-      >
-        <Select>
-          <Select.Option value="employee">Employee</Select.Option>
-          {/* <Select.Option value="amin">Admin</Select.Option> */}
-        </Select>
-      </Form.Item>
       <Form.Item
         label="Employee"
         name="employee"

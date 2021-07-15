@@ -12,7 +12,7 @@ const { Content, Footer } = Layout;
 const LoginPage = () => {
   // const [error, setError] = useState();
 
-  // const { setUserData } = useContext(UserContext);
+  // const { setAdminData } = useContext(AdminContext);
   // const history = useHistory();
   const { loading: isLoading } = useSelector(selectAuth);
   // function handleChange(e) {
