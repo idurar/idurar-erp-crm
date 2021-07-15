@@ -53,15 +53,15 @@ function Navigation() {
             Quote
           </Menu.Item>
           <Menu.Item key="31" icon={<TeamOutlined />}>
-            <Link to="/user" />
-            Users Management
+            <Link to="/admin" />
+            Admins Management
           </Menu.Item>
 
           <Menu.Item key="32" icon={<SettingOutlined />}>
             <Link to="/settings" />
             Settings
           </Menu.Item>
-          {/* <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+          {/* <SubMenu key="sub1" icon={<UserOutlined />} title="Admin">
             <Menu.Item key="4">Tom</Menu.Item>
             <Menu.Item key="5">Bill</Menu.Item>
             <Menu.Item key="6">Alex</Menu.Item>

@@ -7,11 +7,11 @@ import storePersist from "@/redux/storePersist";
 
 import { getCookie, setCookie, deleteCookie } from "./cookie";
 
-export const login = async (loginUserData) => {
+export const login = async (loginAdminData) => {
   try {
     const response = await axios.post(
       API_BASE_URL + `login?timestamp=${new Date().getTime()}`,
-      loginUserData
+      loginAdminData
     );
     token.set(response.data.result.token);
     return successHandler(response);
