@@ -1,6 +1,6 @@
 import React from "react";
 
-import CrudPanel from "@/components/CrudPanel";
+import CrudModule from "@/modules/CrudModule";
 import CustomerForm from "@/forms/CustomerForm";
 
 function Customer() {
@@ -76,12 +76,9 @@ function Customer() {
     entityDisplayLabels,
   };
   return (
-    <CrudPanel
-      entity={entity}
-      dataTableColumns={dataTableColumns}
+    <CrudModule
       createForm={<CustomerForm />}
-      readColumns={readColumns}
-      searchConfig={searchConfig}
+      updateForm={<CustomerForm isUpdateForm={true} />}
       config={config}
     />
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 
-export default function CustomerForm() {
+export default function CustomerForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item

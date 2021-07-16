@@ -33,9 +33,11 @@ export default function UpdateForm({ config, formElements }) {
         };
       }
     }
-
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 23 ~ onSubmit ~ fieldsValue",
+      fieldsValue
+    );
     const id = current._id;
-    console.log(fieldsValue);
     dispatch(crud.update(entity, id, fieldsValue));
   };
   useEffect(() => {

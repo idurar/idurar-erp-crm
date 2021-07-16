@@ -2,29 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { erp } from "@/redux/erp/actions";
-import { useErpContext } from "@/context/erp";
-import { selectDeletedItem } from "@/redux/erp/selectors";
+import { crud } from "@/redux/crud/actions";
+import { useCrudContext } from "@/context/crud";
+import { selectDeletedItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
-export default function Delete({ config }) {
+export default function UpdatePasswordModal({ config }) {
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = "Do you want delete : ",
-    modalTitle = "Remove Item",
+    deleteMessage = "Update current Password : ",
+    modalTitle = "Update Password",
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
-  const { state, erpContextAction } = useErpContext();
-  const { deleteModal } = state;
-  const { modal } = erpContextAction;
+  const { state, crudContextAction } = useCrudContext();
+  const { isModalOpen } = state;
+  const { modal } = crudContextAction;
   const [displayItem, setDisplayItem] = useState("");
 
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(erp.list(entity));
+      dispatch(crud.list(entity));
     }
     if (current) {
       let labels = entityDisplayLabels
@@ -37,7 +37,7 @@ export default function Delete({ config }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(erp.delete(entity, id));
+    dispatch(crud.delete(entity, id));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
@@ -45,7 +45,7 @@ export default function Delete({ config }) {
   return (
     <Modal
       title={modalTitle}
-      visible={deleteModal.isOpen}
+      visible={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}

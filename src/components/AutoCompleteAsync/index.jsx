@@ -89,10 +89,6 @@ export default function AutoCompleteAsync({
   useEffect(() => {
     // this for update Form , it's for setField
     if (formItemValue && !isTyping.current && !isSelect.current) {
-      console.log(
-        "🚀 ~ file: index.jsx ~ line 90 ~ useEffect ~ formItemValue",
-        formItemValue
-      );
       isUpdating.current = false;
       // optionResults = [];
       const labels = displayLabels.map((x) => formItemValue[x]).join(" ");

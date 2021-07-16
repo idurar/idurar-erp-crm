@@ -12,7 +12,7 @@ export default function DeleteModal({ config }) {
     entity,
     entityDisplayLabels,
     deleteMessage = "Do you want delete : ",
-    deleteModalDelete = "Remove Item",
+    modalTitle = "Remove Item",
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
@@ -44,7 +44,7 @@ export default function DeleteModal({ config }) {
   };
   return (
     <Modal
-      title={deleteModalDelete}
+      title={modalTitle}
       visible={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
