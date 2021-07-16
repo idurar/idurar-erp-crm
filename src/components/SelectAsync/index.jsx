@@ -29,7 +29,7 @@ export default function SelectAsync({
   useEffect(() => {
     // this for update Form , it's for setField
     if (value) {
-      setCurrentValue(value);
+      setCurrentValue(value[outputValue] || value); // set nested value or value
     }
   }, [value]);
 

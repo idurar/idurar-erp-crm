@@ -1,9 +1,8 @@
 import React from "react";
 
 import ErpPanel from "@/components/ErpPanel";
-import { ErpLayout } from "@/layout";
-import PatientForm from "@/forms/PatientForm";
-import { Table, Tag, Radio, Space } from "antd";
+
+import { Tag } from "antd";
 
 export default function Quote() {
   const entity = "quote";
@@ -70,7 +69,6 @@ export default function Quote() {
     ADD_NEW_ENTITY,
     UPDATE_ENTITY,
     DATATABLE_TITLE,
-
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,

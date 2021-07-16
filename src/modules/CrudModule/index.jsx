@@ -1,7 +1,7 @@
-import React, { useLayoutEffect, useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { Row, Col, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import DataTable from "@/components/DataTable";
+
 import CreateForm from "@/components/CreateForm";
 import UpdateForm from "@/components/UpdateForm";
 import DeleteModal from "@/components/DeleteModal";
@@ -13,6 +13,8 @@ import { crud } from "@/redux/crud/actions";
 import { useCrudContext } from "@/context/crud";
 
 import { CrudLayout } from "@/layout";
+
+import CrudDataTable from "./CrudDataTable";
 
 function SidePanelTopContent({ config, formElements }) {
   return (
@@ -55,10 +57,8 @@ function FixHeaderPanel({ config }) {
   );
 }
 
-function CrudPanel({ config, createForm, updateForm }) {
+function CrudModule({ config, createForm, updateForm }) {
   const dispatch = useDispatch();
-  let form = {};
-  updateForm === undefined ? (form = createForm) : (form = updateForm);
 
   useLayoutEffect(() => {
     dispatch(crud.resetState());
@@ -72,13 +72,13 @@ function CrudPanel({ config, createForm, updateForm }) {
         <CreateForm config={config} formElements={createForm} />
       }
       sidePanelTopContent={
-        <SidePanelTopContent config={config} formElements={form} />
+        <SidePanelTopContent config={config} formElements={updateForm} />
       }
     >
-      <DataTable config={config} />
+      <CrudDataTable config={config} />
       <DeleteModal config={config} />
     </CrudLayout>
   );
 }
 
-export default CrudPanel;
+export default CrudModule;

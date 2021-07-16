@@ -3,10 +3,7 @@ import { Form, Input, Select } from "antd";
 import SelectAsync from "@/components/SelectAsync";
 import AutoCompleteAsync from "@/components/AutoCompleteAsync";
 
-export default function AdminForm({
-  autoCompleteUpdate = null,
-  isUpdateForm = false,
-}) {
+export default function AdminForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
@@ -26,10 +23,9 @@ export default function AdminForm({
           searchFields={"name,surame"}
         />
       </Form.Item>
-
       <Form.Item
         label="Role"
-        name={isUpdateForm ? ["role", "_id"] : "role"}
+        name="role"
         rules={[
           {
             required: true,
@@ -54,18 +50,20 @@ export default function AdminForm({
       >
         <Input autoComplete="off" />
       </Form.Item>
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
-      >
-        <Input type="password" autoComplete="off" />
-      </Form.Item>
+      {!isUpdateForm && (
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Password!",
+            },
+          ]}
+        >
+          <Input type="password" autoComplete="off" />
+        </Form.Item>
+      )}
     </>
   );
 }

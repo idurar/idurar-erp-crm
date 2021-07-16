@@ -10,6 +10,14 @@ const contextActions = (dispatch) => {
         dispatch({ type: actionTypes.CLOSE_MODAL });
       },
     },
+    advancedModal: {
+      open: () => {
+        dispatch({ type: actionTypes.OPEN_ADVANCED_MODAL });
+      },
+      close: () => {
+        dispatch({ type: actionTypes.CLOSE_ADVANCED_MODAL });
+      },
+    },
     panel: {
       open: () => {
         dispatch({ type: actionTypes.OPEN_PANEL });

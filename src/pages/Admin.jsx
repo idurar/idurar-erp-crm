@@ -1,12 +1,12 @@
 import React from "react";
 
-import CrudPanel from "@/components/CrudPanel";
+import AdminCrudModule from "@/modules/AdminCrudModule";
 import AdminForm from "@/forms/AdminForm";
 
 export default function Admin() {
   const entity = "admin";
   const searchConfig = {
-    displayLabels: ["name,email"],
+    displayLabels: ["name", "surname"],
     searchFields: "email,name,surname",
     outputValue: "_id",
   };
@@ -49,13 +49,9 @@ export default function Admin() {
     entityDisplayLabels,
   };
   return (
-    <CrudPanel
-      entity={entity}
-      dataTableColumns={dataTableColumns}
+    <AdminCrudModule
       createForm={<AdminForm />}
       updateForm={<AdminForm isUpdateForm={true} />}
-      readColumns={readColumns}
-      searchConfig={searchConfig}
       config={config}
     />
   );

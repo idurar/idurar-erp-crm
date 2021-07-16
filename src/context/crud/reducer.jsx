@@ -2,6 +2,7 @@ import * as actionTypes from "./types";
 
 export const initialState = {
   isModalOpen: false,
+  isAdvancedModalOpen: false,
   isPanelCollapsed: false,
   isBoxCollapsed: false,
   isReadBoxOpen: true,
@@ -12,12 +13,24 @@ export function contextReducer(state, action) {
     case actionTypes.OPEN_MODAL:
       return {
         ...state,
+        isAdvancedModalOpen: false,
         isModalOpen: true,
       };
     case actionTypes.CLOSE_MODAL:
       return {
         ...state,
         isModalOpen: false,
+      };
+    case actionTypes.OPEN_ADVANCED_MODAL:
+      return {
+        ...state,
+        isModalOpen: false,
+        isAdvancedModalOpen: true,
+      };
+    case actionTypes.CLOSE_ADVANCED_MODAL:
+      return {
+        ...state,
+        isAdvancedModalOpen: false,
       };
     case actionTypes.OPEN_PANEL:
       return {
