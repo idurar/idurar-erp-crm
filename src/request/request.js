@@ -134,12 +134,23 @@ const request = {
       return errorHandler(error);
     }
   },
-  get: async (entityUrl, option = {}) => {
+  get: async (entityUrl) => {
     axiosInstance.defaults.headers = {
       ...headersInstance,
     };
     try {
       const response = await axiosInstance.get(entityUrl);
+      return successHandler(response);
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  patch: async (entityUrl, jsonData) => {
+    axiosInstance.defaults.headers = {
+      ...headersInstance,
+    };
+    try {
+      const response = await axiosInstance.patch(entityUrl, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);

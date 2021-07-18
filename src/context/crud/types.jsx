@@ -1,8 +1,11 @@
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 
-export const OPEN_ADVANCED_MODAL = "OPEN_ADVANCED_MODAL";
-export const CLOSE_ADVANCED_MODAL = "CLOSE_ADVANCED_MODAL";
+export const OPEN_ADVANCED_BOX = "OPEN_ADVANCED_BOX";
+export const CLOSE_ADVANCED_BOX = "CLOSE_ADVANCED_BOX";
+
+export const OPEN_EDIT_BOX = "OPEN_EDIT_BOX";
+export const CLOSE_EDIT_BOX = "CLOSE_EDIT_BOX";
 
 export const OPEN_PANEL = "OPEN_PANEL";
 export const CLOSE_PANEL = "CLOSE_PANEL";

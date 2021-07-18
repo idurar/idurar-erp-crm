@@ -10,12 +10,20 @@ const contextActions = (dispatch) => {
         dispatch({ type: actionTypes.CLOSE_MODAL });
       },
     },
-    advancedModal: {
+    advancedBox: {
       open: () => {
-        dispatch({ type: actionTypes.OPEN_ADVANCED_MODAL });
+        dispatch({ type: actionTypes.OPEN_ADVANCED_BOX });
       },
       close: () => {
-        dispatch({ type: actionTypes.CLOSE_ADVANCED_MODAL });
+        dispatch({ type: actionTypes.CLOSE_ADVANCED_BOX });
+      },
+    },
+    editBox: {
+      open: () => {
+        dispatch({ type: actionTypes.OPEN_EDIT_BOX });
+      },
+      close: () => {
+        dispatch({ type: actionTypes.CLOSE_EDIT_BOX });
       },
     },
     panel: {

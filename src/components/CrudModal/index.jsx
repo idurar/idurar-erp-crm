@@ -7,12 +7,12 @@ import { useCrudContext } from "@/context/crud";
 import { selectDeletedItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
 
-export default function UpdatePasswordModal({ config }) {
+export default function DeleteModal({ config, children }) {
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = "Update current Password : ",
-    modalTitle = "Update Password",
+    deleteMessage = "Do you want delete : ",
+    modalTitle = "Remove Item",
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
@@ -50,10 +50,7 @@ export default function UpdatePasswordModal({ config }) {
       onCancel={handleCancel}
       confirmLoading={isLoading}
     >
-      <p>
-        {deleteMessage}
-        {displayItem}
-      </p>
+      {children}
     </Modal>
   );
 }

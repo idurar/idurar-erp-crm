@@ -5,6 +5,7 @@ import { Layout, Avatar, Menu, Dropdown } from "antd";
 
 import { UserOutlined } from "@ant-design/icons";
 import { logout } from "@/redux/auth/actions";
+import uniqueId from "@/utils/uinqueId";
 const { Header } = Layout;
 
 export default function HeaderContent() {
@@ -12,8 +13,10 @@ export default function HeaderContent() {
 
   const menu = (
     <Menu>
-      <Menu.Item onClick={() => dispatch(logout())}>logout</Menu.Item>
-      <Menu.Item>
+      <Menu.Item key={`${uniqueId()}`} onClick={() => dispatch(logout())}>
+        logout
+      </Menu.Item>
+      <Menu.Item key={`${uniqueId()}`}>
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -22,7 +25,7 @@ export default function HeaderContent() {
           2nd menu item
         </a>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key={`${uniqueId()}`}>
         <a
           target="_blank"
           rel="noopener noreferrer"

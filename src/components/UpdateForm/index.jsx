@@ -33,10 +33,7 @@ export default function UpdateForm({ config, formElements }) {
         };
       }
     }
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 23 ~ onSubmit ~ fieldsValue",
-      fieldsValue
-    );
+
     const id = current._id;
     dispatch(crud.update(entity, id, fieldsValue));
   };
@@ -63,11 +60,11 @@ export default function UpdateForm({ config, formElements }) {
     }
   }, [isSuccess]);
 
-  const { isReadBoxOpen } = state;
+  const { isEditBoxOpen } = state;
 
-  const show = isReadBoxOpen
-    ? { display: "none", opacity: 0 }
-    : { display: "block", opacity: 1 };
+  const show = isEditBoxOpen
+    ? { display: "block", opacity: 1 }
+    : { display: "none", opacity: 0 };
   return (
     <div style={show}>
       <Loading isLoading={isLoading}>

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { selectItemById } from "@/redux/crud/selectors";
 import { useCrudContext } from "@/context/crud";
-
+import uniqueId from "@/utils/uinqueId";
 import DataTable from "@/components/DataTable";
 
 function AddNewItem({ config }) {
@@ -27,7 +27,7 @@ function AddNewItem({ config }) {
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
   const { crudContextAction } = useCrudContext();
-  const { panel, collapsedBox, modal, readBox } = crudContextAction;
+  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
     dispatch(crud.currentItem(item));
@@ -37,7 +37,7 @@ function DropDownRowMenu({ row }) {
   };
   function Edit() {
     dispatch(crud.currentAction("update", item));
-    readBox.close();
+    editBox.open();
     panel.open();
     collapsedBox.open();
   }
@@ -47,13 +47,17 @@ function DropDownRowMenu({ row }) {
   }
   return (
     <Menu style={{ width: 130 }}>
-      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
+      <Menu.Item key={`${uniqueId()}`} icon={<EyeOutlined />} onClick={Show}>
         Show
       </Menu.Item>
-      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
+      <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
-      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
+      <Menu.Item
+        key={`${uniqueId()}`}
+        icon={<DeleteOutlined />}
+        onClick={Delete}
+      >
         Delete
       </Menu.Item>
     </Menu>

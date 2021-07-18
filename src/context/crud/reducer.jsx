@@ -2,10 +2,11 @@ import * as actionTypes from "./types";
 
 export const initialState = {
   isModalOpen: false,
-  isAdvancedModalOpen: false,
   isPanelCollapsed: false,
   isBoxCollapsed: false,
   isReadBoxOpen: true,
+  isAdvancedBoxOpen: false,
+  isEditBoxOpen: false,
 };
 
 export function contextReducer(state, action) {
@@ -13,7 +14,6 @@ export function contextReducer(state, action) {
     case actionTypes.OPEN_MODAL:
       return {
         ...state,
-        isAdvancedModalOpen: false,
         isModalOpen: true,
       };
     case actionTypes.CLOSE_MODAL:
@@ -21,17 +21,7 @@ export function contextReducer(state, action) {
         ...state,
         isModalOpen: false,
       };
-    case actionTypes.OPEN_ADVANCED_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-        isAdvancedModalOpen: true,
-      };
-    case actionTypes.CLOSE_ADVANCED_MODAL:
-      return {
-        ...state,
-        isAdvancedModalOpen: false,
-      };
+
     case actionTypes.OPEN_PANEL:
       return {
         ...state,
@@ -65,12 +55,38 @@ export function contextReducer(state, action) {
     case actionTypes.OPEN_READ_BOX:
       return {
         ...state,
+        isAdvancedBoxOpen: false,
+        isEditBoxOpen: false,
         isReadBoxOpen: true,
       };
     case actionTypes.CLOSE_READ_BOX:
       return {
         ...state,
         isReadBoxOpen: false,
+      };
+    case actionTypes.OPEN_ADVANCED_BOX:
+      return {
+        ...state,
+        isReadBoxOpen: false,
+        isEditBoxOpen: false,
+        isAdvancedBoxOpen: true,
+      };
+    case actionTypes.CLOSE_ADVANCED_BOX:
+      return {
+        ...state,
+        isAdvancedBoxOpen: false,
+      };
+    case actionTypes.OPEN_EDIT_BOX:
+      return {
+        ...state,
+        isReadBoxOpen: false,
+        isAdvancedBoxOpen: false,
+        isEditBoxOpen: true,
+      };
+    case actionTypes.CLOSE_EDIT_BOX:
+      return {
+        ...state,
+        isEditBoxOpen: false,
       };
     case actionTypes.COLLAPSE_READ_BOX:
       return {
