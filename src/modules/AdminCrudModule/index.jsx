@@ -15,13 +15,14 @@ import { useCrudContext } from "@/context/crud";
 import { CrudLayout } from "@/layout";
 
 import AdminDataTable from "./AdminDataTable";
-import UpdatePasswordModal from "./UpdatePasswordModal";
+import UpdatePassword from "./UpdatePassword";
 
 function SidePanelTopContent({ config, formElements }) {
   return (
     <>
       <ReadItem config={config} />
       <UpdateForm config={config} formElements={formElements} />
+      <UpdatePassword config={config} />
     </>
   );
 }
@@ -58,7 +59,7 @@ function FixHeaderPanel({ config }) {
   );
 }
 
-function CrudModule({ config, createForm, updateForm }) {
+function AdminCrudModule({ config, createForm, updateForm }) {
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -78,9 +79,8 @@ function CrudModule({ config, createForm, updateForm }) {
     >
       <AdminDataTable config={config} />
       <DeleteModal config={config} />
-      <UpdatePasswordModal config={config} />
     </CrudLayout>
   );
 }
 
-export default CrudModule;
+export default AdminCrudModule;

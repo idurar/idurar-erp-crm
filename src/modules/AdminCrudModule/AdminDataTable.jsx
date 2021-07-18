@@ -36,8 +36,9 @@ function DropDownRowMenu({ row }) {
     panel,
     collapsedBox,
     modal,
-    advancedModal,
+    advancedBox,
     readBox,
+    editBox,
   } = crudContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
@@ -48,14 +49,15 @@ function DropDownRowMenu({ row }) {
   };
   function Edit() {
     dispatch(crud.currentAction("update", item));
-    readBox.close();
+    editBox.open();
     panel.open();
     collapsedBox.open();
   }
   function UpdatePassword() {
-    // dispatch(crud.currentAction("update", item));
-
-    advancedModal.open();
+    dispatch(crud.currentAction("update", item));
+    advancedBox.open();
+    panel.open();
+    collapsedBox.open();
   }
   function Delete() {
     dispatch(crud.currentAction("delete", item));
