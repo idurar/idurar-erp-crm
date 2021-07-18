@@ -8,7 +8,7 @@ import { selectUpdatedItem } from "@/redux/crud/selectors";
 import { Button, Form, Input } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import Loading from "@/components/Loading";
-import useForm from "@/hooks/useForm";
+import useOnFetch from "@/hooks/useOnFetch";
 import { request } from "@/request";
 
 export default function UpdatePassword({ config }) {
@@ -19,34 +19,18 @@ export default function UpdatePassword({ config }) {
 
   const [form] = Form.useForm();
 
-  const { onSubmit, result, isLoading, isSuccess } = useForm();
+  const { onFetch, result, isLoading, isSuccess } = useOnFetch();
 
   const handelSubmit = (fieldsValue) => {
     const id = current._id;
     const updateFn = () => {
       return request.patch("admin/password-update/" + id, fieldsValue);
     };
-    onSubmit(updateFn);
+    onFetch(updateFn);
   };
 
   useEffect(() => {
-    if (current) {
-      console.log(
-        "🚀 ~ file: UpdatePassword.jsx ~ line 42 ~ useEffect ~ current",
-        current
-      );
-    }
-  }, [current]);
-  useEffect(() => {
     if (isSuccess) {
-      console.log(
-        "🚀 ~ file: UpdatePassword.jsx ~ line 42 ~ useEffect ~ result",
-        result
-      );
-      console.log(
-        "🚀 ~ file: UpdatePassword.jsx ~ line 42 ~ useEffect ~ isSuccess",
-        isSuccess
-      );
       // readBox.open();
       form.resetFields();
       dispatch(crud.resetAction("update"));
@@ -66,6 +50,7 @@ export default function UpdatePassword({ config }) {
         <div className="space"></div>
         <Form form={form} layout="vertical" onFinish={handelSubmit}>
           <Form.Item
+            label="New Password"
             name="password"
             rules={[
               {
@@ -83,7 +68,7 @@ export default function UpdatePassword({ config }) {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Submit
+              Update
             </Button>
           </Form.Item>
         </Form>
