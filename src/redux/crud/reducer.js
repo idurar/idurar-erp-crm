@@ -73,7 +73,7 @@ const crudReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [keyState]: {
-          ...state[keyState],
+          ...INITIAL_KEY_STATE,
           current: payload,
         },
       };
