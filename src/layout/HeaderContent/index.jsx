@@ -41,7 +41,7 @@ export default function HeaderContent() {
       className="site-layout-background"
       style={{ padding: 0, background: "none" }}
     >
-      <Dropdown overlay={menu} placement="bottomRight" arrow>
+      <Dropdown overlay={menu} placement="bottomRight">
         <Avatar icon={<UserOutlined />} />
       </Dropdown>
     </Header>
