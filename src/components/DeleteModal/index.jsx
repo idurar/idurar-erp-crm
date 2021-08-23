@@ -25,6 +25,7 @@ export default function DeleteModal({ config }) {
     if (isSuccess) {
       modal.close();
       dispatch(crud.list(entity));
+      // dispatch(crud.resetAction("delete")); // check here maybe it wrong
     }
     if (current) {
       let labels = entityDisplayLabels
