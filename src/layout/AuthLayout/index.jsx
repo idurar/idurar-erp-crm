@@ -1,30 +1,16 @@
 import React from "react";
-
-import { CrudContextProvider } from "@/context/crud";
-
-export default function AuthLayout({ children }) {
+import { Layout } from "antd";
+export default function AuthLayout({ sideContent, children }) {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <SidePanel
-        config={config}
-        topContent={sidePanelTopContent}
-        bottomContent={sidePanelBottomContent}
-        fixHeaderPanel={fixHeaderPanel}
-      ></SidePanel>
-      <Layout className="site-layout">
-        <HeaderContent />
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: "50px 40px",
-            margin: "50px auto",
-            width: "100%",
-            maxWidth: "1000px",
-          }}
-        >
-          {children}
-        </Content>
-      </Layout>
+    <Layout
+      style={{
+        minHeight: "100vh",
+        flexDirection: "row",
+        justifyContent: "space-between",
+      }}
+    >
+      <div style={{ width: "50%" }}>{sideContent}</div>
+      <div style={{ width: "50%", background: "#FFF" }}>{children}</div>
     </Layout>
   );
 }
