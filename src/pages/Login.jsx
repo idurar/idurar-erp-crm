@@ -144,7 +144,7 @@ const LoginPage = () => {
           <Col span={24} offset={0}>
             <Content
               style={{
-                padding: "150px 30px",
+                padding: "200px 30px 30px",
                 maxWidth: "440px",
                 margin: "0 auto",
               }}
