@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&display=swap");
+
 @import "~antd/dist/antd.less";
+@import "./variable.less";
 @import "./partials/collapseBox.less";
 @import "./partials/dashboard.less";
 @import "./partials/core.less";
@@ -17,6 +20,12 @@
 [data-theme="dark"] .site-layout .site-layout-background {
   background: #141414;
 }
+.ant-layout-sider-trigger {
+  background: #fff;
+  border-top: 1px solid #edf0f5;
+  border-right: 1px solid #edf0f5;
+  color: #4f5d75;
+}
 .ant-layout-sider-zero-width-trigger {
   top: 5px;
   right: 10px;
@@ -24,10 +33,18 @@
   background: none;
   font-size: 20px;
 }
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border: none !important;
+}
 // .ant-layout-sider-collapsed > .ant-layout-sider-zero-width-trigger {
 //   right: -50px;
 // }
-
+.sidePanel {
+  border-right: 1px solid #edf0f5;
+}
 .center {
   position: absolute;
   left: 50%;

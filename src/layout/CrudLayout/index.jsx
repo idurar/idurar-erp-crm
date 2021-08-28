@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import DefaultLayout from "../DefaultLayout";
 import HeaderContent from "../HeaderContent";
 
 import SidePanel from "@/components/SidePanel";
 import { Layout } from "antd";
+import { useCrudContext } from "@/context/crud";
+import { useAppContext } from "@/context/appContext";
 
 const { Content } = Layout;
+
+const ContentBox = ({ children }) => {
+  const { state: stateCrud, crudContextAction } = useCrudContext();
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { isPanelClose } = stateCrud;
+  const { isNavMenuClose } = stateApp;
+  const { panel } = crudContextAction;
+  useEffect(() => {
+    if (!isNavMenuClose) {
+      panel.close();
+    }
+  }, [isNavMenuClose]);
+  return (
+    <Content
+      className="site-layout-background whiteBox shadow"
+      style={{
+        padding: "50px 40px",
+        margin: "50px auto",
+        width: isPanelClose ? "100%" : "830px",
+        maxWidth: "1000px",
+      }}
+    >
+      {children}
+    </Content>
+  );
+};
 
 export default function CrudLayout({
   children,
@@ -26,17 +54,7 @@ export default function CrudLayout({
         ></SidePanel>
         <Layout className="site-layout">
           <HeaderContent />
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: "50px 40px",
-              margin: "50px auto",
-              width: "100%",
-              maxWidth: "1000px",
-            }}
-          >
-            {children}
-          </Content>
+          <ContentBox> {children}</ContentBox>
         </Layout>
       </Layout>
     </DefaultLayout>

@@ -8,6 +8,7 @@ import store from "@/redux/store";
 import { Button, Result } from "antd";
 
 import useNetwork from "@/hooks/useNetwork";
+import { AppContextProvider } from "@/context/appContext";
 
 function App() {
   const { isOnline: isNetwork } = useNetwork();
@@ -33,7 +34,9 @@ function App() {
   return (
     <RouterHistory history={history}>
       <Provider store={store}>
-        <Router />
+        <AppContextProvider>
+          <Router />
+        </AppContextProvider>
       </Provider>
     </RouterHistory>
   );

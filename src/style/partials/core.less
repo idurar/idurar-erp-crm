@@ -1,12 +1,65 @@
-input,
-button .ant-input,
-.ant-btn,
-.ant-input-number,
-.ant-select-selector,
-.ant-picker {
-  border-radius: 4px !important;
+// input,
+// button,
+// .ant-input,
+// .ant-btn,
+// .ant-input-number,
+// .ant-select-selector,
+// .ant-picker {
+//   border-radius: 4px !important;
+// }
+
+// .ant-select-selection-search-input {
+//   border-radius: 4px !important;
+// }
+
+// .ant-input-lg,
+// .ant-input-affix-wrapper-lg {
+//   border-radius: 4px !important;
+// }
+
+* {
+  font-family: "Nunito", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 600;
+}
+.ant-table-thead > tr > th {
+  font-weight: 700;
+}
+.ant-typography strong {
+  font-weight: 700;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700 !important;
+}
+.list-checked {
+  padding-left: 0px;
+  list-style: none;
+}
+.list-checked-item {
+  position: relative;
+  display: block;
+  color: #677788;
+  padding-left: 1.75rem;
+  margin-bottom: 30px;
+  list-style: none;
 }
 
-.ant-select-selection-search-input {
-  border-radius: 4px !important;
+.list-checked-item::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../images/checklist.svg);
+  content: "";
+  margin-top: 0.125rem;
+}
+
+.sideContent * {
+  color: #4f5d75 !important;
 }

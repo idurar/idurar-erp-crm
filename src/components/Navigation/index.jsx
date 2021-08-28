@@ -12,28 +12,32 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-
+import { useAppContext } from "@/context/appContext";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 function Navigation() {
-  const [collapsed, setCollapsed] = useState(true);
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { isNavMenuClose } = stateApp;
+  const { navMenu } = appContextAction;
 
   const onCollapse = () => {
-    setCollapsed(!collapsed);
+    navMenu.collapse();
   };
   return (
     <>
       <Sider
         collapsible
-        collapsed={collapsed}
+        collapsed={isNavMenuClose}
         onCollapse={onCollapse}
         style={{
           zIndex: 1000,
+          background: "#fff",
+          borderRight: "1px solid #edf0f5",
         }}
       >
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        <Menu defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<DashboardOutlined />}>
             <Link to="/" />
             Home Page
