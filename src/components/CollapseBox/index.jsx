@@ -45,10 +45,10 @@ export default function CollapseBox({
   buttonTitle,
   isCollapsed,
   onCollapse,
-  isPanelCollapsed,
+  isPanelClose,
 }) {
   const collapsed = isCollapsed ? "collapsed" : "";
-  const isDiplayed = isPanelCollapsed ? "-399px" : "0px";
+  const isDiplayed = isPanelClose ? "-399px" : "0px";
   return (
     <div
       className="panelBox"

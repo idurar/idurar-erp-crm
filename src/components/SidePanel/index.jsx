@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCrudContext } from "@/context/crud";
+import { useAppContext } from "@/context/appContext";
 import { Layout } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import CollapseBox from "../CollapseBox";
@@ -13,25 +14,29 @@ export default function SidePanel({
   fixHeaderPanel,
 }) {
   const { state, crudContextAction } = useCrudContext();
-  const { isPanelCollapsed, isBoxCollapsed } = state;
+  const { isPanelClose, isBoxCollapsed } = state;
   const { panel, collapsedBox } = crudContextAction;
   const [styleSider, setStyleSider] = useState("-1px");
   const [opacitySider, setOpacitySider] = useState("1");
 
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { isNavMenuClose } = stateApp;
+  const { navMenu } = appContextAction;
+
   useEffect(() => {
-    if (isPanelCollapsed) {
+    if (isPanelClose) {
       setStyleSider("-400px");
       setOpacitySider(0);
     } else {
+      if (!isNavMenuClose) {
+        navMenu.close();
+      }
       setStyleSider("-1px");
       setOpacitySider(1);
     }
-
-    setTimeout(() => {
-      setStyleSider("-1px");
-      setOpacitySider(1);
-    }, 300);
-  }, [isPanelCollapsed]);
+    setStyleSider("-1px");
+    setOpacitySider(1);
+  }, [isPanelClose]);
 
   const collapsePanel = () => {
     panel.collapse();
@@ -46,7 +51,7 @@ export default function SidePanel({
       trigger={<MenuOutlined className="trigger" />}
       width={400}
       collapsible
-      collapsed={isPanelCollapsed}
+      collapsed={isPanelClose}
       collapsedWidth={"0px"}
       onCollapse={collapsePanel}
       className="sidePanel"
@@ -63,7 +68,7 @@ export default function SidePanel({
       {fixHeaderPanel}
       <CollapseBox
         buttonTitle="Add new Customer"
-        isPanelCollapsed={isPanelCollapsed}
+        isPanelClose={isPanelClose}
         isCollapsed={isBoxCollapsed}
         onCollapse={collapsePanelBox}
         topContent={topContent}

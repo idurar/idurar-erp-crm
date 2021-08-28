@@ -12,21 +12,23 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-
+import { useAppContext } from "@/context/appContext";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 function Navigation() {
-  const [collapsed, setCollapsed] = useState(true);
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { isNavMenuClose } = stateApp;
+  const { navMenu } = appContextAction;
 
   const onCollapse = () => {
-    setCollapsed(!collapsed);
+    navMenu.collapse();
   };
   return (
     <>
       <Sider
         collapsible
-        collapsed={collapsed}
+        collapsed={isNavMenuClose}
         onCollapse={onCollapse}
         style={{
           zIndex: 1000,
