@@ -27,7 +27,7 @@ export default function CrudLayout({
         <Layout className="site-layout">
           <HeaderContent />
           <Content
-            className="site-layout-background"
+            className="site-layout-background whiteBox shadow"
             style={{
               padding: "50px 40px",
               margin: "50px auto",

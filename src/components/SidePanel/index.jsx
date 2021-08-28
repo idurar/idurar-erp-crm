@@ -49,6 +49,7 @@ export default function SidePanel({
       collapsed={isPanelCollapsed}
       collapsedWidth={"0px"}
       onCollapse={collapsePanel}
+      className="sidePanel"
       zeroWidthTriggerStyle={{
         right: "-50px",
         top: "15px",

@@ -30,10 +30,12 @@ function Navigation() {
         onCollapse={onCollapse}
         style={{
           zIndex: 1000,
+          background: "#fff",
+          borderRight: "1px solid #edf0f5",
         }}
       >
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        <Menu defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<DashboardOutlined />}>
             <Link to="/" />
             Home Page
