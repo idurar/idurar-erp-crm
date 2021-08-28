@@ -5,8 +5,27 @@ import HeaderContent from "../HeaderContent";
 
 import SidePanel from "@/components/SidePanel";
 import { Layout } from "antd";
+import { useCrudContext } from "@/context/crud";
 
 const { Content } = Layout;
+
+const ContentBox = ({ children }) => {
+  const { state } = useCrudContext();
+  const { isPanelCollapsed } = state;
+  return (
+    <Content
+      className="site-layout-background whiteBox shadow"
+      style={{
+        padding: "50px 40px",
+        margin: "50px auto",
+        width: isPanelCollapsed ? "100%" : "830px",
+        maxWidth: "1000px",
+      }}
+    >
+      {children}
+    </Content>
+  );
+};
 
 export default function CrudLayout({
   children,
@@ -26,17 +45,7 @@ export default function CrudLayout({
         ></SidePanel>
         <Layout className="site-layout">
           <HeaderContent />
-          <Content
-            className="site-layout-background whiteBox shadow"
-            style={{
-              padding: "50px 40px",
-              margin: "50px auto",
-              width: "100%",
-              maxWidth: "1000px",
-            }}
-          >
-            {children}
-          </Content>
+          <ContentBox> {children}</ContentBox>
         </Layout>
       </Layout>
     </DefaultLayout>

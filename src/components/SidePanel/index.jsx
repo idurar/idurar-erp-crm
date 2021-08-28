@@ -15,7 +15,7 @@ export default function SidePanel({
   const { state, crudContextAction } = useCrudContext();
   const { isPanelCollapsed, isBoxCollapsed } = state;
   const { panel, collapsedBox } = crudContextAction;
-  const [styleSider, setStyleSider] = useState("0px");
+  const [styleSider, setStyleSider] = useState("-1px");
   const [opacitySider, setOpacitySider] = useState("1");
 
   useEffect(() => {
@@ -23,12 +23,12 @@ export default function SidePanel({
       setStyleSider("-400px");
       setOpacitySider(0);
     } else {
-      setStyleSider("0px");
+      setStyleSider("-1px");
       setOpacitySider(1);
     }
 
     setTimeout(() => {
-      setStyleSider("0px");
+      setStyleSider("-1px");
       setOpacitySider(1);
     }, 300);
   }, [isPanelCollapsed]);

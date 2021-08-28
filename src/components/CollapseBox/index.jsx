@@ -48,11 +48,11 @@ export default function CollapseBox({
   isPanelCollapsed,
 }) {
   const collapsed = isCollapsed ? "collapsed" : "";
-  const isDiplayed = isPanelCollapsed ? "-400px" : "0px";
+  const isDiplayed = isPanelCollapsed ? "-399px" : "0px";
   return (
     <div
       className="panelBox"
-      style={{ width: "400px", marginLeft: isDiplayed }}
+      style={{ width: "399px", marginLeft: isDiplayed }}
     >
       <TopCollapseBox isOpen={isCollapsed}>{topContent}</TopCollapseBox>
       <div className={"collapseBox " + collapsed}>
