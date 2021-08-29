@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
@@ -30,11 +28,7 @@ function Navigation() {
         collapsible
         collapsed={isNavMenuClose}
         onCollapse={onCollapse}
-        style={{
-          zIndex: 1000,
-          background: "#fff",
-          borderRight: "1px solid #edf0f5",
-        }}
+        className="navigation"
       >
         <div className="logo" />
         <Menu defaultSelectedKeys={["1"]} mode="inline">

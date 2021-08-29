@@ -1,27 +1,49 @@
-// input,
-// button,
-// .ant-input,
-// .ant-btn,
-// .ant-input-number,
-// .ant-select-selector,
-// .ant-picker {
-//   border-radius: 4px !important;
-// }
-
-// .ant-select-selection-search-input {
-//   border-radius: 4px !important;
-// }
-
-// .ant-input-lg,
-// .ant-input-affix-wrapper-lg {
-//   border-radius: 4px !important;
-// }
-
 * {
   font-family: "Nunito", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   font-weight: 600;
 }
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 32px;
+  height: 38px;
+  margin-left: -16px;
+  margin-top: -19px;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.login-form button[type="submit"] {
+  margin-bottom: 20px;
+}
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 .ant-table-thead > tr > th {
   font-weight: 700;
 }
@@ -35,31 +57,4 @@ h4,
 h5,
 h6 {
   font-weight: 700 !important;
-}
-.list-checked {
-  padding-left: 0px;
-  list-style: none;
-}
-.list-checked-item {
-  position: relative;
-  display: block;
-  color: #677788;
-  padding-left: 1.75rem;
-  margin-bottom: 30px;
-  list-style: none;
-}
-
-.list-checked-item::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1rem;
-  height: 1rem;
-  background-image: url(../images/checklist.svg);
-  content: "";
-  margin-top: 0.125rem;
-}
-
-.sideContent * {
-  color: #4f5d75 !important;
 }
