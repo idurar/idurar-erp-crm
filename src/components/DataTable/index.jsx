@@ -45,10 +45,10 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
         title={dataTableTitle}
         ghost={false}
         extra={[
-          <Button onClick={handelDataTableLoad} key={uniqueId}>
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
             Refresh
           </Button>,
-          <AddNewItem key={uniqueId} config={config} />,
+          <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}
         style={{
           padding: "20px 0px",

@@ -13,7 +13,7 @@ export default function ErpLayout({ children, config }) {
       <Layout className="site-layout">
         <HeaderContent />
         <Content
-          className="site-layout-background"
+          className="whiteBox shadow"
           style={{
             padding: "50px 40px",
             margin: "50px auto",

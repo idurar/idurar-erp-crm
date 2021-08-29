@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import { useAppContext } from "@/context/appContext";
 import logoIcon from "@/style/images/logo-icon.png";
-import logoMenu from "@/style/images/logo-menu.png";
+import logoText from "@/style/images/logo-text.png";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -46,18 +46,17 @@ function Navigation() {
         className="navigation"
       >
         <div className="logo">
-          {showLogoApp && (
-            <img
-              src={logoIcon}
-              alt="Logo"
-              // style={{ margin: "0 auto 40px", display: "block" }}
-            />
-          )}
+          <img
+            src={logoIcon}
+            alt="Logo"
+            // style={{ margin: "0 auto 40px", display: "block" }}
+          />
+
           {!showLogoApp && (
             <img
-              src={logoMenu}
+              src={logoText}
               alt="Logo"
-              // style={{ margin: "0 auto 40px", display: "block" }}
+              style={{ marginTop: "3px", marginLeft: "10px" }}
             />
           )}
         </div>
