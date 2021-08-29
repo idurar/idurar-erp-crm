@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
@@ -11,6 +12,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useAppContext } from "@/context/appContext";
+import logoIcon from "@/style/images/logo-icon.png";
+import logoMenu from "@/style/images/logo-menu.png";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -18,7 +21,19 @@ function Navigation() {
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
+  const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
 
+  useEffect(() => {
+    if (isNavMenuClose) {
+      setLogoApp(isNavMenuClose);
+    }
+    const timer = setTimeout(() => {
+      if (!isNavMenuClose) {
+        setLogoApp(isNavMenuClose);
+      }
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [isNavMenuClose]);
   const onCollapse = () => {
     navMenu.collapse();
   };
@@ -30,7 +45,22 @@ function Navigation() {
         onCollapse={onCollapse}
         className="navigation"
       >
-        <div className="logo" />
+        <div className="logo">
+          {showLogoApp && (
+            <img
+              src={logoIcon}
+              alt="Logo"
+              // style={{ margin: "0 auto 40px", display: "block" }}
+            />
+          )}
+          {!showLogoApp && (
+            <img
+              src={logoMenu}
+              alt="Logo"
+              // style={{ margin: "0 auto 40px", display: "block" }}
+            />
+          )}
+        </div>
         <Menu defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<DashboardOutlined />}>
             <Link to="/" />
