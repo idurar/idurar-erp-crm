@@ -1,115 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&display=swap");
 
 @import "~antd/dist/antd.less";
-@import "./variable.less";
-@import "./partials/collapseBox.less";
-@import "./partials/dashboard.less";
+@import "./partials/variable.less";
+@import "./partials/customAntd.less";
 @import "./partials/core.less";
 
-.logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
-}
-.ant-layout {
-  background: #f9fafc !important;
-}
-.site-layout .site-layout-background {
-  background: #fff;
-}
-[data-theme="dark"] .site-layout .site-layout-background {
-  background: #141414;
-}
-.ant-layout-sider-trigger {
-  background: #fff;
-  border-top: 1px solid #edf0f5;
-  border-right: 1px solid #edf0f5;
-  color: #4f5d75;
-}
-.ant-layout-sider-zero-width-trigger {
-  top: 5px;
-  right: 10px;
-  color: #001529;
-  background: none;
-  font-size: 20px;
-}
-
-.ant-menu-inline,
-.ant-menu-vertical,
-.ant-menu-vertical-left {
-  border: none !important;
-}
-// .ant-layout-sider-collapsed > .ant-layout-sider-zero-width-trigger {
-//   right: -50px;
-// }
-.sidePanel {
-  border-right: 1px solid #edf0f5;
-}
-.center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 32px;
-  height: 38px;
-  margin-left: -16px;
-  margin-top: -19px;
-}
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.ant-avatar {
-  float: right;
-  margin-right: 30px;
-  margin-top: 15px;
-}
-
-.ant-dropdown-menu {
-  border-radius: 6px;
-}
-.login-form button[type="submit"] {
-  margin-bottom: 20px;
-}
-.login-form-forgot {
-  float: right;
-}
-.ant-col-rtl .login-form-forgot {
-  float: left;
-}
-.login-form-button {
-  width: 100%;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@import "./partials/dashboard.less";
+@import "./partials/auth.less";
+@import "./partials/navigation.less";
+@import "./partials/header.less";
+@import "./partials/sidePanel.less";
+@import "./partials/collapseBox.less";
+@import "./partials/dataTable.less";
+@import "./partials/erp.less";
+@import "./partials/form.less";

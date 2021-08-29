@@ -60,7 +60,6 @@ export default function SidePanel({
         top: "15px",
       }}
       style={{
-        background: "#FFF",
         left: styleSider,
         opacity: opacitySider,
       }}
