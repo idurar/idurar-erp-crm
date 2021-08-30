@@ -36,7 +36,7 @@ export default function HeaderContent() {
         />
         <div className="info">
           <p className="strong">Mark Williams</p>
-          <p>mark@gmail.com</p>
+          <p>mark.williams@gmail.com</p>
         </div>
       </div>
       <div className="line"></div>
