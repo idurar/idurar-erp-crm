@@ -1,49 +1,112 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { Layout, Avatar, Menu, Dropdown } from "antd";
+import { Layout, Avatar, Menu, Dropdown, Badge, Image } from "antd";
 
-import { UserOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  AppstoreOutlined,
+  SettingOutlined,
+  MailOutlined,
+  LogoutOutlined,
+  BellOutlined,
+} from "@ant-design/icons";
+import photo from "@/style/images/photo.png";
+
 import { logout } from "@/redux/auth/actions";
 import uniqueId from "@/utils/uinqueId";
 const { Header } = Layout;
 
 export default function HeaderContent() {
   const dispatch = useDispatch();
+  const { SubMenu } = Menu;
 
-  const menu = (
-    <Menu>
-      <Menu.Item key={`${uniqueId()}`} onClick={() => dispatch(logout())}>
-        logout
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.taobao.com/"
-        >
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.tmall.com/"
-        >
-          3rd menu item
-        </a>
-      </Menu.Item>
-    </Menu>
+  const menu = <></>;
+  const profileDropdown = (
+    <div
+      className="profileDropdown whiteBox shadow"
+      style={{ minWidth: "200px" }}
+    >
+      <div className="pad15">
+        <Avatar
+          size="large"
+          className="last"
+          src={photo}
+          style={{ float: "left" }}
+        />
+        <div className="info">
+          <p className="strong">Mark Williams</p>
+          <p>mark@gmail.com</p>
+        </div>
+      </div>
+      <div className="line"></div>
+      <div>
+        <Menu>
+          <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
+            <Menu.ItemGroup key="g1" title="Item 1">
+              <Menu.Item key="1">Option 1</Menu.Item>
+              <Menu.Item key="2">Option 2</Menu.Item>
+            </Menu.ItemGroup>
+            <Menu.ItemGroup key="g2" title="Item 2">
+              <Menu.Item key="3">Option 3</Menu.Item>
+              <Menu.Item key="4">Option 4</Menu.Item>
+            </Menu.ItemGroup>
+          </SubMenu>
+          <SubMenu
+            key="sub2"
+            icon={<AppstoreOutlined />}
+            title="Navigation Two"
+          >
+            <Menu.Item key="5">Option 5</Menu.Item>
+            <Menu.Item key="6">Option 6</Menu.Item>
+            <SubMenu key="sub3" title="Submenu">
+              <Menu.Item key="7">Option 7</Menu.Item>
+              <Menu.Item key="8">Option 8</Menu.Item>
+            </SubMenu>
+          </SubMenu>
+          <SubMenu
+            key="sub4"
+            icon={<SettingOutlined />}
+            title="Navigation Three"
+          >
+            <Menu.Item key="9">Option 9</Menu.Item>
+            <Menu.Item key="10">Option 10</Menu.Item>
+            <Menu.Item key="11">Option 11</Menu.Item>
+            <Menu.Item key="12">Option 12</Menu.Item>
+          </SubMenu>
+        </Menu>
+      </div>
+      <div className="line"></div>
+      <div>
+        <Menu>
+          <Menu.Item
+            icon={<LogoutOutlined />}
+            key={`${uniqueId()}`}
+            onClick={() => dispatch(logout())}
+          >
+            logout
+          </Menu.Item>
+        </Menu>
+      </div>
+    </div>
   );
   return (
-    <Header
-      className="site-layout-background"
-      style={{ padding: 0, background: "none" }}
-    >
-      <Dropdown overlay={menu} placement="bottomRight">
-        <Avatar icon={<UserOutlined />} />
+    <div className="headerIcon" style={{ padding: 0, background: "none" }}>
+      <Dropdown
+        overlay={profileDropdown}
+        trigger={["click"]}
+        placement="bottomRight"
+      >
+        {/* <Badge dot> */}
+        <Avatar className="last" src={photo} />
+        {/* </Badge> */}
       </Dropdown>
-    </Header>
+      <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+        <Avatar icon={<AppstoreOutlined />} />
+      </Dropdown>
+      <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+        <Avatar icon={<BellOutlined />} />
+      </Dropdown>
+    </div>
   );
 }
