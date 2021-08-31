@@ -11,7 +11,7 @@ export default function Admin() {
     outputValue: "_id",
   };
 
-  const panelTitle = "Admin Panel";
+  const PANEL_TITLE = "Admin Panel";
   const dataTableTitle = "Admin Lists";
   const entityDisplayLabels = ["email"];
 
@@ -36,7 +36,7 @@ export default function Admin() {
 
   const config = {
     entity,
-    panelTitle,
+    PANEL_TITLE,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,
