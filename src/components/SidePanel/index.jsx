@@ -13,6 +13,7 @@ export default function SidePanel({
   bottomContent,
   fixHeaderPanel,
 }) {
+  const { ADD_NEW_ENTITY } = config;
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose, isBoxCollapsed } = state;
   const { panel, collapsedBox } = crudContextAction;
@@ -84,7 +85,7 @@ export default function SidePanel({
       >
         {fixHeaderPanel}
         <CollapseBox
-          buttonTitle="Add new Customer"
+          buttonTitle={ADD_NEW_ENTITY}
           isCollapsed={isBoxCollapsed}
           onCollapse={collapsePanelBox}
           topContent={topContent}
