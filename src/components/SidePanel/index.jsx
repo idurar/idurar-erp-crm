@@ -16,26 +16,38 @@ export default function SidePanel({
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose, isBoxCollapsed } = state;
   const { panel, collapsedBox } = crudContextAction;
-  const [styleSider, setStyleSider] = useState("-1px");
-  const [opacitySider, setOpacitySider] = useState("1");
+  const [isSidePanelClose, setSidePanel] = useState(isPanelClose);
+  const [leftSider, setLeftSider] = useState("-1px");
+  const [opacitySider, setOpacitySider] = useState(0);
+  const [paddingTopSider, setPaddingTopSider] = useState("20px");
 
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
 
   useEffect(() => {
+    let timer = [];
     if (isPanelClose) {
-      setStyleSider("-400px");
       setOpacitySider(0);
+      setPaddingTopSider("20px");
+
+      timer = setTimeout(() => {
+        setLeftSider("-1px");
+        setSidePanel(isPanelClose);
+      }, 200);
     } else {
+      setSidePanel(isPanelClose);
+      setLeftSider(0);
+      timer = setTimeout(() => {
+        setOpacitySider(1);
+        setPaddingTopSider(0);
+      }, 200);
       if (!isNavMenuClose) {
         navMenu.close();
       }
-      setStyleSider("-1px");
-      setOpacitySider(1);
     }
-    setStyleSider("-1px");
-    setOpacitySider(1);
+
+    return () => clearTimeout(timer);
   }, [isPanelClose]);
 
   const collapsePanel = () => {
@@ -51,7 +63,7 @@ export default function SidePanel({
       trigger={<MenuOutlined className="trigger" />}
       width={400}
       collapsible
-      collapsed={isPanelClose}
+      collapsed={isSidePanelClose}
       collapsedWidth={"0px"}
       onCollapse={collapsePanel}
       className="sidePanel"
@@ -60,19 +72,25 @@ export default function SidePanel({
         top: "15px",
       }}
       style={{
-        left: styleSider,
-        opacity: opacitySider,
+        left: leftSider,
       }}
     >
-      {fixHeaderPanel}
-      <CollapseBox
-        buttonTitle="Add new Customer"
-        isPanelClose={isPanelClose}
-        isCollapsed={isBoxCollapsed}
-        onCollapse={collapsePanelBox}
-        topContent={topContent}
-        bottomContent={bottomContent}
-      ></CollapseBox>
+      <div
+        className="sidePanelContent"
+        style={{
+          opacity: opacitySider,
+          paddingTop: paddingTopSider,
+        }}
+      >
+        {fixHeaderPanel}
+        <CollapseBox
+          buttonTitle="Add new Customer"
+          isCollapsed={isBoxCollapsed}
+          onCollapse={collapsePanelBox}
+          topContent={topContent}
+          bottomContent={bottomContent}
+        ></CollapseBox>
+      </div>
     </Sider>
   );
 }

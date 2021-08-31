@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import DefaultLayout from "../DefaultLayout";
 import HeaderContent from "../HeaderContent";
@@ -12,10 +12,26 @@ const { Content } = Layout;
 
 const ContentBox = ({ children }) => {
   const { state: stateCrud, crudContextAction } = useCrudContext();
-  const { state: stateApp, appContextAction } = useAppContext();
+  const { state: stateApp } = useAppContext();
   const { isPanelClose } = stateCrud;
   const { isNavMenuClose } = stateApp;
   const { panel } = crudContextAction;
+
+  const [isSidePanelClose, setSidePanel] = useState(isPanelClose);
+
+  useEffect(() => {
+    let timer = [];
+    if (isPanelClose) {
+      timer = setTimeout(() => {
+        setSidePanel(isPanelClose);
+      }, 200);
+    } else {
+      setSidePanel(isPanelClose);
+    }
+
+    return () => clearTimeout(timer);
+  }, [isPanelClose]);
+
   useEffect(() => {
     if (!isNavMenuClose) {
       panel.close();
@@ -27,7 +43,7 @@ const ContentBox = ({ children }) => {
       style={{
         padding: "50px 40px",
         margin: "50px auto",
-        width: isPanelClose ? "100%" : "830px",
+        width: isSidePanelClose ? "100%" : "830px",
         maxWidth: "1000px",
       }}
     >
