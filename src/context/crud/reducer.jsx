@@ -4,7 +4,7 @@ export const initialState = {
   isModalOpen: false,
   isPanelClose: true,
   isBoxCollapsed: false,
-  isReadBoxOpen: true,
+  isReadBoxOpen: false,
   isAdvancedBoxOpen: false,
   isEditBoxOpen: false,
 };

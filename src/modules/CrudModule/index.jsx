@@ -19,9 +19,11 @@ import { CrudLayout } from "@/layout";
 import CrudDataTable from "./CrudDataTable";
 
 function SidePanelTopContent({ config, formElements }) {
-  const { crudContextAction } = useCrudContext();
+  const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
+
+  const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
 
@@ -36,13 +38,6 @@ function SidePanelTopContent({ config, formElements }) {
     }
   }, [currentItem]);
 
-  //  const Show = () => {
-  //    dispatch(crud.currentItem(item));
-  //    panel.open();
-  //    collapsedBox.open();
-  //    readBox.open();
-  //  };
-
   const removeItem = () => {
     dispatch(crud.currentAction("delete", currentItem));
     modal.open();
@@ -52,9 +47,11 @@ function SidePanelTopContent({ config, formElements }) {
     editBox.open();
     collapsedBox.open();
   };
+
+  const show = isReadBoxOpen || isEditBoxOpen ? { opacity: 1 } : { opacity: 0 };
   return (
     <>
-      <Row>
+      <Row style={show}>
         <Col span={13}>
           <p style={{ marginBottom: "10px" }}>{labels}</p>
         </Col>
