@@ -48,12 +48,14 @@ function DropDownRowMenu({ row }) {
     readBox.open();
   };
   function Edit() {
+    dispatch(crud.currentItem(item));
     dispatch(crud.currentAction("update", item));
     editBox.open();
     panel.open();
     collapsedBox.open();
   }
   function UpdatePassword() {
+    dispatch(crud.currentItem(item));
     dispatch(crud.currentAction("update", item));
     advancedBox.open();
     panel.open();

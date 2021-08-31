@@ -45,7 +45,6 @@ function SidePanelTopContent({ config, formElements }) {
   const editItem = () => {
     dispatch(crud.currentAction("update", currentItem));
     editBox.open();
-    collapsedBox.open();
   };
 
   const show = isReadBoxOpen || isEditBoxOpen ? { opacity: 1 } : { opacity: 0 };

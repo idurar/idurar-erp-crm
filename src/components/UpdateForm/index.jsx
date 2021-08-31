@@ -23,9 +23,9 @@ export default function UpdateForm({ config, formElements }) {
   const { result: currentItem } = useSelector(selectCurrentItem);
 
   const showCurrentRecord = () => {
-    dispatch(crud.currentItem(currentItem));
-    panel.open();
-    collapsedBox.open();
+    // dispatch(crud.currentItem(currentItem));
+    // panel.open();
+    // collapsedBox.open();
     readBox.open();
   };
 
