@@ -52,7 +52,7 @@ export default function Quote() {
     },
   ];
 
-  const panelTitle = "quote";
+  const PANEL_TITLE = "quote";
   const dataTableTitle = "quotes Lists";
   const ADD_NEW_ENTITY = "Add new quote";
   const DATATABLE_TITLE = "quotes List";
@@ -62,7 +62,7 @@ export default function Quote() {
 
   const config = {
     entity,
-    panelTitle,
+    PANEL_TITLE,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,

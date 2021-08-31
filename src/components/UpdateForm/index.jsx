@@ -5,6 +5,8 @@ import { crud } from "@/redux/crud/actions";
 import { useCrudContext } from "@/context/crud";
 import { selectUpdatedItem } from "@/redux/crud/selectors";
 
+import { selectCurrentItem } from "@/redux/crud/selectors";
+
 import { Button, Form } from "antd";
 import Loading from "@/components/Loading";
 
@@ -14,8 +16,20 @@ export default function UpdateForm({ config, formElements }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
   const { state, crudContextAction } = useCrudContext();
-  const { panel, collapsedBox, readBox } = crudContextAction;
 
+  /////
+
+  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
+  const { result: currentItem } = useSelector(selectCurrentItem);
+
+  const showCurrentRecord = () => {
+    dispatch(crud.currentItem(currentItem));
+    panel.open();
+    collapsedBox.open();
+    readBox.open();
+  };
+
+  /////
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
@@ -70,10 +84,23 @@ export default function UpdateForm({ config, formElements }) {
       <Loading isLoading={isLoading}>
         <Form form={form} layout="vertical" onFinish={onSubmit}>
           {formElements}
-          <Form.Item>
+          <Form.Item
+            style={{
+              display: "inline-block",
+              paddingRight: "5px",
+            }}
+          >
             <Button type="primary" htmlType="submit">
-              Submit
+              Save
             </Button>
+          </Form.Item>
+          <Form.Item
+            style={{
+              display: "inline-block",
+              paddingLeft: "5px",
+            }}
+          >
+            <Button onClick={showCurrentRecord}>Cancel</Button>
           </Form.Item>
         </Form>
       </Loading>

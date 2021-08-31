@@ -52,7 +52,7 @@ export default function Invoice() {
     },
   ];
 
-  const panelTitle = "invoice";
+  const PANEL_TITLE = "invoice";
   const dataTableTitle = "invoices Lists";
   const ADD_NEW_ENTITY = "Add new invoice";
   const DATATABLE_TITLE = "invoices List";
@@ -62,7 +62,7 @@ export default function Invoice() {
 
   const config = {
     entity,
-    panelTitle,
+    PANEL_TITLE,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,
