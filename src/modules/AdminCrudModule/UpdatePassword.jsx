@@ -15,7 +15,7 @@ export default function UpdatePassword({ config }) {
   const dispatch = useDispatch();
   const { current } = useSelector(selectUpdatedItem);
 
-  const { state } = useCrudContext();
+  const { state, crudContextAction } = useCrudContext();
 
   const [form] = Form.useForm();
 
@@ -29,6 +29,16 @@ export default function UpdatePassword({ config }) {
     onFetch(updateFn);
   };
 
+  /////
+
+  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
+
+  const showCurrentRecord = () => {
+    // dispatch(crud.currentItem(currentItem));
+    // panel.open();
+    // collapsedBox.open();
+    readBox.open();
+  };
   useEffect(() => {
     if (isSuccess) {
       // readBox.open();
@@ -47,7 +57,7 @@ export default function UpdatePassword({ config }) {
     <div style={show}>
       <Loading isLoading={isLoading}>
         <h3>Update Password</h3>
-        <div className="space"></div>
+        <div className="space10"></div>
         <Form form={form} layout="vertical" onFinish={handelSubmit}>
           <Form.Item
             label="New Password"
@@ -66,10 +76,23 @@ export default function UpdatePassword({ config }) {
               autoComplete="off"
             />
           </Form.Item>
-          <Form.Item>
+          <Form.Item
+            style={{
+              display: "inline-block",
+              paddingRight: "5px",
+            }}
+          >
             <Button type="primary" htmlType="submit">
-              Update
+              Save
             </Button>
+          </Form.Item>
+          <Form.Item
+            style={{
+              display: "inline-block",
+              paddingLeft: "5px",
+            }}
+          >
+            <Button onClick={showCurrentRecord}>Cancel</Button>
           </Form.Item>
         </Form>
       </Loading>
