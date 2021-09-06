@@ -81,17 +81,16 @@ const request = {
     }
   },
 
-  search: async (entity, source, option = {}) => {
+  search: async (entity, source, options = {}) => {
     axiosInstance.defaults.headers = {
       [ACCESS_TOKEN_NAME]: tokenCookies.get(),
     };
     try {
-      let query = "";
-      if (option !== {}) {
-        let fields = option.fields ? "fields=" + option.fields : "";
-        let question = option.question ? "&q=" + option.question : "";
-        query = `?${fields}${question}`;
+      let query = "?";
+      for (var key in options) {
+        query += key + "=" + options[key] + "&";
       }
+      query = query.slice(0, -1);
       // headersInstance.cancelToken = source.token;
       const response = await axiosInstance.get(entity + "/search" + query, {
         cancelToken: source.token,
@@ -103,18 +102,17 @@ const request = {
     }
   },
 
-  list: async (entity, option = {}) => {
+  list: async (entity, options = {}) => {
     axiosInstance.defaults.headers = {
       [ACCESS_TOKEN_NAME]: tokenCookies.get(),
     };
-    console.log(tokenCookies.get());
+
     try {
-      let query = "";
-      if (option !== {}) {
-        let page = option.page ? "page=" + option.page : "";
-        let items = option.items ? "&items=" + option.items : "";
-        query = `?${page}${items}`;
+      let query = "?";
+      for (var key in options) {
+        query += key + "=" + options[key] + "&";
       }
+      query = query.slice(0, -1);
 
       const response = await axiosInstance.get(entity + "/list" + query);
       return successHandler(response);

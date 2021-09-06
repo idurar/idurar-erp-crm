@@ -31,7 +31,8 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    dispatch(crud.list(entity, pagination.current));
+    const options = { page: pagination.current || 1 };
+    dispatch(crud.list(entity, options));
   }, []);
 
   useEffect(() => {

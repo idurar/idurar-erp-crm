@@ -32,16 +32,14 @@ export default function SearchItem({ config }) {
   }, [isLoading]);
   const onSearch = (searchText) => {
     isTyping.current = true;
-
+    const options = {
+      q: searchText,
+      fields: searchFields,
+    };
     clearTimeout(delayTimer);
     delayTimer = setTimeout(function () {
       if (isTyping.current && searchText !== "") {
-        dispatch(
-          crud.search(entity, source, {
-            question: searchText,
-            fields: searchFields,
-          })
-        );
+        dispatch(crud.search(entity, source, options));
       }
       isTyping.current = false;
     }, 500);

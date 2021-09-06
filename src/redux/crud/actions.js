@@ -27,14 +27,14 @@ export const crud = {
       payload: { ...data },
     });
   },
-  list: (entity, currentPage = 1) => async (dispatch) => {
+  list: (entity, options = { page: 1 }) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "list",
       payload: null,
     });
 
-    let data = await request.list(entity, { page: currentPage });
+    let data = await request.list(entity, options);
 
     if (data.success === true) {
       const result = {
@@ -42,6 +42,7 @@ export const crud = {
         pagination: {
           current: parseInt(data.pagination.page, 10),
           pageSize: 10,
+          showSizeChanger: false,
           total: parseInt(data.pagination.count, 10),
         },
       };
@@ -165,7 +166,7 @@ export const crud = {
     }
   },
 
-  search: (entity, source, option) => async (dispatch) => {
+  search: (entity, source, options) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "search",
@@ -175,7 +176,7 @@ export const crud = {
     source.cancel();
 
     source = request.source();
-    let data = await request.search(entity, source, option);
+    let data = await request.search(entity, source, options);
 
     if (data.success === true) {
       dispatch({

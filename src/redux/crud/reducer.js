@@ -18,6 +18,7 @@ const INITIAL_STATE = {
         current: 1,
         pageSize: 10,
         total: 1,
+        showSizeChanger: false,
       },
     },
     isLoading: false,
@@ -63,7 +64,6 @@ const crudReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [keyState]: {
-          ...state[keyState],
           result: payload,
           isLoading: false,
           isSuccess: true,
