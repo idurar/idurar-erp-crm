@@ -15,6 +15,9 @@ const Admin = lazy(() =>
 const Customer = lazy(() =>
   import(/*webpackChunkName:'CustomerPage'*/ "@/pages/Customer")
 );
+const Currency = lazy(() =>
+  import(/*webpackChunkName:'CurrencyPage'*/ "@/pages/Currency")
+);
 const Invoice = lazy(() =>
   import(/*webpackChunkName:'InvoicePage'*/ "@/pages/Invoice")
 );
@@ -37,6 +40,7 @@ export default function AppRouter() {
         <Switch location={location} key={location.pathname}>
           <PrivateRoute path="/" component={Dashboard} exact />
           <PrivateRoute component={Customer} path="/customer" exact />
+          <PrivateRoute component={Currency} path="/currency" exact />
           <PrivateRoute component={Admin} path="/admin" exact />
           <PrivateRoute component={Invoice} path="/invoice" exact />
           <PrivateRoute component={Quote} path="/quote" exact />

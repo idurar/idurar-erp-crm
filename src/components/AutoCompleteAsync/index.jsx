@@ -52,13 +52,12 @@ export default function AutoCompleteAsync({
 
     clearTimeout(delayTimer);
     delayTimer = setTimeout(function () {
+      const options = {
+        q: searchText,
+        fields: searchFields,
+      };
       if (isTyping.current && searchText !== "") {
-        dispatch(
-          search.list(entity, keyRef, source, {
-            question: searchText,
-            fields: searchFields,
-          })
-        );
+        dispatch(search.list(entity, keyRef, source, options));
       }
       isTyping.current = false;
     }, 500);
