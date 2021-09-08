@@ -71,6 +71,13 @@ function Navigation() {
               <span>Customer</span>
             </Link>
           </Menu.Item>
+          <Menu.Item key="Currency">
+            <Link to="/currency">
+              <CustomerServiceOutlined />
+              <span>Currency</span>
+            </Link>
+          </Menu.Item>
+
           <Menu.Item key="21" icon={<FileTextOutlined />}>
             <Link to="/invoice" />
             Invoice
@@ -83,7 +90,6 @@ function Navigation() {
             <Link to="/admin" />
             Admins Management
           </Menu.Item>
-
           <Menu.Item key="32" icon={<SettingOutlined />}>
             <Link to="/settings" />
             Settings

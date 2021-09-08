@@ -1,10 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Form, Input, InputNumber, Button, Select, Divider, Space } from "antd";
-import { DatePicker } from "@/components/CustomAntd";
-import { Row, Col } from "antd";
-import AutoCompleteAsync from "@/components/AutoCompleteAsync";
+import {
+  Form,
+  Input,
+  InputNumber,
+  Button,
+  Select,
+  Divider,
+  Row,
+  Col,
+} from "antd";
+
 import { PlusOutlined } from "@ant-design/icons";
+import { DatePicker } from "@/components/CustomAntd";
+
+import AutoCompleteAsync from "@/components/AutoCompleteAsync";
 import ItemRow from "./ItemRow";
+import SelectAsync from "@/components/SelectAsync";
 
 export default function ErpForm({ subTotal, current = null }) {
   const { Option } = Select;
@@ -97,11 +108,10 @@ export default function ErpForm({ subTotal, current = null }) {
               },
             ]}
           >
-            <Select>
-              <Option value="Dollar">Dollar</Option>
-              <Option value="Euro">Euro</Option>
-              <Option value="Dinar">Dinar Algerian</Option>
-            </Select>
+            <SelectAsync
+              entity={"currency"}
+              displayLabels={["name"]}
+            ></SelectAsync>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>

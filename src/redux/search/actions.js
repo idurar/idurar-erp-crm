@@ -28,7 +28,7 @@ export const search = {
     });
   },
 
-  list: (entity, keyRef, source, option) => async (dispatch) => {
+  list: (entity, keyRef, source, options) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: keyRef,
@@ -36,7 +36,7 @@ export const search = {
 
     source.cancel();
     source = request.source();
-    let data = await request.search(entity, source, option);
+    let data = await request.search(entity, source, options);
 
     if (data.success === true) {
       dispatch({
