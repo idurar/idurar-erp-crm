@@ -45,7 +45,7 @@ export default function Invoice() {
       title: "Status",
       dataIndex: "status",
       render: (status) => {
-        let color = status === "Draft" ? "volcano" : "green";
+        let color = status === "draft" ? "volcano" : "green";
 
         return <Tag color={color}>{status.toUpperCase()}</Tag>;
       },
