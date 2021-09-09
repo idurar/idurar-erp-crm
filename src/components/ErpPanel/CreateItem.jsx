@@ -112,20 +112,7 @@ export default function CreateItem({ config }) {
         style={{
           padding: "20px 0px",
         }}
-      >
-        <Row>
-          <Statistic title="Status" value="Pending" />
-          <Statistic
-            title="Price"
-            prefix="$"
-            value={568.08}
-            style={{
-              margin: "0 32px",
-            }}
-          />
-          <Statistic title="Balance" prefix="$" value={3345.08} />
-        </Row>
-      </PageHeader>
+      ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
         <Form

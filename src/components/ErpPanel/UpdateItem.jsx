@@ -127,8 +127,8 @@ export default function UpdateItem({ config }) {
         onBack={() => updatePanel.close()}
         title={UPDATE_ENTITY}
         ghost={false}
-        tags={<Tag color="volcano">Draft</Tag>}
-        subTitle="This is update page"
+        // tags={<Tag color="volcano">Draft</Tag>}
+        // subTitle="This is update page"
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -142,20 +142,7 @@ export default function UpdateItem({ config }) {
         style={{
           padding: "20px 0px",
         }}
-      >
-        <Row>
-          <Statistic title="Status" value="Pending" />
-          <Statistic
-            title="Price"
-            prefix="$"
-            value={568.08}
-            style={{
-              margin: "0 32px",
-            }}
-          />
-          <Statistic title="Balance" prefix="$" value={3345.08} />
-        </Row>
-      </PageHeader>
+      ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
         <Form
