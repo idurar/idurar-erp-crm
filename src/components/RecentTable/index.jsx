@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Dropdown, Menu, Table } from "antd";
-import { useQuery } from "react-query";
+
 import { request } from "@/request";
+import useFetch from "@/hooks/useFetch";
 
 import {
   EllipsisOutlined,
@@ -43,17 +44,20 @@ export default function RecentTable({ ...props }) {
     },
   ];
 
-  const { isLoading, error, data } = useQuery(entity, () =>
-    request.list(entity)
-  );
-  console.log("use query data", data);
-  useEffect(() => {}, [data]);
+  const asyncList = () => {
+    return request.list(entity);
+  };
+  const { result, isLoading, isSuccess } = useFetch(asyncList);
+  const firstFiveItems = () => {
+    if (isSuccess && result) return result.slice(0, 5);
+    return [];
+  };
   return (
     <>
       <Table
         columns={dataTableColumns}
         rowKey={(item) => item._id}
-        dataSource={data && data.result}
+        dataSource={isSuccess && firstFiveItems()}
         pagination={false}
         loading={isLoading}
       />

@@ -4,11 +4,10 @@ import { Form, Input, InputNumber, Space, Divider, Row, Col } from "antd";
 import { Layout, Breadcrumb, Statistic, Progress, Tag } from "antd";
 
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 import { DashboardLayout } from "@/layout";
 import RecentTable from "@/components/RecentTable";
-const queryClient = new QueryClient();
+
 const TopCard = ({ title, tagContent, tagColor, prefix }) => {
   return (
     <Col className="gutter-row" span={6}>
@@ -244,36 +243,31 @@ export default function Dashboard() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
-        <QueryClientProvider client={queryClient}>
-          <Col className="gutter-row" span={12}>
-            <div className="whiteBox shadow">
-              <div className="pad20">
-                <h3 style={{ color: "#22075e", marginBottom: 5 }}>
-                  Recent Invoices
-                </h3>
-              </div>
-
-              <RecentTable
-                entity={"invoice"}
-                dataTableColumns={dataTableColumns}
-              />
+        <Col className="gutter-row" span={12}>
+          <div className="whiteBox shadow">
+            <div className="pad20">
+              <h3 style={{ color: "#22075e", marginBottom: 5 }}>
+                Recent Invoices
+              </h3>
             </div>
-          </Col>
 
-          <Col className="gutter-row" span={12}>
-            <div className="whiteBox shadow">
-              <div className="pad20">
-                <h3 style={{ color: "#22075e", marginBottom: 5 }}>
-                  Recent Quotes
-                </h3>
-              </div>
-              <RecentTable
-                entity={"quote"}
-                dataTableColumns={dataTableColumns}
-              />
+            <RecentTable
+              entity={"invoice"}
+              dataTableColumns={dataTableColumns}
+            />
+          </div>
+        </Col>
+
+        <Col className="gutter-row" span={12}>
+          <div className="whiteBox shadow">
+            <div className="pad20">
+              <h3 style={{ color: "#22075e", marginBottom: 5 }}>
+                Recent Quotes
+              </h3>
             </div>
-          </Col>
-        </QueryClientProvider>
+            <RecentTable entity={"quote"} dataTableColumns={dataTableColumns} />
+          </div>
+        </Col>
       </Row>
     </DashboardLayout>
   );
