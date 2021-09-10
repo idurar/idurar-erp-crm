@@ -4,26 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import PageLoader from "@/components/PageLoader";
-
-const Dashboard = lazy(() =>
-  import(/*webpackChunkName:'DashboardPage'*/ "@/pages/Dashboard")
-);
-const Admin = lazy(() =>
-  import(/*webpackChunkName:'AdminPage'*/ "@/pages/Admin")
-);
-
-const Customer = lazy(() =>
-  import(/*webpackChunkName:'CustomerPage'*/ "@/pages/Customer")
-);
-const Currency = lazy(() =>
-  import(/*webpackChunkName:'CurrencyPage'*/ "@/pages/Currency")
-);
-const Invoice = lazy(() =>
-  import(/*webpackChunkName:'InvoicePage'*/ "@/pages/Invoice")
-);
-const Quote = lazy(() =>
-  import(/*webpackChunkName:'QuotePage'*/ "@/pages/Quote")
-);
+import { routesConfig } from "./RoutesConfig";
 
 const Logout = lazy(() =>
   import(/*webpackChunkName:'LogoutPage'*/ "@/pages/Logout")
@@ -38,12 +19,20 @@ export default function AppRouter() {
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={false}>
         <Switch location={location} key={location.pathname}>
-          <PrivateRoute path="/" component={Dashboard} exact />
-          <PrivateRoute component={Customer} path="/customer" exact />
-          <PrivateRoute component={Currency} path="/currency" exact />
-          <PrivateRoute component={Admin} path="/admin" exact />
-          <PrivateRoute component={Invoice} path="/invoice" exact />
-          <PrivateRoute component={Quote} path="/quote" exact />
+          {routesConfig.map((routeItem) => {
+            return (
+              <PrivateRoute
+                key={routeItem.component}
+                path={routeItem.path}
+                exact={routeItem.exact || true}
+                component={lazy(() =>
+                  import(
+                    /* webpackChunkName: "[request]" */ `@/pages/${routeItem.component}`
+                  )
+                )}
+              />
+            );
+          })}
           <PrivateRoute component={Logout} path="/logout" exact />
           <PublicRoute path="/login" render={() => <Redirect to="/" />} />
           <Route
