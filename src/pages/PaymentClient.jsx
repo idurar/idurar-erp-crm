@@ -4,8 +4,8 @@ import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import CrudModule from "@/modules/CrudModule";
 import CurrencyForm from "@/forms/CurrencyForm";
 
-export default function Currency() {
-  const entity = "currency";
+export default function PaymentClient() {
+  const entity = "paymentClient";
   const searchConfig = {
     displayLabels: ["name"],
     searchFields: "name",
@@ -38,49 +38,28 @@ export default function Currency() {
   ];
   const dataTableColumns = [
     {
-      title: "Currency Name",
-      dataIndex: "name",
+      title: "Client",
+      dataIndex: ["client", "company"],
     },
     {
-      title: "Symbol",
-      dataIndex: "symbol",
+      title: "Invoice Number",
+      dataIndex: ["invoice", "number"],
     },
     {
-      title: "Decimal Sep",
-      dataIndex: "decimalSeparator",
+      title: "Invoice Year",
+      dataIndex: ["invoice", "year"],
     },
     {
-      title: "Thousand Sep",
-      dataIndex: "thousandSeparator",
-    },
-    {
-      title: "Default",
-      dataIndex: "isDefault",
-      key: "isDefault",
-      render: (text, row) => {
-        return {
-          props: {
-            style: {
-              width: "60px",
-            },
-          },
-          children: (
-            <Switch
-              checked={text}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
-        };
-      },
+      title: "Date",
+      dataIndex: "date",
     },
   ];
 
-  const ADD_NEW_ENTITY = "Add new currency";
-  const DATATABLE_TITLE = "currencys List";
-  const ENTITY_NAME = "currency";
-  const CREATE_ENTITY = "Create currency";
-  const UPDATE_ENTITY = "Update currency";
+  const ADD_NEW_ENTITY = "Add new payment";
+  const DATATABLE_TITLE = "payments List";
+  const ENTITY_NAME = "payment";
+  const CREATE_ENTITY = "Create payment";
+  const UPDATE_ENTITY = "Update payment";
   const PANEL_TITLE = "Currency Panel";
 
   const config = {
