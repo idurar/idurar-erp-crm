@@ -1,3 +1,4 @@
+import React from "react";
 import {
   DesktopOutlined,
   SettingOutlined,
@@ -7,6 +8,7 @@ import {
   DashboardOutlined,
   TeamOutlined,
   UserOutlined,
+  CreditCardOutlined,
 } from "@ant-design/icons";
 
 export const IconMenu = ({ name }) => {
@@ -19,16 +21,17 @@ export const IconMenu = ({ name }) => {
     DashboardOutlined: DashboardOutlined,
     TeamOutlined: TeamOutlined,
     UserOutlined: UserOutlined,
+    CreditCardOutlined: CreditCardOutlined,
     Default: DesktopOutlined,
   };
 
-  const IconTag = components[name || "Default"] || UserOutlined;
+  const IconTag = components[name || "Default"] || SettingOutlined;
   return <IconTag />;
 };
 
 export const routesConfig = [
   {
-    path: ["/", "/dashboard"],
+    path: "/",
     component: "Dashboard",
     icon: "DashboardOutlined",
   },
@@ -51,6 +54,18 @@ export const routesConfig = [
     path: "/quote",
     component: "Quote",
     icon: "FileSyncOutlined",
+  },
+  {
+    path: "/payment/client",
+    component: "PaymentClient",
+    title: "Payment Client",
+    icon: "CreditCardOutlined",
+  },
+  {
+    path: "/payment/mode",
+    component: "PaymentMode",
+    title: "Payment Mode",
+    icon: "CreditCardOutlined",
   },
   {
     path: "/admin",

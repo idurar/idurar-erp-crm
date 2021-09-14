@@ -61,7 +61,7 @@ export default function Navigation() {
                 icon={<IconMenu name={routeItem.icon} />}
               >
                 <Link to={routeItem.path} />
-                {routeItem.component}
+                {routeItem.title || routeItem.component}
               </Menu.Item>
             );
           })}

@@ -2,10 +2,10 @@ import React from "react";
 import { Switch } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import CrudModule from "@/modules/CrudModule";
-import CurrencyForm from "@/forms/CurrencyForm";
+import PaymentModeForm from "@/forms/PaymentModeForm";
 
-export default function Currency() {
-  const entity = "currency";
+export default function PaymentMode() {
+  const entity = "PaymentMode";
   const searchConfig = {
     displayLabels: ["name"],
     searchFields: "name",
@@ -16,45 +16,33 @@ export default function Currency() {
 
   const readColumns = [
     {
-      title: "Currency Name",
+      title: "Payment Mode",
       dataIndex: "name",
     },
     {
-      title: "Symbol",
-      dataIndex: "symbol",
-    },
-    {
-      title: "Decimal Sep",
-      dataIndex: "decimalSeparator",
-    },
-    {
-      title: "Thousand Sep",
-      dataIndex: "thousandSeparator",
+      title: "description",
+      dataIndex: "description",
     },
     {
       title: "Default",
       dataIndex: "isDefault",
     },
+    {
+      title: "enabled",
+      dataIndex: "enabled",
+    },
   ];
   const dataTableColumns = [
     {
-      title: "Currency Name",
+      title: "Payment Mode",
       dataIndex: "name",
     },
     {
-      title: "Symbol",
-      dataIndex: "symbol",
+      title: "description",
+      dataIndex: "description",
     },
     {
-      title: "Decimal Sep",
-      dataIndex: "decimalSeparator",
-    },
-    {
-      title: "Thousand Sep",
-      dataIndex: "thousandSeparator",
-    },
-    {
-      title: "Default",
+      title: "isDefault",
       dataIndex: "isDefault",
       key: "isDefault",
       render: (text, row) => {
@@ -74,13 +62,34 @@ export default function Currency() {
         };
       },
     },
+    {
+      title: "enabled",
+      dataIndex: "enabled",
+      key: "enabled",
+      render: (text, row) => {
+        return {
+          props: {
+            style: {
+              width: "60px",
+            },
+          },
+          children: (
+            <Switch
+              checked={text}
+              checkedChildren={<CheckOutlined />}
+              unCheckedChildren={<CloseOutlined />}
+            />
+          ),
+        };
+      },
+    },
   ];
 
-  const ADD_NEW_ENTITY = "Add new currency";
-  const DATATABLE_TITLE = "currencys List";
-  const ENTITY_NAME = "currency";
-  const CREATE_ENTITY = "Create currency";
-  const UPDATE_ENTITY = "Update currency";
+  const ADD_NEW_ENTITY = "Add new payment mode";
+  const DATATABLE_TITLE = "payment modes List";
+  const ENTITY_NAME = "payment mode";
+  const CREATE_ENTITY = "Create payment mode";
+  const UPDATE_ENTITY = "Update payment mode";
   const PANEL_TITLE = "Currency Panel";
 
   const config = {
@@ -98,8 +107,8 @@ export default function Currency() {
   };
   return (
     <CrudModule
-      createForm={<CurrencyForm />}
-      updateForm={<CurrencyForm isUpdateForm={true} />}
+      createForm={<PaymentModeForm />}
+      updateForm={<PaymentModeForm isUpdateForm={true} />}
       config={config}
     />
   );
