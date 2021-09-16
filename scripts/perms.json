@@ -1,0 +1,502 @@
+[
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "777c7c2ded6546d189653e11" },
+    "name": "test-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "84e8f19fed68c47e9e50531a" },
+    "name": "doctors-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "a9c5c81ca545d975388d67d7" },
+    "name": "doctors-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "552c36117fb2dd592dbad8f3" },
+    "name": "doctors-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "ed4afa14b658f587f8e67481" },
+    "name": "patients-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "d5a27f4926d1ea98e7b7cdd8" },
+    "name": "patients-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "c60307a7b63a7b52906a1459" },
+    "name": "patients-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "48240fc07c4be46eb1ca3b37" },
+    "name": "patients-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "16efc5d466c8dd57527f3396" },
+    "name": "employees-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "4d8445b6c2490079c757420a" },
+    "name": "employees-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "28a1e945470bcbd1803a39c8" },
+    "name": "employees-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "b3c948c37fc6f22dad753dd8" },
+    "name": "employees-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "3410c6436ab11e6f35470d56" },
+    "name": "departements-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "839c01235f6c69aa7879e17a" },
+    "name": "departements-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "b1cc7ccc4e8c3b4ef4c8fad9" },
+    "name": "departements-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "4dead8cda1c21cffcc9f150c" },
+    "name": "departements-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "df8b861119b9cbd9ee1cb840" },
+    "name": "speciality-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "cff7bb0bafe225c35c96dd99" },
+    "name": "speciality-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "0df7f311ed5b49afab95d92d" },
+    "name": "speciality-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "e329049a712a6317a76de35b" },
+    "name": "speciality-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "d7f139e4b0679ff5a925bcaf" },
+    "name": "position-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "22a128362b48307a32980f71" },
+    "name": "position-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "fc1945ff4fc5f580c2215b2a" },
+    "name": "position-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "cdbd3d93a3c605bf803c7ff2" },
+    "name": "position-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "44f61c636a441ec32ea46014" },
+    "name": "appointement-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "9efc54668b74db6f6190371c" },
+    "name": "appointement-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "1352bb055a7fd071f8d03d2b" },
+    "name": "appointement-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "3cf71353129f2ea9c4541485" },
+    "name": "appointement-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "32472fb6d7f41d8993a8d735" },
+    "name": "medicament-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "6edfa14084ee32b9cdc3afda" },
+    "name": "medicament-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "6496fa81626a70a4f4fbf27d" },
+    "name": "medicament-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "d6daca1015d31e4561619f7c" },
+    "name": "medicament-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "269e6fe620f9f2f3ba42d2b8" },
+    "name": "consultation-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "a532cb339ead00da13475a79" },
+    "name": "consultation-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "4a9b7772009f521f54c112ca" },
+    "name": "consultation-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "08c441449ac1dc33e62eab01" },
+    "name": "consultation-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "2c3fa025b5aabaeb10c2b6c5" },
+    "name": "currencyType-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "3d0d9e4f4741268be4c2edea" },
+    "name": "currencyType-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "81e461159bf6618a783b7cb0" },
+    "name": "currencyType-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "200721f4f62c945462e7e8a6" },
+    "name": "currencyType-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "e87d435fcac531502ce05433" },
+    "name": "preinscription-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "e2959587bad4bdeb0cff3ba9" },
+    "name": "preinscription-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "1058023d3d98f022195683b4" },
+    "name": "preinscription-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "4344f104021b24e7d93708f0" },
+    "name": "preinscription-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "a9a2bbc641784a00252512b8" },
+    "name": "paymentMode-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "5e2ec86189545f82e5573295" },
+    "name": "paymentMode-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "d8b233ff1259897dd5dbcd77" },
+    "name": "paymentMode-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "310a9bf25d8884b2681ee622" },
+    "name": "paymentMode-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "45d90bec67f7ba61ca940daa" },
+    "name": "payement-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "55d4ec9f22ecaf26fcf0cd29" },
+    "name": "payement-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "c5a8c7926ec1c8af37c43998" },
+    "name": "payement-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "f9b28942008824bdb72305a7" },
+    "name": "payement-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "04076f8c1cf5de6b28cd94c0" },
+    "name": "analysis-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "f0ba6c6a585a3a7638576b90" },
+    "name": "analysis-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "74ce96402caadb4d180a6430" },
+    "name": "analysis-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "0a4835fb6764f2740598ff82" },
+    "name": "analysis-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "aef89028e2009fb681bdd852" },
+    "name": "analysisType-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "12cc15950261b120bb982687" },
+    "name": "analysisType-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "06b8f15fd76965f9d7e617dd" },
+    "name": "analysisType-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "3690b544a9e4bbd78c76ea08" },
+    "name": "analysisType-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "3fa914f47ebdeb020354502d" },
+    "name": "mriScan-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "836d5e705f0aa09eccdfb60c" },
+    "name": "mriScan-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "747fc87f088d95ec14d08dea" },
+    "name": "mriScan-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "c62b90a33ed32941217daca9" },
+    "name": "mriScan-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "dab5b4d625bd00d3226af7a3" },
+    "name": "mriScanType-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "880698ac7d27f1a39703ac46" },
+    "name": "mriScanType-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "88dd8aefb680ea0923c55463" },
+    "name": "mriScanType-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "633e68e5cc41072483cf8c6d" },
+    "name": "mriScanType-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "b09e7bd2b4c064ab53c28f13" },
+    "name": "clients-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "43ba80121246f624fd7a527e" },
+    "name": "clients-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "70da439d0d015f76889081d5" },
+    "name": "clients-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "6e68ff9288c82d35e2d6834b" },
+    "name": "clients-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "6ead79b411e2058209bf0728" },
+    "name": "invoices-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "29b699640b45610412766851" },
+    "name": "invoices-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "94f46dc01749b76130bcb172" },
+    "name": "invoices-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "fe88eb9f50feab6c4497ac64" },
+    "name": "invoices-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "c1b8c2cb7f37bc8d5e6fe362" },
+    "name": "items-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "2132f3fed1765e686415dd6f" },
+    "name": "items-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "a53386e5da591d698b49c0b1" },
+    "name": "items-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "88860bc3a41edd2d2ed333a2" },
+    "name": "items-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "b7ba555b3773bb5d8a24107d" },
+    "name": "quotes-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "cbddf4daecdab17793f2988d" },
+    "name": "quotes-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "eaad0fe8e053806fb6ecf5a1" },
+    "name": "quotes-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "42e8e119ada57c693956e95e" },
+    "name": "quotes-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "455bc2321aec25d94385b813" },
+    "name": "forms-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "748c2a43923b9604a7876eaf" },
+    "name": "forms-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "5366c1d43582f7e44fab66a7" },
+    "name": "forms-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "bb5b3a14a9766de32be492cd" },
+    "name": "forms-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "aebfafba7d0e1229c017ac98" },
+    "name": "expenses-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "f27d86689d0a7e59dd4e4fca" },
+    "name": "expenses-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "ece8881251918fa55a71bba0" },
+    "name": "expenses-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "b343ab6de1170e0cc8aba33f" },
+    "name": "expenses-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "92cc0b102b150d9d4adfbfc0" },
+    "name": "categories-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "fbd84ee85fc5e58ad50934be" },
+    "name": "categories-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "2e19a2c16fdc3f94238d94d5" },
+    "name": "categories-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "c344819560f7187e6c22ad15" },
+    "name": "categories-create"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "7423842a368b3c1ea850c985" },
+    "name": "paymentClients-read"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "c15e0563e5743e6652f5df3c" },
+    "name": "paymentClients-update"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "0d939937a1bebfc29dbef3cf" },
+    "name": "paymentClients-delete"
+  },
+  {
+    "created": "2020-02-19T19:01:35.911Z",
+    "_id": { "$oid": "bbf34c7885da98c151176f99" },
+    "name": "paymentClients-create"
+  }
+]

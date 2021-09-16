@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 160 240" style="enable-background:new 0 0 160 240;" >
+<style type="text/css">
+	.st0{fill:#0ACF83;}
+	.st1{fill:#A259FF;}
+	.st2{fill:#F24E1E;}
+	.st3{fill:#FF7262;}
+	.st4{fill:#1ABCFE;}
+</style>
+<desc>Created using Figma</desc>
+<path id="path0_fill" class="st0" d="M40,240c22.1,0,40-17.9,40-40v-40H40c-22.1,0-40,17.9-40,40S17.9,240,40,240z"/>
+<path id="path1_fill" class="st1" d="M0,120c0-22.1,17.9-40,40-40h40v80H40C17.9,160,0,142.1,0,120z"/>
+<path id="path1_fill_1_" class="st2" d="M0,40C0,17.9,17.9,0,40,0h40v80H40C17.9,80,0,62.1,0,40z"/>
+<path id="path2_fill" class="st3" d="M80,0h40c22.1,0,40,17.9,40,40s-17.9,40-40,40H80V0z"/>
+<path id="path3_fill" class="st4" d="M160,120c0,22.1-17.9,40-40,40s-40-17.9-40-40s17.9-40,40-40S160,97.9,160,120z"/>
+</svg>

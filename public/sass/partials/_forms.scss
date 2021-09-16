@@ -1,0 +1,233 @@
+input,
+select,
+textarea {
+  -webkit-admin-select: auto !important;
+  -khtml-admin-select: auto !important;
+  -moz-admin-select: -moz-auto !important;
+  -o-admin-select: auto !important;
+  admin-select: auto !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  outline: none;
+  padding: 6px;
+  margin-bottom: 20px;
+  border-radius: $radiusValue;
+  -moz-border-radius: $radiusValue;
+  -webkit-border-radius: $radiusValue;
+  -khtml-border-radius: $radiusValue;
+  direction: ltr;
+  height: 40px;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  background: #fff;
+  color: #777;
+  border: 1px solid #ebebeb;
+}
+
+input:active,
+textarea:active,
+select:active {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #57c3e8;
+  outline: none;
+  color: #57c3e8;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #57c3e8;
+  -moz-box-shadow: 0 3px 8px 0 rgba(0, 163, 240, 0.1);
+  -webkit-box-shadow: 0 3px 8px 0 rgba(0, 163, 240, 0.1);
+  box-shadow: 0 3px 8px 0 rgba(0, 163, 240, 0.1);
+  color: #57c3e8;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background: #eee;
+  color: #d5d5d5;
+}
+select {
+  background: url(../images/icons/arrow-down.svg) no-repeat;
+  background-position: center right 10px;
+}
+textarea {
+  width: 100%;
+  max-width: 100%;
+}
+textarea.letter {
+  height: 200px;
+}
+button {
+  overflow: visible;
+  height: 42px;
+  text-align: center;
+  font-size: 14px;
+  padding: 0 30px;
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.save {
+  background: #259cd4;
+  border: 1px solid #259cd4;
+  color: #fff;
+}
+
+label {
+  font-size: 13px;
+  display: inline-block;
+  width: 100%;
+  color: $textColor;
+  margin-bottom: 10px;
+}
+
+.loginBox {
+  width: 400px;
+  margin: 170px auto 0 auto;
+  svg {
+    width: 400px;
+    fill: #ffffff;
+    float: left;
+    margin-bottom: 50px;
+  }
+  input {
+    background: #2c95af;
+    height: 55px;
+    padding-left: 30px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: left;
+    opacity: 0.65;
+    border: none;
+
+    &::placeholder {
+      color: #ffffff;
+      opacity: 0.7;
+    }
+    &:focus {
+      opacity: 1;
+      -moz-box-shadow: 0 3px 8px 0 rgba(255, 255, 255, 0);
+      -webkit-box-shadow: 0 3px 8px 0 rgba(255, 255, 255, 0);
+      box-shadow: 0 3px 8px 0 rgba(255, 255, 255, 0);
+    }
+  }
+  button {
+    opacity: 0.2;
+    background: #000000;
+    border-radius: 6px;
+    height: 55px;
+    padding-left: 30px;
+    border-radius: 6px;
+    text-align: left;
+    &:hover,
+    &:focus {
+      opacity: 0.5;
+    }
+  }
+}
+
+.add-click {
+  width: 100%;
+  height: 42px;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #e1edff;
+  border-radius: 4px;
+  cursor: pointer;
+  svg {
+    margin: 8px 13px;
+  }
+  &:hover {
+    border-color: #259cd4;
+  }
+}
+
+.search-input {
+  border: 1px solid #e1edff;
+  height: 42px;
+}
+
+.checkbox {
+  margin-top: 27px;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 20px;
+
+  .styled-checkbox {
+    position: absolute; // take it out of document flow
+    opacity: 0;
+    line-height: 0;
+    height: 0;
+    margin: 0;
+    width: 0;
+    padding: 0;
+
+    & + label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    // Box.
+    & + label:before {
+      content: "";
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: text-top;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 1px solid $basicColor;
+    }
+
+    // Box checked
+    &:checked + label:before {
+      background: $basicColor;
+    }
+
+    // Disabled state label.
+    &:disabled + label {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+
+    // Disabled box.
+    &:disabled + label:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+
+    // Checkmark. Could be replaced with an image
+    &:checked + label:after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 50%;
+      margin-top: 1px;
+      background: white;
+      width: 2px;
+      height: 2px;
+      box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white,
+        4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+      transform: rotate(45deg);
+    }
+  }
+}

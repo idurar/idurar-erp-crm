@@ -1,0 +1,153 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@idurar 
+WordPress
+/
+gutenberg
+16
+330
+5.5k1.7k
+ Code Issues 1,982 Pull requests 425 Actions Projects 15 Wiki Security Insights
+You’re editing a file in a project you don’t have write access to. We’ve created a fork of this project for you to commit your proposed changes to. Submitting a change to this file will write it to a new branch in your fork, so you can send a pull request.
+gutenberg
+/
+docs
+/
+contributors
+/
+git-workflow.md
+ 
+
+24
+## Keeping Your Branch Up To Date
+25
+​
+26
+When many different people are working on a project simultaneously, pull requests can go stale quickly. A "stale" pull request is one that is no longer up to date with the main line of development, and it needs to be updated before it can be merged into the project.
+27
+​
+28
+There are two ways to do this: merging and rebasing. In Gutenberg, the recommendation is to rebase. Rebasing means rewriting your changes as if they're happening on top of the main line of development. This ensures the commit history is always clean and linear. Rebasing can be performed as many times as needed while you're working on a pull request. **Do share your work early on** by opening a pull request and keeping your history rebase as you progress.
+29
+​
+30
+The main line of development is known as the `master` branch. If you have a pull-request branch that cannot be merged into `master` due to a conflict (this can happen for long-running pull requests), then in the course of rebasing you'll have to manually resolve any conflicts in your local copy. Learn more in [section _Perform a rebase_](https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request#perform-a-rebase) of _How to Rebase a Pull Request_.
+31
+​
+32
+Once you have resolved any conflicts locally you can update the pull request with `git push --force-with-lease`. Using the `--force-with-lease` parameter is important to guarantee that you don't accidentally overwrite someone else's work.
+33
+​
+34
+To sum it up, you need to fetch any new changes in the repository, rebase your branch on top of `master`, and push the result back to the repository. These are the corresponding commands:
+35
+​
+36
+```sh
+37
+git fetch
+38
+git rebase master
+39
+git push --force-with-lease origin your-branch-name
+40
+```
+41
+​
+42
+## Keeping Your Fork Up To Date
+43
+​
+44
+Working on pull request starts with forking the Gutenberg repository, your separate working copy. Which can easily go out of sync as new pull requests are merged into the main repository. Here your working repository is a `fork` and the main Gutenberg repository is `upstream`. When working on new pull request you should always update your fork before you do `git checkout -b my-new-branch` to work on a feature or fix.
+45
+​
+46
+You will need to add an `upstream` remote in order to keep your fork updated.
+47
+​
+48
+```sh
+49
+git remote add upstream https://github.com/WordPress/gutenberg.git
+50
+git remote -v
+51
+origin  git@github.com:your-account/gutenberg.git (fetch)
+52
+origin  git@github.com:your-account/gutenberg.git (push)
+53
+upstream  https://github.com/WordPress/gutenberg.git (fetch)
+54
+upstream  https://github.com/WordPress/gutenberg.git (push)
+55
+```
+56
+​
+57
+To sync your fork, you first need to fetch the upstream changes and merge them into your local copy:
+58
+​
+59
+``` sh
+60
+git fetch upstream
+61
+git checkout master
+62
+git merge upstream/master
+63
+```
+64
+​
+65
+Once your local copy is updated, push your changes to update your fork on GitHub:
+66
+​
+67
+```
+68
+git push
+69
+```
+70
+​
+71
+The above commands will update your `master` branch from _upstream_. To update any other branch replace `master` with the respective branch name.
+72
+​
+73
+​
+74
+## References
+75
+- https://git-scm.com/book/en/v2
+76
+- https://help.github.com/categories/collaborating-with-issues-and-pull-requests/
+77
+​
+@idurar
+Propose file change
+Commit summary
+Update git-workflow.md
+Optional extended description
+Add an optional extended description…
+ 
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

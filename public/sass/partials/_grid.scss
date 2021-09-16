@@ -1,0 +1,202 @@
+$gridWidth: 100%;
+$col: 24;
+$desktopContainer: 1040px;
+$tabletContainer: 720px;
+$phoneContainer: 480px;
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: $desktopContainer;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+[class^="col-"],
+[class*=" col-"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  min-height: 1px;
+  padding: 0 10px;
+  position: relative;
+}
+[class^="col-"] .grid,
+[class*=" col-"] .grid {
+  margin: 0 -20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.halfContainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: $desktopContainer/2;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.alpha {
+  padding-left: 0;
+}
+.omega {
+  padding-right: 0;
+}
+.gridHint {
+  display: none;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.showGridHint .gridHint {
+  display: block;
+}
+.showGridHint [class^="col-"],
+.showGridHint [class*=" col-"] {
+  box-shadow: 0 0 2px #000 inset;
+}
+.showGridHint .gridHint [class^="col-"],
+.showGridHint .gridHint [class*=" col-"] {
+  height: 100%;
+  background-clip: content-box;
+  background-color: rgba(255, 0, 0, 0.5);
+  box-shadow: none;
+}
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.row [class^="col"] {
+  float: left;
+  margin: 10px 0;
+  min-height: 10px;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  display: inline-block;
+}
+* html .clearfix {
+  height: 1%;
+}
+.clearfix {
+  display: block;
+}
+
+@for $i from 1 through $col {
+  .col-#{$i} {
+    width: $gridWidth / $col * $i;
+  }
+}
+
+@media screen and (min-width: 1020px) {
+  .hidden-lg {
+    display: none;
+  }
+  .container {
+    width: $desktopContainer;
+  }
+  .alpha {
+    padding-left: 0;
+  }
+  .omega {
+    padding-right: 0;
+  }
+  @for $i from 1 through $col {
+    .col-lg-#{$i} {
+      width: $gridWidth / $col * $i;
+    }
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .hidden-md {
+    display: none;
+  }
+  .container {
+    width: $tabletContainer;
+  }
+  .alpha {
+    padding-left: 0;
+  }
+  .omega {
+    padding-right: 0;
+  }
+  .right-md {
+    float: right;
+  }
+  @for $i from 1 through $col {
+    .col-md-#{$i} {
+      width: $gridWidth / $col * $i;
+    }
+  }
+}
+
+@media only screen and (max-width: 729px) {
+  .hidden-sm {
+    display: none;
+  }
+  .container {
+    width: $phoneContainer;
+  }
+  .alpha {
+    padding-left: 0;
+  }
+  .omega {
+    padding-right: 0;
+  }
+  [class^="col-"],
+  [class*=" col-"] {
+    padding: 0 10px;
+  }
+  @for $i from 1 through $col {
+    .col-sm-#{$i} {
+      width: $gridWidth / $col * $i;
+    }
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .hidden-xs {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .alpha {
+    padding-left: 10px;
+  }
+  .omega {
+    padding-right: 0px;
+  }
+  @for $i from 1 through $col {
+    .col-xs-#{$i} {
+      width: $gridWidth / $col * $i;
+    }
+  }
+}

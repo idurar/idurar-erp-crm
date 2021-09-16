@@ -1,0 +1,74 @@
+@keyframes slideIn {
+  0% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.flash {
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  border-radius: 3px;
+  display: flex;
+  animation: slideIn forwards 0.1s ease-in-out 2;
+  animation-timing-function: cubic-bezier(0.01, 1.68, 0.58, 1);
+  & + .flash {
+    animation-delay: 0.55s;
+    & + .flash {
+      animation-delay: 0.6s;
+    }
+  }
+  &__text {
+    flex: 1;
+  }
+  &__remove {
+    background: none;
+    border: 0;
+  }
+  &:after {
+    content: "";
+    display: block;
+    background: white;
+    position: absolute;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: 8px;
+    z-index: -1;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+  &--success {
+    background: linear-gradient(
+      135deg,
+      rgba(210, 255, 82, 1) 0%,
+      rgba(145, 232, 66, 1) 100%
+    );
+  }
+  &--error {
+    background: linear-gradient(
+      20deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(200, 0, 0, 1) 100%
+    );
+  }
+  &--info {
+    background: linear-gradient(
+      35deg,
+      rgba(241, 231, 103, 1) 0%,
+      rgba(254, 182, 69, 1) 100%
+    );
+  }
+  p {
+    margin: 0;
+  }
+}

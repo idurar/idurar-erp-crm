@@ -1,0 +1,28 @@
+{
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd"
+        // "style": true, // or 'css'
+      }
+    ]
+  ]
+}
+
+// {
+//     "presets": [
+//         "@babel/env",
+//         "@babel/preset-react"
+//     ],
+//     "plugins": [
+//         "syntax-dynamic-import",
+//         [
+//             "import",
+//             {
+//                 "libraryName": "antd"
+//                 // "style": true, // or 'css'
+//             }
+//         ]
+//     ]
+// }

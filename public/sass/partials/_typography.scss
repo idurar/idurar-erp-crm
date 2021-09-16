@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "panama";
+  src: url("/fonts/panama-bold-webfont.woff2") format("woff2"),
+    url("/fonts/panama-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.5rem;
+}
+
+h1 {
+  font-size: 32px;
+}
+h2 {
+  font-size: 28px;
+  font-weight: 300;
+}
+h3 {
+  font-size: 22px;
+  font-weight: 400;
+}

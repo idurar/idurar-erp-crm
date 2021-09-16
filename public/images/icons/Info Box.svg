@@ -1,0 +1,221 @@
+<svg id="Info_Box" data-name="Info Box" xmlns="http://www.w3.org/2000/svg"  width="465" height="340" viewBox="0 0 465 340">
+  <defs>
+    <filter id="Rectangle_4" x="227" y="168" width="238" height="156" filterUnits="adminSpaceOnUse">
+      <feOffset dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#0078b0" flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Oval_3" x="411.5" y="171" width="25" height="25" filterUnits="adminSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#00a3f0" flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="IRM">
+    <g id="Rectangle_8" data-name="Rectangle 8" fill="none" stroke="#e1edff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="455" height="52" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="454" height="51" rx="5.5" fill="none"/>
+    </g>
+    <g id="Type" transform="translate(155 17)">
+      <g id="Type-2" data-name="Type">
+        <path id="Stroke_433" data-name="Stroke 433" d="M15.674,8.245,8.245,15.674a.478.478,0,0,1-.675,0L.14,8.245a.478.478,0,0,1,0-.675L7.569.14a.478.478,0,0,1,.675,0l7.429,7.429a.478.478,0,0,1,0,.675Z" transform="translate(0 0)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_434" data-name="Stroke 434" d="M15.534,0,8.1,7.429a.478.478,0,0,1-.675,0L0,0" transform="translate(0.14 12.431)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="Date_icon" data-name="Date icon" transform="translate(17 14)">
+      <g id="Date_icon-2" data-name="Date icon">
+        <path id="Stroke_1" data-name="Stroke 1" d="M15.492,0a3.524,3.524,0,0,1,3.524,3.523V15.492a3.524,3.524,0,0,1-3.524,3.523H3.524A3.524,3.524,0,0,1,0,15.492V3.523A3.524,3.524,0,0,1,3.524,0" transform="translate(0.711 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3" data-name="Stroke 3" d="M0,0H4.443" transform="translate(7.976 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5" data-name="Stroke 5" d="M0,0H18.418" transform="translate(0.91 7.551)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7" data-name="Stroke 7" d="M0,0H10.89" transform="translate(4.774 12.892)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_9" data-name="Stroke 9" d="M0,0H4.64" transform="translate(7.965 16.216)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_11" data-name="Stroke 11" d="M0,4.107V0" transform="translate(6.083 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_13" data-name="Stroke 13" d="M0,4.107V0" transform="translate(14.355 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="More_info_icon" data-name="More info icon" transform="translate(415 24)">
+      <g id="More_info_icon-2" data-name="More info icon">
+        <path id="Stroke_1-2" data-name="Stroke 1" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-2" data-name="Stroke 3" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(7)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-2" data-name="Stroke 5" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(14)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <text id="_16_08_2018" data-name="16/08/2018" transform="translate(51 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">16/08/2018</tspan></text>
+    <text id="bassin_hanche" data-name="bassin – hanche" transform="translate(184 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">bassin – hanche</tspan></text>
+  </g>
+  <g id="IRM_Copy" data-name="IRM Copy" transform="translate(0 72)">
+    <g id="Rectangle_8-2" data-name="Rectangle 8" fill="none" stroke="#e1edff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="455" height="52" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="454" height="51" rx="5.5" fill="none"/>
+    </g>
+    <g id="Type-3" data-name="Type" transform="translate(155 17)">
+      <g id="Type-4" data-name="Type">
+        <path id="Stroke_433-2" data-name="Stroke 433" d="M15.674,8.245,8.245,15.674a.478.478,0,0,1-.675,0L.14,8.245a.478.478,0,0,1,0-.675L7.569.14a.478.478,0,0,1,.675,0l7.429,7.429a.478.478,0,0,1,0,.675Z" transform="translate(0 0)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_434-2" data-name="Stroke 434" d="M15.534,0,8.1,7.429a.478.478,0,0,1-.675,0L0,0" transform="translate(0.14 12.431)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="Date_icon-3" data-name="Date icon" transform="translate(17 14)">
+      <g id="Date_icon-4" data-name="Date icon">
+        <path id="Stroke_1-3" data-name="Stroke 1" d="M15.492,0a3.524,3.524,0,0,1,3.524,3.523V15.492a3.524,3.524,0,0,1-3.524,3.523H3.524A3.524,3.524,0,0,1,0,15.492V3.523A3.524,3.524,0,0,1,3.524,0" transform="translate(0.711 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-3" data-name="Stroke 3" d="M0,0H4.443" transform="translate(7.976 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-3" data-name="Stroke 5" d="M0,0H18.418" transform="translate(0.91 7.551)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7-2" data-name="Stroke 7" d="M0,0H10.89" transform="translate(4.774 12.892)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_9-2" data-name="Stroke 9" d="M0,0H4.64" transform="translate(7.965 16.216)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_11-2" data-name="Stroke 11" d="M0,4.107V0" transform="translate(6.083 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_13-2" data-name="Stroke 13" d="M0,4.107V0" transform="translate(14.355 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="More_info_icon-3" data-name="More info icon" transform="translate(415 24)">
+      <g id="More_info_icon-4" data-name="More info icon">
+        <path id="Stroke_1-4" data-name="Stroke 1" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-4" data-name="Stroke 3" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(7)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-4" data-name="Stroke 5" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(14)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <text id="_16_08_2018-2" data-name="16/08/2018" transform="translate(51 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">16/08/2018</tspan></text>
+    <text id="bassin_hanche-2" data-name="bassin – hanche" transform="translate(184 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">bassin – hanche</tspan></text>
+  </g>
+  <g id="IRM_Copy_2" data-name="IRM Copy 2" transform="translate(0 144)">
+    <g id="Rectangle_8-3" data-name="Rectangle 8" fill="none" stroke="#e1edff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="455" height="52" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="454" height="51" rx="5.5" fill="none"/>
+    </g>
+    <g id="Type-5" data-name="Type" transform="translate(155 17)">
+      <g id="Type-6" data-name="Type">
+        <path id="Stroke_433-3" data-name="Stroke 433" d="M15.674,8.245,8.245,15.674a.478.478,0,0,1-.675,0L.14,8.245a.478.478,0,0,1,0-.675L7.569.14a.478.478,0,0,1,.675,0l7.429,7.429a.478.478,0,0,1,0,.675Z" transform="translate(0 0)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_434-3" data-name="Stroke 434" d="M15.534,0,8.1,7.429a.478.478,0,0,1-.675,0L0,0" transform="translate(0.14 12.431)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="Date_icon-5" data-name="Date icon" transform="translate(17 14)">
+      <g id="Date_icon-6" data-name="Date icon">
+        <path id="Stroke_1-5" data-name="Stroke 1" d="M15.492,0a3.524,3.524,0,0,1,3.524,3.523V15.492a3.524,3.524,0,0,1-3.524,3.523H3.524A3.524,3.524,0,0,1,0,15.492V3.523A3.524,3.524,0,0,1,3.524,0" transform="translate(0.711 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-5" data-name="Stroke 3" d="M0,0H4.443" transform="translate(7.976 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-5" data-name="Stroke 5" d="M0,0H18.418" transform="translate(0.91 7.551)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7-3" data-name="Stroke 7" d="M0,0H10.89" transform="translate(4.774 12.892)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_9-3" data-name="Stroke 9" d="M0,0H4.64" transform="translate(7.965 16.216)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_11-3" data-name="Stroke 11" d="M0,4.107V0" transform="translate(6.083 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_13-3" data-name="Stroke 13" d="M0,4.107V0" transform="translate(14.355 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="More_info_icon-5" data-name="More info icon" transform="translate(415 24)">
+      <g id="More_info_icon-6" data-name="More info icon">
+        <path id="Stroke_1-6" data-name="Stroke 1" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-6" data-name="Stroke 3" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(7)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-6" data-name="Stroke 5" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(14)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <text id="_16_08_2018-3" data-name="16/08/2018" transform="translate(51 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">16/08/2018</tspan></text>
+    <text id="bassin_hanche-3" data-name="bassin – hanche" transform="translate(184 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">bassin – hanche</tspan></text>
+  </g>
+  <g id="IRM_Copy_3" data-name="IRM Copy 3" transform="translate(0 216)">
+    <g id="Rectangle_8-4" data-name="Rectangle 8" fill="none" stroke="#e1edff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="455" height="52" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="454" height="51" rx="5.5" fill="none"/>
+    </g>
+    <g id="Type-7" data-name="Type" transform="translate(155 17)">
+      <g id="Type-8" data-name="Type">
+        <path id="Stroke_433-4" data-name="Stroke 433" d="M15.674,8.245,8.245,15.674a.478.478,0,0,1-.675,0L.14,8.245a.478.478,0,0,1,0-.675L7.569.14a.478.478,0,0,1,.675,0l7.429,7.429a.478.478,0,0,1,0,.675Z" transform="translate(0 0)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_434-4" data-name="Stroke 434" d="M15.534,0,8.1,7.429a.478.478,0,0,1-.675,0L0,0" transform="translate(0.14 12.431)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="Date_icon-7" data-name="Date icon" transform="translate(17 14)">
+      <g id="Date_icon-8" data-name="Date icon">
+        <path id="Stroke_1-7" data-name="Stroke 1" d="M15.492,0a3.524,3.524,0,0,1,3.524,3.523V15.492a3.524,3.524,0,0,1-3.524,3.523H3.524A3.524,3.524,0,0,1,0,15.492V3.523A3.524,3.524,0,0,1,3.524,0" transform="translate(0.711 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-7" data-name="Stroke 3" d="M0,0H4.443" transform="translate(7.976 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-7" data-name="Stroke 5" d="M0,0H18.418" transform="translate(0.91 7.551)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7-4" data-name="Stroke 7" d="M0,0H10.89" transform="translate(4.774 12.892)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_9-4" data-name="Stroke 9" d="M0,0H4.64" transform="translate(7.965 16.216)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_11-4" data-name="Stroke 11" d="M0,4.107V0" transform="translate(6.083 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_13-4" data-name="Stroke 13" d="M0,4.107V0" transform="translate(14.355 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="More_info_icon-7" data-name="More info icon" transform="translate(415 24)">
+      <g id="More_info_icon-8" data-name="More info icon">
+        <path id="Stroke_1-8" data-name="Stroke 1" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-8" data-name="Stroke 3" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(7)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-8" data-name="Stroke 5" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(14)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <text id="_16_08_2018-4" data-name="16/08/2018" transform="translate(51 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">16/08/2018</tspan></text>
+    <text id="bassin_hanche-4" data-name="bassin – hanche" transform="translate(184 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">bassin – hanche</tspan></text>
+  </g>
+  <g id="IRM_Copy_4" data-name="IRM Copy 4" transform="translate(0 288)">
+    <g id="Rectangle_8-5" data-name="Rectangle 8" fill="none" stroke="#e1edff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="455" height="52" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="454" height="51" rx="5.5" fill="none"/>
+    </g>
+    <g id="Type-9" data-name="Type" transform="translate(155 17)">
+      <g id="Type-10" data-name="Type">
+        <path id="Stroke_433-5" data-name="Stroke 433" d="M15.674,8.245,8.245,15.674a.478.478,0,0,1-.675,0L.14,8.245a.478.478,0,0,1,0-.675L7.569.14a.478.478,0,0,1,.675,0l7.429,7.429a.478.478,0,0,1,0,.675Z" transform="translate(0 0)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_434-5" data-name="Stroke 434" d="M15.534,0,8.1,7.429a.478.478,0,0,1-.675,0L0,0" transform="translate(0.14 12.431)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="Date_icon-9" data-name="Date icon" transform="translate(17 14)">
+      <g id="Date_icon-10" data-name="Date icon">
+        <path id="Stroke_1-9" data-name="Stroke 1" d="M15.492,0a3.524,3.524,0,0,1,3.524,3.523V15.492a3.524,3.524,0,0,1-3.524,3.523H3.524A3.524,3.524,0,0,1,0,15.492V3.523A3.524,3.524,0,0,1,3.524,0" transform="translate(0.711 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-9" data-name="Stroke 3" d="M0,0H4.443" transform="translate(7.976 2.565)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-9" data-name="Stroke 5" d="M0,0H18.418" transform="translate(0.91 7.551)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7-5" data-name="Stroke 7" d="M0,0H10.89" transform="translate(4.774 12.892)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_9-5" data-name="Stroke 9" d="M0,0H4.64" transform="translate(7.965 16.216)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_11-5" data-name="Stroke 11" d="M0,4.107V0" transform="translate(6.083 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_13-5" data-name="Stroke 13" d="M0,4.107V0" transform="translate(14.355 0.711)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="More_info_icon-9" data-name="More info icon" transform="translate(415 24)">
+      <g id="More_info_icon-10" data-name="More info icon">
+        <path id="Stroke_1-10" data-name="Stroke 1" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-10" data-name="Stroke 3" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(7)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-10" data-name="Stroke 5" d="M2,0A2,2,0,1,0,4,2,2,2,0,0,0,2,0Z" transform="translate(14)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <text id="_16_08_2018-5" data-name="16/08/2018" transform="translate(51 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">16/08/2018</tspan></text>
+    <text id="bassin_hanche-5" data-name="bassin – hanche" transform="translate(184 28)" fill="#094460" font-size="13" font-family="Roboto-Regular, Roboto" letter-spacing="0.05em"><tspan x="0" y="0">bassin – hanche</tspan></text>
+  </g>
+  <g id="Pop-up_Menu" data-name="Pop-up Menu" transform="translate(251 178)">
+    <g transform="matrix(1, 0, 0, 1, -251, -178)" filter="url(#Rectangle_4)">
+      <g id="Rectangle_4-2" data-name="Rectangle 4" transform="translate(251 186)" fill="#fff" stroke="#e1edff" stroke-miterlimit="10" stroke-width="1">
+        <rect width="190" height="108" rx="6" stroke="none"/>
+        <rect x="0.5" y="0.5" width="189" height="107" rx="5.5" fill="none"/>
+      </g>
+    </g>
+    <path id="Rectangle_5" data-name="Rectangle 5" d="M6,0H184a6,6,0,0,1,6,6V36a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V6A6,6,0,0,1,6,0Z" transform="translate(0 8)" fill="#fff"/>
+    <rect id="Rectangle_5_Copy" data-name="Rectangle 5 Copy" width="190" height="36" transform="translate(0 44)" fill="#fdfdfd"/>
+    <path id="Rectangle_5_Copy_2" data-name="Rectangle 5 Copy 2" d="M0,0H190a0,0,0,0,1,0,0V30a6,6,0,0,1-6,6H6a6,6,0,0,1-6-6V0A0,0,0,0,1,0,0Z" transform="translate(0 80)" fill="#fff"/>
+    <text id="Afficher" transform="translate(50 29)" fill="#5c78bc" font-size="13" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.05em"><tspan x="0" y="0">Afficher</tspan></text>
+    <text id="Modifier" transform="translate(50 64)" fill="#094460" font-size="13" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.05em" opacity="0.9"><tspan x="0" y="0">Modifier</tspan></text>
+    <text id="Supprimer" transform="translate(50 100)" fill="#5c78bc" font-size="13" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.05em"><tspan x="0" y="0">Supprimer</tspan></text>
+    <g id="Delete_icon" data-name="Delete icon" transform="translate(16 88)">
+      <g id="Delete_icon-2" data-name="Delete icon">
+        <path id="Stroke_1-11" data-name="Stroke 1" d="M0,0V14.057H13V0" transform="translate(2.5 3.506)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-11" data-name="Stroke 3" d="M17,1H0" transform="translate(0.5 2.5)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-11" data-name="Stroke 5" d="M0,3V1.582A1.785,1.785,0,0,1,1.933,0h.134A1.784,1.784,0,0,1,4,1.582V3" transform="translate(7)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7-6" data-name="Stroke 7" d="M1,7.015V0" transform="translate(4.5 6.837)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_11-6" data-name="Stroke 11" d="M1,7.015V0" transform="translate(8 6.837)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_9-6" data-name="Stroke 9" d="M1,7.015V0" transform="translate(11.5 6.837)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="Show_icon" data-name="Show icon" transform="translate(17 17)">
+      <g id="Show_icon-2" data-name="Show icon">
+        <path id="Stroke_1-12" data-name="Stroke 1" d="M2.109,0H0V19H14V0H4.486" transform="translate(0.5 0.5)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_3-12" data-name="Stroke 3" d="M0,0H8.4" transform="translate(3.623 6.943)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_4" data-name="Stroke 4" d="M0,0H8.073" transform="translate(3.788 9.61)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5-12" data-name="Stroke 5" d="M0,0H4.492" transform="translate(3.952 12.277)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_6" data-name="Stroke 6" d="M0,0H1.407" transform="translate(10.454 12.277)" fill="none" stroke="#5c78bc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="update_icon" data-name="update icon" transform="translate(17 52)">
+      <g id="update_icon-2" data-name="update icon">
+        <path id="Stroke_1-13" data-name="Stroke 1" d="M2.109,0H0V19H14V0H4.486" transform="translate(0.5 0.5)" fill="none" stroke="#094460" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_463" data-name="Stroke 463" d="M3.571,9.207,9.918,2.859a.281.281,0,0,0,0-.4L7.538.082a.281.281,0,0,0-.4,0L.794,6.43l-.2.2L0,10l3.372-.6.2-.2Z" transform="translate(3 5)" fill="none" stroke="#094460" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_464" data-name="Stroke 464" d="M2,2,0,0" transform="translate(9 6)" fill="none" stroke="#094460" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -251, -178)" filter="url(#Oval_3)">
+      <circle id="Oval_3-2" data-name="Oval 3" cx="3.5" cy="3.5" r="3.5" transform="translate(420.5 178)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

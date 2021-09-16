@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.074" height="13" viewBox="0 0 18.074 13">
+  <g id="Group_4" data-name="Group 4" transform="translate(-1283 -40)">
+    <g id="Stroke_1" data-name="Stroke 1" transform="translate(1283 40)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+      <path d="M1.5,0A1.5,1.5,0,1,0,3,1.5,1.5,1.5,0,0,0,1.5,0Z" stroke="none"/>
+      <path d="M 1.5 1 C 1.224300026893616 1 1 1.224300026893616 1 1.5 C 1 1.775699973106384 1.224300026893616 2 1.5 2 C 1.775699973106384 2 2 1.775699973106384 2 1.5 C 2 1.224300026893616 1.775699973106384 1 1.5 1 M 1.5 0 C 2.328269958496094 0 3 0.6717300415039063 3 1.5 C 3 2.328269958496094 2.328269958496094 3 1.5 3 C 0.6717300415039063 3 0 2.328269958496094 0 1.5 C 0 0.6717300415039063 0.6717300415039063 0 1.5 0 Z" stroke="none" fill="#259cd4"/>
+    </g>
+    <path id="Stroke_3" data-name="Stroke 3" d="M0,1H12" transform="translate(1288.574 40.5)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <g id="Stroke_5" data-name="Stroke 5" transform="translate(1283 45)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+      <path d="M1.5,0A1.5,1.5,0,1,0,3,1.5,1.5,1.5,0,0,0,1.5,0Z" stroke="none"/>
+      <path d="M 1.5 1 C 1.224300026893616 1 1 1.224050045013428 1 1.499449968338013 C 1 1.775449991226196 1.224300026893616 2 1.5 2 C 1.775699973106384 2 2 1.775449991226196 2 1.499449968338013 C 2 1.224050045013428 1.775699973106384 1 1.5 1 M 1.5 0 C 2.328269958496094 0 3 0.6717300415039063 3 1.499449968338013 C 3 2.327719926834106 2.328269958496094 3 1.5 3 C 0.6717300415039063 3 0 2.327719926834106 0 1.499449968338013 C 0 0.6717300415039063 0.6717300415039063 0 1.5 0 Z" stroke="none" fill="#259cd4"/>
+    </g>
+    <path id="Stroke_7" data-name="Stroke 7" d="M0,1H12" transform="translate(1288.574 45.5)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <g id="Stroke_9" data-name="Stroke 9" transform="translate(1283 50)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+      <path d="M1.5,0A1.5,1.5,0,1,0,3,1.5,1.5,1.5,0,0,0,1.5,0Z" stroke="none"/>
+      <path d="M 1.5 1 C 1.224300026893616 1 1 1.224300026893616 1 1.5 C 1 1.775699973106384 1.224300026893616 2 1.5 2 C 1.775699973106384 2 2 1.775699973106384 2 1.5 C 2 1.224300026893616 1.775699973106384 1 1.5 1 M 1.5 0 C 2.328269958496094 0 3 0.6722800731658936 3 1.5 C 3 2.328269958496094 2.328269958496094 3 1.5 3 C 0.6717300415039063 3 0 2.328269958496094 0 1.5 C 0 0.6722800731658936 0.6717300415039063 0 1.5 0 Z" stroke="none" fill="#259cd4"/>
+    </g>
+    <path id="Stroke_11" data-name="Stroke 11" d="M0,1H12" transform="translate(1288.574 50.5)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

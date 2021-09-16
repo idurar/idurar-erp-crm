@@ -1,0 +1,67 @@
+doctype html
+html
+  head
+    title= `${title} | ${h.siteName}`
+    link(rel='stylesheet', href='/dist/style.css')
+    link(rel='stylesheet', href='/javascripts/lib/vanilla-modal/vanilla-modal.css')
+    link(rel="shortcut icon" type="image/png" href="/images/icons/favicon.png")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+      block pageId
+      
+      nav.component(data-component="navigation")
+        .nav-container
+            a.link_logo(href="/")
+              .logo
+                  != h.icon('logo')
+                  .alphabetic-logo
+                      img.logo-text-only(src=`/images/photos/logo_text_only.png`)
+            ul.navMenu
+              each item in h.menu
+                li(class=(item.submenu ? 'subMenuToggle' : ''))
+                    if item.submenu
+                      != h.icon(item.icon)
+                      p #{item.title}
+                    else   
+                      a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__active' : ''))
+                        != h.icon(item.icon)
+                        p #{item.title}
+                    if item.submenu
+                      ul.toggleOption
+                        each subitem in item.submenu
+                            li
+                              a(href=subitem.slug, class=(currentPath.startsWith(subitem.slug) ? 'nav__active' : ''))
+                                p #{subitem.title}
+
+      .component.top-navbar(data-component="headerNav")
+          .headerNav
+              .nav-options
+                  != h.icon('nav-options')    
+              .bell-notification
+                  != h.icon('bell-notification')    
+              .nav-profile
+                  img.single__image(src=`/images/photos/profile.jpg`)
+                  .profile-dropdown
+                    a(href="#") Link 1
+                    a(href="#") Link 2
+                    a(href="#") Link 3
+      
+      .component(data-component="panel")      
+        .panelButton
+          != h.icon('menu')    
+        .panel
+          .box
+              block panelHeader
+                  p.panelTitle Dashboard
+              //- .space
+              block panelBody                  
+          block panelFooter    
+                
+      .content
+         block content
+    
+     
+      block scripts
+         script(src="/dist/App.bundle.js")
+
+   

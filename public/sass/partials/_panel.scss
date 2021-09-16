@@ -1,0 +1,148 @@
+.panel {
+  position: relative;
+  width: 480px;
+  margin-left: 60px;
+  display: block;
+  min-height: 850px;
+  padding-bottom: 30px;
+  float: left;
+  background: #fff;
+  box-shadow: 8px 0 22px 0 rgba(0, 173, 255, 0.16);
+  border-right: 1px solid rgba(37, 156, 212, 0.1);
+  &Content {
+    min-height: 450px;
+  }
+  .box {
+    padding: 15px 30px;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+  }
+  &Title {
+    float: left;
+    font-size: 18px;
+    color: $basicColor;
+    margin-top: 10px;
+  }
+  &Button {
+    left: 480px;
+    top: 15px;
+    height: 24px;
+    width: 24px;
+    float: left;
+    position: absolute;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: content-box;
+    cursor: pointer;
+    svg {
+      float: right;
+      width: 24px;
+      fill: #259cd4;
+    }
+  }
+
+  &Button.panelHidden {
+    left: 85px;
+  }
+  &Button.showSideBar.hide {
+    display: none;
+  }
+}
+
+ul.info {
+  li {
+    display: inline-block;
+    margin: 5px 0;
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.8;
+    color: $textColor;
+    p {
+      width: 5%;
+      float: left;
+      &:first-child {
+        width: 35%;
+        font-weight: 500;
+      }
+      &:last-child {
+        width: 60%;
+      }
+    }
+  }
+}
+
+.panel.hide {
+  opacity: 0;
+  /* visibility: hidden; */
+  margin-left: -500px;
+}
+.accordionForm {
+  margin-top: -400px;
+  position: relative;
+  &Header {
+    width: 100%;
+    padding: 17px 30px 17px 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #fbfcff;
+    color: $basicColor;
+    border-top: 1px solid #e9f5fa;
+    border-bottom: 1px solid #e9f5fa;
+    svg {
+      margin-top: -5px;
+      margin-right: 20px;
+    }
+    .arrow-right {
+      float: right;
+      svg {
+        margin-top: 0;
+        margin-right: 0;
+      }
+    }
+  }
+  .whiteBg {
+    display: none;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+.disabled {
+  overflow: hidden;
+  height: 250px;
+  margin-top: 0 !important;
+  .whiteBg {
+    position: absolute;
+    top: 52px;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9;
+  }
+}
+.cancel {
+  color: #094460;
+  background-color: #fbfcff;
+  border: 1px solid #e1edff;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-admin-select: none;
+  -ms-admin-select: none;
+  admin-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 6px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.cancel:hover {
+  border: 1px solid #259cd4;
+}

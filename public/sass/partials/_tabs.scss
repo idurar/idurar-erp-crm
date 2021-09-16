@@ -1,0 +1,89 @@
+/* Tabs */
+
+.tab-contents {
+  margin-top: 20px;
+}
+.tab-nav {
+  padding: 10px;
+  margin-bottom: 20px;
+  background: #fbfcff;
+  border-radius: 6px;
+  height: 58px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-admin-select: none; /* Safari */
+  -khtml-admin-select: none; /* Konqueror HTML */
+  -moz-admin-select: none; /* Old versions of Firefox */
+  -ms-admin-select: none; /* Internet Explorer/Edge */
+  admin-select: none;
+  .dropdown {
+    right: 5px;
+    position: absolute;
+    top: 0;
+    // a{
+    //     display: inline-block;
+    //     padding: 10px 30px;
+    //     width: 100%;
+    //     margin: 0;
+    //     &:hover{
+    //         background: #FDFDFD;
+    //         }
+    //     &.is-active {
+    //         background: #FDFDFD;
+    //         border-radius: none;
+    //         box-shadow: none;
+    //         &:hover{
+    //         box-shadow: none;
+    //         text-decoration: none;
+    //         }
+    //     }
+    // }
+  }
+  svg {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    width: 20px;
+    cursor: pointer;
+    fill: $basicColor;
+    &:hover {
+      fill: $textColor;
+    }
+  }
+}
+
+.tab-link {
+  margin-right: 4px;
+  padding: 13px 12px;
+  font-family: Roboto-Medium;
+  font-size: 13px;
+  color: #094460;
+  //letter-spacing: 0.65px;
+  display: inline-block;
+  text-decoration: none;
+  &.is-active {
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px 0 rgba(223, 233, 253, 0.5);
+    &:hover {
+      box-shadow: 0 5px 5px 0 rgba(223, 233, 253, 0.9);
+      text-decoration: none;
+    }
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  &.is-active {
+    display: block;
+  }
+}
