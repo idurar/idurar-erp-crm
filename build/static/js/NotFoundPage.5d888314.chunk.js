@@ -1,2 +1,0 @@
-(this["webpackJsonpantd-demo"]=this["webpackJsonpantd-demo"]||[]).push([[9],{552:function(e,t,n){"use strict";n.r(t);var s=n(0),a=n(206),c=n(200),r=n(87),i=n(6);t.default=function(){return Object(s.useEffect)((function(){r.a.replace("/notfound")}),[]),Object(i.jsx)(i.Fragment,{children:Object(i.jsx)(a.a,{status:"404",title:"404",subTitle:"Sorry, the page you visited does not exist.",extra:Object(i.jsx)(c.a,{href:"/",type:"primary",children:"Back Home"})})})}}}]);
-//# sourceMappingURL=NotFoundPage.5d888314.chunk.js.map

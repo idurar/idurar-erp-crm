@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="21.5" viewBox="0 0 16 21.5">
+  <g id="Group_3" data-name="Group 3" transform="translate(-1325 -35)">
+    <g id="Group" transform="translate(1328 36)">
+      <g id="Group_1" data-name="Group 1">
+        <path id="Stroke_3" data-name="Stroke 3" d="M0,0A2.6,2.6,0,0,0,2.688,2.5,2.6,2.6,0,0,0,5.377,0" transform="translate(4 17.5)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_5" data-name="Stroke 5" d="M3.033,0A3.022,3.022,0,0,0,0,3.01V4.462" transform="translate(3 6)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Stroke_7" data-name="Stroke 7" d="M0,3V1.462A1.482,1.482,0,0,1,1.5,0,1.482,1.482,0,0,1,3,1.462V2.849" transform="translate(5 0.5)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <path id="Stroke_1" data-name="Stroke 1" d="M0,6.114A6.057,6.057,0,0,1,6,0a6.057,6.057,0,0,1,6,6.114V14H0Z" transform="translate(1328.5 39.5)" fill="none" stroke="#259cd4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <circle id="Oval_2" data-name="Oval 2" cx="2.5" cy="2.5" r="2.5" transform="translate(1325 35)" fill="#7ed321"/>
+  </g>
+</svg>

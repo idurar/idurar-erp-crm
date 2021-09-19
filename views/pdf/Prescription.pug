@@ -1,0 +1,284 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    style.
+     
+      
+      .sheet {
+        margin: 0;
+        width: 100%; 
+        height: 209mm;
+      }
+
+      body{
+        width: 100%; 
+        margin: 0;
+        background: #ffffff;
+        font-family: sans-serif;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+
+      .clearfix {
+        display: block; }
+      .col {
+        float:left;
+      }
+      .col-1 {
+        width: 4.16667%; }
+
+      .col-2 {
+        width: 8.33333%; }
+
+      .col-3 {
+        width: 12.5%; }
+
+      .col-4 {
+        width: 16.66667%; }
+
+      .col-5 {
+        width: 20.83333%; }
+
+      .col-6 {
+        width: 25%; }
+
+      .col-7 {
+        width: 29.16667%; }
+
+      .col-8 {
+        width: 33.33333%; }
+
+      .col-9 {
+        width: 37.5%; }
+
+      .col-10 {
+        width: 41.66667%; }
+
+      .col-11 {
+        width: 45.83333%; }
+
+      .col-12 {
+        width: 50%; }
+
+      .col-13 {
+        width: 54.16667%; }
+
+      .col-14 {
+        width: 58.33333%; }
+
+      .col-15 {
+        width: 62.5%; }
+
+      .col-16 {
+        width: 66.66667%; }
+
+      .col-17 {
+        width: 70.83333%; }
+
+      .col-18 {
+        width: 75%; }
+
+      .col-19 {
+        width: 79.16667%; }
+
+      .col-20 {
+        width: 83.33333%; }
+
+      .col-21 {
+        width: 87.5%; }
+
+      .col-22 {
+        width: 91.66667%; }
+
+      .col-23 {
+        width: 95.83333%; }
+
+      .col-24 {
+        width: 100%; }
+      .line-area {
+        margin-top: 30px;
+        margin-bottom: 40px;
+        width:100%;
+      }
+      .line-area .line {
+        width:100%;
+        float:left;
+        text-align: center;
+        border-bottom: 2px solid #30c29f;
+        line-height: 0.1em;
+        margin: 10px 0 20px;
+      }
+      .line-area .line span {
+        background: #fff;
+        padding: 0 15px;
+        text-align: center;
+        font-size: 10pt;
+        color: #30c29f;
+      }
+      .patient-area {
+        margin-top: 25px;
+        font-size: 7pt;
+      }
+      .patient-area .date {
+        float:right;
+        text-align:right;
+      }
+      .space{
+        width:100%;
+        height:60px;
+        display:block;
+      }
+      p.letter{
+        font-size : 7pt;
+      }
+      .medicament-area ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .medicament-area ul li{
+        display: block;
+        width: 100%;
+        
+      }
+      .medicament-area ul li p{
+        display: inline-block;
+        padding-right:2%;
+        float: left;
+        
+      }
+      ul.medicamentsTitle{
+        font-size: 7pt;
+
+        color:#000;
+      }
+      ul.medicamentsList{
+        font-size: 7pt;
+        color:#333;
+      }
+
+      .boxesNumber{
+         width: 3%;
+      }
+      .medicamentName{
+         width: 22%;
+      }
+      .drugsNumber{
+        width: 10%;
+      }
+      .daysNumber{
+         width: 10%;
+      }
+      .times{
+        width: 10%;
+      } 
+      .note{
+        width: 30%;
+      }
+      .prescription-container {
+        color: #001028;
+        background: #FFFFFF;
+        font-size: 7pt;
+      }
+      .prescription-container .water-mark {
+  
+        width: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
+        padding-top: 5%;
+      }
+      .prescription-container .water-mark > img {
+        width: 45%;
+        opacity: 0.3;
+      }
+      .presc-top-area {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .presc-top-area .logo-presc {
+        margin-bottom: 10px;
+      }
+      .presc-top-area .logo-presc img {
+        width: 30%;
+      }
+      .presc-top-area .doctor-presc .dr-name {
+        color: #30c29f;
+        font-size: 13px;
+        font-weight:700; 
+        margin-bottom:5px;
+      }
+      .presc-top-area .doctor-presc .dr-speciality {
+        color: #62deff;
+        font-size: 12px;
+      }
+     
+      
+      
+
+
+  body
+        
+          .presc-top-area
+            .doctor-presc
+              .dr-name #{model.doctor.name} #{model.doctor.surname}
+              .dr-speciality #{model.doctor.specialty.name}
+           
+          .patient-area
+            .col.col-14
+              p Nom et Prénom : #{model.patient.name} #{model.patient.surname}
+            .col.col-8.date 
+              p Oran, Le : #{moment(model.created).format('DD/MM/YYYY')}
+
+          .line-area
+            .line
+              span ORDONNANCE
+
+        
+          
+          
+          .medicament-area
+            if model.type === "prescription"
+              ul.medicamentsList
+                each medicament in model.medicamentsList
+                  li
+                    p.boxesNumber  #{medicament.boxesNumber}
+                    p.medicamentName  #{medicament.medicamentName}
+                    p.drugsNumber #{medicament.drugsNumber} cp
+                    P.times  #{medicament.times} fois
+                    P.daysNumber  #{medicament.daysNumber} jours
+                    P.note  #{medicament.note}
+            else
+              .space
+              p.letter #{model.letter}                    
+                  //- .main-section.page-break-inside
+                  //-   .single-row
+                  //-     p
+                  //-       span 
+                  //-         strong Medicament Name:
+                  //-       span #{medicament.medicamentName}
+                  //-   .single-row
+                  //-     .one-third.text-left
+                  //-       span
+                  //-         strong Boxes Number:
+                  //-       span #{medicament.boxesNumber}
+                  //-     .one-third.text-center
+                  //-       span
+                  //-         strong Days Number:
+                  //-       span #{medicament.daysNumber}
+                  //-     .one-third.text-right
+                  //-       span
+                  //-         strong Times:
+                  //-       span #{medicament.times}
+                  //-   .single-row.no-border
+                  //-     p
+                  //-       span
+                  //-         strong Note:
+                  //-       span #{medicament.note}
+          
+
+

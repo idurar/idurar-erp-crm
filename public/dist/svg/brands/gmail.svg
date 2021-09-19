@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 160 120" style="enable-background:new 0 0 160 120;" >
+<style type="text/css">
+	.st0{fill:#EAEAEA;}
+	.st1{fill:#D54C3F;}
+	.st2{fill:#B63524;}
+	.st3{fill:#DE5145;}
+	.st4{fill:#EFEFEF;}
+	.st5{fill:#C64132;}
+	.st6{fill:#E3E3E3;}
+	.st7{fill:url(#SVGID_1_);}
+	.st8{fill:url(#SVGID_2_);}
+</style>
+<path class="st0" d="M150,120H10c-5.5,0-10-4.5-10-10V10C0,4.5,4.5,0,10,0h140c5.5,0,10,4.5,10,10v100C160,115.5,155.5,120,150,120z
+	"/>
+<path class="st1" d="M20,120H10c-5.5,0-10-4.5-10-10V10C0,4.5,4.5,0,10,0s10,4.5,10,10V120z"/>
+<path class="st2" d="M140,120h10c5.5,0,10-4.5,10-10V10c0-5.5-4.5-10-10-10s-10,4.5-10,10V120z"/>
+<path class="st3" d="M155.7,18.2c4.5-3.2,5.6-9.4,2.5-13.9c-3.2-4.5-9.4-5.6-13.9-2.5L80,48.6l0,0l0,0L15.7,1.8
+	C11.2-1.4,5-0.3,1.8,4.3S-0.3,15,4.3,18.2l0,0L4,18l76,55.3 M156,18L80,73.3"/>
+<path class="st4" d="M150,0c-2.1,0-4.1,0.7-5.7,1.8L80,48.6l0,0l0,0L15.7,1.8C14.1,0.6,12.1,0,10,0H150z"/>
+<path class="st5" d="M20,34L3.2,17.3l0,0c0.4,0.3,0.7,0.6,1.1,0.9L4,18l16,11.6l0,4.4"/>
+<path class="st6" d="M68.9,82L20,120l0-86.5L68.9,82"/>
+<linearGradient id="SVGID_1_" gradientUnits="adminSpaceOnUse" x1="-5.6241" y1="116.5692" x2="-4.0567" y2="116.5692" gradientTransform="matrix(38.2761 0 0 -38.2761 235.2731 4517.6318)">
+	<stop  offset="0" style="stop-color:#C8C8C8"/>
+	<stop  offset="1" style="stop-color:#CDCDCD"/>
+</linearGradient>
+<path class="st7" d="M68.9,82L80,73.3L20,29.7v3.9L68.9,82L68.9,82z"/>
+<linearGradient id="SVGID_2_" gradientUnits="adminSpaceOnUse" x1="-4.3471" y1="116.0725" x2="-2.4891" y2="116.0725" gradientTransform="matrix(38.2761 0 0 -38.2761 235.2731 4517.6318)">
+	<stop  offset="0" style="stop-color:#D9D9D9"/>
+	<stop  offset="1" style="stop-color:#E2E2E2"/>
+</linearGradient>
+<path class="st8" d="M106.9,120H140V29.7L80,73.3L68.9,82L106.9,120z"/>
+</svg>
