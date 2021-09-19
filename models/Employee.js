@@ -21,13 +21,11 @@ const employeeSchema = new mongoose.Schema({
     required: true,
   },
   birthday: {
-    type: String,
-    trim: true,
+    type: Date,
     required: true,
   },
   birthplace: {
     type: String,
-    trim: true,
   },
   gender: {
     type: String,
@@ -38,15 +36,11 @@ const employeeSchema = new mongoose.Schema({
     trim: true,
   },
   department: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Department",
-    autopopulate: true,
+    type: String,
     required: true,
   },
   position: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Position",
-    autopopulate: true,
+    type: String,
     required: true,
   },
   address: {
@@ -70,7 +64,7 @@ const employeeSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 1,
+    default: "1",
   },
   created: {
     type: Date,

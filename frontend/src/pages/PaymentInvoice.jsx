@@ -1,11 +1,9 @@
 import React from "react";
-import { Switch } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import CrudModule from "@/modules/CrudModule";
 import CurrencyForm from "@/forms/CurrencyForm";
 
-export default function PaymentClient() {
-  const entity = "paymentClient";
+export default function PaymentInvoice() {
+  const entity = "paymentInvoice";
   const searchConfig = {
     displayLabels: ["name"],
     searchFields: "name",

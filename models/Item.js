@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  itemName: {
+  name: {
     type: String,
     trim: true,
     required: true,
@@ -21,10 +21,6 @@ const itemSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-  },
-  currency: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Currency",
   },
 });
 

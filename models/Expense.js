@@ -8,6 +8,7 @@ const expenseSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    default: Date.now,
   },
   name: {
     type: String,
@@ -45,10 +46,6 @@ const expenseSchema = new mongoose.Schema({
   },
   total: {
     type: Number,
-  },
-  currency: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Currency",
   },
   paymentMode: {
     type: mongoose.Schema.ObjectId,

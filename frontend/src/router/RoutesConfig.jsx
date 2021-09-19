@@ -57,7 +57,7 @@ export const routesConfig = [
   },
   {
     path: "/payment/client",
-    component: "PaymentClient",
+    component: "PaymentInvoice",
     title: "Payment Client",
     icon: "CreditCardOutlined",
   },

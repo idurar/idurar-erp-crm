@@ -171,7 +171,7 @@ exports.menu = [
   //     { slug: "/invoice", title: "Facture", icon: "accounting" },
   //     { slug: "/quote", title: "Devis", icon: "accounting" },
   //     { slug: "/orderform", title: "Bon de commande", icon: "accounting" },
-  //     { slug: "/paymentClient", title: "Regelement", icon: "accounting" },
+  //     { slug: "/paymentInvoice", title: "Regelement", icon: "accounting" },
   //     { slug: "/expenses", title: "Depences", icon: "accounting" },
   //     {
   //       slug: "/financesettings",

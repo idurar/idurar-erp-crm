@@ -175,9 +175,9 @@ methods.update = async (req, res) => {
 //     body["total"] = total;
 
 //     //Calculate credited amount
-//     const findById = await Model.findById(id).populate("paymentClient");
-//     if (findById["paymentClient"].length > 0) {
-//       findById["paymentClient"].map((payment) => {
+//     const findById = await Model.findById(id).populate("paymentInvoice");
+//     if (findById["paymentInvoice"].length > 0) {
+//       findById["paymentInvoice"].map((payment) => {
 //         credit += payment.amount;
 //       });
 //     }

@@ -75,10 +75,10 @@ const quoteSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  paymentClient: [
+  paymentInvoice: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "PaymentClient",
+      ref: "PaymentInvoice",
     },
   ],
   paymentStatus: {

@@ -44,7 +44,6 @@ const adminSchema = new Schema({
     default: false,
   },
   permissions: [{ type: mongoose.Schema.ObjectId, ref: "Permission" }],
-  customMenu: [{ type: mongoose.Schema.ObjectId, ref: "CustomMenu" }],
   isLoggedIn: { type: Boolean },
 });
 

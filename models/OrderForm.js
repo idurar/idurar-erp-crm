@@ -53,10 +53,6 @@ const orderFormSchema = new mongoose.Schema({
       },
     },
   ],
-  currency: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Currency",
-  },
   taxRate: {
     type: Number,
   },
@@ -86,11 +82,11 @@ const orderFormSchema = new mongoose.Schema({
   paymentStatus: {
     type: String,
     trim: true,
-    default: "0",
+    default: "unpaid",
   },
   status: {
     type: String,
-    default: 1,
+    default: "draft",
   },
   updated: {
     type: Date,

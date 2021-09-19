@@ -55,11 +55,6 @@ const invoiceSchema = new mongoose.Schema({
       },
     },
   ],
-  currency: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Currency",
-    autopopulate: true,
-  },
   taxRate: {
     type: Number,
     default: 0,
