@@ -22,23 +22,10 @@ exports.catchErrors = (fn) => {
   If we hit a route that is not found, we mark it as 404 and pass it along to the next error handler to display
 */
 exports.notFound = (req, res, next) => {
-  res.render("errors/404", {
-    title: "404",
+  res.status(404).json({
+    success: false,
+    message: "Api url doesn't exist ",
   });
-};
-
-/*
-  MongoDB Validation Error Handler
-
-  Detect if there are mongodb validation errors that we can nicely show via flash messages
-*/
-
-exports.flashValidationErrors = (err, req, res, next) => {
-  if (!err.errors) return next(err);
-  // validation errors look like
-  const errorKeys = Object.keys(err.errors);
-  errorKeys.forEach((key) => req.flash("error", err.errors[key].message));
-  res.redirect("back");
 };
 
 /*
@@ -56,19 +43,11 @@ exports.developmentErrors = (err, req, res, next) => {
       "<mark>$&</mark>"
     ),
   };
-  // res.status(err.status || 500);
-  // res.format({
-  //   // Based on the `Accept` http header
-  //   "text/html": () => {
-  //     res.send({
-  //       "error": errorDetails
-  //     })
-  //   }, // Form Submit, Reload the page
-  //   "application/json": () => res.json(errorDetails), // Ajax call, send JSON back
-  // });
-  res.render("errors/500", {
-    title: "500",
-    error: err.message,
+
+  res.status(500).json({
+    success: false,
+    message: "Oops ! Error in Server",
+    error: err,
   });
 };
 
@@ -78,13 +57,9 @@ exports.developmentErrors = (err, req, res, next) => {
   No stacktraces are leaked to admin
 */
 exports.productionErrors = (err, req, res, next) => {
-  // res.status(err.status || 500);
-  // res.render("error", {
-  //   message: err.message,
-  //   error: {},
-  // });
-  res.render("errors/500", {
-    title: "500",
-    error: err.message,
+  res.status(500).json({
+    success: false,
+    message: "Oops ! Error in Server",
+    error: err,
   });
 };
