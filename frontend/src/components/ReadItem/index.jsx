@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Row, Col, Button } from "antd";
 import { useSelector } from "react-redux";
 
+import dayjs from "dayjs";
+
 import { useCrudContext } from "@/context/crud";
 import { selectCurrentItem } from "@/redux/crud/selectors";
 import { valueByString } from "@/utils/helpers";
@@ -15,8 +17,6 @@ export default function ReadItem({ config }) {
 
   const isFirstRun = useRef(true);
   useEffect(() => {
-    console.log("currentResult :", currentResult);
-    console.log("readColumns :", readColumns);
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
@@ -25,7 +25,9 @@ export default function ReadItem({ config }) {
     readColumns.map((props) => {
       const propsKey = props.dataIndex;
       const propsTitle = props.title;
-      const value = valueByString(currentResult, propsKey);
+      const isDate = props.isDate || false;
+      let value = valueByString(currentResult, propsKey);
+      value = isDate ? dayjs(value).format("DD/MM/YYYY") : value;
       list.push({ propsKey, label: propsTitle, value: value });
     });
     setListState(list);
@@ -51,6 +53,5 @@ export default function ReadItem({ config }) {
     );
   });
 
-  console.log("itemsList :", itemsList);
   return <div style={show}>{itemsList}</div>;
 }

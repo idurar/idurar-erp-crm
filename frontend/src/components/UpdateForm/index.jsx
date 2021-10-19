@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import dayjs from "dayjs";
+
 import { useDispatch, useSelector } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { useCrudContext } from "@/context/crud";
@@ -19,13 +20,9 @@ export default function UpdateForm({ config, formElements }) {
 
   /////
 
-  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
-  const { result: currentItem } = useSelector(selectCurrentItem);
+  const { panel, collapsedBox, readBox } = crudContextAction;
 
   const showCurrentRecord = () => {
-    // dispatch(crud.currentItem(currentItem));
-    // panel.open();
-    // collapsedBox.open();
     readBox.open();
   };
 
@@ -33,33 +30,18 @@ export default function UpdateForm({ config, formElements }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    if (fieldsValue) {
-      if (fieldsValue.birthday) {
-        fieldsValue = {
-          ...fieldsValue,
-          birthday: fieldsValue["birthday"].format("DD/MM/YYYY"),
-        };
-      }
-      if (fieldsValue.date) {
-        fieldsValue = {
-          ...fieldsValue,
-          birthday: fieldsValue["date"].format("DD/MM/YYYY"),
-        };
-      }
-    }
-
     const id = current._id;
     dispatch(crud.update(entity, id, fieldsValue));
   };
   useEffect(() => {
     if (current) {
-      if (current.birthday) {
-        current.birthday = dayjs(current.birthday);
+      let obj = {};
+      for (const key in current) {
+        obj[key] = dayjs(current[key], "YYYY-MM-DD").isValid()
+          ? dayjs(current[key])
+          : current[key];
       }
-      if (current.date) {
-        current.date = dayjs(current.date);
-      }
-      form.setFieldsValue(current);
+      form.setFieldsValue(obj);
     }
   }, [current]);
 

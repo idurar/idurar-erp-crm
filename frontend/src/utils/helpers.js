@@ -113,6 +113,9 @@ export function formatDate(param) {
   return fullDate;
 }
 
+export const isDate = function (date) {
+  return new Date(date) !== "Invalid Date" && !isNaN(new Date(date));
+};
 /*
  Format Datetime to display admin
 */
