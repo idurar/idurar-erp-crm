@@ -77,4 +77,9 @@ export const routesConfig = [
     component: "Admin",
     icon: "TeamOutlined",
   },
+  {
+    path: "/role",
+    component: "Role",
+    icon: "SettingOutlined",
+  },
 ];
