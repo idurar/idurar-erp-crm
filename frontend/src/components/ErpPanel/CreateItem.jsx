@@ -63,20 +63,20 @@ export default function CreateItem({ config }) {
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
-      if (fieldsValue.expiredDate) {
-        const newDate = fieldsValue["expiredDate"].format("DD/MM/YYYY");
-        fieldsValue = {
-          ...fieldsValue,
-          expiredDate: newDate,
-        };
-      }
-      if (fieldsValue.date) {
-        const newDate = fieldsValue["date"].format("DD/MM/YYYY");
-        fieldsValue = {
-          ...fieldsValue,
-          date: newDate,
-        };
-      }
+      // if (fieldsValue.expiredDate) {
+      //   const newDate = fieldsValue["expiredDate"].format("DD/MM/YYYY");
+      //   fieldsValue = {
+      //     ...fieldsValue,
+      //     expiredDate: newDate,
+      //   };
+      // }
+      // if (fieldsValue.date) {
+      //   const newDate = fieldsValue["date"].format("DD/MM/YYYY");
+      //   fieldsValue = {
+      //     ...fieldsValue,
+      //     date: newDate,
+      //   };
+      // }
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
