@@ -274,8 +274,7 @@ html
             div 
               .col.col-8
                 p.strong Date :
-                p 
-                  != h.moment(model.date).format("DD/MM/YYYY")
+                p= h.moment(model.date).format("DD/MM/YYYY")
               .col.col-8
                 p.strong Expired Date :
                 p #{model.expiredDate}

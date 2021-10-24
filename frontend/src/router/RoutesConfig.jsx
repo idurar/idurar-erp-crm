@@ -46,11 +46,6 @@ export const routesConfig = [
     icon: "CustomerServiceOutlined",
   },
   {
-    path: "/currency",
-    component: "Currency",
-    icon: "DesktopOutlined",
-  },
-  {
     path: "/invoice",
     component: "Invoice",
     icon: "FileTextOutlined",
