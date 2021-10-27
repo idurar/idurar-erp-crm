@@ -10,7 +10,13 @@ import RecentTable from "@/components/RecentTable";
 
 const TopCard = ({ title, tagContent, tagColor, prefix }) => {
   return (
-    <Col className="gutter-row" span={6}>
+    <Col
+      className="gutter-row"
+      xs={{ span: 24 }}
+      sm={{ span: 12 }}
+      md={{ span: 12 }}
+      lg={{ span: 6 }}
+    >
       <div
         className="whiteBox shadow"
         style={{ color: "#595959", fontSize: 13, height: "106px" }}
@@ -156,10 +162,22 @@ export default function Dashboard() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
-        <Col className="gutter-row" span={18}>
+        <Col
+          className="gutter-row"
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 24 }}
+          lg={{ span: 18 }}
+        >
           <div className="whiteBox shadow" style={{ height: "380px" }}>
             <Row className="pad10" gutter={[0, 0]}>
-              <Col className="gutter-row" span={8}>
+              <Col
+                className="gutter-row"
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 8 }}
+                lg={{ span: 8 }}
+              >
                 <div className="pad15">
                   <h3 style={{ color: "#22075e", marginBottom: 15 }}>
                     Invoice Preview
@@ -176,7 +194,13 @@ export default function Dashboard() {
                   <PreviewState tag={"Paid"} color={"green"} value={55} />
                 </div>
               </Col>
-              <Col className="gutter-row" span={8}>
+              <Col
+                className="gutter-row"
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 8 }}
+                lg={{ span: 8 }}
+              >
                 {" "}
                 <div className="pad15">
                   <h3 style={{ color: "#22075e", marginBottom: 15 }}>
@@ -194,7 +218,13 @@ export default function Dashboard() {
                   <PreviewState tag={"Paid"} color={"green"} value={55} />
                 </div>
               </Col>
-              <Col className="gutter-row" span={8}>
+              <Col
+                className="gutter-row"
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 8 }}
+                lg={{ span: 8 }}
+              >
                 {" "}
                 <div className="pad15">
                   <h3 style={{ color: "#22075e", marginBottom: 15 }}>
@@ -216,7 +246,13 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col className="gutter-row" span={6}>
+        <Col
+          className="gutter-row"
+          xs={{ span: 0 }}
+          sm={{ span: 0 }}
+          md={{ span: 0 }}
+          lg={{ span: 6 }}
+        >
           <div className="whiteBox shadow" style={{ height: "380px" }}>
             <div
               className="pad20"
@@ -243,7 +279,13 @@ export default function Dashboard() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
-        <Col className="gutter-row" span={12}>
+        <Col
+          className="gutter-row"
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 12 }}
+          lg={{ span: 12 }}
+        >
           <div className="whiteBox shadow">
             <div className="pad20">
               <h3 style={{ color: "#22075e", marginBottom: 5 }}>
@@ -258,7 +300,13 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col className="gutter-row" span={12}>
+        <Col
+          className="gutter-row"
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 12 }}
+          lg={{ span: 12 }}
+        >
           <div className="whiteBox shadow">
             <div className="pad20">
               <h3 style={{ color: "#22075e", marginBottom: 5 }}>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Dropdown, Button, PageHeader, Table } from "antd";
+import { Dropdown, Button, PageHeader, Table, Col } from "antd";
 
 import { EllipsisOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ import uniqueId from "@/utils/uinqueId";
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, dataTableTitle } = config;
+
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -22,9 +23,8 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } = useSelector(
-    selectListItems
-  );
+  const { result: listResult, isLoading: listIsLoading } =
+    useSelector(selectListItems);
 
   const { pagination, items } = listResult;
 
