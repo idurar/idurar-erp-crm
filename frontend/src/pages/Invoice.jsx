@@ -1,5 +1,5 @@
 import React from "react";
-
+import dayjs from "dayjs";
 import ErpPanel from "@/components/ErpPanel";
 
 import { Tag } from "antd";
@@ -23,10 +23,16 @@ export default function Invoice() {
     {
       title: "Date",
       dataIndex: "date",
+      render: (date) => {
+        return dayjs(date).format("DD/MM/YYYY");
+      },
     },
     {
       title: "Due date",
       dataIndex: "expiredDate",
+      render: (date) => {
+        return dayjs(date).format("DD/MM/YYYY");
+      },
     },
     {
       title: "SubTotal",

@@ -55,18 +55,18 @@ export default function UpdateItem({ config }) {
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
-      if (fieldsValue.expiredDate) {
-        fieldsValue = {
-          ...fieldsValue,
-          expiredDate: fieldsValue["expiredDate"].format("DD/MM/YYYY"),
-        };
-      }
-      if (fieldsValue.date) {
-        fieldsValue = {
-          ...fieldsValue,
-          date: fieldsValue["date"].format("DD/MM/YYYY"),
-        };
-      }
+      // if (fieldsValue.expiredDate) {
+      //   fieldsValue = {
+      //     ...fieldsValue,
+      //     expiredDate: fieldsValue["expiredDate"].format("DD/MM/YYYY"),
+      //   };
+      // }
+      // if (fieldsValue.date) {
+      //   fieldsValue = {
+      //     ...fieldsValue,
+      //     date: fieldsValue["date"].format("DD/MM/YYYY"),
+      //   };
+      // }
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
@@ -105,10 +105,10 @@ export default function UpdateItem({ config }) {
       //   current.client = undefined;
       // }
       if (current.date) {
-        current.date = dayjs(current.date, "DD/MM/YYYY");
+        current.date = dayjs(current.date);
       }
       if (current.expiredDate) {
-        current.expiredDate = dayjs(current.expiredDate, "DD/MM/YYYY");
+        current.expiredDate = dayjs(current.expiredDate);
       }
       if (!current.taxRate) {
         current.taxRate = 0;

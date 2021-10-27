@@ -263,8 +263,8 @@ html
           img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
           .right.company-info
               p IDURAR WEB Agency
-              p Centre d’affaire El-Mountazeh Oran - Algerie
-              p RC: 16A5414225 /NIF: 199035050030146 /AI: 31050981441
+              p Centre d’affaire Gold Tower Oran - Algerie
+              p RC: 16A5234245 /NIF: 198232345630567 /AI: 31009451343
               
         .col.col-24
           .space  
@@ -274,10 +274,10 @@ html
             div 
               .col.col-8
                 p.strong Date :
-                p #{model.date}
+                p #{moment(model.date).format("DD/MM/YYYY")}
               .col.col-8
                 p.strong Expired Date :
-                p #{model.expiredDate}
+                p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
                 p.strong Invoice Number :
                 p # #{model.number}/#{model.year || "2021"} 

@@ -6,6 +6,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const promisify = require("es6-promisify");
 
+const helpers = require("./helpers");
+
 const apiRouter = require("./routes/api");
 const authJwtRouter = require("./routes/authJwt");
 
@@ -39,6 +41,7 @@ app.use(
 // pass variables to our templates + all requests
 
 app.use((req, res, next) => {
+  res.locals.h = helpers;
   res.locals.admin = req.admin || null;
   res.locals.currentPath = req.path;
   next();

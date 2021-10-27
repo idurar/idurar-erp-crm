@@ -101,19 +101,21 @@ export default function ErpForm({ subTotal, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="currency"
-            name="currency"
+            label="paymentStatus"
+            name="paymentStatus"
             rules={[
               {
                 required: false,
-                message: "Please input your currency!",
+                message: "Please input your paymentStatus!",
               },
             ]}
           >
-            <SelectAsync
-              entity={"currency"}
-              displayLabels={["name"]}
-            ></SelectAsync>
+            <Select
+              options={[
+                { value: "unpaid", label: "unpaid" },
+                { value: "paid", label: "unpaid" },
+              ]}
+            ></Select>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>

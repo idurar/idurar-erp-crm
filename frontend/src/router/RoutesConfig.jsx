@@ -41,9 +41,9 @@ export const routesConfig = [
     icon: "CustomerServiceOutlined",
   },
   {
-    path: "/currency",
-    component: "Currency",
-    icon: "DesktopOutlined",
+    path: "/employee",
+    component: "Employee",
+    icon: "CustomerServiceOutlined",
   },
   {
     path: "/invoice",
@@ -71,5 +71,10 @@ export const routesConfig = [
     path: "/admin",
     component: "Admin",
     icon: "TeamOutlined",
+  },
+  {
+    path: "/role",
+    component: "Role",
+    icon: "SettingOutlined",
   },
 ];

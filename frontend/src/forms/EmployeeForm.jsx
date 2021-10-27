@@ -2,12 +2,12 @@ import React from "react";
 import { Form, Input, Button, Radio, Select, Switch } from "antd";
 import { DatePicker, TimePicker, Calendar } from "@/components/CustomAntd";
 
-export default function PatientForm() {
+export default function EmployeeForm() {
   return (
     <>
       <Form.Item
-        label="name"
         name="name"
+        label="name"
         rules={[
           {
             required: true,
@@ -18,8 +18,8 @@ export default function PatientForm() {
         <Input />
       </Form.Item>
       <Form.Item
-        label="Surname"
         name="surname"
+        label="Surname"
         rules={[
           {
             required: true,
@@ -30,8 +30,8 @@ export default function PatientForm() {
         <Input />
       </Form.Item>
       <Form.Item
-        label="Birthday"
         name="birthday"
+        label="Birthday"
         rules={[
           {
             required: true,
@@ -42,12 +42,22 @@ export default function PatientForm() {
         <DatePicker format={"DD/MM/YYYY"} />
       </Form.Item>
       <Form.Item
-        label="Gender"
-        name="sexe"
+        name="birthplace"
+        label="Birthplace"
         rules={[
           {
             required: true,
-            message: "Please input your Gender!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="gender"
+        label="Gender"
+        rules={[
+          {
+            required: true,
           },
         ]}
       >
@@ -56,7 +66,6 @@ export default function PatientForm() {
           <Select.Option value="women">Women</Select.Option>
         </Select>
       </Form.Item>
-
       <Form.Item
         name="email"
         label="E-mail"
@@ -74,12 +83,56 @@ export default function PatientForm() {
         <Input />
       </Form.Item>
       <Form.Item
-        name="tel"
+        name="phone"
         label="Phone Number"
         rules={[
           {
             required: true,
             message: "Please input your phone!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="department"
+        label="department"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="position"
+        label="position"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="address"
+        label="address"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="state"
+        label="state"
+        rules={[
+          {
+            required: true,
           },
         ]}
       >

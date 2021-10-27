@@ -267,10 +267,17 @@ exports.update = async (req, res) => {
           .status(400)
           .json({ message: "An account with this email already exists." });
     }
-
+    if (req.body.employee) {
+      let employee = await getOne("Employee", req.body.employee);
+      req.body.name = employee.name;
+      req.body.surname = employee.surname;
+    }
     let updates = {
       role: req.body.role,
       email: req.body.email,
+      employee: req.body.employee,
+      name: req.body.name,
+      surname: req.body.surname,
     };
 
     // Find document by id and updates with the required fields
