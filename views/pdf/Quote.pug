@@ -274,13 +274,13 @@ html
             div 
               .col.col-8
                 p.strong Date :
-                p #{model.date}
+                p #{moment(model.date).format("DD/MM/YYYY")}
               .col.col-8
                 p.strong Expired Date :
-                p #{model.expiredDate}
+                p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
-                p.strong Invoice Number :
-                p # #{model.number}/#{model.year || "2021"} 
+                p.strong Quote Number :
+                p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
             .billTo

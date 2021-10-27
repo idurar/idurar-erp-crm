@@ -22,15 +22,18 @@ export default function ErpForm({ subTotal, current = null }) {
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
-  const [currentYear, setCurrentYear] = useState();
+  const [currentYear, setCurrentYear] = useState(() =>
+    new Date().getFullYear()
+  );
   const handelTaxChange = (value) => {
     setTaxRate(value);
   };
+
   useEffect(() => {
-    setCurrentYear("2000");
     if (current) {
-      const { taxRate = 0 } = current;
+      const { taxRate = 0, year } = current;
       setTaxRate(taxRate);
+      setCurrentYear(year);
     }
   }, [current]);
   useEffect(() => {
@@ -40,10 +43,7 @@ export default function ErpForm({ subTotal, current = null }) {
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);
-  const generateYear = () => {
-    const year = new Date().getFullYear();
-    return "2002";
-  };
+
   useEffect(() => {
     addField.current.click();
   }, []);
@@ -75,20 +75,22 @@ export default function ErpForm({ subTotal, current = null }) {
           <Form.Item
             label="Number"
             name="number"
+            initialValue={1}
             rules={[
               {
-                required: false,
-                message: "Please input your number name!",
+                required: true,
+                message: "Please input invoice number!",
               },
             ]}
           >
-            <InputNumber style={{ width: "100%" }} defaultValue="1" />
+            <InputNumber style={{ width: "100%" }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
             label="year"
             name="year"
+            initialValue={currentYear}
             rules={[
               {
                 required: true,
@@ -96,7 +98,7 @@ export default function ErpForm({ subTotal, current = null }) {
               },
             ]}
           >
-            <InputNumber style={{ width: "100%" }} defaultValue="2021" />
+            <InputNumber style={{ width: "100%" }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -113,7 +115,7 @@ export default function ErpForm({ subTotal, current = null }) {
             <Select
               options={[
                 { value: "unpaid", label: "unpaid" },
-                { value: "paid", label: "unpaid" },
+                { value: "paid", label: "paid" },
               ]}
             ></Select>
           </Form.Item>

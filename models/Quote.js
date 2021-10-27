@@ -75,17 +75,6 @@ const quoteSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  paymentInvoice: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "PaymentInvoice",
-    },
-  ],
-  paymentStatus: {
-    type: String,
-    trim: true,
-    default: "0",
-  },
   note: {
     type: String,
   },
@@ -93,13 +82,13 @@ const quoteSchema = new mongoose.Schema({
     type: String,
     default: "Draft",
   },
-  updated: {
-    type: Date,
-    default: Date.now,
-  },
   pdfPath: {
     type: String,
     default: "",
+  },
+  updated: {
+    type: Date,
+    default: Date.now,
   },
   created: {
     type: Date,
