@@ -25,7 +25,7 @@ function SaveForm({ form }) {
   );
 }
 
-export default function CreateItem({ config }) {
+export default function CreateItem({ config, CreateForm }) {
   let { entity, CREATE_ENTITY } = config;
   const { erpContextAction } = useErpContext();
   const { createPanel } = erpContextAction;
@@ -121,7 +121,7 @@ export default function CreateItem({ config }) {
           onFinish={onSubmit}
           onValuesChange={handelValuesChange}
         >
-          <ErpForm subTotal={subTotal} />
+          <CreateForm subTotal={subTotal} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save
