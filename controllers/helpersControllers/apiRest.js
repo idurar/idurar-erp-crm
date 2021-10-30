@@ -31,6 +31,7 @@ exports.read = async (Model, req, res) => {
       success: false,
       result: null,
       message: "Oops there is an Error",
+      error: err,
     });
   }
 };
@@ -60,6 +61,7 @@ exports.create = async (Model, req, res) => {
         success: false,
         result: null,
         message: "Required fields are not supplied",
+        error: err,
       });
     } else {
       // Server Error
@@ -67,6 +69,7 @@ exports.create = async (Model, req, res) => {
         success: false,
         result: null,
         message: "Oops there is an Error",
+        error: err,
       });
     }
   }
@@ -102,6 +105,7 @@ exports.update = async (Model, req, res) => {
         success: false,
         result: null,
         message: "Required fields are not supplied",
+        error: err,
       });
     } else {
       // Server Error
@@ -109,6 +113,7 @@ exports.update = async (Model, req, res) => {
         success: false,
         result: null,
         message: "Oops there is an Error",
+        error: err,
       });
     }
   }
@@ -152,8 +157,8 @@ exports.delete = async (Model, req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      error: err,
       message: "Oops there is an Error",
+      error: err,
     });
   }
 };
@@ -232,26 +237,6 @@ exports.search = async (Model, req, res) => {
     : ["name", "surname", "birthday"];
 
   const fields = { $or: [] };
-  // for (const field of fieldsArray) {
-  //   // console.log(field);
-  //   const split = field.split(".");
-
-  //   if(split.length>1) {
-  //   const fieldParent = split[0];
-  //   const fieldMatch = split[1];
-  //   console.log(fieldParent);
-  //   console.log(fieldMatch);
-  //   fields.$or.push({ [fieldParent]: {
-  //       $elemMatch: {
-
-  //         [fieldMatch]: { $regex: new RegExp(req.query.q, "i") }
-  //     }
-  //   } });
-  //   }
-  //   else {
-  //     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, "i") } });
-  //   }
-  // }
 
   for (const field of fieldsArray) {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, "i") } });
@@ -284,6 +269,7 @@ exports.search = async (Model, req, res) => {
       success: false,
       result: null,
       message: "Oops there is an Error",
+      error: err,
     });
   }
 };
@@ -317,6 +303,7 @@ exports.filter = async (Model, req, res) => {
       success: false,
       result: null,
       message: "Oops there is an Error",
+      error: err,
     });
   }
 };
@@ -365,6 +352,7 @@ exports.status = async (Model, req, res) => {
       success: false,
       result: null,
       message: "Oops there is an Error",
+      error: err,
     });
   }
 };
@@ -399,11 +387,12 @@ exports.getFilterbyDate = async (Model, req, res) => {
       result,
       message: "Successfully found all documents where equal to : " + equal,
     });
-  } catch (error) {
+  } catch (err) {
     return res.status(500).json({
       success: false,
       result: null,
       message: "Oops there is an Error",
+      error: err,
     });
   }
 };

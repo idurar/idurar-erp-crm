@@ -79,10 +79,10 @@ const invoiceSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  clientPayment: [
+  paymentInvoice: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "ClientPayment",
+      ref: "PaymentInvoice",
     },
   ],
   paymentStatus: {
@@ -96,13 +96,13 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     default: "draft",
   },
-  updated: {
-    type: Date,
-    default: Date.now,
-  },
   pdfPath: {
     type: String,
     default: "",
+  },
+  updated: {
+    type: Date,
+    default: Date.now,
   },
   created: {
     type: Date,

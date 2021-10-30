@@ -5,7 +5,7 @@ import CrudModule from "@/modules/CrudModule";
 import PaymentModeForm from "@/forms/PaymentModeForm";
 
 export default function PaymentMode() {
-  const entity = "PaymentMode";
+  const entity = "paymentMode";
   const searchConfig = {
     displayLabels: ["name"],
     searchFields: "name",
@@ -20,11 +20,11 @@ export default function PaymentMode() {
       dataIndex: "name",
     },
     {
-      title: "description",
+      title: "Description",
       dataIndex: "description",
     },
     {
-      title: "Default",
+      title: "Is Default",
       dataIndex: "isDefault",
     },
     {
@@ -38,11 +38,11 @@ export default function PaymentMode() {
       dataIndex: "name",
     },
     {
-      title: "description",
+      title: "Description",
       dataIndex: "description",
     },
     {
-      title: "isDefault",
+      title: "Is Default",
       dataIndex: "isDefault",
       key: "isDefault",
       render: (text, row) => {
@@ -63,7 +63,7 @@ export default function PaymentMode() {
       },
     },
     {
-      title: "enabled",
+      title: "Enabled",
       dataIndex: "enabled",
       key: "enabled",
       render: (text, row) => {

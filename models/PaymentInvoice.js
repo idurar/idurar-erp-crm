@@ -20,6 +20,7 @@ const paymentInvoiceSchema = new mongoose.Schema({
   invoice: {
     type: mongoose.Schema.ObjectId,
     ref: "Invoice",
+    required: true,
     autopopulate: true,
   },
   date: {

@@ -11,30 +11,33 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your currency name!",
           },
         ]}
       >
         <Input />
       </Form.Item>
-      <Form.Item label="Description" name="description">
+      <Form.Item
+        label="Description"
+        name="description"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
         <Input />
       </Form.Item>
 
       <Form.Item
         label="Mode enabled"
         name="enabled"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
         style={{
           display: "inline-block",
           width: "calc(50%)",
           paddingRight: "5px",
         }}
         valuePropName="checked"
+        initialValue={true}
       >
         <Switch
           checkedChildren={<CheckOutlined />}
@@ -44,11 +47,6 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
       <Form.Item
         label="Is Default Mode"
         name="isDefault"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
         style={{
           display: "inline-block",
           width: "calc(50%)",

@@ -169,7 +169,7 @@ export default function Dashboard() {
           md={{ span: 24 }}
           lg={{ span: 18 }}
         >
-          <div className="whiteBox shadow" style={{ height: "380px" }}>
+          <div className="whiteBox shadow" style={{ minHeight: "380px" }}>
             <Row className="pad10" gutter={[0, 0]}>
               <Col
                 className="gutter-row"
