@@ -25,6 +25,7 @@ const paymentInvoiceSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    default: Date.now,
     required: true,
   },
   amount: {
@@ -38,7 +39,6 @@ const paymentInvoiceSchema = new mongoose.Schema({
   },
   ref: {
     type: String,
-    trim: true,
   },
   description: {
     type: String,
