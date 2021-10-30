@@ -1,4 +1,5 @@
 import { parse } from "querystring";
+import dayjs from "dayjs";
 function getPageQuery() {
   parse(window.location.href.split("?")[1]);
 }
@@ -113,8 +114,11 @@ export function formatDate(param) {
   return fullDate;
 }
 
-export const isDate = function (date) {
-  return new Date(date) !== "Invalid Date" && !isNaN(new Date(date));
+export const isDate = function ({ date, format = "YYYY-MM-DD" }) {
+  if (typeof date == "boolean") return false;
+  if (typeof date == "number") return false;
+  if (dayjs(date, format).isValid()) return true;
+  return false;
 };
 /*
  Format Datetime to display admin

@@ -25,7 +25,7 @@ function SaveForm({ form }) {
   );
 }
 
-export default function UpdateItem({ config }) {
+export default function UpdateItem({ config, UpdateForm }) {
   let { entity, UPDATE_ENTITY } = config;
   const { erpContextAction } = useErpContext();
   const { updatePanel } = erpContextAction;
@@ -151,11 +151,7 @@ export default function UpdateItem({ config }) {
           onFinish={onSubmit}
           onValuesChange={handelValuesChange}
         >
-          <ErpForm
-            subTotal={subTotal}
-            // autoCompleteUpdate={autoCompleteValue}
-            current={current}
-          />
+          <UpdateForm subTotal={subTotal} current={current} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save

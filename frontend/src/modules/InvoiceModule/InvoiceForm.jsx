@@ -14,10 +14,9 @@ import { PlusOutlined } from "@ant-design/icons";
 import { DatePicker } from "@/components/CustomAntd";
 
 import AutoCompleteAsync from "@/components/AutoCompleteAsync";
-import ItemRow from "./ItemRow";
-import SelectAsync from "@/components/SelectAsync";
+import ItemRow from "@/components/ErpPanel/ItemRow";
 
-export default function ErpForm({ subTotal, current = null }) {
+export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { Option } = Select;
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
@@ -113,6 +112,7 @@ export default function ErpForm({ subTotal, current = null }) {
             ]}
           >
             <Select
+              defaultValue="unpaid"
               options={[
                 { value: "unpaid", label: "unpaid" },
                 { value: "paid", label: "paid" },
@@ -121,27 +121,17 @@ export default function ErpForm({ subTotal, current = null }) {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>
-          <Form.Item
-            label="Erp Note"
-            name="note"
-            rules={[
-              {
-                required: false,
-                message: "Please input your number name!",
-              },
-            ]}
-          >
+          <Form.Item label="Note" name="note">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
           <Form.Item
             name="date"
-            label="Erp Date"
+            label="Date"
             rules={[
               {
-                required: false,
-                message: "Please input your number name!",
+                required: true,
               },
             ]}
           >
@@ -151,11 +141,10 @@ export default function ErpForm({ subTotal, current = null }) {
         <Col className="gutter-row" span={7}>
           <Form.Item
             name="expiredDate"
-            label="Erp Expire Date"
+            label="Expire Date"
             rules={[
               {
-                required: false,
-                message: "Please input your number name!",
+                required: true,
               },
             ]}
           >

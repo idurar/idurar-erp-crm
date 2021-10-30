@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import ErpPanel from "@/components/ErpPanel";
+import InvoiceModule from "@/modules/InvoiceModule";
 
 import { Tag } from "antd";
 
@@ -48,12 +48,11 @@ export default function Invoice() {
       render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      render: (status) => {
-        let color = status === "draft" ? "volcano" : "green";
-
-        return <Tag color={color}>{status.toUpperCase()}</Tag>;
+      title: "paymentStatus",
+      dataIndex: "paymentStatus",
+      render: (paymentStatus) => {
+        let color = paymentStatus === "unpaid" ? "volcano" : "green";
+        return <Tag color={color}>{paymentStatus.toUpperCase()}</Tag>;
       },
     },
   ];
@@ -75,10 +74,9 @@ export default function Invoice() {
     ADD_NEW_ENTITY,
     UPDATE_ENTITY,
     DATATABLE_TITLE,
-
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
-  return <ErpPanel config={config} />;
+  return <InvoiceModule config={config} />;
 }

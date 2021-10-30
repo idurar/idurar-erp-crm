@@ -280,7 +280,7 @@ html
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
                 p.strong Invoice Number :
-                p # #{model.number}/#{model.year || "2021"} 
+                p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
             .billTo

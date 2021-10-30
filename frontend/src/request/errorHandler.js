@@ -6,13 +6,13 @@ const errorHandler = (error, emptyResult = null) => {
   const { response } = error;
 
   if (!response) {
-    // notification.config({
-    //   duration: 20,
-    // });
-    // notification.error({
-    //   message: "No internet connection",
-    //   description: "Cannot connect to the server, Check your internet network",
-    // });
+    notification.config({
+      duration: 20,
+    });
+    notification.error({
+      message: "No internet connection",
+      description: "Cannot connect to the server, Check your internet network",
+    });
     return {
       success: false,
       result: emptyResult,
@@ -20,6 +20,8 @@ const errorHandler = (error, emptyResult = null) => {
     };
   } else if (response && response.status) {
     const message = response.data && response.data.message;
+    const error = response.data && response.data.error;
+    console.log("file: errorHandler.js ~ error", error);
     const errorText = message || codeMessage[response.status];
     const { status } = response;
     notification.config({

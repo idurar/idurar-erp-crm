@@ -1,8 +1,8 @@
 import React from "react";
-
-import ErpPanel from "@/components/ErpPanel";
-
+import dayjs from "dayjs";
 import { Tag } from "antd";
+
+import QuoteModule from "@/modules/QuoteModule";
 
 export default function Quote() {
   const entity = "quote";
@@ -23,10 +23,16 @@ export default function Quote() {
     {
       title: "Date",
       dataIndex: "date",
+      render: (date) => {
+        return dayjs(date).format("DD/MM/YYYY");
+      },
     },
     {
       title: "Due date",
       dataIndex: "expiredDate",
+      render: (date) => {
+        return dayjs(date).format("DD/MM/YYYY");
+      },
     },
     {
       title: "SubTotal",
@@ -45,8 +51,7 @@ export default function Quote() {
       title: "Status",
       dataIndex: "status",
       render: (status) => {
-        let color = status === "Draft" ? "volcano" : "green";
-
+        let color = status == "draft" ? "volcano" : "green";
         return <Tag color={color}>{status.toUpperCase()}</Tag>;
       },
     },
@@ -73,5 +78,5 @@ export default function Quote() {
     searchConfig,
     entityDisplayLabels,
   };
-  return <ErpPanel config={config} />;
+  return <QuoteModule config={config} />;
 }

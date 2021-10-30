@@ -6,6 +6,7 @@ import { crud } from "@/redux/crud/actions";
 import { useCrudContext } from "@/context/crud";
 import { selectUpdatedItem } from "@/redux/crud/selectors";
 
+import { isDate } from "@/utils/helpers";
 import { selectCurrentItem } from "@/redux/crud/selectors";
 
 import { Button, Form } from "antd";
@@ -30,18 +31,52 @@ export default function UpdateForm({ config, formElements }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~ fieldsValue",
+      fieldsValue
+    );
     const id = current._id;
     dispatch(crud.update(entity, id, fieldsValue));
   };
   useEffect(() => {
     if (current) {
-      let obj = {};
-      for (const key in current) {
-        obj[key] = dayjs(current[key], "YYYY-MM-DD").isValid()
-          ? dayjs(current[key])
-          : current[key];
+      let newValues = { ...current };
+      if (newValues.birthday) {
+        newValues = {
+          ...newValues,
+          birthday: dayjs(newValues["birthday"]),
+        };
       }
-      form.setFieldsValue(obj);
+      if (newValues.date) {
+        newValues = {
+          ...newValues,
+          date: dayjs(newValues["date"]),
+        };
+      }
+      if (newValues.expiredDate) {
+        newValues = {
+          ...newValues,
+          expiredDate: dayjs(newValues["expiredDate"]),
+        };
+      }
+      if (newValues.created) {
+        newValues = {
+          ...newValues,
+          created: dayjs(newValues["created"]),
+        };
+      }
+      if (newValues.updated) {
+        newValues = {
+          ...newValues,
+          updated: dayjs(newValues["updated"]),
+        };
+      }
+
+      console.log(
+        "🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj",
+        newValues
+      );
+      form.setFieldsValue(newValues);
     }
   }, [current]);
 
