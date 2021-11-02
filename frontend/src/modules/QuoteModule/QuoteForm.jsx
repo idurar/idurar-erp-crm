@@ -109,14 +109,16 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
                 message: "Please input your status!",
               },
             ]}
+            initialValue="draft"
           >
             <Select
-              defaultValue="draft"
               options={[
                 { value: "draft", label: "Draft" },
+                { value: "pending", label: "pending" },
                 { value: "sent", label: "Sent" },
-                { value: "accepted", label: "Accepted" },
+                { value: "expired", label: "Expired" },
                 { value: "declined", label: "Declined" },
+                { value: "accepted", label: "Accepted" },
               ]}
             ></Select>
           </Form.Item>
