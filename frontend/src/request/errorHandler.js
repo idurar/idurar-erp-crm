@@ -20,8 +20,8 @@ const errorHandler = (error, emptyResult = null) => {
     };
   } else if (response && response.status) {
     const message = response.data && response.data.message;
-    const error = response.data && response.data.error;
-    console.log("file: errorHandler.js ~ error", error);
+    // const error = response.data && response.data.error;
+    // console.log("file: errorHandler.js ~ error", error);
     const errorText = message || codeMessage[response.status];
     const { status } = response;
     notification.config({

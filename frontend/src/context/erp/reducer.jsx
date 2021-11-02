@@ -10,12 +10,16 @@ export const initialState = {
   read: {
     isOpen: false,
   },
+  recordPayment: {
+    isOpen: false,
+  },
   deleteModal: {
     isOpen: false,
   },
-  listDataTable: {
+  dataTableList: {
     isOpen: true,
   },
+  last: null,
 };
 
 export function contextReducer(state, action) {
@@ -34,7 +38,7 @@ export function contextReducer(state, action) {
     case actionTypes.OPEN_PANEL:
       return {
         ...initialState,
-        listDataTable: {
+        dataTableList: {
           isOpen: false,
         },
         [keyState]: { isOpen: true },

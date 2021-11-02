@@ -51,7 +51,6 @@ export default function ItemRow({
         <Form.Item
           name={[field.name, "description"]}
           fieldKey={[field.fieldKey, "description"]}
-          rules={[{ required: true, message: "Missing item description" }]}
         >
           <Input placeholder="description Name" />
         </Form.Item>
