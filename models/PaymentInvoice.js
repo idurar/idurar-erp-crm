@@ -53,5 +53,4 @@ const paymentInvoiceSchema = new mongoose.Schema({
   },
 });
 paymentInvoiceSchema.plugin(require("mongoose-autopopulate"));
-paymentInvoiceSchema.plugin(AutoIncrement, { inc_field: "number" });
 module.exports = mongoose.model("PaymentInvoice", paymentInvoiceSchema);

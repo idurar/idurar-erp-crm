@@ -13,7 +13,7 @@ export default function Invoice() {
   const entityDisplayLabels = ["number", "client.company"];
   const dataTableColumns = [
     {
-      title: "Number",
+      title: "#N",
       dataIndex: "number",
     },
     {
@@ -51,7 +51,13 @@ export default function Invoice() {
       title: "paymentStatus",
       dataIndex: "paymentStatus",
       render: (paymentStatus) => {
-        let color = paymentStatus === "unpaid" ? "volcano" : "green";
+        let color =
+          paymentStatus === "unpaid"
+            ? "volcano"
+            : paymentStatus === "paid"
+            ? "green"
+            : "purple";
+
         return <Tag color={color}>{paymentStatus.toUpperCase()}</Tag>;
       },
     },

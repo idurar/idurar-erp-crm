@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import dayjs from "dayjs";
 import {
   Form,
   Input,
@@ -17,7 +18,6 @@ import AutoCompleteAsync from "@/components/AutoCompleteAsync";
 import ItemRow from "@/components/ErpPanel/ItemRow";
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
-  const { Option } = Select;
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
@@ -110,9 +110,9 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 message: "Please input your paymentStatus!",
               },
             ]}
+            initialValue={"unpaid"}
           >
             <Select
-              defaultValue="unpaid"
               options={[
                 { value: "unpaid", label: "unpaid" },
                 { value: "paid", label: "paid" },
@@ -132,8 +132,10 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
+                type: "object",
               },
             ]}
+            initialValue={dayjs()}
           >
             <DatePicker style={{ width: "100%" }} format={"DD/MM/YYYY"} />
           </Form.Item>
@@ -145,8 +147,10 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
+                type: "object",
               },
             ]}
+            initialValue={dayjs().add(30, "days")}
           >
             <DatePicker style={{ width: "100%" }} format={"DD/MM/YYYY"} />
           </Form.Item>

@@ -34,6 +34,14 @@ const contextActions = (dispatch) => {
         dispatch({ type: actionTypes.CLOSE_PANEL });
       },
     },
+    recordPanel: {
+      open: () => {
+        dispatch({ type: actionTypes.OPEN_PANEL, keyState: "recordPayment" });
+      },
+      close: () => {
+        dispatch({ type: actionTypes.CLOSE_PANEL });
+      },
+    },
   };
 };
 
