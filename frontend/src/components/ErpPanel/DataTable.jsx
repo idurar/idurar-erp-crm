@@ -7,6 +7,7 @@ import {
   EditOutlined,
   DeleteOutlined,
   FilePdfOutlined,
+  CreditCardOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { erp } from "@/redux/erp/actions";
@@ -29,48 +30,8 @@ function AddNewItem({ config }) {
     </Button>
   );
 }
-function DropDownRowMenu({ row, entity }) {
-  const dispatch = useDispatch();
-  const { erpContextAction } = useErpContext();
-  const { readPanel, updatePanel, modal } = erpContextAction;
-  const item = useSelector(selectItemById(row._id));
-  const Show = () => {
-    dispatch(erp.currentItem(item));
-    readPanel.open();
-  };
-  function Edit() {
-    dispatch(erp.currentAction("update", item));
-    updatePanel.open();
-  }
-  function Delete() {
-    dispatch(erp.currentAction("delete", item));
-    modal.open();
-  }
-  function Download() {
-    window.open(
-      `${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`,
-      "_blank"
-    );
-  }
-  return (
-    <Menu style={{ width: 130 }}>
-      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
-        Show
-      </Menu.Item>
-      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
-        Edit
-      </Menu.Item>
-      <Menu.Item icon={<FilePdfOutlined />} onClick={Download}>
-        Download
-      </Menu.Item>
-      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
-        Delete
-      </Menu.Item>
-    </Menu>
-  );
-}
 
-export default function DataTable({ config }) {
+export default function DataTable({ config, DataTableDropMenu }) {
   let { entity, dataTableColumns } = config;
   const { DATATABLE_TITLE } = config;
   dataTableColumns = [
@@ -79,7 +40,7 @@ export default function DataTable({ config }) {
       title: "",
       render: (row) => (
         <Dropdown
-          overlay={DropDownRowMenu({ row, entity })}
+          overlay={DataTableDropMenu({ row, entity })}
           trigger={["click"]}
         >
           <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
@@ -88,9 +49,8 @@ export default function DataTable({ config }) {
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } = useSelector(
-    selectListItems
-  );
+  const { result: listResult, isLoading: listIsLoading } =
+    useSelector(selectListItems);
 
   const { pagination, items } = listResult;
 

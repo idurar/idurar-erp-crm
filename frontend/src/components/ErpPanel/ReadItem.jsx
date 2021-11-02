@@ -23,9 +23,8 @@ import { erp } from "@/redux/erp/actions";
 import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uinqueId";
 
-import { selectCurrentItem, selectItemById } from "@/redux/erp/selectors";
+import { selectCurrentItem } from "@/redux/erp/selectors";
 
-import { valueByString } from "@/utils/helpers";
 import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
 
 const Item = ({ item }) => {

@@ -41,6 +41,12 @@ const INITIAL_STATE = {
     isLoading: false,
     isSuccess: false,
   },
+  recordPayment: {
+    result: null,
+    current: null,
+    isLoading: false,
+    isSuccess: false,
+  },
   search: {
     result: [],
     current: null,

@@ -23,6 +23,11 @@ export const selectUpdatedItem = createSelector(
   (erp) => erp.update
 );
 
+export const selectRecordPaymentItem = createSelector(
+  [selectErp],
+  (erp) => erp.recordPayment
+);
+
 export const selectReadItem = createSelector([selectErp], (erp) => erp.read);
 
 export const selectDeletedItem = createSelector(

@@ -27,37 +27,39 @@ export const erp = {
       payload: { ...data },
     });
   },
-  list: (entity, options = { page: 1 }) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "list",
-      payload: null,
-    });
-
-    let data = await request.list(entity, options);
-
-    if (data.success === true) {
-      const result = {
-        items: data.result,
-        pagination: {
-          current: parseInt(data.pagination.page, 10),
-          pageSize: 10,
-          total: parseInt(data.pagination.count, 10),
-        },
-      };
+  list:
+    (entity, options = { page: 1 }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "list",
-        payload: result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "list",
         payload: null,
       });
-    }
-  },
+
+      let data = await request.list(entity, options);
+
+      if (data.success === true) {
+        const result = {
+          items: data.result,
+          pagination: {
+            current: parseInt(data.pagination.page, 10),
+            pageSize: 10,
+            total: parseInt(data.pagination.count, 10),
+          },
+        };
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "list",
+          payload: result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "list",
+          payload: null,
+        });
+      }
+    },
   create: (entity, jsonData) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
@@ -81,6 +83,33 @@ export const erp = {
       dispatch({
         type: actionTypes.REQUEST_FAILED,
         keyState: "create",
+        payload: null,
+      });
+    }
+  },
+  recordPayment: (entity, jsonData) => async (dispatch) => {
+    dispatch({
+      type: actionTypes.REQUEST_LOADING,
+      keyState: "recordPayment",
+      payload: null,
+    });
+
+    let data = await request.create(entity, jsonData);
+
+    if (data.success === true) {
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+        keyState: "recordPayment",
+        payload: data.result,
+      });
+      dispatch({
+        type: actionTypes.CURRENT_ITEM,
+        payload: data.result.invoice,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
+        keyState: "recordPayment",
         payload: null,
       });
     }
