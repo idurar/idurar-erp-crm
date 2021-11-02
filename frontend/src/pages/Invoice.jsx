@@ -35,20 +35,53 @@ export default function Invoice() {
       },
     },
     {
-      title: "SubTotal",
-      dataIndex: "subTotal",
-
-      render: (subTotal) =>
-        `$ ${subTotal}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
-    },
-    {
       title: "Total",
       dataIndex: "total",
 
-      render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+      render: (total) => {
+        return {
+          props: {
+            style: {
+              textAlign: "right",
+              whiteSpace: "nowrap",
+            },
+          },
+          children: (
+            <>$ {total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</>
+          ),
+        };
+      },
     },
     {
-      title: "paymentStatus",
+      title: "Balance",
+      dataIndex: "credit",
+
+      render: (credit) => {
+        return {
+          props: {
+            style: {
+              textAlign: "right",
+              whiteSpace: "nowrap",
+            },
+          },
+          children: (
+            <>$ {credit.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</>
+          ),
+        };
+      },
+    },
+    {
+      title: "status",
+      dataIndex: "status",
+      render: (status) => {
+        let color =
+          status === "draft" ? "cyan" : status === "sent" ? "magenta" : "gold";
+
+        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+      },
+    },
+    {
+      title: "Payment",
       dataIndex: "paymentStatus",
       render: (paymentStatus) => {
         let color =
@@ -56,9 +89,15 @@ export default function Invoice() {
             ? "volcano"
             : paymentStatus === "paid"
             ? "green"
+            : paymentStatus === "overdue"
+            ? "red"
             : "purple";
 
-        return <Tag color={color}>{paymentStatus.toUpperCase()}</Tag>;
+        return (
+          <Tag color={color}>
+            {paymentStatus && paymentStatus.toUpperCase()}
+          </Tag>
+        );
       },
     },
   ];
