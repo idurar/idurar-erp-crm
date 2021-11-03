@@ -27,6 +27,7 @@ export default function DataTableDropMenu({ row, entity }) {
   function RecordPayment() {
     dispatch(erp.currentAction("recordPayment", item));
     recordPanel.open();
+    dispatch(erp.currentItem(item));
   }
   function Edit() {
     dispatch(erp.currentAction("update", item));
