@@ -15,6 +15,8 @@ import {
   FilePdfOutlined,
   RollbackOutlined,
   PlusCircleOutlined,
+  FileTextOutlined,
+  CloseCircleOutlined,
 } from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -36,7 +38,7 @@ export default function Payment({ config }) {
 
   const { current: currentItem } = useSelector(selectRecordPaymentItem);
 
-  const { readPanel, updatePanel } = erpContextAction;
+  const { readPanel, recordPanel } = erpContextAction;
 
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState({
@@ -71,99 +73,89 @@ export default function Payment({ config }) {
 
   return (
     <>
-      <PageHeader
-        onBack={() => readPanel.close()}
-        title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ""}`}
-        ghost={false}
-        tags={<Tag color="volcano">Draft</Tag>}
-        // subTitle="This is cuurent erp page"
-        extra={[
-          <Button
-            key={`${uniqueId()}`}
-            onClick={() => {
-              window.open(
-                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
-                "_blank"
-              );
-            }}
-            icon={<FilePdfOutlined />}
-          >
-            Download PDF
-          </Button>,
-          <Button
-            key={`${uniqueId()}`}
-            onClick={() => {
-              dispatch(erp.currentAction("update", currentErp));
-              updatePanel.open();
-            }}
-            type="primary"
-            icon={<EditOutlined />}
-          >
-            Edit Erp
-          </Button>,
-        ]}
-        style={{
-          padding: "20px 0px",
-        }}
-      >
-        <Row>
-          <Statistic title="Status" value={currentErp.status} />
-          <Statistic
-            title="SubTotal"
-            prefix="$"
-            value={currentErp.subTotal}
+      <Row gutter={[12, 12]}>
+        <Col
+          className="gutter-row"
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 24 }}
+          lg={{ span: 20, push: 2 }}
+        >
+          <PageHeader
+            onBack={() => readPanel.close()}
+            title={`Record Payment for ${ENTITY_NAME} # ${currentErp.number}/${
+              currentErp.year || ""
+            }`}
+            ghost={false}
+            tags={<Tag color="volcano">{currentErp.status}</Tag>}
+            // subTitle="This is cuurent erp page"
+            extra={[
+              <Button
+                key={`${uniqueId()}`}
+                onClick={() => recordPanel.close()}
+                icon={<CloseCircleOutlined />}
+              >
+                Cancel
+              </Button>,
+              <Button
+                key={`${uniqueId()}`}
+                onClick={() => readPanel.open()}
+                icon={<FileTextOutlined />}
+              >
+                Show Invoice
+              </Button>,
+            ]}
             style={{
-              margin: "0 32px",
+              padding: "20px 0px",
             }}
-          />
-          <Statistic
-            title="Total"
-            prefix="$"
-            value={currentErp.total}
-            style={{
-              margin: "0 32px",
-            }}
-          />
-          <Statistic
-            title="Balance"
-            prefix="$"
-            value={currentErp.credit}
-            style={{
-              margin: "0 32px",
-            }}
-          />
-        </Row>
-      </PageHeader>
-      <Divider dashed />
-
+          ></PageHeader>
+          <Divider dashed />
+        </Col>
+      </Row>
       <Row gutter={[12, 12]}>
         <Col
           className="gutter-row"
           xs={{ span: 24, order: 2 }}
           sm={{ span: 24, order: 2 }}
-          md={{ span: 11, order: 1 }}
-          lg={{ span: 11, order: 1 }}
+          md={{ span: 10, order: 2, push: 2 }}
+          lg={{ span: 10, order: 2, push: 4 }}
         >
-          <p>
-            <strong>ITEM</strong>
-          </p>
+          <div className="space50"></div>
+          <Descriptions
+            title={`Client : ${currentErp.client.company}`}
+            column={1}
+          >
+            <Descriptions.Item label="E-mail">
+              {currentErp.client.email}
+            </Descriptions.Item>
+            <Descriptions.Item label="Phone">
+              {currentErp.client.phone}
+            </Descriptions.Item>
+            <Divider dashed />
+            <Descriptions.Item label="Payment Status">
+              {currentErp.paymentStatus}
+            </Descriptions.Item>
+            <Descriptions.Item label="Sub Total">
+              {currentErp.subTotal}
+            </Descriptions.Item>
+            <Descriptions.Item label="Total">
+              {currentErp.total}
+            </Descriptions.Item>
+            <Descriptions.Item label="Discount">
+              {currentErp.discount}
+            </Descriptions.Item>
+            <Descriptions.Item label="Balance">
+              {currentErp.credit}
+            </Descriptions.Item>
+          </Descriptions>
         </Col>
-        <Col
-          className="gutter-row"
-          xs={{ span: 0, order: 2 }}
-          sm={{ span: 0, order: 2 }}
-          md={{ span: 1, order: 2 }}
-          lg={{ span: 2, order: 2 }}
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <Divider style={{ padding: "10px 0" }} type="vertical"></Divider>
-        </Col>
+
         <Col
           className="gutter-row"
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
-          md={{ span: 12, order: 3 }}
-          lg={{ span: 11, order: 3 }}
+          md={{ span: 12, order: 1 }}
+          lg={{ span: 10, order: 1, push: 2 }}
         >
           <RecordPayment config={config} />
         </Col>
