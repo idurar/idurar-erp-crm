@@ -15,6 +15,7 @@ import {
   FilePdfOutlined,
   RollbackOutlined,
   PlusCircleOutlined,
+  CloseCircleOutlined,
 } from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -117,9 +118,20 @@ export default function ReadItem({ config }) {
         onBack={() => readPanel.close()}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ""}`}
         ghost={false}
-        tags={<Tag color="volcano">Draft</Tag>}
+        tags={
+          <Tag color="volcano">
+            {currentErp.paymentStatus || currentErp.status}
+          </Tag>
+        }
         // subTitle="This is cuurent erp page"
         extra={[
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => readPanel.close()}
+            icon={<CloseCircleOutlined />}
+          >
+            Close
+          </Button>,
           <Button
             key={`${uniqueId()}`}
             onClick={() => {

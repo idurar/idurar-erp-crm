@@ -39,20 +39,31 @@ export default function Quote() {
       dataIndex: "subTotal",
 
       render: (subTotal) =>
-        `$ ${subTotal}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+        `$ ${subTotal.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
     },
     {
       title: "Total",
       dataIndex: "total",
 
-      render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+      render: (total) =>
+        `$ ${total.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
     },
+
     {
       title: "Status",
       dataIndex: "status",
       render: (status) => {
-        let color = status == "draft" ? "volcano" : "green";
-        return <Tag color={color}>{status.toUpperCase()}</Tag>;
+        let color =
+          status === "draft"
+            ? "cyan"
+            : status === "sent"
+            ? "blue"
+            : status === "accepted"
+            ? "green"
+            : status === "expired"
+            ? "orange"
+            : "red";
+        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
       },
     },
   ];

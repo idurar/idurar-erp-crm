@@ -102,20 +102,21 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="paymentStatus"
-            name="paymentStatus"
+            label="status"
+            name="status"
             rules={[
               {
                 required: false,
-                message: "Please input your paymentStatus!",
+                message: "Please input invoice status!",
               },
             ]}
-            initialValue={"unpaid"}
+            initialValue={"draft"}
           >
             <Select
               options={[
-                { value: "unpaid", label: "unpaid" },
-                { value: "paid", label: "paid" },
+                { value: "draft", label: "Draft" },
+                { value: "pending", label: "Pending" },
+                { value: "sent", label: "Sent" },
               ]}
             ></Select>
           </Form.Item>

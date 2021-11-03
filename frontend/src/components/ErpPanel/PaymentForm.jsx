@@ -20,8 +20,9 @@ export default function PaymentForm({
             required: true,
           },
         ]}
+        style={{ width: "50%", float: "left", paddingRight: "20px" }}
       >
-        <InputNumber style={{ width: "50%" }} />
+        <InputNumber style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         name="date"
@@ -33,8 +34,9 @@ export default function PaymentForm({
           },
         ]}
         initialValue={dayjs().add(30, "days")}
+        style={{ width: "50%" }}
       >
-        <DatePicker style={{ width: "50%" }} format={"DD/MM/YYYY"} />
+        <DatePicker format={"DD/MM/YYYY"} style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="Amount"
