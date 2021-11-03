@@ -9,6 +9,7 @@ import {
   TeamOutlined,
   UserOutlined,
   CreditCardOutlined,
+  BankOutlined,
 } from "@ant-design/icons";
 
 export const IconMenu = ({ name }) => {
@@ -41,11 +42,6 @@ export const routesConfig = [
     icon: "CustomerServiceOutlined",
   },
   {
-    path: "/employee",
-    component: "Employee",
-    icon: "CustomerServiceOutlined",
-  },
-  {
     path: "/invoice",
     component: "Invoice",
     icon: "FileTextOutlined",
@@ -65,7 +61,12 @@ export const routesConfig = [
     path: "/payment/mode",
     component: "PaymentMode",
     title: "Payment Mode",
-    icon: "CreditCardOutlined",
+    icon: "BankOutlined",
+  },
+  {
+    path: "/employee",
+    component: "Employee",
+    icon: "UserOutlined",
   },
   {
     path: "/admin",
