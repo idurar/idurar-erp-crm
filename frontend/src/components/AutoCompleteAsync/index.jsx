@@ -74,7 +74,7 @@ export default function AutoCompleteAsync({
       defaultActiveFirstOption={false}
       showArrow={false}
       filterOption={false}
-      notFoundContent={isLoading ? "... Searching" : <Empty />}
+      notFoundContent={isLoading ? "... Searching" : "Not Found"}
       value={currentValue}
       onSearch={onSearch}
       onChange={(newValue) => {
