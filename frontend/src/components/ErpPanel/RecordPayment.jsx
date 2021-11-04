@@ -52,10 +52,7 @@ export default function RecordPayment({ config }) {
         client,
       };
     }
-    console.log(
-      "🚀 ~ file: RecordPayment.jsx ~ line 64 ~ onSubmit ~ fieldsValue",
-      fieldsValue
-    );
+
     dispatch(erp.recordPayment("paymentInvoice", fieldsValue));
   };
 

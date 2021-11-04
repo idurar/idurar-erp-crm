@@ -13,7 +13,7 @@ export default function SelectAsync({
   const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
-  const [isLoadingLabel, setLoadingLabel] = useState("List is Loading");
+
   const asyncList = () => {
     return request.list(entity);
   };
@@ -30,6 +30,7 @@ export default function SelectAsync({
     // this for update Form , it's for setField
     if (value) {
       setCurrentValue(value[outputValue] || value); // set nested value or value
+      onChange(value[outputValue] || value);
     }
   }, [value]);
 
@@ -39,16 +40,16 @@ export default function SelectAsync({
       disabled={isLoading}
       value={currentValue}
       onChange={(newValue) => {
-        setCurrentValue(newValue);
+        // setCurrentValue(newValue[outputValue] || newValue);
         if (onChange) {
-          onChange(newValue);
+          onChange(newValue[outputValue] || newValue);
         }
       }}
     >
       {selectOptions.map((optionField) => (
         <Select.Option
-          key={optionField[outputValue]}
-          value={optionField[outputValue]}
+          key={optionField[outputValue] || optionField}
+          value={optionField[outputValue] || optionField}
         >
           {labels(optionField)}
         </Select.Option>

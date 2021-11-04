@@ -19,7 +19,6 @@ methods.create = async (req, res) => {
     let subTotal = 0;
     let taxTotal = 0;
     let total = 0;
-    // let credit = 0;
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
@@ -39,6 +38,9 @@ methods.create = async (req, res) => {
     body["total"] = total;
     body["items"] = items;
 
+    let paymentStatus = total - discount === 0 ? "paid" : "unpaid";
+
+    body["paymentStatus"] = paymentStatus;
     // Creating a new document in the collection
     const result = await new Model(body).save();
     const fileId = "invoice-" + result._id + ".pdf";
@@ -86,13 +88,19 @@ methods.create = async (req, res) => {
 
 methods.update = async (req, res) => {
   try {
+    const previousInvoice = await Model.findOne({
+      _id: req.params.id,
+      removed: false,
+    });
+
+    const { credit } = previousInvoice;
+
     const { items = [], taxRate = 0, discount = 0 } = req.body;
 
     // default
     let subTotal = 0;
     let taxTotal = 0;
     let total = 0;
-    // let credit = 0;
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
@@ -113,6 +121,14 @@ methods.update = async (req, res) => {
     body["items"] = items;
     body["pdfPath"] = "invoice-" + req.params.id + ".pdf";
     // Find document by id and updates with the required fields
+
+    let paymentStatus =
+      total - discount === credit
+        ? "paid"
+        : credit > 0
+        ? "partially"
+        : "unpaid";
+    body["paymentStatus"] = paymentStatus;
 
     const result = await Model.findOneAndUpdate(
       { _id: req.params.id, removed: false },

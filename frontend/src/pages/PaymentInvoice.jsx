@@ -1,55 +1,91 @@
 import React from "react";
 import CrudModule from "@/modules/CrudModule";
-import CurrencyForm from "@/forms/CurrencyForm";
+import PaymentInvoiceForm from "@/forms/PaymentInvoiceForm";
+
+import dayjs from "dayjs";
 
 export default function PaymentInvoice() {
   const entity = "paymentInvoice";
   const searchConfig = {
-    displayLabels: ["name"],
-    searchFields: "name",
+    displayLabels: ["number"],
+    searchFields: "number",
     outputValue: "_id",
   };
 
-  const entityDisplayLabels = ["name"];
+  const entityDisplayLabels = ["number"];
 
   const readColumns = [
     {
-      title: "Currency Name",
-      dataIndex: "name",
+      title: "number",
+      dataIndex: "number",
     },
     {
-      title: "Symbol",
-      dataIndex: "symbol",
+      title: "Client",
+      dataIndex: "client.company",
     },
     {
-      title: "Decimal Sep",
-      dataIndex: "decimalSeparator",
+      title: "Amount",
+      dataIndex: "amount",
     },
     {
-      title: "Thousand Sep",
-      dataIndex: "thousandSeparator",
+      title: "Date",
+      dataIndex: "date",
+      isDate: true,
     },
     {
-      title: "Default",
-      dataIndex: "isDefault",
+      title: "Invoice Number",
+      dataIndex: "invoice.number",
+    },
+    {
+      title: "Invoice year",
+      dataIndex: "invoice.year",
+    },
+    {
+      title: "Payment Mode",
+      dataIndex: "paymentMode.name",
+    },
+    {
+      title: "updated ",
+      dataIndex: "updated",
+      isDate: true,
+    },
+    {
+      title: "created ",
+      dataIndex: "created",
+      isDate: true,
     },
   ];
   const dataTableColumns = [
     {
+      title: "number",
+      dataIndex: "number",
+    },
+    {
       title: "Client",
       dataIndex: ["client", "company"],
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      render: (date) => {
+        return dayjs(date).format("DD/MM/YYYY");
+      },
     },
     {
       title: "Invoice Number",
       dataIndex: ["invoice", "number"],
     },
     {
-      title: "Invoice Year",
+      title: "Invoice year",
       dataIndex: ["invoice", "year"],
     },
     {
-      title: "Date",
-      dataIndex: "date",
+      title: "Payment Mode",
+      dataIndex: ["paymentMode", "name"],
     },
   ];
 
@@ -75,8 +111,8 @@ export default function PaymentInvoice() {
   };
   return (
     <CrudModule
-      createForm={<CurrencyForm />}
-      updateForm={<CurrencyForm isUpdateForm={true} />}
+      createForm={<PaymentInvoiceForm />}
+      updateForm={<PaymentInvoiceForm isUpdateForm={true} />}
       config={config}
     />
   );

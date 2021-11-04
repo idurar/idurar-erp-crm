@@ -23,6 +23,7 @@ export const IconMenu = ({ name }) => {
     TeamOutlined: TeamOutlined,
     UserOutlined: UserOutlined,
     CreditCardOutlined: CreditCardOutlined,
+    BankOutlined: BankOutlined,
     Default: DesktopOutlined,
   };
 
@@ -52,9 +53,9 @@ export const routesConfig = [
     icon: "FileSyncOutlined",
   },
   {
-    path: "/payment/client",
+    path: "/payment/invoice",
     component: "PaymentInvoice",
-    title: "Payment Client",
+    title: "Payment Invoice",
     icon: "CreditCardOutlined",
   },
   {

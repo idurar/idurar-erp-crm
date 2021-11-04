@@ -16,6 +16,10 @@ const axiosInstance = axios.create({
 
 const request = {
   create: async (entity, jsonData) => {
+    console.log(
+      "🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData",
+      jsonData
+    );
     axiosInstance.defaults.headers = {
       ...headersInstance,
     };
@@ -39,6 +43,10 @@ const request = {
     }
   },
   update: async (entity, id, jsonData) => {
+    console.log(
+      "🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData",
+      jsonData
+    );
     axiosInstance.defaults.headers = {
       ...headersInstance,
     };
