@@ -83,10 +83,10 @@ exports.login = async (req, res) => {
 
     const token = jwt.sign(
       {
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
         id: admin._id,
       },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      { expiresIn: "72h" }
     );
 
     const result = await Admin.findOneAndUpdate(
@@ -113,7 +113,7 @@ exports.login = async (req, res) => {
     // res.status(500).json({ success: false, result:null, message: err.message });
     res
       .status(500)
-      .json({ success: false, result: null, message: err.message });
+      .json({ success: false, result: null, message: err.message, error: err });
   }
 };
 
@@ -129,6 +129,7 @@ exports.isValidToken = async (req, res, next) => {
       });
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+
     if (!verified)
       return res.status(401).json({
         success: false,
@@ -159,11 +160,11 @@ exports.isValidToken = async (req, res, next) => {
       next();
     }
   } catch (err) {
-    res.status(500).json({
+    res.status(503).json({
       success: false,
       result: null,
       message: err.message,
-      jwtExpired: true,
+      error: err,
     });
   }
 };
