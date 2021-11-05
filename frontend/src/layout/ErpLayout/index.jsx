@@ -1,7 +1,6 @@
 import React from "react";
 
 import ErpContextLayout from "../ErpContextLayout";
-import HeaderContent from "../HeaderContent";
 
 import { Layout } from "antd";
 
@@ -11,12 +10,11 @@ export default function ErpLayout({ children, config }) {
   return (
     <ErpContextLayout>
       <Layout className="site-layout">
-        <HeaderContent />
         <Content
           className="whiteBox shadow"
           style={{
             padding: "50px 40px",
-            margin: "50px auto",
+            margin: "100px auto",
             width: "100%",
             maxWidth: "1100px",
           }}

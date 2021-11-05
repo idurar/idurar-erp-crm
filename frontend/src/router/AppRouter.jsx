@@ -13,6 +13,28 @@ const NotFound = lazy(() =>
   import(/*webpackChunkName:'NotFoundPage'*/ "@/pages/NotFound")
 );
 
+const SubMenuRouter = ({ subMenuRouter }) => {
+  subMenuRouter.map((subMenu) => {
+    console.log(
+      "🚀 ~ file: AppRouter.jsx ~ line 25 ~ routeItem.hasSubMenu.map ~ subMenu",
+      subMenu
+    );
+
+    return (
+      <PrivateRoute
+        key={subMenu.component}
+        path={subMenu.path}
+        exact={subMenu.exact || true}
+        component={lazy(() =>
+          import(
+            /* webpackChunkName: "[request]" */ `@/pages/${subMenu.component}`
+          )
+        )}
+      />
+    );
+  });
+};
+
 export default function AppRouter() {
   const location = useLocation();
   return (
@@ -34,7 +56,7 @@ export default function AppRouter() {
             );
           })}
           <PrivateRoute component={Logout} path="/logout" exact />
-          <PublicRoute path="/login" render={() => <Redirect to="/" />} />
+          <PublicRoute path="/login" render={() => <Redirect to="/" />} exact />
           <Route
             path="*"
             component={NotFound}
