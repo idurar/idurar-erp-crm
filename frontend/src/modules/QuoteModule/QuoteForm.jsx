@@ -63,7 +63,6 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           >
             <AutoCompleteAsync
               entity={"client"}
-              keyRef={"client"}
               displayLabels={["company"]}
               searchFields={"company,managerSurname,managerName"}
             />

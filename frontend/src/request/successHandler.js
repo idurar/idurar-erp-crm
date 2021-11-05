@@ -3,7 +3,7 @@ import { notification } from "antd";
 import codeMessage from "./codeMessage";
 
 const successHandler = (response, typeNotification = {}) => {
-  if (!response.data.result) {
+  if (!response.data) {
     response = {
       ...response,
       status: 404,

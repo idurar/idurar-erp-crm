@@ -18,7 +18,6 @@ export default function AdminForm({ isUpdateForm = false }) {
       >
         <AutoCompleteAsync
           entity={"employee"}
-          keyRef={"employee"}
           displayLabels={["name", "surname"]}
           searchFields={"name,surame"}
         />
