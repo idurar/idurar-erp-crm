@@ -1,14 +1,13 @@
-import React, { useEffect, useState, Suspense } from "react";
-import { Router as RouterHistory } from "react-router-dom";
-import { Provider } from "react-redux";
 import Router from "@/router";
-import history from "@/utils/history";
-import store from "@/redux/store";
-
-import { Button, Result } from "antd";
 
 import useNetwork from "@/hooks/useNetwork";
-import { AppContextProvider } from "@/context/appContext";
+
+import { Layout } from "antd";
+import Navigation from "@/app/Navigation";
+
+import { useSelector } from "react-redux";
+import { selectAuth } from "@/redux/auth/selectors";
+import HeaderContent from "@/app/HeaderContent";
 
 function App() {
   const { isOnline: isNetwork } = useNetwork();
@@ -31,15 +30,20 @@ function App() {
   // else {
 
   // }
-  return (
-    <RouterHistory history={history}>
-      <Provider store={store}>
-        <AppContextProvider>
-          <Router />
-        </AppContextProvider>
-      </Provider>
-    </RouterHistory>
-  );
+  const { isLoggedIn } = useSelector(selectAuth);
+
+  if (!isLoggedIn) return <Router />;
+  else {
+    return (
+      <Layout style={{ minHeight: "100vh" }}>
+        <Navigation />
+        <Layout style={{ minHeight: "100vh" }}>
+          <HeaderContent />
+          <Router isLoggedIn={true} />
+        </Layout>
+      </Layout>
+    );
+  }
 }
 
 export default App;

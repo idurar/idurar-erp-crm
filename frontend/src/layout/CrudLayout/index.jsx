@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import DefaultLayout from "../DefaultLayout";
-import HeaderContent from "../HeaderContent";
 
 import SidePanel from "@/components/SidePanel";
 import { Layout } from "antd";
@@ -42,7 +41,7 @@ const ContentBox = ({ children }) => {
       className="site-layout-background whiteBox shadow"
       style={{
         padding: "50px 40px",
-        margin: "50px auto",
+        margin: "100px auto",
         width: isSidePanelClose ? "100%" : "830px",
         maxWidth: "1000px",
       }}
@@ -60,19 +59,20 @@ export default function CrudLayout({
   fixHeaderPanel,
 }) {
   return (
-    <DefaultLayout>
-      <Layout style={{ minHeight: "100vh" }}>
-        <SidePanel
-          config={config}
-          topContent={sidePanelTopContent}
-          bottomContent={sidePanelBottomContent}
-          fixHeaderPanel={fixHeaderPanel}
-        ></SidePanel>
-        <Layout className="site-layout">
-          <HeaderContent />
-          <ContentBox> {children}</ContentBox>
+    <>
+      <DefaultLayout>
+        <Layout style={{ minHeight: "100vh" }}>
+          <SidePanel
+            config={config}
+            topContent={sidePanelTopContent}
+            bottomContent={sidePanelBottomContent}
+            fixHeaderPanel={fixHeaderPanel}
+          ></SidePanel>
+          <Layout className="site-layout">
+            <ContentBox> {children}</ContentBox>
+          </Layout>
         </Layout>
-      </Layout>
-    </DefaultLayout>
+      </DefaultLayout>
+    </>
   );
 }

@@ -22,6 +22,7 @@ export default function AuthRouter() {
             path="/"
             component={Login}
             render={() => <Redirect to="/login" />}
+            exact
           />
           <PublicRoute component={Login} path="/login" exact />
           <Route

@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { Layout, Avatar, Menu, Dropdown, Badge, Image } from "antd";
+import { Avatar, Menu, Dropdown } from "antd";
 
 import {
-  UserOutlined,
   AppstoreOutlined,
   SettingOutlined,
   MailOutlined,
@@ -15,13 +14,11 @@ import photo from "@/style/images/photo.png";
 
 import { logout } from "@/redux/auth/actions";
 import uniqueId from "@/utils/uinqueId";
-const { Header } = Layout;
 
 export default function HeaderContent() {
   const dispatch = useDispatch();
   const { SubMenu } = Menu;
 
-  const menu = <></>;
   const profileDropdown = (
     <div
       className="profileDropdown whiteBox shadow"
@@ -91,7 +88,10 @@ export default function HeaderContent() {
     </div>
   );
   return (
-    <div className="headerIcon" style={{ padding: 0, background: "none" }}>
+    <div
+      className="headerIcon"
+      style={{ position: "absolute", right: 0, zIndex: "9999" }}
+    >
       <Dropdown
         overlay={profileDropdown}
         trigger={["click"]}
@@ -101,10 +101,10 @@ export default function HeaderContent() {
         <Avatar className="last" src={photo} />
         {/* </Badge> */}
       </Dropdown>
-      <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+      <Dropdown trigger={["click"]} placement="bottomRight">
         <Avatar icon={<AppstoreOutlined />} />
       </Dropdown>
-      <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+      <Dropdown trigger={["click"]} placement="bottomRight">
         <Avatar icon={<BellOutlined />} />
       </Dropdown>
     </div>
