@@ -106,13 +106,11 @@ exports.login = async (req, res) => {
     ).exec();
 
     res.cookie("token", token, {
-      maxAge: 24 * 60 * 60 * 1000,
+      // maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
-
-      // secure: true,
     });
 
-    res.status(200).json({
+    res.json({
       success: true,
       result: {
         token,
@@ -202,5 +200,6 @@ exports.logout = async (req, res) => {
     }
   ).exec();
 
-  res.clearCookie("token").status(200).json({ isLoggedIn: result.isLoggedIn });
+  res.clearCookie("token");
+  res.json({ isLoggedIn: result.isLoggedIn });
 };

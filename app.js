@@ -19,31 +19,15 @@ require("dotenv").config({ path: ".variables.env" });
 // create our Express app
 const app = express();
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
-app.use(express.static(path.join(__dirname, "public")));
 
 // Takes the raw requests and turns them into usable properties on req.body
 
 app.use(helmet());
-// app.use(function (req, res, next) {
-//   // res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Credentials", "true");
-//   res.header("Access-Control-Allow-Methods", "GET,PATCH,POST,DELETE");
-//   res.header("Access-Control-Expose-Headers", "Content-Length");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Accept, Authorization,x-auth-token, Content-Type, X-Requested-With, Range"
-//   );
-//   if (req.method === "OPTIONS") {
-//     return res.sendStatus(200);
-//   } else {
-//     return next();
-//   }
-// });
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-// app.use(cors());
+app.use(express.static(path.join(__dirname, "public")));
+
 // // Sessions allow us to Contact data on visitors from request to request
 // // This keeps admins logged in and allows us to send flash messages
 // app.use(
@@ -65,12 +49,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// // promisify some callback based APIs
-// app.use((req, res, next) => {
-//   req.login = promisify(req.login, req);
-//   next();
-// });
-
 // app.use(function (req, res, next) {
 //   if (req.url.slice(-1) === "/" && req.path.length > 1) {
 //     // req.path = req.path.slice(0, -1);
@@ -81,7 +59,14 @@ app.use((req, res, next) => {
 
 // Here our API Routes
 
-app.use("/api", cors(), authJwtRouter);
+app.use(
+  "/api",
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+  authJwtRouter
+);
 
 // app.use("/api", cors(), isValidToken, apiRouter);
 
