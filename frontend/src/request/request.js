@@ -6,13 +6,16 @@ import successHandler from "./successHandler";
 
 const headersInstance = { [ACCESS_TOKEN_NAME]: tokenCookies.get() };
 
-const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 30000,
-  headers: {
-    ...headersInstance,
-  },
-});
+// const axios = axios.create({
+//   baseURL: API_BASE_URL,
+//   timeout: 30000,
+//   withCredentials: true,
+//   // headers: {
+//   //   ...headersInstance,
+//   // },
+// });
+axios.defaults.baseURL = API_BASE_URL;
+axios.defaults.withCredentials = true;
 
 const request = {
   create: async (entity, jsonData) => {
@@ -20,23 +23,23 @@ const request = {
       "🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData",
       jsonData
     );
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     console.log("jsonData", jsonData);
     try {
-      const response = await axiosInstance.post(entity + "/create", jsonData);
+      const response = await axios.post(entity + "/create", jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
   read: async (entity, id) => {
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
-      const response = await axiosInstance.get(entity + "/read/" + id);
+      const response = await axios.get(entity + "/read/" + id);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
@@ -47,14 +50,11 @@ const request = {
       "🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData",
       jsonData
     );
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
-      const response = await axiosInstance.patch(
-        entity + "/update/" + id,
-        jsonData
-      );
+      const response = await axios.patch(entity + "/update/" + id, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
@@ -62,11 +62,11 @@ const request = {
   },
 
   delete: async (entity, id, option = {}) => {
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
-      const response = await axiosInstance.delete(entity + "/delete/" + id);
+      const response = await axios.delete(entity + "/delete/" + id);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
@@ -74,15 +74,15 @@ const request = {
   },
 
   filter: async (entity, option = {}) => {
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
       let filter = option.filter ? "filter=" + option.filter : "";
       let equal = option.equal ? "&equal=" + option.equal : "";
       let query = `?${filter}${equal}`;
 
-      const response = await axiosInstance.get(entity + "/filter" + query);
+      const response = await axios.get(entity + "/filter" + query);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
@@ -90,9 +90,9 @@ const request = {
   },
 
   search: async (entity, source, options = {}) => {
-    axiosInstance.defaults.headers = {
-      [ACCESS_TOKEN_NAME]: tokenCookies.get(),
-    };
+    // axios.defaults.headers = {
+    //   [ACCESS_TOKEN_NAME]: tokenCookies.get(),
+    // };
     try {
       let query = "?";
       for (var key in options) {
@@ -100,7 +100,7 @@ const request = {
       }
       query = query.slice(0, -1);
       // headersInstance.cancelToken = source.token;
-      const response = await axiosInstance.get(entity + "/search" + query, {
+      const response = await axios.get(entity + "/search" + query, {
         cancelToken: source.token,
       });
 
@@ -111,9 +111,9 @@ const request = {
   },
 
   list: async (entity, options = {}) => {
-    axiosInstance.defaults.headers = {
-      [ACCESS_TOKEN_NAME]: tokenCookies.get(),
-    };
+    // axios.defaults.headers = {
+    //   [ACCESS_TOKEN_NAME]: tokenCookies.get(),
+    // };
 
     try {
       let query = "?";
@@ -122,7 +122,7 @@ const request = {
       }
       query = query.slice(0, -1);
 
-      const response = await axiosInstance.get(entity + "/list" + query);
+      const response = await axios.get(entity + "/list" + query);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
@@ -130,33 +130,33 @@ const request = {
   },
 
   post: async (entityUrl, jsonData, option = {}) => {
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
-      const response = await axiosInstance.post(entityUrl, jsonData);
+      const response = await axios.post(entityUrl, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
   get: async (entityUrl) => {
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
-      const response = await axiosInstance.get(entityUrl);
+      const response = await axios.get(entityUrl);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
   patch: async (entityUrl, jsonData) => {
-    axiosInstance.defaults.headers = {
-      ...headersInstance,
-    };
+    // axios.defaults.headers = {
+    //   ...headersInstance,
+    // };
     try {
-      const response = await axiosInstance.patch(entityUrl, jsonData);
+      const response = await axios.patch(entityUrl, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
@@ -164,7 +164,7 @@ const request = {
   },
 
   source: () => {
-    // const CancelToken = await axiosInstance.CancelToken;
+    // const CancelToken = await axios.CancelToken;
 
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();

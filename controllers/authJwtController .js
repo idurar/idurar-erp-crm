@@ -59,10 +59,18 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(
+      "🚀 ~ file: authJwtController .js ~ line 62 ~ exports.login= ~ req.body",
+      req.body
+    );
 
     // validate
     if (!email || !password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: "Not all fields have been entered.",
+      });
 
     const admin = await Admin.findOne({ email: email, removed: false });
     // console.log(admin);
@@ -97,7 +105,14 @@ exports.login = async (req, res) => {
       }
     ).exec();
 
-    res.json({
+    res.cookie("token", token, {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+
+      // secure: true,
+    });
+
+    res.status(200).json({
       success: true,
       result: {
         token,
@@ -119,7 +134,12 @@ exports.login = async (req, res) => {
 
 exports.isValidToken = async (req, res, next) => {
   try {
-    const token = req.header("x-auth-token");
+    const token = req.cookies.token;
+    console.log(
+      "🚀 ~ file: authJwtController .js ~ line 130 ~ exports.isValidToken= ~ token",
+      token
+    );
+
     if (!token)
       return res.status(401).json({
         success: false,
@@ -129,6 +149,10 @@ exports.isValidToken = async (req, res, next) => {
       });
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(
+      "isValidToken 🚀🚀🚀🚀 ~ file: authJwtController .js ~ line 139 ~ exports.isValidToken= ~ verified",
+      verified
+    );
 
     if (!verified)
       return res.status(401).json({
@@ -178,5 +202,5 @@ exports.logout = async (req, res) => {
     }
   ).exec();
 
-  res.status(200).json({ isLoggedIn: result.isLoggedIn });
+  res.clearCookie("token").status(200).json({ isLoggedIn: result.isLoggedIn });
 };
