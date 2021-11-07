@@ -66,7 +66,7 @@ const request = {
     }
   },
 
-  search: async (entity, source, options = {}) => {
+  search: async (entity, source = null, options = {}) => {
     try {
       let query = "?";
       for (var key in options) {
@@ -74,9 +74,7 @@ const request = {
       }
       query = query.slice(0, -1);
       // headersInstance.cancelToken = source.token;
-      const response = await axios.get(entity + "/search" + query, {
-        cancelToken: source.token,
-      });
+      const response = await axios.get(entity + "/search" + query);
 
       return successHandler(response);
     } catch (error) {
