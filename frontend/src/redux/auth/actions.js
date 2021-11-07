@@ -1,6 +1,6 @@
 import * as actionTypes from "./types";
 import * as authService from "@/auth";
-import storePersist from "@/redux/storePersist";
+
 import history from "@/utils/history";
 
 export const login = (loginAdminData) => async (dispatch) => {
@@ -11,12 +11,8 @@ export const login = (loginAdminData) => async (dispatch) => {
   const data = await authService.login(loginAdminData);
 
   if (data.success === true) {
-    const authValue = {
-      current: data.result.admin,
-      loading: false,
-      isLoggedIn: true,
-    };
-    storePersist.set("auth", authValue);
+    window.localStorage.setItem("isLoggedIn", true);
+    window.localStorage.setItem("auth", JSON.stringify(data.result.admin));
     dispatch({
       type: actionTypes.LOGIN_SUCCESS,
       payload: data.result.admin,

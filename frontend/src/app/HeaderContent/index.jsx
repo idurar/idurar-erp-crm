@@ -13,6 +13,7 @@ import {
 import photo from "@/style/images/photo.png";
 
 import { logout } from "@/redux/auth/actions";
+import history from "@/utils/history";
 import uniqueId from "@/utils/uinqueId";
 
 export default function HeaderContent() {
@@ -79,7 +80,7 @@ export default function HeaderContent() {
           <Menu.Item
             icon={<LogoutOutlined />}
             key={`${uniqueId()}`}
-            onClick={() => dispatch(logout())}
+            onClick={() => history.push("/logout")}
           >
             logout
           </Menu.Item>

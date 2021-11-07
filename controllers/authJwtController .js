@@ -59,10 +59,18 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(
+      "🚀 ~ file: authJwtController .js ~ line 62 ~ exports.login= ~ req.body",
+      req.body
+    );
 
     // validate
     if (!email || !password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: "Not all fields have been entered.",
+      });
 
     const admin = await Admin.findOne({ email: email, removed: false });
     // console.log(admin);
@@ -97,6 +105,11 @@ exports.login = async (req, res) => {
       }
     ).exec();
 
+    res.cookie("token", token, {
+      maxAge: 72 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
+
     res.json({
       success: true,
       result: {
@@ -119,7 +132,12 @@ exports.login = async (req, res) => {
 
 exports.isValidToken = async (req, res, next) => {
   try {
-    const token = req.header("x-auth-token");
+    const token = req.cookies.token;
+    console.log(
+      "🚀 ~ file: authJwtController .js ~ line 130 ~ exports.isValidToken= ~ token",
+      token
+    );
+
     if (!token)
       return res.status(401).json({
         success: false,
@@ -178,5 +196,6 @@ exports.logout = async (req, res) => {
     }
   ).exec();
 
-  res.status(200).json({ isLoggedIn: result.isLoggedIn });
+  res.clearCookie("token");
+  res.json({ isLoggedOut: true });
 };

@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Space, Layout, Row, Col, Divider } from "antd";
 import { Typography } from "antd";
 
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-
 import { login } from "@/redux/auth/actions";
 import { selectAuth } from "@/redux/auth/selectors";
 import LoginForm from "@/forms/LoginForm";
@@ -16,12 +14,8 @@ import logo1 from "@/style/images/logo1.png";
 import logo2 from "@/style/images/logo2.png";
 import logo3 from "@/style/images/logo3.png";
 import logo4 from "@/style/images/logo4.png";
-// import { ReactComponent as GitlabGray } from "@/style/images/gitlab-gray.svg";
-// Tell webpack this JS file uses this image
 
-// import { ReactComponent as Logo } from "@/style/images/logo.svg";
-
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 const { Title, Text } = Typography;
 
 const SideContent = () => {
