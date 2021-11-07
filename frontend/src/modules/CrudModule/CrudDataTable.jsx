@@ -30,20 +30,20 @@ function DropDownRowMenu({ row }) {
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
-    dispatch(crud.currentItem(item));
+    dispatch(crud.currentItem({ data: item }));
     panel.open();
     collapsedBox.open();
     readBox.open();
   };
   function Edit() {
-    dispatch(crud.currentItem(item));
-    dispatch(crud.currentAction("update", item));
+    dispatch(crud.currentItem({ data: item }));
+    dispatch(crud.currentAction({ actionType: "update", data: item }));
     editBox.open();
     panel.open();
     collapsedBox.open();
   }
   function Delete() {
-    dispatch(crud.currentAction("delete", item));
+    dispatch(crud.currentAction({ actionType: "delete", data: item }));
     modal.open();
   }
   return (

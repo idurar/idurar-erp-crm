@@ -1,39 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Divider } from "antd";
 
-import {
-  Button,
-  PageHeader,
-  Row,
-  Col,
-  Descriptions,
-  Statistic,
-  Tag,
-} from "antd";
-import {
-  EditOutlined,
-  FilePdfOutlined,
-  RollbackOutlined,
-  PlusCircleOutlined,
-  FileTextOutlined,
-  CloseCircleOutlined,
-} from "@ant-design/icons";
+import { Button, PageHeader, Row, Col, Descriptions, Tag } from "antd";
+import { FileTextOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
 
 import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uinqueId";
 
-import { selectRecordPaymentItem, selectItemById } from "@/redux/erp/selectors";
-
-import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
+import { selectRecordPaymentItem } from "@/redux/erp/selectors";
 
 import RecordPayment from "./RecordPayment";
 
 export default function Payment({ config }) {
   const { entity, ENTITY_NAME } = config;
-  const dispatch = useDispatch();
+
   const { erpContextAction } = useErpContext();
 
   const { current: currentItem } = useSelector(selectRecordPaymentItem);
@@ -135,7 +117,7 @@ export default function Payment({ config }) {
             <Descriptions.Item label="Payment Status">
               {currentErp.paymentStatus}
             </Descriptions.Item>
-            <Descriptions.Item label="Sub Total">
+            <Descriptions.Item label="SubTotal">
               {currentErp.subTotal}
             </Descriptions.Item>
             <Descriptions.Item label="Total">

@@ -11,7 +11,7 @@ import Search from "./SearchItem";
 
 import { useDispatch } from "react-redux";
 import { erp } from "@/redux/erp/actions";
-import { search } from "@/redux/search/actions";
+
 import { useErpContext } from "@/context/erp";
 
 const Visibility = ({ isVisible, children }) => {
@@ -33,8 +33,6 @@ export default function ErpPanel({
     state;
   useLayoutEffect(() => {
     dispatch(erp.resetState());
-    dispatch(search.resetState());
-    dispatch(search.init(["client"]));
   }, []);
 
   return (

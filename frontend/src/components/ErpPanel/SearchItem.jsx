@@ -21,7 +21,6 @@ export default function Search({ config }) {
   const { erpContextAction } = useErpContext();
   const { panel, collapsedBox, readBox } = erpContextAction;
 
-  let source = request.source();
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
 
   const isTyping = useRef(false);
@@ -37,7 +36,7 @@ export default function Search({ config }) {
     delayTimer = setTimeout(function () {
       if (isTyping.current && searchText !== "") {
         dispatch(
-          erp.search(entity, source, {
+          erp.search(entity, {
             question: searchText,
             fields: searchFields,
           })
@@ -52,7 +51,7 @@ export default function Search({ config }) {
       return item[outputValue] === data;
     });
 
-    dispatch(erp.currentItem(currentItem));
+    dispatch(erp.currentItem({ data: currentItem }));
     panel.open();
     collapsedBox.open();
     readBox.open();

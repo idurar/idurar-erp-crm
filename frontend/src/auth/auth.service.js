@@ -3,7 +3,7 @@ import { API_BASE_URL } from "@/config/serverApiConfig";
 import axios from "axios";
 import errorHandler from "@/request/errorHandler";
 
-export const login = async (loginAdminData) => {
+export const login = async ({ loginData }) => {
   try {
     const response = await fetch(
       API_BASE_URL + `login?timestamp=${new Date().getTime()}`,
@@ -18,7 +18,7 @@ export const login = async (loginAdminData) => {
         },
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(loginAdminData), // body data type must match "Content-Type" header
+        body: JSON.stringify(loginData), // body data type must match "Content-Type" header
       }
     );
 
@@ -33,9 +33,7 @@ export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {
     window.localStorage.clear();
-    const response = await axios.post(
-      API_BASE_URL + `logout?timestamp=${new Date().getTime()}`
-    );
+    await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
   } catch (error) {
     return errorHandler(error);
   }

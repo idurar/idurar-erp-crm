@@ -102,12 +102,10 @@ export default function HeaderContent() {
         <Avatar className="last" src={photo} />
         {/* </Badge> */}
       </Dropdown>
-      <Dropdown trigger={["click"]} placement="bottomRight">
-        <Avatar icon={<AppstoreOutlined />} />
-      </Dropdown>
-      <Dropdown trigger={["click"]} placement="bottomRight">
-        <Avatar icon={<BellOutlined />} />
-      </Dropdown>
+
+      <Avatar icon={<AppstoreOutlined />} />
+
+      <Avatar icon={<BellOutlined />} />
     </div>
   );
 }

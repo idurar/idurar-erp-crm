@@ -33,7 +33,7 @@ export default function AutoCompleteAsync({
   );
 
   const asyncSearch = (options) => {
-    return request.search(entity, null, options);
+    return request.search({ entity, options });
   };
 
   let { onFetch, result, isSuccess, isLoading } = useOnFetch();

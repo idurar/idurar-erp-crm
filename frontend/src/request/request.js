@@ -8,7 +8,7 @@ axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
 
 const request = {
-  create: async (entity, jsonData) => {
+  create: async ({ entity, jsonData }) => {
     console.log(
       "🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData",
       jsonData
@@ -22,7 +22,7 @@ const request = {
       return errorHandler(error);
     }
   },
-  read: async (entity, id) => {
+  read: async ({ entity, id }) => {
     try {
       const response = await axios.get(entity + "/read/" + id);
       return successHandler(response);
@@ -30,7 +30,8 @@ const request = {
       return errorHandler(error);
     }
   },
-  update: async (entity, id, jsonData) => {
+  update: async ({ entity, id, jsonData }) => {
+    console.log("🚀 ~ file: request.js ~ line 34 ~ update: ~ id", id);
     console.log(
       "🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData",
       jsonData
@@ -44,7 +45,7 @@ const request = {
     }
   },
 
-  delete: async (entity, id, option = {}) => {
+  delete: async ({ entity, id, options = {} }) => {
     try {
       const response = await axios.delete(entity + "/delete/" + id);
       return successHandler(response);
@@ -53,10 +54,10 @@ const request = {
     }
   },
 
-  filter: async (entity, option = {}) => {
+  filter: async ({ entity, options = {} }) => {
     try {
-      let filter = option.filter ? "filter=" + option.filter : "";
-      let equal = option.equal ? "&equal=" + option.equal : "";
+      let filter = options.filter ? "filter=" + options.filter : "";
+      let equal = options.equal ? "&equal=" + options.equal : "";
       let query = `?${filter}${equal}`;
 
       const response = await axios.get(entity + "/filter" + query);
@@ -66,7 +67,7 @@ const request = {
     }
   },
 
-  search: async (entity, source = null, options = {}) => {
+  search: async ({ entity, options = {} }) => {
     try {
       let query = "?";
       for (var key in options) {
@@ -82,7 +83,7 @@ const request = {
     }
   },
 
-  list: async (entity, options = {}) => {
+  list: async ({ entity, options = {} }) => {
     try {
       let query = "?";
       for (var key in options) {
@@ -97,25 +98,25 @@ const request = {
     }
   },
 
-  post: async (entityUrl, jsonData, option = {}) => {
+  post: async ({ entity, jsonData, options = {} }) => {
     try {
-      const response = await axios.post(entityUrl, jsonData);
+      const response = await axios.post(entity, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
-  get: async (entityUrl) => {
+  get: async ({ entity }) => {
     try {
-      const response = await axios.get(entityUrl);
+      const response = await axios.get(entity);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);
     }
   },
-  patch: async (entityUrl, jsonData) => {
+  patch: async ({ entity, jsonData }) => {
     try {
-      const response = await axios.patch(entityUrl, jsonData);
+      const response = await axios.patch(entity, jsonData);
       return successHandler(response);
     } catch (error) {
       return errorHandler(error);

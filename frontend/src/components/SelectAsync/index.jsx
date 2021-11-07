@@ -15,7 +15,7 @@ export default function SelectAsync({
   const [currentValue, setCurrentValue] = useState(undefined);
 
   const asyncList = () => {
-    return request.list(entity);
+    return request.list({ entity });
   };
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {

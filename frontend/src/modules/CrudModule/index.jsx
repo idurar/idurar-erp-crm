@@ -39,11 +39,11 @@ function SidePanelTopContent({ config, formElements }) {
   }, [currentItem]);
 
   const removeItem = () => {
-    dispatch(crud.currentAction("delete", currentItem));
+    dispatch(crud.currentAction({ actionType: "delete", data: currentItem }));
     modal.open();
   };
   const editItem = () => {
-    dispatch(crud.currentAction("update", currentItem));
+    dispatch(crud.currentAction({ actionType: "update", data: currentItem }));
     editBox.open();
   };
 
