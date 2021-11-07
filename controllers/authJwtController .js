@@ -109,6 +109,7 @@ exports.login = async (req, res) => {
       maxAge: 72 * 60 * 60 * 1000,
       httpOnly: true,
       sameSite: "none",
+      secure: true,
     });
 
     res.json({
