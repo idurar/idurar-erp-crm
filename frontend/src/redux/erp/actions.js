@@ -36,7 +36,7 @@ export const erp = {
         payload: null,
       });
 
-      let data = await request.list(entity, options);
+      let data = await request.list({ entity, options });
 
       if (data.success === true) {
         const result = {
@@ -67,7 +67,7 @@ export const erp = {
       payload: null,
     });
     console.log("jsonData action redux", jsonData);
-    let data = await request.create(entity, jsonData);
+    let data = await request.create({ entity, jsonData });
 
     if (data.success === true) {
       dispatch({
@@ -94,7 +94,7 @@ export const erp = {
       payload: null,
     });
 
-    let data = await request.create(entity, jsonData);
+    let data = await request.create({ entity, jsonData });
 
     if (data.success === true) {
       dispatch({
@@ -114,14 +114,14 @@ export const erp = {
       });
     }
   },
-  read: (entity, itemId) => async (dispatch) => {
+  read: (entity, id) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "read",
       payload: null,
     });
 
-    let data = await request.read(entity, itemId);
+    let data = await request.read({ entity, id });
 
     if (data.success === true) {
       dispatch({
@@ -141,14 +141,14 @@ export const erp = {
       });
     }
   },
-  update: (entity, itemId, jsonData) => async (dispatch) => {
+  update: (entity, id, jsonData) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "update",
       payload: null,
     });
 
-    let data = await request.update(entity, itemId, jsonData);
+    let data = await request.update({ entity, id, jsonData });
 
     if (data.success === true) {
       dispatch({
@@ -169,14 +169,14 @@ export const erp = {
     }
   },
 
-  delete: (entity, itemId) => async (dispatch) => {
+  delete: (entity, id) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "delete",
       payload: null,
     });
 
-    let data = await request.delete(entity, itemId);
+    let data = await request.delete({ entity, id });
 
     if (data.success === true) {
       dispatch({
@@ -193,17 +193,14 @@ export const erp = {
     }
   },
 
-  search: (entity, source, options) => async (dispatch) => {
+  search: (entity, options) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "search",
       payload: null,
     });
 
-    source.cancel();
-
-    source = request.source();
-    let data = await request.search(entity, source, options);
+    let data = await request.search({ entity, options });
 
     if (data.success === true) {
       dispatch({

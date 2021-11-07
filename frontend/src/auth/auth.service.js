@@ -33,9 +33,7 @@ export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {
     window.localStorage.clear();
-    const response = await axios.post(
-      API_BASE_URL + `logout?timestamp=${new Date().getTime()}`
-    );
+    await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
   } catch (error) {
     return errorHandler(error);
   }

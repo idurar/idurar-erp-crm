@@ -22,26 +22,22 @@ export default function UpdatePassword({ config }) {
   const { onFetch, result, isLoading, isSuccess } = useOnFetch();
 
   const handelSubmit = (fieldsValue) => {
-    const id = current._id;
+    const entity = "admin/password-update/" + current._id;
     const updateFn = () => {
-      return request.patch("admin/password-update/" + id, fieldsValue);
+      return request.patch({ entity, jsonData: fieldsValue });
     };
     onFetch(updateFn);
   };
 
   /////
 
-  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
+  const { readBox } = crudContextAction;
 
   const showCurrentRecord = () => {
-    // dispatch(crud.currentItem(currentItem));
-    // panel.open();
-    // collapsedBox.open();
     readBox.open();
   };
   useEffect(() => {
     if (isSuccess) {
-      // readBox.open();
       form.resetFields();
       dispatch(crud.resetAction("update"));
     }

@@ -36,7 +36,7 @@ export const crud = {
         payload: null,
       });
 
-      let data = await request.list(entity, options);
+      let data = await request.list({ entity, options });
 
       if (data.success === true) {
         const result = {
@@ -67,8 +67,8 @@ export const crud = {
       keyState: "create",
       payload: null,
     });
-    console.log("jsonData action redux", jsonData);
-    let data = await request.create(entity, jsonData);
+
+    let data = await request.create({ entity, jsonData });
 
     if (data.success === true) {
       dispatch({
@@ -89,14 +89,14 @@ export const crud = {
       });
     }
   },
-  read: (entity, itemId) => async (dispatch) => {
+  read: (entity, id) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "read",
       payload: null,
     });
 
-    let data = await request.read(entity, itemId);
+    let data = await request.read({ entity, id });
 
     if (data.success === true) {
       dispatch({
@@ -116,14 +116,14 @@ export const crud = {
       });
     }
   },
-  update: (entity, itemId, jsonData) => async (dispatch) => {
+  update: (entity, id, jsonData) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "update",
       payload: null,
     });
 
-    let data = await request.update(entity, itemId, jsonData);
+    let data = await request.update({ entity, id, jsonData });
 
     if (data.success === true) {
       dispatch({
@@ -144,14 +144,14 @@ export const crud = {
     }
   },
 
-  delete: (entity, itemId) => async (dispatch) => {
+  delete: (entity, id) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "delete",
       payload: null,
     });
 
-    let data = await request.delete(entity, itemId);
+    let data = await request.delete({ entity, id });
 
     if (data.success === true) {
       dispatch({
@@ -175,7 +175,7 @@ export const crud = {
       payload: null,
     });
 
-    let data = await request.search(entity, null, options);
+    let data = await request.search({ entity, options });
 
     if (data.success === true) {
       dispatch({
