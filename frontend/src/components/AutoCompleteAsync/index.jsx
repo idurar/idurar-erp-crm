@@ -1,128 +1,96 @@
-import React, { useEffect, useState, useRef } from "react";
-
-import { AutoComplete } from "antd";
-
-import { useSelector, useDispatch } from "react-redux";
-import { search } from "@/redux/search/actions";
+import React, { useState, useEffect, useRef } from "react";
 import { request } from "@/request";
-
-import { searchState } from "@/redux/search/selectors";
-
-export const useAutoComplete = (keyRef) => {
-  let state = useSelector(searchState);
-  let [currentState, setCurrentState] = useState({
-    result: [],
-    selected: null,
-    isLoading: false,
-    isSuccess: false,
-  });
-  useEffect(() => {
-    let newState = state[keyRef];
-    if (newState) setCurrentState(newState);
-  }, [state]);
-  return currentState;
-};
+import useOnFetch from "@/hooks/useOnFetch";
+import { Select, Empty } from "antd";
 
 export default function AutoCompleteAsync({
   entity,
-  keyRef,
   displayLabels,
   searchFields,
   outputValue = "_id",
-  value: formItemValue, /// this is for update
+  value, /// this is for update
   onChange, /// this is for update
 }) {
-  const dispatch = useDispatch();
-  const [fieldValue, setValue] = useState(formItemValue);
+  const [selectOptions, setOptions] = useState([]);
+  const [currentValue, setCurrentValue] = useState(undefined);
 
-  const [options, setOptions] = useState([]);
+  const isUpdating = useRef(true);
+  const isSearching = useRef(false);
 
   let source = request.source();
 
-  let { result, isLoading, isSuccess } = useAutoComplete(keyRef);
-  const isTyping = useRef(false);
-  const isSelect = useRef(false);
+  const asyncSearch = (options) => {
+    return request.search(entity, source, options);
+  };
 
-  let delayTimer = null;
-  useEffect(() => {
-    isLoading && setOptions([{ label: "... Searching" }]);
-  }, [isLoading]);
+  let { onFetch, result, isSuccess, isLoading } = useOnFetch();
+
+  const labels = (optionField) => {
+    return displayLabels.map((x) => optionField[x]).join(" ");
+  };
+
   const onSearch = (searchText) => {
-    isTyping.current = true;
-
-    clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    if (searchText) {
+      setOptions([]);
+      setCurrentValue(undefined);
+      isSearching.current = true;
+      source.cancel();
+      source = request.source();
       const options = {
         q: searchText,
         fields: searchFields,
       };
-      if (isTyping.current && searchText !== "") {
-        dispatch(search.list(entity, keyRef, source, options));
-      }
-      isTyping.current = false;
-    }, 500);
-  };
-
-  const onSelect = (data) => {
-    isSelect.current = true;
-    const currentItem = result.find((item) => {
-      return item[outputValue] === data;
-    });
-    dispatch(search.selected(keyRef, currentItem));
-  };
-
-  const handelChange = (data) => {
-    const currentItem = options.find((item) => {
-      return item.value === data;
-    });
-
-    const currentValue = currentItem ? currentItem.label : data;
-
-    setValue(currentValue);
-    if (onChange) {
-      onChange(data);
+      onFetch(() => asyncSearch(options));
     }
   };
-  let optionResults = [];
-  const isUpdating = useRef(true);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setOptions(result);
+    } else {
+      setCurrentValue(undefined);
+      setOptions([]);
+    }
+  }, [isSuccess, result]);
+
   useEffect(() => {
     // this for update Form , it's for setField
-    if (formItemValue && !isTyping.current && !isSelect.current) {
+    if (value && isUpdating.current) {
+      if (!isSearching.current) {
+        setOptions([value]);
+      }
+
+      setCurrentValue(value[outputValue] || value); // set nested value or value
+      onChange(value[outputValue] || value);
       isUpdating.current = false;
-      // optionResults = [];
-      const labels = displayLabels.map((x) => formItemValue[x]).join(" ");
-      optionResults.push({ label: labels, value: formItemValue[outputValue] });
-      setValue(labels);
-      setOptions(optionResults);
-      // if (onChange) {
-      //   onChange(formItemValue[outputValue]);
-      // }
     }
-  }, [formItemValue]);
-
-  useEffect(() => {
-    // optionResults = [];
-
-    result.map((item) => {
-      const labels = displayLabels.map((x) => item[x]).join(" ");
-      optionResults.push({ label: labels, value: item[outputValue] });
-    });
-    setOptions(optionResults);
-  }, [result]);
+  }, [value]);
 
   return (
-    <AutoComplete
-      value={fieldValue}
-      options={options}
-      style={{
-        width: "100%",
-      }}
-      onSelect={onSelect}
+    <Select
+      loading={isLoading}
+      showSearch
+      placeholder={"Search Here"}
+      defaultActiveFirstOption={false}
+      showArrow={false}
+      filterOption={false}
+      notFoundContent={isLoading ? "... Searching" : "Not Found"}
+      value={currentValue}
       onSearch={onSearch}
-      onChange={handelChange}
-      notFoundContent={!isSuccess ? "No result found" : ""}
-      allowClear={true}
-      placeholder="Start Searching here"
-    ></AutoComplete>
+      onChange={(newValue) => {
+        if (onChange) {
+          onChange(newValue[outputValue] || newValue);
+        }
+      }}
+    >
+      {selectOptions.map((optionField) => (
+        <Select.Option
+          key={optionField[outputValue] || optionField}
+          value={optionField[outputValue] || optionField}
+        >
+          {labels(optionField)}
+        </Select.Option>
+      ))}
+    </Select>
   );
 }
