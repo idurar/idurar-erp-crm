@@ -2,33 +2,41 @@ import * as actionTypes from "./types";
 import { request } from "@/request";
 
 export const crud = {
-  resetState: () => async (dispatch) => {
-    dispatch({
-      type: actionTypes.RESET_STATE,
-    });
-  },
-  resetAction: (actionType) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.RESET_ACTION,
-      keyState: actionType,
-      payload: null,
-    });
-  },
-  currentItem: (data) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.CURRENT_ITEM,
-      payload: { ...data },
-    });
-  },
-  currentAction: (actionType, data) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.CURRENT_ACTION,
-      keyState: actionType,
-      payload: { ...data },
-    });
-  },
+  resetState:
+    (props = {}) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.RESET_STATE,
+      });
+    },
+  resetAction:
+    ({ actionType }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.RESET_ACTION,
+        keyState: actionType,
+        payload: null,
+      });
+    },
+  currentItem:
+    ({ data }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.CURRENT_ITEM,
+        payload: { ...data },
+      });
+    },
+  currentAction:
+    ({ actionType, data }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.CURRENT_ACTION,
+        keyState: actionType,
+        payload: { ...data },
+      });
+    },
   list:
-    (entity, options = { page: 1 }) =>
+    ({ entity, options = { page: 1 } }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -61,134 +69,144 @@ export const crud = {
         });
       }
     },
-  create: (entity, jsonData) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "create",
-      payload: null,
-    });
-
-    let data = await request.create({ entity, jsonData });
-
-    if (data.success === true) {
+  create:
+    ({ entity, jsonData }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "create",
-        payload: data.result,
-      });
-
-      dispatch({
-        type: actionTypes.CURRENT_ITEM,
-        payload: data.result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "create",
         payload: null,
       });
-    }
-  },
-  read: (entity, id) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "read",
-      payload: null,
-    });
 
-    let data = await request.read({ entity, id });
+      let data = await request.create({ entity, jsonData });
 
-    if (data.success === true) {
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "create",
+          payload: data.result,
+        });
+
+        dispatch({
+          type: actionTypes.CURRENT_ITEM,
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "create",
+          payload: null,
+        });
+      }
+    },
+  read:
+    ({ entity, id }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.CURRENT_ITEM,
-        payload: data.result,
-      });
-      dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "read",
-        payload: data.result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
-        keyState: "read",
         payload: null,
       });
-    }
-  },
-  update: (entity, id, jsonData) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "update",
-      payload: null,
-    });
 
-    let data = await request.update({ entity, id, jsonData });
+      let data = await request.read({ entity, id });
 
-    if (data.success === true) {
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.CURRENT_ITEM,
+          payload: data.result,
+        });
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "read",
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "read",
+          payload: null,
+        });
+      }
+    },
+  update:
+    ({ entity, id, jsonData }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "update",
-        payload: data.result,
-      });
-      dispatch({
-        type: actionTypes.CURRENT_ITEM,
-        payload: data.result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "update",
         payload: null,
       });
-    }
-  },
 
-  delete: (entity, id) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "delete",
-      payload: null,
-    });
+      let data = await request.update({ entity, id, jsonData });
 
-    let data = await request.delete({ entity, id });
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "update",
+          payload: data.result,
+        });
+        dispatch({
+          type: actionTypes.CURRENT_ITEM,
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "update",
+          payload: null,
+        });
+      }
+    },
 
-    if (data.success === true) {
+  delete:
+    ({ entity, id }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "delete",
-        payload: data.result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "delete",
         payload: null,
       });
-    }
-  },
 
-  search: (entity, options) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "search",
-      payload: null,
-    });
+      let data = await request.delete({ entity, id });
 
-    let data = await request.search({ entity, options });
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "delete",
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "delete",
+          payload: null,
+        });
+      }
+    },
 
-    if (data.success === true) {
+  search:
+    ({ entity, options = {} }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "search",
-        payload: data.result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "search",
         payload: null,
       });
-    }
-  },
+
+      let data = await request.search({ entity, options });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "search",
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "search",
+          payload: null,
+        });
+      }
+    },
 };

@@ -24,8 +24,8 @@ export default function DeleteModal({ config }) {
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(crud.list(entity));
-      // dispatch(crud.resetAction("delete")); // check here maybe it wrong
+      dispatch(crud.list({ entity }));
+      // dispatch(crud.resetAction({actionType:"delete"})); // check here maybe it wrong
     }
     if (current) {
       let labels = entityDisplayLabels
@@ -38,7 +38,7 @@ export default function DeleteModal({ config }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(crud.delete(entity, id));
+    dispatch(crud.delete({ entity, id }));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();

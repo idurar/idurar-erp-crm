@@ -39,7 +39,7 @@ export default function UpdatePassword({ config }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(crud.resetAction("update"));
+      dispatch(crud.resetAction({ actionType: "update" }));
     }
   }, [isSuccess]);
 

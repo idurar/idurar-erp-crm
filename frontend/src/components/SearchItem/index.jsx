@@ -48,7 +48,7 @@ function SearchItemComponent({ config, onRerender }) {
         q: debouncedValue,
         fields: searchFields,
       };
-      dispatch(crud.search(entity, options));
+      dispatch(crud.search({ entity, options }));
     }
     return () => {
       cancel();
@@ -70,7 +70,7 @@ function SearchItemComponent({ config, onRerender }) {
       return item[outputValue] === data;
     });
 
-    dispatch(crud.currentItem(currentItem));
+    dispatch(crud.currentItem({ data: currentItem }));
 
     panel.open();
     collapsedBox.open();

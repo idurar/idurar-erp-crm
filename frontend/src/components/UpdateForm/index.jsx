@@ -36,7 +36,7 @@ export default function UpdateForm({ config, formElements }) {
       current._id
     );
     const id = current._id;
-    dispatch(crud.update(entity, id, fieldsValue));
+    dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
   };
   useEffect(() => {
     if (current) {
@@ -86,8 +86,8 @@ export default function UpdateForm({ config, formElements }) {
       collapsedBox.open();
       panel.open();
       form.resetFields();
-      dispatch(crud.resetAction("update"));
-      dispatch(crud.list(entity));
+      dispatch(crud.resetAction({ actionType: "update" }));
+      dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);
 
