@@ -9,7 +9,7 @@ import { useErpContext } from "@/context/erp";
 
 import Loading from "@/components/Loading";
 
-import PaymentForm from "./PaymentForm";
+import PaymentInvoiceForm from "@/forms/PaymentInvoiceForm";
 
 export default function RecordPayment({ config }) {
   let { entity, CREATE_ENTITY } = config;
@@ -62,7 +62,7 @@ export default function RecordPayment({ config }) {
     <>
       <Loading isLoading={isLoading}>
         <Form form={form} layout="vertical" onFinish={onSubmit}>
-          <PaymentForm maxAmount={maxAmount} />
+          <PaymentInvoiceForm maxAmount={maxAmount} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Record Payment
