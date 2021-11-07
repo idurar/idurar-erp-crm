@@ -27,38 +27,40 @@ export const crud = {
       payload: { ...data },
     });
   },
-  list: (entity, options = { page: 1 }) => async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      keyState: "list",
-      payload: null,
-    });
-
-    let data = await request.list(entity, options);
-
-    if (data.success === true) {
-      const result = {
-        items: data.result,
-        pagination: {
-          current: parseInt(data.pagination.page, 10),
-          pageSize: 10,
-          showSizeChanger: false,
-          total: parseInt(data.pagination.count, 10),
-        },
-      };
+  list:
+    (entity, options = { page: 1 }) =>
+    async (dispatch) => {
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        keyState: "list",
-        payload: result,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.REQUEST_FAILED,
+        type: actionTypes.REQUEST_LOADING,
         keyState: "list",
         payload: null,
       });
-    }
-  },
+
+      let data = await request.list(entity, options);
+
+      if (data.success === true) {
+        const result = {
+          items: data.result,
+          pagination: {
+            current: parseInt(data.pagination.page, 10),
+            pageSize: 10,
+            showSizeChanger: false,
+            total: parseInt(data.pagination.count, 10),
+          },
+        };
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: "list",
+          payload: result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: "list",
+          payload: null,
+        });
+      }
+    },
   create: (entity, jsonData) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
@@ -166,17 +168,14 @@ export const crud = {
     }
   },
 
-  search: (entity, source, options) => async (dispatch) => {
+  search: (entity, options) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
       keyState: "search",
       payload: null,
     });
 
-    source.cancel();
-
-    source = request.source();
-    let data = await request.search(entity, source, options);
+    let data = await request.search(entity, null, options);
 
     if (data.success === true) {
       dispatch({

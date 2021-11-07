@@ -43,43 +43,46 @@ export default function AutoCompleteAsync({
   };
 
   useEffect(() => {
-    const options = {
-      q: debouncedValue,
-      fields: searchFields,
-    };
-    onFetch(() => asyncSearch(options));
+    if (debouncedValue != "") {
+      const options = {
+        q: debouncedValue,
+        fields: searchFields,
+      };
+      onFetch(() => asyncSearch(options));
+    }
+
     return () => {
       cancel();
     };
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText) {
+    if (searchText && searchText != "") {
+      isSearching.current = true;
       setSearching(true);
       setOptions([]);
       setCurrentValue(undefined);
-      isSearching.current = true;
       setValToSearch(searchText);
     }
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      setOptions(result);
-    } else {
-      setSearching(false);
-      setCurrentValue(undefined);
-      setOptions([]);
+    if (isSearching.current) {
+      if (isSuccess) {
+        setOptions(result);
+      } else {
+        setSearching(false);
+        setCurrentValue(undefined);
+        setOptions([]);
+      }
     }
   }, [isSuccess, result]);
-
   useEffect(() => {
     // this for update Form , it's for setField
     if (value && isUpdating.current) {
       if (!isSearching.current) {
         setOptions([value]);
       }
-
       setCurrentValue(value[outputValue] || value); // set nested value or value
       onChange(value[outputValue] || value);
       isUpdating.current = false;
@@ -90,6 +93,7 @@ export default function AutoCompleteAsync({
     <Select
       loading={isLoading}
       showSearch
+      allowClear
       placeholder={"Search Here"}
       defaultActiveFirstOption={false}
       showArrow={false}
