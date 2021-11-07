@@ -106,7 +106,7 @@ exports.login = async (req, res) => {
     ).exec();
 
     res.cookie("token", token, {
-      // maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 72 * 60 * 60 * 1000,
       httpOnly: true,
     });
 
@@ -147,10 +147,6 @@ exports.isValidToken = async (req, res, next) => {
       });
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(
-      "isValidToken 🚀🚀🚀🚀 ~ file: authJwtController .js ~ line 139 ~ exports.isValidToken= ~ verified",
-      verified
-    );
 
     if (!verified)
       return res.status(401).json({
@@ -201,5 +197,5 @@ exports.logout = async (req, res) => {
   ).exec();
 
   res.clearCookie("token");
-  res.json({ isLoggedIn: result.isLoggedIn });
+  res.json({ isLoggedOut: true });
 };

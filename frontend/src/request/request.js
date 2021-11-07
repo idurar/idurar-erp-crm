@@ -1,19 +1,9 @@
 import axios from "axios";
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "@/config/serverApiConfig";
-import { token as tokenCookies } from "@/auth";
+import { API_BASE_URL } from "@/config/serverApiConfig";
+
 import errorHandler from "./errorHandler";
 import successHandler from "./successHandler";
 
-const headersInstance = { [ACCESS_TOKEN_NAME]: tokenCookies.get() };
-
-// const axios = axios.create({
-//   baseURL: API_BASE_URL,
-//   timeout: 30000,
-//   withCredentials: true,
-//   // headers: {
-//   //   ...headersInstance,
-//   // },
-// });
 axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
 
@@ -23,9 +13,7 @@ const request = {
       "🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData",
       jsonData
     );
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
+
     console.log("jsonData", jsonData);
     try {
       const response = await axios.post(entity + "/create", jsonData);
@@ -35,9 +23,6 @@ const request = {
     }
   },
   read: async (entity, id) => {
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
     try {
       const response = await axios.get(entity + "/read/" + id);
       return successHandler(response);
@@ -50,9 +35,7 @@ const request = {
       "🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData",
       jsonData
     );
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
+
     try {
       const response = await axios.patch(entity + "/update/" + id, jsonData);
       return successHandler(response);
@@ -62,9 +45,6 @@ const request = {
   },
 
   delete: async (entity, id, option = {}) => {
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
     try {
       const response = await axios.delete(entity + "/delete/" + id);
       return successHandler(response);
@@ -74,9 +54,6 @@ const request = {
   },
 
   filter: async (entity, option = {}) => {
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
     try {
       let filter = option.filter ? "filter=" + option.filter : "";
       let equal = option.equal ? "&equal=" + option.equal : "";
@@ -90,9 +67,6 @@ const request = {
   },
 
   search: async (entity, source, options = {}) => {
-    // axios.defaults.headers = {
-    //   [ACCESS_TOKEN_NAME]: tokenCookies.get(),
-    // };
     try {
       let query = "?";
       for (var key in options) {
@@ -111,10 +85,6 @@ const request = {
   },
 
   list: async (entity, options = {}) => {
-    // axios.defaults.headers = {
-    //   [ACCESS_TOKEN_NAME]: tokenCookies.get(),
-    // };
-
     try {
       let query = "?";
       for (var key in options) {
@@ -130,9 +100,6 @@ const request = {
   },
 
   post: async (entityUrl, jsonData, option = {}) => {
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
     try {
       const response = await axios.post(entityUrl, jsonData);
       return successHandler(response);
@@ -141,9 +108,6 @@ const request = {
     }
   },
   get: async (entityUrl) => {
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
     try {
       const response = await axios.get(entityUrl);
       return successHandler(response);
@@ -152,9 +116,6 @@ const request = {
     }
   },
   patch: async (entityUrl, jsonData) => {
-    // axios.defaults.headers = {
-    //   ...headersInstance,
-    // };
     try {
       const response = await axios.patch(entityUrl, jsonData);
       return successHandler(response);
@@ -164,8 +125,6 @@ const request = {
   },
 
   source: () => {
-    // const CancelToken = await axios.CancelToken;
-
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
     return source;

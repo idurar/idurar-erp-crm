@@ -10,7 +10,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        authService.token.get() ? (
+        window.localStorage.getItem("isLoggedIn") ? (
           <Redirect to="/" />
         ) : (
           <motion.div

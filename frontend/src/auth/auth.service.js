@@ -1,11 +1,7 @@
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "@/config/serverApiConfig";
+import { API_BASE_URL } from "@/config/serverApiConfig";
 
 import axios from "axios";
 import errorHandler from "@/request/errorHandler";
-import successHandler from "@/request/successHandler";
-import storePersist from "@/redux/storePersist";
-
-import { getCookie, setCookie, deleteCookie } from "./cookie";
 
 export const login = async (loginAdminData) => {
   try {
@@ -28,7 +24,6 @@ export const login = async (loginAdminData) => {
 
     const data = await response.json();
 
-    token.set(data.result.token);
     return data;
   } catch (error) {
     return errorHandler(error);
@@ -37,24 +32,11 @@ export const login = async (loginAdminData) => {
 export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {
-    token.remove();
-    storePersist.clear();
+    window.localStorage.clear();
     const response = await axios.post(
       API_BASE_URL + `logout?timestamp=${new Date().getTime()}`
     );
   } catch (error) {
     return errorHandler(error);
   }
-};
-
-export const token = {
-  get: () => {
-    return getCookie(ACCESS_TOKEN_NAME);
-  },
-  set: (token) => {
-    return setCookie(ACCESS_TOKEN_NAME, token);
-  },
-  remove: () => {
-    return deleteCookie(ACCESS_TOKEN_NAME);
-  },
 };
