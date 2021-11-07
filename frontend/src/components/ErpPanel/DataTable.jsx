@@ -57,11 +57,12 @@ export default function DataTable({ config, DataTableDropMenu }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    dispatch(erp.list(entity, pagination.current));
+    const options = { page: pagination.current || 1 };
+    dispatch(erp.list({ entity, options }));
   }, []);
 
   useEffect(() => {
-    dispatch(erp.list(entity));
+    dispatch(erp.list({ entity }));
   }, []);
 
   return (

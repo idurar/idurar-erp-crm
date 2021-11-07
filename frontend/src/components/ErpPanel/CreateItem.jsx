@@ -53,10 +53,10 @@ export default function CreateItem({ config, CreateForm }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(erp.resetAction("create"));
+      dispatch(erp.resetAction({ actionType: "create" }));
       setSubTotal(0);
       createPanel.close();
-      dispatch(erp.list(entity));
+      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 
@@ -87,7 +87,7 @@ export default function CreateItem({ config, CreateForm }) {
         };
       }
     }
-    dispatch(erp.create(entity, fieldsValue));
+    dispatch(erp.create({ entity, jsonData: fieldsValue }));
   };
 
   return (

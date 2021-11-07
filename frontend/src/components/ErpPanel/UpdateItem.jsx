@@ -84,15 +84,15 @@ export default function UpdateItem({ config, UpdateForm }) {
       "🚀 ~ file: UpdateItem.jsx ~ line 88 ~ onSubmit ~ fieldsValue",
       fieldsValue
     );
-    dispatch(erp.update(entity, id, fieldsValue));
+    dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
   };
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
       setSubTotal(0);
-      dispatch(erp.resetAction("update"));
+      dispatch(erp.resetAction({ actionType: "update" }));
       updatePanel.close();
-      dispatch(erp.list(entity));
+      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 

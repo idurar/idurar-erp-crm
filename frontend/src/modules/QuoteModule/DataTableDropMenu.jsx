@@ -22,15 +22,15 @@ export default function DataTableDropMenu({ row, entity }) {
   const { readPanel, updatePanel, modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
   function Read() {
-    dispatch(erp.currentItem(item));
+    dispatch(erp.currentItem({ data: item }));
     readPanel.open();
   }
   function Edit() {
-    dispatch(erp.currentAction("update", item));
+    dispatch(erp.currentAction({ actionType: "update", data: item }));
     updatePanel.open();
   }
   function Delete() {
-    dispatch(erp.currentAction("delete", item));
+    dispatch(erp.currentAction({ actionType: "delete", data: item }));
     modal.open();
   }
   function Download() {

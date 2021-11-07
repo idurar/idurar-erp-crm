@@ -36,9 +36,9 @@ export default function RecordPayment({ config }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(erp.resetAction("recordPayment"));
+      dispatch(erp.resetAction({ actionType: "recordPayment" }));
       recordPanel.close();
-      dispatch(erp.list(entity));
+      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 
@@ -53,7 +53,9 @@ export default function RecordPayment({ config }) {
       };
     }
 
-    dispatch(erp.recordPayment("paymentInvoice", fieldsValue));
+    dispatch(
+      erp.recordPayment({ entity: "paymentInvoice", jsonData: fieldsValue })
+    );
   };
 
   return (

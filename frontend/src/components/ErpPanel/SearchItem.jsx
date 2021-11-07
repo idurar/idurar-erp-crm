@@ -51,7 +51,7 @@ export default function Search({ config }) {
       return item[outputValue] === data;
     });
 
-    dispatch(erp.currentItem(currentItem));
+    dispatch(erp.currentItem({ data: currentItem }));
     panel.open();
     collapsedBox.open();
     readBox.open();
