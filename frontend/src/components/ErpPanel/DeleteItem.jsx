@@ -24,7 +24,7 @@ export default function Delete({ config }) {
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(erp.list(entity));
+      dispatch(erp.list({ entity }));
     }
     if (current) {
       let labels = entityDisplayLabels
@@ -37,7 +37,7 @@ export default function Delete({ config }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(erp.delete(entity, id));
+    dispatch(erp.delete({ entity, id }));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();

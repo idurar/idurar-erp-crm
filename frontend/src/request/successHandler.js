@@ -2,44 +2,38 @@ import { notification } from "antd";
 
 import codeMessage from "./codeMessage";
 
-const successHandler = (response, typeNotification = {}) => {
-  if (!response.data) {
-    response = {
-      ...response,
-      status: 404,
-      url: null,
-      data: {
-        success: false,
-        result: null,
-      },
-    };
-  }
+const successHandler = (
+  response,
+  options = { notifyOnSuccess: false, notifyOnFailed: true }
+) => {
   const { data } = response;
-  if (data.success === false) {
-    const message = data && data.message;
+  if (data && data.success === true) {
+    const message = response.data && data.message;
+    const successText = message || codeMessage[response.status];
+
+    if (options.notifyOnSuccess) {
+      notification.config({
+        duration: 5,
+      });
+      notification.success({
+        message: `Request success`,
+        description: successText,
+      });
+    }
+  } else {
+    const message = response.data && data.message;
     const errorText = message || codeMessage[response.status];
     const { status } = response;
-    notification.config({
-      duration: 20,
-    });
-    notification.error({
-      message: `Request error ${status}`,
-      description: errorText,
-    });
-  } else {
-    const message = data && data.message;
-    const successText = message || codeMessage[response.status];
-    const { status } = response;
-    // notification.config({
-    //   duration: 20,
-    // });
-    // notification.success({
-    //   message: `Request success`,
-    //   description: successText,
-    // });
+    if (options.notifyOnFailed) {
+      notification.config({
+        duration: 5,
+      });
+      notification.error({
+        message: `Request error ${status}`,
+        description: errorText,
+      });
+    }
   }
-
-  return data;
 };
 
 export default successHandler;

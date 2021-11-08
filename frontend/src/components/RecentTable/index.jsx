@@ -45,7 +45,7 @@ export default function RecentTable({ ...props }) {
   ];
 
   const asyncList = () => {
-    return request.list(entity);
+    return request.list({ entity });
   };
   const { result, isLoading, isSuccess } = useFetch(asyncList);
   const firstFiveItems = () => {

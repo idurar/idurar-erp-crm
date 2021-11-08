@@ -5,5 +5,5 @@ export default function useNetwork() {
   useEffect(() => {
     setNetwork(window.navigator.onLine);
   }, [window.navigator.onLine]);
-  return { isOnline };
+  return [isOnline];
 }

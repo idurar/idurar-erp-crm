@@ -92,12 +92,19 @@ exports.update = async (Model, req, res) => {
         runValidators: true,
       }
     ).exec();
-
-    return res.status(200).json({
-      success: true,
-      result,
-      message: "we update this document by this id: " + req.params.id,
-    });
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        result: null,
+        message: "No document found by this id: " + req.params.id,
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        result,
+        message: "we update this document by this id: " + req.params.id,
+      });
+    }
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
     if (err.name == "ValidationError") {

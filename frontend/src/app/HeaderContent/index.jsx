@@ -91,7 +91,7 @@ export default function HeaderContent() {
   return (
     <div
       className="headerIcon"
-      style={{ position: "absolute", right: 0, zIndex: "9999" }}
+      style={{ position: "absolute", right: 0, zIndex: "99" }}
     >
       <Dropdown
         overlay={profileDropdown}
@@ -102,12 +102,10 @@ export default function HeaderContent() {
         <Avatar className="last" src={photo} />
         {/* </Badge> */}
       </Dropdown>
-      <Dropdown trigger={["click"]} placement="bottomRight">
-        <Avatar icon={<AppstoreOutlined />} />
-      </Dropdown>
-      <Dropdown trigger={["click"]} placement="bottomRight">
-        <Avatar icon={<BellOutlined />} />
-      </Dropdown>
+
+      <Avatar icon={<AppstoreOutlined />} />
+
+      <Avatar icon={<BellOutlined />} />
     </div>
   );
 }

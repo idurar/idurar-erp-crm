@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { request } from "@/request";
 import useOnFetch from "@/hooks/useOnFetch";
-import { Select, Empty } from "antd";
+import { useDebounce } from "react-use";
+import { Select } from "antd";
 
 export default function AutoCompleteAsync({
   entity,
@@ -17,10 +18,22 @@ export default function AutoCompleteAsync({
   const isUpdating = useRef(true);
   const isSearching = useRef(false);
 
-  let source = request.source();
+  const [searching, setSearching] = useState(false);
+
+  const [valToSearch, setValToSearch] = useState("");
+  const [debouncedValue, setDebouncedValue] = useState("");
+
+  const [, cancel] = useDebounce(
+    () => {
+      //  setState("Typing stopped");
+      setDebouncedValue(valToSearch);
+    },
+    500,
+    [valToSearch]
+  );
 
   const asyncSearch = (options) => {
-    return request.search(entity, source, options);
+    return request.search({ entity, options });
   };
 
   let { onFetch, result, isSuccess, isLoading } = useOnFetch();
@@ -29,37 +42,47 @@ export default function AutoCompleteAsync({
     return displayLabels.map((x) => optionField[x]).join(" ");
   };
 
-  const onSearch = (searchText) => {
-    if (searchText) {
-      setOptions([]);
-      setCurrentValue(undefined);
-      isSearching.current = true;
-      source.cancel();
-      source = request.source();
+  useEffect(() => {
+    if (debouncedValue != "") {
       const options = {
-        q: searchText,
+        q: debouncedValue,
         fields: searchFields,
       };
       onFetch(() => asyncSearch(options));
     }
+
+    return () => {
+      cancel();
+    };
+  }, [debouncedValue]);
+
+  const onSearch = (searchText) => {
+    if (searchText && searchText != "") {
+      isSearching.current = true;
+      setSearching(true);
+      setOptions([]);
+      setCurrentValue(undefined);
+      setValToSearch(searchText);
+    }
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      setOptions(result);
-    } else {
-      setCurrentValue(undefined);
-      setOptions([]);
+    if (isSearching.current) {
+      if (isSuccess) {
+        setOptions(result);
+      } else {
+        setSearching(false);
+        setCurrentValue(undefined);
+        setOptions([]);
+      }
     }
   }, [isSuccess, result]);
-
   useEffect(() => {
     // this for update Form , it's for setField
     if (value && isUpdating.current) {
       if (!isSearching.current) {
         setOptions([value]);
       }
-
       setCurrentValue(value[outputValue] || value); // set nested value or value
       onChange(value[outputValue] || value);
       isUpdating.current = false;
@@ -70,11 +93,12 @@ export default function AutoCompleteAsync({
     <Select
       loading={isLoading}
       showSearch
+      allowClear
       placeholder={"Search Here"}
       defaultActiveFirstOption={false}
       showArrow={false}
       filterOption={false}
-      notFoundContent={isLoading ? "... Searching" : "Not Found"}
+      notFoundContent={searching ? "... Searching" : "Not Found"}
       value={currentValue}
       onSearch={onSearch}
       onChange={(newValue) => {

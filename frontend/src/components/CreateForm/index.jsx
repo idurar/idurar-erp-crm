@@ -21,7 +21,7 @@ export default function CreateForm({ config, formElements }) {
       fieldsValue
     );
 
-    dispatch(crud.create(entity, fieldsValue));
+    dispatch(crud.create({ entity, jsonData: fieldsValue }));
   };
 
   useEffect(() => {
@@ -30,8 +30,8 @@ export default function CreateForm({ config, formElements }) {
       collapsedBox.open();
       panel.open();
       form.resetFields();
-      dispatch(crud.resetAction("create"));
-      dispatch(crud.list(entity));
+      dispatch(crud.resetAction({ actionType: "create" }));
+      dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);
 

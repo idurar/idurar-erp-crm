@@ -127,7 +127,7 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    dispatch(login(values));
+    dispatch(login({ loginData: values }));
   };
   return (
     <>

@@ -8,29 +8,37 @@ axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
 
 const request = {
-  create: async (entity, jsonData) => {
+  create: async ({ entity, jsonData }) => {
     console.log(
       "🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData",
       jsonData
     );
 
-    console.log("jsonData", jsonData);
     try {
       const response = await axios.post(entity + "/create", jsonData);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
-  read: async (entity, id) => {
+  read: async ({ entity, id }) => {
     try {
       const response = await axios.get(entity + "/read/" + id);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
-  update: async (entity, id, jsonData) => {
+  update: async ({ entity, id, jsonData }) => {
+    console.log("🚀 ~ file: request.js ~ line 34 ~ update: ~ id", id);
     console.log(
       "🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData",
       jsonData
@@ -38,35 +46,47 @@ const request = {
 
     try {
       const response = await axios.patch(entity + "/update/" + id, jsonData);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  delete: async (entity, id, option = {}) => {
+  delete: async ({ entity, id, options = {} }) => {
     try {
       const response = await axios.delete(entity + "/delete/" + id);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  filter: async (entity, option = {}) => {
+  filter: async ({ entity, options = {} }) => {
     try {
-      let filter = option.filter ? "filter=" + option.filter : "";
-      let equal = option.equal ? "&equal=" + option.equal : "";
+      let filter = options.filter ? "filter=" + options.filter : "";
+      let equal = options.equal ? "&equal=" + options.equal : "";
       let query = `?${filter}${equal}`;
 
       const response = await axios.get(entity + "/filter" + query);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  search: async (entity, source, options = {}) => {
+  search: async ({ entity, options = {} }) => {
     try {
       let query = "?";
       for (var key in options) {
@@ -74,17 +94,19 @@ const request = {
       }
       query = query.slice(0, -1);
       // headersInstance.cancelToken = source.token;
-      const response = await axios.get(entity + "/search" + query, {
-        cancelToken: source.token,
-      });
+      const response = await axios.get(entity + "/search" + query);
 
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  list: async (entity, options = {}) => {
+  list: async ({ entity, options = {} }) => {
     try {
       let query = "?";
       for (var key in options) {
@@ -93,32 +115,42 @@ const request = {
       query = query.slice(0, -1);
 
       const response = await axios.get(entity + "/list" + query);
-      return successHandler(response);
+
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
 
-  post: async (entityUrl, jsonData, option = {}) => {
+  post: async ({ entity, jsonData, options = {} }) => {
     try {
-      const response = await axios.post(entityUrl, jsonData);
-      return successHandler(response);
+      const response = await axios.post(entity, jsonData);
+
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
-  get: async (entityUrl) => {
+  get: async ({ entity }) => {
     try {
-      const response = await axios.get(entityUrl);
-      return successHandler(response);
+      const response = await axios.get(entity);
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
   },
-  patch: async (entityUrl, jsonData) => {
+  patch: async ({ entity, jsonData }) => {
     try {
-      const response = await axios.patch(entityUrl, jsonData);
-      return successHandler(response);
+      const response = await axios.patch(entity, jsonData);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }

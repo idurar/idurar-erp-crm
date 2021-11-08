@@ -9,7 +9,7 @@ import { useErpContext } from "@/context/erp";
 
 import Loading from "@/components/Loading";
 
-import PaymentForm from "./PaymentForm";
+import PaymentInvoiceForm from "@/forms/PaymentInvoiceForm";
 
 export default function RecordPayment({ config }) {
   let { entity, CREATE_ENTITY } = config;
@@ -36,9 +36,9 @@ export default function RecordPayment({ config }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(erp.resetAction("recordPayment"));
+      dispatch(erp.resetAction({ actionType: "recordPayment" }));
       recordPanel.close();
-      dispatch(erp.list(entity));
+      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 
@@ -53,14 +53,16 @@ export default function RecordPayment({ config }) {
       };
     }
 
-    dispatch(erp.recordPayment("paymentInvoice", fieldsValue));
+    dispatch(
+      erp.recordPayment({ entity: "paymentInvoice", jsonData: fieldsValue })
+    );
   };
 
   return (
     <>
       <Loading isLoading={isLoading}>
         <Form form={form} layout="vertical" onFinish={onSubmit}>
-          <PaymentForm maxAmount={maxAmount} />
+          <PaymentInvoiceForm maxAmount={maxAmount} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Record Payment

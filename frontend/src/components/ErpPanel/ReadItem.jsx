@@ -147,7 +147,9 @@ export default function ReadItem({ config }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              dispatch(erp.currentAction("update", currentErp));
+              dispatch(
+                erp.currentAction({ actionType: "update", data: currentErp })
+              );
               updatePanel.open();
             }}
             type="primary"
