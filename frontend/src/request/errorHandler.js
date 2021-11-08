@@ -2,12 +2,16 @@ import { notification } from "antd";
 import history from "@/utils/history";
 import codeMessage from "./codeMessage";
 
-const errorHandler = (error, emptyResult = null) => {
+const errorHandler = (error) => {
   const { response } = error;
+  console.log(
+    "🚀 ~ file: errorHandler.js ~ line 7 ~ errorHandler ~ error",
+    error
+  );
 
-  if (!response) {
+  if (response === undefined) {
     notification.config({
-      duration: 20,
+      duration: 5,
     });
     notification.error({
       message: "No internet connection",
@@ -15,17 +19,17 @@ const errorHandler = (error, emptyResult = null) => {
     });
     return {
       success: false,
-      result: emptyResult,
+      result: null,
       message: "Cannot connect to the server, Check your internet network",
     };
   } else if (response && response.status) {
     const message = response.data && response.data.message;
-    // const error = response.data && response.data.error;
-    // console.log("file: errorHandler.js ~ error", error);
-    const errorText = message || codeMessage[response.status];
+    const error = response.data && response.data.error;
+
+    const errorText = error || message || codeMessage[response.status];
     const { status } = response;
     notification.config({
-      duration: 20,
+      duration: 10,
     });
     notification.error({
       message: `Request error ${status}`,
@@ -37,7 +41,7 @@ const errorHandler = (error, emptyResult = null) => {
     return response.data;
   } else {
     notification.config({
-      duration: 20,
+      duration: 10,
     });
     notification.error({
       message: "Unknown Error",
@@ -45,7 +49,7 @@ const errorHandler = (error, emptyResult = null) => {
     });
     return {
       success: false,
-      result: emptyResult,
+      result: null,
       message: "An unknown error occurred in the app, please try again. ",
     };
   }
