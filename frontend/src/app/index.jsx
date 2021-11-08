@@ -1,35 +1,32 @@
+import React, { useEffect } from "react";
+
 import Router from "@/router";
 
 import useNetwork from "@/hooks/useNetwork";
 
-import { Layout } from "antd";
+import { Layout, notification } from "antd";
+
 import Navigation from "@/app/Navigation";
 
 import { useSelector } from "react-redux";
 import { selectAuth } from "@/redux/auth/selectors";
 import HeaderContent from "@/app/HeaderContent";
+// import { useNetworkState } from "react-use";
 
 function App() {
-  const { isOnline: isNetwork } = useNetwork();
+  // const [isOnline] = useNetwork();
+  // // const networkState = useNetworkState();
 
-  // if (!isNetwork)
-  //   return (
-  //     <>
-  //       <Result
-  //         status="404"
-  //         title="No Internet Connection"
-  //         subTitle="Check your Internet Connection or your network."
-  //         extra={
-  //           <Button href="/" type="primary">
-  //             Try Again
-  //           </Button>
-  //         }
-  //       />
-  //     </>
-  //   );
-  // else {
-
+  // if (!isOnline) {
+  //   notification.config({
+  //     duration: 0,
+  //   });
+  //   notification.error({
+  //     message: "No internet connection",
+  //     description: "Cannot connect to the server, Check your internet network",
+  //   });
   // }
+
   const { isLoggedIn } = useSelector(selectAuth);
 
   if (!isLoggedIn) return <Router />;

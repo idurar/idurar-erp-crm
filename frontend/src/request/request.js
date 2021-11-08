@@ -14,10 +14,13 @@ const request = {
       jsonData
     );
 
-    console.log("jsonData", jsonData);
     try {
       const response = await axios.post(entity + "/create", jsonData);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -25,7 +28,11 @@ const request = {
   read: async ({ entity, id }) => {
     try {
       const response = await axios.get(entity + "/read/" + id);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -39,7 +46,11 @@ const request = {
 
     try {
       const response = await axios.patch(entity + "/update/" + id, jsonData);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -48,7 +59,11 @@ const request = {
   delete: async ({ entity, id, options = {} }) => {
     try {
       const response = await axios.delete(entity + "/delete/" + id);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -61,7 +76,11 @@ const request = {
       let query = `?${filter}${equal}`;
 
       const response = await axios.get(entity + "/filter" + query);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -77,7 +96,11 @@ const request = {
       // headersInstance.cancelToken = source.token;
       const response = await axios.get(entity + "/search" + query);
 
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -92,7 +115,12 @@ const request = {
       query = query.slice(0, -1);
 
       const response = await axios.get(entity + "/list" + query);
-      return successHandler(response);
+
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -101,7 +129,8 @@ const request = {
   post: async ({ entity, jsonData, options = {} }) => {
     try {
       const response = await axios.post(entity, jsonData);
-      return successHandler(response);
+
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -109,7 +138,7 @@ const request = {
   get: async ({ entity }) => {
     try {
       const response = await axios.get(entity);
-      return successHandler(response);
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }
@@ -117,7 +146,11 @@ const request = {
   patch: async ({ entity, jsonData }) => {
     try {
       const response = await axios.patch(entity, jsonData);
-      return successHandler(response);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
     } catch (error) {
       return errorHandler(error);
     }

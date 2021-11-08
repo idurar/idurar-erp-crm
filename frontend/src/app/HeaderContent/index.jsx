@@ -91,7 +91,7 @@ export default function HeaderContent() {
   return (
     <div
       className="headerIcon"
-      style={{ position: "absolute", right: 0, zIndex: "9999" }}
+      style={{ position: "absolute", right: 0, zIndex: "99" }}
     >
       <Dropdown
         overlay={profileDropdown}
