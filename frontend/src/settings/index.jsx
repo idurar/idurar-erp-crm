@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { selectSettings } from "@/redux/settings/selectors";
 
 export const useMoney = () => {
-  const { currency, currencyPosition } = useSelector(selectSettings);
+  const { currency, currencyPosition , decimalSep , ThousandSep = " "} = useSelector(selectSettings);
 
   let moneyFormatter = ({ amount = 0 }) => {
     return currencyPosition === "before"
