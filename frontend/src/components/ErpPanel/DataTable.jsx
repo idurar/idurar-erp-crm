@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { erp } from "@/redux/erp/actions";
+import { settings } from "@/redux/settings/actions";
 import { selectListItems, selectItemById } from "@/redux/erp/selectors";
 import { useErpContext } from "@/context/erp";
 import uniqueId from "@/utils/uinqueId";
@@ -61,6 +62,10 @@ export default function DataTable({ config, DataTableDropMenu }) {
     dispatch(erp.list({ entity, options }));
   }, []);
 
+  const handelCurrency = () => {
+    dispatch(settings.currency({ value: "€" }));
+    dispatch(settings.currencyPosition({ position: "before" }));
+  };
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
@@ -77,6 +82,13 @@ export default function DataTable({ config, DataTableDropMenu }) {
             icon={<RedoOutlined />}
           >
             Refresh
+          </Button>,
+          <Button
+            onClick={handelCurrency}
+            key={`${uniqueId()}`}
+            icon={<RedoOutlined />}
+          >
+            Change Currency
           </Button>,
           <AddNewItem config={config} key={`${uniqueId()}`} />,
         ]}

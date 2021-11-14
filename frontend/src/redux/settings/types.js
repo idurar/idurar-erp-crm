@@ -1,0 +1,2 @@
+export const CURRENT_STATE = "CURRENT_STATE";
+export const SET_STATE = "SET_SETTINGS_STATE";

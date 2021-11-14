@@ -1,10 +1,12 @@
 import React from "react";
 import dayjs from "dayjs";
-import InvoiceModule from "@/modules/InvoiceModule";
-
 import { Tag } from "antd";
+import InvoiceModule from "@/modules/InvoiceModule";
+import { useMoney } from "@/settings";
 
 export default function Invoice() {
+  const { moneyRowFormatter } = useMoney();
+
   const entity = "invoice";
   const searchConfig = {
     displayLabels: ["name", "surname"],
@@ -37,38 +39,12 @@ export default function Invoice() {
     {
       title: "Total",
       dataIndex: "total",
-
-      render: (total) => {
-        return {
-          props: {
-            style: {
-              textAlign: "right",
-              whiteSpace: "nowrap",
-            },
-          },
-          children: (
-            <>$ {total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</>
-          ),
-        };
-      },
+      render: (amount) => moneyRowFormatter({ amount }),
     },
     {
       title: "Balance",
       dataIndex: "credit",
-
-      render: (credit) => {
-        return {
-          props: {
-            style: {
-              textAlign: "right",
-              whiteSpace: "nowrap",
-            },
-          },
-          children: (
-            <>$ {credit.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</>
-          ),
-        };
-      },
+      render: (amount) => moneyRowFormatter({ amount }),
     },
     {
       title: "status",
