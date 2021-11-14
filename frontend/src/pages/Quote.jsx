@@ -3,8 +3,11 @@ import dayjs from "dayjs";
 import { Tag } from "antd";
 
 import QuoteModule from "@/modules/QuoteModule";
+import { useMoney } from "@/settings";
 
 export default function Quote() {
+  const { moneyRowFormatter } = useMoney();
+
   const entity = "quote";
   const searchConfig = {
     displayLabels: ["name", "surname"],
@@ -37,16 +40,12 @@ export default function Quote() {
     {
       title: "SubTotal",
       dataIndex: "subTotal",
-
-      render: (subTotal) =>
-        `$ ${subTotal.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+      render: (amount) => moneyRowFormatter({ amount }),
     },
     {
       title: "Total",
       dataIndex: "total",
-
-      render: (total) =>
-        `$ ${total.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+      render: (amount) => moneyRowFormatter({ amount }),
     },
 
     {
