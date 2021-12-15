@@ -1,6 +1,7 @@
 const CracoLessPlugin = require("craco-less");
 const path = require("path");
 const CracoAlias = require("craco-alias");
+const { defaults } = require("jest-config");
 
 module.exports = {
   plugins: [
@@ -20,6 +21,7 @@ module.exports = {
         lessLoaderOptions: {
           lessOptions: {
             modifyVars: {
+              "root-entry-name": "default",
               "primary-color": "#1B98F5",
               "link-color": "#1B98F5",
               "border-radius-base": "4px",
@@ -38,18 +40,13 @@ module.exports = {
       },
     },
   ],
-  // webpack: {
-  //   alias: {
-  //     "@": path.resolve(__dirname, "src/"),
-  //   },
-  //   output: {
-  //     publicPath: "/",
-  //     path: path.join(__dirname, "root"),
-  //   },
-  // },
-  // jest: {
-  //   moduleNameMapper: {
-  //     "^@/(.+)": "<rootDir>/src/$1",
-  //   },
-  // },
+
+  jest: {
+    ...defaults,
+    moduleNameMapper: {
+      "^@/(.+)": "<rootDir>/src/$1",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    },
+    moduleFileExtensions: ["js", "jsx"],
+  },
 };
