@@ -1,4 +1,5 @@
 {
+  "moduleResolution": "node",
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
