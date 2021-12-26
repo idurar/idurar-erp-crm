@@ -1,8 +1,8 @@
-import * as actionTypes from "./types";
+import * as actionTypes from './types';
 
 const INITIAL_STATE = {
-  currency: "DA",
-  currencyPosition: "after",
+  currency: '$',
+  currencyPosition: 'before',
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {

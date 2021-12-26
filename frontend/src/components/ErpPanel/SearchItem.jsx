@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 
-import { AutoComplete, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
-import { request } from "@/request";
-import { useErpContext } from "@/context/erp";
-import { selectSearchedItems } from "@/redux/erp/selectors";
+import { AutoComplete, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
+import { request } from '@/request';
+import { useErpContext } from '@/context/erp';
+import { selectSearchedItems } from '@/redux/erp/selectors';
 
-import { Empty } from "antd";
+import { Empty } from 'antd';
 
 export default function Search({ config }) {
   let { entity, searchConfig } = config;
 
-  const { displayLabels, searchFields, outputValue = "_id" } = searchConfig;
+  const { displayLabels, searchFields, outputValue = '_id' } = searchConfig;
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [options, setOptions] = useState([]);
 
   const { erpContextAction } = useErpContext();
@@ -27,14 +27,14 @@ export default function Search({ config }) {
 
   let delayTimer = null;
   useEffect(() => {
-    isLoading && setOptions([{ label: "... Searching" }]);
+    isLoading && setOptions([{ label: '... Searching' }]);
   }, [isLoading]);
   const onSearch = (searchText) => {
     isTyping.current = true;
 
     clearTimeout(delayTimer);
     delayTimer = setTimeout(function () {
-      if (isTyping.current && searchText !== "") {
+      if (isTyping.current && searchText !== '') {
         dispatch(
           erp.search(entity, {
             question: searchText,
@@ -69,7 +69,7 @@ export default function Search({ config }) {
     let optionResults = [];
 
     result.map((item) => {
-      const labels = displayLabels.map((x) => item[x]).join(" ");
+      const labels = displayLabels.map((x) => item[x]).join(' ');
       optionResults.push({ label: labels, value: item[outputValue] });
     });
 
@@ -81,12 +81,12 @@ export default function Search({ config }) {
       value={value}
       options={options}
       style={{
-        width: "100%",
+        width: '100%',
       }}
       onSelect={onSelect}
       onSearch={onSearch}
       onChange={onChange}
-      notFoundContent={!isSuccess ? <Empty /> : ""}
+      notFoundContent={!isSuccess ? <Empty /> : ''}
       allowClear={true}
       placeholder="Your Search here"
     >

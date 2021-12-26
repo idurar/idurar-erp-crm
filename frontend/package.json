@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
-    "antd": "^4.16.13",
+    "antd": "^4.17.3",
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
     "framer-motion": "^4.1.13",
@@ -29,7 +29,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -51,8 +51,15 @@
   },
   "devDependencies": {
     "@craco/craco": "^6.1.2",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/user-event": "^13.5.0",
+    "babel-plugin-import": "^1.13.3",
     "craco-alias": "^3.0.1",
     "craco-less": "^1.17.1",
-    "eslint-plugin-react": "^7.25.1"
+    "identity-obj-proxy": "^3.0.0",
+    "prettier": "^2.5.1",
+    "redux-mock-store": "^1.5.4"
   }
 }

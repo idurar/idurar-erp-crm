@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Form, Input } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Switch, Form, Input } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function CurrencyForm({ isUpdateForm = false }) {
   return (
@@ -11,7 +11,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your currency name!",
+            message: 'Please input your currency name!',
           },
         ]}
       >
@@ -23,13 +23,13 @@ export default function CurrencyForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your surname!",
+            message: 'Please input your surname!',
           },
         ]}
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingRight: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
         }}
       >
         <Input />
@@ -43,9 +43,9 @@ export default function CurrencyForm({ isUpdateForm = false }) {
           },
         ]}
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingLeft: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingLeft: '5px',
         }}
       >
         <Input />
@@ -60,9 +60,9 @@ export default function CurrencyForm({ isUpdateForm = false }) {
           },
         ]}
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingRight: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
         }}
       >
         <Input />
@@ -76,9 +76,9 @@ export default function CurrencyForm({ isUpdateForm = false }) {
           },
         ]}
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingLeft: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingLeft: '5px',
         }}
         valuePropName="checked"
       >

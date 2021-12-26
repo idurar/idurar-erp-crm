@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import dayjs from "dayjs";
+import React, { useEffect } from 'react';
+import dayjs from 'dayjs';
 
-import { useDispatch, useSelector } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { useCrudContext } from "@/context/crud";
-import { selectUpdatedItem } from "@/redux/crud/selectors";
+import { useDispatch, useSelector } from 'react-redux';
+import { crud } from '@/redux/crud/actions';
+import { useCrudContext } from '@/context/crud';
+import { selectUpdatedItem } from '@/redux/crud/selectors';
 
-import { isDate } from "@/utils/helpers";
-import { selectCurrentItem } from "@/redux/crud/selectors";
+import { isDate } from '@/utils/helpers';
+import { selectCurrentItem } from '@/redux/crud/selectors';
 
-import { Button, Form } from "antd";
-import Loading from "@/components/Loading";
+import { Button, Form } from 'antd';
+import Loading from '@/components/Loading';
 
 export default function UpdateForm({ config, formElements }) {
   let { entity } = config;
@@ -32,7 +32,7 @@ export default function UpdateForm({ config, formElements }) {
 
   const onSubmit = (fieldsValue) => {
     console.log(
-      "🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id",
+      '🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id',
       current._id
     );
     const id = current._id;
@@ -44,36 +44,36 @@ export default function UpdateForm({ config, formElements }) {
       if (newValues.birthday) {
         newValues = {
           ...newValues,
-          birthday: dayjs(newValues["birthday"]),
+          birthday: dayjs(newValues['birthday']),
         };
       }
       if (newValues.date) {
         newValues = {
           ...newValues,
-          date: dayjs(newValues["date"]),
+          date: dayjs(newValues['date']),
         };
       }
       if (newValues.expiredDate) {
         newValues = {
           ...newValues,
-          expiredDate: dayjs(newValues["expiredDate"]),
+          expiredDate: dayjs(newValues['expiredDate']),
         };
       }
       if (newValues.created) {
         newValues = {
           ...newValues,
-          created: dayjs(newValues["created"]),
+          created: dayjs(newValues['created']),
         };
       }
       if (newValues.updated) {
         newValues = {
           ...newValues,
-          updated: dayjs(newValues["updated"]),
+          updated: dayjs(newValues['updated']),
         };
       }
 
       console.log(
-        "🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj",
+        '🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj',
         newValues
       );
       form.setFieldsValue(newValues);
@@ -86,7 +86,7 @@ export default function UpdateForm({ config, formElements }) {
       collapsedBox.open();
       panel.open();
       form.resetFields();
-      dispatch(crud.resetAction({ actionType: "update" }));
+      dispatch(crud.resetAction({ actionType: 'update' }));
       dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);
@@ -94,8 +94,8 @@ export default function UpdateForm({ config, formElements }) {
   const { isEditBoxOpen } = state;
 
   const show = isEditBoxOpen
-    ? { display: "block", opacity: 1 }
-    : { display: "none", opacity: 0 };
+    ? { display: 'block', opacity: 1 }
+    : { display: 'none', opacity: 0 };
   return (
     <div style={show}>
       <Loading isLoading={isLoading}>
@@ -103,8 +103,8 @@ export default function UpdateForm({ config, formElements }) {
           {formElements}
           <Form.Item
             style={{
-              display: "inline-block",
-              paddingRight: "5px",
+              display: 'inline-block',
+              paddingRight: '5px',
             }}
           >
             <Button type="primary" htmlType="submit">
@@ -113,8 +113,8 @@ export default function UpdateForm({ config, formElements }) {
           </Form.Item>
           <Form.Item
             style={{
-              display: "inline-block",
-              paddingLeft: "5px",
+              display: 'inline-block',
+              paddingLeft: '5px',
             }}
           >
             <Button onClick={showCurrentRecord}>Cancel</Button>

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { CrudContextProvider } from "@/context/crud";
+import { CrudContextProvider } from '@/context/crud';
 
 function DefaultLayout({ children }) {
   return <CrudContextProvider>{children}</CrudContextProvider>;

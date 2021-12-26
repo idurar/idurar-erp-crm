@@ -1,29 +1,29 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
-import { Row, Col, Button } from "antd";
+import React, { useLayoutEffect, useState, useEffect } from 'react';
+import { Row, Col, Button } from 'antd';
 
 import {
   PlusOutlined,
   EditOutlined,
   DeleteOutlined,
   LockOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
-import CreateForm from "@/components/CreateForm";
-import UpdateForm from "@/components/UpdateForm";
-import DeleteModal from "@/components/DeleteModal";
-import ReadItem from "@/components/ReadItem";
-import SearchItem from "@/components/SearchItem";
+import CreateForm from '@/components/CreateForm';
+import UpdateForm from '@/components/UpdateForm';
+import DeleteModal from '@/components/DeleteModal';
+import ReadItem from '@/components/ReadItem';
+import SearchItem from '@/components/SearchItem';
 
-import { useDispatch, useSelector } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { useCrudContext } from "@/context/crud";
+import { useDispatch, useSelector } from 'react-redux';
+import { crud } from '@/redux/crud/actions';
+import { useCrudContext } from '@/context/crud';
 
-import { CrudLayout } from "@/layout";
+import { CrudLayout } from '@/layout';
 
-import AdminDataTable from "./AdminDataTable";
-import UpdatePassword from "./UpdatePassword";
+import AdminDataTable from './AdminDataTable';
+import UpdatePassword from './UpdatePassword';
 
-import { selectCurrentItem } from "@/redux/crud/selectors";
+import { selectCurrentItem } from '@/redux/crud/selectors';
 
 function SidePanelTopContent({ config, formElements }) {
   const { crudContextAction, state } = useCrudContext();
@@ -34,27 +34,27 @@ function SidePanelTopContent({ config, formElements }) {
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
 
-  const [labels, setLabels] = useState("");
+  const [labels, setLabels] = useState('');
   useEffect(() => {
     if (currentItem) {
       const currentlabels = entityDisplayLabels
         .map((x) => currentItem[x])
-        .join(" ");
+        .join(' ');
 
       setLabels(currentlabels);
     }
   }, [currentItem]);
 
   const removeItem = () => {
-    dispatch(crud.currentAction({ actionType: "delete", data: currentItem }));
+    dispatch(crud.currentAction({ actionType: 'delete', data: currentItem }));
     modal.open();
   };
   const editItem = () => {
-    dispatch(crud.currentAction({ actionType: "update", data: currentItem }));
+    dispatch(crud.currentAction({ actionType: 'update', data: currentItem }));
     editBox.open();
   };
   const updatePassword = () => {
-    dispatch(crud.currentAction({ actionType: "update", data: currentItem }));
+    dispatch(crud.currentAction({ actionType: 'update', data: currentItem }));
     advancedBox.open();
   };
 
@@ -74,7 +74,11 @@ function SidePanelTopContent({ config, formElements }) {
             type="text"
             icon={<DeleteOutlined />}
             size="small"
-            style={{ float: "left", marginRight: "5px", marginLeft: "-5px" }}
+            style={{
+              float: 'left',
+              marginRight: '5px',
+              marginLeft: '-5px',
+            }}
           >
             remove
           </Button>
@@ -83,7 +87,7 @@ function SidePanelTopContent({ config, formElements }) {
             type="text"
             icon={<EditOutlined />}
             size="small"
-            style={{ float: "left", marginRight: "5px" }}
+            style={{ float: 'left', marginRight: '5px' }}
           >
             edit
           </Button>
@@ -92,7 +96,7 @@ function SidePanelTopContent({ config, formElements }) {
             type="text"
             icon={<LockOutlined />}
             size="small"
-            style={{ float: "left", marginRight: "0px" }}
+            style={{ float: 'left', marginRight: '0px' }}
           >
             update password
           </Button>

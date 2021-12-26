@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Select } from "antd";
+import React from 'react';
+import { Form, Input, Select } from 'antd';
 
 export default function RoleForm({ isUpdateForm = false }) {
   return (
@@ -10,7 +10,7 @@ export default function RoleForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your codeName!",
+            message: 'Please input your codeName!',
           },
         ]}
       >
@@ -22,7 +22,7 @@ export default function RoleForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your displayName!",
+            message: 'Please input your displayName!',
           },
         ]}
       >
@@ -34,7 +34,7 @@ export default function RoleForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your dashboardType!",
+            message: 'Please input your dashboardType!',
           },
         ]}
       >

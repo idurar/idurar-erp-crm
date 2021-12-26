@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
-import { useDebounce } from "react-use";
-import { Select, Empty } from "antd";
+import { useDebounce } from 'react-use';
+import { Select, Empty } from 'antd';
 
-import { SearchOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
+import { SearchOutlined } from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { crud } from '@/redux/crud/actions';
 
-import { useCrudContext } from "@/context/crud";
-import { selectSearchedItems } from "@/redux/crud/selectors";
+import { useCrudContext } from '@/context/crud';
+import { selectSearchedItems } from '@/redux/crud/selectors';
 
 function SearchItemComponent({ config, onRerender }) {
   let { entity, searchConfig } = config;
 
-  const { displayLabels, searchFields, outputValue = "_id" } = searchConfig;
+  const { displayLabels, searchFields, outputValue = '_id' } = searchConfig;
 
   const dispatch = useDispatch();
   const { crudContextAction } = useCrudContext();
@@ -27,8 +27,8 @@ function SearchItemComponent({ config, onRerender }) {
 
   const [searching, setSearching] = useState(false);
 
-  const [valToSearch, setValToSearch] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
+  const [valToSearch, setValToSearch] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState('');
 
   const [, cancel] = useDebounce(
     () => {
@@ -39,11 +39,11 @@ function SearchItemComponent({ config, onRerender }) {
   );
 
   const labels = (optionField) => {
-    return displayLabels.map((x) => optionField[x]).join(" ");
+    return displayLabels.map((x) => optionField[x]).join(' ');
   };
 
   useEffect(() => {
-    if (debouncedValue != "") {
+    if (debouncedValue != '') {
       const options = {
         q: debouncedValue,
         fields: searchFields,
@@ -56,7 +56,7 @@ function SearchItemComponent({ config, onRerender }) {
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText && searchText != "") {
+    if (searchText && searchText != '') {
       isSearching.current = true;
       setSearching(true);
       setOptions([]);
@@ -95,15 +95,15 @@ function SearchItemComponent({ config, onRerender }) {
       showSearch
       allowClear
       placeholder={
-        <SearchOutlined style={{ float: "right", padding: "8px 0" }} />
+        <SearchOutlined style={{ float: 'right', padding: '8px 0' }} />
       }
       defaultActiveFirstOption={false}
       showArrow={false}
       filterOption={false}
-      notFoundContent={searching ? "... Searching" : <Empty />}
+      notFoundContent={searching ? '... Searching' : <Empty />}
       value={currentValue}
       onSearch={onSearch}
-      style={{ width: "100%" }}
+      style={{ width: '100%' }}
       onSelect={onSelect}
     >
       {selectOptions.map((optionField) => (

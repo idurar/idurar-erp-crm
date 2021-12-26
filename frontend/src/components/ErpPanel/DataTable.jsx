@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from "react";
-import { Dropdown, Menu, Table } from "antd";
-import { Button, PageHeader, Tag } from "antd";
+import React, { useCallback, useEffect } from 'react';
+import { Dropdown, Menu, Table } from 'antd';
+import { Button, PageHeader, Tag } from 'antd';
 import {
   EllipsisOutlined,
   EyeOutlined,
@@ -8,15 +8,15 @@ import {
   DeleteOutlined,
   FilePdfOutlined,
   CreditCardOutlined,
-} from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
-import { settings } from "@/redux/settings/actions";
-import { selectListItems, selectItemById } from "@/redux/erp/selectors";
-import { useErpContext } from "@/context/erp";
-import uniqueId from "@/utils/uinqueId";
-import { DOWNLOAD_BASE_URL } from "@/config/serverApiConfig";
-import { RedoOutlined, PlusOutlined } from "@ant-design/icons";
+} from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
+import { settings } from '@/redux/settings/actions';
+import { selectListItems, selectItemById } from '@/redux/erp/selectors';
+import { useErpContext } from '@/context/erp';
+import uniqueId from '@/utils/uinqueId';
+import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 function AddNewItem({ config }) {
   const { ADD_NEW_ENTITY, DATATABLE_TITLE } = config;
   const { erpContextAction } = useErpContext();
@@ -38,13 +38,13 @@ export default function DataTable({ config, DataTableDropMenu }) {
   dataTableColumns = [
     ...dataTableColumns,
     {
-      title: "",
+      title: '',
       render: (row) => (
         <Dropdown
           overlay={DataTableDropMenu({ row, entity })}
-          trigger={["click"]}
+          trigger={['click']}
         >
-          <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
+          <EllipsisOutlined style={{ cursor: 'pointer', fontSize: '24px' }} />
         </Dropdown>
       ),
     },
@@ -63,8 +63,8 @@ export default function DataTable({ config, DataTableDropMenu }) {
   }, []);
 
   const handelCurrency = () => {
-    dispatch(settings.currency({ value: "€" }));
-    dispatch(settings.currencyPosition({ position: "before" }));
+    dispatch(settings.currency({ value: '€' }));
+    dispatch(settings.currencyPosition({ position: 'before' }));
   };
   useEffect(() => {
     dispatch(erp.list({ entity }));
@@ -93,7 +93,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
           <AddNewItem config={config} key={`${uniqueId()}`} />,
         ]}
         style={{
-          padding: "20px 0px",
+          padding: '20px 0px',
         }}
       ></PageHeader>
       <Table

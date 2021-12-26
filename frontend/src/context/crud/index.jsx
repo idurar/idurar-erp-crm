@@ -1,7 +1,7 @@
-import React, { useMemo, useReducer, createContext, useContext } from "react";
-import { initialState, contextReducer } from "./reducer";
-import contextActions from "./actions";
-import contextSelectors from "./selectors";
+import React, { useMemo, useReducer, createContext, useContext } from 'react';
+import { initialState, contextReducer } from './reducer';
+import contextActions from './actions';
+import contextSelectors from './selectors';
 
 const CrudContext = createContext();
 
@@ -15,7 +15,7 @@ function CrudContextProvider({ children }) {
 function useCrudContext() {
   const context = useContext(CrudContext);
   if (context === undefined) {
-    throw new Error("useCrudContext must be used within a CrudContextProvider");
+    throw new Error('useCrudContext must be used within a CrudContextProvider');
   }
   const [state, dispatch] = context;
   const crudContextAction = contextActions(dispatch);

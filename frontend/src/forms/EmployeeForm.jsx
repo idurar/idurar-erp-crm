@@ -1,6 +1,6 @@
-import React from "react";
-import { Form, Input, Button, Radio, Select, Switch } from "antd";
-import { DatePicker, TimePicker, Calendar } from "@/components/CustomAntd";
+import React from 'react';
+import { Form, Input, Button, Radio, Select, Switch } from 'antd';
+import { DatePicker, TimePicker, Calendar } from '@/components/CustomAntd';
 
 export default function EmployeeForm() {
   return (
@@ -11,7 +11,7 @@ export default function EmployeeForm() {
         rules={[
           {
             required: true,
-            message: "Please input your name!",
+            message: 'Please input your name!',
           },
         ]}
       >
@@ -23,7 +23,7 @@ export default function EmployeeForm() {
         rules={[
           {
             required: true,
-            message: "Please input your surname!",
+            message: 'Please input your surname!',
           },
         ]}
       >
@@ -35,11 +35,11 @@ export default function EmployeeForm() {
         rules={[
           {
             required: true,
-            message: "Please input your birthday!",
+            message: 'Please input your birthday!',
           },
         ]}
       >
-        <DatePicker format={"DD/MM/YYYY"} />
+        <DatePicker format={'DD/MM/YYYY'} />
       </Form.Item>
       <Form.Item
         name="birthplace"
@@ -71,12 +71,12 @@ export default function EmployeeForm() {
         label="E-mail"
         rules={[
           {
-            type: "email",
-            message: "The input is not valid E-mail!",
+            type: 'email',
+            message: 'The input is not valid E-mail!',
           },
           {
             required: true,
-            message: "Please input your E-mail!",
+            message: 'Please input your E-mail!',
           },
         ]}
       >
@@ -88,7 +88,7 @@ export default function EmployeeForm() {
         rules={[
           {
             required: true,
-            message: "Please input your phone!",
+            message: 'Please input your phone!',
           },
         ]}
       >

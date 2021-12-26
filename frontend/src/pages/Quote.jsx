@@ -1,79 +1,79 @@
-import React from "react";
-import dayjs from "dayjs";
-import { Tag } from "antd";
+import React from 'react';
+import dayjs from 'dayjs';
+import { Tag } from 'antd';
 
-import QuoteModule from "@/modules/QuoteModule";
-import { useMoney } from "@/settings";
+import QuoteModule from '@/modules/QuoteModule';
+import { useMoney } from '@/settings';
 
 export default function Quote() {
   const { moneyRowFormatter } = useMoney();
 
-  const entity = "quote";
+  const entity = 'quote';
   const searchConfig = {
-    displayLabels: ["name", "surname"],
-    searchFields: "name,surname,birthday",
+    displayLabels: ['name', 'surname'],
+    searchFields: 'name,surname,birthday',
   };
-  const entityDisplayLabels = ["number", "client.company"];
+  const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
-      title: "Number",
-      dataIndex: "number",
+      title: 'Number',
+      dataIndex: 'number',
     },
     {
-      title: "Client",
-      dataIndex: ["client", "company"],
+      title: 'Client',
+      dataIndex: ['client', 'company'],
     },
     {
-      title: "Date",
-      dataIndex: "date",
+      title: 'Date',
+      dataIndex: 'date',
       render: (date) => {
-        return dayjs(date).format("DD/MM/YYYY");
+        return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: "Due date",
-      dataIndex: "expiredDate",
+      title: 'Due date',
+      dataIndex: 'expiredDate',
       render: (date) => {
-        return dayjs(date).format("DD/MM/YYYY");
+        return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: "SubTotal",
-      dataIndex: "subTotal",
+      title: 'SubTotal',
+      dataIndex: 'subTotal',
       render: (amount) => moneyRowFormatter({ amount }),
     },
     {
-      title: "Total",
-      dataIndex: "total",
+      title: 'Total',
+      dataIndex: 'total',
       render: (amount) => moneyRowFormatter({ amount }),
     },
 
     {
-      title: "Status",
-      dataIndex: "status",
+      title: 'Status',
+      dataIndex: 'status',
       render: (status) => {
         let color =
-          status === "draft"
-            ? "cyan"
-            : status === "sent"
-            ? "blue"
-            : status === "accepted"
-            ? "green"
-            : status === "expired"
-            ? "orange"
-            : "red";
+          status === 'draft'
+            ? 'cyan'
+            : status === 'sent'
+            ? 'blue'
+            : status === 'accepted'
+            ? 'green'
+            : status === 'expired'
+            ? 'orange'
+            : 'red';
         return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
       },
     },
   ];
 
-  const PANEL_TITLE = "quote";
-  const dataTableTitle = "quotes Lists";
-  const ADD_NEW_ENTITY = "Add new quote";
-  const DATATABLE_TITLE = "quotes List";
-  const ENTITY_NAME = "quote";
-  const CREATE_ENTITY = "Create quote";
-  const UPDATE_ENTITY = "Update quote";
+  const PANEL_TITLE = 'quote';
+  const dataTableTitle = 'quotes Lists';
+  const ADD_NEW_ENTITY = 'Add new quote';
+  const DATATABLE_TITLE = 'quotes List';
+  const ENTITY_NAME = 'quote';
+  const CREATE_ENTITY = 'Create quote';
+  const UPDATE_ENTITY = 'Update quote';
 
   const config = {
     entity,

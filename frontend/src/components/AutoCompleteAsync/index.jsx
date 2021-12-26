@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import { request } from "@/request";
-import useOnFetch from "@/hooks/useOnFetch";
-import { useDebounce } from "react-use";
-import { Select } from "antd";
+import React, { useState, useEffect, useRef } from 'react';
+import { request } from '@/request';
+import useOnFetch from '@/hooks/useOnFetch';
+import { useDebounce } from 'react-use';
+import { Select } from 'antd';
 
 export default function AutoCompleteAsync({
   entity,
   displayLabels,
   searchFields,
-  outputValue = "_id",
+  outputValue = '_id',
   value, /// this is for update
   onChange, /// this is for update
 }) {
@@ -20,8 +20,8 @@ export default function AutoCompleteAsync({
 
   const [searching, setSearching] = useState(false);
 
-  const [valToSearch, setValToSearch] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
+  const [valToSearch, setValToSearch] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState('');
 
   const [, cancel] = useDebounce(
     () => {
@@ -39,11 +39,11 @@ export default function AutoCompleteAsync({
   let { onFetch, result, isSuccess, isLoading } = useOnFetch();
 
   const labels = (optionField) => {
-    return displayLabels.map((x) => optionField[x]).join(" ");
+    return displayLabels.map((x) => optionField[x]).join(' ');
   };
 
   useEffect(() => {
-    if (debouncedValue != "") {
+    if (debouncedValue != '') {
       const options = {
         q: debouncedValue,
         fields: searchFields,
@@ -57,7 +57,7 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText && searchText != "") {
+    if (searchText && searchText != '') {
       isSearching.current = true;
       setSearching(true);
       setOptions([]);
@@ -94,11 +94,11 @@ export default function AutoCompleteAsync({
       loading={isLoading}
       showSearch
       allowClear
-      placeholder={"Search Here"}
+      placeholder={'Search Here'}
       defaultActiveFirstOption={false}
       showArrow={false}
       filterOption={false}
-      notFoundContent={searching ? "... Searching" : "Not Found"}
+      notFoundContent={searching ? '... Searching' : 'Not Found'}
       value={currentValue}
       onSearch={onSearch}
       onChange={(newValue) => {

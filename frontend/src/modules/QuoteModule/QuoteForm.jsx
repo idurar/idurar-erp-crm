@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import dayjs from "dayjs";
+import React, { useState, useEffect, useRef } from 'react';
+import dayjs from 'dayjs';
 import {
   Form,
   Input,
@@ -9,13 +9,13 @@ import {
   Divider,
   Row,
   Col,
-} from "antd";
+} from 'antd';
 
-import { PlusOutlined } from "@ant-design/icons";
-import { DatePicker } from "@/components/CustomAntd";
+import { PlusOutlined } from '@ant-design/icons';
+import { DatePicker } from '@/components/CustomAntd';
 
-import AutoCompleteAsync from "@/components/AutoCompleteAsync";
-import ItemRow from "@/components/ErpPanel/ItemRow";
+import AutoCompleteAsync from '@/components/AutoCompleteAsync';
+import ItemRow from '@/components/ErpPanel/ItemRow';
 
 export default function QuoteForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
@@ -57,14 +57,14 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: "Please input your client!",
+                message: 'Please input your client!',
               },
             ]}
           >
             <AutoCompleteAsync
-              entity={"client"}
-              displayLabels={["company"]}
-              searchFields={"company,managerSurname,managerName"}
+              entity={'client'}
+              displayLabels={['company']}
+              searchFields={'company,managerSurname,managerName'}
             />
           </Form.Item>
         </Col>
@@ -76,11 +76,11 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: "Please input invoice number!",
+                message: 'Please input invoice number!',
               },
             ]}
           >
-            <InputNumber style={{ width: "100%" }} />
+            <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -91,11 +91,11 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: "Please input invoice year!",
+                message: 'Please input invoice year!',
               },
             ]}
           >
-            <InputNumber style={{ width: "100%" }} />
+            <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -105,19 +105,19 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: false,
-                message: "Please input your status!",
+                message: 'Please input your status!',
               },
             ]}
             initialValue="draft"
           >
             <Select
               options={[
-                { value: "draft", label: "Draft" },
-                { value: "pending", label: "pending" },
-                { value: "sent", label: "Sent" },
-                { value: "expired", label: "Expired" },
-                { value: "declined", label: "Declined" },
-                { value: "accepted", label: "Accepted" },
+                { value: 'draft', label: 'Draft' },
+                { value: 'pending', label: 'pending' },
+                { value: 'sent', label: 'Sent' },
+                { value: 'expired', label: 'Expired' },
+                { value: 'declined', label: 'Declined' },
+                { value: 'accepted', label: 'Accepted' },
               ]}
             ></Select>
           </Form.Item>
@@ -134,12 +134,12 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                type: "object",
+                type: 'object',
               },
             ]}
             initialValue={dayjs()}
           >
-            <DatePicker style={{ width: "100%" }} format={"DD/MM/YYYY"} />
+            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={7}>
@@ -149,17 +149,17 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                type: "object",
+                type: 'object',
               },
             ]}
-            initialValue={dayjs().add(30, "days")}
+            initialValue={dayjs().add(30, 'days')}
           >
-            <DatePicker style={{ width: "100%" }} format={"DD/MM/YYYY"} />
+            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
           </Form.Item>
         </Col>
       </Row>
       <Divider dashed />
-      <Row gutter={[12, 12]} style={{ position: "relative" }}>
+      <Row gutter={[12, 12]} style={{ position: 'relative' }}>
         <Col className="gutter-row" span={6}>
           <p>Item</p>
         </Col>
@@ -202,13 +202,13 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
         )}
       </Form.List>
       <Divider dashed />
-      <div style={{ width: "300px", float: "right" }}>
+      <div style={{ width: '300px', float: 'right' }}>
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={10}>
             <p
               style={{
-                paddingLeft: "12px",
-                paddingTop: "5px",
+                paddingLeft: '12px',
+                paddingTop: '5px',
               }}
             >
               Sub Total :
@@ -219,10 +219,10 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             <Form.Item>
               <InputNumber
                 readOnly
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 value={subTotal}
                 formatter={(value) =>
-                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
                 }
               />
             </Form.Item>
@@ -233,7 +233,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
               rules={[
                 {
                   required: false,
-                  message: "Please input your taxRate!",
+                  message: 'Please input your taxRate!',
                 },
               ]}
               initialValue="0"
@@ -243,8 +243,8 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
                 onChange={handelTaxChange}
                 bordered={false}
                 options={[
-                  { value: 0, label: "Tax 0 %" },
-                  { value: 0.19, label: "Tax 19 %" },
+                  { value: 0, label: 'Tax 0 %' },
+                  { value: 0.19, label: 'Tax 19 %' },
                 ]}
               ></Select>
             </Form.Item>
@@ -253,10 +253,10 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             <Form.Item>
               <InputNumber
                 readOnly
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 value={taxTotal}
                 formatter={(value) =>
-                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
                 }
               />
             </Form.Item>
@@ -264,8 +264,8 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={10}>
             <p
               style={{
-                paddingLeft: "12px",
-                paddingTop: "5px",
+                paddingLeft: '12px',
+                paddingTop: '5px',
               }}
             >
               Total :
@@ -275,10 +275,10 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             <Form.Item>
               <InputNumber
                 readOnly
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 value={total}
                 formatter={(value) =>
-                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
                 }
               />
             </Form.Item>

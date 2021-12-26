@@ -1,22 +1,22 @@
-import React, { lazy, Suspense } from "react";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import PrivateRoute from "./PrivateRoute";
-import PublicRoute from "./PublicRoute";
-import PageLoader from "@/components/PageLoader";
-import { routesConfig } from "./RoutesConfig";
+import React, { lazy, Suspense } from 'react';
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+import PageLoader from '@/components/PageLoader';
+import { routesConfig } from './RoutesConfig';
 
 const Logout = lazy(() =>
-  import(/*webpackChunkName:'LogoutPage'*/ "@/pages/Logout")
+  import(/*webpackChunkName:'LogoutPage'*/ '@/pages/Logout')
 );
 const NotFound = lazy(() =>
-  import(/*webpackChunkName:'NotFoundPage'*/ "@/pages/NotFound")
+  import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound')
 );
 
 const SubMenuRouter = ({ subMenuRouter }) => {
   subMenuRouter.map((subMenu) => {
     console.log(
-      "🚀 ~ file: AppRouter.jsx ~ line 25 ~ routeItem.hasSubMenu.map ~ subMenu",
+      '🚀 ~ file: AppRouter.jsx ~ line 25 ~ routeItem.hasSubMenu.map ~ subMenu',
       subMenu
     );
 

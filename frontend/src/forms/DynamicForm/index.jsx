@@ -1,5 +1,5 @@
-import { Input, Form, Checkbox, Select } from "antd";
-import { DatePicker } from "@/components/CustomAntd";
+import { Input, Form, Checkbox, Select } from 'antd';
+import { DatePicker } from '@/components/CustomAntd';
 // mapping of our components
 const componentMapping = {
   input: Input,
@@ -25,7 +25,7 @@ function FormElement({
   inputType = {},
   selectOptions = [],
   required = false,
-  message = "Field is required!",
+  message = 'Field is required!',
 }) {
   // dinamically select a component from componentMapping object
   const { Option } = Select;
@@ -47,7 +47,7 @@ function FormElement({
           ))}
         </Select>
       }
-      else if(fieldType === "date"){<DatePicker format={"DD/MM/YYYY"} />}
+      else if(fieldType === "date"){<DatePicker format={'DD/MM/YYYY'} />}
       else {<Component />}
     </Form.Item>
   );

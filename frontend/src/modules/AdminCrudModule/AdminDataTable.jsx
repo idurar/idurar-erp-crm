@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import { Button, Menu } from "antd";
+import { Button, Menu } from 'antd';
 import {
   EyeOutlined,
   EditOutlined,
   LockOutlined,
   DeleteOutlined,
-} from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { selectItemById } from "@/redux/crud/selectors";
-import { useCrudContext } from "@/context/crud";
-import uniqueId from "@/utils/uinqueId";
-import DataTable from "@/components/DataTable";
+} from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { crud } from '@/redux/crud/actions';
+import { selectItemById } from '@/redux/crud/selectors';
+import { useCrudContext } from '@/context/crud';
+import uniqueId from '@/utils/uinqueId';
+import DataTable from '@/components/DataTable';
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
@@ -43,20 +43,20 @@ function DropDownRowMenu({ row }) {
   };
   function Edit() {
     dispatch(crud.currentItem({ data: item }));
-    dispatch(crud.currentAction({ actionType: "update", data: item }));
+    dispatch(crud.currentAction({ actionType: 'update', data: item }));
     editBox.open();
     panel.open();
     collapsedBox.open();
   }
   function UpdatePassword() {
     dispatch(crud.currentItem({ data: item }));
-    dispatch(crud.currentAction({ actionType: "update", data: item }));
+    dispatch(crud.currentAction({ actionType: 'update', data: item }));
     advancedBox.open();
     panel.open();
     collapsedBox.open();
   }
   function Delete() {
-    dispatch(crud.currentAction({ actionType: "delete", data: item }));
+    dispatch(crud.currentAction({ actionType: 'delete', data: item }));
     modal.open();
   }
   return (

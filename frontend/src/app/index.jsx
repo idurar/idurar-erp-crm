@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import Router from "@/router";
+import Router from '@/router';
 
-import useNetwork from "@/hooks/useNetwork";
+import useNetwork from '@/hooks/useNetwork';
 
-import { Layout, notification } from "antd";
+import { Layout, notification } from 'antd';
 
-import Navigation from "@/app/Navigation";
+import Navigation from '@/app/Navigation';
 
-import { useSelector } from "react-redux";
-import { selectAuth } from "@/redux/auth/selectors";
-import HeaderContent from "@/app/HeaderContent";
+import { useSelector } from 'react-redux';
+import { selectAuth } from '@/redux/auth/selectors';
+import HeaderContent from '@/app/HeaderContent';
 // import { useNetworkState } from "react-use";
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
   if (!isLoggedIn) return <Router />;
   else {
     return (
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={{ minHeight: '100vh' }}>
         <Navigation />
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout style={{ minHeight: '100vh' }}>
           <HeaderContent />
           <Router isLoggedIn={true} />
         </Layout>

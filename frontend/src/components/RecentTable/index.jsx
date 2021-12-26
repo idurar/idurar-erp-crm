@@ -1,15 +1,15 @@
-import React from "react";
-import { Dropdown, Menu, Table } from "antd";
+import React from 'react';
+import { Dropdown, Menu, Table } from 'antd';
 
-import { request } from "@/request";
-import useFetch from "@/hooks/useFetch";
+import { request } from '@/request';
+import useFetch from '@/hooks/useFetch';
 
 import {
   EllipsisOutlined,
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 function DropDownRowMenu({ row }) {
   const Show = () => {};
@@ -35,10 +35,10 @@ export default function RecentTable({ ...props }) {
   dataTableColumns = [
     ...dataTableColumns,
     {
-      title: "",
+      title: '',
       render: (row) => (
-        <Dropdown overlay={DropDownRowMenu({ row })} trigger={["click"]}>
-          <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
+        <Dropdown overlay={DropDownRowMenu({ row })} trigger={['click']}>
+          <EllipsisOutlined style={{ cursor: 'pointer', fontSize: '24px' }} />
         </Dropdown>
       ),
     },

@@ -1,5 +1,5 @@
-import * as actionTypes from "./types";
-import { request } from "@/request";
+import * as actionTypes from './types';
+import { request } from '@/request';
 
 export const crud = {
   resetState:
@@ -40,7 +40,7 @@ export const crud = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "list",
+        keyState: 'list',
         payload: null,
       });
 
@@ -58,13 +58,13 @@ export const crud = {
         };
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "list",
+          keyState: 'list',
           payload: result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "list",
+          keyState: 'list',
           payload: null,
         });
       }
@@ -74,7 +74,7 @@ export const crud = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "create",
+        keyState: 'create',
         payload: null,
       });
 
@@ -83,7 +83,7 @@ export const crud = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "create",
+          keyState: 'create',
           payload: data.result,
         });
 
@@ -94,7 +94,7 @@ export const crud = {
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "create",
+          keyState: 'create',
           payload: null,
         });
       }
@@ -104,7 +104,7 @@ export const crud = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "read",
+        keyState: 'read',
         payload: null,
       });
 
@@ -117,13 +117,13 @@ export const crud = {
         });
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "read",
+          keyState: 'read',
           payload: data.result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "read",
+          keyState: 'read',
           payload: null,
         });
       }
@@ -133,7 +133,7 @@ export const crud = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "update",
+        keyState: 'update',
         payload: null,
       });
 
@@ -142,7 +142,7 @@ export const crud = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "update",
+          keyState: 'update',
           payload: data.result,
         });
         dispatch({
@@ -152,7 +152,7 @@ export const crud = {
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "update",
+          keyState: 'update',
           payload: null,
         });
       }
@@ -163,7 +163,7 @@ export const crud = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "delete",
+        keyState: 'delete',
         payload: null,
       });
 
@@ -172,13 +172,13 @@ export const crud = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "delete",
+          keyState: 'delete',
           payload: data.result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "delete",
+          keyState: 'delete',
           payload: null,
         });
       }
@@ -189,7 +189,7 @@ export const crud = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "search",
+        keyState: 'search',
         payload: null,
       });
 
@@ -198,13 +198,13 @@ export const crud = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "search",
+          keyState: 'search',
           payload: data.result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "search",
+          keyState: 'search',
           payload: null,
         });
       }
