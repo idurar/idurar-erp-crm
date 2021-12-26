@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { request } from "@/request";
-import useFetch from "@/hooks/useFetch";
-import { Select } from "antd";
+import React, { useState, useEffect, useRef } from 'react';
+import { request } from '@/request';
+import useFetch from '@/hooks/useFetch';
+import { Select } from 'antd';
 
 export default function SelectAsync({
   entity,
-  displayLabels = ["name"],
-  outputValue = "_id",
+  displayLabels = ['name'],
+  outputValue = '_id',
   value,
   onChange,
 }) {
@@ -24,7 +24,7 @@ export default function SelectAsync({
   }, [fetchIsLoading]);
 
   const labels = (optionField) => {
-    return displayLabels.map((x) => optionField[x]).join(" ");
+    return displayLabels.map((x) => optionField[x]).join(' ');
   };
   useEffect(() => {
     // this for update Form , it's for setField

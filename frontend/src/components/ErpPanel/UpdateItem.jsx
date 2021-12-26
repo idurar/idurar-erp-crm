@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Form, Divider } from "antd";
-import dayjs from "dayjs";
-import { Button, PageHeader, Row, Statistic, Tag } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Form, Divider } from 'antd';
+import dayjs from 'dayjs';
+import { Button, PageHeader, Row, Statistic, Tag } from 'antd';
 
-import { useSelector, useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
+import { useSelector, useDispatch } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
 
-import { useErpContext } from "@/context/erp";
-import uniqueId from "@/utils/uinqueId";
-import { selectUpdatedItem } from "@/redux/erp/selectors";
-import Loading from "@/components/Loading";
+import { useErpContext } from '@/context/erp';
+import uniqueId from '@/utils/uinqueId';
+import { selectUpdatedItem } from '@/redux/erp/selectors';
+import Loading from '@/components/Loading';
 
-import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 function SaveForm({ form }) {
   const handelClick = () => {
@@ -33,17 +33,17 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
-  const [autoCompleteValue, setAutoCompleteValue] = useState("");
+  const [autoCompleteValue, setAutoCompleteValue] = useState('');
 
   const handelValuesChange = (changedValues, values) => {
-    const items = values["items"];
+    const items = values['items'];
     let subTotal = 0;
 
     if (items) {
       items.map((item) => {
         if (item) {
           if (item.quantity && item.price) {
-            let total = item["quantity"] * item["price"];
+            let total = item['quantity'] * item['price'];
             //sub total
             subTotal += total;
           }
@@ -81,7 +81,7 @@ export default function UpdateItem({ config, UpdateForm }) {
 
     const id = current._id;
     console.log(
-      "🚀 ~ file: UpdateItem.jsx ~ line 88 ~ onSubmit ~ fieldsValue",
+      '🚀 ~ file: UpdateItem.jsx ~ line 88 ~ onSubmit ~ fieldsValue',
       fieldsValue
     );
     dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
@@ -90,7 +90,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     if (isSuccess) {
       form.resetFields();
       setSubTotal(0);
-      dispatch(erp.resetAction({ actionType: "update" }));
+      dispatch(erp.resetAction({ actionType: 'update' }));
       updatePanel.close();
       dispatch(erp.list({ entity }));
     }
@@ -140,7 +140,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           <SaveForm form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
-          padding: "20px 0px",
+          padding: '20px 0px',
         }}
       ></PageHeader>
       <Divider dashed />

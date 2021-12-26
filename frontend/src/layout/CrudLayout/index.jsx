@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import DefaultLayout from "../DefaultLayout";
+import DefaultLayout from '../DefaultLayout';
 
-import SidePanel from "@/components/SidePanel";
-import { Layout } from "antd";
-import { useCrudContext } from "@/context/crud";
-import { useAppContext } from "@/context/appContext";
+import SidePanel from '@/components/SidePanel';
+import { Layout } from 'antd';
+import { useCrudContext } from '@/context/crud';
+import { useAppContext } from '@/context/appContext';
 
 const { Content } = Layout;
 
@@ -40,10 +40,10 @@ const ContentBox = ({ children }) => {
     <Content
       className="site-layout-background whiteBox shadow"
       style={{
-        padding: "50px 40px",
-        margin: "100px auto",
-        width: isSidePanelClose ? "100%" : "830px",
-        maxWidth: "1000px",
+        padding: '50px 40px',
+        margin: '100px auto',
+        width: isSidePanelClose ? '100%' : '830px',
+        maxWidth: '1000px',
       }}
     >
       {children}
@@ -61,7 +61,7 @@ export default function CrudLayout({
   return (
     <>
       <DefaultLayout>
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout style={{ minHeight: '100vh' }}>
           <SidePanel
             config={config}
             topContent={sidePanelTopContent}

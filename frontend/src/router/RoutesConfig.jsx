@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // import {
 //   DesktopOutlined,
 //   SettingOutlined,
@@ -33,39 +33,39 @@ import React from "react";
 
 export const routesConfig = [
   {
-    path: "/",
-    component: "Dashboard",
+    path: '/',
+    component: 'Dashboard',
   },
   {
-    path: "/customer",
-    component: "Customer",
+    path: '/customer',
+    component: 'Customer',
   },
   {
-    path: "/invoice",
-    component: "Invoice",
+    path: '/invoice',
+    component: 'Invoice',
   },
   {
-    path: "/quote",
-    component: "Quote",
+    path: '/quote',
+    component: 'Quote',
   },
   {
-    path: "/payment/invoice",
-    component: "PaymentInvoice",
+    path: '/payment/invoice',
+    component: 'PaymentInvoice',
   },
   {
-    path: "/employee",
-    component: "Employee",
+    path: '/employee',
+    component: 'Employee',
   },
   {
-    path: "/admin",
-    component: "Admin",
+    path: '/admin',
+    component: 'Admin',
   },
   {
-    path: "/payment/mode",
-    component: "PaymentMode",
+    path: '/payment/mode',
+    component: 'PaymentMode',
   },
   {
-    path: "/role",
-    component: "Role",
+    path: '/role',
+    component: 'Role',
   },
 ];

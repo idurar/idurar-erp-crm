@@ -1,5 +1,5 @@
-import React from "react";
-import { Layout, Row, Col } from "antd";
+import React from 'react';
+import { Layout, Row, Col } from 'antd';
 export default function AuthLayout({ sideContent, children }) {
   return (
     <Layout>
@@ -10,7 +10,7 @@ export default function AuthLayout({ sideContent, children }) {
           md={{ span: 11, order: 1 }}
           lg={{ span: 12, order: 1 }}
           style={{
-            minHeight: "100vh",
+            minHeight: '100vh',
           }}
         >
           {sideContent}
@@ -20,7 +20,7 @@ export default function AuthLayout({ sideContent, children }) {
           sm={{ span: 24, order: 1 }}
           md={{ span: 13, order: 2 }}
           lg={{ span: 12, order: 2 }}
-          style={{ background: "#FFF", minHeight: "100vh" }}
+          style={{ background: '#FFF', minHeight: '100vh' }}
         >
           {children}
         </Col>

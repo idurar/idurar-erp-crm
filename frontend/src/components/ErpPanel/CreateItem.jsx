@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Form, Divider } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Form, Divider } from 'antd';
 
-import { Button, PageHeader, Row, Statistic, Tag } from "antd";
+import { Button, PageHeader, Row, Statistic, Tag } from 'antd';
 
-import { useSelector, useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
-import { selectCreatedItem } from "@/redux/erp/selectors";
+import { useSelector, useDispatch } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
+import { selectCreatedItem } from '@/redux/erp/selectors';
 
-import { useErpContext } from "@/context/erp";
-import uniqueId from "@/utils/uinqueId";
+import { useErpContext } from '@/context/erp';
+import uniqueId from '@/utils/uinqueId';
 
-import Loading from "@/components/Loading";
-import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import Loading from '@/components/Loading';
+import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 function SaveForm({ form }) {
   const handelClick = () => {
     form.submit();
@@ -33,14 +33,14 @@ export default function CreateItem({ config, CreateForm }) {
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const handelValuesChange = (changedValues, values) => {
-    const items = values["items"];
+    const items = values['items'];
     let subTotal = 0;
 
     if (items) {
       items.map((item) => {
         if (item) {
           if (item.quantity && item.price) {
-            let total = item["quantity"] * item["price"];
+            let total = item['quantity'] * item['price'];
             //sub total
             subTotal += total;
           }
@@ -53,7 +53,7 @@ export default function CreateItem({ config, CreateForm }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(erp.resetAction({ actionType: "create" }));
+      dispatch(erp.resetAction({ actionType: 'create' }));
       setSubTotal(0);
       createPanel.close();
       dispatch(erp.list({ entity }));
@@ -109,7 +109,7 @@ export default function CreateItem({ config, CreateForm }) {
           <SaveForm form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
-          padding: "20px 0px",
+          padding: '20px 0px',
         }}
       ></PageHeader>
       <Divider dashed />

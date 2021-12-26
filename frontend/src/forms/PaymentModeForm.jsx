@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Form, Input } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Switch, Form, Input } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function PaymentModeForm({ isUpdateForm = false }) {
   return (
@@ -32,9 +32,9 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         label="Mode enabled"
         name="enabled"
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingRight: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
         }}
         valuePropName="checked"
         initialValue={true}
@@ -48,9 +48,9 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         label="Is Default Mode"
         name="isDefault"
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingLeft: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingLeft: '5px',
         }}
         valuePropName="checked"
       >

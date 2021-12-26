@@ -1,7 +1,7 @@
-import { parse } from "querystring";
-import dayjs from "dayjs";
+import { parse } from 'querystring';
+import dayjs from 'dayjs';
 function getPageQuery() {
-  parse(window.location.href.split("?")[1]);
+  parse(window.location.href.split('?')[1]);
 }
 
 /* 
@@ -18,7 +18,7 @@ function getPageQuery() {
 */
 
 export function get(obj, key) {
-  return key.split(".").reduce(function (o, x) {
+  return key.split('.').reduce(function (o, x) {
     return o === undefined || o === null ? o : o[x];
   }, obj);
 
@@ -28,9 +28,9 @@ export function get(obj, key) {
 }
 
 Object.byString = function (o, s) {
-  s = s.replace(/\[(\w+)\]/g, ".$1"); // convert indexes to properties
-  s = s.replace(/^\./, ""); // strip a leading dot
-  let a = s.split(".");
+  s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+  s = s.replace(/^\./, ''); // strip a leading dot
+  let a = s.split('.');
   for (let i = 0, n = a.length; i < n; ++i) {
     let k = a[i];
     if (o !== null) {
@@ -50,8 +50,8 @@ Object.byString = function (o, s) {
  To check only if a property exists, without getting its value. It similer get function.
 */
 export function has(obj, key) {
-  return key.split(".").every(function (x) {
-    if (typeof obj !== "object" || obj === null || x in obj === false)
+  return key.split('.').every(function (x) {
+    if (typeof obj !== 'object' || obj === null || x in obj === false)
       /// !x in obj or  x in obj === true *** if you find any bug
       return false;
     obj = obj[x];
@@ -64,14 +64,14 @@ export function has(obj, key) {
 */
 export function valueByString(obj, string, devider) {
   if (devider === undefined) {
-    devider = "|";
+    devider = '|';
   }
   return string
     .split(devider)
     .map(function (key) {
       return get(obj, key);
     })
-    .join(" ");
+    .join(' ');
 }
 
 /*
@@ -79,13 +79,13 @@ export function valueByString(obj, string, devider) {
 */
 export function toFormData(form) {
   let formData = new FormData();
-  const elements = form.querySelectorAll("input, select, textarea");
+  const elements = form.querySelectorAll('input, select, textarea');
   for (let i = 0; i < elements.length; ++i) {
     const element = elements[i];
     const name = element.name;
 
-    if (name && element.dataset.disabled !== "true") {
-      if (element.type === "file") {
+    if (name && element.dataset.disabled !== 'true') {
+      if (element.type === 'file') {
         const file = element.files[0];
         formData.append(name, file);
       } else {
@@ -114,9 +114,9 @@ export function formatDate(param) {
   return fullDate;
 }
 
-export const isDate = function ({ date, format = "YYYY-MM-DD" }) {
-  if (typeof date == "boolean") return false;
-  if (typeof date == "number") return false;
+export const isDate = function ({ date, format = 'YYYY-MM-DD' }) {
+  if (typeof date == 'boolean') return false;
+  if (typeof date == 'number') return false;
   if (dayjs(date, format).isValid()) return true;
   return false;
 };
@@ -125,28 +125,28 @@ export const isDate = function ({ date, format = "YYYY-MM-DD" }) {
 */
 export function formatDatetime(param) {
   let time = new Date(param).toLocaleTimeString();
-  return formatDate(param) + " " + time;
+  return formatDate(param) + ' ' + time;
 }
 
 /*
  Set object value in html
 */
 export function bindValue(obj, parentElement) {
-  parentElement.querySelectorAll("[data-property]").forEach((element) => {
+  parentElement.querySelectorAll('[data-property]').forEach((element) => {
     const type = element.dataset.type;
     let value = valueByString(obj, element.dataset.property);
     console.log({ type });
     switch (type) {
-      case "date":
+      case 'date':
         value = formatDate(value);
         break;
 
-      case "datetime":
+      case 'datetime':
         value = formatDatetime(value);
         break;
 
-      case "currency":
-        value = value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+      case 'currency':
+        value = value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
         break;
 
       default:

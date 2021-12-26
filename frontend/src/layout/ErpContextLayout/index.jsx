@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { ErpContextProvider } from "@/context/erp";
+import { ErpContextProvider } from '@/context/erp';
 
 function ErpContextLayout({ children }) {
   return <ErpContextProvider>{children}</ErpContextProvider>;

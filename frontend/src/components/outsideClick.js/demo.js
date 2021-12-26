@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 
-import Dropdown from "./Dropdown";
-import "./styles.css";
+import Dropdown from './Dropdown';
+import './styles.css';
 
 function App() {
   const [vegetagle, setVegetable] = useState(undefined);
@@ -16,17 +16,17 @@ function App() {
         placeholder="Select Vegetable"
         value={vegetagle}
         onChange={(v) => setVegetable(v)}
-        options={["Tomato", "Cucumber", "Potato"]}
+        options={['Tomato', 'Cucumber', 'Potato']}
       />
       <Dropdown
         placeholder="Select Fruit"
         value={fruit}
         onChange={(v) => setFruit(v)}
-        options={["Apple", "Banana", "Orange", "Mango"]}
+        options={['Apple', 'Banana', 'Orange', 'Mango']}
       />
     </div>
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);

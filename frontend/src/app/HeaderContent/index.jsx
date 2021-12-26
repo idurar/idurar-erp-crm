@@ -1,7 +1,7 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Avatar, Menu, Dropdown } from "antd";
+import { Avatar, Menu, Dropdown } from 'antd';
 
 import {
   AppstoreOutlined,
@@ -9,12 +9,12 @@ import {
   MailOutlined,
   LogoutOutlined,
   BellOutlined,
-} from "@ant-design/icons";
-import photo from "@/style/images/photo.png";
+} from '@ant-design/icons';
+import photo from '@/style/images/photo.png';
 
-import { logout } from "@/redux/auth/actions";
-import history from "@/utils/history";
-import uniqueId from "@/utils/uinqueId";
+import { logout } from '@/redux/auth/actions';
+import history from '@/utils/history';
+import uniqueId from '@/utils/uinqueId';
 
 export default function HeaderContent() {
   const dispatch = useDispatch();
@@ -23,14 +23,14 @@ export default function HeaderContent() {
   const profileDropdown = (
     <div
       className="profileDropdown whiteBox shadow"
-      style={{ minWidth: "200px" }}
+      style={{ minWidth: '200px' }}
     >
       <div className="pad15">
         <Avatar
           size="large"
           className="last"
           src={photo}
-          style={{ float: "left" }}
+          style={{ float: 'left' }}
         />
         <div className="info">
           <p className="strong">Mark Williams</p>
@@ -80,7 +80,7 @@ export default function HeaderContent() {
           <Menu.Item
             icon={<LogoutOutlined />}
             key={`${uniqueId()}`}
-            onClick={() => history.push("/logout")}
+            onClick={() => history.push('/logout')}
           >
             logout
           </Menu.Item>
@@ -91,11 +91,11 @@ export default function HeaderContent() {
   return (
     <div
       className="headerIcon"
-      style={{ position: "absolute", right: 0, zIndex: "99" }}
+      style={{ position: 'absolute', right: 0, zIndex: '99' }}
     >
       <Dropdown
         overlay={profileDropdown}
-        trigger={["click"]}
+        trigger={['click']}
         placement="bottomRight"
       >
         {/* <Badge dot> */}

@@ -1,4 +1,4 @@
-import * as actionTypes from "./types";
+import * as actionTypes from './types';
 
 const contextActions = (dispatch) => {
   return {
@@ -12,7 +12,7 @@ const contextActions = (dispatch) => {
     },
     readPanel: {
       open: () => {
-        dispatch({ type: actionTypes.OPEN_PANEL, keyState: "read" });
+        dispatch({ type: actionTypes.OPEN_PANEL, keyState: 'read' });
       },
       close: () => {
         dispatch({ type: actionTypes.CLOSE_PANEL });
@@ -20,7 +20,7 @@ const contextActions = (dispatch) => {
     },
     updatePanel: {
       open: () => {
-        dispatch({ type: actionTypes.OPEN_PANEL, keyState: "update" });
+        dispatch({ type: actionTypes.OPEN_PANEL, keyState: 'update' });
       },
       close: () => {
         dispatch({ type: actionTypes.CLOSE_PANEL });
@@ -28,7 +28,7 @@ const contextActions = (dispatch) => {
     },
     createPanel: {
       open: () => {
-        dispatch({ type: actionTypes.OPEN_PANEL, keyState: "create" });
+        dispatch({ type: actionTypes.OPEN_PANEL, keyState: 'create' });
       },
       close: () => {
         dispatch({ type: actionTypes.CLOSE_PANEL });
@@ -36,7 +36,10 @@ const contextActions = (dispatch) => {
     },
     recordPanel: {
       open: () => {
-        dispatch({ type: actionTypes.OPEN_PANEL, keyState: "recordPayment" });
+        dispatch({
+          type: actionTypes.OPEN_PANEL,
+          keyState: 'recordPayment',
+        });
       },
       close: () => {
         dispatch({ type: actionTypes.CLOSE_PANEL });

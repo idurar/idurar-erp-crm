@@ -1,36 +1,36 @@
-import React from "react";
+import React from 'react';
 
-import CrudModule from "@/modules/CrudModule";
-import RoleForm from "@/forms/ٌRoleForm";
+import CrudModule from '@/modules/CrudModule';
+import RoleForm from '@/forms/ٌRoleForm';
 
 export default function Role() {
-  const entity = "role";
+  const entity = 'role';
   const searchConfig = {
-    displayLabels: ["displayName"],
-    searchFields: "codeName,displayName",
-    outputValue: "_id",
+    displayLabels: ['displayName'],
+    searchFields: 'codeName,displayName',
+    outputValue: '_id',
   };
 
-  const PANEL_TITLE = "Role Panel";
-  const dataTableTitle = "Role Lists";
-  const entityDisplayLabels = ["displayName"];
+  const PANEL_TITLE = 'Role Panel';
+  const dataTableTitle = 'Role Lists';
+  const entityDisplayLabels = ['displayName'];
 
   const readColumns = [
-    { title: "codeName", dataIndex: "codeName" },
-    { title: "displayName", dataIndex: "displayName" },
-    { title: "dashboardType", dataIndex: "dashboardType" },
+    { title: 'codeName', dataIndex: 'codeName' },
+    { title: 'displayName', dataIndex: 'displayName' },
+    { title: 'dashboardType', dataIndex: 'dashboardType' },
   ];
 
   const dataTableColumns = [
-    { title: "codeName", dataIndex: "codeName" },
-    { title: "displayName", dataIndex: "displayName" },
-    { title: "dashboardType", dataIndex: "dashboardType" },
+    { title: 'codeName', dataIndex: 'codeName' },
+    { title: 'displayName', dataIndex: 'displayName' },
+    { title: 'dashboardType', dataIndex: 'dashboardType' },
   ];
-  const ADD_NEW_ENTITY = "Add new Role";
-  const DATATABLE_TITLE = "Roles List";
-  const ENTITY_NAME = "Role";
-  const CREATE_ENTITY = "Create Role";
-  const UPDATE_ENTITY = "Update Role";
+  const ADD_NEW_ENTITY = 'Add new Role';
+  const DATATABLE_TITLE = 'Roles List';
+  const ENTITY_NAME = 'Role';
+  const CREATE_ENTITY = 'Create Role';
+  const UPDATE_ENTITY = 'Update Role';
 
   const config = {
     entity,

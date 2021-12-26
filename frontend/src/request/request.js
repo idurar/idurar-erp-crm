@@ -1,8 +1,8 @@
-import axios from "axios";
-import { API_BASE_URL } from "@/config/serverApiConfig";
+import axios from 'axios';
+import { API_BASE_URL } from '@/config/serverApiConfig';
 
-import errorHandler from "./errorHandler";
-import successHandler from "./successHandler";
+import errorHandler from './errorHandler';
+import successHandler from './successHandler';
 
 axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -10,12 +10,12 @@ axios.defaults.withCredentials = true;
 const request = {
   create: async ({ entity, jsonData }) => {
     console.log(
-      "🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData",
+      '🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData',
       jsonData
     );
 
     try {
-      const response = await axios.post(entity + "/create", jsonData);
+      const response = await axios.post(entity + '/create', jsonData);
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,
@@ -27,7 +27,7 @@ const request = {
   },
   read: async ({ entity, id }) => {
     try {
-      const response = await axios.get(entity + "/read/" + id);
+      const response = await axios.get(entity + '/read/' + id);
       successHandler(response, {
         notifyOnSuccess: false,
         notifyOnFailed: true,
@@ -38,14 +38,14 @@ const request = {
     }
   },
   update: async ({ entity, id, jsonData }) => {
-    console.log("🚀 ~ file: request.js ~ line 34 ~ update: ~ id", id);
+    console.log('🚀 ~ file: request.js ~ line 34 ~ update: ~ id', id);
     console.log(
-      "🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData",
+      '🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData',
       jsonData
     );
 
     try {
-      const response = await axios.patch(entity + "/update/" + id, jsonData);
+      const response = await axios.patch(entity + '/update/' + id, jsonData);
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,
@@ -58,7 +58,7 @@ const request = {
 
   delete: async ({ entity, id, options = {} }) => {
     try {
-      const response = await axios.delete(entity + "/delete/" + id);
+      const response = await axios.delete(entity + '/delete/' + id);
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,
@@ -71,11 +71,11 @@ const request = {
 
   filter: async ({ entity, options = {} }) => {
     try {
-      let filter = options.filter ? "filter=" + options.filter : "";
-      let equal = options.equal ? "&equal=" + options.equal : "";
+      let filter = options.filter ? 'filter=' + options.filter : '';
+      let equal = options.equal ? '&equal=' + options.equal : '';
       let query = `?${filter}${equal}`;
 
-      const response = await axios.get(entity + "/filter" + query);
+      const response = await axios.get(entity + '/filter' + query);
       successHandler(response, {
         notifyOnSuccess: false,
         notifyOnFailed: false,
@@ -88,13 +88,13 @@ const request = {
 
   search: async ({ entity, options = {} }) => {
     try {
-      let query = "?";
+      let query = '?';
       for (var key in options) {
-        query += key + "=" + options[key] + "&";
+        query += key + '=' + options[key] + '&';
       }
       query = query.slice(0, -1);
       // headersInstance.cancelToken = source.token;
-      const response = await axios.get(entity + "/search" + query);
+      const response = await axios.get(entity + '/search' + query);
 
       successHandler(response, {
         notifyOnSuccess: false,
@@ -108,13 +108,13 @@ const request = {
 
   list: async ({ entity, options = {} }) => {
     try {
-      let query = "?";
+      let query = '?';
       for (var key in options) {
-        query += key + "=" + options[key] + "&";
+        query += key + '=' + options[key] + '&';
       }
       query = query.slice(0, -1);
 
-      const response = await axios.get(entity + "/list" + query);
+      const response = await axios.get(entity + '/list' + query);
 
       successHandler(response, {
         notifyOnSuccess: false,

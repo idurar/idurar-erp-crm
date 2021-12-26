@@ -1,6 +1,6 @@
-import React from "react";
-import { Form, Input, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Form, Input, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 export default function LoginForm() {
   return (
@@ -10,7 +10,7 @@ export default function LoginForm() {
         rules={[
           {
             required: true,
-            message: "Please input your Email!",
+            message: 'Please input your Email!',
           },
         ]}
       >
@@ -26,7 +26,7 @@ export default function LoginForm() {
         rules={[
           {
             required: true,
-            message: "Please input your Password!",
+            message: 'Please input your Password!',
           },
         ]}
       >

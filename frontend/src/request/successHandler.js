@@ -1,6 +1,6 @@
-import { notification } from "antd";
+import { notification } from 'antd';
 
-import codeMessage from "./codeMessage";
+import codeMessage from './codeMessage';
 
 const successHandler = (
   response,

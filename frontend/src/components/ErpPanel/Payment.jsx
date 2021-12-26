@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Divider } from "antd";
+import React, { useState, useEffect, useRef } from 'react';
+import { Divider } from 'antd';
 
-import { Button, PageHeader, Row, Col, Descriptions, Tag } from "antd";
-import { FileTextOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { Button, PageHeader, Row, Col, Descriptions, Tag } from 'antd';
+import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { useErpContext } from "@/context/erp";
-import uniqueId from "@/utils/uinqueId";
+import { useErpContext } from '@/context/erp';
+import uniqueId from '@/utils/uinqueId';
 
-import { selectRecordPaymentItem } from "@/redux/erp/selectors";
+import { selectRecordPaymentItem } from '@/redux/erp/selectors';
 
-import RecordPayment from "./RecordPayment";
+import RecordPayment from './RecordPayment';
 
 export default function Payment({ config }) {
   const { entity, ENTITY_NAME } = config;
@@ -24,12 +24,12 @@ export default function Payment({ config }) {
 
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState({
-    status: "",
+    status: '',
     client: {
-      company: "",
-      email: "",
-      phone: "",
-      address: "",
+      company: '',
+      email: '',
+      phone: '',
+      address: '',
     },
     subTotal: 0,
     taxTotal: 0,
@@ -50,7 +50,7 @@ export default function Payment({ config }) {
   }, [currentItem]);
 
   useEffect(() => {
-    console.info("itemslist", itemslist);
+    console.info('itemslist', itemslist);
   }, [itemslist]);
 
   return (
@@ -66,7 +66,7 @@ export default function Payment({ config }) {
           <PageHeader
             onBack={() => readPanel.close()}
             title={`Record Payment for ${ENTITY_NAME} # ${currentErp.number}/${
-              currentErp.year || ""
+              currentErp.year || ''
             }`}
             ghost={false}
             tags={<Tag color="volcano">{currentErp.status}</Tag>}
@@ -88,7 +88,7 @@ export default function Payment({ config }) {
               </Button>,
             ]}
             style={{
-              padding: "20px 0px",
+              padding: '20px 0px',
             }}
           ></PageHeader>
           <Divider dashed />

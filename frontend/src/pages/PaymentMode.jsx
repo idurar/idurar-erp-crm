@@ -1,55 +1,55 @@
-import React from "react";
-import { Switch } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import CrudModule from "@/modules/CrudModule";
-import PaymentModeForm from "@/forms/PaymentModeForm";
+import React from 'react';
+import { Switch } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import CrudModule from '@/modules/CrudModule';
+import PaymentModeForm from '@/forms/PaymentModeForm';
 
 export default function PaymentMode() {
-  const entity = "paymentMode";
+  const entity = 'paymentMode';
   const searchConfig = {
-    displayLabels: ["name"],
-    searchFields: "name",
-    outputValue: "_id",
+    displayLabels: ['name'],
+    searchFields: 'name',
+    outputValue: '_id',
   };
 
-  const entityDisplayLabels = ["name"];
+  const entityDisplayLabels = ['name'];
 
   const readColumns = [
     {
-      title: "Payment Mode",
-      dataIndex: "name",
+      title: 'Payment Mode',
+      dataIndex: 'name',
     },
     {
-      title: "Description",
-      dataIndex: "description",
+      title: 'Description',
+      dataIndex: 'description',
     },
     {
-      title: "Is Default",
-      dataIndex: "isDefault",
+      title: 'Is Default',
+      dataIndex: 'isDefault',
     },
     {
-      title: "enabled",
-      dataIndex: "enabled",
+      title: 'enabled',
+      dataIndex: 'enabled',
     },
   ];
   const dataTableColumns = [
     {
-      title: "Payment Mode",
-      dataIndex: "name",
+      title: 'Payment Mode',
+      dataIndex: 'name',
     },
     {
-      title: "Description",
-      dataIndex: "description",
+      title: 'Description',
+      dataIndex: 'description',
     },
     {
-      title: "Is Default",
-      dataIndex: "isDefault",
-      key: "isDefault",
+      title: 'Is Default',
+      dataIndex: 'isDefault',
+      key: 'isDefault',
       render: (text, row) => {
         return {
           props: {
             style: {
-              width: "60px",
+              width: '60px',
             },
           },
           children: (
@@ -63,14 +63,14 @@ export default function PaymentMode() {
       },
     },
     {
-      title: "Enabled",
-      dataIndex: "enabled",
-      key: "enabled",
+      title: 'Enabled',
+      dataIndex: 'enabled',
+      key: 'enabled',
       render: (text, row) => {
         return {
           props: {
             style: {
-              width: "60px",
+              width: '60px',
             },
           },
           children: (
@@ -85,12 +85,12 @@ export default function PaymentMode() {
     },
   ];
 
-  const ADD_NEW_ENTITY = "Add new payment mode";
-  const DATATABLE_TITLE = "payment modes List";
-  const ENTITY_NAME = "payment mode";
-  const CREATE_ENTITY = "Create payment mode";
-  const UPDATE_ENTITY = "Update payment mode";
-  const PANEL_TITLE = "Currency Panel";
+  const ADD_NEW_ENTITY = 'Add new payment mode';
+  const DATATABLE_TITLE = 'payment modes List';
+  const ENTITY_NAME = 'payment mode';
+  const CREATE_ENTITY = 'Create payment mode';
+  const UPDATE_ENTITY = 'Update payment mode';
+  const PANEL_TITLE = 'Currency Panel';
 
   const config = {
     entity,

@@ -1,22 +1,22 @@
-import React, { useLayoutEffect, useEffect, useState } from "react";
-import { Row, Col, Button, Divider } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import React, { useLayoutEffect, useEffect, useState } from 'react';
+import { Row, Col, Button, Divider } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import CreateForm from "@/components/CreateForm";
-import UpdateForm from "@/components/UpdateForm";
-import DeleteModal from "@/components/DeleteModal";
-import ReadItem from "@/components/ReadItem";
-import SearchItem from "@/components/SearchItem";
+import CreateForm from '@/components/CreateForm';
+import UpdateForm from '@/components/UpdateForm';
+import DeleteModal from '@/components/DeleteModal';
+import ReadItem from '@/components/ReadItem';
+import SearchItem from '@/components/SearchItem';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectCurrentItem } from "@/redux/crud/selectors";
-import { crud } from "@/redux/crud/actions";
-import { useCrudContext } from "@/context/crud";
+import { selectCurrentItem } from '@/redux/crud/selectors';
+import { crud } from '@/redux/crud/actions';
+import { useCrudContext } from '@/context/crud';
 
-import { CrudLayout } from "@/layout";
+import { CrudLayout } from '@/layout';
 
-import CrudDataTable from "./CrudDataTable";
+import CrudDataTable from './CrudDataTable';
 
 function SidePanelTopContent({ config, formElements }) {
   const { crudContextAction, state } = useCrudContext();
@@ -27,23 +27,23 @@ function SidePanelTopContent({ config, formElements }) {
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
 
-  const [labels, setLabels] = useState("");
+  const [labels, setLabels] = useState('');
   useEffect(() => {
     if (currentItem) {
       const currentlabels = entityDisplayLabels
         .map((x) => currentItem[x])
-        .join(" ");
+        .join(' ');
 
       setLabels(currentlabels);
     }
   }, [currentItem]);
 
   const removeItem = () => {
-    dispatch(crud.currentAction({ actionType: "delete", data: currentItem }));
+    dispatch(crud.currentAction({ actionType: 'delete', data: currentItem }));
     modal.open();
   };
   const editItem = () => {
-    dispatch(crud.currentAction({ actionType: "update", data: currentItem }));
+    dispatch(crud.currentAction({ actionType: 'update', data: currentItem }));
     editBox.open();
   };
 
@@ -52,7 +52,7 @@ function SidePanelTopContent({ config, formElements }) {
     <>
       <Row style={show}>
         <Col span={13}>
-          <p style={{ marginBottom: "10px" }}>{labels}</p>
+          <p style={{ marginBottom: '10px' }}>{labels}</p>
         </Col>
         <Col span={11}>
           <Button
@@ -60,7 +60,7 @@ function SidePanelTopContent({ config, formElements }) {
             type="text"
             icon={<DeleteOutlined />}
             size="small"
-            style={{ float: "right", marginLeft: "5px" }}
+            style={{ float: 'right', marginLeft: '5px' }}
           >
             remove
           </Button>
@@ -69,7 +69,7 @@ function SidePanelTopContent({ config, formElements }) {
             type="text"
             icon={<EditOutlined />}
             size="small"
-            style={{ float: "right", marginLeft: "0px" }}
+            style={{ float: 'right', marginLeft: '0px' }}
           >
             edit
           </Button>
