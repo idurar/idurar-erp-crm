@@ -7,7 +7,7 @@ import { CrudContextProvider } from "@/context/crud";
 
 import ReadItem from "./index";
 import FeedStoreMock from "@/test/mocksComponent/FeedStoreMock";
-
+import { crud } from "@/redux/crud/actions";
 const data = {
   company: "IDURAR",
   managerSurname: "Lalami ",
@@ -40,24 +40,13 @@ const readColumns = [
 ];
 
 const config = { readColumns };
-beforeAll(() => {
-  delete window.matchMedia;
-  window.matchMedia = (query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  });
-});
+
+
 describe("Integration Testing : Read Component", () => {
   test("renders read component", () => {
     const { debug } = render(
       <Provider store={store}>
-        <FeedStoreMock data={data} />
+        <FeedStoreMock method={crud.currentItem} data={data} />
         <CrudContextProvider>
           <ReadItem config={config} />
         </CrudContextProvider>
@@ -67,8 +56,4 @@ describe("Integration Testing : Read Component", () => {
   });
 });
 
-// test('renders a number input with a label "Favorite Number"', () => {
-//   render(<App />);
-//   const input = screen.getByLabelText(/favorite number/i);
-//   expect(input).toHaveAttribute("type", "number");
-// });
+

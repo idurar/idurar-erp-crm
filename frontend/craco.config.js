@@ -40,13 +40,4 @@ module.exports = {
       },
     },
   ],
-
-  jest: {
-    ...defaults,
-    moduleNameMapper: {
-      "^@/(.+)": "<rootDir>/src/$1",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    },
-    moduleFileExtensions: ["js", "jsx"],
-  },
 };

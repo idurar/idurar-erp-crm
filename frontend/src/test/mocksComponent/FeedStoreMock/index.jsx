@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
 
-export default function FeedStoreMock({ data }) {
+
+export default function FeedStoreMock({ method,data }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(crud.currentItem({ data }));
+    dispatch(method({ data }));
   }, [data]);
 
   return null;
