@@ -14,11 +14,8 @@ jobs:
       run:
         working-directory: frontend    
     steps:
-      - uses: actions/checkout@v2
       - name: Install Dependencies
         run: yarn
-      - name: Build
-        run: yarn build
       - name: Test
         run: yarn test --watchAll=false
         
