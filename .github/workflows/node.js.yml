@@ -21,7 +21,9 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install Dependencies
         run: yarn
+      - name: Install @testing-library/jest-dom  
+        run: yarn add @testing-library/jest-dom
       - name: Test
-        run: yarn test --watchAll=false
+        run: yarn test
         
         
