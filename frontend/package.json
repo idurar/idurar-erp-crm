@@ -58,7 +58,6 @@
     "babel-plugin-import": "^1.13.3",
     "craco-alias": "^3.0.1",
     "craco-less": "^1.17.1",
-    "eslint": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "identity-obj-proxy": "^3.0.0",
