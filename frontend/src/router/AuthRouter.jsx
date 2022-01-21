@@ -1,15 +1,15 @@
-import React, { lazy, Suspense } from "react";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import PublicRoute from "./PublicRoute";
-import PageLoader from "@/components/PageLoader";
+import React, { lazy, Suspense } from 'react';
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import PublicRoute from './PublicRoute';
+import PageLoader from '@/components/PageLoader';
 
 const Login = lazy(() =>
-  import(/*webpackChunkName:'LoginPage'*/ "@/pages/Login")
+  import(/*webpackChunkName:'LoginPage'*/ '@/pages/Login')
 );
 
 const NotFound = lazy(() =>
-  import(/*webpackChunkName:'NotFoundPage'*/ "@/pages/NotFound")
+  import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound')
 );
 
 export default function AuthRouter() {

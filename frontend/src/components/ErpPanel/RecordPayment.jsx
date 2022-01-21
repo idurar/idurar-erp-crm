@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Form, Divider, Button } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Form, Divider, Button } from 'antd';
 
-import { useSelector, useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
-import { selectRecordPaymentItem } from "@/redux/erp/selectors";
+import { useSelector, useDispatch } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
+import { selectRecordPaymentItem } from '@/redux/erp/selectors';
 
-import { useErpContext } from "@/context/erp";
+import { useErpContext } from '@/context/erp';
 
-import Loading from "@/components/Loading";
+import Loading from '@/components/Loading';
 
-import PaymentInvoiceForm from "@/forms/PaymentInvoiceForm";
+import PaymentInvoiceForm from '@/forms/PaymentInvoiceForm';
 
 export default function RecordPayment({ config }) {
   let { entity, CREATE_ENTITY } = config;
@@ -36,7 +36,7 @@ export default function RecordPayment({ config }) {
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
-      dispatch(erp.resetAction({ actionType: "recordPayment" }));
+      dispatch(erp.resetAction({ actionType: 'recordPayment' }));
       recordPanel.close();
       dispatch(erp.list({ entity }));
     }
@@ -54,7 +54,10 @@ export default function RecordPayment({ config }) {
     }
 
     dispatch(
-      erp.recordPayment({ entity: "paymentInvoice", jsonData: fieldsValue })
+      erp.recordPayment({
+        entity: 'paymentInvoice',
+        jsonData: fieldsValue,
+      })
     );
   };
 

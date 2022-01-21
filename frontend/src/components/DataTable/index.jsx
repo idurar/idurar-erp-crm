@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from "react";
-import { Dropdown, Button, PageHeader, Table, Col } from "antd";
+import React, { useCallback, useEffect } from 'react';
+import { Dropdown, Button, PageHeader, Table, Col } from 'antd';
 
-import { EllipsisOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { selectListItems } from "@/redux/crud/selectors";
+import { EllipsisOutlined } from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { crud } from '@/redux/crud/actions';
+import { selectListItems } from '@/redux/crud/selectors';
 
-import uniqueId from "@/utils/uinqueId";
+import uniqueId from '@/utils/uinqueId';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, dataTableTitle } = config;
@@ -14,10 +14,10 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   dataTableColumns = [
     ...dataTableColumns,
     {
-      title: "",
+      title: '',
       render: (row) => (
-        <Dropdown overlay={DropDownRowMenu({ row })} trigger={["click"]}>
-          <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
+        <Dropdown overlay={DropDownRowMenu({ row })} trigger={['click']}>
+          <EllipsisOutlined style={{ cursor: 'pointer', fontSize: '24px' }} />
         </Dropdown>
       ),
     },
@@ -52,7 +52,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
           <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}
         style={{
-          padding: "20px 0px",
+          padding: '20px 0px',
         }}
       ></PageHeader>
       <Table

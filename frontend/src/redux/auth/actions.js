@@ -1,7 +1,7 @@
-import * as actionTypes from "./types";
-import * as authService from "@/auth";
+import * as actionTypes from './types';
+import * as authService from '@/auth';
 
-import history from "@/utils/history";
+import history from '@/utils/history';
 
 export const login =
   ({ loginData }) =>
@@ -13,13 +13,13 @@ export const login =
     const data = await authService.login({ loginData });
 
     if (data.success === true) {
-      window.localStorage.setItem("isLoggedIn", true);
-      window.localStorage.setItem("auth", JSON.stringify(data.result.admin));
+      window.localStorage.setItem('isLoggedIn', true);
+      window.localStorage.setItem('auth', JSON.stringify(data.result.admin));
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
         payload: data.result.admin,
       });
-      history.push("/");
+      history.push('/');
     } else {
       dispatch({
         type: actionTypes.FAILED_REQUEST,
@@ -33,5 +33,5 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
-  history.push("/login");
+  history.push('/login');
 };

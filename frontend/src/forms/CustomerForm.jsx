@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
+import React from 'react';
+import { Button, Form, Input } from 'antd';
 
 export default function CustomerForm({ isUpdateForm = false }) {
   return (
@@ -10,7 +10,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your company name!",
+            message: 'Please input your company name!',
           },
         ]}
       >
@@ -22,13 +22,13 @@ export default function CustomerForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your surname!",
+            message: 'Please input your surname!',
           },
         ]}
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingRight: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
         }}
       >
         <Input />
@@ -39,13 +39,13 @@ export default function CustomerForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your manager name!",
+            message: 'Please input your manager name!',
           },
         ]}
         style={{
-          display: "inline-block",
-          width: "calc(50%)",
-          paddingLeft: "5px",
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingLeft: '5px',
         }}
       >
         <Input />
@@ -57,7 +57,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your phone!",
+            message: 'Please input your phone!',
           },
         ]}
       >
@@ -68,12 +68,12 @@ export default function CustomerForm({ isUpdateForm = false }) {
         label="E-mail"
         rules={[
           {
-            type: "email",
-            message: "The input is not valid E-mail!",
+            type: 'email',
+            message: 'The input is not valid E-mail!',
           },
           {
             required: true,
-            message: "Please input your E-mail!",
+            message: 'Please input your E-mail!',
           },
         ]}
       >

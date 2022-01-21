@@ -1,19 +1,19 @@
-let CACHE_NAME = "your-app-name";
-let urlsToCache = ["/", "/completed"];
+let CACHE_NAME = 'your-app-name';
+let urlsToCache = ['/', '/completed'];
 
 // Install a service worker
-self.addEventListener("install", (event) => {
+self.addEventListener('install', (event) => {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log("Opened cache");
+      console.log('Opened cache');
       return cache.addAll(urlsToCache);
     })
   );
 });
 
 // Cache and return requests
-self.addEventListener("fetch", (event) => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then(function (response) {
       // Cache hit - return response
@@ -26,8 +26,8 @@ self.addEventListener("fetch", (event) => {
 });
 
 // Update a service worker
-self.addEventListener("activate", (event) => {
-  let cacheWhitelist = ["your-app-name"];
+self.addEventListener('activate', (event) => {
+  let cacheWhitelist = ['your-app-name'];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(

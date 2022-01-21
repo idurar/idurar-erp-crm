@@ -1,5 +1,5 @@
-import * as actionTypes from "./types";
-import { request } from "@/request";
+import * as actionTypes from './types';
+import { request } from '@/request';
 
 export const erp = {
   resetState: () => async (dispatch) => {
@@ -38,7 +38,7 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "list",
+        keyState: 'list',
         payload: null,
       });
 
@@ -55,13 +55,13 @@ export const erp = {
         };
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "list",
+          keyState: 'list',
           payload: result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "list",
+          keyState: 'list',
           payload: null,
         });
       }
@@ -71,16 +71,16 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "create",
+        keyState: 'create',
         payload: null,
       });
-      console.log("jsonData action redux", jsonData);
+      console.log('jsonData action redux', jsonData);
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "create",
+          keyState: 'create',
           payload: data.result,
         });
         dispatch({
@@ -90,7 +90,7 @@ export const erp = {
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "create",
+          keyState: 'create',
           payload: null,
         });
       }
@@ -100,7 +100,7 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "recordPayment",
+        keyState: 'recordPayment',
         payload: null,
       });
 
@@ -109,7 +109,7 @@ export const erp = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "recordPayment",
+          keyState: 'recordPayment',
           payload: data.result,
         });
         dispatch({
@@ -119,7 +119,7 @@ export const erp = {
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "recordPayment",
+          keyState: 'recordPayment',
           payload: null,
         });
       }
@@ -129,7 +129,7 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "read",
+        keyState: 'read',
         payload: null,
       });
 
@@ -142,13 +142,13 @@ export const erp = {
         });
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "read",
+          keyState: 'read',
           payload: data.result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "read",
+          keyState: 'read',
           payload: null,
         });
       }
@@ -158,7 +158,7 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "update",
+        keyState: 'update',
         payload: null,
       });
 
@@ -167,7 +167,7 @@ export const erp = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "update",
+          keyState: 'update',
           payload: data.result,
         });
         dispatch({
@@ -177,7 +177,7 @@ export const erp = {
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "update",
+          keyState: 'update',
           payload: null,
         });
       }
@@ -188,7 +188,7 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "delete",
+        keyState: 'delete',
         payload: null,
       });
 
@@ -197,13 +197,13 @@ export const erp = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "delete",
+          keyState: 'delete',
           payload: data.result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "delete",
+          keyState: 'delete',
           payload: null,
         });
       }
@@ -214,7 +214,7 @@ export const erp = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
-        keyState: "search",
+        keyState: 'search',
         payload: null,
       });
 
@@ -223,13 +223,13 @@ export const erp = {
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          keyState: "search",
+          keyState: 'search',
           payload: data.result,
         });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
-          keyState: "search",
+          keyState: 'search',
           payload: null,
         });
       }

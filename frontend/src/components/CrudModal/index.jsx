@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import React, { useEffect, useState } from 'react';
+import { Modal } from 'antd';
 
-import { useDispatch, useSelector } from "react-redux";
-import { crud } from "@/redux/crud/actions";
-import { useCrudContext } from "@/context/crud";
-import { selectDeletedItem } from "@/redux/crud/selectors";
-import { valueByString } from "@/utils/helpers";
+import { useDispatch, useSelector } from 'react-redux';
+import { crud } from '@/redux/crud/actions';
+import { useCrudContext } from '@/context/crud';
+import { selectDeletedItem } from '@/redux/crud/selectors';
+import { valueByString } from '@/utils/helpers';
 
 export default function DeleteModal({ config, children }) {
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = "Do you want delete : ",
-    modalTitle = "Remove Item",
+    deleteMessage = 'Do you want delete : ',
+    modalTitle = 'Remove Item',
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, crudContextAction } = useCrudContext();
   const { isModalOpen } = state;
   const { modal } = crudContextAction;
-  const [displayItem, setDisplayItem] = useState("");
+  const [displayItem, setDisplayItem] = useState('');
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,7 +29,7 @@ export default function DeleteModal({ config, children }) {
     if (current) {
       let labels = entityDisplayLabels
         .map((x) => valueByString(current, x))
-        .join(" ");
+        .join(' ');
 
       setDisplayItem(labels);
     }

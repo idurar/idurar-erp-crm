@@ -1,23 +1,23 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect } from 'react';
 
-import DataTable from "./DataTable";
-import CreateItem from "./CreateItem";
+import DataTable from './DataTable';
+import CreateItem from './CreateItem';
 
-import UpdateItem from "./UpdateItem";
-import Delete from "./DeleteItem";
-import ReadItem from "./ReadItem";
-import Payment from "./Payment";
-import Search from "./SearchItem";
+import UpdateItem from './UpdateItem';
+import Delete from './DeleteItem';
+import ReadItem from './ReadItem';
+import Payment from './Payment';
+import Search from './SearchItem';
 
-import { useDispatch } from "react-redux";
-import { erp } from "@/redux/erp/actions";
+import { useDispatch } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
 
-import { useErpContext } from "@/context/erp";
+import { useErpContext } from '@/context/erp';
 
 const Visibility = ({ isVisible, children }) => {
   const show = isVisible
-    ? { display: "block", opacity: 1 }
-    : { display: "none", opacity: 0 };
+    ? { display: 'block', opacity: 1 }
+    : { display: 'none', opacity: 0 };
   return <div style={show}>{children}</div>;
 };
 

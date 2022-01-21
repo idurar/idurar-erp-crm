@@ -1,27 +1,12 @@
-// {
-//     "presets": [
-//         "@babel/env",
-//         "@babel/preset-react"
-//     ],
-//     "plugins": [
-//         "syntax-dynamic-import",
-//         [
-//             "import",
-//             {
-//                 "libraryName": "antd"
-//                 // "style": true, // or 'css'
-//             }
-//         ]
-//     ]
-// }
-
 {
+  "presets": ["@babel/env", "@babel/preset-react"],
   "plugins": [
     [
       "import",
       {
-        "libraryName": "antd"
-        // "style": true, // or 'css'
+        "libraryName": "antd",
+        "libraryDirectory": "lib", // default: lib
+        "style": true
       }
     ]
   ]

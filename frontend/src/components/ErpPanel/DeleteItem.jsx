@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import React, { useEffect, useState } from 'react';
+import { Modal } from 'antd';
 
-import { useDispatch, useSelector } from "react-redux";
-import { erp } from "@/redux/erp/actions";
-import { useErpContext } from "@/context/erp";
-import { selectDeletedItem } from "@/redux/erp/selectors";
-import { valueByString } from "@/utils/helpers";
+import { useDispatch, useSelector } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
+import { useErpContext } from '@/context/erp';
+import { selectDeletedItem } from '@/redux/erp/selectors';
+import { valueByString } from '@/utils/helpers';
 
 export default function Delete({ config }) {
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = "Do you want delete : ",
-    modalTitle = "Remove Item",
+    deleteMessage = 'Do you want delete : ',
+    modalTitle = 'Remove Item',
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, erpContextAction } = useErpContext();
   const { deleteModal } = state;
   const { modal } = erpContextAction;
-  const [displayItem, setDisplayItem] = useState("");
+  const [displayItem, setDisplayItem] = useState('');
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,7 +29,7 @@ export default function Delete({ config }) {
     if (current) {
       let labels = entityDisplayLabels
         .map((x) => valueByString(current, x))
-        .join(" ");
+        .join(' ');
 
       setDisplayItem(labels);
     }

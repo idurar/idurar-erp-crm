@@ -1,7 +1,7 @@
-import React, { useMemo, useReducer, createContext, useContext } from "react";
-import { initialState, contextReducer } from "./reducer";
-import contextActions from "./actions";
-import contextSelectors from "./selectors";
+import React, { useMemo, useReducer, createContext, useContext } from 'react';
+import { initialState, contextReducer } from './reducer';
+import contextActions from './actions';
+import contextSelectors from './selectors';
 
 const ErpContext = createContext();
 
@@ -15,7 +15,7 @@ function ErpContextProvider({ children }) {
 function useErpContext() {
   const context = useContext(ErpContext);
   if (context === undefined) {
-    throw new Error("useErpContext must be used within a ErpContextProvider");
+    throw new Error('useErpContext must be used within a ErpContextProvider');
   }
   const [state, dispatch] = context;
   const erpContextAction = contextActions(dispatch);

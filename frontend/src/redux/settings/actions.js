@@ -1,12 +1,12 @@
-import * as actionTypes from "./types";
+import * as actionTypes from './types';
 
 export const settings = {
   currency:
-    ({ value = "$" }) =>
+    ({ value = '$' }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.SET_STATE,
-        keyState: "currency",
+        keyState: 'currency',
         payload: value,
       });
     },
@@ -15,7 +15,7 @@ export const settings = {
     async (dispatch) => {
       dispatch({
         type: actionTypes.SET_STATE,
-        keyState: "currencyPosition",
+        keyState: 'currencyPosition',
         payload: position,
       });
     },

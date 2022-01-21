@@ -1,10 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const config = {
-    type: "spring",
+    type: 'spring',
     damping: 20,
     stiffness: 100,
   };
@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        window.localStorage.getItem("isLoggedIn") ? (
+        window.localStorage.getItem('isLoggedIn') ? (
           <motion.div
             transition={config}
             initial={{ y: 20, opacity: 0 }}

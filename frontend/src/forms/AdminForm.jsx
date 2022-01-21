@@ -1,7 +1,7 @@
-import React from "react";
-import { Form, Input, Select } from "antd";
-import SelectAsync from "@/components/SelectAsync";
-import AutoCompleteAsync from "@/components/AutoCompleteAsync";
+import React from 'react';
+import { Form, Input, Select } from 'antd';
+import SelectAsync from '@/components/SelectAsync';
+import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
 export default function AdminForm({ isUpdateForm = false }) {
   return (
@@ -12,14 +12,14 @@ export default function AdminForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "This Field is required",
+            message: 'This Field is required',
           },
         ]}
       >
         <AutoCompleteAsync
-          entity={"employee"}
-          displayLabels={["name", "surname"]}
-          searchFields={"name,surame"}
+          entity={'employee'}
+          displayLabels={['name', 'surname']}
+          searchFields={'name,surame'}
         />
       </Form.Item>
       <Form.Item
@@ -28,13 +28,13 @@ export default function AdminForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "This Field is required",
+            message: 'This Field is required',
           },
         ]}
       >
         <SelectAsync
-          entity={"role"}
-          displayLabels={["displayName"]}
+          entity={'role'}
+          displayLabels={['displayName']}
         ></SelectAsync>
       </Form.Item>
       <Form.Item
@@ -43,7 +43,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: "Please input your Email!",
+            message: 'Please input your Email!',
           },
         ]}
       >
@@ -56,7 +56,7 @@ export default function AdminForm({ isUpdateForm = false }) {
           rules={[
             {
               required: true,
-              message: "Please input your Password!",
+              message: 'Please input your Password!',
             },
           ]}
         >
