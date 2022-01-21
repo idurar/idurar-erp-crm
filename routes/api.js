@@ -43,21 +43,21 @@ router
     catchErrors(adminController.create)
   );
 router.route("/admin/read/:id").get(catchErrors(adminController.read));
-router.route("/admin/update/:id").patch(catchErrors(adminController.update));
-router.route("/admin/delete/:id").delete(catchErrors(adminController.delete));
+// router.route("/admin/update/:id").patch(catchErrors(adminController.update));
+// router.route("/admin/delete/:id").delete(catchErrors(adminController.delete));
 router.route("/admin/search").get(catchErrors(adminController.search));
 router.route("/admin/list").get(catchErrors(adminController.list));
 router.route("/admin/profile").get(catchErrors(adminController.profile));
 router.route("/admin/status/:id").patch(catchErrors(adminController.status));
-router
-  .route("/admin/photo")
-  .post(
-    [adminPhotoUpload.single("photo"), setFilePathToBody],
-    catchErrors(adminController.photo)
-  );
-router
-  .route("/admin/password-update/:id")
-  .patch(catchErrors(adminController.updatePassword));
+// router
+//   .route("/admin/photo")
+//   .post(
+//     [adminPhotoUpload.single("photo"), setFilePathToBody],
+//     catchErrors(adminController.photo)
+//   );
+// router
+//   .route("/admin/password-update/:id")
+//   .patch(catchErrors(adminController.updatePassword));
 
 // //____________________________ role management_______________________________
 
