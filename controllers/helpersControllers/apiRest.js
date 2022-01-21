@@ -229,7 +229,7 @@ exports.list = async (Model, req, res) => {
 
 exports.search = async (Model, req, res) => {
   // console.log(req.query.fields)
-  if (req.query.q === undefined || req.query.q === "" || req.query.q === " ") {
+  if (req.query.q === undefined || req.query.q.trim() === "") {
     return res
       .status(202)
       .json({
@@ -250,10 +250,7 @@ exports.search = async (Model, req, res) => {
   }
   // console.log(fields)
   try {
-    let results = await Model.find(fields)
-      .where("removed", false)
-      .sort({ name: "asc" })
-      .limit(10);
+    let results = await Model.find(fields).where("removed", false).limit(10);
 
     if (results.length >= 1) {
       return res.status(200).json({
