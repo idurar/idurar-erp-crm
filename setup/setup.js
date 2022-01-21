@@ -38,7 +38,7 @@ async function createAdmin() {
   try {
     const Admin = require("../models/Admin");
     var newAdmin = new Admin();
-    const passwordHash = newAdmin.generateHash("123456");
+    const passwordHash = newAdmin.generateHash("admin123");
 
     await new Admin({
       email: "admin@demo.com",
@@ -53,8 +53,3 @@ async function createAdmin() {
   }
 }
 createAdmin();
-// if (process.argv.includes("--delete")) {
-//   deleteData();
-// } else {
-//   loadData();
-// }
