@@ -7,12 +7,7 @@ import CollapseBox from '../CollapseBox';
 
 const { Sider } = Layout;
 
-export default function SidePanel({
-  config,
-  topContent,
-  bottomContent,
-  fixHeaderPanel,
-}) {
+export default function SidePanel({ config, topContent, bottomContent, fixHeaderPanel }) {
   const { ADD_NEW_ENTITY } = config;
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose, isBoxCollapsed } = state;

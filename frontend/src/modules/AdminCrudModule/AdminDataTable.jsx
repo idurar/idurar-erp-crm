@@ -1,12 +1,7 @@
 import React from 'react';
 
 import { Button, Menu } from 'antd';
-import {
-  EyeOutlined,
-  EditOutlined,
-  LockOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, LockOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectItemById } from '@/redux/crud/selectors';
@@ -32,8 +27,7 @@ function AddNewItem({ config }) {
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
   const { crudContextAction } = useCrudContext();
-  const { panel, collapsedBox, modal, advancedBox, readBox, editBox } =
-    crudContextAction;
+  const { panel, collapsedBox, modal, advancedBox, readBox, editBox } = crudContextAction;
   const item = useSelector(selectItemById(row._id));
   const Show = () => {
     dispatch(crud.currentItem({ data: item }));
@@ -67,18 +61,10 @@ function DropDownRowMenu({ row }) {
       <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
-      <Menu.Item
-        key={`${uniqueId()}`}
-        icon={<LockOutlined />}
-        onClick={UpdatePassword}
-      >
+      <Menu.Item key={`${uniqueId()}`} icon={<LockOutlined />} onClick={UpdatePassword}>
         Update Password
       </Menu.Item>
-      <Menu.Item
-        key={`${uniqueId()}`}
-        icon={<DeleteOutlined />}
-        onClick={Delete}
-      >
+      <Menu.Item key={`${uniqueId()}`} icon={<DeleteOutlined />} onClick={Delete}>
         Delete
       </Menu.Item>
     </Menu>
@@ -86,11 +72,5 @@ function DropDownRowMenu({ row }) {
 }
 
 export default function AdminCrudModule({ config }) {
-  return (
-    <DataTable
-      config={config}
-      DropDownRowMenu={DropDownRowMenu}
-      AddNewItem={AddNewItem}
-    />
-  );
+  return <DataTable config={config} DropDownRowMenu={DropDownRowMenu} AddNewItem={AddNewItem} />;
 }

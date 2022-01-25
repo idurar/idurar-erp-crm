@@ -13,11 +13,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
         window.localStorage.getItem('isLoggedIn') ? (
           <Redirect to="/" />
         ) : (
-          <motion.div
-            initial={{ x: 200 }}
-            animate={{ x: 0 }}
-            exit={{ scale: 0 }}
-          >
+          <motion.div initial={{ x: 200 }} animate={{ x: 0 }} exit={{ scale: 0 }}>
             <Component {...props} />
           </motion.div>
         )

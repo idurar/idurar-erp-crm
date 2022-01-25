@@ -15,22 +15,14 @@ import { erp } from '@/redux/erp/actions';
 import { useErpContext } from '@/context/erp';
 
 const Visibility = ({ isVisible, children }) => {
-  const show = isVisible
-    ? { display: 'block', opacity: 1 }
-    : { display: 'none', opacity: 0 };
+  const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
   return <div style={show}>{children}</div>;
 };
 
-export default function ErpPanel({
-  config,
-  CreateForm,
-  UpdateForm,
-  DataTableDropMenu,
-}) {
+export default function ErpPanel({ config, CreateForm, UpdateForm, DataTableDropMenu }) {
   const dispatch = useDispatch();
   const { state } = useErpContext();
-  const { update, read, create, recordPayment, dataTableList, deleteModal } =
-    state;
+  const { update, read, create, recordPayment, dataTableList, deleteModal } = state;
   useLayoutEffect(() => {
     dispatch(erp.resetState());
   }, []);

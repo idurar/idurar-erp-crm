@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const expenseSchema = new mongoose.Schema({
@@ -32,7 +32,7 @@ const expenseSchema = new mongoose.Schema({
   },
   expenseCategory: {
     type: mongoose.Schema.ObjectId,
-    ref: "ExpenseCategory",
+    ref: 'ExpenseCategory',
     required: true,
   },
   taxRate: {
@@ -49,7 +49,7 @@ const expenseSchema = new mongoose.Schema({
   },
   paymentMode: {
     type: mongoose.Schema.ObjectId,
-    ref: "PaymentMode",
+    ref: 'PaymentMode',
   },
   attachedFile: {
     type: String,
@@ -64,4 +64,4 @@ const expenseSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Expense", expenseSchema);
+module.exports = mongoose.model('Expense', expenseSchema);

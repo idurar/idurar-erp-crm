@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const employeeSchema = new mongoose.Schema({
@@ -64,19 +64,19 @@ const employeeSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "1",
+    default: '1',
   },
   created: {
     type: Date,
     default: Date.now,
   },
 });
-employeeSchema.plugin(require("mongoose-autopopulate"));
+employeeSchema.plugin(require('mongoose-autopopulate'));
 employeeSchema.index({
-  name: "text",
-  surname: "text",
-  birthday: "text",
-  status: "text",
+  name: 'text',
+  surname: 'text',
+  birthday: 'text',
+  status: 'text',
 });
 
-module.exports = mongoose.model("Employee", employeeSchema);
+module.exports = mongoose.model('Employee', employeeSchema);

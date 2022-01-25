@@ -54,11 +54,7 @@ function DropDownRowMenu({ row }) {
       <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
-      <Menu.Item
-        key={`${uniqueId()}`}
-        icon={<DeleteOutlined />}
-        onClick={Delete}
-      >
+      <Menu.Item key={`${uniqueId()}`} icon={<DeleteOutlined />} onClick={Delete}>
         Delete
       </Menu.Item>
     </Menu>
@@ -66,11 +62,5 @@ function DropDownRowMenu({ row }) {
 }
 
 export default function CrudDataTable({ config }) {
-  return (
-    <DataTable
-      config={config}
-      DropDownRowMenu={DropDownRowMenu}
-      AddNewItem={AddNewItem}
-    />
-  );
+  return <DataTable config={config} DropDownRowMenu={DropDownRowMenu} AddNewItem={AddNewItem} />;
 }

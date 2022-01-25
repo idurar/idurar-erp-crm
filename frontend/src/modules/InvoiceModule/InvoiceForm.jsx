@@ -1,15 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
-import {
-  Form,
-  Input,
-  InputNumber,
-  Button,
-  Select,
-  Divider,
-  Row,
-  Col,
-} from 'antd';
+import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
 import { DatePicker } from '@/components/CustomAntd';
@@ -21,9 +12,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
-  const [currentYear, setCurrentYear] = useState(() =>
-    new Date().getFullYear()
-  );
+  const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
     setTaxRate(value);
   };
@@ -178,12 +167,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
         {(fields, { add, remove }) => (
           <>
             {fields.map((field) => (
-              <ItemRow
-                key={field.key}
-                remove={remove}
-                field={field}
-                current={current}
-              ></ItemRow>
+              <ItemRow key={field.key} remove={remove} field={field} current={current}></ItemRow>
             ))}
             <Form.Item>
               <Button
@@ -219,9 +203,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 readOnly
                 style={{ width: '100%' }}
                 value={subTotal}
-                formatter={(value) =>
-                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-                }
+                formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
               />
             </Form.Item>
           </Col>
@@ -253,9 +235,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 readOnly
                 style={{ width: '100%' }}
                 value={taxTotal}
-                formatter={(value) =>
-                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-                }
+                formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
               />
             </Form.Item>
           </Col>
@@ -275,9 +255,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 readOnly
                 style={{ width: '100%' }}
                 value={total}
-                formatter={(value) =>
-                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-                }
+                formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
               />
             </Form.Item>
           </Col>

@@ -31,10 +31,7 @@ export default function UpdateForm({ config, formElements }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    console.log(
-      '🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id',
-      current._id
-    );
+    console.log('🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id', current._id);
     const id = current._id;
     dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
   };
@@ -72,10 +69,7 @@ export default function UpdateForm({ config, formElements }) {
         };
       }
 
-      console.log(
-        '🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj',
-        newValues
-      );
+      console.log('🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj', newValues);
       form.setFieldsValue(newValues);
     }
   }, [current]);
@@ -93,9 +87,7 @@ export default function UpdateForm({ config, formElements }) {
 
   const { isEditBoxOpen } = state;
 
-  const show = isEditBoxOpen
-    ? { display: 'block', opacity: 1 }
-    : { display: 'none', opacity: 0 };
+  const show = isEditBoxOpen ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
   return (
     <div style={show}>
       <Loading isLoading={isLoading}>

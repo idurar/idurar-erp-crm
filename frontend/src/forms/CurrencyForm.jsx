@@ -82,10 +82,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
         }}
         valuePropName="checked"
       >
-        <Switch
-          checkedChildren={<CheckOutlined />}
-          unCheckedChildren={<CloseOutlined />}
-        />
+        <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
       </Form.Item>
     </>
   );

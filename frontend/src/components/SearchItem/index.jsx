@@ -94,9 +94,7 @@ function SearchItemComponent({ config, onRerender }) {
       loading={isLoading}
       showSearch
       allowClear
-      placeholder={
-        <SearchOutlined style={{ float: 'right', padding: '8px 0' }} />
-      }
+      placeholder={<SearchOutlined style={{ float: 'right', padding: '8px 0' }} />}
       defaultActiveFirstOption={false}
       showArrow={false}
       filterOption={false}
@@ -107,10 +105,7 @@ function SearchItemComponent({ config, onRerender }) {
       onSelect={onSelect}
     >
       {selectOptions.map((optionField) => (
-        <Select.Option
-          key={optionField[outputValue]}
-          value={optionField[outputValue]}
-        >
+        <Select.Option key={optionField[outputValue]} value={optionField[outputValue]}>
           {labels(optionField)}
         </Select.Option>
       ))}

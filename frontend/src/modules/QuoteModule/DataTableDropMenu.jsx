@@ -34,10 +34,7 @@ export default function DataTableDropMenu({ row, entity }) {
     modal.open();
   }
   function Download() {
-    window.open(
-      `${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`,
-      '_blank'
-    );
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
   }
   return (
     <Menu style={{ minWidth: 130 }}>
@@ -47,18 +44,10 @@ export default function DataTableDropMenu({ row, entity }) {
       <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
-      <Menu.Item
-        key={`${uniqueId()}`}
-        icon={<FilePdfOutlined />}
-        onClick={Download}
-      >
+      <Menu.Item key={`${uniqueId()}`} icon={<FilePdfOutlined />} onClick={Download}>
         Download
       </Menu.Item>
-      <Menu.Item
-        key={`${uniqueId()}`}
-        icon={<DeleteOutlined />}
-        onClick={Delete}
-      >
+      <Menu.Item key={`${uniqueId()}`} icon={<DeleteOutlined />} onClick={Delete}>
         Delete
       </Menu.Item>
     </Menu>

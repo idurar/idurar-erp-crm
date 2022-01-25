@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const expenseCategorySchema = new mongoose.Schema({
@@ -26,4 +26,4 @@ const expenseCategorySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("ExpenseCategory", expenseCategorySchema);
+module.exports = mongoose.model('ExpenseCategory', expenseCategorySchema);

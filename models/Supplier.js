@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const supplierSchema = new mongoose.Schema({
@@ -76,4 +76,4 @@ const supplierSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Supplier", supplierSchema);
+module.exports = mongoose.model('Supplier', supplierSchema);

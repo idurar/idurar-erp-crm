@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const paymentModeSchema = new mongoose.Schema({
@@ -31,4 +31,4 @@ const paymentModeSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("PaymentMode", paymentModeSchema);
+module.exports = mongoose.model('PaymentMode', paymentModeSchema);
