@@ -1,11 +1,11 @@
 import * as actionTypes from './types';
 
 const INITIAL_STATE = {
-  currency: '$',
+  currencySymbol: '$',
   currencyPosition: 'before',
 };
 
-const authReducer = (state = INITIAL_STATE, action) => {
+const settingsReducer = (state = INITIAL_STATE, action) => {
   const { payload, keyState } = action;
   switch (action.type) {
     case actionTypes.SET_STATE:
@@ -19,4 +19,4 @@ const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default authReducer;
+export default settingsReducer;

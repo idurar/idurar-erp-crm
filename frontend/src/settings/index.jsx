@@ -1,27 +1,27 @@
 import React from 'react';
-import dayjs from 'dayjs';
-
+import currency from 'currency.js';
 import { useSelector } from 'react-redux';
 
 import { selectSettings } from '@/redux/settings/selectors';
 
 export const useMoney = () => {
   const {
-    currency,
-    currencyPosition,
+    currencySymbol,
+    currencyPosition = 'before',
     decimalSep,
     ThousandSep = ' ',
   } = useSelector(selectSettings);
 
+  const currencyFomat = (amount) =>
+    currency(amount, { separator: ThousandSep, decimal: decimalSep });
+
   let moneyFormatter = ({ amount = 0 }) => {
     return currencyPosition === 'before'
-      ? currency + ' ' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-      : amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
-          ' ' +
-          currency;
+      ? currencySymbol + ' ' + currencyFomat(amount)
+      : currencyFomat(amount) + ' ' + currencySymbol;
   };
   let amountFormatter = ({ amount = 0 }) => {
-    return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return currencyFomat(amount);
   };
 
   let moneyRowFormatter = ({ amount = 0 }) => {
@@ -40,7 +40,6 @@ export const useMoney = () => {
     moneyRowFormatter,
     moneyFormatter,
     amountFormatter,
-    currency,
-    currencyPosition,
+    currencySymbol,
   };
 };
