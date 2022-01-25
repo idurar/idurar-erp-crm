@@ -7,27 +7,43 @@ on:
   pull_request:
     branches: [master]
 jobs:
-  buildAndTest:
-    name: Build and Test
+  build:
+    name: Test
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v1
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v2
+      - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v2.3.0
         with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
-      - run: yarn
-        if: |
-          steps.cache-node-modules.outputs.cache-hit != 'true'
-      - name: Test
-        run: yarn test
+          cmd: install # will run `yarn install` command
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: test # will run `yarn test` command
+
+
+  # buildAndTest:
+  #   name: Build and Test
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: frontend
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Get yarn cache directory path
+  #       id: yarn-cache-dir-path
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - name: Cache node_modules
+  #       id: cache-node-modules
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
+  #     - run: yarn
+  #       if: |
+  #         steps.cache-node-modules.outputs.cache-hit != 'true'
+  #     - name: Test
+  #       run: yarn test
