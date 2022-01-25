@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
 const adminSchema = new Schema({
   removed: {
@@ -31,23 +31,23 @@ const adminSchema = new Schema({
   },
   employee: {
     type: mongoose.Schema.ObjectId,
-    ref: "Employee",
+    ref: 'Employee',
     autopopulate: true,
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  role: { type: mongoose.Schema.ObjectId, ref: "Role", autopopulate: true },
+  role: { type: mongoose.Schema.ObjectId, ref: 'Role', autopopulate: true },
   hasCustomPermissions: {
     type: Boolean,
     default: false,
   },
-  permissions: [{ type: mongoose.Schema.ObjectId, ref: "Permission" }],
+  permissions: [{ type: mongoose.Schema.ObjectId, ref: 'Permission' }],
   isLoggedIn: { type: Boolean },
 });
 
-adminSchema.plugin(require("mongoose-autopopulate"));
+adminSchema.plugin(require('mongoose-autopopulate'));
 
 // generating a hash
 adminSchema.methods.generateHash = function (password) {
@@ -59,4 +59,4 @@ adminSchema.methods.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model("Admin", adminSchema);
+module.exports = mongoose.model('Admin', adminSchema);

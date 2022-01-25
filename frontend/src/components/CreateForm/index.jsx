@@ -16,10 +16,7 @@ export default function CreateForm({ config, formElements }) {
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
-    console.log(
-      '🚀 ~ file: index.jsx ~ line 19 ~ onSubmit ~ fieldsValue',
-      fieldsValue
-    );
+    console.log('🚀 ~ file: index.jsx ~ line 19 ~ onSubmit ~ fieldsValue', fieldsValue);
 
     dispatch(crud.create({ entity, jsonData: fieldsValue }));
   };

@@ -30,11 +30,7 @@ const SideContent = () => {
       className="sideContent"
     >
       <div style={{ width: '100%' }}>
-        <img
-          src={logo}
-          alt="Logo"
-          style={{ margin: '0 auto 40px', display: 'block' }}
-        />
+        <img src={logo} alt="Logo" style={{ margin: '0 auto 40px', display: 'block' }} />
         <div className="space40"></div>
         <Title level={3}>Manage your company with :</Title>
         <div className="space20"></div>
@@ -50,10 +46,7 @@ const SideContent = () => {
           <li className="list-checked-item">
             <Space direction="vertical">
               <Text strong>Easily add &amp; manage your services</Text>
-              <Text>
-                It brings together your tasks, projects, timelines, files and
-                more
-              </Text>
+              <Text>It brings together your tasks, projects, timelines, files and more</Text>
             </Space>
           </li>
         </ul>

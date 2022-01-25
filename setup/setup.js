@@ -1,7 +1,7 @@
-require("dotenv").config({ path: __dirname + "/../.variables.env" });
-const fs = require("fs");
+require('dotenv').config({ path: __dirname + '/../.variables.env' });
+const fs = require('fs');
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
@@ -36,18 +36,18 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 async function createAdmin() {
   try {
-    const Admin = require("../models/Admin");
+    const Admin = require('../models/Admin');
     var newAdmin = new Admin();
-    const passwordHash = newAdmin.generateHash("admin123");
+    const passwordHash = newAdmin.generateHash('admin123');
 
     await new Admin({
-      email: "admin@demo.com",
+      email: 'admin@demo.com',
       password: passwordHash,
     }).save();
-    console.log("👍👍👍👍👍👍👍👍 Admin created : Done!");
+    console.log('👍👍👍👍👍👍👍👍 Admin created : Done!');
     process.exit();
   } catch (e) {
-    console.log("\n👎👎👎👎👎👎👎👎 Error! The Error info is below");
+    console.log('\n👎👎👎👎👎👎👎👎 Error! The Error info is below');
     console.log(e);
     process.exit();
   }

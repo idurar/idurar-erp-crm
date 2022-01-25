@@ -3,13 +3,13 @@
 */
 
 // FS is a built in module to node that let's us read files from the system we're running on
-const fs = require("fs");
-const mongoose = require("mongoose");
+const fs = require('fs');
+const mongoose = require('mongoose');
 
-const getData = require("./controllers/helpersControllers/custom").getData;
+const getData = require('./controllers/helpersControllers/custom').getData;
 
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
-exports.moment = require("moment");
+exports.moment = require('moment');
 
 // Dump is a handy debugging function we can use to sort of "console.log" our data
 exports.dump = (obj) => JSON.stringify(obj, null, 2);
@@ -28,9 +28,9 @@ exports.image = (name) => fs.readFileSync(`./public/images/photos/${name}.jpg`);
 
 exports.adminPhotoUrl = (admin) => {
   if (admin) {
-    return admin.photo ? "/" + admin.photo : "/images/photos/profile.jpg";
+    return admin.photo ? '/' + admin.photo : '/images/photos/profile.jpg';
   } else {
-    return "/images/photos/profile.jpg";
+    return '/images/photos/profile.jpg';
   }
 };
 
@@ -39,7 +39,7 @@ exports.siteName = `Express.js / MongoBD / Rest Api`;
 
 exports.timeRange = (start, end, format, interval) => {
   if (format == undefined) {
-    format = "HH:mm";
+    format = 'HH:mm';
   }
 
   if (interval == undefined) {
@@ -50,47 +50,47 @@ exports.timeRange = (start, end, format, interval) => {
   const range = [];
   while (moment(start).isBefore(moment(end))) {
     range.push(moment(start).format(format));
-    start = moment(start).add(interval, "minutes");
+    start = moment(start).add(interval, 'minutes');
   }
   return range;
 };
 
 exports.settingCommercial = async (name) => {
   try {
-    const Model = mongoose.model("SettingCommercial");
+    const Model = mongoose.model('SettingCommercial');
     const result = await Model.findOne({ name: name });
     if (result) {
       return await result.value;
     }
     return null;
   } catch (err) {
-    console.log("setting fetch failed", err);
+    console.log('setting fetch failed', err);
   }
 };
 
 exports.settingGlobal = async (name) => {
   try {
-    const Model = mongoose.model("SettingGlobal");
+    const Model = mongoose.model('SettingGlobal');
     const result = await Model.findOne({ name: name });
     if (result) {
       return await result.value;
     }
     return null;
   } catch (err) {
-    console.log("setting fetch failed", err);
+    console.log('setting fetch failed', err);
   }
 };
 
 exports.settingMedical = async (name) => {
   try {
-    const Model = mongoose.model("SettingMedical");
+    const Model = mongoose.model('SettingMedical');
     const result = await Model.findOne({ name: name });
     if (result) {
       return await result.value;
     }
     return null;
   } catch (err) {
-    console.log("setting fetch failed", err);
+    console.log('setting fetch failed', err);
   }
 };
 

@@ -30,9 +30,7 @@ function SidePanelTopContent({ config, formElements }) {
   const [labels, setLabels] = useState('');
   useEffect(() => {
     if (currentItem) {
-      const currentlabels = entityDisplayLabels
-        .map((x) => currentItem[x])
-        .join(' ');
+      const currentlabels = entityDisplayLabels.map((x) => currentItem[x]).join(' ');
 
       setLabels(currentlabels);
     }
@@ -99,9 +97,7 @@ function FixHeaderPanel({ config }) {
     <div className="box">
       <Row gutter={12}>
         <Col className="gutter-row" span={21}>
-          <h1 style={{ fontSize: 20, marginBottom: 20 }}>
-            {config.PANEL_TITLE}
-          </h1>
+          <h1 style={{ fontSize: 20, marginBottom: 20 }}>{config.PANEL_TITLE}</h1>
         </Col>
       </Row>
       <Row gutter={8}>
@@ -109,11 +105,7 @@ function FixHeaderPanel({ config }) {
           <SearchItem config={config} />
         </Col>
         <Col className="gutter-row" span={3}>
-          <Button
-            onClick={addNewItem}
-            block={true}
-            icon={<PlusOutlined />}
-          ></Button>
+          <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
         </Col>
       </Row>
     </div>
@@ -131,12 +123,8 @@ function CrudModule({ config, createForm, updateForm }) {
     <CrudLayout
       config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
-      sidePanelBottomContent={
-        <CreateForm config={config} formElements={createForm} />
-      }
-      sidePanelTopContent={
-        <SidePanelTopContent config={config} formElements={updateForm} />
-      }
+      sidePanelBottomContent={<CreateForm config={config} formElements={createForm} />}
+      sidePanelTopContent={<SidePanelTopContent config={config} formElements={updateForm} />}
     >
       <CrudDataTable config={config} />
       <DeleteModal config={config} />

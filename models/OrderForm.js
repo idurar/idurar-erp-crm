@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const orderFormSchema = new mongoose.Schema({
@@ -24,7 +24,7 @@ const orderFormSchema = new mongoose.Schema({
   },
   supplier: {
     type: mongoose.Schema.ObjectId,
-    ref: "Supplier",
+    ref: 'Supplier',
     required: true,
   },
   items: [
@@ -76,17 +76,17 @@ const orderFormSchema = new mongoose.Schema({
   expense: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "Expense",
+      ref: 'Expense',
     },
   ],
   paymentStatus: {
     type: String,
     trim: true,
-    default: "unpaid",
+    default: 'unpaid',
   },
   status: {
     type: String,
-    default: "draft",
+    default: 'draft',
   },
   updated: {
     type: Date,
@@ -98,4 +98,4 @@ const orderFormSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("OrderForm", orderFormSchema);
+module.exports = mongoose.model('OrderForm', orderFormSchema);

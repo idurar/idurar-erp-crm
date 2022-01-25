@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Admin = mongoose.model("Admin");
-const getOne = require("./helpersControllers/custom").getOne;
+const mongoose = require('mongoose');
+const Admin = mongoose.model('Admin');
+const getOne = require('./helpersControllers/custom').getOne;
 
 /**
  *  Get all documents of a Model
@@ -17,7 +17,7 @@ exports.list = async (req, res) => {
     const resultsPromise = Admin.find({ removed: false })
       .skip(skip)
       .limit(limit)
-      .sort({ created: "desc" })
+      .sort({ created: 'desc' })
       .populate();
     // Counting the total documents
     const countPromise = Admin.count({ removed: false });
@@ -38,20 +38,18 @@ exports.list = async (req, res) => {
         success: true,
         result,
         pagination,
-        message: "Successfully found all documents",
+        message: 'Successfully found all documents',
       });
     } else {
       return res.status(203).json({
         success: false,
         result: [],
         pagination,
-        message: "Collection is Empty",
+        message: 'Collection is Empty',
       });
     }
   } catch {
-    return res
-      .status(500)
-      .json({ success: false, result: [], message: "Oops there is an Error" });
+    return res.status(500).json({ success: false, result: [], message: 'Oops there is an Error' });
   }
 };
 exports.profile = async (req, res) => {
@@ -80,13 +78,13 @@ exports.profile = async (req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: "Successfully found Profile",
+      message: 'Successfully found Profile',
     });
   } catch {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -101,14 +99,14 @@ exports.photo = async (req, res) => {
     const tmpResult = await Admin.findOneAndUpdate(
       { _id: req.admin._id, removed: false },
       { $set: updates },
-      { new: true, runValidators: true, context: "query" }
+      { new: true, runValidators: true, context: 'query' }
     );
     // If no results found, return document not found
     if (!tmpResult) {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     } else {
       // Return success resposne
@@ -126,7 +124,7 @@ exports.photo = async (req, res) => {
       return res.status(200).json({
         success: true,
         result,
-        message: "we found this document by this id: " + req.params.id,
+        message: 'we found this document by this id: ' + req.params.id,
       });
     }
   } catch {
@@ -134,7 +132,7 @@ exports.photo = async (req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -150,7 +148,7 @@ exports.read = async (req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     } else {
       // Return success resposne
@@ -168,7 +166,7 @@ exports.read = async (req, res) => {
       return res.status(200).json({
         success: true,
         result,
-        message: "we found this document by this id: " + req.params.id,
+        message: 'we found this document by this id: ' + req.params.id,
       });
     }
   } catch {
@@ -176,7 +174,7 @@ exports.read = async (req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -203,18 +201,18 @@ exports.create = async (req, res) => {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "An account with this email already exists.",
+        message: 'An account with this email already exists.',
       });
 
     if (password.length < 8)
       return res.status(400).json({
         success: false,
         result: null,
-        message: "The password needs to be at least 8 characters long.",
+        message: 'The password needs to be at least 8 characters long.',
       });
 
     if (req.body.employee) {
-      let employee = await getOne("Employee", req.body.employee);
+      let employee = await getOne('Employee', req.body.employee);
       req.body.name = employee.name;
       req.body.surname = employee.surname;
     }
@@ -242,10 +240,10 @@ exports.create = async (req, res) => {
         role: result.role,
         employee: result.employee,
       },
-      message: "Admin document save correctly",
+      message: 'Admin document save correctly',
     });
   } catch {
-    return res.status(500).json({ success: false, message: "there is error" });
+    return res.status(500).json({ success: false, message: 'there is error' });
   }
 };
 
@@ -263,12 +261,10 @@ exports.update = async (req, res) => {
       const existingAdmin = await Admin.findOne({ email: email });
 
       if (existingAdmin._id != req.params.id)
-        return res
-          .status(400)
-          .json({ message: "An account with this email already exists." });
+        return res.status(400).json({ message: 'An account with this email already exists.' });
     }
     if (req.body.employee) {
-      let employee = await getOne("Employee", req.body.employee);
+      let employee = await getOne('Employee', req.body.employee);
       req.body.name = employee.name;
       req.body.surname = employee.surname;
     }
@@ -293,7 +289,7 @@ exports.update = async (req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     }
     return res.status(200).json({
@@ -308,14 +304,14 @@ exports.update = async (req, res) => {
         role: result.role,
         employee: result.employee,
       },
-      message: "we update this document by this id: " + req.params.id,
+      message: 'we update this document by this id: ' + req.params.id,
     });
   } catch {
     // Server Error
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -324,12 +320,11 @@ exports.updatePassword = async (req, res) => {
   try {
     let { password } = req.body;
 
-    if (!password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+    if (!password) return res.status(400).json({ msg: 'Not all fields have been entered.' });
 
     if (password.length < 8)
       return res.status(400).json({
-        msg: "The password needs to be at least 8 characters long.",
+        msg: 'The password needs to be at least 8 characters long.',
       });
 
     // if (password !== passwordCheck)
@@ -354,7 +349,7 @@ exports.updatePassword = async (req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     }
     return res.status(200).json({
@@ -369,14 +364,14 @@ exports.updatePassword = async (req, res) => {
         role: result.role,
         employee: result.employee,
       },
-      message: "we update the password by this id: " + req.params.id,
+      message: 'we update the password by this id: ' + req.params.id,
     });
   } catch {
     // Server Error
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -399,20 +394,20 @@ exports.delete = async (req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     } else {
       return res.status(200).json({
         success: true,
         result,
-        message: "Successfully Deleted the document by id: " + req.params.id,
+        message: 'Successfully Deleted the document by id: ' + req.params.id,
       });
     }
   } catch {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -436,15 +431,13 @@ exports.status = async (req, res) => {
         return res.status(404).json({
           success: false,
           result: null,
-          message: "No document found by this id: " + req.params.id,
+          message: 'No document found by this id: ' + req.params.id,
         });
       } else {
         return res.status(200).json({
           success: true,
           result,
-          message:
-            "Successfully update status of this document by id: " +
-            req.params.id,
+          message: 'Successfully update status of this document by id: ' + req.params.id,
         });
       }
     } else {
@@ -461,7 +454,7 @@ exports.status = async (req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -470,53 +463,46 @@ exports.search = async (req, res) => {
 
   // console.log(fields)
   try {
-    if (
-      req.query.q === undefined ||
-      req.query.q === "" ||
-      req.query.q === " "
-    ) {
+    if (req.query.q === undefined || req.query.q === '' || req.query.q === ' ') {
       return res
         .status(202)
         .json({
           success: false,
           result: [],
-          message: "No document found by this request",
+          message: 'No document found by this request',
         })
         .end();
     }
 
     const fieldsArray = req.query.fields
-      ? req.query.fields.split(",")
-      : ["name", "surname", "email"];
+      ? req.query.fields.split(',')
+      : ['name', 'surname', 'email'];
 
     const fields = { $or: [] };
 
     for (const field of fieldsArray) {
-      fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, "i") } });
+      fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
     }
-    let result = await Admin.find(fields)
-      .where("removed", false)
-      .sort({ name: "asc" })
-      .limit(10);
+    let result = await Admin.find(fields).where('removed', false).sort({ name: 'asc' }).limit(10);
 
     if (result.length >= 1) {
       return res.status(200).json({
         success: true,
         result,
-        message: "Successfully found all documents",
+        message: 'Successfully found all documents',
       });
     } else {
       return res.status(202).json({
         success: false,
         result: [],
-        message: "No document found by this request",
+        message: 'No document found by this request',
       });
     }
   } catch {
     return res.status(500).json({
       success: false,
       result: [],
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };
@@ -527,7 +513,7 @@ exports.filter = async (req, res) => {
       return res.status(403).json({
         success: false,
         result: null,
-        message: "filter not provided correctly",
+        message: 'filter not provided correctly',
       });
     }
     const result = await Admin.find({ removed: false })
@@ -536,14 +522,13 @@ exports.filter = async (req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message:
-        "Successfully found all documents where equal to : " + req.params.equal,
+      message: 'Successfully found all documents where equal to : ' + req.params.equal,
     });
   } catch {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
     });
   }
 };

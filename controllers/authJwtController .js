@@ -1,32 +1,26 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const Admin = mongoose.model("Admin");
+const Admin = mongoose.model('Admin');
 
-require("dotenv").config({ path: ".variables.env" });
+require('dotenv').config({ path: '.variables.env' });
 
 exports.register = async (req, res) => {
   try {
     let { email, password, passwordCheck, name } = req.body;
 
     if (!email || !password || !passwordCheck)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res.status(400).json({ msg: 'Not all fields have been entered.' });
     if (password.length < 5)
-      return res
-        .status(400)
-        .json({ msg: "The password needs to be at least 5 characters long." });
+      return res.status(400).json({ msg: 'The password needs to be at least 5 characters long.' });
     if (password !== passwordCheck)
-      return res
-        .status(400)
-        .json({ msg: "Enter the same password twice for verification." });
+      return res.status(400).json({ msg: 'Enter the same password twice for verification.' });
 
     const existingAdmin = await Admin.findOne({ email: email });
     if (existingAdmin)
-      return res
-        .status(400)
-        .json({ msg: "An account with this email already exists." });
+      return res.status(400).json({ msg: 'An account with this email already exists.' });
 
     if (!name) name = email;
 
@@ -59,17 +53,14 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(
-      "🚀 ~ file: authJwtController .js ~ line 62 ~ exports.login= ~ req.body",
-      req.body
-    );
+    console.log('🚀 ~ file: authJwtController .js ~ line 62 ~ exports.login= ~ req.body', req.body);
 
     // validate
     if (!email || !password)
       return res.status(400).json({
         success: false,
         result: null,
-        message: "Not all fields have been entered.",
+        message: 'Not all fields have been entered.',
       });
 
     const admin = await Admin.findOne({ email: email, removed: false });
@@ -78,7 +69,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "No account with this email has been registered.",
+        message: 'No account with this email has been registered.',
       });
 
     const isMatch = await bcrypt.compare(password, admin.password);
@@ -86,7 +77,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "Invalid credentials.",
+        message: 'Invalid credentials.',
       });
 
     const token = jwt.sign(
@@ -94,7 +85,7 @@ exports.login = async (req, res) => {
         id: admin._id,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "72h" }
+      { expiresIn: '72h' }
     );
 
     const result = await Admin.findOneAndUpdate(
@@ -105,10 +96,10 @@ exports.login = async (req, res) => {
       }
     ).exec();
 
-    res.cookie("token", token, {
+    res.cookie('token', token, {
       maxAge: 72 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: 'none',
       secure: true,
     });
 
@@ -122,13 +113,11 @@ exports.login = async (req, res) => {
           isLoggedIn: result.isLoggedIn,
         },
       },
-      message: "Successfully login admin",
+      message: 'Successfully login admin',
     });
   } catch (err) {
     // res.status(500).json({ success: false, result:null, message: err.message });
-    res
-      .status(500)
-      .json({ success: false, result: null, message: err.message, error: err });
+    res.status(500).json({ success: false, result: null, message: err.message, error: err });
   }
 };
 
@@ -136,7 +125,7 @@ exports.isValidToken = async (req, res, next) => {
   try {
     const token = req.cookies.token;
     console.log(
-      "🚀 ~ file: authJwtController .js ~ line 130 ~ exports.isValidToken= ~ token",
+      '🚀 ~ file: authJwtController .js ~ line 130 ~ exports.isValidToken= ~ token',
       token
     );
 
@@ -144,7 +133,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "No authentication token, authorization denied.",
+        message: 'No authentication token, authorization denied.',
         jwtExpired: true,
       });
 
@@ -154,7 +143,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "Token verification failed, authorization denied.",
+        message: 'Token verification failed, authorization denied.',
         jwtExpired: true,
       });
 
@@ -171,7 +160,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "Admin is already logout try to login, authorization denied.",
+        message: 'Admin is already logout try to login, authorization denied.',
         jwtExpired: true,
       });
     else {
@@ -198,6 +187,6 @@ exports.logout = async (req, res) => {
     }
   ).exec();
 
-  res.clearCookie("token");
+  res.clearCookie('token');
   res.json({ isLoggedOut: true });
 };

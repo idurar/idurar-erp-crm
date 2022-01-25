@@ -21,17 +21,9 @@ export default function HeaderContent() {
   const { SubMenu } = Menu;
 
   const profileDropdown = (
-    <div
-      className="profileDropdown whiteBox shadow"
-      style={{ minWidth: '200px' }}
-    >
+    <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
       <div className="pad15">
-        <Avatar
-          size="large"
-          className="last"
-          src={photo}
-          style={{ float: 'left' }}
-        />
+        <Avatar size="large" className="last" src={photo} style={{ float: 'left' }} />
         <div className="info">
           <p className="strong">Mark Williams</p>
           <p>mark.williams@gmail.com</p>
@@ -50,11 +42,7 @@ export default function HeaderContent() {
               <Menu.Item key="4">Option 4</Menu.Item>
             </Menu.ItemGroup>
           </SubMenu>
-          <SubMenu
-            key="sub2"
-            icon={<AppstoreOutlined />}
-            title="Navigation Two"
-          >
+          <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
             <Menu.Item key="5">Option 5</Menu.Item>
             <Menu.Item key="6">Option 6</Menu.Item>
             <SubMenu key="sub3" title="Submenu">
@@ -62,11 +50,7 @@ export default function HeaderContent() {
               <Menu.Item key="8">Option 8</Menu.Item>
             </SubMenu>
           </SubMenu>
-          <SubMenu
-            key="sub4"
-            icon={<SettingOutlined />}
-            title="Navigation Three"
-          >
+          <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
             <Menu.Item key="9">Option 9</Menu.Item>
             <Menu.Item key="10">Option 10</Menu.Item>
             <Menu.Item key="11">Option 11</Menu.Item>
@@ -89,15 +73,8 @@ export default function HeaderContent() {
     </div>
   );
   return (
-    <div
-      className="headerIcon"
-      style={{ position: 'absolute', right: 0, zIndex: '99' }}
-    >
-      <Dropdown
-        overlay={profileDropdown}
-        trigger={['click']}
-        placement="bottomRight"
-      >
+    <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
+      <Dropdown overlay={profileDropdown} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}
         <Avatar className="last" src={photo} />
         {/* </Badge> */}

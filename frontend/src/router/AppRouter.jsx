@@ -6,19 +6,12 @@ import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
 import { routesConfig } from './RoutesConfig';
 
-const Logout = lazy(() =>
-  import(/*webpackChunkName:'LogoutPage'*/ '@/pages/Logout')
-);
-const NotFound = lazy(() =>
-  import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound')
-);
+const Logout = lazy(() => import(/*webpackChunkName:'LogoutPage'*/ '@/pages/Logout'));
+const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
 
 const SubMenuRouter = ({ subMenuRouter }) => {
   subMenuRouter.map((subMenu) => {
-    console.log(
-      '🚀 ~ file: AppRouter.jsx ~ line 25 ~ routeItem.hasSubMenu.map ~ subMenu',
-      subMenu
-    );
+    console.log('🚀 ~ file: AppRouter.jsx ~ line 25 ~ routeItem.hasSubMenu.map ~ subMenu', subMenu);
 
     return (
       <PrivateRoute
@@ -26,9 +19,7 @@ const SubMenuRouter = ({ subMenuRouter }) => {
         path={subMenu.path}
         exact={subMenu.exact || true}
         component={lazy(() =>
-          import(
-            /* webpackChunkName: "[request]" */ `@/pages/${subMenu.component}`
-          )
+          import(/* webpackChunkName: "[request]" */ `@/pages/${subMenu.component}`)
         )}
       />
     );
@@ -48,20 +39,14 @@ export default function AppRouter() {
                 path={routeItem.path}
                 exact={routeItem.exact || true}
                 component={lazy(() =>
-                  import(
-                    /* webpackChunkName: "[request]" */ `@/pages/${routeItem.component}`
-                  )
+                  import(/* webpackChunkName: "[request]" */ `@/pages/${routeItem.component}`)
                 )}
               />
             );
           })}
           <PublicRoute path="/login" render={() => <Redirect to="/" />} exact />
           <Route component={Logout} path="/logout" exact />
-          <Route
-            path="*"
-            component={NotFound}
-            render={() => <Redirect to="/notfound" />}
-          />
+          <Route path="*" component={NotFound} render={() => <Redirect to="/notfound" />} />
         </Switch>
       </AnimatePresence>
     </Suspense>

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const roleSchema = new mongoose.Schema({
@@ -22,11 +22,11 @@ const roleSchema = new mongoose.Schema({
     trim: true,
   },
   authorizedPages: [{ type: String, lowercase: true, trim: true }],
-  permissions: [{ type: mongoose.Schema.ObjectId, ref: "Permission" }],
+  permissions: [{ type: mongoose.Schema.ObjectId, ref: 'Permission' }],
   created: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model("Role", roleSchema);
+module.exports = mongoose.model('Role', roleSchema);

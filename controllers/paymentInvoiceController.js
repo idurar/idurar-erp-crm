@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
-const Model = mongoose.model("PaymentInvoice");
-const Invoice = mongoose.model("Invoice");
-const custom = require("./helpersControllers/custom");
+const mongoose = require('mongoose');
+const Model = mongoose.model('PaymentInvoice');
+const Invoice = mongoose.model('Invoice');
+const custom = require('./helpersControllers/custom');
 
-const crudController = require("./helpersControllers/crudController");
-const methods = crudController.createCRUDController("PaymentInvoice");
+const crudController = require('./helpersControllers/crudController');
+const methods = crudController.createCRUDController('PaymentInvoice');
 
-delete methods["create"];
-delete methods["update"];
-delete methods["delete"];
+delete methods['create'];
+delete methods['update'];
+delete methods['delete'];
 
 methods.create = async (req, res) => {
   try {
@@ -44,7 +44,7 @@ methods.create = async (req, res) => {
 
     const result = await new Model(req.body).save();
 
-    const fileId = "payment-invoice-report-" + result._id + ".pdf";
+    const fileId = 'payment-invoice-report-' + result._id + '.pdf';
     const updatePath = Model.findOneAndUpdate(
       { _id: result._id, removed: false },
       { pdfPath: fileId },
@@ -58,11 +58,7 @@ methods.create = async (req, res) => {
     const { id: invoiceId, total, discount, credit } = result.invoice;
 
     let paymentStatus =
-      total - discount === credit + amount
-        ? "paid"
-        : credit + amount > 0
-        ? "partially"
-        : "unpaid";
+      total - discount === credit + amount ? 'paid' : credit + amount > 0 ? 'partially' : 'unpaid';
 
     const invoiceUpdate = Invoice.findByIdAndUpdate(
       { _id: invoiceId },
@@ -79,23 +75,20 @@ methods.create = async (req, res) => {
     //   result
     // );
 
-    const [updatedResult, invoiceUpdated] = await Promise.all([
-      updatePath,
-      invoiceUpdate,
-    ]);
+    const [updatedResult, invoiceUpdated] = await Promise.all([updatePath, invoiceUpdate]);
     res.status(200).json({
       success: true,
       result: updatedResult,
-      message: "Successfully Created the document in Model ",
+      message: 'Successfully Created the document in Model ',
     });
   } catch (err) {
     console.log(err);
     // If err is thrown by Mongoose due to required validations
-    if (err.name == "ValidationError") {
+    if (err.name == 'ValidationError') {
       res.status(400).json({
         success: false,
         result: null,
-        message: "Required fields are not supplied",
+        message: 'Required fields are not supplied',
         error: err,
       });
     } else {
@@ -103,7 +96,7 @@ methods.create = async (req, res) => {
       res.status(500).json({
         success: false,
         result: null,
-        message: "Oops there is an Error",
+        message: 'Oops there is an Error',
         error: err,
       });
     }
@@ -126,12 +119,7 @@ methods.update = async (req, res) => {
     });
 
     const { amount: previousAmount } = previousPayment;
-    const {
-      id: invoiceId,
-      total,
-      discount,
-      credit: previousCredit,
-    } = previousPayment.invoice;
+    const { id: invoiceId, total, discount, credit: previousCredit } = previousPayment.invoice;
 
     const { amount: currentAmount } = req.body;
 
@@ -149,10 +137,10 @@ methods.update = async (req, res) => {
 
     let paymentStatus =
       total - discount === previousCredit + changedAmount
-        ? "paid"
+        ? 'paid'
         : previousCredit + changedAmount > 0
-        ? "partially"
-        : "unpaid";
+        ? 'partially'
+        : 'unpaid';
 
     const updatedDate = new Date();
     const updates = {
@@ -195,16 +183,16 @@ methods.update = async (req, res) => {
     res.status(200).json({
       success: true,
       result,
-      message: "Successfully updated the Payment ",
+      message: 'Successfully updated the Payment ',
     });
   } catch (err) {
     console.log(err);
     // If err is thrown by Mongoose due to required validations
-    if (err.name == "ValidationError") {
+    if (err.name == 'ValidationError') {
       res.status(400).json({
         success: false,
         result: null,
-        message: "Required fields are not supplied",
+        message: 'Required fields are not supplied',
         error: err,
       });
     } else {
@@ -212,7 +200,7 @@ methods.update = async (req, res) => {
       res.status(500).json({
         success: false,
         result: null,
-        message: "Oops there is an Error",
+        message: 'Oops there is an Error',
         error: err,
       });
     }
@@ -231,17 +219,12 @@ methods.delete = async (req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     }
 
     const { _id: paymentInvoiceId, amount: previousAmount } = previousPayment;
-    const {
-      id: invoiceId,
-      total,
-      discount,
-      credit: previousCredit,
-    } = previousPayment.invoice;
+    const { id: invoiceId, total, discount, credit: previousCredit } = previousPayment.invoice;
 
     // Find the document by id and delete it
     let updates = {
@@ -259,10 +242,10 @@ methods.delete = async (req, res) => {
 
     let paymentStatus =
       total - discount === previousCredit - previousAmount
-        ? "paid"
+        ? 'paid'
         : previousCredit - previousAmount > 0
-        ? "partially"
-        : "unpaid";
+        ? 'partially'
+        : 'unpaid';
 
     const updateInvoice = await Invoice.findOneAndUpdate(
       { _id: invoiceId },
@@ -283,13 +266,13 @@ methods.delete = async (req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: "Successfully Deleted the document by id: " + req.params.id,
+      message: 'Successfully Deleted the document by id: ' + req.params.id,
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }

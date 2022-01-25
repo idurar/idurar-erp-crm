@@ -103,32 +103,15 @@ export default function Payment({ config }) {
           lg={{ span: 10, order: 2, push: 4 }}
         >
           <div className="space50"></div>
-          <Descriptions
-            title={`Client : ${currentErp.client.company}`}
-            column={1}
-          >
-            <Descriptions.Item label="E-mail">
-              {currentErp.client.email}
-            </Descriptions.Item>
-            <Descriptions.Item label="Phone">
-              {currentErp.client.phone}
-            </Descriptions.Item>
+          <Descriptions title={`Client : ${currentErp.client.company}`} column={1}>
+            <Descriptions.Item label="E-mail">{currentErp.client.email}</Descriptions.Item>
+            <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
             <Divider dashed />
-            <Descriptions.Item label="Payment Status">
-              {currentErp.paymentStatus}
-            </Descriptions.Item>
-            <Descriptions.Item label="SubTotal">
-              {currentErp.subTotal}
-            </Descriptions.Item>
-            <Descriptions.Item label="Total">
-              {currentErp.total}
-            </Descriptions.Item>
-            <Descriptions.Item label="Discount">
-              {currentErp.discount}
-            </Descriptions.Item>
-            <Descriptions.Item label="Balance">
-              {currentErp.credit}
-            </Descriptions.Item>
+            <Descriptions.Item label="Payment Status">{currentErp.paymentStatus}</Descriptions.Item>
+            <Descriptions.Item label="SubTotal">{currentErp.subTotal}</Descriptions.Item>
+            <Descriptions.Item label="Total">{currentErp.total}</Descriptions.Item>
+            <Descriptions.Item label="Discount">{currentErp.discount}</Descriptions.Item>
+            <Descriptions.Item label="Balance">{currentErp.credit}</Descriptions.Item>
           </Descriptions>
         </Col>
 

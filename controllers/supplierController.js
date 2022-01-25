@@ -1,2 +1,2 @@
-const crudController = require("./helpersControllers/crudController");
-module.exports = crudController.createCRUDController("Supplier");
+const crudController = require('./helpersControllers/crudController');
+module.exports = crudController.createCRUDController('Supplier');

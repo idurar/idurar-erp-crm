@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const quoteSchema = new mongoose.Schema({
@@ -28,7 +28,7 @@ const quoteSchema = new mongoose.Schema({
   },
   client: {
     type: mongoose.Schema.ObjectId,
-    ref: "Client",
+    ref: 'Client',
     required: true,
     autopopulate: true,
   },
@@ -80,11 +80,11 @@ const quoteSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "Draft",
+    default: 'Draft',
   },
   pdfPath: {
     type: String,
-    default: "",
+    default: '',
   },
   updated: {
     type: Date,
@@ -96,5 +96,5 @@ const quoteSchema = new mongoose.Schema({
   },
 });
 
-quoteSchema.plugin(require("mongoose-autopopulate"));
-module.exports = mongoose.model("Quote", quoteSchema);
+quoteSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Quote', quoteSchema);

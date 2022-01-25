@@ -27,9 +27,7 @@ export default function Delete({ config }) {
       dispatch(erp.list({ entity }));
     }
     if (current) {
-      let labels = entityDisplayLabels
-        .map((x) => valueByString(current, x))
-        .join(' ');
+      let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
 
       setDisplayItem(labels);
     }

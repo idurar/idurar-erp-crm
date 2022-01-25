@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const permissionSchema = new mongoose.Schema({
@@ -27,4 +27,4 @@ const permissionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Permission", permissionSchema);
+module.exports = mongoose.model('Permission', permissionSchema);

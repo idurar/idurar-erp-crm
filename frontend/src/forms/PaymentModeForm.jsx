@@ -39,10 +39,7 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         valuePropName="checked"
         initialValue={true}
       >
-        <Switch
-          checkedChildren={<CheckOutlined />}
-          unCheckedChildren={<CloseOutlined />}
-        />
+        <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
       </Form.Item>
       <Form.Item
         label="Is Default Mode"
@@ -54,10 +51,7 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         }}
         valuePropName="checked"
       >
-        <Switch
-          checkedChildren={<CheckOutlined />}
-          unCheckedChildren={<CloseOutlined />}
-        />
+        <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
       </Form.Item>
     </>
   );

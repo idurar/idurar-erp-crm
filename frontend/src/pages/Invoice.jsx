@@ -50,8 +50,7 @@ export default function Invoice() {
       title: 'status',
       dataIndex: 'status',
       render: (status) => {
-        let color =
-          status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
+        let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
 
         return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
       },
@@ -69,11 +68,7 @@ export default function Invoice() {
             ? 'red'
             : 'purple';
 
-        return (
-          <Tag color={color}>
-            {paymentStatus && paymentStatus.toUpperCase()}
-          </Tag>
-        );
+        return <Tag color={color}>{paymentStatus && paymentStatus.toUpperCase()}</Tag>;
       },
     },
   ];

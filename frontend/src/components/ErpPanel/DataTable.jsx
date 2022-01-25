@@ -40,18 +40,14 @@ export default function DataTable({ config, DataTableDropMenu }) {
     {
       title: '',
       render: (row) => (
-        <Dropdown
-          overlay={DataTableDropMenu({ row, entity })}
-          trigger={['click']}
-        >
+        <Dropdown overlay={DataTableDropMenu({ row, entity })} trigger={['click']}>
           <EllipsisOutlined style={{ cursor: 'pointer', fontSize: '24px' }} />
         </Dropdown>
       ),
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } =
-    useSelector(selectListItems);
+  const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
   const { pagination, items } = listResult;
 
@@ -76,18 +72,10 @@ export default function DataTable({ config, DataTableDropMenu }) {
         title={DATATABLE_TITLE}
         ghost={true}
         extra={[
-          <Button
-            onClick={handelDataTableLoad}
-            key={`${uniqueId()}`}
-            icon={<RedoOutlined />}
-          >
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
             Refresh
           </Button>,
-          <Button
-            onClick={handelCurrency}
-            key={`${uniqueId()}`}
-            icon={<RedoOutlined />}
-          >
+          <Button onClick={handelCurrency} key={`${uniqueId()}`} icon={<RedoOutlined />}>
             Change Currency
           </Button>,
           <AddNewItem config={config} key={`${uniqueId()}`} />,

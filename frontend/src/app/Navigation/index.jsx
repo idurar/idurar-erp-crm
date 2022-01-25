@@ -45,12 +45,7 @@ export default function Navigation() {
 
   return (
     <>
-      <Sider
-        collapsible
-        collapsed={isNavMenuClose}
-        onCollapse={onCollapse}
-        className="navigation"
-      >
+      <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
         <div className="logo">
           <img
             src={logoIcon}
@@ -59,11 +54,7 @@ export default function Navigation() {
           />
 
           {!showLogoApp && (
-            <img
-              src={logoText}
-              alt="Logo"
-              style={{ marginTop: '3px', marginLeft: '10px' }}
-            />
+            <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
           )}
         </div>
         <Menu mode="inline">
@@ -95,11 +86,7 @@ export default function Navigation() {
             <Link to={'/admin'} />
             Admin
           </Menu.Item>
-          <SubMenu
-            key={'Settings'}
-            icon={<SettingOutlined />}
-            title={'Settings'}
-          >
+          <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
             <Menu.Item key={'PaymentMode'}>
               <Link to={'/payment/mode'} />
               Payment Mode
