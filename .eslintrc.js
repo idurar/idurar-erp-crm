@@ -4,12 +4,12 @@ module.exports = {
     es2020: true,
     node: true,
   },
-  extends: "eslint:recommended",
+  extends: 'eslint:recommended',
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module',
   },
   rules: {
-    "no-console": 0,
+    'no-console': 0,
   },
 };

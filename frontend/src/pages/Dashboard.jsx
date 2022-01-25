@@ -17,14 +17,8 @@ const TopCard = ({ title, tagContent, tagColor, prefix }) => {
       md={{ span: 12 }}
       lg={{ span: 6 }}
     >
-      <div
-        className="whiteBox shadow"
-        style={{ color: '#595959', fontSize: 13, height: '106px' }}
-      >
-        <div
-          className="pad15 strong"
-          style={{ textAlign: 'center', justifyContent: 'center' }}
-        >
+      <div className="whiteBox shadow" style={{ color: '#595959', fontSize: 13, height: '106px' }}>
+        <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
           <h3 style={{ color: '#22075e', marginBottom: 0 }}>{title}</h3>
         </div>
         <Divider style={{ padding: 0, margin: 0 }}></Divider>
@@ -200,11 +194,7 @@ export default function Dashboard() {
                   <PreviewState tag={'Pending'} color={'bleu'} value={5} />
                   <PreviewState tag={'Not Paid'} color={'orange'} value={12} />
                   <PreviewState tag={'Overdue'} color={'red'} value={6} />
-                  <PreviewState
-                    tag={'Partially Paid'}
-                    color={'cyan'}
-                    value={8}
-                  />
+                  <PreviewState tag={'Partially Paid'} color={'cyan'} value={8} />
                   <PreviewState tag={'Paid'} color={'green'} value={55} />
                 </div>
               </Col>
@@ -229,11 +219,7 @@ export default function Dashboard() {
                   <PreviewState tag={'Pending'} color={'bleu'} value={5} />
                   <PreviewState tag={'Not Paid'} color={'orange'} value={12} />
                   <PreviewState tag={'Overdue'} color={'red'} value={6} />
-                  <PreviewState
-                    tag={'Partially Paid'}
-                    color={'cyan'}
-                    value={8}
-                  />
+                  <PreviewState tag={'Partially Paid'} color={'cyan'} value={8} />
                   <PreviewState tag={'Paid'} color={'green'} value={55} />
                 </div>
               </Col>
@@ -258,11 +244,7 @@ export default function Dashboard() {
                   <PreviewState tag={'Pending'} color={'bleu'} value={5} />
                   <PreviewState tag={'Not Paid'} color={'orange'} value={12} />
                   <PreviewState tag={'Overdue'} color={'red'} value={6} />
-                  <PreviewState
-                    tag={'Partially Paid'}
-                    color={'cyan'}
-                    value={8}
-                  />
+                  <PreviewState tag={'Partially Paid'} color={'cyan'} value={8} />
                   <PreviewState tag={'Paid'} color={'green'} value={55} />
                 </div>
               </Col>
@@ -285,9 +267,7 @@ export default function Dashboard() {
                 justifyContent: 'center',
               }}
             >
-              <h3 style={{ color: '#22075e', marginBottom: 30 }}>
-                Customer Preview
-              </h3>
+              <h3 style={{ color: '#22075e', marginBottom: 30 }}>Customer Preview</h3>
 
               <Progress type="dashboard" percent={25} width={148} />
               <p>New Customer this Month</p>
@@ -315,15 +295,10 @@ export default function Dashboard() {
         >
           <div className="whiteBox shadow">
             <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>
-                Recent Invoices
-              </h3>
+              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Invoices</h3>
             </div>
 
-            <RecentTable
-              entity={'invoice'}
-              dataTableColumns={dataTableColumns}
-            />
+            <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
           </div>
         </Col>
 
@@ -336,9 +311,7 @@ export default function Dashboard() {
         >
           <div className="whiteBox shadow">
             <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>
-                Recent Quotes
-              </h3>
+              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Quotes</h3>
             </div>
             <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
           </div>

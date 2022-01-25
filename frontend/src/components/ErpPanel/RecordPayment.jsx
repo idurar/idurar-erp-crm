@@ -17,11 +17,7 @@ export default function RecordPayment({ config }) {
   const { recordPanel } = erpContextAction;
   const dispatch = useDispatch();
 
-  const {
-    isLoading,
-    isSuccess,
-    current: currentInvoice,
-  } = useSelector(selectRecordPaymentItem);
+  const { isLoading, isSuccess, current: currentInvoice } = useSelector(selectRecordPaymentItem);
 
   const [form] = Form.useForm();
 

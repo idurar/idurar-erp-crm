@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const settingCommercial = new mongoose.Schema({
@@ -34,4 +34,4 @@ const settingCommercial = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("SettingCommercial", settingCommercial);
+module.exports = mongoose.model('SettingCommercial', settingCommercial);

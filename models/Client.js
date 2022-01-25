@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const clientSchema = new mongoose.Schema({
@@ -89,4 +89,4 @@ const clientSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Client", clientSchema);
+module.exports = mongoose.model('Client', clientSchema);

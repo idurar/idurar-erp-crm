@@ -32,10 +32,7 @@ export default function AdminForm({ isUpdateForm = false }) {
           },
         ]}
       >
-        <SelectAsync
-          entity={'role'}
-          displayLabels={['displayName']}
-        ></SelectAsync>
+        <SelectAsync entity={'role'} displayLabels={['displayName']}></SelectAsync>
       </Form.Item>
       <Form.Item
         label="E-mail"

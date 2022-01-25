@@ -27,9 +27,7 @@ export default function DeleteModal({ config, children }) {
       dispatch(crud.list({ entity }));
     }
     if (current) {
-      let labels = entityDisplayLabels
-        .map((x) => valueByString(current, x))
-        .join(' ');
+      let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
 
       setDisplayItem(labels);
     }

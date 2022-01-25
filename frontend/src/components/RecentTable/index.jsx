@@ -4,12 +4,7 @@ import { Dropdown, Menu, Table } from 'antd';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 
-import {
-  EllipsisOutlined,
-  EyeOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons';
+import { EllipsisOutlined, EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 function DropDownRowMenu({ row }) {
   const Show = () => {};

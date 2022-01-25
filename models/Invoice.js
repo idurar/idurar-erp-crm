@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const invoiceSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ const invoiceSchema = new mongoose.Schema({
   },
   recurring: {
     type: String,
-    default: "0",
+    default: '0',
   },
   date: {
     type: Date,
@@ -28,7 +28,7 @@ const invoiceSchema = new mongoose.Schema({
   },
   client: {
     type: mongoose.Schema.ObjectId,
-    ref: "Client",
+    ref: 'Client',
     required: true,
     autopopulate: true,
   },
@@ -82,23 +82,23 @@ const invoiceSchema = new mongoose.Schema({
   paymentInvoice: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "PaymentInvoice",
+      ref: 'PaymentInvoice',
     },
   ],
   paymentStatus: {
     type: String,
-    default: "unpaid",
+    default: 'unpaid',
   },
   note: {
     type: String,
   },
   status: {
     type: String,
-    default: "draft",
+    default: 'draft',
   },
   pdfPath: {
     type: String,
-    default: "",
+    default: '',
   },
   updated: {
     type: Date,
@@ -110,5 +110,5 @@ const invoiceSchema = new mongoose.Schema({
   },
 });
 
-invoiceSchema.plugin(require("mongoose-autopopulate"));
-module.exports = mongoose.model("Invoice", invoiceSchema);
+invoiceSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Invoice', invoiceSchema);

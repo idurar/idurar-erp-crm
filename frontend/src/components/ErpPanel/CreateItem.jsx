@@ -114,12 +114,7 @@ export default function CreateItem({ config, CreateForm }) {
       ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={onSubmit}
-          onValuesChange={handelValuesChange}
-        >
+        <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
           <CreateForm subTotal={subTotal} />
           <Form.Item>
             <Button type="primary" htmlType="submit">

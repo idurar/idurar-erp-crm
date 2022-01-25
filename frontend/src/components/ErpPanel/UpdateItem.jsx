@@ -80,10 +80,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     }
 
     const id = current._id;
-    console.log(
-      '🚀 ~ file: UpdateItem.jsx ~ line 88 ~ onSubmit ~ fieldsValue',
-      fieldsValue
-    );
+    console.log('🚀 ~ file: UpdateItem.jsx ~ line 88 ~ onSubmit ~ fieldsValue', fieldsValue);
     dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
   };
   useEffect(() => {
@@ -145,12 +142,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={onSubmit}
-          onValuesChange={handelValuesChange}
-        >
+        <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
           <UpdateForm subTotal={subTotal} current={current} />
           <Form.Item>
             <Button type="primary" htmlType="submit">

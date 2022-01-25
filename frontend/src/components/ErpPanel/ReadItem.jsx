@@ -1,15 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Divider } from 'antd';
 
-import {
-  Button,
-  PageHeader,
-  Row,
-  Col,
-  Descriptions,
-  Statistic,
-  Tag,
-} from 'antd';
+import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
 import {
   EditOutlined,
   FilePdfOutlined,
@@ -118,11 +110,7 @@ export default function ReadItem({ config }) {
         onBack={() => readPanel.close()}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={
-          <Tag color="volcano">
-            {currentErp.paymentStatus || currentErp.status}
-          </Tag>
-        }
+        tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
         // subTitle="This is cuurent erp page"
         extra={[
           <Button
@@ -195,15 +183,9 @@ export default function ReadItem({ config }) {
       </PageHeader>
       <Divider dashed />
       <Descriptions title={`Client : ${currentErp.client.company}`}>
-        <Descriptions.Item label="Address">
-          {currentErp.client.address}
-        </Descriptions.Item>
-        <Descriptions.Item label="E-mail">
-          {currentErp.client.email}
-        </Descriptions.Item>
-        <Descriptions.Item label="Phone">
-          {currentErp.client.phone}
-        </Descriptions.Item>
+        <Descriptions.Item label="Address">{currentErp.client.address}</Descriptions.Item>
+        <Descriptions.Item label="E-mail">{currentErp.client.email}</Descriptions.Item>
+        <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>
@@ -260,9 +242,7 @@ export default function ReadItem({ config }) {
           <Col className="gutter-row" span={12}>
             <p>
               {`$ `}
-              {currentErp.subTotal
-                .toFixed(2)
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+              {currentErp.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
             </p>
           </Col>
           <Col className="gutter-row" span={12}>
@@ -271,9 +251,7 @@ export default function ReadItem({ config }) {
           <Col className="gutter-row" span={12}>
             <p>
               {`$ `}
-              {currentErp.taxTotal
-                .toFixed(2)
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+              {currentErp.taxTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
             </p>
           </Col>
           <Col className="gutter-row" span={12}>
@@ -282,9 +260,7 @@ export default function ReadItem({ config }) {
           <Col className="gutter-row" span={12}>
             <p>
               {`$ `}
-              {currentErp.total
-                .toFixed(2)
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+              {currentErp.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
             </p>
           </Col>
         </Row>

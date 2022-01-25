@@ -4,7 +4,7 @@
  *  @returns {Document} Single Document
  */
 
-const moment = require("moment");
+const moment = require('moment');
 
 exports.read = async (Model, req, res) => {
   try {
@@ -15,14 +15,14 @@ exports.read = async (Model, req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     } else {
       // Return success resposne
       return res.status(200).json({
         success: true,
         result,
-        message: "we found this document by this id: " + req.params.id,
+        message: 'we found this document by this id: ' + req.params.id,
       });
     }
   } catch (err) {
@@ -30,7 +30,7 @@ exports.read = async (Model, req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }
@@ -52,15 +52,15 @@ exports.create = async (Model, req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: "Successfully Created the document in Model ",
+      message: 'Successfully Created the document in Model ',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
-    if (err.name == "ValidationError") {
+    if (err.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "Required fields are not supplied",
+        message: 'Required fields are not supplied',
         error: err,
       });
     } else {
@@ -68,7 +68,7 @@ exports.create = async (Model, req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        message: "Oops there is an Error",
+        message: 'Oops there is an Error',
         error: err,
       });
     }
@@ -84,34 +84,30 @@ exports.create = async (Model, req, res) => {
 exports.update = async (Model, req, res) => {
   try {
     // Find document by id and updates with the required fields
-    const result = await Model.findOneAndUpdate(
-      { _id: req.params.id, removed: false },
-      req.body,
-      {
-        new: true, // return the new result instead of the old one
-        runValidators: true,
-      }
-    ).exec();
+    const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, req.body, {
+      new: true, // return the new result instead of the old one
+      runValidators: true,
+    }).exec();
     if (!result) {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     } else {
       return res.status(200).json({
         success: true,
         result,
-        message: "we update this document by this id: " + req.params.id,
+        message: 'we update this document by this id: ' + req.params.id,
       });
     }
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
-    if (err.name == "ValidationError") {
+    if (err.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "Required fields are not supplied",
+        message: 'Required fields are not supplied',
         error: err,
       });
     } else {
@@ -119,7 +115,7 @@ exports.update = async (Model, req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        message: "Oops there is an Error",
+        message: 'Oops there is an Error',
         error: err,
       });
     }
@@ -151,20 +147,20 @@ exports.delete = async (Model, req, res) => {
       return res.status(404).json({
         success: false,
         result: null,
-        message: "No document found by this id: " + req.params.id,
+        message: 'No document found by this id: ' + req.params.id,
       });
     } else {
       return res.status(200).json({
         success: true,
         result,
-        message: "Successfully Deleted the document by id: " + req.params.id,
+        message: 'Successfully Deleted the document by id: ' + req.params.id,
       });
     }
   } catch (err) {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }
@@ -185,7 +181,7 @@ exports.list = async (Model, req, res) => {
     const resultsPromise = Model.find({ removed: false })
       .skip(skip)
       .limit(limit)
-      .sort({ created: "desc" })
+      .sort({ created: 'desc' })
       .populate();
     // Counting the total documents
     const countPromise = Model.count({ removed: false });
@@ -201,21 +197,21 @@ exports.list = async (Model, req, res) => {
         success: true,
         result,
         pagination,
-        message: "Successfully found all documents",
+        message: 'Successfully found all documents',
       });
     } else {
       return res.status(203).json({
         success: false,
         result: [],
         pagination,
-        message: "Collection is Empty",
+        message: 'Collection is Empty',
       });
     }
   } catch (err) {
     return res.status(500).json({
       success: false,
       result: [],
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }
@@ -229,34 +225,34 @@ exports.list = async (Model, req, res) => {
 
 exports.search = async (Model, req, res) => {
   // console.log(req.query.fields)
-  if (req.query.q === undefined || req.query.q.trim() === "") {
+  if (req.query.q === undefined || req.query.q.trim() === '') {
     return res
       .status(202)
       .json({
         success: false,
         result: [],
-        message: "No document found by this request",
+        message: 'No document found by this request',
       })
       .end();
   }
   const fieldsArray = req.query.fields
-    ? req.query.fields.split(",")
-    : ["name", "surname", "birthday"];
+    ? req.query.fields.split(',')
+    : ['name', 'surname', 'birthday'];
 
   const fields = { $or: [] };
 
   for (const field of fieldsArray) {
-    fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, "i") } });
+    fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
   // console.log(fields)
   try {
-    let results = await Model.find(fields).where("removed", false).limit(10);
+    let results = await Model.find(fields).where('removed', false).limit(10);
 
     if (results.length >= 1) {
       return res.status(200).json({
         success: true,
         result: results,
-        message: "Successfully found all documents",
+        message: 'Successfully found all documents',
       });
     } else {
       return res
@@ -264,7 +260,7 @@ exports.search = async (Model, req, res) => {
         .json({
           success: false,
           result: [],
-          message: "No document found by this request",
+          message: 'No document found by this request',
         })
         .end();
     }
@@ -272,7 +268,7 @@ exports.search = async (Model, req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }
@@ -290,7 +286,7 @@ exports.filter = async (Model, req, res) => {
       return res.status(403).json({
         success: false,
         result: null,
-        message: "filter not provided correctly",
+        message: 'filter not provided correctly',
       });
     }
     const result = await Model.find({ removed: false })
@@ -299,21 +295,20 @@ exports.filter = async (Model, req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message:
-        "Successfully found all documents where equal to : " + req.params.equal,
+      message: 'Successfully found all documents where equal to : ' + req.params.equal,
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }
 };
 exports.status = async (Model, req, res) => {
   try {
-    if (req.query.enabled == "true" || req.query.enabled == "false") {
+    if (req.query.enabled == 'true' || req.query.enabled == 'false') {
       let updates = {
         enabled: req.query.enabled,
       };
@@ -330,15 +325,13 @@ exports.status = async (Model, req, res) => {
         return res.status(404).json({
           success: false,
           result: null,
-          message: "No document found by this id: " + req.params.id,
+          message: 'No document found by this id: ' + req.params.id,
         });
       } else {
         return res.status(200).json({
           success: true,
           result,
-          message:
-            "Successfully update status of this document by id: " +
-            req.params.id,
+          message: 'Successfully update status of this document by id: ' + req.params.id,
         });
       }
     } else {
@@ -355,7 +348,7 @@ exports.status = async (Model, req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }
@@ -364,38 +357,38 @@ exports.getFilterbyDate = async (Model, req, res) => {
   try {
     const { filter, equal, date } = req.params;
     let day = null;
-    if (date == "today") {
-      day = moment().format("DD/MM/YYYY");
-    } else if (date == "tomorrow") {
-      day = moment().add(1, "days").format("DD/MM/YYYY");
+    if (date == 'today') {
+      day = moment().format('DD/MM/YYYY');
+    } else if (date == 'tomorrow') {
+      day = moment().add(1, 'days').format('DD/MM/YYYY');
     } else {
-      day = moment(date, "DD-MM-YYYY").format("DD/MM/YYYY");
+      day = moment(date, 'DD-MM-YYYY').format('DD/MM/YYYY');
     }
 
     const result = await Model.find({ removed: false })
       .where(filter)
       .equals(equal)
-      .where("date")
+      .where('date')
       .equals(day);
 
     if (result.length == 0) {
       return res.status(400).json({
         success: false,
         result: [],
-        message: "Date not found for this api",
+        message: 'Date not found for this api',
       });
     }
 
     return res.status(200).json({
       success: true,
       result,
-      message: "Successfully found all documents where equal to : " + equal,
+      message: 'Successfully found all documents where equal to : ' + equal,
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
       result: null,
-      message: "Oops there is an Error",
+      message: 'Oops there is an Error',
       error: err,
     });
   }

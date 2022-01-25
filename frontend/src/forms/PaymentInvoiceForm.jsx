@@ -4,10 +4,7 @@ import { Form, Input, InputNumber } from 'antd';
 import { DatePicker } from '@/components/CustomAntd';
 import SelectAsync from '@/components/SelectAsync';
 
-export default function PaymentInvoiceForm({
-  maxAmount = null,
-  isUpdateForm = false,
-}) {
+export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = false }) {
   const { TextArea } = Input;
   return (
     <>
@@ -47,9 +44,7 @@ export default function PaymentInvoiceForm({
           style={{ width: '100%' }}
           min={0}
           max={maxAmount}
-          formatter={(value) =>
-            `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-          }
+          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
         />
       </Form.Item>
       <Form.Item
@@ -61,10 +56,7 @@ export default function PaymentInvoiceForm({
           },
         ]}
       >
-        <SelectAsync
-          entity={'paymentMode'}
-          displayLabels={['name']}
-        ></SelectAsync>
+        <SelectAsync entity={'paymentMode'} displayLabels={['name']}></SelectAsync>
       </Form.Item>
       <Form.Item label="Reference" name="ref">
         <Input />

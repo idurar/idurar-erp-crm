@@ -33,9 +33,7 @@ export default function ReadItem({ config }) {
     setListState(list);
   }, [currentResult]);
 
-  const show = isReadBoxOpen
-    ? { display: 'block', opacity: 1 }
-    : { display: 'none', opacity: 0 };
+  const show = isReadBoxOpen ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
 
   const itemsList = listState.map((item) => {
     return (

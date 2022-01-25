@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-let pdf = require("html-pdf");
-const pug = require("pug");
-const fs = require("fs");
-const moment = require("moment");
+let pdf = require('html-pdf');
+const pug = require('pug');
+const fs = require('fs');
+const moment = require('moment');
 
 exports.getData = (model) => {
   const Model = mongoose.model(model);
@@ -19,9 +19,9 @@ exports.getOne = (model, id) => {
 
 exports.regExSearch = async (Model, req, res) => {
   let results = await Model.find({
-    name: { $regex: new RegExp(req.query.q, "i") },
+    name: { $regex: new RegExp(req.query.q, 'i') },
   })
-    .sort({ name: "asc" })
+    .sort({ name: 'asc' })
     .limit(10);
 
   if (results.length >= 1) {
@@ -33,9 +33,7 @@ exports.regExSearch = async (Model, req, res) => {
 };
 
 exports.search = async (Model, req, res) => {
-  let results = await Model.find({ birthday: req.query.q })
-    .sort({ name: "asc" })
-    .limit(10);
+  let results = await Model.find({ birthday: req.query.q }).sort({ name: 'asc' }).limit(10);
 
   if (results.length < 1 || !results) {
     results = await Model
@@ -47,12 +45,12 @@ exports.search = async (Model, req, res) => {
           },
         },
         {
-          score: { $meta: "textScore" },
+          score: { $meta: 'textScore' },
         }
       )
       // the sort them
       .sort({
-        score: { $meta: "textScore" },
+        score: { $meta: 'textScore' },
       })
       // limit to only 5 messages
       .limit(10);
@@ -71,12 +69,8 @@ exports.search = async (Model, req, res) => {
  * Pdf Generate New Method
  * This method only generate PDF in the folder, not download the PDF
  */
-exports.generatePdf = (
-  modelName,
-  info = { filename: "pdf_file", format: "A5" },
-  result
-) => {
-  const fileId = info.filename + "-" + result._id + ".pdf";
+exports.generatePdf = (modelName, info = { filename: 'pdf_file', format: 'A5' }, result) => {
+  const fileId = info.filename + '-' + result._id + '.pdf';
 
   // if PDF already exist, then delete it and create new PDF
   const folderPath = modelName.toLowerCase();
@@ -85,7 +79,7 @@ exports.generatePdf = (
   }
 
   //render pdf html
-  const html = pug.renderFile("views/pdf/" + modelName + ".pug", {
+  const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
     model: result,
     moment: moment,
   });
@@ -93,10 +87,10 @@ exports.generatePdf = (
   pdf
     .create(html, {
       format: info.format,
-      orientation: "portrait",
-      border: "12mm",
+      orientation: 'portrait',
+      border: '12mm',
     })
     .toFile(`./public/download/${folderPath}/${fileId}`, function (err) {
-      if (err) return console.log("this pdf create error " + err);
+      if (err) return console.log('this pdf create error ' + err);
     });
 };

@@ -48,10 +48,7 @@ export default function ItemRow({
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={8}>
-        <Form.Item
-          name={[field.name, 'description']}
-          fieldKey={[field.fieldKey, 'description']}
-        >
+        <Form.Item name={[field.name, 'description']} fieldKey={[field.fieldKey, 'description']}>
           <Input placeholder="description Name" />
         </Form.Item>
       </Col>
@@ -74,9 +71,7 @@ export default function ItemRow({
             style={{ width: '100%' }}
             onChange={updatePrice}
             min={0}
-            formatter={(value) =>
-              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-            }
+            formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
           />
         </Form.Item>
       </Col>
@@ -87,9 +82,7 @@ export default function ItemRow({
               readOnly
               style={{ width: '100%' }}
               value={totalState}
-              formatter={(value) =>
-                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-              }
+              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
             />
           </Form.Item>
         </Form.Item>

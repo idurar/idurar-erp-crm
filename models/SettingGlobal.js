@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const SettingGlobal = new mongoose.Schema({
@@ -34,4 +34,4 @@ const SettingGlobal = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("SettingGlobal", SettingGlobal);
+module.exports = mongoose.model('SettingGlobal', SettingGlobal);

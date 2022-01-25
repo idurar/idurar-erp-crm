@@ -32,11 +32,7 @@ function FormElement({
   const Component = componentMapping[fieldType];
 
   return (
-    <Form.Item
-      label={label}
-      name={name}
-      rules={[{ required, message }, inputType]}
-    >
+    <Form.Item label={label} name={name} rules={[{ required, message }, inputType]}>
       if (fieldType === "select")
       {
         <Select>
