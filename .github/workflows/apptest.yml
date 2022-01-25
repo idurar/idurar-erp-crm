@@ -18,14 +18,6 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache yarn cache
-        uses: actions/cache@v2
-        id: cache-yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v2
@@ -36,7 +28,6 @@ jobs:
             ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
       - run: yarn
         if: |
-          steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
           steps.cache-node-modules.outputs.cache-hit != 'true'
       - name: Test
         run: yarn test
