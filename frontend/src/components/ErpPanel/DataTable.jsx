@@ -1,14 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
-import { Dropdown, Menu, Table } from 'antd';
-import { Button, PageHeader, Tag } from 'antd';
-import {
-  EllipsisOutlined,
-  EyeOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  FilePdfOutlined,
-  CreditCardOutlined,
-} from '@ant-design/icons';
+import { Dropdown, Table } from 'antd';
+import { Button, PageHeader } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { settings } from '@/redux/settings/actions';
@@ -59,8 +52,8 @@ export default function DataTable({ config, DataTableDropMenu }) {
   }, []);
 
   const handelCurrency = () => {
-    dispatch(settings.currency({ value: '€' }));
-    dispatch(settings.currencyPosition({ position: 'before' }));
+    dispatch(settings.currencySymbol({ value: '€' }));
+    dispatch(settings.currencyPosition({ position: 'after' }));
   };
   useEffect(() => {
     dispatch(erp.list({ entity }));

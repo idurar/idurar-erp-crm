@@ -8,12 +8,17 @@ export const useMoney = () => {
   const {
     currencySymbol,
     currencyPosition = 'before',
-    decimalSep,
+    decimalSep = '.',
     ThousandSep = ' ',
   } = useSelector(selectSettings);
 
   const currencyFomat = (amount) =>
-    currency(amount, { separator: ThousandSep, decimal: decimalSep });
+    currency(amount, {
+      symbol: '',
+      separator: ThousandSep,
+      decimal: decimalSep,
+      precision: 2,
+    }).format();
 
   let moneyFormatter = ({ amount = 0 }) => {
     return currencyPosition === 'before'
