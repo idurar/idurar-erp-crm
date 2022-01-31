@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectListItems, selectItemById } from '@/redux/erp/selectors';
+import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';

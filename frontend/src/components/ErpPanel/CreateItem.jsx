@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Divider } from 'antd';
 
-import { Button, PageHeader, Row, Statistic, Tag } from 'antd';
+import { Button, PageHeader, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -12,6 +12,7 @@ import uniqueId from '@/utils/uinqueId';
 
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import calculate from '@/utils/calculate';
 function SaveForm({ form }) {
   const handelClick = () => {
     form.submit();
@@ -40,9 +41,9 @@ export default function CreateItem({ config, CreateForm }) {
       items.map((item) => {
         if (item) {
           if (item.quantity && item.price) {
-            let total = item['quantity'] * item['price'];
+            let total = calculate.multiply(item.price, item.quantity);
             //sub total
-            subTotal += total;
+            subTotal = calculate.add(subTotal, total);
           }
         }
       });
@@ -62,20 +63,6 @@ export default function CreateItem({ config, CreateForm }) {
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
-      // if (fieldsValue.expiredDate) {
-      //   const newDate = fieldsValue["expiredDate"].format("DD/MM/YYYY");
-      //   fieldsValue = {
-      //     ...fieldsValue,
-      //     expiredDate: newDate,
-      //   };
-      // }
-      // if (fieldsValue.date) {
-      //   const newDate = fieldsValue["date"].format("DD/MM/YYYY");
-      //   fieldsValue = {
-      //     ...fieldsValue,
-      //     date: newDate,
-      //   };
-      // }
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {

@@ -1,14 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Divider } from 'antd';
 
 import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
-import {
-  EditOutlined,
-  FilePdfOutlined,
-  RollbackOutlined,
-  PlusCircleOutlined,
-  CloseCircleOutlined,
-} from '@ant-design/icons';
+import { EditOutlined, FilePdfOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -69,7 +63,6 @@ export default function ReadItem({ config }) {
   const { erpContextAction } = useErpContext();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
-  const { state } = useErpContext();
 
   const { readPanel, updatePanel } = erpContextAction;
 
@@ -94,15 +87,10 @@ export default function ReadItem({ config }) {
   useEffect(() => {
     if (currentResult) {
       const { items } = currentResult;
-
       setItemsList(items);
       setCurrentErp(currentResult);
     }
   }, [currentResult]);
-
-  useEffect(() => {
-    console.info('itemslist', itemslist);
-  }, [itemslist]);
 
   return (
     <>

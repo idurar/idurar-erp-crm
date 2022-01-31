@@ -7,6 +7,7 @@ import { DatePicker } from '@/components/CustomAntd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import ItemRow from '@/components/ErpPanel/ItemRow';
+import calculate from '@/utils/calculate';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
@@ -25,9 +26,10 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
     }
   }, [current]);
   useEffect(() => {
-    const currentTotal = subTotal * taxRate + subTotal;
-    setTaxTotal((subTotal * taxRate).toFixed(2));
-    setTotal(currentTotal.toFixed(2));
+    const currentTaxTotal = calculate.multiply(subTotal, taxRate);
+    const currentTotal = calculate.add(currentTaxTotal, subTotal);
+    setTaxTotal(currentTaxTotal);
+    setTotal(currentTotal);
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);

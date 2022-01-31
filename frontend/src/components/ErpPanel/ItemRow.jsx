@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Input, InputNumber, Space, Row, Col } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import calculate from '@/utils/calculate';
 
 export default function ItemRow({
   field,
@@ -31,9 +32,9 @@ export default function ItemRow({
   }, [current]);
 
   useEffect(() => {
-    const currentTotal = price * quantity;
+    const currentTotal = calculate.multiply(price, quantity);
 
-    setTotal(currentTotal.toFixed(2));
+    setTotal(currentTotal);
   }, [price, quantity]);
 
   return (
