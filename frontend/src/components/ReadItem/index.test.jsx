@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, cleanup } from '@testing-library/react';
 
 import { Provider } from 'react-redux';
 
@@ -54,9 +54,43 @@ const RenderedComponent = () => {
   );
 };
 
+// describe('Integration Testing : Read Component', () => {
+//   test('renders read component', () => {
+//     // const { debug } = render(<RenderedComponent />);
+//     // // eslint-disable-next-line testing-library/no-debugging-utils
+//     // act(() => debug());
+
+//     render(<RenderedComponent />);
+
+//     // eslint-disable-next-line jest/valid-expect
+//     expect(screen.getByText('Lalami'));
+//     // eslint-disable-next-line jest/valid-expect
+//   });
+// });
+
 describe('Integration Testing : Read Component', () => {
-  test('renders read component', () => {
-    const { debug } = render(<RenderedComponent />);
-    act(() => debug());
+  afterEach(() => cleanup());
+
+  test('should contain `managerSurname` text', (text = data.managerSurname) => {
+    render(<RenderedComponent />);
+
+    // eslint-disable-next-line jest/valid-expect
+    expect(screen.getByText('Lalami'));
   });
+  test('should contain `Company Label` text', (text = readColumns[0].title) => {
+    render(<RenderedComponent />);
+    // eslint-disable-next-line jest/valid-expect
+    expect(screen.getByText(text));
+  });
+  test('should contain `Company Name` text', (text = data.company) => {
+    render(<RenderedComponent />);
+    // eslint-disable-next-line jest/valid-expect
+    expect(screen.getByText(text));
+  });
+  // test('renders read component', () => {
+  //   // const { debug } = render(<RenderedComponent />);
+  //   // // eslint-disable-next-line testing-library/no-debugging-utils
+  //   // act(() => debug());
+
+  // });
 });
