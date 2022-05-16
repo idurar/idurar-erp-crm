@@ -1,7 +1,7 @@
-const defaultMenu = require("../helpers").menu;
-const CustomMenu = require("../models/CustomMenu");
+const defaultMenu = require('../helpers').menu;
+const CustomMenu = require('../models/CustomMenu');
 
-const tree = (items, id = undefined, link = "parent", level = 1) => {
+const tree = (items, id = undefined, link = 'parent', level = 1) => {
   if (level > 5) {
     return [];
   }

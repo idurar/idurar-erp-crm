@@ -1,21 +1,21 @@
-const express = require("express");
+const express = require('express');
 
-const helmet = require("helmet");
-const path = require("path");
-const cors = require("cors");
+const helmet = require('helmet');
+const path = require('path');
+const cors = require('cors');
 
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
+require('dotenv').config({ path: '.variables.env' });
 
-const helpers = require("./helpers");
+const helpers = require('./helpers');
 
-const apiRouter = require("./routes/api");
-const authJwtRouter = require("./routes/authJwt");
+const erpApiRouter = require('./routes/erpRoutes/erpApi');
+const erpAuthRouter = require('./routes/erpRoutes/erpAuth');
 
-const errorHandlers = require("./handlers/errorHandlers");
+const errorHandlers = require('./handlers/errorHandlers');
 
-const { isValidToken } = require("./controllers/authJwtController ");
+const { isValidAdminToken } = require('./controllers/erpControllers/authJwtController ');
 
-require("dotenv").config({ path: ".variables.env" });
 // create our Express app
 const app = express();
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
@@ -26,7 +26,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // // Sessions allow us to Contact data on visitors from request to request
 // // This keeps admins logged in and allows us to send flash messages
@@ -60,31 +60,31 @@ app.use((req, res, next) => {
 // Here our API Routes
 
 app.use(
-  "/api",
+  '/api',
   cors({
     origin: true,
     credentials: true,
   }),
-  authJwtRouter
+  erpAuthRouter
 );
 
-// app.use("/api", cors(), isValidToken, apiRouter);
+// app.use("/api", cors(), isValidAdminToken, erpApiRouter);
 
 app.use(
-  "/api",
+  '/api',
   cors({
     origin: true,
     credentials: true,
   }),
-  isValidToken,
-  apiRouter
+  isValidAdminToken,
+  erpApiRouter
 );
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
 
 // Otherwise this was a really bad error we didn't expect! Shoot eh
-if (app.get("env") === "development") {
+if (app.get('env') === 'development') {
   /* Development Error Handler - Prints stack trace */
   app.use(errorHandlers.developmentErrors);
 }

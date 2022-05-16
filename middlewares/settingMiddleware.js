@@ -1,14 +1,12 @@
-const mongoose = require("mongoose");
-const getData = require("./../controllers/helpersControllers/custom").getData;
+const mongoose = require('mongoose');
+const getData = require('./../controllers/corsControllers/custom').getData;
 
 /**
  * Commercial settings
  */
 const settingCommercial = async () => {
   try {
-    const [settingCommercial] = await Promise.all([
-      getData("SettingCommercial"),
-    ]).then((data) => {
+    const [settingCommercial] = await Promise.all([getData('SettingCommercial')]).then((data) => {
       return data;
     });
     return settingCommercial;
@@ -22,11 +20,9 @@ const settingCommercial = async () => {
  */
 const settingGlobal = async () => {
   try {
-    const [settingGlobal] = await Promise.all([getData("SettingGlobal")]).then(
-      (data) => {
-        return data;
-      }
-    );
+    const [settingGlobal] = await Promise.all([getData('SettingGlobal')]).then((data) => {
+      return data;
+    });
     return settingGlobal;
   } catch (error) {
     return error;
@@ -38,9 +34,7 @@ const settingGlobal = async () => {
  */
 const settingMedical = async () => {
   try {
-    const [settingMedical] = await Promise.all([
-      getData("SettingMedical"),
-    ]).then((data) => {
+    const [settingMedical] = await Promise.all([getData('SettingMedical')]).then((data) => {
       return data;
     });
     return settingMedical;
