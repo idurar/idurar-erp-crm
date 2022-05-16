@@ -5,17 +5,17 @@ const path = require('path');
 const cors = require('cors');
 
 const cookieParser = require('cookie-parser');
+require('dotenv').config({ path: '.variables.env' });
 
 const helpers = require('./helpers');
 
-const apiRouter = require('./routes/api');
-const authJwtRouter = require('./routes/authJwt');
+const erpApiRouter = require('./routes/erpRoutes/erpApi');
+const erpAuthRouter = require('./routes/erpRoutes/erpAuth');
 
 const errorHandlers = require('./handlers/errorHandlers');
 
-const { isValidToken } = require('./controllers/authJwtController ');
+const { isValidAdminToken } = require('./controllers/erpControllers/authJwtController ');
 
-require('dotenv').config({ path: '.variables.env' });
 // create our Express app
 const app = express();
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
@@ -65,10 +65,10 @@ app.use(
     origin: true,
     credentials: true,
   }),
-  authJwtRouter
+  erpAuthRouter
 );
 
-// app.use("/api", cors(), isValidToken, apiRouter);
+// app.use("/api", cors(), isValidAdminToken, erpApiRouter);
 
 app.use(
   '/api',
@@ -76,8 +76,8 @@ app.use(
     origin: true,
     credentials: true,
   }),
-  isValidToken,
-  apiRouter
+  isValidAdminToken,
+  erpApiRouter
 );
 
 // If that above routes didnt work, we 404 them and forward to error handler

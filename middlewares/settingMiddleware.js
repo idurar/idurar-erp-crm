@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const getData = require('./../controllers/helpersControllers/custom').getData;
+const getData = require('./../controllers/corsControllers/custom').getData;
 
 /**
  * Commercial settings
