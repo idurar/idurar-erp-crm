@@ -6,7 +6,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 
-const getData = require('./controllers/helpersControllers/custom').getData;
+const getData = require('./controllers/corsControllers/custom').getData;
 
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
 exports.moment = require('moment');

@@ -1,5 +1,5 @@
 {
-  "name": "starter-crud-auth-api-express",
+  "name": "cedimed-react",
   "version": "1.0.0",
   "scripts": {
     "start": "node ./server.js",
@@ -13,14 +13,15 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "4.0.0",
-    "express": "4.17.1",
+    "express": "^4.18.1",
     "glob": "7.1.1",
     "helmet": "^4.6.0",
     "html-pdf": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
+    "module-alias": "^2.2.2",
     "moment": "^2.26.0",
-    "mongoose": "^5.9.10",
+    "mongoose": "^6.3.3",
     "mongoose-autopopulate": "^0.14.0",
     "mongoose-sequence": "^5.2.2",
     "multer": "^1.4.2",
@@ -28,6 +29,9 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.2"
+  },
+  "_moduleAliases": {
+    "@": "."
   },
   "description": "Just you wait folks!",
   "main": "app.js",
