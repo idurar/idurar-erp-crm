@@ -1,0 +1,20 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+name: Continuous Integration
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  buildAndTest:
+    name: Install and Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v1
+      - run: yarn
+      - name: Test
+        run: yarn test
