@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
     res.cookie('token', token, {
       maxAge: req.body.remember ? 72 * 60 * 60 * 1000 : 60 * 60 * 1000, // Cookie expires after 30 days
       expires: req.body.remember ? new Date(Date.now() + 1 * 3600000) : 0, // cookie will be removed after 1 hour
-      httpOnly: true,
+      httpOnly: false,
       secure: false,
     });
 
