@@ -11,6 +11,7 @@ const helpers = require('./helpers');
 
 const erpApiRouter = require('./routes/erpRoutes/erpApi');
 const erpAuthRouter = require('./routes/erpRoutes/erpAuth');
+const erpDownloadRouter = require('./routes/erpRoutes/erpDownloadRouter');
 
 const errorHandlers = require('./handlers/errorHandlers');
 
@@ -79,6 +80,8 @@ app.use(
   isValidAdminToken,
   erpApiRouter
 );
+
+app.use('/download', cors(), erpDownloadRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
