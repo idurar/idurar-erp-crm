@@ -87,6 +87,10 @@ export default function Navigation() {
             Admin
           </Menu.Item>
           <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
+            <Menu.Item key={'SettingsPage'}>
+              <Link to={'/settings'} />
+              General Settings
+            </Menu.Item>
             <Menu.Item key={'PaymentMode'}>
               <Link to={'/payment/mode'} />
               Payment Mode

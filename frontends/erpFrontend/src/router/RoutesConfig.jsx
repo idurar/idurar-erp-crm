@@ -61,6 +61,10 @@ export const routesConfig = [
     component: 'Admin',
   },
   {
+    path: '/settings',
+    component: 'Settings/Settings',
+  },
+  {
     path: '/payment/mode',
     component: 'PaymentMode',
   },
