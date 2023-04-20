@@ -1,28 +1,30 @@
 import { useState, useEffect } from 'react';
-import { Menu, Tabs } from 'antd';
+import { Menu, Tabs, Button, Divider } from 'antd';
 import { SettingsLayout } from '@/layout';
 
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 
-// const RightMenu = ({ handleTabChange }) => {
-//   const menuItems = [
-//     { key: 'generalSettings', label: 'generalSettings' },
-//     { key: 'paymentSettings', label: 'paymentSettings' },
-//     { key: 'invoiceSettings', label: 'invoiceSettings' },
-//   ];
-
-//   return (
-//     <Menu mode="inline" defaultSelectedKeys={['generalSettings']}>
-//       {menuItems.map((item) => (
-//         <Menu.Item key={item.key} onClick={() => handleTabChange(item.key)}>
-//           {item.label}
-//         </Menu.Item>
-//       ))}
-//     </Menu>
-//   );
-// };
+const RightMenu = ({ activeTab, handleTabChange }) => {
+  const menuItems = [
+    { key: 'generalSettings', label: 'generalSettings' },
+    { key: 'paymentSettings', label: 'paymentSettings' },
+    { key: 'invoiceSettings', label: 'invoiceSettings' },
+  ];
+  const menuList = menuItems.map((item, index) => (
+    <Button
+      type={item.key == activeTab ? 'default' : 'text'}
+      key={item.key}
+      style={{ marginBottom: '10px' }}
+      block
+      onClick={() => handleTabChange(item.key)}
+    >
+      {item.label}
+    </Button>
+  ));
+  return <div className="pad10">{menuList}</div>;
+};
 
 const Visibility = ({ isVisible = false, children }) => {
   const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
@@ -30,38 +32,23 @@ const Visibility = ({ isVisible = false, children }) => {
 };
 
 export default function Settings() {
-  const initialState = [
-    { tab: 'generalSettings', isActive: true },
-    { tab: 'paymentSettings', isActive: false },
-    { tab: 'invoiceSettings', isActive: false },
-  ];
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState('generalSettings');
 
   const isActive = (tab) => {
-    const currentTab = state.find((x) => x.tab === tab);
-    return currentTab && currentTab.isActive ? true : false;
+    return state === tab ? true : false;
   };
 
   const handleTabChange = (tab) => {
-    const myNewList = [...state];
-    myNewList.map((a) => {
-      if (a.tab === tab) {
-        a.isActive = true;
-      } else {
-        a.isActive = false;
-      }
-    });
-
-    setState(myNewList);
+    setState(tab);
   };
 
   return (
     <SettingsLayout
       topCardContent="Generals Settings"
       topCardTitle="Settings"
-      // bottomCardContent={<RightMenu handleTabChange={handleTabChange} />}
+      bottomCardContent={<RightMenu activeTab={state} handleTabChange={handleTabChange} />}
     >
-      <Visibility isVisible={isActive('generalSettings') || true}>
+      <Visibility isVisible={isActive('generalSettings')}>
         <GeneralSettings />
       </Visibility>
       <Visibility isVisible={isActive('paymentSettings')}>
