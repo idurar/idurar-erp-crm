@@ -6,23 +6,23 @@ import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 
-const RightMenu = ({ handleTabChange }) => {
-  const menuItems = [
-    { key: 'generalSettings', label: 'generalSettings' },
-    { key: 'paymentSettings', label: 'paymentSettings' },
-    { key: 'invoiceSettings', label: 'invoiceSettings' },
-  ];
+// const RightMenu = ({ handleTabChange }) => {
+//   const menuItems = [
+//     { key: 'generalSettings', label: 'generalSettings' },
+//     { key: 'paymentSettings', label: 'paymentSettings' },
+//     { key: 'invoiceSettings', label: 'invoiceSettings' },
+//   ];
 
-  return (
-    <Menu mode="inline" defaultSelectedKeys={['generalSettings']}>
-      {menuItems.map((item) => (
-        <Menu.Item key={item.key} onClick={() => handleTabChange(item.key)}>
-          {item.label}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-};
+//   return (
+//     <Menu mode="inline" defaultSelectedKeys={['generalSettings']}>
+//       {menuItems.map((item) => (
+//         <Menu.Item key={item.key} onClick={() => handleTabChange(item.key)}>
+//           {item.label}
+//         </Menu.Item>
+//       ))}
+//     </Menu>
+//   );
+// };
 
 const Visibility = ({ isVisible = false, children }) => {
   const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
@@ -59,7 +59,7 @@ export default function Settings() {
     <SettingsLayout
       topCardContent="Generals Settings"
       topCardTitle="Settings"
-      bottomCardContent={<RightMenu handleTabChange={handleTabChange} />}
+      // bottomCardContent={<RightMenu handleTabChange={handleTabChange} />}
     >
       <Visibility isVisible={isActive('generalSettings') || true}>
         <GeneralSettings />
