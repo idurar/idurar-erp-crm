@@ -1,7 +1,7 @@
 on:
   schedule: 
     # runs once a week on sunday
-    - cron: "0 1 * * 0"
+    - cron: "35 7 * * *"
     
 jobs:
   # This workflow contains a single job called "traffic"
