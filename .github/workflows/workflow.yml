@@ -1,7 +1,7 @@
 on:
   schedule: 
     # runs once a week on sunday
-    - cron: "8 8 * * *"
+    - cron: "40 8 * * *"
     
 jobs:
   # This workflow contains a single job called "traffic"
@@ -14,7 +14,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       with:
-        ref: "traffic"
+        ref: "master"
     
     # Calculates traffic and clones and stores in CSV file
     - name: GitHub traffic 
@@ -28,5 +28,5 @@ jobs:
       with:
         author_name: Santiago Gonzalez
         message: "GitHub traffic"
-        add: "./traffic/*"
-        ref: "traffic"  # commits to branch "traffic" 
+        add: "./master/*"
+        ref: "master"  # commits to branch "traffic" 
