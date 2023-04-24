@@ -25,8 +25,6 @@ const useMoney = () => {
         }).format();
 
   let moneyFormatter = ({ amount = 0 }) => {
-    console.log('🚀 ~ file: useMoney.jsx ~ line 28 ~ moneyFormatter ~ amount', amount);
-
     return currencyPosition === 'before'
       ? currencySymbol + ' ' + currencyFormat(amount)
       : currencyFormat(amount) + ' ' + currencySymbol;
