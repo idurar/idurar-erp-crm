@@ -1,7 +1,7 @@
-# IDURAR ERP/CRM Based Mern Stack and Ant Design (Express.js / React / Redux / MongoDB)
+# Best Open Source ERP/CRM, MERN Stack (Node.js/React.js)
 
 ```
-Don't forget please to ⭐ this repo if you like this Starter Antd Admin!
+Can you star our GitHub repo? 🤩 Open Source ERP/CRM !
 ```
 
 ![screenshot-mern-redux-crud-app-idurar vercel app-2021 09 02-11_05_01](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
