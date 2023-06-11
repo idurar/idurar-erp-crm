@@ -13,6 +13,6 @@ Can you star our GitHub repo? 🤩 Open Source ERP/CRM !
 
 IDURAR is Open Source ERP/CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
-**Live App Demo** : [https://mern-redux-crud-app.vercel.app](https://mern-redux-crud-app.vercel.app) "Please use chrome"
+**Live App Demo** : [https://idurarapp.com/open-source-erp-crm/](https://idurarapp.com/open-source-erp-crm/) "Please use chrome"
 
 `username : admin@demo.com password : admin123`
