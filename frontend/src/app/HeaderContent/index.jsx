@@ -82,7 +82,7 @@ export default function HeaderContent() {
 
       <Avatar className="cursor" icon={<AppstoreOutlined />} />
 
-      <Avatar className="cursor" icon={<BellOutlined />} />
+      <Avatar className="cursor-pointer" icon={<BellOutlined />} />
     </div>
   );
 }
