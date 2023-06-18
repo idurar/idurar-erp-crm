@@ -1,4 +1,4 @@
-# Open Source ERP / CRM - MERN Stack (Node.js/React.js)
+# ERP / CRM Open Source based on (Node.js/React.js)
 
 IDURAR is Open Source ERP/CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
