@@ -21,8 +21,7 @@ const expenseController = require('@/controllers/erpControllers/expenseControlle
 const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
 
-const settingCommercialController = require('@/controllers/erpControllers/settingCommercialController');
-const settingGlobalController = require('@/controllers/erpControllers/settingGlobalController');
+const settingsController = require('@/controllers/erpControllers/settingsController');
 
 // //_______________________________ Admin management_______________________________
 
@@ -178,26 +177,12 @@ router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController
 
 // //____________________________________________ API for Global Setting _________________
 
-router.route('/settingGlobal/create').post(catchErrors(settingGlobalController.create));
-router.route('/settingGlobal/read/:id').get(catchErrors(settingGlobalController.read));
-router.route('/settingGlobal/update/:id').patch(catchErrors(settingGlobalController.update));
-router.route('/settingGlobal/delete/:id').delete(catchErrors(settingGlobalController.delete));
-router.route('/settingGlobal/search').get(catchErrors(settingGlobalController.search));
-router.route('/settingGlobal/list').get(catchErrors(settingGlobalController.list));
-router.route('/settingGlobal/filter').get(catchErrors(settingGlobalController.filter));
-
-// //______________________________________________ API for Commercial Setting _________________
-
-router.route('/settingCommercial/create').post(catchErrors(settingCommercialController.create));
-router.route('/settingCommercial/read/:id').get(catchErrors(settingCommercialController.read));
-router
-  .route('/settingCommercial/update/:id')
-  .patch(catchErrors(settingCommercialController.update));
-router
-  .route('/settingCommercial/delete/:id')
-  .delete(catchErrors(settingCommercialController.delete));
-router.route('/settingCommercial/search').get(catchErrors(settingCommercialController.search));
-router.route('/settingCommercial/list').get(catchErrors(settingCommercialController.list));
-router.route('/settingCommercial/filter').get(catchErrors(settingCommercialController.filter));
+router.route('/settings/create').post(catchErrors(settingsController.create));
+router.route('/settings/read/:id').get(catchErrors(settingsController.read));
+router.route('/settings/update/:id').patch(catchErrors(settingsController.update));
+router.route('/settings/delete/:id').delete(catchErrors(settingsController.delete));
+router.route('/settings/search').get(catchErrors(settingsController.search));
+router.route('/settings/list').get(catchErrors(settingsController.list));
+router.route('/settings/filter').get(catchErrors(settingsController.filter));
 
 module.exports = router;
