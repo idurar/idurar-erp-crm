@@ -69,8 +69,6 @@ app.use(
   erpAuthRouter
 );
 
-// app.use("/api", cors(), isValidAdminToken, erpApiRouter);
-
 app.use(
   '/api',
   cors({
