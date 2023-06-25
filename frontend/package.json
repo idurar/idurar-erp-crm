@@ -1,6 +1,9 @@
 {
   "name": "erp-crm",
   "version": "0.1.0",
+  "engines": {
+    "npm": "8.5.5"
+  },
   "dependencies": {
     "@ant-design/icons": "4.7.0",
     "antd": "4.17.4",
@@ -28,7 +31,7 @@
   "scripts": {
     "start": "craco start",
     "start:dev": "cross-env REACT_APP_DEV_REMOTE=remote npm start",
-    "build": "craco build && mv build _static",
+    "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
