@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
 
     const result = await Admin.findOneAndUpdate(
       { _id: admin._id },
-      { isLoggedIn: true },
+      { $inc:{isLoggedIn:1} , $push:{loggedSessions: token}} ,
       {
         new: true,
       }
@@ -70,7 +70,7 @@ exports.login = async (req, res) => {
           admin: {
             id: result._id,
             name: result.name,
-            isLoggedIn: result.isLoggedIn,
+            isLoggedIn: result.isLoggedIn>0?true:false,
           },
         },
         message: 'Successfully login admin',
@@ -110,13 +110,13 @@ exports.isValidAdminToken = async (req, res, next) => {
         message: "Admin doens't Exist, authorization denied.",
         jwtExpired: true,
       });
-    // if (admin.isLoggedIn === false)
-    //   return res.status(401).json({
-    //     success: false,
-    //     result: null,
-    //     message: 'Admin is already logout try to login, authorization denied.',
-    //     jwtExpired: true,
-    //   });
+    if (admin.isLoggedIn === 0)
+      return res.status(401).json({
+        success: false,
+        result: null,
+        message: 'Admin is already logout try to login, authorization denied.',
+        jwtExpired: true,
+      });
     else {
       req.admin = admin;
       next();
@@ -132,13 +132,14 @@ exports.isValidAdminToken = async (req, res, next) => {
 };
 
 exports.logout = async (req, res) => {
-  // const result = await Admin.findOneAndUpdate(
-  //   { _id: req.admin._id },
-  //   { isLoggedIn: false },
-  //   {
-  //     new: true,
-  //   }
-  // ).exec();
+  const token = req.cookies.token;
+  const result = await Admin.findOneAndUpdate(
+    { _id: req.admin._id },
+    { $pull: {loggedSessions: token}, $inc:{isLoggedIn:-1} },
+    {
+      new: true,
+    }
+  ).exec();
 
   res
     .clearCookie('token', {
