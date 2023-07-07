@@ -30,7 +30,12 @@ const SideContent = () => {
       className="sideContent"
     >
       <div style={{ width: '100%' }}>
-        <img src={logo} alt="Logo" style={{ margin: '0 auto 40px', display: 'block' }} />
+        <img
+          src={logo}
+          alt="Logo"
+          style={{ margin: '0 auto 40px', display: 'block' }}
+          className="pointer-cursor"
+        />
         <div className="space40"></div>
         <Title level={3}>Manage your company with :</Title>
         <div className="space20"></div>
@@ -69,6 +74,7 @@ const SideContent = () => {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            className="pointer-cursor"
           />
           <img
             src={logo2}
@@ -82,6 +88,7 @@ const SideContent = () => {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            className="pointer-cursor"
           />
           <img
             src={logo3}
@@ -95,6 +102,7 @@ const SideContent = () => {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            className="pointer-cursor"
           />
           <img
             src={logo4}
@@ -108,6 +116,7 @@ const SideContent = () => {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            className="pointer-cursor"
           />
         </div>
       </div>
