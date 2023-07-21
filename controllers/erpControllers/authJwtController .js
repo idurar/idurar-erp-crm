@@ -8,6 +8,35 @@ const Admin = mongoose.model('Admin');
 
 require('dotenv').config({ path: '.variables.env' });
 
+exports.register = async (req, res) => {
+  try {
+    var newAdmin = new Admin();
+    const { email, password, name, surname } = req.body;
+    // validate
+    if (!email || !password || !name || !surname)
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Not all fields have been entered.',
+      });
+    const passwordHash = newAdmin.generateHash(password);
+    await new Admin({
+      email: email,
+      password: passwordHash,
+      name: name,
+      surname: surname,
+    }).save();
+    console.log('👍👍👍👍👍👍👍👍 Admin created : Done!');
+    res.status(200).json({
+      success: true,
+      result: null,
+      message: 'Admin created : Done!',
+    });
+  } catch (e) {
+    res.status(500).json({ success: false, result: null, message: e.message, error: e });
+  }
+};
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

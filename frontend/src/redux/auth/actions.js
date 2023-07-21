@@ -28,6 +28,30 @@ export const login =
     }
   };
 
+export const register =
+  ({ registerData }) =>
+  async (dispatch) => {
+    dispatch({
+      type: actionTypes.LOADING_REQUEST,
+      payload: { loading: true },
+    });
+    const data = await authService.register({ registerData });
+
+    if (data.success === true) {
+      dispatch({
+        type: actionTypes.REGISTER_SUCCESS,
+        payload: data,
+      });
+      // history.push('/login');
+      window.location.href = '/login';  
+    } else {
+      dispatch({
+        type: actionTypes.FAILED_REQUEST,
+        payload: data,
+      });
+    }
+  };
+
 export const logout = () => async (dispatch) => {
   authService.logout();
   dispatch({

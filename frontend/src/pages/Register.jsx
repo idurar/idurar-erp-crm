@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Space, Layout, Row, Col, Divider } from 'antd';
 import { Typography } from 'antd';
 
-import { login } from '@/redux/auth/actions';
+import { register } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
-import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 
 import logo from '@/style/images/logo.png';
@@ -14,6 +13,7 @@ import logo1 from '@/style/images/logo1.png';
 import logo2 from '@/style/images/logo2.png';
 import logo3 from '@/style/images/logo3.png';
 import logo4 from '@/style/images/logo4.png';
+import RegisterForm from '@/forms/RegisterForm';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -38,6 +38,7 @@ const SideContent = () => {
           <li className="list-checked-item">
             <Space direction="vertical">
               <Text strong>All-in-one tool</Text>
+
               <Text>Build, run, and scale your apps - end to end</Text>
             </Space>
           </li>
@@ -114,12 +115,12 @@ const SideContent = () => {
   );
 };
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const { loading: isLoading } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+    dispatch(register({ registerData: values }));
   };
   return (
     <>
@@ -142,7 +143,7 @@ const LoginPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign in</Title>
+          <Title level={1}>Register</Title>
 
           <Divider />
           <div className="site-layout-content">
@@ -154,7 +155,7 @@ const LoginPage = () => {
               }}
               onFinish={onFinish}
             >
-              <LoginForm />
+              <RegisterForm/>
               <Form.Item>
                 <Button
                   type="primary"
@@ -163,9 +164,9 @@ const LoginPage = () => {
                   loading={isLoading}
                   size="large"
                 >
-                  Log in
+                  Register
                 </Button>
-                Or <a href="/register">register now!</a>
+                Or already have an account <a href="/login">login?</a>
               </Form.Item>
             </Form>
           </div>
@@ -175,4 +176,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
