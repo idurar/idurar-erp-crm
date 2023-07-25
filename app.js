@@ -59,11 +59,16 @@ app.use((req, res, next) => {
 // });
 
 // Here our API Routes
-
+const clientIP = req.connection.remoteAddress;
+let isLocalhost = false;
+if (clientIP === '127.0.0.1' || clientIP === '::1') {
+  // Connection is from localhost
+  isLocalhost = true;
+}
 app.use(
   '/api',
   cors({
-    origin: true,
+    origin: isLocalhost ? false : true,
     credentials: true,
   }),
   erpAuthRouter
@@ -72,7 +77,7 @@ app.use(
 app.use(
   '/api',
   cors({
-    origin: true,
+    origin: isLocalhost ? false : true,
     credentials: true,
   }),
   isValidAdminToken,
