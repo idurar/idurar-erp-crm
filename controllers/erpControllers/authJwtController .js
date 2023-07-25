@@ -11,7 +11,12 @@ require('dotenv').config({ path: '.variables.env' });
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    const clientIP = req.connection.remoteAddress;
+    let isLocalhost = false;
+    if (clientIP === '127.0.0.1' || clientIP === '::1') {
+      // Connection is from localhost
+      isLocalhost = true;
+    }
     // validate
     if (!email || !password)
       return res.status(400).json({
@@ -59,7 +64,7 @@ exports.login = async (req, res) => {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
         sameSite: 'Lax',
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' ? true : false,
+        secure: process.env.NODE_ENV === 'production' && !isLocalhost ? true : false,
         domain: req.hostname,
         Path: '/',
       })
