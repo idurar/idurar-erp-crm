@@ -62,8 +62,8 @@ exports.login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
-        sameSite: 'Lax',
-        httpOnly: true,
+        sameSite: !isLocalhost ? 'Lax' : 'Strict',
+        httpOnly: !isLocalhost ? true : false,
         secure: process.env.NODE_ENV === 'production' && !isLocalhost ? true : false,
         domain: req.hostname,
         Path: '/',
