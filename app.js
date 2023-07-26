@@ -47,6 +47,13 @@ app.use((req, res, next) => {
   res.locals.h = helpers;
   res.locals.admin = req.admin || null;
   res.locals.currentPath = req.path;
+  const clientIP = req.socket.remoteAddress;
+  let isLocalhost = false;
+  if (clientIP === '127.0.0.1' || clientIP === '::1') {
+    // Connection is from localhost
+    isLocalhost = true;
+  }
+  res.locals.isLocalhost = isLocalhost;
   next();
 });
 
@@ -59,16 +66,33 @@ app.use((req, res, next) => {
 // });
 
 // Here our API Routes
-const clientIP = req.connection.remoteAddress;
-let isLocalhost = false;
-if (clientIP === '127.0.0.1' || clientIP === '::1') {
-  // Connection is from localhost
-  isLocalhost = true;
-}
+
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  const clientIP = req.socket.remoteAddress;
+  let isLocalhost = false;
+  if (clientIP === '127.0.0.1' || clientIP === '::1') {
+    // Connection is from localhost
+    isLocalhost = true;
+  }
+  if (isLocalhost) {
+    corsOptions = {
+      origin: '*',
+      credentials: true,
+    };
+  } else {
+    corsOptions = {
+      origin: true,
+      credentials: true,
+    };
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+
 app.use(
   '/api',
   cors({
-    origin: isLocalhost ? false : true,
+    origin: true,
     credentials: true,
   }),
   erpAuthRouter
@@ -77,7 +101,7 @@ app.use(
 app.use(
   '/api',
   cors({
-    origin: isLocalhost ? false : true,
+    origin: true,
     credentials: true,
   }),
   isValidAdminToken,
