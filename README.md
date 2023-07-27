@@ -54,7 +54,7 @@ Then, create a new MongoDB database and user:
 \`\`\`bash
 mongo
 use idurar-erp-crm
-db.createUser({user: 'dave', pwd: 'password123', roles: [{role: 'readWrite', db: 'idurar-erp-crm'}]})
+db.createUser({user: 'user-me', pwd: 'password123', roles: [{role: 'readWrite', db: 'idurar-erp-crm'}]})
 exit
 \`\`\`
 
