@@ -37,26 +37,26 @@ cd idurar-erp-crm
 
 ### 2. Install the dependencies
 
-\`\`\`
+`
 npm install
-\`\`\`
+`
 
 ### 3. Setup MongoDB
 
 First, start MongoDB service:
 
-\`\`\`
+`
 sudo service mongod start
-\`\`\`
+`
 
 Then, create a new MongoDB database and user:
 
-\`\`\`
+`
 mongo
 use idurar-erp-crm
 db.createUser({user: 'user-me', pwd: 'password123', roles: [{role: 'readWrite', db: 'idurar-erp-crm'}]})
 exit
-\`\`\`
+`
 
 ### 4. Setup environment variables
 
@@ -68,15 +68,15 @@ mv .tmp.variables.env .variables.env
 
 Then, open the `.variables.env` file and set the `DATABASE` variable to your MongoDB URI:
 
-\`\`\`
+`
 nano .variables.env
-\`\`\`
+`
 
 Change the line with `DATABASE` to:
 
-\`\`\`
+`
 DATABASE=mongodb://user-me:password123@localhost:27017/idurar-erp-crm
-\`\`\`
+`
 
 Save and close the file.
 
@@ -84,15 +84,15 @@ Save and close the file.
 
 This will create an admin user:
 
-\`\`\`
+`
 node ./setup/setup.js
-\`\`\`
+`
 
 ### 6. Start the backend server
 
-\`\`\`
+`
 npm start
-\`\`\`
+`
 
 The backend server should now be running at `http://localhost:8888`.
 
@@ -100,16 +100,16 @@ The backend server should now be running at `http://localhost:8888`.
 
 Navigate to the frontend directory and install its dependencies:
 
-\`\`\`
+`
 cd frontend
 npm install
-\`\`\`
+`
 
 Then, start the frontend server:
 
-\`\`\`
+`
 npm start
-\`\`\`
+`
 
 The frontend should now be running at `http://localhost:3000`.
 
