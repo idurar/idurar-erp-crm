@@ -45,9 +45,7 @@ npm install
 
 First, start MongoDB service:
 
-`
-sudo service mongod start
-`
+`sudo service mongod start`
 
 Then, create a new MongoDB database and user:
 
