@@ -62,9 +62,9 @@ exit
 
 Rename the `.tmp.variables.env` file to `.variables.env`:
 
-\`\`\`bash
+`bash
 mv .tmp.variables.env .variables.env
-\`\`\`
+`
 
 Then, open the `.variables.env` file and set the `DATABASE` variable to your MongoDB URI:
 
