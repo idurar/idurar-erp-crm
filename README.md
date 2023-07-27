@@ -16,3 +16,101 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 **Live App Demo** : [https://idurarapp.com/open-source-erp-crm/](https://idurarapp.com/open-source-erp-crm/) "Please use chrome"
 
 `username : admin@demo.com password : admin123`
+
+
+# Run the App Locally
+This is a guide on how to run the idurar-erp-crm application locally.
+
+## Prerequisites
+
+- Node.js (version 14 is recommended)
+- MongoDB installed locally
+
+## Steps
+
+### 1. Clone the repository
+
+\`\`\`bash
+git clone https://github.com/idurar/idurar-erp-crm.git
+cd idurar-erp-crm
+\`\`\`
+
+### 2. Install the dependencies
+
+\`\`\`bash
+npm install
+\`\`\`
+
+### 3. Setup MongoDB
+
+First, start MongoDB service:
+
+\`\`\`bash
+sudo service mongod start
+\`\`\`
+
+Then, create a new MongoDB database and user:
+
+\`\`\`bash
+mongo
+use idurar-erp-crm
+db.createUser({user: 'dave', pwd: 'password123', roles: [{role: 'readWrite', db: 'idurar-erp-crm'}]})
+exit
+\`\`\`
+
+### 4. Setup environment variables
+
+Rename the `.tmp.variables.env` file to `.variables.env`:
+
+\`\`\`bash
+mv .tmp.variables.env .variables.env
+\`\`\`
+
+Then, open the `.variables.env` file and set the `DATABASE` variable to your MongoDB URI:
+
+\`\`\`bash
+nano .variables.env
+\`\`\`
+
+Change the line with `DATABASE` to:
+
+\`\`\`
+DATABASE=mongodb://user-me:password123@localhost:27017/idurar-erp-crm
+\`\`\`
+
+Save and close the file.
+
+### 5. Run setup script
+
+This will create an admin user:
+
+\`\`\`bash
+node ./setup/setup.js
+\`\`\`
+
+### 6. Start the backend server
+
+\`\`\`bash
+npm start
+\`\`\`
+
+The backend server should now be running at `http://localhost:8888`.
+
+### 7. Setup and start the frontend server
+
+Navigate to the frontend directory and install its dependencies:
+
+\`\`\`bash
+cd frontend
+npm install
+\`\`\`
+
+Then, start the frontend server:
+
+\`\`\`bash
+npm start
+\`\`\`
+
+The frontend should now be running at `http://localhost:3000`.
+
+Now, you should be able to access the application in your web browser at `http://localhost:3000`.
