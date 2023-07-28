@@ -111,4 +111,4 @@ npm start
 
 The frontend should now be running at `http://localhost:3000`.
 
-Now, you should be able to access the application in your web browser at `http://localhost:3000`.
+Now, you should be able to access the application in your web browser at `http://localhost:3000/login`.
