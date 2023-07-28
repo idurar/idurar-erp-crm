@@ -30,10 +30,10 @@ This is a guide on how to run the idurar-erp-crm application locally.
 
 ### 1. Clone the repository
 
-
+`
 git clone https://github.com/idurar/idurar-erp-crm.git
 cd idurar-erp-crm
-
+`
 
 ### 2. Install the dependencies
 
