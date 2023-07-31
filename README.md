@@ -32,6 +32,8 @@ This is a guide on how to run the idurar-erp-crm application locally.
 
 `
 git clone https://github.com/idurar/idurar-erp-crm.git
+`
+`
 cd idurar-erp-crm
 `
 
