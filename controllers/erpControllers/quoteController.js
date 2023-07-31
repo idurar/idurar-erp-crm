@@ -2,6 +2,7 @@
 // module.exports = crudController.createCRUDController("Quote");
 
 const mongoose = require('mongoose');
+const moment = require('moment');
 const Model = mongoose.model('Quote');
 const custom = require('../corsControllers/custom');
 
@@ -139,6 +140,87 @@ methods.update = async (req, res) => {
     }
   }
 };
+
+methods.summary = async (req, res) => {
+  try {
+    let defaultType = 'month';
+
+    const { type } = req.query;
+
+    if (type) {
+      defaultType = type;
+    }
+
+    const currentDate = moment();
+    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
+    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
+
+    if (defaultType === 'week') {
+      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
+      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
+    }
+    if (defaultType === 'year') {
+      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
+      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
+    }
+
+    const result = await Model.aggregate([
+      {
+        $match: {
+          removed: false,
+          date: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: '$status',
+          count: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $project: {
+          status: '$_id',
+          count: 1,
+          percentage: {
+            $multiply: [{ $divide: ['$count', { $sum: '$count' }] }, 100],
+          },
+        },
+      },
+      {
+        $sort: {
+          status: 1,
+        },
+      },
+    ]);
+
+    const total = result.reduce((acc, item) => acc + item.count, 0);
+
+    const finalResult = {
+      total,
+      type: defaultType,
+      performance: result,
+    };
+
+    return res.status(200).json({
+      success: true,
+      result: finalResult,
+      message: `Successfully found all Quotations for the last ${defaultType}`,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      result: null,
+      message: 'Oops there is an Error',
+      error: error,
+    });
+  }
+};
+
 
 // methods.update = async (req, res) => {
 //   try {
