@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
 import logoIcon from '@/style/images/logo-icon.png';
@@ -17,16 +17,30 @@ import {
   UserOutlined,
   CreditCardOutlined,
   BankOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default function Navigation() {
+  return (
+    <>
+      <div className="sidebar-wraper">
+        <Sidebar collapsible={true} />
+      </div>
+      <MobileSidebar />
+    </>
+  );
+}
+
+function Sidebar({ collapsible }) {
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
+  const history = useHistory();
 
   useEffect(() => {
     if (isNavMenuClose) {
@@ -45,7 +59,12 @@ export default function Navigation() {
 
   return (
     <>
-      <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
+      <Sider
+        collapsible={collapsible}
+        collapsed={collapsible ? isNavMenuClose : collapsible}
+        onCollapse={onCollapse}
+        className="navigation"
+      >
         <div className="logo">
           <img
             src={logoIcon}
@@ -57,51 +76,66 @@ export default function Navigation() {
             <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
           )}
         </div>
-        <Menu mode="inline">
-          <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
-            <Link to={'/'} />
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={[window.location.pathname]} // this is for active menu
+          onClick={({ key }) => history.push(key)}
+        >
+          <Menu.Item key={'/'} icon={<DashboardOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key={'Customer'} icon={<CustomerServiceOutlined />}>
-            <Link to={'/customer'} />
+          <Menu.Item key={'/customer'} icon={<CustomerServiceOutlined />}>
             Customer
           </Menu.Item>
-          <Menu.Item key={'Invoice'} icon={<FileTextOutlined />}>
-            <Link to={'/invoice'} />
+          <Menu.Item key={'/invoice'} icon={<FileTextOutlined />}>
             Invoice
           </Menu.Item>
-          <Menu.Item key={'Quote'} icon={<FileSyncOutlined />}>
-            <Link to={'/quote'} />
+          <Menu.Item key={'/quote'} icon={<FileSyncOutlined />}>
             Quote
           </Menu.Item>
-          <Menu.Item key={'PaymentInvoice'} icon={<CreditCardOutlined />}>
-            <Link to={'/payment/invoice'} />
+          <Menu.Item key={'/payment/invoice'} icon={<CreditCardOutlined />}>
             Payment Invoice
           </Menu.Item>
-          <Menu.Item key={'Employee'} icon={<UserOutlined />}>
-            <Link to={'/employee'} />
+          <Menu.Item key={'/employee'} icon={<UserOutlined />}>
             Employee
           </Menu.Item>
-          <Menu.Item key={'Admin'} icon={<TeamOutlined />}>
-            <Link to={'/admin'} />
+          <Menu.Item key={'/admin'} icon={<TeamOutlined />}>
             Admin
           </Menu.Item>
           <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
-            <Menu.Item key={'SettingsPage'}>
-              <Link to={'/settings'} />
-              General Settings
-            </Menu.Item>
-            <Menu.Item key={'PaymentMode'}>
-              <Link to={'/payment/mode'} />
-              Payment Mode
-            </Menu.Item>
-            <Menu.Item key={'Role'}>
-              <Link to={'/role'} />
-              Role
-            </Menu.Item>
+            <Menu.Item key={'/settings'}>General Settings</Menu.Item>
+            <Menu.Item key={'/payment/mode'}>Payment Mode</Menu.Item>
+            <Menu.Item key={'/role'}>Role</Menu.Item>
           </SubMenu>
         </Menu>
       </Sider>
+    </>
+  );
+}
+
+function MobileSidebar() {
+  const [visible, setVisible] = useState(false);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+  return (
+    <>
+      <Button type="text" size="large" onClick={showDrawer} className="mobile-sidebar-btn">
+        <MenuOutlined />
+      </Button>
+      <Drawer
+        width={200}
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        visible={visible}
+        className="mobile-sidebar-wraper"
+      >
+        <Sidebar collapsible={false} />
+      </Drawer>
     </>
   );
 }
