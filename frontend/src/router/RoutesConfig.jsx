@@ -72,4 +72,8 @@ export const routesConfig = [
     path: '/role',
     component: 'Role',
   },
+  {
+    path: '/profile',
+    component: 'Profile',
+  },
 ];

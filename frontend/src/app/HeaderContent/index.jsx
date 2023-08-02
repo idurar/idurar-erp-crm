@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Avatar, Menu, Dropdown } from 'antd';
+import { Avatar, Menu, Dropdown, Button } from 'antd';
 
 import {
   AppstoreOutlined,
@@ -22,7 +22,7 @@ export default function HeaderContent() {
 
   const profileDropdown = (
     <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
-      <div className="pad15">
+      <div className="pad15" onClick={() => history.push('/profile')} style={{ cursor: 'pointer' }}>
         <Avatar size="large" className="last" src={photo} style={{ float: 'left' }} />
         <div className="info">
           <p className="strong">Salah Eddine Lalami</p>
