@@ -12,14 +12,7 @@ const PasswordModal = () => {
     console.log('Received values of form: ', fieldsValue);
   };
   return (
-    <Modal
-      title={modalTitle}
-      visible={passwordModal.isOpen}
-      //   onOk={handleOk}
-      onCancel={modal.close}
-      //   confirmLoading={isLoading}
-      okText="Update"
-    >
+    <Modal title={modalTitle} visible={passwordModal.isOpen} onCancel={modal.close} okText="Update">
       <Form layout="vertical" onFinish={handelSubmit}>
         <Form.Item
           label="New Password"

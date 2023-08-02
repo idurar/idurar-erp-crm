@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Avatar, Menu, Dropdown, Button } from 'antd';
+import { Avatar, Menu, Dropdown } from 'antd';
 
 import {
   AppstoreOutlined,

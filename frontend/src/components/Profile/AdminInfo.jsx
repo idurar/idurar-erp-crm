@@ -15,7 +15,6 @@ const AdminInfo = ({ config }) => {
   const { ENTITY_NAME } = config;
 
   const state = useSelector((state) => state);
-  console.log('store', state);
 
   return (
     <>

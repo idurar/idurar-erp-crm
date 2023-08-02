@@ -19,8 +19,6 @@ const UpdateAdmin = ({ config }) => {
         onBack={() => updatePanel.close()}
         title={ENTITY_NAME}
         ghost={false}
-        //   tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
-        // subTitle="This is cuurent erp page"
         extra={[
           <Button
             onClick={() => updatePanel.close()}
