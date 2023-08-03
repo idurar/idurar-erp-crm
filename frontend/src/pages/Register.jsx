@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Form, Input, Button, Space, Layout, Row, Col, Divider } from 'antd';
 import { Typography } from 'antd';
 
 import RegisterForm from '@/forms/RegisterForm';
+import AuthLayout from '@/layout/AuthLayout';
 
 import logo from '@/style/images/logo.png';
 import logo1 from '@/style/images/logo1.png';
@@ -113,6 +113,7 @@ const SideContent = () => {
 };
 
 const RegisterPage = () => {
+  const onFinish = () => {};
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>
@@ -140,19 +141,15 @@ const RegisterPage = () => {
           <div className="site-layout-content">
             <Form
               name="signup"
-              className="signup-form"
+              className="login-form"
               initialValues={{
                 remember: true,
-              }
+              }}
+              onFinish={onFinish}
             >
               <RegisterForm />
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                  size="large"
-                >
+                <Button type="primary" htmlType="submit" className="login-form-button" size="large">
                   Register
                 </Button>
                 Or <a href="/login">already have account? Login</a>
