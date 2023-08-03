@@ -4,10 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Space, Layout, Row, Col, Divider } from 'antd';
 import { Typography } from 'antd';
 
-import { login } from '@/redux/auth/actions';
-import { selectAuth } from '@/redux/auth/selectors';
 import RegisterForm from '@/forms/RegisterForm';
-import AuthLayout from '@/layout/AuthLayout';
 
 import logo from '@/style/images/logo.png';
 import logo1 from '@/style/images/logo1.png';
@@ -116,12 +113,6 @@ const SideContent = () => {
 };
 
 const RegisterPage = () => {
-  const { loading: isLoading } = useSelector(selectAuth);
-
-  const dispatch = useDispatch();
-  const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
-  };
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>
@@ -148,20 +139,18 @@ const RegisterPage = () => {
           <Divider />
           <div className="site-layout-content">
             <Form
-              name="normal_login"
-              className="login-form"
+              name="signup"
+              className="signup-form"
               initialValues={{
                 remember: true,
-              }}
-              onFinish={onFinish}
+              }
             >
               <RegisterForm />
               <Form.Item>
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button"
-                  loading={isLoading}
+                  className="signup-form-button"
                   size="large"
                 >
                   Register
