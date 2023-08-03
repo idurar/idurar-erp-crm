@@ -1,11 +1,12 @@
 const fs = require('fs');
+const path = require('path');
 const custom = require('../corsControllers/custom');
+const { SendInvoice } = require('../../emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const InvoiceModel = mongoose.model('Invoice');
 const ClientModel = mongoose.model('Client');
 const ObjectId = mongoose.Types.ObjectId;
 const { Resend } = require('resend');
-const path = require('path');
 
 module.exports = sendMail = async (req, res) => {
   const { id } = req.body;
@@ -99,12 +100,7 @@ const sendViaApi = async (email, name, filePath) => {
         content: attatchedFile,
       },
     ],
-    html: `
-    <p>Hello ${name}, <br> <br>
-    Here's the invoice you requested at <br>
-        <strong>${new Date()}</strong>
-    </p>
-    `,
+    html: SendInvoice({ name }),
   });
 
   return data;
