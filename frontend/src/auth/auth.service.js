@@ -35,6 +35,7 @@ export const login = async ({ loginData }) => {
     return errorHandler(error);
   }
 };
+
 export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {

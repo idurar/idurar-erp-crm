@@ -1,3 +1,4 @@
+const { isLoggedIn } = require('@/frontend/src/redux/auth/selectors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { stubFalse } = require('lodash');
@@ -47,7 +48,8 @@ exports.login = async (req, res) => {
 
     const result = await Admin.findOneAndUpdate(
       { _id: admin._id },
-      { isLoggedIn: true },
+      // { isLoggedIn: true },
+      {$set:{isLoggedIn: true}, $push:{loggedSessions: token}},
       {
         new: true,
       }
@@ -110,13 +112,14 @@ exports.isValidAdminToken = async (req, res, next) => {
         message: "Admin doens't Exist, authorization denied.",
         jwtExpired: true,
       });
-    // if (admin.isLoggedIn === false)
-    //   return res.status(401).json({
-    //     success: false,
-    //     result: null,
-    //     message: 'Admin is already logout try to login, authorization denied.',
-    //     jwtExpired: true,
-    //   });
+      //if admin is registered but not logged in at the moment
+    if (admin.isLoggedIn === false)
+      return res.status(401).json({
+        success: false,
+        result: null,
+        message: 'Admin is already logout try to login, authorization denied.',
+        jwtExpired: true,
+      });
     else {
       req.admin = admin;
       next();
@@ -139,8 +142,12 @@ exports.logout = async (req, res) => {
   //     new: true,
   //   }
   // ).exec();
-
-  res
+  const token = req.cookies.token
+  const result = await Admin.findOneAndUpdate(
+    {_id: req.admin._id},
+    {$set: {isLoggedIn: false}, $pull: {loggedSessions: token}},
+    {new: true}
+  ).exec()
     .clearCookie('token', {
       maxAge: null, // Cookie expires after 30 days
       sameSite: 'Lax',
