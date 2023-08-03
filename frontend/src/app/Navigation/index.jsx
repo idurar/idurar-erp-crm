@@ -46,17 +46,20 @@ export default function Navigation() {
   return (
     <>
       <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
-        <div className="logo">
-          <img
-            src={logoIcon}
-            alt="Logo"
-            // style={{ margin: "0 auto 40px", display: "block" }}
-          />
+        <a href="/">
+          <div className="logo">
+            <img
+              src={logoIcon}
+              alt="Logo"
+              // style={{ margin: "0 auto 40px", display: "block" }}
+            />
 
-          {!showLogoApp && (
-            <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
-          )}
-        </div>
+            {!showLogoApp && (
+              <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
+            )}
+          </div>
+        </a>
+
         <Menu mode="inline">
           <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
             <Link to={'/'} />
