@@ -150,7 +150,7 @@ const RegisterPage = () => {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="signup-form-button"
+                  className="login-form-button"
                   size="large"
                 >
                   Register
