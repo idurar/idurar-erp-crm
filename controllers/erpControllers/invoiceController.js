@@ -163,7 +163,15 @@ methods.summary = async (req, res) => {
     const { type } = req.query;
 
     if (type) {
-      defaultType = type;
+      if (['week', 'month', 'year'].includes(type)) {
+        defaultType = type
+      } else {
+        return res.status(400).json({
+          success: false,
+          result: null,
+          message: 'Invalid type',
+        });
+      }
     }
 
     const currentDate = moment();
@@ -195,15 +203,20 @@ methods.summary = async (req, res) => {
           count: {
             $sum: 1,
           },
+          total_amount: {
+            $sum: '$total',
+          }
         },
       },
       {
         $project: {
+          _id: 0,
           status: '$_id',
           count: 1,
           percentage: {
             $multiply: [{ $divide: ['$count', { $sum: '$count' }] }, 100],
           },
+          total_amount: 1
         },
       },
       {
@@ -213,7 +226,8 @@ methods.summary = async (req, res) => {
       },
     ]);
 
-    const total = result.reduce((acc, item) => acc + item.count, 0);
+    const total = result.reduce((acc, item) => acc + item.total_amount, 0);
+    
 
     const finalResult = {
       total,
