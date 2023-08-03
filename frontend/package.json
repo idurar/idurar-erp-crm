@@ -33,7 +33,7 @@
     "cross-env": "7.0.3"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco --openssl-legacy-provider start",
     "start:dev": "cross-env REACT_APP_DEV_REMOTE=remote npm start",
     "build": "craco build",
     "test": "craco test",

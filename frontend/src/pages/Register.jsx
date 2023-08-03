@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 
 import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
-import LoginForm from '@/forms/LoginForm';
+import RegisterForm from '@/forms/RegisterForm';
 import AuthLayout from '@/layout/AuthLayout';
 
 import logo from '@/style/images/logo.png';
@@ -115,7 +115,7 @@ const SideContent = () => {
   );
 };
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const { loading: isLoading } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
@@ -143,7 +143,7 @@ const LoginPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign in</Title>
+          <Title level={1}>Sign up</Title>
 
           <Divider />
           <div className="site-layout-content">
@@ -155,7 +155,7 @@ const LoginPage = () => {
               }}
               onFinish={onFinish}
             >
-              <LoginForm />
+              <RegisterForm />
               <Form.Item>
                 <Button
                   type="primary"
@@ -164,9 +164,9 @@ const LoginPage = () => {
                   loading={isLoading}
                   size="large"
                 >
-                  Log in
+                  Register
                 </Button>
-                Or <a href="/register">register now!</a>
+                Or <a href="/login">already have account? Login</a>
               </Form.Item>
             </Form>
           </div>
@@ -176,4 +176,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
