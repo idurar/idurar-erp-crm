@@ -23,6 +23,9 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 
 ```bash
 git clone https://github.com/idurar/idurar-erp-crm.git
+```
+
+```bash
 cd idurar-erp-crm
 ```
 
@@ -82,6 +85,9 @@ Open a new terminal window , and run the following command to install the fronte
 
 ```bash
 cd frontend
+```
+
+```bash
 npm install
 ```
 
@@ -97,10 +103,13 @@ npm run start
 
 This command will start the frontend server, and you'll be able to access the website on localhost:3000 in your web browser.
 
-` If you encounter an OpenSSL error while running the frontend server, follow these additional steps:`
+:exclamation: :warning:` If you encounter an OpenSSL error while running the frontend server, follow these additional steps:`
 
 ```bash
 export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+```bash
 npm run start
 ```
 
