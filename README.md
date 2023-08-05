@@ -123,5 +123,4 @@ Now you should be all set to run the project locally on your machine and explore
 
 ## Show your support
 
-Dont forget to give a ⭐️ to this project
-Happy coding!
+Dont forget to give a ⭐️ to this project ... Happy coding!
