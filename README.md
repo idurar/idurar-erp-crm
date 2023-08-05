@@ -19,7 +19,7 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 
 ## Getting started
 
-### Step 1: Clone the repository
+#### Step 1: Clone the repository
 
 ```bash
 git clone https://github.com/idurar/idurar-erp-crm.git
@@ -29,7 +29,7 @@ git clone https://github.com/idurar/idurar-erp-crm.git
 cd idurar-erp-crm
 ```
 
-### Step 2: Create Your MongoDB Account and Database/Cluster
+#### Step 2: Create Your MongoDB Account and Database/Cluster
 
 - Create your own MongoDB account by visiting the MongoDB website and signing up for a new account.
 
@@ -37,11 +37,11 @@ cd idurar-erp-crm
 
 - add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
 
-### Step 3: Rename the Environment File
+#### Step 3: Rename the Environment File
 
 Locate the file named tmp.variables.env in the root directory of the project and rename it to .variables.env. This file will be used to store the necessary environment variables for the project to run.
 
-### Step 4: Update MongoDB URI
+#### Step 4: Update MongoDB URI
 
 In the .variables.env file, find the line that reads:
 
@@ -49,7 +49,7 @@ In the .variables.env file, find the line that reads:
 
 Replace "your-mongodb-uri" with the actual URI of your MongoDB database.
 
-### Step 5: Install Backend Dependencies
+#### Step 5: Install Backend Dependencies
 
 In your terminal, navigate to the root directory of the project and run the following command to install the backend dependencies:
 
@@ -59,7 +59,7 @@ npm install
 
 This command will install all the required packages specified in the package.json file.
 
-### Step 6: Run Setup Script
+#### Step 6: Run Setup Script
 
 While still in the root directory of the project, execute the following command to run the setup script:
 
@@ -69,7 +69,7 @@ node setup/setup.js
 
 This setup script may perform necessary database migrations or any other initialization tasks required for the project.
 
-### Step 7: Run the Backend Server
+#### Step 7: Run the Backend Server
 
 In the same terminal, run the following command to start the backend server:
 
@@ -79,7 +79,7 @@ npm run dev
 
 This command will start the backend server, and it will listen for incoming requests.
 
-### Step 8: Install Frontend Dependencies
+#### Step 8: Install Frontend Dependencies
 
 Open a new terminal window , and run the following command to install the frontend dependencies:
 
@@ -93,7 +93,7 @@ npm install
 
 This command will navigate to the frontend directory within the project and install all the required packages for the frontend.
 
-### Step 9: Run the Frontend Server
+#### Step 9: Run the Frontend Server
 
 After installing the frontend dependencies, run the following command in the same terminal to start the frontend server:
 
