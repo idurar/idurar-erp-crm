@@ -120,4 +120,8 @@ Once the website is up and running, you can log in using the following credentia
 `username : admin@demo.com password : admin123`
 
 Now you should be all set to run the project locally on your machine and explore its features.
-dont forget to star our Open Source ERP / CRM repo . Happy coding!
+
+## Show your support
+
+Dont forget to give a ⭐️ to this project
+Happy coding!
