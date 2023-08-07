@@ -101,7 +101,7 @@ Navigate to the frontend directory and install its dependencies:
 
 `
 cd frontend
-npm install
+npm install --save dotenv
 `
 
 Then, start the frontend server:
