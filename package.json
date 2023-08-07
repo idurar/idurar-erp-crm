@@ -1,6 +1,10 @@
 {
   "name": "cedimed-react",
   "version": "1.0.0",
+  "engines": {
+    "npm": "8.5.5",
+    "node": "16.15.0"
+  },
   "scripts": {
     "start": "node ./server.js",
     "dev": "nodemon ./server.js --ignore public/",
