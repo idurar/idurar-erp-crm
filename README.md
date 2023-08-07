@@ -56,7 +56,7 @@ mongo --eval 'db = db.getSiblingDB("idurar-erp-crm"); db.createUser({user: "user
 
 ### 4. Setup environment variables
 
-Rename the `.tmp.variables.env` file to `.variables.env`:
+Rename the `tmp.variables.env` file to `.variables.env`:
 
 `
 mv .tmp.variables.env .variables.env
