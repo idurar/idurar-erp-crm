@@ -69,13 +69,19 @@ exports.search = async (Model, req, res) => {
  * Pdf Generate New Method
  * This method only generate PDF in the folder, not download the PDF
  */
-exports.generatePdf = (modelName, info = { filename: 'pdf_file', format: 'A5' }, result) => {
+exports.generatePdf = async (
+  modelName,
+  info = { filename: 'pdf_file', format: 'A5' },
+  result,
+  callback
+) => {
   const fileId = info.filename + '-' + result._id + '.pdf';
+  const folderPath = modelName.toLowerCase();
+  const targetLocation = `./public/download/${folderPath}/${fileId}`;
 
   // if PDF already exist, then delete it and create new PDF
-  const folderPath = modelName.toLowerCase();
-  if (fs.existsSync(`./public/download/${folderPath}/${fileId}`)) {
-    fs.unlinkSync(`./public/download/${folderPath}/${fileId}`);
+  if (fs.existsSync(targetLocation)) {
+    fs.unlinkSync(targetLocation);
   }
 
   //render pdf html
@@ -84,13 +90,14 @@ exports.generatePdf = (modelName, info = { filename: 'pdf_file', format: 'A5' },
     moment: moment,
   });
 
-  pdf
+  await pdf
     .create(html, {
       format: info.format,
       orientation: 'portrait',
       border: '12mm',
     })
-    .toFile(`./public/download/${folderPath}/${fileId}`, function (err) {
+    .toFile(targetLocation, function (err) {
       if (err) return console.log('this pdf create error ' + err);
+      if (callback) callback(targetLocation);
     });
 };

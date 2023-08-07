@@ -36,6 +36,7 @@
     "start": "craco start",
     "start:dev": "cross-env REACT_APP_DEV_REMOTE=remote npm start",
     "build": "craco build",
+    "dev:new": "cross-env npm start",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
