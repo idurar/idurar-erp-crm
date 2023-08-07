@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
-import { Dropdown, Button, PageHeader, Table, Col } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Dropdown, Button, PageHeader, Table, Col, Input } from 'antd';
 
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import { selectListItems } from '@/redux/crud/selectors';
 import uniqueId from '@/utils/uinqueId';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
+  const [searchInput, setSearchInput] = useState(''); //state for the search input
   let { entity, dataTableColumns, dataTableTitle } = config;
 
   dataTableColumns = [
@@ -30,13 +31,25 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    const options = { page: pagination.current || 1 };
+    const options = { page: pagination.current || 1, searchFilter: searchInput };
     dispatch(crud.list({ entity, options }));
   }, []);
 
+  // function to handle search
+  const onSearchHandler = (value) => {
+    setSearchInput(value);
+  };
+  // function to handle search input change
+  const searchChangeHandler = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setSearchInput(e.target.value);
+  };
+
   useEffect(() => {
-    dispatch(crud.list({ entity }));
-  }, []);
+    const options = { searchFilter: searchInput };
+    dispatch(crud.list({ entity, options }));
+  }, [searchInput]);
 
   return (
     <>
@@ -45,6 +58,17 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
         title={dataTableTitle}
         ghost={false}
         extra={[
+          <Input.Search
+            placeholder="search..."
+            key={`search_input_unique_id`}
+            allowClear
+            onSearch={onSearchHandler}
+            value={searchInput}
+            onChange={searchChangeHandler}
+            style={{
+              width: 250,
+            }}
+          />,
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
             Refresh
           </Button>,

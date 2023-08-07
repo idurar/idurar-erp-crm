@@ -5,6 +5,7 @@
  */
 
 const moment = require('moment');
+const mongoose = require('mongoose');
 
 exports.read = async (Model, req, res) => {
   try {
@@ -176,15 +177,53 @@ exports.list = async (Model, req, res) => {
   const page = req.query.page || 1;
   const limit = parseInt(req.query.items) || 10;
   const skip = page * limit - limit;
+  const searchFilter = req.query.searchFilter || '';
   try {
+    // regex exp to search based on the search filter
+    let searchQueryRegx = new RegExp(searchFilter, 'i');
+    // checkign the model type and creating the search filter accordingly
+    let documentSearchParameters = {};
+    if (Model === mongoose.model('Employee')) {
+      documentSearchParameters = {
+        $or: [
+          { name: { $regex: searchQueryRegx } },
+          { surname: { $regex: searchQueryRegx } },
+          { department: { $regex: searchQueryRegx } },
+          { position: { $regex: searchQueryRegx } },
+          { email: { $regex: searchQueryRegx } },
+        ],
+      };
+    } else if (Model === mongoose.model('Client')) {
+      documentSearchParameters = {
+        $or: [
+          { managerName: { $regex: searchQueryRegx } },
+          { managerSurname: { $regex: searchQueryRegx } },
+          { company: { $regex: searchQueryRegx } },
+          { email: { $regex: searchQueryRegx } },
+        ],
+      };
+    } else if (Model === mongoose.model('Admin')) {
+      documentSearchParameters = {
+        $or: [
+          { name: { $regex: searchQueryRegx } },
+          { surname: { $regex: searchQueryRegx } },
+          { email: { $regex: searchQueryRegx } },
+        ],
+      };
+    }
+
     //  Query the database for a list of all results
-    const resultsPromise = Model.find({ removed: false })
+    const resultsPromise = Model.find({
+      removed: false,
+      // adding query to check for the search filter
+      ...documentSearchParameters,
+    })
       .skip(skip)
       .limit(limit)
       .sort({ created: 'desc' })
       .populate();
     // Counting the total documents
-    const countPromise = Model.count({ removed: false });
+    const countPromise = Model.count({ removed: false, ...documentSearchParameters });
     // Resolving both promises
     const [result, count] = await Promise.all([resultsPromise, countPromise]);
     // Calculating total pages

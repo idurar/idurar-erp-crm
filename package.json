@@ -9,6 +9,7 @@
     "reset": "node ./setup/reset.js"
   },
   "dependencies": {
+    "antd": "^5.8.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
