@@ -51,10 +51,7 @@ First, start MongoDB service:
 Then, create a new MongoDB database and user:
 
 `
-mongo
-use idurar-erp-crm
-db.createUser({user: 'user-me', pwd: 'password123', roles: [{role: 'readWrite', db: 'idurar-erp-crm'}]})
-exit
+mongo --eval 'db = db.getSiblingDB("idurar-erp-crm"); db.createUser({user: "user-me", pwd: "password123", roles: [{role: "readWrite", db: "idurar-erp-crm"}]});'
 `
 
 ### 4. Setup environment variables
