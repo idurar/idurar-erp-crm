@@ -3,7 +3,7 @@ import ErpPanel from '@/components/ErpPanel';
 import QuoteForm from './QuoteForm';
 import DataTableDropMenu from './DataTableDropMenu';
 
-export default function InvoiceModule({ config }) {
+export default function QuoteModule({ config }) {
   return (
     <ErpLayout>
       <ErpPanel
