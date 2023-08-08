@@ -11,7 +11,12 @@ require('dotenv').config({ path: '.variables.env' });
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    const clientIP = req.connection.remoteAddress;
+    let isLocalhost = false;
+    if (clientIP === '127.0.0.1' || clientIP === '::1') {
+      // Connection is from localhost
+      isLocalhost = true;
+    }
     // validate
     if (!email || !password)
       return res.status(400).json({
@@ -47,7 +52,7 @@ exports.login = async (req, res) => {
 
     const result = await Admin.findOneAndUpdate(
       { _id: admin._id },
-      { isLoggedIn: true },
+      { $inc:{isLoggedIn:1} , $push:{loggedSessions: token}} ,
       {
         new: true,
       }
@@ -57,9 +62,9 @@ exports.login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
-        sameSite: 'Lax',
+        sameSite: process.env.NODE_ENV === 'production' && !isLocalhost ? 'Lax' : 'none',
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' ? true : false,
+        secure: true,
         domain: req.hostname,
         Path: '/',
       })
@@ -70,7 +75,7 @@ exports.login = async (req, res) => {
           admin: {
             id: result._id,
             name: result.name,
-            isLoggedIn: result.isLoggedIn,
+            isLoggedIn: result.isLoggedIn>0?true:false,
           },
         },
         message: 'Successfully login admin',
@@ -110,13 +115,13 @@ exports.isValidAdminToken = async (req, res, next) => {
         message: "Admin doens't Exist, authorization denied.",
         jwtExpired: true,
       });
-    // if (admin.isLoggedIn === false)
-    //   return res.status(401).json({
-    //     success: false,
-    //     result: null,
-    //     message: 'Admin is already logout try to login, authorization denied.',
-    //     jwtExpired: true,
-    //   });
+    if (admin.isLoggedIn === 0)
+      return res.status(401).json({
+        success: false,
+        result: null,
+        message: 'Admin is already logout try to login, authorization denied.',
+        jwtExpired: true,
+      });
     else {
       req.admin = admin;
       next();
@@ -132,13 +137,14 @@ exports.isValidAdminToken = async (req, res, next) => {
 };
 
 exports.logout = async (req, res) => {
-  // const result = await Admin.findOneAndUpdate(
-  //   { _id: req.admin._id },
-  //   { isLoggedIn: false },
-  //   {
-  //     new: true,
-  //   }
-  // ).exec();
+  const token = req.cookies.token;
+  const result = await Admin.findOneAndUpdate(
+    { _id: req.admin._id },
+    { $pull: {loggedSessions: token}, $inc:{isLoggedIn:-1} },
+    {
+      new: true,
+    }
+  ).exec();
 
   res
     .clearCookie('token', {

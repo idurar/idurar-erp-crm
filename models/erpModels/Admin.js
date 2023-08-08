@@ -39,7 +39,11 @@ const adminSchema = new Schema({
     default: false,
   },
   permissions: [{ type: mongoose.Schema.ObjectId, ref: 'Permission' }],
-  isLoggedIn: { type: Boolean },
+  isLoggedIn: { type: Number },
+  loggedSessions:{
+    type: [String],
+    default: []
+  },
 });
 
 adminSchema.plugin(require('mongoose-autopopulate'));

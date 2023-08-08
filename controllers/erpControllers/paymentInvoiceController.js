@@ -77,11 +77,11 @@ methods.create = async (req, res) => {
       }
     ).exec();
 
-    // custom.generatePdf(
-    //   "PaymentInvoice",
-    //   { filename: "payment-invoice-report", format: "A5" },
-    //   result
-    // );
+    custom.generatePdf(
+      'PaymentInvoice',
+      { filename: 'payment-invoice-report', format: 'A4' },
+      result
+    );
 
     const [updatedResult, invoiceUpdated] = await Promise.all([updatePath, invoiceUpdate]);
     res.status(200).json({
@@ -181,11 +181,11 @@ methods.update = async (req, res) => {
       }
     ).exec();
 
-    // custom.generatePdf(
-    //   "PaymentInvoice",
-    //   { filename: "payment-invoice-report", format: "A5" },
-    //   result
-    // );
+    custom.generatePdf(
+      'PaymentInvoice',
+      { filename: 'payment-invoice-report', format: 'A4' },
+      result
+    );
 
     res.status(200).json({
       success: true,
