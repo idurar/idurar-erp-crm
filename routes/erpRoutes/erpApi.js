@@ -102,6 +102,7 @@ router.route('/invoice/list').get(catchErrors(invoiceController.list));
 router.route('/invoice/filter').get(catchErrors(invoiceController.filter));
 router.route('/invoice/pdf/:id').get(catchErrors(invoiceController.generatePDF));
 router.route('/invoice/summary').get(catchErrors(invoiceController.summary));
+router.route('/invoice/mail').post(catchErrors(invoiceController.sendMail));
 
 // //_________________________________________________________________API for items_____________________
 router.route('/item/create').post(catchErrors(itemController.create));
