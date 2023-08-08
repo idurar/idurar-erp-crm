@@ -89,8 +89,9 @@ exports.generatePdf = (modelName, info = { filename: 'pdf_file', format: 'A5' },
       format: info.format,
       orientation: 'portrait',
       border: '12mm',
+      childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } }
     })
-    .toFile(`./public/download/${folderPath}/${fileId}`, function (err) {
+    .toFile(`./public/download/${folderPath}/${fileId}`, function(err) {
       if (err) return console.log('this pdf create error ' + err);
     });
 };
