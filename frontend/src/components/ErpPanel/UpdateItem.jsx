@@ -82,6 +82,14 @@ export default function UpdateItem({ config, UpdateForm }) {
 
     const id = current._id;
     dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
+    if (entity === 'quote' && fieldsValue.status === 'accepted') {
+      // Create a new object for the invoice entity with updated status
+      const invoiceFieldsValue = {
+        ...fieldsValue,
+        status: 'draft',
+      };
+      dispatch(erp.create({ entity: 'invoice', jsonData: invoiceFieldsValue }));
+    }
   };
   useEffect(() => {
     if (isSuccess) {
