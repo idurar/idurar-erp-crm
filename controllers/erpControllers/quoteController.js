@@ -194,14 +194,31 @@ methods.summary = async (req, res) => {
         },
       },
       {
+        $group: {
+          _id: null,
+          total_count: {
+            $sum: '$count',
+          },
+          results: {
+            $push: '$$ROOT',
+          },
+        },
+      },
+      {
+        $unwind: '$results',
+      },
+      {
         $project: {
           _id: 0,
-          status: '$_id',
-          count: 1,
+          status: '$results._id',
+          count: '$results.count',
           percentage: {
-            $multiply: [{ $divide: ['$count', { $sum: '$count' }] }, 100],
+            $round: [
+              { $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] },
+              1,
+            ],
           },
-          total_amount: 1,
+          total_amount: '$results.total_amount',
         },
       },
       {

@@ -205,18 +205,35 @@ methods.summary = async (req, res) => {
           },
           total_amount: {
             $sum: '$total',
-          }
+          },
         },
+      },
+      {
+        $group: {
+          _id: null,
+          total_count: {
+            $sum: '$count',
+          },
+          results: {
+            $push: '$$ROOT',
+          },
+        },
+      },
+      {
+        $unwind: '$results',
       },
       {
         $project: {
           _id: 0,
-          status: '$_id',
-          count: 1,
+          status: '$results._id',
+          count: '$results.count',
           percentage: {
-            $multiply: [{ $divide: ['$count', { $sum: '$count' }] }, 100],
+            $round: [
+              { $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] },
+              1,
+            ],
           },
-          total_amount: 1
+          total_amount: '$results.total_amount',
         },
       },
       {
@@ -226,14 +243,13 @@ methods.summary = async (req, res) => {
       },
     ]);
 
-    const total = result.reduce((acc, item) => acc + item.total_amount, 0);
-    
-
     const finalResult = {
-      total,
-      type: defaultType,
+      total: result.reduce((acc, item) => acc + item.count, 0),
+      total_amount: result.reduce((acc, item) => acc + item.total_amount, 0),
+      type,
       performance: result,
     };
+
 
     return res.status(200).json({
       success: true,
