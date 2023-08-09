@@ -1,6 +1,5 @@
 node_modules/
 frontend/node_modules/
-package-lock.json
 *.zip
 .DS_Store
 .idea

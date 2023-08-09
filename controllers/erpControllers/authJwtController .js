@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
         id: admin._id,
       },
       process.env.JWT_SECRET,
-      { expiresIn: '72h' }
+      { expiresIn: req.body.remember ? 365 * 24 + 'h' : '24h' }
     );
 
     const result = await Admin.findOneAndUpdate(
@@ -53,25 +53,28 @@ exports.login = async (req, res) => {
       }
     ).exec();
 
-    res.cookie('token', token, {
-      maxAge: req.body.remember ? 72 * 60 * 60 * 1000 : 60 * 60 * 1000, // Cookie expires after 30 days
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true,
-    });
-
-    res.json({
-      success: true,
-      result: {
-        token,
-        admin: {
-          id: result._id,
-          name: result.name,
-          isLoggedIn: result.isLoggedIn,
+    res
+      .status(200)
+      .cookie('token', token, {
+        maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
+        sameSite: 'Lax',
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production' ? true : false,
+        domain: req.hostname,
+        Path: '/',
+      })
+      .json({
+        success: true,
+        result: {
+          token,
+          admin: {
+            id: result._id,
+            name: result.name,
+            isLoggedIn: result.isLoggedIn,
+          },
         },
-      },
-      message: 'Successfully login admin',
-    });
+        message: 'Successfully login admin',
+      });
   } catch (err) {
     res.status(500).json({ success: false, result: null, message: err.message, error: err });
   }
@@ -107,6 +110,7 @@ exports.isValidAdminToken = async (req, res, next) => {
         message: "Admin doens't Exist, authorization denied.",
         jwtExpired: true,
       });
+
 
     if (admin.isLoggedIn === false)
       return res.status(401).json({
