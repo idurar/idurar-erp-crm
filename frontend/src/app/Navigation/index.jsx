@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
-import logoIcon from '@/style/images/logo-icon.png';
-import logoText from '@/style/images/logo-text.png';
+import logo from '@/style/images/logo.svg';
 
 import {
   DesktopOutlined,
@@ -48,15 +47,7 @@ export default function Navigation() {
       <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
         <a href="/">
           <div className="logo">
-            <img
-              src={logoIcon}
-              alt="Logo"
-              // style={{ margin: "0 auto 40px", display: "block" }}
-            />
-
-            {!showLogoApp && (
-              <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
-            )}
+            <img src={logo} alt="Logo" style={{ margin: '0 auto 40px', height: '33px' }} />
           </div>
         </a>
 
