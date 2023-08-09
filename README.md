@@ -3,7 +3,7 @@
 IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 ```
-Can you star our  Open Source ERP / CRM repo? 🤩 !
+Dont forget to give a ⭐️ to this project ... Happy coding! 🤩
 ```
 
 ![Open Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
@@ -37,9 +37,12 @@ cd idurar-erp-crm
 
 - add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
 
-#### Step 3: Rename the Environment File
+#### Step 3: Create the Environment File
 
-Locate the file named tmp.variables.env in the root directory of the project and rename it to .variables.env. This file will be used to store the necessary environment variables for the project to run.
+- Create a file named .variables.env in the root directory.
+- Copy all variables from tmp.variables.env .
+- Paste the copied variables inside .variables.env.
+  This file will store environment variables for the project to run.
 
 #### Step 4: Update MongoDB URI
 
