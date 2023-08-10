@@ -40,9 +40,9 @@ const adminSchema = new Schema({
   },
   permissions: [{ type: mongoose.Schema.ObjectId, ref: 'Permission' }],
   isLoggedIn: { type: Number },
-  loggedSessions:{
+  loggedSessions: {
     type: [String],
-    default: []
+    default: [],
   },
 });
 
