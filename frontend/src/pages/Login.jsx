@@ -9,7 +9,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 
-import logo from '@/style/images/logo.png';
+import logo from '@/style/images/logo.svg';
 import logo1 from '@/style/images/logo1.png';
 import logo2 from '@/style/images/logo2.png';
 import logo3 from '@/style/images/logo3.png';
@@ -30,7 +30,15 @@ const SideContent = () => {
       className="sideContent"
     >
       <div style={{ width: '100%' }}>
-        <img src={logo} alt="Logo" style={{ margin: '0 auto 40px', display: 'block' }} />
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            margin: '0 auto 40px',
+            display: 'block',
+            height: '70px',
+          }}
+        />
         <div className="space40"></div>
         <Title level={3}>Manage your company with :</Title>
         <div className="space20"></div>
