@@ -32,21 +32,21 @@ const Visibility = ({ isVisible = false, children }) => {
 };
 
 export default function Settings() {
-  const [state, setState] = useState('generalSettings');
+  const [tabTitle, setTabTitle] = useState('generalSettings');
 
   const isActive = (tab) => {
-    return state === tab ? true : false;
+    return tabTitle === tab ? true : false;
   };
 
   const handleTabChange = (tab) => {
-    setState(tab);
+    setTabTitle(tab);
   };
 
   return (
     <SettingsLayout
-      topCardContent="Generals Settings"
-      topCardTitle="Settings"
-      bottomCardContent={<RightMenu activeTab={state} handleTabChange={handleTabChange} />}
+      topCardContent={tabTitle}
+      topCardTitle={'Settings'}
+      bottomCardContent={<RightMenu activeTab={tabTitle} handleTabChange={handleTabChange} />}
     >
       <Visibility isVisible={isActive('generalSettings')}>
         <GeneralSettings />
