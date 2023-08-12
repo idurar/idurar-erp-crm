@@ -6,3 +6,4 @@ frontend/node_modules/
 notes.md
 .variables.env
 
+*.pdf
