@@ -28,6 +28,7 @@ const SubMenuRouter = ({ subMenuRouter }) => {
 
 export default function AppRouter() {
   const location = useLocation();
+  
   return (
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={false}>

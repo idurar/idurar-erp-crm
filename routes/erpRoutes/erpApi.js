@@ -22,6 +22,7 @@ const expenseCategoryController = require('@/controllers/erpControllers/expenseC
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
 
 const settingsController = require('@/controllers/erpControllers/settingsController');
+const customerController = require('@/controllers/erpControllers/customerController');
 
 // //_______________________________ Admin management_______________________________
 
@@ -184,5 +185,10 @@ router.route('/settings/delete/:id').delete(catchErrors(settingsController.delet
 router.route('/settings/search').get(catchErrors(settingsController.search));
 router.route('/settings/list').get(catchErrors(settingsController.list));
 router.route('/settings/filter').get(catchErrors(settingsController.filter));
+
+// //____________________________________________ API for Customer Analytics  _________________
+
+router.route('/customer/read').get(catchErrors(customerController.read));
+
 
 module.exports = router;

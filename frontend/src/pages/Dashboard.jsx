@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, InputNumber, Space, Divider, Row, Col } from 'antd';
 
 import { Layout, Breadcrumb, Statistic, Progress, Tag } from 'antd';
@@ -7,6 +7,8 @@ import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 import { DashboardLayout } from '@/layout';
 import RecentTable from '@/components/RecentTable';
+
+import { request } from '@/request';
 
 const TopCard = ({ title, tagContent, tagColor, prefix }) => {
   return (
@@ -134,6 +136,25 @@ export default function Dashboard() {
     },
   ];
   const config = { entity, dataTableColumns };
+
+
+
+  const [perMonth,setPerMonth] = useState(25);
+  const [lastLogin,setLastLogin] = useState(11.28);
+  const asyncList = async () => {
+    const data =  await request.read({entity: 'customer',id:''});
+      
+        setPerMonth(data.result.perThisMonth);
+        setLastLogin(data.result.perThirtyDaysCustomerLogin);
+      
+  };
+
+  useEffect( ()=>{
+      asyncList();
+  },[]);
+
+
+  
 
   return (
     <DashboardLayout>
@@ -269,12 +290,12 @@ export default function Dashboard() {
             >
               <h3 style={{ color: '#22075e', marginBottom: 30 }}>Customer Preview</h3>
 
-              <Progress type="dashboard" percent={25} width={148} />
+              <Progress type="dashboard" percent={perMonth} width={148} />
               <p>New Customer this Month</p>
               <Divider />
               <Statistic
                 title="Active Customer"
-                value={11.28}
+                value={lastLogin}
                 precision={2}
                 valueStyle={{ color: '#3f8600' }}
                 prefix={<ArrowUpOutlined />}
