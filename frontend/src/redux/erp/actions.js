@@ -234,4 +234,10 @@ export const erp = {
         });
       }
     },
+
+  mail:
+    ({ entity, jsonData }) =>
+    async (dispatch) => {
+      await request.mail({ entity, jsonData });
+    },
 };
