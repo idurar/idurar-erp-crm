@@ -11,6 +11,7 @@ import Navigation from '@/app/Navigation';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
 import HeaderContent from '@/app/HeaderContent';
+import { useAppContext } from '@/context/appContext';
 // import { useNetworkState } from "react-use";
 
 function App() {
@@ -29,15 +30,20 @@ function App() {
 
   const { isLoggedIn } = useSelector(selectAuth);
 
+  const { state: stateApp } = useAppContext();
+  const { isNavMenuClose, isMobile } = stateApp;
+
   if (!isLoggedIn) return <Router />;
   else {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Navigation />
-        <Layout style={{ minHeight: '100vh' }}>
-          <HeaderContent />
-          <Router isLoggedIn={true} />
-        </Layout>
+        <HeaderContent />
+        {isMobile && isNavMenuClose === false ? null : (
+          <Layout style={{ minHeight: '100vh' }}>
+            <Router isLoggedIn={true} />
+          </Layout>
+        )}
       </Layout>
     );
   }

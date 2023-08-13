@@ -1,3 +1,4 @@
 export const OPEN_NAV_MENU = 'OPEN_NAV_MENU';
 export const CLOSE_NAV_MENU = 'CLOSE_NAV_MENU';
 export const COLLAPSE_NAV_MENU = 'COLLAPSE_NAV_MENU';
+export const SET_MOBILE_SIZE = 'SET_MOBILE_SIZE';

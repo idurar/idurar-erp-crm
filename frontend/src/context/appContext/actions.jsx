@@ -12,6 +12,9 @@ const contextActions = (dispatch) => {
       collapse: () => {
         dispatch({ type: actionTypes.COLLAPSE_NAV_MENU });
       },
+      setMobileSize: (isMobile) => {
+        dispatch({ type: actionTypes.SET_MOBILE_SIZE, payload: { isMobile } });
+      },
     },
   };
 };

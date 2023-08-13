@@ -7,7 +7,6 @@ import logoIcon from '@/style/images/logo-icon.svg';
 import logoText from '@/style/images/logo-text.svg';
 
 import {
-  DesktopOutlined,
   SettingOutlined,
   CustomerServiceOutlined,
   FileTextOutlined,
@@ -16,22 +15,41 @@ import {
   TeamOutlined,
   UserOutlined,
   CreditCardOutlined,
-  BankOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
+const DEFAULT_MOBILE_SIZE = 768;
 
 export default function Navigation() {
   const { state: stateApp, appContextAction } = useAppContext();
-  const { isNavMenuClose } = stateApp;
+  const { isNavMenuClose, isMobile } = stateApp;
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isSmallSize = window.innerWidth <= DEFAULT_MOBILE_SIZE;
+      navMenu.setMobileSize(isSmallSize);
+
+      if (isSmallSize) {
+        onCollapse();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [window.innerWidth]);
 
   useEffect(() => {
     if (isNavMenuClose) {
       setLogoApp(isNavMenuClose);
     }
+
     const timer = setTimeout(() => {
       if (!isNavMenuClose) {
         setLogoApp(isNavMenuClose);
@@ -41,6 +59,14 @@ export default function Navigation() {
   }, [isNavMenuClose]);
   const onCollapse = () => {
     navMenu.collapse();
+  };
+
+  const handleMenuItemClick = () => {
+    if (isMobile) {
+      navMenu.close();
+    }
+
+    return;
   };
 
   return (
@@ -67,44 +93,44 @@ export default function Navigation() {
 
         <Menu mode="inline">
           <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
-            <Link to={'/'} />
+            <Link to={'/'} onClick={handleMenuItemClick} />
             Dashboard
           </Menu.Item>
           <Menu.Item key={'Customer'} icon={<CustomerServiceOutlined />}>
-            <Link to={'/customer'} />
+            <Link to={'/customer'} onClick={handleMenuItemClick} />
             Customer
           </Menu.Item>
           <Menu.Item key={'Invoice'} icon={<FileTextOutlined />}>
-            <Link to={'/invoice'} />
+            <Link to={'/invoice'} onClick={handleMenuItemClick} />
             Invoice
           </Menu.Item>
           <Menu.Item key={'Quote'} icon={<FileSyncOutlined />}>
-            <Link to={'/quote'} />
+            <Link to={'/quote'} onClick={handleMenuItemClick} />
             Quote
           </Menu.Item>
           <Menu.Item key={'PaymentInvoice'} icon={<CreditCardOutlined />}>
-            <Link to={'/payment/invoice'} />
+            <Link to={'/payment/invoice'} onClick={handleMenuItemClick} />
             Payment Invoice
           </Menu.Item>
           <Menu.Item key={'Employee'} icon={<UserOutlined />}>
-            <Link to={'/employee'} />
+            <Link to={'/employee'} onClick={handleMenuItemClick} />
             Employee
           </Menu.Item>
           <Menu.Item key={'Admin'} icon={<TeamOutlined />}>
-            <Link to={'/admin'} />
+            <Link to={'/admin'} onClick={handleMenuItemClick} />
             Admin
           </Menu.Item>
           <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
             <Menu.Item key={'SettingsPage'}>
-              <Link to={'/settings'} />
+              <Link to={'/settings'} onClick={handleMenuItemClick} />
               General Settings
             </Menu.Item>
             <Menu.Item key={'PaymentMode'}>
-              <Link to={'/payment/mode'} />
+              <Link to={'/payment/mode'} onClick={handleMenuItemClick} />
               Payment Mode
             </Menu.Item>
             <Menu.Item key={'Role'}>
-              <Link to={'/role'} />
+              <Link to={'/role'} onClick={handleMenuItemClick} />
               Role
             </Menu.Item>
           </SubMenu>

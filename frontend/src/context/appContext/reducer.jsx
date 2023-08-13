@@ -2,6 +2,7 @@ import * as actionTypes from './types';
 
 export const initialState = {
   isNavMenuClose: false,
+  isMobile: false,
 };
 
 export function contextReducer(state, action) {
@@ -20,6 +21,12 @@ export function contextReducer(state, action) {
       return {
         ...state,
         isNavMenuClose: !state.isNavMenuClose,
+      };
+
+    case actionTypes.SET_MOBILE_SIZE:
+      return {
+        ...state,
+        isMobile: action.payload.isMobile,
       };
 
     default: {
