@@ -1,7 +1,6 @@
 import uniqueId from '@/utils/uinqueId';
-import { EditOutlined, LockOutlined, PlusOutlined, SyncOutlined } from '@ant-design/icons';
+import { PlusOutlined, SyncOutlined } from '@ant-design/icons';
 import { Button, Col, Divider, Form, Input, PageHeader, Row, Typography, Upload } from 'antd';
-import { Content } from 'antd/lib/layout/layout';
 
 const { Title, Text } = Typography;
 
