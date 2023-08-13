@@ -17,6 +17,7 @@ exports.login = async (req, res) => {
       // Connection is from localhost
       isLocalhost = true;
     }
+
     // validate
     if (!email || !password)
       return res.status(400).json({
@@ -24,6 +25,14 @@ exports.login = async (req, res) => {
         result: null,
         message: 'Not all fields have been entered.',
       });
+    
+    if (typeof email !== "string") {
+       return res.status(400).json({
+         success: false,
+         result: null,
+         message: 'Email must be a string.',
+       });
+    }
 
     const admin = await Admin.findOne({ email: email, removed: false });
     // console.log(admin);
