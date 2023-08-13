@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
-import logoIcon from '@/style/images/logo-icon.png';
-import logoText from '@/style/images/logo-text.png';
+import logoIcon from '@/style/images/logo-icon.svg';
+import logoText from '@/style/images/logo-text.svg';
 
 import {
   DesktopOutlined,
@@ -59,29 +59,29 @@ function Sidebar({ collapsible }) {
 
   return (
     <>
-      <Sider
-        collapsible={collapsible}
-        collapsed={collapsible ? isNavMenuClose : collapsible}
-        onCollapse={onCollapse}
-        className="navigation"
-      >
-        <div className="logo">
-          <img
-            src={logoIcon}
-            alt="Logo"
-            // style={{ margin: "0 auto 40px", display: "block" }}
-          />
+      <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
+        <a href="/">
+          <div className="logo">
+            <img
+              src={logoIcon}
+              alt="Logo"
+              // style={{ margin: "0 auto 40px", display: "block" }}
+              style={{ height: '36px' }}
+            />
 
-          {!showLogoApp && (
-            <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
-          )}
-        </div>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={[window.location.pathname]} // this is for active menu
-          onClick={({ key }) => history.push(key)}
-        >
-          <Menu.Item key={'/'} icon={<DashboardOutlined />}>
+            {!showLogoApp && (
+              <img
+                src={logoText}
+                alt="Logo"
+                style={{ marginTop: '3px', marginLeft: '10px', height: '36px' }}
+              />
+            )}
+          </div>
+        </a>
+
+        <Menu mode="inline">
+          <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
+            <Link to={'/'} />
             Dashboard
           </Menu.Item>
           <Menu.Item key={'/customer'} icon={<CustomerServiceOutlined />}>

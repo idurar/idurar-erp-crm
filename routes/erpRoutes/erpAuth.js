@@ -7,7 +7,7 @@ const {
   isValidAdminToken,
   login,
   logout,
-} = require('@/controllers/erpControllers/authJwtController ');
+} = require('@/controllers/erpControllers/authJwtController');
 
 router.route('/login').post(catchErrors(login));
 router.route('/logout').post(isValidAdminToken, catchErrors(logout));
