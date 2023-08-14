@@ -91,6 +91,7 @@ router.route('/client/delete/:id').delete(catchErrors(clientController.delete));
 router.route('/client/search').get(catchErrors(clientController.search));
 router.route('/client/list').get(catchErrors(clientController.list));
 router.route('/client/filter').get(catchErrors(clientController.filter));
+router.route('/client/summary').get(catchErrors(clientController.summary));
 
 // //_________________________________________________________________API for invoices_____________________
 router.route('/invoice/create').post(catchErrors(invoiceController.create));
@@ -176,6 +177,7 @@ router.route('/paymentInvoice/search').get(catchErrors(paymentInvoiceController.
 router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.list));
 router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
 router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+router.route('/paymentInvoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
 // //____________________________________________ API for Global Setting _________________
 

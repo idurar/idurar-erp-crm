@@ -155,5 +155,20 @@ const request = {
     const source = CancelToken.source();
     return source;
   },
+
+  summary: async ({ entity, options = {} }) => {
+    try {
+      const response = await axios.get(entity + '/summary');
+
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
 };
 export default request;
