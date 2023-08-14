@@ -47,7 +47,7 @@ export default function Invoice() {
       render: (amount) => moneyRowFormatter({ amount }),
     },
     {
-      title: 'status',
+      title: 'Status',
       dataIndex: 'status',
       render: (status) => {
         let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
@@ -74,9 +74,9 @@ export default function Invoice() {
   ];
 
   const PANEL_TITLE = 'invoice';
-  const dataTableTitle = 'invoices Lists';
+  const dataTableTitle = 'Invoices Lists';
   const ADD_NEW_ENTITY = 'Add new invoice';
-  const DATATABLE_TITLE = 'invoices List';
+  const DATATABLE_TITLE = 'Invoices List';
   const ENTITY_NAME = 'invoice';
   const CREATE_ENTITY = 'Save invoice';
   const UPDATE_ENTITY = 'Update invoice';
