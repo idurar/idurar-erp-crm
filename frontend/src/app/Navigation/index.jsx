@@ -63,12 +63,7 @@ function Sidebar({ collapsible }) {
       >
         <a href="/">
           <div className="logo">
-            <img
-              src={logoIcon}
-              alt="Logo"
-              // style={{ margin: "0 auto 40px", display: "block" }}
-              style={{ height: '30px' }}
-            />
+            <img src={logoIcon} alt="Logo" style={{ height: '30px' }} />
 
             {!showLogoApp && (
               <img
