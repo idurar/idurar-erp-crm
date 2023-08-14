@@ -13,6 +13,14 @@ delete methods['update'];
 
 methods.create = async (req, res) => {
   try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Request body cannot be empty',
+      });
+    }
+
     const { items = [], taxRate = 0, discount = 0 } = req.body;
 
     // default
@@ -84,6 +92,13 @@ methods.create = async (req, res) => {
 
 methods.update = async (req, res) => {
   try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Request body cannot be empty',
+      });
+    }
     const previousInvoice = await Model.findOne({
       _id: req.params.id,
       removed: false,
