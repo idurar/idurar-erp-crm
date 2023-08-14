@@ -24,7 +24,7 @@ const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
   created: { $gte: startOfMonth, $lte: endOfMonth }
 });
 
-
+  
 
    const thirtyDaysAgo = new Date();
 thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -33,13 +33,25 @@ thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 const thirtyDaysCustomerLogin = await Model.countDocuments({
     Lastlogin: { $gte: thirtyDaysAgo}
 });
-
+   
     // total Customer
    const totalCustomer  = await Model.countDocuments({});
+  
+   
+  
+  // cal percentage with total if data is not empty
+   if(thirtyDaysCustomerLogin != 0){
+     var perThirtyDaysCustomerLogin = (thirtyDaysCustomerLogin / totalCustomer) * 100;
+   }else{
+      perThirtyDaysCustomerLogin = 0;
+   }
 
-   // cal percentage with total
-const perThirtyDaysCustomerLogin = (thirtyDaysCustomerLogin / totalCustomer) * 100;
-const perThisMonth = (thisMonth / totalCustomer)* 100;
+
+   if(thisMonth != 0){
+     var perThisMonth = (thisMonth / totalCustomer)* 100;
+   }else{
+      perThisMonth = 0;
+   }
 
 
   return res.status(200).json({
