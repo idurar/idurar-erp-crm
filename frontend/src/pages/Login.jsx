@@ -18,6 +18,32 @@ import logo4 from '@/style/images/logo4.png';
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
+const ImageWithHoverStyle = ({ src, alt }) => {
+  const imageStyle = {
+    margin: '0 15px',
+    display: 'block',
+    float: 'left',
+    width: '48px',
+    filter: 'grayscale(1)',
+    mixBlendMode: 'multiply',
+    opacity: '0.8',
+    /* Add a smooth transition effect */
+    transition: 'filter 0.3s ease-in-out',
+  };
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      style={{
+        ...imageStyle,
+      }}
+      onMouseEnter={(e) => (e.target.style.filter = 'grayscale(0')}
+      onMouseLeave={(e) => (e.target.style.filter = 'grayscale(1)')}
+    />
+  );
+};
+
 const SideContent = () => {
   return (
     <Content
@@ -57,58 +83,10 @@ const SideContent = () => {
             justifyContent: 'space-between',
           }}
         >
-          <img
-            src={logo1}
-            alt="Logo1"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
-          <img
-            src={logo2}
-            alt="Logo2"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
-          <img
-            src={logo3}
-            alt="Logo3"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
-          <img
-            src={logo4}
-            alt="Logo4"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
+          <ImageWithHoverStyle src={logo1} alt={'Logo1'} />
+          <ImageWithHoverStyle src={logo2} alt={'Logo2'} />
+          <ImageWithHoverStyle src={logo3} alt={'Logo3'} />
+          <ImageWithHoverStyle src={logo4} alt={'Logo4'} />
         </div>
       </div>
     </Content>
