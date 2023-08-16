@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Divider } from 'antd';
 
 import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
-import { EditOutlined, FilePdfOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  FilePdfOutlined,
+  CloseCircleOutlined,
+  MailOutlined,
+} from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -14,6 +19,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
+import useMail from '@/hooks/useMail';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -63,6 +69,7 @@ export default function ReadItem({ config }) {
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
   const { moneyFormatter } = useMoney();
+  const { send } = useMail({ entity });
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
@@ -126,6 +133,15 @@ export default function ReadItem({ config }) {
             icon={<FilePdfOutlined />}
           >
             Download PDF
+          </Button>,
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              send(currentErp._id);
+            }}
+            icon={<MailOutlined />}
+          >
+            Mail Invoice
           </Button>,
           <Button
             key={`${uniqueId()}`}
