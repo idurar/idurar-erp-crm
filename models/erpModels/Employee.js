@@ -53,10 +53,12 @@ const employeeSchema = new mongoose.Schema({
   phone: {
     type: String,
     trim: true,
+    unique: true
   },
   email: {
     type: String,
     trim: true,
+    unique: true
   },
   urgentContact: {
     type: String,

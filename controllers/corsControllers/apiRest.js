@@ -47,8 +47,7 @@ exports.create = async (Model, req, res) => {
     // Creating a new document in the collection
 
     const result = await new Model(req.body).save();
-    console.log(result);
-    // Returning successfull response
+    // Returning successfully response
     return res.status(200).json({
       success: true,
       result,
@@ -61,6 +60,14 @@ exports.create = async (Model, req, res) => {
         success: false,
         result: null,
         message: 'Required fields are not supplied',
+        error: err,
+      });
+    } else if (err?.code === 11000) {
+      // handling duplicate key
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Your given fields exists',
         error: err,
       });
     } else {
@@ -108,6 +115,14 @@ exports.update = async (Model, req, res) => {
         success: false,
         result: null,
         message: 'Required fields are not supplied',
+        error: err,
+      });
+    } else if (err?.code === 11000) {
+      // handling duplicate key
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Your given fields exists',
         error: err,
       });
     } else {
