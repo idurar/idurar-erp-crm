@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
-import { Dropdown, Table } from 'antd';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { Descriptions, Dropdown, Table } from 'antd';
 import { Button, PageHeader } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -55,28 +55,67 @@ export default function DataTable({ config, DataTableDropMenu }) {
   //   dispatch(settings.currency({ value: '€' }));
   //   dispatch(settings.currencyPosition({ position: 'before' }));
   // };
+  const tableHeader = useRef(null);
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
+  // useEffect(() => {
+  //   const header = tableHeader.current;
+  //   if (!header) return;
+  //   const observer = new ResizeObserver(() => {
+  //     // 👉 Do something when the element is resized
+  //     checkTableWidth(header);
+  //   });
 
+  //   observer.observe(header);
+  //   return () => {
+  //     observer.disconnect();
+  //   };
+  // }, []);
+
+  const checkTableWidth = (header) => {
+    const tableWidth = document.querySelector('.ant-table-thead').offsetWidth;
+    if (tableWidth > header.clientWidth) {
+      shrinkTable();
+    }
+    if (tableWidth < header.clientWidth) {
+      console.log('expandTable');
+    }
+  };
+
+  const shrinkTable = () => {
+    const element = dataTableColumns.pop();
+    console.log(element, dataTableColumns);
+  };
+  const expandedRowData = [
+    { Product: 'Cloud Database' },
+    { Billing: 'Prepaid' },
+    { time: '18:00:00' },
+    { Amount: '$80.00' },
+    { Discount: '$20.00' },
+    { Official: '$60.00' },
+  ];
   return (
     <>
-      <PageHeader
-        title={DATATABLE_TITLE}
-        ghost={true}
-        extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-            Refresh
-          </Button>,
-          // <Button onClick={handelCurrency} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-          //   Change Currency
-          // </Button>,
-          <AddNewItem config={config} key={`${uniqueId()}`} />,
-        ]}
-        style={{
-          padding: '20px 0px',
-        }}
-      ></PageHeader>
+      <div ref={tableHeader}>
+        <PageHeader
+          title={DATATABLE_TITLE}
+          ghost={true}
+          extra={[
+            <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+              Refresh
+            </Button>,
+            // <Button onClick={handelCurrency} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+            //   Change Currency
+            // </Button>,
+            <AddNewItem config={config} key={`${uniqueId()}`} />,
+          ]}
+          style={{
+            padding: '20px 0px',
+          }}
+        ></PageHeader>
+      </div>
+
       <Table
         columns={dataTableColumns}
         rowKey={(item) => item._id}
@@ -84,6 +123,19 @@ export default function DataTable({ config, DataTableDropMenu }) {
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
+        expandable={{
+          expandedRowRender: () => (
+            <Descriptions title="" bordered column={1}>
+              {expandedRowData.map((item, index) => {
+                return (
+                  <Descriptions.Item key={index} label={Object.keys(item)[0]}>
+                    {Object.values(item)[0]}
+                  </Descriptions.Item>
+                );
+              })}
+            </Descriptions>
+          ),
+        }}
       />
     </>
   );
