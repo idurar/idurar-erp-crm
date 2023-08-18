@@ -103,7 +103,7 @@ function FixHeaderPanel({ config }) {
         <Col className="gutter-row" span={2}>
           <Button
             style={{ marginTop: 3 }}
-            type="default"
+            type="text"
             onClick={collapsePanel}
             icon={<ArrowLeftOutlined />}
             block={true}
