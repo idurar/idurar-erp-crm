@@ -65,7 +65,6 @@ const clientSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true,
-    unique: true
   },
   fax: {
     type: String,
@@ -79,7 +78,6 @@ const clientSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
-    unique: true
   },
   website: {
     type: String,

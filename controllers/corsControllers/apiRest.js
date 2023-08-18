@@ -4,6 +4,7 @@
  *  @returns {Document} Single Document
  */
 
+const isClientExist = require('@/handlers/isClientExist');
 const moment = require('moment');
 
 exports.read = async (Model, req, res) => {
@@ -44,6 +45,17 @@ exports.read = async (Model, req, res) => {
 
 exports.create = async (Model, req, res) => {
   try {
+
+    const isExist = await isClientExist(Model, req)
+    if (isExist) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Your given fields exists',
+        // error: err,
+      });
+    }
+
     // Creating a new document in the collection
 
     const result = await new Model(req.body).save();
@@ -90,6 +102,16 @@ exports.create = async (Model, req, res) => {
 
 exports.update = async (Model, req, res) => {
   try {
+    // check for existing client
+    const isExist = await isClientExist(Model, req)
+    if (isExist) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Your given fields exists',
+        // error: err,
+      });
+    }
     // Find document by id and updates with the required fields
     const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, req.body, {
       new: true, // return the new result instead of the old one
