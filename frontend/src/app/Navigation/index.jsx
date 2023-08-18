@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
@@ -34,10 +34,17 @@ export default function Navigation() {
 }
 
 function Sidebar({ collapsible }) {
+  let location = useLocation();
+
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
+  const [currentPath, setCurrentPath] = useState(location.pathname);
+
+  useEffect(() => {
+    if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname);
+  }, [location, currentPath]);
 
   useEffect(() => {
     if (isNavMenuClose) {
@@ -56,7 +63,6 @@ function Sidebar({ collapsible }) {
 
   return (
     <>
-
       <Sider
         collapsible={collapsible}
         collapsed={collapsible ? isNavMenuClose : collapsible}
@@ -74,47 +80,45 @@ function Sidebar({ collapsible }) {
             />
           )}
         </div>
-
-
-        <Menu mode="inline">
-          <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
+        <Menu mode="inline" selectedKeys={[currentPath]}>
+          <Menu.Item key={'/'} icon={<DashboardOutlined />}>
             <Link to={'/'} />
             Dashboard
           </Menu.Item>
-          <Menu.Item key={'Customer'} icon={<CustomerServiceOutlined />}>
+          <Menu.Item key={'/customer'} icon={<CustomerServiceOutlined />}>
             <Link to={'/customer'} />
             Customer
           </Menu.Item>
-          <Menu.Item key={'Invoice'} icon={<FileTextOutlined />}>
+          <Menu.Item key={'/invoice'} icon={<FileTextOutlined />}>
             <Link to={'/invoice'} />
             Invoice
           </Menu.Item>
-          <Menu.Item key={'Quote'} icon={<FileSyncOutlined />}>
+          <Menu.Item key={'/quote'} icon={<FileSyncOutlined />}>
             <Link to={'/quote'} />
             Quote
           </Menu.Item>
-          <Menu.Item key={'PaymentInvoice'} icon={<CreditCardOutlined />}>
+          <Menu.Item key={'/payment/invoice'} icon={<CreditCardOutlined />}>
             <Link to={'/payment/invoice'} />
             Payment Invoice
           </Menu.Item>
-          <Menu.Item key={'Employee'} icon={<UserOutlined />}>
+          <Menu.Item key={'/employee'} icon={<UserOutlined />}>
             <Link to={'/employee'} />
             Employee
           </Menu.Item>
-          <Menu.Item key={'Admin'} icon={<TeamOutlined />}>
+          <Menu.Item key={'/admin'} icon={<TeamOutlined />}>
             <Link to={'/admin'} />
             Admin
           </Menu.Item>
           <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
-            <Menu.Item key={'SettingsPage'}>
+            <Menu.Item key={'/settings'}>
               <Link to={'/settings'} />
               General Settings
             </Menu.Item>
-            <Menu.Item key={'PaymentMode'}>
+            <Menu.Item key={'/payment/mode'}>
               <Link to={'/payment/mode'} />
               Payment Mode
             </Menu.Item>
-            <Menu.Item key={'Role'}>
+            <Menu.Item key={'/role'}>
               <Link to={'/role'} />
               Role
             </Menu.Item>
