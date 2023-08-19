@@ -175,6 +175,8 @@ router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.li
 router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
 router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
 
+router.route('/paymentInvoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
+
 // //____________________________________________ API for Global Setting _________________
 
 router.route('/settings/create').post(catchErrors(settingsController.create));
