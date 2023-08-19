@@ -1,19 +1,22 @@
-name: Lint # name of the action (displayed in the github interface)
+name: Lint
 
-on: push # event list
-  pull_request: dev # on a pull request to each of these branches
-  branches:
-    - dev
-    - master
+on:
+  push:
+    branches:
+      - dev
+      - master
+  pull_request:
+    branches:
+      - dev
 
-env: # environment variables (available in any part of the action)
+env:
   NODE_VERSION: 16
 
-jobs: # list of things to do
+jobs:
   linting:
-    name: Linting # job name (unique id)
-    runs-on: ubuntu-latest # on which machine to run
-    steps: # list of steps
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
       - name: Install NodeJS
         uses: actions/setup-node@v2
         with:
