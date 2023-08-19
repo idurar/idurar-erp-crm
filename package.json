@@ -10,7 +10,9 @@
     "dev": "nodemon ./server.js --ignore public/",
     "production": "NODE_ENV=production",
     "setup": "node ./setup/setup.js",
-    "reset": "node ./setup/reset.js"
+    "reset": "node ./setup/reset.js",
+    "lint:js": "eslint controllers/**/*.js",
+    "lint": "npm run lint:js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -34,6 +36,7 @@
     "resend": "^0.17.2"
   },
   "devDependencies": {
+    "eslint": "8.47.0",
     "nodemon": "^1.19.2"
   },
   "_moduleAliases": {
