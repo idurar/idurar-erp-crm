@@ -1,11 +1,10 @@
 name: Lint # name of the action (displayed in the github interface)
 
 on: push # event list
-pull_request: # on a pull request to each of these branches
-branches:
-  - development
-  - staging
-  - production
+  pull_request: dev # on a pull request to each of these branches
+  branches:
+    - dev
+    - master
 
 env: # environment variables (available in any part of the action)
   NODE_VERSION: 16
