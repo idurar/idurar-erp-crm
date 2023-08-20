@@ -15,7 +15,7 @@ export default function Invoice() {
   const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
-      title: '#N',
+      title: 'Number',
       dataIndex: 'number',
     },
     {
@@ -47,7 +47,7 @@ export default function Invoice() {
       render: (amount) => moneyRowFormatter({ amount }),
     },
     {
-      title: 'status',
+      title: 'Status',
       dataIndex: 'status',
       render: (status) => {
         let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
@@ -78,8 +78,8 @@ export default function Invoice() {
   const ADD_NEW_ENTITY = 'Add new invoice';
   const DATATABLE_TITLE = 'invoices List';
   const ENTITY_NAME = 'invoice';
-  const CREATE_ENTITY = 'Save invoice';
-  const UPDATE_ENTITY = 'Update invoice';
+  const CREATE_ENTITY = 'Save Invoice';
+  const UPDATE_ENTITY = 'Update Invoice';
 
   const config = {
     entity,

@@ -57,7 +57,7 @@ export default function PaymentInvoice() {
   ];
   const dataTableColumns = [
     {
-      title: 'number',
+      title: 'Number',
       dataIndex: 'number',
     },
     {
