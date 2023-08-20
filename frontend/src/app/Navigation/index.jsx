@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
-import logoIcon from '@/style/images/logo-icon.png';
-import logoText from '@/style/images/logo-text.png';
+import logoIcon from '@/style/images/logo-icon.svg';
+import logoText from '@/style/images/logo-text.svg';
+import history from '@/utils/history';
 
 import {
-  DesktopOutlined,
   SettingOutlined,
   CustomerServiceOutlined,
   FileTextOutlined,
@@ -16,13 +16,24 @@ import {
   TeamOutlined,
   UserOutlined,
   CreditCardOutlined,
-  BankOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default function Navigation() {
+  return (
+    <>
+      <div className="sidebar-wraper">
+        <Sidebar collapsible={true} />
+      </div>
+      <MobileSidebar />
+    </>
+  );
+}
+
+function Sidebar({ collapsible }) {
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
@@ -45,18 +56,26 @@ export default function Navigation() {
 
   return (
     <>
-      <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
-        <div className="logo">
-          <img
-            src={logoIcon}
-            alt="Logo"
-            // style={{ margin: "0 auto 40px", display: "block" }}
-          />
+
+      <Sider
+        collapsible={collapsible}
+        collapsed={collapsible ? isNavMenuClose : collapsible}
+        onCollapse={onCollapse}
+        className="navigation"
+      >
+        <div className="logo" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
+          <img src={logoIcon} alt="Logo" style={{ height: '32px' }} />
 
           {!showLogoApp && (
-            <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
+            <img
+              src={logoText}
+              alt="Logo"
+              style={{ marginTop: '3px', marginLeft: '10px', height: '29px' }}
+            />
           )}
         </div>
+
+
         <Menu mode="inline">
           <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
             <Link to={'/'} />
@@ -102,6 +121,33 @@ export default function Navigation() {
           </SubMenu>
         </Menu>
       </Sider>
+    </>
+  );
+}
+
+function MobileSidebar() {
+  const [visible, setVisible] = useState(false);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+  return (
+    <>
+      <Button type="text" size="large" onClick={showDrawer} className="mobile-sidebar-btn">
+        <MenuOutlined />
+      </Button>
+      <Drawer
+        width={200}
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        visible={visible}
+        className="mobile-sidebar-wraper"
+      >
+        <Sidebar collapsible={false} />
+      </Drawer>
     </>
   );
 }
