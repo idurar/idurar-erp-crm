@@ -122,6 +122,7 @@ router.route('/quote/search').get(catchErrors(quoteController.search));
 router.route('/quote/list').get(catchErrors(quoteController.list));
 router.route('/quote/filter').get(catchErrors(quoteController.filter));
 router.route('/quote/pdf/:id').get(catchErrors(quoteController.generatePDF));
+router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
 
 // //___________________________________________ API for suppliers _____________________
 router.route('/supplier/create').post(catchErrors(supplierController.create));
