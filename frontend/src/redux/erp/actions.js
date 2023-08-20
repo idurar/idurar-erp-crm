@@ -234,4 +234,10 @@ export const erp = {
         });
       }
     },
+
+  convert:
+    ({ entity, id }) =>
+    async (dispatch) => {
+      await request.convert({ entity, id });
+    },
 };
