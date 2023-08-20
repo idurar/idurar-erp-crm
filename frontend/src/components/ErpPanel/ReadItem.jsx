@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Divider } from 'antd';
 
 import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
-import { EditOutlined, FilePdfOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  FilePdfOutlined,
+  CloseCircleOutlined,
+  RetweetOutlined,
+} from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -126,6 +131,16 @@ export default function ReadItem({ config }) {
             icon={<FilePdfOutlined />}
           >
             Download PDF
+          </Button>,
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              dispatch(erp.convert({ entity, id: currentErp._id }));
+            }}
+            icon={<RetweetOutlined />}
+            style={{ display: entity == 'quote' ? 'inline-block' : 'none' }}
+          >
+            Convert to Invoice
           </Button>,
           <Button
             key={`${uniqueId()}`}
