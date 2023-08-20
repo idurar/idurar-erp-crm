@@ -20,8 +20,9 @@ const orderFormController = require('@/controllers/erpControllers/orderFormContr
 const expenseController = require('@/controllers/erpControllers/expenseController');
 const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
-
 const settingsController = require('@/controllers/erpControllers/settingsController');
+const offerController = require('@/controllers/erpControllers/offerController');
+
 
 // //_______________________________ Admin management_______________________________
 
@@ -188,5 +189,17 @@ router.route('/settings/delete/:id').delete(catchErrors(settingsController.delet
 router.route('/settings/search').get(catchErrors(settingsController.search));
 router.route('/settings/list').get(catchErrors(settingsController.list));
 router.route('/settings/filter').get(catchErrors(settingsController.filter));
+
+// //_________________________________________________________________API for Offers_____________________
+
+router.route('/offer/create').post(catchErrors(offerController.create));
+router.route('/offer/read/:id').get(catchErrors(offerController.read));
+router.route('/offer/update/:id').patch(catchErrors(offerController.update));
+router.route('/offer/delete/:id').delete(catchErrors(offerController.delete));
+router.route('/offer/search').get(catchErrors(offerController.search));
+router.route('/offer/list').get(catchErrors(offerController.list));
+router.route('/offer/filter').get(catchErrors(offerController.filter));
+router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
+router.route('/offer/summary').get(catchErrors(offerController.summary));
 
 module.exports = router;

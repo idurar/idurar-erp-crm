@@ -1,5 +1,5 @@
 import { Statistic, Progress, Divider, Col, Spin } from 'antd';
-import { ArrowUpOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 export default function AnalyticCustomerCard({
   isLoading = false,
@@ -29,8 +29,17 @@ export default function AnalyticCustomerCard({
                 title="Active Customer"
                 value={activeCustomer}
                 precision={2}
-                valueStyle={{ color: '#3f8600' }}
-                prefix={<ArrowUpOutlined />}
+                valueStyle={
+                  // color default gray
+                  activeCustomer > 0 ? { color: '#3f8600' } : activeCustomer < 0 ? { color: '#cf1322' } : {color: '#000000'}
+                }
+                prefix={
+                  activeCustomer > 0 ? (
+                    <ArrowUpOutlined />
+                  ) : activeCustomer < 0 ? (
+                    <ArrowDownOutlined />
+                  ) : null
+                }
                 suffix="%"
               />
             </>

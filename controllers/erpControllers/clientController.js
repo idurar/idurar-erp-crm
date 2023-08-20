@@ -78,6 +78,17 @@ methods.summary = async (req, res) => {
         },
       },
     ]);
+    
+    if (!result || !result.length) {
+      return res.status(200).json({
+        success: true,
+        result: {
+          new: 0,
+          active: 0,
+        },
+        message: 'Successfully get summary of new clients',
+      });
+    }
 
     return res.status(200).json({
       success: true,

@@ -21,6 +21,12 @@ export default function Analytics() {
   } = useFetch(() => request.summary({ entity: 'quote' }));
 
   const {
+    result: offerResult,
+    isSuccess: offerSuccess,
+    isLoading: offerLoading,
+  } = useFetch(() => request.summary({ entity: 'offer' }));
+
+  const {
     result: paymentResult,
     isSuccess: paymentSuccess,
     isLoading: paymentLoading,
@@ -112,12 +118,24 @@ export default function Analytics() {
                   []
                 }
               />
-              <AnalyticStatisticCard title="Offer Preview" />
+              <AnalyticStatisticCard
+                title="Offer Preview"
+                isLoading={offerLoading}
+                statistics={
+                  (offerSuccess &&
+                    offerResult?.performance?.map((item) => ({
+                      tag: item?.status,
+                      color: 'blue',
+                      value: item?.percentage,
+                    }))) ||
+                  []
+                }
+              />
             </Row>
           </div>
         </Col>
-        
-        <AnalyticCustomerCard 
+
+        <AnalyticCustomerCard
           isLoading={clientLoading}
           activeCustomer={clientResult?.active}
           newCustomer={clientResult?.new}
