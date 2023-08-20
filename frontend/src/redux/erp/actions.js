@@ -234,4 +234,30 @@ export const erp = {
         });
       }
     },
+
+  summary:
+    ({ entity, options }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'summary',
+        payload: null,
+      });
+
+      const data = await request.summary({ entity, options });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'summary',
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'summary',
+          payload: null,
+        });
+      }
+    },
 };

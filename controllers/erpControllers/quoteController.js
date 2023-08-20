@@ -228,7 +228,7 @@ methods.summary = async (req, res) => {
       },
     ]);
 
-    const total = result.reduce((acc, item) => acc + item.total_amount, 0);
+    const total = result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2);
 
     const finalResult = {
       total,

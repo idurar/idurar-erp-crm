@@ -243,9 +243,36 @@ methods.summary = async (req, res) => {
       },
     ]);
 
+    const unpaid = await Model.aggregate([
+      {
+        $match: {
+          removed: false,
+          date: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+          paymentStatus: 'unpaid',
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total_amount: {
+            $sum: '$total',
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          total_amount: '$total_amount',
+        },
+      },
+    ])
+
     const finalResult = {
-      total: result.reduce((acc, item) => acc + item.count, 0),
-      total_amount: result.reduce((acc, item) => acc + item.total_amount, 0),
+      total: result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2),
+      total_undue: unpaid.length > 0 ? unpaid[0].total_amount.toFixed(2) : 0,
       type,
       performance: result,
     };
