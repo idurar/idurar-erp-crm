@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Descriptions, Dropdown, Table } from 'antd';
 import { Button, PageHeader } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { settings } from '@/redux/settings/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
+import useResponsiveTable from '@/hooks/useResponsiveTable';
 function AddNewItem({ config }) {
   const { ADD_NEW_ENTITY } = config;
   const { erpContextAction } = useErpContext();
@@ -40,9 +40,13 @@ export default function DataTable({ config, DataTableDropMenu }) {
     },
   ];
 
+  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(dataTableColumns);
+
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
   const { pagination, items } = listResult;
+
+  console.log(items);
 
   const dispatch = useDispatch();
 
@@ -51,50 +55,10 @@ export default function DataTable({ config, DataTableDropMenu }) {
     dispatch(erp.list({ entity, options }));
   }, []);
 
-  // const handelCurrency = () => {
-  //   dispatch(settings.currency({ value: '€' }));
-  //   dispatch(settings.currencyPosition({ position: 'before' }));
-  // };
-  const tableHeader = useRef(null);
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
-  // useEffect(() => {
-  //   const header = tableHeader.current;
-  //   if (!header) return;
-  //   const observer = new ResizeObserver(() => {
-  //     // 👉 Do something when the element is resized
-  //     checkTableWidth(header);
-  //   });
 
-  //   observer.observe(header);
-  //   return () => {
-  //     observer.disconnect();
-  //   };
-  // }, []);
-
-  const checkTableWidth = (header) => {
-    const tableWidth = document.querySelector('.ant-table-thead').offsetWidth;
-    if (tableWidth > header.clientWidth) {
-      shrinkTable();
-    }
-    if (tableWidth < header.clientWidth) {
-      console.log('expandTable');
-    }
-  };
-
-  const shrinkTable = () => {
-    const element = dataTableColumns.pop();
-    console.log(element, dataTableColumns);
-  };
-  const expandedRowData = [
-    { Product: 'Cloud Database' },
-    { Billing: 'Prepaid' },
-    { time: '18:00:00' },
-    { Amount: '$80.00' },
-    { Discount: '$20.00' },
-    { Official: '$60.00' },
-  ];
   return (
     <>
       <div ref={tableHeader}>
@@ -105,9 +69,6 @@ export default function DataTable({ config, DataTableDropMenu }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
               Refresh
             </Button>,
-            // <Button onClick={handelCurrency} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-            //   Change Currency
-            // </Button>,
             <AddNewItem config={config} key={`${uniqueId()}`} />,
           ]}
           style={{
@@ -117,25 +78,35 @@ export default function DataTable({ config, DataTableDropMenu }) {
       </div>
 
       <Table
-        columns={dataTableColumns}
+        columns={tableColumns}
         rowKey={(item) => item._id}
         dataSource={items}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
-        expandable={{
-          expandedRowRender: () => (
-            <Descriptions title="" bordered column={1}>
-              {expandedRowData.map((item, index) => {
-                return (
-                  <Descriptions.Item key={index} label={Object.keys(item)[0]}>
-                    {Object.values(item)[0]}
-                  </Descriptions.Item>
-                );
-              })}
-            </Descriptions>
-          ),
-        }}
+        expandable={
+          expandedRowData.length
+            ? {
+                expandedRowRender: (record) => (
+                  <Descriptions title="" bordered column={1}>
+                    {expandedRowData.map((item, index) => {
+                      return (
+                        <Descriptions.Item key={index} label={item.title}>
+                          {item.render?.(record[item.dataIndex])?.children
+                            ? item.render?.(record[item.dataIndex])?.children
+                            : item.render?.(record[item.dataIndex])
+                            ? item.render?.(record[item.dataIndex])
+                            : Array.isArray(item.dataIndex)
+                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
+                            : record[item.dataIndex]}
+                        </Descriptions.Item>
+                      );
+                    })}
+                  </Descriptions>
+                ),
+              }
+            : null
+        }
       />
     </>
   );
