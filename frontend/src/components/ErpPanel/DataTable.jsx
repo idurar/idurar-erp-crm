@@ -46,8 +46,6 @@ export default function DataTable({ config, DataTableDropMenu }) {
 
   const { pagination, items } = listResult;
 
-  console.log(items);
-
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {

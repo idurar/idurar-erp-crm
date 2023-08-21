@@ -30,8 +30,6 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
 
   const { pagination, items } = listResult;
 
-  console.log(items);
-
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
