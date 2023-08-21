@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    # This example uses an image, but for your own application,
+    # you should use a Dockerfile. See the documentation for more information.
+    image: ergomake/ergomake-example
+    ports:
+      # The first port here will be the one our link points to.
+      - 3000:3000
+    environment:
+      # Our application uses this environment variable to determine
+      # where to connect to the Redis instance.
+      REDIS_URL: "redis://redis:6379"
+
+  # You can add databases in a similar way.
+  # We use the service name as the hostname in the URL.
+  redis:
+    image: redis
+    ports:
+        # We don't want to expose this port, so we don't bind it to localhost.
+        - "6379"
