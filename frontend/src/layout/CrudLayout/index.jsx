@@ -38,9 +38,9 @@ const ContentBox = ({ children }) => {
   }, [isNavMenuClose]);
   return (
     <Content
-      className="whiteBox shadow"
+      className="whiteBox shadow layoutPadding"
       style={{
-        padding: '50px 40px',
+        // padding: '50px 40px',
         margin: '100px auto',
         width: isSidePanelClose ? '100%' : '830px',
         maxWidth: '1000px',
