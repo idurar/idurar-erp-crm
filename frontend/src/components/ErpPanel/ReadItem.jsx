@@ -7,6 +7,7 @@ import {
   FilePdfOutlined,
   CloseCircleOutlined,
   RetweetOutlined,
+  MailOutlined,
 } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,6 +20,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
+import useMail from '@/hooks/useMail';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -68,6 +70,7 @@ export default function ReadItem({ config }) {
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
   const { moneyFormatter } = useMoney();
+  const { send } = useMail({ entity });
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
@@ -135,6 +138,15 @@ export default function ReadItem({ config }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
+              send(currentErp._id);
+            }}
+            icon={<MailOutlined />}
+          >
+            Mail Invoice
+            </Button>,
+<Button
+            key={`${uniqueId()}`}
+            onClick={() => {
               dispatch(erp.convert({ entity, id: currentErp._id }));
             }}
             icon={<RetweetOutlined />}
@@ -142,6 +154,7 @@ export default function ReadItem({ config }) {
           >
             Convert to Invoice
           </Button>,
+          
           <Button
             key={`${uniqueId()}`}
             onClick={() => {

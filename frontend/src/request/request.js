@@ -156,6 +156,20 @@ const request = {
     return source;
   },
 
+
+  mail: async ({ entity, jsonData }) => {
+    try {
+      const response = await axios.post(entity + '/mail/', jsonData);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  
   convert: async ({ entity, id }) => {
     try {
       const response = await axios.get(`${entity}/convert/${id}`);
@@ -168,5 +182,6 @@ const request = {
       return errorHandler(error);
     }
   },
+  
 };
 export default request;

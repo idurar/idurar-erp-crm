@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { Row, Col, Button, Divider } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
@@ -93,10 +93,24 @@ function FixHeaderPanel({ config }) {
     collapsedBox.close();
   };
 
+  const collapsePanel = () => {
+    panel.collapse();
+  };
+
   return (
     <div className="box">
       <Row gutter={12}>
-        <Col className="gutter-row" span={21}>
+        <Col className="gutter-row" span={2}>
+          <Button
+            style={{ marginTop: 3 }}
+            type="text"
+            onClick={collapsePanel}
+            icon={<ArrowLeftOutlined />}
+            block={true}
+            size="small"
+          ></Button>
+        </Col>
+        <Col className="gutter-row" span={22}>
           <h1 style={{ fontSize: 20, marginBottom: 20 }}>{config.PANEL_TITLE}</h1>
         </Col>
       </Row>
