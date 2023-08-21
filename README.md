@@ -142,11 +142,17 @@ Now you should be all set to run the project locally on your machine and explore
 ## Contributing
 
 1.[How to contribute](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#how-to-contribute)
+
 2.[Reporting issues](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#reporting-issues)
+
 3.[Working on issues ](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#working-on-issues)
+
 4.[Submitting pull requests](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#submitting-pull-requests)
+
 5.[Commit Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#commit-guidelines)
+
 6.[Coding Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#coding-guidelines)
+
 7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
 ## Star History
 
@@ -154,7 +160,7 @@ Here you can see the proxy of our growth on the platform and that we're only get
 
 But if you'd like to check it out more news and website you can always check it out on: https://www.idurarapp.com/.
 
-[![Alt text](![Alt text](image.png))](https://star-history.com/#idurar/idurar-erp-crm)
+[![](image.png)](https://star-history.com/#idurar/idurar-erp-crm)
 
 ## License
 
