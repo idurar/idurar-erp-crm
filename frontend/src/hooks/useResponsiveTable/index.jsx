@@ -29,14 +29,11 @@ export default function useResponsiveTable(dataTableColumns) {
   const checkTableWidth = (width) => {
     // this function checks the width of the table
     const tableWidth = document.querySelector('.ant-table-thead').offsetWidth;
-    console.log('Width', width, 'tablewidth', tableWidth);
     if (width < tableWidth) {
-      console.log('shrink', headerWidth);
       setHeaderWidth(width);
       shrinkTable();
     }
     if (width - headerWidth > 100) {
-      console.log('expandTable');
       expandTable();
       setHeaderWidth((prev) => prev + 100);
       return;
