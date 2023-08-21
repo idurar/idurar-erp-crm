@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
@@ -19,6 +19,22 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 
+const SIDEBAR_MENU = [
+  { key: '/', icon: <DashboardOutlined />, title: 'Dashboard' },
+  { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
+  { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
+  { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
+  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
+  { key: '/employee', icon: <UserOutlined />, title: 'Employee' },
+  { key: '/admin', icon: <TeamOutlined />, title: 'Admin' },
+];
+
+const SETTINGS_SUBMENU = [
+  { key: '/settings', title: 'General Settings' },
+  { key: '/payment/mode', title: 'Payment Mode' },
+  { key: '/role', title: 'Role' },
+];
+
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -34,10 +50,17 @@ export default function Navigation() {
 }
 
 function Sidebar({ collapsible }) {
+  let location = useLocation();
+
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
+  const [currentPath, setCurrentPath] = useState(location.pathname);
+
+  useEffect(() => {
+    if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname);
+  }, [location, currentPath]);
 
   useEffect(() => {
     if (isNavMenuClose) {
@@ -56,7 +79,6 @@ function Sidebar({ collapsible }) {
 
   return (
     <>
-
       <Sider
         collapsible={collapsible}
         collapsed={collapsible ? isNavMenuClose : collapsible}
@@ -74,50 +96,20 @@ function Sidebar({ collapsible }) {
             />
           )}
         </div>
-
-
-        <Menu mode="inline">
-          <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
-            <Link to={'/'} />
-            Dashboard
-          </Menu.Item>
-          <Menu.Item key={'Customer'} icon={<CustomerServiceOutlined />}>
-            <Link to={'/customer'} />
-            Customer
-          </Menu.Item>
-          <Menu.Item key={'Invoice'} icon={<FileTextOutlined />}>
-            <Link to={'/invoice'} />
-            Invoice
-          </Menu.Item>
-          <Menu.Item key={'Quote'} icon={<FileSyncOutlined />}>
-            <Link to={'/quote'} />
-            Quote
-          </Menu.Item>
-          <Menu.Item key={'PaymentInvoice'} icon={<CreditCardOutlined />}>
-            <Link to={'/payment/invoice'} />
-            Payment Invoice
-          </Menu.Item>
-          <Menu.Item key={'Employee'} icon={<UserOutlined />}>
-            <Link to={'/employee'} />
-            Employee
-          </Menu.Item>
-          <Menu.Item key={'Admin'} icon={<TeamOutlined />}>
-            <Link to={'/admin'} />
-            Admin
-          </Menu.Item>
+        <Menu mode="inline" selectedKeys={[currentPath]}>
+          {SIDEBAR_MENU.map((menuItem) => (
+            <Menu.Item key={menuItem.key} icon={menuItem.icon}>
+              <Link to={menuItem.key} />
+              {menuItem.title}
+            </Menu.Item>
+          ))}
           <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
-            <Menu.Item key={'SettingsPage'}>
-              <Link to={'/settings'} />
-              General Settings
-            </Menu.Item>
-            <Menu.Item key={'PaymentMode'}>
-              <Link to={'/payment/mode'} />
-              Payment Mode
-            </Menu.Item>
-            <Menu.Item key={'Role'}>
-              <Link to={'/role'} />
-              Role
-            </Menu.Item>
+            {SETTINGS_SUBMENU.map((menuItem) => (
+              <Menu.Item key={menuItem.key}>
+                <Link to={menuItem.key} />
+                {menuItem.title}
+              </Menu.Item>
+            ))}
           </SubMenu>
         </Menu>
       </Sider>
