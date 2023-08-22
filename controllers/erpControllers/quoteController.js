@@ -8,7 +8,6 @@ const Model = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
 
 const custom = require('../corsControllers/custom');
-const moment = require('moment');
 
 const crudController = require('../corsControllers/crudController');
 const methods = crudController.createCRUDController('Quote');
@@ -153,7 +152,7 @@ methods.summary = async (req, res) => {
 
     if (type) {
       if (['week', 'month', 'year'].includes(type)) {
-        defaultType = type
+        defaultType = type;
       } else {
         return res.status(400).json({
           success: false,
@@ -217,10 +216,7 @@ methods.summary = async (req, res) => {
           status: '$results._id',
           count: '$results.count',
           percentage: {
-            $round: [
-              { $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] },
-              1,
-            ],
+            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
           },
           total_amount: '$results.total_amount',
         },
