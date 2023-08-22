@@ -2,7 +2,11 @@
 // module.exports = crudController.createCRUDController("Quote");
 
 const mongoose = require('mongoose');
+const moment = require('moment');
+
 const Model = mongoose.model('Quote');
+const InvoiceModel = mongoose.model('Invoice');
+
 const custom = require('../corsControllers/custom');
 
 const crudController = require('../corsControllers/crudController');
@@ -135,6 +139,190 @@ methods.update = async (req, res) => {
         success: false,
         result: null,
         message: 'Oops there is an Error',
+      });
+    }
+  }
+};
+
+methods.summary = async (req, res) => {
+  try {
+    let defaultType = 'month';
+
+    const { type } = req.query;
+
+    if (type) {
+      if (['week', 'month', 'year'].includes(type)) {
+        defaultType = type;
+      } else {
+        return res.status(400).json({
+          success: false,
+          result: null,
+          message: 'Invalid type',
+        });
+      }
+    }
+
+    const currentDate = moment();
+    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
+    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
+
+    if (defaultType === 'week') {
+      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
+      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
+    }
+    if (defaultType === 'year') {
+      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
+      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
+    }
+
+    const result = await Model.aggregate([
+      {
+        $match: {
+          removed: false,
+          date: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: '$status',
+          count: {
+            $sum: 1,
+          },
+          total_amount: {
+            $sum: '$total',
+          },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total_count: {
+            $sum: '$count',
+          },
+          results: {
+            $push: '$$ROOT',
+          },
+        },
+      },
+      {
+        $unwind: '$results',
+      },
+      {
+        $project: {
+          _id: 0,
+          status: '$results._id',
+          count: '$results.count',
+          percentage: {
+            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
+          },
+          total_amount: '$results.total_amount',
+        },
+      },
+      {
+        $sort: {
+          status: 1,
+        },
+      },
+    ]);
+
+    const total = result.reduce((acc, item) => acc + item.total_amount, 0);
+
+    const finalResult = {
+      total,
+      type: defaultType,
+      performance: result,
+    };
+
+    return res.status(200).json({
+      success: true,
+      result: finalResult,
+      message: `Successfully found all Quotations for the last ${defaultType}`,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      result: null,
+      message: 'Oops there is an Error',
+      error: error,
+    });
+  }
+};
+
+methods.convertQuoteToInvoice = async (req, res) => {
+  try {
+    const quoteId = req.params.id; // Assuming the quote ID is passed in the URL
+
+    // Fetch the quote from the database
+    const quote = await Model.findById(quoteId);
+    if (!quote) {
+      return res.status(404).json({
+        success: false,
+        result: null,
+        message: 'Quote not found',
+      });
+    }
+
+    // If the quote is already converted, prevent creating another invoice
+    if (quote.converted) {
+      return res.status(409).json({
+        success: false,
+        result: null,
+        message: 'Quote is already converted to an invoice.',
+      });
+    }
+
+    // Convert the quote details to invoice details
+    const invoiceData = {
+      number: quote.number,
+      year: quote.year,
+      date: moment(),
+      expiredDate: moment().add(1, 'month'),
+      client: quote.client,
+      items: quote.items.map((item) => ({
+        itemName: item.itemName,
+        description: item.description,
+        quantity: item.quantity,
+        price: item.price,
+        total: item.total,
+      })),
+      taxRate: quote.taxRate,
+      subTotal: quote.subTotal,
+      taxTotal: quote.taxTotal,
+      total: quote.total,
+      credit: quote.credit,
+      discount: quote.discount,
+      note: quote.note,
+    };
+
+    // Create the invoice document
+    const invoice = await new InvoiceModel(invoiceData).save();
+
+    // Mark the quote as converted
+    quote.converted = true;
+    await quote.save();
+
+    // Return the created invoice
+    return res.status(200).json({
+      success: true,
+      result: quote,
+      message: 'Successfully converted quote to invoice',
+    });
+  } catch (err) {
+    // If error is because of Invalid ObjectId
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Invalid ID format',
+      });
+    } else {
+      return res.status(500).json({
+        success: false,
+        result: null,
+        message: 'Oops there is an Errorr',
       });
     }
   }

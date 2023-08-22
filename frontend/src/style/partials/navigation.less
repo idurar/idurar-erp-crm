@@ -1,4 +1,8 @@
 .navigation {
+  position: sticky;
+  height: 100vh;
+  top: 0;
+  left: 0;
   z-index: 1000;
   background: #fff;
   border-right: 1px solid #edf0f5;
@@ -8,4 +12,41 @@
   height: 32px;
   margin: 16px 16px 30px 16px;
   padding-left: 6px;
+}
+
+.sidebar-wraper {
+  background: #fff;
+  display: block;
+}
+
+.mobile-sidebar-wraper {
+  display: none;
+}
+
+.mobile-sidebar-wraper .ant-drawer-body {
+  padding: 12px 0px !important;
+}
+
+.ant-btn.mobile-sidebar-btn {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .sidebar-wraper {
+    display: none;
+  }
+
+  .navigation {
+    height: 100%;
+  }
+
+  .ant-btn.mobile-sidebar-btn {
+    display: block;
+    position: absolute;
+    top: 10px;
+  }
+
+  .mobile-sidebar-wraper {
+    display: block;
+  }
 }
