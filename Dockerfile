@@ -12,14 +12,7 @@ RUN npm install --silent
 # Copy app source code
 COPY . .
 
-# ENV setup
-#ARG DaTABASE=default_value
 
-#ENV DATABASE=$DaTABASE
-
-#RUN echo $DATABASE
-
-RUN mv tmp.variables.env .variables.env
 
 RUN npm run setup
 
