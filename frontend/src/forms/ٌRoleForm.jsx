@@ -6,7 +6,7 @@ export default function RoleForm({ isUpdateForm = false }) {
     <>
       <Form.Item
         name="codeName"
-        label="CodeName"
+        label="codeName"
         rules={[
           {
             required: true,
@@ -18,7 +18,7 @@ export default function RoleForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="displayName"
-        label="DisplayName"
+        label="displayName"
         rules={[
           {
             required: true,
@@ -30,7 +30,7 @@ export default function RoleForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="dashboardType"
-        label="DashboardType"
+        label="dashboardType"
         rules={[
           {
             required: true,
