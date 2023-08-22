@@ -6,7 +6,7 @@ export default function RoleForm({ isUpdateForm = false }) {
     <>
       <Form.Item
         name="codeName"
-        label="CodeName"
+        label="Code Name"
         rules={[
           {
             required: true,
