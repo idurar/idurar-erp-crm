@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
 
     const result = await Admin.findOneAndUpdate(
       { _id: admin._id },
-      { $inc:{isLoggedIn:1} , $push:{loggedSessions: token}} ,
+      { $set: { isLoggedIn: 1 }, $push: { loggedSessions: token } },
       {
         new: true,
       }
@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
           admin: {
             id: result._id,
             name: result.name,
-            isLoggedIn: result.isLoggedIn>0?true:false,
+            isLoggedIn: result.isLoggedIn > 0 ? true : false,
           },
         },
         message: 'Successfully login admin',
@@ -140,7 +140,7 @@ exports.logout = async (req, res) => {
   const token = req.cookies.token;
   const result = await Admin.findOneAndUpdate(
     { _id: req.admin._id },
-    { $pull: {loggedSessions: token}, $inc:{isLoggedIn:-1} },
+    { $pull: { loggedSessions: token }, $set: { isLoggedIn: -1 } },
     {
       new: true,
     }

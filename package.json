@@ -1,5 +1,5 @@
 {
-  "name": "cedimed-react",
+  "name": "idurar-backend",
   "version": "1.0.0",
   "engines": {
     "npm": "8.5.5",
@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "currency.js": "2.0.4",
     "dotenv": "4.0.0",
     "express": "^4.18.1",
     "glob": "7.1.1",
@@ -45,10 +46,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idurar/starter-antd-admin-crud-auth-mern.git"
+    "url": "git+https://github.com/idurar/idurar-erp-crm/.git"
   },
   "bugs": {
-    "url": "https://github.com/idurar/starter-antd-admin-crud-auth-mern/issues"
+    "url": "https://github.com/idurar/idurar-erp-crm//issues"
   },
-  "homepage": "https://github.com/idurar/starter-antd-admin-crud-auth-mern#readme"
+  "homepage": "https://github.com/idurar/idurar-erp-crm/#readme"
 }

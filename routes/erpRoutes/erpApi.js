@@ -124,6 +124,7 @@ router.route('/quote/list').get(catchErrors(quoteController.list));
 router.route('/quote/filter').get(catchErrors(quoteController.filter));
 router.route('/quote/pdf/:id').get(catchErrors(quoteController.generatePDF));
 router.route('/quote/summary').get(catchErrors(quoteController.summary));
+router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
 
 // //___________________________________________ API for suppliers _____________________
 router.route('/supplier/create').post(catchErrors(supplierController.create));
@@ -176,6 +177,8 @@ router.route('/paymentInvoice/search').get(catchErrors(paymentInvoiceController.
 router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.list));
 router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
 router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+
+router.route('/paymentInvoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
 // //____________________________________________ API for Global Setting _________________
 

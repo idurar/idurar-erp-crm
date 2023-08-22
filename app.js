@@ -15,7 +15,7 @@ const erpDownloadRouter = require('./routes/erpRoutes/erpDownloadRouter');
 
 const errorHandlers = require('./handlers/errorHandlers');
 
-const { isValidAdminToken } = require('./controllers/erpControllers/authJwtController ');
+const { isValidAdminToken } = require('./controllers/erpControllers/authJwtController');
 
 // create our Express app
 const app = express();
