@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { Row, Col, Button, Divider } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined ,MailOutlined } from '@ant-design/icons';
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
@@ -17,15 +17,17 @@ import { useCrudContext } from '@/context/crud';
 import { CrudLayout } from '@/layout';
 
 import CrudDataTable from './CrudDataTable';
+import useMail from '@/hooks/useMail';
 
 function SidePanelTopContent({ config, formElements }) {
   const { crudContextAction, state } = useCrudContext();
-  const { entityDisplayLabels } = config;
+  const { entityDisplayLabels, entity } = config;
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
 
   const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
+  const { send } = useMail({ entity });
 
   const [labels, setLabels] = useState('');
   useEffect(() => {
@@ -43,6 +45,9 @@ function SidePanelTopContent({ config, formElements }) {
   const editItem = () => {
     dispatch(crud.currentAction({ actionType: 'update', data: currentItem }));
     editBox.open();
+  };
+  const mailItem = () => {
+    send(currentItem.invoice._id);
   };
 
   const show = isReadBoxOpen || isEditBoxOpen ? { opacity: 1 } : { opacity: 0 };
@@ -71,6 +76,15 @@ function SidePanelTopContent({ config, formElements }) {
           >
             edit
           </Button>
+          <Button
+            onClick={mailItem}
+            type="text"
+            icon={<MailOutlined />}
+            size="small"
+            style={{ float: 'right', marginLeft: '0px' }}
+          >
+            mail
+          </Button>
         </Col>
 
         <Col span={24}>
@@ -93,10 +107,24 @@ function FixHeaderPanel({ config }) {
     collapsedBox.close();
   };
 
+  const collapsePanel = () => {
+    panel.collapse();
+  };
+
   return (
     <div className="box">
       <Row gutter={12}>
-        <Col className="gutter-row" span={21}>
+        <Col className="gutter-row" span={2}>
+          <Button
+            style={{ marginTop: 3 }}
+            type="text"
+            onClick={collapsePanel}
+            icon={<ArrowLeftOutlined />}
+            block={true}
+            size="small"
+          ></Button>
+        </Col>
+        <Col className="gutter-row" span={22}>
           <h1 style={{ fontSize: 20, marginBottom: 20 }}>{config.PANEL_TITLE}</h1>
         </Col>
       </Row>
