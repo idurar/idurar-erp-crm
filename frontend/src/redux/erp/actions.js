@@ -266,4 +266,10 @@ export const erp = {
     async (dispatch) => {
       await request.mail({ entity, jsonData });
     },
+      
+  convert:
+    ({ entity, id }) =>
+    async (dispatch) => {
+      await request.convert({ entity, id });
+    },
 };

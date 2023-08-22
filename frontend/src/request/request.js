@@ -183,5 +183,19 @@ const request = {
       return errorHandler(error);
     }
   },
+  
+  convert: async ({ entity, id }) => {
+    try {
+      const response = await axios.get(`${entity}/convert/${id}`);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  
 };
 export default request;
