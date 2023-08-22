@@ -135,6 +135,7 @@ exports.delete = async (Model, req, res) => {
       removed: true,
     };
     // Find the document by id and delete it
+    console.log(req.params.id)
     const result = await Model.findOneAndUpdate(
       { _id: req.params.id, removed: false },
       { $set: updates },
@@ -142,6 +143,8 @@ exports.delete = async (Model, req, res) => {
         new: true, // return the new result instead of the old one
       }
     ).exec();
+    console.log(result)
+    const AllResult=await Model.find({ update:false }) // fetching all the results whose update is false
     // If no results found, return document not found
     if (!result) {
       return res.status(404).json({
@@ -152,7 +155,7 @@ exports.delete = async (Model, req, res) => {
     } else {
       return res.status(200).json({
         success: true,
-        result,
+        AllResult,
         message: 'Successfully Deleted the document by id: ' + req.params.id,
       });
     }
