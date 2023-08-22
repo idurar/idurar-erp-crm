@@ -100,9 +100,10 @@ router.route('/invoice/delete/:id').delete(catchErrors(invoiceController.delete)
 router.route('/invoice/search').get(catchErrors(invoiceController.search));
 router.route('/invoice/list').get(catchErrors(invoiceController.list));
 router.route('/invoice/filter').get(catchErrors(invoiceController.filter));
-
 router.route('/invoice/pdf/:id').get(catchErrors(invoiceController.generatePDF));
+router.route('/invoice/summary').get(catchErrors(invoiceController.summary));
 router.route('/invoice/mail').post(catchErrors(invoiceController.sendMail));
+
 // //_________________________________________________________________API for items_____________________
 router.route('/item/create').post(catchErrors(itemController.create));
 router.route('/item/read/:id').get(catchErrors(itemController.read));
@@ -122,6 +123,7 @@ router.route('/quote/search').get(catchErrors(quoteController.search));
 router.route('/quote/list').get(catchErrors(quoteController.list));
 router.route('/quote/filter').get(catchErrors(quoteController.filter));
 router.route('/quote/pdf/:id').get(catchErrors(quoteController.generatePDF));
+router.route('/quote/summary').get(catchErrors(quoteController.summary));
 router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
 
 // //___________________________________________ API for suppliers _____________________
