@@ -7,7 +7,7 @@ export default function EmployeeForm() {
     <>
       <Form.Item
         name="name"
-        label="Name"
+        label="name"
         rules={[
           {
             required: true,
@@ -19,7 +19,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="surname"
-        label="Surname"
+        label="Sur name"
         rules={[
           {
             required: true,
@@ -84,7 +84,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="phone"
-        label="Phone Number"
+        label="phone Number"
         rules={[
           {
             required: true,
@@ -107,7 +107,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="position"
-        label="Position"
+        label="position"
         rules={[
           {
             required: true,
@@ -129,7 +129,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="state"
-        label="State"
+        label="state"
         rules={[
           {
             required: true,
