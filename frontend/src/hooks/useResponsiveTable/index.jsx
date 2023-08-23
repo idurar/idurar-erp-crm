@@ -1,9 +1,9 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 import { useRef, useState } from 'react';
 
 //q: this file is a hook
 
-export default function useResponsiveTable(dataTableColumns) {
+export default function useResponsiveTable(dataTableColumns, items) {
   // this hook returns two arays of columns
   // one for mobile and one for desktop
 
@@ -15,6 +15,7 @@ export default function useResponsiveTable(dataTableColumns) {
   useLayoutEffect(() => {
     const header = tableHeader.current;
     if (!header) return;
+    checkTableWidth(header.clientWidth);
     const observer = new ResizeObserver(() => {
       // 👉 Do something when the element is resized
       checkTableWidth(header.clientWidth);
@@ -24,14 +25,16 @@ export default function useResponsiveTable(dataTableColumns) {
     return () => {
       observer.disconnect();
     };
-  }, [headerWidth, expandedRowData.length]);
+  }, [headerWidth, expandedRowData.length, items.length]);
 
   const checkTableWidth = (width) => {
     // this function checks the width of the table
     const tableWidth = document.querySelector('.ant-table-thead').offsetWidth;
+    console.log('width', width, tableWidth);
     if (width < tableWidth) {
       setHeaderWidth(width);
       shrinkTable();
+      return;
     }
     if (width - headerWidth > 100) {
       expandTable();
@@ -60,5 +63,14 @@ export default function useResponsiveTable(dataTableColumns) {
     setExpandedRowData([...arr]);
   };
 
-  return { tableColumns, expandedRowData, tableHeader };
+  const memoizedResult = useMemo(
+    () => ({
+      tableColumns,
+      expandedRowData,
+      tableHeader,
+    }),
+    [tableColumns, expandedRowData, tableHeader]
+  );
+
+  return memoizedResult;
 }

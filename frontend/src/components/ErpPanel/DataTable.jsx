@@ -40,8 +40,6 @@ export default function DataTable({ config, DataTableDropMenu }) {
     },
   ];
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(dataTableColumns);
-
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
   const { pagination, items } = listResult;
@@ -56,6 +54,11 @@ export default function DataTable({ config, DataTableDropMenu }) {
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
+
+  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
+    dataTableColumns,
+    items
+  );
 
   return (
     <>

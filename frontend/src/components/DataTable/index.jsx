@@ -24,8 +24,6 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
     },
   ];
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(dataTableColumns);
-
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
   const { pagination, items } = listResult;
@@ -40,6 +38,11 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   useEffect(() => {
     dispatch(crud.list({ entity }));
   }, []);
+
+  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
+    dataTableColumns,
+    items
+  );
 
   return (
     <>
