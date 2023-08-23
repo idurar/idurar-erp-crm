@@ -103,9 +103,6 @@ export default function ReadItem({ config }) {
     }
   }, [currentResult]);
 
-  useEffect(() => {
-    console.info('itemslist', itemslist);
-  }, [itemslist]);
 
   return (
     <>
@@ -143,8 +140,8 @@ export default function ReadItem({ config }) {
             icon={<MailOutlined />}
           >
             Mail Invoice
-            </Button>,
-<Button
+          </Button>,
+          <Button
             key={`${uniqueId()}`}
             onClick={() => {
               dispatch(erp.convert({ entity, id: currentErp._id }));
@@ -154,7 +151,7 @@ export default function ReadItem({ config }) {
           >
             Convert to Invoice
           </Button>,
-          
+
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
@@ -208,44 +205,49 @@ export default function ReadItem({ config }) {
         <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
-      <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={11}>
-          <p>
-            <strong>ITEM</strong>
-          </p>
-        </Col>
-        <Col className="gutter-row" span={4}>
-          <p
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <strong>PRICE</strong>
-          </p>
-        </Col>
-        <Col className="gutter-row" span={4}>
-          <p
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <strong>QUANTITY</strong>
-          </p>
-        </Col>
-        <Col className="gutter-row" span={5}>
-          <p
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <strong>TOTAL</strong>
-          </p>
-        </Col>
-        <Divider />
-      </Row>
-      {itemslist.map((item) => (
-        <Item key={item._id} item={item}></Item>
-      ))}
+      {itemslist && (
+        <>
+          <Row gutter={[12, 0]}>
+            <Col className="gutter-row" span={11}>
+              <p>
+                <strong>ITEM</strong>
+              </p>
+            </Col>
+            <Col className="gutter-row" span={4}>
+              <p
+                style={{
+                  textAlign: 'right',
+                }}
+              >
+                <strong>PRICE</strong>
+              </p>
+            </Col>
+            <Col className="gutter-row" span={4}>
+              <p
+                style={{
+                  textAlign: 'right',
+                }}
+              >
+                <strong>QUANTITY</strong>
+              </p>
+            </Col>
+            <Col className="gutter-row" span={5}>
+              <p
+                style={{
+                  textAlign: 'right',
+                }}
+              >
+                <strong>TOTAL</strong>
+              </p>
+            </Col>
+            <Divider />
+          </Row>
+          {itemslist?.map((item) => (
+            <Item key={item._id} item={item}></Item>
+          ))}
+        </>
+      )}
+
       <div
         style={{
           width: '300px',
