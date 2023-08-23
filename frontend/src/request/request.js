@@ -156,6 +156,20 @@ const request = {
     return source;
   },
 
+  summary: async ({ entity, options = {} }) => {
+    try {
+      const response = await axios.get(entity + '/summary');
+
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
 
   mail: async ({ entity, jsonData }) => {
     try {

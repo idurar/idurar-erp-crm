@@ -20,8 +20,9 @@ const orderFormController = require('@/controllers/erpControllers/orderFormContr
 const expenseController = require('@/controllers/erpControllers/expenseController');
 const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
-
 const settingsController = require('@/controllers/erpControllers/settingsController');
+const offerController = require('@/controllers/erpControllers/offerController');
+
 
 // //_______________________________ Admin management_______________________________
 
@@ -91,6 +92,7 @@ router.route('/client/delete/:id').delete(catchErrors(clientController.delete));
 router.route('/client/search').get(catchErrors(clientController.search));
 router.route('/client/list').get(catchErrors(clientController.list));
 router.route('/client/filter').get(catchErrors(clientController.filter));
+router.route('/client/summary').get(catchErrors(clientController.summary));
 
 // //_________________________________________________________________API for invoices_____________________
 router.route('/invoice/create').post(catchErrors(invoiceController.create));
@@ -177,6 +179,7 @@ router.route('/paymentInvoice/search').get(catchErrors(paymentInvoiceController.
 router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.list));
 router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
 router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+router.route('/paymentInvoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
 router.route('/paymentInvoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
@@ -189,5 +192,17 @@ router.route('/settings/delete/:id').delete(catchErrors(settingsController.delet
 router.route('/settings/search').get(catchErrors(settingsController.search));
 router.route('/settings/list').get(catchErrors(settingsController.list));
 router.route('/settings/filter').get(catchErrors(settingsController.filter));
+
+// //_________________________________________________________________API for Offers_____________________
+
+router.route('/offer/create').post(catchErrors(offerController.create));
+router.route('/offer/read/:id').get(catchErrors(offerController.read));
+router.route('/offer/update/:id').patch(catchErrors(offerController.update));
+router.route('/offer/delete/:id').delete(catchErrors(offerController.delete));
+router.route('/offer/search').get(catchErrors(offerController.search));
+router.route('/offer/list').get(catchErrors(offerController.list));
+router.route('/offer/filter').get(catchErrors(offerController.filter));
+router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
+router.route('/offer/summary').get(catchErrors(offerController.summary));
 
 module.exports = router;
