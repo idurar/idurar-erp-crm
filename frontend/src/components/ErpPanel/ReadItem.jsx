@@ -141,10 +141,11 @@ export default function ReadItem({ config }) {
               send(currentErp._id);
             }}
             icon={<MailOutlined />}
+            style={{ display: entity == 'invoice' ? 'inline-block' : 'none' }}
           >
             Mail Invoice
-            </Button>,
-<Button
+          </Button>,
+          <Button
             key={`${uniqueId()}`}
             onClick={() => {
               dispatch(erp.convert({ entity, id: currentErp._id }));
@@ -154,7 +155,7 @@ export default function ReadItem({ config }) {
           >
             Convert to Invoice
           </Button>,
-          
+
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
