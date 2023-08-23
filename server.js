@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
 if (major < 14 || (major === 14 && minor <= 0)) {
-  console.log('Please go to nodejs.org and download version 8 or greater. 👌\n ');
+  logger.info('Please go to nodejs.org and download version 8 or greater. 👌\n ');
   process.exit();
 }
 
@@ -17,7 +17,7 @@ require('dotenv').config({ path: '.variables.env' });
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
-  console.error(`🚫 Error → : ${err.message}`);
+  logger.error(`🚫 Error → : ${err.message}`);
 });
 
 const glob = require('glob');
@@ -29,7 +29,9 @@ glob.sync('./models/**/*.js').forEach(function (file) {
 
 // Start our app!
 const app = require('./app');
+const logger = require('./shared/logger');
 app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {
-  console.log(`Express running → On PORT : ${server.address().port}`);
+  // console.log(`Express running → On PORT : ${server.address().port}`);
+  logger.info(`Express running → On PORT : ${server.address().port}`);
 });

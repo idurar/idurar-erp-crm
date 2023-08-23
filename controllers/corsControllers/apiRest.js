@@ -45,7 +45,7 @@ exports.read = async (Model, req, res) => {
 
 exports.create = async (Model, req, res) => {
   try {
-
+    console.log({ body: req.body });
     const isExist = await isClientExist(Model, req)
     if (isExist) {
       return res.status(400).json({
@@ -179,6 +179,8 @@ exports.delete = async (Model, req, res) => {
         new: true, // return the new result instead of the old one
       }
     ).exec();
+
+    console.log({ result });
     // If no results found, return document not found
     if (!result) {
       return res.status(404).json({

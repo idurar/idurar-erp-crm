@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/macbook/Desktop/Open-Source/idurar-erp-crm/logs/winston/error/.6d6576c569f92ae9fccdd86bd42ee21757a165e0-audit.json",
+    "files": [
+        {
+            "date": 1692766131988,
+            "name": "/Users/macbook/Desktop/Open-Source/idurar-erp-crm/logs/winston/error/phu-2023-08-23-10-error.log",
+            "hash": "d20ba0bf5c411a60f9c48435eb0b3c73051cc4592af0f1a7b2dd6161d021fb69"
+        }
+    ],
+    "hashType": "sha256"
+}

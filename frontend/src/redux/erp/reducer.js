@@ -94,6 +94,15 @@ const erpReducer = (state = INITIAL_STATE, action) => {
         },
       };
     case actionTypes.CURRENT_ACTION:
+      console.log({
+        data: {
+          ...state,
+          [keyState]: {
+            ...state[keyState],
+            current: payload,
+          },
+        }
+      });
       return {
         ...state,
         [keyState]: {

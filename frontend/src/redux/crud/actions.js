@@ -168,7 +168,7 @@ export const crud = {
       });
 
       let data = await request.delete({ entity, id });
-
+      console.log({ data });
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
