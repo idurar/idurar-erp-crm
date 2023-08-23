@@ -21,7 +21,7 @@ const generalTransport = new DailyRotateFile({
         'logs',
         'winston',
         'successes',
-        'phu-%DATE%-success.log'
+        'erp-crm-%DATE%-success.log'
     ),
     datePattern: 'YYYY-MM-DD-HH',
     zippedArchive: true,
@@ -37,7 +37,7 @@ const errorTransport = new DailyRotateFile({
         'logs',
         'winston',
         'error',
-        'phu-%DATE%-error.log'
+        'erp-crm-%DATE%-error.log'
     ),
     datePattern: 'YYYY-MM-DD-HH',
     zippedArchive: true,
