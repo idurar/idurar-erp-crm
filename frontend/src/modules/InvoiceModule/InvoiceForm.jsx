@@ -71,6 +71,10 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 required: true,
                 message: 'Please input invoice number!',
               },
+              {
+                pattern: /^[0-9]\d*$/,
+                message: 'Please input valid invoice number.',
+              },
             ]}
           >
             <InputNumber style={{ width: '100%' }} />
