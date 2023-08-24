@@ -20,7 +20,6 @@ export default function DataTableDropMenu({ row, entity }) {
   const { erpContextAction } = useErpContext();
   const { readPanel, updatePanel, recordPanel, modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
-  
   function Read() {
     dispatch(erp.currentItem({ data: item }));
     readPanel.open();

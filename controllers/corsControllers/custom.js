@@ -69,6 +69,7 @@ exports.search = async (Model, req, res) => {
  * Pdf Generate New Method
  * This method only generate PDF in the folder, not download the PDF
  */
+
 exports.generatePdf = async (
   modelName,
   info = { filename: 'pdf_file', format: 'A5' },
@@ -84,10 +85,16 @@ exports.generatePdf = async (
     fs.unlinkSync(targetLocation);
   }
 
+  const dynamicLogoSrc =
+    'https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png';
+  const dynamicTextSrc = 'lorem ipsum dorem narum';
+
   //render pdf html
   const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
     model: result,
     moment: moment,
+    logo: dynamicLogoSrc,
+    text: dynamicTextSrc,
   });
 
   await pdf

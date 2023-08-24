@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Model = mongoose.model('PaymentInvoice');
 const Invoice = mongoose.model('Invoice');
 const custom = require('../corsControllers/custom');
-const sendMail = require('./mailInvoiceController');
 
 const crudController = require('../corsControllers/crudController');
 const methods = crudController.createCRUDController('PaymentInvoice');
@@ -286,5 +285,4 @@ methods.delete = async (req, res) => {
   }
 };
 
-methods.sendMail = sendMail;
 module.exports = methods;
