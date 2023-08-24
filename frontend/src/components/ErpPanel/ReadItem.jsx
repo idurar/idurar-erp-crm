@@ -6,6 +6,7 @@ import {
   EditOutlined,
   FilePdfOutlined,
   CloseCircleOutlined,
+  RetweetOutlined,
   MailOutlined,
 } from '@ant-design/icons';
 
@@ -142,7 +143,18 @@ export default function ReadItem({ config }) {
             icon={<MailOutlined />}
           >
             Mail Invoice
+            </Button>,
+<Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              dispatch(erp.convert({ entity, id: currentErp._id }));
+            }}
+            icon={<RetweetOutlined />}
+            style={{ display: entity == 'quote' ? 'inline-block' : 'none' }}
+          >
+            Convert to Invoice
           </Button>,
+          
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
