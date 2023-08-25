@@ -91,9 +91,9 @@ export default function EmployeeForm() {
             message: 'Please input your phone!',
           },
           {
-            type:'number',
-            message: 'Please enter valid phone number '
-          }
+            pattern: /^(?:[+\d()\-\s]+)$/,
+            message: 'Please enter valid phone number ',
+          },
         ]}
       >
         <Input />

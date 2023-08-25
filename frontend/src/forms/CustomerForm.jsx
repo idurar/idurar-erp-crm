@@ -60,7 +60,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
             message: 'Please input your phone!',
           },
           {
-            type: 'number',
+            pattern: /^(?:[+\d()\-\s]+)$/,
             message: 'Please enter valid phone number ',
           },
         ]}
