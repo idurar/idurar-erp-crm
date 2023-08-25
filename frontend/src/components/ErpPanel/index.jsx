@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 
 import { useErpContext } from '@/context/erp';
+import useUrlAction from '@/hooks/useUrlAction';
 
 const Visibility = ({ isVisible, children }) => {
   const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
@@ -26,6 +27,8 @@ export default function ErpPanel({ config, CreateForm, UpdateForm, DataTableDrop
   useLayoutEffect(() => {
     dispatch(erp.resetState());
   }, []);
+
+  useUrlAction(config.ENTITY_NAME);
 
   return (
     <>
