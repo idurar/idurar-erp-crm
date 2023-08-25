@@ -34,7 +34,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
+            message: 'Please input your E-mail!',
           },
           {
             type: 'email',

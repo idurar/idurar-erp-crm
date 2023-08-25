@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
+import { validatePhoneNumber } from '@/utils/helpers';
 
 export default function CustomerForm({ isUpdateForm = false }) {
   return (
@@ -60,8 +61,8 @@ export default function CustomerForm({ isUpdateForm = false }) {
             message: 'Please input your phone!',
           },
           {
-            pattern: /^(?:[+\d()\-\s]+)$/,
-            message: 'Please enter valid phone number ',
+            pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
+            message: 'Please enter valid phone number!',
           },
         ]}
       >
