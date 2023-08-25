@@ -90,10 +90,6 @@ export default function EmployeeForm() {
             required: true,
             message: 'Please input your phone!',
           },
-          {
-            type:'number',
-            message: 'Please enter valid phone number '
-          }
         ]}
       >
         <Input />

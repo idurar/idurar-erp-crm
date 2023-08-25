@@ -59,10 +59,6 @@ export default function CustomerForm({ isUpdateForm = false }) {
             required: true,
             message: 'Please input your phone!',
           },
-          {
-            type: 'number',
-            message: 'Please enter valid phone number ',
-          },
         ]}
       >
         <Input />

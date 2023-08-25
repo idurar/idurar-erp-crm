@@ -36,10 +36,6 @@ export default function AdminForm({ isUpdateForm = false }) {
             required: true,
             message: 'Please input your Email!',
           },
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
         ]}
       >
         <Input autoComplete="off" />
