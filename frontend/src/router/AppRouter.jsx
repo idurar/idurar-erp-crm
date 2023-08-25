@@ -37,7 +37,7 @@ export default function AppRouter() {
               <PrivateRoute
                 key={routeItem.component}
                 path={routeItem.path}
-                exact={routeItem.exact || true}
+                exact={routeItem.exact ?? true}
                 component={lazy(() =>
                   import(/* webpackChunkName: "[request]" */ `@/pages/${routeItem.component}`)
                 )}

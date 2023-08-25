@@ -41,16 +41,19 @@ export const routesConfig = [
     component: 'Customer',
   },
   {
-    path: '/invoice',
+    path: '/invoice/:action?/:id?',
     component: 'Invoice',
+    exact: false,
   },
   {
-    path: '/quote',
+    path: '/quote/:action?/:id?',
     component: 'Quote',
+    exact: false,
   },
   {
-    path: '/payment/invoice',
+    path: '/payment/invoice/:action?/:id?',
     component: 'PaymentInvoice',
+    exact: false,
   },
   {
     path: '/employee',
