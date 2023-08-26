@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
-import { Dropdown, Table } from 'antd';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Descriptions, Dropdown, Table } from 'antd';
 import { Button, PageHeader } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { settings } from '@/redux/settings/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
+import useResponsiveTable from '@/hooks/useResponsiveTable';
 function AddNewItem({ config }) {
   const { ADD_NEW_ENTITY } = config;
   const { erpContextAction } = useErpContext();
@@ -51,39 +51,63 @@ export default function DataTable({ config, DataTableDropMenu }) {
     dispatch(erp.list({ entity, options }));
   }, []);
 
-  // const handelCurrency = () => {
-  //   dispatch(settings.currency({ value: '€' }));
-  //   dispatch(settings.currencyPosition({ position: 'before' }));
-  // };
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
 
+  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
+    dataTableColumns,
+    items
+  );
+
   return (
     <>
-      <PageHeader
-        title={DATATABLE_TITLE}
-        ghost={true}
-        extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-            Refresh
-          </Button>,
-          // <Button onClick={handelCurrency} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-          //   Change Currency
-          // </Button>,
-          <AddNewItem config={config} key={`${uniqueId()}`} />,
-        ]}
-        style={{
-          padding: '20px 0px',
-        }}
-      ></PageHeader>
+      <div ref={tableHeader}>
+        <PageHeader
+          title={DATATABLE_TITLE}
+          ghost={true}
+          extra={[
+            <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+              Refresh
+            </Button>,
+            <AddNewItem config={config} key={`${uniqueId()}`} />,
+          ]}
+          style={{
+            padding: '20px 0px',
+          }}
+        ></PageHeader>
+      </div>
+
       <Table
-        columns={dataTableColumns}
+        columns={tableColumns}
         rowKey={(item) => item._id}
         dataSource={items}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
+        expandable={
+          expandedRowData.length
+            ? {
+                expandedRowRender: (record) => (
+                  <Descriptions title="" bordered column={1}>
+                    {expandedRowData.map((item, index) => {
+                      return (
+                        <Descriptions.Item key={index} label={item.title}>
+                          {item.render?.(record[item.dataIndex])?.children
+                            ? item.render?.(record[item.dataIndex])?.children
+                            : item.render?.(record[item.dataIndex])
+                            ? item.render?.(record[item.dataIndex])
+                            : Array.isArray(item.dataIndex)
+                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
+                            : record[item.dataIndex]}
+                        </Descriptions.Item>
+                      );
+                    })}
+                  </Descriptions>
+                ),
+              }
+            : null
+        }
       />
     </>
   );

@@ -18,7 +18,13 @@ export default function CreateForm({ config, formElements }) {
   const onSubmit = (fieldsValue) => {
     console.log('🚀 ~ file: index.jsx ~ line 19 ~ onSubmit ~ fieldsValue', fieldsValue);
 
-    dispatch(crud.create({ entity, jsonData: fieldsValue }));
+    // Manually trim values before submission
+    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
+
+    dispatch(crud.create({ entity, jsonData: trimmedValues }));
   };
 
   useEffect(() => {
