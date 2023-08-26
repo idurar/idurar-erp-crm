@@ -20,7 +20,7 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
         ]}
         style={{ width: '50%', float: 'left', paddingRight: '20px' }}
       >
-        <InputNumber style={{ width: '100%' }} />
+        <InputNumber min={1} style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item
         name="date"

@@ -54,7 +54,6 @@ exports.search = async (Model, req, res) => {
       })
       // limit to only 5 messages
       .limit(10);
-    console.log(results);
   }
 
   if (results.length >= 1) {
