@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
         new: true,
       }
     ).exec();
-
+ 
     res
       .status(200)
       .cookie('token', token, {
@@ -72,10 +72,14 @@ exports.login = async (req, res) => {
         success: true,
         result: {
           token,
-          admin: {
+          admin: { 
             id: result._id,
             name: result.name,
+            role: result.email,
+            email: result.email,
+            surname: result.surname,
             isLoggedIn: result.isLoggedIn > 0 ? true : false,
+            
           },
         },
         message: 'Successfully login admin',
