@@ -96,7 +96,7 @@ export default function Employee() {
   ];
 
   const ADD_NEW_ENTITY = 'Add new employee';
-  const DATATABLE_TITLE = 'employees List';
+  const DATATABLE_TITLE = 'Employees List';
   const ENTITY_NAME = 'employee';
   const CREATE_ENTITY = 'Create employee';
   const UPDATE_ENTITY = 'Update employee';

@@ -76,7 +76,7 @@ export default function Invoice() {
   const PANEL_TITLE = 'invoice';
   const dataTableTitle = 'invoices Lists';
   const ADD_NEW_ENTITY = 'Add new invoice';
-  const DATATABLE_TITLE = 'invoices List';
+  const DATATABLE_TITLE = 'Invoices List';
   const ENTITY_NAME = 'invoice';
   const CREATE_ENTITY = 'Save invoice';
   const UPDATE_ENTITY = 'Update invoice';
