@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ClientModel = mongoose.model('Client');
 
 let pdf = require('html-pdf');
 const pug = require('pug');
@@ -89,22 +90,44 @@ exports.generatePdf = async (
     'https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png';
   const dynamicTextSrc = 'lorem ipsum dorem narum';
 
-  //render pdf html
-  const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
-    model: result,
-    moment: moment,
-    logo: dynamicLogoSrc,
-    text: dynamicTextSrc,
-  });
+  try {
+    //Searche for client info in database
+    const clientInfo = await ClientModel.findById(result.client).exec();
 
-  await pdf
-    .create(html, {
-      format: info.format,
-      orientation: 'portrait',
-      border: '12mm',
-    })
-    .toFile(targetLocation, function (err) {
-      if (err) return console.log('this pdf create error ' + err);
-      if (callback) callback(targetLocation);
+    if (!clientInfo) {
+      console.error('Client not found');
+      return;
+    }
+
+    const clientInfoObj = {
+      name: `${clientInfo.managerName} ${clientInfo.managerSurname}`,
+      company: clientInfo.company,
+      managerSurname: clientInfo.managerSurname,
+      phone: clientInfo.phone,
+      email: clientInfo.email,
+    };
+
+    const newResultObj = { ...result._doc, clientInfo: clientInfoObj };
+
+    const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
+      model: newResultObj,
+      moment: moment,
+      logo: dynamicLogoSrc,
+      text: dynamicTextSrc,
     });
+
+    await pdf
+      .create(html, {
+        format: info.format,
+        orientation: 'portrait',
+        border: '12mm',
+      })
+      .toFile(targetLocation, function (err) {
+        if (err) return console.log('this pdf create error ' + err);
+        if (callback) callback(targetLocation);
+      });
+  } catch (error) {
+    console.error('Error:', error);
+    // Handle the error appropriately
+  }
 };

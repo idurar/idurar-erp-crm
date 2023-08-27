@@ -51,9 +51,8 @@ methods.create = async (req, res) => {
         new: true,
       }
     ).exec();
+
     // Returning successfull response
-    console.log('First result for pdf generator');
-    console.log(result);
     custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
 
     // Returning successfull response
@@ -126,9 +125,7 @@ methods.update = async (req, res) => {
       new: true, // return the new result instead of the old one
     }).exec();
 
-    // Returning successfull response
-    console.log('First result for pdf generator');
-    console.log(result);
+    // Returning successfull responses
     custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
     return res.status(200).json({
       success: true,
