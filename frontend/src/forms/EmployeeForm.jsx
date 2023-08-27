@@ -93,7 +93,7 @@ export default function EmployeeForm() {
           },
           {
             pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
-            message: 'Please enter valid phone number ',
+            message: 'Please enter valid phone number!',
           },
         ]}
       >
