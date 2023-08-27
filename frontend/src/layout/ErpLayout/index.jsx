@@ -11,9 +11,8 @@ export default function ErpLayout({ children, config }) {
     <ErpContextLayout>
       <Layout className="site-layout">
         <Content
-          className="whiteBox shadow"
+          className="whiteBox shadow layoutPadding"
           style={{
-            padding: '50px 40px',
             margin: '100px auto',
             width: '100%',
             maxWidth: '1100px',
