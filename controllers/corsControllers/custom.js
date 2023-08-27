@@ -128,6 +128,5 @@ exports.generatePdf = async (
       });
   } catch (error) {
     console.error('Error:', error);
-    // Handle the error appropriately
   }
 };
