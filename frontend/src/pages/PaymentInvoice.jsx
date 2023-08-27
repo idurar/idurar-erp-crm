@@ -14,7 +14,9 @@ export default function PaymentInvoice() {
   const entityDisplayLabels = ['number'];
   const dataTableColumns = [
     {
-      title: '',
+
+      title: 'Number',
+
       dataIndex: 'number',
     },
     {

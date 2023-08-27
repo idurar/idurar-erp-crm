@@ -15,7 +15,7 @@ export default function Employee() {
 
   const dataTableColumns = [
     {
-      title: 'name',
+      title: 'Name',
       dataIndex: 'name',
     },
     {
@@ -23,26 +23,26 @@ export default function Employee() {
       dataIndex: 'surname',
     },
     {
-      title: 'birthday',
+      title: 'Birthday',
       dataIndex: 'birthday',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'department',
+      title: 'Department',
       dataIndex: 'department',
     },
     {
-      title: 'position',
+      title: 'Position',
       dataIndex: 'position',
     },
     {
-      title: 'phone',
+      title: 'Phone Number',
       dataIndex: 'phone',
     },
     {
-      title: 'email',
+      title: 'Email',
       dataIndex: 'email',
     },
   ];
