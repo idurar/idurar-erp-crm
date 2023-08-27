@@ -6,13 +6,15 @@ const { Title, Text } = Typography;
 
 function SetingsSection({ title, description, children }) {
   return (
-    <Row gutter={24}>
-      <Col span={12}>
+    <Row gutter={[24, 24]}>
+      <Col md={{ span: 24 }} lg={{ span: 12 }}>
         <Title level={4}>{title}</Title>
         <Text type="secondary">{description}</Text>
       </Col>
 
-      <Col span={12}>{children}</Col>
+      <Col md={{ span: 24 }} lg={{ span: 12 }}>
+        {children}
+      </Col>
       <Divider></Divider>
     </Row>
   );
@@ -22,7 +24,7 @@ export default function GeneralSettings() {
     <>
       <PageHeader
         onBack={() => window.history.back()}
-        title="General System"
+        title="General Settings"
         ghost={false}
         extra={[
           <Button key={`${uniqueId()}`} type="primary" disabled icon={<SyncOutlined />}>
