@@ -3,6 +3,14 @@ import { Button, Form, Input } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
 
 export default function CustomerForm({ isUpdateForm = false }) {
+  const validateEmptyString = (_, value) => {
+    if (value && value.trim() === '') {
+      return Promise.reject(new Error('Field cannot be empty'));
+    }
+
+    return Promise.resolve();
+  };
+
   return (
     <>
       <Form.Item
@@ -12,6 +20,10 @@ export default function CustomerForm({ isUpdateForm = false }) {
           {
             required: true,
             message: 'Please input your company name!',
+          },
+          {
+            validator: validateEmptyString,
+            message: 'Please input valid value!',
           },
         ]}
       >
@@ -24,6 +36,10 @@ export default function CustomerForm({ isUpdateForm = false }) {
           {
             required: true,
             message: 'Please input your surname!',
+          },
+          {
+            validator: validateEmptyString,
+            message: 'Please input valid value!',
           },
         ]}
         style={{
@@ -41,6 +57,10 @@ export default function CustomerForm({ isUpdateForm = false }) {
           {
             required: true,
             message: 'Please input your manager name!',
+          },
+          {
+            validator: validateEmptyString,
+            message: 'Please input valid value!',
           },
         ]}
         style={{
@@ -61,7 +81,11 @@ export default function CustomerForm({ isUpdateForm = false }) {
             message: 'Please input your phone!',
           },
           {
-            pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
+            validator: validateEmptyString,
+            message: 'Please enter valid phone number!',
+          },
+          {
+            pattern: validatePhoneNumber,
             message: 'Please enter valid phone number!',
           },
         ]}
@@ -79,6 +103,10 @@ export default function CustomerForm({ isUpdateForm = false }) {
           {
             required: true,
             message: 'Please input your E-mail!',
+          },
+          {
+            validator: validateEmptyString,
+            message: 'Please input valid value!',
           },
         ]}
       >
