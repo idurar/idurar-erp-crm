@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Avatar, Menu, Dropdown } from 'antd';
-import Notifications from '@/components/Navigaton';
+import Notifications from '@/components/Notification';
 
 import {
   AppstoreOutlined,
