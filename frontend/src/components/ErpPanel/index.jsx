@@ -7,7 +7,7 @@ import UpdateItem from './UpdateItem';
 import Delete from './DeleteItem';
 import ReadItem from './ReadItem';
 import Payment from './Payment';
-import Search from './SearchItem';
+// import Search from './SearchItem';
 
 import { useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -19,10 +19,25 @@ const Visibility = ({ isVisible, children }) => {
   return <div style={show}>{children}</div>;
 };
 
-export default function ErpPanel({ config, CreateForm, UpdateForm, DataTableDropMenu }) {
+const DetailPanel = ({ config, DetailForm }) => {
+  if (DetailForm) {
+    return <DetailForm config={config} />;
+  }
+
+  return <ReadItem config={config} />;
+};
+
+export default function ErpPanel({
+  config,
+  CreateForm,
+  DetailForm,
+  UpdateForm,
+  DataTableDropMenu,
+}) {
   const dispatch = useDispatch();
   const { state } = useErpContext();
   const { update, read, create, recordPayment, dataTableList, deleteModal } = state;
+
   useLayoutEffect(() => {
     dispatch(erp.resetState());
   }, []);
@@ -33,7 +48,7 @@ export default function ErpPanel({ config, CreateForm, UpdateForm, DataTableDrop
         <DataTable config={config} DataTableDropMenu={DataTableDropMenu} />
       </Visibility>
       <Visibility isVisible={read.isOpen}>
-        <ReadItem config={config} />
+        <DetailPanel config={config} DetailForm={DetailForm} />
       </Visibility>
       <Visibility isVisible={recordPayment.isOpen}>
         <Payment config={config} />
