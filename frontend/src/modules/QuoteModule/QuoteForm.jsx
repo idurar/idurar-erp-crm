@@ -70,7 +70,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <InputNumber style={{ width: '100%' }} />
+            <InputNumber min={1} style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
