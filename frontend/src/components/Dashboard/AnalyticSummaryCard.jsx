@@ -15,7 +15,7 @@ export default function AnalyticSummaryCard({
       md={{ span: 12 }}
       lg={{ span: 6 }}
     >
-      <div className="whiteBox shadow" style={{ color: '#595959', fontSize: 13, height: '106px' }}>
+      <div className="whiteBox shadow" style={{ color: '#595959', fontSize: 13, minHeight: '106px', height: '100%' }}>
         <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
           <h3 style={{ color: '#22075e', marginBottom: 0 }}>{title}</h3>
         </div>
@@ -28,8 +28,10 @@ export default function AnalyticSummaryCard({
             <Col className="gutter-row" span={2}>
               <Divider
                 style={{
+                  height: '100%',
                   padding: '10px 0',
                   justifyContent: 'center',
+                  alignItems: 'center'
                 }}
                 type="vertical"
               ></Divider>
@@ -40,6 +42,7 @@ export default function AnalyticSummaryCard({
               style={{
                 display: 'flex',
                 justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
               {isLoading ? (

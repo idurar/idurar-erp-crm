@@ -8,7 +8,7 @@ export default function AnalyticCustomerCard({
 }) {
   return (
     <Col className="gutter-row" xs={{ span: 0 }} sm={{ span: 0 }} md={{ span: 0 }} lg={{ span: 6 }}>
-      <div className="whiteBox shadow" style={{ height: '380px' }}>
+      <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
         <div
           className="pad20"
           style={{

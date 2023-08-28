@@ -90,7 +90,7 @@ export default function Analytics() {
           md={{ span: 24 }}
           lg={{ span: 18 }}
         >
-          <div className="whiteBox shadow" style={{ minHeight: '380px' }}>
+          <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
             <Row className="pad10" gutter={[0, 0]}>
               <AnalyticStatisticCard
                 title="Invoice Preview"
