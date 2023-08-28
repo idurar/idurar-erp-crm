@@ -21,7 +21,12 @@ export default function AnalyticCustomerCard({
           {isLoading ? (
             <Spin />
           ) : (
-            <>
+            <div
+              style={{
+                display: 'grid',
+                justifyContent: 'center',
+              }}
+            >
               <Progress type="dashboard" percent={newCustomer} width={148} />
               <p>New Customer this Month</p>
               <Divider />
@@ -42,7 +47,7 @@ export default function AnalyticCustomerCard({
                 }
                 suffix="%"
               />
-            </>
+            </div>
           )}
         </div>
       </div>
