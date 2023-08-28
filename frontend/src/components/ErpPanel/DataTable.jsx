@@ -8,14 +8,17 @@ import { settings } from '@/redux/settings/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
+import { useHistory } from 'react-router-dom';
 
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 function AddNewItem({ config }) {
-  const { ADD_NEW_ENTITY } = config;
+  const history = useHistory();
+  const { ADD_NEW_ENTITY, entity } = config;
   const { erpContextAction } = useErpContext();
   const { createPanel } = erpContextAction;
   const handelClick = () => {
-    createPanel.open();
+    // createPanel.open();
+    history.push(`/${entity.toLowerCase()}/create`);
   };
 
   return (
