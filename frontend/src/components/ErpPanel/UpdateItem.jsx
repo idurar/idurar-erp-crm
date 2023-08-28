@@ -12,6 +12,7 @@ import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 function SaveForm({ form, config }) {
   let { UPDATE_ENTITY } = config;
@@ -31,6 +32,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { erpContextAction } = useErpContext();
   const { updatePanel } = erpContextAction;
   const dispatch = useDispatch();
+  const history = useHistory();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
@@ -121,7 +123,10 @@ export default function UpdateItem({ config, UpdateForm }) {
   return (
     <>
       <PageHeader
-        onBack={() => updatePanel.close()}
+        onBack={() => {
+          // updatePanel.close();
+          history.push(`/${entity.toLowerCase()}`);
+        }}
         title={UPDATE_ENTITY}
         ghost={false}
         // tags={<Tag color="volcano">Draft</Tag>}
