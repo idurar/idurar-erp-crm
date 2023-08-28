@@ -104,6 +104,7 @@ exports.generatePdf = async (
       managerSurname: clientInfo.managerSurname,
       phone: clientInfo.phone,
       email: clientInfo.email,
+      address: clientInfo.address,
     };
 
     const newResultObj = { ...result._doc, clientInfo: clientInfoObj };

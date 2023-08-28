@@ -34,6 +34,10 @@ function Customer() {
       title: 'Phone',
       dataIndex: 'phone',
     },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+    },
   ];
   const dataTableColumns = [
     {
@@ -41,16 +45,20 @@ function Customer() {
       dataIndex: 'company',
     },
     {
-      title: 'Manager Surname',
-      dataIndex: 'managerSurname',
-    },
-    {
       title: 'Manager Name',
       dataIndex: 'managerName',
     },
     {
+      title: 'Phone',
+      dataIndex: 'phone',
+    },
+    {
       title: 'Email',
       dataIndex: 'email',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
     },
   ];
 
