@@ -125,7 +125,10 @@ export default function ReadItem({ config, selectedItem }) {
         extra={[
           <Button
             key={`${uniqueId()}`}
-            onClick={() => readPanel.close()}
+            onClick={() => {
+              readPanel.close();
+              history.push(`/${entity.toLowerCase()}`);
+            }}
             icon={<CloseCircleOutlined />}
           >
             Close
@@ -172,6 +175,7 @@ export default function ReadItem({ config, selectedItem }) {
                 })
               );
               updatePanel.open();
+              history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"
             icon={<EditOutlined />}

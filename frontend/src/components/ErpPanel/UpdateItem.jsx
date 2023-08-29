@@ -134,7 +134,10 @@ export default function UpdateItem({ config, UpdateForm }) {
         extra={[
           <Button
             key={`${uniqueId()}`}
-            onClick={() => updatePanel.close()}
+            onClick={() => {
+              // updatePanel.close();
+              history.push(`/${entity.toLowerCase()}`);
+            }}
             icon={<CloseCircleOutlined />}
           >
             Cancel
