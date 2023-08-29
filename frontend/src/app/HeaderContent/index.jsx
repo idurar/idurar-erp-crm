@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Avatar, Menu, Dropdown } from 'antd';
+import Notifications from '@/components/Notification';
 
 import {
   AppstoreOutlined,
@@ -9,6 +10,7 @@ import {
   MailOutlined,
   LogoutOutlined,
   BellOutlined,
+  DeleteOutlined,
 } from '@ant-design/icons';
 import photo from '@/style/images/photo.png';
 
@@ -19,6 +21,8 @@ import uniqueId from '@/utils/uinqueId';
 export default function HeaderContent() {
   const dispatch = useDispatch();
   const { SubMenu } = Menu;
+  
+  
 
   const profileDropdown = (
     <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
@@ -82,7 +86,12 @@ export default function HeaderContent() {
 
       <Avatar icon={<AppstoreOutlined />} />
 
-      <Avatar icon={<BellOutlined />} />
+     <Dropdown overlay={<Notifications/>} trigger={['click']} placement="bottomRight">
+        {/* <Badge dot> */}
+        <Avatar icon={<BellOutlined />} />
+
+        {/* </Badge> */}
+      </Dropdown>
     </div>
   );
 }

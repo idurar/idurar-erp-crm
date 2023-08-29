@@ -9,20 +9,25 @@
     
   [https://idurarapp.com](https://www.idurarapp.com/)
 
-
-
-
 # ERP / CRM Open Source based on (Node.js/React.js)
 
 IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+
 </div>
 
 ```
 Dont forget to give a ⭐️ to this project ... Happy coding! 🤩
 ```
 
+# Our Sponsors
+
+  <a href="https://www.digitalocean.com/?ref=idurarapp.com">
+    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
+  </a>
+
+#
+
 ![Open Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
-![Open Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647100-9dfd6ee5-f873-42a8-8923-88bd0cf53606.png)
 
 ## Open Source ERP / CRM App
 
@@ -135,7 +140,7 @@ npm run start
 
 Once the website is up and running, you can log in using the following credentials:
 
-`username : admin@demo.com password : admin123`
+`username : admin@demo.com - password : admin123`
 
 Now you should be all set to run the project locally on your machine and explore its features.
 
@@ -154,6 +159,7 @@ Now you should be all set to run the project locally on your machine and explore
 6.[Coding Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#coding-guidelines)
 
 7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
+
 ## Star History
 
 Here you can see the proxy of our growth on the platform and that we're only getting started.
@@ -164,13 +170,11 @@ But if you'd like to check it out more news and website you can always check it 
 
 ## License
 
-MIT/Massachusetts Institute of Technology(here [LICENSE](https://github.com/Fernando7181/idurar-erp-crm/blob/master/LICENSE))
+MIT/Massachusetts Institute of Technology(here [LICENSE](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE))
 
 The IDURAR code is licensed by Massachusetts Institute of Technology.
 
 By contributing to IDURAR, you will be agreeing that your contributions will be licensed under its Massachusetts Institute of Technology(MIT).
-
-
 
 ## Show your support
 
