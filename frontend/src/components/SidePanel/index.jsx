@@ -55,37 +55,41 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
   };
 
   return (
-    <Sider
-      trigger={<MenuOutlined className="trigger" />}
-      width={400}
-      collapsed={isSidePanelClose}
-      collapsedWidth={'0px'}
-      onCollapse={collapsePanel}
-      className="sidePanel"
-      zeroWidthTriggerStyle={{
-        right: '-50px',
-        top: '15px',
-      }}
-      style={{
-        left: leftSider,
-      }}
-    >
-      <div
-        className="sidePanelContent"
+    <div>
+      <Sider
+        trigger={<MenuOutlined className="trigger" />}
+        width={'95%'}
+        collapsed={isSidePanelClose}
+        collapsedWidth={'0px'}
+        onCollapse={collapsePanel}
+        className="sidePanel"
+        zeroWidthTriggerStyle={{
+          right: '-50px',
+          top: '15px',
+        }}
         style={{
-          opacity: opacitySider,
-          paddingTop: paddingTopSider,
+          left: leftSider,
+          minHeight: '100vh',
+          maxWidth: '400px'
         }}
       >
-        {fixHeaderPanel}
-        <CollapseBox
-          buttonTitle={ADD_NEW_ENTITY}
-          isCollapsed={isBoxCollapsed}
-          onCollapse={collapsePanelBox}
-          topContent={topContent}
-          bottomContent={bottomContent}
-        ></CollapseBox>
-      </div>
-    </Sider>
+        <div
+          className="sidePanelContent"
+          style={{
+            opacity: opacitySider,
+            paddingTop: paddingTopSider,
+          }}
+        >
+          {fixHeaderPanel}
+          <CollapseBox
+            buttonTitle={ADD_NEW_ENTITY}
+            isCollapsed={isBoxCollapsed}
+            onCollapse={collapsePanelBox}
+            topContent={topContent}
+            bottomContent={bottomContent}
+          ></CollapseBox>
+        </div>
+      </Sider>
+    </div>
   );
 }
