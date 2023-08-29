@@ -28,7 +28,7 @@ const PreviewState = ({ tag, color, value }) => {
   );
 };
 
-export default function AnalyticStatisticCard({
+export default function PreviewCard({
   title = 'Preview',
   statistics = [
     {

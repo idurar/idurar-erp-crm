@@ -1,13 +1,13 @@
-import { Statistic, Progress, Divider, Col, Spin } from 'antd';
+import { Statistic, Progress, Divider, Row, Spin } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
-export default function AnalyticCustomerCard({
+export default function CustomerPreviewCard({
   isLoading = false,
   activeCustomer = 0,
   newCustomer = 0,
 }) {
   return (
-    <Col className="gutter-row" xs={{ span: 0 }} sm={{ span: 0 }} md={{ span: 0 }} lg={{ span: 6 }}>
+    <Row className="gutter-row">
       <div className="whiteBox shadow" style={{ height: '380px' }}>
         <div
           className="pad20"
@@ -46,6 +46,6 @@ export default function AnalyticCustomerCard({
           )}
         </div>
       </div>
-    </Col>
+    </Row>
   );
 }
