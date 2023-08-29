@@ -58,7 +58,19 @@ export const routesConfig = [
   },
   {
     path: '/quote',
-    component: 'Quote',
+    component: 'Quote/index',
+  },
+  {
+    path: '/quote/create',
+    component: 'Quote/QuoteCreate',
+  },
+  {
+    path: '/quote/read/:id',
+    component: 'Quote/QuoteRead',
+  },
+  {
+    path: '/quote/update/:id',
+    component: 'Quote/QuoteUpdate',
   },
   {
     path: '/payment/invoice',
