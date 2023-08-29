@@ -24,10 +24,7 @@ export default function PaymentSettings() {
 
       <Divider></Divider>
       <Form>
-        <SetingsSection
-          title="information"
-          description="Update your company Email, phone and adress"
-        >
+        <SetingsSection title="information" description="Update your Currency and Tax">
           <Form.Item label="Currency">
             <SelectCurrency />
           </Form.Item>
