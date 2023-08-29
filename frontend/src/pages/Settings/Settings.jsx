@@ -8,9 +8,9 @@ import InvoiceSettings from './InvoiceSettings';
 
 const RightMenu = ({ activeTab, handleTabChange }) => {
   const menuItems = [
-    { key: 'generalSettings', label: 'generalSettings' },
-    { key: 'paymentSettings', label: 'paymentSettings' },
-    { key: 'invoiceSettings', label: 'invoiceSettings' },
+    { key: 'generalSettings', label: 'General Settings' },
+    { key: 'paymentSettings', label: 'Payment Settings' },
+    { key: 'invoiceSettings', label: 'Invoice Settings' },
   ];
   const menuList = menuItems.map((item, index) => (
     <Button

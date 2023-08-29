@@ -1,24 +1,8 @@
 import uniqueId from '@/utils/uinqueId';
 import { PlusOutlined, SyncOutlined } from '@ant-design/icons';
-import { Button, Col, Divider, Form, Input, PageHeader, Row, Typography, Upload } from 'antd';
+import { Button, Divider, Form, Input, PageHeader, Upload } from 'antd';
+import SetingsSection from './components/SetingsSection';
 
-const { Title, Text } = Typography;
-
-function SetingsSection({ title, description, children }) {
-  return (
-    <Row gutter={[24, 24]}>
-      <Col md={{ span: 24 }} lg={{ span: 12 }}>
-        <Title level={4}>{title}</Title>
-        <Text type="secondary">{description}</Text>
-      </Col>
-
-      <Col md={{ span: 24 }} lg={{ span: 12 }}>
-        {children}
-      </Col>
-      <Divider></Divider>
-    </Row>
-  );
-}
 export default function GeneralSettings() {
   return (
     <>
