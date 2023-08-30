@@ -21,6 +21,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -65,19 +66,19 @@ const Item = ({ item }) => {
   );
 };
 
-export default function ReadItem({ config }) {
+export default function ReadItem({ config, selectedItem }) {
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
+  const history = useHistory();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
   const { readPanel, updatePanel } = erpContextAction;
 
-  const [itemslist, setItemsList] = useState([]);
-  const [currentErp, setCurrentErp] = useState({
+  const resetErp = {
     status: '',
     client: {
       company: '',
@@ -92,7 +93,10 @@ export default function ReadItem({ config }) {
     credit: 0,
     number: 0,
     year: 0,
-  });
+  };
+
+  const [itemslist, setItemsList] = useState([]);
+  const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
 
   useEffect(() => {
     if (currentResult) {
@@ -110,7 +114,10 @@ export default function ReadItem({ config }) {
   return (
     <>
       <PageHeader
-        onBack={() => readPanel.close()}
+        onBack={() => {
+          readPanel.close();
+          history.push(`/${entity.toLowerCase()}`);
+        }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
         tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
@@ -118,7 +125,10 @@ export default function ReadItem({ config }) {
         extra={[
           <Button
             key={`${uniqueId()}`}
-            onClick={() => readPanel.close()}
+            onClick={() => {
+              readPanel.close();
+              history.push(`/${entity.toLowerCase()}`);
+            }}
             icon={<CloseCircleOutlined />}
           >
             Close
@@ -142,19 +152,19 @@ export default function ReadItem({ config }) {
             }}
             icon={<MailOutlined />}
           >
-            Mail Invoice
-            </Button>,
-<Button
+            Mail {entity.slice(0, 1).toUpperCase() + entity.slice(1).toLowerCase()}
+          </Button>,
+          <Button
             key={`${uniqueId()}`}
             onClick={() => {
               dispatch(erp.convert({ entity, id: currentErp._id }));
             }}
             icon={<RetweetOutlined />}
-            style={{ display: entity == 'quote' ? 'inline-block' : 'none' }}
+            style={{ display: entity === 'quote' ? 'inline-block' : 'none' }}
           >
             Convert to Invoice
           </Button>,
-          
+
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
@@ -165,6 +175,7 @@ export default function ReadItem({ config }) {
                 })
               );
               updatePanel.open();
+              history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"
             icon={<EditOutlined />}
