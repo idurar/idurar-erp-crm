@@ -1,23 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function useFetch(fetchingFn) {
-  const [result, setResult] = useState(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-
-    const data = await fetchingFn();
-    if (data.success === true) {
-      setIsSuccess(true);
-      setResult(data.result);
-    }
-    setIsLoading(false);
-  };
+function useFetchData(fetchFunction) {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const [isSuccess, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchFunction();
+        setData(data.result);
+        setSuccess(true);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     fetchData();
-  }, []);
-  return { result, isSuccess, isLoading };
+  }, [isLoading]);
+
+  return { data, isLoading, isSuccess, error };
+}
+
+export default function useFetch(fetchFunction) {
+  const { data, isLoading, isSuccess, error } = useFetchData(fetchFunction);
+
+  return { result: data, isLoading, isSuccess, error };
 }
