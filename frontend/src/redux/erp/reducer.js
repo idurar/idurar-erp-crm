@@ -58,7 +58,10 @@ const INITIAL_STATE = {
     current: null,
     isLoading: false,
     isSuccess: false,
-  }
+  },
+  invoiceFollowNum: {
+    result: 0,
+  },
 };
 
 const erpReducer = (state = INITIAL_STATE, action) => {
@@ -112,6 +115,13 @@ const erpReducer = (state = INITIAL_STATE, action) => {
         ...state,
         [keyState]: {
           ...INITIAL_STATE[keyState],
+        },
+      };
+    case actionTypes.INVOICE_FOLLOW_NUM:
+      return {
+        ...state,
+        invoiceFollowNum: {
+          result: payload,
         },
       };
     default:

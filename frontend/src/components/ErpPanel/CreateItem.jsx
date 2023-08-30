@@ -5,7 +5,7 @@ import { Button, PageHeader, Row, Statistic, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectCreatedItem } from '@/redux/erp/selectors';
+import { selectCreatedItem, selectInvoiceFollowNumItems } from '@/redux/erp/selectors';
 
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
@@ -34,6 +34,9 @@ export default function CreateItem({ config, CreateForm }) {
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+  const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
+  const invoiceDate = invoiceData?.date;
+
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
@@ -63,6 +66,13 @@ export default function CreateItem({ config, CreateForm }) {
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
+    fieldsValue['number'] = invoiceDate == undefined ? `${year + month}001` : invoiceDate;
+
+    console.log(fieldsValue);
     if (fieldsValue) {
       // if (fieldsValue.expiredDate) {
       //   const newDate = fieldsValue["expiredDate"].format("DD/MM/YYYY");
