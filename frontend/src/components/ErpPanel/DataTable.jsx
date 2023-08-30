@@ -60,20 +60,24 @@ function AddNewItem({ config }) {
         });
 
         const formattedInvoicesArray = results.map((invoice, index) => {
+          const dateNum = invoice.number.split('/');
+          const date = dateNum[0];
+          const num = dateNum[1];
+
           let formattedNumber;
           if (index < 100) {
-            formattedNumber = (invoice.number + 1).toString().padStart(3, '0');
-            return formattedNumber;
+            formattedNumber = (+num + 1).toString().padStart(3, '0');
+            return date + formattedNumber;
           }
           if (index < 1000) {
-            formattedNumber = (invoice.number + 1).toString().padStart(2, '0');
-            return formattedNumber;
+            formattedNumber = (+num + 1).toString().padStart(2, '0');
+
+            return date + formattedNumber;
           } else {
-            formattedNumber = (invoice.number + 1).toString();
-            return formattedNumber;
+            formattedNumber = (+num + 1).toString();
+            return date + formattedNumber;
           }
         });
-
         const formattedInvoices = formattedInvoicesArray[0];
         dispatch(erp.invoiceFollowNum({ date: formattedInvoices }));
       })
