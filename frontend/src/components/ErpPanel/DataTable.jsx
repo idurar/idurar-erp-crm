@@ -19,7 +19,7 @@ function AddNewItem({ config }) {
   const { createPanel } = erpContextAction;
 
   const handelClick = async () => {
-    // set this code in its own hook
+    //Todo: set this code in its own hook
     async function fetchDataForAllPages() {
       const results = [];
 
@@ -67,15 +67,15 @@ function AddNewItem({ config }) {
           let formattedNumber;
           if (index < 100) {
             formattedNumber = (+num + 1).toString().padStart(3, '0');
-            return date + formattedNumber;
+            return `${date}/${formattedNumber}`;
           }
           if (index < 1000) {
             formattedNumber = (+num + 1).toString().padStart(2, '0');
 
-            return date + formattedNumber;
+            return `${date}/${formattedNumber}`;
           } else {
             formattedNumber = (+num + 1).toString();
-            return date + formattedNumber;
+            return `${date}/${formattedNumber}`;
           }
         });
         const formattedInvoices = formattedInvoicesArray[0];
