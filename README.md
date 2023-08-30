@@ -33,7 +33,7 @@ Dont forget to give a ⭐️ to this project ... Happy coding! 🤩
 
 IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
-**Live App Demo** : [https://idurarapp.com/open-source-erp-crm/](https://idurarapp.com/open-source-erp-crm/) "Please use chrome"
+**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/) "Please use chrome"
 
 `username : admin@demo.com password : admin123`
 
