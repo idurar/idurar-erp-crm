@@ -1,6 +1,6 @@
-import Profile from '@/components/Profile';
+import Profile from './components';
 import ProfileLayout from '@/layout/ProfileLayout';
-import { Layout, PageHeader } from 'antd';
+import { Layout } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 
 export default function ProfileModule({ config }) {
