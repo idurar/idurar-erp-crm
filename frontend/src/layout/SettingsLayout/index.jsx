@@ -47,8 +47,8 @@ export default function SettingsLayout({
             lg={{ span: 18 }}
           >
             <div className="whiteBox shadow" style={{ minHeight: '480px' }}>
-              <Row className="pad10" gutter={[0, 0]}>
-                {children}
+              <Row className="pad20" gutter={[0, 0]}>
+                <Col span={24}>{children}</Col>
               </Row>
             </div>
           </Col>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ProfileModule from '@/modules/ProfileModule';
 
-export default function Invoice() {
-  const entity = 'invoice';
+export default function Profile() {
+  const entity = 'profile';
 
   const PANEL_TITLE = 'profile';
   const ENTITY_NAME = 'profile';

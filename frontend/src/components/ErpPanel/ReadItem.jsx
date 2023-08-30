@@ -139,7 +139,7 @@ export default function ReadItem({ config }) {
             }}
             icon={<MailOutlined />}
           >
-            Mail Invoice
+            Mail {entity.slice(0, 1).toUpperCase() + entity.slice(1).toLowerCase()}
           </Button>,
           <Button
             key={`${uniqueId()}`}

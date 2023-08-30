@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Radio, Select, Switch } from 'antd';
 import { DatePicker, TimePicker, Calendar } from '@/components/CustomAntd';
+import { validatePhoneNumber } from '@/utils/helpers';
 
 export default function EmployeeForm() {
   return (
@@ -89,6 +90,10 @@ export default function EmployeeForm() {
           {
             required: true,
             message: 'Please input your phone!',
+          },
+          {
+            pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
+            message: 'Please enter valid phone number!',
           },
         ]}
       >
