@@ -23,7 +23,6 @@ const paymentInvoiceController = require('@/controllers/erpControllers/paymentIn
 const settingsController = require('@/controllers/erpControllers/settingsController');
 const offerController = require('@/controllers/erpControllers/offerController');
 
-
 // //_______________________________ Admin management_______________________________
 
 var adminPhotoStorage = multer.diskStorage({
@@ -127,6 +126,7 @@ router.route('/quote/filter').get(catchErrors(quoteController.filter));
 router.route('/quote/pdf/:id').get(catchErrors(quoteController.generatePDF));
 router.route('/quote/summary').get(catchErrors(quoteController.summary));
 router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
+router.route('/quote/mail').post(catchErrors(quoteController.sendMail));
 
 // //___________________________________________ API for suppliers _____________________
 router.route('/supplier/create').post(catchErrors(supplierController.create));

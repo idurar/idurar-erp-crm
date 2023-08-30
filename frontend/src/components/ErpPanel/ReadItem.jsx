@@ -142,9 +142,9 @@ export default function ReadItem({ config }) {
             }}
             icon={<MailOutlined />}
           >
-            Mail Invoice
-            </Button>,
-<Button
+            Mail {entity.slice(0, 1).toUpperCase() + entity.slice(1).toLowerCase()}
+          </Button>,
+          <Button
             key={`${uniqueId()}`}
             onClick={() => {
               dispatch(erp.convert({ entity, id: currentErp._id }));
@@ -154,7 +154,7 @@ export default function ReadItem({ config }) {
           >
             Convert to Invoice
           </Button>,
-          
+
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
