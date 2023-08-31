@@ -1,9 +1,9 @@
 import { ErpLayout } from '@/layout';
-import ErpPanel from '@/components/ErpPanel';
-import InvoiceForm from './InvoiceForm';
-import DataTableDropMenu from './DataTableDropMenu';
+import ErpPanel from '@/modules/ErpPanelModule';
+import InvoiceForm from '@/modules/InvoiceModule/Forms/InvoiceForm';
+import DataTableDropMenu from './components/DataTableDropMenu';
 
-export default function InvoiceModule({ config }) {
+export default function InvoiceDataTableModule({ config }) {
   return (
     <ErpLayout>
       <ErpPanel

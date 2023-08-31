@@ -1,13 +1,12 @@
-import React from 'react';
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-import InvoiceModule from '@/modules/InvoiceModule';
+import configPage from './config';
 import { useMoney } from '@/settings';
+import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
 
 export default function Invoice() {
   const { moneyRowFormatter } = useMoney();
 
-  const entity = 'invoice';
   const searchConfig = {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
@@ -73,26 +72,11 @@ export default function Invoice() {
     },
   ];
 
-  const PANEL_TITLE = 'invoice';
-  const dataTableTitle = 'Invoices Lists';
-  const ADD_NEW_ENTITY = 'Add new invoice';
-  const DATATABLE_TITLE = 'Invoices List';
-  const ENTITY_NAME = 'invoice';
-  const CREATE_ENTITY = 'Save Invoice';
-  const UPDATE_ENTITY = 'Update Invoice';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    dataTableTitle,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
-  return <InvoiceModule config={config} />;
+  return <InvoiceDataTableModule config={config} />;
 }
