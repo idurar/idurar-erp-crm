@@ -76,15 +76,6 @@ function SidePanelTopContent({ config, formElements }) {
           >
             edit
           </Button>
-          <Button
-            onClick={mailItem}
-            type="text"
-            icon={<MailOutlined />}
-            size="small"
-            style={{ float: 'right', marginLeft: '0px' }}
-          >
-            mail
-          </Button>
         </Col>
 
         <Col span={24}>
