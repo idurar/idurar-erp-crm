@@ -8,9 +8,9 @@ import InvoiceSettings from './InvoiceSettings';
 
 const RightMenu = ({ activeTab, handleTabChange }) => {
   const menuItems = [
-    { key: 'generalSettings', label: 'generalSettings' },
-    { key: 'paymentSettings', label: 'paymentSettings' },
-    { key: 'invoiceSettings', label: 'invoiceSettings' },
+    { key: 'generalSettings', label: 'General Settings' },
+    { key: 'paymentSettings', label: 'Payment Settings' },
+    { key: 'invoiceSettings', label: 'Invoice Settings' },
   ];
   const menuList = menuItems.map((item, index) => (
     <Button
@@ -32,21 +32,21 @@ const Visibility = ({ isVisible = false, children }) => {
 };
 
 export default function Settings() {
-  const [state, setState] = useState('generalSettings');
+  const [tabTitle, setTabTitle] = useState('generalSettings');
 
   const isActive = (tab) => {
-    return state === tab ? true : false;
+    return tabTitle === tab ? true : false;
   };
 
   const handleTabChange = (tab) => {
-    setState(tab);
+    setTabTitle(tab);
   };
 
   return (
     <SettingsLayout
-      topCardContent="Generals Settings"
-      topCardTitle="Settings"
-      bottomCardContent={<RightMenu activeTab={state} handleTabChange={handleTabChange} />}
+      topCardContent={tabTitle}
+      topCardTitle={'Settings'}
+      bottomCardContent={<RightMenu activeTab={tabTitle} handleTabChange={handleTabChange} />}
     >
       <Visibility isVisible={isActive('generalSettings')}>
         <GeneralSettings />

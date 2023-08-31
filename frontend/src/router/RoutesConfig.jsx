@@ -42,11 +42,35 @@ export const routesConfig = [
   },
   {
     path: '/invoice',
-    component: 'Invoice',
+    component: 'Invoice/index',
+  },
+  {
+    path: '/invoice/create',
+    component: 'Invoice/InvoiceCreate',
+  },
+  {
+    path: '/invoice/read/:id',
+    component: 'Invoice/InvoiceRead',
+  },
+  {
+    path: '/invoice/update/:id',
+    component: 'Invoice/InvoiceUpdate',
   },
   {
     path: '/quote',
-    component: 'Quote',
+    component: 'Quote/index',
+  },
+  {
+    path: '/quote/create',
+    component: 'Quote/QuoteCreate',
+  },
+  {
+    path: '/quote/read/:id',
+    component: 'Quote/QuoteRead',
+  },
+  {
+    path: '/quote/update/:id',
+    component: 'Quote/QuoteUpdate',
   },
   {
     path: '/payment/invoice',

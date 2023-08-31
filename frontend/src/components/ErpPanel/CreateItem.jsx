@@ -12,6 +12,7 @@ import uniqueId from '@/utils/uinqueId';
 
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 function SaveForm({ form, config }) {
   let { CREATE_ENTITY } = config;
@@ -29,6 +30,7 @@ function SaveForm({ form, config }) {
 export default function CreateItem({ config, CreateForm }) {
   let { entity, CREATE_ENTITY } = config;
   const { erpContextAction } = useErpContext();
+  const history = useHistory();
   const { createPanel } = erpContextAction;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
@@ -95,7 +97,10 @@ export default function CreateItem({ config, CreateForm }) {
   return (
     <>
       <PageHeader
-        onBack={() => createPanel.close()}
+        onBack={() => {
+          // createPanel.close();
+          history.push(`/${entity.toLowerCase()}`);
+        }}
         title={CREATE_ENTITY}
         ghost={false}
         tags={<Tag color="volcano">Draft</Tag>}
