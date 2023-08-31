@@ -36,7 +36,6 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
-  const [autoCompleteValue, setAutoCompleteValue] = useState('');
 
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
@@ -58,18 +57,6 @@ export default function UpdateItem({ config, UpdateForm }) {
 
   const onSubmit = (fieldsValue) => {
     if (fieldsValue) {
-      // if (fieldsValue.expiredDate) {
-      //   fieldsValue = {
-      //     ...fieldsValue,
-      //     expiredDate: fieldsValue["expiredDate"].format("DD/MM/YYYY"),
-      //   };
-      // }
-      // if (fieldsValue.date) {
-      //   fieldsValue = {
-      //     ...fieldsValue,
-      //     date: fieldsValue["date"].format("DD/MM/YYYY"),
-      //   };
-      // }
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
@@ -97,12 +84,6 @@ export default function UpdateItem({ config, UpdateForm }) {
 
   useEffect(() => {
     if (current) {
-      // if (current.client) {
-      //   const tmpValue = { ...current.client };
-      //   setAutoCompleteValue(tmpValue);
-
-      //   current.client = undefined;
-      // }
       if (current.date) {
         current.date = dayjs(current.date);
       }
@@ -124,18 +105,15 @@ export default function UpdateItem({ config, UpdateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          // updatePanel.close();
           history.push(`/${entity.toLowerCase()}`);
         }}
         title={UPDATE_ENTITY}
         ghost={false}
-        // tags={<Tag color="volcano">Draft</Tag>}
-        // subTitle="This is update page"
+        tags={<Tag color="volcano">Draft</Tag>}
         extra={[
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              // updatePanel.close();
               history.push(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}

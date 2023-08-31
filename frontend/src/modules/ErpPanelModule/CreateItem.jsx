@@ -62,6 +62,7 @@ export default function CreateItem({ config, CreateForm }) {
       createPanel.close();
       dispatch(erp.list({ entity }));
     }
+    return () => {};
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {

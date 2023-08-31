@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useEffectLayout, useRef, useState } from 'react';
 import { Descriptions, Dropdown, Table } from 'antd';
 import { Button, PageHeader } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
@@ -55,7 +55,12 @@ export default function DataTable({ config, DataTableDropMenu }) {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
     dispatch(erp.list({ entity }));
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(

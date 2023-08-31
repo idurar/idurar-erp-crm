@@ -18,17 +18,10 @@ export default function UpdateInvoiceModule({ config }) {
 
   useEffect(() => {
     if (item) {
-      clearTimeout(timeoutId);
       dispatch(erp.currentAction({ actionType: 'update', data: item }));
     } else {
       // If item is undefined for more than 3 seconds, it means the
       // id was invalid and will redirect the user.
-
-      setTimeoutId(
-        setTimeout(() => {
-          history.replace('/invoice');
-        }, 3000)
-      );
     }
   }, [item]);
 
