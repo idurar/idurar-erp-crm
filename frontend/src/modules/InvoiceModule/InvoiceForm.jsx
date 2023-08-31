@@ -205,6 +205,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
+                {/* Todo: make this dynamic tekst based on create or update  */}
                 Save Invoice
               </Button>
             </Form.Item>

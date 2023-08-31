@@ -251,6 +251,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     let { email } = req.body;
+    console.log(req.body);
 
     if (email) {
       const existingAdmin = await Admin.findOne({ email: email });

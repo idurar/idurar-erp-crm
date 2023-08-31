@@ -12,6 +12,17 @@ const UpdateAdmin = ({ config }) => {
   const { readPanel, updatePanel } = profileContextAction;
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
+  const [form] = Form.useForm();
+
+  const handelValuesChange = (changedValues, values) => {
+    console.log(values);
+    // dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
+  };
+
+  const handelClick = (e) => {
+    console.log('Close info update');
+    updatePanel.close();
+  };
 
   return (
     <>
@@ -29,7 +40,7 @@ const UpdateAdmin = ({ config }) => {
           </Button>,
           <Button
             key={`${uniqueId()}`}
-            onClick={() => updatePanel.close()}
+            onClick={() => handelClick}
             type="primary"
             icon={<SaveOutlined />}
           >
@@ -45,7 +56,12 @@ const UpdateAdmin = ({ config }) => {
           <UploadImg />
         </Col>
         <Col xs={{ span: 16 }}>
-          <Form labelCol={{ span: 4 }} wrapperCol={{ span: 12 }}>
+          <Form
+            form={form}
+            onValuesChange={handelValuesChange}
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 12 }}
+          >
             <AdminForm isUpdateForm={true} />
           </Form>
         </Col>

@@ -305,6 +305,8 @@ html
               tr
                 td.service #{item.itemName}
                   span #{item.description}
+                  br
+                  span Note: #{model.note}
                 td.qty #{item.quantity}  
                 td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                 td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
@@ -317,9 +319,8 @@ html
             tr
               td.grand.total(colspan='3') GRAND TOTAL
               td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-        
       .col.col-24
-          .space     
+          .space
       footer.footer-invoice
         | Invoice was created on a computer and is valid without the signature and seal.
           

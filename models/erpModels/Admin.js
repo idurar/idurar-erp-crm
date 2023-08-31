@@ -23,8 +23,61 @@ const adminSchema = new Schema({
     trim: true,
     required: true,
   },
-  name: { type: String, required: true, lowercase: true },
-  surname: { type: String, required: true, lowercase: true },
+  name: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  surname: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  company: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  companyRegNumber: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  bankAccount: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  companyTaxNumber: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  address: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  zipcode: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  city: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  country: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  website: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
   photo: {
     type: String,
     trim: true,
@@ -33,7 +86,11 @@ const adminSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  role: { type: mongoose.Schema.ObjectId, ref: 'Role', autopopulate: true },
+  role: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Role',
+    autopopulate: true,
+  },
   hasCustomPermissions: {
     type: Boolean,
     default: false,

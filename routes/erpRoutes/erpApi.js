@@ -23,7 +23,6 @@ const paymentInvoiceController = require('@/controllers/erpControllers/paymentIn
 const settingsController = require('@/controllers/erpControllers/settingsController');
 const offerController = require('@/controllers/erpControllers/offerController');
 
-
 // //_______________________________ Admin management_______________________________
 
 var adminPhotoStorage = multer.diskStorage({
@@ -40,7 +39,7 @@ router
   .route('/admin/create')
   .post([adminPhotoUpload.single('photo'), setFilePathToBody], catchErrors(adminController.create));
 router.route('/admin/read/:id').get(catchErrors(adminController.read));
-// router.route("/admin/update/:id").patch(catchErrors(adminController.update));
+router.route('/admin/update/:id').patch(catchErrors(adminController.update));
 // router.route("/admin/delete/:id").delete(catchErrors(adminController.delete));
 router.route('/admin/search').get(catchErrors(adminController.search));
 router.route('/admin/list').get(catchErrors(adminController.list));

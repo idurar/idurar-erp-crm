@@ -40,7 +40,6 @@ export default function AdminForm({ isUpdateForm = false }) {
       >
         <Input autoComplete="off" />
       </Form.Item>
-
       {!isUpdateForm && (
         <Form.Item
           label="Password"
@@ -60,7 +59,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         name="role"
         rules={[
           {
-            required: true,
+            required: false,
             message: 'This Field is required',
           },
         ]}
