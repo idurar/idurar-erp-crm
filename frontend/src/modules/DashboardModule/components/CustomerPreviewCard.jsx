@@ -8,7 +8,7 @@ export default function CustomerPreviewCard({
 }) {
   return (
     <Row className="gutter-row">
-      <div className="whiteBox shadow" style={{ height: '380px' }}>
+      <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
         <div
           className="pad20"
           style={{
