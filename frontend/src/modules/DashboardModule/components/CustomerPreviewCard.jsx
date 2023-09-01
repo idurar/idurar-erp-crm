@@ -8,7 +8,7 @@ export default function CustomerPreviewCard({
 }) {
   return (
     <Row className="gutter-row">
-      <div className="whiteBox shadow" style={{ height: '380px' }}>
+      <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
         <div
           className="pad20"
           style={{
@@ -21,7 +21,12 @@ export default function CustomerPreviewCard({
           {isLoading ? (
             <Spin />
           ) : (
-            <>
+            <div
+              style={{
+                display: 'grid',
+                justifyContent: 'center',
+              }}
+            >
               <Progress type="dashboard" percent={newCustomer} width={148} />
               <p>New Customer this Month</p>
               <Divider />
@@ -31,7 +36,11 @@ export default function CustomerPreviewCard({
                 precision={2}
                 valueStyle={
                   // color default gray
-                  activeCustomer > 0 ? { color: '#3f8600' } : activeCustomer < 0 ? { color: '#cf1322' } : {color: '#000000'}
+                  activeCustomer > 0
+                    ? { color: '#3f8600' }
+                    : activeCustomer < 0
+                    ? { color: '#cf1322' }
+                    : { color: '#000000' }
                 }
                 prefix={
                   activeCustomer > 0 ? (
@@ -42,7 +51,7 @@ export default function CustomerPreviewCard({
                 }
                 suffix="%"
               />
-            </>
+            </div>
           )}
         </div>
       </div>
