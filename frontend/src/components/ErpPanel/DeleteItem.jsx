@@ -31,11 +31,14 @@ export default function Delete({ config }) {
 
       setDisplayItem(labels);
     }
-  }, [isSuccess, current]);
-
+  }, [isSuccess===true || current]);
+  
   const handleOk = () => {
     const id = current._id;
     dispatch(erp.delete({ entity, id }));
+    if(isSuccess){
+      modal.close()
+    }
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
