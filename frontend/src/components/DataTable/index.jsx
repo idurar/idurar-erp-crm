@@ -10,7 +10,7 @@ import uniqueId from '@/utils/uinqueId';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
-  let { entity, dataTableColumns, dataTableTitle } = config;
+  let { entity, dataTableColumns, DATATABLE_TITLE } = config;
 
   dataTableColumns = [
     ...dataTableColumns,
@@ -49,7 +49,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
       <div ref={tableHeader}>
         <PageHeader
           onBack={() => window.history.back()}
-          title={dataTableTitle}
+          title={DATATABLE_TITLE}
           ghost={false}
           extra={[
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
