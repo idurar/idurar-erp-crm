@@ -48,9 +48,10 @@ export default function PaymentInvoice() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new payment';
-  const DATATABLE_TITLE = 'Payments List';
+  const ADD_NEW_ENTITY = 'Add New Payment';
+  const dataTableTitle = 'Payment List';
   const ENTITY_NAME = 'payment';
+  const DATATABLE_TITLE = 'Payment List';
   const CREATE_ENTITY = 'Create payment';
   const UPDATE_ENTITY = 'Update payment';
   const PANEL_TITLE = 'payment';
