@@ -14,9 +14,9 @@ Please do not open public github issues or pull requests on this repository for 
 This security policy covers the security of this repository and its code. If you discover a security vulnerability related to this repository, please report it responsibly.
 
 ### Responsible Disclosure Process
-#### Option 1: Reporting directly via Github
+#### Option 1: Reporting via Email
 
-1. **Contact Us**: Contact [@salahlalami](https://github.com/salahlalami) with details of the vulnerability. Please provide a clear and concise description of the issue, any potential impact, and a step-by-step demonstration if possible. Please do not include sensitive information in your initial email.
+1. **Contact Us**: Send an email to [security@idurarapp.com](mailto:security@idurarapp.com) with details of the vulnerability. Please provide a clear and concise description of the issue, any potential impact, and a step-by-step demonstration if possible. Please do not include sensitive information in your initial email.
 
 2. **Confirmation**: We will acknowledge receipt of your report within [X] business days and provide an estimated timeline for when you can expect a response.
 
