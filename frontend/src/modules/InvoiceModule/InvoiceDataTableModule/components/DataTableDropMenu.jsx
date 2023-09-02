@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectListItems, selectItemById } from '@/redux/erp/selectors';
+import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
@@ -20,7 +20,7 @@ export default function DataTableDropMenu({ row, entity }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { erpContextAction } = useErpContext();
-  const { readPanel, updatePanel, recordPanel, modal } = erpContextAction;
+  const { recordPanel, modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
   function Read() {
     dispatch(erp.currentItem({ data: item }));

@@ -2,14 +2,14 @@ import * as actionTypes from './types';
 import { request } from '@/request';
 
 export const erp = {
-  resetState: () => async (dispatch) => {
+  resetState: () => (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,
     });
   },
   resetAction:
     ({ actionType }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.RESET_ACTION,
         keyState: actionType,
@@ -18,7 +18,7 @@ export const erp = {
     },
   currentItem:
     ({ data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ITEM,
         payload: { ...data },
@@ -26,7 +26,7 @@ export const erp = {
     },
   currentAction:
     ({ actionType, data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ACTION,
         keyState: actionType,
@@ -266,7 +266,7 @@ export const erp = {
     async (dispatch) => {
       await request.mail({ entity, jsonData });
     },
-      
+
   convert:
     ({ entity, id }) =>
     async (dispatch) => {
