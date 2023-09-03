@@ -57,6 +57,10 @@ export const routesConfig = [
     component: 'Invoice/InvoiceUpdate',
   },
   {
+    path: '/invoice/record/:id',
+    component: 'Invoice/InvoiceRecord',
+  },
+  {
     path: '/quote',
     component: 'Quote/index',
   },

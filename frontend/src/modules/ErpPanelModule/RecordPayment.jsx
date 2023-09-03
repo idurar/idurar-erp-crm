@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Divider, Button } from 'antd';
+import { Form, Divider, Button, PageHeader, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -10,9 +10,12 @@ import { useErpContext } from '@/context/erp';
 import Loading from '@/components/Loading';
 
 import PaymentInvoiceForm from '@/forms/PaymentInvoiceForm';
+import { CloseCircleOutlined } from '@ant-design/icons';
+import uniqueId from '@/utils/uinqueId';
+import history from '@/utils/history';
 
 export default function RecordPayment({ config }) {
-  let { entity, CREATE_ENTITY } = config;
+  let { entity, RECORD_ENTITY } = config;
   const { erpContextAction } = useErpContext();
   const { recordPanel } = erpContextAction;
   const dispatch = useDispatch();
@@ -59,6 +62,30 @@ export default function RecordPayment({ config }) {
 
   return (
     <>
+      <PageHeader
+        onBack={() => {
+          history.push(`/${entity.toLowerCase()}`);
+        }}
+        title={RECORD_ENTITY}
+        ghost={false}
+        tags={<Tag color="volcano">Draft</Tag>}
+        extra={[
+          <Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              history.push(`/${entity.toLowerCase()}`);
+            }}
+            icon={<CloseCircleOutlined />}
+          >
+            Cancel
+          </Button>,
+          // <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
+        ]}
+        style={{
+          padding: '20px 0px',
+        }}
+      ></PageHeader>
+      <Divider dashed />
       <Loading isLoading={isLoading}>
         <Form form={form} layout="vertical" onFinish={onSubmit}>
           <PaymentInvoiceForm maxAmount={maxAmount} />
