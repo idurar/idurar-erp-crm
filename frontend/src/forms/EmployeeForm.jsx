@@ -15,7 +15,7 @@ export default function EmployeeForm() {
             message: 'Please input your name!',
           },
           {
-            pattern: '[a-zA-Z]*$',
+            pattern: '^[a-zA-Z]*$',
             message: 'Please input valid name!',
           },
         ]}
