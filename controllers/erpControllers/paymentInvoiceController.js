@@ -89,7 +89,7 @@ methods.create = async (req, res) => {
     res.status(200).json({
       success: true,
       result: updatedResult,
-      message: 'Successfully Created the document in Model ',
+      message: 'Payment Invoice created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
