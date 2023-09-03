@@ -26,7 +26,7 @@
     "lodash": "^4.17.20",
     "module-alias": "^2.2.2",
     "moment": "^2.26.0",
-    "mongoose": "^6.3.3",
+    "mongoose": "^6.12.0",
     "mongoose-autopopulate": "^0.14.0",
     "mongoose-sequence": "^5.2.2",
     "multer": "^1.4.2",
