@@ -62,7 +62,7 @@ methods.create = async (req, res) => {
     return res.status(200).json({
       success: true,
       result: updateResult,
-      message: 'Successfully Created the document in Model ',
+      message: 'Quote created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
