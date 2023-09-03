@@ -101,10 +101,21 @@ export default function ReadItem({ config, selectedItem }) {
   useEffect(() => {
     const controller = new AbortController();
     if (currentResult) {
-      const { items } = currentResult;
+      const { items, invoice, ...others } = currentResult;
 
-      setItemsList(items);
-      setCurrentErp(currentResult);
+      // When it accesses the /payment/invoice/ endpoint,
+      // it receives an invoice.item instead of just item
+      // and breaks the code, but now we can check if items exists,
+      // and if it doesn't we can access invoice.items and bring
+      // out the neccessary propery alongside other properties
+
+      if (items) {
+        setItemsList(items);
+        setCurrentErp(currentResult);
+      } else if (invoice.items) {
+        setItemsList(invoice.items);
+        setCurrentErp({ ...invoice.items, ...others, ...invoice });
+      }
     }
     return () => controller.abort();
   }, [currentResult]);
