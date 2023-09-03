@@ -148,7 +148,7 @@ exports.logout = async (req, res) => {
 
   res
     .clearCookie('token', {
-      maxAge: null, // Cookie expires after 30 days
+      maxAge: null,
       sameSite: 'Lax',
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production' ? true : false,

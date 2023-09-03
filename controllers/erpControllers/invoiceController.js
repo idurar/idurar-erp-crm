@@ -1,13 +1,13 @@
-// const crudController = require("./corsControllers/crudController");
-// module.exports = crudController.createCRUDController("Invoice");
+// const createCRUDController = require("./corsControllers/crudController");
+// module.exports = createCRUDController("Invoice");
 
 const mongoose = require('mongoose');
 const moment = require('moment');
 const Model = mongoose.model('Invoice');
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('Invoice');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('Invoice');
 
 delete methods['create'];
 delete methods['update'];
@@ -159,12 +159,12 @@ methods.update = async (req, res) => {
 methods.summary = async (req, res) => {
   try {
     let defaultType = 'month';
-    
+
     const { type } = req.query;
 
     if (type) {
       if (['week', 'month', 'year'].includes(type)) {
-        defaultType = type
+        defaultType = type;
       } else {
         return res.status(400).json({
           success: false,
@@ -228,10 +228,7 @@ methods.summary = async (req, res) => {
           status: '$results._id',
           count: '$results.count',
           percentage: {
-            $round: [
-              { $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] },
-              1,
-            ],
+            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
           },
           total_amount: '$results.total_amount',
         },
@@ -268,7 +265,7 @@ methods.summary = async (req, res) => {
           total_amount: '$total_amount',
         },
       },
-    ])
+    ]);
 
     const finalResult = {
       total: result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2),
@@ -276,7 +273,6 @@ methods.summary = async (req, res) => {
       type,
       performance: result,
     };
-
 
     return res.status(200).json({
       success: true,

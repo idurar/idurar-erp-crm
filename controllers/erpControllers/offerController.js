@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Model = mongoose.model('Offer');
 const moment = require('moment');
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('Offer');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('Offer');
 
 delete methods['create'];
 delete methods['update'];
