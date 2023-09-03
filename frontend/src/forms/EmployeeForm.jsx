@@ -14,6 +14,10 @@ export default function EmployeeForm() {
             required: true,
             message: 'Please input your name!',
           },
+          {
+            pattern: '[a-zA-Z]*$',
+            message: 'Please input valid name!',
+          },
         ]}
       >
         <Input />
@@ -25,6 +29,10 @@ export default function EmployeeForm() {
           {
             required: true,
             message: 'Please input your surname!',
+          },
+          {
+            pattern: '^[a-zA-Z]*$',
+            message: 'Please input valid Surname!',
           },
         ]}
       >
