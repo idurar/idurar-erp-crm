@@ -171,17 +171,17 @@ router.route('/expenseCategory/filter').get(catchErrors(expenseCategoryControlle
 
 // //_____________________________________________ API for client payments_________________
 
-router.route('/paymentInvoice/create').post(catchErrors(paymentInvoiceController.create));
-router.route('/paymentInvoice/read/:id').get(catchErrors(paymentInvoiceController.read));
-router.route('/paymentInvoice/update/:id').patch(catchErrors(paymentInvoiceController.update));
-router.route('/paymentInvoice/delete/:id').delete(catchErrors(paymentInvoiceController.delete));
-router.route('/paymentInvoice/search').get(catchErrors(paymentInvoiceController.search));
-router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.list));
-router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
-router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
-router.route('/paymentInvoice/summary').get(catchErrors(paymentInvoiceController.summary));
+router.route('/payment/invoice/create').post(catchErrors(paymentInvoiceController.create));
+router.route('/payment/invoice/read/:id').get(catchErrors(paymentInvoiceController.read));
+router.route('/payment/invoice/update/:id').patch(catchErrors(paymentInvoiceController.update));
+router.route('/payment/invoice/delete/:id').delete(catchErrors(paymentInvoiceController.delete));
+router.route('/payment/invoice/search').get(catchErrors(paymentInvoiceController.search));
+router.route('/payment/invoice/list').get(catchErrors(paymentInvoiceController.list));
+router.route('/payment/invoice/filter').get(catchErrors(paymentInvoiceController.filter));
+router.route('/payment/invoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+router.route('/payment/invoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
-router.route('/paymentInvoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
+router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
 // //____________________________________________ API for Global Setting _________________
 
