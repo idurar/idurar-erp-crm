@@ -54,7 +54,7 @@ export default function AnalyticSummaryCard({
                     justifyContent: 'center',
                   }}
                 >
-                  {tagContent}
+                  {tagContent ? tagContent : '$0.00'}
                 </Tag>
               )}
             </Col>
