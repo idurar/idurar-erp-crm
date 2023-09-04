@@ -1,4 +1,4 @@
-import { Tag, Divider, Row, Col, Spin } from 'antd';
+import { Tag, Divider, Row, Col, Spin,Tooltip } from 'antd';
 
 export default function AnalyticSummaryCard({
   title,
@@ -47,15 +47,21 @@ export default function AnalyticSummaryCard({
               {isLoading ? (
                 <Spin />
               ) : (
-                <Tag
-                  color={tagColor}
-                  style={{
-                    margin: '0 auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {tagContent ? tagContent : '$0.00'}
-                </Tag>
+                <Tooltip title={tagContent}>
+                  <Tag
+                    color={tagColor}
+                    style={{
+                      margin: '0 auto',
+                      justifyContent: 'center',
+                      maxWidth: '110px',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {tagContent ? tagContent : '$0.00'}
+                  </Tag>
+                </Tooltip>
               )}
             </Col>
           </Row>
