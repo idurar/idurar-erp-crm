@@ -50,8 +50,8 @@ exports.create = async (Model, req, res) => {
     if (isExist) {
       return res.status(400).json({
         success: false,
-        result: null,
-        message: 'Your given fields exists',
+        result: isExist._id,
+        message: `This employee already exists with this id: ${isExist._id}`,
         // error: err,
       });
     }
