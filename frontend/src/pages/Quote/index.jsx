@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
 
-import QuoteModule from '@/modules/QuoteModule';
+import QuoteDataTableModule from '@/modules/QuoteModule/QuoteDataTableModule';
 import { useMoney } from '@/settings';
 import configPage from './config';
 
@@ -72,5 +72,5 @@ export default function Quote() {
     searchConfig,
     entityDisplayLabels,
   };
-  return <QuoteModule config={config} />;
+  return <QuoteDataTableModule config={config} />;
 }
