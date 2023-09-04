@@ -8,6 +8,7 @@ import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
 import { useErpContext } from '@/context/erp';
+import calculate from '@/utils/calculate';
 import uniqueId from '@/utils/uinqueId';
 
 import Loading from '@/components/Loading';
@@ -44,9 +45,9 @@ export default function CreateItem({ config, CreateForm }) {
       items.map((item) => {
         if (item) {
           if (item.quantity && item.price) {
-            let total = item['quantity'] * item['price'];
+            let total = calculate.multiply(item['quantity'], item['price']);
             //sub total
-            subTotal += total;
+            subTotal = calculate.add(subTotal, total);
           }
         }
       });
@@ -84,7 +85,7 @@ export default function CreateItem({ config, CreateForm }) {
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
-          item.total = item.quantity * item.price;
+          item.total = calculate.multiply(item.quantity, item.price);
         });
         fieldsValue = {
           ...fieldsValue,

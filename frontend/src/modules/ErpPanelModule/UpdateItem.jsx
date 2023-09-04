@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 
 import { useErpContext } from '@/context/erp';
+import calculate from '@/utils/calculate';
 import uniqueId from '@/utils/uinqueId';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
@@ -45,9 +46,9 @@ export default function UpdateItem({ config, UpdateForm }) {
       items.map((item) => {
         if (item) {
           if (item.quantity && item.price) {
-            let total = item['quantity'] * item['price'];
+            let total = calculate.multiply(item['quantity'], item['price']);
             //sub total
-            subTotal += total;
+            subTotal = calculate.add(subTotal, total);
           }
         }
       });

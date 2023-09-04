@@ -9,6 +9,8 @@ import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import ItemRow from '@/components/ErpPanel/ItemRow';
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
+import calculate from '@/utils/calculate';
+
 export default function QuoteForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
@@ -26,9 +28,9 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
     }
   }, [current]);
   useEffect(() => {
-    const currentTotal = subTotal * taxRate + subTotal;
-    setTaxTotal((subTotal * taxRate).toFixed(2));
-    setTotal(currentTotal.toFixed(2));
+    const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
+    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)).toFixed(2));
+    setTotal(Number.parseFloat(currentTotal).toFixed(2));
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);
