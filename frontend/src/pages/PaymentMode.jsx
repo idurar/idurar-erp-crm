@@ -86,7 +86,7 @@ export default function PaymentMode() {
   ];
 
   const ADD_NEW_ENTITY = 'Add new payment mode';
-  const DATATABLE_TITLE = 'payment modes List';
+  const DATATABLE_TITLE = 'Payment Modes List';
   const ENTITY_NAME = 'payment mode';
   const CREATE_ENTITY = 'Create payment mode';
   const UPDATE_ENTITY = 'Update payment mode';
