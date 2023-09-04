@@ -20,11 +20,14 @@ export default function RecordInvoiceModule({ config }) {
     } else {
       dispatch(erp.read({ entity: config.entity, id }));
     }
-  }, [item]);
+  }, [item, id]);
 
   const { result: currentResult } = useSelector(selectCurrentItem);
   item = currentResult;
-  dispatch(erp.currentAction({ actionType: 'recordPayment', data: item }));
+
+  useEffect(() => {
+    dispatch(erp.currentAction({ actionType: 'recordPayment', data: item }));
+  }, [item]);
 
   return (
     <ErpLayout>

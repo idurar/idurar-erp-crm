@@ -12,6 +12,7 @@ import { useMoney } from '@/settings';
 import RecordPayment from './RecordPayment';
 import { useSelector } from 'react-redux';
 import { selectRecordPaymentItem } from '@/redux/erp/selectors';
+import history from '@/utils/history';
 
 export default function Payment({ config, currentItem }) {
   const { entity, ENTITY_NAME } = config;
@@ -60,14 +61,16 @@ export default function Payment({ config, currentItem }) {
             extra={[
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => recordPanel.close()}
+                onClick={() => {
+                  history.push(`/${entity.toLowerCase()}`);
+                }}
                 icon={<CloseCircleOutlined />}
               >
                 Cancel
               </Button>,
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => readPanel.open()}
+                onClick={() => history.push(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
                 Show Invoice
