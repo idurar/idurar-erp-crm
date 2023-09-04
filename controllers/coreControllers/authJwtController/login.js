@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
+const { stubFalse } = require('lodash');
 
 const mongoose = require('mongoose');
 
@@ -17,12 +19,21 @@ const login = async (req, res) => {
       isLocalhost = true;
     }
     // validate
-    if (!email || !password)
+    const objectSchema = Joi.object({
+      email: Joi.string()
+        .email({ tlds: { allow: false } })
+        .required(),
+      password: Joi.string().required(),
+    });
+
+    const { error, value } = objectSchema.validate({ email, password });
+    if (error) {
       return res.status(400).json({
         success: false,
         result: null,
-        message: 'Not all fields have been entered.',
+        message: 'Invalid/Missing credentials.',
       });
+    }
 
     const admin = await Admin.findOne({ email: email, removed: false });
     // console.log(admin);
