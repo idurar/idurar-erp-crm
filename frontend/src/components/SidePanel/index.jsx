@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useCrudContext } from '@/context/crud';
 import { useAppContext } from '@/context/appContext';
-import { Layout } from 'antd';
+import { Grid, Layout } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import CollapseBox from '../CollapseBox';
 
+const { useBreakpoint } = Grid;
 const { Sider } = Layout;
 
 export default function SidePanel({ config, topContent, bottomContent, fixHeaderPanel }) {
+  const screens = useBreakpoint();
+
   const { ADD_NEW_ENTITY } = config;
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose, isBoxCollapsed } = state;
@@ -55,41 +58,37 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
   };
 
   return (
-    <div>
-      <Sider
-        trigger={<MenuOutlined className="trigger" />}
-        width={'95%'}
-        collapsed={isSidePanelClose}
-        collapsedWidth={'0px'}
-        onCollapse={collapsePanel}
-        className="sidePanel"
-        zeroWidthTriggerStyle={{
-          right: '-50px',
-          top: '15px',
-        }}
+    <Sider
+      trigger={<MenuOutlined className="trigger" />}
+      width={window.innerWidth >= screens.md ? '95%' : '400px'}
+      collapsed={isSidePanelClose}
+      collapsedWidth={'0px'}
+      onCollapse={collapsePanel}
+      className="sidePanel"
+      zeroWidthTriggerStyle={{
+        right: '-50px',
+        top: '15px',
+      }}
+      style={{
+        left: leftSider,
+      }}
+    >
+      <div
+        className="sidePanelContent"
         style={{
-          left: leftSider,
-          minHeight: '100vh',
-          maxWidth: '400px'
+          opacity: opacitySider,
+          paddingTop: paddingTopSider,
         }}
       >
-        <div
-          className="sidePanelContent"
-          style={{
-            opacity: opacitySider,
-            paddingTop: paddingTopSider,
-          }}
-        >
-          {fixHeaderPanel}
-          <CollapseBox
-            buttonTitle={ADD_NEW_ENTITY}
-            isCollapsed={isBoxCollapsed}
-            onCollapse={collapsePanelBox}
-            topContent={topContent}
-            bottomContent={bottomContent}
-          ></CollapseBox>
-        </div>
-      </Sider>
-    </div>
+        {fixHeaderPanel}
+        <CollapseBox
+          buttonTitle={ADD_NEW_ENTITY}
+          isCollapsed={isBoxCollapsed}
+          onCollapse={collapsePanelBox}
+          topContent={topContent}
+          bottomContent={bottomContent}
+        ></CollapseBox>
+      </div>
+    </Sider>
   );
 }
