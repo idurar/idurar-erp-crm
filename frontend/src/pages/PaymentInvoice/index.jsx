@@ -1,10 +1,8 @@
-import React from 'react';
-
 import dayjs from 'dayjs';
-import PaymentModule from '@/modules/PaymentModule';
+import configPage from './config';
+import PaymentInvoiceDataTableModule from '@/modules/PaymentInvoiceModule/PaymentInvoiceDataTableModule';
 
 export default function PaymentInvoice() {
-  const entity = 'paymentInvoice';
   const searchConfig = {
     displayLabels: ['number'],
     searchFields: 'number',
@@ -14,7 +12,6 @@ export default function PaymentInvoice() {
   const entityDisplayLabels = ['number'];
   const dataTableColumns = [
     {
-
       title: 'Number',
 
       dataIndex: 'number',
@@ -48,26 +45,11 @@ export default function PaymentInvoice() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add New Payment';
-  const dataTableTitle = 'Payment List';
-  const ENTITY_NAME = 'payment';
-  const DATATABLE_TITLE = 'Payment List';
-  const CREATE_ENTITY = 'Create payment';
-  const UPDATE_ENTITY = 'Update payment';
-  const PANEL_TITLE = 'payment';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    dataTableTitle,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
-  return <PaymentModule config={config} />;
+  return <PaymentInvoiceDataTableModule config={config} />;
 }

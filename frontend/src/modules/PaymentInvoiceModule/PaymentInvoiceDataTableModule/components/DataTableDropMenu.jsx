@@ -5,33 +5,39 @@ import {
   EditOutlined,
   DeleteOutlined,
   FilePdfOutlined,
+  CreditCardOutlined,
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 
+import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import uniqueId from '@/utils/uinqueId';
+import { useHistory } from 'react-router-dom';
 
 export default function DataTableDropMenu({ row, entity }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { erpContextAction } = useErpContext();
-  const { readPanel, updatePanel, recordPanel, modal } = erpContextAction;
+  const { recordPanel, modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
   function Read() {
-    dispatch(erp.read({ entity, id: row._id }));
-    readPanel.open();
+    dispatch(erp.currentItem({ data: item }));
+    // readPanel.open();
+    history.push(`/payment/invoice/read/${row._id}`);
   }
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));
-    updatePanel.open();
+    // updatePanel.open();
+    history.push(`/payment/invoice/update/${row._id}`);
   }
   function Delete() {
     dispatch(erp.currentAction({ actionType: 'delete', data: item }));
     modal.open();
   }
   function Download() {
-    console.log("download")
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
   }
   return (
     <Menu style={{ minWidth: 130 }}>

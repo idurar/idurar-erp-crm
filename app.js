@@ -9,13 +9,13 @@ require('dotenv').config({ path: '.variables.env' });
 
 const helpers = require('./helpers');
 
-const erpApiRouter = require('./routes/erpRoutes/erpApi');
-const erpAuthRouter = require('./routes/erpRoutes/erpAuth');
-const erpDownloadRouter = require('./routes/erpRoutes/erpDownloadRouter');
+const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
+const coreApiRouter = require('./routes/coreRoutes/coreApi');
+const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
+const { isValidAdminToken } = require('./controllers/coreControllers/authJwtController');
 
 const errorHandlers = require('./handlers/errorHandlers');
-
-const { isValidAdminToken } = require('./controllers/erpControllers/authJwtController');
+const erpApiRouter = require('./routes/erpRoutes/erpApi');
 
 // create our Express app
 const app = express();
@@ -29,65 +29,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Sessions allow us to Contact data on visitors from request to request
-// // This keeps admins logged in and allows us to send flash messages
-// app.use(
-//   session({
-//     secret: process.env.SECRET,
-//     key: process.env.KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({ mongoUrl: process.env.DATABASE }),
-//   })
-// );
-
 // pass variables to our templates + all requests
 
 app.use((req, res, next) => {
   res.locals.h = helpers;
   res.locals.admin = req.admin || null;
   res.locals.currentPath = req.path;
-  const clientIP = req.socket.remoteAddress;
-  let isLocalhost = false;
-  if (clientIP === '127.0.0.1' || clientIP === '::1') {
-    // Connection is from localhost
-    isLocalhost = true;
-  }
-  res.locals.isLocalhost = isLocalhost;
   next();
 });
 
-// app.use(function (req, res, next) {
-//   if (req.url.slice(-1) === "/" && req.path.length > 1) {
-//     // req.path = req.path.slice(0, -1);
-//     req.url = req.url.slice(0, -1);
-//   }
-//   next();
-// });
-
 // Here our API Routes
-
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  const clientIP = req.socket.remoteAddress;
-  let isLocalhost = false;
-  if (clientIP === '127.0.0.1' || clientIP === '::1') {
-    // Connection is from localhost
-    isLocalhost = true;
-  }
-  if (isLocalhost) {
-    corsOptions = {
-      origin: '*',
-      credentials: true,
-    };
-  } else {
-    corsOptions = {
-      origin: true,
-      credentials: true,
-    };
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
 
 app.use(
   '/api',
@@ -95,7 +46,17 @@ app.use(
     origin: true,
     credentials: true,
   }),
-  erpAuthRouter
+  coreAuthRouter
+);
+
+app.use(
+  '/api',
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+  isValidAdminToken,
+  coreApiRouter
 );
 
 app.use(
@@ -108,7 +69,7 @@ app.use(
   erpApiRouter
 );
 
-app.use('/download', cors(), erpDownloadRouter);
+app.use('/download', cors(), coreDownloadRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);

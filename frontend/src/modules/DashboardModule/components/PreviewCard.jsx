@@ -15,15 +15,17 @@ const PreviewState = ({ tag, color, value }) => {
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
       <div className="left alignLeft capitalize">{tag}</div>
-      <div className="right alignRight">{value} %</div>
-      <Progress
-        percent={value}
-        showInfo={false}
-        strokeColor={{
-          '0%': color,
-          '100%': color,
-        }}
-      />
+      {value && <div className="right alignRight">{value} %</div>}
+      {value && color && (
+        <Progress
+          percent={value}
+          showInfo={false}
+          strokeColor={{
+            '0%': color,
+            '100%': color,
+          }}
+        />
+      )}
     </div>
   );
 };
@@ -85,9 +87,9 @@ export default function PreviewCard({
           <div style={{ textAlign: 'center' }}>
             <Spin />
           </div>
-        ) : (
+        ) : statistics.length > 0 ? (
           statistics
-            ?.map((status, index) => (
+            .map((status, index) => (
               <PreviewState
                 key={index}
                 tag={status.tag}
@@ -97,6 +99,8 @@ export default function PreviewCard({
               // sort by colours
             ))
             .sort(customSort)
+        ) : (
+          <PreviewState tag={`${title} Not Found`} color={null} value={null} />
         )}
       </div>
     </Col>

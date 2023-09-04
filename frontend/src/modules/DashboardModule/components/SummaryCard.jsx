@@ -1,4 +1,4 @@
-import { Tag, Divider, Row, Col, Spin, Tooltip } from 'antd';
+import { Tag, Divider, Row, Col, Spin,Tooltip } from 'antd';
 
 export default function AnalyticSummaryCard({
   title,
@@ -65,7 +65,8 @@ export default function AnalyticSummaryCard({
                       textOverflow: 'ellipsis',
                     }}
                   >
-                    {tagContent}
+                    {tagContent ? tagContent : '$0.00'}
+
                   </Tag>
                 </Tooltip>
               )}

@@ -65,7 +65,7 @@ export default function Quote() {
       },
     },
   ];
-
+  
   const config = {
     ...configPage,
     dataTableColumns,

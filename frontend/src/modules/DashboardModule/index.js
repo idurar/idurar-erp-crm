@@ -57,7 +57,7 @@ export default function DashboardModule() {
   );
 
   const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
-    request.summary({ entity: 'paymentInvoice' })
+    request.summary({ entity: 'payment/invoice' })
   );
 
   const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
