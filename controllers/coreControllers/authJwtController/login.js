@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { stubFalse } = require('lodash');
 
 const mongoose = require('mongoose');
 
@@ -8,7 +7,7 @@ const Admin = mongoose.model('Admin');
 
 require('dotenv').config({ path: '.variables.env' });
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const clientIP = req.connection.remoteAddress;
@@ -85,75 +84,4 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.isValidAdminToken = async (req, res, next) => {
-  try {
-    const token = req.cookies.token;
-
-    if (!token)
-      return res.status(401).json({
-        success: false,
-        result: null,
-        message: 'No authentication token, authorization denied.',
-        jwtExpired: true,
-      });
-
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-
-    if (!verified)
-      return res.status(401).json({
-        success: false,
-        result: null,
-        message: 'Token verification failed, authorization denied.',
-        jwtExpired: true,
-      });
-
-    const admin = await Admin.findOne({ _id: verified.id, removed: false });
-    if (!admin)
-      return res.status(401).json({
-        success: false,
-        result: null,
-        message: "Admin doens't Exist, authorization denied.",
-        jwtExpired: true,
-      });
-    if (admin.isLoggedIn === 0)
-      return res.status(401).json({
-        success: false,
-        result: null,
-        message: 'Admin is already logout try to login, authorization denied.',
-        jwtExpired: true,
-      });
-    else {
-      req.admin = admin;
-      next();
-    }
-  } catch (err) {
-    res.status(503).json({
-      success: false,
-      result: null,
-      message: err.message,
-      error: err,
-    });
-  }
-};
-
-exports.logout = async (req, res) => {
-  const token = req.cookies.token;
-  const result = await Admin.findOneAndUpdate(
-    { _id: req.admin._id },
-    { $pull: { loggedSessions: token }, $set: { isLoggedIn: -1 } },
-    {
-      new: true,
-    }
-  ).exec();
-
-  res
-    .clearCookie('token', {
-      maxAge: null,
-      sameSite: 'Lax',
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production' ? true : false,
-      domain: req.hostname,
-      Path: '/',
-    })
-    .json({ isLoggedOut: true });
-};
+module.exports = login;
