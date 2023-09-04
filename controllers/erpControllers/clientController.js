@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 const Model = mongoose.model('Client');
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('Client');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('Client');
 
 methods.summary = async (req, res) => {
   try {
@@ -78,7 +78,7 @@ methods.summary = async (req, res) => {
         },
       },
     ]);
-    
+
     if (!result || !result.length) {
       return res.status(200).json({
         success: true,

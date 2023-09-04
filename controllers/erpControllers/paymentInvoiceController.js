@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const Model = mongoose.model('PaymentInvoice');
 const Invoice = mongoose.model('Invoice');
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
 
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('PaymentInvoice');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('PaymentInvoice');
 
 delete methods['create'];
 delete methods['update'];
@@ -84,7 +84,7 @@ methods.create = async (req, res) => {
     res.status(200).json({
       success: true,
       result: updatePath,
-      message: 'Successfully Created the document in Model ',
+      message: 'Payment Invoice created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
