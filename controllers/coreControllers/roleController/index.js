@@ -1,7 +1,7 @@
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const crudController = createCRUDController('Setting');
+const crudController = createCRUDController('Role');
 
-const settingMethods = {
+const roleMethods = {
   read: crudController.read,
   create: crudController.create,
   update: crudController.update,
@@ -11,4 +11,4 @@ const settingMethods = {
   search: crudController.search,
 };
 
-module.exports = settingMethods;
+module.exports = roleMethods;

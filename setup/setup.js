@@ -21,11 +21,18 @@ async function setupApp() {
 
     const Setting = require('../models/coreModels/Setting');
 
-    const generalConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/generalConfig.json', 'utf-8')
+    const appConfig = JSON.parse(fs.readFileSync(__dirname + '/config/appConfig.json', 'utf-8'));
+    const companyConfig = JSON.parse(
+      fs.readFileSync(__dirname + '/config/companyConfig.json', 'utf-8')
+    );
+    const financeConfig = JSON.parse(
+      fs.readFileSync(__dirname + '/config/financeConfig.json', 'utf-8')
+    );
+    const customConfig = JSON.parse(
+      fs.readFileSync(__dirname + '/config/customConfig.json', 'utf-8')
     );
 
-    await Setting.insertMany(generalConfig);
+    await Setting.insertMany([...appConfig, ...companyConfig, ...financeConfig, ...customConfig]);
 
     console.log('👍 Settings created : Done!');
   } catch (e) {
