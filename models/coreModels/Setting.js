@@ -20,6 +20,10 @@ const settingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed,
     required: true,
   },
+  valueType: {
+    type: String,
+    default: 'String',
+  },
   isCoreSetting: {
     type: Boolean,
     default: false,

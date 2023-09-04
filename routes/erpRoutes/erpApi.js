@@ -15,7 +15,7 @@ const orderFormController = require('@/controllers/erpControllers/orderFormContr
 const expenseController = require('@/controllers/erpControllers/expenseController');
 const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
-const settingsController = require('@/controllers/erpControllers/settingsController');
+
 const offerController = require('@/controllers/erpControllers/offerController');
 
 // //_________________________________ API for employees_____________________
@@ -135,16 +135,6 @@ router.route('/payment/invoice/pdf/:id').get(catchErrors(paymentInvoiceControlle
 router.route('/payment/invoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
 router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
-
-// //____________________________________________ API for Global Setting _________________
-
-router.route('/settings/create').post(catchErrors(settingsController.create));
-router.route('/settings/read/:id').get(catchErrors(settingsController.read));
-router.route('/settings/update/:id').patch(catchErrors(settingsController.update));
-router.route('/settings/delete/:id').delete(catchErrors(settingsController.delete));
-router.route('/settings/search').get(catchErrors(settingsController.search));
-router.route('/settings/list').get(catchErrors(settingsController.list));
-router.route('/settings/filter').get(catchErrors(settingsController.filter));
 
 // //_________________________________________________________________API for Offers_____________________
 

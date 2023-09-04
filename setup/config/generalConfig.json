@@ -1,0 +1,73 @@
+[
+  {
+    "settingKey": "appName",
+    "settingValue": "IDURAR ERP/CRM",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "language",
+    "settingValue": "en_us",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "companyName",
+    "settingValue": "IDURAR",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "companyAddress",
+    "settingValue": "25 , Rue de Bouragaa , Algiers 16009 ",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "companyCountry",
+    "settingValue": "Algeria",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "companyTaxNumber",
+    "settingValue": "91231255234",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "companyVatNumber",
+    "settingValue": "91231255234",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "companyRegNumber",
+    "settingValue": "00001231421",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "currency",
+    "settingValue": "eur",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "defaultTax",
+    "settingValue": 0.19,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "emailConfig",
+    "settingValue": {
+      "smtpServer": "smtp.example.com",
+      "port": 587,
+      "username": "example@example.com",
+      "password": "mysecretpassword"
+    },
+    "valueType": "object",
+    "isCoreSetting": true
+  }
+]
