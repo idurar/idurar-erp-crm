@@ -57,7 +57,7 @@ export const routesConfig = [
     component: 'Invoice/InvoiceUpdate',
   },
   {
-    path: '/invoice/record/:id',
+    path: '/invoice/pay/:id',
     component: 'Invoice/InvoiceRecord',
   },
   {

@@ -1,17 +1,15 @@
 import { ErpLayout } from '@/layout';
-import RecordPayment from '@/modules/ErpPanelModule/RecordPayment';
-import InvoiceForm from '@/modules/InvoiceModule/Forms/InvoiceForm';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
-import { selectItemById, selectCurrentItem } from '@/redux/erp/selectors';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { selectItemById, selectCurrentItem, selectRecordPaymentItem } from '@/redux/erp/selectors';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import Payment from '@/modules/ErpPanelModule/Payment';
 
 export default function RecordInvoiceModule({ config }) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { id } = useParams();
 
   let item = useSelector(selectItemById(id));
@@ -25,12 +23,12 @@ export default function RecordInvoiceModule({ config }) {
   }, [item]);
 
   const { result: currentResult } = useSelector(selectCurrentItem);
-
   item = currentResult;
+  dispatch(erp.currentAction({ actionType: 'recordPayment', data: item }));
 
   return (
     <ErpLayout>
-      {item ? <RecordPayment config={config} UpdateForm={InvoiceForm} /> : <PageLoader />}
+      {item ? <Payment config={config} currentItem={currentResult} /> : <PageLoader />}
     </ErpLayout>
   );
 }
