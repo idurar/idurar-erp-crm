@@ -3,7 +3,7 @@ const isClientExist = async (Model, req) => {
     const { company, managerSurname, managerName, email, phone } = req.body
     let isExist;
     if (company || managerSurname || managerName || email || phone) {
-        isExist = await Model.findOne({ company, managerName, managerSurname, email, phone })
+        isExist = await Model.findOne({ email, phone })
         // console.log({ isExist });
     }
     return isExist
