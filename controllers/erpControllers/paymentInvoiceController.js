@@ -306,17 +306,8 @@ methods.summary = async (req, res) => {
     }
 
     const currentDate = moment();
-    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
-    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
-
-    if (defaultType === 'week') {
-      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
-      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
-    }
-    if (defaultType === 'year') {
-      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
-      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
-    }
+    let startDate = currentDate.clone().startOf(defaultType);
+    let endDate = currentDate.clone().endOf(defaultType);
 
     // get total amount of invoices
     const result = await Model.aggregate([
@@ -349,12 +340,9 @@ methods.summary = async (req, res) => {
       },
     ]);
 
-    // Since there's only one result document, you can directly access it
-    const summary = result[0];
-
     return res.status(200).json({
       success: true,
-      result: summary,
+      result: result.length > 0 ? result[0] : { count: 0, total: 0 },
       message: `Successfully fetched the summary of payment invoices for the last ${defaultType}`,
     });
   } catch (error) {
