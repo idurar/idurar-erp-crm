@@ -9,13 +9,13 @@ require('dotenv').config({ path: '.variables.env' });
 
 const helpers = require('./helpers');
 
-const erpApiRouter = require('./routes/erpRoutes/erpApi');
-const erpAuthRouter = require('./routes/erpRoutes/erpAuth');
-const erpDownloadRouter = require('./routes/erpRoutes/erpDownloadRouter');
+const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
+const coreApiRouter = require('./routes/coreRoutes/coreApi');
+const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
+const { isValidAdminToken } = require('./controllers/coreControllers/authJwtController');
 
 const errorHandlers = require('./handlers/errorHandlers');
-
-const { isValidAdminToken } = require('./controllers/erpControllers/authJwtController ');
+const erpApiRouter = require('./routes/erpRoutes/erpApi');
 
 // create our Express app
 const app = express();
@@ -45,18 +45,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Sessions allow us to Contact data on visitors from request to request
-// // This keeps admins logged in and allows us to send flash messages
-// app.use(
-//   session({
-//     secret: process.env.SECRET,
-//     key: process.env.KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({ mongoUrl: process.env.DATABASE }),
-//   })
-// );
-
 // pass variables to our templates + all requests
 
 app.use((req, res, next) => {
@@ -66,20 +54,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(function (req, res, next) {
-//   if (req.url.slice(-1) === "/" && req.path.length > 1) {
-//     // req.path = req.path.slice(0, -1);
-//     req.url = req.url.slice(0, -1);
-//   }
-//   next();
-// });
-
 // Here our API Routes
-app.use('/api', erpAuthRouter);
+app.use('/api',coreAuthRouter);
+app.use('/api',isValidAdminToken,coreApiRouter);
+app.use('/api',isValidAdminToken, erpApiRouter);
+app.use('/download', coreDownloadRouter);
 
-app.use('/api', isValidAdminToken, erpApiRouter);
-
-app.use('/download', erpDownloadRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);

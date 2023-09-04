@@ -1,13 +1,8 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const setFilePathToBody = require('@/middlewares/setFilePathToBody');
+
 const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
-
-const adminController = require('@/controllers/erpControllers/adminController');
-const roleController = require('@/controllers/erpControllers/roleController');
 
 const employeeController = require('@/controllers/erpControllers/employeeController');
 const paymentModeController = require('@/controllers/erpControllers/paymentModeController');
@@ -20,50 +15,8 @@ const orderFormController = require('@/controllers/erpControllers/orderFormContr
 const expenseController = require('@/controllers/erpControllers/expenseController');
 const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
-
 const settingsController = require('@/controllers/erpControllers/settingsController');
-
-// //_______________________________ Admin management_______________________________
-
-var adminPhotoStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/admin');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-const adminPhotoUpload = multer({ storage: adminPhotoStorage });
-
-router
-  .route('/admin/create')
-  .post([adminPhotoUpload.single('photo'), setFilePathToBody], catchErrors(adminController.create));
-router.route('/admin/read/:id').get(catchErrors(adminController.read));
-// router.route("/admin/update/:id").patch(catchErrors(adminController.update));
-// router.route("/admin/delete/:id").delete(catchErrors(adminController.delete));
-router.route('/admin/search').get(catchErrors(adminController.search));
-router.route('/admin/list').get(catchErrors(adminController.list));
-router.route('/admin/profile').get(catchErrors(adminController.profile));
-router.route('/admin/status/:id').patch(catchErrors(adminController.status));
-// router
-//   .route("/admin/photo")
-//   .post(
-//     [adminPhotoUpload.single("photo"), setFilePathToBody],
-//     catchErrors(adminController.photo)
-//   );
-// router
-//   .route("/admin/password-update/:id")
-//   .patch(catchErrors(adminController.updatePassword));
-
-// //____________________________ Role management_______________________________
-
-router.route('/role/create').post(catchErrors(roleController.create));
-router.route('/role/read/:id').get(catchErrors(roleController.read));
-router.route('/role/update/:id').patch(catchErrors(roleController.update));
-router.route('/role/delete/:id').delete(catchErrors(roleController.delete));
-router.route('/role/search').get(catchErrors(roleController.search));
-router.route('/role/list').get(catchErrors(roleController.list));
-router.route('/role/filter').get(catchErrors(roleController.filter));
+const offerController = require('@/controllers/erpControllers/offerController');
 
 // //_________________________________ API for employees_____________________
 router.route('/employee/create').post(catchErrors(employeeController.create));
@@ -91,6 +44,7 @@ router.route('/client/delete/:id').delete(catchErrors(clientController.delete));
 router.route('/client/search').get(catchErrors(clientController.search));
 router.route('/client/list').get(catchErrors(clientController.list));
 router.route('/client/filter').get(catchErrors(clientController.filter));
+router.route('/client/summary').get(catchErrors(clientController.summary));
 
 // //_________________________________________________________________API for invoices_____________________
 router.route('/invoice/create').post(catchErrors(invoiceController.create));
@@ -100,8 +54,9 @@ router.route('/invoice/delete/:id').delete(catchErrors(invoiceController.delete)
 router.route('/invoice/search').get(catchErrors(invoiceController.search));
 router.route('/invoice/list').get(catchErrors(invoiceController.list));
 router.route('/invoice/filter').get(catchErrors(invoiceController.filter));
-
 router.route('/invoice/pdf/:id').get(catchErrors(invoiceController.generatePDF));
+router.route('/invoice/summary').get(catchErrors(invoiceController.summary));
+router.route('/invoice/mail').post(catchErrors(invoiceController.sendMail));
 
 // //_________________________________________________________________API for items_____________________
 router.route('/item/create').post(catchErrors(itemController.create));
@@ -122,6 +77,9 @@ router.route('/quote/search').get(catchErrors(quoteController.search));
 router.route('/quote/list').get(catchErrors(quoteController.list));
 router.route('/quote/filter').get(catchErrors(quoteController.filter));
 router.route('/quote/pdf/:id').get(catchErrors(quoteController.generatePDF));
+router.route('/quote/summary').get(catchErrors(quoteController.summary));
+router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
+router.route('/quote/mail').post(catchErrors(quoteController.sendMail));
 
 // //___________________________________________ API for suppliers _____________________
 router.route('/supplier/create').post(catchErrors(supplierController.create));
@@ -166,14 +124,17 @@ router.route('/expenseCategory/filter').get(catchErrors(expenseCategoryControlle
 
 // //_____________________________________________ API for client payments_________________
 
-router.route('/paymentInvoice/create').post(catchErrors(paymentInvoiceController.create));
-router.route('/paymentInvoice/read/:id').get(catchErrors(paymentInvoiceController.read));
-router.route('/paymentInvoice/update/:id').patch(catchErrors(paymentInvoiceController.update));
-router.route('/paymentInvoice/delete/:id').delete(catchErrors(paymentInvoiceController.delete));
-router.route('/paymentInvoice/search').get(catchErrors(paymentInvoiceController.search));
-router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.list));
-router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
-router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+router.route('/payment/invoice/create').post(catchErrors(paymentInvoiceController.create));
+router.route('/payment/invoice/read/:id').get(catchErrors(paymentInvoiceController.read));
+router.route('/payment/invoice/update/:id').patch(catchErrors(paymentInvoiceController.update));
+router.route('/payment/invoice/delete/:id').delete(catchErrors(paymentInvoiceController.delete));
+router.route('/payment/invoice/search').get(catchErrors(paymentInvoiceController.search));
+router.route('/payment/invoice/list').get(catchErrors(paymentInvoiceController.list));
+router.route('/payment/invoice/filter').get(catchErrors(paymentInvoiceController.filter));
+router.route('/payment/invoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+router.route('/payment/invoice/summary').get(catchErrors(paymentInvoiceController.summary));
+
+router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
 // //____________________________________________ API for Global Setting _________________
 
@@ -184,5 +145,17 @@ router.route('/settings/delete/:id').delete(catchErrors(settingsController.delet
 router.route('/settings/search').get(catchErrors(settingsController.search));
 router.route('/settings/list').get(catchErrors(settingsController.list));
 router.route('/settings/filter').get(catchErrors(settingsController.filter));
+
+// //_________________________________________________________________API for Offers_____________________
+
+router.route('/offer/create').post(catchErrors(offerController.create));
+router.route('/offer/read/:id').get(catchErrors(offerController.read));
+router.route('/offer/update/:id').patch(catchErrors(offerController.update));
+router.route('/offer/delete/:id').delete(catchErrors(offerController.delete));
+router.route('/offer/search').get(catchErrors(offerController.search));
+router.route('/offer/list').get(catchErrors(offerController.list));
+router.route('/offer/filter').get(catchErrors(offerController.filter));
+router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
+router.route('/offer/summary').get(catchErrors(offerController.summary));
 
 module.exports = router;

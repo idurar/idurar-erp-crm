@@ -1,13 +1,14 @@
 import React from 'react';
 import { Form, Input, Button, Radio, Select, Switch } from 'antd';
 import { DatePicker, TimePicker, Calendar } from '@/components/CustomAntd';
+import { validatePhoneNumber } from '@/utils/helpers';
 
 export default function EmployeeForm() {
   return (
     <>
       <Form.Item
         name="name"
-        label="name"
+        label="Name"
         rules={[
           {
             required: true,
@@ -90,13 +91,17 @@ export default function EmployeeForm() {
             required: true,
             message: 'Please input your phone!',
           },
+          {
+            pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
+            message: 'Please enter valid phone number!',
+          },
         ]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         name="department"
-        label="department"
+        label="Department"
         rules={[
           {
             required: true,
@@ -107,7 +112,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="position"
-        label="position"
+        label="Position"
         rules={[
           {
             required: true,
@@ -118,7 +123,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="address"
-        label="address"
+        label="Address"
         rules={[
           {
             required: true,
@@ -129,7 +134,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="state"
-        label="state"
+        label="State"
         rules={[
           {
             required: true,

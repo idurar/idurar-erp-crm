@@ -2,14 +2,14 @@ import * as actionTypes from './types';
 import { request } from '@/request';
 
 export const erp = {
-  resetState: () => async (dispatch) => {
+  resetState: () => (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,
     });
   },
   resetAction:
     ({ actionType }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.RESET_ACTION,
         keyState: actionType,
@@ -18,7 +18,7 @@ export const erp = {
     },
   currentItem:
     ({ data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ITEM,
         payload: { ...data },
@@ -26,7 +26,7 @@ export const erp = {
     },
   currentAction:
     ({ actionType, data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ACTION,
         keyState: actionType,
@@ -233,5 +233,43 @@ export const erp = {
           payload: null,
         });
       }
+    },
+
+  summary:
+    ({ entity, options }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'summary',
+        payload: null,
+      });
+
+      const data = await request.summary({ entity, options });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'summary',
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'summary',
+          payload: null,
+        });
+      }
+    },
+
+  mail:
+    ({ entity, jsonData }) =>
+    async (dispatch) => {
+      await request.mail({ entity, jsonData });
+    },
+
+  convert:
+    ({ entity, id }) =>
+    async (dispatch) => {
+      await request.convert({ entity, id });
     },
 };

@@ -34,7 +34,11 @@ export default function AdminForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
+            message: 'Please input your E-mail!',
+          },
+          {
+            type: 'email',
+            message: 'The input is not valid E-mail!',
           },
         ]}
       >

@@ -5,8 +5,9 @@
 // FS is a built in module to node that let's us read files from the system we're running on
 const fs = require('fs');
 const mongoose = require('mongoose');
+const currency = require('currency.js');
 
-const getData = require('./controllers/corsControllers/custom').getData;
+const getData = require('./controllers/middlewaresControllers/pdfController').getData;
 
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
 exports.moment = require('moment');
@@ -92,6 +93,21 @@ exports.settingMedical = async (name) => {
   } catch (err) {
     console.log('setting fetch failed', err);
   }
+};
+
+exports.calculate = {
+  add: (firstValue, secondValue) => {
+    return currency(firstValue).add(secondValue);
+  },
+  sub: (firstValue, secondValue) => {
+    return currency(firstValue).subtract(secondValue);
+  },
+  multiply: (firstValue, secondValue) => {
+    return currency(firstValue).multiply(secondValue);
+  },
+  divide: (firstValue, secondValue) => {
+    return currency(firstValue).divide(secondValue);
+  },
 };
 
 // const settingCommercial = () => {

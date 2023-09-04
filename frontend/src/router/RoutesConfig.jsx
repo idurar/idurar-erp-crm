@@ -42,15 +42,55 @@ export const routesConfig = [
   },
   {
     path: '/invoice',
-    component: 'Invoice',
+    component: 'Invoice/index',
+  },
+  {
+    path: '/invoice/create',
+    component: 'Invoice/InvoiceCreate',
+  },
+  {
+    path: '/invoice/read/:id',
+    component: 'Invoice/InvoiceRead',
+  },
+  {
+    path: '/invoice/update/:id',
+    component: 'Invoice/InvoiceUpdate',
+  },
+  {
+    path: '/invoice/pay/:id',
+    component: 'Invoice/InvoiceRecord',
   },
   {
     path: '/quote',
-    component: 'Quote',
+    component: 'Quote/index',
+  },
+  {
+    path: '/quote/create',
+    component: 'Quote/QuoteCreate',
+  },
+  {
+    path: '/quote/read/:id',
+    component: 'Quote/QuoteRead',
+  },
+  {
+    path: '/quote/update/:id',
+    component: 'Quote/QuoteUpdate',
   },
   {
     path: '/payment/invoice',
-    component: 'PaymentInvoice',
+    component: 'PaymentInvoice/index',
+  },
+  {
+    path: '/payment/invoice/create',
+    component: 'PaymentInvoice/PaymentInvoiceCreate',
+  },
+  {
+    path: '/payment/invoice/read/:id',
+    component: 'PaymentInvoice/PaymentInvoiceRead',
+  },
+  {
+    path: '/payment/invoice/update/:id',
+    component: 'PaymentInvoice/PaymentInvoiceUpdate',
   },
   {
     path: '/employee',
@@ -71,5 +111,9 @@ export const routesConfig = [
   {
     path: '/role',
     component: 'Role',
+  },
+  {
+    path: '/profile',
+    component: 'Profile',
   },
 ];
