@@ -35,47 +35,47 @@ const adminSchema = new Schema({
   },
   company: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   companyRegNumber: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   bankAccount: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   companyTaxNumber: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   address: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   zipcode: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   city: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   country: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   website: {
     type: String,
-    required: true,
+    required: false,
     lowercase: true,
   },
   photo: {

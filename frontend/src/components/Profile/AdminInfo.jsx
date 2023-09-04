@@ -88,7 +88,7 @@ const AdminInfo = ({ config }) => {
                 admin@demo.com
               </h3>
             </Descriptions.Item>
-            <Descriptions.Item label="Role d'utilisateur" span="3">
+            <Descriptions.Item label="User Role" span="3">
               <h3
                 style={{
                   color: '#22075e',

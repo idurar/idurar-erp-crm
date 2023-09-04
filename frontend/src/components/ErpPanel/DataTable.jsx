@@ -22,7 +22,7 @@ function AddNewItem({ config }) {
     //Todo: set this code in its own hook
     //Todo: replace axios with request from request.js
 
-    async function fetchDataForAllPages() {
+    const fetchDataForInvoiceFollowNum = async () => {
       const results = [];
 
       const firstPageResponse = await axios.get('/invoice/list');
@@ -51,9 +51,9 @@ function AddNewItem({ config }) {
         console.error('Error fetching data for the first page');
       }
       return results;
-    }
+    };
 
-    fetchDataForAllPages()
+    fetchDataForInvoiceFollowNum()
       .then((results) => {
         results.sort((a, b) => {
           const dateA = new Date(a.date);
@@ -62,22 +62,23 @@ function AddNewItem({ config }) {
         });
 
         const formattedInvoicesArray = results.map((invoice, index) => {
+          const date = new Date();
+          const year = date.getFullYear();
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
           const dateNum = invoice.number.split('/');
-          const date = dateNum[0];
           const num = dateNum[1];
 
           let formattedNumber;
           if (index < 100) {
             formattedNumber = (+num + 1).toString().padStart(3, '0');
-            return `${date}/${formattedNumber}`;
+            return `${year + month}/${formattedNumber}`;
           }
           if (index < 1000) {
             formattedNumber = (+num + 1).toString().padStart(2, '0');
-
-            return `${date}/${formattedNumber}`;
+            return `${year + month}/${formattedNumber}`;
           } else {
             formattedNumber = (+num + 1).toString();
-            return `${date}/${formattedNumber}`;
+            return `${year + month}/${formattedNumber}`;
           }
         });
         const formattedInvoices = formattedInvoicesArray[0];

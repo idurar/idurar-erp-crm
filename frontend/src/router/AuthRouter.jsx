@@ -5,7 +5,7 @@ import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
 
 const Login = lazy(() => import(/*webpackChunkName:'LoginPage'*/ '@/pages/Login'));
-
+const Register = lazy(() => import(/*webpackChunkName:'RegisterPage'*/ '@/pages/Register'));
 const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
 
 export default function AuthRouter() {
@@ -16,6 +16,7 @@ export default function AuthRouter() {
         <Switch location={location} key={location.pathname}>
           <PublicRoute path="/" component={Login} render={() => <Redirect to="/login" />} exact />
           <PublicRoute component={Login} path="/login" exact />
+          <PublicRoute component={Register} path="/register" exact />
           <Route path="*" component={NotFound} render={() => <Redirect to="/notfound" />} />
         </Switch>
       </AnimatePresence>

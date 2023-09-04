@@ -70,6 +70,7 @@ export default function CreateItem({ config, CreateForm }) {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     fieldsValue['number'] = invoiceDate == undefined ? `${year + month}/1001` : invoiceDate;
+
     if (fieldsValue) {
       // if (fieldsValue.expiredDate) {
       //   const newDate = fieldsValue["expiredDate"].format("DD/MM/YYYY");
