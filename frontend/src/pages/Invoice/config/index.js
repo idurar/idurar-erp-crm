@@ -8,6 +8,7 @@ const Labels = {
   ENTITY_NAME: 'Invoice',
   CREATE_ENTITY: 'Save invoice',
   UPDATE_ENTITY: 'Update invoice',
+  RECORD_ENTITY: 'Record Payment',
 };
 
 const configPage = {
