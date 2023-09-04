@@ -3,10 +3,12 @@ import dayjs from 'dayjs';
 import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
+
 import { DatePicker } from '@/components/CustomAntd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import ItemRow from '@/components/ErpPanel/ItemRow';
+
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 export default function QuoteForm({ subTotal = 0, current = null }) {
@@ -55,6 +57,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
               entity={'client'}
               displayLabels={['company']}
               searchFields={'company,managerSurname,managerName'}
+              // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
         </Col>
@@ -66,7 +69,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input invoice number!',
+                message: 'Please input quote number!',
               },
             ]}
           >
@@ -81,7 +84,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input invoice year!',
+                message: 'Please input quote year!',
               },
             ]}
           >
@@ -95,19 +98,16 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: false,
-                message: 'Please input your status!',
+                message: 'Please input quote status!',
               },
             ]}
-            initialValue="draft"
+            initialValue={'draft'}
           >
             <Select
               options={[
                 { value: 'draft', label: 'Draft' },
-                { value: 'pending', label: 'pending' },
+                { value: 'pending', label: 'Pending' },
                 { value: 'sent', label: 'Sent' },
-                { value: 'expired', label: 'Expired' },
-                { value: 'declined', label: 'Declined' },
-                { value: 'accepted', label: 'Accepted' },
               ]}
             ></Select>
           </Form.Item>

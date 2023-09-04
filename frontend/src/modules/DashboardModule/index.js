@@ -6,7 +6,7 @@ import { DashboardLayout } from '@/layout';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 
-import RecentTable from '@/components/RecentTable';
+import RecentTable from './components/RecentTable';
 
 import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
