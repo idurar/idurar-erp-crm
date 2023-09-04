@@ -60,6 +60,12 @@ export default function PreviewCard({
   statistics = defaultStatistics,
   isLoading = false,
 }) {
+  const statisticsMap = defaultStatistics.map((defaultStat) => {
+    const matchedStat = Array.isArray(statistics)
+      ? statistics.find((stat) => stat.tag === defaultStat.tag)
+      : null;
+    return matchedStat || defaultStat;
+  });
   const customSort = (a, b) => {
     const colorOrder = Object.values(colours);
     const indexA = colorOrder.indexOf(a.props.color);
@@ -88,7 +94,7 @@ export default function PreviewCard({
             <Spin />
           </div>
         ) : (
-          (statistics.length > 0 ? statistics : defaultStatistics)
+          statisticsMap
             ?.map((status, index) => (
               <PreviewState
                 key={index}
