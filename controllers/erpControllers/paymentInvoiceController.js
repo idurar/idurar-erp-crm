@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const Model = mongoose.model('PaymentInvoice');
 const Invoice = mongoose.model('Invoice');
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
 
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('PaymentInvoice');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('PaymentInvoice');
 
 delete methods['create'];
 delete methods['update'];
@@ -89,7 +89,7 @@ methods.create = async (req, res) => {
     res.status(200).json({
       success: true,
       result: updatedResult,
-      message: 'Successfully Created the document in Model ',
+      message: 'Payment Invoice created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
@@ -319,38 +319,38 @@ methods.summary = async (req, res) => {
     }
 
     // get total amount of invoices
-   const result = await Model.aggregate([
-     {
-       $match: {
-         removed: false,
-         date: {
-           $gte: startDate.toDate(),
-           $lte: endDate.toDate(),
-         },
-       },
-     },
-     {
-       $group: {
-         _id: null, // Group all documents into a single group
-         count: {
-           $sum: 1,
-         },
-         total: {
-           $sum: '$amount',
-         },
-       },
-     },
-     {
-       $project: {
-         _id: 0, // Exclude _id from the result
-         count: 1,
-         total: 1,
-       },
-     },
-   ]);
+    const result = await Model.aggregate([
+      {
+        $match: {
+          removed: false,
+          date: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: null, // Group all documents into a single group
+          count: {
+            $sum: 1,
+          },
+          total: {
+            $sum: '$amount',
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0, // Exclude _id from the result
+          count: 1,
+          total: 1,
+        },
+      },
+    ]);
 
-   // Since there's only one result document, you can directly access it
-   const summary = result[0];
+    // Since there's only one result document, you can directly access it
+    const summary = result[0];
 
     return res.status(200).json({
       success: true,
@@ -358,7 +358,7 @@ methods.summary = async (req, res) => {
       message: `Successfully fetched the summary of payment invoices for the last ${defaultType}`,
     });
   } catch (error) {
-    console.log("error", error)
+    console.log('error', error);
     return res.status(500).json({
       success: false,
       result: null,

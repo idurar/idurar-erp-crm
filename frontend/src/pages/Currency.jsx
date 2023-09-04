@@ -77,7 +77,7 @@ export default function Currency() {
   ];
 
   const ADD_NEW_ENTITY = 'Add new currency';
-  const DATATABLE_TITLE = 'currencys List';
+  const DATATABLE_TITLE = 'Currencies List';
   const ENTITY_NAME = 'currency';
   const CREATE_ENTITY = 'Create currency';
   const UPDATE_ENTITY = 'Update currency';

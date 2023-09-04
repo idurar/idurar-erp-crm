@@ -1,5 +1,5 @@
-// const crudController = require("./corsControllers/crudController");
-// module.exports = crudController.createCRUDController("Quote");
+// const createCRUDController = require("./corsControllers/crudController");
+// module.exports = createCRUDController("Quote");
 
 const mongoose = require('mongoose');
 const moment = require('moment');
@@ -7,11 +7,11 @@ const moment = require('moment');
 const Model = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
 
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailQuoteController');
 
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('Quote');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('Quote');
 
 delete methods['create'];
 delete methods['update'];
@@ -62,7 +62,7 @@ methods.create = async (req, res) => {
     return res.status(200).json({
       success: true,
       result: updateResult,
-      message: 'Successfully Created the document in Model ',
+      message: 'Quote created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations

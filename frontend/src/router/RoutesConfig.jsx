@@ -74,7 +74,19 @@ export const routesConfig = [
   },
   {
     path: '/payment/invoice',
-    component: 'PaymentInvoice',
+    component: 'PaymentInvoice/index',
+  },
+  {
+    path: '/payment/invoice/create',
+    component: 'PaymentInvoice/PaymentInvoiceCreate',
+  },
+  {
+    path: '/payment/invoice/read/:id',
+    component: 'PaymentInvoice/PaymentInvoiceRead',
+  },
+  {
+    path: '/payment/invoice/update/:id',
+    component: 'PaymentInvoice/PaymentInvoiceUpdate',
   },
   {
     path: '/employee',
