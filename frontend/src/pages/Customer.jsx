@@ -55,7 +55,7 @@ function Customer() {
   ];
 
   const ADD_NEW_ENTITY = 'Add new customer';
-  const DATATABLE_TITLE = 'customers List';
+  const DATATABLE_TITLE = 'Customers List';
   const ENTITY_NAME = 'customer';
   const CREATE_ENTITY = 'Create customer';
   const UPDATE_ENTITY = 'Update customer';

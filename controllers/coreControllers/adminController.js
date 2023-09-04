@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Admin = mongoose.model('Admin');
-const getOne = require('../corsControllers/custom').getOne;
+const getOne = require('@/controllers/middlewaresControllers/pdfController').getOne;
 
 /**
  *  Get all documents of a Model
