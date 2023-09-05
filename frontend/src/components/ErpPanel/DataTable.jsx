@@ -47,7 +47,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    const options = { page: pagination.current || 1 };
+    const options = { page: pagination.current || 1, limit: pagination.pageSize || 10 };
     dispatch(erp.list({ entity, options }));
   }, []);
 
@@ -58,7 +58,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
-
+  console.log({ pagination });
   return (
     <>
       <PageHeader
