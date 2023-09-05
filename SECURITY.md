@@ -1,6 +1,7 @@
 # Security Policy
 
 ## Supported Releases
+
 | Version | Supported          |
 | ------- | ------------------ |
 | 2.0.1   | :white_check_mark: |
@@ -11,12 +12,14 @@
 Please do not open public github issues or pull requests on this repository for security-related matters. Instead, follow the responsible disclosure process outlined below.
 
 ### Scope
+
 This security policy covers the security of this repository and its code. If you discover a security vulnerability related to this repository, please report it responsibly.
 
 ### Responsible Disclosure Process
-#### Option 1: Reporting via Email
 
-1. **Contact Us**: Send an email to [security@idurarapp.com](mailto:security@idurarapp.com) with details of the vulnerability. Please provide a clear and concise description of the issue, any potential impact, and a step-by-step demonstration if possible. Please do not include sensitive information in your initial email.
+#### Option 1: Reporting via Github Security Advisors
+
+1. **Contact Us**: Submit your report to [https://github.com/idurar/idurar-erp-crm/security](https://github.com/idurar/idurar-erp-crm/security) with details of the vulnerability. Please provide a clear and concise description of the issue, any potential impact, and a step-by-step demonstration if possible. Please do not include sensitive information in your initial email.
 
 2. **Confirmation**: We will acknowledge receipt of your report within [X] business days and provide an estimated timeline for when you can expect a response.
 
