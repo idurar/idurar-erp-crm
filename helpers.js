@@ -4,10 +4,8 @@
 
 // FS is a built in module to node that let's us read files from the system we're running on
 const fs = require('fs');
-const mongoose = require('mongoose');
-const currency = require('currency.js');
 
-const getData = require('./controllers/middlewaresControllers/pdfController').getData;
+const currency = require('currency.js');
 
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
 exports.moment = require('moment');
@@ -26,14 +24,6 @@ exports.icon = (name) => {
   }
 };
 exports.image = (name) => fs.readFileSync(`./public/images/photos/${name}.jpg`);
-
-exports.adminPhotoUrl = (admin) => {
-  if (admin) {
-    return admin.photo ? '/' + admin.photo : '/images/photos/profile.jpg';
-  } else {
-    return '/images/photos/profile.jpg';
-  }
-};
 
 // Some details about the site
 exports.siteName = `Express.js / MongoBD / Rest Api`;
@@ -56,45 +46,6 @@ exports.timeRange = (start, end, format, interval) => {
   return range;
 };
 
-exports.settingCommercial = async (name) => {
-  try {
-    const Model = mongoose.model('SettingCommercial');
-    const result = await Model.findOne({ name: name });
-    if (result) {
-      return await result.value;
-    }
-    return null;
-  } catch (err) {
-    console.log('setting fetch failed', err);
-  }
-};
-
-exports.settingGlobal = async (name) => {
-  try {
-    const Model = mongoose.model('SettingGlobal');
-    const result = await Model.findOne({ name: name });
-    if (result) {
-      return await result.value;
-    }
-    return null;
-  } catch (err) {
-    console.log('setting fetch failed', err);
-  }
-};
-
-exports.settingMedical = async (name) => {
-  try {
-    const Model = mongoose.model('SettingMedical');
-    const result = await Model.findOne({ name: name });
-    if (result) {
-      return await result.value;
-    }
-    return null;
-  } catch (err) {
-    console.log('setting fetch failed', err);
-  }
-};
-
 exports.calculate = {
   add: (firstValue, secondValue) => {
     return currency(firstValue).add(secondValue).value;
@@ -109,54 +60,3 @@ exports.calculate = {
     return currency(firstValue).divide(secondValue).value;
   },
 };
-
-// const settingCommercial = () => {
-// 	return new Promise((resolve, reject) => {
-// 		try {
-// 			resolve(getData('SettingCommercial'));
-// 		} catch (error) {
-// 			reject(error);
-// 		}
-// 	});
-// }
-
-// const settingGlobal = () => {
-// 	return new Promise((resolve, reject) => {
-// 		try {
-// 			resolve(getData('SettingGlobal'));
-// 		} catch (error) {
-// 			reject(error);
-// 		}
-// 	});
-// }
-
-// const settingMedical = () => {
-// 	return new Promise( (resolve, reject) => {
-// 		try {
-// 			resolve(getData('SettingMedical'));
-// 		} catch (error) {
-// 			reject(error);
-// 		}
-// 	});
-// }
-
-/**
- * Medical` settings
- */
-// module.exports.settings = async (callback) => {
-// 	var settings = {}
-
-// 	await settingCommercial().then(function (data) {
-// 		settings['commercial'] = data;
-// 	});
-
-// 	await settingGlobal().then(function (data) {
-// 		settings['global'] = data;
-// 	});
-
-// 	await settingMedical().then(function (data) {
-// 		settings['medical'] = data;
-// 	});
-
-// 	callback(settings);
-// }
