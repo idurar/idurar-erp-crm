@@ -1,5 +1,5 @@
 import SelectAsync from '@/components/SelectAsync';
-import { Form, Input } from 'antd';
+import { Form, Input, Select } from 'antd';
 
 export default function AdminForm({ isUpdateForm = false }) {
   return (
@@ -69,7 +69,10 @@ export default function AdminForm({ isUpdateForm = false }) {
           },
         ]}
       >
-        <SelectAsync entity={'role'} displayLabels={['displayName']}></SelectAsync>
+        <Select>
+          <Select.Option value="admin">Admin</Select.Option>
+          <Select.Option value="staff">Staff</Select.Option>
+        </Select>
       </Form.Item>
     </>
   );

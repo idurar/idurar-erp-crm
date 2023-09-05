@@ -30,6 +30,7 @@ const create = async (req, res) => {
     var newAdmin = new Admin();
     const passwordHash = newAdmin.generateHash(password);
     req.body.password = passwordHash;
+    req.body.role = 'staff';
 
     const result = await new Admin(req.body).save();
     if (!result) {
@@ -49,7 +50,6 @@ const create = async (req, res) => {
         surname: result.surname,
         photo: result.photo,
         role: result.role,
-        employee: result.employee,
       },
       message: 'Admin document save correctly',
     });

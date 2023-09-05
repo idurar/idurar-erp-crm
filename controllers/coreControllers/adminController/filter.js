@@ -13,6 +13,10 @@ const filter = async (req, res) => {
     const result = await Admin.find({ removed: false })
       .where(req.query.filter)
       .equals(req.query.equal);
+
+    for (let admin of result) {
+      admin.password = undefined;
+    }
     return res.status(200).json({
       success: true,
       result,
