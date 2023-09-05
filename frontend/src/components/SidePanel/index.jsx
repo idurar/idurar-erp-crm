@@ -60,7 +60,7 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
   return (
     <Sider
       trigger={<MenuOutlined className="trigger" />}
-      width={window.innerWidth >= screens.md ? '95%' : '400px'}
+      width={screens.md ? '400px' : '95%'}
       collapsed={isSidePanelClose}
       collapsedWidth={'0px'}
       onCollapse={collapsePanel}
@@ -71,6 +71,7 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
       }}
       style={{
         left: leftSider,
+        zIndex: '100',
       }}
     >
       <div
