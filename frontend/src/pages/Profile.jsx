@@ -5,7 +5,7 @@ export default function Profile() {
   const entity = 'profile';
 
   const PANEL_TITLE = 'profile';
-  const ENTITY_NAME = 'profile';
+  const ENTITY_NAME = 'Profile';
   const UPDATE_ENTITY = 'Update profile';
 
   const config = {

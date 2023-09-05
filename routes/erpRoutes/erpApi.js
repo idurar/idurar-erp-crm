@@ -1,13 +1,8 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const setFilePathToBody = require('@/middlewares/setFilePathToBody');
+
 const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
-
-const adminController = require('@/controllers/erpControllers/adminController');
-const roleController = require('@/controllers/erpControllers/roleController');
 
 const employeeController = require('@/controllers/erpControllers/employeeController');
 const paymentModeController = require('@/controllers/erpControllers/paymentModeController');
@@ -20,50 +15,8 @@ const orderFormController = require('@/controllers/erpControllers/orderFormContr
 const expenseController = require('@/controllers/erpControllers/expenseController');
 const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
-const settingsController = require('@/controllers/erpControllers/settingsController');
+
 const offerController = require('@/controllers/erpControllers/offerController');
-
-// //_______________________________ Admin management_______________________________
-
-var adminPhotoStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/admin');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-const adminPhotoUpload = multer({ storage: adminPhotoStorage });
-
-router
-  .route('/admin/create')
-  .post([adminPhotoUpload.single('photo'), setFilePathToBody], catchErrors(adminController.create));
-router.route('/admin/read/:id').get(catchErrors(adminController.read));
-// router.route("/admin/update/:id").patch(catchErrors(adminController.update));
-// router.route("/admin/delete/:id").delete(catchErrors(adminController.delete));
-router.route('/admin/search').get(catchErrors(adminController.search));
-router.route('/admin/list').get(catchErrors(adminController.list));
-router.route('/admin/profile').get(catchErrors(adminController.profile));
-router.route('/admin/status/:id').patch(catchErrors(adminController.status));
-// router
-//   .route("/admin/photo")
-//   .post(
-//     [adminPhotoUpload.single("photo"), setFilePathToBody],
-//     catchErrors(adminController.photo)
-//   );
-// router
-//   .route("/admin/password-update/:id")
-//   .patch(catchErrors(adminController.updatePassword));
-
-// //____________________________ Role management_______________________________
-
-router.route('/role/create').post(catchErrors(roleController.create));
-router.route('/role/read/:id').get(catchErrors(roleController.read));
-router.route('/role/update/:id').patch(catchErrors(roleController.update));
-router.route('/role/delete/:id').delete(catchErrors(roleController.delete));
-router.route('/role/search').get(catchErrors(roleController.search));
-router.route('/role/list').get(catchErrors(roleController.list));
-router.route('/role/filter').get(catchErrors(roleController.filter));
 
 // //_________________________________ API for employees_____________________
 router.route('/employee/create').post(catchErrors(employeeController.create));
@@ -171,27 +124,17 @@ router.route('/expenseCategory/filter').get(catchErrors(expenseCategoryControlle
 
 // //_____________________________________________ API for client payments_________________
 
-router.route('/paymentInvoice/create').post(catchErrors(paymentInvoiceController.create));
-router.route('/paymentInvoice/read/:id').get(catchErrors(paymentInvoiceController.read));
-router.route('/paymentInvoice/update/:id').patch(catchErrors(paymentInvoiceController.update));
-router.route('/paymentInvoice/delete/:id').delete(catchErrors(paymentInvoiceController.delete));
-router.route('/paymentInvoice/search').get(catchErrors(paymentInvoiceController.search));
-router.route('/paymentInvoice/list').get(catchErrors(paymentInvoiceController.list));
-router.route('/paymentInvoice/filter').get(catchErrors(paymentInvoiceController.filter));
-router.route('/paymentInvoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
-router.route('/paymentInvoice/summary').get(catchErrors(paymentInvoiceController.summary));
+router.route('/payment/invoice/create').post(catchErrors(paymentInvoiceController.create));
+router.route('/payment/invoice/read/:id').get(catchErrors(paymentInvoiceController.read));
+router.route('/payment/invoice/update/:id').patch(catchErrors(paymentInvoiceController.update));
+router.route('/payment/invoice/delete/:id').delete(catchErrors(paymentInvoiceController.delete));
+router.route('/payment/invoice/search').get(catchErrors(paymentInvoiceController.search));
+router.route('/payment/invoice/list').get(catchErrors(paymentInvoiceController.list));
+router.route('/payment/invoice/filter').get(catchErrors(paymentInvoiceController.filter));
+router.route('/payment/invoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
+router.route('/payment/invoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
-router.route('/paymentInvoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
-
-// //____________________________________________ API for Global Setting _________________
-
-router.route('/settings/create').post(catchErrors(settingsController.create));
-router.route('/settings/read/:id').get(catchErrors(settingsController.read));
-router.route('/settings/update/:id').patch(catchErrors(settingsController.update));
-router.route('/settings/delete/:id').delete(catchErrors(settingsController.delete));
-router.route('/settings/search').get(catchErrors(settingsController.search));
-router.route('/settings/list').get(catchErrors(settingsController.list));
-router.route('/settings/filter').get(catchErrors(settingsController.filter));
+router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
 // //_________________________________________________________________API for Offers_____________________
 

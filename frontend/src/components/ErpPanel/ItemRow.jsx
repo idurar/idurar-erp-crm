@@ -3,6 +3,7 @@ import { Form, Input, InputNumber, Row, Col } from 'antd';
 
 import { DeleteOutlined } from '@ant-design/icons';
 import { useMoney } from '@/settings';
+import calculate from '@/utils/calculate';
 
 export default function ItemRow({
   field,
@@ -33,9 +34,9 @@ export default function ItemRow({
   }, [current]);
 
   useEffect(() => {
-    const currentTotal = price * quantity;
+    const currentTotal = calculate.multiply(price, quantity);
 
-    setTotal(currentTotal.toFixed(2));
+    setTotal(Number.parseFloat(currentTotal).toFixed(2));
   }, [price, quantity]);
 
   return (

@@ -80,7 +80,7 @@ const quoteSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'Draft',
+    default: 'draft',
   },
   pdfPath: {
     type: String,

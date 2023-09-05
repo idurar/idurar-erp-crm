@@ -31,6 +31,7 @@ export default function RegisterForm() {
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
+          type='email'
           placeholder="Email"
           size="large"
         />
