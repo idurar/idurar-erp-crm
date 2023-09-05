@@ -22,6 +22,7 @@ const expenseCategoryController = require('@/controllers/erpControllers/expenseC
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
 const settingsController = require('@/controllers/erpControllers/settingsController');
 const offerController = require('@/controllers/erpControllers/offerController');
+const leadController = require('@/controllers/erpControllers/leadController');
 
 // //_______________________________ Admin management_______________________________
 
@@ -205,4 +206,13 @@ router.route('/offer/filter').get(catchErrors(offerController.filter));
 router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
 router.route('/offer/summary').get(catchErrors(offerController.summary));
 
+// //_____________________________________ API for leads __________________________________________________
+router.route('/lead/create').post(catchErrors(leadController.create));
+router.route('/lead/read/:id').get(catchErrors(leadController.read));
+router.route('/lead/update/:id').patch(catchErrors(leadController.update));
+router.route('/lead/delete/:id').delete(catchErrors(leadController.delete));
+router.route('/lead/search').get(catchErrors(leadController.search));
+router.route('/lead/list').get(catchErrors(leadController.list));
+router.route('/lead/filter').get(catchErrors(leadController.filter));
+router.route('/lead/summary').get(catchErrors(leadController.summary));
 module.exports = router;
