@@ -11,6 +11,8 @@ import Loading from '@/components/Loading';
 
 import PaymentInvoiceForm from '@/forms/PaymentInvoiceForm';
 
+import calculate from '@/utils/calculate';
+
 export default function RecordPayment({ config }) {
   let { entity } = config;
   const { erpContextAction } = useErpContext();
@@ -26,7 +28,7 @@ export default function RecordPayment({ config }) {
     if (currentInvoice) {
       const { credit, total, discount } = currentInvoice;
 
-      setMaxAmount(total - discount - credit);
+      setMaxAmount(calculate.sub(calculate.sub(total, discount), credit));
     }
   }, [currentInvoice]);
   useEffect(() => {
