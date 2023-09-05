@@ -1,0 +1,25 @@
+[
+  {
+    "settingKey": "appName",
+    "settingValue": "IDURAR ERP/CRM",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "language",
+    "settingValue": "en_us",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "emailConfig",
+    "settingValue": {
+      "smtpServer": "smtp.example.com",
+      "port": 587,
+      "username": "example@example.com",
+      "password": "mysecretpassword"
+    },
+    "valueType": "object",
+    "isCoreSetting": true
+  }
+]

@@ -1,6 +1,3 @@
-// const createCRUDController = require("./corsControllers/crudController");
-// module.exports = createCRUDController("Quote");
-
 const mongoose = require('mongoose');
 const moment = require('moment');
 
