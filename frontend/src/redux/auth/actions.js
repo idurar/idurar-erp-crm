@@ -37,19 +37,18 @@ export const logout = () => async (dispatch) => {
 };
 
 export const register =
-  ({ loginData }) =>
+  ({ registerData }) =>
   async (dispatch) => {
     dispatch({
       type: actionTypes.LOADING_REQUEST,
       payload: { loading: true },
     });
-    const data = await authService.login({ loginData });
-
+    const data = await authService.register({ registerData });
     if (data.success === true) {
       window.localStorage.setItem('isLoggedIn', true);
       window.localStorage.setItem('auth', JSON.stringify(data.result.admin));
       dispatch({
-        type: actionTypes.LOGIN_SUCCESS,
+        type: actionTypes.REGISTER_SUCCESS,
         payload: data.result.admin,
       });
       history.push('/');

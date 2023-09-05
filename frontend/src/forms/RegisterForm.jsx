@@ -1,6 +1,13 @@
 import React from 'react';
 import { Form, Input, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {
+  UserOutlined,
+  LockOutlined,
+  HomeOutlined,
+  IdcardOutlined,
+  EditOutlined,
+  UsergroupAddOutlined,
+} from '@ant-design/icons';
 
 export default function RegisterForm() {
   return (
@@ -10,14 +17,58 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Company name!',
+            message: 'Please input your company name!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<HomeOutlined className="site-form-item-ico" />}
+          placeholder="Company name"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
+        name="name"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your name!',
           },
         ]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="admin@demo.com"
-          autoComplete="email"
+          placeholder="Name"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
+        name="surname"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your surname!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<UsergroupAddOutlined className="site-form-item-icon" />}
+          placeholder="Surname"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
+        name="companyRegNumber"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your company registration number!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<IdcardOutlined className="site-form-item-icon" />}
+          placeholder="Company registration number"
           size="large"
         />
       </Form.Item>
@@ -31,8 +82,8 @@ export default function RegisterForm() {
         ]}
       >
         <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="admin@demo.com"
+          prefix={<EditOutlined className="site-form-item-icon" />}
+          placeholder="Email"
           autoComplete="email"
           size="large"
         />
@@ -48,7 +99,7 @@ export default function RegisterForm() {
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder="admin123"
+          placeholder="Password"
           size="large"
         />
       </Form.Item>
@@ -56,10 +107,6 @@ export default function RegisterForm() {
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
       </Form.Item>
     </>
   );

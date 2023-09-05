@@ -203,15 +203,4 @@ router.route('/offer/filter').get(catchErrors(offerController.filter));
 router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
 router.route('/offer/summary').get(catchErrors(offerController.summary));
 
-// //_____________________________________ API for Profile __________________________________________________
-
-router.route('/profile/create').post(catchErrors(profileController.create));
-router.route('/profile/read/:id').get(catchErrors(profileController.read));
-router.route('/profile/update/:id').patch(catchErrors(profileController.update));
-router.route('/profile/delete/:id').delete(catchErrors(profileController.delete));
-router.route('/profile/search').get(catchErrors(profileController.search));
-router.route('/profile/list').get(catchErrors(profileController.list));
-router.route('/profile/filter').get(catchErrors(profileController.filter));
-router.route('/profile/summary').get(catchErrors(profileController.summary));
-
 module.exports = router;

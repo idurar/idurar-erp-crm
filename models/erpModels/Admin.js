@@ -40,7 +40,7 @@ const adminSchema = new Schema({
   },
   companyRegNumber: {
     type: String,
-    required: false,
+    required: true,
     lowercase: true,
   },
   bankAccount: {

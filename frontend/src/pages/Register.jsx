@@ -43,7 +43,7 @@ const RegisterPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Register your company</Title>
+          <Title level={1}>Sign Up</Title>
 
           <Divider />
           <div className="site-layout-content">
@@ -66,7 +66,7 @@ const RegisterPage = () => {
                 >
                   Register now
                 </Button>
-                Or <a href="/login">Log in!</a>
+                Or <a href="/login">Sign in!</a>
               </Form.Item>
             </Form>
           </div>
