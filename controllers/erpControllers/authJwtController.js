@@ -75,6 +75,9 @@ exports.login = async (req, res) => {
           admin: {
             id: result._id,
             name: result.name,
+            role: result.role,
+            email: result.email,
+            surname: result.surname,
             isLoggedIn: result.isLoggedIn > 0 ? true : false,
           },
         },
