@@ -12,6 +12,7 @@ const sendMail = require('./mailQuoteController');
 
 const crudController = require('../corsControllers/crudController');
 const methods = crudController.createCRUDController('Quote');
+const { calculate } = require('../../helpers');
 
 delete methods['create'];
 delete methods['update'];
@@ -28,14 +29,14 @@ methods.create = async (req, res) => {
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
-      let total = item['quantity'] * item['price'];
+      let total = calculate.multiply(item['quantity'], item['price']);
       //sub total
-      subTotal += total;
+      subTotal = calculate.add(subTotal, total);
       //item total
       item['total'] = total;
     });
-    taxTotal = subTotal * taxRate;
-    total = subTotal + taxTotal;
+    taxTotal = calculate.multiply(subTotal, taxRate);
+    total = calculate.add(subTotal, taxTotal);
 
     let body = req.body;
 
@@ -95,14 +96,14 @@ methods.update = async (req, res) => {
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
-      let total = item['quantity'] * item['price'];
+      let total = calculate.multiply(item['quantity'], item['price']);
       //sub total
-      subTotal += total;
+      subTotal = calculate.add(subTotal, total);
       //item total
       item['total'] = total;
     });
-    taxTotal = subTotal * taxRate;
-    total = subTotal + taxTotal;
+    taxTotal = calculate.multiply(subTotal, taxRate);
+    total = calculate.add(subTotal, taxTotal);
 
     let body = req.body;
 

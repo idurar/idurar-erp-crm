@@ -8,6 +8,7 @@ const custom = require('../corsControllers/custom');
 const sendMail = require('./mailInvoiceController');
 const crudController = require('../corsControllers/crudController');
 const methods = crudController.createCRUDController('Invoice');
+const { calculate } = require('../../helpers');
 
 delete methods['create'];
 delete methods['update'];
@@ -23,14 +24,14 @@ methods.create = async (req, res) => {
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
-      let total = item['quantity'] * item['price'];
+      let total = calculate.multiply(item['quantity'], item['price']);
       //sub total
-      subTotal += total;
+      subTotal = calculate.add(subTotal, total);
       //item total
       item['total'] = total;
     });
-    taxTotal = subTotal * taxRate;
-    total = subTotal + taxTotal;
+    taxTotal = calculate.multiply(subTotal, taxRate);
+    total = calculate.add(subTotal, taxTotal);
 
     let body = req.body;
 
@@ -39,7 +40,7 @@ methods.create = async (req, res) => {
     body['total'] = total;
     body['items'] = items;
 
-    let paymentStatus = total - discount === 0 ? 'paid' : 'unpaid';
+    let paymentStatus = calculate.subtract(total, discount) === 0 ? 'paid' : 'unpaid';
 
     body['paymentStatus'] = paymentStatus;
     // Creating a new document in the collection
@@ -101,14 +102,14 @@ methods.update = async (req, res) => {
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
-      let total = item['quantity'] * item['price'];
+      let total = calculate.multiply(item['quantity'], item['price']);
       //sub total
-      subTotal += total;
+      subTotal = calculate.add(subTotal, total);
       //item total
       item['total'] = total;
     });
-    taxTotal = subTotal * taxRate;
-    total = subTotal + taxTotal;
+    taxTotal = calculate.multiply(subTotal, taxRate);
+    total = calculate.add(subTotal, taxTotal);
 
     let body = req.body;
 
@@ -119,7 +120,8 @@ methods.update = async (req, res) => {
     body['pdfPath'] = 'invoice-' + req.params.id + '.pdf';
     // Find document by id and updates with the required fields
 
-    let paymentStatus = total - discount === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
+    let paymentStatus =
+      calculate.subtract(total, discount) === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
     body['paymentStatus'] = paymentStatus;
 
     const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
@@ -159,12 +161,12 @@ methods.update = async (req, res) => {
 methods.summary = async (req, res) => {
   try {
     let defaultType = 'month';
-    
+
     const { type } = req.query;
 
     if (type) {
       if (['week', 'month', 'year'].includes(type)) {
-        defaultType = type
+        defaultType = type;
       } else {
         return res.status(400).json({
           success: false,
@@ -228,10 +230,7 @@ methods.summary = async (req, res) => {
           status: '$results._id',
           count: '$results.count',
           percentage: {
-            $round: [
-              { $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] },
-              1,
-            ],
+            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
           },
           total_amount: '$results.total_amount',
         },
@@ -268,7 +267,7 @@ methods.summary = async (req, res) => {
           total_amount: '$total_amount',
         },
       },
-    ])
+    ]);
 
     const finalResult = {
       total: result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2),
@@ -276,7 +275,6 @@ methods.summary = async (req, res) => {
       type,
       performance: result,
     };
-
 
     return res.status(200).json({
       success: true,
