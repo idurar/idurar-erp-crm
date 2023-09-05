@@ -22,6 +22,7 @@
     "glob": "7.1.1",
     "helmet": "^4.6.0",
     "html-pdf": "^3.0.1",
+    "joi": "^17.10.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "module-alias": "^2.2.2",
