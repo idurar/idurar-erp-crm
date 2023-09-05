@@ -22,6 +22,11 @@ const expenseCategoryController = require('@/controllers/erpControllers/expenseC
 const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
 const settingsController = require('@/controllers/erpControllers/settingsController');
 const offerController = require('@/controllers/erpControllers/offerController');
+const {
+  createPublicUpload,
+  uploadMiddleware,
+  createPrivateUpload,
+} = require('@/middlewares/uploadMiddleware');
 
 // //_______________________________ Admin management_______________________________
 
@@ -204,5 +209,37 @@ router.route('/offer/list').get(catchErrors(offerController.list));
 router.route('/offer/filter').get(catchErrors(offerController.filter));
 router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
 router.route('/offer/summary').get(catchErrors(offerController.summary));
+
+// //____________________________________________ API for Upload controller _________________
+
+router.route('/public/upload/:model/:fieldId').post(
+  createPublicUpload,
+  uploadMiddleware.single('upload'),
+  // need to add proper controller
+  catchErrors((req, res) => {
+    if (req.upload && req.file) {
+      return res.status(200).send({
+        success: true,
+        result: req.upload,
+        message: 'File uploaded successfully!',
+      });
+    }
+  })
+);
+
+router.route('/private/upload/:model/:fieldId').post(
+  createPrivateUpload,
+  uploadMiddleware.single('upload'),
+  // need to add proper controller
+  catchErrors((req, res) => {
+    if (req.upload && req.file) {
+      return res.status(200).send({
+        success: true,
+        result: req.upload,
+        message: 'File uploaded successfully!',
+      });
+    }
+  })
+);
 
 module.exports = router;
