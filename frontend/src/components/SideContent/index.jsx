@@ -50,60 +50,22 @@ export default function SideContent() {
             justifyContent: 'space-between',
           }}
         >
-          <img
-            src={logo1}
-            alt="Logo1"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
-          <img
-            src={logo2}
-            alt="Logo2"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
-          <img
-            src={logo3}
-            alt="Logo3"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
-          <img
-            src={logo4}
-            alt="Logo4"
-            style={{
-              margin: '0 15px',
-              display: 'block',
-              float: 'left',
-              width: '48px',
-              filter: 'grayscale(1)',
-              mixBlendMode: 'multiply',
-              opacity: '0.8',
-            }}
-          />
+          <ImageComponent src={logo1} alt="Logo1" />
+          <ImageComponent src={logo2} alt="Logo2" />
+          <ImageComponent src={logo3} alt="Logo3" />
+          <ImageComponent src={logo4} alt="Logo4" />
         </div>
       </div>
     </Content>
   );
 }
+
+const ImageComponent = ({ src, alt }) => {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="image-container" // Apply the CSS class
+    />
+  );
+};
