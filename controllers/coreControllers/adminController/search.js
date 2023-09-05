@@ -28,6 +28,9 @@ const search = async (req, res) => {
     }
     let result = await Admin.find(fields).where('removed', false).sort({ name: 'asc' }).limit(10);
 
+    for (let admin of result) {
+      admin.password = undefined;
+    }
     if (result.length >= 1) {
       return res.status(200).json({
         success: true,

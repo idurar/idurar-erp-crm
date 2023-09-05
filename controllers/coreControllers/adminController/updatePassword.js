@@ -47,7 +47,6 @@ const updatePassword = async (req, res) => {
         surname: result.surname,
         photo: result.photo,
         role: result.role,
-        employee: result.employee,
       },
       message: 'we update the password by this id: ' + req.params.id,
     });

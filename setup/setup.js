@@ -15,6 +15,7 @@ async function setupApp() {
       password: passwordHash,
       name: 'Salah Eddine',
       surname: 'Lalami',
+      role: 'admin',
     }).save();
 
     console.log('👍 Admin created : Done!');

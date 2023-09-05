@@ -7,7 +7,6 @@ const { catchErrors } = require('@/handlers/errorHandlers');
 const router = express.Router();
 
 const adminController = require('@/controllers/coreControllers/adminController');
-const roleController = require('@/controllers/coreControllers/roleController');
 const settingController = require('@/controllers/coreControllers/settingController');
 // //_______________________________ Admin management_______________________________
 

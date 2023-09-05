@@ -85,6 +85,10 @@ const login = async (req, res) => {
           admin: {
             id: result._id,
             name: result.name,
+            surname: result.surname,
+            role: result.role,
+            email: result.email,
+            photo: result.photo,
             isLoggedIn: result.isLoggedIn > 0 ? true : false,
           },
         },

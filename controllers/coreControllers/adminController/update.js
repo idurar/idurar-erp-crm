@@ -45,7 +45,6 @@ const update = async (req, res) => {
         surname: result.surname,
         photo: result.photo,
         role: result.role,
-        employee: result.employee,
       },
       message: 'we update this document by this id: ' + req.params.id,
     });

@@ -109,10 +109,6 @@ export const routesConfig = [
     component: 'PaymentMode',
   },
   {
-    path: '/role',
-    component: 'Role',
-  },
-  {
     path: '/profile',
     component: 'Profile',
   },

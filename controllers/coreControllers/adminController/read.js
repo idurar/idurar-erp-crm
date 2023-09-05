@@ -25,7 +25,6 @@ const read = async (req, res) => {
         surname: tmpResult.surname,
         photo: tmpResult.photo,
         role: tmpResult.role,
-        employee: tmpResult.employee,
       };
 
       return res.status(200).json({
