@@ -58,7 +58,6 @@ export default function DataTable({ config, DataTableDropMenu }) {
   useEffect(() => {
     dispatch(erp.list({ entity }));
   }, []);
-  console.log({ pagination });
   return (
     <>
       <PageHeader
