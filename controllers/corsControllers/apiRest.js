@@ -189,7 +189,7 @@ exports.delete = async (Model, req, res) => {
 
 exports.list = async (Model, req, res) => {
   const page = req.query.page || 1;
-  const limit = parseInt(req.query.items) || 10;
+  const limit = parseInt(req.query.limit) || 10;
   const skip = page * limit - limit;
   try {
     //  Query the database for a list of all results
