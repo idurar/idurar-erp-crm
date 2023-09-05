@@ -33,12 +33,7 @@ const adminSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  role: { type: mongoose.Schema.ObjectId, ref: 'Role', autopopulate: true },
-  hasCustomPermissions: {
-    type: Boolean,
-    default: false,
-  },
-  permissions: [{ type: mongoose.Schema.ObjectId, ref: 'Permission' }],
+  role: { type: String, default: 'staff' },
   isLoggedIn: { type: Number },
   loggedSessions: {
     type: [String],
