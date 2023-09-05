@@ -66,6 +66,11 @@ const leadSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  status: {
+    type: String,
+    enum: ['new', 'reached', 'interested', 'not interested', 'converted'],
+    default: 'new',
+  },
   created: {
     type: Date,
     default: Date.now,
