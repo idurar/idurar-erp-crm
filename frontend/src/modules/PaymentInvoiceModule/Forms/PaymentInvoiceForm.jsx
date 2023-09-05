@@ -7,7 +7,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import { DatePicker } from '@/components/CustomAntd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
-import ItemRow from '@/components/ErpPanel/ItemRow';
+
+import ItemRow from '@/modules/ErpPanelModule/ItemRow';
+
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
