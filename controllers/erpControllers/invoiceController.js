@@ -11,7 +11,6 @@ const createCRUDController = require('@/controllers/middlewaresControllers/creat
 const methods = createCRUDController('Invoice');
 const { calculate } = require('@/helpers');
 
-
 delete methods['create'];
 delete methods['update'];
 
@@ -42,7 +41,7 @@ methods.create = async (req, res) => {
     body['total'] = total;
     body['items'] = items;
 
-    let paymentStatus = calculate.subtract(total, discount) === 0 ? 'paid' : 'unpaid';
+    let paymentStatus = calculate.sub(total, discount) === 0 ? 'paid' : 'unpaid';
 
     body['paymentStatus'] = paymentStatus;
     // Creating a new document in the collection
@@ -123,7 +122,7 @@ methods.update = async (req, res) => {
     // Find document by id and updates with the required fields
 
     let paymentStatus =
-      calculate.subtract(total, discount) === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
+      calculate.sub(total, discount) === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
     body['paymentStatus'] = paymentStatus;
 
     const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
@@ -181,8 +180,8 @@ methods.summary = async (req, res) => {
     const currentDate = moment();
     let startDate = currentDate.clone().startOf(defaultType);
     let endDate = currentDate.clone().endOf(defaultType);
-    
-    const statuses = ['draft','pending','sent']
+
+    const statuses = ['draft', 'pending', 'sent'];
 
     const result = await Model.aggregate([
       {

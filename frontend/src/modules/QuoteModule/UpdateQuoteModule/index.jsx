@@ -1,36 +1,63 @@
+import { Button, Result } from 'antd';
+
 import { ErpLayout } from '@/layout';
 import UpdateItem from '@/modules/ErpPanelModule/UpdateItem';
 import QuoteForm from '@/modules/QuoteModule/Forms/QuoteForm';
 
 import PageLoader from '@/components/PageLoader';
+
 import { erp } from '@/redux/erp/actions';
-import { selectItemById, selectCurrentItem } from '@/redux/erp/selectors';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { selectReadItem } from '@/redux/erp/selectors';
+import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 export default function UpdateQuoteModule({ config }) {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const { id } = useParams();
+  const history = useHistory();
 
-  let item = useSelector(selectItemById(id));
+  useLayoutEffect(() => {
+    dispatch(erp.read({ entity: config.entity, id }));
+  }, [id]);
 
-  useEffect(() => {
-    if (item) {
-      dispatch(erp.currentItem({ data: item }));
-    } else {
-      dispatch(erp.read({ entity: config.entity, id }));
+  const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
+
+  useLayoutEffect(() => {
+    if (currentResult) {
+      dispatch(erp.currentAction({ actionType: 'update', data: currentResult }));
     }
-  }, [item]);
+  }, [currentResult]);
 
-  const { result: currentResult } = useSelector(selectCurrentItem);
-
-  item = currentResult;
-
-  return (
-    <ErpLayout>
-      {item ? <UpdateItem config={config} UpdateForm={QuoteForm} /> : <PageLoader />}
-    </ErpLayout>
-  );
+  if (isLoading) {
+    return (
+      <ErpLayout>
+        <PageLoader />
+      </ErpLayout>
+    );
+  } else
+    return (
+      <ErpLayout>
+        {isSuccess ? (
+          <UpdateItem config={config} UpdateForm={QuoteForm} />
+        ) : (
+          <Result
+            status="404"
+            title="Quote not found"
+            subTitle="Sorry, the Quote you requested does not exist."
+            extra={
+              <Button
+                type="primary"
+                onClick={() => {
+                  history.push(`/${config.entity.toLowerCase()}`);
+                }}
+              >
+                Back to Quote Page
+              </Button>
+            }
+          />
+        )}
+      </ErpLayout>
+    );
 }
