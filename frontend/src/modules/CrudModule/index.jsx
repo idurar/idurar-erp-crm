@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { Row, Col, Button, Divider } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import {MenuFoldOutlined,PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
@@ -110,8 +111,13 @@ function FixHeaderPanel({ config }) {
             size="small"
           ></Button>
         </Col>
-        <Col className="gutter-row" span={22}>
+        <Col
+          className="gutter-row"
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+          span={22}
+        >
           <h1 style={{ fontSize: 20, marginBottom: 20 }}>{config.PANEL_TITLE}</h1>
+          <MenuFoldOutlined onClick={collapsePanel} style={{ marginBottom: 20 }} />
         </Col>
       </Row>
       <Row gutter={8}>
