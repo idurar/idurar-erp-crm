@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Divider, Button } from 'antd';
+import { Form, Divider, Button, PageHeader, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectRecordPaymentItem } from '@/redux/erp/selectors';
+import { selectCurrentItem, selectRecordPaymentItem } from '@/redux/erp/selectors';
 
 import { useErpContext } from '@/context/erp';
 
@@ -14,7 +14,7 @@ import PaymentInvoiceForm from '@/forms/PaymentInvoiceForm';
 import calculate from '@/utils/calculate';
 
 export default function RecordPayment({ config }) {
-  let { entity, CREATE_ENTITY } = config;
+  let { entity } = config;
   const { erpContextAction } = useErpContext();
   const { recordPanel } = erpContextAction;
   const dispatch = useDispatch();
@@ -24,10 +24,10 @@ export default function RecordPayment({ config }) {
   const [form] = Form.useForm();
 
   const [maxAmount, setMaxAmount] = useState(0);
-
   useEffect(() => {
     if (currentInvoice) {
       const { credit, total, discount } = currentInvoice;
+
       setMaxAmount(calculate.sub(calculate.sub(total, discount), credit));
     }
   }, [currentInvoice]);
