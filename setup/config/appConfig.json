@@ -12,6 +12,12 @@
     "isCoreSetting": true
   },
   {
+    "settingKey": "allowedRole",
+    "settingValue": ["admin", "staff"],
+    "valueType": "array",
+    "isCoreSetting": true
+  },
+  {
     "settingKey": "emailConfig",
     "settingValue": {
       "smtpServer": "smtp.example.com",

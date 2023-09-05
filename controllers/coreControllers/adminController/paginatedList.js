@@ -24,8 +24,6 @@ const paginatedList = async (req, res) => {
     if (count > 0) {
       for (let admin of result) {
         admin.password = undefined;
-        admin.customMenu = undefined;
-        admin.permissions = undefined;
       }
       return res.status(200).json({
         success: true,

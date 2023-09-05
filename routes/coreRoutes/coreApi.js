@@ -38,16 +38,6 @@ router
 //   .route("/admin/password-update/:id")
 //   .patch(catchErrors(adminController.updatePassword));
 
-// //____________________________ Role management_______________________________
-
-router.route('/role/create').post(catchErrors(roleController.create));
-router.route('/role/read/:id').get(catchErrors(roleController.read));
-router.route('/role/update/:id').patch(catchErrors(roleController.update));
-//router.route('/role/delete/:id').delete(catchErrors(roleController.delete));
-router.route('/role/search').get(catchErrors(roleController.search));
-router.route('/role/list').get(catchErrors(roleController.list));
-router.route('/role/filter').get(catchErrors(roleController.filter));
-
 // //____________________________________________ API for Global Setting _________________
 
 router.route('/setting/create').post(catchErrors(settingController.create));
