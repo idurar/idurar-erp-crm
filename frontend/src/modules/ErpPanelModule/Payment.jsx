@@ -4,51 +4,36 @@ import { Divider } from 'antd';
 import { Button, PageHeader, Row, Col, Descriptions, Tag } from 'antd';
 import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
-import { useSelector, useDispatch } from 'react-redux';
-
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 
-import { selectRecordPaymentItem } from '@/redux/erp/selectors';
 import { useMoney } from '@/settings';
 
 import RecordPayment from './RecordPayment';
+import { useSelector } from 'react-redux';
+import { selectRecordPaymentItem } from '@/redux/erp/selectors';
+import history from '@/utils/history';
 
-export default function Payment({ config }) {
+export default function Payment({ config, currentItem }) {
   const { entity, ENTITY_NAME } = config;
 
   const { erpContextAction } = useErpContext();
-
-  const { current: currentItem } = useSelector(selectRecordPaymentItem);
 
   const { readPanel, recordPanel } = erpContextAction;
   const money = useMoney();
 
   const [itemslist, setItemsList] = useState([]);
-  const [currentErp, setCurrentErp] = useState({
-    status: '',
-    client: {
-      company: '',
-      email: '',
-      phone: '',
-      address: '',
-    },
-    subTotal: 0,
-    taxTotal: 0,
-    taxRate: 0,
-    total: 0,
-    credit: 0,
-    number: 0,
-    year: 0,
-  });
+  const [currentErp, setCurrentErp] = useState(currentItem);
 
   useEffect(() => {
+    const controller = new AbortController();
     if (currentItem) {
       const { items } = currentItem;
 
       setItemsList(items);
       setCurrentErp(currentItem);
     }
+    return () => controller.abort();
   }, [currentItem]);
 
   useEffect(() => {
@@ -66,7 +51,7 @@ export default function Payment({ config }) {
           lg={{ span: 20, push: 2 }}
         >
           <PageHeader
-            onBack={() => readPanel.close()}
+            onBack={() => history.push(`/${entity.toLowerCase()}`)}
             title={`Record Payment for ${ENTITY_NAME} # ${currentErp.number}/${
               currentErp.year || ''
             }`}
@@ -76,14 +61,16 @@ export default function Payment({ config }) {
             extra={[
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => recordPanel.close()}
+                onClick={() => {
+                  history.push(`/${entity.toLowerCase()}`);
+                }}
                 icon={<CloseCircleOutlined />}
               >
                 Cancel
               </Button>,
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => readPanel.open()}
+                onClick={() => history.push(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
                 Show Invoice

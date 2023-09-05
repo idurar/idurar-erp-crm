@@ -20,7 +20,7 @@ export default function DataTableDropMenu({ row, entity }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { erpContextAction } = useErpContext();
-  const { recordPanel, modal } = erpContextAction;
+  const { modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
   function Read() {
     dispatch(erp.currentItem({ data: item }));
@@ -28,13 +28,11 @@ export default function DataTableDropMenu({ row, entity }) {
     history.push(`/invoice/read/${row._id}`);
   }
   function RecordPayment() {
-    dispatch(erp.currentAction({ actionType: 'recordPayment', data: item }));
-    recordPanel.open();
     dispatch(erp.currentItem({ data: item }));
+    history.push(`/invoice/pay/${row._id}`);
   }
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));
-    // updatePanel.open();
     history.push(`/invoice/update/${row._id}`);
   }
   function Delete() {

@@ -47,7 +47,7 @@ methods.create = async (req, res) => {
     const result = await Model.create(req.body);
 
     const fileId = 'payment-invoice-report-' + result._id + '.pdf';
-    const updatePath = Model.findOneAndUpdate(
+    const updatePath = await Model.findOneAndUpdate(
       { _id: result._id.toString(), removed: false },
       { pdfPath: fileId },
       {
@@ -57,19 +57,15 @@ methods.create = async (req, res) => {
     // Returning successfull response
 
     const { _id: paymentInvoiceId, amount } = result;
-    const { id: invoiceId, total, discount, credit } = result.invoice;
-    console.log(
-      '🚀 ~ file: paymentInvoiceController.js ~ line 63 ~ methods.create= ~ total',
-      total
-    );
+    const { id: invoiceId, total, discount, credit } = currentInvoice;
 
     let paymentStatus =
       total - discount === credit + amount ? 'paid' : credit + amount > 0 ? 'partially' : 'unpaid';
 
-    const invoiceUpdate = Invoice.findOneAndUpdate(
+    const invoiceUpdate = await Invoice.findOneAndUpdate(
       { _id: req.body.invoice },
       {
-        $push: { paymentInvoice: paymentInvoiceId },
+        $push: { paymentInvoice: paymentInvoiceId.toString() },
         $inc: { credit: amount },
         $set: { paymentStatus: paymentStatus },
       },
@@ -79,16 +75,15 @@ methods.create = async (req, res) => {
       }
     ).exec();
 
-    custom.generatePdf(
+    await custom.generatePdf(
       'PaymentInvoice',
       { filename: 'payment-invoice-report', format: 'A4' },
-      result
+      invoiceUpdate
     );
 
-    const [updatedResult, invoiceUpdated] = await Promise.all([updatePath, invoiceUpdate]);
     res.status(200).json({
       success: true,
-      result: updatedResult,
+      result: updatePath,
       message: 'Payment Invoice created successfully',
     });
   } catch (err) {
@@ -171,7 +166,7 @@ methods.update = async (req, res) => {
     ).exec();
 
     const updateInvoice = await Invoice.findOneAndUpdate(
-      { _id: req.body.invoice },
+      { _id: result.invoice._id.toString() },
       {
         $inc: { credit: changedAmount },
         $set: {
@@ -183,10 +178,10 @@ methods.update = async (req, res) => {
       }
     ).exec();
 
-    custom.generatePdf(
+    await custom.generatePdf(
       'PaymentInvoice',
       { filename: 'payment-invoice-report', format: 'A4' },
-      result
+      updateInvoice
     );
 
     res.status(200).json({
@@ -195,7 +190,6 @@ methods.update = async (req, res) => {
       message: 'Successfully updated the Payment ',
     });
   } catch (err) {
-    console.log(err);
     // If err is thrown by Mongoose due to required validations
     if (err.name == 'ValidationError') {
       res.status(400).json({
@@ -306,17 +300,8 @@ methods.summary = async (req, res) => {
     }
 
     const currentDate = moment();
-    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
-    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
-
-    if (defaultType === 'week') {
-      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
-      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
-    }
-    if (defaultType === 'year') {
-      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
-      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
-    }
+    let startDate = currentDate.clone().startOf(defaultType);
+    let endDate = currentDate.clone().endOf(defaultType);
 
     // get total amount of invoices
     const result = await Model.aggregate([
@@ -349,12 +334,9 @@ methods.summary = async (req, res) => {
       },
     ]);
 
-    // Since there's only one result document, you can directly access it
-    const summary = result[0];
-
     return res.status(200).json({
       success: true,
-      result: summary,
+      result: result.length > 0 ? result[0] : { count: 0, total: 0 },
       message: `Successfully fetched the summary of payment invoices for the last ${defaultType}`,
     });
   } catch (error) {

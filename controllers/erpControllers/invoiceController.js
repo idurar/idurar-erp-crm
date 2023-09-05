@@ -175,17 +175,10 @@ methods.summary = async (req, res) => {
     }
 
     const currentDate = moment();
-    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
-    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
-
-    if (defaultType === 'week') {
-      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
-      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
-    }
-    if (defaultType === 'year') {
-      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
-      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
-    }
+    let startDate = currentDate.clone().startOf(defaultType);
+    let endDate = currentDate.clone().endOf(defaultType);
+    
+    const statuses = ['draft','pending','sent']
 
     const result = await Model.aggregate([
       {
@@ -239,6 +232,18 @@ methods.summary = async (req, res) => {
         },
       },
     ]);
+
+    statuses.forEach((status) => {
+      const found = result.find((item) => item.status === status);
+      if (!found) {
+        result.push({
+          status,
+          count: 0,
+          percentage: 0,
+          total_amount: 0,
+        });
+      }
+    });
 
     const unpaid = await Model.aggregate([
       {
