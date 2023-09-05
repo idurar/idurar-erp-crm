@@ -1,4 +1,4 @@
-import { Tag, Divider, Row, Col, Spin } from 'antd';
+import { Tag, Divider, Row, Col, Spin,Tooltip } from 'antd';
 
 export default function AnalyticSummaryCard({
   title,
@@ -15,7 +15,10 @@ export default function AnalyticSummaryCard({
       md={{ span: 12 }}
       lg={{ span: 6 }}
     >
-      <div className="whiteBox shadow" style={{ color: '#595959', fontSize: 13, height: '106px' }}>
+      <div
+        className="whiteBox shadow"
+        style={{ color: '#595959', fontSize: 13, minHeight: '106px', height: '100%' }}
+      >
         <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
           <h3 style={{ color: '#22075e', marginBottom: 0, textTransform: 'capitalize' }}>
             {title}
@@ -23,39 +26,49 @@ export default function AnalyticSummaryCard({
         </div>
         <Divider style={{ padding: 0, margin: 0 }}></Divider>
         <div className="pad15">
-          <Row gutter={[0, 0]}>
-            <Col className="gutter-row" span={11} style={{ textAlign: 'left' }}>
-              <div className="left">{prefix}</div>
+          <Row gutter={[0, 0]} justify="space-between" wrap={false}>
+            <Col className="gutter-row" flex="70px" style={{ textAlign: 'left' }}>
+              <div className="left" style={{ whiteSpace: 'nowrap' }}>
+                {prefix}
+              </div>
             </Col>
-            <Col className="gutter-row" span={2}>
-              <Divider
-                style={{
-                  padding: '10px 0',
-                  justifyContent: 'center',
-                }}
-                type="vertical"
-              ></Divider>
-            </Col>
+            <Divider
+              style={{
+                height: '100%',
+                padding: '10px 0',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              type="vertical"
+            ></Divider>
             <Col
               className="gutter-row"
-              span={11}
+              flex="auto"
               style={{
                 display: 'flex',
                 justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               {isLoading ? (
                 <Spin />
               ) : (
-                <Tag
-                  color={tagColor}
-                  style={{
-                    margin: '0 auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {tagContent}
-                </Tag>
+                <Tooltip title={tagContent}>
+                  <Tag
+                    color={tagColor}
+                    style={{
+                      margin: '0 auto',
+                      justifyContent: 'center',
+                      maxWidth: '110px',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {tagContent ? tagContent : '$0.00'}
+
+                  </Tag>
+                </Tooltip>
               )}
             </Col>
           </Row>

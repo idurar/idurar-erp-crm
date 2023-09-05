@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useCrudContext } from '@/context/crud';
 import { useAppContext } from '@/context/appContext';
-import { Layout } from 'antd';
+import { Grid, Layout } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import CollapseBox from '../CollapseBox';
 
+const { useBreakpoint } = Grid;
 const { Sider } = Layout;
 
 export default function SidePanel({ config, topContent, bottomContent, fixHeaderPanel }) {
+  const screens = useBreakpoint();
+
   const { ADD_NEW_ENTITY } = config;
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose, isBoxCollapsed } = state;
@@ -57,7 +60,7 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
   return (
     <Sider
       trigger={<MenuOutlined className="trigger" />}
-      width={400}
+      width={screens.md ? '400px' : '95%'}
       collapsed={isSidePanelClose}
       collapsedWidth={'0px'}
       onCollapse={collapsePanel}
@@ -68,6 +71,7 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
       }}
       style={{
         left: leftSider,
+        zIndex: '100',
       }}
     >
       <div

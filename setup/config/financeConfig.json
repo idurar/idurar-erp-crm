@@ -1,0 +1,20 @@
+[
+  {
+    "settingKey": "currency",
+    "settingValue": "eur",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "defaultTax",
+    "settingValue": 0.19,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "currencyList",
+    "settingValue": ["eur", "usd", "gpd", "inr", "dzd", "cad"],
+    "valueType": "array",
+    "isCoreSetting": true
+  }
+]

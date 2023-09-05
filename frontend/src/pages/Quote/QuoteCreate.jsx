@@ -1,33 +1,14 @@
-import { ErpLayout } from '@/layout';
-import CreateItem from '@/components/ErpPanel/CreateItem';
-import QuoteForm from '@/modules/QuoteModule/QuoteForm';
+import configPage from './config';
+import CreateQuoteModule from '@/modules/QuoteModule/CreateQuoteModule';
 
-export default function InvoiceCreate() {
-  const PANEL_TITLE = 'quote';
-  const dataTableTitle = 'quotes Lists';
-  const ADD_NEW_ENTITY = 'Add new quote';
-  const DATATABLE_TITLE = 'quotes List';
-  const ENTITY_NAME = 'quote';
-  const CREATE_ENTITY = 'Save quote';
-  const UPDATE_ENTITY = 'Update quote';
+const customConfig = {
+  /*your custom config*/
+};
+const config = {
+  ...configPage,
+  //customConfig,
+};
 
-  const config = {
-    entity: 'Quote',
-    PANEL_TITLE,
-    dataTableTitle,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
-    // dataTableColumns,
-    // searchConfig,
-    // entityDisplayLabels,
-  };
-
-  return (
-    <ErpLayout>
-      <CreateItem config={config} CreateForm={QuoteForm} />
-    </ErpLayout>
-  );
+export default function QuoteCreate() {
+  return <CreateQuoteModule config={config} />;
 }

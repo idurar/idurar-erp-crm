@@ -1,13 +1,15 @@
-// const crudController = require("./corsControllers/crudController");
-// module.exports = crudController.createCRUDController("Invoice");
+// const createCRUDController = require("./corsControllers/crudController");
+// module.exports = createCRUDController("Invoice");
 
 const mongoose = require('mongoose');
 const moment = require('moment');
 const Model = mongoose.model('Invoice');
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('Invoice');
+
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('Invoice');
+const { calculate } = require('@/helpers');
 
 delete methods['create'];
 delete methods['update'];
@@ -23,14 +25,14 @@ methods.create = async (req, res) => {
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
-      let total = item['quantity'] * item['price'];
+      let total = calculate.multiply(item['quantity'], item['price']);
       //sub total
-      subTotal += total;
+      subTotal = calculate.add(subTotal, total);
       //item total
       item['total'] = total;
     });
-    taxTotal = subTotal * taxRate;
-    total = subTotal + taxTotal;
+    taxTotal = calculate.multiply(subTotal, taxRate);
+    total = calculate.add(subTotal, taxTotal);
 
     let body = req.body;
 
@@ -39,7 +41,7 @@ methods.create = async (req, res) => {
     body['total'] = total;
     body['items'] = items;
 
-    let paymentStatus = total - discount === 0 ? 'paid' : 'unpaid';
+    let paymentStatus = calculate.sub(total, discount) === 0 ? 'paid' : 'unpaid';
 
     body['paymentStatus'] = paymentStatus;
     // Creating a new document in the collection
@@ -60,7 +62,7 @@ methods.create = async (req, res) => {
     return res.status(200).json({
       success: true,
       result: updateResult,
-      message: 'Successfully Created the document in Model ',
+      message: 'Invoice created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
@@ -101,14 +103,14 @@ methods.update = async (req, res) => {
 
     //Calculate the items array with subTotal, total, taxTotal
     items.map((item) => {
-      let total = item['quantity'] * item['price'];
+      let total = calculate.multiply(item['quantity'], item['price']);
       //sub total
-      subTotal += total;
+      subTotal = calculate.add(subTotal, total);
       //item total
       item['total'] = total;
     });
-    taxTotal = subTotal * taxRate;
-    total = subTotal + taxTotal;
+    taxTotal = calculate.multiply(subTotal, taxRate);
+    total = calculate.add(subTotal, taxTotal);
 
     let body = req.body;
 
@@ -119,7 +121,8 @@ methods.update = async (req, res) => {
     body['pdfPath'] = 'invoice-' + req.params.id + '.pdf';
     // Find document by id and updates with the required fields
 
-    let paymentStatus = total - discount === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
+    let paymentStatus =
+      calculate.sub(total, discount) === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
     body['paymentStatus'] = paymentStatus;
 
     const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
@@ -159,12 +162,12 @@ methods.update = async (req, res) => {
 methods.summary = async (req, res) => {
   try {
     let defaultType = 'month';
-    
+
     const { type } = req.query;
 
     if (type) {
       if (['week', 'month', 'year'].includes(type)) {
-        defaultType = type
+        defaultType = type;
       } else {
         return res.status(400).json({
           success: false,
@@ -175,17 +178,10 @@ methods.summary = async (req, res) => {
     }
 
     const currentDate = moment();
-    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
-    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
+    let startDate = currentDate.clone().startOf(defaultType);
+    let endDate = currentDate.clone().endOf(defaultType);
 
-    if (defaultType === 'week') {
-      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
-      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
-    }
-    if (defaultType === 'year') {
-      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
-      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
-    }
+    const statuses = ['draft', 'pending', 'sent'];
 
     const result = await Model.aggregate([
       {
@@ -228,10 +224,7 @@ methods.summary = async (req, res) => {
           status: '$results._id',
           count: '$results.count',
           percentage: {
-            $round: [
-              { $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] },
-              1,
-            ],
+            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
           },
           total_amount: '$results.total_amount',
         },
@@ -242,6 +235,18 @@ methods.summary = async (req, res) => {
         },
       },
     ]);
+
+    statuses.forEach((status) => {
+      const found = result.find((item) => item.status === status);
+      if (!found) {
+        result.push({
+          status,
+          count: 0,
+          percentage: 0,
+          total_amount: 0,
+        });
+      }
+    });
 
     const unpaid = await Model.aggregate([
       {
@@ -268,7 +273,7 @@ methods.summary = async (req, res) => {
           total_amount: '$total_amount',
         },
       },
-    ])
+    ]);
 
     const finalResult = {
       total: result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2),
@@ -276,7 +281,6 @@ methods.summary = async (req, res) => {
       type,
       performance: result,
     };
-
 
     return res.status(200).json({
       success: true,

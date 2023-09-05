@@ -16,6 +16,7 @@ export default function ErpLayout({ children, config }) {
             margin: '100px auto',
             width: '100%',
             maxWidth: '1100px',
+            minHeight: '600px',
           }}
         >
           {children}

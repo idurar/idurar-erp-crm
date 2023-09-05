@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const { SendInvoice } = require('../../emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const InvoiceModel = mongoose.model('Invoice');
@@ -37,12 +37,19 @@ module.exports = sendMail = async (req, res) => {
           // Send the mail using the details gotten from the client
           const { id: mailId } = await sendViaApi(email, managerName, fileLocation);
 
-          // Returning successfull response
-          return res.status(200).json({
-            success: true,
-            result: mailId,
-            message: `Successfully sent invoice ${id} to ${email}`,
-          });
+          // Update the status to sent if mail was successfull
+          if (mailId) {
+            InvoiceModel.findByIdAndUpdate(id, { status: 'sent' })
+              .exec()
+              .then((data) => {
+                // Returning successfull response
+                return res.status(200).json({
+                  success: true,
+                  result: mailId,
+                  message: `Successfully sent invoice ${id} to ${email}`,
+                });
+              });
+          }
         }
       )
       .catch((err) => {
