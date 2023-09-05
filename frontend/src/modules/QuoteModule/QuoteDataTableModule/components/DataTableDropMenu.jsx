@@ -27,11 +27,7 @@ export default function DataTableDropMenu({ row, entity }) {
     // readPanel.open();
     history.push(`/quote/read/${row._id}`);
   }
-  function RecordPayment() {
-    dispatch(erp.currentAction({ actionType: 'recordPayment', data: item }));
-    recordPanel.open();
-    dispatch(erp.currentItem({ data: item }));
-  }
+
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));
     // updatePanel.open();
@@ -48,9 +44,6 @@ export default function DataTableDropMenu({ row, entity }) {
     <Menu style={{ minWidth: 130 }}>
       <Menu.Item key={`${uniqueId()}`} icon={<EyeOutlined />} onClick={Read}>
         Show
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`} icon={<CreditCardOutlined />} onClick={RecordPayment}>
-        Record Payment
       </Menu.Item>
       <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
         Edit
