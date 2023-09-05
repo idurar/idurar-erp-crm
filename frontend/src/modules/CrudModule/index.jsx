@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { Row, Col, Button, Divider } from 'antd';
-import {CloseOutlined,PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import {MenuFoldOutlined,PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 
 
 import CreateForm from '@/components/CreateForm';
@@ -117,7 +117,7 @@ function FixHeaderPanel({ config }) {
           span={22}
         >
           <h1 style={{ fontSize: 20, marginBottom: 20 }}>{config.PANEL_TITLE}</h1>
-          <CloseOutlined onClick={collapsePanel} style={{ marginBottom: 20 }} />
+          <MenuFoldOutlined onClick={collapsePanel} style={{ marginBottom: 20 }} />
         </Col>
       </Row>
       <Row gutter={8}>
