@@ -1,13 +1,7 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { Row, Col, Button, Divider } from 'antd';
-import {
-  CloseOutlined,
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  ArrowLeftOutlined,
-  MailOutlined,
-} from '@ant-design/icons';
+import {CloseOutlined,PlusOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
@@ -24,7 +18,6 @@ import { useCrudContext } from '@/context/crud';
 import { CrudLayout } from '@/layout';
 
 import CrudDataTable from './CrudDataTable';
-import useMail from '@/hooks/useMail';
 
 function SidePanelTopContent({ config, formElements }) {
   const { crudContextAction, state } = useCrudContext();
@@ -34,7 +27,6 @@ function SidePanelTopContent({ config, formElements }) {
   const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
-  const { send } = useMail({ entity });
 
   const [labels, setLabels] = useState('');
   useEffect(() => {
@@ -52,9 +44,6 @@ function SidePanelTopContent({ config, formElements }) {
   const editItem = () => {
     dispatch(crud.currentAction({ actionType: 'update', data: currentItem }));
     editBox.open();
-  };
-  const mailItem = () => {
-    send(currentItem.invoice._id);
   };
 
   const show = isReadBoxOpen || isEditBoxOpen ? { opacity: 1 } : { opacity: 0 };
@@ -82,15 +71,6 @@ function SidePanelTopContent({ config, formElements }) {
             style={{ float: 'right', marginLeft: '0px' }}
           >
             edit
-          </Button>
-          <Button
-            onClick={mailItem}
-            type="text"
-            icon={<MailOutlined />}
-            size="small"
-            style={{ float: 'right', marginLeft: '0px' }}
-          >
-            mail
           </Button>
         </Col>
 

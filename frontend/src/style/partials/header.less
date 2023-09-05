@@ -3,7 +3,7 @@
   height: 60px;
 }
 .notification::-webkit-scrollbar-thumb {
-  background: #1B98F5;
+  background: #1b98f5;
   border-radius: 4px;
 }
 .headerIcon {
@@ -39,13 +39,51 @@
   }
 }
 
-.notification {
-  display: flex;
-  overflow: auto;
-  .info {
-    float: right;
-    display: inline;
-    background: transparent;
-    border: none;
+.notifications {
+  width: 100%;
+  .pad10 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-right: 6px;
+    padding-bottom: 0px;
   }
+  .notif-list {
+    max-height: 200px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 3px;
+      height: 60px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #1b98f5;
+      border-radius: 4px;
+    }
+
+    .notification {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px;
+      gap: 4px;
+      border-bottom: 1px;
+      // border-bottom: 1px solid #f5f5f5;
+      .notif-btn {
+        padding: 4px;
+        &:hover {
+          background-color: #e8f9ff;
+        }
+        span {
+          width: 150px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+.del-notif:hover {
+  background-color: #ffeeee;
 }

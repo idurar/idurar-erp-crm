@@ -1,5 +1,5 @@
-// const crudController = require("./corsControllers/crudController");
-// module.exports = crudController.createCRUDController("Quote");
+// const createCRUDController = require("./corsControllers/crudController");
+// module.exports = createCRUDController("Quote");
 
 const mongoose = require('mongoose');
 const moment = require('moment');
@@ -7,11 +7,11 @@ const moment = require('moment');
 const Model = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
 
-const custom = require('../corsControllers/custom');
+const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailQuoteController');
 
-const crudController = require('../corsControllers/crudController');
-const methods = crudController.createCRUDController('Quote');
+const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const methods = createCRUDController('Quote');
 
 delete methods['create'];
 delete methods['update'];
@@ -62,7 +62,7 @@ methods.create = async (req, res) => {
     return res.status(200).json({
       success: true,
       result: updateResult,
-      message: 'Successfully Created the document in Model ',
+      message: 'Quote created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
@@ -164,17 +164,10 @@ methods.summary = async (req, res) => {
     }
 
     const currentDate = moment();
-    let startDate = currentDate.clone().subtract(1, 'month').startOf('month');
-    let endDate = currentDate.clone().subtract(1, 'month').endOf('month');
+    let startDate = currentDate.clone().startOf(defaultType);
+    let endDate = currentDate.clone().endOf(defaultType);
 
-    if (defaultType === 'week') {
-      startDate = currentDate.clone().subtract(1, 'week').startOf('week');
-      endDate = currentDate.clone().subtract(1, 'week').endOf('week');
-    }
-    if (defaultType === 'year') {
-      startDate = currentDate.clone().subtract(1, 'year').startOf('year');
-      endDate = currentDate.clone().subtract(1, 'year').endOf('year');
-    }
+    const statuses = ['draft', 'pending', 'sent', 'expired', 'declined', 'accepted'];
 
     const result = await Model.aggregate([
       {
@@ -228,6 +221,18 @@ methods.summary = async (req, res) => {
         },
       },
     ]);
+
+    statuses.forEach((status) => {
+      const found = result.find((item) => item.status === status);
+      if (!found) {
+        result.push({
+          status,
+          count: 0,
+          percentage: 0,
+          total_amount: 0,
+        });
+      }
+    });
 
     const total = result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2);
 
