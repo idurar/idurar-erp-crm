@@ -19,6 +19,22 @@ const erpApiRouter = require('./routes/erpRoutes/erpApi');
 
 // create our Express app
 const app = express();
+
+const corsOptions = {
+  origin: true,
+  credentials: true,
+};
+
+// setting cors at one place for all the routes
+// putting cors as first in order to avoid unneccessary requests from unallowed origins
+app.use(function (req, res, next) {
+  if (req.url.includes('/api')) {
+    cors(corsOptions)(req, res, next);
+  } else {
+    cors()(req, res, next);
+  }
+});
+
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 
 // Takes the raw requests and turns them into usable properties on req.body
@@ -39,37 +55,11 @@ app.use((req, res, next) => {
 });
 
 // Here our API Routes
+app.use('/api',coreAuthRouter);
+app.use('/api',isValidAdminToken,coreApiRouter);
+app.use('/api',isValidAdminToken, erpApiRouter);
+app.use('/download', coreDownloadRouter);
 
-app.use(
-  '/api',
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-  coreAuthRouter
-);
-
-app.use(
-  '/api',
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-  isValidAdminToken,
-  coreApiRouter
-);
-
-app.use(
-  '/api',
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-  isValidAdminToken,
-  erpApiRouter
-);
-
-app.use('/download', cors(), coreDownloadRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);

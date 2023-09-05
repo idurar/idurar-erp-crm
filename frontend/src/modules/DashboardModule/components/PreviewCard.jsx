@@ -11,6 +11,33 @@ const colours = {
   expired: '#614700',
 };
 
+const defaultStatistics = [
+  {
+    tag: 'draft',
+    value: 0,
+  },
+  {
+    tag: 'pending',
+    value: 0,
+  },
+  {
+    tag: 'sent',
+    value: 0,
+  },
+  {
+    tag: 'accepted',
+    value: 0,
+  },
+  {
+    tag: 'declined',
+    value: 0,
+  },
+  {
+    tag: 'expired',
+    value: 0,
+  },
+];
+
 const PreviewState = ({ tag, color, value }) => {
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
@@ -30,34 +57,15 @@ const PreviewState = ({ tag, color, value }) => {
 
 export default function PreviewCard({
   title = 'Preview',
-  statistics = [
-    {
-      tag: 'draft',
-      value: 3,
-    },
-    {
-      tag: 'pending',
-      value: 5,
-    },
-    {
-      tag: 'sent',
-      value: 12,
-    },
-    {
-      tag: 'accepted',
-      value: 6,
-    },
-    {
-      tag: 'declined',
-      value: 8,
-    },
-    {
-      tag: 'expired',
-      value: 55,
-    },
-  ],
+  statistics = defaultStatistics,
   isLoading = false,
 }) {
+  const statisticsMap = defaultStatistics.map((defaultStat) => {
+    const matchedStat = Array.isArray(statistics)
+      ? statistics.find((stat) => stat.tag === defaultStat.tag)
+      : null;
+    return matchedStat || defaultStat;
+  });
   const customSort = (a, b) => {
     const colorOrder = Object.values(colours);
     const indexA = colorOrder.indexOf(a.props.color);
@@ -86,7 +94,7 @@ export default function PreviewCard({
             <Spin />
           </div>
         ) : (
-          statistics
+          statisticsMap
             ?.map((status, index) => (
               <PreviewState
                 key={index}

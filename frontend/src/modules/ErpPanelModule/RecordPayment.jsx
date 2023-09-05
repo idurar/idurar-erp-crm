@@ -28,7 +28,11 @@ export default function RecordPayment({ config }) {
     if (currentInvoice) {
       const { credit, total, discount } = currentInvoice;
 
+<<<<<<< HEAD
       setMaxAmount(calculate.sub(calculate.sub(total, discount), credit));
+=======
+      setMaxAmount(total - discount - credit);
+>>>>>>> e1fffc1c902f5d1510c88e5b886cd571761c6d5d
     }
   }, [currentInvoice]);
   useEffect(() => {
