@@ -28,14 +28,14 @@ export default function RegisterForm() {
             message: 'Please input your Email!',
           },
           {
-            pattern: '[a-z0-9]+@[a-z]+.[a-z]{2,3}',
+            type: 'email',
             message: 'Invalid email!',
           },
         ]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
-          type='email'
+          type="email"
           placeholder="Email"
           size="large"
         />

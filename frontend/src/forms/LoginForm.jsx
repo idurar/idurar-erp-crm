@@ -13,7 +13,7 @@ export default function LoginForm() {
             message: 'Please input your Email!',
           },
           {
-            pattern: '[a-z0-9]+@[a-z]+.[a-z]{2,3}',
+            type: 'email',
             message: 'Invalid email!',
           },
         ]}
