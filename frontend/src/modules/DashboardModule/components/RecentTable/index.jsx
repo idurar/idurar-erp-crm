@@ -15,7 +15,6 @@ function DropDownRowMenu({ row, entity }) {
   function Edit() {
     history.push(`/${entity}/update/${row._id}`);
   }
-  function Delete() {}
 
   return (
     <Menu style={{ width: 130 }}>
@@ -24,9 +23,6 @@ function DropDownRowMenu({ row, entity }) {
       </Menu.Item>
       <Menu.Item icon={<EditOutlined />} onClick={Edit}>
         Edit
-      </Menu.Item>
-      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
-        Delete
       </Menu.Item>
     </Menu>
   );
