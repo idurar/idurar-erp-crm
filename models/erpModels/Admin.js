@@ -35,7 +35,7 @@ const adminSchema = new Schema({
   },
   company: {
     type: String,
-    required: false,
+    required: true,
     lowercase: true,
   },
   companyRegNumber: {
