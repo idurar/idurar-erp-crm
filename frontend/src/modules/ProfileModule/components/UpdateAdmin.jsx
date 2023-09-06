@@ -9,7 +9,7 @@ import UploadImg from './UploadImg';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { crud } from '@/redux/crud/actions';
 
-const UpdateProfile = ({ config }) => {
+const UpdateAdmin = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { readPanel, updatePanel } = profileContextAction;
   const dispatch = useDispatch();
@@ -28,11 +28,11 @@ const UpdateProfile = ({ config }) => {
     form.submit();
   };
 
-  const onSubmit = () => {
+  const onSubmit = (fieldsValue) => {
     const id = current.id;
     const entity = 'admin';
     console.log('🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id', current.id);
-    dispatch(crud.update({ entity, id, jsonData: current }));
+    dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
   };
 
   return (
@@ -80,4 +80,4 @@ const UpdateProfile = ({ config }) => {
   );
 };
 
-export default UpdateProfile;
+export default UpdateAdmin;

@@ -8,7 +8,7 @@ import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-const ProfileInfo = ({ config }) => {
+const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
@@ -123,4 +123,4 @@ const ProfileInfo = ({ config }) => {
   );
 };
 
-export default ProfileInfo;
+export default AdminInfo;

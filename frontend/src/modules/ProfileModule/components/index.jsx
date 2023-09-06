@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 
 import { useProfileContext } from '@/context/profileContext';
-import ProfileInfo from './ProfileInfo';
-import UpdateProfile from './UpdateProfile';
+import ProfileInfo from './AdminInfo';
+import UpdateProfile from './UpdateAdmin';
 import PasswordModal from './PasswordModal';
 
 const Visibility = ({ isVisible, children }) => {
