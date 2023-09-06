@@ -8,13 +8,19 @@ import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-const AdminInfo = ({ config }) => {
+const ProfileInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
-  const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
 
-  const state = useSelector((state) => state);
+  const { email, name, role, surname } = useSelector(selectCurrentAdmin);
+  console.log(
+    '🚀 ~ file: AdminInfo.jsx:20 ~ AdminInfo ~ email, name, role , surname:',
+    email,
+    name,
+    role,
+    surname
+  );
 
   return (
     <>
@@ -65,18 +71,20 @@ const AdminInfo = ({ config }) => {
               <h3
                 style={{
                   color: '#22075e',
+                  textTransform: 'capitalize',
                 }}
               >
-                Salah Eddine
+                {name}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Surname" span="3">
               <h3
                 style={{
                   color: '#22075e',
+                  textTransform: 'capitalize',
                 }}
               >
-                Lalami
+                {surname}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Email" span="3" style={{ paddingTop: '20px' }}>
@@ -85,16 +93,17 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                admin@demo.com
+                {email}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Role d'utilisateur" span="3">
               <h3
                 style={{
                   color: '#22075e',
+                  textTransform: 'capitalize',
                 }}
               >
-                admin
+                {role}
               </h3>
             </Descriptions.Item>
           </Descriptions>
@@ -114,4 +123,4 @@ const AdminInfo = ({ config }) => {
   );
 };
 
-export default AdminInfo;
+export default ProfileInfo;

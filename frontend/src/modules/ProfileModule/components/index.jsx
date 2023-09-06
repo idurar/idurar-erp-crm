@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 
 import { useProfileContext } from '@/context/profileContext';
-import AdminInfo from './AdminInfo';
-import UpdateAdmin from './UpdateAdmin';
+import ProfileInfo from './ProfileInfo';
+import UpdateProfile from './UpdateProfile';
 import PasswordModal from './PasswordModal';
 
 const Visibility = ({ isVisible, children }) => {
@@ -17,10 +17,10 @@ export default function Profile({ config }) {
   return (
     <>
       <Visibility isVisible={read.isOpen}>
-        <AdminInfo config={config} />
+        <ProfileInfo config={config} />
       </Visibility>
       <Visibility isVisible={update.isOpen}>
-        <UpdateAdmin config={config} />
+        <UpdateProfile config={config} />
       </Visibility>
       <PasswordModal config={config} isVisible={passwordModal.isOpen} />
     </>
