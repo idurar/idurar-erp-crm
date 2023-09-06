@@ -27,6 +27,10 @@ export default function RegisterForm() {
             required: true,
             message: 'Please input your Email!',
           },
+          {
+            pattern: '[a-z0-9]+@[a-z]+.[a-z]{2,3}',
+            message: 'Invalid email!',
+          },
         ]}
       >
         <Input
@@ -58,7 +62,16 @@ export default function RegisterForm() {
             required: true,
             message: 'Enter Password Again!',
           },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The new password that you entered do not match!'));
+            },
+          }),
         ]}
+        hasFeedback
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
