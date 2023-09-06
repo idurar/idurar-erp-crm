@@ -42,27 +42,6 @@ export default function AdvancedSettings() {
       dataIndex: 'settingValue',
     },
     {
-      title: 'Core Setting',
-      dataIndex: 'isCoreSetting',
-      key: 'isCoreSetting',
-      render: (text, row) => {
-        return {
-          props: {
-            style: {
-              width: '60px',
-            },
-          },
-          children: (
-            <Switch
-              checked={text}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
-        };
-      },
-    },
-    {
       title: 'enabled',
       dataIndex: 'enabled',
       key: 'enabled',
@@ -75,7 +54,8 @@ export default function AdvancedSettings() {
           },
           children: (
             <Switch
-              checked={text}
+              disabled={row.isCoreSetting}
+              checked={row.enabled}
               checkedChildren={<CheckOutlined />}
               unCheckedChildren={<CloseOutlined />}
             />

@@ -1,8 +1,10 @@
-import React from 'react';
 import { Switch, Form, Input } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { selectCurrentItem } from '@/redux/crud/selectors';
 
 export default function AdvancedSettingsForm({ isUpdateForm = false }) {
+  const { result } = useSelector(selectCurrentItem);
   return (
     <>
       <Form.Item
@@ -33,25 +35,17 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
         name="enabled"
         style={{
           display: 'inline-block',
-          width: 'calc(50%)',
+          width: '100%',
           paddingRight: '5px',
         }}
         valuePropName="checked"
         initialValue={true}
       >
-        <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
-      </Form.Item>
-      <Form.Item
-        label="Is Core Setting"
-        name="isCoreSetting"
-        style={{
-          display: 'inline-block',
-          width: 'calc(50%)',
-          paddingLeft: '5px',
-        }}
-        valuePropName="checked"
-      >
-        <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
+        <Switch
+          disabled={result ? result.isCoreSetting : false}
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+        />
       </Form.Item>
     </>
   );
