@@ -18,7 +18,7 @@ exports.generatePdf = async (
     fs.unlinkSync(targetLocation);
   }
 
-  //render pdf html
+  // render pdf html
   const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
     model: result,
     moment: moment,
