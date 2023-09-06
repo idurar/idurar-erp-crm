@@ -192,7 +192,7 @@ exports.list = async (Model, req, res) => {
   const page = req.query.page || 1;
   const limit = parseInt(req.query.limit) || 10;
   const skip = page * limit - limit;
-  console.log({ limit });
+  console.log('limit', { limit });
   try {
     //  Query the database for a list of all results
     const resultsPromise = Model.find({ removed: false })
