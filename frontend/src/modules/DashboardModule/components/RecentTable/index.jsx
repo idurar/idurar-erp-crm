@@ -4,8 +4,15 @@ import { Dropdown, Menu, Table } from 'antd';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 
-import { EllipsisOutlined, EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import {
+  EllipsisOutlined,
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  FilePdfOutlined,
+} from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
 function DropDownRowMenu({ row, entity }) {
   const history = useHistory();
@@ -15,6 +22,9 @@ function DropDownRowMenu({ row, entity }) {
   function Edit() {
     history.push(`/${entity}/update/${row._id}`);
   }
+  function Delete() {
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
+  }
 
   return (
     <Menu style={{ width: 130 }}>
@@ -23,6 +33,9 @@ function DropDownRowMenu({ row, entity }) {
       </Menu.Item>
       <Menu.Item icon={<EditOutlined />} onClick={Edit}>
         Edit
+      </Menu.Item>
+      <Menu.Item onClick={Delete} icon={<FilePdfOutlined />}>
+        Download PDF
       </Menu.Item>
     </Menu>
   );
