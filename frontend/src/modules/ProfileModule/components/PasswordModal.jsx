@@ -21,7 +21,6 @@ const PasswordModal = ({ config }) => {
   }, [isSuccess]);
 
   const handelSubmit = (fieldsValue) => {
-    console.log('🚀 ~ file: PasswordModal.jsx:18 ~ handelSubmit ~ fieldsValue:', fieldsValue);
     const entity = 'admin/password-update/' + config.id;
     const updateFn = () => {
       return request.patch({ entity, jsonData: fieldsValue });
