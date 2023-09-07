@@ -14,6 +14,7 @@ import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, config }) {
   let { UPDATE_ENTITY } = config;
@@ -110,7 +111,7 @@ export default function UpdateItem({ config, UpdateForm }) {
         }}
         title={UPDATE_ENTITY}
         ghost={false}
-        tags={<Tag color="volcano">Draft</Tag>}
+        tags={StatusTag(form.getFieldValue().status)}
         extra={[
           <Button
             key={`${uniqueId()}`}
