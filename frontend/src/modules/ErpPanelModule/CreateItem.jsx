@@ -82,6 +82,7 @@ export default function CreateItem({ config, CreateForm }) {
       //     date: newDate,
       //   };
       // }
+      console.log({fieldsValue})
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
