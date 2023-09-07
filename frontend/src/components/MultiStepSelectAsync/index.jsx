@@ -10,31 +10,38 @@ const asyncList = (entity, options) => {
 };
 
 const MultiStepSelectAsync = ({
-  firstSelectProps,
-  secondSelectProps,
+  firstSelectProps = {},
+  secondSelectProps = {},
   entity,
-  firstSelectValue,
+  value = {},
   onChange,
-  firstSelectOptions = [],
+  idKey = '_id',
+  valueKey = 'value',
+  labelKey = 'label',
 }) => {
+  const firstSelectedOption = value.firstSelectedOption;
+  const [firstSelectOptions, setFirstSelectOptions] = useState([]);
   const [secondSelectOptions, setSecondSelectOptions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (firstSelectValue) {
-      async function fetchData() {
-        try {
-          const data = await asyncList(entity, { firstSelectValue });
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const data = await asyncList(entity, { id: firstSelectedOption[idKey] });
+        if (firstSelectedOption) {
           setSecondSelectOptions(data.result);
-        } catch (error) {
-          errorHandler(error);
-        } finally {
-          setLoading(false);
+          return;
         }
+        setFirstSelectOptions(data.result);
+      } catch (error) {
+        errorHandler(error);
+      } finally {
+        setLoading(false);
       }
-      fetchData();
     }
-  }, [firstSelectValue]);
+    fetchData();
+  }, [firstSelectedOption]);
 
   return (
     <Space direction="vertical">
@@ -42,25 +49,41 @@ const MultiStepSelectAsync = ({
         placeholder="Select an option"
         style={{ width: 200 }}
         {...firstSelectProps}
-        onChange={(value) => onChange({ firstSelectValue: value })}
+        loading={!firstSelectedOption ? loading : false}
+        onChange={(value) => {
+          if (onChange) {
+            onChange({
+              firstSelectedOption: firstSelectOptions.find((option) => option[valueKey] === value),
+            });
+          }
+        }}
       >
         {firstSelectOptions.map((option) => (
-          <Option key={option.value} value={option.value}>
-            {option.label}
+          <Option key={option[idKey]} value={option[valueKey]}>
+            {option[labelKey]}
           </Option>
         ))}
       </Select>
-      {firstSelectValue && (
+      {firstSelectedOption && (
         <Select
           placeholder="Select another option"
           loading={loading}
           style={{ width: 200 }}
           {...secondSelectProps}
-          onChange={(value) => onChange({ firstSelectValue, secondSelectValue: value })}
+          onChange={(value) => {
+            if (onChange) {
+              onChange({
+                firstSelectedOption,
+                secondSelectedOption: secondSelectOptions.find(
+                  (option) => option[valueKey] === value
+                ),
+              });
+            }
+          }}
         >
           {secondSelectOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              {option.label}
+            <Option key={option[idKey]} value={option[valueKey]}>
+              {option[labelKey]}
             </Option>
           ))}
         </Select>
