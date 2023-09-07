@@ -29,6 +29,7 @@ function SaveForm({ form, config }) {
 }
 
 export default function UpdateItem({ config, UpdateForm }) {
+  
   let { entity, UPDATE_ENTITY } = config;
   const { erpContextAction } = useErpContext();
   const { updatePanel } = erpContextAction;
@@ -37,11 +38,11 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
-
+  const [status,setStatus]=useState("");
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
-
+    
     if (items) {
       items.map((item) => {
         if (item) {
@@ -57,6 +58,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   };
 
   const onSubmit = (fieldsValue) => {
+    setStatus(fieldsValue.status)
     if (fieldsValue) {
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
@@ -68,9 +70,11 @@ export default function UpdateItem({ config, UpdateForm }) {
           items: newList,
         };
       }
+      
     }
 
     const id = current._id;
+    
     dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
   };
   useEffect(() => {
@@ -96,7 +100,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       }
 
       const { subTotal } = current;
-
+      setStatus(current.status)
       form.setFieldsValue(current);
       setSubTotal(subTotal);
     }
@@ -110,7 +114,7 @@ export default function UpdateItem({ config, UpdateForm }) {
         }}
         title={UPDATE_ENTITY}
         ghost={false}
-        tags={<Tag color="volcano">Draft</Tag>}
+        tags={<Tag color="volcano">{status}</Tag>}
         extra={[
           <Button
             key={`${uniqueId()}`}

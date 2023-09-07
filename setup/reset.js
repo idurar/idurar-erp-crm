@@ -1,6 +1,7 @@
 require('dotenv').config({ path: __dirname + '/../.variables.env' });
 
 const mongoose = require('mongoose');
+mongoose.set('strictQuery',false)
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
