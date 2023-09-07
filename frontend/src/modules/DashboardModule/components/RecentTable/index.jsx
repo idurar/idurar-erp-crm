@@ -22,7 +22,7 @@ function DropDownRowMenu({ row, entity }) {
   function Edit() {
     history.push(`/${entity}/update/${row._id}`);
   }
-  function Delete() {
+  function Download() {
     window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
   }
 
@@ -34,7 +34,7 @@ function DropDownRowMenu({ row, entity }) {
       <Menu.Item icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
-      <Menu.Item onClick={Delete} icon={<FilePdfOutlined />}>
+      <Menu.Item onClick={Download} icon={<FilePdfOutlined />}>
         Download PDF
       </Menu.Item>
     </Menu>
