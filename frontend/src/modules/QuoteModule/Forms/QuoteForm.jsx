@@ -113,6 +113,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
                 { value: 'draft', label: 'Draft' },
                 { value: 'pending', label: 'Pending' },
                 { value: 'sent', label: 'Sent' },
+                { value: 'accepted', label: 'Accepted' },
               ]}
             ></Select>
           </Form.Item>

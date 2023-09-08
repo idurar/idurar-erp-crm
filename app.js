@@ -55,11 +55,10 @@ app.use((req, res, next) => {
 });
 
 // Here our API Routes
-app.use('/api',coreAuthRouter);
-app.use('/api',isValidAdminToken,coreApiRouter);
-app.use('/api',isValidAdminToken, erpApiRouter);
+app.use('/api', coreAuthRouter);
+app.use('/api', isValidAdminToken, coreApiRouter);
+app.use('/api', isValidAdminToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
-
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);

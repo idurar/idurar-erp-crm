@@ -32,6 +32,7 @@ const SIDEBAR_MENU = [
 const SETTINGS_SUBMENU = [
   { key: '/settings', title: 'General Settings' },
   { key: '/payment/mode', title: 'Payment Mode' },
+  { key: '/settings/advanced', title: 'Advanced Settings' },
 ];
 
 const { Sider } = Layout;

@@ -1,13 +1,23 @@
+const downloadPdf = require('@/handlers/downloadHandler/downloadPdf');
 const express = require('express');
 
 const router = express.Router();
 
-router.route('/:directory/:filename').get(function (req, res) {
-  const file = `download/${req.params.directory}/${req.params.filename}`;
+router.route('/:subPath/:directory/:id').get(function (req, res) {
+  const { subPath, directory, id } = req.params;
 
-  res.download(file, function (err) {
-    if (err) res.status(500).json({ success: false, message: "couldn't find file" }); // send a 500 on error
-  });
+  // Handle the /payment/invoice/* route
+  if (subPath == 'payment' && directory == 'invoice') {
+    downloadPdf(req, res, { directory: 'PaymentInvoice', id });
+  } else {
+    downloadPdf(req, res, { directory, id });
+  }
+});
+
+router.route('/:directory/:id').get(function (req, res) {
+  const { directory, id } = req.params;
+
+  downloadPdf(req, res, { directory, id });
 });
 
 module.exports = router;

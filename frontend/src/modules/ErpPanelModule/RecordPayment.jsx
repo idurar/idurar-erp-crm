@@ -53,7 +53,7 @@ export default function RecordPayment({ config }) {
 
     dispatch(
       erp.recordPayment({
-        entity: 'paymentInvoice',
+        entity: 'payment/invoice',
         jsonData: fieldsValue,
       })
     );
