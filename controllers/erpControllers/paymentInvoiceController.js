@@ -8,27 +8,60 @@ const sendMail = require('./mailInvoiceController');
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
 const methods = createCRUDController('PaymentInvoice');
 const { calculate } = require('@/helpers');
-
+const Joi = require('joi');
 
 delete methods['create'];
 delete methods['update'];
 delete methods['delete'];
 
+const paymentInvoiceSchema = Joi.object({
+  client: Joi.string().required(),
+  date: Joi.date().required(),
+  status: Joi.string().optional().default('draft'),
+  note: Joi.string().optional().allow(''),
+  number: Joi.number().required(),
+  taxRate: Joi.string().optional().allow(''),
+  year: Joi.number().required(),
+  expiredDate: Joi.date().required(),
+  items: Joi.array().items(
+    Joi.object({
+      description: Joi.string().required(),
+      quantity: Joi.number().positive().required(),
+      itemName: Joi.string().required(),
+      total: Joi.number().positive().required(),
+      price: Joi.number().positive().required(),
+    }).required()
+  ),
+});
+
 methods.create = async (req, res) => {
   try {
-    // Creating a new document in the collection
-    if (req.body.amount === 0) {
-      return res.status(202).json({
+    const { body } = req;
+
+    const { error, value } = paymentInvoiceSchema.validate(body);
+    if (error) {
+      const { details } = error;
+      console.log('details', details);
+      return res.status(400).json({
         success: false,
         result: null,
-        message: `The Minimum Amount couldn't be 0`,
+        message: details[0]?.message,
       });
     }
 
     const currentInvoice = await Invoice.findOne({
-      _id: req.body.invoice,
-      removed: false,
+      number: req.body.number,
     });
+
+    if (!currentInvoice || currentInvoice.removed || currentInvoice.paymentStatus === 'paid') {
+      return res.status(202).json({
+        success: false,
+        result: null,
+        message: `The Invoice is paid or doesn't exist`,
+      });
+    }
+
+    const _amount = value?.items?.reduce((acc, item) => acc + item.total, 0);
 
     const {
       total: previousTotal,
@@ -38,7 +71,7 @@ methods.create = async (req, res) => {
 
     const maxAmount = calculate.sub(calculate.sub(previousTotal, previousDiscount), previousCredit);
 
-    if (req.body.amount > maxAmount) {
+    if (_amount > maxAmount) {
       return res.status(202).json({
         success: false,
         result: null,
@@ -46,7 +79,11 @@ methods.create = async (req, res) => {
       });
     }
 
-    const result = await Model.create(req.body);
+    const result = await Model.create({
+      ...value,
+      amount: _amount,
+      invoice: currentInvoice._id,
+    });
 
     const fileId = 'payment-invoice-report-' + result._id + '.pdf';
     const updatePath = await Model.findOneAndUpdate(
@@ -56,10 +93,9 @@ methods.create = async (req, res) => {
         new: true,
       }
     ).exec();
-    // Returning successfull response
 
     const { _id: paymentInvoiceId, amount } = result;
-    const { id: invoiceId, total, discount, credit } = currentInvoice;
+    const { total, discount, credit } = currentInvoice;
 
     let paymentStatus =
       calculate.sub(total, discount) === calculate.add(credit, amount)
@@ -69,7 +105,7 @@ methods.create = async (req, res) => {
         : 'unpaid';
 
     const invoiceUpdate = await Invoice.findOneAndUpdate(
-      { _id: req.body.invoice },
+      { _id: currentInvoice?._id },
       {
         $push: { paymentInvoice: paymentInvoiceId.toString() },
         $inc: { credit: amount },
@@ -346,7 +382,6 @@ methods.summary = async (req, res) => {
       message: `Successfully fetched the summary of payment invoices for the last ${defaultType}`,
     });
   } catch (error) {
-    console.log('error', error);
     return res.status(500).json({
       success: false,
       result: null,

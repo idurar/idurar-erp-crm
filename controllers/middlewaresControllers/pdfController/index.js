@@ -12,12 +12,10 @@ exports.generatePdf = async (
   const fileId = info.filename + '-' + result._id + '.pdf';
   const folderPath = modelName.toLowerCase();
   const targetLocation = `./public/download/${folderPath}/${fileId}`;
-
   // if PDF already exist, then delete it and create new PDF
   if (fs.existsSync(targetLocation)) {
     fs.unlinkSync(targetLocation);
   }
-
   // render pdf html
   const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
     model: result,
