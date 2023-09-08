@@ -270,7 +270,7 @@ html
           .space  
         .left.col-12
             h1.invoice
-              | INVOICE 
+              | Payment Invoice 
             div 
               .col.col-8
                 p.strong Date :
@@ -278,7 +278,7 @@ html
               .col.col-8
                 p.strong Expired Date :
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
-              .col.col-8 
+              .col.col-9 
                 p.strong Invoice Number :
                 p # #{model.number}/#{model.year || ""} 
               
@@ -320,7 +320,7 @@ html
       .col.col-24
           .space     
       footer.footer-invoice
-        | Invoice was created on a computer and is valid without the signature and seal.
+        | This Payment Invoice was created on a computer and is valid without the signature and seal.
           
 
    
