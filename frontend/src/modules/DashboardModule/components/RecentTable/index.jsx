@@ -35,7 +35,7 @@ function DropDownRowMenu({ row, entity }) {
         Edit
       </Menu.Item>
       <Menu.Item onClick={Download} icon={<FilePdfOutlined />}>
-        Download PDF
+        Download
       </Menu.Item>
     </Menu>
   );
