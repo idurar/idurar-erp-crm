@@ -1,21 +1,20 @@
+import React from 'react';
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
-import { EditOutlined, LockOutlined, LogoutOutlined, MailOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Descriptions, Divider, PageHeader, Row, Space, Tag } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Button, Col, Descriptions, Divider, PageHeader, Row } from 'antd';
+import { useSelector } from 'react-redux';
 import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { selectCurrentAdmin } from '@/redux/crud/selectors';
 
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
-  const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
 
-  const state = useSelector((state) => state);
-
+  const { result } = useSelector(selectCurrentAdmin);
+  console.log(result);
   return (
     <>
       <PageHeader

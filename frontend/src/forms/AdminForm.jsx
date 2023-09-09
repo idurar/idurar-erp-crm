@@ -5,18 +5,6 @@ export default function AdminForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label="Company name"
-        name="company"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your company name!',
-          },
-        ]}
-      >
-        <Input autoComplete="off" />
-      </Form.Item>
-      <Form.Item
         label="Name"
         name="name"
         rules={[
@@ -40,19 +28,6 @@ export default function AdminForm({ isUpdateForm = false }) {
       >
         <Input autoComplete="off" />
       </Form.Item>
-      <Form.Item
-        label="Company registration nr"
-        name="companyRegNumber"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your company registration number!',
-          },
-        ]}
-      >
-        <Input autoComplete="off" />
-      </Form.Item>
-
       {!isUpdateForm && (
         <>
           <Form.Item
@@ -67,7 +42,6 @@ export default function AdminForm({ isUpdateForm = false }) {
           >
             <Input autoComplete="off" />
           </Form.Item>
-
           <Form.Item
             label="Password"
             name="password"

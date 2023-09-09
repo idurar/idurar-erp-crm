@@ -20,6 +20,8 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
+    // TODO: Set the role on register to admin do backend call to get the
+    // admin rol this is set as default rol on backend setup
     dispatch(register({ registerData: values }));
   };
   return (

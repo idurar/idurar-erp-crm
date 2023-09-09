@@ -1,16 +1,16 @@
+import React from 'react';
 import { useProfileContext } from '@/context/profileContext';
-import uniqueId from '@/utils/uinqueId';
-import { CloseCircleOutlined, EditOutlined, LockOutlined, SaveOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Divider, Form, PageHeader, Row } from 'antd';
-import React, { useState } from 'react';
+import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
+import { Button, Col, Form, PageHeader, Row } from 'antd';
 import { useDispatch } from 'react-redux';
-import AdminForm from '@/forms/AdminForm';
-import UploadImg from './UploadImg';
 import { erp } from '@/redux/erp/actions';
+import ProfileForm from '@/forms/ProfileForm';
+import UploadImg from './UploadImg';
+import uniqueId from '@/utils/uinqueId';
 
 const UpdateAdmin = ({ config }) => {
   const { profileContextAction } = useProfileContext();
-  const { readPanel, updatePanel } = profileContextAction;
+  const { updatePanel } = profileContextAction;
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
   const [form] = Form.useForm();
@@ -20,13 +20,18 @@ const UpdateAdmin = ({ config }) => {
   const { id } = jsonObject;
   const entity = 'admin';
 
+  const formResetAndClose = () => {
+    form.resetFields();
+    updatePanel.close();
+  };
+
   const onFinish = (values) => {
-    console.log(values);
     dispatch(erp.update({ entity, id, jsonData: values }));
+    formResetAndClose();
   };
 
   const handelClick = (e) => {
-    updatePanel.close();
+    formResetAndClose();
   };
 
   return (
@@ -43,14 +48,6 @@ const UpdateAdmin = ({ config }) => {
           >
             Close
           </Button>,
-          // <Button
-          //   key={`${uniqueId()}`}
-          //   onClick={() => handelClick}
-          //   type="primary"
-          //   icon={<SaveOutlined />}
-          // >
-          //   save
-          // </Button>,
         ]}
         style={{
           padding: '20px 0px',
@@ -60,7 +57,7 @@ const UpdateAdmin = ({ config }) => {
         <Col xs={{ span: 24 }} sm={{ span: 6 }} md={{ span: 6 }}>
           <UploadImg />
         </Col>
-        <Col xs={{ span: 16 }}>
+        <Col xs={{ span: 18 }}>
           <Form
             form={form}
             onFinish={onFinish}
@@ -68,7 +65,7 @@ const UpdateAdmin = ({ config }) => {
             wrapperCol={{ span: 12 }}
             layout="vertical"
           >
-            <AdminForm isUpdateForm={true} />
+            <ProfileForm isUpdateForm={true} />
             <Form.Item>
               <Button icon={<SaveOutlined />} type="primary" htmlType="submit">
                 Save

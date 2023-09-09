@@ -7,6 +7,7 @@ export const erp = {
       type: actionTypes.RESET_STATE,
     });
   },
+
   resetAction:
     ({ actionType }) =>
     async (dispatch) => {
@@ -16,6 +17,7 @@ export const erp = {
         payload: null,
       });
     },
+
   currentItem:
     ({ data }) =>
     async (dispatch) => {
@@ -24,6 +26,7 @@ export const erp = {
         payload: { ...data },
       });
     },
+
   currentAction:
     ({ actionType, data }) =>
     async (dispatch) => {
@@ -33,6 +36,7 @@ export const erp = {
         payload: { ...data },
       });
     },
+
   list:
     ({ entity, options = { page: 1 } }) =>
     async (dispatch) => {
@@ -66,6 +70,7 @@ export const erp = {
         });
       }
     },
+
   create:
     ({ entity, jsonData }) =>
     async (dispatch) => {
@@ -95,6 +100,7 @@ export const erp = {
         });
       }
     },
+
   recordPayment:
     ({ entity, jsonData }) =>
     async (dispatch) => {
@@ -124,6 +130,7 @@ export const erp = {
         });
       }
     },
+
   read:
     ({ entity, id }) =>
     async (dispatch) => {
@@ -153,6 +160,7 @@ export const erp = {
         });
       }
     },
+
   update:
     ({ entity, id, jsonData }) =>
     async (dispatch) => {
@@ -272,6 +280,7 @@ export const erp = {
     async (dispatch) => {
       await request.convert({ entity, id });
     },
+
   invoiceFollowNum:
     ({ date }) =>
     async (dispatch) => {
