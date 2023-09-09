@@ -213,8 +213,8 @@ router.route('/offer/summary').get(catchErrors(offerController.summary));
 // //____________________________________________ API for Upload controller _________________
 
 router.route('/public/upload/:model/:fieldId').post(
-  createPublicUpload,
   uploadMiddleware.single('upload'),
+  createPublicUpload,
   // need to add proper controller
   catchErrors((req, res) => {
     if (req.upload && req.file) {
@@ -228,8 +228,8 @@ router.route('/public/upload/:model/:fieldId').post(
 );
 
 router.route('/private/upload/:model/:fieldId').post(
-  createPrivateUpload,
   uploadMiddleware.single('upload'),
+  createPrivateUpload,
   // need to add proper controller
   catchErrors((req, res) => {
     if (req.upload && req.file) {

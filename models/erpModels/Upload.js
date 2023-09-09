@@ -8,6 +8,37 @@ const uploadSchema = new mongoose.Schema({
   },
   fieldId: {
     type: String,
+    required: true,
+  },
+  fileName: {
+    type: String,
+    required: true,
+  },
+  fileType: {
+    type: String,
+    enum: [
+      'jpeg',
+      'jpg',
+      'png',
+      'gif',
+      'webp',
+      'doc',
+      'txt',
+      'csv',
+      'docx',
+      'xls',
+      'xlsx',
+      'pdf',
+      'zip',
+      'rar',
+      'mp4',
+      'mov',
+      'avi',
+      'mp3',
+      'm4a',
+      'webm',
+    ],
+    required: true,
   },
   enabled: {
     type: Boolean,
@@ -15,18 +46,25 @@ const uploadSchema = new mongoose.Schema({
   },
   isPublic: {
     type: Boolean,
+    required: true,
   },
   userID: {
     type: mongoose.SchemaTypes.ObjectId,
+    required: true,
   },
   isSecure: {
-    type: String,
+    type: Boolean,
+    required: true,
   },
   removed: {
-    type: String,
+    type: Boolean,
+    default: false,
+    required: true,
   },
   path: {
     type: String,
+    unique: true,
+    required: true,
   },
 });
 
