@@ -31,6 +31,7 @@
     "mongoose-autopopulate": "^0.14.0",
     "mongoose-sequence": "^5.2.2",
     "multer": "^1.4.2",
+    "node-cron": "^3.0.2",
     "pug": "^3.0.2",
     "resend": "^0.17.2"
   },

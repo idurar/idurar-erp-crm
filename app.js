@@ -1,4 +1,5 @@
 const express = require('express');
+const cron = require('node-cron');
 
 const helmet = require('helmet');
 const path = require('path');
@@ -16,6 +17,8 @@ const { isValidAdminToken } = require('./controllers/coreControllers/authJwtCont
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/erpRoutes/erpApi');
+const Invoice = require('./models/erpModels/Invoice');
+const Quote = require('./models/erpModels/Quote');
 
 // create our Express app
 const app = express();
@@ -71,6 +74,30 @@ if (app.get('env') === 'development') {
 
 // production error handler
 app.use(errorHandlers.productionErrors);
+
+cron.schedule('0 2 * * * *', async () => {
+  try{
+    
+    console.log("starting cron job...");
+    let currentDate =  new Date().toISOString();
+    currentDate = currentDate.substring(0,currentDate.length -1);
+
+    // Update expired Invoice
+    const invoiceUpdated = await Invoice.updateMany(
+        { expiredDate: { $lt:  currentDate } },
+        { $set: { status: 'overdue' } }
+      );
+  
+    // Update expired quotes
+    const quoteUpdated = await Quote.updateMany(
+        { expiredDate: { $lt:  currentDate } },
+        { $set: { status: 'expired' } }
+    );
+    console.log('cron job compeleted');
+  }catch(e){
+    console.error(e)
+  }
+}, {timezone: "Asia/Kolkata"});
 
 // done! we export it so we can start the site in start.js
 module.exports = app;
