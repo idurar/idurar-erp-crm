@@ -12,6 +12,7 @@ const helpers = require('./helpers');
 const erpApiRouter = require('./routes/erpRoutes/erpApi');
 const erpAuthRouter = require('./routes/erpRoutes/erpAuth');
 const erpDownloadRouter = require('./routes/erpRoutes/erpDownloadRouter');
+const fileUploadRouter = require('./routes/coreRoutes');
 
 const errorHandlers = require('./handlers/errorHandlers');
 
@@ -98,6 +99,15 @@ app.use(
   erpAuthRouter
 );
 
+app.use(
+  '/upload',
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+  isValidAdminToken,
+  fileUploadRouter
+);
 app.use(
   '/api',
   cors({
