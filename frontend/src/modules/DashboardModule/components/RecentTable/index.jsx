@@ -6,26 +6,36 @@ import useFetch from '@/hooks/useFetch';
 
 import { EllipsisOutlined, EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { erp } from '@/redux/erp/actions';
+import { useErpContext } from '@/context/erp';
 
 function DropDownRowMenu({ row, entity }) {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { erpContextAction } = useErpContext();
+  const { modal } = erpContextAction;
   const Show = () => {
     history.push(`/${entity}/read/${row._id}`);
   };
   function Edit() {
     history.push(`/${entity}/update/${row._id}`);
   }
-  function Delete() {}
+  function Delete() {
+    dispatch(erp.currentAction({ actionType: 'delete', data: {...row,entity }}));
+    modal.open();
+  }
 
   return (
     <Menu style={{ width: 130 }}>
-      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
+      <Menu.Item key={"recent-table-show"} icon={<EyeOutlined />} onClick={Show}>
         Show
       </Menu.Item>
-      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
+      <Menu.Item key={"recent-table-edit"} icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
-      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
+      <Menu.Item key={"recent-table-delete"} icon={<DeleteOutlined />} onClick={Delete}>
         Delete
       </Menu.Item>
     </Menu>
@@ -33,7 +43,8 @@ function DropDownRowMenu({ row, entity }) {
 }
 
 export default function RecentTable({ ...props }) {
-  let { entity, dataTableColumns } = props;
+  
+  let { entity, dataTableColumns, data } = props;
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -49,7 +60,7 @@ export default function RecentTable({ ...props }) {
   const asyncList = () => {
     return request.list({ entity });
   };
-  const { result, isLoading, isSuccess } = useFetch(asyncList);
+  const { result, isLoading, isSuccess } = useFetch(asyncList,data);
   const firstFiveItems = () => {
     if (isSuccess && result) return result.slice(0, 5);
     return [];

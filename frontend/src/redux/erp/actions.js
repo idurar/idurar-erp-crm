@@ -41,7 +41,6 @@ export const erp = {
         keyState: 'list',
         payload: null,
       });
-
       let data = await request.list({ entity, options });
 
       if (data.success === true) {
@@ -198,7 +197,7 @@ export const erp = {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',
-          payload: data.result,
+          payload: {...data.result,entity},
         });
       } else {
         dispatch({

@@ -8,9 +8,14 @@ import useFetch from '@/hooks/useFetch';
 
 import RecentTable from './components/RecentTable';
 
+
 import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
+import Delete from '../ErpPanelModule/DeleteItem';
+import { useErpContext } from '@/context/erp';
+import { useSelector } from 'react-redux';
+import { selectListItems } from '@/redux/erp/selectors';
 
 const dataTableColumns = [
   {
@@ -38,18 +43,25 @@ const dataTableColumns = [
     },
   },
 ];
+const entityDisplayLabels = ['number', 'client.company'];
+
 
 function formatCurrency(value) {
   return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
 export default function DashboardModule() {
+  const { state } = useErpContext();
+  const { deleteModal } = state;
+  const {isLoading} = useSelector(selectListItems);
+
+
   const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
-    request.summary({ entity: 'invoice' })
+    request.summary({ entity: 'invoice' }),isLoading
   );
 
   const { result: quoteResult, isLoading: quoteLoading } = useFetch(() =>
-    request.summary({ entity: 'quote' })
+    request.summary({ entity: 'quote' }),isLoading
   );
 
   const { result: offerResult, isLoading: offerLoading } = useFetch(() =>
@@ -168,7 +180,7 @@ export default function DashboardModule() {
               <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Invoices</h3>
             </div>
 
-            <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
+            <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} data={invoiceResult} />
           </div>
         </Col>
 
@@ -177,10 +189,11 @@ export default function DashboardModule() {
             <div className="pad20">
               <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Quotes</h3>
             </div>
-            <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
+            <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} data={quoteResult} />
           </div>
         </Col>
       </Row>
+      <Delete config={{entityDisplayLabels,entity:null}} isVisible={deleteModal.isOpen}  />
     </DashboardLayout>
   );
 }

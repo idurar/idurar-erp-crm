@@ -15,7 +15,7 @@ export default function Delete({ config }) {
     modalTitle = 'Remove Item',
   } = config;
   const dispatch = useDispatch();
-  const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
+  const { current, isLoading, isSuccess, result } = useSelector(selectDeletedItem);
   const { state, erpContextAction } = useErpContext();
   const { deleteModal } = state;
   const { modal } = erpContextAction;
@@ -24,7 +24,10 @@ export default function Delete({ config }) {
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(erp.list({ entity }));
+      let options = {
+        entity:entity?entity:result?.entity
+      }
+      dispatch(erp.list(options));
     }
     if (current) {
       let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
@@ -35,7 +38,11 @@ export default function Delete({ config }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(erp.delete({ entity, id }));
+    let options = {
+      id:id,
+      entity:entity?entity:current.entity
+    }
+    dispatch(erp.delete(options));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
