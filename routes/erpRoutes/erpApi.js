@@ -213,14 +213,14 @@ router.route('/offer/summary').get(catchErrors(offerController.summary));
 // //____________________________________________ API for Upload controller _________________
 
 router.route('/public/upload/:model/:fieldId').post(
-  uploadMiddleware.single('upload'),
+  uploadMiddleware.array('upload', 100),
   createPublicUpload,
   // need to add proper controller
   catchErrors((req, res) => {
-    if (req.upload && req.file) {
+    if (req.upload.files) {
       return res.status(200).send({
         success: true,
-        result: req.upload,
+        result: req.upload.files,
         message: 'File uploaded successfully!',
       });
     }
@@ -228,14 +228,14 @@ router.route('/public/upload/:model/:fieldId').post(
 );
 
 router.route('/private/upload/:model/:fieldId').post(
-  uploadMiddleware.single('upload'),
+  uploadMiddleware.array('upload', 100),
   createPrivateUpload,
   // need to add proper controller
   catchErrors((req, res) => {
-    if (req.upload && req.file) {
+    if (req.upload.files) {
       return res.status(200).send({
         success: true,
-        result: req.upload,
+        result: req.upload.files,
         message: 'File uploaded successfully!',
       });
     }
