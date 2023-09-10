@@ -2,24 +2,24 @@
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
     </a>
-    <h2>IDURAR</h2>
+    <h1>Free Open Source ERP / CRM | Node.js React.js</h1>
     <p align="center">
-        <p>Simple To Use </p>
+        <p>IDURAR ERP CRM | Simple To Use </p>
     </p>
     
-  [https://idurarapp.com](https://www.idurarapp.com/)
+  [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-# ERP / CRM Open Source based on (Node.js/React.js)
+
 
 IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
 
 ```
-Dont forget to give a ⭐️ to this project ... Happy coding! 🤩
+:rocket: Give a ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
-# Our Sponsors
+## Our Sponsors
 
   <a href="https://www.digitalocean.com/?ref=idurarapp.com">
     <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">

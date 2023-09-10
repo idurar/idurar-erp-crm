@@ -199,6 +199,10 @@ export const erp = {
           keyState: 'delete',
           payload: {...data.result,entity},
         });
+        dispatch({
+          type: actionTypes.RESET_ACTION,
+          keyState: 'delete'
+        });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
