@@ -1,7 +1,13 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { Row, Col, Button } from 'antd';
 
-import { PlusOutlined, EditOutlined, DeleteOutlined, LockOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  LockOutlined,
+  MenuFoldOutlined,
+} from '@ant-design/icons';
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
@@ -105,16 +111,30 @@ function SidePanelTopContent({ config, formElements }) {
 
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
-  const { collapsedBox } = crudContextAction;
+  const { collapsedBox, panel } = crudContextAction;
 
   const addNewItem = () => {
     collapsedBox.close();
   };
+
+  const collapsePanel = () => {
+    panel.collapse();
+  };
+
   return (
     <div className="box">
       <Row gutter={12}>
-        <Col className="gutter-row" span={21}>
+        <Col className="gutter-row" span={22}>
           <h1 style={{ fontSize: 20, marginBottom: 20 }}>{config.PANEL_TITLE}</h1>
+        </Col>
+        <Col className="gutter-row" span={2}>
+          <Button
+            type="text"
+            onClick={collapsePanel}
+            icon={<MenuFoldOutlined />}
+            block={true}
+            size="middle"
+          ></Button>
         </Col>
       </Row>
       <Row gutter={8}>
