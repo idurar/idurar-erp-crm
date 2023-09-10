@@ -1,20 +1,18 @@
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
-import { EditOutlined, LockOutlined, LogoutOutlined, MailOutlined } from '@ant-design/icons';
+import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, PageHeader, Row, Space, Tag } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
 
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
-  const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
 
-  const state = useSelector((state) => state);
+  const { result } = useSelector(selectCurrentItem);
 
   return (
     <>
@@ -65,18 +63,20 @@ const AdminInfo = ({ config }) => {
               <h3
                 style={{
                   color: '#22075e',
+                  textTransform: 'capitalize',
                 }}
               >
-                Salah Eddine
+                {result?.name}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Surname" span="3">
               <h3
                 style={{
                   color: '#22075e',
+                  textTransform: 'capitalize',
                 }}
               >
-                Lalami
+                {result?.surname}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Email" span="3" style={{ paddingTop: '20px' }}>
@@ -85,16 +85,17 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                admin@demo.com
+                {result?.email}
               </h3>
             </Descriptions.Item>
-            <Descriptions.Item label="Role d'utilisateur" span="3">
+            <Descriptions.Item label="Role" span="3">
               <h3
                 style={{
                   color: '#22075e',
+                  textTransform: 'capitalize',
                 }}
               >
-                admin
+                {result?.role}
               </h3>
             </Descriptions.Item>
           </Descriptions>
