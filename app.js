@@ -84,13 +84,13 @@ cron.schedule('0 2 * * * *', async () => {
 
     // Update expired Invoice
     const invoiceUpdated = await Invoice.updateMany(
-        { expiredDate: { $lt:  currentDate } },
+        { expiredDate: { $lt:  currentDate }, status: { $ne: 'overdue' }  },
         { $set: { status: 'overdue' } }
       );
   
     // Update expired quotes
     const quoteUpdated = await Quote.updateMany(
-        { expiredDate: { $lt:  currentDate } },
+        { expiredDate: { $lt:  currentDate }, status: { $ne: 'expired' }  },
         { $set: { status: 'expired' } }
     );
     console.log('cron job compeleted');
