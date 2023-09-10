@@ -125,7 +125,7 @@ export default function ReadItem({ config, selectedItem }) {
       <PageHeader
         onBack={() => {
           readPanel.close();
-          history.push(`/${entity.toLowerCase()}`);
+          history.goBack();
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}

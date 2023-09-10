@@ -107,7 +107,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          history.goBack();
         }}
         title={UPDATE_ENTITY}
         ghost={false}
