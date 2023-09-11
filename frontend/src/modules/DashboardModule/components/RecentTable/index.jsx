@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Menu, Table } from 'antd';
+import { Descriptions, Dropdown, Menu, Table } from 'antd';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 function DropDownRowMenu({ row, entity }) {
   const history = useHistory();
@@ -63,15 +64,44 @@ export default function RecentTable({ ...props }) {
     if (isSuccess && result) return result.slice(0, 5);
     return [];
   };
+
+  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
+    dataTableColumns,
+    firstFiveItems()
+  );
+
   return (
-    <>
+    <div ref={tableHeader}>
       <Table
-        columns={dataTableColumns}
+        columns={tableColumns}
         rowKey={(item) => item._id}
         dataSource={isSuccess && firstFiveItems()}
         pagination={false}
         loading={isLoading}
+        expandable={
+          expandedRowData.length
+            ? {
+                expandedRowRender: (record) => (
+                  <Descriptions title="" bordered column={1}>
+                    {expandedRowData.map((item, index) => {
+                      return (
+                        <Descriptions.Item key={index} label={item.title}>
+                          {item.render?.(record[item.dataIndex])?.children
+                            ? item.render?.(record[item.dataIndex])?.children
+                            : item.render?.(record[item.dataIndex])
+                            ? item.render?.(record[item.dataIndex])
+                            : Array.isArray(item.dataIndex)
+                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
+                            : record[item.dataIndex]}
+                        </Descriptions.Item>
+                      );
+                    })}
+                  </Descriptions>
+                ),
+              }
+            : null
+        }
       />
-    </>
+    </div>
   );
 }
