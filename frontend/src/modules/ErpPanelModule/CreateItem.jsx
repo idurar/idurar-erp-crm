@@ -66,7 +66,6 @@ export default function CreateItem({ config, CreateForm }) {
       dispatch(erp.resetAction({ actionType: 'create' }));
       setSubTotal(0);
       createPanel.close();
-      dispatch(erp.list({ entity }));
     }
     return () => {};
   }, [isSuccess]);

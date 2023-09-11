@@ -42,6 +42,7 @@ function SidePanelTopContent({ config, formElements }) {
     modal.open();
   };
   const editItem = () => {
+    console.log({currentItem})
     dispatch(crud.currentAction({ actionType: 'update', data: currentItem }));
     editBox.open();
   };

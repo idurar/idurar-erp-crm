@@ -17,7 +17,8 @@ import { request } from '@/request';
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
   const queryClient = useQueryClient();
-  const [options,setOptions] = useState([]);
+  const dispatch = useDispatch()
+  const [options,setOptions] = useState({'page':1});
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -31,7 +32,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   ];
 
   const { result:data, isLoading: listIsLoading } = useReactQuery(
-    [entity,'list'],
+    [entity,'list',options],
     () => request.list({ entity, options }),
     {
       staleTime:120000
@@ -50,13 +51,16 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   const handelDataTableLoad = useCallback((pagination) => {
     const options = { page: pagination.current || 1 };
     setOptions(options);
-    queryClient.invalidateQueries({queryKey:[entity,'list']})
   }, []);
 
   const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
     dataTableColumns,
     items
   );
+
+  useEffect(() => {
+    dispatch(crud.list({entity,options,resData:data}));
+  },[data])
 
   return (
     <>

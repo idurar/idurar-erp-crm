@@ -12,7 +12,6 @@ import store from '@/redux/store';
 
 import { AppContextProvider } from '@/context/appContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -22,7 +21,6 @@ ReactDOM.render(
       <AppContextProvider>
         <QueryClientProvider client={queryClient}>
           <App />
-          <ReactQueryDevtools/>
         </QueryClientProvider>
       </AppContextProvider>
     </Provider>

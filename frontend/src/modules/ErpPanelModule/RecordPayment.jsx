@@ -36,7 +36,6 @@ export default function RecordPayment({ config }) {
       form.resetFields();
       dispatch(erp.resetAction({ actionType: 'recordPayment' }));
       recordPanel.close();
-      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 

@@ -35,7 +35,8 @@ function AddNewItem({ config }) {
 
 export default function DataTable({ config, DataTableDropMenu }) {
   const queryClient = useQueryClient();
-  const [options,setOptions] = useState({});
+  const dispatch = useDispatch();
+  const [options,setOptions] = useState({"page":1});
   let { entity, dataTableColumns } = config;
   const { DATATABLE_TITLE } = config;
   dataTableColumns = [
@@ -51,7 +52,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
   ];
 
   const { result:data, isLoading: listIsLoading } = useReactQuery(
-    [entity,'list'],
+    [entity,'list',options],
     () => request.list({ entity, options }),
     {
       staleTime:120000
@@ -68,9 +69,10 @@ export default function DataTable({ config, DataTableDropMenu }) {
   const { pagination, items } = listResult;
 
   const handelDataTableLoad = useCallback((pagination) => {
+    console.log({pagination})
     const options = { page: pagination.current || 1 };
     setOptions(options);
-    queryClient.invalidateQueries({queryKey:[entity,'list']});
+    queryClient.invalidateQueries({queryKey:[entity]});
   }, []);
 
   useEffect(() => {
@@ -79,6 +81,10 @@ export default function DataTable({ config, DataTableDropMenu }) {
       controller.abort();
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(erp.list({entity,options,resData:data}));
+  },[data])
 
   const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
     dataTableColumns,

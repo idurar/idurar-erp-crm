@@ -36,7 +36,7 @@ export const crud = {
       });
     },
   list:
-    ({ entity, options = { page: 1 } }) =>
+    ({ entity, options = { page: 1 } ,resData=null}) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -44,7 +44,7 @@ export const crud = {
         payload: null,
       });
 
-      let data = await request.list({ entity, options });
+      let data = resData?resData:await request.list({ entity, options });
 
       if (data.success === true) {
         const result = {
@@ -81,7 +81,7 @@ export const crud = {
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'create',
@@ -141,7 +141,7 @@ export const crud = {
       let data = await request.update({ entity, id, jsonData });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'update',
@@ -161,7 +161,7 @@ export const crud = {
     },
 
   delete:
-    ({ entity, id, queryClient }) =>
+    ({ entity, id, queryClient}) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -172,7 +172,7 @@ export const crud = {
       let data = await request.delete({ entity, id });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',

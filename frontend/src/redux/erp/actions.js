@@ -33,8 +33,9 @@ export const erp = {
         payload: { ...data },
       });
     },
+  
   list:
-    ({ entity, options = { page: 1 } }) =>
+    ({ entity, options = { page: 1 } ,resData=null}) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -42,7 +43,7 @@ export const erp = {
         payload: null,
       });
 
-      let data = await request.list({ entity, options });
+      let data = resData?resData:await request.list({ entity, options });
 
       if (data.success === true) {
         const result = {
@@ -78,7 +79,7 @@ export const erp = {
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'create',
@@ -108,7 +109,7 @@ export const erp = {
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'recordPayment',
@@ -167,7 +168,7 @@ export const erp = {
       let data = await request.update({ entity, id, jsonData });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'update',
@@ -198,7 +199,7 @@ export const erp = {
       let data = await request.delete({ entity, id });
 
       if (data.success === true) {
-        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
+        if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',
