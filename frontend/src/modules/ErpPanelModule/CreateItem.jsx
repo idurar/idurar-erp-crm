@@ -97,6 +97,7 @@ export default function CreateItem({ config, CreateForm }) {
         };
       }
     }
+    //passing queryClient to invalidate the query
     dispatch(erp.create({ entity, jsonData: fieldsValue , queryClient }));
   };
 

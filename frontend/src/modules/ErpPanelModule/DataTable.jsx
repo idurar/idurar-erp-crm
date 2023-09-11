@@ -2,9 +2,8 @@ import React, { useCallback, useEffect, useEffectLayout, useRef, useState } from
 import { Descriptions, Dropdown, Table } from 'antd';
 import { Button, PageHeader } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
@@ -69,8 +68,9 @@ export default function DataTable({ config, DataTableDropMenu }) {
   const { pagination, items } = listResult;
 
   const handelDataTableLoad = useCallback((pagination) => {
-    console.log({pagination})
     const options = { page: pagination.current || 1 };
+    //setting options as the query for each page needs to be cached
+    //independently
     setOptions(options);
     queryClient.invalidateQueries({queryKey:[entity]});
   }, []);
@@ -83,6 +83,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
   }, []);
 
   useEffect(() => {
+    //updating redux store when fetching data
     dispatch(erp.list({entity,options,resData:data}));
   },[data])
 

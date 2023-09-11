@@ -42,7 +42,7 @@ export const erp = {
         keyState: 'list',
         payload: null,
       });
-
+      //resData , when we already fetched the data using useQuery
       let data = resData?resData:await request.list({ entity, options });
 
       if (data.success === true) {
@@ -79,6 +79,7 @@ export const erp = {
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
+        //invalidating query on mutation
         if(queryClient) queryClient.invalidateQueries({queryKey:[entity]});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
