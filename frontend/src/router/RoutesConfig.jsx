@@ -109,6 +109,10 @@ export const routesConfig = [
     component: 'PaymentMode',
   },
   {
+    path: '/settings/advanced',
+    component: 'AdvancedSettings',
+  },
+  {
     path: '/profile',
     component: 'Profile',
   },

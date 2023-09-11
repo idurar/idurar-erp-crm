@@ -144,6 +144,14 @@ methods.update = async (req, res) => {
 
     const { items = [], taxRate = 0, discount = 0 } = req.body;
 
+    if(items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: 'Items cannot be empty',
+      });
+    }
+
     // default
     let subTotal = 0;
     let taxTotal = 0;
