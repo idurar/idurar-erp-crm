@@ -3,6 +3,8 @@
 
 const mongoose = require('mongoose');
 const moment = require('moment');
+const Joi = require('joi');
+
 const Model = mongoose.model('Invoice');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
@@ -14,9 +16,44 @@ const { calculate } = require('@/helpers');
 delete methods['create'];
 delete methods['update'];
 
+const schema = Joi.object({
+  // string or object
+  client: Joi.alternatives().try(Joi.string(), Joi.object()).required(),
+  number: Joi.number().required(),
+  year: Joi.number().required(),
+  status: Joi.string().required(),
+  note: Joi.string().allow(''),
+  expiredDate: Joi.date().required(),
+  date: Joi.date().required(),
+  // array cannot be empty
+  items: Joi.array().items(
+    Joi.object({
+        itemName: Joi.string().required(),
+        description: Joi.string().allow(''),
+        quantity: Joi.number().required(),
+        price: Joi.number().required(),
+        total: Joi.number().required(),
+      })
+      .required()
+  ).required(),
+  taxRate: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
+});
+
 methods.create = async (req, res) => {
   try {
-    const { items = [], taxRate = 0, discount = 0 } = req.body;
+    let body = req.body;
+
+    const { error, value } = schema.validate(body);
+    if (error) {
+      const { details } = error;
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: details[0]?.message,
+      });
+    }
+
+    const { items = [], taxRate = 0, discount = 0 } = value;
 
     // default
     let subTotal = 0;
@@ -33,8 +70,6 @@ methods.create = async (req, res) => {
     });
     taxTotal = calculate.multiply(subTotal, taxRate);
     total = calculate.add(subTotal, taxTotal);
-
-    let body = req.body;
 
     body['subTotal'] = subTotal;
     body['taxTotal'] = taxTotal;
@@ -65,6 +100,7 @@ methods.create = async (req, res) => {
       message: 'Invoice created successfully',
     });
   } catch (err) {
+    console.log(err);
     // If err is thrown by Mongoose due to required validations
     if (err.name == 'ValidationError') {
       return res.status(400).json({
@@ -87,6 +123,18 @@ methods.create = async (req, res) => {
 
 methods.update = async (req, res) => {
   try {
+    let body = req.body;
+
+    const { error, value } = schema.validate(body);
+    if (error) {
+      const { details } = error;
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: details[0]?.message,
+      });
+    }
+
     const previousInvoice = await Model.findOne({
       _id: req.params.id,
       removed: false,
@@ -111,8 +159,6 @@ methods.update = async (req, res) => {
     });
     taxTotal = calculate.multiply(subTotal, taxRate);
     total = calculate.add(subTotal, taxTotal);
-
-    let body = req.body;
 
     body['subTotal'] = subTotal;
     body['taxTotal'] = taxTotal;
