@@ -15,12 +15,12 @@ delete methods['update'];
 delete methods['delete'];
 
 const paymentInvoiceSchema = Joi.object({
-  client: Joi.string().required(),
+  client: Joi.alternatives().try(Joi.string(), Joi.object()).required(),
   date: Joi.date().required(),
   status: Joi.string().optional().default('draft'),
   note: Joi.string().optional().allow(''),
   number: Joi.number().required(),
-  taxRate: Joi.string().optional().allow(''),
+  taxRate: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
   year: Joi.number().required(),
   expiredDate: Joi.date().required(),
   items: Joi.array().items(
@@ -41,7 +41,6 @@ methods.create = async (req, res) => {
     const { error, value } = paymentInvoiceSchema.validate(body);
     if (error) {
       const { details } = error;
-      console.log('details', details);
       return res.status(400).json({
         success: false,
         result: null,
@@ -151,11 +150,15 @@ methods.create = async (req, res) => {
 
 methods.update = async (req, res) => {
   try {
-    if (req.body.amount === 0) {
-      return res.status(202).json({
+    const { body } = req;
+
+    const { error, value } = paymentInvoiceSchema.validate(body);
+    if (error) {
+      const { details } = error;
+      return res.status(400).json({
         success: false,
         result: null,
-        message: `The Minimum Amount couldn't be 0`,
+        message: details[0]?.message,
       });
     }
     // Find document by id and updates with the required fields
@@ -167,7 +170,7 @@ methods.update = async (req, res) => {
     const { amount: previousAmount } = previousPayment;
     const { id: invoiceId, total, discount, credit: previousCredit } = previousPayment.invoice;
 
-    const { amount: currentAmount } = req.body;
+    const _amount = value?.items?.reduce((acc, item) => acc + item.total, 0);
 
     const changedAmount = calculate.sub(currentAmount, previousAmount);
     const maxAmount = calculate.sub(total, calculate.add(discount, previousCredit));
@@ -190,12 +193,12 @@ methods.update = async (req, res) => {
 
     const updatedDate = new Date();
     const updates = {
-      number: req.body.number,
-      date: req.body.date,
-      amount: req.body.amount,
-      paymentMode: req.body.paymentMode,
-      ref: req.body.ref,
-      description: req.body.description,
+      number: body.number,
+      date: body.date,
+      amount: _amount,
+      paymentMode: body.paymentMode,
+      ref: body.ref,
+      description: body.description,
       updated: updatedDate,
     };
 
