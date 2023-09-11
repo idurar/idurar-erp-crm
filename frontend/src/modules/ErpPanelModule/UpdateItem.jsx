@@ -13,7 +13,7 @@ import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, config }) {
@@ -38,7 +38,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
-  const [id, setId] = useState(current?._id);
+  const { id } = useParams();
 
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
