@@ -16,10 +16,12 @@ import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { StatusTag } from '@/components/Tag';
 
-function SaveForm({ form, config }) {
-  let { UPDATE_ENTITY } = config;
+function SaveForm({ form, config, id }) {
+  let { UPDATE_ENTITY, entity } = config;
+  const history = useHistory();
   const handelClick = () => {
     form.submit();
+    history.push(`/${entity.toLowerCase()}/read/${id}`);
   };
 
   return (
@@ -79,7 +81,6 @@ export default function UpdateItem({ config, UpdateForm }) {
       form.resetFields();
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
-      updatePanel.close();
       dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
@@ -122,7 +123,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           >
             Cancel
           </Button>,
-          <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
+          <SaveForm config={config} form={form} key={`${uniqueId()}`} id={current?._id} />,
         ]}
         style={{
           padding: '20px 0px',
