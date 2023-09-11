@@ -11,10 +11,12 @@ import { selectCurrentItem } from '@/redux/crud/selectors';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function UpdateForm({ config, formElements }) {
   let { entity } = config;
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
   const { state, crudContextAction } = useCrudContext();
@@ -33,7 +35,7 @@ export default function UpdateForm({ config, formElements }) {
   const onSubmit = (fieldsValue) => {
     console.log('🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id', current._id);
     const id = current._id;
-    dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
+    dispatch(crud.update({ entity, id, jsonData: fieldsValue , queryClient}));
   };
   useEffect(() => {
     if (current) {
@@ -81,7 +83,6 @@ export default function UpdateForm({ config, formElements }) {
       panel.open();
       form.resetFields();
       dispatch(crud.resetAction({ actionType: 'update' }));
-      dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);
 

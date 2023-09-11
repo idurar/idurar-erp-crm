@@ -15,6 +15,7 @@ import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { StatusTag } from '@/components/Tag';
+import { useQueryClient } from '@tanstack/react-query';
 
 function SaveForm({ form, config }) {
   let { UPDATE_ENTITY } = config;
@@ -35,6 +36,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { updatePanel } = erpContextAction;
   const dispatch = useDispatch();
   const history = useHistory();
+  const queryClient = useQueryClient();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
@@ -72,7 +74,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     }
 
     const id = current._id;
-    dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
+    dispatch(erp.update({ entity, id, jsonData: fieldsValue ,queryClient }));
   };
   useEffect(() => {
     if (isSuccess) {
@@ -80,7 +82,6 @@ export default function UpdateItem({ config, UpdateForm }) {
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
       updatePanel.close();
-      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 

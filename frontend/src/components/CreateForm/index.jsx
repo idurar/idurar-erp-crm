@@ -8,8 +8,11 @@ import { selectCreatedItem } from '@/redux/crud/selectors';
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 export default function CreateForm({ config, formElements }) {
   let { entity } = config;
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const { crudContextAction } = useCrudContext();
@@ -24,7 +27,7 @@ export default function CreateForm({ config, formElements }) {
       return acc;
     }, {});
 
-    dispatch(crud.create({ entity, jsonData: trimmedValues }));
+    dispatch(crud.create({ entity, jsonData: trimmedValues, queryClient }));
   };
 
   useEffect(() => {
@@ -34,7 +37,6 @@ export default function CreateForm({ config, formElements }) {
       panel.open();
       form.resetFields();
       dispatch(crud.resetAction({ actionType: 'create' }));
-      dispatch(crud.list({ entity }));
     }
   }, [isSuccess]);
 

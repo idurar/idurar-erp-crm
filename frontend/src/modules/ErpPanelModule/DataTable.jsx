@@ -11,6 +11,11 @@ import { useHistory } from 'react-router-dom';
 
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
+
+import useReactQuery from '@/hooks/useReactRouter/useReactQuery';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { request } from '@/request';
 function AddNewItem({ config }) {
   const history = useHistory();
   const { ADD_NEW_ENTITY, entity } = config;
@@ -29,6 +34,8 @@ function AddNewItem({ config }) {
 }
 
 export default function DataTable({ config, DataTableDropMenu }) {
+  const queryClient = useQueryClient();
+  const [options,setOptions] = useState({});
   let { entity, dataTableColumns } = config;
   const { DATATABLE_TITLE } = config;
   dataTableColumns = [
@@ -43,21 +50,31 @@ export default function DataTable({ config, DataTableDropMenu }) {
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
-
+  const { result:data, isLoading: listIsLoading } = useReactQuery(
+    [entity,'list'],
+    () => request.list({ entity, options }),
+    {
+      staleTime:120000
+    }
+  );
+  const listResult = {
+  items: data&&data.result?data.result:[],
+  pagination: {
+    current: data?parseInt(data.pagination.page, 10):0,
+    pageSize: 10,
+    total: data?parseInt(data.pagination.count, 10):0,
+  },
+  }
   const { pagination, items } = listResult;
-
-  const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
     const options = { page: pagination.current || 1 };
-    dispatch(erp.list({ entity, options }));
+    setOptions(options);
+    queryClient.invalidateQueries({queryKey:[entity,'list']});
   }, []);
 
   useEffect(() => {
     const controller = new AbortController();
-    dispatch(erp.list({ entity }));
-
     return () => {
       controller.abort();
     };

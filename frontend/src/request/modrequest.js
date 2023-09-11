@@ -7,7 +7,7 @@ import successHandler from './successHandler';
 axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
 
-const request = {
+const modrequest = {
   create: async ({ entity, jsonData }) => {
     console.log('🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData', jsonData);
 
@@ -19,7 +19,7 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
   read: async ({ entity, id }) => {
@@ -31,7 +31,7 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
   update: async ({ entity, id, jsonData }) => {
@@ -46,7 +46,7 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
@@ -59,11 +59,11 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
-  filter: async ({ entity, options = {} },callBackFn=null) => {
+  filter: async ({ entity, options = {} }) => {
     try {
       let filter = options.filter ? 'filter=' + options.filter : '';
       let equal = options.equal ? '&equal=' + options.equal : '';
@@ -74,10 +74,9 @@ const request = {
         notifyOnSuccess: false,
         notifyOnFailed: false,
       });
-      if(callBackFn) callBackFn()
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
@@ -97,11 +96,11 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
-  list: async ({ entity, options = {} },callBackFn=null) => {
+  list: async ({ entity, options = {} }) => {
     try {
       let query = '?';
       for (var key in options) {
@@ -115,10 +114,9 @@ const request = {
         notifyOnSuccess: false,
         notifyOnFailed: false,
       });
-      if(callBackFn) callBackFn();
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
@@ -128,7 +126,7 @@ const request = {
 
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
   get: async ({ entity }) => {
@@ -136,7 +134,7 @@ const request = {
       const response = await axios.get(entity);
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
   patch: async ({ entity, jsonData }) => {
@@ -148,7 +146,7 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
@@ -158,7 +156,7 @@ const request = {
     return source;
   },
 
-  summary: async ({ entity, options = {} },callBackFn) => {
+  summary: async ({ entity, options = {} }) => {
     try {
       const response = await axios.get(entity + '/summary');
 
@@ -166,11 +164,10 @@ const request = {
         notifyOnSuccess: false,
         notifyOnFailed: false,
       });
-      
-      if(callBackFn) callBackFn();
+
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
 
@@ -183,7 +180,7 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
   
@@ -196,9 +193,9 @@ const request = {
       });
       return response.data;
     } catch (error) {
-      return errorHandler(error);
+      throw errorHandler(error);
     }
   },
   
 };
-export default request;
+export default modrequest;

@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import useReactQuery from '@/hooks/useReactRouter/useReactQuery';
 
 function DropDownRowMenu({ row, entity }) {
   const history = useHistory();
@@ -55,12 +56,15 @@ export default function RecentTable({ ...props }) {
     },
   ];
 
-  const asyncList = () => {
-    return request.list({ entity });
-  };
-  const { result, isLoading, isSuccess } = useFetch(asyncList);
+  const { result:data, isLoading, isSuccess } = useReactQuery(
+    [entity,'list'],
+    () => request.list({ entity }),
+    {
+      staleTime:300000
+    }
+    );
   const firstFiveItems = () => {
-    if (isSuccess && result) return result.slice(0, 5);
+    if (isSuccess && data) return data.result.slice(0, 5);
     return [];
   };
   return (

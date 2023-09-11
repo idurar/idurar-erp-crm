@@ -7,6 +7,8 @@ import { useErpContext } from '@/context/erp';
 import { selectDeletedItem } from '@/redux/erp/selectors';
 import { valueByString } from '@/utils/helpers';
 
+import { QueryClient } from '@tanstack/react-query';
+
 export default function Delete({ config }) {
   let {
     entity,
@@ -15,6 +17,7 @@ export default function Delete({ config }) {
     modalTitle = 'Remove Item',
   } = config;
   const dispatch = useDispatch();
+  const queryClient = new QueryClient();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, erpContextAction } = useErpContext();
   const { deleteModal } = state;
@@ -24,18 +27,16 @@ export default function Delete({ config }) {
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(erp.list({ entity }));
     }
     if (current) {
       let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
-
       setDisplayItem(labels);
     }
   }, [isSuccess, current]);
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(erp.delete({ entity, id }));
+    dispatch(erp.delete({ entity, id , queryClient}));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();

@@ -11,12 +11,19 @@ import history from '@/utils/history';
 import store from '@/redux/store';
 
 import { AppContextProvider } from '@/context/appContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <RouterHistory history={history}>
     <Provider store={store}>
       <AppContextProvider>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+          <ReactQueryDevtools/>
+        </QueryClientProvider>
       </AppContextProvider>
     </Provider>
   </RouterHistory>,

@@ -15,6 +15,10 @@ import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
+import { useQueryClient } from '@tanstack/react-query';
+
+
+
 function SaveForm({ form, config }) {
   let { CREATE_ENTITY } = config;
   const handelClick = () => {
@@ -37,6 +41,7 @@ export default function CreateItem({ config, CreateForm }) {
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+  const queryClient = useQueryClient();
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
@@ -93,7 +98,7 @@ export default function CreateItem({ config, CreateForm }) {
         };
       }
     }
-    dispatch(erp.create({ entity, jsonData: fieldsValue }));
+    dispatch(erp.create({ entity, jsonData: fieldsValue , queryClient }));
   };
 
   return (

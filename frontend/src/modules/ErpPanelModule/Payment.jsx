@@ -37,7 +37,7 @@ export default function Payment({ config, currentItem }) {
   }, [currentItem]);
 
   useEffect(() => {
-    console.info('itemslist', itemslist);
+    console.info('itemslist', itemslist,{currentItem});
   }, [itemslist]);
 
   return (

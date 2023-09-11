@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Dropdown, Button, PageHeader, Table, Col, Descriptions } from 'antd';
 
 import { EllipsisOutlined } from '@ant-design/icons';
@@ -9,9 +9,15 @@ import { selectListItems } from '@/redux/crud/selectors';
 import uniqueId from '@/utils/uinqueId';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
+import useReactQuery from '@/hooks/useReactRouter/useReactQuery';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { request } from '@/request';
+
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
-
+  const queryClient = useQueryClient();
+  const [options,setOptions] = useState([]);
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -24,19 +30,27 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
-
+  const { result:data, isLoading: listIsLoading } = useReactQuery(
+    [entity,'list'],
+    () => request.list({ entity, options }),
+    {
+      staleTime:120000
+    }
+  );
+  const listResult = {
+  items: data&&data.result?data.result:[],
+  pagination: {
+    current: data?parseInt(data.pagination.page, 10):0,
+    pageSize: 10,
+    total: data?parseInt(data.pagination.count, 10):0,
+  },
+  }
   const { pagination, items } = listResult;
-
-  const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
     const options = { page: pagination.current || 1 };
-    dispatch(crud.list({ entity, options }));
-  }, []);
-
-  useEffect(() => {
-    dispatch(crud.list({ entity }));
+    setOptions(options);
+    queryClient.invalidateQueries({queryKey:[entity,'list']})
   }, []);
 
   const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(

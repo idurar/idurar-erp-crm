@@ -11,6 +11,7 @@ import RecentTable from './components/RecentTable';
 import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
+import useReactQuery from '@/hooks/useReactRouter/useReactQuery';
 
 const dataTableColumns = [
   {
@@ -44,44 +45,57 @@ function formatCurrency(value) {
 }
 
 export default function DashboardModule() {
-  const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
-    request.summary({ entity: 'invoice' })
-  );
+  const queryOptions = {
+    staleTime:120000
+  }
+  const { result: invoiceResult, isLoading: invoiceLoading } = useReactQuery(
+    ['invoice','summary'],
+    () => request.summary({ entity: 'invoice' }),
+    queryOptions
+  )
 
-  const { result: quoteResult, isLoading: quoteLoading } = useFetch(() =>
-    request.summary({ entity: 'quote' })
-  );
+  const { result: quoteResult, isLoading: quoteLoading } = useReactQuery(
+    ['quote','summary'],
+    () => request.summary({ entity: 'quote' }),
+    queryOptions
+  )
 
-  const { result: offerResult, isLoading: offerLoading } = useFetch(() =>
-    request.summary({ entity: 'offer' })
-  );
+  const { result: offerResult, isLoading: offerLoading } = useReactQuery(
+    ['offer','summary'],
+    () => request.summary({ entity: 'offer' }),
+    queryOptions
+  )
 
-  const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
-    request.summary({ entity: 'payment/invoice' })
-  );
+  const { result: paymentResult, isLoading: paymentLoading } = useReactQuery(
+    ['payment/invoice','summary'],
+    () => request.summary({ entity: 'payment/invoice' }),
+    queryOptions
+  )
 
-  const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
-    request.summary({ entity: 'client' })
-  );
+  const { result: clientResult, isLoading: clientLoading } = useReactQuery(
+    ['client','summary'],
+    () => request.summary({ entity: 'client' }),
+    queryOptions
+  )
 
   const entityData = [
     {
-      result: invoiceResult,
+      result: invoiceResult?.result,
       isLoading: invoiceLoading,
       entity: 'invoice',
     },
     {
-      result: quoteResult,
+      result: quoteResult?.result,
       isLoading: quoteLoading,
       entity: 'quote',
     },
     {
-      result: offerResult,
+      result: offerResult?.result,
       isLoading: offerLoading,
       entity: 'offer',
     },
     {
-      result: paymentResult,
+      result: paymentResult?.result,
       isLoading: paymentLoading,
       entity: 'payment',
     },
@@ -155,8 +169,8 @@ export default function DashboardModule() {
         <Col className="gutter-row" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
           <CustomerPreviewCard
             isLoading={clientLoading}
-            activeCustomer={clientResult?.active}
-            newCustomer={clientResult?.new}
+            activeCustomer={clientResult?.result?.active}
+            newCustomer={clientResult?.result?.new}
           />
         </Col>
       </Row>

@@ -7,6 +7,8 @@ import { useCrudContext } from '@/context/crud';
 import { selectDeletedItem } from '@/redux/crud/selectors';
 import { valueByString } from '@/utils/helpers';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 export default function DeleteModal({ config, children }) {
   let {
     entity,
@@ -19,12 +21,12 @@ export default function DeleteModal({ config, children }) {
   const { state, crudContextAction } = useCrudContext();
   const { isModalOpen } = state;
   const { modal } = crudContextAction;
+  const queryClient = useQueryClient();
   const [displayItem, setDisplayItem] = useState('');
 
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(crud.list({ entity }));
     }
     if (current) {
       let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
@@ -35,7 +37,7 @@ export default function DeleteModal({ config, children }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(crud.delete({ entity, id }));
+    dispatch(crud.delete({ entity, id, queryClient }));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();

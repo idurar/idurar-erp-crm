@@ -8,6 +8,8 @@ import { useAppContext } from '@/context/appContext';
 import { selectDeletedItem } from '@/redux/crud/selectors';
 import { valueByString } from '@/utils/helpers';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 export default function DeleteModal({ config }) {
   let {
     entity,
@@ -23,12 +25,12 @@ export default function DeleteModal({ config }) {
   const { navMenu } = appContextAction;
   const { isModalOpen } = state;
   const { modal } = crudContextAction;
+  const queryClient = useQueryClient();
   const [displayItem, setDisplayItem] = useState('');
 
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(crud.list({ entity }));
       // dispatch(crud.resetAction({actionType:"delete"})); // check here maybe it wrong
     }
     if (current) {
@@ -40,7 +42,7 @@ export default function DeleteModal({ config }) {
 
   const handleOk = () => {
     const id = current._id;
-    dispatch(crud.delete({ entity, id }));
+    dispatch(crud.delete({ entity, id ,queryClient}));
     readBox.close();
     panel.close();
     navMenu.collapse();

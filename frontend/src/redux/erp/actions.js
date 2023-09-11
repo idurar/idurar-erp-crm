@@ -67,7 +67,7 @@ export const erp = {
       }
     },
   create:
-    ({ entity, jsonData }) =>
+    ({ entity, jsonData, queryClient }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -78,6 +78,7 @@ export const erp = {
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
+        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'create',
@@ -96,7 +97,7 @@ export const erp = {
       }
     },
   recordPayment:
-    ({ entity, jsonData }) =>
+    ({ entity, jsonData, queryClient }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -107,6 +108,7 @@ export const erp = {
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
+        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'recordPayment',
@@ -154,7 +156,7 @@ export const erp = {
       }
     },
   update:
-    ({ entity, id, jsonData }) =>
+    ({ entity, id, jsonData, queryClient }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -165,6 +167,7 @@ export const erp = {
       let data = await request.update({ entity, id, jsonData });
 
       if (data.success === true) {
+        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'update',
@@ -184,7 +187,7 @@ export const erp = {
     },
 
   delete:
-    ({ entity, id }) =>
+    ({ entity, id, queryClient }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -195,6 +198,7 @@ export const erp = {
       let data = await request.delete({ entity, id });
 
       if (data.success === true) {
+        if(queryClient) queryClient.invalidateQueries({queryKey:entity});
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',
