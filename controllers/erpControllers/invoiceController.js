@@ -202,9 +202,24 @@ methods.summary = async (req, res) => {
       },
       {
         $facet: {
-          totalInvoices: [
+          totalInvoice: [
             {
-              $count: 'count',
+              $group: {
+                _id: null,
+                total: {
+                  $sum: '$total',
+                },
+                count: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                total: '$total',
+                count: '$count',
+              },
             },
           ],
           statusCounts: [
@@ -214,9 +229,6 @@ methods.summary = async (req, res) => {
                 count: {
                   $sum: 1,
                 },
-                total_amount: {
-                  $sum: '$total',
-                },
               },
             },
             {
@@ -224,7 +236,6 @@ methods.summary = async (req, res) => {
                 _id: 0,
                 status: '$_id',
                 count: '$count',
-                total_amount: '$total_amount',
               },
             },
           ],
@@ -235,9 +246,6 @@ methods.summary = async (req, res) => {
                 count: {
                   $sum: 1,
                 },
-                total_amount: {
-                  $sum: '$total',
-                },
               },
             },
             {
@@ -245,7 +253,6 @@ methods.summary = async (req, res) => {
                 _id: 0,
                 status: '$_id',
                 count: '$count',
-                total_amount: '$total_amount',
               },
             },
           ],
@@ -263,9 +270,6 @@ methods.summary = async (req, res) => {
                 count: {
                   $sum: 1,
                 },
-                total_amount: {
-                  $sum: '$total',
-                },
               },
             },
             {
@@ -273,7 +277,6 @@ methods.summary = async (req, res) => {
                 _id: 0,
                 status: '$_id',
                 count: '$count',
-                total_amount: '$total_amount',
               },
             },
           ],
@@ -283,7 +286,7 @@ methods.summary = async (req, res) => {
 
     let result = [];
 
-    const totalInvoices = response[0].totalInvoices[0] ? response[0].totalInvoices[0].count : 0;
+    const totalInvoices = response[0].totalInvoice ? response[0].totalInvoice[0] : 0;
     const statusResult = response[0].statusCounts || [];
     const paymentStatusResult = response[0].paymentStatusCounts || [];
     const overdueResult = response[0].overdueCounts || [];
@@ -291,24 +294,24 @@ methods.summary = async (req, res) => {
     const statusResultMap = statusResult.map((item) => {
       return {
         ...item,
-        percentage: Math.round((item.count / totalInvoices) * 100),
+        percentage: Math.round((item.count / totalInvoices.count) * 100),
       };
-    })
+    });
 
     const paymentStatusResultMap = paymentStatusResult.map((item) => {
       return {
         ...item,
-        percentage: Math.round((item.count / totalInvoices) * 100),
+        percentage: Math.round((item.count / totalInvoices.count) * 100),
       };
-    })
+    });
 
     const overdueResultMap = overdueResult.map((item) => {
       return {
         ...item,
         status: 'overdue',
-        percentage: Math.round((item.count / totalInvoices) * 100),
+        percentage: Math.round((item.count / totalInvoices.count) * 100),
       };
-    })
+    });
 
     statuses.forEach((status) => {
       const found = [...paymentStatusResultMap, ...statusResultMap, ...overdueResultMap].find(
@@ -347,7 +350,7 @@ methods.summary = async (req, res) => {
     ]);
 
     const finalResult = {
-      total: result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2),
+      total: totalInvoices.total.toFixed(2),
       total_undue: unpaid.length > 0 ? unpaid[0].total_amount.toFixed(2) : 0,
       type,
       performance: result,
@@ -359,6 +362,7 @@ methods.summary = async (req, res) => {
       message: `Successfully found all invoices for the last ${defaultType}`,
     });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       success: false,
       result: null,
