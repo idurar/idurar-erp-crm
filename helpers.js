@@ -7,6 +7,8 @@ const fs = require('fs');
 
 const currency = require('currency.js');
 
+const cron = require('node-cron');
+
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
 exports.moment = require('moment');
 
@@ -60,3 +62,21 @@ exports.calculate = {
     return currency(firstValue).divide(secondValue).value;
   },
 };
+
+/**
+ * Schedule a cron job to run at a specified time in a given timezone.
+ *
+ * @param {string} cronExpression - The cron expression for scheduling.
+ * @param {string} timezone - The timezone for scheduling (default is London).
+ * @param {Array} job - The Array of Jobs to execute when the cron job runs.
+ */
+exports.scheduleCronJob = (cronExpression, jobs, timezone = 'Asia/Kolkata') => {
+  
+  jobs.map((job) => {
+    cron.schedule(
+      cronExpression, 
+      job, 
+      { timezone }
+    )
+  });
+}

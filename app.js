@@ -17,8 +17,8 @@ const { isValidAdminToken } = require('./controllers/coreControllers/authJwtCont
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/erpRoutes/erpApi');
-const Invoice = require('./models/erpModels/Invoice');
-const Quote = require('./models/erpModels/Quote');
+const { invoiceCronJob, quoteCronJob } = require('./cronJobs');
+const { scheduleCronJob } = require('./helpers');
 
 // create our Express app
 const app = express();
@@ -66,6 +66,9 @@ app.use('/download', coreDownloadRouter);
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
 
+// cron job scheduler
+scheduleCronJob(process.env.CRON_SCHEDULE_EXPRESSION, [ invoiceCronJob, quoteCronJob ]);
+
 // Otherwise this was a really bad error we didn't expect! Shoot eh
 if (app.get('env') === 'development') {
   /* Development Error Handler - Prints stack trace */
@@ -74,30 +77,6 @@ if (app.get('env') === 'development') {
 
 // production error handler
 app.use(errorHandlers.productionErrors);
-
-cron.schedule('0 2 * * * *', async () => {
-  try{
-    
-    console.log("starting cron job...");
-    let currentDate =  new Date().toISOString();
-    currentDate = currentDate.substring(0,currentDate.length -1);
-
-    // Update expired Invoice
-    const invoiceUpdated = await Invoice.updateMany(
-        { expiredDate: { $lt:  currentDate }, status: { $ne: 'overdue' }  },
-        { $set: { status: 'overdue' } }
-      );
-  
-    // Update expired quotes
-    const quoteUpdated = await Quote.updateMany(
-        { expiredDate: { $lt:  currentDate }, status: { $ne: 'expired' }  },
-        { $set: { status: 'expired' } }
-    );
-    console.log('cron job compeleted');
-  }catch(e){
-    console.error(e)
-  }
-}, {timezone: "Asia/Kolkata"});
 
 // done! we export it so we can start the site in start.js
 module.exports = app;
