@@ -38,6 +38,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+  const [id, setId] = useState(current?._id);
 
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
@@ -71,15 +72,14 @@ export default function UpdateItem({ config, UpdateForm }) {
       }
     }
 
-    const id = current._id;
     dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
-    history.push(`/${entity.toLowerCase()}/read/${id}`);
   };
   useEffect(() => {
     if (isSuccess) {
       form.resetFields();
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
+      history.push(`/${entity.toLowerCase()}/read/${id}`);
       dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
