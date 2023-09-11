@@ -96,7 +96,7 @@ methods.update = async (req, res) => {
 
     const { items = [], taxRate = 0, discount = 0 } = req.body;
 
-    if(items.length === 0) {
+    if (items.length === 0) {
       return res.status(400).json({
         success: false,
         result: null,
@@ -147,7 +147,6 @@ methods.update = async (req, res) => {
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
-    console.log(err);
     if (err.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
@@ -189,9 +188,9 @@ methods.summary = async (req, res) => {
     let startDate = currentDate.clone().startOf(defaultType);
     let endDate = currentDate.clone().endOf(defaultType);
 
-    const statuses = ['draft', 'pending', 'sent'];
+    const statuses = ['draft', 'pending', 'overdue', 'paid', 'unpaid', 'partially'];
 
-    const result = await Model.aggregate([
+    const response = await Model.aggregate([
       {
         $match: {
           removed: false,
@@ -202,57 +201,121 @@ methods.summary = async (req, res) => {
         },
       },
       {
-        $group: {
-          _id: '$status',
-          count: {
-            $sum: 1,
-          },
-          total_amount: {
-            $sum: '$total',
-          },
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          total_count: {
-            $sum: '$count',
-          },
-          results: {
-            $push: '$$ROOT',
-          },
-        },
-      },
-      {
-        $unwind: '$results',
-      },
-      {
-        $project: {
-          _id: 0,
-          status: '$results._id',
-          count: '$results.count',
-          percentage: {
-            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
-          },
-          total_amount: '$results.total_amount',
-        },
-      },
-      {
-        $sort: {
-          status: 1,
+        $facet: {
+          totalInvoices: [
+            {
+              $count: 'count',
+            },
+          ],
+          statusCounts: [
+            {
+              $group: {
+                _id: '$status',
+                count: {
+                  $sum: 1,
+                },
+                total_amount: {
+                  $sum: '$total',
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                status: '$_id',
+                count: '$count',
+                total_amount: '$total_amount',
+              },
+            },
+          ],
+          paymentStatusCounts: [
+            {
+              $group: {
+                _id: '$paymentStatus',
+                count: {
+                  $sum: 1,
+                },
+                total_amount: {
+                  $sum: '$total',
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                status: '$_id',
+                count: '$count',
+                total_amount: '$total_amount',
+              },
+            },
+          ],
+          overdueCounts: [
+            {
+              $match: {
+                expiredDate: {
+                  $lt: new Date(),
+                },
+              },
+            },
+            {
+              $group: {
+                _id: '$status',
+                count: {
+                  $sum: 1,
+                },
+                total_amount: {
+                  $sum: '$total',
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                status: '$_id',
+                count: '$count',
+                total_amount: '$total_amount',
+              },
+            },
+          ],
         },
       },
     ]);
 
+    let result = [];
+
+    const totalInvoices = response[0].totalInvoices[0] ? response[0].totalInvoices[0].count : 0;
+    const statusResult = response[0].statusCounts || [];
+    const paymentStatusResult = response[0].paymentStatusCounts || [];
+    const overdueResult = response[0].overdueCounts || [];
+
+    const statusResultMap = statusResult.map((item) => {
+      return {
+        ...item,
+        percentage: Math.round((item.count / totalInvoices) * 100),
+      };
+    })
+
+    const paymentStatusResultMap = paymentStatusResult.map((item) => {
+      return {
+        ...item,
+        percentage: Math.round((item.count / totalInvoices) * 100),
+      };
+    })
+
+    const overdueResultMap = overdueResult.map((item) => {
+      return {
+        ...item,
+        status: 'overdue',
+        percentage: Math.round((item.count / totalInvoices) * 100),
+      };
+    })
+
     statuses.forEach((status) => {
-      const found = result.find((item) => item.status === status);
-      if (!found) {
-        result.push({
-          status,
-          count: 0,
-          percentage: 0,
-          total_amount: 0,
-        });
+      const found = [...paymentStatusResultMap, ...statusResultMap, ...overdueResultMap].find(
+        (item) => item.status === status
+      );
+      if (found) {
+        result.push(found);
       }
     });
 

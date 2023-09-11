@@ -116,6 +116,7 @@ export default function DashboardModule() {
         key={index}
         title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`}
         isLoading={isLoading}
+        entity={entity}
         statistics={
           !isLoading &&
           result?.performance?.map((item) => ({

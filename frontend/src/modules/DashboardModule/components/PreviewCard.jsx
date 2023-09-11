@@ -1,9 +1,14 @@
+import React, { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
 
 const colours = {
   draft: '#595959',
   sent: '#1890ff',
-  pending: '#ffa940',
+  pending: '#1890ff',
+  unpaid: '#ffa940',
+  overdue: '#ff4d4f',
+  partially: '#13c2c2',
+  paid: '#95de64',
   declined: '#ff4d4f',
   accepted: '#95de64',
   cyan: '#13c2c2',
@@ -38,6 +43,33 @@ const defaultStatistics = [
   },
 ];
 
+const defaultInvoiceStatistics = [
+  {
+    tag: 'draft',
+    value: 0,
+  },
+  {
+    tag: 'pending',
+    value: 0,
+  },
+  {
+    tag: 'overdue',
+    value: 0,
+  },
+  {
+    tag: 'paid',
+    value: 0,
+  },
+  {
+    tag: 'unpaid',
+    value: 0,
+  },
+  {
+    tag: 'partially',
+    value: 0,
+  },
+];
+
 const PreviewState = ({ tag, color, value }) => {
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
@@ -59,13 +91,26 @@ export default function PreviewCard({
   title = 'Preview',
   statistics = defaultStatistics,
   isLoading = false,
+  entity = 'invoice',
 }) {
-  const statisticsMap = defaultStatistics.map((defaultStat) => {
-    const matchedStat = Array.isArray(statistics)
-      ? statistics.find((stat) => stat.tag === defaultStat.tag)
-      : null;
-    return matchedStat || defaultStat;
-  });
+  const statisticsMap = useMemo(() => {
+    if (entity === 'invoice') {
+      return defaultInvoiceStatistics.map((defaultStat) => {
+        const matchedStat = Array.isArray(statistics)
+          ? statistics.find((stat) => stat.tag === defaultStat.tag)
+          : null;
+        return matchedStat || defaultStat;
+      });
+    } else {
+      return defaultStatistics.map((defaultStat) => {
+        const matchedStat = Array.isArray(statistics)
+          ? statistics.find((stat) => stat.tag === defaultStat.tag)
+          : null;
+        return matchedStat || defaultStat;
+      });
+    }
+  }, [statistics, entity]);
+
   const customSort = (a, b) => {
     const colorOrder = Object.values(colours);
     const indexA = colorOrder.indexOf(a.props.color);
