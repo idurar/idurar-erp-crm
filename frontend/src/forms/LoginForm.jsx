@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Checkbox } from 'antd';
+import { Form, Input, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 export default function LoginForm() {
@@ -11,6 +11,10 @@ export default function LoginForm() {
           {
             required: true,
             message: 'Please input your Email!',
+          },
+          {
+            type: 'email',
+            message: 'Invalid email!',
           },
         ]}
       >
