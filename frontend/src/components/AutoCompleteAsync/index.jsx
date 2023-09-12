@@ -57,13 +57,11 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText && searchText != '') {
-      isSearching.current = true;
-      setSearching(true);
-      setOptions([]);
-      setCurrentValue(undefined);
-      setValToSearch(searchText);
-    }
+    isSearching.current = true;
+    setOptions([]);
+    setCurrentValue(undefined);
+    setValToSearch(searchText);
+    setSearching(!!searchText);
   };
 
   useEffect(() => {

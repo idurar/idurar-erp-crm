@@ -60,7 +60,7 @@ export default function PaymentInvoiceForm({ subTotal = 0, current = null }) {
             <AutoCompleteAsync
               entity={'client'}
               displayLabels={['company']}
-              searchFields={'company,managerSurname,managerName'}
+              searchFields={'company'}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
