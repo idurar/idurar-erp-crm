@@ -218,7 +218,7 @@ methods.summary = async (req, res) => {
           status: '$results._id',
           count: '$results.count',
           percentage: {
-            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
+            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 0],
           },
           total_amount: '$results.total_amount',
         },

@@ -3,6 +3,8 @@
 
 const mongoose = require('mongoose');
 const moment = require('moment');
+const Joi = require('joi');
+
 const Model = mongoose.model('Invoice');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
@@ -14,9 +16,46 @@ const { calculate } = require('@/helpers');
 delete methods['create'];
 delete methods['update'];
 
+const schema = Joi.object({
+  // string or object
+  client: Joi.alternatives().try(Joi.string(), Joi.object()).required(),
+  number: Joi.number().required(),
+  year: Joi.number().required(),
+  status: Joi.string().required(),
+  note: Joi.string().allow(''),
+  expiredDate: Joi.date().required(),
+  date: Joi.date().required(),
+  // array cannot be empty
+  items: Joi.array()
+    .items(
+      Joi.object({
+        _id: Joi.string().allow('').optional(),
+        itemName: Joi.string().required(),
+        description: Joi.string().allow(''),
+        quantity: Joi.number().required(),
+        price: Joi.number().required(),
+        total: Joi.number().required(),
+      }).required()
+    )
+    .required(),
+  taxRate: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
+});
+
 methods.create = async (req, res) => {
   try {
-    const { items = [], taxRate = 0, discount = 0 } = req.body;
+    let body = req.body;
+
+    const { error, value } = schema.validate(body);
+    if (error) {
+      const { details } = error;
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: details[0]?.message,
+      });
+    }
+
+    const { items = [], taxRate = 0, discount = 0 } = value;
 
     // default
     let subTotal = 0;
@@ -33,8 +72,6 @@ methods.create = async (req, res) => {
     });
     taxTotal = calculate.multiply(subTotal, taxRate);
     total = calculate.add(subTotal, taxTotal);
-
-    let body = req.body;
 
     body['subTotal'] = subTotal;
     body['taxTotal'] = taxTotal;
@@ -65,6 +102,7 @@ methods.create = async (req, res) => {
       message: 'Invoice created successfully',
     });
   } catch (err) {
+    console.log(err);
     // If err is thrown by Mongoose due to required validations
     if (err.name == 'ValidationError') {
       return res.status(400).json({
@@ -87,6 +125,18 @@ methods.create = async (req, res) => {
 
 methods.update = async (req, res) => {
   try {
+    let body = req.body;
+
+    const { error, value } = schema.validate(body);
+    if (error) {
+      const { details } = error;
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: details[0]?.message,
+      });
+    }
+
     const previousInvoice = await Model.findOne({
       _id: req.params.id,
       removed: false,
@@ -96,7 +146,7 @@ methods.update = async (req, res) => {
 
     const { items = [], taxRate = 0, discount = 0 } = req.body;
 
-    if(items.length === 0) {
+    if (items.length === 0) {
       return res.status(400).json({
         success: false,
         result: null,
@@ -119,8 +169,6 @@ methods.update = async (req, res) => {
     });
     taxTotal = calculate.multiply(subTotal, taxRate);
     total = calculate.add(subTotal, taxTotal);
-
-    let body = req.body;
 
     body['subTotal'] = subTotal;
     body['taxTotal'] = taxTotal;
@@ -147,7 +195,6 @@ methods.update = async (req, res) => {
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
-    console.log(err);
     if (err.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
@@ -189,9 +236,9 @@ methods.summary = async (req, res) => {
     let startDate = currentDate.clone().startOf(defaultType);
     let endDate = currentDate.clone().endOf(defaultType);
 
-    const statuses = ['draft', 'pending', 'sent'];
+    const statuses = ['draft', 'pending', 'overdue', 'paid', 'unpaid', 'partially'];
 
-    const result = await Model.aggregate([
+    const response = await Model.aggregate([
       {
         $match: {
           removed: false,
@@ -202,57 +249,124 @@ methods.summary = async (req, res) => {
         },
       },
       {
-        $group: {
-          _id: '$status',
-          count: {
-            $sum: 1,
-          },
-          total_amount: {
-            $sum: '$total',
-          },
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          total_count: {
-            $sum: '$count',
-          },
-          results: {
-            $push: '$$ROOT',
-          },
-        },
-      },
-      {
-        $unwind: '$results',
-      },
-      {
-        $project: {
-          _id: 0,
-          status: '$results._id',
-          count: '$results.count',
-          percentage: {
-            $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 1],
-          },
-          total_amount: '$results.total_amount',
-        },
-      },
-      {
-        $sort: {
-          status: 1,
+        $facet: {
+          totalInvoice: [
+            {
+              $group: {
+                _id: null,
+                total: {
+                  $sum: '$total',
+                },
+                count: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                total: '$total',
+                count: '$count',
+              },
+            },
+          ],
+          statusCounts: [
+            {
+              $group: {
+                _id: '$status',
+                count: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                status: '$_id',
+                count: '$count',
+              },
+            },
+          ],
+          paymentStatusCounts: [
+            {
+              $group: {
+                _id: '$paymentStatus',
+                count: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                status: '$_id',
+                count: '$count',
+              },
+            },
+          ],
+          overdueCounts: [
+            {
+              $match: {
+                expiredDate: {
+                  $lt: new Date(),
+                },
+              },
+            },
+            {
+              $group: {
+                _id: '$status',
+                count: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                status: '$_id',
+                count: '$count',
+              },
+            },
+          ],
         },
       },
     ]);
 
+    let result = [];
+
+    const totalInvoices = response[0].totalInvoice ? response[0].totalInvoice[0] : 0;
+    const statusResult = response[0].statusCounts || [];
+    const paymentStatusResult = response[0].paymentStatusCounts || [];
+    const overdueResult = response[0].overdueCounts || [];
+
+    const statusResultMap = statusResult.map((item) => {
+      return {
+        ...item,
+        percentage: Math.round((item.count / totalInvoices.count) * 100),
+      };
+    });
+
+    const paymentStatusResultMap = paymentStatusResult.map((item) => {
+      return {
+        ...item,
+        percentage: Math.round((item.count / totalInvoices.count) * 100),
+      };
+    });
+
+    const overdueResultMap = overdueResult.map((item) => {
+      return {
+        ...item,
+        status: 'overdue',
+        percentage: Math.round((item.count / totalInvoices.count) * 100),
+      };
+    });
+
     statuses.forEach((status) => {
-      const found = result.find((item) => item.status === status);
-      if (!found) {
-        result.push({
-          status,
-          count: 0,
-          percentage: 0,
-          total_amount: 0,
-        });
+      const found = [...paymentStatusResultMap, ...statusResultMap, ...overdueResultMap].find(
+        (item) => item.status === status
+      );
+      if (found) {
+        result.push(found);
       }
     });
 
@@ -284,7 +398,7 @@ methods.summary = async (req, res) => {
     ]);
 
     const finalResult = {
-      total: result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2),
+      total: totalInvoices.total.toFixed(2),
       total_undue: unpaid.length > 0 ? unpaid[0].total_amount.toFixed(2) : 0,
       type,
       performance: result,
@@ -296,6 +410,7 @@ methods.summary = async (req, res) => {
       message: `Successfully found all invoices for the last ${defaultType}`,
     });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       success: false,
       result: null,

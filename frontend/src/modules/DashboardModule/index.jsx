@@ -130,6 +130,7 @@ export default function DashboardModule() {
         key={index}
         title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`}
         isLoading={isLoading}
+        entity={entity}
         statistics={
           !isLoading &&
           result?.performance?.map((item) => ({
@@ -159,14 +160,14 @@ export default function DashboardModule() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
-        <Col className="gutter-row" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
+        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
           <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
             <Row className="pad10" gutter={[0, 0]}>
               {statisticCards}
             </Row>
           </div>
         </Col>
-        <Col className="gutter-row" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
+        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
           <CustomerPreviewCard
             isLoading={clientLoading}
             activeCustomer={clientResult?.result?.active}
@@ -176,8 +177,8 @@ export default function DashboardModule() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
-        <Col className="gutter-row" sm={{ span: 24 }} md={{ span: 12 }}>
-          <div className="whiteBox shadow">
+        <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
+          <div className="whiteBox shadow" style={{ height: '100%' }}>
             <div className="pad20">
               <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Invoices</h3>
             </div>
@@ -186,8 +187,8 @@ export default function DashboardModule() {
           </div>
         </Col>
 
-        <Col className="gutter-row" sm={{ span: 24 }} md={{ span: 12 }}>
-          <div className="whiteBox shadow">
+        <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
+          <div className="whiteBox shadow" style={{ height: '100%' }}>
             <div className="pad20">
               <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Quotes</h3>
             </div>
