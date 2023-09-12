@@ -26,16 +26,18 @@ const schema = Joi.object({
   expiredDate: Joi.date().required(),
   date: Joi.date().required(),
   // array cannot be empty
-  items: Joi.array().items(
-    Joi.object({
+  items: Joi.array()
+    .items(
+      Joi.object({
+        _id: Joi.string().allow('').optional(),
         itemName: Joi.string().required(),
         description: Joi.string().allow(''),
         quantity: Joi.number().required(),
         price: Joi.number().required(),
         total: Joi.number().required(),
-      })
-      .required()
-  ).required(),
+      }).required()
+    )
+    .required(),
   taxRate: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
 });
 
@@ -144,7 +146,7 @@ methods.update = async (req, res) => {
 
     const { items = [], taxRate = 0, discount = 0 } = req.body;
 
-    if(items.length === 0) {
+    if (items.length === 0) {
       return res.status(400).json({
         success: false,
         result: null,
