@@ -11,7 +11,8 @@ import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
-
+  // console.log('entity from components->dataTable', entity);
+  // console.log('config from components->dataTable', config);
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -31,7 +32,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   const dispatch = useDispatch();
 
   const handelDataTableLoad = useCallback((pagination) => {
-    const options = { page: pagination.current || 1, limit: pagination.limit || 10 };
+    const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
     dispatch(crud.list({ entity, options }));
   }, []);
 
