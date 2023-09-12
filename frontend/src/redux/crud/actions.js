@@ -51,7 +51,7 @@ export const crud = {
           items: data.result,
           pagination: {
             current: parseInt(data.pagination.page, 10),
-            pageSize: 10,
+            pageSize: data?.result?.length || 0,
             showSizeChanger: false,
             total: parseInt(data.pagination.count, 10),
           },
