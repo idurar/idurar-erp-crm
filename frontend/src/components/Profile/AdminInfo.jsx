@@ -6,15 +6,14 @@ import { Button, Col, Descriptions, Divider, PageHeader, Row } from 'antd';
 import { useSelector } from 'react-redux';
 import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
-import { selectCurrentAdmin } from '@/redux/crud/selectors';
+import { selectCurrentItem } from '@/redux/crud/selectors';
 
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
+  const { result } = useSelector(selectCurrentItem);
 
-  const { result } = useSelector(selectCurrentAdmin);
-  console.log(result);
   return (
     <>
       <PageHeader
@@ -66,7 +65,7 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                Salah Eddine
+                {result?.name}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Surname" span="3">
@@ -75,7 +74,7 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                Lalami
+                {result?.surname}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Email" span="3" style={{ paddingTop: '20px' }}>
@@ -84,7 +83,7 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                admin@demo.com
+                {result?.email}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="User Role" span="3">
@@ -93,7 +92,7 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                admin
+                {result?.role.codeName}
               </h3>
             </Descriptions.Item>
           </Descriptions>

@@ -9,7 +9,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
         name="company"
         rules={[
           {
-            required: true,
+            required: false,
             message: 'Please input your company name!',
           },
         ]}
@@ -26,7 +26,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
           name="name"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your name!',
             },
           ]}
@@ -41,7 +41,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
           name="surname"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your surname!',
             },
           ]}
@@ -59,7 +59,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
         name="companyRegNumber"
         rules={[
           {
-            required: true,
+            required: false,
             message: 'Please input your company registration number!',
           },
         ]}
@@ -71,7 +71,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
         name="bankAccount"
         rules={[
           {
-            required: true,
+            required: false,
             message: 'Please input your bank account!',
           },
         ]}
@@ -88,7 +88,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
           name="address"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your address!',
             },
           ]}
@@ -103,7 +103,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
           name="city"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your city!',
             },
           ]}
@@ -119,7 +119,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
           name="zipcode"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your zip code!',
             },
           ]}
@@ -134,7 +134,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
           name="country"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your country!',
             },
           ]}
@@ -152,7 +152,7 @@ export default function ProfileForm({ isUpdateForm = false }) {
         name="role"
         rules={[
           {
-            required: true,
+            required: false,
             message: 'This Field is required',
           },
         ]}
