@@ -193,7 +193,8 @@ html
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
-        margin-bottom: 20px;
+        margin: 0 auto 20px;
+        justify-content: center;
       }
       .table-invoice tr:nth-child(2n-1) td {
         background: #fcfeff;
@@ -211,14 +212,16 @@ html
         text-align: right;
       }
       tbody{
-        border-bottom: 1px solid #c2e0f2;
+        //- border-bottom: 1px solid #c2e0f2;
+      }
+      td.strong{
+        font-weight:700;
       }
       .table-invoice .service, .table-invoice .desc {
-        text-align: left;
+        //- text-align: left;
       }
       .table-invoice td {
         padding: 10px ;
-        text-align: right;
         font-size: 9px;
       }
       .table-invoice td.service, .table-invoice td.desc {
@@ -228,7 +231,7 @@ html
         
       }
       .table-invoice td.grand {
-        border-top: 1px solid #5d6975;
+        //- border-top: 1px solid #5d6975;
       }
       .service span{
         display:block;
@@ -244,6 +247,9 @@ html
       .notice-invoice .notice {
         color: #5d6975;
         
+      }
+      .total.price{
+        font-size: 18px;
       }
       .footer-invoice {
         margin-top:30px
@@ -293,29 +299,13 @@ html
           .space  
       main
         table.table-invoice
-          thead
-            tr.tableHeader
-              th.service ITEM
-              th QTY
-              th PRICE
-              th TOTAL
           tbody
-            each item in model.items
-              tr
-                td.service #{item.itemName}
-                  span #{item.description}
-                td.qty #{item.quantity}  
-                td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-                td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
-              td(colspan='3') SUBTOTAL
-              td.total $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td.strong TOTAL
+              td.total.price $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
-              td(colspan='3') TAX #{model.taxRate*100} %
-              td.total $ #{model.taxTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-            tr
-              td.grand.total(colspan='3') GRAND TOTAL
-              td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td.grand.total.strong GRAND TOTAL
+              td.grand.total.price $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
         
       .col.col-24
           .space     
