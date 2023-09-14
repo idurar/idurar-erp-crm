@@ -6,6 +6,7 @@ const moment = require('moment');
 const Joi = require('joi');
 
 const Model = mongoose.model('Invoice');
+const ModalPaymentInvoice = mongoose.model('PaymentInvoice');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 const sendMail = require('./mailInvoiceController');
 
@@ -214,6 +215,46 @@ methods.update = async (req, res) => {
   }
 };
 
+methods.delete = async (req, res) => {
+  try {
+    const deletedInvoice = await Model.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        removed: false,
+      },
+      {
+        $set: {
+          removed: true,
+        },
+      }
+    ).exec();
+
+    if (!deletedInvoice) {
+      return res.status(404).json({
+        success: false,
+        result: null,
+        message: 'Invoice not found',
+      });
+    }
+    const paymentsInvoices = await ModalPaymentInvoice.updateMany(
+      { invoice: deletedInvoice._id },
+      { $set: { removed: true } }
+    );
+    return res.status(200).json({
+      success: true,
+      result: deletedInvoice,
+      message: 'Invoice deleted successfully',
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      result: null,
+      error: err,
+      message: 'Oops there is an Error',
+    });
+  }
+};
+
 methods.summary = async (req, res) => {
   try {
     let defaultType = 'month';
@@ -398,7 +439,7 @@ methods.summary = async (req, res) => {
     ]);
 
     const finalResult = {
-      total: totalInvoices.total.toFixed(2),
+      total: totalInvoices?.total.toFixed(2),
       total_undue: unpaid.length > 0 ? unpaid[0].total_amount.toFixed(2) : 0,
       type,
       performance: result,
@@ -410,7 +451,7 @@ methods.summary = async (req, res) => {
       message: `Successfully found all invoices for the last ${defaultType}`,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({
       success: false,
       result: null,
