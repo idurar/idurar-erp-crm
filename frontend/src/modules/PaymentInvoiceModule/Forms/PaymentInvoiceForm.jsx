@@ -3,15 +3,8 @@ import dayjs from 'dayjs';
 import { Form, Input, InputNumber } from 'antd';
 import { DatePicker } from '@/components/CustomAntd';
 import SelectAsync from '@/components/SelectAsync';
-import { useMoney } from '@/settings';
 export default function PaymentInvoiceForm({ maxAmount = null, current = null }) {
   const { TextArea } = Input;
-  const money = useMoney();
-
-  const [paymentDate, setPaymentDate] = useState(null);
-  const [number, setNumber] = useState(1);
-  const [amount, setAmount] = useState(0);
-  const [paymentMode, setPaymentMode] = useState(null);
 
   return (
     <>

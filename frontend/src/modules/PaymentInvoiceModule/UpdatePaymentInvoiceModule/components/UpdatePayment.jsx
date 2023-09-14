@@ -3,11 +3,7 @@ import { Form, Divider, Button, PageHeader, Tag } from 'antd';
 import dayjs from 'dayjs';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import {
-  selectCurrentItem,
-  selectRecordPaymentItem,
-  selectUpdatedItem,
-} from '@/redux/erp/selectors';
+import { selectUpdatedItem } from '@/redux/erp/selectors';
 
 import { useErpContext } from '@/context/erp';
 
@@ -16,10 +12,7 @@ import Loading from '@/components/Loading';
 import calculate from '@/utils/calculate';
 import PaymentInvoiceForm from '../../Forms/PaymentInvoiceForm';
 export default function UpdatePayment({ config, currentInvoice }) {
-  console.log('🚀 ~ file: RecordPayment.jsx:21 ~ RecordPayment ~ currentInvoice:', currentInvoice);
   let { entity } = config;
-  const { erpContextAction } = useErpContext();
-  const { recordPanel } = erpContextAction;
   const dispatch = useDispatch();
 
   const { isLoading, isSuccess } = useSelector(selectUpdatedItem);

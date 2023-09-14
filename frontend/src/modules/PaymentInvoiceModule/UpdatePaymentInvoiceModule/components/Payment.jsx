@@ -13,7 +13,6 @@ export default function Payment({ config, currentItem }) {
   const money = useMoney();
 
   const [currentErp, setCurrentErp] = useState(currentItem);
-  console.log('🚀 ~ file: Payment.jsx:27 ~ Payment ~ currentErp:', currentErp);
 
   useEffect(() => {
     const controller = new AbortController();

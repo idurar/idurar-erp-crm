@@ -97,7 +97,6 @@ export default function ReadItem({ config, selectedItem }) {
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
-  console.log('🚀 ~ file: ReadItem.jsx:100 ~ ReadItem ~ currentErp:', currentErp);
 
   useEffect(() => {
     const controller = new AbortController();

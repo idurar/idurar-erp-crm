@@ -24,13 +24,11 @@ export default function DataTableDropMenu({ row, entity }) {
   const item = useSelector(selectItemById(row._id));
   function Read() {
     dispatch(erp.currentItem({ data: item }));
-    // readPanel.open();
     history.push(`/invoice/read/${row._id}`);
   }
   function RecordPayment() {
     dispatch(erp.currentItem({ data: item }));
     history.push(`/invoice/pay/${row._id}`);
-    // history.push(`/payment/invoice/create/${row._id}`);
   }
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));

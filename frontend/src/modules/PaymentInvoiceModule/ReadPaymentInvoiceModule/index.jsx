@@ -13,7 +13,6 @@ export default function ReadPaymentInvoiceModule({ config }) {
   const history = useHistory();
   const { id } = useParams();
   let item = useSelector(selectItemById(id));
-  console.log('🚀 ~ file: index.jsx:16 ~ ReadPaymentInvoiceModule ~ item:', item);
 
   useEffect(() => {
     if (item) {
@@ -25,7 +24,6 @@ export default function ReadPaymentInvoiceModule({ config }) {
   }, [item]);
 
   const { result: currentResult } = useSelector(selectCurrentItem);
-  console.log('🚀 ~ file: index.jsx:28 ~ ReadPaymentInvoiceModule ~ currentResult:', currentResult);
 
   item = currentResult;
   return (
