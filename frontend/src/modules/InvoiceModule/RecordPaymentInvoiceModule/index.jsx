@@ -6,9 +6,9 @@ import { selectItemById, selectCurrentItem, selectRecordPaymentItem } from '@/re
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Payment from '@/modules/ErpPanelModule/Payment';
+import Payment from './components/Payment';
 
-export default function RecordInvoiceModule({ config }) {
+export default function RecordPaymentInvoiceModule({ config }) {
   const dispatch = useDispatch();
   const { id } = useParams();
 

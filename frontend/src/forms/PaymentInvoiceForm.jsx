@@ -44,10 +44,10 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
         {/* <InputNumber
           className="moneyInput"
           min={0}
-          max={maxAmount}
           controls={false}
-          addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
-          addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : undefined}
+          max={maxAmount}
+          addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : null}
+          style={{ textAlign: 'left' }}
         /> */}
         <InputNumber
           style={{ width: '100%' }}

@@ -1,5 +1,5 @@
 import configPage from './config';
-import RecordInvoiceModule from '@/modules/InvoiceModule/RecordInvoiceModule';
+import RecordPaymentInvoiceModule from '@/modules/InvoiceModule/RecordPaymentInvoiceModule';
 
 export default function InvoiceRecord() {
   const customConfig = {
@@ -9,5 +9,5 @@ export default function InvoiceRecord() {
     ...configPage,
     //customConfig,
   };
-  return <RecordInvoiceModule config={config} />;
+  return <RecordPaymentInvoiceModule config={config} />;
 }

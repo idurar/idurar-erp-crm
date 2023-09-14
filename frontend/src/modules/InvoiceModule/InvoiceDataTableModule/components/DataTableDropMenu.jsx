@@ -30,6 +30,7 @@ export default function DataTableDropMenu({ row, entity }) {
   function RecordPayment() {
     dispatch(erp.currentItem({ data: item }));
     history.push(`/invoice/pay/${row._id}`);
+    // history.push(`/payment/invoice/create/${row._id}`);
   }
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));
