@@ -5,6 +5,7 @@ const Model = mongoose.model('Client');
 const QuoteModel = mongoose.model('Quote');
 
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+const InvoiceModel = require('@/models/erpModels/Invoice');
 const methods = createCRUDController('Client');
 
 methods.summary = async (req, res) => {
@@ -105,6 +106,53 @@ methods.summary = async (req, res) => {
       result: null,
       error: error.message, // Include a more descriptive error message
       message: 'Oops, there is an Error',
+    });
+  }
+};
+
+methods.delete = async(req, res) => {
+  try {
+    const clientId = req.params.id;
+    const client = await Model.findById(clientId).exec();
+
+    if (!client) {
+      return res.status(404).json({
+        success: false,
+        result: null,
+        message: 'No client found by id: ' + clientId,
+      });
+    }
+    // Validating that none invoice exist with client id
+    const invoiceExists = await InvoiceModel.exists({ client: client}).exec();
+    if (invoiceExists) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: `Unable to delete client with id ${clientId} with related invoices`,
+      });
+    }
+    
+    const result = await client.remove();
+    if (result.$isDeleted()) {
+      return res.status(200).json({
+        success: true,
+        result,
+        message: `Successfully deleted the client by id ${clientId}`,
+      });
+    } else {
+      return res.status(500).json({
+        success: false,
+        result: null,
+        message: `There was a problem removing client by id ${clientId}`,
+      });
+    }
+  
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      result: null,
+      message: 'Oops there is an Error',
+      error: err,
     });
   }
 };
