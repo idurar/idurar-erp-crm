@@ -21,7 +21,7 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 
 ## Our Sponsors
 
-  <a href="https://www.digitalocean.com/?ref=idurarapp.com">
+  <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
     <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
   </a>
 
