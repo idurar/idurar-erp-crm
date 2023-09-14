@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
-const { SendQuote } = require('../../emailTemplate/SendInvoice');
+const { SendQuote } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const QuoteModel = mongoose.model('Quote');
 const ClientModel = mongoose.model('Client');
