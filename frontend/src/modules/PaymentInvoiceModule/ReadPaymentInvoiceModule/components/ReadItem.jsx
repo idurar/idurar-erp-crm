@@ -102,8 +102,8 @@ export default function ReadItem({ config, selectedItem }) {
   useEffect(() => {
     const controller = new AbortController();
     if (currentResult) {
-      const { invoice, ...others } = currentResult;
-      setCurrentErp({ ...others, ...invoice });
+      const { invoice, _id, ...others } = currentResult;
+      setCurrentErp({ ...others, ...invoice, _id });
     }
     return () => controller.abort();
   }, [currentResult]);
