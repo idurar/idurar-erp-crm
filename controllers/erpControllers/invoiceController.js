@@ -236,8 +236,8 @@ methods.delete = async (req, res) => {
         message: 'Invoice not found',
       });
     }
-    const paymentsInvoices = await ModalPaymentInvoice.updateMany(
-      { invoiceId: deletedInvoice._id },
+    const paymentsInvoices = await ModalPaymentInvoice.findAndUpdate(
+      { invoice: deletedInvoice._id },
       { $set: { removed: true } }
     );
     return res.status(200).json({
@@ -451,7 +451,7 @@ methods.summary = async (req, res) => {
       message: `Successfully found all invoices for the last ${defaultType}`,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({
       success: false,
       result: null,

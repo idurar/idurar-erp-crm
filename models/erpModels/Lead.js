@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const clientSchema = new mongoose.Schema({
+const leadSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,35 +10,40 @@ const clientSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  firstName: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   company: {
     type: String,
     trim: true,
+  },
+  jobTitle: {
+    type: String,
+    trim: true,
+  },
+  email: {
+    type: String,
+    trim: true,
+    lowercase: true,
     unique: true,
-    required: true,
   },
-  managerName: {
+  phone: {
     type: String,
     trim: true,
     required: true,
   },
-  managerSurname: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  bankAccount: {
+  address: {
     type: String,
     trim: true,
   },
-  companyRegNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxID: {
+  country: {
     type: String,
     trim: true,
   },
@@ -54,36 +59,17 @@ const clientSchema = new mongoose.Schema({
       },
     },
   ],
-  address: {
+  source: {
     type: String,
     trim: true,
   },
-  country: {
+  notes: {
     type: String,
     trim: true,
   },
-  phone: {
+  status: {
     type: String,
-    trim: true,
-    required: true,
-  },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
-    type: String,
-    trim: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-  },
-  website: {
-    type: String,
-    trim: true,
+    default: 'new',
   },
   created: {
     type: Date,
@@ -91,4 +77,4 @@ const clientSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Client', clientSchema);
+module.exports = mongoose.model('Lead', leadSchema);
