@@ -187,7 +187,7 @@ methods.delete = async (req, res) => {
     );
     return res.status(200).json({
       success: true,
-      result: {deletedInvoice, paymentsInvoices},
+      result: deletedInvoice,
       message: 'Invoice deleted successfully',
     });
   } catch (err) {
