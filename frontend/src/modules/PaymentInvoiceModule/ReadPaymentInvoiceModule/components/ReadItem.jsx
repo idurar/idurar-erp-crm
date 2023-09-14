@@ -188,7 +188,7 @@ export default function ReadItem({ config, selectedItem }) {
           />
           <Statistic
             title="Amount"
-            value={moneyFormatter({ amount: currentErp.credit })}
+            value={moneyFormatter({ amount: currentErp.amount })}
             style={{
               margin: '0 32px',
             }}
