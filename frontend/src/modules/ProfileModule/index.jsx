@@ -1,4 +1,4 @@
-import Profile from './components';
+import Profile from './components/Profile';
 import ProfileLayout from '@/layout/ProfileLayout';
 import { Layout } from 'antd';
 import { Content } from 'antd/lib/layout/layout';

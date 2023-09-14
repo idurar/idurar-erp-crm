@@ -36,7 +36,7 @@ export const crud = {
       });
     },
   list:
-    ({ entity, options = { page: 1 } }) =>
+    ({ entity, options = { page: 1, items: 10 } }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -51,8 +51,7 @@ export const crud = {
           items: data.result,
           pagination: {
             current: parseInt(data.pagination.page, 10),
-            pageSize: 10,
-            showSizeChanger: false,
+            pageSize: options?.items,
             total: parseInt(data.pagination.count, 10),
           },
         };
@@ -174,6 +173,10 @@ export const crud = {
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',
           payload: data.result,
+        });
+        dispatch({
+          type: actionTypes.RESET_ACTION,
+          keyState: 'delete'
         });
       } else {
         dispatch({

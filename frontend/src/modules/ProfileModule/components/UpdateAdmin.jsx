@@ -1,17 +1,35 @@
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
-import { CloseCircleOutlined, EditOutlined, LockOutlined, SaveOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Divider, Form, PageHeader, Row } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
+import { Avatar, Button, Col, Form, PageHeader, Row } from 'antd';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AdminForm from '@/forms/AdminForm';
 import UploadImg from './UploadImg';
+import { crud } from '@/redux/crud/actions';
+import { selectCurrentItem } from '@/redux/crud/selectors';
 
 const UpdateAdmin = ({ config }) => {
   const { profileContextAction } = useProfileContext();
-  const { readPanel, updatePanel } = profileContextAction;
+  const { updatePanel } = profileContextAction;
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
+
+  const { result } = useSelector(selectCurrentItem);
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue(result);
+  }, [result]);
+
+  const handleSubmit = () => {
+    form.submit();
+  };
+
+  const onSubmit = (fieldsValue) => {
+    const id = config.id;
+    dispatch(crud.update({ entity: 'admin', id, jsonData: fieldsValue }));
+  };
 
   return (
     <>
@@ -29,9 +47,13 @@ const UpdateAdmin = ({ config }) => {
           </Button>,
           <Button
             key={`${uniqueId()}`}
-            onClick={() => updatePanel.close()}
+            onClick={() => {
+              handleSubmit();
+              updatePanel.close();
+            }}
             type="primary"
             icon={<SaveOutlined />}
+            htmlType="submit"
           >
             save
           </Button>,
@@ -45,7 +67,13 @@ const UpdateAdmin = ({ config }) => {
           <UploadImg />
         </Col>
         <Col xs={{ span: 16 }}>
-          <Form labelCol={{ span: 4 }} wrapperCol={{ span: 12 }}>
+          <Form
+            form={form}
+            onFinish={onSubmit}
+            labelAlign="left"
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 12 }}
+          >
             <AdminForm isUpdateForm={true} />
           </Form>
         </Col>

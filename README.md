@@ -9,8 +9,6 @@
     
   [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-
-
 IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
@@ -128,13 +126,43 @@ This command will start the frontend server, and you'll be able to access the we
 
 :exclamation: :warning:` If you encounter an OpenSSL error while running the frontend server, follow these additional steps:`
 
+Reason behind error: This is caused by the node.js V17 compatible issues with OpenSSL, see [this](https://github.com/nodejs/node/issues/40547) and [this](https://github.com/webpack/webpack/issues/14532) issue on GitHub.
+
+Try one of these and error will be solved
+
+- > Downgrade to Node.js v16.
+
+- > Enable legacy OpenSSL provider
+
+Here is how you can enable legacy OpenSSL provider
+
+- On Unix-like (Linux, macOS, Git bash, etc.)
+
 ```bash
 export NODE_OPTIONS=--openssl-legacy-provider
 ```
 
+- On Windows command prompt:
+
+```bash
+set NODE_OPTIONS=--openssl-legacy-provider
+```
+
+- On PowerShell:
+
+```bash
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
+```
+
+Here is [reference](https://github.com/webpack/webpack/issues/14532#issuecomment-947012063) about enabling legacy OpenSSL provider
+
+After trying above solutions, run below command
+
 ```bash
 npm run start
 ```
+
+> If you still facing issue, then follow [this stackoverflow thread](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported). It has so many different types of opinions. You definitely have solution after going through the thread.
 
 ### Website Login Credentials
 

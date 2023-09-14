@@ -59,7 +59,6 @@ export default function SidePanel({ config, topContent, bottomContent, fixHeader
 
   return (
     <Sider
-      trigger={<MenuOutlined className="trigger" />}
       width={screens.md ? '400px' : '95%'}
       collapsed={isSidePanelClose}
       collapsedWidth={'0px'}

@@ -13,7 +13,7 @@ import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, config }) {
@@ -38,6 +38,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+  const { id } = useParams();
 
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
@@ -71,7 +72,6 @@ export default function UpdateItem({ config, UpdateForm }) {
       }
     }
 
-    const id = current._id;
     dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
   };
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       form.resetFields();
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
-      updatePanel.close();
+      history.push(`/${entity.toLowerCase()}/read/${id}`);
       dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
@@ -107,7 +107,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          history.goBack();
         }}
         title={UPDATE_ENTITY}
         ghost={false}

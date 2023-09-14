@@ -7,7 +7,7 @@ const Notifications = () => {
     { id: 1, text: 'First notificationnnnnnnnnnnnnnnnn' },
     { id: 2, text: 'Second notification' },
     { id: 3, text: 'Third ' },
-    { id: 3, text: 'Fourth notification' },
+    { id: 4, text: 'Fourth notification' },
     { id: 5, text: 'Fifth notification' },
     { id: 6, text: 'Sixth notification' },
   ]);

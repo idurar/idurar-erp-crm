@@ -27,11 +27,15 @@ export default function RegisterForm() {
             required: true,
             message: 'Please input your Email!',
           },
+          {
+            type: 'email',
+            message: 'Invalid email!',
+          },
         ]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
-          type='email'
+          type="email"
           placeholder="Email"
           size="large"
         />
@@ -58,7 +62,16 @@ export default function RegisterForm() {
             required: true,
             message: 'Enter Password Again!',
           },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
         ]}
+        hasFeedback
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
