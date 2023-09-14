@@ -74,7 +74,7 @@ export const erp = {
         keyState: 'create',
         payload: null,
       });
-      console.log('jsonData action redux', jsonData);
+
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
@@ -187,6 +187,10 @@ export const erp = {
     ({ entity, id }) =>
     async (dispatch) => {
       dispatch({
+        type: actionTypes.RESET_ACTION,
+        keyState: 'delete',
+      });
+      dispatch({
         type: actionTypes.REQUEST_LOADING,
         keyState: 'delete',
         payload: null,
@@ -202,7 +206,7 @@ export const erp = {
         });
         dispatch({
           type: actionTypes.RESET_ACTION,
-          keyState: 'delete'
+          keyState: 'delete',
         });
       } else {
         dispatch({
