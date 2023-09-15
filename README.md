@@ -14,7 +14,7 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 </div>
 
 ```
-:rocket: Give a ⭐️ & Fork to this project ... Happy coding! 🤩
+🚀 Give a ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
 ## Our Sponsors
