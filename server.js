@@ -37,7 +37,6 @@ const server = app.listen(app.get('port'), () => {
 process.on('unhandledRejection', error => {
   if (server) {
     server.close(() => {
-      errorlogger.error(error);
       process.exit(1);
     });
   } else {
