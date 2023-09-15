@@ -10,6 +10,9 @@ export default function SelectAsync({
   outputValue = '_id',
   value,
   onChange,
+  labelText = '',
+  withRedirect = false,
+  urlToRedirect = '/',
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
@@ -38,9 +41,9 @@ export default function SelectAsync({
   }, [value]);
 
   const handleSelectChange = (newValue) => {
-    if (newValue === 'addPayment') {
+    if (newValue === 'redirectURL') {
       // Navigate to another page when "Add payment" is selected
-      history.push('/payment/mode');
+      history.push(urlToRedirect);
     } else {
       // Handle other select options
       if (onChange) {
@@ -56,9 +59,9 @@ export default function SelectAsync({
       value={currentValue}
       onChange={handleSelectChange}
     >
-      {selectOptions.length === 0 && (
-        <Select.Option key="addPayment" value="addPayment">
-          Add payment
+      {selectOptions.length === 0 && withRedirect && (
+        <Select.Option key="redirectURL" value="redirectURL">
+          {labelText}
         </Select.Option>
       )}
       {selectOptions.map((optionField) => (

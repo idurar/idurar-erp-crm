@@ -65,7 +65,7 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
           },
         ]}
       >
-        <SelectAsync entity={'paymentMode'} displayLabels={['name']}></SelectAsync>
+        <SelectAsync entity={'paymentMode'} displayLabels={['name']} withRedirect={true} urlToRedirect='/payment/mode' labelText='Add Payment Mode'></SelectAsync>
       </Form.Item>
       <Form.Item label="Reference" name="ref">
         <Input />
