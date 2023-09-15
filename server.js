@@ -1,6 +1,6 @@
 require('module-alias/register');
 const mongoose = require('mongoose');
-
+const errorHandlers = require('./handlers/errorHandlers');
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
 if (major < 14 || (major === 14 && minor <= 0)) {
@@ -32,4 +32,15 @@ const app = require('./app');
 app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running → On PORT : ${server.address().port}`);
+});
+
+process.on('unhandledRejection', error => {
+  if (server) {
+    server.close(() => {
+      errorlogger.error(error);
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
 });
