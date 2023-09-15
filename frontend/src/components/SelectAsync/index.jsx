@@ -3,6 +3,7 @@ import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function SelectAsync({
   entity,
@@ -10,7 +11,7 @@ export default function SelectAsync({
   outputValue = '_id',
   value,
   onChange,
-  labelText = '',
+  redirectLabel = '',
   withRedirect = false,
   urlToRedirect = '/',
 }) {
@@ -61,7 +62,7 @@ export default function SelectAsync({
     >
       {selectOptions.length === 0 && withRedirect && (
         <Select.Option key="redirectURL" value="redirectURL">
-          {labelText}
+          <PlusCircleOutlined /> {redirectLabel}
         </Select.Option>
       )}
       {selectOptions.map((optionField) => (
