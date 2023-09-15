@@ -9,6 +9,7 @@ export default function PaymentInvoiceForm({ maxAmount = null, current = null })
   const money = useMoney();
   return (
     <>
+
       <Form.Item
         label="Number"
         name="number"
@@ -67,6 +68,7 @@ export default function PaymentInvoiceForm({ maxAmount = null, current = null })
       <Form.Item label="Description" name="description">
         <TextArea />
       </Form.Item>
+
     </>
   );
 }

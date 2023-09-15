@@ -150,7 +150,7 @@ router.route('/payment/invoice/filter').get(catchErrors(paymentInvoiceController
 router.route('/payment/invoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
 router.route('/payment/invoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
-router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
+//router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
 // //_________________________________________________________________API for Offers_____________________
 
