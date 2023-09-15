@@ -41,19 +41,13 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
         name="amount"
         rules={[{ required: true, message: 'Amount is required' }]}
       >
-        {/* <InputNumber
+        <InputNumber
           className="moneyInput"
           min={0}
           controls={false}
           max={maxAmount}
+          addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
           addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : null}
-          style={{ textAlign: 'left' }}
-        /> */}
-        <InputNumber
-          style={{ width: '100%' }}
-          min={0}
-          max={maxAmount}
-          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
         />
       </Form.Item>
       <Form.Item

@@ -3,9 +3,10 @@ import dayjs from 'dayjs';
 import { Form, Input, InputNumber } from 'antd';
 import { DatePicker } from '@/components/CustomAntd';
 import SelectAsync from '@/components/SelectAsync';
+import { useMoney } from '@/settings';
 export default function PaymentInvoiceForm({ maxAmount = null, current = null }) {
   const { TextArea } = Input;
-
+  const money = useMoney();
   return (
     <>
       <Form.Item
@@ -40,19 +41,13 @@ export default function PaymentInvoiceForm({ maxAmount = null, current = null })
         name="amount"
         rules={[{ required: true, message: 'Amount is required' }]}
       >
-        {/* <InputNumber
+        <InputNumber
           className="moneyInput"
           min={0}
           max={maxAmount}
           controls={false}
           addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
           addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : undefined}
-        /> */}
-        <InputNumber
-          style={{ width: '100%' }}
-          min={0}
-          max={maxAmount}
-          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
         />
       </Form.Item>
       <Form.Item
