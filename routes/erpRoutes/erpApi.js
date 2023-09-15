@@ -7,6 +7,7 @@ const router = express.Router();
 const employeeController = require('@/controllers/erpControllers/employeeController');
 const paymentModeController = require('@/controllers/erpControllers/paymentModeController');
 const clientController = require('@/controllers/erpControllers/clientController');
+const leadController = require('@/controllers/erpControllers/leadController');
 const invoiceController = require('@/controllers/erpControllers/invoiceController');
 const itemController = require('@/controllers/erpControllers/itemController');
 const quoteController = require('@/controllers/erpControllers/quoteController');
@@ -50,6 +51,16 @@ router.route('/client/search').get(catchErrors(clientController.search));
 router.route('/client/list').get(catchErrors(clientController.list));
 router.route('/client/filter').get(catchErrors(clientController.filter));
 router.route('/client/summary').get(catchErrors(clientController.summary));
+
+// //_____________________________________ API for leads __________________________________________________
+router.route('/lead/create').post(catchErrors(leadController.create));
+router.route('/lead/read/:id').get(catchErrors(leadController.read));
+router.route('/lead/update/:id').patch(catchErrors(leadController.update));
+router.route('/lead/delete/:id').delete(catchErrors(leadController.delete));
+router.route('/lead/search').get(catchErrors(leadController.search));
+router.route('/lead/list').get(catchErrors(leadController.list));
+router.route('/lead/filter').get(catchErrors(leadController.filter));
+router.route('/lead/summary').get(catchErrors(leadController.summary));
 
 // //_________________________________________________________________API for invoices_____________________
 router.route('/invoice/create').post(catchErrors(invoiceController.create));
@@ -139,7 +150,7 @@ router.route('/payment/invoice/filter').get(catchErrors(paymentInvoiceController
 router.route('/payment/invoice/pdf/:id').get(catchErrors(paymentInvoiceController.generatePDF));
 router.route('/payment/invoice/summary').get(catchErrors(paymentInvoiceController.summary));
 
-router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
+//router.route('/payment/invoice/mail').post(catchErrors(paymentInvoiceController.sendMail));
 
 // //_________________________________________________________________API for Offers_____________________
 

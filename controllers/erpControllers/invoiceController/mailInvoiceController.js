@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
-const { SendInvoice } = require('../../emailTemplate/SendInvoice');
+const { SendInvoice } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const InvoiceModel = mongoose.model('Invoice');
 const ClientModel = mongoose.model('Client');
 const ObjectId = mongoose.Types.ObjectId;
 const { Resend } = require('resend');
 
-module.exports = sendMail = async (req, res) => {
+const sendMail = async (req, res) => {
   const { id } = req.body;
 
   // Throw error if no id
@@ -112,3 +112,5 @@ const sendViaApi = async (email, name, filePath) => {
 
   return data;
 };
+
+module.exports = sendMail;
