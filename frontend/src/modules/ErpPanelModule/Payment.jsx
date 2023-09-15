@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Divider } from 'antd';
 
 import { Button, PageHeader, Row, Col, Descriptions, Tag } from 'antd';
-import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { FileTextOutlined, CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
@@ -13,6 +13,7 @@ import RecordPayment from './RecordPayment';
 import { useSelector } from 'react-redux';
 import { selectRecordPaymentItem } from '@/redux/erp/selectors';
 import history from '@/utils/history';
+import { useHistory } from 'react-router-dom';
 
 export default function Payment({ config, currentItem }) {
   const { entity, ENTITY_NAME } = config;
@@ -24,6 +25,11 @@ export default function Payment({ config, currentItem }) {
 
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState(currentItem);
+  const history = useHistory();
+
+  const handleButtonClick = () => {
+    history.push('/payment/mode');
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -115,12 +121,20 @@ export default function Payment({ config, currentItem }) {
         <Col
           className="gutter-row"
           xs={{ span: 24, order: 1 }}
-          sm={{ span: 24, order: 1 }}
+          sm={{ span: 12, order: 1 }}
           md={{ span: 12, order: 1 }}
           lg={{ span: 10, order: 1, push: 2 }}
         >
-          <RecordPayment config={config} />
+
+          <Row>
+            <RecordPayment config={config} />
+            <Button type='primary' htmlType='submit' icon={<PlusOutlined />} onClick={handleButtonClick}>
+              Add New Payment Mode
+            </Button>
+          </Row>
+
         </Col>
+
       </Row>
     </>
   );
