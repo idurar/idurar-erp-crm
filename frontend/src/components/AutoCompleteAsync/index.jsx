@@ -57,7 +57,6 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if(searchText==valToSearch) return;
     if (searchText && searchText != '') {
       isSearching.current = true;
       setSearching(true);
