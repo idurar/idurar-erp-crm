@@ -27,7 +27,7 @@ const paginatedList = async (Model, req, res) => {
       });
     } else {
       return res.status(203).json({
-        success: false,
+        success: true,
         result: [],
         pagination,
         message: 'Collection is Empty',

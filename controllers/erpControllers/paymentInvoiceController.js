@@ -3,12 +3,10 @@ const moment = require('moment');
 const Model = mongoose.model('PaymentInvoice');
 const Invoice = mongoose.model('Invoice');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
-const sendMail = require('./mailInvoiceController');
 
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
 const methods = createCRUDController('PaymentInvoice');
 const { calculate } = require('@/helpers');
-
 
 delete methods['create'];
 delete methods['update'];
@@ -356,5 +354,4 @@ methods.summary = async (req, res) => {
   }
 };
 
-methods.sendMail = sendMail;
 module.exports = methods;

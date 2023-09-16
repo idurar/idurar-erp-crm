@@ -24,13 +24,34 @@ export default function ItemRow({ field, remove, offer = false, current = null }
 
   useEffect(() => {
     if (current) {
-      const { items } = current;
-      const item = items[field.fieldKey];
-      if (item) {
-        setQuantity(item.quantity);
-        setPrice(item.price);
-        if (offer) {
-          setOfferPrice(item.offerPrice);
+      // When it accesses the /payment/invoice/ endpoint,
+      // it receives an invoice.item instead of just item
+      // and breaks the code, but now we can check if items exists,
+      // and if it doesn't we can access invoice.items.
+
+      const { items, invoice } = current;
+
+      if (invoice) {
+        const item = invoice[field.fieldKey];
+
+        if (item) {
+          setQuantity(item.quantity);
+          setPrice(item.price);
+
+          if (offer) {
+            setOfferPrice(item.offerPrice);
+          }
+        }
+      } else {
+        const item = items[field.fieldKey];
+
+        if (item) {
+          setQuantity(item.quantity);
+          setPrice(item.price);
+
+          if (offer) {
+            setOfferPrice(item.offerPrice);
+          }
         }
       }
     }
