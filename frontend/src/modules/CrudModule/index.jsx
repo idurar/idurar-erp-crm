@@ -12,8 +12,6 @@ import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
 import DeleteModal from '@/components/DeleteModal';
 import ReadItem from '@/components/ReadItem';
-import SearchItem from '@/components/SearchItem';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentItem } from '@/redux/crud/selectors';
@@ -117,14 +115,6 @@ function FixHeaderPanel({ config }) {
             block={true}
             size="middle"
           ></Button>
-        </Col>
-      </Row>
-      <Row gutter={8}>
-        <Col className="gutter-row" span={21}>
-          <SearchItem config={config} />
-        </Col>
-        <Col className="gutter-row" span={3}>
-          <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
         </Col>
       </Row>
     </div>

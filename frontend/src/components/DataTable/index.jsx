@@ -1,16 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
-import { Dropdown, Button, PageHeader, Table, Col, Descriptions } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Dropdown, Button, PageHeader, Table, Col, Descriptions, Input } from 'antd';
 
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
-
+import { SearchOutlined } from '@ant-design/icons';
+import SearchItem from '@/components/SearchItem';
 import uniqueId from '@/utils/uinqueId';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
+  const [searchText, setSearchText] = useState('');
+
   // console.log('entity from components->dataTable', entity);
   // console.log('config from components->dataTable', config);
   dataTableColumns = [
@@ -28,6 +31,8 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
   const { pagination, items } = listResult;
+  const [data, setData] = useState('');
+  console.log('items : ', data);
 
   const dispatch = useDispatch();
 
@@ -39,6 +44,21 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   useEffect(() => {
     dispatch(crud.list({ entity }));
   }, []);
+
+  useEffect(() => {
+    if (searchText === '') {
+      console.log('itemss : ', items);
+      setData(items);
+    } else {
+      const filteredData = items.filter(
+        (entry) =>
+          entry?.company?.toLowerCase().includes(searchText.toLowerCase()) ||
+          entry?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
+          entry?.email?.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setData(filteredData);
+    }
+  }, [searchText, items]);
 
   const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
     dataTableColumns,
@@ -53,6 +73,17 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
           title={DATATABLE_TITLE}
           ghost={false}
           extra={[
+            <Input
+              style={{ width: '45%' }}
+              placeholder="Search"
+              className="SearchBar"
+              value={searchText}
+              onChange={(e) => {
+                const currValue = e.target.value;
+                setSearchText(currValue);
+              }}
+              prefix={<SearchOutlined style={{ float: 'right' }} />}
+            />,
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
               Refresh
             </Button>,
@@ -66,7 +97,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
       <Table
         columns={tableColumns}
         rowKey={(item) => item._id}
-        dataSource={items}
+        dataSource={data}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
