@@ -60,3 +60,7 @@ exports.calculate = {
     return currency(firstValue).divide(secondValue).value;
   },
 };
+
+exports.checkIfAllowedAccess = (method, permission) => {
+  return (method === 'GET' && permission?.read) || (method === 'POST' && permission?.create) || (method==='PATCH' && permission?.update) || (method=== 'DELETE' && permission?.delete);
+}

@@ -16,6 +16,7 @@ const { isValidAdminToken } = require('./controllers/coreControllers/authJwtCont
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/erpRoutes/erpApi');
+const { authenticate } = require('./middlewares/authentication');
 
 // create our Express app
 const app = express();
@@ -56,8 +57,8 @@ app.use((req, res, next) => {
 
 // Here our API Routes
 app.use('/api', coreAuthRouter);
-app.use('/api', isValidAdminToken, coreApiRouter);
-app.use('/api', isValidAdminToken, erpApiRouter);
+app.use('/api', isValidAdminToken, authenticate,  coreApiRouter);
+app.use('/api', isValidAdminToken, authenticate,  erpApiRouter);
 app.use('/download', coreDownloadRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler

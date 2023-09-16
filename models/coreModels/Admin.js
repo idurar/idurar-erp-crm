@@ -23,6 +23,9 @@ const adminSchema = new Schema({
     trim: true,
     required: true,
   },
+  permissions: {
+    type: String,
+  },
   name: { type: String, required: true, lowercase: true },
   surname: { type: String, required: true, lowercase: true },
   photo: {
