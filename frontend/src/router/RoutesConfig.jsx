@@ -116,4 +116,20 @@ export const routesConfig = [
     path: '/profile',
     component: 'Profile',
   },
+  {
+    path: '/offer',
+    component: 'Offer/index',
+  },
+  {
+    path: '/offer/create',
+    component: 'Offer/OfferCreate',
+  },
+  {
+    path: '/offer/read/:id',
+    component: 'Offer/OfferRead',
+  },
+  {
+    path: '/offer/update/:id',
+    component: 'Offer/OfferUpdate',
+  },
 ];
