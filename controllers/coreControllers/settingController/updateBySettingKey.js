@@ -5,6 +5,10 @@ const Model = mongoose.model('Setting');
 const updateBySettingKey = async (req, res) => {
   try {
     const settingKey = req.params.settingKey || undefined;
+    console.log(
+      '🚀 ~ file: updateBySettingKey.js:8 ~ updateBySettingKey ~ settingKey:',
+      settingKey
+    );
 
     if (!settingKey) {
       return res.status(202).json({
@@ -13,11 +17,19 @@ const updateBySettingKey = async (req, res) => {
         message: 'No settingKey provided ',
       });
     }
+    const { settingValue } = req.body;
 
+    if (!settingValue) {
+      return res.status(202).json({
+        success: false,
+        result: null,
+        message: 'No settingValue provided ',
+      });
+    }
     const result = await Model.findOneAndUpdate(
       { settingKey },
       {
-        settingValue: req.body,
+        settingValue,
       },
       {
         new: true, // return the new result instead of the old one

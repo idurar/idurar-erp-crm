@@ -16,6 +16,7 @@ const readBySettingKey = async (req, res) => {
     }
 
     const result = await Model.findOne({ settingKey });
+
     // If no results found, return document not found
     if (!result) {
       return res.status(404).json({

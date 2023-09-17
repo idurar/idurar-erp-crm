@@ -7,15 +7,20 @@ const updateManySetting = async (req, res) => {
     // req/body = [{settingKey:"",settingValue}]
     let settingsHasError = false;
     const updateDataArray = [];
-    for (const setting of req.body) {
+    const { settings } = req.body;
+
+    for (const setting of settings) {
       if (!setting.hasOwnProperty('settingKey') || !setting.hasOwnProperty('settingValue')) {
         settingsHasError = true;
         break;
       }
+
+      const { settingKey, settingValue } = setting;
+
       updateDataArray.push({
         updateOne: {
-          filter: { settingKey: setting.settingKey },
-          update: { settingValue: setting.settingValue },
+          filter: { settingKey: settingKey },
+          update: { settingValue: settingValue },
         },
       });
     }
@@ -34,18 +39,19 @@ const updateManySetting = async (req, res) => {
         message: 'Settings provided has Error',
       });
     }
-    const result = await Model.bulkWrite(updateDataArray).exec();
-    if (!result) {
+    const result = await Model.bulkWrite(updateDataArray);
+
+    if (!result || result.nMatched < 1) {
       return res.status(404).json({
         success: false,
         result: null,
-        message: 'No document found by this id: ' + req.params.id,
+        message: 'No settings found by to update',
       });
     } else {
       return res.status(200).json({
         success: true,
-        result,
-        message: 'we update this document by this id: ' + req.params.id,
+        result: [],
+        message: 'we update all settings',
       });
     }
   } catch (err) {
