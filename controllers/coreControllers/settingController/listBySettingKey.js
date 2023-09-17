@@ -1,4 +1,8 @@
-const listBySettingKey = async (Model, req, res) => {
+const mongoose = require('mongoose');
+
+const Model = mongoose.model('Setting');
+
+const listBySettingKey = async (req, res) => {
   try {
     // Find document by id
 

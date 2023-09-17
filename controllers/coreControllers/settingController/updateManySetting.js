@@ -1,4 +1,8 @@
-const updateManySetting = async (Model, req, res) => {
+const mongoose = require('mongoose');
+
+const Model = mongoose.model('Setting');
+
+const updateManySetting = async (req, res) => {
   try {
     // req/body = [{settingKey:"",settingValue}]
     let settingsHasError = false;

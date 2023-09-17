@@ -1,4 +1,8 @@
-const updateBySettingKey = async (Model, req, res) => {
+const mongoose = require('mongoose');
+
+const Model = mongoose.model('Setting');
+
+const updateBySettingKey = async (req, res) => {
   try {
     const settingKey = req.params.settingKey || undefined;
 
