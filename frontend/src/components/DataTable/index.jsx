@@ -32,7 +32,6 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
 
   const { pagination, items } = listResult;
   const [data, setData] = useState('');
-  console.log('items : ', data);
 
   const dispatch = useDispatch();
 
@@ -47,7 +46,6 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
 
   useEffect(() => {
     if (searchText === '') {
-      console.log('itemss : ', items);
       setData(items);
     } else {
       const filteredData = items.filter(
