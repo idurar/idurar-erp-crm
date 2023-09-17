@@ -1,10 +1,4 @@
 const Upload = require('@/models/coreModels/Upload');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
-const { transliterate, slugify } = require('transliteration');
-
-const Upload = require('@/models/coreModels/Upload');
 
 // middleware to upload the public document
 const createPrivateUpload = async (req, res, next) => {
