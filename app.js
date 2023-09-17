@@ -1,4 +1,5 @@
 const express = require('express');
+const cron = require('node-cron');
 
 const helmet = require('helmet');
 const path = require('path');
@@ -16,6 +17,8 @@ const { isValidAdminToken } = require('./controllers/coreControllers/authJwtCont
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/erpRoutes/erpApi');
+const { invoiceCronJob, quoteCronJob } = require('./cronJobs');
+const { scheduleCronJob } = require('./helpers');
 
 // create our Express app
 const app = express();
@@ -62,6 +65,9 @@ app.use('/download', coreDownloadRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
+
+// cron job scheduler
+scheduleCronJob(process.env.CRON_SCHEDULE_EXPRESSION, [ invoiceCronJob, quoteCronJob ]);
 
 // Otherwise this was a really bad error we didn't expect! Shoot eh
 if (app.get('env') === 'development') {
