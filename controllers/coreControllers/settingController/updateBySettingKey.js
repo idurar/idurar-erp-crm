@@ -1,10 +1,25 @@
-const update = async (Model, req, res) => {
+const updateBySettingKey = async (Model, req, res) => {
   try {
-    // Find document by id and updates with the required fields
-    const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, req.body, {
-      new: true, // return the new result instead of the old one
-      runValidators: true,
-    }).exec();
+    const settingKey = req.params.settingKey || undefined;
+
+    if (!settingKey) {
+      return res.status(202).json({
+        success: false,
+        result: null,
+        message: 'No settingKey provided ',
+      });
+    }
+
+    const result = await Model.findOneAndUpdate(
+      { settingKey },
+      {
+        settingValue: req.body,
+      },
+      {
+        new: true, // return the new result instead of the old one
+        runValidators: true,
+      }
+    ).exec();
     if (!result) {
       return res.status(404).json({
         success: false,
@@ -39,4 +54,4 @@ const update = async (Model, req, res) => {
   }
 };
 
-module.exports = update;
+module.exports = updateBySettingKey;
