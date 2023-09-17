@@ -4,20 +4,20 @@ const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
 
-const employeeController = require('@/controllers/erpControllers/employeeController');
-const paymentModeController = require('@/controllers/erpControllers/paymentModeController');
-const clientController = require('@/controllers/erpControllers/clientController');
-const leadController = require('@/controllers/erpControllers/leadController');
-const invoiceController = require('@/controllers/erpControllers/invoiceController');
-const itemController = require('@/controllers/erpControllers/itemController');
-const quoteController = require('@/controllers/erpControllers/quoteController');
-const supplierController = require('@/controllers/erpControllers/supplierController');
-const orderFormController = require('@/controllers/erpControllers/orderFormController');
-const expenseController = require('@/controllers/erpControllers/expenseController');
-const expenseCategoryController = require('@/controllers/erpControllers/expenseCategoryController');
-const paymentInvoiceController = require('@/controllers/erpControllers/paymentInvoiceController');
+const employeeController = require('@/controllers/appControllers/employeeController');
+const paymentModeController = require('@/controllers/appControllers/paymentModeController');
+const clientController = require('@/controllers/appControllers/clientController');
+const leadController = require('@/controllers/appControllers/leadController');
+const invoiceController = require('@/controllers/appControllers/invoiceController');
+const itemController = require('@/controllers/appControllers/itemController');
+const quoteController = require('@/controllers/appControllers/quoteController');
+const supplierController = require('@/controllers/appControllers/supplierController');
+const supplierOrderController = require('@/controllers/appControllers/supplierOrderController');
+const expenseController = require('@/controllers/appControllers/expenseController');
+const expenseCategoryController = require('@/controllers/appControllers/expenseCategoryController');
+const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
 
-const offerController = require('@/controllers/erpControllers/offerController');
+const offerController = require('@/controllers/appControllers/offerController');
 
 // //_________________________________ API for employees_____________________
 router.route('/employee/create').post(catchErrors(employeeController.create));
@@ -101,17 +101,14 @@ router.route('/supplier/search').get(catchErrors(supplierController.search));
 router.route('/supplier/list').get(catchErrors(supplierController.list));
 router.route('/supplier/filter').get(catchErrors(supplierController.filter));
 
-// //_________________________________________ API for order Forms _____________________
-
-router.route('/orderForm/create').post(catchErrors(orderFormController.create));
-router.route('/orderForm/read/:id').get(catchErrors(orderFormController.read));
-router.route('/orderForm/update/:id').patch(catchErrors(orderFormController.update));
-router.route('/orderForm/delete/:id').delete(catchErrors(orderFormController.delete));
-router.route('/orderForm/search').get(catchErrors(orderFormController.search));
-router.route('/orderForm/list').get(catchErrors(orderFormController.list));
-router.route('/orderForm/filter').get(catchErrors(orderFormController.filter));
-
-router.route('/orderForm/pdf/:id').get(catchErrors(orderFormController.generatePDF));
+// //___________________________________________ API for suppliers _____________________
+router.route('/supplierOrder/create').post(catchErrors(supplierOrderController.create));
+router.route('/supplierOrder/read/:id').get(catchErrors(supplierOrderController.read));
+router.route('/supplierOrder/update/:id').patch(catchErrors(supplierOrderController.update));
+router.route('/supplierOrder/delete/:id').delete(catchErrors(supplierOrderController.delete));
+router.route('/supplierOrder/search').get(catchErrors(supplierOrderController.search));
+router.route('/supplierOrder/list').get(catchErrors(supplierOrderController.list));
+router.route('/supplierOrder/filter').get(catchErrors(supplierOrderController.filter));
 
 // //_________________________________________________________________API for expenses_____________________
 

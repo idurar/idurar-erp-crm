@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const orderFormSchema = new mongoose.Schema({
+const supplierOrderSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -98,4 +98,4 @@ const orderFormSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('OrderForm', orderFormSchema);
+module.exports = mongoose.model('SupplierOrder', supplierOrderSchema);
