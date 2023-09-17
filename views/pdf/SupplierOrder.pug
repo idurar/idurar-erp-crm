@@ -1,0 +1,326 @@
+doctype html
+html
+  head
+    link(rel="shortcut icon" type="image/png" href="/images/icons/favicon.png")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    style.
+      .sheet {
+        margin: 0;
+        width: 100%; 
+        height: 297mm;
+      }
+
+      body{
+        width: 100%; 
+        margin: 0;
+        padding: 0px ;
+        background: #ffffff;
+        font-family: sans-serif;
+        font-size:10px;
+        color:#333
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+        color:#333
+      }
+
+      .clearfix {
+        display: block; }
+      //- .invoice-container {
+      //-   position: relative;
+      //-   margin: 0 auto;
+      //-   color: #001028;
+      //-   background: #fff;
+      //-   font-size: 10px;
+      //- }
+      .left{
+        float:left;
+      }
+      .right{
+        float:right;
+      }
+      .top-area {    
+        display: block;
+        width:100%;
+        
+      }
+      alignRight :{
+        text-align: right !important;
+      }
+      alignLeft :{
+        text-align: left;
+      }
+      .logo {
+        width: 150px;
+      }
+      .company-info{
+        text-align: right;
+        font-size:8px;
+      }
+      h1.invoice{
+        font-size:32px;
+        color:#52008c;
+        margin-top:0;
+      }
+      p.strong{
+        font-weight:700;
+      }
+      .billTo p {
+        text-align: right !important;
+        float:right;
+        display:block;
+        font-size:9px;
+        width:100%;
+        margin-top:0;
+        margin-bottom:10px;
+        
+      }
+
+      .tableHeader{
+        color:#52008c;
+      }
+      .clearfix {
+        display: block; }
+      .col {
+        float:left;
+      }
+      .col-1 {
+        width: 4.16667%; }
+
+      .col-2 {
+        width: 8.33333%; }
+
+      .col-3 {
+        width: 12.5%; }
+
+      .col-4 {
+        width: 16.66667%; }
+
+      .col-5 {
+        width: 20.83333%; }
+
+      .col-6 {
+        width: 25%; }
+
+      .col-7 {
+        width: 29.16667%; }
+
+      .col-8 {
+        width: 33.33333%; }
+
+      .col-9 {
+        width: 37.5%; }
+
+      .col-10 {
+        width: 41.66667%; }
+
+      .col-11 {
+        width: 45.83333%; }
+
+      .col-12 {
+        width: 50%; }
+
+      .col-13 {
+        width: 54.16667%; }
+
+      .col-14 {
+        width: 58.33333%; }
+
+      .col-15 {
+        width: 62.5%; }
+
+      .col-16 {
+        width: 66.66667%; }
+
+      .col-17 {
+        width: 70.83333%; }
+
+      .col-18 {
+        width: 75%; }
+
+      .col-19 {
+        width: 79.16667%; }
+
+      .col-20 {
+        width: 83.33333%; }
+
+      .col-21 {
+        width: 87.5%; }
+
+      .col-22 {
+        width: 91.66667%; }
+
+      .col-23 {
+        width: 95.83333%; }
+
+      .col-24 {
+        width: 100%; }
+      .space {
+        margin-top: 30px;
+        margin-bottom: 40px;
+        width:100%;
+      }
+      .top-area .number-invoice > h1 {
+        font-weight: 500;
+      }
+      .about-invoice {
+        padding: 0px 15px;
+        margin-top: 10px;
+        font-size: 13px;
+      }
+      .project-invoice {
+        float: left;
+        margin-bottom: 10px;
+      }
+      .project-invoice span {
+        color: #5d6975;
+        text-align: right;
+        width: 52px;
+        margin-right: 10px;
+        display: inline-block;
+        font-size: 0.8em;
+      }
+      .company-invoice {
+        float: right;
+        text-align: right;
+        margin-bottom: 60px;
+      }
+      .project-invoice div, .company-invoice div {
+        white-space: nowrap;
+        margin: 5px auto;
+      }
+      .table-invoice {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 20px;
+      }
+      .table-invoice tr:nth-child(2n-1) td {
+        background: #fcfeff;
+      }
+      .table-invoice th, .table-invoice td {
+        text-align: center;
+      }
+      .table-invoice th {
+        padding: 8px 10px;
+        border-bottom: 1px solid #c2e0f2;
+        color:#52008c;
+        white-space: nowrap;
+        font-weight: 700;
+        font-size: 12px;
+        text-align: right;
+      }
+      tbody{
+        border-bottom: 1px solid #c2e0f2;
+      }
+      .table-invoice .service, .table-invoice .desc {
+        text-align: left;
+      }
+      .table-invoice td {
+        padding: 10px ;
+        text-align: right;
+        font-size: 9px;
+      }
+      .table-invoice td.service, .table-invoice td.desc {
+        vertical-align: top;
+      }
+      .table-invoice td.unit, .table-invoice td.qty, .table-invoice td.total {
+        
+      }
+      .table-invoice td.grand {
+        border-top: 1px solid #5d6975;
+      }
+      .service span{
+        display:block;
+        clear:both;
+        width : 100%;
+        color:#666;
+        margin-top:5px;
+        font-size:8px;
+      }
+      .notice-invoice {
+        padding: 15px;
+      }
+      .notice-invoice .notice {
+        color: #5d6975;
+        
+      }
+      .footer-invoice {
+        margin-top:30px
+        color: #5d6975;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        
+        padding: 20px 0;
+        text-align: center;
+      }
+ 
+  body
+    
+      header.clearfix
+        .top-area
+          img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
+          .right.company-info
+              p IDURAR WEB Agency
+              p Centre d’affaire El-Mountazeh Oran - Algerie
+              p RC: 16A5414225 /NIF: 199035050030146 /AI: 31050981441
+              
+        .col.col-24
+          .space  
+        .left.col-12
+            h1.invoice
+              | QUOTE 
+            div 
+              .col.col-8
+                p.strong Date :
+                p #{moment(model.date).format("DD/MM/YYYY")}
+              .col.col-8
+                p.strong Expired Date :
+                p #{moment(model.expiredDate).format("DD/MM/YYYY")}
+              .col.col-8 
+                p.strong Quote Number :
+                p # #{model.number}/#{model.year || ""} 
+              
+        .right.col-10
+            .billTo
+                p Bill To :
+                p #{model.client.company}
+                p address : #{model.client.address}
+                p phone : #{model.client.phone}
+                p Tel : #{model.client.email}
+        .col.col-24
+          .space  
+      main
+        table.table-invoice
+          thead
+            tr.tableHeader
+              th.service ITEM
+              th QTY
+              th PRICE
+              th TOTAL
+          tbody
+            each item in model.items
+              tr
+                td.service #{item.itemName}
+                  span #{item.description}
+                td.qty #{item.quantity}  
+                td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            tr
+              td(colspan='3') SUBTOTAL
+              td.total $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            tr
+              td(colspan='3') TAX #{model.taxRate*100} %
+              td.total $ #{model.taxTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            tr
+              td.grand.total(colspan='3') GRAND TOTAL
+              td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+        
+      .col.col-24
+          .space     
+      footer.footer-invoice
+        | Invoice was created on a computer and is valid without the signature and seal.
+          
+
+   
