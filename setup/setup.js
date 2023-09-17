@@ -29,11 +29,22 @@ async function setupApp() {
     const financeConfig = JSON.parse(
       fs.readFileSync(__dirname + '/config/financeConfig.json', 'utf-8')
     );
+    const emailTemplate = JSON.parse(
+      fs.readFileSync(__dirname + '/config/emailTemplate.json', 'utf-8')
+    );
+    const crmConfig = JSON.parse(fs.readFileSync(__dirname + '/config/crmConfig.json', 'utf-8'));
     const customConfig = JSON.parse(
       fs.readFileSync(__dirname + '/config/customConfig.json', 'utf-8')
     );
 
-    await Setting.insertMany([...appConfig, ...companyConfig, ...financeConfig, ...customConfig]);
+    await Setting.insertMany([
+      ...appConfig,
+      ...companyConfig,
+      ...financeConfig,
+      ...emailTemplate,
+      ...crmConfig,
+      ...customConfig,
+    ]);
 
     console.log('👍 Settings created : Done!');
   } catch (e) {
