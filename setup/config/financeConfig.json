@@ -1,20 +1,86 @@
 [
   {
+    "settingKey": "currencyList",
+    "settingValue": ["eur", "usd", "gpd", "inr", "dzd", "cad"],
+    "valueType": "array",
+    "isCoreSetting": true
+  },
+  {
     "settingKey": "currency",
-    "settingValue": "eur",
+    "settingValue": "usd",
     "valueType": "string",
     "isCoreSetting": true
   },
   {
-    "settingKey": "defaultTax",
-    "settingValue": 0.19,
+    "settingKey": "currency_symbol",
+    "settingValue": "$",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "currency_position",
+    "settingValue": "before",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "decimal_sep",
+    "settingValue": ".",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "thousand_sep",
+    "settingValue": ",",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "cent_precision",
+    "settingValue": 2,
     "valueType": "number",
     "isCoreSetting": true
   },
   {
-    "settingKey": "currencyList",
-    "settingValue": ["eur", "usd", "gpd", "inr", "dzd", "cad"],
-    "valueType": "array",
+    "settingKey": "zero_format",
+    "settingValue": false,
+    "valueType": "boolean",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "last_invoice_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "last_quote_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "last_offer_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "current_invoice_year",
+    "settingValue": 2023,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "current_quote_year",
+    "settingValue": 2023,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingKey": "current_offer_year",
+    "settingValue": 2023,
+    "valueType": "number",
     "isCoreSetting": true
   }
 ]
