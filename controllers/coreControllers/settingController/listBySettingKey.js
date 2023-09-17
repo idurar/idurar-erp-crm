@@ -6,11 +6,11 @@ const listBySettingKey = async (req, res) => {
   try {
     // Find document by id
 
-    const settingsArray = req.query.settings ? req.query.settings.split(',') : [];
+    const settingKeyArray = req.query.settingKeyArray ? req.query.settingKeyArray.split(',') : [];
 
     const settingsToShow = { $or: [] };
 
-    if (settingsArray.length === 0) {
+    if (settingKeyArray.length === 0) {
       return res
         .status(202)
         .json({
@@ -21,8 +21,8 @@ const listBySettingKey = async (req, res) => {
         .end();
     }
 
-    for (const setting of settingsArray) {
-      settingsToShow.$or.push({ settingKey: setting });
+    for (const settingKey of settingKeyArray) {
+      settingsToShow.$or.push({ settingKey });
     }
     let results = await Model.find(settings).where('removed', false);
 
