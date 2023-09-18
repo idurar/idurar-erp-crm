@@ -1,6 +1,6 @@
 [
   {
-    "settingKey": "appName",
+    "settingKey": "app_name",
     "settingValue": "IDURAR ERP/CRM",
     "valueType": "string",
     "isCoreSetting": true
@@ -12,13 +12,13 @@
     "isCoreSetting": true
   },
   {
-    "settingKey": "allowedRole",
+    "settingKey": "allowed_role",
     "settingValue": ["admin", "staff"],
     "valueType": "array",
     "isCoreSetting": true
   },
   {
-    "settingKey": "emailConfig",
+    "settingKey": "email_config",
     "settingValue": {
       "smtpServer": "smtp.example.com",
       "port": 587,
