@@ -193,8 +193,7 @@ html
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
-        margin: 0 auto 20px;
-        justify-content: center;
+        margin-bottom: 20px;
       }
       .table-invoice tr:nth-child(2n-1) td {
         background: #fcfeff;
@@ -212,16 +211,14 @@ html
         text-align: right;
       }
       tbody{
-        //- border-bottom: 1px solid #c2e0f2;
-      }
-      td.strong{
-        font-weight:700;
+        border-bottom: 1px solid #c2e0f2;
       }
       .table-invoice .service, .table-invoice .desc {
-        //- text-align: left;
+        text-align: left;
       }
       .table-invoice td {
         padding: 10px ;
+        text-align: right;
         font-size: 9px;
       }
       .table-invoice td.service, .table-invoice td.desc {
@@ -231,7 +228,7 @@ html
         
       }
       .table-invoice td.grand {
-        //- border-top: 1px solid #5d6975;
+        border-top: 1px solid #5d6975;
       }
       .service span{
         display:block;
@@ -247,9 +244,6 @@ html
       .notice-invoice .notice {
         color: #5d6975;
         
-      }
-      .total.price{
-        font-size: 18px;
       }
       .footer-invoice {
         margin-top:30px
@@ -276,7 +270,7 @@ html
           .space  
         .left.col-12
             h1.invoice
-              | Payment Invoice 
+              | INVOICE 
             div 
               .col.col-8
                 p.strong Date :
@@ -284,7 +278,7 @@ html
               .col.col-8
                 p.strong Expired Date :
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
-              .col.col-9 
+              .col.col-8 
                 p.strong Invoice Number :
                 p # #{model.number}/#{model.year || ""} 
               
@@ -299,18 +293,34 @@ html
           .space  
       main
         table.table-invoice
+          thead
+            tr.tableHeader
+              th.service ITEM
+              th QTY
+              th PRICE
+              th TOTAL
           tbody
+            each item in model.items
+              tr
+                td.service #{item.itemName}
+                  span #{item.description}
+                td.qty #{item.quantity}  
+                td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
-              td.strong TOTAL
-              td.total.price $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td(colspan='3') SUBTOTAL
+              td.total $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
-              td.grand.total.strong GRAND TOTAL
-              td.grand.total.price $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td(colspan='3') TAX #{model.taxRate*100} %
+              td.total $ #{model.taxTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            tr
+              td.grand.total(colspan='3') GRAND TOTAL
+              td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
         
       .col.col-24
           .space     
       footer.footer-invoice
-        | This Payment Invoice was created on a computer and is valid without the signature and seal.
+        | Invoice was created on a computer and is valid without the signature and seal.
           
 
    
