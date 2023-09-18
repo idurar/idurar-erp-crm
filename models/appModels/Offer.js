@@ -18,9 +18,9 @@ const offerSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  lead: {
+  client: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Lead',
+    ref: 'Client',
     required: true,
     autopopulate: true,
   },
