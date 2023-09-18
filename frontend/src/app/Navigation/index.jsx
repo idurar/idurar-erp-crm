@@ -17,10 +17,12 @@ import {
   UserOutlined,
   CreditCardOutlined,
   MenuOutlined,
+  UserAddOutlined
 } from '@ant-design/icons';
 
 const SIDEBAR_MENU = [
   { key: '/', icon: <DashboardOutlined />, title: 'Dashboard' },
+  { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
   { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
   { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
   { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },

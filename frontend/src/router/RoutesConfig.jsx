@@ -116,4 +116,20 @@ export const routesConfig = [
     path: '/profile',
     component: 'Profile',
   },
+  {
+    path: '/lead',
+    component: 'Lead/index',
+  },
+  {
+    path: '/lead/create',
+    component: 'Lead/LeadCreate',
+  },
+  {
+    path: '/lead/read/:id',
+    component: 'Lead/LeadRead',
+  },
+  {
+    path: '/lead/update/:id',
+    component: 'Lead/LeadUpdate',
+  },
 ];
