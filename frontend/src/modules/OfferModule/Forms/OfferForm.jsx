@@ -55,17 +55,17 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
       <Row gutter={[12, 0]}>
         <Col className="gutter-row" span={9}>
           <Form.Item
-            name="lead"
-            label="Lead"
+            name="client"
+            label="Client"
             rules={[
               {
                 required: true,
-                message: 'Please input your lead!',
+                message: 'Please input your client!',
               },
             ]}
           >
             <AutoCompleteAsync
-              entity={'lead'}
+              entity={'client'}
               displayLabels={['company']}
               searchFields={'company,managerSurname,managerName'}
               // onUpdateValue={autoCompleteUpdate}

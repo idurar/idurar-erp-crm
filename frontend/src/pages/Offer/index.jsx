@@ -9,18 +9,18 @@ export default function Offer() {
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
-    displayLabels: ['name', 'surname'],
-    searchFields: 'name,surname,birthday',
+    displayLabels: ['company'],
+    searchFields: 'company',
   };
-  const entityDisplayLabels = ['number', 'lead.name'];
+  const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
       title: 'Number',
       dataIndex: 'number',
     },
     {
-      title: 'Lead',
-      dataIndex: ['lead', 'name'],
+      title: 'Client',
+      dataIndex: ['client', 'company'],
     },
     {
       title: 'Date',
