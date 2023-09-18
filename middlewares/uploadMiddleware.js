@@ -1,4 +1,4 @@
-const Upload = require('@/models/erpModels/Upload');
+const Upload = require('@/models/appModels/Upload');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
