@@ -263,14 +263,14 @@ html
           img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
           .right.company-info
               p IDURAR WEB Agency
-              p Centre d’affaire Gold Tower Oran - Algerie
-              p RC: 16A5234245 /NIF: 198232345630567 /AI: 31009451343
+              p Centre d’affaire El-Mountazeh Oran - Algerie
+              p RC: 16A5414225 /NIF: 199035050030146 /AI: 31050981441
               
         .col.col-24
           .space  
         .left.col-12
             h1.invoice
-              | OFFER 
+              | QUOTE 
             div 
               .col.col-8
                 p.strong Date :
@@ -279,7 +279,7 @@ html
                 p.strong Expired Date :
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
-                p.strong Offer Number :
+                p.strong Quote Number :
                 p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
@@ -298,7 +298,6 @@ html
               th.service ITEM
               th QTY
               th PRICE
-              th OFFER PRICE
               th TOTAL
           tbody
             each item in model.items
@@ -307,28 +306,21 @@ html
                   span #{item.description}
                 td.qty #{item.quantity}  
                 td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-                td.unit $ #{item.offerPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                 td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
               td(colspan='3') SUBTOTAL
               td.total $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
-              td(colspan='3') OFFER SUBTOTAL
-              td.total $ #{model.subOfferTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-            tr
               td(colspan='3') TAX #{model.taxRate*100} %
               td.total $ #{model.taxTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
             tr
-              td.grand.total(colspan='3') TOTAL
-              td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-            tr
-              td.grand.total(colspan='3') OFFER TOTAL
+              td.grand.total(colspan='3') GRAND TOTAL
               td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
         
       .col.col-24
           .space     
       footer.footer-invoice
-        | Offer was created on a computer and is valid without the signature and seal.
+        | Invoice was created on a computer and is valid without the signature and seal.
           
 
    
