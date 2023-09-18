@@ -47,6 +47,8 @@ async function setupApp() {
     ]);
 
     console.log('👍 Settings created : Done!');
+    console.log('🥳 Setup completed :Success!');
+    process.exit();
   } catch (e) {
     console.log('\n🚫 Error! The Error info is below');
     console.log(e);
