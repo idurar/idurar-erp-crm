@@ -16,7 +16,7 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 **Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
 ```
-:rocket: Give a ⭐️ & Fork to this project ... Happy coding! 🤩
+🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
 ## Our Sponsors
