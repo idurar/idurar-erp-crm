@@ -14,7 +14,7 @@ If you find a bug or have a suggestion for an enhancement :
   - a short but descriptive title.
   - a detailed description of the issue or suggestion (if it is a bug include the steps to reproduce it).
 
-### working on issues
+### Working on issues
 
 - comment on issues you want to work on and we will assign you to it.
 - we do accept pull requests even if you are not assigned to an issue but we prefer you to comment on the issue first.
