@@ -21,8 +21,28 @@ const emailSchema = new mongoose.Schema({
     required: true,
   },
   emailSubject: {
-    type: mongoose.Schema.Types.Mixed,
+    type: String,
     required: true,
+  },
+  language:{
+    type:String,
+    default:"en"
+  },
+  removed: {
+  type: Boolean,
+  default: false,
+  },
+  enabled: {
+  type: Boolean,
+  default: true,
+  },
+  created: {
+  type: Date,
+  default: Date.now,
+  },
+  updated: {
+  type: Date,
+  default: Date.now,
   },
 });
 
