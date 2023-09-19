@@ -51,7 +51,7 @@ async function setupApp() {
     await Email.insertMany([
       ...emailTemplate
     ])
-    console.log('👍 Email Templates Created : Done!');
+    console.log('👍 Email Templates Created : Done !');
     console.log('🥳 Setup completed :Success!');
     process.exit();
   } catch (e) {
