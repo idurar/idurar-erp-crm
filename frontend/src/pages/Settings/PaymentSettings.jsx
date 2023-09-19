@@ -29,7 +29,7 @@ export default function PaymentSettings() {
             <SelectCurrency />
           </Form.Item>
           <Form.Item label="Tax">
-            <InputNumber addonBefore={'%'} placeholder="0" />
+            <InputNumber min={0} addonBefore={'%'} placeholder="0" />
           </Form.Item>
         </SetingsSection>
 
