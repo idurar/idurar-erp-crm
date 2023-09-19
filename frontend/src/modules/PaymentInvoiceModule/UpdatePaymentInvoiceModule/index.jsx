@@ -1,13 +1,13 @@
 import { ErpLayout } from '@/layout';
-import UpdateItem from '@/modules/ErpPanelModule/UpdateItem';
-import PaymentInvoiceForm from '@/modules/PaymentInvoiceModule/Forms/PaymentInvoiceForm';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
-import { selectItemById, selectCurrentItem } from '@/redux/erp/selectors';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { selectItemById } from '@/redux/erp/selectors';
+import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import Payment from './components/Payment';
+import { selectReadItem } from '@/redux/erp/selectors';
 
 export default function UpdatePaymentInvoiceModule({ config }) {
   const dispatch = useDispatch();
@@ -16,21 +16,19 @@ export default function UpdatePaymentInvoiceModule({ config }) {
 
   let item = useSelector(selectItemById(id));
 
-  useEffect(() => {
-    if (item) {
-      dispatch(erp.currentItem({ data: item }));
-    } else {
-      dispatch(erp.read({ entity: config.entity, id }));
-    }
-  }, [item]);
+  useLayoutEffect(() => {
+    dispatch(erp.read({ entity: config.entity, id }));
+  }, [item, id]);
 
-  const { result: currentResult } = useSelector(selectCurrentItem);
+  const { result: currentResult } = useSelector(selectReadItem);
 
-  item = currentResult;
+  item = item ? item : currentResult;
+
+  useLayoutEffect(() => {
+    dispatch(erp.currentAction({ actionType: 'update', id, data: item }));
+  }, []);
 
   return (
-    <ErpLayout>
-      {item ? <UpdateItem config={config} UpdateForm={PaymentInvoiceForm} /> : <PageLoader />}
-    </ErpLayout>
+    <ErpLayout>{item ? <Payment config={config} currentItem={item} /> : <PageLoader />}</ErpLayout>
   );
 }

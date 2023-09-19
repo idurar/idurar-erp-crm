@@ -1,11 +1,11 @@
 import { ErpLayout } from '@/layout';
-import ErpPanel from '@/modules/ErpPanelModule';
+import PaymentInvoiceERP from './components/PaymentInvoiceERP';
 import DataTableDropMenu from './components/DataTableDropMenu';
 
 export default function PaymentInvoiceDataTableModule({ config }) {
   return (
     <ErpLayout>
-      <ErpPanel config={config} DataTableDropMenu={DataTableDropMenu}></ErpPanel>
+      <PaymentInvoiceERP config={config} DataTableDropMenu={DataTableDropMenu}></PaymentInvoiceERP>
     </ErpLayout>
   );
 }
