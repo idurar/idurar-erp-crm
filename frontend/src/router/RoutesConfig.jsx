@@ -58,7 +58,7 @@ export const routesConfig = [
   },
   {
     path: '/invoice/pay/:id',
-    component: 'Invoice/InvoiceRecord',
+    component: 'Invoice/InvoiceRecordPayment',
   },
   {
     path: '/quote',
@@ -109,6 +109,18 @@ export const routesConfig = [
     component: 'PaymentMode',
   },
   {
+    path: '/email',
+    component: 'Email/index',
+  },
+  {
+    path: '/email/read/:id',
+    component: 'Email/EmailRead',
+  },
+  {
+    path: '/email/update/:id',
+    component: 'Email/EmailUpdate',
+  },
+  {
     path: '/settings/advanced',
     component: 'AdvancedSettings',
   },
@@ -131,5 +143,21 @@ export const routesConfig = [
   {
     path: '/lead/update/:id',
     component: 'Lead/LeadUpdate',
+  },
+  {
+    path: '/offer',
+    component: 'Offer/index',
+  },
+  {
+    path: '/offer/create',
+    component: 'Offer/OfferCreate',
+  },
+  {
+    path: '/offer/read/:id',
+    component: 'Offer/OfferRead',
+  },
+  {
+    path: '/offer/update/:id',
+    component: 'Offer/OfferUpdate',
   },
 ];

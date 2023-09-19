@@ -29,13 +29,31 @@ async function setupApp() {
     const financeConfig = JSON.parse(
       fs.readFileSync(__dirname + '/config/financeConfig.json', 'utf-8')
     );
+    const crmConfig = JSON.parse(fs.readFileSync(__dirname + '/config/crmConfig.json', 'utf-8'));
     const customConfig = JSON.parse(
       fs.readFileSync(__dirname + '/config/customConfig.json', 'utf-8')
     );
 
-    await Setting.insertMany([...appConfig, ...companyConfig, ...financeConfig, ...customConfig]);
-
+    await Setting.insertMany([
+      ...appConfig,
+      ...companyConfig,
+      ...financeConfig,
+      ...crmConfig,
+      ...customConfig,
+    ]);
     console.log('👍 Settings created : Done!');
+
+    const Email = require('../models/coreModels/Email');
+    const emailTemplate = JSON.parse(
+      fs.readFileSync(__dirname + '/config/emailTemplate.json', 'utf-8')
+    );
+
+    await Email.insertMany([
+      ...emailTemplate
+    ])
+    console.log('👍 Email Templates Created : Done !');
+    console.log('🥳 Setup completed :Success!');
+    process.exit();
   } catch (e) {
     console.log('\n🚫 Error! The Error info is below');
     console.log(e);

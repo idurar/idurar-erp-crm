@@ -17,12 +17,14 @@ import {
   UserOutlined,
   CreditCardOutlined,
   MenuOutlined,
-  UserAddOutlined
+  UserAddOutlined,
+  FileOutlined,
 } from '@ant-design/icons';
 
 const SIDEBAR_MENU = [
   { key: '/', icon: <DashboardOutlined />, title: 'Dashboard' },
   { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
+  { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
   { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
   { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
   { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
@@ -33,6 +35,7 @@ const SIDEBAR_MENU = [
 
 const SETTINGS_SUBMENU = [
   { key: '/settings', title: 'General Settings' },
+   { key: '/email', title: 'Email templates' },
   { key: '/payment/mode', title: 'Payment Mode' },
   { key: '/settings/advanced', title: 'Advanced Settings' },
 ];

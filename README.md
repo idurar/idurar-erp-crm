@@ -13,13 +13,15 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 
 </div>
 
+**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
+
 ```
-:rocket: Give a ⭐️ & Fork to this project ... Happy coding! 🤩
+🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
 ## Our Sponsors
 
-  <a href="https://www.digitalocean.com/?ref=idurarapp.com">
+  <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
     <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
   </a>
 
@@ -31,7 +33,7 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 
 IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
-**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/) "Please use chrome"
+**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
 `username : admin@demo.com password : admin123`
 
