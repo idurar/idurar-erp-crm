@@ -1,29 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Menu, Tabs, Button, Divider } from 'antd';
+import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-design/icons';
 import { SettingsLayout } from '@/layout';
 
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 
+const menuItems = [
+  { key: 'generalSettings', label: 'General Settings', icon: <SettingOutlined /> },
+  { key: 'paymentSettings', label: 'Payment Settings', icon: <CreditCardOutlined /> },
+  { key: 'invoiceSettings', label: 'Invoice Settings', icon: <FileTextOutlined /> },
+];
+
 const RightMenu = ({ activeTab, handleTabChange }) => {
-  const menuItems = [
-    { key: 'generalSettings', label: 'General Settings' },
-    { key: 'paymentSettings', label: 'Payment Settings' },
-    { key: 'invoiceSettings', label: 'Invoice Settings' },
-  ];
   const menuList = menuItems.map((item, index) => (
-    <Button
-      type={item.key == activeTab ? 'default' : 'text'}
-      key={item.key}
-      style={{ marginBottom: '10px' }}
-      block
-      onClick={() => handleTabChange(item.key)}
-    >
+    <Menu.Item key={item.key} icon={item.icon} onClick={() => handleTabChange(item.key)}>
       {item.label}
-    </Button>
+    </Menu.Item>
   ));
-  return <div className="pad10">{menuList}</div>;
+  return (
+    <div className="pad20" style={{ width: '100%' }}>
+      <Menu mode={'vertical'} selectedKeys={[activeTab]} style={{ width: '100%' }}>
+        {menuList}
+      </Menu>
+    </div>
+  );
 };
 
 const Visibility = ({ isVisible = false, children }) => {
@@ -32,29 +34,32 @@ const Visibility = ({ isVisible = false, children }) => {
 };
 
 export default function Settings() {
-  const [tabTitle, setTabTitle] = useState('generalSettings');
+  const [tabKey, setTabKey] = useState(menuItems[0].key);
+  const [tabTitle, setTabTitle] = useState(menuItems[0].label);
 
   const isActive = (tab) => {
-    return tabTitle === tab ? true : false;
+    return tabKey === tab ? true : false;
   };
 
   const handleTabChange = (tab) => {
-    setTabTitle(tab);
+    const menuItem = menuItems.find((item) => item.key === tab);
+    setTabTitle(menuItem.label);
+    setTabKey(tab);
   };
 
   return (
     <SettingsLayout
       topCardContent={tabTitle}
       topCardTitle={'Settings'}
-      bottomCardContent={<RightMenu activeTab={tabTitle} handleTabChange={handleTabChange} />}
+      bottomCardContent={<RightMenu activeTab={tabKey} handleTabChange={handleTabChange} />}
     >
-      <Visibility isVisible={isActive('generalSettings')}>
+      <Visibility isVisible={isActive(menuItems[0].key)}>
         <GeneralSettings />
       </Visibility>
-      <Visibility isVisible={isActive('paymentSettings')}>
+      <Visibility isVisible={isActive(menuItems[1].key)}>
         <PaymentSettings />
       </Visibility>
-      <Visibility isVisible={isActive('invoiceSettings')}>
+      <Visibility isVisible={isActive(menuItems[2].key)}>
         <InvoiceSettings />
       </Visibility>
     </SettingsLayout>
