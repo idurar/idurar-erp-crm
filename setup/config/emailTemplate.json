@@ -1,44 +1,51 @@
 [
   {
-    "settingKey": "email_invoice_default",
-    "settingValue": "<p>email_invoice_default</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "email_invoice_default",
+    "emailName":"Invoice Email",
+    "emailSubject":"Invoice From Idurar",
+    "emailBody": "<p>email_invoice_default</p>",
+    "emailVariables": ["name","time"]
   },
   {
-    "settingKey": "email_quote_default",
-    "settingValue": "<p>email_quote_default</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "email_quote_default",
+    "emailName":"Quote Email",
+    "emailSubject":"Quote From Idurar",
+    "emailBody": "<p>email_quote_default</p>",
+    "emailVariables": ["name","time"]
   },
   {
-    "settingKey": "email_offer_default",
-    "settingValue": "<p>email_offer_default</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "email_offer_default",
+    "emailName":"Offer Email",
+    "emailSubject":"Invoice From Idurar",
+    "emailBody": "<p>email_offer_default</p>",
+    "emailVariables": []
   },
   {
-    "settingKey": "email_payment_receipt_default",
-    "settingValue": "<p>email_offer_default</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "email_payment_receipt_default",
+    "emailName":"Payment Email",
+    "emailSubject":"Payment From Idurar",
+    "emailBody": "<p>email_payment_receipt_default</p>",
+    "emailVariables": ["name","time"]
   },
   {
-    "settingKey": "email_signup_email_confirm_default",
-    "settingValue": "<p>email_signup_email_confirm</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "email_signup_email_confirm_default",
+    "emailName":"Signup Confirmation Email",
+    "emailSubject":"Signup Confirmation From Idurar",
+    "emailBody": "<p>email_signup_email_confirm_default</p>",
+    "emailVariables": ["name"]
   },
   {
-    "settingKey": "email_reset_password_default",
-    "settingValue": "<p>email_reset_password</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "email_reset_password_default",
+    "emailName":"Password Reset Email",
+    "emailSubject":"Password Reset  From Idurar",
+    "emailBody": "<p>email_reset_password_default</p>",
+    "emailVariables": ["name"]
   },
   {
-    "settingKey": "welcome_email_default",
-    "settingValue": "<p>welcome_email</p>",
-    "valueType": "string",
-    "isCoreSetting": true
+    "emailKey": "welcome_email_default",
+    "emailName":"Welcome Email",
+    "emailSubject":"Welcom From Idurar",
+    "emailBody": "<p>welcome_email</p>",
+    "emailVariables":["name"]
   }
 ]
