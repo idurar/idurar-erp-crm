@@ -8,6 +8,7 @@ const router = express.Router();
 
 const adminController = require('@/controllers/coreControllers/adminController');
 const settingController = require('@/controllers/coreControllers/settingController');
+const emailController = require('@/controllers/coreControllers/emailController');
 
 const {
   createPublicUpload,
@@ -61,6 +62,15 @@ router
   .route('/setting/updateBySettingKey/:settingKey?')
   .patch(catchErrors(settingController.updateBySettingKey));
 router.route('/setting/updateManySetting').patch(catchErrors(settingController.updateManySetting));
+
+// //____________________________________________ API for Email Templates _________________
+router.route('/email/create').post(catchErrors(emailController.create));
+router.route('/email/read/:id').get(catchErrors(emailController.read));
+router.route('/email/update/:id').patch(catchErrors(emailController.update));
+router.route('/email/search').get(catchErrors(emailController.search));
+router.route('/email/list').get(catchErrors(emailController.list));
+router.route('/email/listAll').get(catchErrors(emailController.listAll));
+router.route('/email/filter').get(catchErrors(emailController.filter));
 
 // //____________________________________________ API for Upload controller _________________
 
