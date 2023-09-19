@@ -29,7 +29,7 @@ function AddNewItem({ config }) {
 }
 
 export default function DataTable({ config, DataTableDropMenu }) {
-  let { entity, dataTableColumns } = config;
+  let { entity, dataTableColumns ,create=true} = config;
   const { DATATABLE_TITLE } = config;
   dataTableColumns = [
     ...dataTableColumns,
@@ -78,7 +78,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
               Refresh
             </Button>,
-            <AddNewItem config={config} key={`${uniqueId()}`} />,
+              create?<AddNewItem config={config} key={`${uniqueId()}`} />:<>y</>,
           ]}
           style={{
             padding: '20px 0px',

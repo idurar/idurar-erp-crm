@@ -109,6 +109,18 @@ export const routesConfig = [
     component: 'PaymentMode',
   },
   {
+    path: '/email',
+    component: 'Email/index',
+  },
+  {
+    path: '/email/read/:id',
+    component: 'Email/EmailRead',
+  },
+  {
+    path: '/email/update/:id',
+    component: 'Email/EmailUpdate',
+  },
+  {
     path: '/settings/advanced',
     component: 'AdvancedSettings',
   },
