@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, Tabs, Button, Divider } from 'antd';
 import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-design/icons';
 import { SettingsLayout } from '@/layout';
+import Visibility from '@/components/Visibility';
 
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
@@ -12,6 +13,8 @@ const menuItems = [
   { key: 'paymentSettings', label: 'Payment Settings', icon: <CreditCardOutlined /> },
   { key: 'invoiceSettings', label: 'Invoice Settings', icon: <FileTextOutlined /> },
 ];
+
+const settingsArray = [<GeneralSettings />, <PaymentSettings />, <InvoiceSettings />];
 
 const RightMenu = ({ activeTab, handleTabChange }) => {
   const menuList = menuItems.map((item, index) => (
@@ -28,10 +31,10 @@ const RightMenu = ({ activeTab, handleTabChange }) => {
   );
 };
 
-const Visibility = ({ isVisible = false, children }) => {
-  const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
-  return <div style={show}>{children}</div>;
-};
+const settinsBlock = ({ isActive }) =>
+  settingsArray.map((setting, index) => (
+    <Visibility isVisible={isActive(menuItems[index].key)}>{setting}</Visibility>
+  ));
 
 export default function Settings() {
   const [tabKey, setTabKey] = useState(menuItems[0].key);
@@ -53,15 +56,7 @@ export default function Settings() {
       topCardTitle={'Settings'}
       bottomCardContent={<RightMenu activeTab={tabKey} handleTabChange={handleTabChange} />}
     >
-      <Visibility isVisible={isActive(menuItems[0].key)}>
-        <GeneralSettings />
-      </Visibility>
-      <Visibility isVisible={isActive(menuItems[1].key)}>
-        <PaymentSettings />
-      </Visibility>
-      <Visibility isVisible={isActive(menuItems[2].key)}>
-        <InvoiceSettings />
-      </Visibility>
+      {settinsBlock({ isActive })}
     </SettingsLayout>
   );
 }
