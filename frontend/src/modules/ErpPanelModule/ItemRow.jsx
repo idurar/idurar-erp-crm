@@ -73,21 +73,21 @@ export default function ItemRow({ field, remove, offer = false, current = null }
     <Row gutter={[12, 12]} style={{ position: 'relative' }}>
       <Col className="gutter-row" span={offer ? 3 : 5}>
         <Form.Item
-  name={[field.name, 'itemName']}
-  fieldKey={[field.fieldKey, 'itemName']}
-  rules={[
-    {
-      required: true,
-      message: 'Missing itemName name',
-    },
-    {
-      pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
-      message: 'Item Name must contain alphanumeric or special characters',
-    },
-  ]}
->
-  <Input placeholder="Item Name" />
-</Form.Item>
+          name={[field.name, 'itemName']}
+          fieldKey={[field.fieldKey, 'itemName']}
+          rules={[
+                  {
+                    required: true,
+                    message: 'Missing itemName name',
+                  },
+                  {
+                    pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
+                    message: 'Item Name must contain alphanumeric or special characters',
+                  },
+                ]}
+        >
+          <Input placeholder="Item Name" />
+        </Form.Item>
       </Col>
       <Col className="gutter-row" span={offer ? 5 : 7}>
         <Form.Item name={[field.name, 'description']} fieldKey={[field.fieldKey, 'description']}>
