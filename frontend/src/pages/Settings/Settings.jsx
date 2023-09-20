@@ -7,14 +7,21 @@ import Visibility from '@/components/Visibility';
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
+import MoneyFormatSettings from './MoneyFormatSettings';
 
 const menuItems = [
   { key: 'generalSettings', label: 'General Settings', icon: <SettingOutlined /> },
+  { key: 'moneyFormatSettings', label: 'Currency Settings', icon: <SettingOutlined /> },
   { key: 'paymentSettings', label: 'Payment Settings', icon: <CreditCardOutlined /> },
   { key: 'invoiceSettings', label: 'Invoice Settings', icon: <FileTextOutlined /> },
 ];
 
-const settingsArray = [<GeneralSettings />, <PaymentSettings />, <InvoiceSettings />];
+const settingsArray = [
+  <GeneralSettings />,
+  <MoneyFormatSettings />,
+  <PaymentSettings />,
+  <InvoiceSettings />,
+];
 
 const RightMenu = ({ activeTab, handleTabChange }) => {
   const menuList = menuItems.map((item, index) => (
