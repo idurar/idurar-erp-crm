@@ -1,62 +1,62 @@
 import { useState, useEffect } from 'react';
 import { Menu, Tabs, Button, Divider } from 'antd';
+import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-design/icons';
 import { SettingsLayout } from '@/layout';
+import Visibility from '@/components/Visibility';
 
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 
+const menuItems = [
+  { key: 'generalSettings', label: 'General Settings', icon: <SettingOutlined /> },
+  { key: 'paymentSettings', label: 'Payment Settings', icon: <CreditCardOutlined /> },
+  { key: 'invoiceSettings', label: 'Invoice Settings', icon: <FileTextOutlined /> },
+];
+
+const settingsArray = [<GeneralSettings />, <PaymentSettings />, <InvoiceSettings />];
+
 const RightMenu = ({ activeTab, handleTabChange }) => {
-  const menuItems = [
-    { key: 'generalSettings', label: 'General Settings' },
-    { key: 'paymentSettings', label: 'Payment Settings' },
-    { key: 'invoiceSettings', label: 'Invoice Settings' },
-  ];
   const menuList = menuItems.map((item, index) => (
-    <Button
-      type={item.key == activeTab ? 'default' : 'text'}
-      key={item.key}
-      style={{ marginBottom: '10px' }}
-      block
-      onClick={() => handleTabChange(item.key)}
-    >
+    <Menu.Item key={item.key} icon={item.icon} onClick={() => handleTabChange(item.key)}>
       {item.label}
-    </Button>
+    </Menu.Item>
   ));
-  return <div className="pad10">{menuList}</div>;
+  return (
+    <div className="pad20" style={{ width: '100%' }}>
+      <Menu mode={'vertical'} selectedKeys={[activeTab]} style={{ width: '100%' }}>
+        {menuList}
+      </Menu>
+    </div>
+  );
 };
 
-const Visibility = ({ isVisible = false, children }) => {
-  const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
-  return <div style={show}>{children}</div>;
-};
+const settinsBlock = ({ isActive }) =>
+  settingsArray.map((setting, index) => (
+    <Visibility isVisible={isActive(menuItems[index].key)}>{setting}</Visibility>
+  ));
 
 export default function Settings() {
-  const [tabTitle, setTabTitle] = useState('generalSettings');
+  const [tabKey, setTabKey] = useState(menuItems[0].key);
+  const [tabTitle, setTabTitle] = useState(menuItems[0].label);
 
   const isActive = (tab) => {
-    return tabTitle === tab ? true : false;
+    return tabKey === tab ? true : false;
   };
 
   const handleTabChange = (tab) => {
-    setTabTitle(tab);
+    const menuItem = menuItems.find((item) => item.key === tab);
+    setTabTitle(menuItem.label);
+    setTabKey(tab);
   };
 
   return (
     <SettingsLayout
       topCardContent={tabTitle}
       topCardTitle={'Settings'}
-      bottomCardContent={<RightMenu activeTab={tabTitle} handleTabChange={handleTabChange} />}
+      bottomCardContent={<RightMenu activeTab={tabKey} handleTabChange={handleTabChange} />}
     >
-      <Visibility isVisible={isActive('generalSettings')}>
-        <GeneralSettings />
-      </Visibility>
-      <Visibility isVisible={isActive('paymentSettings')}>
-        <PaymentSettings />
-      </Visibility>
-      <Visibility isVisible={isActive('invoiceSettings')}>
-        <InvoiceSettings />
-      </Visibility>
+      {settinsBlock({ isActive })}
     </SettingsLayout>
   );
 }

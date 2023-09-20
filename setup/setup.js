@@ -34,11 +34,16 @@ async function setupApp() {
       fs.readFileSync(__dirname + '/config/customConfig.json', 'utf-8')
     );
 
+    const moneyFormatConfig = JSON.parse(
+      fs.readFileSync(__dirname + '/config/moneyFormatConfig.json', 'utf-8')
+    );
+
     await Setting.insertMany([
       ...appConfig,
       ...companyConfig,
       ...financeConfig,
       ...crmConfig,
+      ...moneyFormatConfig,
       ...customConfig,
     ]);
     console.log('👍 Settings created : Done!');
@@ -48,9 +53,7 @@ async function setupApp() {
       fs.readFileSync(__dirname + '/config/emailTemplate.json', 'utf-8')
     );
 
-    await Email.insertMany([
-      ...emailTemplate
-    ])
+    await Email.insertMany([...emailTemplate]);
     console.log('👍 Email Templates Created : Done !');
     console.log('🥳 Setup completed :Success!');
     process.exit();

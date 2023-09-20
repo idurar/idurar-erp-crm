@@ -36,7 +36,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         label="Decimal Separator"
-        name="decimalSeparator"
+        name="decimal_separator"
         rules={[
           {
             required: true,
@@ -53,7 +53,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
 
       <Form.Item
         label="Thousand Separator"
-        name="thousandSeparator"
+        name="thousand_separator"
         rules={[
           {
             required: true,
