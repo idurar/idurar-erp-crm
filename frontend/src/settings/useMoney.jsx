@@ -5,29 +5,35 @@ import { useSelector } from 'react-redux';
 import { selectMoneyFormat } from '@/redux/settings/selectors';
 
 const useMoney = () => {
-  const { currencySymbol, currencyPosition, decimalSep, ThousandSep, centPrecision, zeroFormat } =
-    useSelector(selectMoneyFormat);
+  const {
+    currency_symbol,
+    currency_position,
+    decimal_sep,
+    thousand_sep,
+    cent_precision,
+    zero_format,
+  } = useSelector(selectMoneyFormat);
 
   const currencyFormat = (amount) =>
-    currency(amount).dollars() > 0 || !zeroFormat
+    currency(amount).dollars() > 0 || !zero_format
       ? currency(amount, {
-          separator: ThousandSep,
-          decimal: decimalSep,
+          separator: thousand_sep,
+          decimal: decimal_sep,
           symbol: '',
-          precision: centPrecision,
+          precision: cent_precision,
         }).format()
       : 0 +
         currency(amount, {
-          separator: ThousandSep,
-          decimal: decimalSep,
+          separator: thousand_sep,
+          decimal: decimal_sep,
           symbol: '',
-          precision: centPrecision,
+          precision: cent_precision,
         }).format();
 
   let moneyFormatter = ({ amount = 0 }) => {
-    return currencyPosition === 'before'
-      ? currencySymbol + ' ' + currencyFormat(amount)
-      : currencyFormat(amount) + ' ' + currencySymbol;
+    return currency_position === 'before'
+      ? currency_symbol + ' ' + currencyFormat(amount)
+      : currencyFormat(amount) + ' ' + currency_symbol;
   };
 
   let amountFormatter = ({ amount = 0 }) => currencyFormat(amount);
@@ -48,12 +54,12 @@ const useMoney = () => {
     moneyRowFormatter,
     moneyFormatter,
     amountFormatter,
-    currencySymbol,
-    currencyPosition,
-    decimalSep,
-    ThousandSep,
-    centPrecision,
-    zeroFormat,
+    currency_symbol,
+    currency_position,
+    decimal_sep,
+    thousand_sep,
+    cent_precision,
+    zero_format,
   };
 };
 

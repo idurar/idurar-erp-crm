@@ -24,7 +24,6 @@ export default function DataTableDropMenu({ row, entity }) {
   const item = useSelector(selectItemById(row._id));
   function Read() {
     dispatch(erp.currentItem({ data: item }));
-    // readPanel.open();
     history.push(`/invoice/read/${row._id}`);
   }
   function RecordPayment() {

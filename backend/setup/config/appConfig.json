@@ -1,0 +1,35 @@
+[
+  {
+    "settingCategory": "app_settings",
+    "settingKey": "app_name",
+    "settingValue": "IDURAR ERP/CRM",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "app_settings",
+    "settingKey": "language",
+    "settingValue": "en_us",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "app_settings",
+    "settingKey": "allowed_role",
+    "settingValue": ["admin", "staff"],
+    "valueType": "array",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "app_settings",
+    "settingKey": "email_settings",
+    "settingValue": {
+      "smtpServer": "smtp.example.com",
+      "port": 587,
+      "username": "example@example.com",
+      "password": "mysecretpassword"
+    },
+    "valueType": "object",
+    "isCoreSetting": true
+  }
+]
