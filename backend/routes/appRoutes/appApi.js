@@ -18,6 +18,7 @@ const expenseCategoryController = require('@/controllers/appControllers/expenseC
 const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
 
 const offerController = require('@/controllers/appControllers/offerController');
+const taxController = require('@/controllers/appControllers/taxController');
 
 // //_________________________________ API for employees_____________________
 router.route('/employee/create').post(catchErrors(employeeController.create));
@@ -155,5 +156,12 @@ router.route('/offer/list').get(catchErrors(offerController.list));
 router.route('/offer/filter').get(catchErrors(offerController.filter));
 router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
 router.route('/offer/summary').get(catchErrors(offerController.summary));
+
+//  //__________________________________________API for Tax______________________________
+
+router.route('/tax/create').post(catchErrors(taxController.create));
+router.route('/tax/read/:id').get(catchErrors(taxController.read));
+router.route('/tax/update/:id').patch(catchErrors(taxController.update));
+router.route('/tax/delete/:id').delete(catchErrors(taxController.delete));
 
 module.exports = router;
