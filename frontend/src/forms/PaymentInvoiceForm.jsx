@@ -46,8 +46,8 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
           min={0}
           controls={false}
           max={maxAmount}
-          addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
-          addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : null}
+          addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+          addonBefore={money.currency_position === 'before' ? money.currency_symbol : null}
         />
       </Form.Item>
       <Form.Item
@@ -59,7 +59,13 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
           },
         ]}
       >
-        <SelectAsync entity={'paymentMode'} displayLabels={['name']} withRedirect={true} urlToRedirect='/payment/mode' redirectLabel='Add Payment Mode'></SelectAsync>
+        <SelectAsync
+          entity={'paymentMode'}
+          displayLabels={['name']}
+          withRedirect={true}
+          urlToRedirect="/payment/mode"
+          redirectLabel="Add Payment Mode"
+        ></SelectAsync>
       </Form.Item>
       <Form.Item label="Reference" name="ref">
         <Input />

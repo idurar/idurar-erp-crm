@@ -25,11 +25,11 @@ export default function Currency() {
     },
     {
       title: 'Decimal Sep',
-      dataIndex: 'decimalSeparator',
+      dataIndex: 'decimal_separator',
     },
     {
       title: 'Thousand Sep',
-      dataIndex: 'thousandSeparator',
+      dataIndex: 'thousand_separator',
     },
     {
       title: 'Default',
@@ -47,11 +47,11 @@ export default function Currency() {
     },
     {
       title: 'Decimal Sep',
-      dataIndex: 'decimalSeparator',
+      dataIndex: 'decimal_separator',
     },
     {
       title: 'Thousand Sep',
-      dataIndex: 'thousandSeparator',
+      dataIndex: 'thousand_separator',
     },
     {
       title: 'Default',

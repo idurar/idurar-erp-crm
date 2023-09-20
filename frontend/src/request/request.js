@@ -119,6 +119,19 @@ const request = {
       return errorHandler(error);
     }
   },
+  listAll: async ({ entity }) => {
+    try {
+      const response = await axios.get(entity + '/listAll');
+
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
 
   post: async ({ entity, jsonData, options = {} }) => {
     try {
@@ -183,7 +196,7 @@ const request = {
       return errorHandler(error);
     }
   },
-  
+
   convert: async ({ entity, id }) => {
     try {
       const response = await axios.get(`${entity}/convert/${id}`);
@@ -196,6 +209,5 @@ const request = {
       return errorHandler(error);
     }
   },
-  
 };
 export default request;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 
 import Router from '@/router';
 
@@ -8,8 +8,9 @@ import { Layout, notification } from 'antd';
 
 import Navigation from '@/app/Navigation';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
+import { settings } from '@/redux/settings/actions';
 import HeaderContent from '@/app/HeaderContent';
 // import { useNetworkState } from "react-use";
 
@@ -26,6 +27,11 @@ function App() {
   //     description: "Cannot connect to the server, Check your internet network",
   //   });
   // }
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    dispatch(settings.list({ entity: 'setting' }));
+  }, []);
 
   const { isLoggedIn } = useSelector(selectAuth);
 

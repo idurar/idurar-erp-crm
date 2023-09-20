@@ -105,8 +105,8 @@ export default function ItemRow({ field, remove, offer = false, current = null }
             onChange={updatePrice}
             min={0}
             controls={false}
-            addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
-            addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : undefined}
+            addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+            addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
           />
         </Form.Item>
       </Col>
@@ -122,8 +122,8 @@ export default function ItemRow({ field, remove, offer = false, current = null }
               onChange={updateOffer}
               min={0}
               controls={false}
-              addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
-              addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : undefined}
+              addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+              addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
             />
           </Form.Item>
         </Col>
@@ -137,8 +137,8 @@ export default function ItemRow({ field, remove, offer = false, current = null }
               value={totalState}
               min={0}
               controls={false}
-              addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
-              addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : undefined}
+              addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+              addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
               formatter={(value) => money.amountFormatter({ amount: value })}
             />
           </Form.Item>
