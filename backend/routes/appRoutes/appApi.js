@@ -163,5 +163,8 @@ router.route('/tax/create').post(catchErrors(taxController.create));
 router.route('/tax/read/:id').get(catchErrors(taxController.read));
 router.route('/tax/update/:id').patch(catchErrors(taxController.update));
 router.route('/tax/delete/:id').delete(catchErrors(taxController.delete));
+router.route('/tax/invoice/search').get(catchErrors(taxController.search));
+router.route('/tax/invoice/list').get(catchErrors(taxController.list));
+router.route('/tax/invoice/listall').get(catchErrors(taxController.listAll));
 
 module.exports = router;
