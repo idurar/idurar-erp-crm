@@ -14,10 +14,14 @@ const taxSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  updated: {
-    type: Date,
-    default: Date.now,
-  },
+  removed: {
+    type: Boolean,
+    default: false,
+    },
+  enabled: {
+    type: Boolean,
+    default: true,
+    },
   created: {
     type: Date,
     default: Date.now,
