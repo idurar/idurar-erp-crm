@@ -131,7 +131,8 @@ export function formatDatetime(param) {
 /*
   Regex to validate phone number format
 */
-export const validatePhoneNumber = /^(?:[+\d()\-\s]+)$/;
+// export const validatePhoneNumber = /^(?:[+\d()\-\s]+)$/;
+export const validatePhoneNumber = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
 
 /*
  Set object value in html
