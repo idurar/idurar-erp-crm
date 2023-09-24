@@ -2,6 +2,7 @@ import uniqueId from '@/utils/uinqueId';
 import { PlusOutlined, SyncOutlined } from '@ant-design/icons';
 import { Button, Divider, Form, Input, PageHeader, Upload } from 'antd';
 import SetingsSection from './components/SetingsSection';
+import GeneralSettingForm from './components/GeneralSettingForm';
 
 export default function GeneralSettings() {
   return (
@@ -21,25 +22,10 @@ export default function GeneralSettings() {
       ></PageHeader>
 
       <Divider></Divider>
-      <Form>
+      <Form labelCol={{ span: 6 }}  labelAlign="left"
+    labelWrap wrapperCol={{ span: 18 }}>
         <SetingsSection title="Company" description="Update your company name and logo">
-          <Form.Item label="Name">
-            <Input placeholder="Company Name" />
-          </Form.Item>
-          <Form.Item label="Upload" valuePropName="fileList">
-            <Upload action="/upload.do" listType="picture-card">
-              <div>
-                <PlusOutlined />
-                <div
-                  style={{
-                    marginTop: 8,
-                  }}
-                >
-                  Upload
-                </div>
-              </div>
-            </Upload>
-          </Form.Item>
+          <GeneralSettingForm />
         </SetingsSection>
 
         <SetingsSection

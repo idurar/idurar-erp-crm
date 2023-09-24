@@ -58,7 +58,7 @@ const INITIAL_STATE = {
     current: null,
     isLoading: false,
     isSuccess: false,
-  }
+  },
 };
 
 const erpReducer = (state = INITIAL_STATE, action) => {

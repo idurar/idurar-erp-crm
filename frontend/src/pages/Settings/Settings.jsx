@@ -40,7 +40,9 @@ const RightMenu = ({ activeTab, handleTabChange }) => {
 
 const settinsBlock = ({ isActive }) =>
   settingsArray.map((setting, index) => (
-    <Visibility isVisible={isActive(menuItems[index].key)}>{setting}</Visibility>
+    <Visibility key={menuItems[index].key + index} isVisible={isActive(menuItems[index].key)}>
+      {setting}
+    </Visibility>
   ));
 
 export default function Settings() {
