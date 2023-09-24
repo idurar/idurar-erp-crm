@@ -1,4 +1,4 @@
-export const currencies = [
+const currencies = [
   {
     symbol: '$',
     name: 'US Dollar',
@@ -1071,3 +1071,5 @@ export const currencies = [
     name_plural: 'Zimbabwean Dollar',
   },
 ];
+
+export default currencies;

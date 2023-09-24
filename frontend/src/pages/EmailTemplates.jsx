@@ -24,9 +24,9 @@ export default function AdvancedSettings() {
       dataIndex: 'emailSubject',
     },
     {
-        title:'Body',
-        dataIndex:'emailBody',
-    }
+      title: 'Body',
+      dataIndex: 'emailBody',
+    },
   ];
   const dataTableColumns = [
     {
@@ -39,9 +39,7 @@ export default function AdvancedSettings() {
       key: 'emailSubject',
       render: (text, row) => {
         return {
-          children: (
-            <span>{text}</span>
-          ),
+          children: <span>{text}</span>,
         };
       },
     },

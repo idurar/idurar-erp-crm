@@ -176,7 +176,7 @@ export const crud = {
         });
         dispatch({
           type: actionTypes.RESET_ACTION,
-          keyState: 'delete'
+          keyState: 'delete',
         });
       } else {
         dispatch({

@@ -1,36 +1,12 @@
-import uniqueId from '@/utils/uinqueId';
-import { SyncOutlined } from '@ant-design/icons';
-import { Button, Divider, Form, Input, Menu, PageHeader } from 'antd';
-import SetingsSection from './components/SetingsSection';
+import configPage from './config';
 
-export default function InvoiceSettings() {
-  return (
-    <>
-      <PageHeader
-        onBack={() => window.history.back()}
-        title="Invoice Settings"
-        ghost={false}
-        extra={[
-          <Button key={`${uniqueId()}`} type="primary" disabled icon={<SyncOutlined />}>
-            Update
-          </Button>,
-        ]}
-        style={{
-          padding: '20px 0px',
-        }}
-      ></PageHeader>
+import GeneralSettingsModule from '@/modules/SettingModule/GeneralSettingsModule';
 
-      <Divider></Divider>
-      <Form>
-        <SetingsSection title="details" description="">
-          <Form.Item label="Last invoice number">
-            <Input placeholder="xxxxxx" />
-          </Form.Item>
-          <Form.Item label="Last quote number">
-            <Input placeholder="xxxxxx" />
-          </Form.Item>
-        </SetingsSection>
-      </Form>
-    </>
-  );
+const config = {
+  ...configPage,
+  settingsCategory: 'app_settings',
+  SETTINGS_TITLE: 'General Settings',
+};
+export default function GeneralSettings() {
+  return <GeneralSettingsModule config={config} />;
 }
