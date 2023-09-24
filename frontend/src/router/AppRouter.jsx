@@ -7,7 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
 import { useDispatch } from 'react-redux';
-import { settings } from '@/redux/settings/actions';
+import { settingsAction } from '@/redux/settings/actions';
 import { routesConfig } from './RoutesConfig';
 
 const Logout = lazy(() => import(/*webpackChunkName:'LogoutPage'*/ '@/pages/Logout'));
@@ -33,7 +33,7 @@ const SubMenuRouter = ({ subMenuRouter }) => {
 export default function AppRouter() {
   const dispatch = useDispatch();
   useLayoutEffect(() => {
-    dispatch(settings.list({ entity: 'setting' }));
+    dispatch(settingsAction.list({ entity: 'setting' }));
   }, []);
   const location = useLocation();
   return (
