@@ -6,6 +6,7 @@ const router = express.Router();
 
 const employeeController = require('@/controllers/appControllers/employeeController');
 const paymentModeController = require('@/controllers/appControllers/paymentModeController');
+const taxController = require('@/controllers/appControllers/taxController');
 const clientController = require('@/controllers/appControllers/clientController');
 const leadController = require('@/controllers/appControllers/leadController');
 const invoiceController = require('@/controllers/appControllers/invoiceController');
@@ -36,6 +37,15 @@ router.route('/paymentMode/delete/:id').delete(catchErrors(paymentModeController
 router.route('/paymentMode/search').get(catchErrors(paymentModeController.search));
 router.route('/paymentMode/list').get(catchErrors(paymentModeController.list));
 router.route('/paymentMode/filter').get(catchErrors(paymentModeController.filter));
+
+// //_____________________________________ API for taxes _______________________________
+router.route('/taxes/create').post(catchErrors(taxController.create));
+router.route('/taxes/read/:id').get(catchErrors(taxController.read));
+router.route('/taxes/update/:id').patch(catchErrors(taxController.update));
+router.route('/taxes/delete/:id').delete(catchErrors(taxController.delete));
+router.route('/taxes/search').get(catchErrors(taxController.search));
+router.route('/taxes/list').get(catchErrors(taxController.list));
+router.route('/taxes/filter').get(catchErrors(taxController.filter));
 
 // //_____________________________________ API for clients __________________________________________________
 router.route('/client/create').post(catchErrors(clientController.create));
