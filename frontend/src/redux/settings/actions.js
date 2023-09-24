@@ -33,9 +33,22 @@ export const settingsAction = {
 
       if (data.success === true) {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          payload: data.result,
+          type: actionTypes.REQUEST_LOADING,
         });
+
+        let data = await request.listAll({ entity });
+
+        if (data.success === true) {
+          const payload = dispatchSettingsData(data.result);
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            payload,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+          });
+        }
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
@@ -55,9 +68,22 @@ export const settingsAction = {
 
       if (data.success === true) {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          payload: data.result,
+          type: actionTypes.REQUEST_LOADING,
         });
+
+        let data = await request.listAll({ entity });
+
+        if (data.success === true) {
+          const payload = dispatchSettingsData(data.result);
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            payload,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+          });
+        }
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,

@@ -7,7 +7,6 @@ export default function SettingModuleLayout({ config, children }) {
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
         title={config.SETTINGS_TITLE}
         ghost={false}
         extra={[

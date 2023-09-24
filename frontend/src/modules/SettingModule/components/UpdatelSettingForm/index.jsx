@@ -65,9 +65,9 @@ export default function UpdatelSettingForm({ config, children }) {
           form={form}
           onFinish={onSubmit}
           onValuesChange={handleValuesChange}
-          labelCol={{ span: 6 }}
+          labelCol={{ span: 8 }}
           labelAlign="left"
-          wrapperCol={{ span: 18 }}
+          wrapperCol={{ span: 16 }}
         >
           {children}
           <Form.Item

@@ -1,4 +1,4 @@
 import tagColor from './tagColor';
 import languages from './languages';
-
-export { tagColor, languages };
+import currencies from './currenciesList';
+export { tagColor, languages, currencies };

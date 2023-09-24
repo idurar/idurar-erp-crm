@@ -1,5 +1,5 @@
-import SetingsSection from './components/SetingsSection';
-import SettingModuleLayout from './components/SettingModuleLayout';
+import SetingsSection from '../components/SetingsSection';
+import SettingModuleLayout from '../components/SettingModuleLayout';
 import GeneralSettingForm from './forms/GeneralSettingForm';
 
 export default function GeneralSettingsModule({ config }) {
