@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Form, Input, Select, Tag } from 'antd';
 
 import { languages, tagColor } from '@/utils';
@@ -5,14 +6,13 @@ import { languages, tagColor } from '@/utils';
 export default function GeneralSettingForm() {
   const tagRender = (props) => {
     const { label, value, closable, onClose } = props;
-
     const onPreventMouseDown = (event) => {
       event.preventDefault();
       event.stopPropagation();
     };
     return (
       <Tag
-        // color={tagColor[Number(value)]}
+        color={tagColor[Math.floor(Math.random() * 11)]}
         onMouseDown={onPreventMouseDown}
         closable={closable}
         onClose={onClose}

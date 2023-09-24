@@ -2,7 +2,6 @@ const entity = 'setting';
 
 const Labels = {
   PANEL_TITLE: 'Settings',
-  SETTINGS_TITLE: 'General Settings',
   dataTableTitle: 'Settings List',
   ADD_NEW_ENTITY: 'Add New Settings',
   DATATABLE_TITLE: 'Settings List',

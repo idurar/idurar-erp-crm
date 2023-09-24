@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+import compare from 'just-compare';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { settings } from '@/redux/settings/actions';
+import { settingsAction } from '@/redux/settings/actions';
 import { selectSettings } from '@/redux/settings/selectors';
 
 import { Button, Form } from 'antd';
@@ -14,7 +14,7 @@ export default function UpdatelSettingForm({ config, children }) {
   const { result, isLoading, isSuccess } = useSelector(selectSettings);
 
   const [form] = Form.useForm();
-
+  const [isNotChanged, setChanged] = useState(true);
   const onSubmit = (fieldsValue) => {
     const settings = [];
 
@@ -23,21 +23,38 @@ export default function UpdatelSettingForm({ config, children }) {
     }
 
     console.log('🚀 ~ file: index.jsx:20 ~ onSubmit ~ settings:', settings);
-    dispatch(settings.updateMany({ entity, jsonData: fieldsValue }));
+    dispatch(settingsAction.updateMany({ entity, jsonData: { settings } }));
   };
+  const currentSettings = result[settingsCategory];
 
+  const handleValuesChange = (fieldsValue, allValues) => {
+    // console.log('🚀 ~ file: index.jsx:29 ~ UpdatelSettingForm ~ currentSettings:', currentSettings);
+    // console.log('🚀 ~ file: index.jsx:31 ~ handleValuesChange ~ allValues:', allValues);
+    // for (const [key, value] of Object.entries(allValues)) {
+    //   const compResult = compare(allValues[key], currentSettings[key]);
+    //   console.log(
+    //     '🚀 ~ file: index.jsx:35 ~ handleValuesChange ~ currentSettings[key]:',
+    //     currentSettings[key]
+    //   );
+    //   console.log('🚀 ~ file: index.jsx:35 ~ handleValuesChange ~ allValues[key]:', allValues[key]);
+    //   if (!compResult) {
+    //     console.log('🚀 ~ file: index.jsx:35 ~ handleValuesChange ~ compResult:', compResult);
+    //     setChanged(true);
+    //     break;
+    //   } else setChanged(false);
+    // }
+    // console.log('🚀 ~ file: index.jsx:30 ~ handleValuesChange ~ isNotChanged:', isNotChanged);
+  };
   useEffect(() => {
-    console.log('🚀 ~ file: index.jsx:15 ~ UpdateForm ~ result:', result);
     const current = result[settingsCategory];
 
-    console.log('🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj', current);
     form.setFieldsValue(current);
   }, [result]);
 
   useEffect(() => {
     if (isSuccess) {
       //form.resetFields();
-      dispatch(settings.list({ entity }));
+      dispatch(settingsAction.list({ entity }));
     }
   }, [isSuccess]);
 
@@ -47,6 +64,7 @@ export default function UpdatelSettingForm({ config, children }) {
         <Form
           form={form}
           onFinish={onSubmit}
+          onValuesChange={handleValuesChange}
           labelCol={{ span: 6 }}
           labelAlign="left"
           wrapperCol={{ span: 18 }}
