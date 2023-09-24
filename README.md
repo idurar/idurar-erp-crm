@@ -59,7 +59,7 @@ cd idurar-erp-crm
 
 #### Step 3: Create the Environment File
 
-- Create a file named .variables.env in the root directory.
+- Create a file named .variables.env in the /backend directory.
 - Copy all variables from tmp.variables.env .
 - Paste the copied variables inside .variables.env.
   This file will store environment variables for the project to run.
@@ -74,7 +74,7 @@ Replace "your-mongodb-uri" with the actual URI of your MongoDB database.
 
 #### Step 5: Install Backend Dependencies
 
-In your terminal, navigate to the root directory of the project and run the following command to install the backend dependencies:
+In your terminal, navigate to the /backend directory of the project and run the following command to install the backend dependencies:
 
 ```bash
 npm install
@@ -84,7 +84,7 @@ This command will install all the required packages specified in the package.jso
 
 #### Step 6: Run Setup Script
 
-While still in the root directory of the project, execute the following command to run the setup script:
+While still in the /backend directory of the project, execute the following command to run the setup script:
 
 ```bash
 node setup/setup.js
