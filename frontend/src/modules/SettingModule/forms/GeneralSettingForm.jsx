@@ -2,7 +2,7 @@ import { Form, Input, Select, Tag } from 'antd';
 
 import { languages, tagColor } from '@/utils';
 
-export default function GeneralSettingForm({ isUpdateForm = true }) {
+export default function GeneralSettingForm() {
   const tagRender = (props) => {
     const { label, value, closable, onClose } = props;
 
@@ -56,8 +56,8 @@ export default function GeneralSettingForm({ isUpdateForm = true }) {
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
-        > 
-         {languages.map((language) => (
+        >
+          {languages.map((language) => (
             <Select.Option
               key={language.value}
               value={language.value}

@@ -31,7 +31,8 @@ export default function UpdateForm({ config, formElements }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    console.log('🚀 ~ file: index.jsx ~ line 34 ~ onSubmit ~  current._id', current._id);
+    console.log('🚀 ~ file: index.jsx:34 ~ onSubmit ~ fieldsValue:', fieldsValue);
+
     const id = current._id;
     dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
   };
