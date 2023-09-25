@@ -14,10 +14,10 @@ export const login =
 
     if (data.success === true) {
       window.localStorage.setItem('isLoggedIn', true);
-      window.localStorage.setItem('auth', JSON.stringify(data.result.admin));
+      window.localStorage.setItem('auth', JSON.stringify(data.result));
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
-        payload: data.result.admin,
+        payload: data.result,
       });
       history.push('/');
     } else {

@@ -12,6 +12,7 @@ const helpers = require('./helpers');
 const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
 const coreApiRouter = require('./routes/coreRoutes/coreApi');
 const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
+const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
 const { isValidAdminToken } = require('./controllers/coreControllers/authJwtController');
 
 const errorHandlers = require('./handlers/errorHandlers');
@@ -59,6 +60,7 @@ app.use('/api', coreAuthRouter);
 app.use('/api', isValidAdminToken, coreApiRouter);
 app.use('/api', isValidAdminToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
+app.use('/public', corePublicRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
