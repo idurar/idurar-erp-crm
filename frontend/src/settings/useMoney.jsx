@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import currency from 'currency.js';
 
+import { useSelector } from 'react-redux';
+import storePersist from '@/redux/storePersist';
+
+
 import storePersist from '@/redux/storePersist';
 
 const useMoney = () => {
-  const settingsState = storePersist.get('settings') ? storePersist.get('settings') : undefined;
+
+  const moneyFormat = useSelector(selectMoneyFormat);
+
+  const settingsState = storePersist.get('settings') ? storePersist.get('settings') : moneyFormat;
+
 
   const {
     currency_symbol,

@@ -13,7 +13,6 @@ const settingSchema = new mongoose.Schema({
   settingCategory: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
   },
   settingKey: {
