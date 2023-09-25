@@ -1,5 +1,11 @@
-const createPrivateUpload = require('./createPrivateUpload');
-const createPublicUpload = require('./createPublicUpload');
-const uploadToStorage = require('./uploadToStorage');
+const createMultipleUpload = require('./createMultipleUpload');
+const uploadMultipleToStorage = require('./uploadMultipleToStorage');
+const createSingleUpload = require('./createSingleUpload');
+const uploadSingleToStorage = require('./uploadSingleToStorage');
 
-module.exports = { uploadToStorage, createPrivateUpload, createPublicUpload };
+module.exports = {
+  uploadMultipleToStorage,
+  createMultipleUpload,
+  uploadSingleToStorage,
+  createSingleUpload,
+};

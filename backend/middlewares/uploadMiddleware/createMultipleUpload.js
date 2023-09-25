@@ -1,9 +1,10 @@
 const Upload = require('@/models/coreModels/Upload');
 
 // middleware to upload the public document
-const createPrivateUpload = async (req, res, next) => {
+const createMultipleUpload = async (req, res, next) => {
   const modelName = req.params.model;
   const fieldId = req.params.fieldId;
+  const isPublic = req.query.ispublic == true ? true : false;
   const userID = req.admin._id;
 
   if (req?.upload?.files?.length !== 0) {
@@ -18,7 +19,7 @@ const createPrivateUpload = async (req, res, next) => {
         fileName: uploadItem.fileName,
         fileType: uploadItem.fieldExt.slice(1), //removing the dot from the fileExt
         enabled: true,
-        isPublic: false,
+        isPublic: isPublic,
         userID: userID,
         isSecure: true,
         removed: false,
@@ -30,7 +31,6 @@ const createPrivateUpload = async (req, res, next) => {
 
     try {
       const upload = await Upload.insertMany(_uploadsArray);
-
       if (upload?.length !== 0) {
         next();
       } else {
@@ -44,4 +44,4 @@ const createPrivateUpload = async (req, res, next) => {
   }
 };
 
-module.exports = createPrivateUpload;
+module.exports = createMultipleUpload;
