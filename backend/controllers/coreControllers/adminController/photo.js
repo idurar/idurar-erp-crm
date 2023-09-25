@@ -3,16 +3,19 @@ const Admin = mongoose.model('Admin');
 
 const photo = async (req, res) => {
   try {
-    // Find document by id
+    console.log('🚀 ~ file: photo.js:10 ~ photo ~ req.body:', req.body);
+
     const updates = {
       photo: req.body.photo,
     };
 
     const tmpResult = await Admin.findOneAndUpdate(
       { _id: req.admin._id, removed: false },
+
       { $set: updates },
-      { new: true, runValidators: true, context: 'query' }
+      { new: true, runValidators: true }
     );
+
     // If no results found, return document not found
     if (!tmpResult) {
       return res.status(404).json({
@@ -35,15 +38,16 @@ const photo = async (req, res) => {
       return res.status(200).json({
         success: true,
         result,
-        message: 'we found this document by this id: ' + req.params.id,
+        message: 'we update this document photo by this id: ' + req.params.id,
       });
     }
-  } catch {
+  } catch (error) {
     // Server Error
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error',
+      message: 'Oops there is an Error in photo controller',
+      error,
     });
   }
 };

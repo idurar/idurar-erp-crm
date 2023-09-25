@@ -4,6 +4,7 @@ const update = require('./update');
 const remove = require('./remove');
 const updatePassword = require('./updatePassword');
 const profile = require('./profile');
+const photo = require('./photo');
 const status = require('./status');
 const search = require('./search');
 const filter = require('./filter');
@@ -14,6 +15,7 @@ const adminController = {
   create,
   read,
   update,
+  photo,
   delete: remove,
   updatePassword,
   profile,
