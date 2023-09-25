@@ -132,14 +132,15 @@ export function formatDatetime(param) {
   Regex to validate phone number format
   This regex supports following patterns of phone number
   1234567890
-  12-3456-7890
-  12.3456.7890
-  +1234567890
-  +12-3456-7890
-  +12.3456.7890
-  +12 3456 7890
+  123-456-7890
+  123.456.7890
+  +911234567890
+  +1(555) 123-4567
+  +91(555) 123-4567
+  (123) 456-7890
 */
-export const validatePhoneNumber = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+export const validatePhoneNumber =
+  /^(?:(?:\+|00)([1-9]\d{0,3}))?(\()?\d{3}(\))?[-. ]?\d{3}[-. ]?\d{4}$/;
 
 /*
  Set object value in html
