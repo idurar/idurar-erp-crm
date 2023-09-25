@@ -11,9 +11,10 @@ const settingController = require('@/controllers/coreControllers/settingControll
 const emailController = require('@/controllers/coreControllers/emailController');
 
 const {
-  createPublicUpload,
-  uploadToStorage,
-  createPrivateUpload,
+  uploadMultipleToStorage,
+  createMultipleUpload,
+  uploadSingleToStorage,
+  createSingleUpload,
 } = require('@/middlewares/uploadMiddleware');
 // //_______________________________ Admin management_______________________________
 
@@ -74,9 +75,9 @@ router.route('/email/filter').get(catchErrors(emailController.filter));
 
 // //____________________________________________ API for Upload controller _________________
 
-router.route('/public/upload/:model/:fieldId').post(
-  uploadToStorage.array('upload', 100),
-  createPublicUpload,
+router.route('/multiple/upload/:model/:fieldId').post(
+  uploadMultipleToStorage.array('upload', 100),
+  createMultipleUpload,
   // need to add proper controller
   catchErrors((req, res) => {
     if (req.upload.files) {
@@ -89,15 +90,15 @@ router.route('/public/upload/:model/:fieldId').post(
   })
 );
 
-router.route('/private/upload/:model/:fieldId').post(
-  uploadToStorage.array('upload', 100),
-  createPrivateUpload,
+router.route('/single/upload/:model/:fieldId').post(
+  uploadSingleToStorage.single('upload'),
+  createSingleUpload,
   // need to add proper controller
   catchErrors((req, res) => {
-    if (req.upload.files) {
+    if (req.upload && req.file) {
       return res.status(200).send({
         success: true,
-        result: req.upload.files,
+        result: req.upload,
         message: 'File uploaded successfully!',
       });
     }
