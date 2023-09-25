@@ -75,7 +75,16 @@ export default function ItemRow({ field, remove, offer = false, current = null }
         <Form.Item
           name={[field.name, 'itemName']}
           fieldKey={[field.fieldKey, 'itemName']}
-          rules={[{ required: true, message: 'Missing itemName name' }]}
+          rules={[
+                  {
+                    required: true,
+                    message: 'Missing itemName name',
+                  },
+                  {
+                    pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
+                    message: 'Item Name must contain alphanumeric or special characters',
+                  },
+                ]}
         >
           <Input placeholder="Item Name" />
         </Form.Item>
