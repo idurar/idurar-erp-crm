@@ -42,7 +42,6 @@ router.route('/paymentMode/filter').get(catchErrors(paymentModeController.filter
 router.route('/taxes/create').post(catchErrors(taxController.create));
 router.route('/taxes/read/:id').get(catchErrors(taxController.read));
 router.route('/taxes/update/:id').patch(catchErrors(taxController.update));
-router.route('/taxes/delete/:id').delete(catchErrors(taxController.delete));
 router.route('/taxes/search').get(catchErrors(taxController.search));
 router.route('/taxes/list').get(catchErrors(taxController.list));
 router.route('/taxes/filter').get(catchErrors(taxController.filter));
