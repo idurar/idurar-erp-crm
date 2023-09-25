@@ -1,4 +1,4 @@
-const Upload = require('@/models/erpModels/Upload');
+const Upload = require('@/models/coreModels/Upload');
 
 // cmiddleware to upload the private document
 const createSingleUpload = async (req, res, next) => {
