@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Divider,Typography , Button, PageHeader} from 'antd';
-import {
-  EditOutlined,
-  CloseCircleOutlined,
-} from '@ant-design/icons';
+
+import { Divider, Typography, Button, PageHeader } from 'antd';
+import { EditOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -15,7 +13,10 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const {Title,Paragraph} = Typography;
+
+const { Title, Paragraph } = Typography;
+
+
 
 export default function ReadItem({ config, selectedItem }) {
   const { entity, ENTITY_NAME } = config;
@@ -28,12 +29,14 @@ export default function ReadItem({ config, selectedItem }) {
   const { readPanel, updatePanel } = erpContextAction;
 
   const resetErp = {
-    emailName:'',
-    emailKey:'',
-    emailSubject:'',
-    emailBody:'',
-    emailVariables:[],
-    _id:'',
+
+    emailName: '',
+    emailKey: '',
+    emailSubject: '',
+    emailBody: '',
+    emailVariables: [],
+    _id: '',
+
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
@@ -88,15 +91,15 @@ export default function ReadItem({ config, selectedItem }) {
         style={{
           padding: '20px 0px',
         }}
-      >
-      </PageHeader>
+
+      ></PageHeader>
       <Divider dashed />
       <div>
-        
-          <Title level={3}>Subject</Title>
-          <Paragraph>{currentErp.emailSubject}</Paragraph>
-          <Title level={3}>Body</Title>
-          <div dangerouslySetInnerHTML={{__html:currentErp.emailBody}}/>
+        <Title level={3}>Subject</Title>
+        <Paragraph>{currentErp.emailSubject}</Paragraph>
+        <Title level={3}>Body</Title>
+        <div dangerouslySetInnerHTML={{ __html: currentErp.emailBody }} />
+
       </div>
     </>
   );

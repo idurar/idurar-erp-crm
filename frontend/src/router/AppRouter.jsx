@@ -1,9 +1,13 @@
-import React, { lazy, Suspense } from 'react';
+// }
+
+import React, { useLayoutEffect, lazy, Suspense } from 'react';
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
+import { useDispatch } from 'react-redux';
+import { settingsAction } from '@/redux/settings/actions';
 import { routesConfig } from './RoutesConfig';
 
 const Logout = lazy(() => import(/*webpackChunkName:'LogoutPage'*/ '@/pages/Logout'));
@@ -27,6 +31,10 @@ const SubMenuRouter = ({ subMenuRouter }) => {
 };
 
 export default function AppRouter() {
+  const dispatch = useDispatch();
+  useLayoutEffect(() => {
+    dispatch(settingsAction.list({ entity: 'setting' }));
+  }, []);
   const location = useLocation();
   return (
     <Suspense fallback={<PageLoader />}>

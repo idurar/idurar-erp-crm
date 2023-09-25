@@ -21,8 +21,6 @@ import uniqueId from '@/utils/uinqueId';
 export default function HeaderContent() {
   const dispatch = useDispatch();
   const { SubMenu } = Menu;
-  
-  
 
   const profileDropdown = (
     <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
@@ -86,7 +84,7 @@ export default function HeaderContent() {
 
       <Avatar icon={<AppstoreOutlined />} />
 
-     <Dropdown overlay={<Notifications/>} trigger={['click']} placement="bottomRight">
+      <Dropdown overlay={<Notifications />} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}
         <Avatar icon={<BellOutlined />} />
 

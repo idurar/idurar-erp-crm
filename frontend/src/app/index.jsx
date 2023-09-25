@@ -1,4 +1,3 @@
-import React, { useEffect, useLayoutEffect } from 'react';
 
 import Router from '@/router';
 
@@ -10,7 +9,7 @@ import Navigation from '@/app/Navigation';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
-import { settings } from '@/redux/settings/actions';
+
 import HeaderContent from '@/app/HeaderContent';
 // import { useNetworkState } from "react-use";
 
@@ -29,9 +28,8 @@ function App() {
   // }
   const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
-    dispatch(settings.list({ entity: 'setting' }));
-  }, []);
+
+
 
   const { isLoggedIn } = useSelector(selectAuth);
 

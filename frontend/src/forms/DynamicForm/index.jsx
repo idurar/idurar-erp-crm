@@ -1,11 +1,11 @@
-import { Input, Form, Checkbox, Select } from 'antd';
+import { Input, Form, Checkbox, Select, InputNumber } from 'antd';
 import { DatePicker } from '@/components/CustomAntd';
 // mapping of our components
 const componentMapping = {
   input: Input,
+  number: InputNumber,
   password: Input.Password,
   checkbox: Checkbox,
-  date: DatePicker,
 };
 
 function DynamicForm({ fields }) {
@@ -22,9 +22,10 @@ function FormElement({
   fieldType,
   label,
   name,
-  inputType = {},
+  isMultiSelect = false,
   selectOptions = [],
   required = false,
+  fieldProps = {},
   message = 'Field is required!',
 }) {
   // dinamically select a component from componentMapping object
@@ -32,10 +33,10 @@ function FormElement({
   const Component = componentMapping[fieldType];
 
   return (
-    <Form.Item label={label} name={name} rules={[{ required, message }, inputType]}>
+    <Form.Item label={label} name={name} rules={[{ required, message }]}>
       if (fieldType === "select")
       {
-        <Select>
+        <Select {...fieldProps}>
           {selectOptions.map((optionField) => (
             <Option key={optionField.key} value={optionField.key}>
               {optionField.value}
@@ -43,8 +44,8 @@ function FormElement({
           ))}
         </Select>
       }
-      else if(fieldType === "date"){<DatePicker format={'DD/MM/YYYY'} />}
-      else {<Component />}
+      else if(fieldType === "date"){<DatePicker format={'DD/MM/YYYY'} {...fieldProps} />}
+      else {<Component {...fieldProps} />}
     </Form.Item>
   );
 }
