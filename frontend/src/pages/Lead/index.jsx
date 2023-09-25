@@ -54,7 +54,9 @@ export default function Lead() {
       title: 'Created At',
       dataIndex: 'created',
       render: (date) => dayjs(date).format('DD/MM/YYYY'),
+
     },
+
   ];
 
   const config = {

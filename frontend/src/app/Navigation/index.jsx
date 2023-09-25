@@ -35,7 +35,9 @@ const SIDEBAR_MENU = [
 
 const SETTINGS_SUBMENU = [
   { key: '/settings', title: 'General Settings' },
+
   { key: '/email', title: 'Email templates' },
+
   { key: '/payment/mode', title: 'Payment Mode' },
   { key: '/settings/advanced', title: 'Advanced Settings' },
 ];

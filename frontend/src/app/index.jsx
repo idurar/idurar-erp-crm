@@ -1,3 +1,4 @@
+
 import Router from '@/router';
 
 import useNetwork from '@/hooks/useNetwork';
@@ -6,7 +7,7 @@ import { Layout, notification } from 'antd';
 
 import Navigation from '@/app/Navigation';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
 
 import HeaderContent from '@/app/HeaderContent';
@@ -25,6 +26,9 @@ function App() {
   //     description: "Cannot connect to the server, Check your internet network",
   //   });
   // }
+  const dispatch = useDispatch();
+
+
 
 
   const { isLoggedIn } = useSelector(selectAuth);

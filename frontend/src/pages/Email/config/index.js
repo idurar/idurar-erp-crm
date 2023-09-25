@@ -7,7 +7,9 @@ const Labels = {
   ENTITY_NAME: 'Email',
   CREATE_ENTITY: 'Save Email Template',
   UPDATE_ENTITY: 'Update Email Template',
+
   create: false,
+
 };
 
 const configPage = {
