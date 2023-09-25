@@ -12,10 +12,6 @@ export default function Invoice() {
     searchFields: 'name,surname,birthday',
   };
   const entityDisplayLabels = ['number', 'client.company'];
-
-  setTimeout(() => {
-    console.log('setTimeout1000');
-  }, 1000);
   const dataTableColumns = [
     {
       title: 'Number',
