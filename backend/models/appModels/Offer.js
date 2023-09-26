@@ -18,9 +18,9 @@ const offerSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  client: {
+  lead: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Client',
+    ref: 'Lead',
     required: true,
     autopopulate: true,
   },
@@ -38,10 +38,6 @@ const offerSchema = new mongoose.Schema({
         required: true,
       },
       price: {
-        type: Number,
-        required: true,
-      },
-      offerPrice: {
         type: Number,
         required: true,
       },
@@ -65,13 +61,6 @@ const offerSchema = new mongoose.Schema({
   },
   total: {
     type: Number,
-  },
-  offerTotal: {
-    type: Number,
-  },
-  credit: {
-    type: Number,
-    default: 0,
   },
   discount: {
     type: Number,
