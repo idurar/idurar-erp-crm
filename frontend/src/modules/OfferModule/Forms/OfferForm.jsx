@@ -14,9 +14,8 @@ import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
 
-export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null }) {
+export default function OfferForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
-  const [totalOffer, setTotalOffer] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
@@ -31,18 +30,11 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
       setCurrentYear(year);
     }
   }, [current]);
-
   useEffect(() => {
     const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
     setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)).toFixed(2));
     setTotal(Number.parseFloat(currentTotal).toFixed(2));
   }, [subTotal, taxRate]);
-
-  useEffect(() => {
-    const currentTotal = calculate.add(calculate.multiply(offerTotal, taxRate), offerTotal);
-    setTaxTotal(Number.parseFloat(calculate.multiply(offerTotal, taxRate)).toFixed(2));
-    setTotalOffer(Number.parseFloat(currentTotal).toFixed(2));
-  }, [offerTotal, taxRate]);
 
   const addField = useRef(false);
 
@@ -55,8 +47,8 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
       <Row gutter={[12, 0]}>
         <Col className="gutter-row" span={9}>
           <Form.Item
-            name="client"
-            label="Client"
+            name="lead"
+            label="Lead"
             rules={[
               {
                 required: true,
@@ -65,9 +57,9 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
             ]}
           >
             <AutoCompleteAsync
-              entity={'client'}
+              entity={'lead'}
               displayLabels={['company']}
-              searchFields={'company,managerSurname,managerName'}
+              searchFields={'company'}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
@@ -80,7 +72,7 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
             rules={[
               {
                 required: true,
-                message: 'Please input offer number!',
+                message: 'Please input quote number!',
               },
             ]}
           >
@@ -95,7 +87,7 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
             rules={[
               {
                 required: true,
-                message: 'Please input offer year!',
+                message: 'Please input quote year!',
               },
             ]}
           >
@@ -109,7 +101,7 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
             rules={[
               {
                 required: false,
-                message: 'Please input offer status!',
+                message: 'Please input quote status!',
               },
             ]}
             initialValue={'draft'}
@@ -162,10 +154,10 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
       </Row>
       <Divider dashed />
       <Row gutter={[12, 12]} style={{ position: 'relative' }}>
-        <Col className="gutter-row" span={3}>
+        <Col className="gutter-row" span={5}>
           <p>Item</p>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={7}>
           <p>Description</p>
         </Col>
         <Col className="gutter-row" span={3}>
@@ -174,25 +166,15 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
         <Col className="gutter-row" span={4}>
           <p>Price</p>
         </Col>
-        <Col className="gutter-row" span={4}>
-          <p>Offer Price</p>
-        </Col>
         <Col className="gutter-row" span={5}>
-          <p>Offer Total</p>
+          <p>Total</p>
         </Col>
       </Row>
-
       <Form.List name="items">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field) => (
-              <ItemRow
-                key={field.key}
-                remove={remove}
-                field={field}
-                current={current}
-                offer
-              ></ItemRow>
+              <ItemRow key={field.key} remove={remove} field={field} current={current}></ItemRow>
             ))}
             <Form.Item>
               <Button
@@ -214,7 +196,7 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Offer
+                Save Quote
               </Button>
             </Form.Item>
           </Col>
@@ -232,23 +214,6 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
             <MoneyInputFormItem readOnly value={subTotal} />
           </Col>
         </Row>
-
-        <Row gutter={[12, -5]}>
-          <Col className="gutter-row" span={4} offset={15}>
-            <p
-              style={{
-                paddingLeft: '12px',
-                paddingTop: '5px',
-              }}
-            >
-              Offer Sub Total :
-            </p>
-          </Col>
-          <Col className="gutter-row" span={5}>
-            <MoneyInputFormItem readOnly value={offerTotal} />
-          </Col>
-        </Row>
-
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={4} offset={15}>
             <Form.Item
@@ -276,7 +241,6 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
             <MoneyInputFormItem readOnly value={taxTotal} />
           </Col>
         </Row>
-
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={4} offset={15}>
             <p
@@ -290,22 +254,6 @@ export default function OfferForm({ subTotal = 0, offerTotal = 0, current = null
           </Col>
           <Col className="gutter-row" span={5}>
             <MoneyInputFormItem readOnly value={total} />
-          </Col>
-        </Row>
-
-        <Row gutter={[12, -5]}>
-          <Col className="gutter-row" span={4} offset={15}>
-            <p
-              style={{
-                paddingLeft: '12px',
-                paddingTop: '5px',
-              }}
-            >
-              Total Offer :
-            </p>
-          </Col>
-          <Col className="gutter-row" span={5}>
-            <MoneyInputFormItem readOnly value={totalOffer} />
           </Col>
         </Row>
       </div>

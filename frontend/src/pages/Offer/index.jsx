@@ -12,15 +12,15 @@ export default function Offer() {
     displayLabels: ['company'],
     searchFields: 'company',
   };
-  const entityDisplayLabels = ['number', 'client.company'];
+  const entityDisplayLabels = ['number', 'lead.company'];
   const dataTableColumns = [
     {
       title: 'Number',
       dataIndex: 'number',
     },
     {
-      title: 'Client',
-      dataIndex: ['client', 'company'],
+      title: 'Company Name',
+      dataIndex: ['lead', 'company'],
     },
     {
       title: 'Date',

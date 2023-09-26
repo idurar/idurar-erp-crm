@@ -1,6 +1,6 @@
 import { Button, Result } from 'antd';
 import { ErpLayout } from '@/layout';
-import ReadItem from '@/modules/ErpPanelModule/ReadItem';
+import ReadOfferItem from './ReadOfferItem';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
@@ -30,7 +30,7 @@ export default function ReadOfferModule({ config }) {
     return (
       <ErpLayout>
         {isSuccess ? (
-          <ReadItem config={config} selectedItem={currentResult} />
+          <ReadOfferItem config={config} selectedItem={currentResult} />
         ) : (
           <Result
             status="404"

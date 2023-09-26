@@ -5,11 +5,10 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { useMoney } from '@/settings';
 import calculate from '@/utils/calculate';
 
-export default function ItemRow({ field, remove, offer = false, current = null }) {
+export default function ItemRow({ field, remove, current = null }) {
   const [totalState, setTotal] = useState(undefined);
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [offerPrice, setOfferPrice] = useState(0);
 
   const money = useMoney();
   const updateQt = (value) => {
@@ -17,9 +16,6 @@ export default function ItemRow({ field, remove, offer = false, current = null }
   };
   const updatePrice = (value) => {
     setPrice(value);
-  };
-  const updateOffer = (value) => {
-    setOfferPrice(value);
   };
 
   useEffect(() => {
@@ -37,10 +33,6 @@ export default function ItemRow({ field, remove, offer = false, current = null }
         if (item) {
           setQuantity(item.quantity);
           setPrice(item.price);
-
-          if (offer) {
-            setOfferPrice(item.offerPrice);
-          }
         }
       } else {
         const item = items[field.fieldKey];
@@ -48,39 +40,38 @@ export default function ItemRow({ field, remove, offer = false, current = null }
         if (item) {
           setQuantity(item.quantity);
           setPrice(item.price);
-
-          if (offer) {
-            setOfferPrice(item.offerPrice);
-          }
         }
       }
     }
   }, [current]);
 
   useEffect(() => {
-    if (offer) {
-      const currentOfferTotal = calculate.multiply(offerPrice, quantity);
-      setTotal(currentOfferTotal.toFixed(2));
-      return;
-    }
-
     const currentTotal = calculate.multiply(price, quantity);
 
     setTotal(currentTotal.toFixed(2));
-  }, [price, offerPrice, quantity]);
+  }, [price, quantity]);
 
   return (
     <Row gutter={[12, 12]} style={{ position: 'relative' }}>
-      <Col className="gutter-row" span={offer ? 3 : 5}>
+      <Col className="gutter-row" span={5}>
         <Form.Item
           name={[field.name, 'itemName']}
           fieldKey={[field.fieldKey, 'itemName']}
-          rules={[{ required: true, message: 'Missing itemName name' }]}
+          rules={[
+            {
+              required: true,
+              message: 'Missing itemName name',
+            },
+            {
+              pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
+              message: 'Item Name must contain alphanumeric or special characters',
+            },
+          ]}
         >
           <Input placeholder="Item Name" />
         </Form.Item>
       </Col>
-      <Col className="gutter-row" span={offer ? 5 : 7}>
+      <Col className="gutter-row" span={7}>
         <Form.Item name={[field.name, 'description']} fieldKey={[field.fieldKey, 'description']}>
           <Input placeholder="description Name" />
         </Form.Item>
@@ -110,24 +101,6 @@ export default function ItemRow({ field, remove, offer = false, current = null }
           />
         </Form.Item>
       </Col>
-      {offer && (
-        <Col className="gutter-row" span={4}>
-          <Form.Item
-            name={[field.name, 'offerPrice']}
-            fieldKey={[field.fieldKey, 'offerPrice']}
-            rules={[{ required: true, message: 'Missing item offer price' }]}
-          >
-            <InputNumber
-              className="moneyInput"
-              onChange={updateOffer}
-              min={0}
-              controls={false}
-              addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
-              addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
-            />
-          </Form.Item>
-        </Col>
-      )}
       <Col className="gutter-row" span={5}>
         <Form.Item name={[field.name, 'total']}>
           <Form.Item>
