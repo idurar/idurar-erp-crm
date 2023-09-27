@@ -44,19 +44,20 @@ methods.update = async (req, res) => {
         const { isDefault = tax.isDefault, enabled = tax.enabled, ...rest } = req.body;
 
         // if isDefault:false , we update first - isDefault:true
-        // if isEnabled:false and isDefault:true , we update first - isDefault:true
+        // if enabled:false and isDefault:true , we update first - isDefault:true
         if (!isDefault || !enabled && isDefault) {
             await Model.findOneAndUpdate({ _id: { $ne: id }, enabled: true }, { isDefault: true });
         }
 
-        // if isDefault:true and isEnable:true, we update other taxes and make is isDefault:false
+        console.log({ isDefault, enabled });
+        // if isDefault:true and enabled:true, we update other taxes and make is isDefault:false
         if (isDefault && enabled) {
-            await Model.updateMany({}, { isDefault: false });
+            await Model.updateMany({ _id: { $ne: id } }, { isDefault: false });
         }
 
         const taxesCount = await Model.estimatedDocumentCount();
 
-        // if isEnabled:false and it's only one exist, we can't disable
+        // if enabled:false and it's only one exist, we can't disable
         if (!enabled && taxesCount <= 1) {
             return res.status(422).json({
                 success: false,
@@ -68,7 +69,7 @@ methods.update = async (req, res) => {
         const result = await Model
             .findOneAndUpdate(
                 { '_id': id },
-                { isDefault, enabled, ...rest },
+                req.body,
                 { new: true });
 
         return res.status(200).json({
