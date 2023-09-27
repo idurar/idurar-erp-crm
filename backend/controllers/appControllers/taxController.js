@@ -7,7 +7,7 @@ delete methods['delete'];
 
 methods.create = async (req, res) => {
     try {
-        const { isDefault, ...rest } = req.body;
+        const { isDefault } = req.body;
 
         if (isDefault) {
             await Model.updateMany({}, { isDefault: false });
@@ -41,7 +41,7 @@ methods.update = async (req, res) => {
     try {
         const { id } = req.params;
         const tax = await Model.findById(id);
-        const { isDefault = tax.isDefault, enabled = tax.enabled, ...rest } = req.body;
+        const { isDefault = tax.isDefault, enabled = tax.enabled } = req.body;
 
         // if isDefault:false , we update first - isDefault:true
         // if enabled:false and isDefault:true , we update first - isDefault:true
