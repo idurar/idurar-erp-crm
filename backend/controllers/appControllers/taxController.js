@@ -40,7 +40,8 @@ methods.create = async (req, res) => {
 methods.update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { isDefault, enabled, ...rest } = req.body;
+        const tax = await Model.findById(id);
+        const { isDefault = tax.isDefault, enabled = tax.enabled, ...rest } = req.body;
 
         // if isDefault:false , we update first - isDefault:true
         // if isEnabled:false and isDefault:true , we update first - isDefault:true
