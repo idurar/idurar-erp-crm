@@ -12,7 +12,7 @@ methods.create = async (req, res) => {
         if (isDefault) {
             await Model.updateMany({}, { isDefault: false });
         }
-        const result = await new Model({ isDefault, ...rest }).save();
+        const result = await new Model(req.body).save();
         return res.status(200).json({
             success: true,
             result: result,
@@ -45,7 +45,7 @@ methods.update = async (req, res) => {
         // if isDefault:false , we update first - isDefault:true
         // if isEnabled:false and isDefault:true , we update first - isDefault:true
         if (!isDefault || !enabled && isDefault) {
-            await Model.findOneAndUpdate({ _id: { $ne: id } }, { isDefault: true });
+            await Model.findOneAndUpdate({ _id: { $ne: id }, enabled: true }, { isDefault: true });
         }
 
         // if isDefault:true and isEnable:true, we update other taxes and make is isDefault:false
