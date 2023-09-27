@@ -49,7 +49,6 @@ methods.update = async (req, res) => {
             await Model.findOneAndUpdate({ _id: { $ne: id }, enabled: true }, { isDefault: true });
         }
 
-        console.log({ isDefault, enabled });
         // if isDefault:true and enabled:true, we update other taxes and make is isDefault:false
         if (isDefault && enabled) {
             await Model.updateMany({ _id: { $ne: id } }, { isDefault: false });
