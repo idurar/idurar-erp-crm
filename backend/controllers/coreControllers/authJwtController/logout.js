@@ -9,7 +9,10 @@ const logout = async (req, res) => {
     const token = req.cookies.token;
     const result = await Admin.findOneAndUpdate(
       { _id: req.admin._id },
-      { $pull: { loggedSessions: token } },
+      { 
+        $pull: { loggedSessions: token } ,
+        $set: { isLoggedIn: 0} 
+      },
       {
         new: true,
       }
