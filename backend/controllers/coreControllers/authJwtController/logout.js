@@ -28,7 +28,7 @@ const logout = async (req, res) => {
         Path: '/',
       })
       .json({ isLoggedOut: true });
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ success: false, result: null, message: err.message, error: err });
   }
 };
