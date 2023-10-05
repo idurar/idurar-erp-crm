@@ -19,6 +19,10 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
+[![promocode-idurar50](https://github.com/idurar/idurar-erp-crm/assets/136928179/28dd11be-93e2-458c-9f59-1989d746989e)](https://www.eventbrite.com/e/reactjs-online-bootcamp-tickets-731415913687)
+
+
+
 ## Our Sponsors
 
   <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
