@@ -19,6 +19,14 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
+<div align="center">
+    <a href="https://www.upwork.com/workwith/lalamisdn">
+  <img src="https://idurarapp.com/freelace-full-stack-nodejs-react-ux-designer.jpg" width="100%" />
+    </a>
+</div>
+
+
+
 ## Our Sponsors
 
   <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
