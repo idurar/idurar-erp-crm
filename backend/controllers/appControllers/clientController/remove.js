@@ -28,14 +28,7 @@ const remove = async (req, res) => {
     }
 
     // if no invoice or quote, delete the client
-    const result = await Model.findOneAndUpdate(
-      { _id: id, removed: false },
-      {
-        $set: {
-          removed: true,
-        },
-      }
-    ).exec();
+    const result = await Model.findByIdAndDelete(id).exec();
     if (!result) {
       return res.status(404).json({
         success: false,
