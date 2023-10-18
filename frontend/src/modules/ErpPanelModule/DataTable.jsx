@@ -8,15 +8,79 @@ import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
-
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
+import axios from 'axios';
+
 function AddNewItem({ config }) {
   const history = useHistory();
   const { ADD_NEW_ENTITY, entity } = config;
   const { erpContextAction } = useErpContext();
   const { createPanel } = erpContextAction;
+  const dispatch = useDispatch();
+
   const handelClick = () => {
+    // set this code in its own hook
+    async function fetchDataForAllPages() {
+      const results = [];
+
+      const firstPageResponse = await axios.get('/invoice/list');
+      const firstPageData = firstPageResponse.data;
+
+      if (firstPageData.success) {
+        results.push(...firstPageData.result);
+
+        const totalPages = firstPageData.pagination.pages;
+
+        for (let page = 2; page <= totalPages; page++) {
+          try {
+            const nextPageResponse = await axios.get(`/invoice/list?page=${page}`);
+            const nextPageData = nextPageResponse.data;
+
+            if (nextPageData.success) {
+              results.push(...nextPageData.result);
+            } else {
+              console.error(`Error fetching data for page ${page}`);
+            }
+          } catch (error) {
+            console.error(`Error fetching data for page ${page}:`, error);
+          }
+        }
+      } else {
+        console.error('Error fetching data for the first page');
+      }
+      return results;
+    }
+
+    fetchDataForAllPages()
+      .then((results) => {
+        results.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateB - dateA;
+        });
+
+        const formattedInvoicesArray = results.map((invoice, index) => {
+          let formattedNumber;
+          if (index < 100) {
+            formattedNumber = (invoice.number + 1).toString().padStart(3, '0');
+            return formattedNumber;
+          }
+          if (index < 1000) {
+            formattedNumber = (invoice.number + 1).toString().padStart(2, '0');
+            return formattedNumber;
+          } else {
+            formattedNumber = (invoice.number + 1).toString();
+            return formattedNumber;
+          }
+        });
+
+        const formattedInvoices = formattedInvoicesArray[0];
+        dispatch(erp.invoiceFollowNum({ date: formattedInvoices }));
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     // createPanel.open();
     history.push(`/${entity.toLowerCase()}/create`);
   };

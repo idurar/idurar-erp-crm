@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Divider } from 'antd';
-
 import { Button, PageHeader, Tag } from 'antd';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectCreatedItem } from '@/redux/erp/selectors';
-
+import { selectCreatedItem, selectInvoiceFollowNumItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import calculate from '@/utils/calculate';
 import uniqueId from '@/utils/uinqueId';
-
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
@@ -38,6 +34,9 @@ export default function CreateItem({ config, CreateForm }) {
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const [offerSubTotal, setOfferSubTotal] = useState(0);
+  const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
+  const invoiceDate = invoiceData?.date;
+
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
@@ -76,6 +75,12 @@ export default function CreateItem({ config, CreateForm }) {
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
+    fieldsValue['number'] = invoiceDate == undefined ? `${year + month}001` : invoiceDate;
+
     if (fieldsValue) {
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
