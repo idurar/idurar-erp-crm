@@ -75,7 +75,10 @@ export default function CreateItem({ config, CreateForm }) {
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
-    fieldsValue['number'] = invoiceDate == undefined ? `/1001` : invoiceDate;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    fieldsValue['number'] = invoiceDate == undefined ? `${year + month}/1001` : invoiceDate;
 
     if (fieldsValue) {
       if (fieldsValue.items) {

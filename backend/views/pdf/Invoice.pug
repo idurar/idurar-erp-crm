@@ -306,6 +306,8 @@ html
               tr
                 td.service #{item.itemName}
                   span #{item.description}
+                  br
+                  span Note: #{model.note}
                 td.qty #{item.quantity}  
                 td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                 td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}

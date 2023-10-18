@@ -21,6 +21,7 @@ function AddNewItem({ config }) {
 
   const handelClick = () => {
     //TODO: set this code in its own hook
+    //TODO: replace axios with request from request.js
     async function fetchDataForAllPages() {
       const results = [];
 
