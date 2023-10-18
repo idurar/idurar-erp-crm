@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
-
 import { PlusOutlined } from '@ant-design/icons';
-
 import { DatePicker } from '@/components/CustomAntd';
-
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
-
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
-
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
-
 import calculate from '@/utils/calculate';
+import { taxRateList } from '@/utils/taxRateList';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
@@ -228,11 +223,9 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
               <Select
                 value={taxRate}
                 onChange={handelTaxChange}
-                bordered={false}
-                options={[
-                  { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
-                ]}
+                bordered={true}
+                options={taxRateList}
+                placeholder="Add tax rate"
               ></Select>
             </Form.Item>
           </Col>

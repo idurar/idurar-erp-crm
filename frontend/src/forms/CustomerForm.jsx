@@ -93,6 +93,22 @@ export default function CustomerForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
+        name="address"
+        label="Address"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your address!',
+          },
+          {
+            validator: validateEmptyString,
+            message: 'Please input valid value!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
         name="email"
         label="E-mail"
         rules={[
