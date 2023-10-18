@@ -18,7 +18,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
 
-  const invoiceDate = invoiceData?.date;
+  const invoiceNumber = invoiceData?.date;
 
   const handelTaxChange = (value) => {
     setTaxRate(value);
@@ -86,7 +86,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 borderRadius: '5px',
               }}
             >
-              {invoiceDate}
+              {invoiceNumber}
             </p>
           </Form.Item>
         </Col>
