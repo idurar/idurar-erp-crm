@@ -21,9 +21,11 @@ exports.generatePdf = async (
     fs.unlinkSync(targetLocation);
   }
 
+  //TODO: make the url and tekst come from the database
   const dynamicLogoSrc =
     'https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png';
   const dynamicTextSrc = 'lorem ipsum dorem narum';
+
   try {
     //Searche for client info in database
     const clientInfo = await ClientModel.findById(result.client).exec();
@@ -41,6 +43,7 @@ exports.generatePdf = async (
       address: clientInfo.address,
     };
 
+    //TODO: look at why there is client info now in the object. and before there was not
     const newResultObj = { ...result._doc, client: clientInfoObj };
 
     const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
