@@ -63,6 +63,7 @@ export default function CreateItem({ config, CreateForm }) {
   };
 
   useEffect(() => {
+    console.log('on refresh of invoice we need to do a invoice number call');
     if (isSuccess) {
       form.resetFields();
       dispatch(erp.resetAction({ actionType: 'create' }));
@@ -78,6 +79,7 @@ export default function CreateItem({ config, CreateForm }) {
     const date = new Date();
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
     fieldsValue['number'] = invoiceDate == undefined ? `${year + month}/1001` : invoiceDate;
 
     if (fieldsValue) {

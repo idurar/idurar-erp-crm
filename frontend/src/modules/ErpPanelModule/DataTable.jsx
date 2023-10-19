@@ -61,12 +61,15 @@ function AddNewItem({ config }) {
           return dateB - dateA;
         });
 
-        const formattedInvoicesArray = results.map((invoice, index) => {
+        const formattedInvoicesArray = results.map((invoice, i) => {
           const date = new Date();
           const year = date.getFullYear();
           const month = (date.getMonth() + 1).toString().padStart(2, '0');
           const dateNum = invoice.number.split('/');
           const num = dateNum[1];
+
+          console.log(num);
+          const index = 101;
 
           let formattedNumber;
           if (index < 100) {
