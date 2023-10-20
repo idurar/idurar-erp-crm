@@ -17,7 +17,7 @@ const supplierOrderController = require('@/controllers/appControllers/supplierOr
 const expenseController = require('@/controllers/appControllers/expenseController');
 const expenseCategoryController = require('@/controllers/appControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
-
+const orderController = require('@/controllers/appControllers/orderController');
 const offerController = require('@/controllers/appControllers/offerController');
 
 // //_________________________________ API for employees_____________________
@@ -164,5 +164,15 @@ router.route('/offer/list').get(catchErrors(offerController.list));
 router.route('/offer/filter').get(catchErrors(offerController.filter));
 router.route('/offer/pdf/:id').get(catchErrors(offerController.generatePDF));
 router.route('/offer/summary').get(catchErrors(offerController.summary));
+
+// //_________________________________________________________________API for Order________________
+
+router.route('/order/create').post(catchErrors(orderController.create));
+router.route('/order/read/:id').get(catchErrors(orderController.read));
+router.route('/order/update/:id').patch(catchErrors(orderController.update));
+router.route('/order/delete/:id').delete(catchErrors(orderController.delete));
+router.route('/order/search').get(catchErrors(orderController.search));
+router.route('/order/list').get(catchErrors(orderController.list));
+router.route('/order/filter').get(catchErrors(orderController.filter));
 
 module.exports = router;

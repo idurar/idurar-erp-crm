@@ -41,6 +41,10 @@ export const routesConfig = [
     component: 'Customer',
   },
   {
+    path: '/order',
+    component: 'Order',
+  },
+  {
     path: '/invoice',
     component: 'Invoice/index',
   },

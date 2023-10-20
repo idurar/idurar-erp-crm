@@ -10,6 +10,7 @@ import history from '@/utils/history';
 import {
   SettingOutlined,
   CustomerServiceOutlined,
+  ShopOutlined,
   FileTextOutlined,
   FileSyncOutlined,
   DashboardOutlined,
@@ -26,6 +27,7 @@ const SIDEBAR_MENU = [
   { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
   { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
   { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
+  { key: '/order', icon: <ShopOutlined />, title: 'Order' },
   { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
   { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
   { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
