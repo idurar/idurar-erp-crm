@@ -1,7 +1,7 @@
 import * as actionTypes from './types';
 
 const INITIAL_PROFILE_STATE = {
-  default_profile: {
+  informations: {
     _id: 'defaultProfile',
     isAdmin: true,
     name: 'default profile',
@@ -10,7 +10,7 @@ const INITIAL_PROFILE_STATE = {
     role: 'default profile',
     photo: '<PHOTO>',
   },
-  default_profile_settings: {},
+  settings: {},
 };
 
 const INITIAL_STATE = {
@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   isSuccess: false,
 };
 
-const settingsReducer = (state = INITIAL_STATE, action) => {
+const profileReducer = (state = INITIAL_STATE, action) => {
   const { payload = null } = action;
   switch (action.type) {
     case actionTypes.RESET_STATE:
@@ -35,7 +35,6 @@ const settingsReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
         isSuccess: false,
       };
-
     case actionTypes.REQUEST_SUCCESS:
       return {
         result: payload,
@@ -47,4 +46,4 @@ const settingsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default settingsReducer;
+export default profileReducer;
