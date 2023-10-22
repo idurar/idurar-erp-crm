@@ -334,7 +334,7 @@ router
   .post(
     hasPermission('create'),
     kycFileUpload.single('file'),
-    setFilePathToBody,
+    setFilePathToBody('filePath'),
     catchErrors(kycController.create)
   );
 router
@@ -342,7 +342,7 @@ router
   .patch(
     hasPermission('update'),
     kycFileUpload.single('file'),
-    setFilePathToBody,
+    setFilePathToBody('filePath'),
     catchErrors(kycController.update)
   );
 

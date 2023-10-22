@@ -37,7 +37,10 @@ const profileReducer = (state = INITIAL_STATE, action) => {
       };
     case actionTypes.REQUEST_SUCCESS:
       return {
-        result: payload,
+        result: {
+          ...state.result,
+          informations: payload,
+        },
         isLoading: false,
         isSuccess: true,
       };

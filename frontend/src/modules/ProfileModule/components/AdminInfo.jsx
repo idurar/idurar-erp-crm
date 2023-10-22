@@ -1,6 +1,6 @@
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
-import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
+import { EditOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, PageHeader, Row, Space, Tag } from 'antd';
 import { useSelector } from 'react-redux';
 import photo from '@/style/images/photo.png';
@@ -14,7 +14,12 @@ const AdminInfo = ({ config }) => {
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
   const currentAdmin = useSelector(selectAuth);
-  const { result } = useSelector(selectCurrentItem);
+
+  const srcImgProfile = currentAdmin?.photo ? (
+    BASE_URL + currentAdmin?.photo
+  ) : (
+    <UserOutlined style={{ color: '#333', fontSize: 'inherit' }} />
+  );
 
   return (
     <>
@@ -51,7 +56,7 @@ const AdminInfo = ({ config }) => {
         <Col xs={{ span: 24 }} sm={{ span: 7 }} md={{ span: 5 }}>
           <img
             className="last left circle pad5"
-            src={`${BASE_URL}${currentAdmin?.photo}`}
+            src={srcImgProfile}
             style={{
               width: '100px',
               height: '100px',
@@ -69,7 +74,7 @@ const AdminInfo = ({ config }) => {
                   textTransform: 'capitalize',
                 }}
               >
-                {result?.name}
+                {currentAdmin?.name}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Surname" span="3">
@@ -79,7 +84,7 @@ const AdminInfo = ({ config }) => {
                   textTransform: 'capitalize',
                 }}
               >
-                {result?.surname}
+                {currentAdmin?.surname}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Email" span="3" style={{ paddingTop: '20px' }}>
@@ -88,7 +93,7 @@ const AdminInfo = ({ config }) => {
                   color: '#22075e',
                 }}
               >
-                {result?.email}
+                {currentAdmin?.email}
               </h3>
             </Descriptions.Item>
             <Descriptions.Item label="Role" span="3">
@@ -98,7 +103,7 @@ const AdminInfo = ({ config }) => {
                   textTransform: 'capitalize',
                 }}
               >
-                {result?.role}
+                {currentAdmin?.role}
               </h3>
             </Descriptions.Item>
           </Descriptions>

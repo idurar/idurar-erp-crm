@@ -19,8 +19,7 @@ export default function Profile({ config }) {
   const { id } = useSelector(selectAuth);
   // using the crud redux to fetch and update the admin
   const entity = 'admin';
-  const dispatch = useDispatch();
-  dispatch(crud.read({ entity, id }));
+
   config = { ...config, id };
 
   return (

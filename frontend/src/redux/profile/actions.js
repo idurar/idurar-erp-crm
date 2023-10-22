@@ -9,40 +9,11 @@ export const profileAction = {
   },
   currentProfile:
     ({ data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
-        type: actionTypes.CURRENT_ITEM,
+        type: actionTypes.REQUEST_SUCCESS,
         payload: data,
       });
-    },
-  read:
-    ({ entity, id }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'read',
-        payload: null,
-      });
-
-      let data = await request.read({ entity, id });
-
-      if (data.success === true) {
-        dispatch({
-          type: actionTypes.CURRENT_ITEM,
-          payload: data.result,
-        });
-        dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'read',
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
-          keyState: 'read',
-          payload: null,
-        });
-      }
     },
   update:
     ({ entity, id, jsonData }) =>
@@ -52,15 +23,11 @@ export const profileAction = {
         payload: null,
       });
 
-      let data = await request.update({ entity, id, jsonData });
+      let data = await request.updateAndUpload({ entity, id, jsonData });
 
       if (data.success === true) {
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          payload: data.result,
-        });
-        dispatch({
-          type: actionTypes.CURRENT_ITEM,
           payload: data.result,
         });
       } else {

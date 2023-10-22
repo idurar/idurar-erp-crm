@@ -7,7 +7,7 @@ import Notifications from '@/components/Notification';
 import {
   AppstoreOutlined,
   SettingOutlined,
-  MailOutlined,
+  UserOutlined,
   LogoutOutlined,
   BellOutlined,
   DeleteOutlined,
@@ -26,14 +26,20 @@ export default function HeaderContent() {
 
   const { SubMenu } = Menu;
 
+  const srcImgProfile = currentAdmin?.photo ? (
+    BASE_URL + currentAdmin?.photo
+  ) : (
+    <UserOutlined style={{ color: '#333', fontSize: 'inherit' }} />
+  );
+
   const profileDropdown = (
     <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
       <div className="pad15" onClick={() => history.push('/profile')} style={{ cursor: 'pointer' }}>
         <Avatar
           size="large"
           className="last"
-          src={`${BASE_URL}${currentAdmin?.photo}`}
-          style={{ float: 'left' }}
+          src={srcImgProfile}
+          style={{ float: 'left', fontSize: '32px' }}
         />
         <div className="info">
           <p className="strong">
@@ -80,7 +86,7 @@ export default function HeaderContent() {
     <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
       <Dropdown overlay={profileDropdown} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}
-        <Avatar className="last" src={`${BASE_URL}${currentAdmin?.photo}`} />
+        <Avatar className="last" src={srcImgProfile} />
         {/* </Badge> */}
       </Dropdown>
 
