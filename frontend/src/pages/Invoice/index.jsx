@@ -38,12 +38,12 @@ export default function Invoice() {
     {
       title: 'Total',
       dataIndex: 'total',
-      render: (amount) => moneyRowFormatter({ amount }),
+      render: (total) => moneyRowFormatter({ amount: total }),
     },
     {
       title: 'Balance',
       dataIndex: 'credit',
-      render: (amount) => moneyRowFormatter({ amount }),
+      render: (credit) => moneyRowFormatter({ amount: credit }),
     },
     {
       title: 'Status',
@@ -69,6 +69,11 @@ export default function Invoice() {
 
         return <Tag color={color}>{paymentStatus && paymentStatus.toUpperCase()}</Tag>;
       },
+    },
+    {
+      title: 'Created By',
+      dataIndex: ['createdBy', 'name'],
+      render: (createdBy) => (createdBy ? createdBy : 'Adminstrator'),
     },
   ];
 

@@ -6,6 +6,7 @@ const quoteSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
   converted: {
     type: Boolean,
     default: false,
