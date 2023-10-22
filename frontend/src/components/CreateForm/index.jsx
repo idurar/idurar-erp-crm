@@ -8,7 +8,7 @@ import { selectCreatedItem } from '@/redux/crud/selectors';
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
-export default function CreateForm({ config, formElements }) {
+export default function CreateForm({ config, formElements, withUpload = false }) {
   let { entity } = config;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
@@ -16,15 +16,18 @@ export default function CreateForm({ config, formElements }) {
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
-    console.log('🚀 ~ file: index.jsx ~ line 19 ~ onSubmit ~ fieldsValue', fieldsValue);
-
     // Manually trim values before submission
+
+    if (fieldsValue.file && withUpload) {
+      fieldsValue.file = fieldsValue.file[0].originFileObj;
+    }
+
     const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
       return acc;
     }, {});
 
-    dispatch(crud.create({ entity, jsonData: trimmedValues }));
+    dispatch(crud.create({ entity, jsonData: trimmedValues, withUpload }));
   };
 
   useEffect(() => {
