@@ -29,11 +29,15 @@ const adminSchema = new Schema({
     type: String,
     trim: true,
   },
-  createdAt: {
+  created: {
     type: Date,
     default: Date.now,
   },
-  role: { type: String, default: 'staff' },
+  role: {
+    type: String,
+    default: 'staff',
+    enum: ['admin', 'staffAdmin', 'staff', 'createOnly', 'readOnly'],
+  },
   isLoggedIn: { type: Number },
   loggedSessions: {
     type: [String],
