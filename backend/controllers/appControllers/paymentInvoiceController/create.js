@@ -37,7 +37,7 @@ const create = async (req, res) => {
         message: `The Max Amount you can add is ${maxAmount}`,
       });
     }
-
+    req.body['createdBy'] = req.admin._id;
     const result = await Model.create(req.body);
 
     const fileId = 'payment-invoice-report-' + result._id + '.pdf';

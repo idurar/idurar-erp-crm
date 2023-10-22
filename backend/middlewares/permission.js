@@ -1,6 +1,7 @@
 //this middleware will check if the user has permission
 
 const roles = {
+  admin: ['create', 'read', 'update', 'delete', 'download', 'upload'],
   staffAdmin: ['create', 'read', 'update', 'delete', 'download', 'upload'],
   staff: ['create', 'read', 'update', 'download', 'upload'],
   createOnly: ['create', 'read', 'download', 'upload'],
