@@ -2,7 +2,8 @@
 module.exports = (req, res, next) => {
   console.log('🚀 ~ file: setFilePathToBody.js:4 ~ req.file:', req.file);
   if (req.file) {
-    req.body.photo = req.file.path;
+    console.log('🚀 ~ file: setFilePathToBody.js:5 ~ req.file:', req.file);
+    req.body.filePath = req.file.path;
     console.log('🚀 ~ file: setFilePathToBody.js:6 ~ req.file.path:', req.file.path);
   }
   // if (req.files) {

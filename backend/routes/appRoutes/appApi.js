@@ -4,6 +4,10 @@ const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
 
+const multer = require('multer');
+const path = require('path');
+const setFilePathToBody = require('@/middlewares/setFilePathToBody');
+
 const employeeController = require('@/controllers/appControllers/employeeController');
 const paymentModeController = require('@/controllers/appControllers/paymentModeController');
 const taxController = require('@/controllers/appControllers/taxController');
@@ -19,6 +23,8 @@ const expenseCategoryController = require('@/controllers/appControllers/expenseC
 const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
 const orderController = require('@/controllers/appControllers/orderController');
 const offerController = require('@/controllers/appControllers/offerController');
+
+const kycController = require('@/controllers/appControllers/kycController');
 
 // //_________________________________ API for employees_____________________
 router.route('/employee/create').post(catchErrors(employeeController.create));
@@ -174,5 +180,32 @@ router.route('/order/delete/:id').delete(catchErrors(orderController.delete));
 router.route('/order/search').get(catchErrors(orderController.search));
 router.route('/order/list').get(catchErrors(orderController.list));
 router.route('/order/filter').get(catchErrors(orderController.filter));
+
+// //_________________________________________________________________API for Kyc________________
+
+const kycFileStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/kyc');
+  },
+  filename: function (req, file, cb) {
+    console.log('🚀 ~ file: appApi.js:182 ~ file:', file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const kycFileUpload = multer({ storage: kycFileStorage });
+
+router
+  .route('/kyc/create')
+  .post(kycFileUpload.single('file'), setFilePathToBody, catchErrors(kycController.create));
+router
+  .route('/kyc/update/:id')
+  .patch(kycFileUpload.single('file'), setFilePathToBody, catchErrors(kycController.update));
+
+router.route('/kyc/read/:id').get(catchErrors(kycController.read));
+
+router.route('/kyc/delete/:id').delete(catchErrors(kycController.delete));
+router.route('/kyc/search').get(catchErrors(kycController.search));
+router.route('/kyc/list').get(catchErrors(kycController.list));
+router.route('/kyc/filter').get(catchErrors(kycController.filter));
 
 module.exports = router;

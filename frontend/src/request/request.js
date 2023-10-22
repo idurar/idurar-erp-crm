@@ -9,10 +9,24 @@ axios.defaults.withCredentials = true;
 
 const request = {
   create: async ({ entity, jsonData }) => {
-    console.log('🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData', jsonData);
-
     try {
       const response = await axios.post(entity + '/create', jsonData);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  createAndUpload: async ({ entity, jsonData }) => {
+    try {
+      const response = await axios.post(entity + '/create', jsonData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,
@@ -35,11 +49,24 @@ const request = {
     }
   },
   update: async ({ entity, id, jsonData }) => {
-    console.log('🚀 ~ file: request.js ~ line 34 ~ update: ~ id', id);
-    console.log('🚀 Update Request 🚀 ~ file: request.js ~ line 42 ~ update: ~ jsonData', jsonData);
-
     try {
       const response = await axios.patch(entity + '/update/' + id, jsonData);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  updateAndUpload: async ({ entity, id, jsonData }) => {
+    try {
+      const response = await axios.patch(entity + '/update/' + id, jsonData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,

@@ -12,7 +12,7 @@ import { selectCurrentItem } from '@/redux/crud/selectors';
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
-export default function UpdateForm({ config, formElements }) {
+export default function UpdateForm({ config, formElements, withUpload = false }) {
   let { entity } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
@@ -31,10 +31,16 @@ export default function UpdateForm({ config, formElements }) {
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    console.log('🚀 ~ file: index.jsx:34 ~ onSubmit ~ fieldsValue:', fieldsValue);
-
     const id = current._id;
-    dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
+
+    if (fieldsValue.file && withUpload) {
+      fieldsValue.file = fieldsValue.file[0].originFileObj;
+    }
+    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
+    dispatch(crud.update({ entity, id, jsonData: trimmedValues, withUpload }));
   };
   useEffect(() => {
     if (current) {
