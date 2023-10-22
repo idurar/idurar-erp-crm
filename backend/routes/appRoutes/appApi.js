@@ -25,6 +25,7 @@ const orderController = require('@/controllers/appControllers/orderController');
 const offerController = require('@/controllers/appControllers/offerController');
 
 const kycController = require('@/controllers/appControllers/kycController');
+const inventoryController = require('@/controllers/appControllers/inventoryController');
 
 // //_________________________________ API for employees_____________________
 router.route('/employee/create').post(catchErrors(employeeController.create));
@@ -180,6 +181,16 @@ router.route('/order/delete/:id').delete(catchErrors(orderController.delete));
 router.route('/order/search').get(catchErrors(orderController.search));
 router.route('/order/list').get(catchErrors(orderController.list));
 router.route('/order/filter').get(catchErrors(orderController.filter));
+
+// //_________________________________________________________________API for Inventory
+
+router.route('/inventory/create').post(catchErrors(inventoryController.create));
+router.route('/inventory/read/:id').get(catchErrors(inventoryController.read));
+router.route('/inventory/update/:id').patch(catchErrors(inventoryController.update));
+router.route('/inventory/delete/:id').delete(catchErrors(inventoryController.delete));
+router.route('/inventory/search').get(catchErrors(inventoryController.search));
+router.route('/inventory/list').get(catchErrors(inventoryController.list));
+router.route('/inventory/filter').get(catchErrors(inventoryController.filter));
 
 // //_________________________________________________________________API for Kyc________________
 
