@@ -14,14 +14,14 @@ import {
 } from '@ant-design/icons';
 import photo from '@/style/images/photo.png';
 
-import { selectAuth } from '@/redux/auth/selectors';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import history from '@/utils/history';
 import uniqueId from '@/utils/uinqueId';
 
 import { BASE_URL } from '@/config/serverApiConfig';
 
 export default function HeaderContent() {
-  const currentAdmin = useSelector(selectAuth);
+  const currentAdmin = useSelector(selectCurrentAdmin);
   console.log('🚀 ~ file: index.jsx:23 ~ HeaderContent ~ currentAdmin:', currentAdmin);
 
   const { SubMenu } = Menu;

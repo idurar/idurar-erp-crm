@@ -5,7 +5,7 @@ import AdminInfo from './AdminInfo';
 import UpdateAdmin from './UpdateAdmin';
 import PasswordModal from './PasswordModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuth } from '@/redux/auth/selectors';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { crud } from '@/redux/crud/actions';
 
 const Visibility = ({ isVisible, children }) => {
@@ -16,11 +16,11 @@ const Visibility = ({ isVisible, children }) => {
 export default function Profile({ config }) {
   const { state } = useProfileContext();
   const { update, read, passwordModal } = state;
-  const { id } = useSelector(selectAuth);
+  const { _id } = useSelector(selectCurrentAdmin);
   // using the crud redux to fetch and update the admin
   const entity = 'profile';
 
-  config = { ...config, id };
+  config = { ...config, id: _id };
 
   return (
     <>

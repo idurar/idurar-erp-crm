@@ -6,9 +6,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminForm from '@/forms/AdminForm';
 import UploadImg from './UploadImg';
-import { profile } from '@/redux/profile/actions';
+import { updateProfile } from '@/redux/auth/actions';
 
-import { selectAuth } from '@/redux/auth/selectors';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
 const UpdateAdmin = ({ config }) => {
   const { profileContextAction } = useProfileContext();
@@ -16,7 +16,7 @@ const UpdateAdmin = ({ config }) => {
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
 
-  const currentAdmin = useSelector(selectAuth);
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const UpdateAdmin = ({ config }) => {
   };
 
   const onSubmit = (fieldsValue) => {
-    const id = config.id;
+    const { _id: id } = currentAdmin;
 
     if (fieldsValue.file) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
@@ -37,7 +37,7 @@ const UpdateAdmin = ({ config }) => {
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
       return acc;
     }, {});
-    dispatch(profile.update({ entity: 'profile', id, jsonData: trimmedValues }));
+    dispatch(updateProfile({ entity: 'profile', id, jsonData: trimmedValues }));
   };
 
   return (

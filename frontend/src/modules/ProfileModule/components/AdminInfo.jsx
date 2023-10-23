@@ -6,14 +6,14 @@ import { useSelector } from 'react-redux';
 import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
 import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
-import { selectAuth } from '@/redux/auth/selectors';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { BASE_URL } from '@/config/serverApiConfig';
 
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
-  const currentAdmin = useSelector(selectAuth);
+  const currentAdmin = useSelector(selectCurrentAdmin);
 
   const srcImgProfile = currentAdmin?.photo ? (
     BASE_URL + currentAdmin?.photo
