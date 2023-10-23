@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Form, Divider } from 'antd';
 
 import { Button, PageHeader, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
+
+import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
@@ -29,11 +31,16 @@ function SaveForm({ form, config }) {
 }
 
 export default function CreateItem({ config, CreateForm }) {
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    dispatch(settingsAction.list({ entity: 'setting' }));
+  }, []);
   let { entity, CREATE_ENTITY } = config;
   const { erpContextAction } = useErpContext();
   const history = useHistory();
   const { createPanel } = erpContextAction;
-  const dispatch = useDispatch();
+
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);

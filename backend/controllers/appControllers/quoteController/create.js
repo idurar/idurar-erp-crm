@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Model = mongoose.model('Quote');
 
 const custom = require('@/controllers/middlewaresControllers/pdfController');
-
+const { increaseBySettingKey } = require('@/middlewares/settings');
 const { calculate } = require('@/helpers');
 
 const create = async (req, res) => {
@@ -47,6 +47,7 @@ const create = async (req, res) => {
     ).exec();
     // Returning successfull response
 
+    increaseBySettingKey({ settingKey: 'last_quote_number' });
     custom.generatePdf('Quote', { filename: 'quote', format: 'A4' }, result);
 
     // Returning successfull response

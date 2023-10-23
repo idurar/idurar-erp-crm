@@ -13,8 +13,6 @@ exports.hasPermission = (permissionName = 'all') => {
     const currentUserRole = req.admin.role;
 
     if (roles[currentUserRole].includes(permissionName) || req.admin.role === 'admin') {
-      console.log('🚀 ~ file: permission.js:14 ~ req.admin.role:', req.admin.role);
-      console.log('🚀 ~ file: permission.js:25 ~ return ~ permissionName:', permissionName);
       next();
     } else {
       return res.status(403).json({
