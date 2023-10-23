@@ -18,7 +18,7 @@ export default function Profile({ config }) {
   const { update, read, passwordModal } = state;
   const { id } = useSelector(selectAuth);
   // using the crud redux to fetch and update the admin
-  const entity = 'admin';
+  const entity = 'profile';
 
   config = { ...config, id };
 

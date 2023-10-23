@@ -1,7 +1,7 @@
 import * as actionTypes from './types';
 import { request } from '@/request';
 
-export const profileAction = {
+export const profile = {
   resetState: () => (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,

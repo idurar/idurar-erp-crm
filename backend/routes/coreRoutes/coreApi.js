@@ -25,6 +25,7 @@ var adminPhotoStorage = multer.diskStorage({
     cb(null, 'public/uploads/admin');
   },
   filename: function (req, file, cb) {
+    console.log('🚀 ~ file: coreApi.js:28 ~ file:', file.originalname);
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
@@ -65,7 +66,8 @@ router
   .route('/profile/update/:id')
   .patch(
     hasPermission('read'),
-    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
+    adminPhotoUpload.single('file'),
+    setFilePathToBody('photo'),
     catchErrors(adminController.updateProfile)
   );
 

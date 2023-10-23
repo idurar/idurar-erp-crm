@@ -6,8 +6,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminForm from '@/forms/AdminForm';
 import UploadImg from './UploadImg';
-import { crud } from '@/redux/crud/actions';
-import { selectCurrentItem } from '@/redux/crud/selectors';
+import { profile } from '@/redux/profile/actions';
+
+import { selectAuth } from '@/redux/auth/selectors';
 
 const UpdateAdmin = ({ config }) => {
   const { profileContextAction } = useProfileContext();
@@ -15,12 +16,12 @@ const UpdateAdmin = ({ config }) => {
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
 
-  const { result } = useSelector(selectCurrentItem);
+  const currentAdmin = useSelector(selectAuth);
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue(result);
-  }, [result]);
+    form.setFieldsValue(currentAdmin);
+  }, [currentAdmin]);
 
   const handleSubmit = () => {
     form.submit();
@@ -28,7 +29,15 @@ const UpdateAdmin = ({ config }) => {
 
   const onSubmit = (fieldsValue) => {
     const id = config.id;
-    dispatch(crud.update({ entity: 'admin', id, jsonData: fieldsValue }));
+
+    if (fieldsValue.file) {
+      fieldsValue.file = fieldsValue.file[0].originFileObj;
+    }
+    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
+    dispatch(profile.update({ entity: 'profile', id, jsonData: trimmedValues }));
   };
 
   return (
@@ -63,9 +72,7 @@ const UpdateAdmin = ({ config }) => {
         }}
       ></PageHeader>
       <Row align="start">
-        <Col xs={{ span: 24 }} sm={{ span: 6 }} md={{ span: 4 }}>
-          <UploadImg />
-        </Col>
+        <Col xs={{ span: 24 }} sm={{ span: 6 }} md={{ span: 4 }}></Col>
         <Col xs={{ span: 16 }}>
           <Form
             form={form}
