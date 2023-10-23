@@ -70,7 +70,6 @@ export default function KycForm({ isUpdateForm = false }) {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         name="file"
         label="File"

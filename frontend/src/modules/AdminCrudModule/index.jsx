@@ -103,7 +103,7 @@ function SidePanelTopContent({ config, formElements }) {
         <div className="space10"></div>
       </Row>
       <ReadItem config={config} />
-      <UpdateForm config={config} formElements={formElements} />
+      <UpdateForm config={config} formElements={formElements} withUpload={true} />
       <UpdatePassword config={config} />
     </>
   );
@@ -160,7 +160,9 @@ function AdminCrudModule({ config, createForm, updateForm }) {
     <CrudLayout
       config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
-      sidePanelBottomContent={<CreateForm config={config} formElements={createForm} />}
+      sidePanelBottomContent={
+        <CreateForm config={config} formElements={createForm} withUpload={true} />
+      }
       sidePanelTopContent={<SidePanelTopContent config={config} formElements={updateForm} />}
     >
       <AdminDataTable config={config} />

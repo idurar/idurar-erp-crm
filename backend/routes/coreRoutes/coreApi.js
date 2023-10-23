@@ -25,6 +25,7 @@ var adminPhotoStorage = multer.diskStorage({
     cb(null, 'public/uploads/admin');
   },
   filename: function (req, file, cb) {
+    console.log('🚀 ~ file: coreApi.js:28 ~ file:', file.originalname);
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
@@ -34,11 +35,17 @@ router
   .route('/admin/create')
   .post(
     hasPermission(),
-    [adminPhotoUpload.single('photo'), setFilePathToBody],
+    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
     catchErrors(adminController.create)
   );
 router.route('/admin/read/:id').get(hasPermission(), catchErrors(adminController.read));
-router.route('/admin/update/:id').patch(hasPermission(), catchErrors(adminController.update));
+router
+  .route('/admin/update/:id')
+  .patch(
+    hasPermission(),
+    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
+    catchErrors(adminController.update)
+  );
 router.route('/admin/delete/:id').delete(hasPermission(), catchErrors(adminController.delete));
 router.route('/admin/search').get(hasPermission(), catchErrors(adminController.search));
 router.route('/admin/list').get(hasPermission(), catchErrors(adminController.list));
@@ -48,44 +55,59 @@ router
   .route('/admin/photo')
   .post(
     hasPermission(),
-    [adminPhotoUpload.single('photo'), setFilePathToBody],
+    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
     catchErrors(adminController.photo)
   );
 router
   .route('/admin/password-update/:id')
   .patch(hasPermission(), catchErrors(adminController.updatePassword));
 
+router
+  .route('/profile/update/:id')
+  .patch(
+    hasPermission('read'),
+    adminPhotoUpload.single('file'),
+    setFilePathToBody('photo'),
+    catchErrors(adminController.updateProfile)
+  );
+
 // //____________________________________________ API for Global Setting _________________
 
-router.route('/setting/create').post(hasPermission(), catchErrors(settingController.create));
-router.route('/setting/read/:id').get(hasPermission(), catchErrors(settingController.read));
-router.route('/setting/update/:id').patch(hasPermission(), catchErrors(settingController.update));
+router
+  .route('/setting/create')
+  .post(hasPermission('create'), catchErrors(settingController.create));
+router.route('/setting/read/:id').get(hasPermission('read'), catchErrors(settingController.read));
+router
+  .route('/setting/update/:id')
+  .patch(hasPermission('update'), catchErrors(settingController.update));
 //router.route('/setting/delete/:id).delete(hasPermission(),catchErrors(settingController.delete));
-router.route('/setting/search').get(hasPermission(), catchErrors(settingController.search));
-router.route('/setting/list').get(hasPermission(), catchErrors(settingController.list));
-router.route('/setting/listAll').get(hasPermission(), catchErrors(settingController.listAll));
-router.route('/setting/filter').get(hasPermission(), catchErrors(settingController.filter));
+router.route('/setting/search').get(hasPermission('read'), catchErrors(settingController.search));
+router.route('/setting/list').get(hasPermission('read'), catchErrors(settingController.list));
+router.route('/setting/listAll').get(hasPermission('read'), catchErrors(settingController.listAll));
+router.route('/setting/filter').get(hasPermission('read'), catchErrors(settingController.filter));
 router
   .route('/setting/readBySettingKey/:settingKey')
-  .get(hasPermission(), catchErrors(settingController.readBySettingKey));
+  .get(hasPermission('read'), catchErrors(settingController.readBySettingKey));
 router
   .route('/setting/listBySettingKey')
-  .get(hasPermission(), catchErrors(settingController.listBySettingKey));
+  .get(hasPermission('read'), catchErrors(settingController.listBySettingKey));
 router
   .route('/setting/updateBySettingKey/:settingKey?')
-  .patch(hasPermission(), catchErrors(settingController.updateBySettingKey));
+  .patch(hasPermission('update'), catchErrors(settingController.updateBySettingKey));
 router
   .route('/setting/updateManySetting')
-  .patch(hasPermission(), catchErrors(settingController.updateManySetting));
+  .patch(hasPermission('read'), catchErrors(settingController.updateManySetting));
 
 // //____________________________________________ API for Email Templates _________________
-router.route('/email/create').post(hasPermission(), catchErrors(emailController.create));
-router.route('/email/read/:id').get(hasPermission(), catchErrors(emailController.read));
-router.route('/email/update/:id').patch(hasPermission(), catchErrors(emailController.update));
-router.route('/email/search').get(hasPermission(), catchErrors(emailController.search));
-router.route('/email/list').get(hasPermission(), catchErrors(emailController.list));
-router.route('/email/listAll').get(hasPermission(), catchErrors(emailController.listAll));
-router.route('/email/filter').get(hasPermission(), catchErrors(emailController.filter));
+router.route('/email/create').post(hasPermission('create'), catchErrors(emailController.create));
+router.route('/email/read/:id').get(hasPermission('read'), catchErrors(emailController.read));
+router
+  .route('/email/update/:id')
+  .patch(hasPermission('update'), catchErrors(emailController.update));
+router.route('/email/search').get(hasPermission('read'), catchErrors(emailController.search));
+router.route('/email/list').get(hasPermission('read'), catchErrors(emailController.list));
+router.route('/email/listAll').get(hasPermission('read'), catchErrors(emailController.listAll));
+router.route('/email/filter').get(hasPermission('read'), catchErrors(emailController.filter));
 
 // //____________________________________________ API for Upload controller _________________
 
