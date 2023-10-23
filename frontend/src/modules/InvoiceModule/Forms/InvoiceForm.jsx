@@ -11,23 +11,38 @@ import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
+import { selectFinanceSettings } from '@/redux/settings/selectors';
 
 import calculate from '@/utils/calculate';
+import { useSelector } from 'react-redux';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
+  const { last_invoice_number } = useSelector(selectFinanceSettings);
+
+  if (!last_invoice_number) {
+    return <></>;
+  }
+
+  return <LoadInvoiceForm subTotal={subTotal} current={current} />;
+}
+
+function LoadInvoiceForm({ subTotal = 0, current = null }) {
+  const { last_invoice_number } = useSelector(selectFinanceSettings);
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
+  const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
   const handelTaxChange = (value) => {
     setTaxRate(value);
   };
 
   useEffect(() => {
     if (current) {
-      const { taxRate = 0, year } = current;
+      const { taxRate = 0, year, number } = current;
       setTaxRate(taxRate);
       setCurrentYear(year);
+      setLastNumber(number);
     }
   }, [current]);
   useEffect(() => {
@@ -68,7 +83,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           <Form.Item
             label="Number"
             name="number"
-            initialValue={1}
+            initialValue={lastNumber}
             rules={[
               {
                 required: true,

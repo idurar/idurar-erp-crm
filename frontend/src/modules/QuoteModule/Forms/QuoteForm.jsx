@@ -11,10 +11,25 @@ import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
+import { selectFinanceSettings } from '@/redux/settings/selectors';
 
 import calculate from '@/utils/calculate';
+import { useSelector } from 'react-redux';
 
-export default function QuoteForm({ subTotal = 0, current = null }) {
+export default function InvoiceForm({ subTotal = 0, current = null }) {
+  const { last_quote_number } = useSelector(selectFinanceSettings);
+
+  if (!last_quote_number) {
+    return <></>;
+  }
+
+  return <LoadQuoteForm subTotal={subTotal} current={current} />;
+}
+
+function LoadQuoteForm({ subTotal = 0, current = null }) {
+  const { last_quote_number } = useSelector(selectFinanceSettings);
+  const [lastNumber, setLastNumber] = useState(() => last_quote_number + 1);
+
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
@@ -25,9 +40,10 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
 
   useEffect(() => {
     if (current) {
-      const { taxRate = 0, year } = current;
+      const { taxRate = 0, year, number } = current;
       setTaxRate(taxRate);
       setCurrentYear(year);
+      setLastNumber(number);
     }
   }, [current]);
   useEffect(() => {
@@ -68,7 +84,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           <Form.Item
             label="Number"
             name="number"
-            initialValue={1}
+            initialValue={lastNumber}
             rules={[
               {
                 required: true,
