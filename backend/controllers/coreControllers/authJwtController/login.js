@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const { stubFalse } = require('lodash');
+const url = require('url');
 
 const mongoose = require('mongoose');
 
@@ -13,13 +14,25 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log('🚀 ~ file: app.js:33 ~  req.origin :', req.get('origin'));
+
+    // URL address
+    const address = req.get('origin');
+    console.log('🚀 ~ file: login.js:21 ~ login ~ address:', address);
+    console.log('🚀 ~ file: login.js:21 ~ login ~ req.hostname:', req.hostname);
+
+    // Call parse() method using url module
+    let urlObject = url.parse(address, true);
+
+    const orginalHostname = urlObject.hostname;
+
     let isLocalhost = false;
-    if (req.orginalHostname === '127.0.0.1' || req.orginalHostname === 'localhost') {
+    if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
       // Connection is from localhost
       isLocalhost = true;
     }
 
-    console.log('🚀 ~ file: login.js:22 ~ login ~ req.orginalHostname:', req.orginalHostname);
+    console.log('🚀 ~ file: login.js:22 ~ login ~ orginalHostname:', orginalHostname);
 
     console.log('🚀 ~ file: login.js:20 ~ login ~ isLocalhost:', isLocalhost);
     // validate
@@ -76,10 +89,10 @@ const login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
-        sameSite: isLocalhost ? 'strict' : 'Lax',
-        httpOnly: !isLocalhost,
-        secure: !isLocalhost,
-        domain: req.orginalHostname,
+        sameSite: process.env.NODE_ENV === 'production' && isLocalhost ? 'none' : 'Lax',
+        httpOnly: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
+        secure: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
+        domain: req.hostname,
         Path: '/',
       })
       .json({
