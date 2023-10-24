@@ -11,7 +11,6 @@ const updateProfile = async (req, res) => {
       });
 
     let updates = {
-      role: req.body.role,
       email: req.body.email,
       name: req.body.name,
       surname: req.body.surname,
