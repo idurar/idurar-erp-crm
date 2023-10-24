@@ -18,7 +18,6 @@ const login = async (req, res) => {
       // Connection is from localhost
       isLocalhost = true;
     }
-    console.log('🚀 ~ file: login.js:20 ~ login ~ isLocalhost:', isLocalhost);
 
     // validate
     const objectSchema = Joi.object({
@@ -74,9 +73,10 @@ const login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
-        sameSite: process.env.NODE_ENV === 'production' && !isLocalhost ? 'Lax' : 'none',
+        // sameSite: process.env.NODE_ENV === 'production' && !isLocalhost ? 'Lax' : 'none',
+        sameSite: 'Lax',
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production' ? true : false,
         domain: req.hostname,
         Path: '/',
       })
