@@ -3,7 +3,6 @@ module.exports = (fieldName = 'filePath') => {
   return (req, res, next) => {
     if (req.file) {
       req.body[fieldName] = req.file.path;
-      console.log('🚀 ~ file: setFilePathToBody.js:6 ~ return ~ fieldName:', fieldName);
     }
     // if (req.files) {
     //     req.body[req.files.fieldname] = req.files.path

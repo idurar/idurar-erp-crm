@@ -3,13 +3,6 @@ const Admin = mongoose.model('Admin');
 
 const updateProfile = async (req, res) => {
   try {
-    console.log('🚀 ~ file: updateProfile.js:7 ~ updateProfile ~ req.admin:', req.admin._id);
-    console.log('🚀 ~ file: updateProfile.js:10 ~ updateProfile ~ req.params.id:', req.params.id);
-    if (req.admin._id == req.params.id) {
-      console.log(
-        '🚀 ~ file: updateProfile.js:10 ~ updateProfile ~ req.admin._id === req.params.id'
-      );
-    }
     if (req.admin._id != req.params.id)
       return res.status(403).json({
         success: false,
@@ -24,7 +17,6 @@ const updateProfile = async (req, res) => {
       surname: req.body.surname,
       photo: req.body.photo,
     };
-    console.log('🚀 ~ file: updateProfile.js:41 ~ updateProfile ~ updates:', updates);
 
     // Find document by id and updates with the required fields
     const result = await Admin.findOneAndUpdate(
@@ -34,7 +26,6 @@ const updateProfile = async (req, res) => {
         new: true, // return the new result instead of the old one
       }
     ).exec();
-    console.log('🚀 ~ file: updateProfile.js:50 ~ updateProfile ~ result:', result);
 
     if (!result) {
       return res.status(404).json({
