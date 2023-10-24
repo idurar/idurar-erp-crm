@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const { stubFalse } = require('lodash');
+const url = require('url');
 
 const mongoose = require('mongoose');
 
@@ -12,12 +13,28 @@ require('dotenv').config({ path: '.variables.env' });
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const clientIP = req.connection.remoteAddress;
+
+    console.log('🚀 ~ file: app.js:33 ~  req.origin :', req.get('origin'));
+
+    // URL address
+    const address = req.get('origin');
+    console.log('🚀 ~ file: login.js:21 ~ login ~ address:', address);
+    console.log('🚀 ~ file: login.js:21 ~ login ~ req.hostname:', req.hostname);
+
+    // Call parse() method using url module
+    let urlObject = url.parse(address, true);
+
+    const orginalHostname = urlObject.hostname;
+
     let isLocalhost = false;
-    if (clientIP === '127.0.0.1' || clientIP === '::1') {
+    if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
       // Connection is from localhost
       isLocalhost = true;
     }
+
+    console.log('🚀 ~ file: login.js:22 ~ login ~ orginalHostname:', orginalHostname);
+
+    console.log('🚀 ~ file: login.js:20 ~ login ~ isLocalhost:', isLocalhost);
     // validate
     const objectSchema = Joi.object({
       email: Joi.string()
@@ -71,17 +88,17 @@ const login = async (req, res) => {
     res
       .status(200)
       .cookie('token', token, {
-        maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
-        sameSite: process.env.NODE_ENV === 'production' && !isLocalhost ? 'Lax' : 'none',
-        httpOnly: true,
-        secure: true,
+        maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
+        sameSite: process.env.NODE_ENV === 'production' && isLocalhost ? 'none' : 'Lax',
+        httpOnly: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
+        secure: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
         domain: req.hostname,
         Path: '/',
       })
       .json({
         success: true,
         result: {
-          id: result._id,
+          _id: result._id,
           name: result.name,
           surname: result.surname,
           role: result.role,

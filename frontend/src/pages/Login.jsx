@@ -16,7 +16,7 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const LoginPage = () => {
-  const { loading: isLoading } = useSelector(selectAuth);
+  const { isLoading } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
   const onFinish = (values) => {

@@ -13,15 +13,11 @@ const profile = async (req, res) => {
     }
     let result = {
       _id: req.admin._id,
-      enabled: req.admin.enabled,
       email: req.admin.email,
       name: req.admin.name,
       surname: req.admin.surname,
       photo: req.admin.photo,
-
       role: req.admin.role,
-
-      employee: req.admin.employee,
     };
 
     return res.status(200).json({

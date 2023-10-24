@@ -18,6 +18,7 @@ const listAll = async (req, res) => {
     if (result.length > 0) {
       for (let admin of result) {
         admin.password = undefined;
+        admin.loggedSessions = undefined;
       }
       return res.status(200).json({
         success: true,

@@ -3,20 +3,20 @@ const Admin = mongoose.model('Admin');
 
 const update = async (req, res) => {
   try {
-    let { email } = req.body;
+    // let { email } = req.body;
 
-    if (email) {
-      const existingAdmin = await Admin.findOne({ email: email });
+    // if (email) {
+    //   const existingAdmin = await Admin.findOne({ email: email });
 
-      if (existingAdmin._id != req.params.id)
-        return res.status(400).json({ message: 'An account with this email already exists.' });
-    }
+    //   if (existingAdmin._id != req.params.id)
+    //     return res.status(400).json({ message: 'An account with this email already exists.' });
+    // }
     let updates = {
       role: req.body.role,
       email: req.body.email,
-      employee: req.body.employee,
       name: req.body.name,
       surname: req.body.surname,
+      photo: req.body.photo,
     };
 
     // Find document by id and updates with the required fields

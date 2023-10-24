@@ -24,7 +24,7 @@ import { CrudLayout } from '@/layout';
 
 import CrudDataTable from './CrudDataTable';
 
-function SidePanelTopContent({ config, formElements }) {
+function SidePanelTopContent({ config, formElements, withUpload }) {
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels, entity } = config;
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
@@ -85,7 +85,7 @@ function SidePanelTopContent({ config, formElements }) {
         <div className="space10"></div>
       </Row>
       <ReadItem config={config} />
-      <UpdateForm config={config} formElements={formElements} />
+      <UpdateForm config={config} formElements={formElements} withUpload={withUpload} />
     </>
   );
 }
@@ -131,7 +131,7 @@ function FixHeaderPanel({ config }) {
   );
 }
 
-function CrudModule({ config, createForm, updateForm }) {
+function CrudModule({ config, createForm, updateForm, withUpload = false }) {
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -142,8 +142,12 @@ function CrudModule({ config, createForm, updateForm }) {
     <CrudLayout
       config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
-      sidePanelBottomContent={<CreateForm config={config} formElements={createForm} />}
-      sidePanelTopContent={<SidePanelTopContent config={config} formElements={updateForm} />}
+      sidePanelBottomContent={
+        <CreateForm config={config} formElements={createForm} withUpload={withUpload} />
+      }
+      sidePanelTopContent={
+        <SidePanelTopContent config={config} formElements={updateForm} withUpload={withUpload} />
+      }
     >
       <CrudDataTable config={config} />
       <DeleteModal config={config} />

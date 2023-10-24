@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+const { hasPermission } = require('@/middlewares/permission');
+
 // Without middleware
 
 router.route('/:subPath/:directory/:file').get(function (req, res) {
@@ -11,9 +13,7 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
   const options = {
     root: path.join(__dirname, `../../public/${subPath}/${directory}`),
   };
-
   const fileName = file;
-
   res.sendFile(fileName, options, function (err) {
     if (err) {
       res.sendStatus(404);
