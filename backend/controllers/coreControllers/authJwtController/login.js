@@ -14,11 +14,14 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     let isLocalhost = false;
-    if (req.hostname === '127.0.0.1' || req.hostname === 'localhost') {
+    if (req.orginalHostname === '127.0.0.1' || req.orginalHostname === 'localhost') {
       // Connection is from localhost
       isLocalhost = true;
     }
 
+    console.log('🚀 ~ file: login.js:22 ~ login ~ req.orginalHostname:', req.orginalHostname);
+
+    console.log('🚀 ~ file: login.js:20 ~ login ~ isLocalhost:', isLocalhost);
     // validate
     const objectSchema = Joi.object({
       email: Joi.string()
@@ -73,10 +76,10 @@ const login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
-        sameSite: isLocalhost ? 'none' : 'Lax',
-        httpOnly: true,
-        secure: true,
-        domain: req.hostname,
+        sameSite: isLocalhost ? 'strict' : 'Lax',
+        httpOnly: !isLocalhost,
+        secure: !isLocalhost,
+        domain: req.orginalHostname,
         Path: '/',
       })
       .json({

@@ -29,6 +29,7 @@ const corsOptions = {
 // setting cors at one place for all the routes
 // putting cors as first in order to avoid unneccessary requests from unallowed origins
 app.use(function (req, res, next) {
+  req.orginalHostname = req.hostname;
   cors(corsOptions)(req, res, next);
 });
 
