@@ -73,9 +73,9 @@ const login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
-        sameSite: 'Lax',
+        sameSite: isLocalhost ? 'none' : 'Lax',
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' && !isLocalhost ? true : false,
+        secure: true,
         domain: req.hostname,
         Path: '/',
       })
