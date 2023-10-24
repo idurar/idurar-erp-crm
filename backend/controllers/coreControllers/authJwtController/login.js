@@ -74,7 +74,7 @@ const login = async (req, res) => {
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
         sameSite: process.env.NODE_ENV === 'production' && !isLocalhost ? 'Lax' : 'none',
-        httpOnly: true,
+        httpOnly: !isLocalhost ? true : false,
         secure: true,
         domain: req.hostname,
         Path: '/',
