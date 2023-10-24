@@ -38,7 +38,7 @@ router
     [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
     catchErrors(adminController.create)
   );
-router.route('/admin/read/:id').get(hasPermission(), catchErrors(adminController.read));
+router.route('/admin/read/:id').get(hasPermission('read'), catchErrors(adminController.read));
 router
   .route('/admin/update/:id')
   .patch(
@@ -47,10 +47,10 @@ router
     catchErrors(adminController.update)
   );
 router.route('/admin/delete/:id').delete(hasPermission(), catchErrors(adminController.delete));
-router.route('/admin/search').get(hasPermission(), catchErrors(adminController.search));
-router.route('/admin/list').get(hasPermission(), catchErrors(adminController.list));
-router.route('/admin/profile').get(hasPermission(), catchErrors(adminController.profile));
-router.route('/admin/status/:id').patch(hasPermission(), catchErrors(adminController.status));
+router.route('/admin/search').get(hasPermission('read'), catchErrors(adminController.search));
+router.route('/admin/list').get(hasPermission('read'), catchErrors(adminController.list));
+router.route('/admin/profile').get(hasPermission('read'), catchErrors(adminController.profile));
+router.route('/admin/status/:id').patch(hasPermission('read'), catchErrors(adminController.status));
 router
   .route('/admin/photo')
   .post(
