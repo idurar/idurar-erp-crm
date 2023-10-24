@@ -7,7 +7,7 @@ const { hasPermission } = require('@/middlewares/permission');
 
 // Without middleware
 
-router.route('/:subPath/:directory/:file').get(hasPermission('download'), function (req, res) {
+router.route('/:subPath/:directory/:file').get(function (req, res) {
   const { subPath, directory, file } = req.params;
 
   const options = {

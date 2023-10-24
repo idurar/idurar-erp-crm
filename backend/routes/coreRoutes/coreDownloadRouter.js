@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const { hasPermission } = require('@/middlewares/permission');
 
-router.route('/:subPath/:directory/:id').get(hasPermission('download'), function (req, res) {
+router.route('/:subPath/:directory/:id').get(function (req, res) {
   const { subPath, directory, id } = req.params;
 
   // Handle the /payment/invoice/* route
