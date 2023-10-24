@@ -6,6 +6,7 @@ import rootReducer from './rootReducer';
 import storePersist from './storePersist';
 
 const logger = createLogger();
+
 let middleware = [thunk];
 
 let configStore = applyMiddleware(...middleware);
@@ -18,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const AUTH_INITIAL_STATE = {
-  current: storePersist.get('auth'),
+  current: storePersist.get('auth') ? storePersist.get('auth') : null,
   isLoggedIn: true,
   isLoading: false,
   isSuccess: false,

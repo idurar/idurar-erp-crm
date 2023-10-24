@@ -13,6 +13,7 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 import photo from '@/style/images/photo.png';
+import { checkImage } from '@/request';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import history from '@/utils/history';
@@ -22,15 +23,10 @@ import { BASE_URL } from '@/config/serverApiConfig';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
-  console.log('🚀 ~ file: index.jsx:23 ~ HeaderContent ~ currentAdmin:', currentAdmin);
 
-  const { SubMenu } = Menu;
-
-  const srcImgProfile = currentAdmin?.photo ? (
-    BASE_URL + currentAdmin?.photo
-  ) : (
-    <UserOutlined style={{ color: '#333', fontSize: 'inherit' }} />
-  );
+  const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
+    ? BASE_URL + currentAdmin?.photo
+    : photo;
 
   const profileDropdown = (
     <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
@@ -39,8 +35,10 @@ export default function HeaderContent() {
           size="large"
           className="last"
           src={srcImgProfile}
-          style={{ float: 'left', fontSize: '32px' }}
-        />
+          style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+        >
+          {currentAdmin?.name.charAt(0).toUpperCase()}
+        </Avatar>
         <div className="info">
           <p className="strong">
             {currentAdmin?.name} {currentAdmin?.surname}
@@ -86,7 +84,13 @@ export default function HeaderContent() {
     <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
       <Dropdown overlay={profileDropdown} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}
-        <Avatar className="last" src={srcImgProfile} />
+        <Avatar
+          className="last"
+          src={srcImgProfile}
+          style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+        >
+          {currentAdmin?.name.charAt(0).toUpperCase()}
+        </Avatar>
         {/* </Badge> */}
       </Dropdown>
 
