@@ -20,7 +20,7 @@ export default function ItemRow({ field, remove, current = null }) {
 
   useEffect(() => {
     if (current) {
-      // When it accesses the /payment/invoice/ endpoint,
+      // When it accesses the /payment/ endpoint,
       // it receives an invoice.item instead of just item
       // and breaks the code, but now we can check if items exists,
       // and if it doesn't we can access invoice.items.

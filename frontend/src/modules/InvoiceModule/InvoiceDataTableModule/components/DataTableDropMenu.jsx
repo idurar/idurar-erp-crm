@@ -14,11 +14,11 @@ import { useErpContext } from '@/context/erp';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import uniqueId from '@/utils/uinqueId';
-import { useHistory } from 'react-router-dom';
+import history from '@/utils/history';
 
 export default function DataTableDropMenu({ row, entity }) {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const { erpContextAction } = useErpContext();
   const { modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
@@ -39,7 +39,7 @@ export default function DataTableDropMenu({ row, entity }) {
     modal.open();
   }
   function Download() {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
   }
   return (
     <Menu style={{ minWidth: 130 }}>

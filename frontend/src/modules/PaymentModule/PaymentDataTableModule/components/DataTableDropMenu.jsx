@@ -20,18 +20,15 @@ export default function DataTableDropMenu({ row, entity }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { erpContextAction } = useErpContext();
-  const { recordPanel, modal } = erpContextAction;
+  const { modal } = erpContextAction;
   const item = useSelector(selectItemById(row._id));
   function Read() {
     dispatch(erp.currentItem({ data: item }));
-    // readPanel.open();
-    history.push(`/offer/read/${row._id}`);
+    history.push(`/payment/read/${row._id}`);
   }
-
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));
-    // updatePanel.open();
-    history.push(`/offer/update/${row._id}`);
+    history.push(`/payment/update/${row._id}`);
   }
   function Delete() {
     dispatch(erp.currentAction({ actionType: 'delete', data: item }));

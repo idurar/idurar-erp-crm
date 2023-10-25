@@ -5,6 +5,7 @@ const Model = mongoose.model('Offer');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 
 const { calculate } = require('@/helpers');
+const { increaseBySettingKey } = require('@/middlewares/settings');
 
 const create = async (req, res) => {
   try {
@@ -37,7 +38,7 @@ const create = async (req, res) => {
 
     // Creating a new document in the collection
     const result = await new Model(body).save();
-    const fileId = 'invoice-' + result._id + '.pdf';
+    const fileId = 'offer-' + result._id + '.pdf';
     const updateResult = await Model.findOneAndUpdate(
       { _id: result._id },
       { pdfPath: fileId },
@@ -47,13 +48,14 @@ const create = async (req, res) => {
     ).exec();
     // Returning successfull response
 
-    custom.generatePdf('Offer', { filename: 'quote', format: 'A4' }, result);
+    increaseBySettingKey({ settingKey: 'last_offer_number' });
+    custom.generatePdf('Offer', { filename: 'offer', format: 'A4' }, result);
 
     // Returning successfull response
     return res.status(200).json({
       success: true,
       result: updateResult,
-      message: 'Quote created successfully',
+      message: 'Offer created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
@@ -68,7 +70,7 @@ const create = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        message: 'Oops there is an Error',
+        message: err.message,
       });
     }
   }
