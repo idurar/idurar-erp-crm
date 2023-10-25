@@ -26,7 +26,7 @@ const logout = async (req, res) => {
       })
       .json({ isLoggedOut: true });
   } catch (error) {
-    res.status(500).json({ success: false, result: null, message: err.message, error: err });
+    res.status(500).json({ success: false, result: null, message: error.message, error: error });
   }
 };
 

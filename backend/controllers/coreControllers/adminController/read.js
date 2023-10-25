@@ -38,7 +38,7 @@ const read = async (req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error',
+      message: error.message,
       error,
     });
   }
