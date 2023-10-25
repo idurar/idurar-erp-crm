@@ -8,19 +8,16 @@ import history from '@/utils/history';
 import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { BASE_URL } from '@/config/serverApiConfig';
-
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
   const currentAdmin = useSelector(selectCurrentAdmin);
-
   const srcImgProfile = currentAdmin?.photo ? (
     BASE_URL + currentAdmin?.photo
   ) : (
-    <UserOutlined style={{ color: '#333', fontSize: 'inherit' }} />
+    <UserOutlined style={{ color: '#333', fontSize: '30px' }} />
   );
-
   return (
     <>
       <PageHeader
@@ -54,7 +51,7 @@ const AdminInfo = ({ config }) => {
       ></PageHeader>
       <Row align="middle">
         <Col xs={{ span: 24 }} sm={{ span: 7 }} md={{ span: 5 }}>
-          <img
+          <Avatar
             className="last left circle pad5"
             src={srcImgProfile}
             style={{
@@ -62,6 +59,7 @@ const AdminInfo = ({ config }) => {
               height: '100px',
               border: '2px solid #1B98F5',
             }}
+            size={95}
             alt={`${currentAdmin?.name}`}
           />
         </Col>
@@ -109,7 +107,6 @@ const AdminInfo = ({ config }) => {
           </Descriptions>
         </Col>
       </Row>
-
       <Divider />
       <Button
         key={`${uniqueId()}`}
@@ -122,5 +119,4 @@ const AdminInfo = ({ config }) => {
     </>
   );
 };
-
 export default AdminInfo;
