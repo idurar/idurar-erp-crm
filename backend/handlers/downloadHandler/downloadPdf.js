@@ -18,10 +18,16 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
     await custom.generatePdf(
       modelName,
       { filename: modelName, format: 'A4' },
-      result.invoice ?? result,
+      result,
       async (fileLocation) => {
         return res.download(fileLocation, (err) => {
-          if (err) res.status(500).json({ success: false, message: "Couldn't find file" });
+          if (err)
+            res.status(500).json({
+              success: false,
+              result: null,
+              message: "Couldn't find file",
+              error: err.message,
+            });
         });
       }
     );
@@ -31,7 +37,7 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: err.message,
         message: 'Required fields are not supplied',
       });
     } else if (err.name == 'BSONTypeError') {
@@ -39,7 +45,7 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: err.message,
         message: 'Invalid ID',
       });
     } else {
@@ -48,7 +54,7 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       return res.status(500).json({
         success: false,
         result: null,
-        error: err,
+        error: err.message,
         message: 'Oops there is an Error',
       });
     }
