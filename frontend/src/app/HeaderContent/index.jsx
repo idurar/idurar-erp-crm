@@ -55,7 +55,7 @@ export default function HeaderContent() {
             key={`${uniqueId()}`}
             onClick={() => history.push('/profile')}
           >
-            Profil Settings
+            Profile Settings
           </Menu.Item>
           <Menu.Item
             icon={<SettingOutlined />}
