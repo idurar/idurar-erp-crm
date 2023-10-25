@@ -13,8 +13,23 @@ import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
+import { selectFinanceSettings } from '@/redux/settings/selectors';
+
+import { useSelector } from 'react-redux';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
+  const { last_offer_number } = useSelector(selectFinanceSettings);
+
+  if (!last_offer_number) {
+    return <></>;
+  }
+
+  return <LoadOfferForm subTotal={subTotal} current={current} />;
+}
+
+function LoadOfferForm({ subTotal = 0, current = null }) {
+  const { last_offer_number } = useSelector(selectFinanceSettings);
+  const [lastNumber, setLastNumber] = useState(() => last_offer_number + 1);
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
@@ -25,9 +40,10 @@ export default function OfferForm({ subTotal = 0, current = null }) {
 
   useEffect(() => {
     if (current) {
-      const { taxRate = 0, year } = current;
+      const { taxRate = 0, year, number } = current;
       setTaxRate(taxRate);
       setCurrentYear(year);
+      setLastNumber(number);
     }
   }, [current]);
   useEffect(() => {
@@ -68,11 +84,11 @@ export default function OfferForm({ subTotal = 0, current = null }) {
           <Form.Item
             label="Number"
             name="number"
-            initialValue={1}
+            initialValue={lastNumber}
             rules={[
               {
                 required: true,
-                message: 'Please input quote number!',
+                message: 'Please input offer number!',
               },
             ]}
           >
@@ -87,7 +103,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input quote year!',
+                message: 'Please input offer year!',
               },
             ]}
           >
@@ -101,7 +117,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: false,
-                message: 'Please input quote status!',
+                message: 'Please input offer status!',
               },
             ]}
             initialValue={'draft'}
@@ -196,7 +212,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Quote
+                Save offer
               </Button>
             </Form.Item>
           </Col>

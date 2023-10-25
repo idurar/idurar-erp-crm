@@ -57,7 +57,7 @@ export default function DashboardModule() {
   );
 
   const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
-    request.summary({ entity: 'payment/invoice' })
+    request.summary({ entity: 'payment' })
   );
 
   const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
@@ -95,7 +95,7 @@ export default function DashboardModule() {
     return (
       <SummaryCard
         key={index}
-        title={data?.entity === 'paymentInvoice' ? 'Payment' : data?.entity}
+        title={data?.entity === 'payment' ? 'Payment' : data?.entity}
         tagColor={
           data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
         }

@@ -89,20 +89,20 @@ export const routesConfig = [
     component: 'Quote/QuoteUpdate',
   },
   {
-    path: '/payment/invoice',
-    component: 'PaymentInvoice/index',
+    path: '/payment',
+    component: 'Payment/index',
   },
   {
-    path: '/payment/invoice/create',
-    component: 'PaymentInvoice/PaymentInvoiceCreate',
+    path: '/payment/create',
+    component: 'Payment/PaymentCreate',
   },
   {
-    path: '/payment/invoice/read/:id',
-    component: 'PaymentInvoice/PaymentInvoiceRead',
+    path: '/payment/read/:id',
+    component: 'Payment/PaymentRead',
   },
   {
-    path: '/payment/invoice/update/:id',
-    component: 'PaymentInvoice/PaymentInvoiceUpdate',
+    path: '/payment/update/:id',
+    component: 'Payment/PaymentUpdate',
   },
   {
     path: '/employee',

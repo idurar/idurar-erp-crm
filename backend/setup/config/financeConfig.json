@@ -29,6 +29,13 @@
   },
   {
     "settingCategory": "finance_settings",
+    "settingKey": "last_payment_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
     "settingKey": "current_invoice_year",
     "settingValue": 2023,
     "valueType": "number",

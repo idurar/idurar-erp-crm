@@ -13,7 +13,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 
-import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
@@ -21,7 +20,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import history from '@/utils/history';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -69,14 +68,11 @@ const Item = ({ item }) => {
 export default function ReadItem({ config, selectedItem }) {
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
-  const { erpContextAction } = useErpContext();
+
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
-  const history = useHistory();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
-
-  const { readPanel, updatePanel } = erpContextAction;
 
   const resetErp = {
     status: '',
@@ -103,7 +99,7 @@ export default function ReadItem({ config, selectedItem }) {
     if (currentResult) {
       const { items, invoice, ...others } = currentResult;
 
-      // When it accesses the /payment/invoice/ endpoint,
+      // When it accesses the /payment/ endpoint,
       // it receives an invoice.item instead of just item
       // and breaks the code, but now we can check if items exists,
       // and if it doesn't we can access invoice.items and bring
@@ -124,8 +120,7 @@ export default function ReadItem({ config, selectedItem }) {
     <>
       <PageHeader
         onBack={() => {
-          readPanel.close();
-          history.goBack();
+          history.push(`/${entity.toLowerCase()}`);
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
@@ -135,7 +130,6 @@ export default function ReadItem({ config, selectedItem }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              readPanel.close();
               history.push(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
@@ -183,7 +177,6 @@ export default function ReadItem({ config, selectedItem }) {
                   data: currentErp,
                 })
               );
-              updatePanel.open();
               history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"

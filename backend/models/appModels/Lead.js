@@ -6,7 +6,6 @@ const leadSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
   enabled: {
     type: Boolean,
     default: true,

@@ -6,7 +6,7 @@ module.exports = function (app) {
     createProxyMiddleware({
       target:
         process.env.REACT_APP_DEV_REMOTE == 'remote'
-          ? process.env.REACT_APP_PROXY_SERVER
+          ? process.env.REACT_APP_BACKEND_SERVER
           : 'http://localhost/',
       changeOrigin: true,
     })
