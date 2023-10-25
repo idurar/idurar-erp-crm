@@ -55,7 +55,7 @@ export default function Navigation() {
   return (
     <>
       <div className="sidebar-wraper">
-        <Sidebar collapsible={true} />
+        <Sidebar collapsible />
       </div>
       <MobileSidebar />
     </>
@@ -72,7 +72,7 @@ function Sidebar({ collapsible }) {
   const [currentPath, setCurrentPath] = useState(location.pathname);
 
   useEffect(() => {
-    if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname);
+    if (location && currentPath !== location.pathname) setCurrentPath(location.pathname);
   }, [location, currentPath]);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function Sidebar({ collapsible }) {
     <>
       <Sider
         collapsible={collapsible}
-        collapsed={collapsible ? isNavMenuClose : collapsible}
+        collapsed={collapsible && isNavMenuClose}
         onCollapse={onCollapse}
         className="navigation"
       >
