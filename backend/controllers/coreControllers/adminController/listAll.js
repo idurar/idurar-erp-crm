@@ -33,9 +33,7 @@ const listAll = async (req, res) => {
       });
     }
   } catch (error) {
-    return res
-      .status(500)
-      .json({ success: false, result: [], message: 'Oops there is an Error', error });
+    return res.status(500).json({ success: false, result: [], message: error.message, error });
   }
 };
 

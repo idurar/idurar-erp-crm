@@ -18,8 +18,8 @@ const { hasPermission } = require('@/middlewares/permission');
 //     },
 //   };
 
-//   res.status(200).sendFile(file, options, function (err) {
-//     if (err) {
+//   res.status(200).sendFile(file, options, function (error) {
+//     if (error) {
 //       const id = file.slice(directory.length + 1).slice(0, -4); // extract id from file name
 //       downloadPdf(req, res, { directory, id });
 //     }
@@ -28,7 +28,6 @@ const { hasPermission } = require('@/middlewares/permission');
 
 router.route('/:directory/:file').get(function (req, res) {
   const { directory, file } = req.params;
-
   const id = file.slice(directory.length + 1).slice(0, -4); // extract id from file name
   downloadPdf(req, res, { directory, id });
 });

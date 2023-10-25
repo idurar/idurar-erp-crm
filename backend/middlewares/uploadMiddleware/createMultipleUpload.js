@@ -34,13 +34,13 @@ const createMultipleUpload = async (req, res, next) => {
       if (upload?.length !== 0) {
         next();
       } else {
-        return res.status(500).json({ success: false, message: 'Oops there is an Error' });
+        return res.status(500).json({ success: false, message: error.message });
       }
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Oops there is an Error' });
+      return res.status(500).json({ success: false, message: error.message });
     }
   } else {
-    return res.status(500).json({ success: false, message: 'Oops there is an Error' });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 

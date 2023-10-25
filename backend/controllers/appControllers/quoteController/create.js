@@ -56,9 +56,9 @@ const create = async (req, res) => {
       result: updateResult,
       message: 'Quote created successfully',
     });
-  } catch (err) {
-    // If err is thrown by Mongoose due to required validations
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    // If error is thrown by Mongoose due to required validations
+    if (error.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
@@ -69,7 +69,7 @@ const create = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        message: 'Oops there is an Error',
+        message: error.message,
       });
     }
   }

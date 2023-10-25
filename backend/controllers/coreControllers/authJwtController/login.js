@@ -108,8 +108,8 @@ const login = async (req, res) => {
         },
         message: 'Successfully login admin',
       });
-  } catch (err) {
-    res.status(500).json({ success: false, result: null, message: err.message, error: err });
+  } catch (error) {
+    res.status(500).json({ success: false, result: null, message: error.message, error: error });
   }
 };
 

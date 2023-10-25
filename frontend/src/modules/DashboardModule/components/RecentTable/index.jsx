@@ -24,7 +24,7 @@ function DropDownRowMenu({ row, entity }) {
     history.push(`/${entity}/update/${row._id}`);
   }
   function Download() {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
   }
 
   return (

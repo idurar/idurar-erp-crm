@@ -44,13 +44,13 @@ const listBySettingKey = async (req, res) => {
         })
         .end();
     }
-  } catch (err) {
+  } catch (error) {
     // Server Error
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error',
-      error: err,
+      message: error.message,
+      error: error,
     });
   }
 };

@@ -71,14 +71,14 @@ const create = async (req, res) => {
       result: updateResult,
       message: 'Invoice created successfully',
     });
-  } catch (err) {
-    console.log(err);
-    // If err is thrown by Mongoose due to required validations
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    console.log(error);
+    // If error is thrown by Mongoose due to required validations
+    if (error.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: error,
         message: 'Required fields are not supplied',
       });
     } else {
@@ -86,8 +86,8 @@ const create = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        error: err,
-        message: 'Oops there is an Error',
+        error: error,
+        message: error.message,
       });
     }
   }
