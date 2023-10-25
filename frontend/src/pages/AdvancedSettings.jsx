@@ -40,6 +40,9 @@ export default function AdvancedSettings() {
     {
       title: 'Value',
       dataIndex: 'settingValue',
+      render: (text, row) => {
+        return `${text}`;
+      },
     },
     {
       title: 'enabled',
