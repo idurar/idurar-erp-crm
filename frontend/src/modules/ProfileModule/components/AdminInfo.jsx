@@ -8,16 +8,22 @@ import history from '@/utils/history';
 import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { BASE_URL } from '@/config/serverApiConfig';
+
+import { checkImage } from '@/request';
+
+
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
   const currentAdmin = useSelector(selectCurrentAdmin);
-  const srcImgProfile = currentAdmin?.photo ? (
-    BASE_URL + currentAdmin?.photo
-  ) : (
-    <UserOutlined style={{ color: '#333', fontSize: '30px' }} />
-  );
+
+
+  const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
+    ? BASE_URL + currentAdmin?.photo
+    : undefined;
+
+
   return (
     <>
       <PageHeader
@@ -61,7 +67,9 @@ const AdminInfo = ({ config }) => {
             }}
             size={95}
             alt={`${currentAdmin?.name}`}
-          />
+          > 
+           {currentAdmin?.name.charAt(0).toUpperCase()}
+        </Avatar>
         </Col>
         <Col xs={{ span: 24 }} sm={{ span: 18 }}>
           <Descriptions labelStyle={{ fontSize: '17px' }} size="small">

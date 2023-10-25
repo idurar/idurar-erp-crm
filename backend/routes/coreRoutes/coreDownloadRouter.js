@@ -7,9 +7,9 @@ const { hasPermission } = require('@/middlewares/permission');
 router.route('/:subPath/:directory/:id').get(function (req, res) {
   const { subPath, directory, id } = req.params;
 
-  // Handle the /payment/invoice/* route
+  // Handle the /payment/* route
   if (subPath == 'payment' && directory == 'invoice') {
-    downloadPdf(req, res, { directory: 'PaymentInvoice', id });
+    downloadPdf(req, res, { directory: 'Payment', id });
   } else {
     downloadPdf(req, res, { directory, id });
   }

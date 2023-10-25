@@ -22,7 +22,7 @@ const supplierController = require('@/controllers/appControllers/supplierControl
 const supplierOrderController = require('@/controllers/appControllers/supplierOrderController');
 const expenseController = require('@/controllers/appControllers/expenseController');
 const expenseCategoryController = require('@/controllers/appControllers/expenseCategoryController');
-const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
+const paymentController = require('@/controllers/appControllers/paymentController');
 const orderController = require('@/controllers/appControllers/orderController');
 const offerController = require('@/controllers/appControllers/offerController');
 
@@ -235,34 +235,24 @@ router
 // //_____________________________________________ API for client payments_________________
 
 router
-  .route('/payment/invoice/create')
-  .post(hasPermission('create'), catchErrors(paymentInvoiceController.create));
+  .route('/payment/create')
+  .post(hasPermission('create'), catchErrors(paymentController.create));
+router.route('/payment/read/:id').get(hasPermission('read'), catchErrors(paymentController.read));
 router
-  .route('/payment/invoice/read/:id')
-  .get(hasPermission('read'), catchErrors(paymentInvoiceController.read));
+  .route('/payment/update/:id')
+  .patch(hasPermission('update'), catchErrors(paymentController.update));
 router
-  .route('/payment/invoice/update/:id')
-  .patch(hasPermission('update'), catchErrors(paymentInvoiceController.update));
+  .route('/payment/delete/:id')
+  .delete(hasPermission('delete'), catchErrors(paymentController.delete));
+router.route('/payment/search').get(hasPermission('read'), catchErrors(paymentController.search));
+router.route('/payment/list').get(hasPermission('read'), catchErrors(paymentController.list));
+router.route('/payment/filter').get(hasPermission('read'), catchErrors(paymentController.filter));
 router
-  .route('/payment/invoice/delete/:id')
-  .delete(hasPermission('delete'), catchErrors(paymentInvoiceController.delete));
-router
-  .route('/payment/invoice/search')
-  .get(hasPermission('read'), catchErrors(paymentInvoiceController.search));
-router
-  .route('/payment/invoice/list')
-  .get(hasPermission('read'), catchErrors(paymentInvoiceController.list));
-router
-  .route('/payment/invoice/filter')
-  .get(hasPermission('read'), catchErrors(paymentInvoiceController.filter));
-router
-  .route('/payment/invoice/pdf/:id')
-  .get(hasPermission('read'), catchErrors(paymentInvoiceController.generatePDF));
-router
-  .route('/payment/invoice/summary')
-  .get(hasPermission('read'), catchErrors(paymentInvoiceController.summary));
+  .route('/payment/pdf/:id')
+  .get(hasPermission('read'), catchErrors(paymentController.generatePDF));
+router.route('/payment/summary').get(hasPermission('read'), catchErrors(paymentController.summary));
 
-//router.route('/payment/invoice/mail).post( hasPermission('create'),catchErrors(paymentInvoiceController.sendMail));
+//router.route('/payment/mail).post( hasPermission('create'),catchErrors(paymentController.sendMail));
 
 // //_________________________________________________________________API for Offers_____________________
 
