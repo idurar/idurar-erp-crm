@@ -16,8 +16,8 @@ require('dotenv').config({ path: '.variables.env' });
 
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
-  console.error(`🚫 Error → : ${err.message}`);
+mongoose.connection.on('error', (error) => {
+  console.error(`🚫 Error → : ${error.message}`);
 });
 
 const glob = require('glob');

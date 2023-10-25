@@ -33,12 +33,12 @@ const remove = async (req, res) => {
       result: deletedInvoice,
       message: 'Invoice deleted successfully',
     });
-  } catch (err) {
+  } catch (error) {
     return res.status(500).json({
       success: false,
       result: null,
-      error: err,
-      message: 'Oops there is an Error',
+      error: error,
+      message: error.message,
     });
   }
 };

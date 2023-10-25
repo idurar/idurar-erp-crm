@@ -47,29 +47,29 @@ module.exports = sendMail = async (req, res) => {
             });
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         return res.status(500).json({
           success: false,
           result: null,
-          error: err,
-          message: 'Oops there is an Error',
+          error: error,
+          message: error.message,
         });
       });
-  } catch (err) {
-    // If err is thrown by Mongoose due to required validations
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    // If error is thrown by Mongoose due to required validations
+    if (error.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: error,
         message: 'Required fields are not supplied',
       });
-    } else if (err.name == 'BSONTypeError') {
-      // If err is thrown by Mongoose due to invalid ID
+    } else if (error.name == 'BSONTypeError') {
+      // If error is thrown by Mongoose due to invalid ID
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: error,
         message: 'Invalid ID',
       });
     } else {
@@ -77,8 +77,8 @@ module.exports = sendMail = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        error: err,
-        message: 'Oops there is an Error',
+        error: error,
+        message: error.message,
       });
     }
   }

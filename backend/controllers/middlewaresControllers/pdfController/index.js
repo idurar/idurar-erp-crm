@@ -30,8 +30,8 @@ exports.generatePdf = async (
       orientation: 'portrait',
       border: '12mm',
     })
-    .toFile(targetLocation, function (err) {
-      if (err) return console.log('this pdf create error ' + err);
+    .toFile(targetLocation, function (error) {
+      if (error) return console.log('this pdf create error ' + error);
       if (callback) callback(targetLocation);
     });
 };

@@ -50,10 +50,14 @@ const convertQuoteToInvoice = async (req, res) => {
       note: quote.note,
     };
 
+    invoiceData['createdBy'] = req.admin._id;
+    // Creating a new document in the collection
+
     // Create the invoice document
     const invoice = await new InvoiceModel(invoiceData).save();
 
     // Mark the quote as converted
+    quote['createdBy'] = req.admin._id;
     quote.converted = true;
     await quote.save();
 
@@ -63,19 +67,21 @@ const convertQuoteToInvoice = async (req, res) => {
       result: quote,
       message: 'Successfully converted quote to invoice',
     });
-  } catch (err) {
+  } catch (error) {
     // If error is because of Invalid ObjectId
-    if (err.kind == 'ObjectId') {
+    if (error.kind == 'ObjectId') {
       return res.status(400).json({
         success: false,
         result: null,
         message: 'Invalid ID format',
+        error: error,
       });
     } else {
       return res.status(500).json({
         success: false,
         result: null,
-        message: 'Oops there is an Errorr',
+        error,
+        message: error.message,
       });
     }
   }

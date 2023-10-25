@@ -14,8 +14,8 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
     root: path.join(__dirname, `../../public/${subPath}/${directory}`),
   };
   const fileName = file;
-  res.sendFile(fileName, options, function (err) {
-    if (err) {
+  res.sendFile(fileName, options, function (error) {
+    if (error) {
       res.sendStatus(404);
     }
   });

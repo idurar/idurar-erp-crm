@@ -84,22 +84,22 @@ const update = async (req, res) => {
       result,
       message: 'Successfully updated the Payment ',
     });
-  } catch (err) {
-    // If err is thrown by Mongoose due to required validations
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    // If error is thrown by Mongoose due to required validations
+    if (error.name == 'ValidationError') {
       res.status(400).json({
         success: false,
         result: null,
         message: 'Required fields are not supplied',
-        error: err,
+        error: error,
       });
     } else {
       // Server Error
       res.status(500).json({
         success: false,
         result: null,
-        message: err.message,
-        error: err,
+        message: error.message,
+        error: error,
       });
     }
   }
