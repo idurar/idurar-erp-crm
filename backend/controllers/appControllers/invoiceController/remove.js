@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('Invoice');
-const ModalPaymentInvoice = mongoose.model('PaymentInvoice');
+const ModalPayment = mongoose.model('Payment');
 
 const remove = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ const remove = async (req, res) => {
         message: 'Invoice not found',
       });
     }
-    const paymentsInvoices = await ModalPaymentInvoice.updateMany(
+    const paymentsInvoices = await ModalPayment.updateMany(
       { invoice: deletedInvoice._id },
       { $set: { removed: true } }
     );

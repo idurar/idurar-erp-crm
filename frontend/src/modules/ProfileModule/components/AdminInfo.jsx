@@ -9,17 +9,17 @@ import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { BASE_URL } from '@/config/serverApiConfig';
 
+import { checkImage } from '@/request';
+
 const AdminInfo = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
   const currentAdmin = useSelector(selectCurrentAdmin);
 
-  const srcImgProfile = currentAdmin?.photo ? (
-    BASE_URL + currentAdmin?.photo
-  ) : (
-    <UserOutlined style={{ color: '#333', fontSize: 'inherit' }} />
-  );
+  const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
+    ? BASE_URL + currentAdmin?.photo
+    : undefined;
 
   return (
     <>
@@ -54,16 +54,15 @@ const AdminInfo = ({ config }) => {
       ></PageHeader>
       <Row align="middle">
         <Col xs={{ span: 24 }} sm={{ span: 7 }} md={{ span: 5 }}>
-          <img
-            className="last left circle pad5"
+          <Avatar
+            className="last left pad5"
             src={srcImgProfile}
-            style={{
-              width: '100px',
-              height: '100px',
-              border: '2px solid #1B98F5',
-            }}
+            size={96}
+            style={{ color: '#f56a00', backgroundColor: '#fde3cf', fontSize: '48px' }}
             alt={`${currentAdmin?.name}`}
-          />
+          >
+            {currentAdmin?.name.charAt(0).toUpperCase()}
+          </Avatar>
         </Col>
         <Col xs={{ span: 24 }} sm={{ span: 18 }}>
           <Descriptions labelStyle={{ fontSize: '17px' }} size="small">
@@ -109,7 +108,6 @@ const AdminInfo = ({ config }) => {
           </Descriptions>
         </Col>
       </Row>
-
       <Divider />
       <Button
         key={`${uniqueId()}`}
@@ -122,5 +120,4 @@ const AdminInfo = ({ config }) => {
     </>
   );
 };
-
 export default AdminInfo;

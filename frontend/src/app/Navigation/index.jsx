@@ -34,7 +34,7 @@ const SIDEBAR_MENU = [
   // { key: '/kyc', icon: <ShoppingCartOutlined />, title: 'Kyc' },
   { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
   { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
-  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
+  { key: '/payment', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
   { key: '/employee', icon: <UserOutlined />, title: 'Employee' },
   { key: '/admin', icon: <TeamOutlined />, title: 'Admin' },
 ];

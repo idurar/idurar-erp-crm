@@ -37,7 +37,7 @@ const create = async (req, res) => {
 
     // Creating a new document in the collection
     const result = await new Model(body).save();
-    const fileId = 'invoice-' + result._id + '.pdf';
+    const fileId = 'quote-' + result._id + '.pdf';
     const updateResult = await Model.findOneAndUpdate(
       { _id: result._id },
       { pdfPath: fileId },

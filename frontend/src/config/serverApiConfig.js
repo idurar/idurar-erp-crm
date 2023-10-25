@@ -8,6 +8,6 @@ export const BASE_URL =
     : 'http://localhost:8888/';
 export const DOWNLOAD_BASE_URL =
   process.env.NODE_ENV == 'production' || process.env.REACT_APP_DEV_REMOTE == 'remote'
-    ? process.env.REACT_APP_BACKEND_SERVER + '/download/'
+    ? process.env.REACT_APP_BACKEND_SERVER + 'download/'
     : 'http://localhost:8888/download/';
 export const ACCESS_TOKEN_NAME = 'x-auth-token';

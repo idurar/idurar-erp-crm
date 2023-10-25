@@ -9,13 +9,13 @@ import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
-import { useErpContext } from '@/context/erp';
 import calculate from '@/utils/calculate';
 import uniqueId from '@/utils/uinqueId';
 
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+
+import history from '@/utils/history';
 
 function SaveForm({ form, config }) {
   let { CREATE_ENTITY } = config;
@@ -37,11 +37,8 @@ export default function CreateItem({ config, CreateForm }) {
     dispatch(settingsAction.list({ entity: 'setting' }));
   }, []);
   let { entity, CREATE_ENTITY } = config;
-  const { erpContextAction } = useErpContext();
-  const history = useHistory();
-  const { createPanel } = erpContextAction;
 
-  const { isLoading, isSuccess } = useSelector(selectCreatedItem);
+  const { isLoading, isSuccess, result } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const [offerSubTotal, setOfferSubTotal] = useState(0);
@@ -76,8 +73,7 @@ export default function CreateItem({ config, CreateForm }) {
       dispatch(erp.resetAction({ actionType: 'create' }));
       setSubTotal(0);
       setOfferSubTotal(0);
-      createPanel.close();
-      dispatch(erp.list({ entity }));
+      history.push(`/${entity.toLowerCase()}/read/${result._id}`);
     }
     return () => {};
   }, [isSuccess]);
@@ -102,7 +98,6 @@ export default function CreateItem({ config, CreateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          // createPanel.close();
           history.push(`/${entity.toLowerCase()}`);
         }}
         title={CREATE_ENTITY}

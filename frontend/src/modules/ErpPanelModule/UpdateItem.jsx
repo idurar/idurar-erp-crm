@@ -6,7 +6,6 @@ import { Button, PageHeader, Row, Col, Tag } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 
-import { useErpContext } from '@/context/erp';
 import calculate from '@/utils/calculate';
 import uniqueId from '@/utils/uinqueId';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
@@ -31,8 +30,7 @@ function SaveForm({ form, config }) {
 
 export default function UpdateItem({ config, UpdateForm }) {
   let { entity, UPDATE_ENTITY } = config;
-  const { erpContextAction } = useErpContext();
-  const { updatePanel } = erpContextAction;
+
   const dispatch = useDispatch();
   const history = useHistory();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
@@ -80,7 +78,6 @@ export default function UpdateItem({ config, UpdateForm }) {
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
       history.push(`/${entity.toLowerCase()}/read/${id}`);
-      dispatch(erp.list({ entity }));
     }
   }, [isSuccess]);
 
@@ -107,7 +104,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.goBack();
+          history.push(`/${entity.toLowerCase()}`);
         }}
         title={UPDATE_ENTITY}
         ghost={false}
