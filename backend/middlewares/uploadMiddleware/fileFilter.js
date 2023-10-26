@@ -7,6 +7,7 @@ const fileFilter =
       'image/png',
       'image/gif',
       'image/webp',
+      'image/svg+xml',
       'application/msword',
       'text/plain',
       'text/csv',
@@ -62,7 +63,6 @@ const fileFilter =
     } else if (type === 'compressed') {
       if (
         !file.mimetype.startsWith('application/zip') &&
-        !file.mimetype.startsWith('application/x-zip-compressed') &&
         !file.mimetype.startsWith('application/x-zip-compressed') &&
         !file.mimetype.startsWith('application/vnd.rar')
       ) {

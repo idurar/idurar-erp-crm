@@ -8,13 +8,13 @@ import { selectSettings } from '@/redux/settings/selectors';
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
-export default function UpdatelSettingForm({ config, children }) {
+export default function UpdateSettingForm({ config, children }) {
   let { entity, settingsCategory } = config;
   const dispatch = useDispatch();
   const { result, isLoading, isSuccess } = useSelector(selectSettings);
 
   const [form] = Form.useForm();
-  const [isNotChanged, setChanged] = useState(true);
+
   const onSubmit = (fieldsValue) => {
     const settings = [];
 
@@ -22,10 +22,8 @@ export default function UpdatelSettingForm({ config, children }) {
       settings.push({ settingKey: key, settingValue: value });
     }
 
-    console.log('🚀 ~ file: index.jsx:20 ~ onSubmit ~ settings:', settings);
     dispatch(settingsAction.updateMany({ entity, jsonData: { settings } }));
   };
-  const currentSettings = result[settingsCategory];
 
   const handleValuesChange = (fieldsValue, allValues) => {
     // console.log('🚀 ~ file: index.jsx:29 ~ UpdatelSettingForm ~ currentSettings:', currentSettings);
@@ -50,13 +48,6 @@ export default function UpdatelSettingForm({ config, children }) {
 
     form.setFieldsValue(current);
   }, [result]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      //form.resetFields();
-      dispatch(settingsAction.list({ entity }));
-    }
-  }, [isSuccess]);
 
   return (
     <div>

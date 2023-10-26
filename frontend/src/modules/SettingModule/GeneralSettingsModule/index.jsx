@@ -1,10 +1,10 @@
 import SetingsSection from '../components/SetingsSection';
-import SettingModuleLayout from '../components/SettingModuleLayout';
+import UpdateSettingModule from '../components/UpdateSettingModule';
 import GeneralSettingForm from './forms/GeneralSettingForm';
 
 export default function GeneralSettingsModule({ config }) {
   return (
-    <SettingModuleLayout config={config}>
+    <UpdateSettingModule config={config}>
       <SetingsSection title="Company" description="Update your company name and logo">
         <GeneralSettingForm />
       </SetingsSection>
@@ -16,6 +16,6 @@ export default function GeneralSettingsModule({ config }) {
       <SetingsSection title="Other details" description="Add your website and other links">
         <GeneralSettingForm />
       </SetingsSection> */}
-    </SettingModuleLayout>
+    </UpdateSettingModule>
   );
 }
