@@ -9,7 +9,8 @@ if (major < 14 || (major === 14 && minor <= 0)) {
 }
 
 // import environmental variables from our variables.env file
-require('dotenv').config({ path: '.variables.env' });
+require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env.local' });
 
 // Connect to our Database and handle any bad connections
 // mongoose.connect(process.env.DATABASE);
@@ -17,6 +18,9 @@ require('dotenv').config({ path: '.variables.env' });
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (error) => {
+  console.log(
+    `1. 🔥 Commun Error caused issue → : check your .env file first and add your mongodb url`
+  );
   console.error(`🚫 Error → : ${error.message}`);
 });
 
