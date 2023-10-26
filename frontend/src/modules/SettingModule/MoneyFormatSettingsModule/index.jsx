@@ -1,13 +1,13 @@
 import SetingsSection from '../components/SetingsSection';
-import SettingModuleLayout from '../components/SettingModuleLayout';
+import UpdateSettingModule from '../components/UpdateSettingModule';
 import MoneyFormSettingForm from './forms/MoneyFormSettingForm';
 
 export default function MoneyFormatSettingsModule({ config }) {
   return (
-    <SettingModuleLayout config={config}>
+    <UpdateSettingModule config={config}>
       <SetingsSection title="Money Format" description="Update your money format">
         <MoneyFormSettingForm />
       </SetingsSection>
-    </SettingModuleLayout>
+    </UpdateSettingModule>
   );
 }

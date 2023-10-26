@@ -4,6 +4,7 @@ import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-desi
 import { SettingsLayout } from '@/layout';
 import Visibility from '@/components/Visibility';
 
+import AppSettings from './AppSettings';
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
@@ -11,6 +12,7 @@ import MoneyFormatSettings from './MoneyFormatSettings';
 
 const menuItems = [
   { key: 'generalSettings', label: 'General Settings', icon: <SettingOutlined /> },
+  { key: 'appSettings', label: 'App Settings', icon: <SettingOutlined /> },
   { key: 'moneyFormatSettings', label: 'Currency Settings', icon: <SettingOutlined /> },
   { key: 'paymentSettings', label: 'Payment Settings', icon: <CreditCardOutlined /> },
   { key: 'invoiceSettings', label: 'Invoice Settings', icon: <FileTextOutlined /> },
@@ -18,6 +20,7 @@ const menuItems = [
 
 const settingsArray = [
   <GeneralSettings />,
+  <AppSettings />,
   <MoneyFormatSettings />,
   <PaymentSettings />,
   <InvoiceSettings />,

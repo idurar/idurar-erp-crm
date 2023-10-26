@@ -1,9 +1,9 @@
 import uniqueId from '@/utils/uinqueId';
 import { PlusOutlined, SyncOutlined } from '@ant-design/icons';
 import { Button, Divider, Form, Input, PageHeader, Upload } from 'antd';
-import UpdatelSettingForm from './UpdatelSettingForm';
+import UpdateSettingForm from './UpdateSettingForm';
 
-export default function SettingModuleLayout({ config, children }) {
+export default function UpdateSettingModule({ config, children }) {
   return (
     <>
       <PageHeader
@@ -20,7 +20,7 @@ export default function SettingModuleLayout({ config, children }) {
       ></PageHeader>
 
       <Divider></Divider>
-      <UpdatelSettingForm config={config}>{children}</UpdatelSettingForm>
+      <UpdateSettingForm config={config}>{children}</UpdateSettingForm>
     </>
   );
 }
