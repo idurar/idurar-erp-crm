@@ -92,7 +92,7 @@ export default function AdminForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="file"
-        label="File"
+        label="Photo"
         valuePropName="fileList"
         getValueFromEvent={(e) => e.fileList}
       >

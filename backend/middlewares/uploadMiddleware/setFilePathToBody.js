@@ -5,7 +5,7 @@ module.exports = (fieldName = 'filePath') => {
       req.body[fieldName] = req.file.path;
     }
     // if (req.files) {
-    //     req.body[req.files.fieldname] = req.files.path
+    //     req.body[req.files.fieldName] = req.files.path
     // }
     next();
   };

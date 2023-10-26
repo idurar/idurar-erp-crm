@@ -7,6 +7,20 @@
     "isCoreSetting": true
   },
   {
+    "settingCategory": "app_icon",
+    "settingKey": "app_name",
+    "settingValue": "https://www.idurarapp.com/Theme/idurar-no-code-app/assets/img/idurar-ai-no-code-app-logo.svg",
+    "valueType": "image",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "app_logo",
+    "settingKey": "app_name",
+    "settingValue": "https://www.idurarapp.com/Theme/idurar-no-code-app/assets/img/idurar-ai-no-code-app-logo.svg",
+    "valueType": "image",
+    "isCoreSetting": true
+  },
+  {
     "settingCategory": "app_settings",
     "settingKey": "language",
     "settingValue": "en_us",

@@ -64,6 +64,42 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
+        label="Setting Category"
+        name="settingCategory"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Select
+          placeholder="Select Setting Category"
+          options={[
+            {
+              value: 'app_settings',
+              label: 'App Settings',
+            },
+            {
+              value: 'crm_settings',
+              label: 'Crm Settings',
+            },
+
+            {
+              value: 'finance_settings',
+              label: 'Finance Settings',
+            },
+            {
+              value: 'company_settings',
+              label: 'Company Settings',
+            },
+            {
+              value: 'money_format_settings',
+              label: 'Money Format Settings',
+            },
+          ]}
+        />
+      </Form.Item>
+      <Form.Item
         label="Setting Name"
         name="settingKey"
         rules={[
@@ -85,8 +121,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
         ]}
       >
         <Select
-          placeholder="Please select"
-          // defaultValue={['a10', 'c12']}
+          placeholder="Select Setting Type"
           onChange={handleChange}
           options={[
             {
