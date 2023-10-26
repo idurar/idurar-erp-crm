@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 
 const Admin = mongoose.model('Admin');
 
-require('dotenv').config({ path: '.variables.env' });
-
 const isValidAdminToken = async (req, res, next) => {
   try {
     const token = req.cookies.token;

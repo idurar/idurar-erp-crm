@@ -73,7 +73,11 @@ export default function Invoice() {
     {
       title: 'Created By',
       dataIndex: ['createdBy', 'name'],
-      render: (createdBy) => (createdBy ? createdBy : 'Adminstrator'),
+      // render: (name) => {
+      //   console.log('🚀 ~ file: index.jsx:81 ~ Invoice ~ name:', name);
+      //   let color = name !== '' ? 'blue' : 'gray';
+      //   return <Tag color={color}>{name ? name : 'Administrator'}</Tag>;
+      // },
     },
   ];
 

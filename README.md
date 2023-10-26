@@ -57,16 +57,15 @@ cd idurar-erp-crm
 
 - add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
 
-#### Step 3: Create the Environment File
+#### Step 3: Edit the Environment File
 
-- Create a file named .variables.env in the /backend directory.
-- Copy all variables from tmp.variables.env .
-- Paste the copied variables inside .variables.env.
+- Check a file named .env in the /backend directory.
+
   This file will store environment variables for the project to run.
 
 #### Step 4: Update MongoDB URI
 
-In the .variables.env file, find the line that reads:
+In the .env file, find the line that reads:
 
 `DATABASE="your-mongodb-uri"`
 

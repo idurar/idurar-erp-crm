@@ -8,8 +8,6 @@ const mongoose = require('mongoose');
 
 const Admin = mongoose.model('Admin');
 
-require('dotenv').config({ path: '.variables.env' });
-
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
