@@ -6,7 +6,7 @@ const router = express.Router();
 
 const multer = require('multer');
 const path = require('path');
-const setFilePathToBody = require('@/middlewares/setFilePathToBody');
+const setFilePathToBody = require('@/middlewares/uploadMiddleware/setFilePathToBody');
 
 const { hasPermission } = require('@/middlewares/permission');
 
