@@ -10,6 +10,8 @@ import { updateProfile } from '@/redux/auth/actions';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 const UpdateAdmin = ({ config }) => {
   const { profileContextAction } = useProfileContext();
   const { updatePanel } = profileContextAction;

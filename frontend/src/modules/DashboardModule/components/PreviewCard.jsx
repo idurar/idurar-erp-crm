@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 const colours = {
   draft: '#595959',

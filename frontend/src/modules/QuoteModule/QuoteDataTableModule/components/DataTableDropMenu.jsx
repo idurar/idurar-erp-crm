@@ -8,6 +8,7 @@ import {
   CreditCardOutlined,
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { erp } from '@/redux/erp/actions';
 import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
@@ -24,13 +25,11 @@ export default function DataTableDropMenu({ row, entity }) {
   const item = useSelector(selectItemById(row._id));
   function Read() {
     dispatch(erp.currentItem({ data: item }));
-    // readPanel.open();
     history.push(`/quote/read/${row._id}`);
   }
 
   function Edit() {
     dispatch(erp.currentAction({ actionType: 'update', data: item }));
-    // updatePanel.open();
     history.push(`/quote/update/${row._id}`);
   }
   function Delete() {

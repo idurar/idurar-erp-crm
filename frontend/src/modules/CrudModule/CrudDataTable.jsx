@@ -5,6 +5,7 @@ import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectItemById } from '@/redux/crud/selectors';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { useCrudContext } from '@/context/crud';
 import uniqueId from '@/utils/uinqueId';
 import DataTable from '@/components/DataTable';

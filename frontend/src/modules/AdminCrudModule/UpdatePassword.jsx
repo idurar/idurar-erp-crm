@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { useCrudContext } from '@/context/crud';
 import { selectUpdatedItem } from '@/redux/crud/selectors';
 

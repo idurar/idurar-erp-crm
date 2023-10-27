@@ -13,6 +13,7 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';

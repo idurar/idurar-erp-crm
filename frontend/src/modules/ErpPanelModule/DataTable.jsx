@@ -3,6 +3,7 @@ import { Descriptions, Dropdown, Table } from 'antd';
 import { Button, PageHeader } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';

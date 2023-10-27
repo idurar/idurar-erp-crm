@@ -7,6 +7,7 @@ import { erp } from '@/redux/erp/actions';
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { useParams, useHistory } from 'react-router-dom';
 
 export default function ReadInvoiceModule({ config }) {

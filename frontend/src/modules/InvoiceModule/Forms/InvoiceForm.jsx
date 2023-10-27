@@ -12,6 +12,7 @@ import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';

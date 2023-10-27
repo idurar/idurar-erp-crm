@@ -3,6 +3,8 @@ import { Form, Input, InputNumber, Button, Select, Divider, Row, Col, Typography
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { PlusOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 const { Paragraph } = Typography;
 

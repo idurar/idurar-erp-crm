@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { Button, PageHeader, Row, Col, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { erp } from '@/redux/erp/actions';
 
 import calculate from '@/utils/calculate';

@@ -7,6 +7,8 @@ import photo from '@/style/images/photo.png';
 import history from '@/utils/history';
 import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
+
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { BASE_URL } from '@/config/serverApiConfig';
 
 import { checkImage } from '@/request';
