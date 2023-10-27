@@ -138,14 +138,6 @@ function FixHeaderPanel({ config }) {
           ></Button>
         </Col>
       </Row>
-      <Row gutter={8}>
-        <Col className="gutter-row" span={21}>
-          <SearchItem config={config} />
-        </Col>
-        <Col className="gutter-row" span={3}>
-          <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
-        </Col>
-      </Row>
     </div>
   );
 }
