@@ -17,44 +17,66 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
 
-export default function DataTableDropMenu({ row, entity }) {
+const Read = ({ record, entity }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { erpContextAction } = useErpContext();
-  const { recordPanel, modal } = erpContextAction;
-  const item = useSelector(selectItemById(row._id));
-  function Read() {
+  const item = useSelector(selectItemById(record._id));
+  function onClick() {
     dispatch(erp.currentItem({ data: item }));
-    // readPanel.open();
-    history.push(`/offer/read/${row._id}`);
+    history.push(`/offer/read/${record._id}`);
   }
 
-  function Edit() {
-    dispatch(erp.currentAction({ actionType: 'update', data: item }));
-    // updatePanel.open();
-    history.push(`/offer/update/${row._id}`);
-  }
-  function Delete() {
-    dispatch(erp.currentAction({ actionType: 'delete', data: item }));
-    modal.open();
-  }
-  function Download() {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
-  }
-  return (
-    <Menu style={{ minWidth: 130 }}>
-      <Menu.Item key={`${uniqueId()}`} icon={<EyeOutlined />} onClick={Read}>
-        Show
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
-        Edit
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`} icon={<FilePdfOutlined />} onClick={Download}>
-        Download
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`} icon={<DeleteOutlined />} onClick={Delete}>
-        Delete
-      </Menu.Item>
-    </Menu>
-  );
+  return <div onClick={onClick}>Read</div>;
+};
+
+export default function DataTableDropMenu({ row, entity }) {
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  // const { erpContextAction } = useErpContext();
+  // const { recordPanel, modal } = erpContextAction;
+  // const item = useSelector(selectItemById(row._id));
+  // function Read(e) {
+  //   e.preventDefault();
+  //   dispatch(erp.currentItem({ data: item }));
+
+  //   history.push(`/offer/read/${row._id}`);
+  // }
+
+  // function Edit() {
+  //   e.preventDefault();
+  //   dispatch(erp.currentAction({ actionType: 'update', data: item }));
+
+  //   history.push(`/offer/update/${row._id}`);
+  // }
+  // function Delete() {
+  //   e.preventDefault();
+  //   dispatch(erp.currentAction({ actionType: 'delete', data: item }));
+  //   modal.open();
+  // }
+  // function Download() {
+  //   e.preventDefault();
+  //   window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
+  // }
+  return [
+    {
+      label: <Read row={row} entity={entity} />,
+      key: `${uniqueId()}`,
+      icon: <EyeOutlined />,
+    },
+    {
+      label: <Read row={row} entity={entity} />,
+      key: `${uniqueId()}`,
+      icon: <EditOutlined />,
+    },
+    {
+      label: <Read row={row} entity={entity} />,
+      key: `${uniqueId()}`,
+      icon: <FilePdfOutlined />,
+    },
+    {
+      label: <Read row={row} entity={entity} />,
+      key: `${uniqueId()}`,
+      icon: <DeleteOutlined />,
+    },
+  ];
 }

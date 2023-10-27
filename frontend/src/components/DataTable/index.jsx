@@ -11,8 +11,7 @@ import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
-  // console.log('entity from components->dataTable', entity);
-  // console.log('config from components->dataTable', config);
+
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -36,8 +35,16 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
     dispatch(crud.list({ entity, options }));
   }, []);
 
-  useEffect(() => {
+  const dispatcher = () => {
     dispatch(crud.list({ entity }));
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    dispatcher();
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(

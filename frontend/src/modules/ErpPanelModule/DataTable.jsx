@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useEffectLayout, useRef, useState } from 'react';
 import { Descriptions, Dropdown, Table } from 'antd';
-import { Button, PageHeader } from 'antd';
+import { Button, PageHeader, Space } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentLang } from '@/redux/lang/selectors';
@@ -12,6 +12,11 @@ import { useHistory } from 'react-router-dom';
 
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
+
+import { selectItemById } from '@/redux/erp/selectors';
+
+import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+
 function AddNewItem({ config }) {
   const history = useHistory();
   const { ADD_NEW_ENTITY, entity } = config;
@@ -32,33 +37,80 @@ function AddNewItem({ config }) {
 export default function DataTable({ config, DataTableDropMenu }) {
   let { entity, dataTableColumns, create = true } = config;
   const { DATATABLE_TITLE } = config;
+
+  const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
+
+  const { pagination, items: dataSource } = listResult;
+
+  const items = [
+    {
+      label: '1nd menu item',
+      key: '0',
+    },
+    {
+      label: <a href="https://www.aliyun.com">2nd menu item</a>,
+      key: '1',
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: '3rd menu item',
+      key: '3',
+    },
+  ];
+
+  const history = useHistory();
+
+  const handleCreateChildTask = (record) => {
+    console.log('record', record);
+
+    console.log('🚀 ~ file: DataTable.jsx:22 ~ Read ~ record:', record);
+    const item = dataSource.find((item) => item._id === record._id);
+    dispatch(erp.currentItem({ data: item }));
+
+    history.push(`/offer/read/${record._id}`);
+  };
+
   dataTableColumns = [
     ...dataTableColumns,
     {
-      title: '',
-      render: (row) => (
-        <Dropdown overlay={DataTableDropMenu({ row, entity })} trigger={['click']}>
-          <EllipsisOutlined style={{ cursor: 'pointer', fontSize: '24px' }} />
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Dropdown
+          menu={{
+            items,
+            onClick: ({ key }) => {
+              handleCreateChildTask(record);
+              // else if (key === '2')handleCloseTask
+            },
+          }}
+          trigger={['click']}
+        >
+          <EllipsisOutlined
+            style={{ cursor: 'pointer', fontSize: '24px' }}
+            onClick={(e) => e.preventDefault()}
+          />
         </Dropdown>
       ),
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
-
-  const { pagination, items } = listResult;
-
   const dispatch = useDispatch();
 
-  const handelDataTableLoad = useCallback((pagination) => {
+  const handelDataTableLoad = (pagination) => {
     const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
     dispatch(erp.list({ entity, options }));
-  }, []);
+  };
+
+  const dispatcher = () => {
+    dispatch(erp.list({ entity }));
+  };
 
   useEffect(() => {
     const controller = new AbortController();
-    dispatch(erp.list({ entity }));
-
+    dispatcher();
     return () => {
       controller.abort();
     };
@@ -90,7 +142,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
       <Table
         columns={tableColumns}
         rowKey={(item) => item._id}
-        dataSource={items}
+        dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
