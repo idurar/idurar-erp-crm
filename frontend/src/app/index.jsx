@@ -1,14 +1,18 @@
-
+import { useState, useEffect } from 'react';
 import Router from '@/router';
+import enUS from 'antd/es/locale/en_US';
+import zhCN from 'antd/es/locale/zh_CN';
+import frFR from 'antd/es/locale/fr_FR';
 
 import useNetwork from '@/hooks/useNetwork';
 
-import { Layout, notification } from 'antd';
+import { Layout, ConfigProvider } from 'antd';
 
 import Navigation from '@/app/Navigation';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
+import { selectLangCode } from '@/redux/lang/selectors';
 
 import HeaderContent from '@/app/HeaderContent';
 // import { useNetworkState } from "react-use";
@@ -26,23 +30,41 @@ function App() {
   //     description: "Cannot connect to the server, Check your internet network",
   //   });
   // }
-  const dispatch = useDispatch();
-
-
-
 
   const { isLoggedIn } = useSelector(selectAuth);
+  const langCode = useSelector(selectLangCode);
 
-  if (!isLoggedIn) return <Router />;
+  const [locale, setLocal] = useState(enUS);
+
+  useEffect(() => {
+    if (langCode === 'fr_FR') {
+      setLocal(frFR);
+    } else {
+      setLocal(enUS);
+    }
+
+    return () => {
+      return false;
+    };
+  }, [langCode]);
+
+  if (!isLoggedIn)
+    return (
+      <ConfigProvider direction="ltr" locale={locale}>
+        <Router />
+      </ConfigProvider>
+    );
   else {
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Navigation />
+      <ConfigProvider direction="ltr" locale={locale}>
         <Layout style={{ minHeight: '100vh' }}>
-          <HeaderContent />
-          <Router isLoggedIn={true} />
+          <Navigation />
+          <Layout style={{ minHeight: '100vh' }}>
+            <HeaderContent />
+            <Router isLoggedIn={true} />
+          </Layout>
         </Layout>
-      </Layout>
+      </ConfigProvider>
     );
   }
 }

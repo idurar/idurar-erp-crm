@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule';
@@ -85,21 +89,23 @@ export default function PaymentMode() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new payment mode';
-  const DATATABLE_TITLE = 'Payment Modes List';
-  const ENTITY_NAME = 'payment mode';
-  const CREATE_ENTITY = 'Create payment mode';
-  const UPDATE_ENTITY = 'Update payment mode';
-  const PANEL_TITLE = 'Currency Panel';
+  const lang = useSelector(selectCurrentLang);
 
-  const config = {
+  const Labels = {
+    PANEL_TITLE: lang.payment_mode,
+    DATATABLE_TITLE: lang.payment_mode_list,
+    ADD_NEW_ENTITY: lang.add_new_payment_mode,
+    ENTITY_NAME: lang.payment_mode,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

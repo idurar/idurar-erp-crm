@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule';
@@ -68,21 +72,24 @@ export default function AdvancedSettings() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new Setting';
-  const DATATABLE_TITLE = 'Settings List';
-  const ENTITY_NAME = 'advanced settings';
-  const CREATE_ENTITY = 'Create a setting';
-  const UPDATE_ENTITY = 'Update a setting';
-  const PANEL_TITLE = 'Settings Panel';
+  const lang = useSelector(selectCurrentLang);
 
-  const config = {
+  const Labels = {
+    PANEL_TITLE: lang.setting,
+    DATATABLE_TITLE: lang.setting_list,
+    ADD_NEW_ENTITY: lang.add_new_setting,
+    ENTITY_NAME: lang.setting,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+    RECORD_ENTITY: lang.record_payment,
+  };
+
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

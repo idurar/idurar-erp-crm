@@ -11,6 +11,7 @@ import { useMoney } from '@/settings';
 
 import RecordPayment from './RecordPayment';
 import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { selectRecordPaymentItem } from '@/redux/erp/selectors';
 import history from '@/utils/history';
 

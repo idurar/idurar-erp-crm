@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 

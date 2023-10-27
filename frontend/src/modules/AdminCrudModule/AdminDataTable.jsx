@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectItemById } from '@/redux/crud/selectors';
 import { useCrudContext } from '@/context/crud';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import uniqueId from '@/utils/uinqueId';
 import DataTable from '@/components/DataTable';
 

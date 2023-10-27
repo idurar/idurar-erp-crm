@@ -10,13 +10,11 @@ import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-
 const { Title, Paragraph } = Typography;
-
-
 
 export default function ReadItem({ config, selectedItem }) {
   const { entity, ENTITY_NAME } = config;
@@ -29,14 +27,12 @@ export default function ReadItem({ config, selectedItem }) {
   const { readPanel, updatePanel } = erpContextAction;
 
   const resetErp = {
-
     emailName: '',
     emailKey: '',
     emailSubject: '',
     emailBody: '',
     emailVariables: [],
     _id: '',
-
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
@@ -91,7 +87,6 @@ export default function ReadItem({ config, selectedItem }) {
         style={{
           padding: '20px 0px',
         }}
-
       ></PageHeader>
       <Divider dashed />
       <div>
@@ -99,7 +94,6 @@ export default function ReadItem({ config, selectedItem }) {
         <Paragraph>{currentErp.emailSubject}</Paragraph>
         <Title level={3}>Body</Title>
         <div dangerouslySetInnerHTML={{ __html: currentErp.emailBody }} />
-
       </div>
     </>
   );

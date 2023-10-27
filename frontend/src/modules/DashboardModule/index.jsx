@@ -1,5 +1,7 @@
 import React from 'react';
 import { Tag, Row, Col } from 'antd';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import { DashboardLayout } from '@/layout';
 

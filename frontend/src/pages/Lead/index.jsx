@@ -5,9 +5,11 @@ import React from 'react';
 import CrudModule from '@/modules/CrudModule';
 import LeadForm from '@/forms/LeadForm';
 
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 export default function Lead() {
+  const entity = 'lead';
   const searchConfig = {
     displayLabels: ['firstname', 'company'],
     searchFields: 'firstname,company',
@@ -88,10 +90,24 @@ export default function Lead() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.lead,
+    DATATABLE_TITLE: lang.lead_list,
+    ADD_NEW_ENTITY: lang.add_new_lead,
+    ENTITY_NAME: lang.lead,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
-    readColumns,
     dataTableColumns,
+    readColumns,
     searchConfig,
     entityDisplayLabels,
   };

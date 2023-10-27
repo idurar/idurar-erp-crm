@@ -3,8 +3,12 @@ import React from 'react';
 import CrudModule from '@/modules/CrudModule';
 import CustomerForm from '@/forms/CustomerForm';
 
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 function Customer() {
   const entity = 'client';
+
   const searchConfig = {
     displayLabels: ['company'],
     searchFields: 'company,managerSurname,managerName',
@@ -54,26 +58,28 @@ function Customer() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new customer';
-  const DATATABLE_TITLE = 'Customers List';
-  const ENTITY_NAME = 'customer';
-  const CREATE_ENTITY = 'Create customer';
-  const UPDATE_ENTITY = 'Update customer';
-  const PANEL_TITLE = 'Customer Panel';
+  const lang = useSelector(selectCurrentLang);
 
-  const config = {
+  const Labels = {
+    PANEL_TITLE: lang.customer,
+    DATATABLE_TITLE: lang.customer_list,
+    ADD_NEW_ENTITY: lang.add_new_customer,
+    ENTITY_NAME: lang.customer,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
+
   return (
     <CrudModule
       createForm={<CustomerForm />}

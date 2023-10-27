@@ -2,9 +2,11 @@ import React from 'react';
 
 import CrudModule from '@/modules/CrudModule';
 import OrderForm from '@/forms/OrderForm'; // Ensure to create this form
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
-function Order() {
-  const entity = 'order'; // Keeping entity value as 'order'
+export default function Order() {
+  const entity = 'order';
   const searchConfig = {
     displayLabels: ['orderId', 'status'],
     searchFields: 'orderId,status',
@@ -67,23 +69,25 @@ function Order() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new shipping entry';
-  const DATATABLE_TITLE = 'Shipping List';
-  const ENTITY_NAME = 'shipping entry';
-  const CREATE_ENTITY = 'Create shipping entry';
-  const UPDATE_ENTITY = 'Update shipping entry';
-  const PANEL_TITLE = 'Shipping Panel';
+  const lang = useSelector(selectCurrentLang);
 
-  const config = {
+  const Labels = {
+    PANEL_TITLE: lang.order,
+    DATATABLE_TITLE: lang.order_list,
+    ADD_NEW_ENTITY: lang.add_new_order,
+    ENTITY_NAME: lang.order,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
-    readColumns,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     dataTableColumns,
+    readColumns,
     searchConfig,
     entityDisplayLabels,
   };
@@ -95,5 +99,3 @@ function Order() {
     />
   );
 }
-
-export default Order;

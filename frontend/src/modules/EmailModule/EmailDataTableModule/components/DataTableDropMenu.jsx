@@ -8,6 +8,7 @@ import {
   CreditCardOutlined,
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { erp } from '@/redux/erp/actions';
 import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';

@@ -4,7 +4,7 @@ import { Form, Divider, Button, PageHeader, Tag } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectCurrentItem, selectRecordPaymentItem } from '@/redux/erp/selectors';
-
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { useErpContext } from '@/context/erp';
 
 import Loading from '@/components/Loading';

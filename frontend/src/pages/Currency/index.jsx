@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule';
@@ -6,6 +10,7 @@ import CurrencyForm from '@/forms/CurrencyForm';
 
 export default function Currency() {
   const entity = 'currency';
+
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -76,26 +81,29 @@ export default function Currency() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new currency';
-  const DATATABLE_TITLE = 'Currencies List';
-  const ENTITY_NAME = 'currency';
-  const CREATE_ENTITY = 'Create currency';
-  const UPDATE_ENTITY = 'Update currency';
-  const PANEL_TITLE = 'Currency Panel';
+  const lang = useSelector(selectCurrentLang);
 
-  const config = {
+  const Labels = {
+    PANEL_TITLE: lang.currency,
+    DATATABLE_TITLE: lang.currency_list,
+    ADD_NEW_ENTITY: lang.add_new_currency,
+    ENTITY_NAME: lang.currency,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
+
   return (
     <CrudModule
       createForm={<CurrencyForm />}

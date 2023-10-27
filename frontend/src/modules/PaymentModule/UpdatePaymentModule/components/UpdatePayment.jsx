@@ -7,6 +7,8 @@ import { selectUpdatedItem } from '@/redux/erp/selectors';
 
 import { useErpContext } from '@/context/erp';
 
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import Loading from '@/components/Loading';
 
 import calculate from '@/utils/calculate';

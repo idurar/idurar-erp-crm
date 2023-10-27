@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import CrudModule from '@/modules/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
@@ -95,21 +97,23 @@ export default function Employee() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new employee';
-  const DATATABLE_TITLE = 'Employees List';
-  const ENTITY_NAME = 'employee';
-  const CREATE_ENTITY = 'Create employee';
-  const UPDATE_ENTITY = 'Update employee';
-  const PANEL_TITLE = 'Employee Panel';
+  const lang = useSelector(selectCurrentLang);
 
-  const config = {
+  const Labels = {
+    PANEL_TITLE: lang.employee,
+    DATATABLE_TITLE: lang.employee_list,
+    ADD_NEW_ENTITY: lang.add_new_employee,
+    ENTITY_NAME: lang.employee,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

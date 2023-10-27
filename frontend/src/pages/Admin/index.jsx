@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
 
@@ -11,8 +13,6 @@ export default function Admin() {
     outputValue: '_id',
   };
 
-  const PANEL_TITLE = 'Admin Panel';
-  const dataTableTitle = 'Admin Lists';
   const entityDisplayLabels = ['email'];
 
   const readColumns = [
@@ -28,21 +28,25 @@ export default function Admin() {
     { title: 'Email', dataIndex: 'email' },
     { title: "Role d'utilisateur", dataIndex: 'role' },
   ];
-  const ADD_NEW_ENTITY = 'Add new admin';
-  const DATATABLE_TITLE = 'Admins List';
-  const ENTITY_NAME = 'admin';
-  const CREATE_ENTITY = 'Create admin';
-  const UPDATE_ENTITY = 'Update admin';
 
-  const config = {
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.admin,
+    DATATABLE_TITLE: lang.admin_list,
+    ADD_NEW_ENTITY: lang.add_new_admin,
+    ENTITY_NAME: lang.admin,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+    RECORD_ENTITY: lang.record_payment,
+  };
+
+  const configPage = {
     entity,
-    PANEL_TITLE,
-    dataTableTitle,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...Labels,
+  };
+  const config = {
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

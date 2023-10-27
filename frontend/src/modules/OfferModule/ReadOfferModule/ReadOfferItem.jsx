@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import { erp } from '@/redux/erp/actions';
 
 import uniqueId from '@/utils/uinqueId';

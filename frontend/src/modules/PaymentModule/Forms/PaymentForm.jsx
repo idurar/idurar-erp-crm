@@ -4,6 +4,8 @@ import { Form, Input, InputNumber } from 'antd';
 import { DatePicker } from '@/components/CustomAntd';
 import SelectAsync from '@/components/SelectAsync';
 import { useMoney } from '@/settings';
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 export default function PaymentForm({ maxAmount = null, current = null }) {
   const { TextArea } = Input;
   const money = useMoney();
