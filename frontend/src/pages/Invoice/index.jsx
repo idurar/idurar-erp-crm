@@ -1,10 +1,13 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { useMoney } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
 
 export default function Invoice() {
+  const entity = 'invoice';
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -81,11 +84,28 @@ export default function Invoice() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.invoice,
+    DATATABLE_TITLE: lang.invoice_list,
+    ADD_NEW_ENTITY: lang.add_new_invoice,
+    ENTITY_NAME: lang.invoice,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+    RECORD_ENTITY: lang.record_payment,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
+
   return <InvoiceDataTableModule config={config} />;
 }

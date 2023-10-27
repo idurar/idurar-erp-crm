@@ -1,10 +1,12 @@
 import React from 'react';
 
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 import CrudModule from '@/modules/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
 export default function Employee() {
+  const entity = 'employee';
   const searchConfig = {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
@@ -95,6 +97,21 @@ export default function Employee() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.employee,
+    DATATABLE_TITLE: lang.employee_list,
+    ADD_NEW_ENTITY: lang.add_new_employee,
+    ENTITY_NAME: lang.employee,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     readColumns,

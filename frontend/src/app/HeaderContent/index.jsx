@@ -16,6 +16,7 @@ import photo from '@/style/images/photo.png';
 import { checkImage } from '@/request';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { langAction } from '@/redux/lang/actions';
 import history from '@/utils/history';
 import uniqueId from '@/utils/uinqueId';
 
@@ -23,6 +24,7 @@ import { BASE_URL } from '@/config/serverApiConfig';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
+  const dispatch = useDispatch();
 
   const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
     ? BASE_URL + currentAdmin?.photo
@@ -94,7 +96,12 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
-      <Avatar icon={<AppstoreOutlined />} />
+      <Avatar
+        icon={<AppstoreOutlined />}
+        onClick={() => {
+          dispatch(langAction.translate());
+        }}
+      />
 
       <Dropdown overlay={<Notifications />} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}

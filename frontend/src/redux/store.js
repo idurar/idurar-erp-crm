@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import lang from '@/lang/default';
 
 import rootReducer from './rootReducer';
 import storePersist from './storePersist';
@@ -25,6 +26,8 @@ const AUTH_INITIAL_STATE = {
   isSuccess: false,
 };
 const initialState = storePersist.get('auth') ? { auth: AUTH_INITIAL_STATE } : {};
+
+window.localStorage.setItem('lang', JSON.stringify(lang));
 
 const store = createStore(rootReducer, initialState, configStore);
 

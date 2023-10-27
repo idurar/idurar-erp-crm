@@ -1,7 +1,5 @@
 import lang from '@/lang/language';
-
 const entity = 'invoice';
-
 const Labels = {
   PANEL_TITLE: lang.invoice,
   DATATABLE_TITLE: lang.invoice_list,

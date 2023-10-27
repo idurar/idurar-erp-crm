@@ -3,9 +3,11 @@ import { Tag } from 'antd';
 
 import QuoteDataTableModule from '@/modules/QuoteModule/QuoteDataTableModule';
 import { useMoney } from '@/settings';
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 export default function Quote() {
+  const entity = 'quote';
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -66,6 +68,21 @@ export default function Quote() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.quote,
+    DATATABLE_TITLE: lang.quote_list,
+    ADD_NEW_ENTITY: lang.add_new_quote,
+    ENTITY_NAME: lang.quote,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     dataTableColumns,

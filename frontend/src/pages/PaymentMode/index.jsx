@@ -1,6 +1,7 @@
 import React from 'react';
 
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -8,6 +9,7 @@ import CrudModule from '@/modules/CrudModule';
 import PaymentModeForm from '@/forms/PaymentModeForm';
 
 export default function PaymentMode() {
+  const entity = 'paymentMode';
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -87,6 +89,21 @@ export default function PaymentMode() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.payment_mode,
+    DATATABLE_TITLE: lang.payment_mode_list,
+    ADD_NEW_ENTITY: lang.add_new_payment_mode,
+    ENTITY_NAME: lang.payment_mode,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     readColumns,

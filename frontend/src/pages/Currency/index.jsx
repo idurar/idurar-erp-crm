@@ -1,6 +1,7 @@
 import React from 'react';
 
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -8,6 +9,8 @@ import CrudModule from '@/modules/CrudModule';
 import CurrencyForm from '@/forms/CurrencyForm';
 
 export default function Currency() {
+  const entity = 'currency';
+
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -78,6 +81,21 @@ export default function Currency() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.currency,
+    DATATABLE_TITLE: lang.currency_list,
+    ADD_NEW_ENTITY: lang.add_new_currency,
+    ENTITY_NAME: lang.currency,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     readColumns,

@@ -2,9 +2,11 @@ import React from 'react';
 
 import CrudModule from '@/modules/CrudModule';
 import OrderForm from '@/forms/OrderForm'; // Ensure to create this form
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
-function Order() {
+export default function Order() {
+  const entity = 'order';
   const searchConfig = {
     displayLabels: ['orderId', 'status'],
     searchFields: 'orderId,status',
@@ -67,10 +69,25 @@ function Order() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.order,
+    DATATABLE_TITLE: lang.order_list,
+    ADD_NEW_ENTITY: lang.add_new_order,
+    ENTITY_NAME: lang.order,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
-    readColumns,
     dataTableColumns,
+    readColumns,
     searchConfig,
     entityDisplayLabels,
   };
@@ -82,5 +99,3 @@ function Order() {
     />
   );
 }
-
-export default Order;

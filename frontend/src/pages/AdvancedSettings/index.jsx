@@ -1,6 +1,7 @@
 import React from 'react';
 
-import configPage from './config';
+import { useSelector } from 'react-redux';
+import { selectCurrentLang } from '@/redux/lang/selectors';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -8,6 +9,7 @@ import CrudModule from '@/modules/CrudModule';
 import AdvancedSettingsForm from '@/forms/AdvancedSettingsForm';
 
 export default function AdvancedSettings() {
+  const entity = 'setting';
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -70,6 +72,22 @@ export default function AdvancedSettings() {
     },
   ];
 
+  const lang = useSelector(selectCurrentLang);
+
+  const Labels = {
+    PANEL_TITLE: lang.setting,
+    DATATABLE_TITLE: lang.setting_list,
+    ADD_NEW_ENTITY: lang.add_new_setting,
+    ENTITY_NAME: lang.setting,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+    RECORD_ENTITY: lang.record_payment,
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     readColumns,
