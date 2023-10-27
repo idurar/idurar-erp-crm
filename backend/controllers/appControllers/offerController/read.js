@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Model = mongoose.model('Invoice');
+const Model = mongoose.model('Offer');
 
 const read = async (req, res) => {
   try {

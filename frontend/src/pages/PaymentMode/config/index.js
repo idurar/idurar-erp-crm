@@ -1,12 +1,12 @@
 import lang from '@/lang/language';
 
-const entity = 'inventory'; // Updated entity name
+const entity = 'paymentMode';
 
 const Labels = {
-  PANEL_TITLE: lang.product,
-  DATATABLE_TITLE: lang.product_list,
-  ADD_NEW_ENTITY: lang.add_new_product,
-  ENTITY_NAME: lang.product,
+  PANEL_TITLE: lang.payment_mode,
+  DATATABLE_TITLE: lang.payment_mode_list,
+  ADD_NEW_ENTITY: lang.add_new_payment_mode,
+  ENTITY_NAME: lang.payment_mode,
   CREATE_ENTITY: lang.save,
   UPDATE_ENTITY: lang.update,
 };

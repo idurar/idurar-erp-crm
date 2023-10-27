@@ -1,12 +1,12 @@
 import lang from '@/lang/language';
 
-const entity = 'inventory'; // Updated entity name
+const entity = 'employee';
 
 const Labels = {
-  PANEL_TITLE: lang.product,
-  DATATABLE_TITLE: lang.product_list,
-  ADD_NEW_ENTITY: lang.add_new_product,
-  ENTITY_NAME: lang.product,
+  PANEL_TITLE: lang.employee,
+  DATATABLE_TITLE: lang.employee_list,
+  ADD_NEW_ENTITY: lang.add_new_employee,
+  ENTITY_NAME: lang.employee,
   CREATE_ENTITY: lang.save,
   UPDATE_ENTITY: lang.update,
 };

@@ -1,11 +1,13 @@
 import React from 'react';
+
+import configPage from './config';
+
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule';
 import AdvancedSettingsForm from '@/forms/AdvancedSettingsForm';
 
 export default function AdvancedSettings() {
-  const entity = 'setting';
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -68,21 +70,8 @@ export default function AdvancedSettings() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new Setting';
-  const DATATABLE_TITLE = 'Settings List';
-  const ENTITY_NAME = 'advanced settings';
-  const CREATE_ENTITY = 'Create a setting';
-  const UPDATE_ENTITY = 'Update a setting';
-  const PANEL_TITLE = 'Settings Panel';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

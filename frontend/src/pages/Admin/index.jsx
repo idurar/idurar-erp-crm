@@ -1,5 +1,6 @@
 import React from 'react';
 
+import configPage from './config';
 import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
 
@@ -11,8 +12,6 @@ export default function Admin() {
     outputValue: '_id',
   };
 
-  const PANEL_TITLE = 'Admin Panel';
-  const dataTableTitle = 'Admin Lists';
   const entityDisplayLabels = ['email'];
 
   const readColumns = [
@@ -28,21 +27,9 @@ export default function Admin() {
     { title: 'Email', dataIndex: 'email' },
     { title: "Role d'utilisateur", dataIndex: 'role' },
   ];
-  const ADD_NEW_ENTITY = 'Add new admin';
-  const DATATABLE_TITLE = 'Admins List';
-  const ENTITY_NAME = 'admin';
-  const CREATE_ENTITY = 'Create admin';
-  const UPDATE_ENTITY = 'Update admin';
 
   const config = {
-    entity,
-    PANEL_TITLE,
-    dataTableTitle,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

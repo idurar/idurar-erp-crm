@@ -1,18 +1,21 @@
 import React from 'react';
 import ProfileModule from '@/modules/ProfileModule';
 
+import lang from '@/lang/language';
+
 export default function Profile() {
   const entity = 'profile';
 
-  const PANEL_TITLE = 'profile';
-  const ENTITY_NAME = 'Profile';
-  const UPDATE_ENTITY = 'Update profile';
+  const Labels = {
+    PANEL_TITLE: lang.profile,
+    ENTITY_NAME: lang.profile,
+    CREATE_ENTITY: lang.save,
+    UPDATE_ENTITY: lang.update,
+  };
 
   const config = {
     entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    UPDATE_ENTITY,
+    ...Labels,
   };
   return <ProfileModule config={config} />;
 }

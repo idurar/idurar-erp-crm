@@ -1,10 +1,10 @@
 import React from 'react';
 
+import configPage from './config';
 import CrudModule from '@/modules/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
 export default function Employee() {
-  const entity = 'employee';
   const searchConfig = {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
@@ -95,21 +95,8 @@ export default function Employee() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new employee';
-  const DATATABLE_TITLE = 'Employees List';
-  const ENTITY_NAME = 'employee';
-  const CREATE_ENTITY = 'Create employee';
-  const UPDATE_ENTITY = 'Update employee';
-  const PANEL_TITLE = 'Employee Panel';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

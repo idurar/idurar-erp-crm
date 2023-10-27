@@ -1,13 +1,14 @@
+import lang from '@/lang/language';
+
 const entity = 'lead';
 
 const Labels = {
-  PANEL_TITLE: 'Lead',
-  dataTableTitle: 'Lead List',
-  ADD_NEW_ENTITY: 'Add New Lead',
-  DATATABLE_TITLE: 'Lead List',
-  ENTITY_NAME: 'Lead',
-  CREATE_ENTITY: 'Save Lead',
-  UPDATE_ENTITY: 'Update Lead',
+  PANEL_TITLE: lang.lead,
+  DATATABLE_TITLE: lang.lead_list,
+  ADD_NEW_ENTITY: lang.add_new_lead,
+  ENTITY_NAME: lang.lead,
+  CREATE_ENTITY: lang.save,
+  UPDATE_ENTITY: lang.update,
 };
 
 const configPage = {

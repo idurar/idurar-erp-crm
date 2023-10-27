@@ -1,11 +1,13 @@
 import React from 'react';
+
+import configPage from './config';
+
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule';
 import CurrencyForm from '@/forms/CurrencyForm';
 
 export default function Currency() {
-  const entity = 'currency';
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -76,26 +78,14 @@ export default function Currency() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new currency';
-  const DATATABLE_TITLE = 'Currencies List';
-  const ENTITY_NAME = 'currency';
-  const CREATE_ENTITY = 'Create currency';
-  const UPDATE_ENTITY = 'Update currency';
-  const PANEL_TITLE = 'Currency Panel';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
+
   return (
     <CrudModule
       createForm={<CurrencyForm />}

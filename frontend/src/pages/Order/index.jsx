@@ -2,9 +2,9 @@ import React from 'react';
 
 import CrudModule from '@/modules/CrudModule';
 import OrderForm from '@/forms/OrderForm'; // Ensure to create this form
+import configPage from './config';
 
 function Order() {
-  const entity = 'order'; // Keeping entity value as 'order'
   const searchConfig = {
     displayLabels: ['orderId', 'status'],
     searchFields: 'orderId,status',
@@ -67,21 +67,8 @@ function Order() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new shipping entry';
-  const DATATABLE_TITLE = 'Shipping List';
-  const ENTITY_NAME = 'shipping entry';
-  const CREATE_ENTITY = 'Create shipping entry';
-  const UPDATE_ENTITY = 'Update shipping entry';
-  const PANEL_TITLE = 'Shipping Panel';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,

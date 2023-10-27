@@ -1,11 +1,13 @@
 import React from 'react';
+
+import configPage from './config';
+
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule';
 import PaymentModeForm from '@/forms/PaymentModeForm';
 
 export default function PaymentMode() {
-  const entity = 'paymentMode';
   const searchConfig = {
     displayLabels: ['name'],
     searchFields: 'name',
@@ -85,21 +87,8 @@ export default function PaymentMode() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new payment mode';
-  const DATATABLE_TITLE = 'Payment Modes List';
-  const ENTITY_NAME = 'payment mode';
-  const CREATE_ENTITY = 'Create payment mode';
-  const UPDATE_ENTITY = 'Update payment mode';
-  const PANEL_TITLE = 'Currency Panel';
-
   const config = {
-    entity,
-    PANEL_TITLE,
-    ENTITY_NAME,
-    CREATE_ENTITY,
-    ADD_NEW_ENTITY,
-    UPDATE_ENTITY,
-    DATATABLE_TITLE,
+    ...configPage,
     readColumns,
     dataTableColumns,
     searchConfig,
