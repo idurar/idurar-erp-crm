@@ -21,6 +21,7 @@ export const langAction = {
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data,
+        langCode: 'fr_FR',
       });
       window.localStorage.setItem('lang', JSON.stringify(data));
     } else {

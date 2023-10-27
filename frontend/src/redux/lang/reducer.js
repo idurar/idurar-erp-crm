@@ -7,7 +7,7 @@ const INITIAL_LANG_STATE = {
 
 const INITIAL_STATE = {
   result: INITIAL_LANG_STATE,
-  langCode: 'en_us',
+  langCode: 'en_US',
   isLoading: false,
   isSuccess: false,
 };
