@@ -5,7 +5,7 @@ import DataTableDropMenu from './components/DataTableDropMenu';
 export default function PaymentDataTableModule({ config }) {
   return (
     <ErpLayout>
-      <PaymentERP config={config} DataTableDropMenu={DataTableDropMenu}></PaymentERP>
+      <PaymentERP config={config}></PaymentERP>
     </ErpLayout>
   );
 }

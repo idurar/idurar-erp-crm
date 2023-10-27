@@ -6,10 +6,6 @@ import { useMoney } from '@/settings';
 import { useSelector } from 'react-redux';
 import { selectCurrentLang } from '@/redux/lang/selectors';
 
-const formatDate = (date) => {
-  return dayjs(date).format('DD/MM/YYYY');
-};
-
 export default function Offer() {
   const { moneyRowFormatter } = useMoney();
 
@@ -30,17 +26,17 @@ export default function Offer() {
     {
       title: 'Date',
       dataIndex: 'date',
-      render: (_, record) => formatDate(record.date),
+      render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
     {
       title: 'SubTotal',
       dataIndex: 'subTotal',
-      onCell: (record, rowIndex) => moneyRowFormatter({ amount: record.subTotal }),
+      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
       title: 'Total',
       dataIndex: 'total',
-      onCell: (record, rowIndex) => moneyRowFormatter({ amount: record.total }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {
@@ -50,18 +46,18 @@ export default function Offer() {
     {
       title: 'Status',
       dataIndex: 'status',
-      render: (_, record) => {
+      render: (status) => {
         let color =
-          record?.status === 'draft'
+          status === 'draft'
             ? 'cyan'
-            : record?.status === 'sent'
+            : status === 'sent'
             ? 'blue'
-            : record?.status === 'accepted'
+            : status === 'accepted'
             ? 'green'
-            : record?.status === 'expired'
+            : status === 'expired'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{record?.status && record?.status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
       },
     },
   ];

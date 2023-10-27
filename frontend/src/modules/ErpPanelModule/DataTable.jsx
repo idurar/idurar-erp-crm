@@ -1,7 +1,15 @@
-import React, { useCallback, useEffect, useEffectLayout, useRef, useState } from 'react';
-import { Descriptions, Dropdown, Table } from 'antd';
-import { Button, PageHeader, Space } from 'antd';
-import { EllipsisOutlined } from '@ant-design/icons';
+import React, { useEffect } from 'react';
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  FilePdfOutlined,
+  RedoOutlined,
+  PlusOutlined,
+  EllipsisOutlined,
+} from '@ant-design/icons';
+import { Descriptions, Dropdown, Table, Button, PageHeader } from 'antd';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentLang } from '@/redux/lang/selectors';
 import { erp } from '@/redux/erp/actions';
@@ -10,10 +18,7 @@ import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
 
-import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
-
-import { selectItemById } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
@@ -23,7 +28,6 @@ function AddNewItem({ config }) {
   const { erpContextAction } = useErpContext();
   const { createPanel } = erpContextAction;
   const handelClick = () => {
-    // createPanel.open();
     history.push(`/${entity.toLowerCase()}/create`);
   };
 
@@ -34,7 +38,7 @@ function AddNewItem({ config }) {
   );
 }
 
-export default function DataTable({ config, DataTableDropMenu }) {
+export default function DataTable({ config, extra = [] }) {
   let { entity, dataTableColumns, create = true } = config;
   const { DATATABLE_TITLE } = config;
 
@@ -42,34 +46,59 @@ export default function DataTable({ config, DataTableDropMenu }) {
 
   const { pagination, items: dataSource } = listResult;
 
+  const { erpContextAction } = useErpContext();
+  const { modal } = erpContextAction;
+
   const items = [
     {
-      label: '1nd menu item',
-      key: '0',
+      label: 'Show',
+      key: 'read',
+      icon: <EyeOutlined />,
     },
     {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
-      key: '1',
+      label: 'Edit',
+      key: 'edit',
+      icon: <EditOutlined />,
     },
+    {
+      label: 'Download',
+      key: 'download',
+      icon: <FilePdfOutlined />,
+    },
+    ...extra,
     {
       type: 'divider',
     },
+
     {
-      label: '3rd menu item',
-      key: '3',
+      label: 'Delete',
+      key: 'delete',
+      icon: <DeleteOutlined />,
     },
   ];
 
   const history = useHistory();
 
-  const handleCreateChildTask = (record) => {
-    console.log('record', record);
+  const handleRead = (record) => {
+    dispatch(erp.currentItem({ data: record }));
+    history.push(`/${entity}/read/${record._id}`);
+  };
+  const handleEdit = (record) => {
+    dispatch(erp.currentAction({ actionType: 'update', data: record }));
+    history.push(`/${entity}/update/${record._id}`);
+  };
+  const handleDownload = (record) => {
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+  };
 
-    console.log('🚀 ~ file: DataTable.jsx:22 ~ Read ~ record:', record);
-    const item = dataSource.find((item) => item._id === record._id);
-    dispatch(erp.currentItem({ data: item }));
+  const handleDelete = (record) => {
+    dispatch(erp.currentAction({ actionType: 'delete', data: record }));
+    modal.open();
+  };
 
-    history.push(`/offer/read/${record._id}`);
+  const handleRecordPayment = (record) => {
+    dispatch(erp.currentItem({ data: record }));
+    history.push(`/invoice/pay/${record._id}`);
   };
 
   dataTableColumns = [
@@ -82,7 +111,25 @@ export default function DataTable({ config, DataTableDropMenu }) {
           menu={{
             items,
             onClick: ({ key }) => {
-              handleCreateChildTask(record);
+              switch (key) {
+                case 'read':
+                  handleRead(record);
+                  break;
+                case 'edit':
+                  handleEdit(record);
+                  break;
+                case 'download':
+                  handleDownload(record);
+                  break;
+                case 'delete':
+                  handleDelete(record);
+                  break;
+                case 'recordPayment':
+                  handleRecordPayment(record);
+                  break;
+                default:
+                  break;
+              }
               // else if (key === '2')handleCloseTask
             },
           }}
