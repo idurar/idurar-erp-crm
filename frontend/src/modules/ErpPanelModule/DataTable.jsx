@@ -22,20 +22,21 @@ import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
-function AddNewItem({ config }) {
+function AddNewItem({ config, hasCreate = true }) {
   const history = useHistory();
   const { ADD_NEW_ENTITY, entity } = config;
-  const { erpContextAction } = useErpContext();
-  const { createPanel } = erpContextAction;
-  const handelClick = () => {
+
+  const handleClick = () => {
     history.push(`/${entity.toLowerCase()}/create`);
   };
 
-  return (
-    <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {ADD_NEW_ENTITY}
-    </Button>
-  );
+  if (hasCreate)
+    return (
+      <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
+        {ADD_NEW_ENTITY}
+      </Button>
+    );
+  else return null;
 }
 
 export default function DataTable({ config, extra = [] }) {
@@ -178,7 +179,7 @@ export default function DataTable({ config, extra = [] }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
               Refresh
             </Button>,
-            create ? <AddNewItem config={config} key={`${uniqueId()}`} /> : <></>,
+            <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
           ]}
           style={{
             padding: '20px 0px',

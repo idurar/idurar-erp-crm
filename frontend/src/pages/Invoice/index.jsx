@@ -41,12 +41,12 @@ export default function Invoice() {
     {
       title: 'Total',
       dataIndex: 'total',
-      render: (total) => moneyRowFormatter({ amount: total }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
     {
       title: 'Balance',
       dataIndex: 'credit',
-      render: (credit) => moneyRowFormatter({ amount: credit }),
+      onCell: (credit) => moneyRowFormatter({ amount: credit }),
     },
     {
       title: 'Status',

@@ -41,12 +41,12 @@ export default function Quote() {
     {
       title: 'SubTotal',
       dataIndex: 'subTotal',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
       title: 'Total',
       dataIndex: 'total',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {

@@ -53,6 +53,7 @@ export default function UpdateEmailModule({ config }) {
                 onClick={() => {
                   history.push(`/${config.entity.toLowerCase()}`);
                 }}
+                key="emailform404"
               >
                 Back to Quote Page
               </Button>

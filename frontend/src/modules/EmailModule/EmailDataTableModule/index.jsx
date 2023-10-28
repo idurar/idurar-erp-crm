@@ -5,7 +5,7 @@ import DataTableDropMenu from './components/DataTableDropMenu';
 export default function EmailDataTableModule({ config }) {
   return (
     <ErpLayout>
-      <ErpPanel config={config} DataTableDropMenu={DataTableDropMenu}></ErpPanel>
+      <ErpPanel config={config}></ErpPanel>
     </ErpLayout>
   );
 }

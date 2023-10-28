@@ -52,22 +52,24 @@ export default function AdvancedSettings() {
       title: 'enabled',
       dataIndex: 'enabled',
       key: 'enabled',
-      render: (text, row) => {
+      onCell: (record, rowIndex) => {
         return {
           props: {
             style: {
               width: '60px',
             },
           },
-          children: (
-            <Switch
-              disabled={row.isCoreSetting}
-              checked={row.enabled}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
         };
+      },
+      render: (_, record) => {
+        return (
+          <Switch
+            disabled={record.isCoreSetting}
+            checked={record.enabled}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        );
       },
     },
   ];
@@ -75,9 +77,9 @@ export default function AdvancedSettings() {
   const lang = useSelector(selectCurrentLang);
 
   const Labels = {
-    PANEL_TITLE: lang.setting,
-    DATATABLE_TITLE: lang.setting_list,
-    ADD_NEW_ENTITY: lang.add_new_setting,
+    PANEL_TITLE: lang.settings,
+    DATATABLE_TITLE: lang.settings_list,
+    ADD_NEW_ENTITY: lang.add_new_settings,
     ENTITY_NAME: lang.setting,
     CREATE_ENTITY: lang.save,
     UPDATE_ENTITY: lang.update,

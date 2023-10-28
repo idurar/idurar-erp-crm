@@ -27,7 +27,7 @@ export default function EmailForm({ current = null }) {
   };
 
   return (
-    <>
+    <Row>
       <Form.Item label="Available Variables">{displayLabels(current?.emailVariables)}</Form.Item>
       <Form.Item label="Subject" name="emailSubject">
         <Input />
@@ -45,6 +45,6 @@ export default function EmailForm({ current = null }) {
           </Button>
         </Form.Item>
       </Col>
-    </>
+    </Row>
   );
 }

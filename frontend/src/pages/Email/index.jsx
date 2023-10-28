@@ -33,16 +33,12 @@ export default function AdvancedSettings() {
     {
       title: 'Template Name',
       dataIndex: 'emailName',
+      key: 'emailName',
     },
     {
       title: 'Subject',
       dataIndex: 'emailSubject',
       key: 'emailSubject',
-      render: (text, row) => {
-        return {
-          children: <span>{text}</span>,
-        };
-      },
     },
   ];
 
