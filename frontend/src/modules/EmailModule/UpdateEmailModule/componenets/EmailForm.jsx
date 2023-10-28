@@ -15,8 +15,7 @@ import {
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { PlusOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 const { Paragraph } = Typography;
 

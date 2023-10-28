@@ -2,8 +2,7 @@ import React from 'react';
 
 import CrudModule from '@/modules/CrudModule';
 import OrderForm from '@/forms/OrderForm'; // Ensure to create this form
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 export default function Order() {
   const entity = 'order';
@@ -69,15 +68,15 @@ export default function Order() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.order,
-    DATATABLE_TITLE: lang.order_list,
-    ADD_NEW_ENTITY: lang.add_new_order,
-    ENTITY_NAME: lang.order,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('order'),
+    DATATABLE_TITLE: getLang('order_list'),
+    ADD_NEW_ENTITY: getLang('add_new_order'),
+    ENTITY_NAME: getLang('order'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

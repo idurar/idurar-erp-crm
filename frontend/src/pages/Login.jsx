@@ -48,6 +48,7 @@ const LoginPage = () => {
           <Divider />
           <div className="site-layout-content">
             <Form
+              layout="vertical"
               name="normal_login"
               className="login-form"
               initialValues={{

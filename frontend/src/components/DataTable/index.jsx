@@ -2,11 +2,10 @@ import React, { useCallback, useEffect } from 'react';
 import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Descriptions, Dropdown, Table, Button, PageHeader } from 'antd';
 
-import { useHistory } from 'react-router-dom';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 import uniqueId from '@/utils/uinqueId';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
@@ -16,6 +15,7 @@ function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
   const { collapsedBox, panel } = crudContextAction;
   const { ADD_NEW_ENTITY } = config;
+
   const handelClick = () => {
     panel.open();
     collapsedBox.close();
@@ -31,15 +31,16 @@ export default function DataTable({ config, extra = [] }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
+  const getLang = useLanguage();
 
   const items = [
     {
-      label: 'Show',
+      label: getLang('Show'),
       key: 'read',
       icon: <EyeOutlined />,
     },
     {
-      label: 'Edit',
+      label: getLang('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
     },
@@ -49,7 +50,7 @@ export default function DataTable({ config, extra = [] }) {
     },
 
     {
-      label: 'Delete',
+      label: getLang('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
     },

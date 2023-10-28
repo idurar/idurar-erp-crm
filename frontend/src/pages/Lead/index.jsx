@@ -5,8 +5,7 @@ import React from 'react';
 import CrudModule from '@/modules/CrudModule';
 import LeadForm from '@/forms/LeadForm';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 export default function Lead() {
   const entity = 'lead';
@@ -90,15 +89,15 @@ export default function Lead() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.lead,
-    DATATABLE_TITLE: lang.lead_list,
-    ADD_NEW_ENTITY: lang.add_new_lead,
-    ENTITY_NAME: lang.lead,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('lead'),
+    DATATABLE_TITLE: getLang('lead_list'),
+    ADD_NEW_ENTITY: getLang('add_new_lead'),
+    ENTITY_NAME: getLang('lead'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
   const configPage = {
     entity,

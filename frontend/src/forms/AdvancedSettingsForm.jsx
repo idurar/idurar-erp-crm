@@ -4,7 +4,11 @@ import { useSelector } from 'react-redux';
 import { selectCurrentItem } from '@/redux/crud/selectors';
 import { useState } from 'react';
 
+import useLanguage from '@/lang/useLanguage';
+
 export function SelectType() {
+  const getLang = useLanguage();
+
   return (
     <Form.List name="settingValue" initialValue={[{ Label: '', Value: '' }]}>
       {(fields, { add, remove }) => (
@@ -13,12 +17,11 @@ export function SelectType() {
             <Space key={field.key} align="center">
               <Form.Item
                 {...field}
-                label="Label"
+                label={getLang('Label')}
                 name={[field.name, 'label']}
                 rules={[
                   {
                     required: true,
-                    message: 'Missing label',
                   },
                 ]}
               >
@@ -26,12 +29,11 @@ export function SelectType() {
               </Form.Item>
               <Form.Item
                 {...field}
-                label="Value"
+                label={getLang('Value')}
                 name={[field.name, 'Value']}
                 rules={[
                   {
                     required: true,
-                    message: 'Missing value',
                   },
                 ]}
               >
@@ -54,6 +56,7 @@ export function SelectType() {
 }
 
 export default function AdvancedSettingsForm({ isUpdateForm = false }) {
+  const getLang = useLanguage();
   const { result } = useSelector(selectCurrentItem);
   const [type, setType] = useState(null);
   const options = ['number', 'text', 'date'];
@@ -64,7 +67,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label="Setting Category"
+        label={getLang('Setting Category')}
         name="settingCategory"
         rules={[
           {
@@ -73,34 +76,34 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
         ]}
       >
         <Select
-          placeholder="Select Setting Category"
+          placeholder={getLang('Select')}
           options={[
             {
               value: 'app_settings',
-              label: 'App Settings',
+              label: getLang('App Settings'),
             },
             {
               value: 'crm_settings',
-              label: 'Crm Settings',
+              label: getLang('CRM Settings'),
             },
 
             {
               value: 'finance_settings',
-              label: 'Finance Settings',
+              label: getLang('Finance Settings'),
             },
             {
               value: 'company_settings',
-              label: 'Company Settings',
+              label: getLang('Company Settings'),
             },
             {
               value: 'money_format_settings',
-              label: 'Money Format Settings',
+              label: getLang('Money Format Settings'),
             },
           ]}
         />
       </Form.Item>
       <Form.Item
-        label="Setting Name"
+        label={getLang('Setting Name')}
         name="settingKey"
         rules={[
           {
@@ -112,7 +115,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Type"
+        label={getLang('type')}
         name="settingType"
         rules={[
           {
@@ -121,7 +124,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
         ]}
       >
         <Select
-          placeholder="Select Setting Type"
+          placeholder={getLang('Select')}
           onChange={handleChange}
           options={[
             {
@@ -163,7 +166,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
       ) : null}
 
       <Form.Item
-        label="Setting enabled"
+        label={getLang('enabled')}
         name="enabled"
         style={{
           display: 'inline-block',

@@ -8,12 +8,15 @@ import { useAppContext } from '@/context/appContext';
 import { selectDeletedItem } from '@/redux/crud/selectors';
 import { valueByString } from '@/utils/helpers';
 
+import useLanguage from '@/lang/useLanguage';
+
 export default function DeleteModal({ config }) {
+  const getLang = useLanguage();
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = 'Do you want delete : ',
-    modalTitle = 'Remove Item',
+    deleteMessage = getLang('delete_message'),
+    modalTitle = getLang('delete_confirmation'),
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);

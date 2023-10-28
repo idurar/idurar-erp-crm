@@ -162,6 +162,8 @@ const lang = {
   welcome: 'Bienvenue !',
   goodbye: 'Au revoir !',
 
+  name: 'Prenom',
+
   invoice: 'Facture',
   quote: 'Devis',
   offer: 'Offre',

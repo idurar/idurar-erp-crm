@@ -3,8 +3,7 @@ import React from 'react';
 import CrudModule from '@/modules/CrudModule';
 import CustomerForm from '@/forms/CustomerForm';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 function Customer() {
   const entity = 'client';
@@ -58,15 +57,15 @@ function Customer() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.customer,
-    DATATABLE_TITLE: lang.customer_list,
-    ADD_NEW_ENTITY: lang.add_new_customer,
-    ENTITY_NAME: lang.customer,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('customer'),
+    DATATABLE_TITLE: getLang('customer_list'),
+    ADD_NEW_ENTITY: getLang('add_new_customer'),
+    ENTITY_NAME: getLang('customer'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
   const configPage = {
     entity,

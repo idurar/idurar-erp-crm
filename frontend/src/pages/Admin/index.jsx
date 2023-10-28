@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
 
@@ -29,16 +28,16 @@ export default function Admin() {
     { title: "Role d'utilisateur", dataIndex: 'role' },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.admin,
-    DATATABLE_TITLE: lang.admin_list,
-    ADD_NEW_ENTITY: lang.add_new_admin,
-    ENTITY_NAME: lang.admin,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
-    RECORD_ENTITY: lang.record_payment,
+    PANEL_TITLE: getLang('admin'),
+    DATATABLE_TITLE: getLang('admin_list'),
+    ADD_NEW_ENTITY: getLang('add_new_admin'),
+    ENTITY_NAME: getLang('admin'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
+    RECORD_ENTITY: getLang('record_payment'),
   };
 
   const configPage = {

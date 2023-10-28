@@ -18,13 +18,14 @@ import DataTable from '@/components/DataTable';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentItem } from '@/redux/crud/selectors';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
+  const getLang = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels, entity } = config;
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
@@ -66,7 +67,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             size="small"
             style={{ float: 'right', marginLeft: '5px' }}
           >
-            remove
+            {getLang('remove')}
           </Button>
           <Button
             onClick={editItem}
@@ -75,7 +76,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             size="small"
             style={{ float: 'right', marginLeft: '0px' }}
           >
-            edit
+            {getLang('edit')}
           </Button>
         </Col>
 

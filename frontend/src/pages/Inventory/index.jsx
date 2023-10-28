@@ -1,8 +1,7 @@
 import React from 'react';
 import CrudModule from '@/modules/CrudModule';
 import InventoryForm from '@/forms/InventoryForm'; // Retaining InventoryForm
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 export default function Inventory() {
   const entity = 'inventory'; // Updated entity name
@@ -43,15 +42,15 @@ export default function Inventory() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.product,
-    DATATABLE_TITLE: lang.product_list,
-    ADD_NEW_ENTITY: lang.add_new_product,
-    ENTITY_NAME: lang.product,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('product'),
+    DATATABLE_TITLE: getLang('product_list'),
+    ADD_NEW_ENTITY: getLang('add_new_product'),
+    ENTITY_NAME: getLang('product'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

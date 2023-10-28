@@ -19,11 +19,9 @@ export default function OrderForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input the order ID!',
           },
           {
             validator: validateEmptyString,
-            message: 'Please input valid value!',
           },
         ]}
       >
@@ -36,11 +34,9 @@ export default function OrderForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input the products!',
           },
           {
             validator: validateEmptyString,
-            message: 'Please input valid value!',
           },
         ]}
       >
@@ -53,7 +49,6 @@ export default function OrderForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input the quantity!',
           },
         ]}
       >
@@ -66,7 +61,6 @@ export default function OrderForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input the price!',
           },
         ]}
       >
@@ -79,7 +73,6 @@ export default function OrderForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please select the status!',
           },
         ]}
       >
@@ -97,7 +90,6 @@ export default function OrderForm({ isUpdateForm = false }) {
         rules={[
           {
             validator: validateEmptyString,
-            message: 'Please input valid value!',
           },
         ]}
       >

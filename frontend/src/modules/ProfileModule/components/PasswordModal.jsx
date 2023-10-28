@@ -3,8 +3,7 @@ import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 const PasswordModal = ({ config }) => {
   const { state, profileContextAction } = useProfileContext();

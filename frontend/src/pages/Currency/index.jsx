@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -81,15 +80,15 @@ export default function Currency() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.currency,
-    DATATABLE_TITLE: lang.currency_list,
-    ADD_NEW_ENTITY: lang.add_new_currency,
-    ENTITY_NAME: lang.currency,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('currency'),
+    DATATABLE_TITLE: getLang('currency_list'),
+    ADD_NEW_ENTITY: getLang('add_new_currency'),
+    ENTITY_NAME: getLang('currency'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

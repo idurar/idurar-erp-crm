@@ -162,6 +162,8 @@ const lang = {
   welcome: 'Welcome!',
   goodbye: 'Goodbye!',
 
+  name: 'Name',
+
   invoice: 'Invoice',
   quote: 'Quote',
   offer: 'Offer',
@@ -202,6 +204,9 @@ const lang = {
   add_new_product: 'Add New Product',
   order_list: 'Order List',
   add_new_order: 'Add New Order',
+
+  general_settings: 'General Settings',
+  email_templates: 'Email Templates',
 
   postal_code: 'Postal Code',
   phone_number: 'Phone Number',

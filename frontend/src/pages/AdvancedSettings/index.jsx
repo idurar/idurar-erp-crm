@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -74,16 +73,16 @@ export default function AdvancedSettings() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.settings,
-    DATATABLE_TITLE: lang.settings_list,
-    ADD_NEW_ENTITY: lang.add_new_settings,
-    ENTITY_NAME: lang.setting,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
-    RECORD_ENTITY: lang.record_payment,
+    PANEL_TITLE: getLang('settings'),
+    DATATABLE_TITLE: getLang('settings_list'),
+    ADD_NEW_ENTITY: getLang('add_new_settings'),
+    ENTITY_NAME: getLang('setting'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
+    RECORD_ENTITY: getLang('record_payment'),
   };
 
   const configPage = {

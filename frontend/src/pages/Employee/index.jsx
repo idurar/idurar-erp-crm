@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import CrudModule from '@/modules/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
@@ -97,15 +96,15 @@ export default function Employee() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.employee,
-    DATATABLE_TITLE: lang.employee_list,
-    ADD_NEW_ENTITY: lang.add_new_employee,
-    ENTITY_NAME: lang.employee,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('employee'),
+    DATATABLE_TITLE: getLang('employee_list'),
+    ADD_NEW_ENTITY: getLang('add_new_employee'),
+    ENTITY_NAME: getLang('employee'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

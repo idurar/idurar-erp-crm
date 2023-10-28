@@ -5,8 +5,7 @@ import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import uniqueId from '@/utils/uinqueId';
 import { useMoney } from '@/settings';
 import history from '@/utils/history';
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import UpdatePayment from './UpdatePayment';
 
 export default function Payment({ config, currentItem }) {

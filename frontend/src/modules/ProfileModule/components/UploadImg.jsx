@@ -1,7 +1,6 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { message, Upload, Form, Button } from 'antd';
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 // import photo from '@/style/images/photo.png';
 

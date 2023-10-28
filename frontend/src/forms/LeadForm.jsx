@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
+import { Form, Input, Select } from 'antd';
 
-import { PlusOutlined } from '@ant-design/icons';
+import useLanguage from '@/lang/useLanguage';
 
 export default function LeadForm() {
+  const getLang = useLanguage();
   return (
     <>
       <Form.Item
-        label="First Name"
+        label={getLang('first name')}
         name="firstName"
         rules={[
           {
             required: true,
-            message: 'Please input First name!',
           },
         ]}
       >
@@ -20,12 +19,11 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label="Last Name"
+        label={getLang('last name')}
         name="lastName"
         rules={[
           {
             required: true,
-            message: 'Please input Last name!',
           },
         ]}
       >
@@ -33,12 +31,11 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label="Email"
+        label={getLang('email')}
         name="email"
         rules={[
           {
             required: true,
-            message: 'Please input Email!',
           },
         ]}
       >
@@ -46,12 +43,11 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label="Phone Number"
+        label={getLang('phone')}
         name="phone"
         rules={[
           {
             required: true,
-            message: 'Please input Phone Number!',
           },
         ]}
       >
@@ -59,12 +55,11 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label="Company"
+        label={getLang('company')}
         name="company"
         rules={[
           {
             required: true,
-            message: 'Please input Lead Company!',
           },
         ]}
       >
@@ -72,52 +67,50 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label="Job Title"
+        label={getLang('position in company')}
         name="jobTitle"
         rules={[
           {
             required: true,
-            message: 'Please input the Job Title!',
           },
         ]}
       >
         <Input />
       </Form.Item>
 
-      <Form.Item label="Address" name="address">
+      <Form.Item label={getLang('address')} name="address">
         <Input />
       </Form.Item>
 
-      <Form.Item label="Country" name="country">
+      <Form.Item label={getLang('country')} name="country">
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="status"
+        label={getLang('status')}
         name="status"
         rules={[
           {
             required: false,
-            message: 'Please input Lead status!',
           },
         ]}
         initialValue={'new'}
       >
         <Select
           options={[
-            { value: 'new', label: 'New' },
-            { value: 'reached', label: 'Reached' },
-            { value: 'interested', label: 'Interest' },
-            { value: 'not interested', label: 'Not Interest' },
+            { value: 'new', label: getLang('new') },
+            { value: 'reached', label: getLang('reached') },
+            { value: 'interested', label: getLang('interested') },
+            { value: 'not interested', label: getLang('not interested') },
           ]}
         ></Select>
       </Form.Item>
 
-      <Form.Item label="Note" name="note">
+      <Form.Item label={getLang('note')} name="note">
         <Input />
       </Form.Item>
 
-      <Form.Item label="Source" name="source">
+      <Form.Item label={getLang('source')} name="source">
         <Input placeholder="ex: linkedin, website, ads..." />
       </Form.Item>
     </>

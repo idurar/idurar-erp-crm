@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -89,15 +88,15 @@ export default function PaymentMode() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: lang.payment_mode,
-    DATATABLE_TITLE: lang.payment_mode_list,
-    ADD_NEW_ENTITY: lang.add_new_payment_mode,
-    ENTITY_NAME: lang.payment_mode,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('payment_mode'),
+    DATATABLE_TITLE: getLang('payment_mode_list'),
+    ADD_NEW_ENTITY: getLang('add_new_payment_mode'),
+    ENTITY_NAME: getLang('payment_mode'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

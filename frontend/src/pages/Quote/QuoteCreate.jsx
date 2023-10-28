@@ -1,19 +1,18 @@
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import CreateQuoteModule from '@/modules/QuoteModule/CreateQuoteModule';
 
 export default function QuoteCreate() {
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const entity = 'quote';
 
   const Labels = {
-    PANEL_TITLE: lang.quote,
-    DATATABLE_TITLE: lang.quote_list,
-    ADD_NEW_ENTITY: lang.add_new_quote,
-    ENTITY_NAME: lang.quote,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('quote'),
+    DATATABLE_TITLE: getLang('quote_list'),
+    ADD_NEW_ENTITY: getLang('add_new_quote'),
+    ENTITY_NAME: getLang('quote'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

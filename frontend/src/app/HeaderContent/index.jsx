@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import { Avatar, Menu, Dropdown } from 'antd';
+import { Link } from 'react-router-dom';
+import { Avatar, Dropdown } from 'antd';
 // import Notifications from '@/components/Notification';
 
 import { AppstoreOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -11,13 +11,16 @@ import { checkImage } from '@/request';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { langAction } from '@/redux/lang/actions';
 import history from '@/utils/history';
-import uniqueId from '@/utils/uinqueId';
 
 import { BASE_URL } from '@/config/serverApiConfig';
+
+import useLanguage from '@/lang/useLanguage';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const dispatch = useDispatch();
+
+  const getLang = useLanguage();
 
   const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
     ? BASE_URL + currentAdmin?.photo
@@ -61,14 +64,14 @@ export default function HeaderContent() {
       key: 'settingProfile',
       label: (
         <Link to={'/profile'}>
-          <DropdownMenu text={'profile Settings'} />
+          <DropdownMenu text={getLang('profile_settings')} />
         </Link>
       ),
     },
     {
       icon: <SettingOutlined />,
       key: 'settingApp',
-      label: <Link to={'/settings'}>App Settings</Link>,
+      label: <Link to={'/settings'}>{getLang('app_settings')}</Link>,
     },
 
     {
@@ -78,7 +81,7 @@ export default function HeaderContent() {
     {
       icon: <LogoutOutlined />,
       key: 'logout',
-      label: <Link to={'/logout'}>Logout</Link>,
+      label: <Link to={'/logout'}>{getLang('logout')}</Link>,
     },
   ];
   return (
@@ -108,10 +111,6 @@ export default function HeaderContent() {
           dispatch(langAction.translate());
         }}
       />
-
-      {/* <Dropdown overlay={<Notifications />} trigger={['click']} placement="bottomRight">
-        <Avatar icon={<BellOutlined />} />
-      </Dropdown> */}
     </div>
   );
 }

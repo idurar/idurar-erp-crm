@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 
 export default function Payment() {
@@ -46,17 +45,17 @@ export default function Payment() {
     },
   ];
 
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
 
   const entity = 'payment';
 
   const Labels = {
-    PANEL_TITLE: lang.payment,
-    DATATABLE_TITLE: lang.payment_list,
-    ADD_NEW_ENTITY: lang.add_new_payment,
-    ENTITY_NAME: lang.payment,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
+    PANEL_TITLE: getLang('payment'),
+    DATATABLE_TITLE: getLang('payment_list'),
+    ADD_NEW_ENTITY: getLang('add_new_payment'),
+    ENTITY_NAME: getLang('payment'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
   };
 
   const configPage = {

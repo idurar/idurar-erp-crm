@@ -1,18 +1,17 @@
-import { useSelector } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import CreateInvoiceModule from '@/modules/InvoiceModule/CreateInvoiceModule';
 
 export default function InvoiceCreate() {
   const entity = 'invoice';
-  const lang = useSelector(selectCurrentLang);
+  const getLang = useLanguage();
   const Labels = {
-    PANEL_TITLE: lang.invoice,
-    DATATABLE_TITLE: lang.invoice_list,
-    ADD_NEW_ENTITY: lang.add_new_invoice,
-    ENTITY_NAME: lang.invoice,
-    CREATE_ENTITY: lang.save,
-    UPDATE_ENTITY: lang.update,
-    RECORD_ENTITY: lang.record_payment,
+    PANEL_TITLE: getLang('invoice'),
+    DATATABLE_TITLE: getLang('invoice_list'),
+    ADD_NEW_ENTITY: getLang('add_new_invoice'),
+    ENTITY_NAME: getLang('invoice'),
+    CREATE_ENTITY: getLang('save'),
+    UPDATE_ENTITY: getLang('update'),
+    RECORD_ENTITY: getLang('record_payment'),
   };
 
   const configPage = {
