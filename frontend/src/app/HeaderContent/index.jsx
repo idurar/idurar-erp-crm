@@ -1,17 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Link, useLocation } from 'react-router-dom';
 import { Avatar, Menu, Dropdown } from 'antd';
-import Notifications from '@/components/Notification';
+// import Notifications from '@/components/Notification';
 
-import {
-  AppstoreOutlined,
-  SettingOutlined,
-  UserOutlined,
-  LogoutOutlined,
-  BellOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons';
+import { AppstoreOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 import photo from '@/style/images/photo.png';
 import { checkImage } from '@/request';
 
@@ -30,9 +23,9 @@ export default function HeaderContent() {
     ? BASE_URL + currentAdmin?.photo
     : photo;
 
-  const profileDropdown = (
-    <div className="profileDropdown whiteBox shadow" style={{ minWidth: '200px' }}>
-      <div className="pad15" onClick={() => history.push('/profile')} style={{ cursor: 'pointer' }}>
+  const ProfileDropdown = () => {
+    return (
+      <div className="profileDropdown" onClick={() => history.push('/profile')}>
         <Avatar
           size="large"
           className="last"
@@ -41,50 +34,63 @@ export default function HeaderContent() {
         >
           {currentAdmin?.name.charAt(0).toUpperCase()}
         </Avatar>
-        <div className="info">
+        <div className="profileDropdownInfo">
           <p className="strong">
             {currentAdmin?.name} {currentAdmin?.surname}
           </p>
           <p>{currentAdmin?.email}</p>
         </div>
       </div>
-      <div className="line"></div>
+    );
+  };
 
-      <div>
-        <Menu>
-          <Menu.Item
-            icon={<SettingOutlined />}
-            key={`${uniqueId()}`}
-            onClick={() => history.push('/profile')}
-          >
-            Profil Settings
-          </Menu.Item>
-          <Menu.Item
-            icon={<SettingOutlined />}
-            key={`${uniqueId()}`}
-            onClick={() => history.push('/settings/')}
-          >
-            App Settings
-          </Menu.Item>
-        </Menu>
-      </div>
-      <div className="line"></div>
-      <div>
-        <Menu>
-          <Menu.Item
-            icon={<LogoutOutlined />}
-            key={`${uniqueId()}`}
-            onClick={() => history.push('/logout')}
-          >
-            logout
-          </Menu.Item>
-        </Menu>
-      </div>
-    </div>
-  );
+  const DropdownMenu = ({ text }) => {
+    return <span style={{}}>{text}</span>;
+  };
+
+  const items = [
+    {
+      label: <ProfileDropdown className="headerDropDownMenu" />,
+      key: 'ProfileDropdown',
+    },
+    {
+      type: 'divider',
+    },
+    {
+      icon: <SettingOutlined />,
+      key: 'settingProfile',
+      label: (
+        <Link to={'/profile'}>
+          <DropdownMenu text={'profile Settings'} />
+        </Link>
+      ),
+    },
+    {
+      icon: <SettingOutlined />,
+      key: 'settingApp',
+      label: <Link to={'/settings'}>App Settings</Link>,
+    },
+
+    {
+      type: 'divider',
+    },
+
+    {
+      icon: <LogoutOutlined />,
+      key: 'logout',
+      label: <Link to={'/logout'}>Logout</Link>,
+    },
+  ];
   return (
     <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
-      <Dropdown overlay={profileDropdown} trigger={['click']} placement="bottomRight">
+      <Dropdown
+        menu={{
+          items,
+        }}
+        trigger={['click']}
+        placement="bottomRight"
+        stye={{ width: '280px' }}
+      >
         {/* <Badge dot> */}
         <Avatar
           className="last"
@@ -103,12 +109,9 @@ export default function HeaderContent() {
         }}
       />
 
-      <Dropdown overlay={<Notifications />} trigger={['click']} placement="bottomRight">
-        {/* <Badge dot> */}
+      {/* <Dropdown overlay={<Notifications />} trigger={['click']} placement="bottomRight">
         <Avatar icon={<BellOutlined />} />
-
-        {/* </Badge> */}
-      </Dropdown>
+      </Dropdown> */}
     </div>
   );
 }

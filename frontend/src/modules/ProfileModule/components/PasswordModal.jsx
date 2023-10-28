@@ -32,7 +32,7 @@ const PasswordModal = ({ config }) => {
   return (
     <Modal
       title={modalTitle}
-      visible={passwordModal.isOpen}
+      open={passwordModal.isOpen}
       onCancel={modal.close}
       okText="Update"
       onOk={() => {

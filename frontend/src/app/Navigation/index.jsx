@@ -24,30 +24,6 @@ import {
   FileOutlined,
 } from '@ant-design/icons';
 
-const SIDEBAR_MENU = [
-  { key: '/', icon: <DashboardOutlined />, title: 'Dashboard' },
-  { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
-  { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
-  { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
-  // { key: '/order', icon: <ShopOutlined />, title: 'Order' },
-  // { key: '/inventory', icon: <InboxOutlined />, title: 'Inventory' },
-  // { key: '/kyc', icon: <ShoppingCartOutlined />, title: 'Kyc' },
-  { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
-  { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
-  { key: '/payment', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
-  { key: '/employee', icon: <UserOutlined />, title: 'Employee' },
-  { key: '/admin', icon: <TeamOutlined />, title: 'Admin' },
-];
-
-const SETTINGS_SUBMENU = [
-  { key: '/settings', title: 'General Settings' },
-
-  { key: '/email', title: 'Email templates' },
-
-  { key: '/payment/mode', title: 'Payment Mode' },
-  { key: '/settings/advanced', title: 'Advanced Settings' },
-];
-
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -70,6 +46,49 @@ function Sidebar({ collapsible }) {
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
   const [currentPath, setCurrentPath] = useState(location.pathname);
+
+  const items = [
+    { key: 'dashboard', icon: <DashboardOutlined />, label: <Link to={'/'}>Dashboard</Link> },
+    { key: 'lead', icon: <UserAddOutlined />, label: <Link to={'/lead'}>Lead</Link> },
+    { key: 'offer', icon: <FileOutlined />, label: <Link to={'/offer'}>Offer</Link> },
+    {
+      key: 'customer',
+      icon: <CustomerServiceOutlined />,
+      label: <Link to={'/customer'}>Customer</Link>,
+    },
+    // { key: 'order', icon: <ShopOutlined />, label: <Link to={'/'}>Lead</Link> Order },
+    // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
+    // { key: 'kyc', icon: <ShoppingCartOutlined />, label: <Link to={'/'}>Lead</Link> Kyc },
+    { key: 'invoice', icon: <FileTextOutlined />, label: <Link to={'/invoice'}>Invoice</Link> },
+    { key: 'quote', icon: <FileSyncOutlined />, label: <Link to={'/quote'}>Quote</Link> },
+    { key: 'payment', icon: <CreditCardOutlined />, label: <Link to={'/payment'}>Payment</Link> },
+    { key: 'employee', icon: <UserOutlined />, label: <Link to={'/employee'}>Employee</Link> },
+    { key: 'admin', icon: <TeamOutlined />, label: <Link to={'/admin'}>Admin</Link> },
+    {
+      label: 'Settings',
+      key: 'settings',
+      icon: <SettingOutlined />,
+      children: [
+        {
+          key: 'generalSettings',
+          label: <Link to={'/settings'}>General Settings</Link>,
+        },
+        {
+          key: 'emailTemplates',
+          label: <Link to={'/email'}>Email templates</Link>,
+        },
+        {
+          key: 'paymentMode',
+          label: <Link to={'/payment/mode'}>Payment Mode</Link>,
+        },
+        {
+          key: 'advancedSettings',
+          icon: <UserOutlined />,
+          label: <Link to={'/settings/advanced'}>Advanced Settings</Link>,
+        },
+      ],
+    },
+  ];
 
   useEffect(() => {
     if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname);
@@ -109,22 +128,12 @@ function Sidebar({ collapsible }) {
             />
           )}
         </div>
-        <Menu mode="inline" selectedKeys={[currentPath]}>
-          {SIDEBAR_MENU.map((menuItem) => (
-            <Menu.Item key={menuItem.key} icon={menuItem.icon}>
-              <Link to={menuItem.key} />
-              {menuItem.title}
-            </Menu.Item>
-          ))}
-          <SubMenu key={'Settings'} icon={<SettingOutlined />} title={'Settings'}>
-            {SETTINGS_SUBMENU.map((menuItem) => (
-              <Menu.Item key={menuItem.key}>
-                <Link to={menuItem.key} />
-                {menuItem.title}
-              </Menu.Item>
-            ))}
-          </SubMenu>
-        </Menu>
+        <Menu
+          items={items}
+          mode="inline"
+          // selectedKeys={[currentPath]}
+        />
+        ;
       </Sider>
     </>
   );
@@ -148,7 +157,7 @@ function MobileSidebar() {
         placement="left"
         closable={false}
         onClose={onClose}
-        visible={visible}
+        open={visible}
         className="mobile-sidebar-wraper"
       >
         <Sidebar collapsible={false} />
