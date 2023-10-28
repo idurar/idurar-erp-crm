@@ -8,13 +8,13 @@ import { useMoney } from '@/settings';
 import useLanguage from '@/lang/useLanguage';
 
 export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const { TextArea } = Input;
   const money = useMoney();
   return (
     <>
       <Form.Item
-        label={getLang('number')}
+        label={translate('number')}
         name="number"
         initialValue={1}
         rules={[
@@ -28,7 +28,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
       </Form.Item>
       <Form.Item
         name="date"
-        label={getLang('date')}
+        label={translate('date')}
         rules={[
           {
             required: true,
@@ -40,7 +40,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
       >
         <DatePicker format={'DD/MM/YYYY'} style={{ width: '100%' }} />
       </Form.Item>
-      <Form.Item label={getLang('amount')} name="amount" rules={[{ required: true }]}>
+      <Form.Item label={translate('amount')} name="amount" rules={[{ required: true }]}>
         <InputNumber
           className="moneyInput"
           min={0}
@@ -51,7 +51,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
         />
       </Form.Item>
       <Form.Item
-        label={getLang('payment Mode')}
+        label={translate('payment Mode')}
         name="paymentMode"
         rules={[
           {
@@ -67,10 +67,10 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           redirectLabel="Add Payment Mode"
         ></SelectAsync>
       </Form.Item>
-      <Form.Item label={getLang('Reference')} name="ref">
+      <Form.Item label={translate('Reference')} name="ref">
         <Input />
       </Form.Item>
-      <Form.Item label={getLang('Description')} name="description">
+      <Form.Item label={translate('Description')} name="description">
         <TextArea />
       </Form.Item>
     </>

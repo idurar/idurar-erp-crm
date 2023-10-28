@@ -6,13 +6,13 @@ import { validatePhoneNumber } from '@/utils/helpers';
 import useLanguage from '@/lang/useLanguage';
 
 export default function EmployeeForm() {
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   return (
     <>
       <Form.Item
         name="name"
-        label={getLang('first name')}
+        label={translate('first name')}
         rules={[
           {
             required: true,
@@ -23,7 +23,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="surname"
-        label={getLang('last name')}
+        label={translate('last name')}
         rules={[
           {
             required: true,
@@ -34,7 +34,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="birthday"
-        label={getLang('birthday')}
+        label={translate('birthday')}
         rules={[
           {
             required: true,
@@ -45,7 +45,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="birthplace"
-        label={getLang('birthplace')}
+        label={translate('birthplace')}
         rules={[
           {
             required: true,
@@ -56,7 +56,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="gender"
-        label={getLang('gender')}
+        label={translate('gender')}
         rules={[
           {
             required: true,
@@ -70,7 +70,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="email"
-        label={getLang('email')}
+        label={translate('email')}
         rules={[
           {
             type: 'email',
@@ -84,7 +84,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="phone"
-        label={getLang('phone')}
+        label={translate('phone')}
         rules={[
           {
             required: true,
@@ -98,7 +98,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="department"
-        label={getLang('Department')}
+        label={translate('Department')}
         rules={[
           {
             required: true,
@@ -109,7 +109,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="position"
-        label={getLang('Position')}
+        label={translate('Position')}
         rules={[
           {
             required: true,
@@ -120,7 +120,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="address"
-        label={getLang('Address')}
+        label={translate('Address')}
         rules={[
           {
             required: true,
@@ -131,7 +131,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="state"
-        label={getLang('State')}
+        label={translate('State')}
         rules={[
           {
             required: true,

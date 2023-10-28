@@ -10,12 +10,12 @@ import { valueByString } from '@/utils/helpers';
 import useLanguage from '@/lang/useLanguage';
 
 export default function DeleteModal({ config, children }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = getLang('delete_message'),
-    modalTitle = getLang('delete_confirmation'),
+    deleteMessage = translate('delete_message'),
+    modalTitle = translate('delete_confirmation'),
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);

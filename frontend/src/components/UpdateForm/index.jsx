@@ -13,7 +13,7 @@ import Loading from '@/components/Loading';
 
 export default function UpdateForm({ config, formElements, withUpload = false }) {
   let { entity } = config;
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
@@ -106,7 +106,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
             }}
           >
             <Button type="primary" htmlType="submit">
-              {getLang('Save')}
+              {translate('Save')}
             </Button>
           </Form.Item>
           <Form.Item
@@ -115,7 +115,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
               paddingLeft: '5px',
             }}
           >
-            <Button onClick={showCurrentRecord}>{getLang('Cancel')}</Button>
+            <Button onClick={showCurrentRecord}>{translate('Cancel')}</Button>
           </Form.Item>
         </Form>
       </Loading>

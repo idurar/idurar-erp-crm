@@ -30,7 +30,7 @@ import { selectCurrentItem } from '@/redux/crud/selectors';
 import useLanguage from '@/lang/useLanguage';
 
 function SidePanelTopContent({ config, formElements }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
   const { panel, advancedBox, modal, readBox, editBox } = crudContextAction;
@@ -81,7 +81,7 @@ function SidePanelTopContent({ config, formElements }) {
               marginLeft: '-5px',
             }}
           >
-            {getLang('remove')}
+            {translate('remove')}
           </Button>
           <Button
             onClick={editItem}
@@ -90,7 +90,7 @@ function SidePanelTopContent({ config, formElements }) {
             size="small"
             style={{ float: 'left', marginRight: '5px' }}
           >
-            {getLang('edit')}
+            {translate('edit')}
           </Button>
           <Button
             onClick={updatePassword}
@@ -99,7 +99,7 @@ function SidePanelTopContent({ config, formElements }) {
             size="small"
             style={{ float: 'left', marginRight: '0px' }}
           >
-            {getLang('Update Password')}
+            {translate('Update Password')}
           </Button>
         </Col>
 

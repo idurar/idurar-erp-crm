@@ -4,7 +4,7 @@ import { validatePhoneNumber } from '@/utils/helpers';
 import useLanguage from '@/lang/useLanguage';
 
 export default function CustomerForm({ isUpdateForm = false }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {
       return Promise.reject(new Error('Field cannot be empty'));
@@ -16,7 +16,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label={getLang('company')}
+        label={translate('company')}
         name="company"
         rules={[
           {
@@ -30,7 +30,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
-        label={getLang('Manager first Name')}
+        label={translate('Manager first Name')}
         name="managerSurname"
         rules={[
           {
@@ -49,7 +49,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
-        label={getLang('Manager Last Name')}
+        label={translate('Manager Last Name')}
         name="managerName"
         rules={[
           {
@@ -69,7 +69,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label={getLang('Phone')}
+        label={translate('Phone')}
         rules={[
           {
             required: true,
@@ -86,7 +86,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="email"
-        label={getLang('email')}
+        label={translate('email')}
         rules={[
           {
             type: 'email',

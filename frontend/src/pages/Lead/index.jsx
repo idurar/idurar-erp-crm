@@ -89,15 +89,15 @@ export default function Lead() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('lead'),
-    DATATABLE_TITLE: getLang('lead_list'),
-    ADD_NEW_ENTITY: getLang('add_new_lead'),
-    ENTITY_NAME: getLang('lead'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('lead'),
+    DATATABLE_TITLE: translate('lead_list'),
+    ADD_NEW_ENTITY: translate('add_new_lead'),
+    ENTITY_NAME: translate('lead'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
   const configPage = {
     entity,

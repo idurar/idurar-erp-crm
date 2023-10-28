@@ -88,15 +88,15 @@ export default function PaymentMode() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('payment_mode'),
-    DATATABLE_TITLE: getLang('payment_mode_list'),
-    ADD_NEW_ENTITY: getLang('add_new_payment_mode'),
-    ENTITY_NAME: getLang('payment_mode'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('payment_mode'),
+    DATATABLE_TITLE: translate('payment_mode_list'),
+    ADD_NEW_ENTITY: translate('add_new_payment_mode'),
+    ENTITY_NAME: translate('payment_mode'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

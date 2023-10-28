@@ -1,6 +1,6 @@
 const languages = [
   { icon: '🇦🇱 ', label: 'Albanian', value: 'sq_al' },
-  { icon: '🇦🇪 ', label: 'Arabic', value: 'ar_sa' },
+  { icon: '🇩🇿 ', label: 'Arabic', value: 'ar_sa' },
   { icon: '🇧🇩 ', label: 'Bengali', value: 'bn_bd' },
   { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },
   { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es' },

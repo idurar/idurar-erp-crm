@@ -7,7 +7,7 @@ import { useState } from 'react';
 import useLanguage from '@/lang/useLanguage';
 
 export function SelectType() {
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   return (
     <Form.List name="settingValue" initialValue={[{ Label: '', Value: '' }]}>
@@ -17,7 +17,7 @@ export function SelectType() {
             <Space key={field.key} align="center">
               <Form.Item
                 {...field}
-                label={getLang('Label')}
+                label={translate('Label')}
                 name={[field.name, 'label']}
                 rules={[
                   {
@@ -29,7 +29,7 @@ export function SelectType() {
               </Form.Item>
               <Form.Item
                 {...field}
-                label={getLang('Value')}
+                label={translate('Value')}
                 name={[field.name, 'Value']}
                 rules={[
                   {
@@ -56,7 +56,7 @@ export function SelectType() {
 }
 
 export default function AdvancedSettingsForm({ isUpdateForm = false }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const { result } = useSelector(selectCurrentItem);
   const [type, setType] = useState(null);
   const options = ['number', 'text', 'date'];
@@ -67,7 +67,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label={getLang('Setting Category')}
+        label={translate('Setting Category')}
         name="settingCategory"
         rules={[
           {
@@ -76,34 +76,34 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
         ]}
       >
         <Select
-          placeholder={getLang('Select')}
+          placeholder={translate('Select')}
           options={[
             {
               value: 'app_settings',
-              label: getLang('App Settings'),
+              label: translate('App Settings'),
             },
             {
               value: 'crm_settings',
-              label: getLang('CRM Settings'),
+              label: translate('CRM Settings'),
             },
 
             {
               value: 'finance_settings',
-              label: getLang('Finance Settings'),
+              label: translate('Finance Settings'),
             },
             {
               value: 'company_settings',
-              label: getLang('Company Settings'),
+              label: translate('Company Settings'),
             },
             {
               value: 'money_format_settings',
-              label: getLang('Money Format Settings'),
+              label: translate('Money Format Settings'),
             },
           ]}
         />
       </Form.Item>
       <Form.Item
-        label={getLang('Setting Name')}
+        label={translate('Setting Name')}
         name="settingKey"
         rules={[
           {
@@ -115,7 +115,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label={getLang('type')}
+        label={translate('type')}
         name="settingType"
         rules={[
           {
@@ -124,7 +124,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
         ]}
       >
         <Select
-          placeholder={getLang('Select')}
+          placeholder={translate('Select')}
           onChange={handleChange}
           options={[
             {
@@ -166,7 +166,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
       ) : null}
 
       <Form.Item
-        label={getLang('enabled')}
+        label={translate('enabled')}
         name="enabled"
         style={{
           display: 'inline-block',

@@ -67,15 +67,15 @@ export default function Quote() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('quote'),
-    DATATABLE_TITLE: getLang('quote_list'),
-    ADD_NEW_ENTITY: getLang('add_new_quote'),
-    ENTITY_NAME: getLang('quote'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('quote'),
+    DATATABLE_TITLE: translate('quote_list'),
+    ADD_NEW_ENTITY: translate('add_new_quote'),
+    ENTITY_NAME: translate('quote'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

@@ -96,15 +96,15 @@ export default function Employee() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('employee'),
-    DATATABLE_TITLE: getLang('employee_list'),
-    ADD_NEW_ENTITY: getLang('add_new_employee'),
-    ENTITY_NAME: getLang('employee'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('employee'),
+    DATATABLE_TITLE: translate('employee_list'),
+    ADD_NEW_ENTITY: translate('add_new_employee'),
+    ENTITY_NAME: translate('employee'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

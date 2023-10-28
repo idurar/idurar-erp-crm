@@ -5,13 +5,13 @@ import useLanguage from '@/lang/useLanguage';
 
 export default function Profile() {
   const entity = 'profile';
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('profile'),
-    ENTITY_NAME: getLang('profile'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('profile'),
+    ENTITY_NAME: translate('profile'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const config = {

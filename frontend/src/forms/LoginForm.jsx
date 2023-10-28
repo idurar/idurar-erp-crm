@@ -5,11 +5,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import useLanguage from '@/lang/useLanguage';
 
 export default function LoginForm() {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label={getLang('email')}
+        label={translate('email')}
         name="email"
         rules={[
           {
@@ -29,7 +29,7 @@ export default function LoginForm() {
         />
       </Form.Item>
       <Form.Item
-        label={getLang('password')}
+        label={translate('password')}
         name="password"
         rules={[
           {
@@ -45,11 +45,11 @@ export default function LoginForm() {
       </Form.Item>
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>{getLang('Remember me')}</Checkbox>
+          <Checkbox>{translate('Remember me')}</Checkbox>
         </Form.Item>
 
         <a className="login-form-forgot" href="">
-          {getLang('Forgot password')}
+          {translate('Forgot password')}
         </a>
       </Form.Item>
     </>

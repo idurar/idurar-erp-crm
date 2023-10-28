@@ -73,16 +73,16 @@ export default function AdvancedSettings() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('settings'),
-    DATATABLE_TITLE: getLang('settings_list'),
-    ADD_NEW_ENTITY: getLang('add_new_settings'),
-    ENTITY_NAME: getLang('setting'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
-    RECORD_ENTITY: getLang('record_payment'),
+    PANEL_TITLE: translate('settings'),
+    DATATABLE_TITLE: translate('settings_list'),
+    ADD_NEW_ENTITY: translate('add_new_settings'),
+    ENTITY_NAME: translate('setting'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+    RECORD_ENTITY: translate('record_payment'),
   };
 
   const configPage = {

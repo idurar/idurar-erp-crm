@@ -25,7 +25,7 @@ import { useCrudContext } from '@/context/crud';
 import { CrudLayout } from '@/layout';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels, entity } = config;
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
@@ -67,7 +67,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             size="small"
             style={{ float: 'right', marginLeft: '5px' }}
           >
-            {getLang('remove')}
+            {translate('remove')}
           </Button>
           <Button
             onClick={editItem}
@@ -76,7 +76,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             size="small"
             style={{ float: 'right', marginLeft: '0px' }}
           >
-            {getLang('edit')}
+            {translate('edit')}
           </Button>
         </Col>
 

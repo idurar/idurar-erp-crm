@@ -2,17 +2,17 @@ import useLanguage from '@/lang/useLanguage';
 import ReadPaymentModule from '@/modules/PaymentModule/ReadPaymentModule';
 
 export default function PaymentRead() {
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const entity = 'payment';
 
   const Labels = {
-    PANEL_TITLE: getLang('payment'),
-    DATATABLE_TITLE: getLang('payment_list'),
-    ADD_NEW_ENTITY: getLang('add_new_payment'),
-    ENTITY_NAME: getLang('payment'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('payment'),
+    DATATABLE_TITLE: translate('payment_list'),
+    ADD_NEW_ENTITY: translate('add_new_payment'),
+    ENTITY_NAME: translate('payment'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

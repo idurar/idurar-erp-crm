@@ -11,13 +11,13 @@ export const getLabel = (lang, key) => {
     );
 
     const label = conversionOfAllFirstCharacterofEachWord.join(' ');
-    // console.error(
-    //   'Language Label Warning : getLang("' +
-    //     key +
-    //     '") failed to get label for this key : ' +
-    //     key +
-    //     ' please review your language config file and add this label'
-    // );
+    console.error(
+      '🇩🇿 🇯🇵 🇪🇸 Language Label Warning : translate("' +
+        lowerCaseKey +
+        '") failed to get label for this key : ' +
+        lowerCaseKey +
+        ' please review your language config file and add this label'
+    );
     return label;
   }
 };

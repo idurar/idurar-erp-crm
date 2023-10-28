@@ -57,15 +57,15 @@ function Customer() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('customer'),
-    DATATABLE_TITLE: getLang('customer_list'),
-    ADD_NEW_ENTITY: getLang('add_new_customer'),
-    ENTITY_NAME: getLang('customer'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('customer'),
+    DATATABLE_TITLE: translate('customer_list'),
+    ADD_NEW_ENTITY: translate('add_new_customer'),
+    ENTITY_NAME: translate('customer'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
   const configPage = {
     entity,

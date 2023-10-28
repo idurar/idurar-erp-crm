@@ -6,14 +6,14 @@ import DataTable from '@/components/DataTable';
 import useLanguage from '@/lang/useLanguage';
 
 export default function AdminCrudModule({ config }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   return (
     <DataTable
       config={config}
       extra={[
         {
-          label: getLang('Update Password'),
+          label: translate('Update Password'),
           key: 'updatePassword',
           icon: <EyeOutlined />,
         },

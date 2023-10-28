@@ -68,15 +68,15 @@ export default function Order() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('order'),
-    DATATABLE_TITLE: getLang('order_list'),
-    ADD_NEW_ENTITY: getLang('add_new_order'),
-    ENTITY_NAME: getLang('order'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('order'),
+    DATATABLE_TITLE: translate('order_list'),
+    ADD_NEW_ENTITY: translate('add_new_order'),
+    ENTITY_NAME: translate('order'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

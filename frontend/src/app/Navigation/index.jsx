@@ -49,28 +49,28 @@ function Sidebar({ collapsible }) {
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
   const [currentPath, setCurrentPath] = useState(location.pathname);
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const items = [
     {
       key: 'dashboard',
       icon: <DashboardOutlined />,
-      label: <Link to={'/'}>{getLang('dashboard')}</Link>,
+      label: <Link to={'/'}>{translate('dashboard')}</Link>,
     },
     {
       key: 'lead',
       icon: <UserAddOutlined />,
-      label: <Link to={'/lead'}>{getLang('lead')}</Link>,
+      label: <Link to={'/lead'}>{translate('lead')}</Link>,
     },
     {
       key: 'offer',
       icon: <FileOutlined />,
-      label: <Link to={'/offer'}>{getLang('offer')}</Link>,
+      label: <Link to={'/offer'}>{translate('offer')}</Link>,
     },
     {
       key: 'customer',
       icon: <CustomerServiceOutlined />,
-      label: <Link to={'/customer'}>{getLang('customer')}</Link>,
+      label: <Link to={'/customer'}>{translate('customer')}</Link>,
     },
     // { key: 'order', icon: <ShopOutlined />, label: <Link to={'/'}>Lead</Link> Order },
     // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
@@ -78,27 +78,27 @@ function Sidebar({ collapsible }) {
     {
       key: 'invoice',
       icon: <FileTextOutlined />,
-      label: <Link to={'/invoice'}>{getLang('invoice')}</Link>,
+      label: <Link to={'/invoice'}>{translate('invoice')}</Link>,
     },
     {
       key: 'quote',
       icon: <FileSyncOutlined />,
-      label: <Link to={'/quote'}>{getLang('quote')}</Link>,
+      label: <Link to={'/quote'}>{translate('quote')}</Link>,
     },
     {
       key: 'payment',
       icon: <CreditCardOutlined />,
-      label: <Link to={'/payment'}>{getLang('payment')}</Link>,
+      label: <Link to={'/payment'}>{translate('payment')}</Link>,
     },
     {
       key: 'employee',
       icon: <UserOutlined />,
-      label: <Link to={'/employee'}>{getLang('employee')}</Link>,
+      label: <Link to={'/employee'}>{translate('employee')}</Link>,
     },
     {
       key: 'admin',
       icon: <TeamOutlined />,
-      label: <Link to={'/admin'}>{getLang('admin')}</Link>,
+      label: <Link to={'/admin'}>{translate('admin')}</Link>,
     },
     {
       label: 'Settings',
@@ -107,19 +107,19 @@ function Sidebar({ collapsible }) {
       children: [
         {
           key: 'generalSettings',
-          label: <Link to={'/settings'}>{getLang('general_settings')}</Link>,
+          label: <Link to={'/settings'}>{translate('general_settings')}</Link>,
         },
         {
           key: 'emailTemplates',
-          label: <Link to={'/email'}>{getLang('email_templates')}</Link>,
+          label: <Link to={'/email'}>{translate('email_templates')}</Link>,
         },
         {
           key: 'paymentMode',
-          label: <Link to={'/payment/mode'}>{getLang('payment_mode')}</Link>,
+          label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,
         },
         {
           key: 'advancedSettings',
-          label: <Link to={'/settings/advanced'}>{getLang('advanced_settings')}</Link>,
+          label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
         },
       ],
     },

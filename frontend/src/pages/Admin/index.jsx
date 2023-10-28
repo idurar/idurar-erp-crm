@@ -28,16 +28,16 @@ export default function Admin() {
     { title: "Role d'utilisateur", dataIndex: 'role' },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('admin'),
-    DATATABLE_TITLE: getLang('admin_list'),
-    ADD_NEW_ENTITY: getLang('add_new_admin'),
-    ENTITY_NAME: getLang('admin'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
-    RECORD_ENTITY: getLang('record_payment'),
+    PANEL_TITLE: translate('admin'),
+    DATATABLE_TITLE: translate('admin_list'),
+    ADD_NEW_ENTITY: translate('add_new_admin'),
+    ENTITY_NAME: translate('admin'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+    RECORD_ENTITY: translate('record_payment'),
   };
 
   const configPage = {

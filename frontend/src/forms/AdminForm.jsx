@@ -17,11 +17,11 @@ const beforeUpload = (file) => {
 };
 
 export default function AdminForm({ isUpdateForm = false }) {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label={getLang('first Name')}
+        label={translate('first Name')}
         name="name"
         rules={[
           {
@@ -32,7 +32,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label={getLang('last Name')}
+        label={translate('last Name')}
         name="surname"
         rules={[
           {
@@ -43,7 +43,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label={getLang('email')}
+        label={translate('email')}
         name="email"
         rules={[
           {
@@ -59,7 +59,7 @@ export default function AdminForm({ isUpdateForm = false }) {
 
       {!isUpdateForm && (
         <Form.Item
-          label={getLang('Password')}
+          label={translate('Password')}
           name="password"
           rules={[
             {
@@ -71,7 +71,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         </Form.Item>
       )}
       <Form.Item
-        label={getLang('Role')}
+        label={translate('Role')}
         name="role"
         rules={[
           {
@@ -89,7 +89,7 @@ export default function AdminForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="file"
-        label={getLang('Photo')}
+        label={translate('Photo')}
         valuePropName="fileList"
         getValueFromEvent={(e) => e.fileList}
       >

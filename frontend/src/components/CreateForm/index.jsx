@@ -17,7 +17,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
-  const getLang = useLanguage();
+  const translate = useLanguage();
   const onSubmit = (fieldsValue) => {
     // Manually trim values before submission
 
@@ -50,7 +50,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
         {formElements}
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            {getLang('Submit')}
+            {translate('Submit')}
           </Button>
         </Form.Item>
       </Form>

@@ -20,7 +20,7 @@ export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const dispatch = useDispatch();
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
     ? BASE_URL + currentAdmin?.photo
@@ -64,14 +64,14 @@ export default function HeaderContent() {
       key: 'settingProfile',
       label: (
         <Link to={'/profile'}>
-          <DropdownMenu text={getLang('profile_settings')} />
+          <DropdownMenu text={translate('profile_settings')} />
         </Link>
       ),
     },
     {
       icon: <SettingOutlined />,
       key: 'settingApp',
-      label: <Link to={'/settings'}>{getLang('app_settings')}</Link>,
+      label: <Link to={'/settings'}>{translate('app_settings')}</Link>,
     },
 
     {
@@ -81,7 +81,7 @@ export default function HeaderContent() {
     {
       icon: <LogoutOutlined />,
       key: 'logout',
-      label: <Link to={'/logout'}>{getLang('logout')}</Link>,
+      label: <Link to={'/logout'}>{translate('logout')}</Link>,
     },
   ];
   return (

@@ -80,15 +80,15 @@ export default function Currency() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('currency'),
-    DATATABLE_TITLE: getLang('currency_list'),
-    ADD_NEW_ENTITY: getLang('add_new_currency'),
-    ENTITY_NAME: getLang('currency'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('currency'),
+    DATATABLE_TITLE: translate('currency_list'),
+    ADD_NEW_ENTITY: translate('add_new_currency'),
+    ENTITY_NAME: translate('currency'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

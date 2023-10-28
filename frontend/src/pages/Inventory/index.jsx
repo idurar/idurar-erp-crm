@@ -42,15 +42,15 @@ export default function Inventory() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('product'),
-    DATATABLE_TITLE: getLang('product_list'),
-    ADD_NEW_ENTITY: getLang('add_new_product'),
-    ENTITY_NAME: getLang('product'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('product'),
+    DATATABLE_TITLE: translate('product_list'),
+    ADD_NEW_ENTITY: translate('add_new_product'),
+    ENTITY_NAME: translate('product'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

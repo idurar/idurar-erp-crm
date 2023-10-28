@@ -3,11 +3,11 @@ import { Form, Input, Select } from 'antd';
 import useLanguage from '@/lang/useLanguage';
 
 export default function LeadForm() {
-  const getLang = useLanguage();
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label={getLang('first name')}
+        label={translate('first name')}
         name="firstName"
         rules={[
           {
@@ -19,7 +19,7 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label={getLang('last name')}
+        label={translate('last name')}
         name="lastName"
         rules={[
           {
@@ -31,7 +31,7 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label={getLang('email')}
+        label={translate('email')}
         name="email"
         rules={[
           {
@@ -43,7 +43,7 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label={getLang('phone')}
+        label={translate('phone')}
         name="phone"
         rules={[
           {
@@ -55,7 +55,7 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label={getLang('company')}
+        label={translate('company')}
         name="company"
         rules={[
           {
@@ -67,7 +67,7 @@ export default function LeadForm() {
       </Form.Item>
 
       <Form.Item
-        label={getLang('position in company')}
+        label={translate('position in company')}
         name="jobTitle"
         rules={[
           {
@@ -78,16 +78,16 @@ export default function LeadForm() {
         <Input />
       </Form.Item>
 
-      <Form.Item label={getLang('address')} name="address">
+      <Form.Item label={translate('address')} name="address">
         <Input />
       </Form.Item>
 
-      <Form.Item label={getLang('country')} name="country">
+      <Form.Item label={translate('country')} name="country">
         <Input />
       </Form.Item>
 
       <Form.Item
-        label={getLang('status')}
+        label={translate('status')}
         name="status"
         rules={[
           {
@@ -98,19 +98,19 @@ export default function LeadForm() {
       >
         <Select
           options={[
-            { value: 'new', label: getLang('new') },
-            { value: 'reached', label: getLang('reached') },
-            { value: 'interested', label: getLang('interested') },
-            { value: 'not interested', label: getLang('not interested') },
+            { value: 'new', label: translate('new') },
+            { value: 'reached', label: translate('reached') },
+            { value: 'interested', label: translate('interested') },
+            { value: 'not interested', label: translate('not interested') },
           ]}
         ></Select>
       </Form.Item>
 
-      <Form.Item label={getLang('note')} name="note">
+      <Form.Item label={translate('note')} name="note">
         <Input />
       </Form.Item>
 
-      <Form.Item label={getLang('source')} name="source">
+      <Form.Item label={translate('source')} name="source">
         <Input placeholder="ex: linkedin, website, ads..." />
       </Form.Item>
     </>

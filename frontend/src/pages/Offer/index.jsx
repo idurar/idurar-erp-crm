@@ -61,16 +61,16 @@ export default function Offer() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const entity = 'offer';
   const Labels = {
-    PANEL_TITLE: getLang('offer'),
-    DATATABLE_TITLE: getLang('offer_list'),
-    ADD_NEW_ENTITY: getLang('add_new_offer'),
-    ENTITY_NAME: getLang('offer'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('offer'),
+    DATATABLE_TITLE: translate('offer_list'),
+    ADD_NEW_ENTITY: translate('add_new_offer'),
+    ENTITY_NAME: translate('offer'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

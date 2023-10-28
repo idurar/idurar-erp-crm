@@ -31,16 +31,16 @@ export default function DataTable({ config, extra = [] }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const items = [
     {
-      label: getLang('Show'),
+      label: translate('Show'),
       key: 'read',
       icon: <EyeOutlined />,
     },
     {
-      label: getLang('Edit'),
+      label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
     },
@@ -50,7 +50,7 @@ export default function DataTable({ config, extra = [] }) {
     },
 
     {
-      label: getLang('Delete'),
+      label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
     },

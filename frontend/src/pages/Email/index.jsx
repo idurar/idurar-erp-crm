@@ -41,15 +41,15 @@ export default function AdvancedSettings() {
     },
   ];
 
-  const getLang = useLanguage();
+  const translate = useLanguage();
 
   const Labels = {
-    PANEL_TITLE: getLang('email_template'),
-    DATATABLE_TITLE: getLang('email_template_list'),
-    ADD_NEW_ENTITY: getLang('add_new_email_template'),
-    ENTITY_NAME: getLang('email_template'),
-    CREATE_ENTITY: getLang('save'),
-    UPDATE_ENTITY: getLang('update'),
+    PANEL_TITLE: translate('email_template'),
+    DATATABLE_TITLE: translate('email_template_list'),
+    ADD_NEW_ENTITY: translate('add_new_email_template'),
+    ENTITY_NAME: translate('email_template'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
