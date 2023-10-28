@@ -15,7 +15,6 @@ export default function SelectAsync({
   withRedirect = false,
   urlToRedirect = '/',
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
 
@@ -26,9 +25,8 @@ export default function SelectAsync({
   };
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {
-    isSuccess ? setOptions(result) : setOptions([]);
-    setIsLoading(fetchIsLoading);
-  }, [fetchIsLoading]);
+    isSuccess && setOptions(result);
+  }, [isSuccess]);
 
   const labels = (optionField) => {
     return displayLabels.map((x) => optionField[x]).join(' ');
@@ -55,8 +53,8 @@ export default function SelectAsync({
 
   return (
     <Select
-      loading={isLoading}
-      disabled={isLoading}
+      loading={fetchIsLoading}
+      disabled={fetchIsLoading}
       value={currentValue}
       onChange={handleSelectChange}
     >

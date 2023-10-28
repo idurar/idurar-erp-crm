@@ -26,26 +26,7 @@ function useFetchData(fetchFunction) {
 }
 
 export default function useFetch(fetchFunction) {
-   const [data, setData] = useState(null);
-   const [isLoading, setLoading] = useState(true);
-   const [isSuccess, setSuccess] = useState(false);
-   const [error, setError] = useState(null);
+  const { data, isLoading, isSuccess, error } = useFetchData(fetchFunction);
 
-   useEffect(() => {
-     async function fetchData() {
-       try {
-         const data = await fetchFunction();
-         setData(data.result);
-         setSuccess(true);
-       } catch (error) {
-         setError(error);
-       } finally {
-         setLoading(false);
-       }
-     }
-
-     fetchData();
-   }, [isLoading]);
-
-   return { data, isLoading, isSuccess, error };
+  return { result: data, isLoading, isSuccess, error };
 }
