@@ -33,7 +33,7 @@ export default function Offer() {
       onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
       onCell: (total) => moneyRowFormatter({ amount: total }),
     },
@@ -43,7 +43,7 @@ export default function Offer() {
       dataIndex: 'note',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =

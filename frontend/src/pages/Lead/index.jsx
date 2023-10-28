@@ -39,7 +39,7 @@ export default function Lead() {
       dataIndex: 'phone',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
     },
   ];
@@ -66,7 +66,7 @@ export default function Lead() {
       dataIndex: ['phone'],
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =

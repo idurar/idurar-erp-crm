@@ -13,38 +13,12 @@ import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
 
-const dataTableColumns = [
-  {
-    title: 'N#',
-    dataIndex: 'number',
-  },
-  {
-    title: 'Client',
-    dataIndex: ['client', 'company'],
-  },
-
-  {
-    title: 'Total',
-    dataIndex: 'total',
-
-    render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (status) => {
-      let color = status === 'Draft' ? 'volcano' : 'green';
-
-      return <Tag color={color}>{status.toUpperCase()}</Tag>;
-    },
-  },
-];
-
 function formatCurrency(value) {
   return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
 export default function DashboardModule() {
+  const translate = useLanguage();
   const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
     request.summary({ entity: 'invoice' })
   );
@@ -64,6 +38,33 @@ export default function DashboardModule() {
   const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
     request.summary({ entity: 'client' })
   );
+
+  const dataTableColumns = [
+    {
+      title: translate('number'),
+      dataIndex: 'number',
+    },
+    {
+      title: translate('Client'),
+      dataIndex: ['client', 'company'],
+    },
+
+    {
+      title: translate('Total'),
+      dataIndex: 'total',
+
+      render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
+    },
+    {
+      title: translate('Status'),
+      dataIndex: 'status',
+      render: (status) => {
+        let color = status === 'Draft' ? 'volcano' : 'green';
+
+        return <Tag color={color}>{translate(status.toUpperCase())}</Tag>;
+      },
+    },
+  ];
 
   const entityData = [
     {
@@ -96,7 +97,7 @@ export default function DashboardModule() {
     return (
       <SummaryCard
         key={index}
-        title={data?.entity === 'payment' ? 'Payment' : data?.entity}
+        title={data?.entity === 'payment' ? translate('Payment') : data?.entity}
         tagColor={
           data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
         }
@@ -115,7 +116,9 @@ export default function DashboardModule() {
     return (
       <PreviewCard
         key={index}
-        title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`}
+        title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} ${translate(
+          'Preview'
+        )}`}
         isLoading={isLoading}
         entity={entity}
         statistics={
@@ -167,7 +170,7 @@ export default function DashboardModule() {
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
           <div className="whiteBox shadow" style={{ height: '100%' }}>
             <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Invoices</h3>
+              <h3 style={{ color: '#22075e', marginBottom: 5 }}>{translate('Recent Invoices')}</h3>
             </div>
 
             <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
@@ -177,7 +180,7 @@ export default function DashboardModule() {
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
           <div className="whiteBox shadow" style={{ height: '100%' }}>
             <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Quotes</h3>
+              <h3 style={{ color: '#22075e', marginBottom: 5 }}>{translate('Recent Quotes')}</h3>
             </div>
             <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
           </div>

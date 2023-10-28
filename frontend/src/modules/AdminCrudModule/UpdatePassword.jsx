@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
 import { useCrudContext } from '@/context/crud';
 import { selectUpdatedItem } from '@/redux/crud/selectors';
 
@@ -12,7 +11,10 @@ import Loading from '@/components/Loading';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 
+import useLanguage from '@/lang/useLanguage';
+
 export default function UpdatePassword({ config }) {
+  const translate = useLanguage();
   const dispatch = useDispatch();
   const { current } = useSelector(selectUpdatedItem);
 
@@ -57,12 +59,11 @@ export default function UpdatePassword({ config }) {
         <div className="space10"></div>
         <Form form={form} layout="vertical" onFinish={handelSubmit}>
           <Form.Item
-            label="New Password"
+            label={translate('New Password')}
             name="password"
             rules={[
               {
                 required: true,
-                message: 'Please input your Password!',
                 len: 8,
               },
             ]}
@@ -76,7 +77,7 @@ export default function UpdatePassword({ config }) {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Save
+              {translate('Save')}
             </Button>
           </Form.Item>
           <Form.Item
@@ -85,7 +86,7 @@ export default function UpdatePassword({ config }) {
               paddingLeft: '5px',
             }}
           >
-            <Button onClick={showCurrentRecord}>Cancel</Button>
+            <Button onClick={showCurrentRecord}>{translate('Cancel')}</Button>
           </Form.Item>
         </Form>
       </Loading>

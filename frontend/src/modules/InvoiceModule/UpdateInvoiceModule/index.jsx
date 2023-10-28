@@ -1,4 +1,4 @@
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 
 import { ErpLayout } from '@/layout';
 import UpdateItem from '@/modules/ErpPanelModule/UpdateItem';
@@ -7,17 +7,16 @@ import InvoiceForm from '@/modules/InvoiceModule/Forms/InvoiceForm';
 import PageLoader from '@/components/PageLoader';
 
 import { erp } from '@/redux/erp/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function UpdateInvoiceModule({ config }) {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const history = useHistory();
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));
@@ -43,21 +42,7 @@ export default function UpdateInvoiceModule({ config }) {
         {isSuccess ? (
           <UpdateItem config={config} UpdateForm={InvoiceForm} />
         ) : (
-          <Result
-            status="404"
-            title="Invoice not found"
-            subTitle="Sorry, the invoice you requested does not exist."
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push(`/${config.entity.toLowerCase()}`);
-                }}
-              >
-                Back to Invoice Page
-              </Button>
-            }
-          />
+          <NotFound entity={config.entity} />
         )}
       </ErpLayout>
     );

@@ -20,7 +20,7 @@ export default function Quote() {
       dataIndex: 'number',
     },
     {
-      title: 'Client',
+      title: translate('Client'),
       dataIndex: ['client', 'company'],
     },
     {
@@ -43,13 +43,13 @@ export default function Quote() {
       onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
       onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =

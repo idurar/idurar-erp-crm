@@ -32,7 +32,7 @@ export default function Order() {
       dataIndex: 'price',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
     },
     {
@@ -59,7 +59,7 @@ export default function Order() {
     },
 
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
     },
     {

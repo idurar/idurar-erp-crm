@@ -1,23 +1,10 @@
 import React, { useEffect } from 'react';
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 import history from '@/utils/history';
-const NotFound = () => {
+const NotFoundPage = () => {
   useEffect(() => {
     history.replace('/notfound');
   }, []);
-  return (
-    <>
-      <Result
-        status="404"
-        title="404"
-        subTitle="Sorry, the page you visited does not exist."
-        extra={
-          <Button href="/" type="primary">
-            Back Home
-          </Button>
-        }
-      />
-    </>
-  );
+  return <NotFound entity={''} />;
 };
-export default NotFound;
+export default NotFoundPage;

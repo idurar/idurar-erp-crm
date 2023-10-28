@@ -20,7 +20,7 @@ export default function Invoice() {
       dataIndex: 'number',
     },
     {
-      title: 'Client',
+      title: translate('Client'),
       dataIndex: ['client', 'company'],
     },
     {
@@ -38,7 +38,7 @@ export default function Invoice() {
       },
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
       onCell: (total) => moneyRowFormatter({ amount: total }),
     },
@@ -48,7 +48,7 @@ export default function Invoice() {
       onCell: (credit) => moneyRowFormatter({ amount: credit }),
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';

@@ -1,4 +1,4 @@
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 import { ErpLayout } from '@/layout';
 import ReadOfferItem from './ReadOfferItem';
 
@@ -33,21 +33,7 @@ export default function ReadOfferModule({ config }) {
         {isSuccess ? (
           <ReadOfferItem config={config} selectedItem={currentResult} />
         ) : (
-          <Result
-            status="404"
-            title="Offer not found"
-            subTitle="Sorry, the Offer you requested does not exist."
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push(`/${config.entity.toLowerCase()}`);
-                }}
-              >
-                Back to Offer Page
-              </Button>
-            }
-          />
+          <NotFound entity={config.entity} />
         )}
       </ErpLayout>
     );

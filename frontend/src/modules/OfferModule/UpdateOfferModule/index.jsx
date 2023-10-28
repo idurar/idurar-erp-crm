@@ -1,4 +1,4 @@
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 
 import { ErpLayout } from '@/layout';
 import UpdateItem from '@/modules/ErpPanelModule/UpdateItem';
@@ -43,21 +43,7 @@ export default function UpdateOfferModule({ config }) {
         {isSuccess ? (
           <UpdateItem config={config} UpdateForm={OfferForm} />
         ) : (
-          <Result
-            status="404"
-            title="Offer not found"
-            subTitle="Sorry, the Offer you requested does not exist."
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push(`/${config.entity.toLowerCase()}`);
-                }}
-              >
-                Back to Offer Page
-              </Button>
-            }
-          />
+          <NotFound entity={config.entity} />
         )}
       </ErpLayout>
     );
