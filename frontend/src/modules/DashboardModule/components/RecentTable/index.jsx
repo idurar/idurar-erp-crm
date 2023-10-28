@@ -4,55 +4,83 @@ import { Descriptions, Dropdown, Menu, Table } from 'antd';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 
-import {
-  EllipsisOutlined,
-  EyeOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  FilePdfOutlined,
-} from '@ant-design/icons';
+import { EllipsisOutlined, EyeOutlined, EditOutlined, FilePdfOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { erp } from '@/redux/erp/actions';
 import { selectCurrentLang } from '@/redux/lang/selectors';
 import { useHistory } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
-function DropDownRowMenu({ row, entity }) {
-  const history = useHistory();
-  const Show = () => {
-    history.push(`/${entity}/read/${row._id}`);
-  };
-  function Edit() {
-    history.push(`/${entity}/update/${row._id}`);
-  }
-  function Download() {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${row._id}.pdf`, '_blank');
-  }
-
-  return (
-    <Menu style={{ width: 130 }}>
-      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
-        Show
-      </Menu.Item>
-      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
-        Edit
-      </Menu.Item>
-      <Menu.Item onClick={Download} icon={<FilePdfOutlined />}>
-        Download
-      </Menu.Item>
-    </Menu>
-  );
-}
-
 export default function RecentTable({ ...props }) {
   let { entity, dataTableColumns } = props;
+
+  const items = [
+    {
+      label: 'Show',
+      key: 'read',
+      icon: <EyeOutlined />,
+    },
+    {
+      label: 'Edit',
+      key: 'edit',
+      icon: <EditOutlined />,
+    },
+    {
+      label: 'Download',
+      key: 'download',
+      icon: <FilePdfOutlined />,
+    },
+  ];
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleRead = (record) => {
+    dispatch(erp.currentItem({ data: record }));
+    history.push(`/${entity}/read/${record._id}`);
+  };
+  const handleEdit = (record) => {
+    dispatch(erp.currentAction({ actionType: 'update', data: record }));
+    history.push(`/${entity}/update/${record._id}`);
+  };
+  const handleDownload = (record) => {
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+  };
+
   dataTableColumns = [
     ...dataTableColumns,
     {
       title: '',
-      render: (row) => (
-        <Dropdown overlay={DropDownRowMenu({ row, entity })} trigger={['click']}>
-          <EllipsisOutlined style={{ cursor: 'pointer', fontSize: '24px' }} />
+      key: 'action',
+      render: (_, record) => (
+        <Dropdown
+          menu={{
+            items,
+            onClick: ({ key }) => {
+              switch (key) {
+                case 'read':
+                  handleRead(record);
+                  break;
+                case 'edit':
+                  handleEdit(record);
+                  break;
+                case 'download':
+                  handleDownload(record);
+                  break;
+
+                default:
+                  break;
+              }
+              // else if (key === '2')handleCloseTask
+            },
+          }}
+          trigger={['click']}
+        >
+          <EllipsisOutlined
+            style={{ cursor: 'pointer', fontSize: '24px' }}
+            onClick={(e) => e.preventDefault()}
+          />
         </Dropdown>
       ),
     },

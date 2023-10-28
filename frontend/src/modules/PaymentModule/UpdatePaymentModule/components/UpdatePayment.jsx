@@ -12,7 +12,7 @@ import { selectCurrentLang } from '@/redux/lang/selectors';
 import Loading from '@/components/Loading';
 
 import calculate from '@/utils/calculate';
-import PaymentForm from '../../Forms/PaymentForm';
+import PaymentForm from '@/forms/PaymentForm';
 export default function UpdatePayment({ config, currentInvoice }) {
   let { entity } = config;
   const dispatch = useDispatch();

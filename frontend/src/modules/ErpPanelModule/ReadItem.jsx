@@ -96,7 +96,6 @@ export default function ReadItem({ config, selectedItem }) {
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
 
   useEffect(() => {
-    const controller = new AbortController();
     if (currentResult) {
       const { items, invoice, ...others } = currentResult;
 
@@ -114,7 +113,10 @@ export default function ReadItem({ config, selectedItem }) {
         setCurrentErp({ ...invoice.items, ...others, ...invoice });
       }
     }
-    return () => controller.abort();
+    return () => {
+      setItemsList([]);
+      setCurrentErp(resetErp);
+    };
   }, [currentResult]);
 
   return (

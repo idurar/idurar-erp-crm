@@ -31,7 +31,7 @@ const langReducer = (state = INITIAL_STATE, action) => {
 
     case actionTypes.REQUEST_SUCCESS:
       return {
-        result: payload,
+        result: { ...state.result, ...payload },
         langCode: langCode,
         isLoading: false,
         isSuccess: true,

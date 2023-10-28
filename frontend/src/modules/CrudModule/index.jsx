@@ -13,6 +13,7 @@ import UpdateForm from '@/components/UpdateForm';
 import DeleteModal from '@/components/DeleteModal';
 import ReadItem from '@/components/ReadItem';
 import SearchItem from '@/components/SearchItem';
+import DataTable from '@/components/DataTable';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,8 +23,6 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
-
-import CrudDataTable from './CrudDataTable';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
   const { crudContextAction, state } = useCrudContext();
@@ -150,7 +149,7 @@ function CrudModule({ config, createForm, updateForm, withUpload = false }) {
         <SidePanelTopContent config={config} formElements={updateForm} withUpload={withUpload} />
       }
     >
-      <CrudDataTable config={config} />
+      <DataTable config={config} />
       <DeleteModal config={config} />
     </CrudLayout>
   );

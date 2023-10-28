@@ -26,19 +26,17 @@ export default function Offer() {
     {
       title: 'Date',
       dataIndex: 'date',
-      render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
-      },
+      render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
     {
       title: 'SubTotal',
       dataIndex: 'subTotal',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
       title: 'Total',
       dataIndex: 'total',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {

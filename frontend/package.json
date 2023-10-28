@@ -7,7 +7,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.8.1",
     "@craco/craco": "5.5.0",
-    "antd": "4.17.4",
+    "antd": "^4.24.14",
     "axios": "0.27.2",
     "craco-alias": "3.0.1",
     "craco-less": "1.17.1",
