@@ -7,7 +7,7 @@ import QuoteForm from '@/modules/QuoteModule/Forms/QuoteForm';
 import PageLoader from '@/components/PageLoader';
 
 import { erp } from '@/redux/erp/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

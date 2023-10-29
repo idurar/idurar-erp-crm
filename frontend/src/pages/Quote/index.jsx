@@ -6,6 +6,7 @@ import { useMoney } from '@/settings';
 import useLanguage from '@/lang/useLanguage';
 
 export default function Quote() {
+  const translate = useLanguage();
   const entity = 'quote';
   const { moneyRowFormatter } = useMoney();
 
@@ -66,8 +67,6 @@ export default function Quote() {
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('quote'),

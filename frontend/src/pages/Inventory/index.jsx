@@ -59,6 +59,7 @@ export default function Inventory() {
   };
   const config = {
     ...configPage,
+    readColumns,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,

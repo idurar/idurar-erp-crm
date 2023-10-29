@@ -6,6 +6,7 @@ import { useMoney } from '@/settings';
 import useLanguage from '@/lang/useLanguage';
 
 export default function Offer() {
+  const translate = useLanguage();
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -60,8 +61,6 @@ export default function Offer() {
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const entity = 'offer';
   const Labels = {

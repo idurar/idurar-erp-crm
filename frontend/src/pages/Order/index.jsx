@@ -5,6 +5,7 @@ import OrderForm from '@/forms/OrderForm'; // Ensure to create this form
 import useLanguage from '@/lang/useLanguage';
 
 export default function Order() {
+  const translate = useLanguage();
   const entity = 'order';
   const searchConfig = {
     displayLabels: ['orderId', 'status'],
@@ -67,8 +68,6 @@ export default function Order() {
       dataIndex: 'notes',
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('order'),

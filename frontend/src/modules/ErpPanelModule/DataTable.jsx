@@ -11,7 +11,7 @@ import {
 import { Descriptions, Dropdown, Table, Button, PageHeader } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
@@ -40,6 +40,7 @@ function AddNewItem({ config, hasCreate = true }) {
 }
 
 export default function DataTable({ config, extra = [] }) {
+  const translate = useLanguage();
   let { entity, dataTableColumns, create = true } = config;
   const { DATATABLE_TITLE } = config;
 
@@ -52,17 +53,17 @@ export default function DataTable({ config, extra = [] }) {
 
   const items = [
     {
-      label: 'Show',
+      label: translate('Show'),
       key: 'read',
       icon: <EyeOutlined />,
     },
     {
-      label: 'Edit',
+      label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
     },
     {
-      label: 'Download',
+      label: translate('Download'),
       key: 'download',
       icon: <FilePdfOutlined />,
     },
@@ -72,7 +73,7 @@ export default function DataTable({ config, extra = [] }) {
     },
 
     {
-      label: 'Delete',
+      label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
     },
@@ -105,7 +106,7 @@ export default function DataTable({ config, extra = [] }) {
   dataTableColumns = [
     ...dataTableColumns,
     {
-      title: 'Action',
+      title: '',
       key: 'action',
       render: (_, record) => (
         <Dropdown
@@ -177,7 +178,7 @@ export default function DataTable({ config, extra = [] }) {
           ghost={true}
           extra={[
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-              Refresh
+              {translate('Refresh')}
             </Button>,
             <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
           ]}

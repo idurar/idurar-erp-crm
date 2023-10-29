@@ -27,8 +27,6 @@ const AUTH_INITIAL_STATE = {
 };
 const initialState = storePersist.get('auth') ? { auth: AUTH_INITIAL_STATE } : {};
 
-window.localStorage.setItem('lang', JSON.stringify(lang));
-
 const store = createStore(rootReducer, initialState, configStore);
 
 export default store;

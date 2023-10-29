@@ -48,42 +48,46 @@ export default function PaymentMode() {
       title: 'Is Default',
       dataIndex: 'isDefault',
       key: 'isDefault',
-      render: (text, row) => {
+      onCell: (record, rowIndex) => {
         return {
           props: {
             style: {
               width: '60px',
             },
           },
-          children: (
-            <Switch
-              checked={text}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
         };
+      },
+      render: (_, record) => {
+        return (
+          <Switch
+            checked={record.isDefault}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        );
       },
     },
     {
       title: 'Enabled',
       dataIndex: 'enabled',
       key: 'enabled',
-      render: (text, row) => {
+      onCell: (record, rowIndex) => {
         return {
           props: {
             style: {
               width: '60px',
             },
           },
-          children: (
-            <Switch
-              checked={text}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
         };
+      },
+      render: (_, record) => {
+        return (
+          <Switch
+            checked={record.enabled}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        );
       },
     },
   ];

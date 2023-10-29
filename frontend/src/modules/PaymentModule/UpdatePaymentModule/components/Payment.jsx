@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Divider } from 'antd';
-import { Button, PageHeader, Row, Col, Descriptions, Tag } from 'antd';
+import React, { useState, useEffect } from 'react';
+
+import { Button, PageHeader, Row, Col, Descriptions, Tag, Divider } from 'antd';
 import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import uniqueId from '@/utils/uinqueId';
 import { useMoney } from '@/settings';
@@ -9,6 +9,7 @@ import useLanguage from '@/lang/useLanguage';
 import UpdatePayment from './UpdatePayment';
 
 export default function Payment({ config, currentItem }) {
+  const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
 
   const money = useMoney();
@@ -48,14 +49,14 @@ export default function Payment({ config, currentItem }) {
                 }}
                 icon={<CloseCircleOutlined />}
               >
-                Cancel
+                {translate('Cancel')}
               </Button>,
               <Button
                 key={`${uniqueId()}`}
                 onClick={() => history.push(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
-                Show Invoice
+                label={translate('Show invoice')}
               </Button>,
             ]}
             style={{
@@ -74,15 +75,21 @@ export default function Payment({ config, currentItem }) {
           lg={{ span: 10, order: 2, push: 4 }}
         >
           <div className="space50"></div>
-          <Descriptions title={`Client : ${currentErp.client.company}`} column={1}>
-            <Descriptions.Item label="E-mail">{currentErp.client.email}</Descriptions.Item>
-            <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
+          <Descriptions title={`${translate('Client')} : ${currentErp.client.company}`} column={1}>
+            <Descriptions.Item label={translate('email')}>
+              {currentErp.client.email}
+            </Descriptions.Item>
+            <Descriptions.Item label={translate('Phone')}>
+              {currentErp.client.phone}
+            </Descriptions.Item>
             <Divider dashed />
-            <Descriptions.Item label="Payment Status">{currentErp.paymentStatus}</Descriptions.Item>
-            <Descriptions.Item label="SubTotal">
+            <Descriptions.Item label={translate('Payment Status')}>
+              {currentErp.paymentStatus}
+            </Descriptions.Item>
+            <Descriptions.Item label={translate('SubTotal')}>
               {money.amountFormatter({ amount: currentErp.subTotal })}
             </Descriptions.Item>
-            <Descriptions.Item label="Total">
+            <Descriptions.Item label={translate('Total')}>
               {money.amountFormatter({ amount: currentErp.total })}
             </Descriptions.Item>
             <Descriptions.Item label="Discount">

@@ -29,7 +29,7 @@ export default function ErpPanel({ config, extra }) {
   return (
     <>
       <DataTable config={config} extra={extra} />
-      <Delete config={config} isVisible={deleteModal.isOpen} />
+      <Delete config={config} isOpen={deleteModal.isOpen} />
     </>
   );
 }

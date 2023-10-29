@@ -8,6 +8,7 @@ import LeadForm from '@/forms/LeadForm';
 import useLanguage from '@/lang/useLanguage';
 
 export default function Lead() {
+  const translate = useLanguage();
   const entity = 'lead';
   const searchConfig = {
     displayLabels: ['firstname', 'company'],
@@ -88,8 +89,6 @@ export default function Lead() {
       render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('lead'),

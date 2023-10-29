@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+
 import { selectCurrentLang } from '@/redux/lang/selectors';
 
 const getLabel = (lang, key) => {
@@ -19,6 +20,18 @@ const getLabel = (lang, key) => {
       );
 
       const label = conversionOfAllFirstCharacterofEachWord.join(' ');
+
+      const result = window.localStorage.getItem('lang');
+      if (!result) {
+        let list = {};
+        list[lowerCaseKey] = label;
+        window.localStorage.setItem('lang', JSON.stringify(list));
+      } else {
+        let list = { ...JSON.parse(result) };
+        list[lowerCaseKey] = label;
+        window.localStorage.removeItem('lang');
+        window.localStorage.setItem('lang', JSON.stringify(list));
+      }
       console.error(
         '🇩🇿 🇧🇷 🇻🇳 🇮🇩 🇨🇳 Language Label Warning : translate("' +
           lowerCaseKey +

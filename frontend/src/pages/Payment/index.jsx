@@ -3,6 +3,7 @@ import useLanguage from '@/lang/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 
 export default function Payment() {
+  const translate = useLanguage();
   const searchConfig = {
     displayLabels: ['number'],
     searchFields: 'number',
@@ -44,8 +45,6 @@ export default function Payment() {
       dataIndex: ['paymentMode', 'name'],
     },
   ];
-
-  const translate = useLanguage();
 
   const entity = 'payment';
 

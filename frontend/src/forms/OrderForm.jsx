@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Form, Input, Tag, Select, InputNumber } from 'antd';
-import dayjs from 'dayjs';
+import { Form, Input, Select, InputNumber } from 'antd';
+
+import useLanguage from '@/lang/useLanguage';
 
 export default function OrderForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {
       return Promise.reject(new Error('Field cannot be empty'));
@@ -14,7 +16,7 @@ export default function OrderForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label="Order ID"
+        label={translate('Order ID')}
         name="orderId"
         rules={[
           {
@@ -29,7 +31,7 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Products"
+        label={translate('Products')}
         name="products"
         rules={[
           {
@@ -44,7 +46,7 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Quantity"
+        label={translate('Quantity')}
         name="quantity"
         rules={[
           {
@@ -56,7 +58,7 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Price"
+        label={translate('Price')}
         name="price"
         rules={[
           {
@@ -68,7 +70,7 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Status"
+        label={translate('status')}
         name="status"
         rules={[
           {
@@ -77,15 +79,15 @@ export default function OrderForm({ isUpdateForm = false }) {
         ]}
       >
         <Select>
-          <Select.Option value="pending">Pending</Select.Option>
-          <Select.Option value="shipped">Shipped</Select.Option>
-          <Select.Option value="delivered">Delivered</Select.Option>
-          <Select.Option value="cancelled">Cancelled</Select.Option>
+          <Select.Option value="pending">{translate('Pending')}</Select.Option>
+          <Select.Option value="shipped">{translate('Shipped')}</Select.Option>
+          <Select.Option value="delivered">{translate('Delivered')}</Select.Option>
+          <Select.Option value="cancelled">{translate('Cancelled')}</Select.Option>
         </Select>
       </Form.Item>
 
       <Form.Item
-        label="Notes"
+        label={translate('Note')}
         name="notes"
         rules={[
           {

@@ -6,6 +6,7 @@ import { useMoney } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
 
 export default function Invoice() {
+  const translate = useLanguage();
   const entity = 'invoice';
   const { moneyRowFormatter } = useMoney();
 
@@ -82,8 +83,6 @@ export default function Invoice() {
       // },
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('invoice'),

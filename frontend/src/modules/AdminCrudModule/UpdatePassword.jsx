@@ -55,7 +55,7 @@ export default function UpdatePassword({ config }) {
   return (
     <div style={show}>
       <Loading isLoading={isLoading}>
-        <h3>Update Password</h3>
+        <h3>{translate('Update Password')}</h3>
         <div className="space10"></div>
         <Form form={form} layout="vertical" onFinish={handelSubmit}>
           <Form.Item

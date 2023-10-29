@@ -14,7 +14,7 @@ export default function DeleteModal({ config, children }) {
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = translate('delete_message'),
+    deleteMessage = translate('are_you_sure_you_want_to_delete'),
     modalTitle = translate('delete_confirmation'),
   } = config;
   const dispatch = useDispatch();

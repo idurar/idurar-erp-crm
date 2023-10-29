@@ -1,7 +1,5 @@
 import React from 'react';
 import useLanguage from '@/lang/useLanguage';
-import CrudModule from '@/modules/CrudModule';
-import AdvancedSettingsForm from '@/forms/AdvancedSettingsForm';
 import EmailDataTableModule from '@/modules/EmailModule/EmailDataTableModule';
 
 export default function AdvancedSettings() {

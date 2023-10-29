@@ -16,10 +16,11 @@ const beforeUpload = (file) => {
   return isJpgOrPng && isLt2M;
 };
 export default function UploadImg() {
+  const translate = useLanguage();
   return (
     <Form.Item
       name="file"
-      label="File"
+      label={translate('Upload Image')}
       valuePropName="fileList"
       getValueFromEvent={(e) => e.fileList}
     >
