@@ -3,6 +3,7 @@ import Router from '@/router';
 import enUS from 'antd/es/locale/en_US';
 import zhCN from 'antd/es/locale/zh_CN';
 import frFR from 'antd/es/locale/fr_FR';
+import arEG from 'antd/es/locale/ar_EG';
 
 import useNetwork from '@/hooks/useNetwork';
 
@@ -35,13 +36,20 @@ function App() {
   const langCode = useSelector(selectLangCode);
 
   const [locale, setLocal] = useState(enUS);
+  const [direction, setDirection] = useState('ltr');
 
   useEffect(() => {
-    if (langCode === 'fr_FR') {
+    if (langCode === 'fr_fr') {
+      setDirection('ltr');
       setLocal(frFR);
-    } else if (langCode === 'zh_CN') {
+    } else if (langCode === 'zh_cn') {
+      setDirection('ltr');
       setLocal(zhCN);
+    } else if (langCode === 'ar_eg') {
+      setDirection('rtl');
+      setLocal(arEG);
     } else {
+      setDirection('ltr');
       setLocal(enUS);
     }
 
@@ -52,13 +60,13 @@ function App() {
 
   if (!isLoggedIn)
     return (
-      <ConfigProvider direction="ltr" locale={locale}>
+      <ConfigProvider direction={direction} locale={locale}>
         <Router />
       </ConfigProvider>
     );
   else {
     return (
-      <ConfigProvider direction="ltr" locale={locale}>
+      <ConfigProvider direction={direction} locale={locale}>
         <Layout style={{ minHeight: '100vh' }}>
           <Navigation />
           <Layout style={{ minHeight: '100vh' }}>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown } from 'antd';
+import { Avatar, Dropdown, Select } from 'antd';
+
+import { languages } from '@/utils';
+
 // import Notifications from '@/components/Notification';
 
 import { AppstoreOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -85,7 +88,7 @@ export default function HeaderContent() {
     },
   ];
   return (
-    <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
+    <div className="headerIcon" style={{ zIndex: '99' }}>
       <Dropdown
         menu={{
           items,
@@ -111,6 +114,36 @@ export default function HeaderContent() {
           dispatch(langAction.translate('zh_cn'));
         }}
       />
+
+      <Select
+        showSearch
+        placeholder={translate('select language')}
+        defaultValue={'en_us'}
+        style={{ marginTop: '15px', width: '120px', float: 'right' }}
+        optionFilterProp="children"
+        filterOption={(input, option) => (option?.label ?? '').includes(input)}
+        filterSort={(optionA, optionB) =>
+          (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
+        }
+        onSelect={(value) => {
+          dispatch(langAction.translate(value));
+        }}
+      >
+        {languages.map((language) => (
+          <Select.Option
+            key={language.value}
+            value={language.value}
+            label={language.label.toLowerCase()}
+          >
+            <div className="demo-option-label-item">
+              <span role="img" aria-label={language.label}>
+                {language.icon}
+              </span>
+              {language.label}
+            </div>
+          </Select.Option>
+        ))}
+      </Select>
     </div>
   );
 }

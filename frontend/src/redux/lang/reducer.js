@@ -7,7 +7,7 @@ const INITIAL_LANG_STATE = {
 
 const INITIAL_STATE = {
   result: INITIAL_LANG_STATE,
-  langCode: 'en_US',
+  langCode: 'en_us',
   isLoading: false,
   isSuccess: false,
 };
@@ -32,7 +32,7 @@ const langReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.REQUEST_SUCCESS:
       return {
         result: { ...state.result, ...payload },
-        langCode: langCode,
+        langCode: langCode.toLowerCase(),
         isLoading: false,
         isSuccess: true,
       };
