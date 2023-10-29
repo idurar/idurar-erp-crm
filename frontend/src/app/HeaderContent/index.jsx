@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown } from 'antd';
+import { Avatar, Dropdown, Layout } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
@@ -16,10 +16,11 @@ import history from '@/utils/history';
 import { BASE_URL } from '@/config/serverApiConfig';
 
 import useLanguage from '@/lang/useLanguage';
-import ChangeLanguage from '@/components/ChangeLanguage';
+import SelectLanguage from '@/components/SelectLanguage';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
+  const { Header } = Layout;
 
   const dispatch = useDispatch();
 
@@ -36,12 +37,12 @@ export default function HeaderContent() {
           size="large"
           className="last"
           src={srcImgProfile}
-          style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+          style={{ color: '#f56a00', backgroundColor: !srcImgProfile ? '#fde3cf' : 'none' }}
         >
           {currentAdmin?.name.charAt(0).toUpperCase()}
         </Avatar>
         <div className="profileDropdownInfo">
-          <p className="strong">
+          <p>
             {currentAdmin?.name} {currentAdmin?.surname}
           </p>
           <p>{currentAdmin?.email}</p>
@@ -88,20 +89,33 @@ export default function HeaderContent() {
     },
   ];
   return (
-    <div className="headerIcon" style={{ zIndex: '99' }}>
+    <Header
+      style={{
+        padding: '20px',
+        background: '#f9fafc',
+        display: ' flex',
+        flexDirection: ' row-reverse',
+        justifyContent: ' flex-start',
+        gap: ' 15px',
+      }}
+    >
       <Dropdown
         menu={{
           items,
         }}
         trigger={['click']}
         placement="bottomRight"
-        stye={{ width: '280px' }}
+        stye={{ width: '280px', float: 'right' }}
       >
         {/* <Badge dot> */}
         <Avatar
           className="last"
           src={srcImgProfile}
-          style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+          style={{
+            color: '#f56a00',
+            backgroundColor: !srcImgProfile ? '#fde3cf' : 'none',
+            float: 'right',
+          }}
         >
           {currentAdmin?.name.charAt(0).toUpperCase()}
         </Avatar>
@@ -113,9 +127,10 @@ export default function HeaderContent() {
         onClick={() => {
           dispatch(translateAction.translate('zh_cn'));
         }}
+        style={{ float: 'right' }}
       />
 
-      <ChangeLanguage />
-    </div>
+      <SelectLanguage />
+    </Header>
   );
 }

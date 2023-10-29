@@ -31,7 +31,7 @@ function App() {
   //     description: "Cannot connect to the server, Check your internet network",
   //   });
   // }
-
+  const { Header, Content, Footer, Sider } = Layout;
   const { isLoggedIn } = useSelector(selectAuth);
   const langCode = useSelector(selectLangCode);
 
@@ -67,11 +67,25 @@ function App() {
   else {
     return (
       <ConfigProvider direction={direction} locale={locale}>
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout hasSider>
           <Navigation />
-          <Layout style={{ minHeight: '100vh' }}>
+          <Layout
+            className="site-layout"
+            style={{
+              marginLeft: 230,
+            }}
+          >
             <HeaderContent />
-            <Router isLoggedIn={true} />
+            <Content
+              style={{
+                margin: '60px auto 30px',
+                overflow: 'initial',
+                width: '100%',
+                maxWidth: '1100px',
+              }}
+            >
+              <Router isLoggedIn={true} />
+            </Content>
           </Layout>
         </Layout>
       </ConfigProvider>

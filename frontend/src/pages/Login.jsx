@@ -12,7 +12,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
-import ChangeLanguage from '@/components/ChangeLanguage';
+import SelectLanguage from '@/components/SelectLanguage';
 
 import logo from '@/style/images/logo.png';
 
@@ -35,7 +35,7 @@ const LoginPage = () => {
             padding: '10px 20px',
           }}
         >
-          <ChangeLanguage />
+          <SelectLanguage />
         </Content>
         <Content
           style={{

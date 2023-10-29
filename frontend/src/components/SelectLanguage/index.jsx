@@ -12,7 +12,7 @@ import useLanguage from '@/lang/useLanguage';
 
 import { Select } from 'antd';
 
-const ChangeLanguage = () => {
+const SelectLanguage = () => {
   const translate = useLanguage();
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const ChangeLanguage = () => {
       showSearch
       placeholder={translate('select language')}
       defaultValue={langCode}
-      style={{ marginTop: '15px', width: '120px', float: 'right' }}
+      style={{ width: '120px', float: 'right' }}
       optionFilterProp="children"
       filterOption={(input, option) => (option?.label ?? '').includes(input)}
       filterSort={(optionA, optionB) =>
@@ -38,6 +38,7 @@ const ChangeLanguage = () => {
           key={language.value}
           value={language.value}
           label={language.label.toLowerCase()}
+          disabled={language.disabled}
         >
           <div className="demo-option-label-item">
             <span role="img" aria-label={language.label}>
@@ -51,4 +52,4 @@ const ChangeLanguage = () => {
   );
 };
 
-export default ChangeLanguage;
+export default SelectLanguage;
