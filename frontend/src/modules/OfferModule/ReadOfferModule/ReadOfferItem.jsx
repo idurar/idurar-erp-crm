@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag, Divider } from 'antd';
+import { Button, Row, Col, Descriptions, Statistic, Tag, Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import {
   EditOutlined,
   FilePdfOutlined,

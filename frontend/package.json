@@ -5,9 +5,11 @@
     "npm": "8.5.5"
   },
   "dependencies": {
+    "@ant-design/compatible": "^5.1.2",
     "@ant-design/icons": "^4.8.1",
+    "@ant-design/pro-layout": "^7.17.12",
     "@craco/craco": "5.5.0",
-    "antd": "^4.24.14",
+    "antd": "^5.10.2",
     "axios": "0.27.2",
     "craco-alias": "3.0.1",
     "craco-less": "1.17.1",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, PageHeader, Row, Col, Descriptions, Tag, Divider } from 'antd';
+import { Button, Row, Col, Descriptions, Tag, Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 import uniqueId from '@/utils/uinqueId';

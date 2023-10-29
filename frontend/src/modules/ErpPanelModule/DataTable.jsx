@@ -8,7 +8,8 @@ import {
   PlusOutlined,
   EllipsisOutlined,
 } from '@ant-design/icons';
-import { Descriptions, Dropdown, Table, Button, PageHeader } from 'antd';
+import { Descriptions, Dropdown, Table, Button } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 import useLanguage from '@/lang/useLanguage';

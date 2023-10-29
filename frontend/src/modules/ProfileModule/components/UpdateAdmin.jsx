@@ -1,7 +1,8 @@
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
-import { Button, Col, Form, PageHeader, Row } from 'antd';
+import { Button, Col, Form, Row } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminForm from '@/forms/AdminForm';

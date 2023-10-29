@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&display=swap');
+
+/* @import '~antd/dist/antd'; */
+@import './partials/variable';
+@import './partials/customAntd';
+@import './partials/core';
+
+@import './partials/dashboard';
+@import './partials/auth';
+@import './partials/navigation';
+@import './partials/header';
+@import './partials/sidePanel';
+@import './partials/collapseBox';
+@import './partials/dataTable';
+@import './partials/erp';
+@import './partials/form';

@@ -1,6 +1,7 @@
 import uniqueId from '@/utils/uinqueId';
 import { PlusOutlined, SyncOutlined } from '@ant-design/icons';
-import { Button, Divider, Form, Input, PageHeader, Upload } from 'antd';
+import { Button, Divider, Form, Input, Upload } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import UpdateSettingForm from './UpdateSettingForm';
 
 export default function UpdateSettingModule({ config, children }) {

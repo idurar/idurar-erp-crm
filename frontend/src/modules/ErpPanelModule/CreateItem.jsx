@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 
-import { Button, PageHeader, Tag, Form, Divider } from 'antd';
+import { Button, Tag, Form, Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 
