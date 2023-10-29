@@ -9,11 +9,11 @@ import { languages } from '@/utils';
 
 import { AppstoreOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 
-import { selectLangCode } from '@/redux/lang/selectors';
+import { selectLangCode } from '@/redux/translate/selectors';
 import { checkImage } from '@/request';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { langAction } from '@/redux/lang/actions';
+import { translateAction } from '@/redux/translate/actions';
 import history from '@/utils/history';
 
 import { BASE_URL } from '@/config/serverApiConfig';
@@ -113,7 +113,7 @@ export default function HeaderContent() {
       <Avatar
         icon={<AppstoreOutlined />}
         onClick={() => {
-          dispatch(langAction.translate('zh_cn'));
+          dispatch(translateAction.translate('zh_cn'));
         }}
       />
 
@@ -128,7 +128,7 @@ export default function HeaderContent() {
           (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
         }
         onSelect={(value) => {
-          dispatch(langAction.translate(value));
+          dispatch(translateAction.translate(value));
         }}
       >
         {languages.map((language) => (

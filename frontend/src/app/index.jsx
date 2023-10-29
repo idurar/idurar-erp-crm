@@ -13,7 +13,7 @@ import Navigation from '@/app/Navigation';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
-import { selectLangCode } from '@/redux/lang/selectors';
+import { selectLangCode } from '@/redux/translate/selectors';
 
 import HeaderContent from '@/app/HeaderContent';
 // import { useNetworkState } from "react-use";

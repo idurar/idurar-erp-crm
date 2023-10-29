@@ -43,7 +43,7 @@ const AUTH_INITIAL_STATE = {
 
 const auth_state = storePersist.get('auth') ? storePersist.get('auth') : AUTH_INITIAL_STATE;
 
-const initialState = { lang: lang_state, auth: auth_state };
+const initialState = { translate: lang_state, auth: auth_state };
 const store = createStore(rootReducer, initialState, configStore);
 
 export default store;

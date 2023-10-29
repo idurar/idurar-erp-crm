@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import { selectCurrentLang } from '@/redux/translate/selectors';
 
 const getLabel = (lang, key) => {
   try {

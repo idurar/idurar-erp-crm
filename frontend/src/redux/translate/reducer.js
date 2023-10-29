@@ -17,7 +17,7 @@ const INITIAL_STATE = storePersist.get('translate')
   ? storePersist.get('translate')
   : LANG_INITIAL_STATE;
 
-const langReducer = (state = INITIAL_STATE, action) => {
+const translateReducer = (state = INITIAL_STATE, action) => {
   const { payload = null, langCode } = action;
   switch (action.type) {
     case actionTypes.RESET_STATE:
@@ -46,4 +46,4 @@ const langReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default langReducer;
+export default translateReducer;

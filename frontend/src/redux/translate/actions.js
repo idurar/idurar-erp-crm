@@ -6,7 +6,7 @@ import fr_fr from '@/lang/fr_fr';
 import zh_cn from '@/lang/zh_cn';
 import ar_eg from '@/lang/ar_eg';
 
-export const langAction = {
+export const translateAction = {
   resetState: () => (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,
