@@ -1,5 +1,5 @@
 import * as actionTypes from './types';
-import lang from '@/lang/default';
+import lang from '@/lang/en_us';
 
 const INITIAL_LANG_STATE = {
   ...lang,

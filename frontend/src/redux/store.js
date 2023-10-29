@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import lang from '@/lang/default';
+import lang from '@/lang/en_us';
 
 import rootReducer from './rootReducer';
 import storePersist from './storePersist';

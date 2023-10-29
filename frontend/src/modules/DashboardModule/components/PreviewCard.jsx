@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
+import useLanguage from '@/lang/useLanguage';
 
 const colours = {
   draft: '#595959',
@@ -71,9 +72,10 @@ const defaultInvoiceStatistics = [
 ];
 
 const PreviewState = ({ tag, color, value }) => {
+  const translate = useLanguage();
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
-      <div className="left alignLeft capitalize">{tag}</div>
+      <div className="left alignLeft capitalize">{translate(tag)}</div>
       <div className="right alignRight">{value} %</div>
       <Progress
         percent={value}

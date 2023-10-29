@@ -4,6 +4,7 @@ import InventoryForm from '@/forms/InventoryForm'; // Retaining InventoryForm
 import useLanguage from '@/lang/useLanguage';
 
 export default function Inventory() {
+  const translate = useLanguage();
   const entity = 'inventory'; // Updated entity name
   const searchConfig = {
     displayLabels: ['product'], // Adjusted to search by product
@@ -14,35 +15,33 @@ export default function Inventory() {
 
   const readColumns = [
     {
-      title: 'Product',
+      title: translate('Product'),
       dataIndex: 'product',
     },
     {
-      title: 'Quantity',
+      title: translate('Quantity'),
       dataIndex: 'quantity',
     },
     {
-      title: 'Unit Price',
+      title: translate('Unit Price'),
       dataIndex: 'unitPrice',
     },
   ];
 
   const dataTableColumns = [
     {
-      title: 'Product',
+      title: translate('Product'),
       dataIndex: ['product'],
     },
     {
-      title: 'Quantity',
+      title: translate('Quantity'),
       dataIndex: ['quantity'],
     },
     {
-      title: 'Unit Price in $',
+      title: translate('Unit Price'),
       dataIndex: ['unitPrice'],
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('product'),

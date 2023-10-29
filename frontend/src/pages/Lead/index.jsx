@@ -19,24 +19,24 @@ export default function Lead() {
 
   const readColumns = [
     {
-      title: 'First Name',
+      title: translate('First Name'),
       dataIndex: 'firstName',
     },
 
     {
-      title: 'Last Name',
+      title: translate('Last Name'),
       dataIndex: 'lastName',
     },
     {
-      title: 'Company',
+      title: translate('Company'),
       dataIndex: 'company',
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: 'email',
     },
     {
-      title: 'Phone',
+      title: translate('Phone'),
       dataIndex: 'phone',
     },
     {
@@ -47,23 +47,23 @@ export default function Lead() {
 
   const dataTableColumns = [
     {
-      title: 'First Name',
+      title: translate('First Name'),
       dataIndex: ['firstName'],
     },
     {
-      title: 'Last Name',
+      title: translate('Last Name'),
       dataIndex: ['lastName'],
     },
     {
-      title: 'Company',
+      title: translate('Company'),
       dataIndex: ['company'],
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: ['email'],
     },
     {
-      title: 'Phone',
+      title: translate('Phone'),
       dataIndex: ['phone'],
     },
     {
@@ -80,11 +80,11 @@ export default function Lead() {
             : status === 'not interested'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
     {
-      title: 'Created At',
+      title: translate('Created'),
       dataIndex: 'created',
       render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },

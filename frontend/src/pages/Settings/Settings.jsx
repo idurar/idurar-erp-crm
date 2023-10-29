@@ -10,6 +10,8 @@ import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 import MoneyFormatSettings from './MoneyFormatSettings';
 
+import useLanguage from '@/lang/useLanguage';
+
 const settingsArray = [
   <GeneralSettings />,
   <AppSettings />,
@@ -32,42 +34,52 @@ const RightMenu = ({ activeTab, items }) => {
 };
 
 export default function Settings() {
+  const translate = useLanguage();
   const items = [
     {
       key: 'generalSettings',
-      label: <span onClick={() => handleTabChange('generalSettings')}>General Settings</span>,
+      label: (
+        <span onClick={() => handleTabChange('generalSettings')}>
+          {translate('General Settings')}
+        </span>
+      ),
       icon: <SettingOutlined />,
     },
     {
       key: 'appSettings',
-      label: <span onClick={() => handleTabChange('appSettings')}>App Settings</span>,
+      label: (
+        <span onClick={() => handleTabChange('appSettings')}>{translate('App Settings')}</span>
+      ),
       icon: <SettingOutlined />,
     },
     {
       key: 'moneyFormatSettings',
-      label: <span onClick={() => handleTabChange('moneyFormatSettings')}>Currency Settings</span>,
+      label: (
+        <span onClick={() => handleTabChange('moneyFormatSettings')}>
+          {translate('Currency Settings')}
+        </span>
+      ),
       icon: <SettingOutlined />,
     },
     {
       key: 'paymentSettings',
-      label: <span onClick={() => handleTabChange('paymentSettings')}>Payment Settings</span>,
+      label: (
+        <span onClick={() => handleTabChange('paymentSettings')}>
+          {translate('Finance Settings')}
+        </span>
+      ),
       icon: <CreditCardOutlined />,
     },
     {
       key: 'invoiceSettings',
-      label: <span onClick={() => handleTabChange('invoiceSettings')}>Invoice Settings</span>,
+      label: (
+        <span onClick={() => handleTabChange('invoiceSettings')}>{translate('Crm Settings')}</span>
+      ),
       icon: <FileTextOutlined />,
     },
   ];
   const [tabKey, setTabKey] = useState(items[0].key);
   const [tabTitle, setTabTitle] = useState(items[0].label);
-
-  const settinsBlock = ({ isActive }) =>
-    settingsArray.map((setting, index) => (
-      <Visibility key={items[index].key + index} isOpen={isActive(items[index].key)}>
-        {setting}
-      </Visibility>
-    ));
 
   const isActive = (tab) => {
     return tabKey === tab ? true : false;
@@ -82,10 +94,14 @@ export default function Settings() {
   return (
     <SettingsLayout
       topCardContent={tabTitle}
-      topCardTitle={'Settings'}
+      topCardTitle={translate('Settings')}
       bottomCardContent={<RightMenu activeTab={tabKey} items={items} />}
     >
-      {settinsBlock({ isActive })}
+      {settingsArray.map((setting, index) => (
+        <Visibility key={items[index].key + index} isOpen={isActive(items[index].key)}>
+          {setting}
+        </Visibility>
+      ))}
     </SettingsLayout>
   );
 }

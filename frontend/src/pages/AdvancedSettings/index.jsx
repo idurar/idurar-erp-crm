@@ -8,6 +8,7 @@ import CrudModule from '@/modules/CrudModule';
 import AdvancedSettingsForm from '@/forms/AdvancedSettingsForm';
 
 export default function AdvancedSettings() {
+  const translate = useLanguage();
   const entity = 'setting';
   const searchConfig = {
     displayLabels: ['name'],
@@ -19,36 +20,36 @@ export default function AdvancedSettings() {
 
   const readColumns = [
     {
-      title: 'Setting Name',
+      title: translate('Setting'),
       dataIndex: 'settingKey',
     },
     {
-      title: 'Value',
+      title: translate('Value'),
       dataIndex: 'settingValue',
     },
     {
-      title: 'enabled',
+      title: translate('enabled'),
       dataIndex: 'enabled',
     },
     {
-      title: 'Core Setting',
+      title: translate('Core Setting'),
       dataIndex: 'isCoreSetting',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Setting Name',
+      title: translate('Setting'),
       dataIndex: 'settingKey',
     },
     {
-      title: 'Value',
+      title: translate('Value'),
       dataIndex: 'settingValue',
       render: (text, row) => {
         return `${text}`;
       },
     },
     {
-      title: 'enabled',
+      title: translate('enabled'),
       dataIndex: 'enabled',
       key: 'enabled',
       onCell: (record, rowIndex) => {
@@ -72,8 +73,6 @@ export default function AdvancedSettings() {
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('settings'),

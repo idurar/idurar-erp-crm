@@ -8,6 +8,7 @@ import CrudModule from '@/modules/CrudModule';
 import PaymentModeForm from '@/forms/PaymentModeForm';
 
 export default function PaymentMode() {
+  const translate = useLanguage();
   const entity = 'paymentMode';
   const searchConfig = {
     displayLabels: ['name'],
@@ -19,33 +20,33 @@ export default function PaymentMode() {
 
   const readColumns = [
     {
-      title: 'Payment Mode',
+      title: translate('Payment Mode'),
       dataIndex: 'name',
     },
     {
-      title: 'Description',
+      title: translate('Description'),
       dataIndex: 'description',
     },
     {
-      title: 'Is Default',
+      title: translate('Default'),
       dataIndex: 'isDefault',
     },
     {
-      title: 'enabled',
+      title: translate('enabled'),
       dataIndex: 'enabled',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Payment Mode',
+      title: translate('Payment Mode'),
       dataIndex: 'name',
     },
     {
-      title: 'Description',
+      title: translate('Description'),
       dataIndex: 'description',
     },
     {
-      title: 'Is Default',
+      title: translate('Default'),
       dataIndex: 'isDefault',
       key: 'isDefault',
       onCell: (record, rowIndex) => {
@@ -68,7 +69,7 @@ export default function PaymentMode() {
       },
     },
     {
-      title: 'Enabled',
+      title: translate('enabled'),
       dataIndex: 'enabled',
       key: 'enabled',
       onCell: (record, rowIndex) => {
@@ -91,8 +92,6 @@ export default function PaymentMode() {
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('payment_mode'),

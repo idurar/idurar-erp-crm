@@ -61,7 +61,7 @@ export default function DashboardModule() {
       render: (status) => {
         let color = status === 'Draft' ? 'volcano' : 'green';
 
-        return <Tag color={color}>{translate(status.toUpperCase())}</Tag>;
+        return <Tag color={color}>{translate(status)}</Tag>;
       },
     },
   ];
@@ -71,21 +71,25 @@ export default function DashboardModule() {
       result: invoiceResult,
       isLoading: invoiceLoading,
       entity: 'invoice',
+      title: translate('Invoices preview'),
     },
     {
       result: quoteResult,
       isLoading: quoteLoading,
       entity: 'quote',
+      title: translate('quotes preview'),
     },
     {
       result: offerResult,
       isLoading: offerLoading,
       entity: 'offer',
+      title: translate('offers preview'),
     },
     {
       result: paymentResult,
       isLoading: paymentLoading,
       entity: 'payment',
+      title: translate('payments preview'),
     },
   ];
 
@@ -97,11 +101,11 @@ export default function DashboardModule() {
     return (
       <SummaryCard
         key={index}
-        title={data?.entity === 'payment' ? translate('Payment') : data?.entity}
+        title={data?.entity === 'payment' ? translate('Payment') : translate(data?.entity)}
         tagColor={
           data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
         }
-        prefix={'This month'}
+        prefix={translate('This month')}
         isLoading={isLoading}
         tagContent={result?.total && formatCurrency(result?.total)}
       />
@@ -109,16 +113,14 @@ export default function DashboardModule() {
   });
 
   const statisticCards = entityData.map((data, index) => {
-    const { result, entity, isLoading } = data;
+    const { result, entity, isLoading, title } = data;
 
     if (entity === 'payment') return null;
 
     return (
       <PreviewCard
         key={index}
-        title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} ${translate(
-          'Preview'
-        )}`}
+        title={title}
         isLoading={isLoading}
         entity={entity}
         statistics={
@@ -138,9 +140,9 @@ export default function DashboardModule() {
       <Row gutter={[24, 24]}>
         {cards}
         <SummaryCard
-          title={'Due Balance'}
+          title={translate('Due Balance')}
           tagColor={'red'}
-          prefix={'Not Paid'}
+          prefix={translate('Not Paid')}
           isLoading={invoiceLoading}
           tagContent={
             invoiceResult?.total_undue &&

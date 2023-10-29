@@ -1,6 +1,8 @@
 import { Tag } from 'antd';
+import useLanguage from '@/lang/useLanguage';
 
 export function StatusTag(status = 'draft') {
+  const translate = useLanguage();
   let color =
     status === 'draft'
       ? 'cyan'
@@ -12,5 +14,5 @@ export function StatusTag(status = 'draft') {
       ? 'orange'
       : 'red';
 
-  return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+  return <Tag color={color}>{status && translate(status)}</Tag>;
 }

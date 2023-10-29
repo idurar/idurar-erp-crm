@@ -108,7 +108,7 @@ export default function HeaderContent() {
       <Avatar
         icon={<AppstoreOutlined />}
         onClick={() => {
-          dispatch(langAction.translate());
+          dispatch(langAction.translate('zh_cn'));
         }}
       />
     </div>

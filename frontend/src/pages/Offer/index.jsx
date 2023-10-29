@@ -16,20 +16,20 @@ export default function Offer() {
   const entityDisplayLabels = ['number', 'lead.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
-      title: 'Company Name',
+      title: translate('Company'),
       dataIndex: ['lead', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
     {
-      title: 'SubTotal',
+      title: translate('Sub Total'),
       dataIndex: 'subTotal',
       onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
@@ -40,7 +40,7 @@ export default function Offer() {
     },
 
     {
-      title: 'Note',
+      title: translate('Note'),
       dataIndex: 'note',
     },
     {
@@ -57,7 +57,7 @@ export default function Offer() {
             : status === 'expired'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
   ];

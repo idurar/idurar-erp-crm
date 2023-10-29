@@ -13,21 +13,22 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function RecentTable({ ...props }) {
+  const translate = useLanguage();
   let { entity, dataTableColumns } = props;
 
   const items = [
     {
-      label: 'Show',
+      label: translate('Show'),
       key: 'read',
       icon: <EyeOutlined />,
     },
     {
-      label: 'Edit',
+      label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
     },
     {
-      label: 'Download',
+      label: translate('Download'),
       key: 'download',
       icon: <FilePdfOutlined />,
     },

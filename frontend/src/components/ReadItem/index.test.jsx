@@ -14,8 +14,8 @@ const data = {
   company: 'IDURAR',
   managerSurname: 'Lalami ',
   managerName: 'Salah Eddine',
-  email: 'idurardz@gmail.com',
-  phone: '05541 144 700',
+  email: 'test@gmail.com',
+  phone: '0777 777 777',
 };
 
 const readColumns = [
@@ -24,11 +24,11 @@ const readColumns = [
     dataIndex: 'company',
   },
   {
-    title: 'Manager Surname',
+    title: 'Manager first name',
     dataIndex: 'managerSurname',
   },
   {
-    title: 'Manager Name',
+    title: 'Manager last name',
     dataIndex: 'managerName',
   },
   {

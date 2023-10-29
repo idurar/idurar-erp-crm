@@ -5,6 +5,7 @@ import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
 
 export default function Admin() {
+  const translate = useLanguage();
   const entity = 'admin';
   const searchConfig = {
     displayLabels: ['name', 'surname'],
@@ -15,20 +16,18 @@ export default function Admin() {
   const entityDisplayLabels = ['email'];
 
   const readColumns = [
-    { title: 'Name', dataIndex: 'name' },
-    { title: 'Surname', dataIndex: 'surname' },
-    { title: 'Email', dataIndex: 'email' },
-    { title: "Role d'utilisateur", dataIndex: 'role' },
+    { title: translate('first name'), dataIndex: 'name' },
+    { title: translate('last name'), dataIndex: 'surname' },
+    { title: translate('Email'), dataIndex: 'email' },
+    { title: translate('role'), dataIndex: 'role' },
   ];
 
   const dataTableColumns = [
-    { title: 'Name', dataIndex: 'name' },
-    { title: 'Surname', dataIndex: 'surname' },
-    { title: 'Email', dataIndex: 'email' },
-    { title: "Role d'utilisateur", dataIndex: 'role' },
+    { title: translate('first name'), dataIndex: 'name' },
+    { title: translate('last name'), dataIndex: 'surname' },
+    { title: translate('Email'), dataIndex: 'email' },
+    { title: translate('role'), dataIndex: 'role' },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('admin'),

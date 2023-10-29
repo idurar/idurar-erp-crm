@@ -49,7 +49,7 @@ const getLabel = (lang, key) => {
         key +
         ' please review your language config file and add this label'
     );
-    return 'No label found';
+    return 'No translate';
   }
 };
 

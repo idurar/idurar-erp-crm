@@ -17,19 +17,19 @@ export default function Order() {
 
   const readColumns = [
     {
-      title: 'Order ID',
+      title: translate('Order ID'),
       dataIndex: 'orderId',
     },
     {
-      title: 'Products',
+      title: translate('Product'),
       dataIndex: 'products',
     },
     {
-      title: 'Quantity',
+      title: translate('Quantity'),
       dataIndex: 'quantity',
     },
     {
-      title: 'Price',
+      title: translate('Price'),
       dataIndex: 'price',
     },
     {
@@ -37,25 +37,25 @@ export default function Order() {
       dataIndex: 'status',
     },
     {
-      title: 'Notes',
+      title: translate('Note'),
       dataIndex: 'notes',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Order ID',
+      title: translate('Order ID'),
       dataIndex: 'orderId',
     },
     {
-      title: 'Products',
+      title: translate('Product'),
       dataIndex: 'products',
     },
     {
-      title: 'Quantity',
+      title: translate('Quantity'),
       dataIndex: 'quantity',
     },
     {
-      title: 'Price',
+      title: translate('Price'),
       dataIndex: 'price',
     },
 
@@ -64,7 +64,7 @@ export default function Order() {
       dataIndex: 'status',
     },
     {
-      title: 'Notes',
+      title: translate('Note'),
       dataIndex: 'notes',
     },
   ];

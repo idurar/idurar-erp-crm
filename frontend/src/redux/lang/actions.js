@@ -1,7 +1,9 @@
 import * as actionTypes from './types';
 import { request } from '@/request';
 
+import en_us from '@/lang/en_us';
 import fr_fr from '@/lang/fr_fr';
+import zh_cn from '@/lang/zh_cn';
 
 export const langAction = {
   resetState: () => (dispatch) => {
@@ -9,17 +11,25 @@ export const langAction = {
       type: actionTypes.RESET_STATE,
     });
   },
-  translate: () => async (dispatch) => {
+  translate: (value) => async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
     });
-    let data = fr_fr;
 
+    let data = null;
+
+    if (value === 'zh_cn') {
+      data = zh_cn;
+    } else if (value === 'fr_fr') {
+      data = fr_fr;
+    } else {
+      data = en_us;
+    }
     if (data) {
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data,
-        langCode: 'fr_FR',
+        langCode: value,
       });
     } else {
       dispatch({

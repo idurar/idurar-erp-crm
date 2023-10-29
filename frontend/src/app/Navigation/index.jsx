@@ -101,7 +101,7 @@ function Sidebar({ collapsible }) {
       label: <Link to={'/admin'}>{translate('admin')}</Link>,
     },
     {
-      label: 'Settings',
+      label: translate('Settings'),
       key: 'settings',
       icon: <SettingOutlined />,
       children: [

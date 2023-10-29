@@ -17,7 +17,7 @@ export default function Invoice() {
   const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
@@ -25,14 +25,14 @@ export default function Invoice() {
       dataIndex: ['client', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Due date',
+      title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
@@ -44,7 +44,7 @@ export default function Invoice() {
       onCell: (total) => moneyRowFormatter({ amount: total }),
     },
     {
-      title: 'Balance',
+      title: translate('credit'),
       dataIndex: 'credit',
       onCell: (credit) => moneyRowFormatter({ amount: credit }),
     },
@@ -54,11 +54,11 @@ export default function Invoice() {
       render: (status) => {
         let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
 
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
     {
-      title: 'Payment',
+      title: translate('Payment'),
       dataIndex: 'paymentStatus',
       render: (paymentStatus) => {
         let color =
@@ -70,11 +70,11 @@ export default function Invoice() {
             ? 'red'
             : 'purple';
 
-        return <Tag color={color}>{paymentStatus && paymentStatus.toUpperCase()}</Tag>;
+        return <Tag color={color}>{paymentStatus && translate(paymentStatus)}</Tag>;
       },
     },
     {
-      title: 'Created By',
+      title: translate('Created By'),
       dataIndex: ['createdBy', 'name'],
       // render: (name) => {
       //   console.log('🚀 ~ file: index.jsx:81 ~ Invoice ~ name:', name);

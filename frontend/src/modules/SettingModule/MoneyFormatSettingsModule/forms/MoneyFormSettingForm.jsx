@@ -29,8 +29,9 @@ export default function MoneyFormSettingForm() {
       >
         <Input autoComplete="off" />
       </Form.Item>
-      label={translate('Currency Position')}
+
       <Form.Item
+        label={translate('Currency Position')}
         name="currency_position"
         rules={[
           {

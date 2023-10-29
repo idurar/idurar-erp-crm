@@ -17,7 +17,7 @@ export default function Quote() {
   const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
@@ -25,21 +25,21 @@ export default function Quote() {
       dataIndex: ['client', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Due date',
+      title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'SubTotal',
+      title: translate('Sub Total'),
       dataIndex: 'subTotal',
       onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
@@ -63,7 +63,7 @@ export default function Quote() {
             : status === 'expired'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
   ];

@@ -39,6 +39,8 @@ function App() {
   useEffect(() => {
     if (langCode === 'fr_FR') {
       setLocal(frFR);
+    } else if (langCode === 'zh_CN') {
+      setLocal(zhCN);
     } else {
       setLocal(enUS);
     }
