@@ -13,10 +13,6 @@ const INITIAL_STATE = storePersist.get('translate')
   ? storePersist.get('translate')
   : LANG_INITIAL_STATE;
 
-console.log(
-  "🚀 ~ file: reducer.js:17 ~ storePersist.get('translate');:",
-  storePersist.get('translate')
-);
 const translateReducer = (state = INITIAL_STATE, action) => {
   const { payload = null, langCode } = action;
   switch (action.type) {
