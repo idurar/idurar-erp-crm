@@ -1,16 +1,21 @@
 import * as actionTypes from './types';
 import lang from '@/lang/en_us';
+import storePersist from '../storePersist';
 
 const INITIAL_LANG_STATE = {
   ...lang,
 };
 
-const INITIAL_STATE = {
+const LANG_INITIAL_STATE = {
   result: INITIAL_LANG_STATE,
   langCode: 'en_us',
   isLoading: false,
   isSuccess: false,
 };
+
+const INITIAL_STATE = storePersist.get('translate')
+  ? storePersist.get('translate')
+  : LANG_INITIAL_STATE;
 
 const langReducer = (state = INITIAL_STATE, action) => {
   const { payload = null, langCode } = action;

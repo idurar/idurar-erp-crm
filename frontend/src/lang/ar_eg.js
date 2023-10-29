@@ -321,5 +321,12 @@ const lang = {
   active_customer: 'العميل النشط',
   customer_preview: 'معاينة العملاء',
   new_customer_this_month: 'عميل جديد في هذا الشهر',
+
+  already_have_account_login: 'تسجيل دخول لديك بالفعل حساب',
+  forgot_password: 'نسيت كلمة المرور',
+  log_in: 'تسجيل الدخول',
+  or: 'أو',
+  sign_in: 'تسجيل الدخول',
+  sign_up: 'انشاء حساب',
 };
 export default lang;

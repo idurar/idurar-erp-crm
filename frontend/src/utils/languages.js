@@ -4,7 +4,7 @@ const languages = [
   // { icon: '🇧🇩 ', label: 'Bengali', value: 'bn_bd' },
   // { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },
   // { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es' },
-  { icon: '🇨🇳 ', label: 'Chinese (Simplified)', value: 'zh_cn' },
+  { icon: '🇨🇳 ', label: 'Chinese', value: 'zh_cn' },
   // { icon: '🇭🇷 ', label: 'Croatian', value: 'hr_hr' },
   // { icon: '🇨🇿 ', label: 'Czech', value: 'cs_cz' },
   // { icon: '🇩🇰 ', label: 'Danish', value: 'da_dk' },

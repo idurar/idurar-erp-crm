@@ -28,6 +28,14 @@ export const langAction = {
     } else {
       data = en_us;
     }
+
+    const LANG_STATE = {
+      result: data,
+      langCode: value,
+      isLoading: false,
+      isSuccess: true,
+    };
+    window.localStorage.setItem('translate', JSON.stringify(LANG_STATE));
     if (data) {
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,

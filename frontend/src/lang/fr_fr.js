@@ -322,5 +322,12 @@ const lang = {
   active_customer: 'Client actif',
   customer_preview: 'Aperçu du client',
   new_customer_this_month: 'Nouveau client ce mois-ci',
+
+  already_have_account_login: 'Déjà avoir un compte Connexion',
+  forgot_password: 'Mot de passe oublié',
+  log_in: 'Se connecter',
+  or: 'Ou',
+  sign_in: 'Se connecter',
+  sign_up: "S'inscrire",
 };
 export default lang;

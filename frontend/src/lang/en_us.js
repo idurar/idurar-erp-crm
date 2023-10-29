@@ -320,6 +320,12 @@ const lang = {
   active_customer: 'Active Customer',
   customer_preview: 'Customer Preview',
   new_customer_this_month: 'New Customer This Month',
+  already_have_account_login: 'Already Have Account Login',
+  forgot_password: 'Forgot Password',
+  log_in: 'Log In',
+  or: 'Or',
+  sign_in: 'Sign In',
+  sign_up: 'Sign Up',
 };
 
 export default lang;
