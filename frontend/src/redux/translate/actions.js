@@ -33,7 +33,7 @@ export const translateAction = {
       result: data,
       langCode: value,
       isLoading: false,
-      isSuccess: true,
+      isSuccess: false,
     };
     window.localStorage.setItem('translate', JSON.stringify(LANG_STATE));
     if (data) {

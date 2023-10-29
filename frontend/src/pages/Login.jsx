@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+// import Notifications from '@/components/Notification';
+
+import useLanguage from '@/lang/useLanguage';
+
 import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 
 import { login } from '@/redux/auth/actions';
@@ -8,8 +12,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
-
-import useLanguage from '@/lang/useLanguage';
+import ChangeLanguage from '@/components/ChangeLanguage';
 
 import logo from '@/style/images/logo.png';
 
@@ -29,7 +32,14 @@ const LoginPage = () => {
       <AuthLayout sideContent={<SideContent />}>
         <Content
           style={{
-            padding: '200px 30px 30px',
+            padding: '10px 20px',
+          }}
+        >
+          <ChangeLanguage />
+        </Content>
+        <Content
+          style={{
+            padding: '140px 30px 30px',
             maxWidth: '440px',
             margin: '0 auto',
           }}

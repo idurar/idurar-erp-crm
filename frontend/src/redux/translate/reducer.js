@@ -1,13 +1,9 @@
 import * as actionTypes from './types';
-import lang from '@/lang/en_us';
+import en_us from '@/lang/en_us';
 import storePersist from '../storePersist';
 
-const INITIAL_LANG_STATE = {
-  ...lang,
-};
-
 const LANG_INITIAL_STATE = {
-  result: INITIAL_LANG_STATE,
+  result: en_us,
   langCode: 'en_us',
   isLoading: false,
   isSuccess: false,
