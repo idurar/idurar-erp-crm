@@ -2,6 +2,7 @@
 
 @import './partials/rest';
 @import './partials/customAntd';
+@import './partials/layout';
 @import './partials/core';
 
 @import './partials/dashboard';

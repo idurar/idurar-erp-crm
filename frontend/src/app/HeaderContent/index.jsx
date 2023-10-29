@@ -116,6 +116,7 @@ export default function HeaderContent() {
             backgroundColor: !srcImgProfile ? '#fde3cf' : 'none',
             float: 'right',
           }}
+          size="large"
         >
           {currentAdmin?.name.charAt(0).toUpperCase()}
         </Avatar>
@@ -128,6 +129,7 @@ export default function HeaderContent() {
           dispatch(translateAction.translate('zh_cn'));
         }}
         style={{ float: 'right' }}
+        size="large"
       />
 
       <SelectLanguage />

@@ -16,6 +16,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import { selectLangCode } from '@/redux/translate/selectors';
 
 import HeaderContent from '@/app/HeaderContent';
+import { useAppContext } from '@/context/appContext';
 // import { useNetworkState } from "react-use";
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
 
   const [locale, setLocal] = useState(enUS);
   const [direction, setDirection] = useState('ltr');
+
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { isNavMenuClose } = stateApp;
 
   useEffect(() => {
     if (langCode === 'fr_fr') {
@@ -70,10 +74,7 @@ function App() {
         <Layout hasSider>
           <Navigation />
           <Layout
-            className="site-layout"
-            style={{
-              marginLeft: 230,
-            }}
+            className={isNavMenuClose ? 'smallNavigation site-layout' : 'wideNavigation layout'}
           >
             <HeaderContent />
             <Content
@@ -81,8 +82,8 @@ function App() {
                 margin: '60px auto 30px',
                 overflow: 'initial',
                 width: '100%',
-                maxWidth: '1100px',
               }}
+              className={isNavMenuClose ? 'wideAppContainer' : 'appContainer'}
             >
               <Router isLoggedIn={true} />
             </Content>
