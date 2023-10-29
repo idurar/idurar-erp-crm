@@ -27,7 +27,6 @@ import {
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 export default function Navigation() {
   return (
@@ -145,32 +144,36 @@ function Sidebar({ collapsible }) {
   };
 
   return (
-    <>
-      <Sider
-        collapsible={collapsible}
-        collapsed={collapsible ? isNavMenuClose : collapsible}
-        onCollapse={onCollapse}
-        className="navigation"
-      >
-        <div className="logo" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
-          <img src={logoIcon} alt="Logo" style={{ height: '32px' }} />
+    <Sider
+      collapsible={collapsible}
+      collapsed={collapsible ? isNavMenuClose : collapsible}
+      onCollapse={onCollapse}
+      className="navigation"
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: '20px',
+        top: '20px',
+        bottom: '20px',
+        borderRadius: '8px',
+        boxShadow: '0px 0px 20px 3px rgba(150, 190, 238, 0.15)',
+      }}
+      theme={'light'}
+    >
+      <div className="logo" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
+        <img src={logoIcon} alt="Logo" style={{ height: '32px' }} />
 
-          {!showLogoApp && (
-            <img
-              src={logoText}
-              alt="Logo"
-              style={{ marginTop: '3px', marginLeft: '10px', height: '29px' }}
-            />
-          )}
-        </div>
-        <Menu
-          items={items}
-          mode="inline"
-          // selectedKeys={[currentPath]}
-        />
-        ;
-      </Sider>
-    </>
+        {!showLogoApp && (
+          <img
+            src={logoText}
+            alt="Logo"
+            style={{ marginTop: '3px', marginLeft: '10px', height: '29px' }}
+          />
+        )}
+      </div>
+      <Menu items={items} mode="inline" selectedKeys={'dashboard'} theme={'light'} />
+    </Sider>
   );
 }
 
@@ -193,7 +196,7 @@ function MobileSidebar() {
         closable={false}
         onClose={onClose}
         open={visible}
-        className="mobile-sidebar-wraper"
+        rootClassName="mobile-sidebar-wraper"
       >
         <Sidebar collapsible={false} />
       </Drawer>

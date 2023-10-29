@@ -16,6 +16,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import { selectLangCode } from '@/redux/translate/selectors';
 
 import HeaderContent from '@/app/HeaderContent';
+import { useAppContext } from '@/context/appContext';
 // import { useNetworkState } from "react-use";
 
 function App() {
@@ -31,12 +32,15 @@ function App() {
   //     description: "Cannot connect to the server, Check your internet network",
   //   });
   // }
-
+  const { Header, Content, Footer, Sider } = Layout;
   const { isLoggedIn } = useSelector(selectAuth);
   const langCode = useSelector(selectLangCode);
 
   const [locale, setLocal] = useState(enUS);
   const [direction, setDirection] = useState('ltr');
+
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { isNavMenuClose } = stateApp;
 
   useEffect(() => {
     if (langCode === 'fr_fr') {
@@ -67,11 +71,22 @@ function App() {
   else {
     return (
       <ConfigProvider direction={direction} locale={locale}>
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout hasSider>
           <Navigation />
-          <Layout style={{ minHeight: '100vh' }}>
+          <Layout
+            className={isNavMenuClose ? 'smallNavigation site-layout' : 'wideNavigation layout'}
+          >
             <HeaderContent />
-            <Router isLoggedIn={true} />
+            <Content
+              style={{
+                margin: '60px auto 30px',
+                overflow: 'initial',
+                width: '100%',
+              }}
+              className={isNavMenuClose ? 'wideAppContainer' : 'appContainer'}
+            >
+              <Router isLoggedIn={true} />
+            </Content>
           </Layout>
         </Layout>
       </ConfigProvider>

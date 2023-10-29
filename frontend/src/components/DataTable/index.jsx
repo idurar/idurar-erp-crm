@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Descriptions, Dropdown, Table, Button, PageHeader } from 'antd';
+import { Descriptions, Dropdown, Table, Button,  } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';

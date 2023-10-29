@@ -10,7 +10,7 @@ export default function CustomerPreviewCard({
   const translate = useLanguage();
   return (
     <Row className="gutter-row">
-      <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
+      <div className="whiteBox shadow" style={{ minHeight: 452, height: '100%' }}>
         <div
           className="pad20"
           style={{

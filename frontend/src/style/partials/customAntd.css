@@ -27,10 +27,6 @@
   border: none !important;
 }
 
-// .ant-layout-sider-collapsed > .ant-layout-sider-zero-width-trigger {
-//   right: -50px;
-// }
-
 .headerIcon .ant-dropdown-menu {
   border-radius: 6px;
   background: none;

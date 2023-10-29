@@ -3,9 +3,9 @@
   transition: all 0.3s ease;
 }
 .collapseBoxHeader {
-  width: 100%;
+  /* width: 100%; */
   padding: 17px 30px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
   font-size: 14px;
   text-transform: uppercase;
@@ -20,12 +20,11 @@
   padding: 20px;
 }
 .BottomCollapseBox {
-  padding: 20px;
+  /* padding: 20px; */
   opacity: 1;
 }
 .TopCollapseBox {
   min-height: 450px;
-  padding: 0px 20px 20px;
   opacity: 1;
 }
 .collapseBox {

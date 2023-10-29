@@ -8,21 +8,23 @@
 }
 .headerIcon {
   position: relative;
-  .ant-avatar {
-    float: right;
-    margin-left: 10px;
-    margin-top: 15px;
-    color: #4f5d75;
-    background: transparent;
-    &:hover {
-      background: #fff;
-      box-shadow: 0px 0px 10px 4px rgba(150, 190, 238, 0.3);
-      cursor: pointer;
-    }
-  }
-  .last {
-    margin-right: 30px;
-  }
+}
+
+.headerIcon.ant-avatar {
+  float: right;
+  margin-left: 10px;
+  margin-top: 15px;
+  color: #4f5d75;
+  background: transparent;
+}
+.headerIcon.ant-avatar :hover {
+  background: #fff;
+  box-shadow: 0px 0px 10px 4px rgba(150, 190, 238, 0.3);
+  cursor: pointer;
+}
+
+.headerIcon .last {
+  margin-right: 30px;
 }
 
 .profileDropdown {
@@ -33,12 +35,13 @@
   float: left;
   display: inline;
   padding-left: 15px;
-  p {
-    margin-bottom: 0;
-  }
 }
 
-.notifications {
+.profileDropdownInfo p {
+  margin: 0;
+}
+
+/* .notifications {
   width: 100%;
   .pad10 {
     display: flex;
@@ -47,7 +50,9 @@
     padding-right: 6px;
     padding-bottom: 0px;
   }
-  .notif-list {
+}
+
+ .notif-list {
     max-height: 200px;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -59,14 +64,16 @@
       border-radius: 4px;
     }
 
-    .notification {
+   
+  }
+
+ .notification {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 6px;
       gap: 4px;
       border-bottom: 1px;
-      // border-bottom: 1px solid #f5f5f5;
       .notif-btn {
         padding: 4px;
         &:hover {
@@ -80,9 +87,7 @@
           text-align: left;
         }
       }
-    }
-  }
-}
-.del-notif:hover {
+    }   */
+/* .del-notif:hover {
   background-color: #ffeeee;
-}
+} */

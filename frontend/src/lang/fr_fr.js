@@ -245,7 +245,7 @@ const lang = {
   interested: 'Intéressé',
   last_name: 'Nom de famille',
   manager_first_name: 'Prénom du responsable',
-  manager_last_name: 'Nom de famille du responsable',
+  manager_last_name: 'Nom de responsable',
   money_format_settings: 'Paramètres de format monétaire',
   new: 'Nouveau',
   not_interested: 'Pas intéressé',

@@ -136,7 +136,7 @@ export default function DashboardModule() {
   });
 
   return (
-    <DashboardLayout>
+    <>
       <Row gutter={[24, 24]}>
         {cards}
         <SummaryCard
@@ -153,8 +153,8 @@ export default function DashboardModule() {
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
-          <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
-            <Row className="pad10" gutter={[0, 0]}>
+          <div className="whiteBox shadow" style={{ minHeight: 452, height: '100%' }}>
+            <Row className="pad20" gutter={[0, 0]}>
               {statisticCards}
             </Row>
           </div>
@@ -170,24 +170,24 @@ export default function DashboardModule() {
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
-          <div className="whiteBox shadow" style={{ height: '100%' }}>
-            <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>{translate('Recent Invoices')}</h3>
-            </div>
+          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+            <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+              {translate('Recent Invoices')}
+            </h3>
 
             <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
           </div>
         </Col>
 
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
-          <div className="whiteBox shadow" style={{ height: '100%' }}>
-            <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>{translate('Recent Quotes')}</h3>
-            </div>
+          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+            <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+              {translate('Recent Quotes')}
+            </h3>
             <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
           </div>
         </Col>
       </Row>
-    </DashboardLayout>
+    </>
   );
 }
