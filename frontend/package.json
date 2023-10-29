@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@ant-design/compatible": "^5.1.2",
-    "@ant-design/icons": "^4.8.1",
+    "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-layout": "^7.17.12",
     "@craco/craco": "5.5.0",
     "antd": "^5.10.2",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Select } from 'antd';
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
 
 import useLanguage from '@/lang/useLanguage';

@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Form, Input, InputNumber } from 'antd';
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 import SelectAsync from '@/components/SelectAsync';
 import { useMoney } from '@/settings';
 

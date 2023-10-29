@@ -151,6 +151,17 @@ function Sidebar({ collapsible }) {
         collapsed={collapsible ? isNavMenuClose : collapsible}
         onCollapse={onCollapse}
         className="navigation"
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: '20px',
+          top: '20px',
+          bottom: '20px',
+          borderRadius: '8px',
+          boxShadow: '0px 0px 20px 3px rgba(150, 190, 238, 0.15)',
+        }}
+        theme={'light'}
       >
         <div className="logo" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
           <img src={logoIcon} alt="Logo" style={{ height: '32px' }} />
@@ -163,12 +174,7 @@ function Sidebar({ collapsible }) {
             />
           )}
         </div>
-        <Menu
-          items={items}
-          mode="inline"
-          // selectedKeys={[currentPath]}
-        />
-        ;
+        <Menu items={items} mode="inline" selectedKeys={'dashboard'} theme={'light'} />
       </Sider>
     </>
   );
@@ -193,7 +199,7 @@ function MobileSidebar() {
         closable={false}
         onClose={onClose}
         open={visible}
-        className="mobile-sidebar-wraper"
+        rootClassName="mobile-sidebar-wraper"
       >
         <Sidebar collapsible={false} />
       </Drawer>

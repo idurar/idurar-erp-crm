@@ -1,9 +1,3 @@
-* {
-  font-family: 'Nunito', sans-serif !important;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 600;
-}
-
 .centerAbsolute {
   position: absolute;
   left: 50%;

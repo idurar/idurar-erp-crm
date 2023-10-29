@@ -4,7 +4,7 @@ import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'ant
 
 import { PlusOutlined } from '@ant-design/icons';
 
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
