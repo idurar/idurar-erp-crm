@@ -1,10 +1,10 @@
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 import { ErpLayout } from '@/layout';
 import ReadOfferItem from './ReadOfferItem';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,21 +33,7 @@ export default function ReadOfferModule({ config }) {
         {isSuccess ? (
           <ReadOfferItem config={config} selectedItem={currentResult} />
         ) : (
-          <Result
-            status="404"
-            title="Offer not found"
-            subTitle="Sorry, the Offer you requested does not exist."
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push(`/${config.entity.toLowerCase()}`);
-                }}
-              >
-                Back to Offer Page
-              </Button>
-            }
-          />
+          <NotFound entity={config.entity} />
         )}
       </ErpLayout>
     );

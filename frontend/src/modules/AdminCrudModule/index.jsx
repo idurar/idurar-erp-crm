@@ -17,7 +17,7 @@ import SearchItem from '@/components/SearchItem';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';

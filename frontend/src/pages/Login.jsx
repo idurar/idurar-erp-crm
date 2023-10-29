@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Form, Button, Layout, Col, Divider } from 'antd';
-import { Typography } from 'antd';
+import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 
 import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
@@ -10,12 +9,15 @@ import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
 
+import useLanguage from '@/lang/useLanguage';
+
 import logo from '@/style/images/logo.png';
 
 const { Content } = Layout;
 const { Title } = Typography;
 
 const LoginPage = () => {
+  const translate = useLanguage();
   const { isLoading } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const LoginPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign in</Title>
+          <Title level={1}>{translate('Sign in')}</Title>
 
           <Divider />
           <div className="site-layout-content">
@@ -65,9 +67,9 @@ const LoginPage = () => {
                   loading={isLoading}
                   size="large"
                 >
-                  Log in
+                  {translate('Log in')}
                 </Button>
-                Or <a href="/register">register now!</a>
+                {/* {translate('Or')} <a href="/register">{translate('register now!')}</a> */}
               </Form.Item>
             </Form>
           </div>

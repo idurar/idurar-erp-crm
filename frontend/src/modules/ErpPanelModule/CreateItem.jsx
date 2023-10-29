@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Form, Divider } from 'antd';
 
-import { Button, PageHeader, Tag } from 'antd';
+import { Button, PageHeader, Tag, Form, Divider } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';
@@ -19,20 +18,21 @@ import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 import history from '@/utils/history';
 
-function SaveForm({ form, config }) {
-  let { CREATE_ENTITY } = config;
+function SaveForm({ form }) {
+  const translate = useLanguage();
   const handelClick = () => {
     form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {CREATE_ENTITY}
+      {translate('Save')}
     </Button>
   );
 }
 
 export default function CreateItem({ config, CreateForm }) {
+  const translate = useLanguage();
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -112,9 +112,9 @@ export default function CreateItem({ config, CreateForm }) {
             onClick={() => history.push(`/${entity.toLowerCase()}`)}
             icon={<CloseCircleOutlined />}
           >
-            Cancel
+            {translate('Cancel')}
           </Button>,
-          <SaveForm form={form} config={config} key={`${uniqueId()}`} />,
+          <SaveForm form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',

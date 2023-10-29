@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function SelectAsync({

@@ -1,19 +1,18 @@
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 import { ErpLayout } from '@/layout';
 import ReadItem from '@/modules/ErpPanelModule/ReadItem';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function ReadQuoteModule({ config }) {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const history = useHistory();
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));
@@ -33,21 +32,7 @@ export default function ReadQuoteModule({ config }) {
         {isSuccess ? (
           <ReadItem config={config} selectedItem={currentResult} />
         ) : (
-          <Result
-            status="404"
-            title="Quote not found"
-            subTitle="Sorry, the Quote you requested does not exist."
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push(`/${config.entity.toLowerCase()}`);
-                }}
-              >
-                Back to Quote Page
-              </Button>
-            }
-          />
+          <NotFound entity={config.entity} />
         )}
       </ErpLayout>
     );

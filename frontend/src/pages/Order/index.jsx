@@ -5,6 +5,7 @@ import OrderForm from '@/forms/OrderForm'; // Ensure to create this form
 import useLanguage from '@/lang/useLanguage';
 
 export default function Order() {
+  const translate = useLanguage();
   const entity = 'order';
   const searchConfig = {
     displayLabels: ['orderId', 'status'],
@@ -16,59 +17,57 @@ export default function Order() {
 
   const readColumns = [
     {
-      title: 'Order ID',
+      title: translate('Order ID'),
       dataIndex: 'orderId',
     },
     {
-      title: 'Products',
+      title: translate('Product'),
       dataIndex: 'products',
     },
     {
-      title: 'Quantity',
+      title: translate('Quantity'),
       dataIndex: 'quantity',
     },
     {
-      title: 'Price',
+      title: translate('Price'),
       dataIndex: 'price',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
     },
     {
-      title: 'Notes',
+      title: translate('Note'),
       dataIndex: 'notes',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Order ID',
+      title: translate('Order ID'),
       dataIndex: 'orderId',
     },
     {
-      title: 'Products',
+      title: translate('Product'),
       dataIndex: 'products',
     },
     {
-      title: 'Quantity',
+      title: translate('Quantity'),
       dataIndex: 'quantity',
     },
     {
-      title: 'Price',
+      title: translate('Price'),
       dataIndex: 'price',
     },
 
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
     },
     {
-      title: 'Notes',
+      title: translate('Note'),
       dataIndex: 'notes',
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('order'),

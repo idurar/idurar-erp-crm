@@ -8,6 +8,7 @@ import CrudModule from '@/modules/CrudModule';
 import PaymentModeForm from '@/forms/PaymentModeForm';
 
 export default function PaymentMode() {
+  const translate = useLanguage();
   const entity = 'paymentMode';
   const searchConfig = {
     displayLabels: ['name'],
@@ -19,76 +20,78 @@ export default function PaymentMode() {
 
   const readColumns = [
     {
-      title: 'Payment Mode',
+      title: translate('Payment Mode'),
       dataIndex: 'name',
     },
     {
-      title: 'Description',
+      title: translate('Description'),
       dataIndex: 'description',
     },
     {
-      title: 'Is Default',
+      title: translate('Default'),
       dataIndex: 'isDefault',
     },
     {
-      title: 'enabled',
+      title: translate('enabled'),
       dataIndex: 'enabled',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Payment Mode',
+      title: translate('Payment Mode'),
       dataIndex: 'name',
     },
     {
-      title: 'Description',
+      title: translate('Description'),
       dataIndex: 'description',
     },
     {
-      title: 'Is Default',
+      title: translate('Default'),
       dataIndex: 'isDefault',
       key: 'isDefault',
-      render: (text, row) => {
+      onCell: (record, rowIndex) => {
         return {
           props: {
             style: {
               width: '60px',
             },
           },
-          children: (
-            <Switch
-              checked={text}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
         };
+      },
+      render: (_, record) => {
+        return (
+          <Switch
+            checked={record.isDefault}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        );
       },
     },
     {
-      title: 'Enabled',
+      title: translate('enabled'),
       dataIndex: 'enabled',
       key: 'enabled',
-      render: (text, row) => {
+      onCell: (record, rowIndex) => {
         return {
           props: {
             style: {
               width: '60px',
             },
           },
-          children: (
-            <Switch
-              checked={text}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          ),
         };
+      },
+      render: (_, record) => {
+        return (
+          <Switch
+            checked={record.enabled}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        );
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('payment_mode'),

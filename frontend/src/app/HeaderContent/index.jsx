@@ -1,15 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown } from 'antd';
+import { Avatar, Dropdown, Select } from 'antd';
+
+import { languages } from '@/utils';
+
 // import Notifications from '@/components/Notification';
 
 import { AppstoreOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
-import photo from '@/style/images/photo.png';
+
+import { selectLangCode } from '@/redux/translate/selectors';
 import { checkImage } from '@/request';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { langAction } from '@/redux/lang/actions';
+import { translateAction } from '@/redux/translate/actions';
 import history from '@/utils/history';
 
 import { BASE_URL } from '@/config/serverApiConfig';
@@ -18,13 +22,14 @@ import useLanguage from '@/lang/useLanguage';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const langCode = useSelector(selectLangCode);
   const translate = useLanguage();
 
   const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
     ? BASE_URL + currentAdmin?.photo
-    : photo;
+    : null;
 
   const ProfileDropdown = () => {
     return (
@@ -85,7 +90,7 @@ export default function HeaderContent() {
     },
   ];
   return (
-    <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
+    <div className="headerIcon" style={{ zIndex: '99' }}>
       <Dropdown
         menu={{
           items,
@@ -108,9 +113,39 @@ export default function HeaderContent() {
       <Avatar
         icon={<AppstoreOutlined />}
         onClick={() => {
-          dispatch(langAction.translate());
+          dispatch(translateAction.translate('zh_cn'));
         }}
       />
+
+      <Select
+        showSearch
+        placeholder={translate('select language')}
+        defaultValue={langCode}
+        style={{ marginTop: '15px', width: '120px', float: 'right' }}
+        optionFilterProp="children"
+        filterOption={(input, option) => (option?.label ?? '').includes(input)}
+        filterSort={(optionA, optionB) =>
+          (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
+        }
+        onSelect={(value) => {
+          dispatch(translateAction.translate(value));
+        }}
+      >
+        {languages.map((language) => (
+          <Select.Option
+            key={language.value}
+            value={language.value}
+            label={language.label.toLowerCase()}
+          >
+            <div className="demo-option-label-item">
+              <span role="img" aria-label={language.label}>
+                {language.icon}
+              </span>
+              {language.label}
+            </div>
+          </Select.Option>
+        ))}
+      </Select>
     </div>
   );
 }

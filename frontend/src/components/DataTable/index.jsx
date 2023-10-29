@@ -85,7 +85,7 @@ export default function DataTable({ config, extra = [] }) {
   dataTableColumns = [
     ...dataTableColumns,
     {
-      title: 'Action',
+      title: '',
       key: 'action',
       render: (_, record) => (
         <Dropdown
@@ -161,7 +161,7 @@ export default function DataTable({ config, extra = [] }) {
           ghost={false}
           extra={[
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
-              Refresh
+              {translate('Refresh')}
             </Button>,
             <AddNewItem key={`${uniqueId()}`} config={config} />,
           ]}

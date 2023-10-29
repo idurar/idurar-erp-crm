@@ -2,7 +2,10 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
+import useLanguage from '@/lang/useLanguage';
+
 export default function RegisterForm() {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
@@ -10,7 +13,6 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Name!',
           },
         ]}
       >
@@ -25,11 +27,9 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
           },
           {
             type: 'email',
-            message: 'Invalid email!',
           },
         ]}
       >
@@ -45,7 +45,6 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input Password!',
           },
         ]}
       >
@@ -60,7 +59,6 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Enter Password Again!',
           },
           ({ getFieldValue }) => ({
             validator(_, value) {

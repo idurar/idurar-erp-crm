@@ -1,18 +1,23 @@
 import * as actionTypes from './types';
-import lang from '@/lang/default';
+import lang from '@/lang/en_us';
+import storePersist from '../storePersist';
 
 const INITIAL_LANG_STATE = {
   ...lang,
 };
 
-const INITIAL_STATE = {
+const LANG_INITIAL_STATE = {
   result: INITIAL_LANG_STATE,
-  langCode: 'en_US',
+  langCode: 'en_us',
   isLoading: false,
   isSuccess: false,
 };
 
-const langReducer = (state = INITIAL_STATE, action) => {
+const INITIAL_STATE = storePersist.get('translate')
+  ? storePersist.get('translate')
+  : LANG_INITIAL_STATE;
+
+const translateReducer = (state = INITIAL_STATE, action) => {
   const { payload = null, langCode } = action;
   switch (action.type) {
     case actionTypes.RESET_STATE:
@@ -32,7 +37,7 @@ const langReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.REQUEST_SUCCESS:
       return {
         result: { ...state.result, ...payload },
-        langCode: langCode,
+        langCode: langCode.toLowerCase(),
         isLoading: false,
         isSuccess: true,
       };
@@ -41,4 +46,4 @@ const langReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default langReducer;
+export default translateReducer;

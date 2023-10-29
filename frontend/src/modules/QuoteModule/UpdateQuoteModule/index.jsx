@@ -1,4 +1,4 @@
-import { Button, Result } from 'antd';
+import NotFound from '@/components/NotFound';
 
 import { ErpLayout } from '@/layout';
 import UpdateItem from '@/modules/ErpPanelModule/UpdateItem';
@@ -7,7 +7,7 @@ import QuoteForm from '@/modules/QuoteModule/Forms/QuoteForm';
 import PageLoader from '@/components/PageLoader';
 
 import { erp } from '@/redux/erp/actions';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,21 +43,7 @@ export default function UpdateQuoteModule({ config }) {
         {isSuccess ? (
           <UpdateItem config={config} UpdateForm={QuoteForm} />
         ) : (
-          <Result
-            status="404"
-            title="Quote not found"
-            subTitle="Sorry, the Quote you requested does not exist."
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push(`/${config.entity.toLowerCase()}`);
-                }}
-              >
-                Back to Quote Page
-              </Button>
-            }
-          />
+          <NotFound entity={config.entity} />
         )}
       </ErpLayout>
     );

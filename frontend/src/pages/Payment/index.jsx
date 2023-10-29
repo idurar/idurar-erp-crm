@@ -3,6 +3,7 @@ import useLanguage from '@/lang/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 
 export default function Payment() {
+  const translate = useLanguage();
   const searchConfig = {
     displayLabels: ['number'],
     searchFields: 'number',
@@ -12,40 +13,38 @@ export default function Payment() {
   const entityDisplayLabels = ['number'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
 
       dataIndex: 'number',
     },
     {
-      title: 'Client',
+      title: translate('Client'),
       dataIndex: ['client', 'company'],
     },
     {
-      title: 'Amount',
+      title: translate('Amount'),
       dataIndex: 'amount',
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Invoice Number',
+      title: translate('Number'),
       dataIndex: ['invoice', 'number'],
     },
     {
-      title: 'Invoice year',
+      title: translate('year'),
       dataIndex: ['invoice', 'year'],
     },
     {
-      title: 'Payment Mode',
+      title: translate('Payment Mode'),
       dataIndex: ['paymentMode', 'name'],
     },
   ];
-
-  const translate = useLanguage();
 
   const entity = 'payment';
 

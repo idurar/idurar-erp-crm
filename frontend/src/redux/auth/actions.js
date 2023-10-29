@@ -14,7 +14,13 @@ export const login =
 
     if (data.success === true) {
       window.localStorage.setItem('isLoggedIn', true);
-      window.localStorage.setItem('auth', JSON.stringify(data.result));
+      const auth_state = {
+        current: data.result,
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: false,
+      };
+      window.localStorage.setItem('auth', JSON.stringify(auth_state));
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
@@ -32,6 +38,8 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
+  window.localStorage.removeItem('isLoggedIn');
+  window.localStorage.removeItem('auth');
   history.push('/login');
 };
 

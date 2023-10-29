@@ -6,6 +6,7 @@ import { useMoney } from '@/settings';
 import useLanguage from '@/lang/useLanguage';
 
 export default function Offer() {
+  const translate = useLanguage();
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -15,35 +16,35 @@ export default function Offer() {
   const entityDisplayLabels = ['number', 'lead.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
-      title: 'Company Name',
+      title: translate('Company'),
       dataIndex: ['lead', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
     {
-      title: 'SubTotal',
+      title: translate('Sub Total'),
       dataIndex: 'subTotal',
       onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
       onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {
-      title: 'Note',
+      title: translate('Note'),
       dataIndex: 'note',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =
@@ -56,12 +57,10 @@ export default function Offer() {
             : status === 'expired'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const entity = 'offer';
   const Labels = {

@@ -1,18 +1,20 @@
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Form, PageHeader, Row } from 'antd';
+import { Button, Col, Form, PageHeader, Row } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminForm from '@/forms/AdminForm';
-import UploadImg from './UploadImg';
+
 import { updateProfile } from '@/redux/auth/actions';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 
 const UpdateAdmin = ({ config }) => {
+  const translate = useLanguage();
+
   const { profileContextAction } = useProfileContext();
   const { updatePanel } = profileContextAction;
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const UpdateAdmin = ({ config }) => {
   };
 
   return (
-    <>
+    <div>
       <PageHeader
         onBack={() => updatePanel.close()}
         title={ENTITY_NAME}
@@ -54,7 +56,7 @@ const UpdateAdmin = ({ config }) => {
             key={`${uniqueId()}`}
             icon={<CloseCircleOutlined />}
           >
-            Close
+            {translate('Close')}
           </Button>,
           <Button
             key={`${uniqueId()}`}
@@ -66,7 +68,7 @@ const UpdateAdmin = ({ config }) => {
             icon={<SaveOutlined />}
             htmlType="submit"
           >
-            save
+            {translate('Save')}
           </Button>,
         ]}
         style={{
@@ -87,7 +89,7 @@ const UpdateAdmin = ({ config }) => {
           </Form>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

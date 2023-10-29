@@ -5,6 +5,7 @@ import CrudModule from '@/modules/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
 export default function Employee() {
+  const translate = useLanguage();
   const entity = 'employee';
   const searchConfig = {
     displayLabels: ['name', 'surname'],
@@ -16,87 +17,85 @@ export default function Employee() {
 
   const dataTableColumns = [
     {
-      title: 'Name',
+      title: translate('first name'),
       dataIndex: 'name',
     },
     {
-      title: 'Surname',
+      title: translate('last name'),
       dataIndex: 'surname',
     },
     {
-      title: 'Birthday',
+      title: translate('Birthday'),
       dataIndex: 'birthday',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Department',
+      title: translate('Department'),
       dataIndex: 'department',
     },
     {
-      title: 'Position',
+      title: translate('Position'),
       dataIndex: 'position',
     },
     {
-      title: 'Phone Number',
+      title: translate('Phone'),
       dataIndex: 'phone',
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: 'email',
     },
   ];
 
   const readColumns = [
     {
-      title: 'name',
+      title: translate('first name'),
       dataIndex: 'name',
     },
     {
-      title: 'Surname',
+      title: translate('last name'),
       dataIndex: 'surname',
     },
     {
-      title: 'birthday',
+      title: translate('Birthday'),
       dataIndex: 'birthday',
       isDate: true,
     },
     {
-      title: 'birthplace',
+      title: translate('birthplace'),
       dataIndex: 'birthplace',
     },
     {
-      title: 'gender',
+      title: translate('gender'),
       dataIndex: 'gender',
     },
     {
-      title: 'department',
+      title: translate('Department'),
       dataIndex: 'department',
     },
     {
-      title: 'position',
+      title: translate('Position'),
       dataIndex: 'position',
     },
     {
-      title: 'address',
+      title: translate('address'),
       dataIndex: 'address',
     },
     {
-      title: 'state',
+      title: translate('state'),
       dataIndex: 'state',
     },
     {
-      title: 'phone',
+      title: translate('Phone'),
       dataIndex: 'phone',
     },
     {
-      title: 'email',
+      title: translate('Email'),
       dataIndex: 'email',
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('employee'),

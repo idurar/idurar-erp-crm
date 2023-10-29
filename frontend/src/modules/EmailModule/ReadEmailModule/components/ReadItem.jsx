@@ -10,13 +10,14 @@ import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
-import { selectCurrentLang } from '@/redux/lang/selectors';
 
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
+import useLanguage from '@/lang/useLanguage';
 
 const { Title, Paragraph } = Typography;
 
 export default function ReadItem({ config, selectedItem }) {
+  const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
@@ -63,7 +64,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             icon={<CloseCircleOutlined />}
           >
-            Close
+            {translate('Close')}
           </Button>,
 
           <Button
@@ -81,7 +82,7 @@ export default function ReadItem({ config, selectedItem }) {
             type="primary"
             icon={<EditOutlined />}
           >
-            Edit Template
+            {translate('Edit')}
           </Button>,
         ]}
         style={{
@@ -90,9 +91,9 @@ export default function ReadItem({ config, selectedItem }) {
       ></PageHeader>
       <Divider dashed />
       <div>
-        <Title level={3}>Subject</Title>
+        <Title level={3}>{translate('Subject')}</Title>
         <Paragraph>{currentErp.emailSubject}</Paragraph>
-        <Title level={3}>Body</Title>
+        <Title level={3}>{translate('Body')}</Title>
         <div dangerouslySetInnerHTML={{ __html: currentErp.emailBody }} />
       </div>
     </>

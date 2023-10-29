@@ -3,17 +3,18 @@ import uniqueId from '@/utils/uinqueId';
 import { EditOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, PageHeader, Row, Space, Tag } from 'antd';
 import { useSelector } from 'react-redux';
-import photo from '@/style/images/photo.png';
+
 import history from '@/utils/history';
-import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
+
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { BASE_URL } from '@/config/serverApiConfig';
 
 import { checkImage } from '@/request';
 
 const AdminInfo = ({ config }) => {
+  const translate = useLanguage();
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
@@ -38,7 +39,7 @@ const AdminInfo = ({ config }) => {
             type="primary"
             icon={<EditOutlined />}
           >
-            Edit
+            {translate('Edit')}
           </Button>,
           <Button
             key={`${uniqueId()}`}
@@ -47,7 +48,7 @@ const AdminInfo = ({ config }) => {
               modal.open();
             }}
           >
-            Update Password
+            {translate('Update Password')}
           </Button>,
         ]}
         style={{
@@ -68,7 +69,11 @@ const AdminInfo = ({ config }) => {
         </Col>
         <Col xs={{ span: 24 }} sm={{ span: 18 }}>
           <Descriptions labelStyle={{ fontSize: '17px' }} size="small">
-            <Descriptions.Item label="Name" span="3" style={{ paddingTop: '20px' }}>
+            <Descriptions.Item
+              label={translate('first name')}
+              span="3"
+              style={{ paddingTop: '20px' }}
+            >
               <h3
                 style={{
                   color: '#22075e',
@@ -78,7 +83,7 @@ const AdminInfo = ({ config }) => {
                 {currentAdmin?.name}
               </h3>
             </Descriptions.Item>
-            <Descriptions.Item label="Surname" span="3">
+            <Descriptions.Item label={translate('last name')} span="3">
               <h3
                 style={{
                   color: '#22075e',
@@ -88,7 +93,7 @@ const AdminInfo = ({ config }) => {
                 {currentAdmin?.surname}
               </h3>
             </Descriptions.Item>
-            <Descriptions.Item label="Email" span="3" style={{ paddingTop: '20px' }}>
+            <Descriptions.Item label={translate('email')} span="3" style={{ paddingTop: '20px' }}>
               <h3
                 style={{
                   color: '#22075e',
@@ -97,7 +102,7 @@ const AdminInfo = ({ config }) => {
                 {currentAdmin?.email}
               </h3>
             </Descriptions.Item>
-            <Descriptions.Item label="Role" span="3">
+            <Descriptions.Item label={translate('role')} span="3">
               <h3
                 style={{
                   color: '#22075e',
@@ -117,7 +122,7 @@ const AdminInfo = ({ config }) => {
         className="right"
         onClick={() => history.push('/logout')}
       >
-        Logout
+        {translate('Logout')}
       </Button>
     </>
   );

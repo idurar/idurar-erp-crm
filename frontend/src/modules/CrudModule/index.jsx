@@ -1,12 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
-import { Row, Col, Button, Divider } from 'antd';
-import {
-  MenuFoldOutlined,
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  ArrowLeftOutlined,
-} from '@ant-design/icons';
+import { Row, Col, Button } from 'antd';
+import { MenuFoldOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
@@ -27,8 +21,8 @@ import { CrudLayout } from '@/layout';
 function SidePanelTopContent({ config, formElements, withUpload }) {
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
-  const { entityDisplayLabels, entity } = config;
-  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
+  const { entityDisplayLabels } = config;
+  const { modal, editBox } = crudContextAction;
 
   const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
@@ -94,7 +88,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
 
-  const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
+  const { panel, collapsedBox } = crudContextAction;
 
   const addNewItem = () => {
     collapsedBox.close();

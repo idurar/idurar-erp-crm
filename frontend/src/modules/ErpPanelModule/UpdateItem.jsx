@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Button, PageHeader, Row, Col, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
 import calculate from '@/utils/calculate';
@@ -30,6 +30,7 @@ function SaveForm({ form, config }) {
 }
 
 export default function UpdateItem({ config, UpdateForm }) {
+  const translate = useLanguage();
   let { entity, UPDATE_ENTITY } = config;
 
   const dispatch = useDispatch();
@@ -118,7 +119,7 @@ export default function UpdateItem({ config, UpdateForm }) {
             }}
             icon={<CloseCircleOutlined />}
           >
-            Cancel
+            {translate('Cancel')}
           </Button>,
           <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
         ]}

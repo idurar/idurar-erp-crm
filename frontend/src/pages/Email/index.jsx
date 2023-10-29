@@ -1,10 +1,9 @@
 import React from 'react';
 import useLanguage from '@/lang/useLanguage';
-import CrudModule from '@/modules/CrudModule';
-import AdvancedSettingsForm from '@/forms/AdvancedSettingsForm';
 import EmailDataTableModule from '@/modules/EmailModule/EmailDataTableModule';
 
 export default function AdvancedSettings() {
+  const translate = useLanguage();
   const entity = 'email';
   const searchConfig = {
     displayLabels: ['name'],
@@ -16,32 +15,30 @@ export default function AdvancedSettings() {
 
   const readColumns = [
     {
-      title: 'Template Name',
+      title: translate('Template'),
       dataIndex: 'emailName',
     },
     {
-      title: 'Subject',
+      title: translate('Subject'),
       dataIndex: 'emailSubject',
     },
     {
-      title: 'Body',
+      title: translate('email content'),
       dataIndex: 'emailBody',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Template Name',
+      title: translate('Template'),
       dataIndex: 'emailName',
       key: 'emailName',
     },
     {
-      title: 'Subject',
+      title: translate('Subject'),
       dataIndex: 'emailSubject',
       key: 'emailSubject',
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('email_template'),

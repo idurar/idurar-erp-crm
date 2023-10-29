@@ -5,7 +5,8 @@ import CustomerForm from '@/forms/CustomerForm';
 
 import useLanguage from '@/lang/useLanguage';
 
-function Customer() {
+export default function Customer() {
+  const translate = useLanguage();
   const entity = 'client';
 
   const searchConfig = {
@@ -18,46 +19,44 @@ function Customer() {
 
   const readColumns = [
     {
-      title: 'Company',
+      title: translate('Company'),
       dataIndex: 'company',
     },
     {
-      title: 'Manager Surname',
+      title: translate('Manager first name'),
       dataIndex: 'managerSurname',
     },
     {
-      title: 'Manager Name',
+      title: translate('Manager last name'),
       dataIndex: 'managerName',
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: 'email',
     },
     {
-      title: 'Phone',
+      title: translate('Phone'),
       dataIndex: 'phone',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Company',
+      title: translate('Company'),
       dataIndex: 'company',
     },
     {
-      title: 'Manager Surname',
+      title: translate('Manager first name'),
       dataIndex: 'managerSurname',
     },
     {
-      title: 'Manager Name',
+      title: translate('Manager last name'),
       dataIndex: 'managerName',
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: 'email',
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('customer'),
@@ -87,5 +86,3 @@ function Customer() {
     />
   );
 }
-
-export default Customer;

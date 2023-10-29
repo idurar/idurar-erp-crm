@@ -1,96 +1,88 @@
 import { useState } from 'react';
 import { Form, Input, InputNumber, Select, Switch } from 'antd';
 
-import { languages, tagColor } from '@/utils';
+import useLanguage from '@/lang/useLanguage';
 
 export default function MoneyFormSettingForm() {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label="Currency Name"
+        label={translate('Currency Name')}
         name="currency"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="Currency Symbol"
+        label={translate('Currency Symbol')}
         name="currency_symbol"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
+
       <Form.Item
-        label="Currency Position"
+        label={translate('Currency Position')}
         name="currency_position"
         rules={[
           {
             required: true,
-            message: 'This Field is required',
           },
         ]}
       >
         <Select>
-          <Select.Option value="before">before</Select.Option>
-          <Select.Option value="after">after</Select.Option>
+          <Select.Option value="before">{translate('before')}</Select.Option>
+          <Select.Option value="after">{translate('after')}</Select.Option>
         </Select>
       </Form.Item>
-
       <Form.Item
-        label="Decimal Separator"
+        label={translate('Decimal Separator')}
         name="decimal_sep"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="Thousand Separator"
+        label={translate('Thousand Separator')}
         name="thousand_sep"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
-
       <Form.Item
-        label="Cent precision "
+        label={translate('Cent precision')}
         name="cent_precision"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
       >
         <InputNumber min={0} />
       </Form.Item>
-
       <Form.Item
-        label="Zero Format"
+        label={translate('Zero Format')}
         name="zero_format"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
         valuePropName="checked"

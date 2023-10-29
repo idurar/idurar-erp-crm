@@ -8,6 +8,7 @@ import CrudModule from '@/modules/CrudModule';
 import CurrencyForm from '@/forms/CurrencyForm';
 
 export default function Currency() {
+  const translate = useLanguage();
   const entity = 'currency';
 
   const searchConfig = {
@@ -20,45 +21,45 @@ export default function Currency() {
 
   const readColumns = [
     {
-      title: 'Currency Name',
+      title: translate('Currency'),
       dataIndex: 'name',
     },
     {
-      title: 'Symbol',
+      title: translate('Currency'),
       dataIndex: 'symbol',
     },
     {
-      title: 'Decimal Sep',
+      title: translate('Decimal Separator'),
       dataIndex: 'decimal_separator',
     },
     {
-      title: 'Thousand Sep',
+      title: translate('Thousand Separator'),
       dataIndex: 'thousand_separator',
     },
     {
-      title: 'Default',
+      title: translate('Default'),
       dataIndex: 'isDefault',
     },
   ];
   const dataTableColumns = [
     {
-      title: 'Currency Name',
+      title: translate('Currency'),
       dataIndex: 'name',
     },
     {
-      title: 'Symbol',
+      title: translate('Currency'),
       dataIndex: 'symbol',
     },
     {
-      title: 'Decimal Sep',
+      title: translate('Decimal Separator'),
       dataIndex: 'decimal_separator',
     },
     {
-      title: 'Thousand Sep',
+      title: translate('Thousand Separator'),
       dataIndex: 'thousand_separator',
     },
     {
-      title: 'Default',
+      title: translate('Default'),
       dataIndex: 'isDefault',
       key: 'isDefault',
       render: (text, row) => {
@@ -79,8 +80,6 @@ export default function Currency() {
       },
     },
   ];
-
-  const translate = useLanguage();
 
   const Labels = {
     PANEL_TITLE: translate('currency'),

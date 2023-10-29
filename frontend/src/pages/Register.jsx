@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Form, Button, Layout, Col, Divider } from 'antd';
-import { Typography } from 'antd';
+import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 
 import RegisterForm from '@/forms/RegisterForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
+
+import useLanguage from '@/lang/useLanguage';
 
 import logo from '@/style/images/logo.png';
 
@@ -13,6 +14,7 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const RegisterPage = () => {
+  const translate = useLanguage();
   const onFinish = () => {};
   return (
     <>
@@ -35,7 +37,7 @@ const RegisterPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign up</Title>
+          <Title level={1}>{translate('Sign up')}</Title>
 
           <Divider />
           <div className="site-layout-content">
@@ -50,9 +52,9 @@ const RegisterPage = () => {
               <RegisterForm />
               <Form.Item>
                 <Button type="primary" htmlType="submit" className="login-form-button" size="large">
-                  Register
+                  {translate('Register')}
                 </Button>
-                Or <a href="/login">already have account? Login</a>
+                {translate('Or')} <a href="/login"> {translate('already have account Login')} </a>
               </Form.Item>
             </Form>
           </div>

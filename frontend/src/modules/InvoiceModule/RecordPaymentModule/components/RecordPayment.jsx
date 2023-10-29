@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Divider, Button, PageHeader, Tag } from 'antd';
+import { Form, Button } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import { selectCurrentItem, selectRecordPaymentItem } from '@/redux/erp/selectors';
-import { selectCurrentLang } from '@/redux/lang/selectors';
+import { selectRecordPaymentItem } from '@/redux/erp/selectors';
+import useLanguage from '@/lang/useLanguage';
 import { useErpContext } from '@/context/erp';
 
 import Loading from '@/components/Loading';
@@ -14,6 +14,7 @@ import PaymentForm from '@/forms/PaymentForm';
 import calculate from '@/utils/calculate';
 
 export default function RecordPayment({ config }) {
+  const translate = useLanguage();
   let { entity } = config;
   const { erpContextAction } = useErpContext();
   const { recordPanel } = erpContextAction;
@@ -66,7 +67,7 @@ export default function RecordPayment({ config }) {
           <PaymentForm maxAmount={maxAmount} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Record Payment
+              {translate('Record Payment')}
             </Button>
           </Form.Item>
         </Form>

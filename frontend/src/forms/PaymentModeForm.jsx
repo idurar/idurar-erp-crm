@@ -1,12 +1,14 @@
 import React from 'react';
 import { Switch, Form, Input } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import useLanguage from '@/lang/useLanguage';
 
 export default function PaymentModeForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label="Payment Mode Name"
+        label={translate('Payment Mode')}
         name="name"
         rules={[
           {
@@ -17,7 +19,7 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
-        label="Description"
+        label={translate('Description')}
         name="description"
         rules={[
           {
@@ -29,7 +31,7 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Mode enabled"
+        label={translate('enabled')}
         name="enabled"
         style={{
           display: 'inline-block',
@@ -42,7 +44,7 @@ export default function PaymentModeForm({ isUpdateForm = false }) {
         <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
       </Form.Item>
       <Form.Item
-        label="Is Default Mode"
+        label={translate('Default Mode')}
         name="isDefault"
         style={{
           display: 'inline-block',
