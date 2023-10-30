@@ -1,5 +1,5 @@
 import { useProfileContext } from '@/context/profileContext';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';

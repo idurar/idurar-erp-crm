@@ -1,4 +1,4 @@
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { PlusOutlined, SyncOutlined } from '@ant-design/icons';
 import { Button, Divider, Form, Input, Upload } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';

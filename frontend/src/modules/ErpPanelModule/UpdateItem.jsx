@@ -9,7 +9,7 @@ import useLanguage from '@/lang/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
 import calculate from '@/utils/calculate';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 

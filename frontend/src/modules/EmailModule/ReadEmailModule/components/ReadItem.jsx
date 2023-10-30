@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 
 import { useErpContext } from '@/context/erp';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
 

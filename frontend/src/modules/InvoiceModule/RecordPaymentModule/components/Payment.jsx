@@ -4,7 +4,7 @@ import { Button, Row, Col, Descriptions, Tag, Divider } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import { useMoney } from '@/settings';
 

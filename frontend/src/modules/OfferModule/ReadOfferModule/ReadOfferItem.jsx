@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import useLanguage from '@/lang/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
 

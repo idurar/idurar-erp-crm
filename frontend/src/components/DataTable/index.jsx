@@ -8,7 +8,7 @@ import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/lang/useLanguage';
 
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 import { useCrudContext } from '@/context/crud';
 

@@ -12,7 +12,7 @@ import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
 import calculate from '@/utils/calculate';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';

@@ -16,7 +16,7 @@ import useLanguage from '@/lang/useLanguage';
 import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { useNavigate } from 'react-router-dom';
 
 import useResponsiveTable from '@/hooks/useResponsiveTable';

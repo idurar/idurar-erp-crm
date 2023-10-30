@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Router from '@/router';
+import Router from '@/router/Router';
 import enUS from 'antd/es/locale/en_US';
 import zhCN from 'antd/es/locale/zh_CN';
 import frFR from 'antd/es/locale/fr_FR';
