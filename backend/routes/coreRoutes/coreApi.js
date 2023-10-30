@@ -65,7 +65,7 @@ router
 router
   .route('/profile/update/:id')
   .patch(
-    hasPermission('read'),
+    hasPermission(),
     adminPhotoUpload.single('file'),
     setFilePathToBody('photo'),
     catchErrors(adminController.updateProfile)
