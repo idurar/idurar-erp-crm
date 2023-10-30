@@ -14,7 +14,6 @@
     "cross-env": "7.0.3",
     "currency.js": "2.0.4",
     "history": "4.10.1",
-    "http-proxy-middleware": "^2.0.6",
     "just-compare": "^2.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
