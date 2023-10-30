@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Divider } from 'antd';
 
 import { Button, Row, Col, Descriptions, Statistic, Tag } from 'antd';

@@ -1,10 +1,10 @@
 import { Tag } from 'antd';
 import useLanguage from '@/lang/useLanguage';
 
-export function StatusTag(status = 'draft') {
+export function StatusTag({ status = 'draft' }) {
   const translate = useLanguage();
-  let color =
-    status === 'draft'
+  let color = () => {
+    return status === 'draft'
       ? 'cyan'
       : status === 'sent'
       ? 'blue'
@@ -13,6 +13,7 @@ export function StatusTag(status = 'draft') {
       : status === 'expired'
       ? 'orange'
       : 'red';
+  };
 
-  return <Tag color={color}>{status && translate(status)}</Tag>;
+  return <Tag color={color()}>{translate(status)}</Tag>;
 }

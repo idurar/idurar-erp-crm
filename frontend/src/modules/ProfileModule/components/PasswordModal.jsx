@@ -2,7 +2,7 @@ import { useProfileContext } from '@/context/profileContext';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 import { Button, Form, Input, Modal } from 'antd';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import useLanguage from '@/lang/useLanguage';
 
 const PasswordModal = ({ config }) => {

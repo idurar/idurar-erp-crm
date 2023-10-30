@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { AutoComplete, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';

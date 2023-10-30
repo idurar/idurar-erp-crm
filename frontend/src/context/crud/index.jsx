@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer, createContext, useContext } from 'react';
+import { useMemo, useReducer, createContext, useContext } from 'react';
 import { initialState, contextReducer } from './reducer';
 import contextActions from './actions';
 import contextSelectors from './selectors';

@@ -7,8 +7,9 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-layout": "^7.17.12",
+    "@rollup/plugin-dynamic-import-vars": "^2.1.0",
     "@vitejs/plugin-react": "^4.0.4",
-    "antd": "^5.10.2",
+    "antd": "^5.10.3",
     "axios": "0.27.2",
     "cross-env": "7.0.3",
     "currency.js": "2.0.4",
@@ -25,15 +26,14 @@
     "redux-logger": "3.0.6",
     "redux-thunk": "2.4.1",
     "reselect": "4.1.5",
-    "vite": "^4.4.8",
-    "@rollup/plugin-dynamic-import-vars": "^2.1.0"
+    "vite": "^4.5.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "dev:remote": "REACT_APP_DEV_REMOTE=remote npm run dev"
+    "dev:remote": "cross-env VITE_DEV_REMOTE=remote npm run dev"
   },
   "devDependencies": {
     "@types/react": "^18.2.18",

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import { useLayoutEffect, useState, useEffect } from 'react';
 import { Row, Col, Button } from 'antd';
 
 import {

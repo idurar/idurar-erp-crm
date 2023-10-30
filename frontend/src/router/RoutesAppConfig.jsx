@@ -11,7 +11,7 @@ const Customer = lazy(() => import(`@/pages/Customer`));
 const Inventory = lazy(() => import(`@/pages/Inventory`));
 const Order = lazy(() => import(`@/pages/Order`));
 const Invoice = lazy(() => import(`@/pages/Invoice`));
-const InvoiceCreate = lazy(() => import(`@/pages/Invoice / InvoiceCreate`));
+const InvoiceCreate = lazy(() => import(`@/pages/Invoice/InvoiceCreate`));
 
 const InvoiceRead = lazy(() => import(`@/pages/Invoice/InvoiceRead`));
 const InvoiceUpdate = lazy(() => import(`@/pages/Invoice/InvoiceUpdate`));
@@ -21,7 +21,6 @@ const QuoteCreate = lazy(() => import(`@/pages/Quote/QuoteCreate`));
 const QuoteRead = lazy(() => import(`@/pages/Quote/QuoteRead`));
 const QuoteUpdate = lazy(() => import(`@/pages/Quote/QuoteUpdate`));
 const Payment = lazy(() => import(`@/pages/Payment/index`));
-const PaymentCreate = lazy(() => import(`@/pages/Payment/PaymentCreate`));
 const PaymentRead = lazy(() => import(`@/pages/Payment/PaymentRead`));
 const PaymentUpdate = lazy(() => import(`@/pages/Payment/PaymentUpdate`));
 const Employee = lazy(() => import(`@/pages/Employee`));
@@ -34,9 +33,6 @@ const EmailUpdate = lazy(() => import(`@/pages/Email/EmailUpdate`));
 const AdvancedSettings = lazy(() => import(`@/pages/AdvancedSettings`));
 const Profile = lazy(() => import(`@/pages/Profile`));
 const Lead = lazy(() => import(`@/pages/Lead/index`));
-const LeadCreate = lazy(() => import(`@/pages/Lead/LeadCreate`));
-const LeadRead = lazy(() => import(`@/pages/Lead/LeadRead`));
-const LeadUpdate = lazy(() => import(`@/pages/Lead/LeadUpdate`));
 const Offer = lazy(() => import(`@/pages/Offer/index`));
 const OfferCreate = lazy(() => import(`@/pages/Offer/OfferCreate`));
 const OfferRead = lazy(() => import(`@/pages/Offer/OfferRead`));
@@ -113,10 +109,6 @@ export default function RoutesAppConfig() {
       element: <Payment />,
     },
     {
-      path: '/payment/create',
-      element: <PaymentCreate />,
-    },
-    {
       path: '/payment/read/:id',
       element: <PaymentRead />,
     },
@@ -163,18 +155,6 @@ export default function RoutesAppConfig() {
     {
       path: '/lead',
       element: <Lead />,
-    },
-    {
-      path: '/lead/create',
-      element: <LeadCreate />,
-    },
-    {
-      path: '/lead/read/:id',
-      element: <LeadRead />,
-    },
-    {
-      path: '/lead/update/:id',
-      element: <LeadUpdate />,
     },
     {
       path: '/offer',

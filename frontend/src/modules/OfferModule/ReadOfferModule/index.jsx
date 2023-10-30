@@ -8,7 +8,7 @@ import useLanguage from '@/lang/useLanguage';
 import { selectReadItem } from '@/redux/erp/selectors';
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function ReadOfferModule({ config }) {
   const dispatch = useDispatch();

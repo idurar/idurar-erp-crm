@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
 import useLanguage from '@/lang/useLanguage';
 

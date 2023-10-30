@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Select, Space } from 'antd';
 import { request } from '@/request';
 import errorHandler from '@/request/errorHandler';
