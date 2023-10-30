@@ -2,6 +2,9 @@ import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
 
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+
 export default function CustomerForm({ isUpdateForm = false }) {
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {
@@ -78,19 +81,13 @@ export default function CustomerForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input your phone!',
-          },
-          {
-            validator: validateEmptyString,
-            message: 'Please enter valid phone number!',
-          },
-          {
-            pattern: validatePhoneNumber,
-            message: 'Please enter valid phone number!',
+            message: 'Please input your number!',
           },
         ]}
       >
-        <Input />
+        <PhoneInput
+          country={'us'}
+        />
       </Form.Item>
       <Form.Item
         name="email"
