@@ -80,9 +80,9 @@ const login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
-        sameSite: process.env.NODE_ENV === 'production' && isLocalhost ? 'none' : 'Lax',
-        httpOnly: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
-        secure: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
+        sameSite: process.env.NODE_ENV === 'production' ? 'Lax' : 'none',
+        httpOnly: process.env.NODE_ENV === 'production' ? true : false,
+        secure: true,
         domain: req.hostname,
         Path: '/',
       })

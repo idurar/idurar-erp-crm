@@ -12,7 +12,6 @@ export default ({ mode }) => {
       ? process.env.VITE_BACKEND_SERVER
       : 'http://localhost:8888/';
 
-  console.log('🚀 ~ file: vite.config.js:11 ~ proxy_url:', proxy_url);
   const config = {
     plugins: [react()],
     resolve: {
@@ -22,6 +21,7 @@ export default ({ mode }) => {
       },
     },
     server: {
+      port: 3000,
       proxy: {
         '/api': {
           target: proxy_url,
