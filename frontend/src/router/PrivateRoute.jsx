@@ -1,21 +1,9 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (
-    // Show the component only when the admin is logged in
-    // Otherwise, redirect the admin to /signin page
-
-    <Route
-      {...rest}
-      render={(props) =>
-        window.localStorage.getItem('isLoggedIn') ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
+const PrivateRoute = ({ children }) => {
+  if (window.localStorage.getItem('isLoggedIn')) {
+    return <>{children}</>;
+  } else return <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

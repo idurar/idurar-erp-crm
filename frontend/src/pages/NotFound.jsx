@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import NotFound from '@/components/NotFound';
-import history from '@/utils/history';
+
 const NotFoundPage = () => {
+  let navigate = useNavigate();
   useEffect(() => {
-    history.replace('/notfound');
+    navigate(`notfound`, { replace: true });
   }, []);
   return <NotFound entity={''} />;
 };

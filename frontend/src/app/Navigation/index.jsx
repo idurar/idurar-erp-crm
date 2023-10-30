@@ -7,7 +7,7 @@ import { useAppContext } from '@/context/appContext';
 import useLanguage from '@/lang/useLanguage';
 import logoIcon from '@/style/images/logo-icon.svg';
 import logoText from '@/style/images/logo-text.svg';
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
 import {
   SettingOutlined,
@@ -46,6 +46,7 @@ function Sidebar({ collapsible }) {
   const [currentPath, setCurrentPath] = useState(location.pathname);
 
   const translate = useLanguage();
+  const navigate = useNavigate();
 
   const items = [
     {
@@ -158,7 +159,7 @@ function Sidebar({ collapsible }) {
       }}
       theme={'light'}
     >
-      <div className="logo" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
+      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <img src={logoIcon} alt="Logo" style={{ height: '32px' }} />
 
         {!showLogoApp && (

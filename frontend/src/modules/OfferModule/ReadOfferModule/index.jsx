@@ -13,7 +13,7 @@ import { useParams, useHistory } from 'react-router-dom';
 export default function ReadOfferModule({ config }) {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));

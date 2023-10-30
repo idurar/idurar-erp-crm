@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
@@ -14,12 +14,33 @@ export default function AuthRouter() {
   const location = useLocation();
   return (
     <Suspense fallback={<PageLoader />}>
-      <Switch location={location} key={location.pathname}>
-        <PublicRoute path="/" component={Login} render={() => <Redirect to="/login" />} exact />
-        <PublicRoute component={Login} path="/login" exact />
-        <PublicRoute component={Register} path="/register" exact />
-        <Route path="*" component={NotFound} render={() => <Redirect to="/notfound" />} />
-      </Switch>
+      <Routes location={location} key={location.pathname}>
+        <Route
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+          path="/"
+        />
+        <Route
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+          path="/login"
+        />
+        <Route
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+          path="/register"
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </Suspense>
   );
 }

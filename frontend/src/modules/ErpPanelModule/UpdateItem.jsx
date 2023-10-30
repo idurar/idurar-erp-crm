@@ -35,7 +35,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   let { entity, UPDATE_ENTITY } = config;
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
@@ -80,7 +80,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       form.resetFields();
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
-      history.push(`/${entity.toLowerCase()}/read/${id}`);
+      navigate(`/${entity.toLowerCase()}/read/${id}`);
     }
   }, [isSuccess]);
 
@@ -107,7 +107,7 @@ export default function UpdateItem({ config, UpdateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={UPDATE_ENTITY}
         ghost={false}
@@ -116,7 +116,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              history.push(`/${entity.toLowerCase()}`);
+              navigate(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
           >

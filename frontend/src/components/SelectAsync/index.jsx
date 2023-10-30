@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function SelectAsync({
@@ -18,7 +18,7 @@ export default function SelectAsync({
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const asyncList = () => {
     return request.list({ entity });
@@ -42,7 +42,7 @@ export default function SelectAsync({
   const handleSelectChange = (newValue) => {
     if (newValue === 'redirectURL') {
       // Navigate to another page when "Add payment" is selected
-      history.push(urlToRedirect);
+      navigate(urlToRedirect);
     } else {
       // Handle other select options
       if (onChange) {

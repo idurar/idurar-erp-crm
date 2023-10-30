@@ -1,5 +1,7 @@
-import React from 'react';
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import Notifications from '@/components/Notification';
 
@@ -21,12 +23,17 @@ const { Title } = Typography;
 
 const LoginPage = () => {
   const translate = useLanguage();
-  const { isLoading } = useSelector(selectAuth);
+  const { isLoading, isSuccess } = useSelector(selectAuth);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
     dispatch(login({ loginData: values }));
   };
+
+  useEffect(() => {
+    if (isSuccess) navigate('/login');
+  }, [isSuccess]);
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>

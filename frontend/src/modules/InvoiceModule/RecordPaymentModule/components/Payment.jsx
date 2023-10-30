@@ -11,13 +11,14 @@ import { useMoney } from '@/settings';
 import RecordPayment from './RecordPayment';
 import useLanguage from '@/lang/useLanguage';
 
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
 export default function Payment({ config, currentItem }) {
   const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
 
   const money = useMoney();
+  const navigate = useNavigate();
 
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState(currentItem);
@@ -48,7 +49,7 @@ export default function Payment({ config, currentItem }) {
           lg={{ span: 20, push: 2 }}
         >
           <PageHeader
-            onBack={() => history.push(`/${entity.toLowerCase()}`)}
+            onBack={() => navigate(`/${entity.toLowerCase()}`)}
             title={`Record Payment for ${ENTITY_NAME} # ${currentErp.number}/${
               currentErp.year || ''
             }`}
@@ -59,7 +60,7 @@ export default function Payment({ config, currentItem }) {
               <Button
                 key={`${uniqueId()}`}
                 onClick={() => {
-                  history.push(`/${entity.toLowerCase()}`);
+                  navigate(`/${entity.toLowerCase()}`);
                 }}
                 icon={<CloseCircleOutlined />}
               >
@@ -67,7 +68,7 @@ export default function Payment({ config, currentItem }) {
               </Button>,
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => history.push(`/invoice/read/${currentErp._id}`)}
+                onClick={() => navigate(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
                 {translate('Show Invoice')}
