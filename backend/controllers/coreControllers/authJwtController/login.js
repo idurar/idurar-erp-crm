@@ -12,12 +12,8 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log('🚀 ~ file: app.js:33 ~  req.origin :', req.get('origin'));
-
     // URL address
     const address = req.get('origin');
-    console.log('🚀 ~ file: login.js:21 ~ login ~ address:', address);
-    console.log('🚀 ~ file: login.js:21 ~ login ~ req.hostname:', req.hostname);
 
     // Call parse() method using url module
     let urlObject = url.parse(address, true);
@@ -30,9 +26,6 @@ const login = async (req, res) => {
       isLocalhost = true;
     }
 
-    console.log('🚀 ~ file: login.js:22 ~ login ~ orginalHostname:', orginalHostname);
-
-    console.log('🚀 ~ file: login.js:20 ~ login ~ isLocalhost:', isLocalhost);
     // validate
     const objectSchema = Joi.object({
       email: Joi.string()
