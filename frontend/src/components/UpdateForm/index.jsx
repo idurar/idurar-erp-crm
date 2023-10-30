@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import dayjs from 'dayjs';
 
 import { useDispatch, useSelector } from 'react-redux';

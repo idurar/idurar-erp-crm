@@ -1,7 +1,7 @@
 import { useProfileContext } from '@/context/profileContext';
 import uniqueId from '@/utils/uinqueId';
-import { EditOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Descriptions, Divider, Row, Space, Tag } from 'antd';
+import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Avatar, Button, Col, Descriptions, Divider, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 import { useSelector } from 'react-redux';
 

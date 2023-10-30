@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import compare from 'just-compare';
 
 import { useDispatch, useSelector } from 'react-redux';

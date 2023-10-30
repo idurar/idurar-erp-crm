@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Divider, Space } from 'antd';
+import { useState, useEffect } from 'react';
+import { Form, Divider } from 'antd';
 import dayjs from 'dayjs';
 import { Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -14,7 +14,7 @@ import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, config }) {

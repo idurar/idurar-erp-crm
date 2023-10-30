@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Input, InputNumber, Row, Col } from 'antd';
 
 import { DeleteOutlined } from '@ant-design/icons';

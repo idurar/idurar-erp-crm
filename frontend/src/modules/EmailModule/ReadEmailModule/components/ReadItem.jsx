@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Divider, Typography, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
