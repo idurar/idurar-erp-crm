@@ -172,7 +172,7 @@ function Sidebar({ collapsible }) {
           />
         )}
       </div>
-      <Menu items={items} mode="inline" selectedKeys={'dashboard'} theme={'light'} />
+      <Menu items={items} mode="inline" theme={'light'} />
     </Sider>
   );
 }

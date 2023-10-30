@@ -4,11 +4,11 @@ import { AnimatePresence } from 'framer-motion';
 import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
 
-const Login = lazy(() => import(/*webpackChunkName:'LoginPage'*/ '@/pages/Login'));
+const Login = lazy(() => import('@/pages/Login.jsx'));
 
-const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
+const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
 
-const Register = lazy(() => import(/*webpackChunkName:'RegisterPage'*/ '@/pages/Register'));
+const Register = lazy(() => import('@/pages/Register.jsx'));
 
 export default function AuthRouter() {
   const location = useLocation();

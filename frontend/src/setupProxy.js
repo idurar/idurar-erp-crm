@@ -5,8 +5,8 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       target:
-        process.env.REACT_APP_DEV_REMOTE == 'remote'
-          ? process.env.REACT_APP_BACKEND_SERVER
+        import.meta.env.REACT_APP_DEV_REMOTE == 'remote'
+          ? import.meta.env.REACT_APP_BACKEND_SERVER
           : 'http://localhost/',
       changeOrigin: true,
     })
