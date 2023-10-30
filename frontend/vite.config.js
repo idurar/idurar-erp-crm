@@ -6,6 +6,13 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+
+  const proxy_url =
+    process.env.VITE_DEV_REMOTE === 'remote'
+      ? process.env.VITE_BACKEND_SERVER
+      : 'http://localhost:8888/';
+
+  console.log('🚀 ~ file: vite.config.js:11 ~ proxy_url:', proxy_url);
   const config = {
     plugins: [react()],
     resolve: {
@@ -17,7 +24,7 @@ export default ({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: process.env.VITE_BACKEND_SERVER,
+          target: proxy_url,
           changeOrigin: true,
           secure: false,
         },
