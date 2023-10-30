@@ -17,7 +17,7 @@ import uniqueId from '@/utils/uinqueId';
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
 function SaveForm({ form }) {
   const translate = useLanguage();
@@ -35,6 +35,7 @@ function SaveForm({ form }) {
 export default function CreateItem({ config, CreateForm }) {
   const translate = useLanguage();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
@@ -76,7 +77,7 @@ export default function CreateItem({ config, CreateForm }) {
       dispatch(erp.resetAction({ actionType: 'create' }));
       setSubTotal(0);
       setOfferSubTotal(0);
-      history.push(`/${entity.toLowerCase()}/read/${result._id}`);
+      navigate(`/${entity.toLowerCase()}/read/${result._id}`);
     }
     return () => {};
   }, [isSuccess]);
@@ -101,7 +102,7 @@ export default function CreateItem({ config, CreateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={CREATE_ENTITY}
         ghost={false}
@@ -110,7 +111,7 @@ export default function CreateItem({ config, CreateForm }) {
         extra={[
           <Button
             key={`${uniqueId()}`}
-            onClick={() => history.push(`/${entity.toLowerCase()}`)}
+            onClick={() => navigate(`/${entity.toLowerCase()}`)}
             icon={<CloseCircleOutlined />}
           >
             {translate('Cancel')}

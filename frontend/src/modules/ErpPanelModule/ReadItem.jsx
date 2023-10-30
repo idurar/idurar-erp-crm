@@ -22,7 +22,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -71,6 +71,7 @@ export default function ReadItem({ config, selectedItem }) {
   const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
@@ -125,7 +126,7 @@ export default function ReadItem({ config, selectedItem }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
@@ -135,7 +136,7 @@ export default function ReadItem({ config, selectedItem }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              history.push(`/${entity.toLowerCase()}`);
+              navigate(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
           >
@@ -182,7 +183,7 @@ export default function ReadItem({ config, selectedItem }) {
                   data: currentErp,
                 })
               );
-              history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
+              navigate(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"
             icon={<EditOutlined />}

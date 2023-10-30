@@ -17,18 +17,18 @@ import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import uniqueId from '@/utils/uinqueId';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
 function AddNewItem({ config, hasCreate = true }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { ADD_NEW_ENTITY, entity } = config;
 
   const handleClick = () => {
-    history.push(`/${entity.toLowerCase()}/create`);
+    navigate(`/${entity.toLowerCase()}/create`);
   };
 
   if (hasCreate)
@@ -80,15 +80,15 @@ export default function DataTable({ config, extra = [] }) {
     },
   ];
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleRead = (record) => {
     dispatch(erp.currentItem({ data: record }));
-    history.push(`/${entity}/read/${record._id}`);
+    navigate(`/${entity}/read/${record._id}`);
   };
   const handleEdit = (record) => {
     dispatch(erp.currentAction({ actionType: 'update', data: record }));
-    history.push(`/${entity}/update/${record._id}`);
+    navigate(`/${entity}/update/${record._id}`);
   };
   const handleDownload = (record) => {
     window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
@@ -101,7 +101,7 @@ export default function DataTable({ config, extra = [] }) {
 
   const handleRecordPayment = (record) => {
     dispatch(erp.currentItem({ data: record }));
-    history.push(`/invoice/pay/${record._id}`);
+    navigate(`/invoice/pay/${record._id}`);
   };
 
   dataTableColumns = [

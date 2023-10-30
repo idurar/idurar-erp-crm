@@ -5,7 +5,7 @@ import { PageHeader } from '@ant-design/pro-layout';
 import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import uniqueId from '@/utils/uinqueId';
 import { useMoney } from '@/settings';
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 import useLanguage from '@/lang/useLanguage';
 import UpdatePayment from './UpdatePayment';
 
@@ -14,6 +14,7 @@ export default function Payment({ config, currentItem }) {
   const { entity, ENTITY_NAME } = config;
 
   const money = useMoney();
+  const navigate = useNavigate();
 
   const [currentErp, setCurrentErp] = useState(currentItem);
 
@@ -37,7 +38,7 @@ export default function Payment({ config, currentItem }) {
           lg={{ span: 20, push: 2 }}
         >
           <PageHeader
-            onBack={() => history.push(`/${entity.toLowerCase()}`)}
+            onBack={() => navigate(`/${entity.toLowerCase()}`)}
             title={`Update  ${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
             ghost={false}
             tags={<Tag color="volcano">{currentErp.paymentStatus}</Tag>}
@@ -46,7 +47,7 @@ export default function Payment({ config, currentItem }) {
               <Button
                 key={`${uniqueId()}`}
                 onClick={() => {
-                  history.push(`/${entity.toLowerCase()}`);
+                  navigate(`/${entity.toLowerCase()}`);
                 }}
                 icon={<CloseCircleOutlined />}
               >
@@ -54,7 +55,7 @@ export default function Payment({ config, currentItem }) {
               </Button>,
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => history.push(`/invoice/read/${currentErp._id}`)}
+                onClick={() => navigate(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
                 label={translate('Show invoice')}

@@ -2,8 +2,6 @@ import * as actionTypes from './types';
 import * as authService from '@/auth';
 import { request } from '@/request';
 
-import history from '@/utils/history';
-
 export const login =
   ({ loginData }) =>
   async (dispatch) => {
@@ -18,14 +16,13 @@ export const login =
         current: data.result,
         isLoggedIn: true,
         isLoading: false,
-        isSuccess: false,
+        isSuccess: true,
       };
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
       });
-      history.push('/');
     } else {
       dispatch({
         type: actionTypes.REQUEST_FAILED,
@@ -40,7 +37,6 @@ export const logout = () => async (dispatch) => {
   });
   window.localStorage.removeItem('isLoggedIn');
   window.localStorage.removeItem('auth');
-  history.push('/login');
 };
 
 export const updateProfile =

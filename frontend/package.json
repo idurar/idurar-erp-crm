@@ -7,6 +7,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-layout": "^7.17.12",
+    "@vitejs/plugin-react": "^4.0.4",
     "antd": "^5.10.2",
     "axios": "0.27.2",
     "cross-env": "7.0.3",
@@ -18,14 +19,14 @@
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
     "react-redux": "7.2.8",
-    "react-router-dom": "5.2.0",
+    "react-router-dom": "^6.17.0",
     "react-use": "^17.4.0",
     "redux": "4.2.0",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.4.1",
     "reselect": "4.1.5",
-    "@vitejs/plugin-react": "^4.0.4",
-    "vite": "^4.4.8"
+    "vite": "^4.4.8",
+    "@rollup/plugin-dynamic-import-vars": "^2.1.0"
   },
   "scripts": {
     "dev": "vite",
@@ -35,7 +36,6 @@
     "dev:remote": "REACT_APP_DEV_REMOTE=remote npm run dev"
   },
   "devDependencies": {
-    "@rollup/plugin-dynamic-import-vars": "^2.1.0",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "eslint": "^8.46.0",

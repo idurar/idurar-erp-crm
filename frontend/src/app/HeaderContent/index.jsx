@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Avatar, Dropdown, Layout } from 'antd';
@@ -11,7 +10,7 @@ import { checkImage } from '@/request';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { translateAction } from '@/redux/translate/actions';
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
 import { BASE_URL } from '@/config/serverApiConfig';
 
@@ -31,8 +30,9 @@ export default function HeaderContent() {
     : null;
 
   const ProfileDropdown = () => {
+    const navigate = useNavigate();
     return (
-      <div className="profileDropdown" onClick={() => history.push('/profile')}>
+      <div className="profileDropdown" onClick={() => navigate('/profile')}>
         <Avatar
           size="large"
           className="last"

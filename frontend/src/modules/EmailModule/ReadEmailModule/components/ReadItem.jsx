@@ -12,7 +12,7 @@ import uniqueId from '@/utils/uinqueId';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useLanguage from '@/lang/useLanguage';
 
 const { Title, Paragraph } = Typography;
@@ -22,7 +22,7 @@ export default function ReadItem({ config, selectedItem }) {
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
@@ -61,7 +61,7 @@ export default function ReadItem({ config, selectedItem }) {
             key={`${uniqueId()}`}
             onClick={() => {
               readPanel.close();
-              history.push(`/${entity.toLowerCase()}`);
+              navigate(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
           >
@@ -78,7 +78,7 @@ export default function ReadItem({ config, selectedItem }) {
                 })
               );
               updatePanel.open();
-              history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
+              navigate(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"
             icon={<EditOutlined />}

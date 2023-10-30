@@ -11,7 +11,7 @@ import { selectReadItem } from '@/redux/erp/selectors';
 
 export default function UpdatePaymentModule({ config }) {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   let item = useSelector(selectItemById(id));

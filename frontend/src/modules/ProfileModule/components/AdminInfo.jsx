@@ -5,7 +5,7 @@ import { Avatar, Button, Col, Descriptions, Divider, Row, Space, Tag } from 'ant
 import { PageHeader } from '@ant-design/pro-layout';
 import { useSelector } from 'react-redux';
 
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
@@ -16,6 +16,7 @@ import { checkImage } from '@/request';
 
 const AdminInfo = ({ config }) => {
   const translate = useLanguage();
+  const navigate = useNavigate();
   const { profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { ENTITY_NAME } = config;
@@ -121,7 +122,7 @@ const AdminInfo = ({ config }) => {
         key={`${uniqueId()}`}
         icon={<LogoutOutlined />}
         className="right"
-        onClick={() => history.push('/logout')}
+        onClick={() => navigate('/logout')}
       >
         {translate('Logout')}
       </Button>

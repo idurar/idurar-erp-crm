@@ -8,7 +8,7 @@ import { EllipsisOutlined, EyeOutlined, EditOutlined, FilePdfOutlined } from '@a
 import { useDispatch, useSelector } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/lang/useLanguage';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
@@ -34,16 +34,16 @@ export default function RecentTable({ ...props }) {
     },
   ];
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleRead = (record) => {
     dispatch(erp.currentItem({ data: record }));
-    history.push(`/${entity}/read/${record._id}`);
+    navigate(`/${entity}/read/${record._id}`);
   };
   const handleEdit = (record) => {
     dispatch(erp.currentAction({ actionType: 'update', data: record }));
-    history.push(`/${entity}/update/${record._id}`);
+    navigate(`/${entity}/update/${record._id}`);
   };
   const handleDownload = (record) => {
     window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');

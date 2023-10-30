@@ -17,7 +17,7 @@ export default function UpdateOfferModule({ config }) {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));

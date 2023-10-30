@@ -1,11 +1,11 @@
 import { Result, Button } from 'antd';
 import useLanguage from '@/lang/useLanguage';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotFound({ entity }) {
   const translate = useLanguage();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <Result
@@ -16,7 +16,7 @@ export default function NotFound({ entity }) {
         <Button
           type="primary"
           onClick={() => {
-            history.push(`/${entity?.toLowerCase()}`);
+            navigate(`/${entity?.toLowerCase()}`);
           }}
         >
           {translate('Back')}
