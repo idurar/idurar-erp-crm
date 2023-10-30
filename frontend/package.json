@@ -33,7 +33,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "dev:remote": "REACT_APP_DEV_REMOTE=remote npm run dev"
+    "dev:remote": "cross-env VITE_DEV_REMOTE=remote npm run dev"
   },
   "devDependencies": {
     "@types/react": "^18.2.18",
