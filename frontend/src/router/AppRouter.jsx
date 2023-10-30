@@ -45,7 +45,7 @@ export default function AppRouter() {
                 path={routeItem.path}
                 exact={routeItem.exact || true}
                 component={lazy(() =>
-                  import(/* webpackChunkName: "[request]" */ `@/pages/${routeItem.component}`)
+                  import(/* webpackChunkName: "[request]" */ `../pages/${routeItem.component}`)
                 )}
               />
             );

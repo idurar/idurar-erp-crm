@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import App from './app';
 import './style/app.css';
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
 
 import { Router as RouterHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -12,18 +11,15 @@ import store from '@/redux/store';
 
 import { AppContextProvider } from '@/context/appContext';
 
-ReactDOM.render(
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(
   <RouterHistory history={history}>
     <Provider store={store}>
       <AppContextProvider>
         <App />
       </AppContextProvider>
     </Provider>
-  </RouterHistory>,
-  document.getElementById('root')
+  </RouterHistory>
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

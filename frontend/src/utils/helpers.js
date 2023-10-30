@@ -1,8 +1,8 @@
-import { parse } from 'querystring';
+// import { parse } from 'querystring';
 import dayjs from 'dayjs';
-function getPageQuery() {
-  parse(window.location.href.split('?')[1]);
-}
+// function getPageQuery() {
+//   parse(window.location.href.split('?')[1]);
+// }
 
 /* 
  To get nested object properties.
@@ -161,4 +161,4 @@ export function bindValue(obj, parentElement) {
   });
 }
 
-export default getPageQuery;
+// export default getPageQuery;

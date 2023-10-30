@@ -29,7 +29,7 @@ export default function CustomerPreviewCard({
                 justifyContent: 'center',
               }}
             >
-              <Progress type="dashboard" percent={newCustomer} width={148} />
+              <Progress type="dashboard" percent={newCustomer} size={148} />
               <p>{translate('New Customer this Month')}</p>
               <Divider />
               <Statistic
