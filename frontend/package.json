@@ -5,15 +5,12 @@
     "npm": "8.5.5"
   },
   "dependencies": {
-    "@ant-design/compatible": "^5.1.2",
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-layout": "^7.17.12",
     "antd": "^5.10.2",
     "axios": "0.27.2",
     "cross-env": "7.0.3",
     "currency.js": "2.0.4",
-    "dayjs": "1.10.4",
-    "framer-motion": "4.1.13",
     "history": "4.10.1",
     "http-proxy-middleware": "^2.0.6",
     "just-compare": "^2.3.0",
@@ -36,6 +33,7 @@
     "dev:remote": "REACT_APP_DEV_REMOTE=remote npm run dev"
   },
   "devDependencies": {
+    "@rollup/plugin-dynamic-import-vars": "^2.1.0",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.4",
@@ -44,6 +42,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "prettier": "2.5.1",
-    "vite": "^4.4.8"
+    "vite": "^4.5.0"
   }
 }
