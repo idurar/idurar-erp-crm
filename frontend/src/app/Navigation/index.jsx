@@ -12,9 +12,6 @@ import history from '@/utils/history';
 import {
   SettingOutlined,
   CustomerServiceOutlined,
-  ShopOutlined,
-  ShoppingCartOutlined,
-  InboxOutlined,
   FileTextOutlined,
   FileSyncOutlined,
   DashboardOutlined,

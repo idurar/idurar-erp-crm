@@ -1,6 +1,6 @@
 // }
 
-import React, { useLayoutEffect, lazy, Suspense } from 'react';
+import { useLayoutEffect, lazy, Suspense } from 'react';
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from './PrivateRoute';

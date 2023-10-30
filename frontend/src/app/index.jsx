@@ -5,13 +5,11 @@ import zhCN from 'antd/es/locale/zh_CN';
 import frFR from 'antd/es/locale/fr_FR';
 import arEG from 'antd/es/locale/ar_EG';
 
-import useNetwork from '@/hooks/useNetwork';
-
 import { Layout, ConfigProvider } from 'antd';
 
 import Navigation from '@/app/Navigation';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
 import { selectLangCode } from '@/redux/translate/selectors';
 
@@ -32,14 +30,14 @@ function App() {
   //     description: "Cannot connect to the server, Check your internet network",
   //   });
   // }
-  const { Header, Content, Footer, Sider } = Layout;
+  const { Content } = Layout;
   const { isLoggedIn } = useSelector(selectAuth);
   const langCode = useSelector(selectLangCode);
 
   const [locale, setLocal] = useState(enUS);
   const [direction, setDirection] = useState('ltr');
 
-  const { state: stateApp, appContextAction } = useAppContext();
+  const { state: stateApp } = useAppContext();
   const { isNavMenuClose } = stateApp;
 
   useEffect(() => {
