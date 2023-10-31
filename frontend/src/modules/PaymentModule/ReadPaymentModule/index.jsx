@@ -4,13 +4,13 @@ import ReadItem from './components/ReadItem';
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
 import { selectItemById, selectCurrentItem } from '@/redux/erp/selectors';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function ReadPaymentModule({ config }) {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const { id } = useParams();
   let item = useSelector(selectItemById(id));
 
@@ -20,7 +20,6 @@ export default function ReadPaymentModule({ config }) {
     } else {
       dispatch(erp.read({ entity: config.entity, id }));
     }
-    console.log('useEffect item');
   }, [item]);
 
   const { result: currentResult } = useSelector(selectCurrentItem);

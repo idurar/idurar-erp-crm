@@ -8,18 +8,12 @@ const mongoose = require('mongoose');
 
 const Admin = mongoose.model('Admin');
 
-require('dotenv').config({ path: '.variables.env' });
-
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log('🚀 ~ file: app.js:33 ~  req.origin :', req.get('origin'));
-
     // URL address
     const address = req.get('origin');
-    console.log('🚀 ~ file: login.js:21 ~ login ~ address:', address);
-    console.log('🚀 ~ file: login.js:21 ~ login ~ req.hostname:', req.hostname);
 
     // Call parse() method using url module
     let urlObject = url.parse(address, true);
@@ -32,9 +26,6 @@ const login = async (req, res) => {
       isLocalhost = true;
     }
 
-    console.log('🚀 ~ file: login.js:22 ~ login ~ orginalHostname:', orginalHostname);
-
-    console.log('🚀 ~ file: login.js:20 ~ login ~ isLocalhost:', isLocalhost);
     // validate
     const objectSchema = Joi.object({
       email: Joi.string()
@@ -89,9 +80,9 @@ const login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
-        sameSite: process.env.NODE_ENV === 'production' && isLocalhost ? 'none' : 'Lax',
-        httpOnly: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
-        secure: process.env.NODE_ENV === 'production' && isLocalhost ? true : !isLocalhost,
+        sameSite: process.env.NODE_ENV === 'production' ? 'Lax' : 'none',
+        httpOnly: process.env.NODE_ENV === 'production' ? true : false,
+        secure: true,
         domain: req.hostname,
         Path: '/',
       })

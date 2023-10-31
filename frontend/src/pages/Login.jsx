@@ -1,14 +1,18 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import { Form, Button, Layout, Col, Divider } from 'antd';
-import { Typography } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import useLanguage from '@/locale/useLanguage';
+
+import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 
 import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
+import SelectLanguage from '@/components/SelectLanguage';
 
 import logo from '@/style/images/logo.png';
 
@@ -16,18 +20,31 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const LoginPage = () => {
-  const { isLoading } = useSelector(selectAuth);
+  const translate = useLanguage();
+  const { isLoading, isSuccess } = useSelector(selectAuth);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
     dispatch(login({ loginData: values }));
   };
+
+  useEffect(() => {
+    if (isSuccess) navigate('/');
+  }, [isSuccess]);
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>
         <Content
           style={{
-            padding: '200px 30px 30px',
+            padding: '10px 20px',
+          }}
+        >
+          <SelectLanguage />
+        </Content>
+        <Content
+          style={{
+            padding: '140px 30px 30px',
             maxWidth: '440px',
             margin: '0 auto',
           }}
@@ -43,11 +60,12 @@ const LoginPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign in</Title>
+          <Title level={1}>{translate('Sign in')}</Title>
 
           <Divider />
           <div className="site-layout-content">
             <Form
+              layout="vertical"
               name="normal_login"
               className="login-form"
               initialValues={{
@@ -64,9 +82,9 @@ const LoginPage = () => {
                   loading={isLoading}
                   size="large"
                 >
-                  Log in
+                  {translate('Log in')}
                 </Button>
-                Or <a href="/register">register now!</a>
+                {/* {translate('Or')} <a href="/register">{translate('register now!')}</a> */}
               </Form.Item>
             </Form>
           </div>

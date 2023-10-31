@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
 
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
@@ -12,6 +12,7 @@ import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
+import useLanguage from '@/locale/useLanguage';
 
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
@@ -27,6 +28,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
 }
 
 function LoadInvoiceForm({ subTotal = 0, current = null }) {
+  const translate = useLanguage();
   const { last_invoice_number } = useSelector(selectFinanceSettings);
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
@@ -63,11 +65,10 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         <Col className="gutter-row" span={9}>
           <Form.Item
             name="client"
-            label="Client"
+            label={translate('Client')}
             rules={[
               {
                 required: true,
-                message: 'Please input your client!',
               },
             ]}
           >
@@ -81,13 +82,12 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="Number"
+            label={translate('number')}
             name="number"
             initialValue={lastNumber}
             rules={[
               {
                 required: true,
-                message: 'Please input invoice number!',
               },
             ]}
           >
@@ -96,13 +96,12 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="year"
+            label={translate('year')}
             name="year"
             initialValue={currentYear}
             rules={[
               {
                 required: true,
-                message: 'Please input invoice year!',
               },
             ]}
           >
@@ -111,34 +110,33 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="status"
+            label={translate('status')}
             name="status"
             rules={[
               {
                 required: false,
-                message: 'Please input invoice status!',
               },
             ]}
             initialValue={'draft'}
           >
             <Select
               options={[
-                { value: 'draft', label: 'Draft' },
-                { value: 'pending', label: 'Pending' },
-                { value: 'sent', label: 'Sent' },
+                { value: 'draft', label: translate('Draft') },
+                { value: 'pending', label: translate('Pending') },
+                { value: 'sent', label: translate('Pending') },
               ]}
             ></Select>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>
-          <Form.Item label="Note" name="note">
+          <Form.Item label={translate('Note')} name="note">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
           <Form.Item
             name="date"
-            label="Date"
+            label={translate('Date')}
             rules={[
               {
                 required: true,
@@ -153,7 +151,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         <Col className="gutter-row" span={7}>
           <Form.Item
             name="expiredDate"
-            label="Expire Date"
+            label={translate('Expire Date')}
             rules={[
               {
                 required: true,
@@ -169,19 +167,19 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
       <Divider dashed />
       <Row gutter={[12, 12]} style={{ position: 'relative' }}>
         <Col className="gutter-row" span={5}>
-          <p>Item</p>
+          <p>{translate('Item')}</p>
         </Col>
         <Col className="gutter-row" span={7}>
-          <p>Description</p>
+          <p>{translate('Description')}</p>
         </Col>
         <Col className="gutter-row" span={3}>
-          <p>Quantity</p>
+          <p>{translate('Quantity')}</p>{' '}
         </Col>
         <Col className="gutter-row" span={4}>
-          <p>Price</p>
+          <p>{translate('Price')}</p>
         </Col>
         <Col className="gutter-row" span={5}>
-          <p>Total</p>
+          <p>{translate('Total')}</p>
         </Col>
       </Row>
       <Form.List name="items">
@@ -198,7 +196,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 icon={<PlusOutlined />}
                 ref={addField}
               >
-                Add field
+                {translate('Add field')}
               </Button>
             </Form.Item>
           </>
@@ -210,7 +208,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Invoice
+                {translate('Save')}
               </Button>
             </Form.Item>
           </Col>
@@ -221,7 +219,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 paddingTop: '5px',
               }}
             >
-              Sub Total :
+              {translate('Sub Total')} :
             </p>
           </Col>
           <Col className="gutter-row" span={5}>
@@ -235,7 +233,6 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               rules={[
                 {
                   required: false,
-                  message: 'Please input your taxRate!',
                 },
               ]}
               initialValue="0"
@@ -245,8 +242,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 onChange={handelTaxChange}
                 bordered={false}
                 options={[
-                  { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
+                  { value: 0, label: `${translate('Tax')} 0 %` },
+                  { value: 0.19, label: `${translate('Tax')} 19 %` },
                 ]}
               ></Select>
             </Form.Item>
@@ -263,7 +260,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 paddingTop: '5px',
               }}
             >
-              Total :
+              {translate('Total')} :
             </p>
           </Col>
           <Col className="gutter-row" span={5}>

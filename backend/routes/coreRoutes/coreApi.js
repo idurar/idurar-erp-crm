@@ -1,7 +1,5 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const setFilePathToBody = require('@/middlewares/setFilePathToBody');
+
 const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
@@ -15,27 +13,19 @@ const {
   createMultipleUpload,
   uploadSingleToStorage,
   createSingleUpload,
+  singleStorageUpload,
+  setFilePathToBody,
 } = require('@/middlewares/uploadMiddleware');
 
 const { hasPermission } = require('@/middlewares/permission');
 // //_______________________________ Admin management_______________________________
 
-var adminPhotoStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/admin');
-  },
-  filename: function (req, file, cb) {
-    console.log('🚀 ~ file: coreApi.js:28 ~ file:', file.originalname);
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-const adminPhotoUpload = multer({ storage: adminPhotoStorage });
-
 router
   .route('/admin/create')
   .post(
     hasPermission(),
-    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
+    singleStorageUpload({ entity: 'admin', fieldName: 'file' }),
+    setFilePathToBody('photo'),
     catchErrors(adminController.create)
   );
 router.route('/admin/read/:id').get(hasPermission('read'), catchErrors(adminController.read));
@@ -43,7 +33,8 @@ router
   .route('/admin/update/:id')
   .patch(
     hasPermission(),
-    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
+    singleStorageUpload({ entity: 'admin', fieldName: 'file' }),
+    setFilePathToBody('photo'),
     catchErrors(adminController.update)
   );
 router.route('/admin/delete/:id').delete(hasPermission(), catchErrors(adminController.delete));
@@ -55,7 +46,8 @@ router
   .route('/admin/photo')
   .post(
     hasPermission(),
-    [adminPhotoUpload.single('photo'), setFilePathToBody('photo')],
+    singleStorageUpload({ entity: 'admin', fieldName: 'file' }),
+    setFilePathToBody('photo'),
     catchErrors(adminController.photo)
   );
 router
@@ -66,8 +58,7 @@ router
   .route('/profile/update/:id')
   .patch(
     hasPermission(),
-    adminPhotoUpload.single('file'),
-    setFilePathToBody('photo'),
+    catchErrors(singleStorageUpload({ entity: 'admin', fieldName: 'photo', fileType: 'image' })),
     catchErrors(adminController.updateProfile)
   );
 
@@ -95,6 +86,15 @@ router
   .route('/setting/updateBySettingKey/:settingKey?')
   .patch(hasPermission('update'), catchErrors(settingController.updateBySettingKey));
 router
+  .route('/setting/upload/:settingKey?')
+  .patch(
+    hasPermission('update'),
+    catchErrors(
+      singleStorageUpload({ entity: 'setting', fieldName: 'settingValue', fileType: 'image' })
+    ),
+    catchErrors(settingController.updateBySettingKey)
+  );
+router
   .route('/setting/updateManySetting')
   .patch(hasPermission('read'), catchErrors(settingController.updateManySetting));
 
@@ -111,7 +111,7 @@ router.route('/email/filter').get(hasPermission('read'), catchErrors(emailContro
 
 // //____________________________________________ API for Upload controller _________________
 
-router.route('/multiple/upload/:model/:fieldId').post(
+router.route('/upload/multiple/:model/:fieldId').post(
   hasPermission('upload'),
   uploadMultipleToStorage.array('upload', 100),
   createMultipleUpload,
@@ -128,7 +128,7 @@ router.route('/multiple/upload/:model/:fieldId').post(
   })
 );
 
-router.route('/single/upload/:model/:fieldId').post(
+router.route('upload/single/:model/:fieldId').post(
   hasPermission('upload'),
   uploadSingleToStorage.single('upload'),
   createSingleUpload,

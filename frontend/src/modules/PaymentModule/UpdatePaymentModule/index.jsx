@@ -5,13 +5,13 @@ import { erp } from '@/redux/erp/actions';
 import { selectItemById } from '@/redux/erp/selectors';
 import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Payment from './components/Payment';
 import { selectReadItem } from '@/redux/erp/selectors';
 
 export default function UpdatePaymentModule({ config }) {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   let item = useSelector(selectItemById(id));

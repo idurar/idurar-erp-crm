@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Form, Input, Tag, Select, InputNumber } from 'antd';
-import dayjs from 'dayjs';
+import { Form, Input, Select, InputNumber } from 'antd';
+
+import useLanguage from '@/locale/useLanguage';
 
 export default function OrderForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {
       return Promise.reject(new Error('Field cannot be empty'));
@@ -14,16 +16,14 @@ export default function OrderForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label="Order ID"
+        label={translate('Order ID')}
         name="orderId"
         rules={[
           {
             required: true,
-            message: 'Please input the order ID!',
           },
           {
             validator: validateEmptyString,
-            message: 'Please input valid value!',
           },
         ]}
       >
@@ -31,16 +31,14 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Products"
+        label={translate('Products')}
         name="products"
         rules={[
           {
             required: true,
-            message: 'Please input the products!',
           },
           {
             validator: validateEmptyString,
-            message: 'Please input valid value!',
           },
         ]}
       >
@@ -48,12 +46,11 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Quantity"
+        label={translate('Quantity')}
         name="quantity"
         rules={[
           {
             required: true,
-            message: 'Please input the quantity!',
           },
         ]}
       >
@@ -61,12 +58,11 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Price"
+        label={translate('Price')}
         name="price"
         rules={[
           {
             required: true,
-            message: 'Please input the price!',
           },
         ]}
       >
@@ -74,30 +70,28 @@ export default function OrderForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Status"
+        label={translate('status')}
         name="status"
         rules={[
           {
             required: true,
-            message: 'Please select the status!',
           },
         ]}
       >
         <Select>
-          <Select.Option value="pending">Pending</Select.Option>
-          <Select.Option value="shipped">Shipped</Select.Option>
-          <Select.Option value="delivered">Delivered</Select.Option>
-          <Select.Option value="cancelled">Cancelled</Select.Option>
+          <Select.Option value="pending">{translate('Pending')}</Select.Option>
+          <Select.Option value="shipped">{translate('Shipped')}</Select.Option>
+          <Select.Option value="delivered">{translate('Delivered')}</Select.Option>
+          <Select.Option value="cancelled">{translate('Cancelled')}</Select.Option>
         </Select>
       </Form.Item>
 
       <Form.Item
-        label="Notes"
+        label={translate('Note')}
         name="notes"
         rules={[
           {
             validator: validateEmptyString,
-            message: 'Please input valid value!',
           },
         ]}
       >

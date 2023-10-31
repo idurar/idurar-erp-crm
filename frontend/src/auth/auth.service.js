@@ -38,7 +38,9 @@ export const login = async ({ loginData }) => {
 export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {
-    window.localStorage.clear();
+    // window.localStorage.clear();
+    // window.localStorage.removeItem('isLoggedIn');
+    // window.localStorage.removeItem('auth');
     await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
   } catch (error) {
     return errorHandler(error);

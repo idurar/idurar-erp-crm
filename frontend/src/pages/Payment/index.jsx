@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 
 export default function Payment() {
+  const translate = useLanguage();
   const searchConfig = {
     displayLabels: ['number'],
     searchFields: 'number',
@@ -12,39 +13,54 @@ export default function Payment() {
   const entityDisplayLabels = ['number'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
 
       dataIndex: 'number',
     },
     {
-      title: 'Client',
+      title: translate('Client'),
       dataIndex: ['client', 'company'],
     },
     {
-      title: 'Amount',
+      title: translate('Amount'),
       dataIndex: 'amount',
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Invoice Number',
+      title: translate('Number'),
       dataIndex: ['invoice', 'number'],
     },
     {
-      title: 'Invoice year',
+      title: translate('year'),
       dataIndex: ['invoice', 'year'],
     },
     {
-      title: 'Payment Mode',
+      title: translate('Payment Mode'),
       dataIndex: ['paymentMode', 'name'],
     },
   ];
 
+  const entity = 'payment';
+
+  const Labels = {
+    PANEL_TITLE: translate('payment'),
+    DATATABLE_TITLE: translate('payment_list'),
+    ADD_NEW_ENTITY: translate('add_new_payment'),
+    ENTITY_NAME: translate('payment'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     dataTableColumns,

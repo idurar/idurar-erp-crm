@@ -43,7 +43,7 @@ exports.developmentErrors = (error, req, res, next) => {
 
   res.status(500).json({
     success: false,
-    message: 'Oops ! Error in Server',
+    message: error.message,
     error: error,
   });
 };
@@ -56,7 +56,7 @@ exports.developmentErrors = (error, req, res, next) => {
 exports.productionErrors = (error, req, res, next) => {
   res.status(500).json({
     success: false,
-    message: 'Oops ! Error in Server',
+    message: error.message,
     error: error,
   });
 };

@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import { Form, Input, Select, Tag } from 'antd';
 
 import { languages, tagColor } from '@/utils';
+import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingForm() {
+  const translate = useLanguage();
   const tagRender = (props) => {
     const { label, value, closable, onClose } = props;
     const onPreventMouseDown = (event) => {
@@ -27,30 +28,28 @@ export default function GeneralSettingForm() {
   return (
     <>
       <Form.Item
-        label="App Name"
+        label={translate('App Name')}
         name="app_name"
         rules={[
           {
             required: true,
-            message: 'Please input your App Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="language"
+        label={translate('language')}
         name="language"
         rules={[
           {
             required: true,
-            message: 'This Field is required',
           },
         ]}
       >
         <Select
           showSearch
-          placeholder="Select a person"
+          placeholder={translate('select language')}
           optionFilterProp="children"
           filterOption={(input, option) => (option?.label ?? '').includes(input)}
           filterSort={(optionA, optionB) =>
@@ -74,12 +73,11 @@ export default function GeneralSettingForm() {
         </Select>
       </Form.Item>
       <Form.Item
-        label="Allowed Role"
+        label={translate('Allowed Role')}
         name="allowed_role"
         rules={[
           {
             required: true,
-            message: 'This Field is required',
           },
         ]}
       >

@@ -3,9 +3,10 @@ import { Tag } from 'antd';
 
 import OfferDataTableModule from '@/modules/OfferModule/OfferDataTableModule';
 import { useMoney } from '@/settings';
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Offer() {
+  const translate = useLanguage();
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -15,37 +16,35 @@ export default function Offer() {
   const entityDisplayLabels = ['number', 'lead.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
-      title: 'Company Name',
+      title: translate('Company'),
       dataIndex: ['lead', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
-      render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
-      },
+      render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
     {
-      title: 'SubTotal',
+      title: translate('Sub Total'),
       dataIndex: 'subTotal',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {
-      title: 'Note',
+      title: translate('Note'),
       dataIndex: 'note',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =
@@ -58,11 +57,25 @@ export default function Offer() {
             : status === 'expired'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
   ];
 
+  const entity = 'offer';
+  const Labels = {
+    PANEL_TITLE: translate('offer'),
+    DATATABLE_TITLE: translate('offer_list'),
+    ADD_NEW_ENTITY: translate('add_new_offer'),
+    ENTITY_NAME: translate('offer'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     dataTableColumns,

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Divider } from 'antd';
+import { useState, useEffect } from 'react';
 
-import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
+import { Button, Row, Col, Descriptions, Statistic, Tag, Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import {
   EditOutlined,
   FilePdfOutlined,
@@ -11,16 +11,17 @@ import {
 } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
+import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -66,12 +67,13 @@ const Item = ({ item }) => {
 };
 
 export default function ReadOfferItem({ config, selectedItem }) {
+  const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
 
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
@@ -121,7 +123,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
@@ -131,11 +133,11 @@ export default function ReadOfferItem({ config, selectedItem }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              history.push(`/${entity.toLowerCase()}`);
+              navigate(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
           >
-            Close
+            {translate('Close')}
           </Button>,
           <Button
             key={`${uniqueId()}`}
@@ -147,7 +149,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             }}
             icon={<FilePdfOutlined />}
           >
-            Download PDF
+            {translate('Download PDF')}
           </Button>,
           <Button
             key={`${uniqueId()}`}
@@ -156,7 +158,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             }}
             icon={<MailOutlined />}
           >
-            Mail {entity.slice(0, 1).toUpperCase() + entity.slice(1).toLowerCase()}
+            {translate('Send by email')}
           </Button>,
           <Button
             key={`${uniqueId()}`}
@@ -166,7 +168,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             icon={<RetweetOutlined />}
             style={{ display: entity === 'quote' ? 'inline-block' : 'none' }}
           >
-            Convert to Invoice
+            {translate('Convert to Invoice')}
           </Button>,
 
           <Button
@@ -178,12 +180,12 @@ export default function ReadOfferItem({ config, selectedItem }) {
                   data: currentErp,
                 })
               );
-              history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
+              navigate(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"
             icon={<EditOutlined />}
           >
-            Edit Erp
+            {translate('Edit')}
           </Button>,
         ]}
         style={{
@@ -193,21 +195,21 @@ export default function ReadOfferItem({ config, selectedItem }) {
         <Row>
           <Statistic title="Status" value={currentErp.status} />
           <Statistic
-            title="SubTotal"
+            title={translate('SubTotal')}
             value={moneyFormatter({ amount: currentErp.subTotal })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
-            title="Total"
+            title={translate('Total')}
             value={moneyFormatter({ amount: currentErp.total })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
-            title="Balance"
+            title={translate('Balance')}
             value={moneyFormatter({ amount: currentErp.credit })}
             style={{
               margin: '0 32px',
@@ -217,15 +219,17 @@ export default function ReadOfferItem({ config, selectedItem }) {
       </PageHeader>
       <Divider dashed />
       <Descriptions title={`lead : ${currentErp.lead.company}`}>
-        <Descriptions.Item label="Address">{currentErp.lead.address}</Descriptions.Item>
-        <Descriptions.Item label="E-mail">{currentErp.lead.email}</Descriptions.Item>
-        <Descriptions.Item label="Phone">{currentErp.lead.phone}</Descriptions.Item>
+        <Descriptions.Item label={translate('Address')}>
+          {currentErp.lead.address}
+        </Descriptions.Item>
+        <Descriptions.Item label={translate('email')}>{currentErp.lead.email}</Descriptions.Item>
+        <Descriptions.Item label={translate('Phone')}>{currentErp.lead.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>
         <Col className="gutter-row" span={11}>
           <p>
-            <strong>ITEM</strong>
+            <strong>{translate('product')}</strong>
           </p>
         </Col>
         <Col className="gutter-row" span={4}>
@@ -234,7 +238,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
               textAlign: 'right',
             }}
           >
-            <strong>PRICE</strong>
+            <strong>{translate('PRICE')}</strong>
           </p>
         </Col>
         <Col className="gutter-row" span={4}>
@@ -243,7 +247,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
               textAlign: 'right',
             }}
           >
-            <strong>QUANTITY</strong>
+            <strong>{translate('QUANTITY')}</strong>
           </p>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -252,7 +256,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
               textAlign: 'right',
             }}
           >
-            <strong>TOTAL</strong>
+            <strong>{translate('TOTAL')}</strong>
           </p>
         </Col>
         <Divider />
@@ -270,7 +274,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
       >
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={12}>
-            <p>Sub Total :</p>
+            <p>{translate('Sub Total')} : </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
@@ -283,7 +287,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             <p>{moneyFormatter({ amount: currentErp.taxTotal })}</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>Total :</p>
+            <p>{translate('Total')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>{moneyFormatter({ amount: currentErp.total })}</p>

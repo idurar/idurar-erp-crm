@@ -36,6 +36,35 @@
   },
   {
     "settingCategory": "finance_settings",
+    "settingKey": "invoice_prefix",
+    "settingValue": "inv-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "quote_prefix",
+    "settingValue": "qt-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "offer_prefix",
+    "settingValue": "ofr-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "payment_prefix",
+    "settingValue": "pm-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+
+  {
+    "settingCategory": "finance_settings",
     "settingKey": "current_invoice_year",
     "settingValue": 2023,
     "valueType": "number",

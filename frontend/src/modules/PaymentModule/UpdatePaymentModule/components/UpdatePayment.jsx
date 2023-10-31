@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Divider, Button, PageHeader, Tag } from 'antd';
+import { useState, useEffect } from 'react';
+import { Form, Button } from 'antd';
 import dayjs from 'dayjs';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 
-import { useErpContext } from '@/context/erp';
+import useLanguage from '@/locale/useLanguage';
 
 import Loading from '@/components/Loading';
 
 import calculate from '@/utils/calculate';
-import PaymentForm from '../../Forms/PaymentForm';
+import PaymentForm from '@/forms/PaymentForm';
 export default function UpdatePayment({ config, currentInvoice }) {
+  const translate = useLanguage();
   let { entity } = config;
   const dispatch = useDispatch();
 
@@ -70,7 +71,7 @@ export default function UpdatePayment({ config, currentInvoice }) {
           <PaymentForm maxAmount={maxAmount} />
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Update Payment
+              {translate('Update')}
             </Button>
           </Form.Item>
         </Form>

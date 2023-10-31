@@ -6,7 +6,7 @@ const offerSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
   number: {
     type: Number,
     required: true,

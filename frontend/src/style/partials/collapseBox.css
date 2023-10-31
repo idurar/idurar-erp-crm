@@ -1,0 +1,56 @@
+.panelBox,
+.panelBox * {
+  transition: all 0.3s ease;
+}
+.collapseBoxHeader {
+  /* width: 100%; */
+  padding: 17px 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #f9fafc;
+  border-top: 1px solid #edf0f5;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.box {
+  width: 100%;
+  padding: 20px;
+}
+.BottomCollapseBox {
+  /* padding: 20px; */
+  opacity: 1;
+}
+.TopCollapseBox {
+  min-height: 450px;
+  opacity: 1;
+}
+.collapseBox {
+  margin-top: -400px;
+  position: relative;
+
+  background: #fff;
+  z-index: 1;
+}
+.collapsed {
+  overflow: hidden;
+  height: 250px;
+  margin-top: 0 !important;
+}
+
+.collapseBox .whiteBg {
+  display: none;
+  background-color: hsla(0, 0%, 100%, 0);
+}
+
+.collapsed .whiteBg {
+  position: absolute;
+  top: 58px;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background-color: hsla(0, 0%, 100%, 0.8);
+  z-index: 9;
+}

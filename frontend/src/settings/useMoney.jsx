@@ -1,4 +1,3 @@
-import React from 'react';
 import currency from 'currency.js';
 
 import { useSelector } from 'react-redux';

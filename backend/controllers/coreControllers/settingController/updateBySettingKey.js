@@ -5,10 +5,6 @@ const Model = mongoose.model('Setting');
 const updateBySettingKey = async (req, res) => {
   try {
     const settingKey = req.params.settingKey || undefined;
-    console.log(
-      '🚀 ~ file: updateBySettingKey.js:8 ~ updateBySettingKey ~ settingKey:',
-      settingKey
-    );
 
     if (!settingKey) {
       return res.status(202).json({

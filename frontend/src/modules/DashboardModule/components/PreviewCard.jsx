@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
+import useLanguage from '@/locale/useLanguage';
 
 const colours = {
   draft: '#595959',
@@ -71,9 +72,10 @@ const defaultInvoiceStatistics = [
 ];
 
 const PreviewState = ({ tag, color, value }) => {
+  const translate = useLanguage();
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
-      <div className="left alignLeft capitalize">{tag}</div>
+      <div className="left alignLeft capitalize">{translate(tag)}</div>
       <div className="right alignRight">{value} %</div>
       <Progress
         percent={value}
@@ -125,11 +127,13 @@ export default function PreviewCard({
       md={{ span: 8 }}
       lg={{ span: 8 }}
     >
-      <div className="pad15">
+      <div className="pad20">
         <h3
           style={{
             color: '#22075e',
-            marginBottom: 15,
+            fontSize: 'large',
+            marginBottom: 40,
+            marginTop: 0,
           }}
         >
           {title}

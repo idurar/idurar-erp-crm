@@ -1,20 +1,22 @@
 import React from 'react';
-import { Form, Input, Checkbox, message } from 'antd';
+import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import useLanguage from '@/locale/useLanguage';
+
 export default function LoginForm() {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
+        label={translate('email')}
         name="email"
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
           },
           {
             type: 'email',
-            message: 'Invalid email!',
           },
         ]}
       >
@@ -27,11 +29,11 @@ export default function LoginForm() {
         />
       </Form.Item>
       <Form.Item
+        label={translate('password')}
         name="password"
         rules={[
           {
             required: true,
-            message: 'Please input your Password!',
           },
         ]}
       >
@@ -43,11 +45,11 @@ export default function LoginForm() {
       </Form.Item>
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox>{translate('Remember me')}</Checkbox>
         </Form.Item>
 
         <a className="login-form-forgot" href="">
-          Forgot password
+          {translate('Forgot password')}
         </a>
       </Form.Item>
     </>

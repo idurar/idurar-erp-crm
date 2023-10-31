@@ -1,27 +1,19 @@
-import React, { lazy, Suspense } from 'react';
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import PublicRoute from './PublicRoute';
-import PageLoader from '@/components/PageLoader';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
-const Login = lazy(() => import(/*webpackChunkName:'LoginPage'*/ '@/pages/Login'));
+import Login from '@/pages/Login';
 
-const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
+import NotFound from '@/pages/NotFound';
 
-const Register = lazy(() => import(/*webpackChunkName:'RegisterPage'*/ '@/pages/Register'));
+import Register from '@/pages/Register';
 
 export default function AuthRouter() {
   const location = useLocation();
   return (
-    <Suspense fallback={<PageLoader />}>
-      <AnimatePresence exitBeforeEnter initial={false}>
-        <Switch location={location} key={location.pathname}>
-          <PublicRoute path="/" component={Login} render={() => <Redirect to="/login" />} exact />
-          <PublicRoute component={Login} path="/login" exact />
-          <PublicRoute component={Register} path="/register" exact />
-          <Route path="*" component={NotFound} render={() => <Redirect to="/notfound" />} />
-        </Switch>
-      </AnimatePresence>
-    </Suspense>
+    <Routes location={location} key={location.pathname}>
+      <Route element={<Login />} path="/" />
+      <Route element={<Login />} path="/login" />
+      <Route element={<Register />} path="/register" />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }

@@ -2,6 +2,8 @@ import { Form, Input, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { message, Upload, Button } from 'antd';
 
+import useLanguage from '@/locale/useLanguage';
+
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
@@ -15,43 +17,40 @@ const beforeUpload = (file) => {
 };
 
 export default function AdminForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label="Name"
+        label={translate('first Name')}
         name="name"
         rules={[
           {
             required: true,
-            message: 'Please input your Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="Surname"
+        label={translate('last Name')}
         name="surname"
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="E-mail"
+        label={translate('email')}
         name="email"
         rules={[
           {
             required: true,
-            message: 'Please input your E-mail!',
           },
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
           },
         ]}
       >
@@ -60,12 +59,11 @@ export default function AdminForm({ isUpdateForm = false }) {
 
       {!isUpdateForm && (
         <Form.Item
-          label="Password"
+          label={translate('Password')}
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please input your Password!',
             },
           ]}
         >
@@ -73,12 +71,11 @@ export default function AdminForm({ isUpdateForm = false }) {
         </Form.Item>
       )}
       <Form.Item
-        label="Role"
+        label={translate('Role')}
         name="role"
         rules={[
           {
             required: true,
-            message: 'This Field is required',
           },
         ]}
       >
@@ -92,7 +89,7 @@ export default function AdminForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="file"
-        label="File"
+        label={translate('Photo')}
         valuePropName="fileList"
         getValueFromEvent={(e) => e.fileList}
       >

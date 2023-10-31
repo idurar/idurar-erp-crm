@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 import { selectCreatedItem } from '@/redux/crud/selectors';
+
+import useLanguage from '@/locale/useLanguage';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
@@ -15,6 +17,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
+  const translate = useLanguage();
   const onSubmit = (fieldsValue) => {
     // Manually trim values before submission
 
@@ -47,7 +50,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
         {formElements}
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            {translate('Submit')}
           </Button>
         </Form.Item>
       </Form>

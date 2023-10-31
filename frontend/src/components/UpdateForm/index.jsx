@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import dayjs from 'dayjs';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,14 +6,14 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 import { selectUpdatedItem } from '@/redux/crud/selectors';
 
-import { isDate } from '@/utils/helpers';
-import { selectCurrentItem } from '@/redux/crud/selectors';
+import useLanguage from '@/locale/useLanguage';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
 export default function UpdateForm({ config, formElements, withUpload = false }) {
   let { entity } = config;
+  const translate = useLanguage();
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
@@ -76,7 +76,6 @@ export default function UpdateForm({ config, formElements, withUpload = false })
         };
       }
 
-      console.log('🚀 ~ file: index.jsx ~ line 40 ~ useEffect ~ obj', newValues);
       form.setFieldsValue(newValues);
     }
   }, [current]);
@@ -107,7 +106,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
             }}
           >
             <Button type="primary" htmlType="submit">
-              Save
+              {translate('Save')}
             </Button>
           </Form.Item>
           <Form.Item
@@ -116,7 +115,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
               paddingLeft: '5px',
             }}
           >
-            <Button onClick={showCurrentRecord}>Cancel</Button>
+            <Button onClick={showCurrentRecord}>{translate('Cancel')}</Button>
           </Form.Item>
         </Form>
       </Loading>

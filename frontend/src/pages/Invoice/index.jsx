@@ -1,10 +1,13 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
+
 import { useMoney } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
 
 export default function Invoice() {
+  const translate = useLanguage();
+  const entity = 'invoice';
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -14,48 +17,48 @@ export default function Invoice() {
   const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
-      title: 'Client',
+      title: translate('Client'),
       dataIndex: ['client', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Due date',
+      title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
-      render: (total) => moneyRowFormatter({ amount: total }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
     {
-      title: 'Balance',
+      title: translate('credit'),
       dataIndex: 'credit',
-      render: (credit) => moneyRowFormatter({ amount: credit }),
+      onCell: (credit) => moneyRowFormatter({ amount: credit }),
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
 
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
     {
-      title: 'Payment',
+      title: translate('Payment'),
       dataIndex: 'paymentStatus',
       render: (paymentStatus) => {
         let color =
@@ -67,21 +70,40 @@ export default function Invoice() {
             ? 'red'
             : 'purple';
 
-        return <Tag color={color}>{paymentStatus && paymentStatus.toUpperCase()}</Tag>;
+        return <Tag color={color}>{paymentStatus && translate(paymentStatus)}</Tag>;
       },
     },
     {
-      title: 'Created By',
+      title: translate('Created By'),
       dataIndex: ['createdBy', 'name'],
-      render: (createdBy) => (createdBy ? createdBy : 'Adminstrator'),
+      // render: (name) => {
+      //   console.log('🚀 ~ file: index.jsx:81 ~ Invoice ~ name:', name);
+      //   let color = name !== '' ? 'blue' : 'gray';
+      //   return <Tag color={color}>{name ? name : 'Administrator'}</Tag>;
+      // },
     },
   ];
 
+  const Labels = {
+    PANEL_TITLE: translate('invoice'),
+    DATATABLE_TITLE: translate('invoice_list'),
+    ADD_NEW_ENTITY: translate('add_new_invoice'),
+    ENTITY_NAME: translate('invoice'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+    RECORD_ENTITY: translate('record_payment'),
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     dataTableColumns,
     searchConfig,
     entityDisplayLabels,
   };
+
   return <InvoiceDataTableModule config={config} />;
 }

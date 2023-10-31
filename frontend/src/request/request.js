@@ -190,6 +190,23 @@ const request = {
     }
   },
 
+  upload: async ({ entity, id, jsonData }) => {
+    try {
+      const response = await axios.patch(entity + '/upload/' + id, jsonData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+
   source: () => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();

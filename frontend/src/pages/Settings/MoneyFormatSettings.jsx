@@ -1,12 +1,26 @@
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 
 import MoneyFormatSettingsModule from '@/modules/SettingModule/MoneyFormatSettingsModule';
 
-const config = {
-  ...configPage,
-  settingsCategory: 'money_format_settings',
-  SETTINGS_TITLE: 'Money Format Settings',
-};
 export default function MoneyFormatSettings() {
-  return <MoneyFormatSettingsModule config={config} />;
+  const translate = useLanguage();
+
+  const entity = 'setting';
+
+  const Labels = {
+    PANEL_TITLE: translate('settings'),
+    DATATABLE_TITLE: translate('settings_list'),
+    ADD_NEW_ENTITY: translate('add_new_settings'),
+    ENTITY_NAME: translate('settings'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+    SETTINGS_TITLE: translate('Money Format Settings'),
+  };
+
+  const configPage = {
+    entity,
+    settingsCategory: 'money_format_settings',
+    ...Labels,
+  };
+  return <MoneyFormatSettingsModule config={configPage} />;
 }

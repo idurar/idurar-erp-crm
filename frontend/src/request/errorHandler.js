@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import history from '@/utils/history';
+
 import codeMessage from './codeMessage';
 
 const errorHandler = (error) => {
@@ -17,9 +17,9 @@ const errorHandler = (error) => {
       message: `Request error ${status}`,
       description: errorText,
     });
-    if (response.data && response.data.jwtExpired) {
-      history.push('/logout');
-    }
+    // if (response.data && response.data.jwtExpired) {
+    //   navigate('/logout');
+    // }
     return response.data;
   } else {
     notification.config({

@@ -1,16 +1,20 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Form, Input, InputNumber } from 'antd';
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 import SelectAsync from '@/components/SelectAsync';
 import { useMoney } from '@/settings';
+
+import useLanguage from '@/locale/useLanguage';
+
 export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) {
+  const translate = useLanguage();
   const { TextArea } = Input;
   const money = useMoney();
   return (
     <>
       <Form.Item
-        label="Number"
+        label={translate('number')}
         name="number"
         initialValue={1}
         rules={[
@@ -24,7 +28,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
       </Form.Item>
       <Form.Item
         name="date"
-        label="Date"
+        label={translate('date')}
         rules={[
           {
             required: true,
@@ -32,15 +36,11 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           },
         ]}
         initialValue={dayjs().add(30, 'days')}
-        style={{ width: '50%' }}
+        style={{ width: '100%' }}
       >
         <DatePicker format={'DD/MM/YYYY'} style={{ width: '100%' }} />
       </Form.Item>
-      <Form.Item
-        label="Amount"
-        name="amount"
-        rules={[{ required: true, message: 'Amount is required' }]}
-      >
+      <Form.Item label={translate('amount')} name="amount" rules={[{ required: true }]}>
         <InputNumber
           className="moneyInput"
           min={0}
@@ -51,7 +51,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
         />
       </Form.Item>
       <Form.Item
-        label="Payment Mode"
+        label={translate('payment Mode')}
         name="paymentMode"
         rules={[
           {
@@ -67,10 +67,10 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           redirectLabel="Add Payment Mode"
         ></SelectAsync>
       </Form.Item>
-      <Form.Item label="Reference" name="ref">
+      <Form.Item label={translate('Reference')} name="ref">
         <Input />
       </Form.Item>
-      <Form.Item label="Description" name="description">
+      <Form.Item label={translate('Description')} name="description">
         <TextArea />
       </Form.Item>
     </>

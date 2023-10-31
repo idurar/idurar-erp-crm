@@ -2,14 +2,14 @@
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
     </a>
-    <h1>Free Open Source ERP / CRM | Node.js React.js</h1>
+    <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
     <p align="center">
         <p>IDURAR ERP CRM | Simple To Use </p>
     </p>
     
   [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
 
@@ -27,11 +27,11 @@ IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on
 
 #
 
-![Open Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
+![Open "Fair-Code" Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
 
-## Open Source ERP / CRM App
+## Open "Fair-Code" Source ERP / CRM App
 
-IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 **Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
@@ -57,16 +57,15 @@ cd idurar-erp-crm
 
 - add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
 
-#### Step 3: Create the Environment File
+#### Step 3: Edit the Environment File
 
-- Create a file named .variables.env in the /backend directory.
-- Copy all variables from tmp.variables.env .
-- Paste the copied variables inside .variables.env.
+- Check a file named .env in the /backend directory.
+
   This file will store environment variables for the project to run.
 
 #### Step 4: Update MongoDB URI
 
-In the .variables.env file, find the line that reads:
+In the .env file, find the line that reads:
 
 `DATABASE="your-mongodb-uri"`
 
@@ -200,11 +199,11 @@ But if you'd like to check it out more news and website you can always check it 
 
 ## License
 
-MIT/Massachusetts Institute of Technology(here [LICENSE](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE))
+IDURAR is [fair-code](http://faircode.io) distributed under the
+[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE.md) and the
+[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE.md).
 
-The IDURAR code is licensed by Massachusetts Institute of Technology.
-
-By contributing to IDURAR, you will be agreeing that your contributions will be licensed under its Massachusetts Institute of Technology(MIT).
+Proprietary licenses are available for enterprise customers. [Get in touch](mailto:hello@idurarapp.com)
 
 ## Show your support
 

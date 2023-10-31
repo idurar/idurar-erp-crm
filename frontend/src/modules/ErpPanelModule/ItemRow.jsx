@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Input, InputNumber, Row, Col } from 'antd';
 
 import { DeleteOutlined } from '@ant-design/icons';
@@ -56,7 +56,6 @@ export default function ItemRow({ field, remove, current = null }) {
       <Col className="gutter-row" span={5}>
         <Form.Item
           name={[field.name, 'itemName']}
-          fieldKey={[field.fieldKey, 'itemName']}
           rules={[
             {
               required: true,
@@ -72,14 +71,13 @@ export default function ItemRow({ field, remove, current = null }) {
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={7}>
-        <Form.Item name={[field.name, 'description']} fieldKey={[field.fieldKey, 'description']}>
+        <Form.Item name={[field.name, 'description']}>
           <Input placeholder="description Name" />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={3}>
         <Form.Item
           name={[field.name, 'quantity']}
-          fieldKey={[field.fieldKey, 'quantity']}
           rules={[{ required: true, message: 'Missing item quantity' }]}
         >
           <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
@@ -88,7 +86,6 @@ export default function ItemRow({ field, remove, current = null }) {
       <Col className="gutter-row" span={4}>
         <Form.Item
           name={[field.name, 'price']}
-          fieldKey={[field.fieldKey, 'price']}
           rules={[{ required: true, message: 'Missing item price' }]}
         >
           <InputNumber

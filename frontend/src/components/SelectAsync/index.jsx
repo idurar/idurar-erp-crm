@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useNavigate } from 'react-router-dom';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function SelectAsync({
@@ -15,20 +15,18 @@ export default function SelectAsync({
   withRedirect = false,
   urlToRedirect = '/',
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const asyncList = () => {
     return request.list({ entity });
   };
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {
-    isSuccess ? setOptions(result) : setOptions([]);
-    setIsLoading(fetchIsLoading);
-  }, [fetchIsLoading]);
+    isSuccess && setOptions(result);
+  }, [isSuccess]);
 
   const labels = (optionField) => {
     return displayLabels.map((x) => optionField[x]).join(' ');
@@ -44,7 +42,7 @@ export default function SelectAsync({
   const handleSelectChange = (newValue) => {
     if (newValue === 'redirectURL') {
       // Navigate to another page when "Add payment" is selected
-      history.push(urlToRedirect);
+      navigate(urlToRedirect);
     } else {
       // Handle other select options
       if (onChange) {
@@ -55,8 +53,8 @@ export default function SelectAsync({
 
   return (
     <Select
-      loading={isLoading}
-      disabled={isLoading}
+      loading={fetchIsLoading}
+      disabled={fetchIsLoading}
       value={currentValue}
       onChange={handleSelectChange}
     >

@@ -1,37 +1,41 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Form, Divider } from 'antd';
+import { useState, useEffect, useLayoutEffect } from 'react';
 
-import { Button, PageHeader, Tag } from 'antd';
+import { Button, Tag, Form, Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
+
+import useLanguage from '@/locale/useLanguage';
 
 import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
 import calculate from '@/utils/calculate';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-import history from '@/utils/history';
+import { useNavigate } from 'react-router-dom';
 
-function SaveForm({ form, config }) {
-  let { CREATE_ENTITY } = config;
+function SaveForm({ form }) {
+  const translate = useLanguage();
   const handelClick = () => {
     form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {CREATE_ENTITY}
+      {translate('Save')}
     </Button>
   );
 }
 
 export default function CreateItem({ config, CreateForm }) {
+  const translate = useLanguage();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
@@ -73,7 +77,7 @@ export default function CreateItem({ config, CreateForm }) {
       dispatch(erp.resetAction({ actionType: 'create' }));
       setSubTotal(0);
       setOfferSubTotal(0);
-      history.push(`/${entity.toLowerCase()}/read/${result._id}`);
+      navigate(`/${entity.toLowerCase()}/read/${result._id}`);
     }
     return () => {};
   }, [isSuccess]);
@@ -98,7 +102,7 @@ export default function CreateItem({ config, CreateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.push(`/${entity.toLowerCase()}`);
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={CREATE_ENTITY}
         ghost={false}
@@ -107,12 +111,12 @@ export default function CreateItem({ config, CreateForm }) {
         extra={[
           <Button
             key={`${uniqueId()}`}
-            onClick={() => history.push(`/${entity.toLowerCase()}`)}
+            onClick={() => navigate(`/${entity.toLowerCase()}`)}
             icon={<CloseCircleOutlined />}
           >
-            Cancel
+            {translate('Cancel')}
           </Button>,
-          <SaveForm form={form} config={config} key={`${uniqueId()}`} />,
+          <SaveForm form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',
