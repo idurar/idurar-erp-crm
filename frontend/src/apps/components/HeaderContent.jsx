@@ -18,12 +18,6 @@ import { BASE_URL } from '@/config/serverApiConfig';
 import useLanguage from '@/locale/useLanguage';
 import SelectLanguage from '@/components/SelectLanguage';
 
-// async function asyncCaller(value) {
-//   const result = await checkImage(value);
-//   console.log('🚀 ~ file: HeaderContent.jsx:22 ~ asyncCaller ~ result:', result);
-//   return result;
-// }
-
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const { Header } = Layout;
