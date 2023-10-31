@@ -200,8 +200,8 @@ But if you'd like to check it out more news and website you can always check it 
 ## License
 
 IDURAR is [fair-code](http://faircode.io) distributed under the
-[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE.md) and the
-[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE.md).
+[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
+[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
 
 Proprietary licenses are available for enterprise customers. [Get in touch](mailto:hello@idurarapp.com)
 
