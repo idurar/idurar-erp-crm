@@ -5,6 +5,7 @@ import en_us from '@/locale/translation/en_us';
 import fr_fr from '@/locale/translation/fr_fr';
 import zh_cn from '@/locale/translation/zh_cn';
 import ar_eg from '@/locale/translation/ar_eg';
+import ro_ro from '@/locale/translation/ro_ro';
 
 export const translateAction = {
   resetState: () => (dispatch) => {
@@ -23,6 +24,8 @@ export const translateAction = {
       data = zh_cn;
     } else if (value === 'fr_fr') {
       data = fr_fr;
+    } else if (value === 'ro_ro') {
+      data = ro_ro;
     } else if (value === 'ar_eg') {
       data = ar_eg;
     } else {

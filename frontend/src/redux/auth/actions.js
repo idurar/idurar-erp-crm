@@ -35,8 +35,6 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
-  window.localStorage.removeItem('isLoggedIn');
-  window.localStorage.removeItem('auth');
 };
 
 export const updateProfile =

@@ -8,10 +8,12 @@ const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   function asyncLogout() {
-    return dispatch(logoutAction());
+    dispatch(logoutAction());
   }
   useEffect(() => {
     asyncLogout();
+    window.localStorage.removeItem('isLoggedIn');
+    window.localStorage.removeItem('auth');
     navigate('/login');
   }, []);
 
