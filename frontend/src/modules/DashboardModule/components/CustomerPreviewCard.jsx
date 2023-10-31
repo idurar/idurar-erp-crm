@@ -10,7 +10,7 @@ export default function CustomerPreviewCard({
   const translate = useLanguage();
   return (
     <Row className="gutter-row">
-      <div className="whiteBox shadow" style={{ minHeight: 452, height: '100%' }}>
+      <div className="whiteBox shadow" style={{ height: 458 }}>
         <div
           className="pad20"
           style={{
@@ -18,7 +18,9 @@ export default function CustomerPreviewCard({
             justifyContent: 'center',
           }}
         >
-          <h3 style={{ color: '#22075e', marginBottom: 30 }}>{translate('Customer Preview')}</h3>
+          <h3 style={{ color: '#22075e', marginBottom: 40, marginTop: 15, fontSize: 'large' }}>
+            {translate('Customer Preview')}
+          </h3>
 
           {isLoading ? (
             <Spin />

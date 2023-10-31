@@ -127,11 +127,13 @@ export default function PreviewCard({
       md={{ span: 8 }}
       lg={{ span: 8 }}
     >
-      <div className="pad15">
+      <div className="pad20">
         <h3
           style={{
             color: '#22075e',
-            marginBottom: 15,
+            fontSize: 'large',
+            marginBottom: 40,
+            marginTop: 0,
           }}
         >
           {title}

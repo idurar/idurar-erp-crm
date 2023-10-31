@@ -11,5 +11,3 @@ export const DOWNLOAD_BASE_URL =
     ? import.meta.env.VITE_BACKEND_SERVER + 'download/'
     : 'http://localhost:8888/download/';
 export const ACCESS_TOKEN_NAME = 'x-auth-token';
-
-console.log('🚀 ~ file: serverApiConfig.js:2 ~ API_BASE_URL:', API_BASE_URL);

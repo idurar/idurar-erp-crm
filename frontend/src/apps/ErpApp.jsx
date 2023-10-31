@@ -30,7 +30,7 @@ export default function ErpCrmApp() {
       <Navigation />
 
       <Layout
-        style={{ marginLeft: isNavMenuClose ? 80 : 220 }}
+        style={{ marginLeft: isNavMenuClose ? 100 : 220 }}
         className={isNavMenuClose ? 'smallNavigation site-layout' : 'wideNavigation layout'}
       >
         <HeaderContent />

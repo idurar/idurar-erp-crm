@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-// import Notifications from '@/components/Notification';
-
 import useLanguage from '@/locale/useLanguage';
 
 import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
@@ -32,7 +30,7 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) navigate('/login');
+    if (isSuccess) navigate('/');
   }, [isSuccess]);
   return (
     <>

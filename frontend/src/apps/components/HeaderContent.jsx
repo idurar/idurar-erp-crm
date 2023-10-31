@@ -123,14 +123,14 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
-      <Avatar
+      {/* <Avatar
         icon={<AppstoreOutlined />}
         onClick={() => {
-          dispatch(translateAction.translate('zh_cn'));
+        
         }}
         style={{ float: 'right' }}
         size="large"
-      />
+      /> */}
 
       <SelectLanguage />
     </Header>

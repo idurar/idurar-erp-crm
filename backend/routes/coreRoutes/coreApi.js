@@ -57,7 +57,7 @@ router
 router
   .route('/profile/update/:id')
   .patch(
-    hasPermission('read'),
+    hasPermission(),
     catchErrors(singleStorageUpload({ entity: 'admin', fieldName: 'photo', fileType: 'image' })),
     catchErrors(adminController.updateProfile)
   );
