@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Avatar, Dropdown, Layout } from 'antd';
@@ -23,7 +24,18 @@ export default function HeaderContent() {
 
   const translate = useLanguage();
 
-  const hasPhotoprofile = checkImage(BASE_URL + currentAdmin?.photo);
+  const [hasPhotoprofile, setHasPhotoprofile] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await checkImage(BASE_URL + currentAdmin?.photo);
+      setHasPhotoprofile(result);
+    }
+    fetchData();
+    return () => {
+      return false;
+    };
+  }, []);
 
   const srcImgProfile = hasPhotoprofile ? BASE_URL + currentAdmin?.photo : null;
 
