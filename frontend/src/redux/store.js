@@ -1,12 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+
 import lang from '@/locale/translation/en_us';
 
 import rootReducer from './rootReducer';
 import storePersist from './storePersist';
-
-const logger = createLogger();
 
 let middleware = [thunk];
 
