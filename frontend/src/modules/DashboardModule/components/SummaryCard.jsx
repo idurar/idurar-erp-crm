@@ -20,14 +20,21 @@ export default function AnalyticSummaryCard({
         style={{ color: '#595959', fontSize: 13, minHeight: '106px', height: '100%' }}
       >
         <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
-          <h3 style={{ color: '#22075e', marginBottom: 0, textTransform: 'capitalize' }}>
+          <h3
+            style={{
+              color: '#22075e',
+              fontSize: 'large',
+              margin: '5px 0',
+              textTransform: 'capitalize',
+            }}
+          >
             {title}
           </h3>
         </div>
         <Divider style={{ padding: 0, margin: 0 }}></Divider>
         <div className="pad15">
           <Row gutter={[0, 0]} justify="space-between" wrap={false}>
-            <Col className="gutter-row" flex="70px" style={{ textAlign: 'left' }}>
+            <Col className="gutter-row" flex="85px" style={{ textAlign: 'left' }}>
               <div className="left" style={{ whiteSpace: 'nowrap' }}>
                 {prefix}
               </div>

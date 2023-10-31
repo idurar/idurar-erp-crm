@@ -1,8 +1,5 @@
-import React from 'react';
 import { Tag, Row, Col } from 'antd';
 import useLanguage from '@/locale/useLanguage';
-
-import { DashboardLayout } from '@/layout';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
@@ -137,7 +134,7 @@ export default function DashboardModule() {
 
   return (
     <>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[32, 32]}>
         {cards}
         <SummaryCard
           title={translate('Due Balance')}
@@ -151,9 +148,9 @@ export default function DashboardModule() {
         />
       </Row>
       <div className="space30"></div>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[32, 32]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
-          <div className="whiteBox shadow" style={{ minHeight: 452, height: '100%' }}>
+          <div className="whiteBox shadow" style={{ height: 458 }}>
             <Row className="pad20" gutter={[0, 0]}>
               {statisticCards}
             </Row>
@@ -168,7 +165,7 @@ export default function DashboardModule() {
         </Col>
       </Row>
       <div className="space30"></div>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[32, 32]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
           <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
             <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
