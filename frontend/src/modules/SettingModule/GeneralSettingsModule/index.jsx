@@ -1,7 +1,7 @@
 import SetingsSection from '../components/SetingsSection';
 import UpdateSettingModule from '../components/UpdateSettingModule';
 import GeneralSettingForm from './forms/GeneralSettingForm';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingsModule({ config }) {
   const translate = useLanguage();

@@ -1,7 +1,7 @@
 import { Form, Input, Select, Tag } from 'antd';
 
 import { languages, tagColor } from '@/utils';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();

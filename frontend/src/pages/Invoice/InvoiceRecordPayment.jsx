@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import RecordPaymentModule from '@/modules/InvoiceModule/RecordPaymentModule';
 
 export default function InvoiceRecord() {

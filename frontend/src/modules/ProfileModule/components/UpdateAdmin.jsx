@@ -1,5 +1,5 @@
 import { useProfileContext } from '@/context/profileContext';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -11,7 +11,7 @@ import { updateProfile } from '@/redux/auth/actions';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const UpdateAdmin = ({ config }) => {
   const translate = useLanguage();

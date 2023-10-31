@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Input, InputNumber, Select, Switch } from 'antd';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function MoneyFormSettingForm() {
   const translate = useLanguage();

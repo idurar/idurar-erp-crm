@@ -16,7 +16,7 @@ import calculate from '@/utils/calculate';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
 
 import { useSelector } from 'react-redux';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
   const { last_offer_number } = useSelector(selectFinanceSettings);

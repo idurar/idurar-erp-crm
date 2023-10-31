@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const colours = {
   draft: '#595959',

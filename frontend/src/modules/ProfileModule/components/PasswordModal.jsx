@@ -3,7 +3,7 @@ import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 import { Button, Form, Input, Modal } from 'antd';
 import { useEffect } from 'react';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const PasswordModal = ({ config }) => {
   const translate = useLanguage();

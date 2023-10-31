@@ -1,6 +1,6 @@
 import { Form, Input, Select } from 'antd';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function LeadForm() {
   const translate = useLanguage();

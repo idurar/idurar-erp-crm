@@ -2,7 +2,7 @@ import { Form, Input, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { message, Upload, Button } from 'antd';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';

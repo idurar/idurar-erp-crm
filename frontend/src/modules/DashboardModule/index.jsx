@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag, Row, Col } from 'antd';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { DashboardLayout } from '@/layout';
 

@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import ReadInvoiceModule from '@/modules/InvoiceModule/ReadInvoiceModule';
 
 export default function InvoiceRead() {

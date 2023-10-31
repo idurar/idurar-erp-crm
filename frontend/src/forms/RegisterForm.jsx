@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function RegisterForm() {
   const translate = useLanguage();

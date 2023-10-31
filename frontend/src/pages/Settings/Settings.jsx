@@ -10,7 +10,7 @@ import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 import MoneyFormatSettings from './MoneyFormatSettings';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const settingsArray = [
   <GeneralSettings />,

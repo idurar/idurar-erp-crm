@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import UpdateEmailModule from '@/modules/EmailModule/UpdateEmailModule';
 
 export default function EmailUpdate() {

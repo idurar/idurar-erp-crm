@@ -1,5 +1,5 @@
 import React from 'react';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import EmailDataTableModule from '@/modules/EmailModule/EmailDataTableModule';
 
 export default function AdvancedSettings() {

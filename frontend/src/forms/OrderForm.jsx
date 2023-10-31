@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Select, InputNumber } from 'antd';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function OrderForm({ isUpdateForm = false }) {
   const translate = useLanguage();

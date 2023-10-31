@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 
 import OfferDataTableModule from '@/modules/OfferModule/OfferDataTableModule';
 import { useMoney } from '@/settings';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Offer() {
   const translate = useLanguage();

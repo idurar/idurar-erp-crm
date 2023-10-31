@@ -11,7 +11,7 @@ import Loading from '@/components/Loading';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function UpdatePassword({ config }) {
   const translate = useLanguage();

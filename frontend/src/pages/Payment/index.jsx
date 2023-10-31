@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 
 export default function Payment() {

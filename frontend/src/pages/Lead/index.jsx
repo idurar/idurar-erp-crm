@@ -2,10 +2,10 @@ import dayjs from 'dayjs';
 import { Tag } from 'antd';
 import React from 'react';
 
-import CrudModule from '@/modules/CrudModule';
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import LeadForm from '@/forms/LeadForm';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Lead() {
   const translate = useLanguage();

@@ -1,5 +1,5 @@
 import { Result, Button } from 'antd';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
 
 export default function NotFound({ entity }) {

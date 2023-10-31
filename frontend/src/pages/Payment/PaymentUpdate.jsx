@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import UpdatePaymentModule from '@/modules/PaymentModule/UpdatePaymentModule';
 
 export default function PaymentUpdate() {

@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import ReadPaymentModule from '@/modules/PaymentModule/ReadPaymentModule';
 
 export default function PaymentRead() {

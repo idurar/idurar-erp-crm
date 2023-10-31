@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import ReadQuoteModule from '@/modules/QuoteModule/ReadQuoteModule';
 
 export default function QuoteRead() {

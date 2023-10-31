@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { languages } from '@/utils';
+import languages from '@/locale/languages';
 import { selectLangCode } from '@/redux/translate/selectors';
 
 // import Notifications from '@/components/Notification';
 
 import { translateAction } from '@/redux/translate/actions';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { Select } from 'antd';
 

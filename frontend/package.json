@@ -25,6 +25,7 @@
     "redux-logger": "3.0.6",
     "redux-thunk": "2.4.1",
     "reselect": "4.1.5",
+    "shortid": "^2.2.16",
     "vite": "^4.5.0"
   },
   "scripts": {

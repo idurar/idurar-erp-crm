@@ -1,5 +1,5 @@
 import { Tag } from 'antd';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export function StatusTag({ status = 'draft' }) {
   const translate = useLanguage();

@@ -7,7 +7,7 @@ import { useCrudContext } from '@/context/crud';
 import { selectDeletedItem } from '@/redux/crud/selectors';
 import { valueByString } from '@/utils/helpers';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function DeleteModal({ config, children }) {
   const translate = useLanguage();

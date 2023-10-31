@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import ReadOfferModule from '@/modules/OfferModule/ReadOfferModule';
 
 export default function OfferRead() {

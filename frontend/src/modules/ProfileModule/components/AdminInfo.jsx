@@ -1,5 +1,5 @@
 import { useProfileContext } from '@/context/profileContext';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { BASE_URL } from '@/config/serverApiConfig';
 
 import { checkImage } from '@/request';
