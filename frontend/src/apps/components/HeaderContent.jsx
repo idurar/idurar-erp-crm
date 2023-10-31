@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Avatar, Dropdown, Layout } from 'antd';
@@ -17,13 +18,30 @@ import { BASE_URL } from '@/config/serverApiConfig';
 import useLanguage from '@/locale/useLanguage';
 import SelectLanguage from '@/components/SelectLanguage';
 
+// async function asyncCaller(value) {
+//   const result = await checkImage(value);
+//   console.log('🚀 ~ file: HeaderContent.jsx:22 ~ asyncCaller ~ result:', result);
+//   return result;
+// }
+
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const { Header } = Layout;
 
   const translate = useLanguage();
 
-  const hasPhotoprofile = checkImage(BASE_URL + currentAdmin?.photo);
+  const [hasPhotoprofile, setHasPhotoprofile] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await checkImage(BASE_URL + currentAdmin?.photo);
+      setHasPhotoprofile(result);
+    }
+    fetchData();
+    return () => {
+      return false;
+    };
+  }, []);
 
   const srcImgProfile = hasPhotoprofile ? BASE_URL + currentAdmin?.photo : null;
 
