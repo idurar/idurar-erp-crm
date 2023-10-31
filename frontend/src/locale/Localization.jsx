@@ -4,6 +4,7 @@ import enUS from 'antd/es/locale/en_US';
 import zhCN from 'antd/es/locale/zh_CN';
 import frFR from 'antd/es/locale/fr_FR';
 import arEG from 'antd/es/locale/ar_EG';
+import roRO from 'antd/es/locale/ro_RO';
 
 import { ConfigProvider } from 'antd';
 
@@ -24,6 +25,9 @@ export default function Localization({ children }) {
     } else if (langCode === 'zh_cn') {
       setDirection('ltr');
       setLocal(zhCN);
+    } else if (langCode === 'ro_ro') {
+      setDirection('ltr');
+      setLocal(roRO);
     } else if (langCode === 'ar_eg') {
       setDirection('rtl');
       setLocal(arEG);

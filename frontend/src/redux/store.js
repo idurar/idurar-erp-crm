@@ -12,10 +12,7 @@ let configStore = applyMiddleware(...middleware);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-if (process.env.NODE_ENV === 'development') {
-  middleware = [...middleware];
-  configStore = composeEnhancers(applyMiddleware(...middleware));
-}
+configStore = composeEnhancers(applyMiddleware(...middleware));
 
 const INITIAL_LANG_STATE = {
   ...lang,
