@@ -5,7 +5,7 @@ import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';

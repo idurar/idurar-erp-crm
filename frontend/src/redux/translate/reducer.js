@@ -1,5 +1,5 @@
 import * as actionTypes from './types';
-import en_us from '@/lang/en_us';
+import en_us from '@/locale/translation/en_us';
 import storePersist from '../storePersist';
 
 const LANG_INITIAL_STATE = {

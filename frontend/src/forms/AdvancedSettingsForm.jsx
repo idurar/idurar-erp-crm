@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentItem } from '@/redux/crud/selectors';
 import { useState } from 'react';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export function SelectType() {
   const translate = useLanguage();

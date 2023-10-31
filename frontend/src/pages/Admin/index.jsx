@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
 

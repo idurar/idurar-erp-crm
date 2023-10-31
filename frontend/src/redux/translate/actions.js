@@ -1,10 +1,10 @@
 import * as actionTypes from './types';
 import { request } from '@/request';
 
-import en_us from '@/lang/en_us';
-import fr_fr from '@/lang/fr_fr';
-import zh_cn from '@/lang/zh_cn';
-import ar_eg from '@/lang/ar_eg';
+import en_us from '@/locale/translation/en_us';
+import fr_fr from '@/locale/translation/fr_fr';
+import zh_cn from '@/locale/translation/zh_cn';
+import ar_eg from '@/locale/translation/ar_eg';
 
 export const translateAction = {
   resetState: () => (dispatch) => {

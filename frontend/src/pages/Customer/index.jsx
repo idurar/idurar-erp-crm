@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CrudModule from '@/modules/CrudModule';
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import CustomerForm from '@/forms/CustomerForm';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Customer() {
   const translate = useLanguage();

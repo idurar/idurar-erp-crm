@@ -3,7 +3,7 @@ import { Form, Input, Select } from 'antd';
 import { DatePicker } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function EmployeeForm() {
   const translate = useLanguage();

@@ -1,18 +1,18 @@
 import { useLayoutEffect, useEffect, useState } from 'react';
 import { Row, Col, Button } from 'antd';
-import { MenuFoldOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import CreateForm from '@/components/CreateForm';
 import UpdateForm from '@/components/UpdateForm';
 import DeleteModal from '@/components/DeleteModal';
 import ReadItem from '@/components/ReadItem';
 import SearchItem from '@/components/SearchItem';
-import DataTable from '@/components/DataTable';
+import DataTable from '@/components/DataTable/DataTable';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentItem } from '@/redux/crud/selectors';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 
@@ -88,15 +88,15 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
 
-  const { panel, collapsedBox } = crudContextAction;
+  const { collapsedBox } = crudContextAction;
 
   const addNewItem = () => {
     collapsedBox.close();
   };
 
-  const collapsePanel = () => {
-    panel.collapse();
-  };
+  // const collapsePanel = () => {
+  //   panel.collapse();
+  // };
 
   return (
     <Row gutter={8}>

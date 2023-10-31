@@ -3,7 +3,7 @@ import { Form, Input, Button, Row, Col, Typography, Tag } from 'antd';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { PlusOutlined } from '@ant-design/icons';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const { Paragraph } = Typography;
 

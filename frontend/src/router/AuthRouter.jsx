@@ -13,34 +13,38 @@ const Register = lazy(() => import(`@/pages/Register.jsx`));
 export default function AuthRouter() {
   const location = useLocation();
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes location={location} key={location.pathname}>
-        <Route
-          element={
-            <PublicRoute>
+    <Routes location={location} key={location.pathname}>
+      <Route
+        element={
+          <PublicRoute>
+            <Suspense fallback={<PageLoader />}>
               <Login />
-            </PublicRoute>
-          }
-          path="/"
-        />
-        <Route
-          element={
-            <PublicRoute>
+            </Suspense>
+          </PublicRoute>
+        }
+        path="/"
+      />
+      <Route
+        element={
+          <PublicRoute>
+            <Suspense fallback={<PageLoader />}>
               <Login />
-            </PublicRoute>
-          }
-          path="/login"
-        />
-        <Route
-          element={
-            <PublicRoute>
+            </Suspense>
+          </PublicRoute>
+        }
+        path="/login"
+      />
+      <Route
+        element={
+          <PublicRoute>
+            <Suspense fallback={<PageLoader />}>
               <Register />
-            </PublicRoute>
-          }
-          path="/register"
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+            </Suspense>
+          </PublicRoute>
+        }
+        path="/register"
+      />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }

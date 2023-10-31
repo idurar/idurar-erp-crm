@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
 import { generate as uniqueId } from 'shortid';

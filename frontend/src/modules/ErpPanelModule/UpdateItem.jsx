@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
 import calculate from '@/utils/calculate';

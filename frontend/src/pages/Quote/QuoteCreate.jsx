@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import CreateQuoteModule from '@/modules/QuoteModule/CreateQuoteModule';
 
 export default function QuoteCreate() {

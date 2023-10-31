@@ -6,7 +6,7 @@ import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { generate as uniqueId } from 'shortid';
 import { useMoney } from '@/settings';
 import { useNavigate } from 'react-router-dom';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import UpdatePayment from './UpdatePayment';
 
 export default function Payment({ config, currentItem }) {

@@ -5,7 +5,7 @@ import { DatePicker } from 'antd';
 import SelectAsync from '@/components/SelectAsync';
 import { useMoney } from '@/settings';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) {
   const translate = useLanguage();

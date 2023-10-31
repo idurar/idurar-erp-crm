@@ -1,10 +1,10 @@
 import React from 'react';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
-import CrudModule from '@/modules/CrudModule';
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import CurrencyForm from '@/forms/CurrencyForm';
 
 export default function Currency() {

@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { BASE_URL } from '@/config/serverApiConfig';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import SelectLanguage from '@/components/SelectLanguage';
 
 export default function HeaderContent() {

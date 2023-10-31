@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import UpdateOfferModule from '@/modules/OfferModule/UpdateOfferModule';
 
 export default function OfferUpdate() {

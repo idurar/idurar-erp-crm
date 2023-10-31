@@ -11,7 +11,7 @@ import { updateProfile } from '@/redux/auth/actions';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const UpdateAdmin = ({ config }) => {
   const translate = useLanguage();

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import Loading from '@/components/Loading';
 

@@ -1,7 +1,7 @@
 import { Form, Input } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function CustomerForm({ isUpdateForm = false }) {
   const translate = useLanguage();

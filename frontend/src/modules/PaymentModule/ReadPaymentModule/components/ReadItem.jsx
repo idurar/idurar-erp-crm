@@ -12,7 +12,7 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { generate as uniqueId } from 'shortid';
 

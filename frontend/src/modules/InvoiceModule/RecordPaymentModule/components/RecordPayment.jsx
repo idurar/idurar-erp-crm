@@ -4,7 +4,7 @@ import { Form, Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectRecordPaymentItem } from '@/redux/erp/selectors';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { useErpContext } from '@/context/erp';
 
 import Loading from '@/components/Loading';

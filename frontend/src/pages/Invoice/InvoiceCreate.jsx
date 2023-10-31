@@ -1,4 +1,4 @@
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import CreateInvoiceModule from '@/modules/InvoiceModule/CreateInvoiceModule';
 
 export default function InvoiceCreate() {

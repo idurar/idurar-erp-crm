@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 
 import QuoteDataTableModule from '@/modules/QuoteModule/QuoteDataTableModule';
 import { useMoney } from '@/settings';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Quote() {
   const translate = useLanguage();

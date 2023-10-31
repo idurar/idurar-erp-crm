@@ -13,7 +13,7 @@ import { generate as uniqueId } from 'shortid';
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { useNavigate } from 'react-router-dom';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 const { Title, Paragraph } = Typography;
 

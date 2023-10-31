@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 import { BASE_URL } from '@/config/serverApiConfig';
 
 import { checkImage } from '@/request';

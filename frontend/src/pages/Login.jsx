@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // import Notifications from '@/components/Notification';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 

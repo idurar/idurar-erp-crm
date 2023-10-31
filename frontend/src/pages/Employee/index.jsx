@@ -1,7 +1,7 @@
 import React from 'react';
 
-import useLanguage from '@/lang/useLanguage';
-import CrudModule from '@/modules/CrudModule';
+import useLanguage from '@/locale/useLanguage';
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
 export default function Employee() {

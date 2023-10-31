@@ -1,7 +1,7 @@
 import React from 'react';
-import CrudModule from '@/modules/CrudModule';
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import InventoryForm from '@/forms/InventoryForm'; // Retaining InventoryForm
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Inventory() {
   const translate = useLanguage();

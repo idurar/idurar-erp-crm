@@ -1,6 +1,6 @@
 import { Statistic, Progress, Divider, Row, Spin } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 export default function CustomerPreviewCard({
   isLoading = false,

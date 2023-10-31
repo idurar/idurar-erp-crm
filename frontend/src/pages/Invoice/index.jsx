@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 import { useMoney } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';

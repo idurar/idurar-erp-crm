@@ -27,7 +27,7 @@ import UpdatePassword from './UpdatePassword';
 
 import { selectCurrentItem } from '@/redux/crud/selectors';
 
-import useLanguage from '@/lang/useLanguage';
+import useLanguage from '@/locale/useLanguage';
 
 function SidePanelTopContent({ config, formElements }) {
   const translate = useLanguage();
