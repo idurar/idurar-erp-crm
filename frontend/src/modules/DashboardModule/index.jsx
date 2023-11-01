@@ -1,6 +1,8 @@
 import { Tag, Row, Col } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
+import {useMoney} from "@/settings";
+
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 
@@ -10,12 +12,9 @@ import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
 
-function formatCurrency(value) {
-  return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}
-
 export default function DashboardModule() {
   const translate = useLanguage();
+  const { moneyFormatter } = useMoney();
   const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
     request.summary({ entity: 'invoice' })
   );
@@ -50,7 +49,7 @@ export default function DashboardModule() {
       title: translate('Total'),
       dataIndex: 'total',
 
-      render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
+      render: (total) => moneyFormatter({ amount: total }),
     },
     {
       title: translate('Status'),
@@ -104,7 +103,7 @@ export default function DashboardModule() {
         }
         prefix={translate('This month')}
         isLoading={isLoading}
-        tagContent={result?.total && formatCurrency(result?.total)}
+        tagContent={result?.total && moneyFormatter({ amount: result?.total }) }
       />
     );
   });
@@ -143,7 +142,7 @@ export default function DashboardModule() {
           isLoading={invoiceLoading}
           tagContent={
             invoiceResult?.total_undue &&
-            `$ ${invoiceResult?.total_undue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+              moneyFormatter({ amount: invoiceResult?.total_undue })
           }
         />
       </Row>
