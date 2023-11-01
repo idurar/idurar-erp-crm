@@ -10,6 +10,7 @@ import uniqueId from '@/utils/uinqueId';
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import useInvoiceFollowNum from '@/hooks/invoiceFollowNum/useInvoiceFollowNum';
 
 function SaveForm({ form, config }) {
   let { CREATE_ENTITY } = config;
@@ -37,6 +38,8 @@ export default function CreateItem({ config, CreateForm }) {
   const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
   const invoiceDate = invoiceData?.date;
 
+  useInvoiceFollowNum();
+
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
@@ -44,7 +47,6 @@ export default function CreateItem({ config, CreateForm }) {
 
     if (items) {
       items.map((item) => {
-        console.log({ item });
         if (item) {
           if (item.offerPrice && item.quantity) {
             let offerTotal = calculate.multiply(item['quantity'], item['offerPrice']);
@@ -63,7 +65,6 @@ export default function CreateItem({ config, CreateForm }) {
   };
 
   useEffect(() => {
-    console.log('on refresh of invoice we need to do a invoice number call');
     if (isSuccess) {
       form.resetFields();
       dispatch(erp.resetAction({ actionType: 'create' }));

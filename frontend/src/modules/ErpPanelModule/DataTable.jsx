@@ -10,87 +10,17 @@ import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
-import axios from 'axios';
+import useInvoiceFollowNum from '@/hooks/invoiceFollowNum/useInvoiceFollowNum';
 
 function AddNewItem({ config }) {
   const history = useHistory();
   const { ADD_NEW_ENTITY, entity } = config;
   const { erpContextAction } = useErpContext();
   const { createPanel } = erpContextAction;
-  const dispatch = useDispatch();
+
+  useInvoiceFollowNum();
 
   const handelClick = () => {
-    //TODO: set this code in its own hook
-    //TODO: replace axios with request from request.js
-    const fetchDataForInvoiceFollowNum = async () => {
-      const results = [];
-
-      const firstPageResponse = await axios.get('/invoice/list');
-      const firstPageData = firstPageResponse.data;
-
-      if (firstPageData.success) {
-        results.push(...firstPageData.result);
-
-        const totalPages = firstPageData.pagination.pages;
-
-        for (let page = 2; page <= totalPages; page++) {
-          try {
-            const nextPageResponse = await axios.get(`/invoice/list?page=${page}`);
-            const nextPageData = nextPageResponse.data;
-
-            if (nextPageData.success) {
-              results.push(...nextPageData.result);
-            } else {
-              console.error(`Error fetching data for page ${page}`);
-            }
-          } catch (error) {
-            console.error(`Error fetching data for page ${page}:`, error);
-          }
-        }
-      } else {
-        console.error('Error fetching data for the first page');
-      }
-      return results;
-    };
-
-    fetchDataForInvoiceFollowNum()
-      .then((results) => {
-        results.sort((a, b) => {
-          const dateA = new Date(a.date);
-          const dateB = new Date(b.date);
-          return dateB - dateA;
-        });
-
-        const formattedInvoicesArray = results.map((invoice, i) => {
-          const date = new Date();
-          const year = date.getFullYear();
-          const month = (date.getMonth() + 1).toString().padStart(2, '0');
-          const dateNum = invoice.number.split('/');
-          const num = dateNum[1];
-
-          console.log(num);
-          const index = 101;
-
-          let formattedNumber;
-          if (index < 100) {
-            formattedNumber = (+num + 1).toString().padStart(3, '0');
-            return `${year + month}/${formattedNumber}`;
-          }
-          if (index < 1000) {
-            formattedNumber = (+num + 1).toString().padStart(2, '0');
-            return `${year + month}/${formattedNumber}`;
-          } else {
-            formattedNumber = (+num + 1).toString();
-            return `${year + month}/${formattedNumber}`;
-          }
-        });
-
-        const formattedInvoices = formattedInvoicesArray[0];
-        dispatch(erp.invoiceFollowNum({ date: formattedInvoices }));
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
     // createPanel.open();
     history.push(`/${entity.toLowerCase()}/create`);
   };
