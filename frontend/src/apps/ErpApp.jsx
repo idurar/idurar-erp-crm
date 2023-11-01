@@ -40,7 +40,7 @@ export default function ErpCrmApp() {
             margin: '40px auto 30px',
             overflow: 'initial',
             width: '100%',
-            maxWidth: isNavMenuClose ? 1200 : 1100,
+            maxWidth: isNavMenuClose ? 1150 : 1050,
           }}
         >
           <Suspense fallback={<PageLoader />}>
