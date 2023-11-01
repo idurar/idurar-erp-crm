@@ -1,27 +1,23 @@
-import React from 'react';
-
-import ErpContextLayout from '../ErpContextLayout';
+import { ErpContextProvider } from '@/context/erp';
 
 import { Layout } from 'antd';
 
 const { Content } = Layout;
 
-export default function ErpLayout({ children, config }) {
+export default function ErpLayout({ children }) {
   return (
-    <ErpContextLayout>
-      <Layout className="site-layout">
-        <Content
-          className="whiteBox shadow layoutPadding"
-          style={{
-            margin: '30px auto',
-            width: '100%',
-            maxWidth: '1100px',
-            minHeight: '600px',
-          }}
-        >
-          {children}
-        </Content>
-      </Layout>
-    </ErpContextLayout>
+    <ErpContextProvider>
+      <Content
+        className="whiteBox shadow layoutPadding"
+        style={{
+          margin: '30px auto',
+          width: '100%',
+          maxWidth: '1100px',
+          minHeight: '600px',
+        }}
+      >
+        {children}
+      </Content>
+    </ErpContextProvider>
   );
 }

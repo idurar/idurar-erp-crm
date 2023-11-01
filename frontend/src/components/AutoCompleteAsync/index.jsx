@@ -108,6 +108,7 @@ export default function AutoCompleteAsync({
       onClear={() => {
         setOptions([]);
         setCurrentValue(undefined);
+        setSearching(false);
       }}
     >
       {selectOptions.map((optionField) => (
