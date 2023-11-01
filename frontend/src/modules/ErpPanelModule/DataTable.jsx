@@ -5,23 +5,17 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
-import { useErpContext } from '@/context/erp';
+
 import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
 import { RedoOutlined, PlusOutlined } from '@ant-design/icons';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
-import useInvoiceFollowNum from '@/hooks/invoiceFollowNum/useInvoiceFollowNum';
 
 function AddNewItem({ config }) {
   const history = useHistory();
   const { ADD_NEW_ENTITY, entity } = config;
-  const { erpContextAction } = useErpContext();
-  const { createPanel } = erpContextAction;
-
-  useInvoiceFollowNum();
 
   const handelClick = () => {
-    // createPanel.open();
     history.push(`/${entity.toLowerCase()}/create`);
   };
 

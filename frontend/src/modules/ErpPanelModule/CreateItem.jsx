@@ -10,7 +10,7 @@ import uniqueId from '@/utils/uinqueId';
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import useInvoiceFollowNum from '@/hooks/invoiceFollowNum/useInvoiceFollowNum';
+import invoiceFollowNum from '@/utils/invoiceFollowNum';
 
 function SaveForm({ form, config }) {
   let { CREATE_ENTITY } = config;
@@ -38,8 +38,6 @@ export default function CreateItem({ config, CreateForm }) {
   const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
   const invoiceDate = invoiceData?.date;
 
-  useInvoiceFollowNum();
-
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
@@ -65,6 +63,22 @@ export default function CreateItem({ config, CreateForm }) {
   };
 
   useEffect(() => {
+    let isMounted = true; // Initialize a flag to track component mounting
+
+    const fetchData = async () => {
+      try {
+        const { formattedInvoices } = await invoiceFollowNum();
+
+        if (isMounted) {
+          dispatch(erp.invoiceFollowNum({ date: formattedInvoices }));
+        }
+      } catch (error) {
+        // Handle any errors here
+      }
+    };
+
+    fetchData();
+
     if (isSuccess) {
       form.resetFields();
       dispatch(erp.resetAction({ actionType: 'create' }));
@@ -73,7 +87,9 @@ export default function CreateItem({ config, CreateForm }) {
       createPanel.close();
       dispatch(erp.list({ entity }));
     }
-    return () => {};
+    return () => {
+      isMounted = false;
+    };
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
