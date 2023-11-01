@@ -7,6 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const helpers = require('./helpers');
+const { translate } = require('./locale/useLanguage');
 
 const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
 const coreApiRouter = require('./routes/coreRoutes/coreApi');
@@ -35,6 +36,10 @@ const corsOptions = {
 //     cors()(req, res, next);
 //   }
 // });
+
+translate('invoice');
+console.log("🚀 ~ file: app.js:41 ~ translate('invoice');:", translate('invoice'));
+
 app.use(function (req, res, next) {
   cors(corsOptions)(req, res, next);
 });
