@@ -96,7 +96,6 @@ function SearchItemComponent({ config, onRerender }) {
       allowClear
       placeholder={<SearchOutlined style={{ float: 'right', padding: '8px 0' }} />}
       defaultActiveFirstOption={false}
-      showArrow={false}
       filterOption={false}
       notFoundContent={searching ? '... Searching' : <Empty />}
       value={currentValue}
