@@ -5,6 +5,7 @@ import en_us from '@/locale/translation/en_us';
 import fr_fr from '@/locale/translation/fr_fr';
 import zh_cn from '@/locale/translation/zh_cn';
 import ar_eg from '@/locale/translation/ar_eg';
+import it_it from '@/locale/translation/it_it';
 import ro_ro from '@/locale/translation/ro_ro';
 
 export const translateAction = {
@@ -28,6 +29,8 @@ export const translateAction = {
       data = ro_ro;
     } else if (value === 'ar_eg') {
       data = ar_eg;
+    } else if (value === 'it_it') {
+      data = it_it;
     } else {
       data = en_us;
     }
