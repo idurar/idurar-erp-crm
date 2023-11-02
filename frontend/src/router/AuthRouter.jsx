@@ -5,10 +5,8 @@ import PublicRoute from './PublicRoute';
 import PageLoader from '@/components/PageLoader';
 
 const Login = lazy(() => import(/*webpackChunkName:'LoginPage'*/ '@/pages/Login'));
-
-const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
-
 const Register = lazy(() => import(/*webpackChunkName:'RegisterPage'*/ '@/pages/Register'));
+const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
 
 export default function AuthRouter() {
   const location = useLocation();

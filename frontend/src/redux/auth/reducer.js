@@ -25,6 +25,13 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.LOGOUT_SUCCESS:
       return INITIAL_STATE;
 
+    case actionTypes.REGISTER_SUCCESS:
+      return {
+        current: action.payload,
+        loading: false,
+        isLoggedIn: true,
+      };
+
     default:
       return state;
   }

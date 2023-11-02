@@ -2,11 +2,13 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import React, { useState } from 'react';
 // import photo from '@/style/images/photo.png';
+
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 };
+
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
@@ -18,9 +20,11 @@ const beforeUpload = (file) => {
   }
   return isJpgOrPng && isLt2M;
 };
+
 export default function UploadImg() {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+
   const handleChange = (info) => {
     if (info.file.status === 'uploading') {
       setLoading(true);

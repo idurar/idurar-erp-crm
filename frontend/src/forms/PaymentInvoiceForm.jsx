@@ -4,6 +4,7 @@ import { Form, Input, InputNumber } from 'antd';
 import { DatePicker } from '@/components/CustomAntd';
 import SelectAsync from '@/components/SelectAsync';
 import { useMoney } from '@/settings';
+
 export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = false }) {
   const { TextArea } = Input;
   const money = useMoney();
@@ -20,7 +21,7 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
         ]}
         style={{ width: '50%', float: 'left', paddingRight: '20px' }}
       >
-        <InputNumber min={1} style={{ width: '100%' }} />
+        <InputNumber style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item
         name="date"

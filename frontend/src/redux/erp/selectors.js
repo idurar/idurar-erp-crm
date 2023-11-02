@@ -19,3 +19,8 @@ export const selectReadItem = createSelector([selectErp], (erp) => erp.read);
 export const selectDeletedItem = createSelector([selectErp], (erp) => erp.delete);
 
 export const selectSearchedItems = createSelector([selectErp], (erp) => erp.search);
+
+export const selectInvoiceFollowNumItems = createSelector(
+  [selectErp],
+  (erp) => erp.invoiceFollowNum
+);

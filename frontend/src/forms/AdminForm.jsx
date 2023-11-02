@@ -10,7 +10,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         rules={[
           {
             required: true,
-            message: 'Please input your Name!',
+            message: 'Please input your name!',
           },
         ]}
       >
@@ -28,36 +28,33 @@ export default function AdminForm({ isUpdateForm = false }) {
       >
         <Input autoComplete="off" />
       </Form.Item>
-      <Form.Item
-        label="E-mail"
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-        ]}
-      >
-        <Input autoComplete="off" />
-      </Form.Item>
-
       {!isUpdateForm && (
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your Password!',
-            },
-          ]}
-        >
-          <Input.Password autoComplete="new-password" />
-        </Form.Item>
+        <>
+          <Form.Item
+            label="E-mail"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Email!',
+              },
+            ]}
+          >
+            <Input autoComplete="off" />
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Password!',
+              },
+            ]}
+          >
+            <Input.Password autoComplete="new-password" />
+          </Form.Item>
+        </>
       )}
       <Form.Item
         label="Role"

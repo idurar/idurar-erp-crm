@@ -260,11 +260,12 @@ html
     
       header.clearfix
         .top-area
-          img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
+          img.logo.left(src=logo)
           .right.company-info
               p IDURAR WEB Agency
               p Centre d’affaire Gold Tower Oran - Algerie
               p RC: 16A5234245 /NIF: 198232345630567 /AI: 31009451343
+              p #{text}
               
         .col.col-24
           .space  
@@ -273,22 +274,22 @@ html
               | INVOICE 
             div 
               .col.col-8
-                p.strong Date :
+                p.strong Date
                 p #{moment(model.date).format("DD/MM/YYYY")}
               .col.col-8
-                p.strong Expired Date :
+                p.strong Expired Date
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
-                p.strong Invoice Number :
-                p # #{model.number}/#{model.year || ""} 
+                p.strong Invoice Number
+                p #{model.number  || model.year}
               
         .right.col-10
             .billTo
                 p Bill To :
-                p #{model.client.company}
-                p address : #{model.client.address}
-                p phone : #{model.client.phone}
-                p Tel : #{model.client.email}
+                p #{model.clientInfo.company}
+                p #{model.clientInfo.address}
+                p #{model.clientInfo.phone}
+                p #{model.clientInfo.email}
         .col.col-24
           .space  
       main
@@ -304,6 +305,8 @@ html
               tr
                 td.service #{item.itemName}
                   span #{item.description}
+                  br
+                  span Note: #{model.note}
                 td.qty #{item.quantity}  
                 td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                 td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
@@ -316,9 +319,8 @@ html
             tr
               td.grand.total(colspan='3') GRAND TOTAL
               td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-        
       .col.col-24
-          .space     
+          .space
       footer.footer-invoice
         | Invoice was created on a computer and is valid without the signature and seal.
           

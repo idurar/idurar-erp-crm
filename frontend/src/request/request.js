@@ -10,6 +10,8 @@ axios.defaults.withCredentials = true;
 const request = {
   create: async ({ entity, jsonData }) => {
     console.log('🚀 Create Request 🚀 ~ file: request.js ~ line 19 ~ create: ~ jsonData', jsonData);
+    console.log(entity);
+    console.log(jsonData);
 
     try {
       const response = await axios.post(entity + '/create', jsonData);

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
-import { validatePhoneNumber } from '@/utils/helpers';
+import { Form, Input } from 'antd';
 
 export default function CustomerForm({ isUpdateForm = false }) {
   const validateEmptyString = (_, value) => {
@@ -71,7 +70,6 @@ export default function CustomerForm({ isUpdateForm = false }) {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         name="phone"
         label="Phone"
@@ -103,6 +101,22 @@ export default function CustomerForm({ isUpdateForm = false }) {
           {
             required: true,
             message: 'Please input your E-mail!',
+          },
+          {
+            validator: validateEmptyString,
+            message: 'Please input valid value!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="address"
+        label="Address"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your address!',
           },
           {
             validator: validateEmptyString,

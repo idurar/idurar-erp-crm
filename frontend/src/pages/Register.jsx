@@ -1,19 +1,29 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Form, Button, Layout, Col, Divider } from 'antd';
 import { Typography } from 'antd';
 
+import { register } from '@/redux/auth/actions';
+import { selectAuth } from '@/redux/auth/selectors';
 import RegisterForm from '@/forms/RegisterForm';
 import AuthLayout from '@/layout/AuthLayout';
-import SideContent from '@/components/SideContent';
 
 import logo from '@/style/images/logo.png';
+import SideContent from '@/components/SideContent';
 
 const { Content } = Layout;
 const { Title } = Typography;
 
 const RegisterPage = () => {
-  const onFinish = () => {};
+  const { loading: isLoading } = useSelector(selectAuth);
+
+  const dispatch = useDispatch();
+  const onFinish = (values) => {
+    // TODO: Set the role on register to admin do backend call to get the
+    // admin rol this is set as default rol on backend setup
+    dispatch(register({ registerData: values }));
+  };
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>
@@ -35,13 +45,13 @@ const RegisterPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign up</Title>
+          <Title level={1}>Sign Up</Title>
 
           <Divider />
           <div className="site-layout-content">
             <Form
-              name="signup"
-              className="login-form"
+              name="normal_register"
+              className="register-form"
               initialValues={{
                 remember: true,
               }}
@@ -49,10 +59,16 @@ const RegisterPage = () => {
             >
               <RegisterForm />
               <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button" size="large">
-                  Register
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  loading={isLoading}
+                  size="large"
+                >
+                  Register now
                 </Button>
-                Or <a href="/login">already have account? Login</a>
+                Or <a href="/login">Sign in!</a>
               </Form.Item>
             </Form>
           </div>

@@ -36,9 +36,7 @@ export default function Payment({ config, currentItem }) {
     return () => controller.abort();
   }, [currentItem]);
 
-  useEffect(() => {
-    console.info('itemslist', itemslist);
-  }, [itemslist]);
+  useEffect(() => {}, [itemslist]);
 
   return (
     <>

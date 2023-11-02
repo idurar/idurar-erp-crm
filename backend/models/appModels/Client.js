@@ -58,6 +58,14 @@ const clientSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  zipcode: {
+    type: String,
+    trim: true,
+  },
+  city: {
+    type: String,
+    trim: true,
+  },
   country: {
     type: String,
     trim: true,
