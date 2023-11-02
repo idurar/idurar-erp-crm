@@ -276,6 +276,9 @@ const lang = {
   or: 'Or',
   sign_in: 'Sign In',
   sign_up: 'Sign Up',
+  select_date: "Select Date",
+  men: "Men",
+  women: "Women",
 };
 
 export default lang;

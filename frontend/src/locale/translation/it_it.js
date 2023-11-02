@@ -276,6 +276,9 @@ const lang = {
   or: 'Oppure',
   sign_in: 'Accedi',
   sign_up: 'Registrati',
+  select_date: "Seleziona Data",
+  men: "Uomo",
+  women: "Donna",
 };
 
 export default lang;
