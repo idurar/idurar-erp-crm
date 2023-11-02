@@ -22,7 +22,6 @@ import { BASE_URL } from '@/config/serverApiConfig';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectAuth);
-  console.log('🚀 ~ file: index.jsx:23 ~ HeaderContent ~ currentAdmin:', currentAdmin);
 
   const { SubMenu } = Menu;
 
@@ -32,7 +31,7 @@ export default function HeaderContent() {
         <Avatar
           size="large"
           className="last"
-          src={`${BASE_URL}${currentAdmin?.photo}`}
+          src={currentAdmin?.photo ? `${BASE_URL}${currentAdmin?.photo}` : photo}
           style={{ float: 'left' }}
         />
         <div className="info">
@@ -80,7 +79,10 @@ export default function HeaderContent() {
     <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
       <Dropdown overlay={profileDropdown} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}
-        <Avatar className="last" src={`${BASE_URL}${currentAdmin?.photo}`} />
+        <Avatar
+          className="last"
+          src={currentAdmin?.photo ? `${BASE_URL}${currentAdmin?.photo}` : photo}
+        />
         {/* </Badge> */}
       </Dropdown>
 

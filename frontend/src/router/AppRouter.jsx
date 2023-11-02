@@ -15,8 +15,6 @@ const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/
 
 const SubMenuRouter = ({ subMenuRouter }) => {
   subMenuRouter.map((subMenu) => {
-    console.log('🚀 ~ file: AppRouter.jsx ~ line 25 ~ routeItem.hasSubMenu.map ~ subMenu', subMenu);
-
     return (
       <PrivateRoute
         key={subMenu.component}

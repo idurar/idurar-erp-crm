@@ -21,9 +21,15 @@ const beforeUpload = (file) => {
 export default function UploadImg() {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+
   const handleChange = (info) => {
+    console.log(info);
     if (info.file.status === 'uploading') {
       setLoading(true);
+      return;
+    }
+    if (info.file.status === 'error') {
+      setLoading(false);
       return;
     }
     if (info.file.status === 'done') {
@@ -34,6 +40,7 @@ export default function UploadImg() {
       });
     }
   };
+
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -46,13 +53,14 @@ export default function UploadImg() {
       </div>
     </div>
   );
+
   return (
     <Upload
       name="avatar"
       listType="picture-card"
       className="avatar-uploader"
       showUploadList={false}
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      action="/single/upload/:model/:fieldId"
       beforeUpload={beforeUpload}
       onChange={handleChange}
       style={{ borderRadius: '50%' }}

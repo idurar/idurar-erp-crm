@@ -15,7 +15,7 @@ const AdminInfo = ({ config }) => {
   const { ENTITY_NAME } = config;
   const currentAdmin = useSelector(selectAuth);
   const { result } = useSelector(selectCurrentItem);
-
+  console.log(currentAdmin);
   return (
     <>
       <PageHeader
@@ -51,7 +51,7 @@ const AdminInfo = ({ config }) => {
         <Col xs={{ span: 24 }} sm={{ span: 7 }} md={{ span: 5 }}>
           <img
             className="last left circle pad5"
-            src={`${BASE_URL}${currentAdmin?.photo}`}
+            src={currentAdmin?.photo ? `${BASE_URL}${currentAdmin?.photo}` : photo}
             style={{
               width: '100px',
               height: '100px',

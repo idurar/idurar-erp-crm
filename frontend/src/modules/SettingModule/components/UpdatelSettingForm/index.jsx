@@ -22,7 +22,6 @@ export default function UpdatelSettingForm({ config, children }) {
       settings.push({ settingKey: key, settingValue: value });
     }
 
-    console.log('🚀 ~ file: index.jsx:20 ~ onSubmit ~ settings:', settings);
     dispatch(settingsAction.updateMany({ entity, jsonData: { settings } }));
   };
   const currentSettings = result[settingsCategory];

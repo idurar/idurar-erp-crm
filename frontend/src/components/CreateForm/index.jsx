@@ -16,8 +16,6 @@ export default function CreateForm({ config, formElements }) {
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
-    console.log('🚀 ~ file: index.jsx ~ line 19 ~ onSubmit ~ fieldsValue', fieldsValue);
-
     // Manually trim values before submission
     const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];

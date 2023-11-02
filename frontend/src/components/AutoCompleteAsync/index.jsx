@@ -103,7 +103,15 @@ export default function AutoCompleteAsync({
       onSearch={onSearch}
       onChange={(newValue) => {
         if (onChange) {
-          onChange(newValue[outputValue] || newValue);
+          if (newValue) {
+            const selectedValue = newValue.hasOwnProperty(outputValue)
+              ? newValue[outputValue]
+              : newValue;
+            onChange(selectedValue);
+          } else {
+            // Handle the case when newValue is undefined or null
+            onChange(null);
+          }
         }
       }}
     >
