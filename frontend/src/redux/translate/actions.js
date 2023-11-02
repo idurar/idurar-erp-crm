@@ -1,11 +1,7 @@
 import * as actionTypes from './types';
-import { request } from '@/request';
 
-import en_us from '@/locale/translation/en_us';
-import fr_fr from '@/locale/translation/fr_fr';
-import zh_cn from '@/locale/translation/zh_cn';
-import ar_eg from '@/locale/translation/ar_eg';
-import ro_ro from '@/locale/translation/ro_ro';
+import translation from '@/locale/translation';
+import languages from '@/locale/languages';
 
 export const translateAction = {
   resetState: () => (dispatch) => {
@@ -18,22 +14,11 @@ export const translateAction = {
       type: actionTypes.REQUEST_LOADING,
     });
 
-    let data = null;
-
-    if (value === 'zh_cn') {
-      data = zh_cn;
-    } else if (value === 'fr_fr') {
-      data = fr_fr;
-    } else if (value === 'ro_ro') {
-      data = ro_ro;
-    } else if (value === 'ar_eg') {
-      data = ar_eg;
-    } else {
-      data = en_us;
-    }
-
+    let data = translation[value];
+    const isRtl = languages.find((l) => l.value === value).isRtl || false;
     const LANG_STATE = {
       result: data,
+      isRtl: isRtl,
       langCode: value,
       isLoading: false,
       isSuccess: false,

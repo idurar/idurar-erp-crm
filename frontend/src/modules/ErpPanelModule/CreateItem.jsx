@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Button, Tag, Form, Divider } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -37,10 +37,10 @@ export default function CreateItem({ config, CreateForm }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
   }, []);
-  let { entity, CREATE_ENTITY } = config;
+  let { entity } = config;
 
   const { isLoading, isSuccess, result } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
@@ -53,7 +53,6 @@ export default function CreateItem({ config, CreateForm }) {
 
     if (items) {
       items.map((item) => {
-        console.log({ item });
         if (item) {
           if (item.offerPrice && item.quantity) {
             let offerTotal = calculate.multiply(item['quantity'], item['offerPrice']);

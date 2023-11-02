@@ -1,4 +1,5 @@
 import { Tag, Divider, Row, Col, Spin, Tooltip } from 'antd';
+import {useMoney} from "@/settings";
 
 export default function AnalyticSummaryCard({
   title,
@@ -7,6 +8,7 @@ export default function AnalyticSummaryCard({
   prefix,
   isLoading = false,
 }) {
+    const { moneyFormatter } = useMoney();
   return (
     <Col
       className="gutter-row"
@@ -72,7 +74,7 @@ export default function AnalyticSummaryCard({
                       textOverflow: 'ellipsis',
                     }}
                   >
-                    {tagContent ? tagContent : '$0.00'}
+                    {tagContent ? tagContent : moneyFormatter({ amount: 0 })}
                   </Tag>
                 </Tooltip>
               )}
