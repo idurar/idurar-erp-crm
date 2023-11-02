@@ -1,4 +1,3 @@
-import React from 'react';
 import currency from 'currency.js';
 
 import { useSelector } from 'react-redux';
@@ -7,9 +6,11 @@ import storePersist from '@/redux/storePersist';
 import { selectMoneyFormat } from '@/redux/settings/selectors';
 
 const useMoney = () => {
-  const moneyFormat = useSelector(selectMoneyFormat);
+  const money_format_settings = useSelector(selectMoneyFormat);
 
-  const settingsState = storePersist.get('settings') ? storePersist.get('settings') : moneyFormat;
+  const settingsState = storePersist.get('settings')
+    ? storePersist.get('settings')
+    : { money_format_settings };
 
   const {
     currency_symbol,

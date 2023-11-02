@@ -5,6 +5,7 @@ const Model = mongoose.model('Invoice');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 
 const { calculate } = require('@/helpers');
+const { increaseBySettingKey } = require('@/middlewares/settings');
 const schema = require('./schemaValidate');
 
 const create = async (req, res) => {
@@ -47,6 +48,7 @@ const create = async (req, res) => {
     let paymentStatus = calculate.sub(total, discount) === 0 ? 'paid' : 'unpaid';
 
     body['paymentStatus'] = paymentStatus;
+    body['createdBy'] = req.admin._id;
     // Creating a new document in the collection
     const result = await new Model(body).save();
     const fileId = 'invoice-' + result._id + '.pdf';
@@ -58,6 +60,8 @@ const create = async (req, res) => {
       }
     ).exec();
     // Returning successfull response
+
+    increaseBySettingKey({ settingKey: 'last_invoice_number' });
 
     custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
 
@@ -73,7 +77,7 @@ const create = async (req, res) => {
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: error,
         message: 'Required fields are not supplied',
       });
     } else {
@@ -81,8 +85,8 @@ const create = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        error: err,
-        message: 'Oops there is an Error',
+        error: error,
+        message: error.message,
       });
     }
   }

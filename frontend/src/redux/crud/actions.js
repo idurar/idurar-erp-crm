@@ -69,15 +69,19 @@ export const crud = {
       }
     },
   create:
-    ({ entity, jsonData }) =>
+    ({ entity, jsonData, withUpload = false }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
         keyState: 'create',
         payload: null,
       });
-
-      let data = await request.create({ entity, jsonData });
+      let data = null;
+      if (withUpload) {
+        data = await request.createAndUpload({ entity, jsonData });
+      } else {
+        data = await request.create({ entity, jsonData });
+      }
 
       if (data.success === true) {
         dispatch({
@@ -128,7 +132,7 @@ export const crud = {
       }
     },
   update:
-    ({ entity, id, jsonData }) =>
+    ({ entity, id, jsonData, withUpload = false }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -136,7 +140,13 @@ export const crud = {
         payload: null,
       });
 
-      let data = await request.update({ entity, id, jsonData });
+      let data = null;
+
+      if (withUpload) {
+        data = await request.updateAndUpload({ entity, id, jsonData });
+      } else {
+        data = await request.update({ entity, id, jsonData });
+      }
 
       if (data.success === true) {
         dispatch({

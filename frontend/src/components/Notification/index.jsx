@@ -19,7 +19,7 @@ const Notifications = () => {
 
   return (
     <div className="notifications whiteBox shadow">
-      <div className="pad10">
+      <div className="pad20">
         <p className="strong">Notifications</p>
         <Button type="text" shape="circle" className="del-notif">
           <DeleteOutlined />

@@ -18,38 +18,44 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
     await custom.generatePdf(
       modelName,
       { filename: modelName, format: 'A4' },
-      result.invoice ?? result,
+      result,
       async (fileLocation) => {
-        return res.download(fileLocation, (err) => {
-          if (err) res.status(500).json({ success: false, message: "Couldn't find file" });
+        return res.download(fileLocation, (error) => {
+          if (error)
+            res.status(500).json({
+              success: false,
+              result: null,
+              message: "Couldn't find file",
+              error: error.message,
+            });
         });
       }
     );
-  } catch (err) {
-    // If err is thrown by Mongoose due to required validations
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    // If error is thrown by Mongoose due to required validations
+    if (error.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: error.message,
         message: 'Required fields are not supplied',
       });
-    } else if (err.name == 'BSONTypeError') {
-      // If err is thrown by Mongoose due to invalid ID
+    } else if (error.name == 'BSONTypeError') {
+      // If error is thrown by Mongoose due to invalid ID
       return res.status(400).json({
         success: false,
         result: null,
-        error: err,
+        error: error.message,
         message: 'Invalid ID',
       });
     } else {
       // Server Error
-      console.log(err);
+      console.log(error);
       return res.status(500).json({
         success: false,
         result: null,
-        error: err,
-        message: 'Oops there is an Error',
+        error: error.message,
+        message: error.message,
       });
     }
   }

@@ -3,9 +3,11 @@ import { Tag } from 'antd';
 
 import QuoteDataTableModule from '@/modules/QuoteModule/QuoteDataTableModule';
 import { useMoney } from '@/settings';
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Quote() {
+  const translate = useLanguage();
+  const entity = 'quote';
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {
@@ -15,40 +17,40 @@ export default function Quote() {
   const entityDisplayLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
-      title: 'Number',
+      title: translate('Number'),
       dataIndex: 'number',
     },
     {
-      title: 'Client',
+      title: translate('Client'),
       dataIndex: ['client', 'company'],
     },
     {
-      title: 'Date',
+      title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'Due date',
+      title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format('DD/MM/YYYY');
       },
     },
     {
-      title: 'SubTotal',
+      title: translate('Sub Total'),
       dataIndex: 'subTotal',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
     },
     {
-      title: 'Total',
+      title: translate('Total'),
       dataIndex: 'total',
-      render: (amount) => moneyRowFormatter({ amount }),
+      onCell: (total) => moneyRowFormatter({ amount: total }),
     },
 
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =
@@ -61,11 +63,24 @@ export default function Quote() {
             : status === 'expired'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
   ];
 
+  const Labels = {
+    PANEL_TITLE: translate('quote'),
+    DATATABLE_TITLE: translate('quote_list'),
+    ADD_NEW_ENTITY: translate('add_new_quote'),
+    ENTITY_NAME: translate('quote'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+  };
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
     dataTableColumns,

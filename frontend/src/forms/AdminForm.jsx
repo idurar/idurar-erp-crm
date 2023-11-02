@@ -1,44 +1,56 @@
-import SelectAsync from '@/components/SelectAsync';
 import { Form, Input, Select } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { message, Upload, Button } from 'antd';
+
+import useLanguage from '@/locale/useLanguage';
+
+const beforeUpload = (file) => {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('You can only upload JPG/PNG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('Image must smaller than 2MB!');
+  }
+  return isJpgOrPng && isLt2M;
+};
 
 export default function AdminForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
-        label="Name"
+        label={translate('first Name')}
         name="name"
         rules={[
           {
             required: true,
-            message: 'Please input your Name!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="Surname"
+        label={translate('last Name')}
         name="surname"
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
           },
         ]}
       >
         <Input autoComplete="off" />
       </Form.Item>
       <Form.Item
-        label="E-mail"
+        label={translate('email')}
         name="email"
         rules={[
           {
             required: true,
-            message: 'Please input your E-mail!',
           },
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
           },
         ]}
       >
@@ -47,12 +59,11 @@ export default function AdminForm({ isUpdateForm = false }) {
 
       {!isUpdateForm && (
         <Form.Item
-          label="Password"
+          label={translate('Password')}
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please input your Password!',
             },
           ]}
         >
@@ -60,19 +71,31 @@ export default function AdminForm({ isUpdateForm = false }) {
         </Form.Item>
       )}
       <Form.Item
-        label="Role"
+        label={translate('Role')}
         name="role"
         rules={[
           {
             required: true,
-            message: 'This Field is required',
           },
         ]}
       >
         <Select>
-          <Select.Option value="admin">Admin</Select.Option>
-          <Select.Option value="staff">Staff</Select.Option>
+          <Select.Option value="admin">Admin (Super Admin)</Select.Option>
+          <Select.Option value="staffAdmin">Staff Admin (Create,Read,Update,Delete)</Select.Option>
+          <Select.Option value="staff">Staff (Create,Read,Update)</Select.Option>
+          <Select.Option value="createOnly">Create and Read Only</Select.Option>
+          <Select.Option value="readOnly">Read Only</Select.Option>
         </Select>
+      </Form.Item>
+      <Form.Item
+        name="file"
+        label={translate('Photo')}
+        valuePropName="fileList"
+        getValueFromEvent={(e) => e.fileList}
+      >
+        <Upload beforeUpload={beforeUpload}>
+          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        </Upload>
       </Form.Item>
     </>
   );

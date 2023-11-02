@@ -30,6 +30,7 @@ const search = async (req, res) => {
 
     for (let admin of result) {
       admin.password = undefined;
+      admin.loggedSessions = undefined;
     }
     if (result.length >= 1) {
       return res.status(200).json({
@@ -48,7 +49,7 @@ const search = async (req, res) => {
     return res.status(500).json({
       success: false,
       result: [],
-      message: 'Oops there is an Error',
+      message: error.message,
       error,
     });
   }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import dayjs from 'dayjs';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,14 +6,14 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 import { selectUpdatedItem } from '@/redux/crud/selectors';
 
-import { isDate } from '@/utils/helpers';
-import { selectCurrentItem } from '@/redux/crud/selectors';
+import useLanguage from '@/locale/useLanguage';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
-export default function UpdateForm({ config, formElements }) {
+export default function UpdateForm({ config, formElements, withUpload = false }) {
   let { entity } = config;
+  const translate = useLanguage();
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
 
@@ -32,7 +32,15 @@ export default function UpdateForm({ config, formElements }) {
 
   const onSubmit = (fieldsValue) => {
     const id = current._id;
-    dispatch(crud.update({ entity, id, jsonData: fieldsValue }));
+
+    if (fieldsValue.file && withUpload) {
+      fieldsValue.file = fieldsValue.file[0].originFileObj;
+    }
+    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
+    dispatch(crud.update({ entity, id, jsonData: trimmedValues, withUpload }));
   };
   useEffect(() => {
     if (current) {
@@ -98,7 +106,7 @@ export default function UpdateForm({ config, formElements }) {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Save
+              {translate('Save')}
             </Button>
           </Form.Item>
           <Form.Item
@@ -107,7 +115,7 @@ export default function UpdateForm({ config, formElements }) {
               paddingLeft: '5px',
             }}
           >
-            <Button onClick={showCurrentRecord}>Cancel</Button>
+            <Button onClick={showCurrentRecord}>{translate('Cancel')}</Button>
           </Form.Item>
         </Form>
       </Loading>

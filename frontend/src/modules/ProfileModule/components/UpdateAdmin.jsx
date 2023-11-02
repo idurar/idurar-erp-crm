@@ -1,38 +1,52 @@
 import { useProfileContext } from '@/context/profileContext';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Form, PageHeader, Row } from 'antd';
-import React, { useEffect } from 'react';
+import { Button, Col, Form, Row } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminForm from '@/forms/AdminForm';
-import UploadImg from './UploadImg';
-import { crud } from '@/redux/crud/actions';
-import { selectCurrentItem } from '@/redux/crud/selectors';
+
+import { updateProfile } from '@/redux/auth/actions';
+
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+
+import useLanguage from '@/locale/useLanguage';
 
 const UpdateAdmin = ({ config }) => {
+  const translate = useLanguage();
+
   const { profileContextAction } = useProfileContext();
   const { updatePanel } = profileContextAction;
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
 
-  const { result } = useSelector(selectCurrentItem);
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue(result);
-  }, [result]);
+    form.setFieldsValue(currentAdmin);
+  }, [currentAdmin]);
 
   const handleSubmit = () => {
     form.submit();
   };
 
   const onSubmit = (fieldsValue) => {
-    const id = config.id;
-    dispatch(crud.update({ entity: 'admin', id, jsonData: fieldsValue }));
+    const { _id: id } = currentAdmin;
+
+    if (fieldsValue.file) {
+      fieldsValue.file = fieldsValue.file[0].originFileObj;
+    }
+    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
+    dispatch(updateProfile({ entity: 'profile', id, jsonData: trimmedValues }));
   };
 
   return (
-    <>
+    <div>
       <PageHeader
         onBack={() => updatePanel.close()}
         title={ENTITY_NAME}
@@ -43,7 +57,7 @@ const UpdateAdmin = ({ config }) => {
             key={`${uniqueId()}`}
             icon={<CloseCircleOutlined />}
           >
-            Close
+            {translate('Close')}
           </Button>,
           <Button
             key={`${uniqueId()}`}
@@ -55,7 +69,7 @@ const UpdateAdmin = ({ config }) => {
             icon={<SaveOutlined />}
             htmlType="submit"
           >
-            save
+            {translate('Save')}
           </Button>,
         ]}
         style={{
@@ -63,9 +77,7 @@ const UpdateAdmin = ({ config }) => {
         }}
       ></PageHeader>
       <Row align="start">
-        <Col xs={{ span: 24 }} sm={{ span: 6 }} md={{ span: 4 }}>
-          <UploadImg />
-        </Col>
+        <Col xs={{ span: 24 }} sm={{ span: 6 }} md={{ span: 4 }}></Col>
         <Col xs={{ span: 16 }}>
           <Form
             form={form}
@@ -78,7 +90,7 @@ const UpdateAdmin = ({ config }) => {
           </Form>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

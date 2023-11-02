@@ -2,13 +2,16 @@ import { useProfileContext } from '@/context/profileContext';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 import { Button, Form, Input, Modal } from 'antd';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import useLanguage from '@/locale/useLanguage';
 
 const PasswordModal = ({ config }) => {
+  const translate = useLanguage();
+
   const { state, profileContextAction } = useProfileContext();
   const { modal, updatePanel } = profileContextAction;
   const { update, read, passwordModal } = state;
-  const modalTitle = 'Update password';
+  const modalTitle = translate('Update Password');
 
   const [passForm] = Form.useForm();
 
@@ -30,7 +33,7 @@ const PasswordModal = ({ config }) => {
   return (
     <Modal
       title={modalTitle}
-      visible={passwordModal.isOpen}
+      open={passwordModal.isOpen}
       onCancel={modal.close}
       okText="Update"
       onOk={() => {
@@ -40,12 +43,11 @@ const PasswordModal = ({ config }) => {
     >
       <Form form={passForm} layout="vertical" onFinish={handelSubmit}>
         <Form.Item
-          label="New Password"
+          label={translate('New Password')}
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please input your Password!',
               min: 8,
             },
           ]}
@@ -54,13 +56,12 @@ const PasswordModal = ({ config }) => {
           <Input.Password />
         </Form.Item>
         <Form.Item
-          label="Confirm Password"
+          label={translate('Confirm Password')}
           name="repassword"
           hasFeedback
           rules={[
             {
               required: true,
-              message: 'Please confirm your password!',
             },
             ({ getFieldValue }) => ({
               validator(_, value) {

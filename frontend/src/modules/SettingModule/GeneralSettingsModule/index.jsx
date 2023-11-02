@@ -1,11 +1,16 @@
 import SetingsSection from '../components/SetingsSection';
-import SettingModuleLayout from '../components/SettingModuleLayout';
+import UpdateSettingModule from '../components/UpdateSettingModule';
 import GeneralSettingForm from './forms/GeneralSettingForm';
+import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingsModule({ config }) {
+  const translate = useLanguage();
   return (
-    <SettingModuleLayout config={config}>
-      <SetingsSection title="Company" description="Update your company name and logo">
+    <UpdateSettingModule config={config}>
+      <SetingsSection
+        title={translate('Company')}
+        description={translate('Update your company informations')}
+      >
         <GeneralSettingForm />
       </SetingsSection>
 
@@ -16,6 +21,6 @@ export default function GeneralSettingsModule({ config }) {
       <SetingsSection title="Other details" description="Add your website and other links">
         <GeneralSettingForm />
       </SetingsSection> */}
-    </SettingModuleLayout>
+    </UpdateSettingModule>
   );
 }

@@ -32,13 +32,13 @@ const readBySettingKey = async (req, res) => {
         message: 'we found this document by this settingKey: ' + settingKey,
       });
     }
-  } catch (err) {
+  } catch (error) {
     // Server Error
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error',
-      error: err,
+      message: error.message,
+      error: error,
     });
   }
 };

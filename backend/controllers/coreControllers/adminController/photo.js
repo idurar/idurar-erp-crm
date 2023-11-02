@@ -46,7 +46,8 @@ const photo = async (req, res) => {
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error in photo controller',
+      error: error,
+      message: error.message,
       error,
     });
   }

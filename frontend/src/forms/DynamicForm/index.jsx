@@ -1,5 +1,5 @@
 import { Input, Form, Checkbox, Select, InputNumber } from 'antd';
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 // mapping of our components
 const componentMapping = {
   input: Input,

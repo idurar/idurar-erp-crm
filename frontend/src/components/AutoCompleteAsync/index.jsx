@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { request } from '@/request';
 import useOnFetch from '@/hooks/useOnFetch';
 import { useDebounce } from 'react-use';
-import { Select } from 'antd';
+import { Select, Empty } from 'antd';
 
 export default function AutoCompleteAsync({
   entity,
@@ -96,9 +96,8 @@ export default function AutoCompleteAsync({
       allowClear
       placeholder={'Search Here'}
       defaultActiveFirstOption={false}
-      showArrow={false}
       filterOption={false}
-      notFoundContent={searching ? '... Searching' : 'Not Found'}
+      notFoundContent={searching ? '... Searching' : <Empty />}
       value={currentValue}
       onSearch={onSearch}
       onChange={(newValue) => {
@@ -113,6 +112,11 @@ export default function AutoCompleteAsync({
             onChange(null);
           }
         }
+      }}
+      onClear={() => {
+        setOptions([]);
+        setCurrentValue(undefined);
+        setSearching(false);
       }}
     >
       {selectOptions.map((optionField) => (

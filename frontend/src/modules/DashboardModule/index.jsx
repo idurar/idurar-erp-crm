@@ -1,7 +1,7 @@
-import React from 'react';
 import { Tag, Row, Col } from 'antd';
+import useLanguage from '@/locale/useLanguage';
 
-import { DashboardLayout } from '@/layout';
+import {useMoney} from "@/settings";
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
@@ -12,38 +12,9 @@ import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
 
-const dataTableColumns = [
-  {
-    title: 'N#',
-    dataIndex: 'number',
-  },
-  {
-    title: 'Client',
-    dataIndex: ['client', 'company'],
-  },
-
-  {
-    title: 'Total',
-    dataIndex: 'total',
-
-    render: (total) => `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (status) => {
-      let color = status === 'Draft' ? 'volcano' : 'green';
-
-      return <Tag color={color}>{status.toUpperCase()}</Tag>;
-    },
-  },
-];
-
-function formatCurrency(value) {
-  return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}
-
 export default function DashboardModule() {
+  const translate = useLanguage();
+  const { moneyFormatter } = useMoney();
   const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
     request.summary({ entity: 'invoice' })
   );
@@ -57,33 +28,64 @@ export default function DashboardModule() {
   );
 
   const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
-    request.summary({ entity: 'payment/invoice' })
+    request.summary({ entity: 'payment' })
   );
 
   const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
     request.summary({ entity: 'client' })
   );
 
+  const dataTableColumns = [
+    {
+      title: translate('number'),
+      dataIndex: 'number',
+    },
+    {
+      title: translate('Client'),
+      dataIndex: ['client', 'company'],
+    },
+
+    {
+      title: translate('Total'),
+      dataIndex: 'total',
+
+      render: (total) => moneyFormatter({ amount: total }),
+    },
+    {
+      title: translate('Status'),
+      dataIndex: 'status',
+      render: (status) => {
+        let color = status === 'Draft' ? 'volcano' : 'green';
+
+        return <Tag color={color}>{translate(status)}</Tag>;
+      },
+    },
+  ];
+
   const entityData = [
     {
       result: invoiceResult,
       isLoading: invoiceLoading,
       entity: 'invoice',
+      title: translate('Invoices preview'),
     },
     {
       result: quoteResult,
       isLoading: quoteLoading,
       entity: 'quote',
+      title: translate('quotes preview'),
     },
     {
       result: offerResult,
       isLoading: offerLoading,
       entity: 'offer',
+      title: translate('offers preview'),
     },
     {
       result: paymentResult,
       isLoading: paymentLoading,
       entity: 'payment',
+      title: translate('payments preview'),
     },
   ];
 
@@ -95,26 +97,26 @@ export default function DashboardModule() {
     return (
       <SummaryCard
         key={index}
-        title={data?.entity === 'paymentInvoice' ? 'Payment' : data?.entity}
+        title={data?.entity === 'payment' ? translate('Payment') : translate(data?.entity)}
         tagColor={
           data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
         }
-        prefix={'This month'}
+        prefix={translate('This month')}
         isLoading={isLoading}
-        tagContent={result?.total && formatCurrency(result?.total)}
+        tagContent={result?.total && moneyFormatter({ amount: result?.total }) }
       />
     );
   });
 
   const statisticCards = entityData.map((data, index) => {
-    const { result, entity, isLoading } = data;
+    const { result, entity, isLoading, title } = data;
 
     if (entity === 'payment') return null;
 
     return (
       <PreviewCard
         key={index}
-        title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`}
+        title={title}
         isLoading={isLoading}
         entity={entity}
         statistics={
@@ -130,25 +132,25 @@ export default function DashboardModule() {
   });
 
   return (
-    <DashboardLayout>
-      <Row gutter={[24, 24]}>
+    <>
+      <Row gutter={[32, 32]}>
         {cards}
         <SummaryCard
-          title={'Due Balance'}
+          title={translate('Due Balance')}
           tagColor={'red'}
-          prefix={'Not Paid'}
+          prefix={translate('Not Paid')}
           isLoading={invoiceLoading}
           tagContent={
             invoiceResult?.total_undue &&
-            `$ ${invoiceResult?.total_undue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+              moneyFormatter({ amount: invoiceResult?.total_undue })
           }
         />
       </Row>
       <div className="space30"></div>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[32, 32]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
-          <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
-            <Row className="pad10" gutter={[0, 0]}>
+          <div className="whiteBox shadow" style={{ height: 458 }}>
+            <Row className="pad20" gutter={[0, 0]}>
               {statisticCards}
             </Row>
           </div>
@@ -162,26 +164,26 @@ export default function DashboardModule() {
         </Col>
       </Row>
       <div className="space30"></div>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[32, 32]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
-          <div className="whiteBox shadow" style={{ height: '100%' }}>
-            <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Invoices</h3>
-            </div>
+          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+            <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+              {translate('Recent Invoices')}
+            </h3>
 
             <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
           </div>
         </Col>
 
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
-          <div className="whiteBox shadow" style={{ height: '100%' }}>
-            <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Quotes</h3>
-            </div>
+          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+            <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+              {translate('Recent Quotes')}
+            </h3>
             <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
           </div>
         </Col>
       </Row>
-    </DashboardLayout>
+    </>
   );
 }
