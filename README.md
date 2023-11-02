@@ -1,19 +1,39 @@
-# ERP / CRM Open Source based on (Node.js/React.js)
+<div align="center">
+    <a href="https://www.idurarapp.com/">
+  <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
+    </a>
+    <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
+    <p align="center">
+        <p>IDURAR ERP CRM | Simple To Use </p>
+    </p>
+    
+  [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+
+</div>
+
+**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
 ```
-Dont forget to give a ⭐️ to this project ... Happy coding! 🤩
+🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
 ```
 
-![Open Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
-![Open Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647100-9dfd6ee5-f873-42a8-8923-88bd0cf53606.png)
+## Our Sponsors
 
-## Open Source ERP / CRM App
+  <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
+    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
+  </a>
 
-IDURAR is Open Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+#
 
-**Live App Demo** : [https://idurarapp.com/open-source-erp-crm/](https://idurarapp.com/open-source-erp-crm/) "Please use chrome"
+![Open "Fair-Code" Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
+
+## Open "Fair-Code" Source ERP / CRM App
+
+IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+
+**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
 `username : admin@demo.com password : admin123`
 
@@ -37,16 +57,15 @@ cd idurar-erp-crm
 
 - add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
 
-#### Step 3: Create the Environment File
+#### Step 3: Edit the Environment File
 
-- Create a file named .variables.env in the root directory.
-- Copy all variables from tmp.variables.env .
-- Paste the copied variables inside .variables.env.
+- Check a file named .env in the /backend directory.
+
   This file will store environment variables for the project to run.
 
 #### Step 4: Update MongoDB URI
 
-In the .variables.env file, find the line that reads:
+In the .env file, find the line that reads:
 
 `DATABASE="your-mongodb-uri"`
 
@@ -54,7 +73,7 @@ Replace "your-mongodb-uri" with the actual URI of your MongoDB database.
 
 #### Step 5: Install Backend Dependencies
 
-In your terminal, navigate to the root directory of the project and run the following command to install the backend dependencies:
+In your terminal, navigate to the /backend directory of the project and run the following command to install the backend dependencies:
 
 ```bash
 npm install
@@ -64,7 +83,7 @@ This command will install all the required packages specified in the package.jso
 
 #### Step 6: Run Setup Script
 
-While still in the root directory of the project, execute the following command to run the setup script:
+While still in the /backend directory of the project, execute the following command to run the setup script:
 
 ```bash
 node setup/setup.js
@@ -108,21 +127,83 @@ This command will start the frontend server, and you'll be able to access the we
 
 :exclamation: :warning:` If you encounter an OpenSSL error while running the frontend server, follow these additional steps:`
 
+Reason behind error: This is caused by the node.js V17 compatible issues with OpenSSL, see [this](https://github.com/nodejs/node/issues/40547) and [this](https://github.com/webpack/webpack/issues/14532) issue on GitHub.
+
+Try one of these and error will be solved
+
+- > Downgrade to Node.js v16.
+
+- > Enable legacy OpenSSL provider
+
+Here is how you can enable legacy OpenSSL provider
+
+- On Unix-like (Linux, macOS, Git bash, etc.)
+
 ```bash
 export NODE_OPTIONS=--openssl-legacy-provider
 ```
+
+- On Windows command prompt:
+
+```bash
+set NODE_OPTIONS=--openssl-legacy-provider
+```
+
+- On PowerShell:
+
+```bash
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
+```
+
+Here is [reference](https://github.com/webpack/webpack/issues/14532#issuecomment-947012063) about enabling legacy OpenSSL provider
+
+After trying above solutions, run below command
 
 ```bash
 npm run start
 ```
 
+> If you still facing issue, then follow [this stackoverflow thread](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported). It has so many different types of opinions. You definitely have solution after going through the thread.
+
 ### Website Login Credentials
 
 Once the website is up and running, you can log in using the following credentials:
 
-`username : admin@demo.com password : admin123`
+`username : admin@demo.com - password : admin123`
 
 Now you should be all set to run the project locally on your machine and explore its features.
+
+## Contributing
+
+1.[How to contribute](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#how-to-contribute)
+
+2.[Reporting issues](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#reporting-issues)
+
+3.[Working on issues ](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#working-on-issues)
+
+4.[Submitting pull requests](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#submitting-pull-requests)
+
+5.[Commit Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#commit-guidelines)
+
+6.[Coding Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#coding-guidelines)
+
+7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
+
+## Star History
+
+Here you can see the proxy of our growth on the platform and that we're only getting started.
+
+But if you'd like to check it out more news and website you can always check it out on: https://www.idurarapp.com/.
+
+[![](image.png)](https://star-history.com/#idurar/idurar-erp-crm)
+
+## License
+
+IDURAR is [fair-code](http://faircode.io) distributed under the
+[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
+[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
+
+Proprietary licenses are available for enterprise customers. [Get in touch](mailto:hello@idurarapp.com)
 
 ## Show your support
 

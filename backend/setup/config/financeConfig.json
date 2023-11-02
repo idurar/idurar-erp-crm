@@ -1,0 +1,87 @@
+[
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "currency_list",
+    "settingValue": ["eur", "usd", "gpd", "inr", "dzd", "cad"],
+    "valueType": "array",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_invoice_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_quote_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_offer_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_payment_number",
+    "settingValue": 1,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "invoice_prefix",
+    "settingValue": "inv-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "quote_prefix",
+    "settingValue": "qt-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "offer_prefix",
+    "settingValue": "ofr-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "payment_prefix",
+    "settingValue": "pm-",
+    "valueType": "string",
+    "isCoreSetting": true
+  },
+
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "current_invoice_year",
+    "settingValue": 2023,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "current_quote_year",
+    "settingValue": 2023,
+    "valueType": "number",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "current_offer_year",
+    "settingValue": 2023,
+    "valueType": "number",
+    "isCoreSetting": true
+  }
+]

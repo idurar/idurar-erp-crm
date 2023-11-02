@@ -1,15 +1,11 @@
 import React from 'react';
-import { Form, Input, Checkbox } from 'antd';
-import {
-  UserOutlined,
-  LockOutlined,
-  HomeOutlined,
-  IdcardOutlined,
-  EditOutlined,
-  UsergroupAddOutlined,
-} from '@ant-design/icons';
+import { Form, Input } from 'antd';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+
+import useLanguage from '@/locale/useLanguage';
 
 export default function RegisterForm() {
+  const translate = useLanguage();
   return (
     <>
       <Form.Item
@@ -32,7 +28,6 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your name!',
           },
         ]}
       >
@@ -77,7 +72,9 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
+          },
+          {
+            type: 'email',
           },
         ]}
       >
@@ -93,7 +90,6 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Password!',
           },
         ]}
       >
@@ -103,10 +99,28 @@ export default function RegisterForm() {
           size="large"
         />
       </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+      <Form.Item
+        name="confirm_password"
+        rules={[
+          {
+            required: true,
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
+        ]}
+        hasFeedback
+      >
+        <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          placeholder="Confirm_password"
+          size="large"
+        />
       </Form.Item>
     </>
   );

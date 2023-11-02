@@ -12,8 +12,8 @@ export default function MoneyInputFormItem({ updatePrice, value = 0, readOnly = 
         onChange={updatePrice}
         value={value}
         controls={false}
-        addonAfter={money.currencyPosition === 'after' ? money.currencySymbol : undefined}
-        addonBefore={money.currencyPosition === 'before' ? money.currencySymbol : undefined}
+        addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+        addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
         formatter={(value) => money.amountFormatter({ amount: value })}
       />
     </Form.Item>

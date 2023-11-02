@@ -9,15 +9,21 @@ const TopCard = ({ title, cardContent }) => {
   return (
     <div
       className="whiteBox shadow"
-      style={{ color: '#595959', fontSize: 13, height: '106px', marginBottom: '24px' }}
+      style={{
+        color: '#595959',
+        fontSize: 13,
+        height: '70px',
+        minHeight: 'auto',
+        marginBottom: '24px',
+      }}
     >
-      <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
-        <h3 style={{ color: '#22075e', marginBottom: 0 }}>{title}</h3>
+      <div className="pad20 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
+        <h2 style={{ color: '#22075e', marginBottom: 0, marginTop: 0 }}>{title}</h2>
       </div>
-      <Divider style={{ padding: 0, margin: 0 }}></Divider>
+      {/* <Divider style={{ padding: 0, margin: 0 }}></Divider>
       <div className="pad15" style={{ textAlign: 'center', justifyContent: 'center' }}>
         {cardContent}
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -33,7 +39,7 @@ export default function SettingsLayout({
       <Content
         style={{
           padding: '30px 40px',
-          margin: '70px auto',
+          margin: '0px auto',
           width: '100%',
           maxWidth: '1100px',
         }}
@@ -47,8 +53,8 @@ export default function SettingsLayout({
             lg={{ span: 18 }}
           >
             <div className="whiteBox shadow" style={{ minHeight: '480px' }}>
-              <Row className="pad10" gutter={[0, 0]}>
-                {children}
+              <Row className="pad40" gutter={[0, 0]}>
+                <Col span={24}>{children}</Col>
               </Row>
             </div>
           </Col>

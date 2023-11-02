@@ -1,0 +1,16 @@
+[
+  {
+    "settingCategory": "crm_settings",
+    "settingKey": "lead_source",
+    "settingValue": ["recomendation", "facebook", "linkedin", "newsletter", "website"],
+    "valueType": "array",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "crm_settings",
+    "settingKey": "lead_status",
+    "settingValue": ["new", "contacted", "waiting", "in negosation", "won", "loose"],
+    "valueType": "array",
+    "isCoreSetting": true
+  }
+]

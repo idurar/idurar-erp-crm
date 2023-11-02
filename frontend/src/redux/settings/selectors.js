@@ -4,31 +4,30 @@ export const selectSettings = (state) => state.settings;
 
 export const selectCurrentSettings = createSelector(
   [selectSettings],
-  (settings) => settings.current.result
+  (settings) => settings.result
 );
 
 export const selectMoneyFormat = createSelector(
   [selectCurrentSettings],
-  (settings) => settings.moneyFormat
-);
-export const selectCurrency = createSelector(
-  [selectMoneyFormat],
-  (moneyFormat) => moneyFormat.currencySymbol
+  (settings) => settings.money_format_settings
 );
 
-export const selectCurrencyPosition = createSelector(
-  [selectMoneyFormat],
-  (moneyFormat) => moneyFormat.currencyPosition
+export const selectAppSettings = createSelector(
+  [selectCurrentSettings],
+  (settings) => settings.app_settings
 );
 
-export const selectCreatedSettings = createSelector(
-  [selectSettings],
-  (settings) => settings.create
+export const selectFinanceSettings = createSelector(
+  [selectCurrentSettings],
+  (settings) => settings.finance_settings
 );
 
-export const selectUpdatedSettings = createSelector(
-  [selectSettings],
-  (settings) => settings.update
+export const selectCrmSettings = createSelector(
+  [selectCurrentSettings],
+  (settings) => settings.crm_settings
 );
 
-export const selectReadSettings = createSelector([selectSettings], (settings) => settings.read);
+export const selectCompanySettings = createSelector(
+  [selectCurrentSettings],
+  (settings) => settings.company_settings
+);

@@ -1,29 +1,31 @@
 import * as actionTypes from './types';
 import * as authService from '@/auth';
-
-import history from '@/utils/history';
+import { request } from '@/request';
 
 export const login =
   ({ loginData }) =>
   async (dispatch) => {
     dispatch({
-      type: actionTypes.LOADING_REQUEST,
-      payload: { loading: true },
+      type: actionTypes.REQUEST_LOADING,
     });
     const data = await authService.login({ loginData });
 
     if (data.success === true) {
       window.localStorage.setItem('isLoggedIn', true);
-      window.localStorage.setItem('auth', JSON.stringify(data.result.admin));
+      const auth_state = {
+        current: data.result,
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: true,
+      };
+      window.localStorage.setItem('auth', JSON.stringify(auth_state));
       dispatch({
-        type: actionTypes.LOGIN_SUCCESS,
-        payload: data.result.admin,
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: data.result,
       });
-      history.push('/');
     } else {
       dispatch({
-        type: actionTypes.FAILED_REQUEST,
-        payload: data,
+        type: actionTypes.REQUEST_FAILED,
       });
     }
   };
@@ -33,29 +35,28 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
-  history.push('/login');
 };
 
-export const register =
-  ({ registerData }) =>
+export const updateProfile =
+  ({ entity, id, jsonData }) =>
   async (dispatch) => {
     dispatch({
-      type: actionTypes.LOADING_REQUEST,
-      payload: { loading: true },
+      type: actionTypes.REQUEST_LOADING,
+      payload: null,
     });
-    const data = await authService.register({ registerData });
+
+    let data = await request.updateAndUpload({ entity, id, jsonData });
+
     if (data.success === true) {
-      window.localStorage.setItem('isLoggedIn', true);
-      window.localStorage.setItem('auth', JSON.stringify(data.result.admin));
+      window.localStorage.setItem('auth', JSON.stringify(data.result));
       dispatch({
-        type: actionTypes.REGISTER_SUCCESS,
-        payload: data.result.admin,
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: data.result,
       });
-      history.push('/');
     } else {
       dispatch({
-        type: actionTypes.FAILED_REQUEST,
-        payload: data,
+        type: actionTypes.REQUEST_FAILED,
+        payload: null,
       });
     }
   };

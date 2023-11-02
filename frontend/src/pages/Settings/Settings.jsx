@@ -1,62 +1,107 @@
-import { useState, useEffect } from 'react';
-import { Menu, Tabs, Button, Divider } from 'antd';
+import { useState } from 'react';
+import { Menu } from 'antd';
+import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-design/icons';
 import { SettingsLayout } from '@/layout';
+import Visibility from '@/components/Visibility';
 
+import AppSettings from './AppSettings';
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
+import MoneyFormatSettings from './MoneyFormatSettings';
 
-const RightMenu = ({ activeTab, handleTabChange }) => {
-  const menuItems = [
-    { key: 'generalSettings', label: 'generalSettings' },
-    { key: 'paymentSettings', label: 'paymentSettings' },
-    { key: 'invoiceSettings', label: 'invoiceSettings' },
-  ];
-  const menuList = menuItems.map((item, index) => (
-    <Button
-      type={item.key == activeTab ? 'default' : 'text'}
-      key={item.key}
-      style={{ marginBottom: '10px' }}
-      block
-      onClick={() => handleTabChange(item.key)}
-    >
-      {item.label}
-    </Button>
-  ));
-  return <div className="pad10">{menuList}</div>;
-};
+import useLanguage from '@/locale/useLanguage';
 
-const Visibility = ({ isVisible = false, children }) => {
-  const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
-  return <div style={show}>{children}</div>;
+const settingsArray = [
+  <GeneralSettings />,
+  <AppSettings />,
+  <MoneyFormatSettings />,
+  <PaymentSettings />,
+  <InvoiceSettings />,
+];
+
+const RightMenu = ({ activeTab, items }) => {
+  return (
+    <div className="pad20" style={{ width: '100%' }}>
+      <Menu
+        mode={'vertical'}
+        selectedKeys={[activeTab]}
+        items={items}
+        style={{ width: '100%' }}
+      ></Menu>
+    </div>
+  );
 };
 
 export default function Settings() {
-  const [state, setState] = useState('generalSettings');
+  const translate = useLanguage();
+  const items = [
+    {
+      key: 'generalSettings',
+      label: (
+        <span onClick={() => handleTabChange('generalSettings')}>
+          {translate('General Settings')}
+        </span>
+      ),
+      icon: <SettingOutlined />,
+    },
+    {
+      key: 'appSettings',
+      label: (
+        <span onClick={() => handleTabChange('appSettings')}>{translate('App Settings')}</span>
+      ),
+      icon: <SettingOutlined />,
+    },
+    {
+      key: 'moneyFormatSettings',
+      label: (
+        <span onClick={() => handleTabChange('moneyFormatSettings')}>
+          {translate('Currency Settings')}
+        </span>
+      ),
+      icon: <SettingOutlined />,
+    },
+    {
+      key: 'paymentSettings',
+      label: (
+        <span onClick={() => handleTabChange('paymentSettings')}>
+          {translate('Finance Settings')}
+        </span>
+      ),
+      icon: <CreditCardOutlined />,
+    },
+    {
+      key: 'invoiceSettings',
+      label: (
+        <span onClick={() => handleTabChange('invoiceSettings')}>{translate('Crm Settings')}</span>
+      ),
+      icon: <FileTextOutlined />,
+    },
+  ];
+  const [tabKey, setTabKey] = useState(items[0].key);
+  const [tabTitle, setTabTitle] = useState(items[0].label);
 
   const isActive = (tab) => {
-    return state === tab ? true : false;
+    return tabKey === tab ? true : false;
   };
 
   const handleTabChange = (tab) => {
-    setState(tab);
+    const menuItem = items.find((item) => item.key === tab);
+    setTabTitle(menuItem.label);
+    setTabKey(tab);
   };
 
   return (
     <SettingsLayout
-      topCardContent="Generals Settings"
-      topCardTitle="Settings"
-      bottomCardContent={<RightMenu activeTab={state} handleTabChange={handleTabChange} />}
+      topCardContent={tabTitle}
+      topCardTitle={translate('Settings')}
+      bottomCardContent={<RightMenu activeTab={tabKey} items={items} />}
     >
-      <Visibility isVisible={isActive('generalSettings')}>
-        <GeneralSettings />
-      </Visibility>
-      <Visibility isVisible={isActive('paymentSettings')}>
-        <PaymentSettings />
-      </Visibility>
-      <Visibility isVisible={isActive('invoiceSettings')}>
-        <InvoiceSettings />
-      </Visibility>
+      {settingsArray.map((setting, index) => (
+        <Visibility key={items[index].key + index} isOpen={isActive(items[index].key)}>
+          {setting}
+        </Visibility>
+      ))}
     </SettingsLayout>
   );
 }

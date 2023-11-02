@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function SelectAsync({
   entity,
@@ -9,19 +11,22 @@ export default function SelectAsync({
   outputValue = '_id',
   value,
   onChange,
+  redirectLabel = '',
+  withRedirect = false,
+  urlToRedirect = '/',
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
+
+  const navigate = useNavigate();
 
   const asyncList = () => {
     return request.list({ entity });
   };
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {
-    isSuccess ? setOptions(result) : setOptions([]);
-    setIsLoading(fetchIsLoading);
-  }, [fetchIsLoading]);
+    isSuccess && setOptions(result);
+  }, [isSuccess]);
 
   const labels = (optionField) => {
     return displayLabels.map((x) => optionField[x]).join(' ');
@@ -34,18 +39,30 @@ export default function SelectAsync({
     }
   }, [value]);
 
+  const handleSelectChange = (newValue) => {
+    if (newValue === 'redirectURL') {
+      // Navigate to another page when "Add payment" is selected
+      navigate(urlToRedirect);
+    } else {
+      // Handle other select options
+      if (onChange) {
+        onChange(newValue[outputValue] || newValue);
+      }
+    }
+  };
+
   return (
     <Select
-      loading={isLoading}
-      disabled={isLoading}
+      loading={fetchIsLoading}
+      disabled={fetchIsLoading}
       value={currentValue}
-      onChange={(newValue) => {
-        // setCurrentValue(newValue[outputValue] || newValue);
-        if (onChange) {
-          onChange(newValue[outputValue] || newValue);
-        }
-      }}
+      onChange={handleSelectChange}
     >
+      {selectOptions.length === 0 && withRedirect && (
+        <Select.Option key="redirectURL" value="redirectURL">
+          <PlusCircleOutlined /> {redirectLabel}
+        </Select.Option>
+      )}
       {selectOptions.map((optionField) => (
         <Select.Option
           key={optionField[outputValue] || optionField}

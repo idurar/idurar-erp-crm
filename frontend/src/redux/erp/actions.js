@@ -2,7 +2,7 @@ import * as actionTypes from './types';
 import { request } from '@/request';
 
 export const erp = {
-  resetState: () => async (dispatch) => {
+  resetState: () => (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,
     });
@@ -10,7 +10,7 @@ export const erp = {
 
   resetAction:
     ({ actionType }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.RESET_ACTION,
         keyState: actionType,
@@ -20,7 +20,7 @@ export const erp = {
 
   currentItem:
     ({ data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ITEM,
         payload: { ...data },
@@ -29,7 +29,7 @@ export const erp = {
 
   currentAction:
     ({ actionType, data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ACTION,
         keyState: actionType,
@@ -38,7 +38,7 @@ export const erp = {
     },
 
   list:
-    ({ entity, options = { page: 1 } }) =>
+    ({ entity, options = { page: 1, items: 10 } }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -53,7 +53,7 @@ export const erp = {
           items: data.result,
           pagination: {
             current: parseInt(data.pagination.page, 10),
-            pageSize: 10,
+            pageSize: options?.items || 10,
             total: parseInt(data.pagination.count, 10),
           },
         };
@@ -79,7 +79,7 @@ export const erp = {
         keyState: 'create',
         payload: null,
       });
-      console.log('jsonData action redux', jsonData);
+
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
@@ -195,6 +195,10 @@ export const erp = {
     ({ entity, id }) =>
     async (dispatch) => {
       dispatch({
+        type: actionTypes.RESET_ACTION,
+        keyState: 'delete',
+      });
+      dispatch({
         type: actionTypes.REQUEST_LOADING,
         keyState: 'delete',
         payload: null,
@@ -207,6 +211,10 @@ export const erp = {
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'delete',
           payload: data.result,
+        });
+        dispatch({
+          type: actionTypes.RESET_ACTION,
+          keyState: 'delete',
         });
       } else {
         dispatch({

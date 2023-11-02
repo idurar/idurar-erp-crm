@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
+import { useAppContext } from '@/context/appContext';
 import { selectDeletedItem } from '@/redux/crud/selectors';
 import { valueByString } from '@/utils/helpers';
 
+import useLanguage from '@/locale/useLanguage';
+
 export default function DeleteModal({ config }) {
+  const translate = useLanguage();
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = 'Do you want delete : ',
-    modalTitle = 'Remove Item',
+    deleteMessage = translate('are_you_sure_you_want_to_delete'),
+    modalTitle = translate('delete_confirmation'),
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, crudContextAction } = useCrudContext();
+  const { appContextAction } = useAppContext();
+  const { panel, collapsedBox, readBox } = crudContextAction;
+  const { navMenu } = appContextAction;
   const { isModalOpen } = state;
   const { modal } = crudContextAction;
   const [displayItem, setDisplayItem] = useState('');
@@ -37,6 +44,9 @@ export default function DeleteModal({ config }) {
   const handleOk = () => {
     const id = current._id;
     dispatch(crud.delete({ entity, id }));
+    readBox.close();
+    panel.close();
+    navMenu.collapse();
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
@@ -44,7 +54,7 @@ export default function DeleteModal({ config }) {
   return (
     <Modal
       title={modalTitle}
-      visible={isModalOpen}
+      open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}
