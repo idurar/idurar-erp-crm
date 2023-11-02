@@ -280,6 +280,12 @@ const lang = {
   men: "Uomo",
   women: "Donna",
   other: "Altro",
+  click_to_upload: "Clicca per caricare",
+  admin_super_admin: "Amministratore (Super Admin)",
+  staff_admin_crud: "Staff Admin (Crea, leggi, aggiorna, cancella)",
+  staff_cru: "Staff (Crea, leggi, aggiorna)",
+  create_and_read_only: "Solo crea e leggi",
+  read_only: "Sola lettura",
 };
 
 export default lang;

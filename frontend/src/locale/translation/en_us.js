@@ -280,6 +280,12 @@ const lang = {
   men: "Men",
   women: "Women",
   other: "Other",
+  click_to_upload: "Click to Upload",
+  admin_super_admin: "Admin (Super Admin)",
+  staff_admin_crud: "Staff Admin (Create,Read,Update,Delete)",
+  staff_cru: "Staff (Create,Read,Update)",
+  create_and_read_only: "Create and Read Only",
+  read_only: "Read Only",
 };
 
 export default lang;
