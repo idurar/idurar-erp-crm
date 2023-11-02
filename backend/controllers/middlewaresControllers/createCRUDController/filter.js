@@ -15,12 +15,12 @@ const filter = async (Model, req, res) => {
       result,
       message: 'Successfully found all documents where equal to : ' + req.params.equal,
     });
-  } catch (err) {
+  } catch (error) {
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error',
-      error: err,
+      message: error.message,
+      error: error,
     });
   }
 };

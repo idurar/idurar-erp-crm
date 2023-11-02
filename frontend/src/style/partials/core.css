@@ -1,0 +1,163 @@
+.centerAbsolute {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 32px;
+  height: 38px;
+  margin-left: -16px;
+  margin-top: -19px;
+}
+.whiteBox {
+  background: #fff;
+  border-radius: 6px;
+  width: 100%;
+  min-height: 100px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.shadow {
+  box-shadow: 0px 0px 20px 3px rgba(150, 190, 238, 0.15);
+}
+.shadow:hover {
+  box-shadow: 0px 0px 30px 8px rgba(150, 190, 238, 0.25);
+}
+.line {
+  border-top: 1px solid #edf0f5;
+  width: 100%;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+.pad5 {
+  padding: 5px;
+}
+.pad10 {
+  padding: 10px;
+}
+.pad15 {
+  padding: 15px;
+}
+.pad20 {
+  padding: 20px;
+}
+.pad25 {
+  padding: 25px;
+}
+.pad30 {
+  padding: 30px;
+}
+.pad33 {
+  padding: 35px;
+}
+.pad40 {
+  padding: 40px;
+}
+
+.mrg5 {
+  margin: 5px;
+}
+.mrg10 {
+  margin: 10px;
+}
+.mrg15 {
+  margin: 15px;
+}
+.mrg20 {
+  margin: 20px;
+}
+.mrg25 {
+  margin: 20px;
+}
+.mrg30 {
+  margin: 20px;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+.center {
+  justify-content: center;
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.space10 {
+  height: 20px;
+  width: 100%;
+  display: block;
+}
+.space20 {
+  height: 20px;
+  width: 100%;
+  display: block;
+}
+.space30 {
+  height: 30px;
+  width: 100%;
+  display: block;
+}
+.space40 {
+  height: 30px;
+  width: 100%;
+  display: block;
+}
+.space50 {
+  height: 50px;
+  width: 100%;
+  display: block;
+}
+.space60 {
+  height: 60px;
+  width: 100%;
+  display: block;
+}
+.space70 {
+  height: 70px;
+  width: 100%;
+  display: block;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.layoutPadding {
+  position: relative;
+  padding: 50px 40px;
+}
+
+.dashboardSpacing {
+  padding: 30px 40px;
+  margin: 70px auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .layoutPadding {
+    padding: 50px 20px;
+  }
+
+  .dashboardSpacing {
+    padding: 30px 20px;
+    margin: 70px auto;
+  }
+}

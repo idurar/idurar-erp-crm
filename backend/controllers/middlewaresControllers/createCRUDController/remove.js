@@ -26,12 +26,12 @@ const remove = async (Model, req, res) => {
         message: 'Successfully Deleted the document by id: ' + req.params.id,
       });
     }
-  } catch (err) {
+  } catch (error) {
     return res.status(500).json({
       success: false,
       result: null,
-      message: 'Oops there is an Error',
-      error: err,
+      message: error.message,
+      error: error,
     });
   }
 };

@@ -5,7 +5,6 @@ const path = require('path');
 const cors = require('cors');
 
 const cookieParser = require('cookie-parser');
-require('dotenv').config({ path: '.variables.env' });
 
 const helpers = require('./helpers');
 
@@ -28,12 +27,16 @@ const corsOptions = {
 
 // setting cors at one place for all the routes
 // putting cors as first in order to avoid unneccessary requests from unallowed origins
+
+// app.use(function (req, res, next) {
+//   if (req.url.includes('/api')) {
+//     cors(corsOptions)(req, res, next);
+//   } else {
+//     cors()(req, res, next);
+//   }
+// });
 app.use(function (req, res, next) {
-  if (req.url.includes('/api')) {
-    cors(corsOptions)(req, res, next);
-  } else {
-    cors()(req, res, next);
-  }
+  cors(corsOptions)(req, res, next);
 });
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is

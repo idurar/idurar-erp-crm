@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,7 +43,7 @@ export default function Delete({ config }) {
   return (
     <Modal
       title={modalTitle}
-      visible={deleteModal.isOpen}
+      open={deleteModal.isOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}

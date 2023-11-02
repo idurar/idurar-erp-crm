@@ -1,0 +1,84 @@
+.ant-layout {
+  background: #f9fafc !important;
+}
+.site-layout .site-layout-background {
+  background: #fff;
+}
+[data-theme='dark'] .site-layout .site-layout-background {
+  background: #141414;
+}
+.ant-layout-sider-trigger {
+  background: #fff;
+  border-top: 1px solid #edf0f5;
+  border-right: 1px solid #edf0f5;
+  color: #4f5d75;
+}
+.ant-layout-sider-zero-width-trigger {
+  top: 5px;
+  right: 10px;
+  color: #001529;
+  background: none;
+  font-size: 20px;
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border: none !important;
+}
+
+.headerIcon .ant-dropdown-menu {
+  border-radius: 6px;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+}
+.headerIcon .ant-dropdown-menu-item:hover,
+.headerIcon .ant-dropdown-menu-item.ant-dropdown-menu-item-active {
+  background: none;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.login-form button[type='submit'] {
+  margin-bottom: 20px;
+}
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.ant-table-thead > tr > th {
+  font-weight: 700;
+}
+.ant-typography strong {
+  font-weight: 700;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700 !important;
+}
+
+.ant-menu-inline {
+  padding-bottom: 50px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}

@@ -1,11 +1,22 @@
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 import UpdateOfferModule from '@/modules/OfferModule/UpdateOfferModule';
 
 export default function OfferUpdate() {
+  const translate = useLanguage();
 
-  const config = {
-    ...configPage,
-    //customConfig,
+  const entity = 'offer';
+  const Labels = {
+    PANEL_TITLE: translate('offer'),
+    DATATABLE_TITLE: translate('offer_list'),
+    ADD_NEW_ENTITY: translate('add_new_offer'),
+    ENTITY_NAME: translate('offer'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
-  return <UpdateOfferModule config={config} />;
+
+  const configPage = {
+    entity,
+    ...Labels,
+  };
+  return <UpdateOfferModule config={configPage} />;
 }

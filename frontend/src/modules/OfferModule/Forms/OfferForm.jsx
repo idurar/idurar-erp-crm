@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
 
-import { DatePicker } from '@/components/CustomAntd';
+import { DatePicker } from 'antd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
@@ -13,8 +13,25 @@ import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
+import { selectFinanceSettings } from '@/redux/settings/selectors';
+
+import { useSelector } from 'react-redux';
+import useLanguage from '@/locale/useLanguage';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
+  const { last_offer_number } = useSelector(selectFinanceSettings);
+
+  if (!last_offer_number) {
+    return <></>;
+  }
+
+  return <LoadOfferForm subTotal={subTotal} current={current} />;
+}
+
+function LoadOfferForm({ subTotal = 0, current = null }) {
+  const translate = useLanguage();
+  const { last_offer_number } = useSelector(selectFinanceSettings);
+  const [lastNumber, setLastNumber] = useState(() => last_offer_number + 1);
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
@@ -25,9 +42,10 @@ export default function OfferForm({ subTotal = 0, current = null }) {
 
   useEffect(() => {
     if (current) {
-      const { taxRate = 0, year } = current;
+      const { taxRate = 0, year, number } = current;
       setTaxRate(taxRate);
       setCurrentYear(year);
+      setLastNumber(number);
     }
   }, [current]);
   useEffect(() => {
@@ -48,11 +66,10 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         <Col className="gutter-row" span={9}>
           <Form.Item
             name="lead"
-            label="Lead"
+            label={translate('Lead')}
             rules={[
               {
                 required: true,
-                message: 'Please input your client!',
               },
             ]}
           >
@@ -66,13 +83,12 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="Number"
+            label={translate('number')}
             name="number"
-            initialValue={1}
+            initialValue={lastNumber}
             rules={[
               {
                 required: true,
-                message: 'Please input quote number!',
               },
             ]}
           >
@@ -81,13 +97,12 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="year"
+            label={translate('year')}
             name="year"
             initialValue={currentYear}
             rules={[
               {
                 required: true,
-                message: 'Please input quote year!',
               },
             ]}
           >
@@ -96,35 +111,34 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="status"
+            label={translate('status')}
             name="status"
             rules={[
               {
                 required: false,
-                message: 'Please input quote status!',
               },
             ]}
             initialValue={'draft'}
           >
             <Select
               options={[
-                { value: 'draft', label: 'Draft' },
-                { value: 'pending', label: 'Pending' },
-                { value: 'sent', label: 'Sent' },
-                { value: 'accepted', label: 'Accepted' },
+                { value: 'draft', label: translate('Draft') },
+                { value: 'pending', label: translate('Pending') },
+                { value: 'sent', label: translate('Pending') },
+                { value: 'accepted', label: translate('Accepted') },
               ]}
             ></Select>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>
-          <Form.Item label="Note" name="note">
+          <Form.Item label={translate('Note')} name="note">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
           <Form.Item
             name="date"
-            label="Date"
+            label={translate('Date')}
             rules={[
               {
                 required: true,
@@ -139,7 +153,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         <Col className="gutter-row" span={7}>
           <Form.Item
             name="expiredDate"
-            label="Expire Date"
+            label={translate('Expire Date')}
             rules={[
               {
                 required: true,
@@ -155,19 +169,19 @@ export default function OfferForm({ subTotal = 0, current = null }) {
       <Divider dashed />
       <Row gutter={[12, 12]} style={{ position: 'relative' }}>
         <Col className="gutter-row" span={5}>
-          <p>Item</p>
+          <p>{translate('Item')}</p>
         </Col>
         <Col className="gutter-row" span={7}>
-          <p>Description</p>
+          <p>{translate('Description')}</p>
         </Col>
         <Col className="gutter-row" span={3}>
-          <p>Quantity</p>
+          <p>{translate('Quantity')}</p>{' '}
         </Col>
         <Col className="gutter-row" span={4}>
-          <p>Price</p>
+          <p>{translate('Price')}</p>
         </Col>
         <Col className="gutter-row" span={5}>
-          <p>Total</p>
+          <p>{translate('Total')}</p>
         </Col>
       </Row>
       <Form.List name="items">
@@ -184,7 +198,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
                 icon={<PlusOutlined />}
                 ref={addField}
               >
-                Add field
+                {translate('Add field')}
               </Button>
             </Form.Item>
           </>
@@ -196,7 +210,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Quote
+                {translate('Save')}
               </Button>
             </Form.Item>
           </Col>
@@ -207,7 +221,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
                 paddingTop: '5px',
               }}
             >
-              Sub Total :
+              {translate('Sub Total')} :
             </p>
           </Col>
           <Col className="gutter-row" span={5}>
@@ -221,7 +235,6 @@ export default function OfferForm({ subTotal = 0, current = null }) {
               rules={[
                 {
                   required: false,
-                  message: 'Please input your taxRate!',
                 },
               ]}
               initialValue="0"
@@ -249,7 +262,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
                 paddingTop: '5px',
               }}
             >
-              Total :
+              {translate('Total')} :
             </p>
           </Col>
           <Col className="gutter-row" span={5}>

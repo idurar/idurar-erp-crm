@@ -2,12 +2,14 @@ import dayjs from 'dayjs';
 import { Tag } from 'antd';
 import React from 'react';
 
-import CrudModule from '@/modules/CrudModule';
+import CrudModule from '@/modules/CrudModule/CrudModule';
 import LeadForm from '@/forms/LeadForm';
 
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Lead() {
+  const translate = useLanguage();
+  const entity = 'lead';
   const searchConfig = {
     displayLabels: ['firstname', 'company'],
     searchFields: 'firstname,company',
@@ -17,55 +19,55 @@ export default function Lead() {
 
   const readColumns = [
     {
-      title: 'First Name',
+      title: translate('First Name'),
       dataIndex: 'firstName',
     },
 
     {
-      title: 'Last Name',
+      title: translate('Last Name'),
       dataIndex: 'lastName',
     },
     {
-      title: 'Company',
+      title: translate('Company'),
       dataIndex: 'company',
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: 'email',
     },
     {
-      title: 'Phone',
+      title: translate('Phone'),
       dataIndex: 'phone',
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
     },
   ];
 
   const dataTableColumns = [
     {
-      title: 'First Name',
+      title: translate('First Name'),
       dataIndex: ['firstName'],
     },
     {
-      title: 'Last Name',
+      title: translate('Last Name'),
       dataIndex: ['lastName'],
     },
     {
-      title: 'Company',
+      title: translate('Company'),
       dataIndex: ['company'],
     },
     {
-      title: 'Email',
+      title: translate('Email'),
       dataIndex: ['email'],
     },
     {
-      title: 'Phone',
+      title: translate('Phone'),
       dataIndex: ['phone'],
     },
     {
-      title: 'Status',
+      title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
         let color =
@@ -78,20 +80,32 @@ export default function Lead() {
             : status === 'not interested'
             ? 'orange'
             : 'red';
-        return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+        return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
     {
-      title: 'Created At',
+      title: translate('Created'),
       dataIndex: 'created',
       render: (date) => dayjs(date).format('DD/MM/YYYY'),
     },
   ];
 
+  const Labels = {
+    PANEL_TITLE: translate('lead'),
+    DATATABLE_TITLE: translate('lead_list'),
+    ADD_NEW_ENTITY: translate('add_new_lead'),
+    ENTITY_NAME: translate('lead'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
+  };
+  const configPage = {
+    entity,
+    ...Labels,
+  };
   const config = {
     ...configPage,
-    readColumns,
     dataTableColumns,
+    readColumns,
     searchConfig,
     entityDisplayLabels,
   };

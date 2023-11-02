@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import { useLayoutEffect, useState, useEffect } from 'react';
 import { Row, Col, Button } from 'antd';
 
 import {
@@ -17,6 +17,7 @@ import SearchItem from '@/components/SearchItem';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
+
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
@@ -26,7 +27,10 @@ import UpdatePassword from './UpdatePassword';
 
 import { selectCurrentItem } from '@/redux/crud/selectors';
 
+import useLanguage from '@/locale/useLanguage';
+
 function SidePanelTopContent({ config, formElements }) {
+  const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
   const { panel, advancedBox, modal, readBox, editBox } = crudContextAction;
@@ -77,7 +81,7 @@ function SidePanelTopContent({ config, formElements }) {
               marginLeft: '-5px',
             }}
           >
-            remove
+            {translate('remove')}
           </Button>
           <Button
             onClick={editItem}
@@ -86,7 +90,7 @@ function SidePanelTopContent({ config, formElements }) {
             size="small"
             style={{ float: 'left', marginRight: '5px' }}
           >
-            edit
+            {translate('edit')}
           </Button>
           <Button
             onClick={updatePassword}
@@ -95,7 +99,7 @@ function SidePanelTopContent({ config, formElements }) {
             size="small"
             style={{ float: 'left', marginRight: '0px' }}
           >
-            update password
+            {translate('Update Password')}
           </Button>
         </Col>
 
@@ -103,7 +107,7 @@ function SidePanelTopContent({ config, formElements }) {
         <div className="space10"></div>
       </Row>
       <ReadItem config={config} />
-      <UpdateForm config={config} formElements={formElements} />
+      <UpdateForm config={config} formElements={formElements} withUpload={true} />
       <UpdatePassword config={config} />
     </>
   );
@@ -160,7 +164,9 @@ function AdminCrudModule({ config, createForm, updateForm }) {
     <CrudLayout
       config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
-      sidePanelBottomContent={<CreateForm config={config} formElements={createForm} />}
+      sidePanelBottomContent={
+        <CreateForm config={config} formElements={createForm} withUpload={true} />
+      }
       sidePanelTopContent={<SidePanelTopContent config={config} formElements={updateForm} />}
     >
       <AdminDataTable config={config} />

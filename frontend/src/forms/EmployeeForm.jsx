@@ -1,18 +1,21 @@
 import React from 'react';
-import { Form, Input, Button, Radio, Select, Switch } from 'antd';
-import { DatePicker, TimePicker, Calendar } from '@/components/CustomAntd';
+import { Form, Input, Select } from 'antd';
+import { DatePicker } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
 
+import useLanguage from '@/locale/useLanguage';
+
 export default function EmployeeForm() {
+  const translate = useLanguage();
+
   return (
     <>
       <Form.Item
         name="name"
-        label="Name"
+        label={translate('first name')}
         rules={[
           {
             required: true,
-            message: 'Please input your name!',
           },
         ]}
       >
@@ -20,11 +23,10 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="surname"
-        label="Surname"
+        label={translate('last name')}
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
           },
         ]}
       >
@@ -32,11 +34,10 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="birthday"
-        label="Birthday"
+        label={translate('birthday')}
         rules={[
           {
             required: true,
-            message: 'Please input your birthday!',
           },
         ]}
       >
@@ -44,7 +45,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="birthplace"
-        label="Birthplace"
+        label={translate('birthplace')}
         rules={[
           {
             required: true,
@@ -55,7 +56,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="gender"
-        label="Gender"
+        label={translate('gender')}
         rules={[
           {
             required: true,
@@ -69,15 +70,13 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="email"
-        label="E-mail"
+        label={translate('email')}
         rules={[
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
           },
         ]}
       >
@@ -85,15 +84,13 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="phone"
-        label="Phone Number"
+        label={translate('phone')}
         rules={[
           {
             required: true,
-            message: 'Please input your phone!',
           },
           {
             pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
-            message: 'Please enter valid phone number!',
           },
         ]}
       >
@@ -101,7 +98,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="department"
-        label="Department"
+        label={translate('Department')}
         rules={[
           {
             required: true,
@@ -112,7 +109,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="position"
-        label="Position"
+        label={translate('Position')}
         rules={[
           {
             required: true,
@@ -123,7 +120,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="address"
-        label="Address"
+        label={translate('Address')}
         rules={[
           {
             required: true,
@@ -134,7 +131,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="state"
-        label="State"
+        label={translate('State')}
         rules={[
           {
             required: true,

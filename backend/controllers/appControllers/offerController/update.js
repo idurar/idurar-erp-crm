@@ -40,7 +40,7 @@ const update = async (req, res) => {
     body['taxTotal'] = taxTotal;
     body['total'] = total;
     body['items'] = items;
-    body['pdfPath'] = 'quote-' + req.params.id + '.pdf';
+    body['pdfPath'] = 'offer-' + req.params.id + '.pdf';
     // Find document by id and updates with the required fields
 
     const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
@@ -49,16 +49,16 @@ const update = async (req, res) => {
 
     // Returning successfull response
 
-    custom.generatePdf('Offer', { filename: 'invoice', format: 'A4' }, result);
+    custom.generatePdf('Offer', { filename: 'offer', format: 'A4' }, result);
     return res.status(200).json({
       success: true,
       result,
       message: 'we update this document by this id: ' + req.params.id,
     });
-  } catch (err) {
-    // If err is thrown by Mongoose due to required validations
-    console.log(err);
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    // If error is thrown by Mongoose due to required validations
+    console.log(error);
+    if (error.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
@@ -69,7 +69,7 @@ const update = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        message: 'Oops there is an Error',
+        message: error.message,
       });
     }
   }

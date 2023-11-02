@@ -1,7 +1,5 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const setFilePathToBody = require('@/middlewares/setFilePathToBody');
+
 const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
@@ -15,70 +13,110 @@ const {
   createMultipleUpload,
   uploadSingleToStorage,
   createSingleUpload,
+  singleStorageUpload,
+  setFilePathToBody,
 } = require('@/middlewares/uploadMiddleware');
-// //_______________________________ Admin management_______________________________
 
-var adminPhotoStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/admin');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-const adminPhotoUpload = multer({ storage: adminPhotoStorage });
+const { hasPermission } = require('@/middlewares/permission');
+// //_______________________________ Admin management_______________________________
 
 router
   .route('/admin/create')
-  .post([adminPhotoUpload.single('photo'), setFilePathToBody], catchErrors(adminController.create));
-router.route('/admin/read/:id').get(catchErrors(adminController.read));
-router.route('/admin/update/:id').patch(catchErrors(adminController.update));
-// router.route("/admin/delete/:id").delete(catchErrors(adminController.delete));
-router.route('/admin/search').get(catchErrors(adminController.search));
-router.route('/admin/list').get(catchErrors(adminController.list));
-router.route('/admin/profile').get(catchErrors(adminController.profile));
-router.route('/admin/status/:id').patch(catchErrors(adminController.status));
+  .post(
+    hasPermission(),
+    singleStorageUpload({ entity: 'admin', fieldName: 'file' }),
+    setFilePathToBody('photo'),
+    catchErrors(adminController.create)
+  );
+router.route('/admin/read/:id').get(hasPermission('read'), catchErrors(adminController.read));
+router
+  .route('/admin/update/:id')
+  .patch(
+    hasPermission(),
+    singleStorageUpload({ entity: 'admin', fieldName: 'file' }),
+    setFilePathToBody('photo'),
+    catchErrors(adminController.update)
+  );
+router.route('/admin/delete/:id').delete(hasPermission(), catchErrors(adminController.delete));
+router.route('/admin/search').get(hasPermission('read'), catchErrors(adminController.search));
+router.route('/admin/list').get(hasPermission('read'), catchErrors(adminController.list));
+router.route('/admin/profile').get(hasPermission('read'), catchErrors(adminController.profile));
+router.route('/admin/status/:id').patch(hasPermission('read'), catchErrors(adminController.status));
 router
   .route('/admin/photo')
-  .post([adminPhotoUpload.single('photo'), setFilePathToBody], catchErrors(adminController.photo));
-// router
-//   .route("/admin/password-update/:id")
-//   .patch(catchErrors(adminController.updatePassword));
+  .post(
+    hasPermission(),
+    singleStorageUpload({ entity: 'admin', fieldName: 'file' }),
+    setFilePathToBody('photo'),
+    catchErrors(adminController.photo)
+  );
+router
+  .route('/admin/password-update/:id')
+  .patch(hasPermission(), catchErrors(adminController.updatePassword));
+
+router
+  .route('/profile/update/:id')
+  .patch(
+    hasPermission(),
+    catchErrors(singleStorageUpload({ entity: 'admin', fieldName: 'photo', fileType: 'image' })),
+    catchErrors(adminController.updateProfile)
+  );
 
 // //____________________________________________ API for Global Setting _________________
 
-router.route('/setting/create').post(catchErrors(settingController.create));
-router.route('/setting/read/:id').get(catchErrors(settingController.read));
-router.route('/setting/update/:id').patch(catchErrors(settingController.update));
-//router.route('/setting/delete/:id').delete(catchErrors(settingController.delete));
-router.route('/setting/search').get(catchErrors(settingController.search));
-router.route('/setting/list').get(catchErrors(settingController.list));
-router.route('/setting/listAll').get(catchErrors(settingController.listAll));
-router.route('/setting/filter').get(catchErrors(settingController.filter));
+router
+  .route('/setting/create')
+  .post(hasPermission('create'), catchErrors(settingController.create));
+router.route('/setting/read/:id').get(hasPermission('read'), catchErrors(settingController.read));
+router
+  .route('/setting/update/:id')
+  .patch(hasPermission('update'), catchErrors(settingController.update));
+//router.route('/setting/delete/:id).delete(hasPermission(),catchErrors(settingController.delete));
+router.route('/setting/search').get(hasPermission('read'), catchErrors(settingController.search));
+router.route('/setting/list').get(hasPermission('read'), catchErrors(settingController.list));
+router.route('/setting/listAll').get(hasPermission('read'), catchErrors(settingController.listAll));
+router.route('/setting/filter').get(hasPermission('read'), catchErrors(settingController.filter));
 router
   .route('/setting/readBySettingKey/:settingKey')
-  .get(catchErrors(settingController.readBySettingKey));
-router.route('/setting/listBySettingKey').get(catchErrors(settingController.listBySettingKey));
+  .get(hasPermission('read'), catchErrors(settingController.readBySettingKey));
+router
+  .route('/setting/listBySettingKey')
+  .get(hasPermission('read'), catchErrors(settingController.listBySettingKey));
 router
   .route('/setting/updateBySettingKey/:settingKey?')
-  .patch(catchErrors(settingController.updateBySettingKey));
-router.route('/setting/updateManySetting').patch(catchErrors(settingController.updateManySetting));
+  .patch(hasPermission('update'), catchErrors(settingController.updateBySettingKey));
+router
+  .route('/setting/upload/:settingKey?')
+  .patch(
+    hasPermission('update'),
+    catchErrors(
+      singleStorageUpload({ entity: 'setting', fieldName: 'settingValue', fileType: 'image' })
+    ),
+    catchErrors(settingController.updateBySettingKey)
+  );
+router
+  .route('/setting/updateManySetting')
+  .patch(hasPermission('read'), catchErrors(settingController.updateManySetting));
 
 // //____________________________________________ API for Email Templates _________________
-router.route('/email/create').post(catchErrors(emailController.create));
-router.route('/email/read/:id').get(catchErrors(emailController.read));
-router.route('/email/update/:id').patch(catchErrors(emailController.update));
-router.route('/email/search').get(catchErrors(emailController.search));
-router.route('/email/list').get(catchErrors(emailController.list));
-router.route('/email/listAll').get(catchErrors(emailController.listAll));
-router.route('/email/filter').get(catchErrors(emailController.filter));
+router.route('/email/create').post(hasPermission('create'), catchErrors(emailController.create));
+router.route('/email/read/:id').get(hasPermission('read'), catchErrors(emailController.read));
+router
+  .route('/email/update/:id')
+  .patch(hasPermission('update'), catchErrors(emailController.update));
+router.route('/email/search').get(hasPermission('read'), catchErrors(emailController.search));
+router.route('/email/list').get(hasPermission('read'), catchErrors(emailController.list));
+router.route('/email/listAll').get(hasPermission('read'), catchErrors(emailController.listAll));
+router.route('/email/filter').get(hasPermission('read'), catchErrors(emailController.filter));
 
 // //____________________________________________ API for Upload controller _________________
 
-router.route('/multiple/upload/:model/:fieldId').post(
+router.route('/upload/multiple/:model/:fieldId').post(
+  hasPermission('upload'),
   uploadMultipleToStorage.array('upload', 100),
   createMultipleUpload,
   // need to add proper controller
+  hasPermission(),
   catchErrors((req, res) => {
     if (req.upload.files) {
       return res.status(200).send({
@@ -90,10 +128,12 @@ router.route('/multiple/upload/:model/:fieldId').post(
   })
 );
 
-router.route('/single/upload/:model/:fieldId').post(
+router.route('upload/single/:model/:fieldId').post(
+  hasPermission('upload'),
   uploadSingleToStorage.single('upload'),
   createSingleUpload,
   // need to add proper controller
+  hasPermission(),
   catchErrors((req, res) => {
     if (req.upload && req.file) {
       return res.status(200).send({

@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Form, Button, Layout, Col, Divider } from 'antd';
-import { Typography } from 'antd';
+import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 
 import { register } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
@@ -12,18 +11,16 @@ import AuthLayout from '@/layout/AuthLayout';
 import logo from '@/style/images/logo.png';
 import SideContent from '@/components/SideContent';
 
+import useLanguage from '@/locale/useLanguage';
+
+import logo from '@/style/images/logo.png';
+
 const { Content } = Layout;
 const { Title } = Typography;
 
 const RegisterPage = () => {
-  const { loading: isLoading } = useSelector(selectAuth);
-
-  const dispatch = useDispatch();
-  const onFinish = (values) => {
-    // TODO: Set the role on register to admin do backend call to get the
-    // admin rol this is set as default rol on backend setup
-    dispatch(register({ registerData: values }));
-  };
+  const translate = useLanguage();
+  const onFinish = () => {};
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>
@@ -45,7 +42,7 @@ const RegisterPage = () => {
             />
             <div className="space50"></div>
           </Col>
-          <Title level={1}>Sign Up</Title>
+          <Title level={1}>{translate('Sign up')}</Title>
 
           <Divider />
           <div className="site-layout-content">
@@ -59,16 +56,10 @@ const RegisterPage = () => {
             >
               <RegisterForm />
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                  loading={isLoading}
-                  size="large"
-                >
-                  Register now
+                <Button type="primary" htmlType="submit" className="login-form-button" size="large">
+                  {translate('Register')}
                 </Button>
-                Or <a href="/login">Sign in!</a>
+                {translate('Or')} <a href="/login"> {translate('already have account Login')} </a>
               </Form.Item>
             </Form>
           </div>

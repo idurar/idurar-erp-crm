@@ -1,30 +1,7 @@
-import { parse } from 'querystring';
-import dayjs from 'dayjs';
-function getPageQuery() {
-  parse(window.location.href.split('?')[1]);
-}
-
-/* 
- To get nested object properties.
- admin = {
-    location: {
-        lat: 50,
-        long: 9
-    }
- }
-
- get(admin, 'location.lat')     // 50
- get(admin, 'location.foo.bar') // undefined
-*/
-
 export function get(obj, key) {
   return key.split('.').reduce(function (o, x) {
     return o === undefined || o === null ? o : o[x];
   }, obj);
-
-  // key.split('.').reduce(function(o, x) {
-  //     return (o === undefined || o === null) ? o : o[x];
-  //   }, obj);
 }
 
 Object.byString = function (o, s) {
@@ -160,5 +137,3 @@ export function bindValue(obj, parentElement) {
     element.innerHTML = value;
   });
 }
-
-export default getPageQuery;
