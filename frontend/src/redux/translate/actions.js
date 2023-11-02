@@ -29,6 +29,7 @@ export const translateAction = {
         type: actionTypes.REQUEST_SUCCESS,
         payload: data,
         langCode: value,
+        isRtl: isRtl,
       });
     } else {
       dispatch({
