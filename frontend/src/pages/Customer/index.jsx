@@ -24,11 +24,11 @@ export default function Customer() {
     },
     {
       title: translate('Manager first name'),
-      dataIndex: 'managerSurname',
+      dataIndex: 'managerName',
     },
     {
       title: translate('Manager last name'),
-      dataIndex: 'managerName',
+      dataIndex: 'managerSurname',
     },
     {
       title: translate('Email'),
@@ -46,11 +46,11 @@ export default function Customer() {
     },
     {
       title: translate('Manager first name'),
-      dataIndex: 'managerSurname',
+      dataIndex: 'managerName',
     },
     {
       title: translate('Manager last name'),
-      dataIndex: 'managerName',
+      dataIndex: 'managerSurname',
     },
     {
       title: translate('Email'),
