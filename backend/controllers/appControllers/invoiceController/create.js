@@ -68,7 +68,6 @@ const create = async (req, res) => {
       message: 'Invoice created successfully',
     });
   } catch (err) {
-    console.log(err);
     // If err is thrown by Mongoose due to required validations
     if (err.name == 'ValidationError') {
       return res.status(400).json({

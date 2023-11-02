@@ -62,7 +62,6 @@ const summary = async (req, res) => {
       message: `Successfully fetched the summary of payment invoices for the last ${defaultType}`,
     });
   } catch (error) {
-    console.log('error', error);
     return res.status(500).json({
       success: false,
       result: null,

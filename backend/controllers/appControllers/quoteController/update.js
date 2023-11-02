@@ -57,7 +57,6 @@ const update = async (req, res) => {
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations
-    console.log(err);
     if (err.name == 'ValidationError') {
       return res.status(400).json({
         success: false,

@@ -106,7 +106,6 @@ const summary = async (req, res) => {
       message: `Successfully found all Offers for the last ${defaultType}`,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       result: null,

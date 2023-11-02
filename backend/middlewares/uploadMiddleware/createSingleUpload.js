@@ -2,6 +2,7 @@ const Upload = require('@/models/coreModels/Upload');
 
 // cmiddleware to upload the private document
 const createSingleUpload = async (req, res, next) => {
+  console.log(req);
   const modelName = req.params.model;
   const fieldId = req.params.fieldId;
   const isPublic = req.query.ispublic == true ? true : false;
