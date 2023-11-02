@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('Invoice');
-const ModalPaymentInvoice = mongoose.model('PaymentInvoice');
+const ModalPayment = mongoose.model('Payment');
 
 const remove = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ const remove = async (req, res) => {
         message: 'Invoice not found',
       });
     }
-    const paymentsInvoices = await ModalPaymentInvoice.updateMany(
+    const paymentsInvoices = await ModalPayment.updateMany(
       { invoice: deletedInvoice._id },
       { $set: { removed: true } }
     );
@@ -33,12 +33,12 @@ const remove = async (req, res) => {
       result: deletedInvoice,
       message: 'Invoice deleted successfully',
     });
-  } catch (err) {
+  } catch (error) {
     return res.status(500).json({
       success: false,
       result: null,
-      error: err,
-      message: 'Oops there is an Error',
+      error: error,
+      message: error.message,
     });
   }
 };

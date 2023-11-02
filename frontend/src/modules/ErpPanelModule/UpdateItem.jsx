@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Divider, Space } from 'antd';
+import { useState, useEffect } from 'react';
+import { Form, Divider } from 'antd';
 import dayjs from 'dayjs';
-import { Button, PageHeader, Row, Col, Tag } from 'antd';
+import { Button } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
+import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
-import { useErpContext } from '@/context/erp';
 import calculate from '@/utils/calculate';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory, useParams } from 'react-router-dom';
-import { StatusTag } from '@/components/Tag';
+import { useNavigate, useParams } from 'react-router-dom';
+// import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, config }) {
   let { UPDATE_ENTITY } = config;
@@ -30,11 +31,11 @@ function SaveForm({ form, config }) {
 }
 
 export default function UpdateItem({ config, UpdateForm }) {
+  const translate = useLanguage();
   let { entity, UPDATE_ENTITY } = config;
-  const { erpContextAction } = useErpContext();
-  const { updatePanel } = erpContextAction;
+
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
@@ -79,8 +80,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       form.resetFields();
       setSubTotal(0);
       dispatch(erp.resetAction({ actionType: 'update' }));
-      history.push(`/${entity.toLowerCase()}/read/${id}`);
-      dispatch(erp.list({ entity }));
+      navigate(`/${entity.toLowerCase()}/read/${id}`);
     }
   }, [isSuccess]);
 
@@ -107,20 +107,20 @@ export default function UpdateItem({ config, UpdateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          history.goBack();
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={UPDATE_ENTITY}
         ghost={false}
-        tags={StatusTag(form.getFieldValue().status)}
+        // tags={StatusTag(form.getFieldValue().status)}
         extra={[
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
-              history.push(`/${entity.toLowerCase()}`);
+              navigate(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
           >
-            Cancel
+            {translate('Cancel')}
           </Button>,
           <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
         ]}

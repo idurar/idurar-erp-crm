@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Model = mongoose.model('Quote');
 
 const custom = require('@/controllers/middlewaresControllers/pdfController');
-
+const { increaseBySettingKey } = require('@/middlewares/settings');
 const { calculate } = require('@/helpers');
 
 const create = async (req, res) => {
@@ -33,10 +33,11 @@ const create = async (req, res) => {
     body['taxTotal'] = taxTotal;
     body['total'] = total;
     body['items'] = items;
+    body['createdBy'] = req.admin._id;
 
     // Creating a new document in the collection
     const result = await new Model(body).save();
-    const fileId = 'invoice-' + result._id + '.pdf';
+    const fileId = 'quote-' + result._id + '.pdf';
     const updateResult = await Model.findOneAndUpdate(
       { _id: result._id },
       { pdfPath: fileId },
@@ -46,6 +47,7 @@ const create = async (req, res) => {
     ).exec();
     // Returning successfull response
 
+    increaseBySettingKey({ settingKey: 'last_quote_number' });
     custom.generatePdf('Quote', { filename: 'quote', format: 'A4' }, result);
 
     // Returning successfull response
@@ -54,9 +56,9 @@ const create = async (req, res) => {
       result: updateResult,
       message: 'Quote created successfully',
     });
-  } catch (err) {
-    // If err is thrown by Mongoose due to required validations
-    if (err.name == 'ValidationError') {
+  } catch (error) {
+    // If error is thrown by Mongoose due to required validations
+    if (error.name == 'ValidationError') {
       return res.status(400).json({
         success: false,
         result: null,
@@ -67,7 +69,7 @@ const create = async (req, res) => {
       return res.status(500).json({
         success: false,
         result: null,
-        message: 'Oops there is an Error',
+        message: error.message,
       });
     }
   }

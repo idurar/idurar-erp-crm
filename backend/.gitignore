@@ -4,6 +4,7 @@ frontend/node_modules/
 .DS_Store
 .idea
 notes.md
-.variables.env
+
+.env.local
 
 *.pdf

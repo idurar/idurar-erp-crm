@@ -20,6 +20,22 @@ const request = {
       return errorHandler(error);
     }
   },
+  createAndUpload: async ({ entity, jsonData }) => {
+    try {
+      const response = await axios.post(entity + '/create', jsonData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
   read: async ({ entity, id }) => {
     try {
       const response = await axios.get(entity + '/read/' + id);
@@ -35,6 +51,22 @@ const request = {
   update: async ({ entity, id, jsonData }) => {
     try {
       const response = await axios.patch(entity + '/update/' + id, jsonData);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  updateAndUpload: async ({ entity, id, jsonData }) => {
+    try {
+      const response = await axios.patch(entity + '/update/' + id, jsonData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,
@@ -148,6 +180,23 @@ const request = {
   patch: async ({ entity, jsonData }) => {
     try {
       const response = await axios.patch(entity, jsonData);
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+
+  upload: async ({ entity, id, jsonData }) => {
+    try {
+      const response = await axios.patch(entity + '/upload/' + id, jsonData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,

@@ -1,23 +1,13 @@
-import React, { useEffect } from 'react';
-import { Button, Result } from 'antd';
-import history from '@/utils/history';
-const NotFound = () => {
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import NotFound from '@/components/NotFound';
+
+const NotFoundPage = () => {
+  let navigate = useNavigate();
   useEffect(() => {
-    history.replace('/notfound');
+    navigate(`notfound`, { replace: true });
   }, []);
-  return (
-    <>
-      <Result
-        status="404"
-        title="404"
-        subTitle="Sorry, the page you visited does not exist."
-        extra={
-          <Button href="/" type="primary">
-            Back Home
-          </Button>
-        }
-      />
-    </>
-  );
+  return <NotFound entity={''} />;
 };
-export default NotFound;
+export default NotFoundPage;

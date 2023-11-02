@@ -2,22 +2,30 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const { stubFalse } = require('lodash');
+const url = require('url');
 
 const mongoose = require('mongoose');
 
 const Admin = mongoose.model('Admin');
 
-require('dotenv').config({ path: '.variables.env' });
-
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const clientIP = req.connection.remoteAddress;
+
+    // URL address
+    const address = req.get('origin');
+
+    // Call parse() method using url module
+    let urlObject = url.parse(address, true);
+
+    const orginalHostname = urlObject.hostname;
+
     let isLocalhost = false;
-    if (clientIP === '127.0.0.1' || clientIP === '::1') {
+    if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
       // Connection is from localhost
       isLocalhost = true;
     }
+
     // validate
     const objectSchema = Joi.object({
       email: Joi.string()
@@ -71,9 +79,9 @@ const login = async (req, res) => {
     res
       .status(200)
       .cookie('token', token, {
-        maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null, // Cookie expires after 30 days
-        sameSite: process.env.NODE_ENV === 'production' && !isLocalhost ? 'Lax' : 'none',
-        httpOnly: true,
+        maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
+        sameSite: process.env.NODE_ENV === 'production' ? 'Lax' : 'none',
+        httpOnly: process.env.NODE_ENV === 'production' ? true : false,
         secure: true,
         domain: req.hostname,
         Path: '/',
@@ -81,7 +89,7 @@ const login = async (req, res) => {
       .json({
         success: true,
         result: {
-          id: result._id,
+          _id: result._id,
           name: result.name,
           surname: result.surname,
           role: result.role,
@@ -91,8 +99,8 @@ const login = async (req, res) => {
         },
         message: 'Successfully login admin',
       });
-  } catch (err) {
-    res.status(500).json({ success: false, result: null, message: err.message, error: err });
+  } catch (error) {
+    res.status(500).json({ success: false, result: null, message: error.message, error: error });
   }
 };
 

@@ -17,12 +17,12 @@ const listAll = async (Model, req, res) => {
         message: 'Collection is Empty',
       });
     }
-  } catch (err) {
+  } catch (error) {
     return res.status(500).json({
       success: false,
       result: [],
-      message: 'Oops there is an Error',
-      error: err,
+      message: error.message,
+      error: error,
     });
   }
 };

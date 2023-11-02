@@ -1,13 +1,23 @@
-import configPage from './config';
+import useLanguage from '@/locale/useLanguage';
 import ReadQuoteModule from '@/modules/QuoteModule/ReadQuoteModule';
 
 export default function QuoteRead() {
-  const customConfig = {
-    /*your custom config*/
+  const translate = useLanguage();
+
+  const entity = 'quote';
+
+  const Labels = {
+    PANEL_TITLE: translate('quote'),
+    DATATABLE_TITLE: translate('quote_list'),
+    ADD_NEW_ENTITY: translate('add_new_quote'),
+    ENTITY_NAME: translate('quote'),
+    CREATE_ENTITY: translate('save'),
+    UPDATE_ENTITY: translate('update'),
   };
-  const config = {
-    ...configPage,
-    //customConfig,
+
+  const configPage = {
+    entity,
+    ...Labels,
   };
-  return <ReadQuoteModule config={config} />;
+  return <ReadQuoteModule config={configPage} />;
 }

@@ -24,6 +24,7 @@ const paginatedList = async (req, res) => {
     if (count > 0) {
       for (let admin of result) {
         admin.password = undefined;
+        admin.loggedSessions = undefined;
       }
       return res.status(200).json({
         success: true,
@@ -40,9 +41,7 @@ const paginatedList = async (req, res) => {
       });
     }
   } catch (error) {
-    return res
-      .status(500)
-      .json({ success: false, result: [], message: 'Oops there is an Error', error });
+    return res.status(500).json({ success: false, result: [], message: error.message, error });
   }
 };
 

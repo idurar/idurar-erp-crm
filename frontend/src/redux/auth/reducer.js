@@ -2,25 +2,31 @@ import * as actionTypes from './types';
 
 const INITIAL_STATE = {
   current: {},
-  loading: false,
   isLoggedIn: false,
+  isLoading: false,
+  isSuccess: false,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.LOADING_REQUEST:
+    case actionTypes.REQUEST_LOADING:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
       };
-    case actionTypes.FAILED_REQUEST:
-      return INITIAL_STATE;
+    case actionTypes.REQUEST_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+      };
 
-    case actionTypes.LOGIN_SUCCESS:
+    case actionTypes.REQUEST_SUCCESS:
       return {
         current: action.payload,
-        loading: false,
+        isLoading: false,
         isLoggedIn: true,
+        isSuccess: true,
       };
     case actionTypes.LOGOUT_SUCCESS:
       return INITIAL_STATE;

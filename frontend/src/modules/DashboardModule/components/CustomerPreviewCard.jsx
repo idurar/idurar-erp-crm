@@ -1,14 +1,16 @@
 import { Statistic, Progress, Divider, Row, Spin } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import useLanguage from '@/locale/useLanguage';
 
 export default function CustomerPreviewCard({
   isLoading = false,
   activeCustomer = 0,
   newCustomer = 0,
 }) {
+  const translate = useLanguage();
   return (
     <Row className="gutter-row">
-      <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
+      <div className="whiteBox shadow" style={{ height: 458 }}>
         <div
           className="pad20"
           style={{
@@ -16,7 +18,9 @@ export default function CustomerPreviewCard({
             justifyContent: 'center',
           }}
         >
-          <h3 style={{ color: '#22075e', marginBottom: 30 }}>Customer Preview</h3>
+          <h3 style={{ color: '#22075e', marginBottom: 40, marginTop: 15, fontSize: 'large' }}>
+            {translate('Customer Preview')}
+          </h3>
 
           {isLoading ? (
             <Spin />
@@ -27,15 +31,14 @@ export default function CustomerPreviewCard({
                 justifyContent: 'center',
               }}
             >
-              <Progress type="dashboard" percent={newCustomer} width={148} />
-              <p>New Customer this Month</p>
+              <Progress type="dashboard" percent={newCustomer} size={148} />
+              <p>{translate('New Customer this Month')}</p>
               <Divider />
               <Statistic
-                title="Active Customer"
+                title={translate('Active Customer')}
                 value={activeCustomer}
                 precision={2}
                 valueStyle={
-                  // color default gray
                   activeCustomer > 0
                     ? { color: '#3f8600' }
                     : activeCustomer < 0

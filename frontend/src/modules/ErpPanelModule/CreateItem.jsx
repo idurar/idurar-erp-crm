@@ -1,37 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Divider } from 'antd';
-import { Button, PageHeader, Tag } from 'antd';
+import { useState, useEffect } from 'react';
+
+import { Button, Tag, Form, Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
+
 import { useSelector, useDispatch } from 'react-redux';
+
+import useLanguage from '@/locale/useLanguage';
+
+import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem, selectInvoiceFollowNumItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import calculate from '@/utils/calculate';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
+
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import invoiceFollowNum from '@/utils/invoiceFollowNum';
 
-function SaveForm({ form, config }) {
-  let { CREATE_ENTITY } = config;
+import { useNavigate } from 'react-router-dom';
+
+function SaveForm({ form }) {
+  const translate = useLanguage();
   const handelClick = () => {
     form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {CREATE_ENTITY}
+      {translate('Save')}
     </Button>
   );
 }
 
 export default function CreateItem({ config, CreateForm }) {
-  let { entity, CREATE_ENTITY } = config;
-  const { erpContextAction } = useErpContext();
-  const history = useHistory();
-  const { createPanel } = erpContextAction;
+  const translate = useLanguage();
   const dispatch = useDispatch();
-  const { isLoading, isSuccess } = useSelector(selectCreatedItem);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(settingsAction.list({ entity: 'setting' }));
+  }, []);
+  let { entity } = config;
+
+  const { isLoading, isSuccess, result } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const [offerSubTotal, setOfferSubTotal] = useState(0);
@@ -84,8 +97,7 @@ export default function CreateItem({ config, CreateForm }) {
       dispatch(erp.resetAction({ actionType: 'create' }));
       setSubTotal(0);
       setOfferSubTotal(0);
-      createPanel.close();
-      dispatch(erp.list({ entity }));
+      navigate(`/${entity.toLowerCase()}/read/${result._id}`);
     }
     return () => {
       isMounted = false;
@@ -118,22 +130,21 @@ export default function CreateItem({ config, CreateForm }) {
     <>
       <PageHeader
         onBack={() => {
-          // createPanel.close();
-          history.push(`/${entity.toLowerCase()}`);
+          navigate(`/${entity.toLowerCase()}`);
         }}
-        title={CREATE_ENTITY}
+        title={translate('New')}
         ghost={false}
-        tags={<Tag color="volcano">Draft</Tag>}
+        tags={<Tag color="gray">Draft</Tag>}
         // subTitle="This is create page"
         extra={[
           <Button
             key={`${uniqueId()}`}
-            onClick={() => history.push(`/${entity.toLowerCase()}`)}
+            onClick={() => navigate(`/${entity.toLowerCase()}`)}
             icon={<CloseCircleOutlined />}
           >
-            Cancel
+            {translate('Cancel')}
           </Button>,
-          <SaveForm form={form} config={config} key={`${uniqueId()}`} />,
+          <SaveForm form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',

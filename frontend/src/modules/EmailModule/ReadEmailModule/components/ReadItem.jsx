@@ -1,42 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { Divider, Typography, Button, PageHeader } from 'antd';
+import { Divider, Typography, Button } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import { EditOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 
 import { useErpContext } from '@/context/erp';
-import uniqueId from '@/utils/uinqueId';
+import { generate as uniqueId } from 'shortid';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { useNavigate } from 'react-router-dom';
+import useLanguage from '@/locale/useLanguage';
 
 const { Title, Paragraph } = Typography;
 
-
-
 export default function ReadItem({ config, selectedItem }) {
+  const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
   const { readPanel, updatePanel } = erpContextAction;
 
   const resetErp = {
-
     emailName: '',
     emailKey: '',
     emailSubject: '',
     emailBody: '',
     emailVariables: [],
     _id: '',
-
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
@@ -63,11 +61,11 @@ export default function ReadItem({ config, selectedItem }) {
             key={`${uniqueId()}`}
             onClick={() => {
               readPanel.close();
-              history.push(`/${entity.toLowerCase()}`);
+              navigate(`/${entity.toLowerCase()}`);
             }}
             icon={<CloseCircleOutlined />}
           >
-            Close
+            {translate('Close')}
           </Button>,
 
           <Button
@@ -80,26 +78,24 @@ export default function ReadItem({ config, selectedItem }) {
                 })
               );
               updatePanel.open();
-              history.push(`/${entity.toLowerCase()}/update/${currentErp._id}`);
+              navigate(`/${entity.toLowerCase()}/update/${currentErp._id}`);
             }}
             type="primary"
             icon={<EditOutlined />}
           >
-            Edit Template
+            {translate('Edit')}
           </Button>,
         ]}
         style={{
           padding: '20px 0px',
         }}
-
       ></PageHeader>
       <Divider dashed />
       <div>
-        <Title level={3}>Subject</Title>
+        <Title level={3}>{translate('Subject')}</Title>
         <Paragraph>{currentErp.emailSubject}</Paragraph>
-        <Title level={3}>Body</Title>
+        <Title level={3}>{translate('Body')}</Title>
         <div dangerouslySetInnerHTML={{ __html: currentErp.emailBody }} />
-
       </div>
     </>
   );
