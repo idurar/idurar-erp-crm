@@ -155,7 +155,7 @@ const lang = {
   add_new_order: 'Aggiungi Nuovo Ordine',
   general_settings: 'Impostazioni Generali',
   email_templates: 'Modelli Email',
-  birthday: 'Data di nasita',
+  birthday: 'Data di nascita',
   birthplace: 'Luogo di Nascita',
   department: 'Reparto',
   gender: 'Genere',
