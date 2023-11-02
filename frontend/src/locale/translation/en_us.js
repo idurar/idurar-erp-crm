@@ -279,6 +279,7 @@ const lang = {
   select_date: "Select Date",
   men: "Men",
   women: "Women",
+  other: "Other",
 };
 
 export default lang;
