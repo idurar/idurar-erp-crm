@@ -6,6 +6,7 @@ import itIT from 'antd/es/locale/it_IT';
 import hiIN from 'antd/es/locale/hi_IN';
 import esES from 'antd/es/locale/es_ES';
 import deDE from 'antd/es/locale/de_DE';
+import ruRU from 'antd/es/locale/ru_RU';
 const antdLocale = {
   zh_cn: zhCN,
   fr_fr: frFR,
@@ -15,6 +16,7 @@ const antdLocale = {
   hi_in: hiIN,
   es_es: esES,
   de_de: deDE,
+  ru_ru: ruRU,
 };
 
 export default antdLocale;
