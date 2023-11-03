@@ -80,11 +80,11 @@ export default function AdminForm({ isUpdateForm = false }) {
         ]}
       >
         <Select>
-          <Select.Option value="admin">Admin (Super Admin)</Select.Option>
-          <Select.Option value="staffAdmin">Staff Admin (Create,Read,Update,Delete)</Select.Option>
-          <Select.Option value="staff">Staff (Create,Read,Update)</Select.Option>
-          <Select.Option value="createOnly">Create and Read Only</Select.Option>
-          <Select.Option value="readOnly">Read Only</Select.Option>
+          <Select.Option value="admin">{translate("admin_super_admin")}</Select.Option>
+          <Select.Option value="staffAdmin">{translate("staff_admin_crud")}</Select.Option>
+          <Select.Option value="staff">{translate("staff_cru")}</Select.Option>
+          <Select.Option value="createOnly">{translate("create_and_read_only")}</Select.Option>
+          <Select.Option value="readOnly">{translate("read_only")}</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
@@ -94,7 +94,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         getValueFromEvent={(e) => e.fileList}
       >
         <Upload beforeUpload={beforeUpload}>
-          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          <Button icon={<UploadOutlined />}>{translate("click_to_upload")}</Button>
         </Upload>
       </Form.Item>
     </>

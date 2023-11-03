@@ -41,7 +41,10 @@ export default function EmployeeForm() {
           },
         ]}
       >
-        <DatePicker format={'DD/MM/YYYY'} />
+        <DatePicker
+            placeholder={translate('select_date')}
+            format={'DD/MM/YYYY'}
+        />
       </Form.Item>
       <Form.Item
         name="birthplace"
@@ -64,8 +67,8 @@ export default function EmployeeForm() {
         ]}
       >
         <Select>
-          <Select.Option value="men">Men</Select.Option>
-          <Select.Option value="women">Women</Select.Option>
+            <Select.Option value="men">{translate('men')}</Select.Option>
+            <Select.Option value="women">{translate('women')}</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
