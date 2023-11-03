@@ -1,10 +1,8 @@
-import { lazy, Suspense, useLayoutEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 import { Layout } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
-
-import PageLoader from '@/components/PageLoader';
 
 import Navigation from '@/apps/components/Navigation';
 import HeaderContent from '@/apps/components/HeaderContent';
@@ -12,7 +10,7 @@ import HeaderContent from '@/apps/components/HeaderContent';
 import { useDispatch } from 'react-redux';
 import { settingsAction } from '@/redux/settings/actions';
 
-const AppRouter = lazy(() => import('@/router/AppRouter'));
+import AppRouter from '@/router/AppRouter';
 
 export default function ErpCrmApp() {
   const { Content } = Layout;
@@ -43,9 +41,7 @@ export default function ErpCrmApp() {
             maxWidth: isNavMenuClose ? 1150 : 1050,
           }}
         >
-          <Suspense fallback={<PageLoader />}>
-            <AppRouter />
-          </Suspense>
+          <AppRouter />
         </Content>
       </Layout>
     </Layout>
