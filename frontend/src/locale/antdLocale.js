@@ -10,7 +10,7 @@ import deDE from 'antd/es/locale/de_DE';
 import ruRU from 'antd/es/locale/ru_RU';
 import trTR from 'antd/es/locale/tr_TR';
 import ptBr from 'antd/es/locale/pt_BR';
-
+import ukUA from 'antd/es/locale/uk_UA';
 const antdLocale = {
   zh_cn: zhCN,
   fr_fr: frFR,
@@ -24,6 +24,7 @@ const antdLocale = {
   ru_ru: ruRU,
   tr_tr: trTR,
   pt_pt: ptBr,
+  uk_ua: ukUA,
 };
 
 export default antdLocale;
