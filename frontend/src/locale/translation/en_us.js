@@ -279,7 +279,6 @@ const lang = {
   select_date: "Select Date",
   men: "Men",
   women: "Women",
-  other: "Other",
   click_to_upload: "Click to Upload",
   admin_super_admin: "Admin (Super Admin)",
   staff_admin_crud: "Staff Admin (Create,Read,Update,Delete)",
