@@ -4,6 +4,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import roRO from 'antd/es/locale/ro_RO';
 import itIT from 'antd/es/locale/it_IT';
 import hiIN from 'antd/es/locale/hi_IN';
+import esES from 'antd/es/locale/es_ES';
 import deDE from 'antd/es/locale/de_DE';
 const antdLocale = {
   zh_cn: zhCN,
@@ -12,6 +13,7 @@ const antdLocale = {
   ro_ro: roRO,
   it_it: itIT,
   hi_in: hiIN,
+  es_es: esES,
   de_de: deDE,
 };
 
