@@ -5,6 +5,7 @@ import ar_eg from './ar_eg';
 import it_it from './it_it';
 import ro_ro from './ro_ro';
 import hi_in from './hi_in';
+import id_id from './id_id';
 import th_th from './th_th';
 import es_es from './es_es';
 import de_de from './de_de';
@@ -20,6 +21,7 @@ const languages = {
   it_it,
   ro_ro,
   hi_in,
+  id_id,
   th_th,
   es_es,
   de_de,
