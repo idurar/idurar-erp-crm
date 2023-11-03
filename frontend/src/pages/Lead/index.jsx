@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-import React from 'react';
 
 import CrudModule from '@/modules/CrudModule/CrudModule';
 import LeadForm from '@/forms/LeadForm';
