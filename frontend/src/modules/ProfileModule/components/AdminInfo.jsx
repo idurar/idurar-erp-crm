@@ -70,50 +70,15 @@ const AdminInfo = ({ config }) => {
           </Avatar>
         </Col>
         <Col xs={{ span: 24 }} sm={{ span: 18 }}>
-          <Descriptions labelStyle={{ fontSize: '17px' }} size="small">
-            <Descriptions.Item
-              label={translate('first name')}
-              span="3"
-              style={{ paddingTop: '20px' }}
-            >
-              <h3
-                style={{
-                  color: '#22075e',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {currentAdmin?.name}
-              </h3>
+          <Descriptions column={1} size="middle">
+            <Descriptions.Item label={translate('first name')}>
+              {currentAdmin?.name}
             </Descriptions.Item>
-            <Descriptions.Item label={translate('last name')} span="3">
-              <h3
-                style={{
-                  color: '#22075e',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {currentAdmin?.surname}
-              </h3>
+            <Descriptions.Item label={translate('last name')}>
+              {currentAdmin?.surname}
             </Descriptions.Item>
-            <Descriptions.Item label={translate('email')} span="3" style={{ paddingTop: '20px' }}>
-              <h3
-                style={{
-                  color: '#22075e',
-                }}
-              >
-                {currentAdmin?.email}
-              </h3>
-            </Descriptions.Item>
-            <Descriptions.Item label={translate('role')} span="3">
-              <h3
-                style={{
-                  color: '#22075e',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {currentAdmin?.role}
-              </h3>
-            </Descriptions.Item>
+            <Descriptions.Item label={translate('email')}>{currentAdmin?.email}</Descriptions.Item>
+            <Descriptions.Item label={translate('role')}>{currentAdmin?.role}</Descriptions.Item>
           </Descriptions>
         </Col>
       </Row>
