@@ -11,7 +11,7 @@ import de_de from './de_de';
 import ru_ru from './ru_ru';
 import tr_tr from './tr_tr';
 import pt_br from './pt_br';
-
+import vi_vn from './vi_vn';
 const languages = {
   ar_eg,
   en_us,
@@ -26,6 +26,7 @@ const languages = {
   ru_ru,
   tr_tr,
   pt_br,
+  vi_vn,
 };
 
 export default languages;

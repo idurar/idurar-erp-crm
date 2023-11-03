@@ -12,7 +12,7 @@ const languages = [
   { icon: '🇪🇸 ', label: 'Spanish', value: 'es_es' },
   { icon: '🇹🇭 ', label: 'Thai', value: 'th_th' },
   { icon: '🇹🇷 ', label: 'Turkish', value: 'tr_tr' },
-
+  { icon: '🇻🇳 ', label: 'Vietnamese', value: 'vi_vn'},
   { icon: '🇦🇱 ', label: 'Albanian (coming soon)', value: 'sq_al', disabled: true },
   { icon: '🇧🇩 ', label: 'Bengali (coming soon)', value: 'bn_bd', disabled: true },
   { icon: '🇧🇬 ', label: 'Bulgarian (coming soon)', value: 'bg_bg', disabled: true },
@@ -44,7 +44,6 @@ const languages = [
   { icon: '🇸🇪 ', label: 'Swedish (coming soon)', value: 'sv_se', disabled: true },
   { icon: '🇺🇦 ', label: 'Ukrainian (coming soon)', value: 'uk_ua', disabled: true },
   { icon: '🇵🇰 ', label: 'Urdu (coming soon)', value: 'ur_pk', disabled: true },
-  { icon: '🇻🇳 ', label: 'Vietnamese (coming soon)', value: 'vi_vn', disabled: true },
 ];
 
 export default languages;
