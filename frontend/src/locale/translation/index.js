@@ -14,7 +14,9 @@ import tr_tr from './tr_tr';
 import pt_br from './pt_br';
 import vi_vn from './vi_vn';
 import uk_ua from './uk_ua';
+import ja_jp from './ja_jp';
 import nl_nl from './nl_nl';
+
 
 
 const languages = {
@@ -34,6 +36,7 @@ const languages = {
   pt_br,
   vi_vn,
   uk_ua,
+  ja_jp,
   nl_nl,
 };
 

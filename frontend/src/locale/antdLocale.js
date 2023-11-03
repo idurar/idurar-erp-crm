@@ -13,6 +13,7 @@ import trTR from 'antd/es/locale/tr_TR';
 import ptBr from 'antd/es/locale/pt_BR';
 import viVN from 'antd/es/locale/vi_VN';
 import ukUA from 'antd/es/locale/uk_UA';
+import jaJP from 'antd/es/locale/ja_JP';
 import nlNL from 'antd/es/locale/nl_NL';
 
 
@@ -32,6 +33,7 @@ const antdLocale = {
   pt_pt: ptBr,
   vi_vn: viVN,
   uk_ua: ukUA,
+  ja_jp: jaJP,
   nl_nl: nlNL,
 };
 
