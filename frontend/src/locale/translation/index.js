@@ -5,6 +5,8 @@ import ar_eg from './ar_eg';
 import it_it from './it_it';
 import ro_ro from './ro_ro';
 import hi_in from './hi_in';
+import tr_tr from './tr_tr';
+
 const languages = {
   ar_eg,
   en_us,
@@ -13,6 +15,7 @@ const languages = {
   it_it,
   ro_ro,
   hi_in,
+  tr_tr,
 };
 
 export default languages;
