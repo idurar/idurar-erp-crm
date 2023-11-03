@@ -5,10 +5,12 @@ import ar_eg from './ar_eg';
 import it_it from './it_it';
 import ro_ro from './ro_ro';
 import hi_in from './hi_in';
+
 import es_es from './es_es';
 import de_de from './de_de';
 import ru_ru from './ru_ru';
 import tr_tr from './tr_tr';
+
 const languages = {
   ar_eg,
   en_us,
