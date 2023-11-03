@@ -277,5 +277,14 @@ const lang = {
   or: 'या',
   sign_in: 'साइन इन करें',
   sign_up: 'साइन अप करें',
+  select_date: 'तारीख चुनें',
+  men: 'पुरुष',
+  women: 'महिलाएँ',
+  click_to_upload: 'अपलोड करने के लिए क्लिक करें',
+  admin_super_admin: 'व्यवस्थापक (सुपर व्यवस्थापक)',
+  staff_admin_crud: 'कर्मचारी व्यवस्थापक (सृजना, पठन, अद्यतन, हटाना)',
+  staff_cru: 'कर्मचारी (सृजना, पठन, अद्यतन)',
+  create_and_read_only: 'सृजना और केवल पठन',
+  read_only: 'केवल पठन',
 };
 export default lang;
