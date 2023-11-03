@@ -69,7 +69,6 @@ export default function EmployeeForm() {
         <Select>
             <Select.Option value="men">{translate('men')}</Select.Option>
             <Select.Option value="women">{translate('women')}</Select.Option>
-            <Select.Option value="other">{translate('other')}</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
