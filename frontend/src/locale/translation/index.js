@@ -12,6 +12,7 @@ import ru_ru from './ru_ru';
 import tr_tr from './tr_tr';
 import pt_br from './pt_br';
 import uk_ua from './uk_ua';
+import ja_jp from './ja_jp';
 const languages = {
   ar_eg,
   en_us,
@@ -27,6 +28,7 @@ const languages = {
   tr_tr,
   pt_br,
   uk_ua,
+  ja_jp,
 };
 
 export default languages;
