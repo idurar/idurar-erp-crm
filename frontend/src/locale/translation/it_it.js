@@ -155,7 +155,7 @@ const lang = {
   add_new_order: 'Aggiungi Nuovo Ordine',
   general_settings: 'Impostazioni Generali',
   email_templates: 'Modelli Email',
-  birthday: 'Data di nasita',
+  birthday: 'Data di nascita',
   birthplace: 'Luogo di Nascita',
   department: 'Reparto',
   gender: 'Genere',
@@ -276,6 +276,15 @@ const lang = {
   or: 'Oppure',
   sign_in: 'Accedi',
   sign_up: 'Registrati',
+  select_date: "Seleziona Data",
+  men: "Uomo",
+  women: "Donna",
+  click_to_upload: "Clicca per caricare",
+  admin_super_admin: "Amministratore (Super Admin)",
+  staff_admin_crud: "Staff Admin (Crea, leggi, aggiorna, cancella)",
+  staff_cru: "Staff (Crea, leggi, aggiorna)",
+  create_and_read_only: "Solo crea e leggi",
+  read_only: "Sola lettura",
 };
 
 export default lang;
