@@ -19,7 +19,7 @@ const languages = [
   { icon: '🇻🇳 ', label: 'Vietnamese', value: 'vi_vn' },
   { icon: '🇦🇱 ', label: 'Albanian (coming soon)', value: 'sq_al', disabled: true },
   { icon: '🇧🇩 ', label: 'Bengali (coming soon)', value: 'bn_bd', disabled: true },
-  { icon: '🇧🇬 ', label: 'Bulgarian (coming soon)', value: 'bg_bg', disabled: true },
+  { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },
   { icon: '🇪🇦 ', label: 'Catalonian (coming soon)', value: 'ca_es', disabled: true },
   { icon: '🇭🇷 ', label: 'Croatian (coming soon)', value: 'hr_hr', disabled: true },
   { icon: '🇨🇿 ', label: 'Czech (coming soon)', value: 'cs_cz', disabled: true },
