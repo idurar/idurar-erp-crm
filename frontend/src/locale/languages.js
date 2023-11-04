@@ -2,6 +2,7 @@ const languages = [
   { icon: '🇩🇿 ', label: 'Arabic', value: 'ar_eg', isRtl: true },
   { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },
   { icon: '🇨🇳 ', label: 'Chinese', value: 'zh_cn' },
+  { icon: '🇩🇰 ', label: 'Danish', value: 'da_dk' },
   { icon: '🇳🇱 ', label: 'Dutch', value: 'nl_nl' },
   { icon: '🇺🇸 ', label: 'English', value: 'en_us' },
   { icon: '🇫🇷 ', label: 'French', value: 'fr_fr' },
@@ -19,13 +20,13 @@ const languages = [
   { icon: '🇹🇭 ', label: 'Thai', value: 'th_th' },
   { icon: '🇹🇷 ', label: 'Turkish', value: 'tr_tr' },
   { icon: '🇺🇦 ', label: 'Ukrainian', value: 'uk_ua' },
+  { icon: '🇵🇰 ', label: 'Urdu', value: 'ur_pk', isRtl: true },
   { icon: '🇻🇳 ', label: 'Vietnamese', value: 'vi_vn' },
   { icon: '🇦🇱 ', label: 'Albanian (coming soon)', value: 'sq_al', disabled: true },
   { icon: '🇧🇩 ', label: 'Bengali (coming soon)', value: 'bn_bd', disabled: true },
   { icon: '🇪🇦 ', label: 'Catalonian (coming soon)', value: 'ca_es', disabled: true },
   { icon: '🇭🇷 ', label: 'Croatian (coming soon)', value: 'hr_hr', disabled: true },
   { icon: '🇨🇿 ', label: 'Czech (coming soon)', value: 'cs_cz', disabled: true },
-  { icon: '🇩🇰 ', label: 'Danish', value: 'da_dk' },
   { icon: '🇪🇪 ', label: 'Estonian (coming soon)', value: 'et_ee', disabled: true },
   { icon: '🇵🇭 ', label: 'Filipino (coming soon)', value: 'fil_ph', disabled: true },
   { icon: '🇫🇮 ', label: 'Finnish (coming soon)', value: 'fi_fi', disabled: true },
@@ -43,7 +44,6 @@ const languages = [
   { icon: '🇸🇰 ', label: 'Slovak (coming soon)', value: 'sk_sk', disabled: true },
   { icon: '🇸🇮 ', label: 'Slovenian (coming soon)', value: 'sl_si', disabled: true },
   { icon: '🇰🇪 ', label: 'Swahili (coming soon)', value: 'sw_ke', disabled: true },
-  { icon: '🇵🇰 ', label: 'Urdu (coming soon)', value: 'ur_pk', disabled: true },
 ];
 
 export default languages;
