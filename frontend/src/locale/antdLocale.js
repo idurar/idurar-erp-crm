@@ -16,6 +16,8 @@ import ukUA from 'antd/es/locale/uk_UA';
 import jaJP from 'antd/es/locale/ja_JP';
 import nlNL from 'antd/es/locale/nl_NL';
 import svSE from 'antd/es/locale/sv_SE';
+import plPL from 'antd/es/locale/pl_PL';
+
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -36,6 +38,7 @@ const antdLocale = {
   ja_jp: jaJP,
   nl_nl: nlNL,
   sv_se: svSE,
+  pl_pl: plPL,
 };
 
 export default antdLocale;
