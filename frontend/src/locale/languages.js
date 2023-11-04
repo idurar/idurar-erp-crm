@@ -42,7 +42,7 @@ const languages = [
   { icon: '🇸🇰 ', label: 'Slovak (coming soon)', value: 'sk_sk', disabled: true },
   { icon: '🇸🇮 ', label: 'Slovenian (coming soon)', value: 'sl_si', disabled: true },
   { icon: '🇰🇪 ', label: 'Swahili (coming soon)', value: 'sw_ke', disabled: true },
-  { icon: '🇸🇪 ', label: 'Swedish (coming soon)', value: 'sv_se', disabled: true },
+  { icon: '🇸🇪 ', label: 'Swedish', value: 'sv_se' },
   { icon: '🇵🇰 ', label: 'Urdu (coming soon)', value: 'ur_pk', disabled: true },
 ];
 
