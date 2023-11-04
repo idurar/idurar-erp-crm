@@ -16,8 +16,14 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 **Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
 ```
-🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
+🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
+
+# How To Deploy IDURAR ERP CRM : 
+🔥 I would like to invite you for a weekly free IDURAR Webinar (Node.js React.js course), where you learn how to deploy IDURAR on cloud , and create a new api and new crud app with IDURAR in just one hour ?
+Please fill this form if you are interested : [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
+
+The Webinar will be this Wednesday at 1pm GMT.
 
 ## Our Sponsors
 
