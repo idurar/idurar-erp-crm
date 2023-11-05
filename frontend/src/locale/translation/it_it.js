@@ -285,6 +285,9 @@ const lang = {
   staff_cru: "Staff (Crea, leggi, aggiorna)",
   create_and_read_only: "Solo crea e leggi",
   read_only: "Sola lettura",
+  taxes: 'Tasse',
+  taxes_list: 'List Tasse',
+  add_new_tax: 'Aggiungi Nuova Tassa',
 };
 
 export default lang;
