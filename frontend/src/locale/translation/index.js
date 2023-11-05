@@ -16,8 +16,7 @@ import vi_vn from './vi_vn';
 import uk_ua from './uk_ua';
 import ja_jp from './ja_jp';
 import nl_nl from './nl_nl';
-
-
+import cs_cz from './cs_cz';
 
 const languages = {
   ar_eg,
@@ -38,6 +37,7 @@ const languages = {
   uk_ua,
   ja_jp,
   nl_nl,
+  cs_cz,
 };
 
 export default languages;
