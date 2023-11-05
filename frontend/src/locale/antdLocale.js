@@ -20,6 +20,7 @@ import daDK from 'antd/es/locale/da_DK';
 import bgBG from 'antd/es/locale/bg_BG';
 import svSE from 'antd/es/locale/sv_SE';
 import plPL from 'antd/es/locale/pl_PL';
+import srRS from 'antd/es/locale/sr_RS';
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -44,6 +45,7 @@ const antdLocale = {
   bg_bg: bgBG,
   sv_se: svSE,
   pl_pl: plPL,
+  sr_rs: srRS,
 };
 
 export default antdLocale;
