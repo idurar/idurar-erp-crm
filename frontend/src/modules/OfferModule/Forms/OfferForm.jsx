@@ -17,6 +17,7 @@ import { selectFinanceSettings } from '@/redux/settings/selectors';
 
 import { useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
+import SelectAsync from "@/components/SelectAsync";
 
 export default function OfferForm({ subTotal = 0, current = null }) {
   const { last_offer_number } = useSelector(selectFinanceSettings);
@@ -37,7 +38,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
-    setTaxRate(value);
+    setTaxRate(value/100);
   };
 
   useEffect(() => {
@@ -231,23 +232,25 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={4} offset={15}>
             <Form.Item
-              name="taxRate"
-              rules={[
-                {
-                  required: false,
-                },
-              ]}
-              initialValue="0"
-            >
-              <Select
-                value={taxRate}
-                onChange={handelTaxChange}
-                bordered={false}
-                options={[
-                  { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
+                name="taxRate"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please choose the tax!',
+                  },
                 ]}
-              ></Select>
+            >
+              <SelectAsync
+                  value={taxRate}
+                  onChange={handelTaxChange}
+                  bordered={false}
+                  entity={'taxes'}
+                  outputValue={'taxValue'}
+                  displayLabels={['taxName']}
+                  withRedirect={true}
+                  urlToRedirect="/taxes"
+                  redirectLabel="Add New Tax"
+              />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={5}>
