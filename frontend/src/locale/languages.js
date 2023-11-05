@@ -14,7 +14,7 @@ const languages = [
   { icon: '🇮🇹 ', label: 'Italian', value: 'it_it' },
   { icon: '🇯🇵 ', label: 'Japanese ', value: 'ja_jp' },
   { icon: '🇵🇱 ', label: 'Polish', value: 'pl_pl' },
-  { icon: '🇧🇷 ', label: 'Portuguese (Brazil)', value: 'pt_br' },
+  { icon: '🇧🇷 ', label: 'Portuguese Brazil', value: 'pt_br' },
   { icon: '🇷🇴 ', label: 'Romanian', value: 'ro_ro' },
   { icon: '🇷🇺 ', label: 'Russian', value: 'ru_ru' },
   { icon: '🇸🇰 ', label: 'Slovak', value: 'sk_sk' },
