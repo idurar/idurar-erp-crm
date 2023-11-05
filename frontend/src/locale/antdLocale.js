@@ -15,6 +15,7 @@ import viVN from 'antd/es/locale/vi_VN';
 import ukUA from 'antd/es/locale/uk_UA';
 import jaJP from 'antd/es/locale/ja_JP';
 import nlNL from 'antd/es/locale/nl_NL';
+import csCZ from 'antd/es/locale/cs_CZ';
 import urPk from 'antd/es/locale/ur_PK';
 import daDK from 'antd/es/locale/da_DK';
 import bgBG from 'antd/es/locale/bg_BG';
@@ -43,6 +44,7 @@ const antdLocale = {
   uk_ua: ukUA,
   ja_jp: jaJP,
   nl_nl: nlNL,
+  cs_cz: csCZ,
   ur_pk: urPk,
   da_dk: daDK,
   bg_bg: bgBG,

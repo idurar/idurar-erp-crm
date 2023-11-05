@@ -16,6 +16,7 @@ import vi_vn from './vi_vn';
 import uk_ua from './uk_ua';
 import ja_jp from './ja_jp';
 import nl_nl from './nl_nl';
+import cs_cz from './cs_cz';
 import ur_pk from './ur_pk';
 import da_dk from './da_dk';
 import bg_bg from './bg_bg';
@@ -45,6 +46,7 @@ const languages = {
   uk_ua,
   ja_jp,
   nl_nl,
+  cs_cz,
   ur_pk,
   da_dk,
   bg_bg,
