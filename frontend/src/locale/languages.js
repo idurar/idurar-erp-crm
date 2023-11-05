@@ -1,5 +1,6 @@
 const languages = [
   { icon: '🇩🇿 ', label: 'Arabic', value: 'ar_eg', isRtl: true },
+  { icon: '🇧🇩 ', label: 'Bengali', value: 'bn_bd' },
   { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },
   { icon: '🇨🇳 ', label: 'Chinese', value: 'zh_cn' },
   { icon: '🇩🇰 ', label: 'Danish', value: 'da_dk' },
@@ -15,6 +16,9 @@ const languages = [
   { icon: '🇧🇷 ', label: 'Portuguese (Brazil)', value: 'pt_br' },
   { icon: '🇷🇴 ', label: 'Romanian', value: 'ro_ro' },
   { icon: '🇷🇺 ', label: 'Russian', value: 'ru_ru' },
+  { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs' },
+  { icon: '🇸🇰 ', label: 'Slovak', value: 'sk_sk' },
+  { icon: '🇸🇮 ', label: 'Slovenian', value: 'sl_si' },
   { icon: '🇪🇸 ', label: 'Spanish', value: 'es_es' },
   { icon: '🇸🇪 ', label: 'Swedish', value: 'sv_se' },
   { icon: '🇹🇭 ', label: 'Thai', value: 'th_th' },
@@ -23,7 +27,6 @@ const languages = [
   { icon: '🇵🇰 ', label: 'Urdu', value: 'ur_pk', isRtl: true },
   { icon: '🇻🇳 ', label: 'Vietnamese', value: 'vi_vn' },
   { icon: '🇦🇱 ', label: 'Albanian (coming soon)', value: 'sq_al', disabled: true },
-  { icon: '🇧🇩 ', label: 'Bengali (coming soon)', value: 'bn_bd', disabled: true },
   { icon: '🇪🇦 ', label: 'Catalonian (coming soon)', value: 'ca_es', disabled: true },
   { icon: '🇭🇷 ', label: 'Croatian (coming soon)', value: 'hr_hr', disabled: true },
   { icon: '🇨🇿 ', label: 'Czech (coming soon)', value: 'cs_cz', disabled: true },
@@ -40,10 +43,6 @@ const languages = [
   { icon: '🇳🇴 ', label: 'Norwegian (coming soon)', value: 'nb_no', disabled: true },
   { icon: '🇮🇷 ', label: 'Persian (coming soon)', value: 'fa_ir', isRtl: true, disabled: true },
   { icon: '🇵🇹 ', label: 'Portuguese (Portugal) (coming soon)', value: 'pt_pt', disabled: true },
-  { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs' },
-  { icon: '🇸🇰 ', label: 'Slovak (coming soon)', value: 'sk_sk', disabled: true },
-  { icon: '🇸🇮 ', label: 'Slovenian (coming soon)', value: 'sl_si', disabled: true },
-  { icon: '🇰🇪 ', label: 'Swahili (coming soon)', value: 'sw_ke', disabled: true },
 ];
 
 export default languages;
