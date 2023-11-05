@@ -5,7 +5,6 @@ import useLanguage from '@/locale/useLanguage';
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule/CrudModule';
-import PaymentModeForm from '@/forms/PaymentModeForm';
 import TaxForm from "@/forms/TaxForm";
 
 export default function Taxes() {

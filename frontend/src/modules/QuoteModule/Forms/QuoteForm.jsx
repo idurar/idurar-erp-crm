@@ -17,7 +17,7 @@ import useLanguage from '@/locale/useLanguage';
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
 
-export default function InvoiceForm({ subTotal = 0, current = null }) {
+export default function QuoteForm({ subTotal = 0, current = null }) {
   const { last_quote_number } = useSelector(selectFinanceSettings);
 
   if (!last_quote_number) {
@@ -124,7 +124,7 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
               options={[
                 { value: 'draft', label: translate('Draft') },
                 { value: 'pending', label: translate('Pending') },
-                { value: 'sent', label: translate('Pending') },
+                { value: 'sent', label: translate('Sent') },
                 { value: 'accepted', label: translate('Accepted') },
               ]}
             ></Select>

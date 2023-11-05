@@ -124,7 +124,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               options={[
                 { value: 'draft', label: translate('Draft') },
                 { value: 'pending', label: translate('Pending') },
-                { value: 'sent', label: translate('Pending') },
+                { value: 'sent', label: translate('Sent') },
                 { value: 'accepted', label: translate('Accepted') },
               ]}
             ></Select>
