@@ -25,6 +25,7 @@ import hrHR from 'antd/es/locale/hr_HR';
 import slSI from 'antd/es/locale/sl_SI';
 import skSK from 'antd/es/locale/sk_SK';
 import bnBD from 'antd/es/locale/bn_BD';
+import koKR from 'antd/es/locale/ko_KR';
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -54,6 +55,7 @@ const antdLocale = {
   sl_si: slSI,
   sk_sk: skSK,
   bn_bd: bnBD,
+  ko_kr: koKR,
 };
 
 export default antdLocale;
