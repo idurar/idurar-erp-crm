@@ -2,12 +2,14 @@
   "name": "mnm-frontend",
   "version": "0.1.0",
   "engines": {
-    "npm": "8.5.5"
+    "npm": "9.6.7"
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.1",
+    "@ant-design/pro-layout": "^7.17.13",
     "@craco/craco": "5.5.0",
-    "antd": "4.17.4",
+    "ant-design": "^1.0.0",
+    "antd": "^5.11.0",
     "axios": "^0.27.2",
     "craco-alias": "3.0.1",
     "craco-less": "1.17.1",
@@ -24,8 +26,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "reselect": "^4.1.8",
-    "shortid": "^2.2.16",
-    "vite": "^4.5.0"
+    "shortid": "^2.2.16"
   },
   "scripts": {
     "dev": "vite",
@@ -37,10 +38,12 @@
   "devDependencies": {
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.1.1",
     "eslint": "^8.46.0",
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "vite": "^4.5.0"
   }
 }
