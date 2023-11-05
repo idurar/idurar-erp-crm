@@ -22,6 +22,7 @@ import da_dk from './da_dk';
 import bg_bg from './bg_bg';
 import sv_se from './sv_se';
 import pl_pl from './pl_pl';
+import ms_my from './ms_my';
 import sl_si from './sl_si';
 import sk_sk from './sk_sk';
 import bn_bd from './bn_bd';
@@ -53,6 +54,7 @@ const languages = {
   bg_bg,
   sv_se,
   pl_pl,
+  ms_my,
   sl_si,
   sk_sk,
   bn_bd,
