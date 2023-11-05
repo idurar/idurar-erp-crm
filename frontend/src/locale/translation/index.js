@@ -17,6 +17,15 @@ import uk_ua from './uk_ua';
 import ja_jp from './ja_jp';
 import nl_nl from './nl_nl';
 import cs_cz from './cs_cz';
+import ur_pk from './ur_pk';
+import da_dk from './da_dk';
+import bg_bg from './bg_bg';
+import sv_se from './sv_se';
+import pl_pl from './pl_pl';
+import sl_si from './sl_si';
+import sk_sk from './sk_sk';
+import bn_bd from './bn_bd';
+import hr_hr from './hr_hr';
 
 const languages = {
   ar_eg,
@@ -38,6 +47,15 @@ const languages = {
   ja_jp,
   nl_nl,
   cs_cz,
+  ur_pk,
+  da_dk,
+  bg_bg,
+  sv_se,
+  pl_pl,
+  sl_si,
+  sk_sk,
+  bn_bd,
+  hr_hr,
 };
 
 export default languages;

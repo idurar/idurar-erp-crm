@@ -1,6 +1,6 @@
 {
-  "name": "erp-crm",
-  "version": "0.1.0",
+  "name": "idurar-erp-crm",
+  "version": "3.0.0-beta.7",
   "engines": {
     "npm": "8.5.5"
   },
