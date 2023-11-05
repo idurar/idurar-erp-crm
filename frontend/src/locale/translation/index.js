@@ -24,6 +24,7 @@ import pl_pl from './pl_pl';
 import sl_si from './sl_si';
 import sk_sk from './sk_sk';
 import bn_bd from './bn_bd';
+import hr_hr from './hr_hr';
 
 const languages = {
   ar_eg,
@@ -52,6 +53,7 @@ const languages = {
   sl_si,
   sk_sk,
   bn_bd,
+  hr_hr,
 };
 
 export default languages;
