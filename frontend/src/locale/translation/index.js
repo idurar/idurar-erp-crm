@@ -22,6 +22,7 @@ import bg_bg from './bg_bg';
 import sv_se from './sv_se';
 import pl_pl from './pl_pl';
 import pt_pt from './pt_pt';
+import el_gr from './el_gr';
 
 const languages = {
   ar_eg,
@@ -48,6 +49,7 @@ const languages = {
   sv_se,
   pl_pl,
   pt_pt,
+  el_gr,
 };
 
 export default languages;
