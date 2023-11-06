@@ -24,6 +24,7 @@ import plPL from 'antd/es/locale/pl_PL';
 import mkMK from 'antd/es/locale/mk_MK';
 import nbNO from 'antd/es/locale/nb_NO';
 import msMY from 'antd/es/locale/ms_MY';
+import huHU from 'antd/es/locale/hu_HU';
 import hrHR from 'antd/es/locale/hr_HR';
 import slSI from 'antd/es/locale/sl_SI';
 import skSK from 'antd/es/locale/sk_SK';
@@ -59,6 +60,7 @@ const antdLocale = {
   mk_mk: mkMK,
   nb_no: nbNO,
   ms_my: msMY,
+  hu_hu: huHU,
   hr_hr: hrHR,
   sl_si: slSI,
   sk_sk: skSK,

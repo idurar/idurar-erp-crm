@@ -11,6 +11,7 @@ const languages = [
   { icon: '🇫🇷 ', label: 'French', value: 'fr_fr' },
   { icon: '🇩🇪 ', label: 'German', value: 'de_de' },
   { icon: '🇮🇳 ', label: 'Hindi', value: 'hi_in' },
+  { icon: '🇭🇺 ', label: 'Hungarian', value: 'hu_hu'},
   { icon: '🇮🇩 ', label: 'Indonesian', value: 'id_id' },
   { icon: '🇮🇹 ', label: 'Italian', value: 'it_it' },
   { icon: '🇯🇵 ', label: 'Japanese ', value: 'ja_jp' },
