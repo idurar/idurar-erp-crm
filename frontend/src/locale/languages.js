@@ -22,6 +22,7 @@ const languages = [
   { icon: '🇳🇴 ', label: 'Norwegian', value: 'nb_no' },
   { icon: '🇵🇱 ', label: 'Polish', value: 'pl_pl' },
   { icon: '🇧🇷 ', label: 'Portuguese Brazil', value: 'pt_br' },
+  { icon: '🇵🇹 ', label: 'Portuguese Portugal', value: 'pt_pt' },
   { icon: '🇷🇴 ', label: 'Romanian', value: 'ro_ro' },
   { icon: '🇷🇺 ', label: 'Russian', value: 'ru_ru' },
   { icon: '🇸🇰 ', label: 'Slovak', value: 'sk_sk' },
