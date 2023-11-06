@@ -21,6 +21,7 @@ import da_dk from './da_dk';
 import bg_bg from './bg_bg';
 import sv_se from './sv_se';
 import pl_pl from './pl_pl';
+import nb_no from './nb_no';
 
 const languages = {
   ar_eg,
@@ -46,6 +47,7 @@ const languages = {
   bg_bg,
   sv_se,
   pl_pl,
+  nb_no,
 };
 
 export default languages;
