@@ -21,6 +21,7 @@ import daDK from 'antd/es/locale/da_DK';
 import bgBG from 'antd/es/locale/bg_BG';
 import svSE from 'antd/es/locale/sv_SE';
 import plPL from 'antd/es/locale/pl_PL';
+import nbNO from 'antd/es/locale/nb_NO';
 import msMY from 'antd/es/locale/ms_MY';
 import hrHR from 'antd/es/locale/hr_HR';
 import slSI from 'antd/es/locale/sl_SI';
@@ -52,6 +53,7 @@ const antdLocale = {
   bg_bg: bgBG,
   sv_se: svSE,
   pl_pl: plPL,
+  nb_no: nbNO,
   ms_my: msMY,
   hr_hr: hrHR,
   sl_si: slSI,
