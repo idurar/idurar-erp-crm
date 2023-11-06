@@ -16,8 +16,9 @@ import useLanguage from '@/locale/useLanguage';
 
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
+import SelectAsync from "@/components/SelectAsync";
 
-export default function InvoiceForm({ subTotal = 0, current = null }) {
+export default function QuoteForm({ subTotal = 0, current = null }) {
   const { last_quote_number } = useSelector(selectFinanceSettings);
 
   if (!last_quote_number) {
@@ -37,7 +38,7 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
-    setTaxRate(value);
+    setTaxRate(value/100);
   };
 
   useEffect(() => {
@@ -124,7 +125,7 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
               options={[
                 { value: 'draft', label: translate('Draft') },
                 { value: 'pending', label: translate('Pending') },
-                { value: 'sent', label: translate('Pending') },
+                { value: 'sent', label: translate('Sent') },
                 { value: 'accepted', label: translate('Accepted') },
               ]}
             ></Select>
@@ -234,20 +235,22 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
               name="taxRate"
               rules={[
                 {
-                  required: false,
+                  required: true,
+                  message: 'Please choose the tax!',
                 },
               ]}
-              initialValue="0"
             >
-              <Select
-                value={taxRate}
-                onChange={handelTaxChange}
-                bordered={false}
-                options={[
-                  { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
-                ]}
-              ></Select>
+              <SelectAsync
+                  value={taxRate}
+                  onChange={handelTaxChange}
+                  bordered={false}
+                  entity={'taxes'}
+                  outputValue={'taxValue'}
+                  displayLabels={['taxName']}
+                  withRedirect={true}
+                  urlToRedirect="/taxes"
+                  redirectLabel="Add New Tax"
+              />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={5}>
