@@ -18,7 +18,6 @@ import { selectInvoiceFollowNumItems } from '@/redux/erp/selectors';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
-
   if (!last_invoice_number) {
     return <></>;
   }
@@ -33,9 +32,6 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
-  const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
-
-  const invoiceNumber = invoiceData?.date;
 
   const handelTaxChange = (value) => {
     setTaxRate(value);
@@ -49,6 +45,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
       setLastNumber(number);
     }
   }, [current]);
+
   useEffect(() => {
     const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
     setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)).toFixed(2));
@@ -86,24 +83,13 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           <Form.Item
             label={translate('number')}
             name="number"
-            initialValue={lastNumber}
             rules={[
               {
-                required: true,
+                required: false,
               },
             ]}
           >
-            <p
-              style={{
-                width: '100%',
-                height: '2rem',
-                border: '1px solid #D8D8D8',
-                padding: '5px',
-                borderRadius: '5px',
-              }}
-            >
-              {invoiceNumber}
-            </p>
+            <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>

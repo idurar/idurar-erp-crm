@@ -10,13 +10,11 @@ import useLanguage from '@/locale/useLanguage';
 import { settingsAction } from '@/redux/settings/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem, selectInvoiceFollowNumItems } from '@/redux/erp/selectors';
-import { useErpContext } from '@/context/erp';
 import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 
 import Loading from '@/components/Loading';
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
 import invoiceFollowNum from '@/utils/invoiceFollowNum';
 
 import { useNavigate } from 'react-router-dom';
@@ -35,21 +33,34 @@ function SaveForm({ form }) {
 }
 
 export default function CreateItem({ config, CreateForm }) {
-  const translate = useLanguage();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(settingsAction.list({ entity: 'setting' }));
-  }, []);
-  let { entity } = config;
-
+  const [invoiceNumber, setInvoiceNumber] = useState('');
   const { isLoading, isSuccess, result } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const [offerSubTotal, setOfferSubTotal] = useState(0);
   const { result: invoiceData } = useSelector(selectInvoiceFollowNumItems);
   const invoiceDate = invoiceData?.date;
+
+  const translate = useLanguage();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (invoiceDate) {
+      setInvoiceNumber(invoiceDate);
+    }
+
+    // Use setFieldsValue to dynamically update the number field
+    form.setFieldsValue({
+      number: invoiceNumber,
+    });
+  }, [invoiceDate, invoiceNumber]);
+
+  useEffect(() => {
+    dispatch(settingsAction.list({ entity: 'setting' }));
+  }, []);
+
+  let { entity } = config;
 
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
@@ -152,7 +163,16 @@ export default function CreateItem({ config, CreateForm }) {
       ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={{
+            number: invoiceNumber, // Set initial value for the "number" field
+            // ... other form fields
+          }}
+          onFinish={onSubmit}
+          onValuesChange={handelValuesChange}
+        >
           <CreateForm subTotal={subTotal} offerTotal={offerSubTotal} />
         </Form>
       </Loading>
