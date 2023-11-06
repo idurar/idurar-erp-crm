@@ -33,7 +33,7 @@ import ko_kr from './ko_kr';
 import lv_lv from './lv_lv';
 import pt_pt from './pt_pt';
 import hu_hu from './hu_hu';
-
+import el_gr from './el_gr';
 const languages = {
   ar_eg,
   en_us,
@@ -70,6 +70,7 @@ const languages = {
   lv_lv,
   pt_pt,
   hu_hu,
+  el_gr,
 };
 
 export default languages;

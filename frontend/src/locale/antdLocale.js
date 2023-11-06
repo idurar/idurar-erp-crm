@@ -32,8 +32,7 @@ import skSK from 'antd/es/locale/sk_SK';
 import bnBD from 'antd/es/locale/bn_BD';
 import koKR from 'antd/es/locale/ko_KR';
 import lvLV from 'antd/es/locale/lv_LV';
-
-
+import elGR from 'antd/es/locale/el_GR';
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -59,7 +58,7 @@ const antdLocale = {
   bg_bg: bgBG,
   sv_se: svSE,
   pl_pl: plPL,
-  pt_pt: ptPT,
+  pt_Pt: ptPT,
   mk_mk: mkMK,
   nb_no: nbNO,
   ms_my: msMY,
@@ -70,6 +69,7 @@ const antdLocale = {
   bn_bd: bnBD,
   ko_kr: koKR,
   lv_lv: lvLV,
+  el_GR: elGR,
 };
 
 export default antdLocale;
