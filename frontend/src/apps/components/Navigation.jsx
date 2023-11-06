@@ -115,6 +115,10 @@ function Sidebar({ collapsible }) {
           label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,
         },
         {
+          key: 'taxes',
+          label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
+        },
+        {
           key: 'advancedSettings',
           label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
         },

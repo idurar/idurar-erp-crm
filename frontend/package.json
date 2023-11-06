@@ -1,6 +1,6 @@
 {
-  "name": "erp-crm",
-  "version": "0.1.0",
+  "name": "idurar-erp-crm",
+  "version": "3.0.0-beta.7",
   "engines": {
     "npm": "8.5.5"
   },
@@ -10,7 +10,7 @@
     "@rollup/plugin-dynamic-import-vars": "^2.1.0",
     "@vitejs/plugin-react": "^4.0.4",
     "antd": "^5.11.0",
-    "axios": "0.27.2",
+    "axios": "^1.6.0",
     "cross-env": "7.0.3",
     "currency.js": "2.0.4",
     "just-compare": "^2.3.0",

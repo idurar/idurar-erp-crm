@@ -1,19 +1,19 @@
 import { Form, Input, Select, Tag } from 'antd';
 
-import { languages, tagColor } from '@/utils';
+import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
   const tagRender = (props) => {
-    const { label, value, closable, onClose } = props;
+    const { label, closable, onClose } = props;
     const onPreventMouseDown = (event) => {
       event.preventDefault();
       event.stopPropagation();
     };
     return (
       <Tag
-        color={tagColor[Math.floor(Math.random() * 11)]}
+        // color={tagColor[Math.floor(Math.random() * 11)]}
         onMouseDown={onPreventMouseDown}
         closable={closable}
         onClose={onClose}

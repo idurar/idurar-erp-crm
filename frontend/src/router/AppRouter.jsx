@@ -27,6 +27,7 @@ const Employee = lazy(() => import('@/pages/Employee'));
 const Admin = lazy(() => import('@/pages/Admin'));
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
+const Taxes = lazy(() => import('@/pages/Taxes'));
 const Email = lazy(() => import('@/pages/Email/index'));
 const EmailRead = lazy(() => import('@/pages/Email/EmailRead'));
 const EmailUpdate = lazy(() => import('@/pages/Email/EmailUpdate'));
@@ -127,6 +128,10 @@ export default function AppRouter() {
     {
       path: '/payment/mode',
       element: <PaymentMode />,
+    },
+    {
+      path: '/taxes',
+      element: <Taxes />,
     },
     {
       path: '/email',

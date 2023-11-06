@@ -24,7 +24,7 @@ Object.byString = function (o, s) {
 };
 
 /* 
- To check only if a property exists, without getting its value. It similer get function.
+ To check only if a property exists, without getting its value. It similar get function.
 */
 export function has(obj, key) {
   return key.split('.').every(function (x) {

@@ -1,7 +1,18 @@
 import * as actionTypes from './types';
 
-import translation from '@/locale/translation';
 import languages from '@/locale/languages';
+
+async function fetchTranslation() {
+  try {
+    let translation = await import('@/locale/translation/translation');
+    return translation.default;
+  } catch (error) {
+    console.error(
+      'Error fetching translation file :~ file: actions.js:7 ~ fetchTranslation ~ fetchTranslation:',
+      error
+    );
+  }
+}
 
 export const translateAction = {
   resetState: () => (dispatch) => {
@@ -13,8 +24,9 @@ export const translateAction = {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
     });
+    const translation = await fetchTranslation();
+    let data = await translation[value];
 
-    let data = translation[value];
     const isRtl = languages.find((l) => l.value === value).isRtl || false;
     const LANG_STATE = {
       result: data,
