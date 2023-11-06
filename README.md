@@ -113,8 +113,6 @@ cd frontend
 npm install
 ```
 
-This command will navigate to the frontend directory within the project and install all the required packages for the frontend.
-
 #### Step 9: Run the Frontend Server
 
 After installing the frontend dependencies, run the following command in the same terminal to start the frontend server:
