@@ -21,15 +21,18 @@ import daDK from 'antd/es/locale/da_DK';
 import bgBG from 'antd/es/locale/bg_BG';
 import svSE from 'antd/es/locale/sv_SE';
 import plPL from 'antd/es/locale/pl_PL';
+import ptPT from 'antd/es/locale/pt_PT';
 import mkMK from 'antd/es/locale/mk_MK';
 import nbNO from 'antd/es/locale/nb_NO';
 import msMY from 'antd/es/locale/ms_MY';
+import huHU from 'antd/es/locale/hu_HU';
 import hrHR from 'antd/es/locale/hr_HR';
 import slSI from 'antd/es/locale/sl_SI';
 import skSK from 'antd/es/locale/sk_SK';
 import bnBD from 'antd/es/locale/bn_BD';
 import koKR from 'antd/es/locale/ko_KR';
 import lvLV from 'antd/es/locale/lv_LV';
+
 
 
 const antdLocale = {
@@ -56,9 +59,11 @@ const antdLocale = {
   bg_bg: bgBG,
   sv_se: svSE,
   pl_pl: plPL,
+  pt_pt: ptPT,
   mk_mk: mkMK,
   nb_no: nbNO,
   ms_my: msMY,
+  hu_hu: huHU,
   hr_hr: hrHR,
   sl_si: slSI,
   sk_sk: skSK,
