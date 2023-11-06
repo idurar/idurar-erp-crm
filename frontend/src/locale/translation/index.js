@@ -16,11 +16,21 @@ import vi_vn from './vi_vn';
 import uk_ua from './uk_ua';
 import ja_jp from './ja_jp';
 import nl_nl from './nl_nl';
-import ur_pk from './ur_pk'
+import cs_cz from './cs_cz';
+import ur_pk from './ur_pk';
 import da_dk from './da_dk';
 import bg_bg from './bg_bg';
 import sv_se from './sv_se';
 import pl_pl from './pl_pl';
+import mk_mk from './mk_mk';
+import nb_no from './nb_no';
+import ms_my from './ms_my';
+import sl_si from './sl_si';
+import sk_sk from './sk_sk';
+import bn_bd from './bn_bd';
+import hr_hr from './hr_hr';
+import ko_kr from './ko_kr';
+import lv_lv from './lv_lv';
 
 const languages = {
   ar_eg,
@@ -41,11 +51,21 @@ const languages = {
   uk_ua,
   ja_jp,
   nl_nl,
+  cs_cz,
   ur_pk,
   da_dk,
   bg_bg,
   sv_se,
   pl_pl,
+  mk_mk,
+  nb_no,
+  ms_my,
+  sl_si,
+  sk_sk,
+  bn_bd,
+  hr_hr,
+  ko_kr,
+  lv_lv,
 };
 
 export default languages;
