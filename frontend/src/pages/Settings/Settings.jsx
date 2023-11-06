@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu } from 'antd';
-import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-design/icons';
+import {SettingOutlined, FileTextOutlined, CreditCardOutlined, DollarOutlined} from '@ant-design/icons';
 import { SettingsLayout } from '@/layout';
 import Visibility from '@/components/Visibility';
 
@@ -59,7 +59,7 @@ export default function Settings() {
           {translate('Currency Settings')}
         </span>
       ),
-      icon: <SettingOutlined />,
+      icon: <DollarOutlined />,
     },
     {
       key: 'paymentSettings',

@@ -15,12 +15,21 @@ import viVN from 'antd/es/locale/vi_VN';
 import ukUA from 'antd/es/locale/uk_UA';
 import jaJP from 'antd/es/locale/ja_JP';
 import nlNL from 'antd/es/locale/nl_NL';
+import csCZ from 'antd/es/locale/cs_CZ';
 import urPk from 'antd/es/locale/ur_PK';
 import daDK from 'antd/es/locale/da_DK';
 import bgBG from 'antd/es/locale/bg_BG';
 import svSE from 'antd/es/locale/sv_SE';
 import plPL from 'antd/es/locale/pl_PL';
 import mkMK from 'antd/es/locale/mk_MK';
+import nbNO from 'antd/es/locale/nb_NO';
+import msMY from 'antd/es/locale/ms_MY';
+import hrHR from 'antd/es/locale/hr_HR';
+import slSI from 'antd/es/locale/sl_SI';
+import skSK from 'antd/es/locale/sk_SK';
+import bnBD from 'antd/es/locale/bn_BD';
+import koKR from 'antd/es/locale/ko_KR';
+
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -40,12 +49,20 @@ const antdLocale = {
   uk_ua: ukUA,
   ja_jp: jaJP,
   nl_nl: nlNL,
+  cs_cz: csCZ,
   ur_pk: urPk,
   da_dk: daDK,
   bg_bg: bgBG,
   sv_se: svSE,
   pl_pl: plPL,
   mk_mk: mkMK,
+  nb_no: nbNO,
+  ms_my: msMY,
+  hr_hr: hrHR,
+  sl_si: slSI,
+  sk_sk: skSK,
+  bn_bd: bnBD,
+  ko_kr: koKR,
 };
 
 export default antdLocale;

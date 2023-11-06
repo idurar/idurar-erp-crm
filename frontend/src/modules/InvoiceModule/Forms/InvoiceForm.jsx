@@ -16,6 +16,7 @@ import useLanguage from '@/locale/useLanguage';
 
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
+import SelectAsync from "@/components/SelectAsync";
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
@@ -36,7 +37,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
   const handelTaxChange = (value) => {
-    setTaxRate(value);
+    setTaxRate(value/100);
   };
 
   useEffect(() => {
@@ -232,20 +233,22 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               name="taxRate"
               rules={[
                 {
-                  required: false,
+                  required: true,
+                  message: 'Please choose the tax!',
                 },
               ]}
-              initialValue="0"
             >
-              <Select
-                value={taxRate}
-                onChange={handelTaxChange}
-                bordered={false}
-                options={[
-                  { value: 0, label: `${translate('Tax')} 0 %` },
-                  { value: 0.19, label: `${translate('Tax')} 19 %` },
-                ]}
-              ></Select>
+              <SelectAsync
+                  value={taxRate}
+                  onChange={handelTaxChange}
+                  bordered={false}
+                  entity={'taxes'}
+                  outputValue={'taxValue'}
+                  displayLabels={['taxName']}
+                  withRedirect={true}
+                  urlToRedirect="/taxes"
+                  redirectLabel="Add New Tax"
+              />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={5}>
