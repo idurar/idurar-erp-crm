@@ -285,6 +285,9 @@ const lang = {
   staff_cru: 'Staff (Create,Read,Update)',
   create_and_read_only: 'Create and Read Only',
   read_only: 'Read Only',
+  taxes: 'Taxes',
+  taxes_list: 'Taxes List',
+  add_new_tax: 'Add New Tax',
 };
 
 export default lang;

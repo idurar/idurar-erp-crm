@@ -1,7 +1,7 @@
 import { Tag, Row, Col } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
-import {useMoney} from "@/settings";
+import { useMoney } from '@/settings';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
@@ -103,7 +103,7 @@ export default function DashboardModule() {
         }
         prefix={translate('This month')}
         isLoading={isLoading}
-        tagContent={result?.total && moneyFormatter({ amount: result?.total }) }
+        tagContent={result?.total && moneyFormatter({ amount: result?.total })}
       />
     );
   });
@@ -141,8 +141,7 @@ export default function DashboardModule() {
           prefix={translate('Not Paid')}
           isLoading={invoiceLoading}
           tagContent={
-            invoiceResult?.total_undue &&
-              moneyFormatter({ amount: invoiceResult?.total_undue })
+            invoiceResult?.total_undue && moneyFormatter({ amount: invoiceResult?.total_undue })
           }
         />
       </Row>
