@@ -31,6 +31,8 @@ import bn_bd from './bn_bd';
 import hr_hr from './hr_hr';
 import ko_kr from './ko_kr';
 import lv_lv from './lv_lv';
+import pt_pt from './pt_pt';
+import hu_hu from './hu_hu';
 
 const languages = {
   ar_eg,
@@ -66,6 +68,8 @@ const languages = {
   hr_hr,
   ko_kr,
   lv_lv,
+  pt_pt,
+  hu_hu,
 };
 
 export default languages;

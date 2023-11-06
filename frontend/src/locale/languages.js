@@ -11,7 +11,7 @@ const languages = [
   { icon: '🇫🇷 ', label: 'French', value: 'fr_fr' },
   { icon: '🇩🇪 ', label: 'German', value: 'de_de' },
   { icon: '🇮🇳 ', label: 'Hindi', value: 'hi_in' },
-  { icon: '🇭🇺 ', label: 'Hungarian', value: 'hu_hu'},
+  { icon: '🇭🇺 ', label: 'Hungarian', value: 'hu_hu' },
   { icon: '🇮🇩 ', label: 'Indonesian', value: 'id_id' },
   { icon: '🇮🇹 ', label: 'Italian', value: 'it_it' },
   { icon: '🇯🇵 ', label: 'Japanese ', value: 'ja_jp' },
@@ -41,10 +41,8 @@ const languages = [
   { icon: '🇵🇭 ', label: 'Filipino', value: 'fil_ph', disabled: true },
   { icon: '🇫🇮 ', label: 'Finnish', value: 'fi_fi', disabled: true },
   { icon: '🇬🇷 ', label: 'Greek', value: 'el_gr', disabled: true },
-  { icon: '🇭🇺 ', label: 'Hungarian', value: 'hu_hu', disabled: true },
   { icon: '🇱🇹 ', label: 'Lithuanian', value: 'lt_lt', disabled: true },
   { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true, disabled: true },
-  { icon: '🇵🇹 ', label: 'Portuguese Portugal', value: 'pt_pt', disabled: true },
 ];
 
 export default languages;
