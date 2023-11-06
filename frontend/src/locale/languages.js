@@ -14,6 +14,9 @@ const languages = [
   { icon: '🇮🇩 ', label: 'Indonesian', value: 'id_id' },
   { icon: '🇮🇹 ', label: 'Italian', value: 'it_it' },
   { icon: '🇯🇵 ', label: 'Japanese ', value: 'ja_jp' },
+  { icon: '🇰🇷 ', label: 'Korean', value: 'ko_kr' },
+  { icon: '🇲🇾 ', label: 'Malay', value: 'ms_my' },
+  { icon: '🇳🇴 ', label: 'Norwegian', value: 'nb_no' },
   { icon: '🇵🇱 ', label: 'Polish', value: 'pl_pl' },
   { icon: '🇧🇷 ', label: 'Portuguese Brazil', value: 'pt_br' },
   { icon: '🇷🇴 ', label: 'Romanian', value: 'ro_ro' },
@@ -35,14 +38,11 @@ const languages = [
   { icon: '🇫🇮 ', label: 'Finnish (coming soon)', value: 'fi_fi', disabled: true },
   { icon: '🇬🇷 ', label: 'Greek (coming soon)', value: 'el_gr', disabled: true },
   { icon: '🇭🇺 ', label: 'Hungarian (coming soon)', value: 'hu_hu', disabled: true },
-  { icon: '🇰🇷 ', label: 'Korean', value: 'ko_kr' },
   { icon: '🇱🇻 ', label: 'Latvian (coming soon)', value: 'lv_lv', disabled: true },
   { icon: '🇱🇹 ', label: 'Lithuanian (coming soon)', value: 'lt_lt', disabled: true },
   { icon: '🇲🇰 ', label: 'Macedonian (coming soon)', value: 'mk_mk', disabled: true },
-  { icon: '🇲🇾 ', label: 'Malay', value: 'ms_my' },
-  { icon: '🇳🇴 ', label: 'Norwegian', value: 'nb_no' },
   { icon: '🇮🇷 ', label: 'Persian (coming soon)', value: 'fa_ir', isRtl: true, disabled: true },
-  { icon: '🇵🇹 ', label: 'Portuguese (Portugal) (coming soon)', value: 'pt_pt', disabled: true },
+  { icon: '🇵🇹 ', label: 'Portuguese Portugal (coming soon)', value: 'pt_pt', disabled: true },
 ];
 
 export default languages;
