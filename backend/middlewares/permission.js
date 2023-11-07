@@ -18,7 +18,7 @@ exports.hasPermission = (permissionName = 'all') => {
       return res.status(403).json({
         success: false,
         result: null,
-        message: 'Access denied; you are not granted permission.',
+        message: 'Access denied : you are not granted permission.',
       });
     }
   };
