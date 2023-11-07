@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
@@ -11,6 +11,8 @@ export default function SelectAsync({
   outputValue = '_id',
   value,
   onChange,
+  loadDefault = true,
+  defaultField = 'isDefault',
   redirectLabel = '',
   withRedirect = false,
   urlToRedirect = '/',
@@ -50,6 +52,18 @@ export default function SelectAsync({
       }
     }
   };
+
+  useEffect(() => {
+    if(loadDefault) {
+      const elem = selectOptions.find((option) => {
+        return option[defaultField] === true;
+      });
+      if (elem) {
+        setCurrentValue(elem[outputValue] || elem);
+        onChange(elem[outputValue] || elem);
+      }
+    }
+  }, [selectOptions]);
 
   return (
     <Select
