@@ -34,6 +34,8 @@ import lv_lv from './lv_lv';
 import pt_pt from './pt_pt';
 import hu_hu from './hu_hu';
 import el_gr from './el_gr';
+import lt_lt from './lt_lt';
+
 const languages = {
   ar_eg,
   en_us,
@@ -71,6 +73,7 @@ const languages = {
   pt_pt,
   hu_hu,
   el_gr,
+  lt_lt,
 };
 
 export default languages;
