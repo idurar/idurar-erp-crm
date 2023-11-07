@@ -41,7 +41,7 @@ const languages = [
   { icon: '🇵🇭 ', label: 'Filipino', value: 'fil_ph', disabled: true },
   { icon: '🇫🇮 ', label: 'Finnish', value: 'fi_fi', disabled: true },
   { icon: '🇬🇷 ', label: 'Greek', value: 'el_gr' },
-  { icon: '🇱🇹 ', label: 'Lithuanian', value: 'lt_lt', disabled: true },
+  { icon: '🇱🇹 ', label: 'Lithuanian', value: 'lt_lt' },
   { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true, disabled: true },
 ];
 
