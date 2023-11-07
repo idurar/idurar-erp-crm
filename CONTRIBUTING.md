@@ -22,7 +22,7 @@ If you find a bug or have a suggestion for an enhancement :
 ### Submitting Pull Requests
 
 1. Fork the repository and create your own branch from the `dev` branch.
-2. follow this format for naming branches:
+2. Use the following format for branch names:
    - `features/new-profile-page`
    - `issues/fix-authentication-issue`
 3. Make sure your code follows our [Coding Guidelines](#coding-guidelines).
