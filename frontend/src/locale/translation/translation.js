@@ -33,8 +33,10 @@ import ko_kr from './ko_kr';
 import lv_lv from './lv_lv';
 import pt_pt from './pt_pt';
 import hu_hu from './hu_hu';
+import et_ee from './et_ee';
 import el_gr from './el_gr';
 import lt_lt from './lt_lt';
+
 
 const languages = {
   ar_eg,
@@ -72,6 +74,7 @@ const languages = {
   lv_lv,
   pt_pt,
   hu_hu,
+  et_ee,
   el_gr,
   lt_lt,
 };

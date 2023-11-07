@@ -19,6 +19,14 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
 
+## License
+
+IDURAR is [fair-code](http://faircode.io) distributed under the
+[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
+[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
+
+Commercial licenses are available : [Get in touch](mailto:hello@idurarapp.com)
+
 # How To Deploy IDURAR ERP CRM : 
 🔥 I would like to invite you for a weekly free IDURAR Webinar (Node.js React.js course), where you learn how to deploy IDURAR on cloud , and create a new api and new crud app with IDURAR in just one hour ?
 Please fill this form if you are interested : [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
@@ -207,7 +215,7 @@ IDURAR is [fair-code](http://faircode.io) distributed under the
 [**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
 [**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
 
-Proprietary licenses are available for enterprise customers. [Get in touch](mailto:hello@idurarapp.com)
+Commercial licenses are available : [Get in touch](mailto:hello@idurarapp.com)
 
 ## Show your support
 
