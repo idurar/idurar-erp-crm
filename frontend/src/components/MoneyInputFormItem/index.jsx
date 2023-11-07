@@ -10,11 +10,11 @@ export default function MoneyInputFormItem({ updatePrice, value = 0, readOnly = 
         readOnly={readOnly}
         className="moneyInput"
         onChange={updatePrice}
-        value={value}
+        precision={money.cent_precision ? money.cent_precision : 2}
+        value={money.amountFormatter({ amount: value })}
         controls={false}
         addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
         addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
-        formatter={(value) => money.amountFormatter({ amount: value })}
       />
     </Form.Item>
   );
