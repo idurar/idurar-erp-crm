@@ -14,14 +14,13 @@ export default function AutoCompleteAsync({
 }) {
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
+  const [searching, setSearching] = useState(false);
+  const [valToSearch, setValToSearch] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState('');
+  const [dropDownData, setDropDownData] = useState([]);
 
   const isUpdating = useRef(true);
   const isSearching = useRef(false);
-
-  const [searching, setSearching] = useState(false);
-
-  const [valToSearch, setValToSearch] = useState('');
-  const [debouncedValue, setDebouncedValue] = useState('');
 
   const [, cancel] = useDebounce(
     () => {
@@ -57,12 +56,23 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText && searchText != '') {
+    setDropDownData([]);
+    if (searchText != '') {
       isSearching.current = true;
       setSearching(true);
       setOptions([]);
       setCurrentValue(undefined);
       setValToSearch(searchText);
+    }
+  };
+
+  const onDropDownOpen = async () => {
+    if (!searching) {
+      if (!dropDownData.length) {
+        // Only fetch data if it's not already loaded
+        const { result } = await request.listAll({ entity });
+        setDropDownData(result);
+      }
     }
   };
 
@@ -77,6 +87,7 @@ export default function AutoCompleteAsync({
       }
     }
   }, [isSuccess, result]);
+
   useEffect(() => {
     // this for update Form , it's for setField
     if (value && isUpdating.current) {
@@ -91,6 +102,11 @@ export default function AutoCompleteAsync({
 
   return (
     <Select
+      onDropdownVisibleChange={(open) => {
+        if (open) {
+          onDropDownOpen();
+        }
+      }}
       loading={isLoading}
       showSearch
       allowClear
@@ -117,11 +133,21 @@ export default function AutoCompleteAsync({
         setOptions([]);
         setCurrentValue(undefined);
         setSearching(false);
+        setDropDownData([]);
       }}
     >
       {selectOptions.map((optionField) => (
         <Select.Option
           key={optionField[outputValue] || optionField}
+          value={optionField[outputValue] || optionField}
+        >
+          {labels(optionField)}
+        </Select.Option>
+      ))}
+      {/* Render data from dropDownOpen function when the dropdown is open */}
+      {dropDownData.map((optionField) => (
+        <Select.Option
+          key={`dropdown-${optionField[outputValue] || optionField}`}
           value={optionField[outputValue] || optionField}
         >
           {labels(optionField)}

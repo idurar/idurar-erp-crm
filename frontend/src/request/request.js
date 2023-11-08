@@ -146,6 +146,7 @@ const request = {
       return errorHandler(error);
     }
   },
+
   listAll: async ({ entity }) => {
     try {
       const response = await axios.get(entity + '/listAll');

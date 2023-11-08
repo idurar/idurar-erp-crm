@@ -14,7 +14,6 @@ import useLanguage from '@/locale/useLanguage';
 import calculate from '@/utils/calculate';
 import { taxRateList } from '@/utils/taxRateList';
 import { useSelector } from 'react-redux';
-import { selectInvoiceFollowNumItems } from '@/redux/erp/selectors';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);

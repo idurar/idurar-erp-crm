@@ -163,16 +163,7 @@ export default function CreateItem({ config, CreateForm }) {
       ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form
-          form={form}
-          layout="vertical"
-          initialValues={{
-            number: invoiceNumber, // Set initial value for the "number" field
-            // ... other form fields
-          }}
-          onFinish={onSubmit}
-          onValuesChange={handelValuesChange}
-        >
+        <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
           <CreateForm subTotal={subTotal} offerTotal={offerSubTotal} />
         </Form>
       </Loading>

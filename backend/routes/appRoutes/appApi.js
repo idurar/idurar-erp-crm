@@ -86,6 +86,7 @@ router
   .delete(hasPermission('delete'), catchErrors(clientController.delete));
 router.route('/client/search').get(hasPermission('read'), catchErrors(clientController.search));
 router.route('/client/list').get(hasPermission('read'), catchErrors(clientController.list));
+router.route('/client/listAll').get(hasPermission('read'), catchErrors(clientController.listAll));
 router.route('/client/filter').get(hasPermission('read'), catchErrors(clientController.filter));
 router.route('/client/summary').get(hasPermission('read'), catchErrors(clientController.summary));
 

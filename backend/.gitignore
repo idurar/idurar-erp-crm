@@ -5,7 +5,9 @@ frontend/node_modules/
 .idea
 notes.md
 
-.env
+backend/.env
 .env.local
 
+ 
+backend/public
 *.pdf
