@@ -8,6 +8,7 @@ const languages = [
   { icon: '🇩🇰 ', label: 'Danish', value: 'da_dk' },
   { icon: '🇳🇱 ', label: 'Dutch', value: 'nl_nl' },
   { icon: '🇺🇸 ', label: 'English', value: 'en_us' },
+  { icon: '🇪🇪 ', label: 'Estonian', value: 'et_ee' },
   { icon: '🇫🇷 ', label: 'French', value: 'fr_fr' },
   { icon: '🇩🇪 ', label: 'German', value: 'de_de' },
   { icon: '🇬🇷 ', label: 'Greek', value: 'el_gr' },
@@ -18,6 +19,7 @@ const languages = [
   { icon: '🇯🇵 ', label: 'Japanese ', value: 'ja_jp' },
   { icon: '🇰🇷 ', label: 'Korean', value: 'ko_kr' },
   { icon: '🇱🇻 ', label: 'Latvian', value: 'lv_lv' },
+  { icon: '🇱🇹 ', label: 'Lithuanian', value: 'lt_lt' },
   { icon: '🇲🇰 ', label: 'Macedonian', value: 'mk_mk' },
   { icon: '🇲🇾 ', label: 'Malay', value: 'ms_my' },
   { icon: '🇳🇴 ', label: 'Norwegian', value: 'nb_no' },
@@ -38,11 +40,8 @@ const languages = [
   { icon: '🇦🇱 ', label: 'Albanian', value: 'sq_al', disabled: true },
   { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs', disabled: true },
   { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es', disabled: true },
-  { icon: '🇪🇪 ', label: 'Estonian', value: 'et_ee' },
   { icon: '🇵🇭 ', label: 'Filipino', value: 'fil_ph', disabled: true },
   { icon: '🇫🇮 ', label: 'Finnish', value: 'fi_fi', disabled: true },
-  { icon: '🇬🇷 ', label: 'Greek', value: 'el_gr' },
-  { icon: '🇱🇹 ', label: 'Lithuanian', value: 'lt_lt' },
   { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true, disabled: true },
 ];
 
