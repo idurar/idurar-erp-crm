@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
-import { useDebounce } from 'react-use';
+import useDebounce from '@/hooks/useDebounce';
+
 import { Select, Empty } from 'antd';
 
 import { SearchOutlined } from '@ant-design/icons';
