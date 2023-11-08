@@ -189,8 +189,14 @@ function MobileSidebar() {
   };
   return (
     <>
-      <Button type="text" size="large" onClick={showDrawer} className="mobile-sidebar-btn">
-        <MenuOutlined />
+      <Button
+        type="text"
+        size="large"
+        onClick={showDrawer}
+        className="mobile-sidebar-btn"
+        style={{ marginLeft: 25 }}
+      >
+        <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
       <Drawer
         width={200}
