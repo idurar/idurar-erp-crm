@@ -13,6 +13,7 @@ import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
+import useIsMobile from '@/hooks/useIsMobile';
 
 import logo from '@/style/images/logo.png';
 
@@ -23,6 +24,7 @@ const LoginPage = () => {
   const translate = useLanguage();
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
@@ -58,7 +60,7 @@ const LoginPage = () => {
                 display: 'block',
               }}
             />
-            <div className="space50"></div>
+            {isMobile ? <div className="space20"></div> : <div className="space50"></div>}
           </Col>
           <Title level={1}>{translate('Sign in')}</Title>
 
