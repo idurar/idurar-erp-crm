@@ -32,23 +32,23 @@ const getLabel = (lang, key) => {
         window.localStorage.removeItem('lang');
         window.localStorage.setItem('lang', JSON.stringify(list));
       }
-      console.error(
-        '🇩🇿 🇧🇷 🇻🇳 🇮🇩 🇨🇳 Language Label Warning : translate("' +
-          lowerCaseKey +
-          '") failed to get label for this key : ' +
-          lowerCaseKey +
-          ' please review your language config file and add this label'
-      );
+      // console.error(
+      //   '🇩🇿 🇧🇷 🇻🇳 🇮🇩 🇨🇳 Language Label Warning : translate("' +
+      //     lowerCaseKey +
+      //     '") failed to get label for this key : ' +
+      //     lowerCaseKey +
+      //     ' please review your language config file and add this label'
+      // );
       return label;
     }
   } catch (error) {
-    console.error(
-      '🚨 error getting this label : translate("' +
-        key +
-        '") failed to get label for this key : ' +
-        key +
-        ' please review your language config file and add this label'
-    );
+    // console.error(
+    //   '🚨 error getting this label : translate("' +
+    //     key +
+    //     '") failed to get label for this key : ' +
+    //     key +
+    //     ' please review your language config file and add this label'
+    // );
     return 'No translate';
   }
 };
