@@ -9,6 +9,7 @@ const languages = [
   { icon: '🇳🇱 ', label: 'Dutch', value: 'nl_nl' },
   { icon: '🇺🇸 ', label: 'English', value: 'en_us' },
   { icon: '🇪🇪 ', label: 'Estonian', value: 'et_ee' },
+  { icon: '🇫🇮 ', label: 'Finnish', value: 'fi_fi' },
   { icon: '🇫🇷 ', label: 'French', value: 'fr_fr' },
   { icon: '🇩🇪 ', label: 'German', value: 'de_de' },
   { icon: '🇬🇷 ', label: 'Greek', value: 'el_gr' },
@@ -41,7 +42,6 @@ const languages = [
   { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs', disabled: true },
   { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es', disabled: true },
   { icon: '🇵🇭 ', label: 'Filipino', value: 'fil_ph', disabled: true },
-  { icon: '🇫🇮 ', label: 'Finnish', value: 'fi_fi', disabled: true },
   { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true, disabled: true },
 ];
 

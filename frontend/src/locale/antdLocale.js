@@ -32,6 +32,7 @@ import skSK from 'antd/es/locale/sk_SK';
 import bnBD from 'antd/es/locale/bn_BD';
 import koKR from 'antd/es/locale/ko_KR';
 import lvLV from 'antd/es/locale/lv_LV';
+import fiFi from 'antd/es/locale/fi_FI';
 import etEE from 'antd/es/locale/et_EE';
 import elGR from 'antd/es/locale/el_GR';
 import ltLT from 'antd/es/locale/lt_LT';
@@ -49,7 +50,7 @@ const antdLocale = {
   de_de: deDE,
   ru_ru: ruRU,
   tr_tr: trTR,
-  pt_pt: ptBr,
+  pt_br: ptBR,
   vi_vn: viVN,
   uk_ua: ukUA,
   ja_jp: jaJP,
@@ -60,7 +61,7 @@ const antdLocale = {
   bg_bg: bgBG,
   sv_se: svSE,
   pl_pl: plPL,
-  pt_Pt: ptPT,
+  pt_pt: ptPT,
   mk_mk: mkMK,
   nb_no: nbNO,
   ms_my: msMY,
@@ -71,6 +72,7 @@ const antdLocale = {
   bn_bd: bnBD,
   ko_kr: koKR,
   lv_lv: lvLV,
+  fi_fi: fiFi,
   et_ee: etEE,
   el_GR: elGR,
   lt_LT: ltLT,
