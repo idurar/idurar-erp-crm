@@ -10,7 +10,7 @@ import esES from 'antd/es/locale/es_ES';
 import deDE from 'antd/es/locale/de_DE';
 import ruRU from 'antd/es/locale/ru_RU';
 import trTR from 'antd/es/locale/tr_TR';
-import ptBr from 'antd/es/locale/pt_BR';
+import ptBR from 'antd/es/locale/pt_BR';
 import viVN from 'antd/es/locale/vi_VN';
 import ukUA from 'antd/es/locale/uk_UA';
 import jaJP from 'antd/es/locale/ja_JP';
