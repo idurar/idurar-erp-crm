@@ -24,7 +24,7 @@ const SelectLanguage = () => {
       defaultValue={langCode}
       style={{ width: '120px', float: 'right', marginTop: '5px' }}
       optionFilterProp="children"
-      filterOption={(input, option) => (option?.label ?? '').includes(input)}
+      filterOption={(input, option) => (option?.label ?? '').includes(input.toLowerCase())}
       filterSort={(optionA, optionB) =>
         (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
       }

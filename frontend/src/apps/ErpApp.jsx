@@ -12,11 +12,15 @@ import { settingsAction } from '@/redux/settings/actions';
 
 import AppRouter from '@/router/AppRouter';
 
+import useIsMobile from '@/hooks/useIsMobile';
+
 export default function ErpCrmApp() {
   const { Content } = Layout;
 
   const { state: stateApp } = useAppContext();
   const { isNavMenuClose } = stateApp;
+
+  const isMobile = useIsMobile();
 
   const dispatch = useDispatch();
   useLayoutEffect(() => {
@@ -27,23 +31,37 @@ export default function ErpCrmApp() {
     <Layout hasSider>
       <Navigation />
 
-      <Layout
-        style={{ marginLeft: isNavMenuClose ? 100 : 220 }}
-        className={isNavMenuClose ? 'smallNavigation site-layout' : 'wideNavigation layout'}
-      >
-        <HeaderContent />
-
-        <Content
-          style={{
-            margin: '40px auto 30px',
-            overflow: 'initial',
-            width: '100%',
-            maxWidth: isNavMenuClose ? 1150 : 1050,
-          }}
-        >
-          <AppRouter />
-        </Content>
-      </Layout>
+      {isMobile ? (
+        <Layout style={{ marginLeft: 0 }}>
+          <HeaderContent />
+          <Content
+            style={{
+              margin: '40px auto 30px',
+              overflow: 'initial',
+              width: '100%',
+              padding: '0 25px',
+              maxWidth: 'none',
+            }}
+          >
+            <AppRouter />
+          </Content>
+        </Layout>
+      ) : (
+        <Layout style={{ marginLeft: isNavMenuClose ? 100 : 220 }}>
+          <HeaderContent />
+          <Content
+            style={{
+              margin: '40px auto 30px',
+              overflow: 'initial',
+              width: '100%',
+              padding: '0 25px',
+              maxWidth: isNavMenuClose ? 1200 : 1100,
+            }}
+          >
+            <AppRouter />
+          </Content>
+        </Layout>
+      )}
     </Layout>
   );
 }
