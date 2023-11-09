@@ -167,14 +167,18 @@ const summary = async (req, res) => {
             $gte: startDate.toDate(),
             $lte: endDate.toDate(),
           },
-          paymentStatus: 'unpaid',
+          paymentStatus: {
+            $in: ['unpaid', 'partially'],
+          }
         },
       },
       {
         $group: {
           _id: null,
           total_amount: {
-            $sum: '$total',
+            $sum: {
+              $subtract: ['$total', '$credit']
+            },
           },
         },
       },
