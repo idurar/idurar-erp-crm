@@ -72,6 +72,13 @@ router.route('/taxes/create').post(hasPermission('create'), catchErrors(taxContr
 router.route('/taxes/read/:id').get(hasPermission('read'), catchErrors(taxController.read));
 router.route('/taxes/update/:id').patch(hasPermission('update'), catchErrors(taxController.update));
 router.route('/taxes/search').get(hasPermission('read'), catchErrors(taxController.search));
+/**
+ * @swagger
+ * /api/taxes/list:
+ *   get:
+ *     summary: Get a list of taxes
+ *     description: Get a list of all the taxes
+*/
 router.route('/taxes/list').get(hasPermission('read'), catchErrors(taxController.list));
 router.route('/taxes/filter').get(hasPermission('read'), catchErrors(taxController.filter));
 
