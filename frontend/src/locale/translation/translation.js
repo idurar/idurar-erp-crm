@@ -37,7 +37,7 @@ import fi_fi from './fi_fi';
 import et_ee from './et_ee';
 import el_gr from './el_gr';
 import lt_lt from './lt_lt';
-
+import ca_es from './ca_es';
 
 const languages = {
   ar_eg,
@@ -79,6 +79,7 @@ const languages = {
   et_ee,
   el_gr,
   lt_lt,
+  ca_es,
 };
 
 export default languages;

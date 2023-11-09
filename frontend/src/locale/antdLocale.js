@@ -36,6 +36,7 @@ import fiFi from 'antd/es/locale/fi_FI';
 import etEE from 'antd/es/locale/et_EE';
 import elGR from 'antd/es/locale/el_GR';
 import ltLT from 'antd/es/locale/lt_LT';
+import caES from 'antd/es/locale/ca_ES';
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -74,8 +75,9 @@ const antdLocale = {
   lv_lv: lvLV,
   fi_fi: fiFi,
   et_ee: etEE,
-  el_GR: elGR,
-  lt_LT: ltLT,
+  el_gr: elGR,
+  lt_lt: ltLT,
+  ca_es: caES,
 };
 
 export default antdLocale;
