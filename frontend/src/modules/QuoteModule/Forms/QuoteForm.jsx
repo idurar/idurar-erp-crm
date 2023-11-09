@@ -51,8 +51,8 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
   }, [current]);
   useEffect(() => {
     const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
-    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)).toFixed(2));
-    setTotal(Number.parseFloat(currentTotal).toFixed(2));
+    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)));
+    setTotal(Number.parseFloat(currentTotal));
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);
