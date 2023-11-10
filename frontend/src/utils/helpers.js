@@ -137,3 +137,19 @@ export function bindValue(obj, parentElement) {
     element.innerHTML = value;
   });
 }
+
+/*
+ * Tax rates are stored on the backend as whole numbers.
+ * For example, 15% is stored as 15 (and not as 0.15) which creates issues on the frontend while calculating tax amount.
+ * This function simply takes in the tax rates and divides them by 100.
+ */
+export const taxRateValueTransformer = (taxes) => {
+  if (taxes) {
+    return taxes.map((tax) => {
+      return {
+        ...tax,
+        taxValue: tax.taxValue / 100,
+      };
+    });
+  }
+};

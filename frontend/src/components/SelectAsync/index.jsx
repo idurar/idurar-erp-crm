@@ -14,6 +14,7 @@ export default function SelectAsync({
   redirectLabel = '',
   withRedirect = false,
   urlToRedirect = '/',
+  valueTransformer = null,
 }) {
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
@@ -25,7 +26,7 @@ export default function SelectAsync({
   };
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {
-    isSuccess && setOptions(result);
+    isSuccess && setOptions(valueTransformer ? valueTransformer(result) : result);
   }, [isSuccess]);
 
   const labels = (optionField) => {
