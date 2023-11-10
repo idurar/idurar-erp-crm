@@ -247,6 +247,7 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
                   entity={'taxes'}
                   outputValue={'taxValue'}
                   displayLabels={['taxName']}
+                  loadDefault={true}
                   withRedirect={true}
                   urlToRedirect="/taxes"
                   redirectLabel="Add New Tax"
