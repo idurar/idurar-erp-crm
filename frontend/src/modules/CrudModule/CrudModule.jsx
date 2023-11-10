@@ -17,8 +17,11 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
@@ -60,6 +63,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<DeleteOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '5px' }}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('remove')}
           </Button>
@@ -69,6 +73,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '0px' }}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('edit')}
           </Button>
@@ -87,8 +92,8 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
 
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
-
   const { collapsedBox } = crudContextAction;
+  const currentAdmin = useSelector(selectCurrentAdmin);
 
   const addNewItem = () => {
     collapsedBox.close();
@@ -104,7 +109,12 @@ function FixHeaderPanel({ config }) {
         <SearchItem config={config} />
       </Col>
       <Col className="gutter-row" span={3}>
-        <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
+        <Button
+          onClick={addNewItem}
+          block={true}
+          icon={<PlusOutlined />}
+          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+        ></Button>
       </Col>
     </Row>
   );

@@ -28,8 +28,11 @@ import UpdatePassword from './UpdatePassword';
 import { selectCurrentItem } from '@/redux/crud/selectors';
 
 import useLanguage from '@/locale/useLanguage';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
 function SidePanelTopContent({ config, formElements }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
@@ -80,6 +83,7 @@ function SidePanelTopContent({ config, formElements }) {
               marginRight: '5px',
               marginLeft: '-5px',
             }}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('remove')}
           </Button>
@@ -89,6 +93,7 @@ function SidePanelTopContent({ config, formElements }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'left', marginRight: '5px' }}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('edit')}
           </Button>
@@ -98,6 +103,11 @@ function SidePanelTopContent({ config, formElements }) {
             icon={<LockOutlined />}
             size="small"
             style={{ float: 'left', marginRight: '0px' }}
+            disabled={
+              currentAdmin._id === currentItem._id
+                ? false
+                : currentAdmin && !doesAdminHaveEditAccess(currentAdmin)
+            }
           >
             {translate('Update Password')}
           </Button>
@@ -114,6 +124,7 @@ function SidePanelTopContent({ config, formElements }) {
 }
 
 function FixHeaderPanel({ config }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const { crudContextAction } = useCrudContext();
   const { collapsedBox, panel } = crudContextAction;
 
@@ -146,7 +157,12 @@ function FixHeaderPanel({ config }) {
           <SearchItem config={config} />
         </Col>
         <Col className="gutter-row" span={3}>
-          <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
+          <Button
+            onClick={addNewItem}
+            block={true}
+            icon={<PlusOutlined />}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+          ></Button>
         </Col>
       </Row>
     </div>

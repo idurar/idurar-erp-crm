@@ -2,8 +2,12 @@ import { Form, Input, Select, Tag } from 'antd';
 
 import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
+import { useSelector } from 'react-redux';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
 
 export default function GeneralSettingForm() {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const tagRender = (props) => {
     const { label, closable, onClose } = props;
@@ -36,7 +40,10 @@ export default function GeneralSettingForm() {
           },
         ]}
       >
-        <Input autoComplete="off" />
+        <Input
+          autoComplete="off"
+          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+        />
       </Form.Item>
       <Form.Item
         label={translate('language')}
@@ -55,6 +62,7 @@ export default function GeneralSettingForm() {
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
+          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
         >
           {languages.map((language) => (
             <Select.Option
@@ -88,6 +96,7 @@ export default function GeneralSettingForm() {
           }}
           tokenSeparators={[',']}
           tagRender={tagRender}
+          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
         ></Select>
       </Form.Item>
     </>

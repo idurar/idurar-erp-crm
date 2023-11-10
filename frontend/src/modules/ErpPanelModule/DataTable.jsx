@@ -22,8 +22,10 @@ import { useNavigate } from 'react-router-dom';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
 
-function AddNewItem({ config, hasCreate = true }) {
+function AddNewItem({ config, hasCreate = true, currentAdmin = null }) {
   const navigate = useNavigate();
   const { ADD_NEW_ENTITY, entity } = config;
 
@@ -33,7 +35,12 @@ function AddNewItem({ config, hasCreate = true }) {
 
   if (hasCreate)
     return (
-      <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
+      <Button
+        onClick={handleClick}
+        type="primary"
+        icon={<PlusOutlined />}
+        disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+      >
         {ADD_NEW_ENTITY}
       </Button>
     );
@@ -41,6 +48,7 @@ function AddNewItem({ config, hasCreate = true }) {
 }
 
 export default function DataTable({ config, extra = [] }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   let { entity, dataTableColumns, create = true } = config;
   const { DATATABLE_TITLE } = config;
@@ -52,6 +60,15 @@ export default function DataTable({ config, extra = [] }) {
   const { erpContextAction } = useErpContext();
   const { modal } = erpContextAction;
 
+  extra = extra.map((item) => {
+    if (item.key === 'recordPayment' || item.key === 'updatePassword') {
+      return {
+        ...item,
+        disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+      };
+    } else return item;
+  });
+
   const items = [
     {
       label: translate('Show'),
@@ -62,6 +79,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
     },
     {
       label: translate('Download'),
@@ -77,6 +95,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
+      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
     },
   ];
 
@@ -181,7 +200,12 @@ export default function DataTable({ config, extra = [] }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
               {translate('Refresh')}
             </Button>,
-            <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
+            <AddNewItem
+              config={config}
+              key={`${uniqueId()}`}
+              hasCreate={create}
+              currentAdmin={currentAdmin}
+            />,
           ]}
           style={{
             padding: '20px 0px',

@@ -137,3 +137,7 @@ export function bindValue(obj, parentElement) {
     element.innerHTML = value;
   });
 }
+
+export function doesAdminHaveEditAccess(admin) {
+  return admin && admin.role !== 'readOnly';
+}

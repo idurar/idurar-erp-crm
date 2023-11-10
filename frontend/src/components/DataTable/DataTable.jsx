@@ -11,8 +11,10 @@ import useLanguage from '@/locale/useLanguage';
 import { generate as uniqueId } from 'shortid';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 import { useCrudContext } from '@/context/crud';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
 
-function AddNewItem({ config }) {
+function AddNewItem({ config, currentAdmin = null }) {
   const { crudContextAction } = useCrudContext();
   const { collapsedBox, panel } = crudContextAction;
   const { ADD_NEW_ENTITY } = config;
@@ -23,16 +25,30 @@ function AddNewItem({ config }) {
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
+    <Button
+      onClick={handelClick}
+      type="primary"
+      disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+    >
       {ADD_NEW_ENTITY}
     </Button>
   );
 }
 export default function DataTable({ config, extra = [] }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
+
+  extra = extra.map((item) => {
+    if (item.key === 'recordPayment' || item.key === 'updatePassword') {
+      return {
+        ...item,
+        disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+      };
+    } else return item;
+  });
 
   const items = [
     {
@@ -44,6 +60,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
     },
     ...extra,
     {
@@ -54,6 +71,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
+      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
     },
   ];
 
@@ -83,6 +101,23 @@ export default function DataTable({ config, extra = [] }) {
     collapsedBox.open();
   }
 
+  function preprocessItems(items, record) {
+    let newItems = items.map((item) => {
+      if (
+        record._id === currentAdmin._id &&
+        (item.key === 'updatePassword' || item.key === 'edit')
+      ) {
+        return {
+          ...item,
+          disabled: false,
+        };
+      }
+      return item;
+    });
+    if (!newItems) newItems = [];
+    return newItems;
+  }
+
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -91,7 +126,7 @@ export default function DataTable({ config, extra = [] }) {
       render: (_, record) => (
         <Dropdown
           menu={{
-            items,
+            items: preprocessItems(items, record),
             onClick: ({ key }) => {
               switch (key) {
                 case 'read':
@@ -164,7 +199,7 @@ export default function DataTable({ config, extra = [] }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
               {translate('Refresh')}
             </Button>,
-            <AddNewItem key={`${uniqueId()}`} config={config} />,
+            <AddNewItem key={`${uniqueId()}`} config={config} currentAdmin={currentAdmin} />,
           ]}
           style={{
             padding: '20px 0px',

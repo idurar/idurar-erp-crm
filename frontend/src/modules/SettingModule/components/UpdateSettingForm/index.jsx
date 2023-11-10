@@ -7,8 +7,11 @@ import { selectSettings } from '@/redux/settings/selectors';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
 
 export default function UpdateSettingForm({ config, children }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   let { entity, settingsCategory } = config;
   const dispatch = useDispatch();
   const { result, isLoading, isSuccess } = useSelector(selectSettings);
@@ -67,7 +70,11 @@ export default function UpdateSettingForm({ config, children }) {
               paddingRight: '5px',
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            >
               Save
             </Button>
           </Form.Item>

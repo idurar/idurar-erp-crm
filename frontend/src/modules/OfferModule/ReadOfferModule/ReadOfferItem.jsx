@@ -22,6 +22,8 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { doesAdminHaveEditAccess } from '@/utils/helpers';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -67,6 +69,7 @@ const Item = ({ item }) => {
 };
 
 export default function ReadOfferItem({ config, selectedItem }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
@@ -157,6 +160,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
               send(currentErp._id);
             }}
             icon={<MailOutlined />}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('Send by email')}
           </Button>,
@@ -167,6 +171,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             }}
             icon={<RetweetOutlined />}
             style={{ display: entity === 'quote' ? 'inline-block' : 'none' }}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('Convert to Invoice')}
           </Button>,
@@ -184,6 +189,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             }}
             type="primary"
             icon={<EditOutlined />}
+            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
           >
             {translate('Edit')}
           </Button>,

@@ -54,3 +54,8 @@
   background-color: hsla(0, 0%, 100%, 0.8);
   z-index: 9;
 }
+
+.collapseBox .buttonDisabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
