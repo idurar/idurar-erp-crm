@@ -39,7 +39,7 @@ const languages = [
   { icon: '🇵🇰 ', label: 'Urdu', value: 'ur_pk', isRtl: true },
   { icon: '🇻🇳 ', label: 'Vietnamese', value: 'vi_vn' },
   { icon: '🇦🇱 ', label: 'Albanian', value: 'sq_al', disabled: true },
-  { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs', disabled: true },
+  { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs' },
   { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es' },
   { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true },
 ];
