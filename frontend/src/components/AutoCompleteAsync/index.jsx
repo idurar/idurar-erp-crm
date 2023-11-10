@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { request } from '@/request';
 import useOnFetch from '@/hooks/useOnFetch';
-import { useDebounce } from 'react-use';
+import useDebounce from '@/hooks/useDebounce';
+
 import { Select, Empty } from 'antd';
 
 export default function AutoCompleteAsync({

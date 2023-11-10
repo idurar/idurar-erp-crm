@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux';
 
 import { selectLangState } from '@/redux/translate/selectors';
 
-const importLangFile = async () => {
-  return await import('./antdLocale');
-};
+import antdLocale from './antdLocale';
 
 export default function Localization({ children }) {
   const { langCode, langDirection } = useSelector(selectLangState);
@@ -17,7 +15,6 @@ export default function Localization({ children }) {
   const [direction, setDirection] = useState();
 
   useEffect(() => {
-    const antdLocale = importLangFile();
     const lang = antdLocale[langCode];
     setDirection(langDirection);
     setLocal(lang);

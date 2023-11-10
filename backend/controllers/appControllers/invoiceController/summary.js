@@ -187,8 +187,8 @@ const summary = async (req, res) => {
     ]);
 
     const finalResult = {
-      total: totalInvoices?.total.toFixed(2),
-      total_undue: unpaid.length > 0 ? unpaid[0].total_amount.toFixed(2) : 0,
+      total: totalInvoices?.total,
+      total_undue: unpaid.length > 0 ? unpaid[0].total_amount : 0,
       type,
       performance: result,
     };

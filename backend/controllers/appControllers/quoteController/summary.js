@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const Model = mongoose.model('Invoice');
+const Model = mongoose.model('Quote');
 
 const summary = async (req, res) => {
   try {
@@ -92,7 +92,7 @@ const summary = async (req, res) => {
       }
     });
 
-    const total = result.reduce((acc, item) => acc + item.total_amount, 0).toFixed(2);
+    const total = result.reduce((acc, item) => acc + item.total_amount, 0);
 
     const finalResult = {
       total,
