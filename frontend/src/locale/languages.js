@@ -41,7 +41,7 @@ const languages = [
   { icon: '🇦🇱 ', label: 'Albanian', value: 'sq_al', disabled: true },
   { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs', disabled: true },
   { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es' },
-  { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true, disabled: true },
+  { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true },
 ];
 
 export default languages;
