@@ -11,7 +11,7 @@ export default function SelectAsync({
   outputValue = '_id',
   value,
   onChange,
-  loadDefault = true,
+  loadDefault = false,
   defaultField = 'isDefault',
   redirectLabel = '',
   withRedirect = false,
