@@ -67,8 +67,8 @@ export default function CustomerForm({ isUpdateForm = false }) {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
+        name="phone"
         label={translate('Phone')}
         rules={[
           {

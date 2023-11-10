@@ -18,6 +18,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
   const translate = useLanguage();
+
   const onSubmit = (fieldsValue) => {
     // Manually trim values before submission
 
@@ -29,7 +30,6 @@ export default function CreateForm({ config, formElements, withUpload = false })
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
       return acc;
     }, {});
-
     dispatch(crud.create({ entity, jsonData: trimmedValues, withUpload }));
   };
 
