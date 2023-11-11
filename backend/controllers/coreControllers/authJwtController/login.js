@@ -36,17 +36,19 @@ const login = async (req, res) => {
 
     const { error, value } = objectSchema.validate({ email, password });
     if (error) {
-      return res.status(400).json({
+      return res.status(409).json({
         success: false,
         result: null,
+        error: error,
         message: 'Invalid/Missing credentials.',
+        errorMessage: error.message,
       });
     }
 
     const admin = await Admin.findOne({ email: email, removed: false });
     // console.log(admin);
     if (!admin)
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
         result: null,
         message: 'No account with this email has been registered.',
@@ -54,7 +56,7 @@ const login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch)
-      return res.status(400).json({
+      return res.status(403).json({
         success: false,
         result: null,
         message: 'Invalid credentials.',
@@ -84,7 +86,8 @@ const login = async (req, res) => {
         httpOnly: true,
         secure: true,
         domain: req.hostname,
-        Path: '/',
+        path: '/',
+        Partitioned: true,
       })
       .json({
         success: true,

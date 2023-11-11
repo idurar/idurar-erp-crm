@@ -24,6 +24,7 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
+app.use(cors(corsOptions));
 
 // setting cors at one place for all the routes
 // putting cors as first in order to avoid unneccessary requests from unallowed origins
@@ -35,9 +36,6 @@ const corsOptions = {
 //     cors()(req, res, next);
 //   }
 // });
-app.use(function (req, res, next) {
-  cors(corsOptions)(req, res, next);
-});
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 

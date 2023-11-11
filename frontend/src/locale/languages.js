@@ -2,6 +2,7 @@ const languages = [
   { icon: '🇩🇿 ', label: 'Arabic', value: 'ar_eg', isRtl: true },
   { icon: '🇧🇩 ', label: 'Bengali', value: 'bn_bd' },
   { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },
+  { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es' },
   { icon: '🇨🇳 ', label: 'Chinese', value: 'zh_cn' },
   { icon: '🇭🇷 ', label: 'Croatian', value: 'hr_hr' },
   { icon: '🇨🇿 ', label: 'Czech', value: 'cs_cz' },
@@ -24,11 +25,13 @@ const languages = [
   { icon: '🇲🇰 ', label: 'Macedonian', value: 'mk_mk' },
   { icon: '🇲🇾 ', label: 'Malay', value: 'ms_my' },
   { icon: '🇳🇴 ', label: 'Norwegian', value: 'nb_no' },
+  { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true },
   { icon: '🇵🇱 ', label: 'Polish', value: 'pl_pl' },
   { icon: '🇧🇷 ', label: 'Portuguese Brazil', value: 'pt_br' },
   { icon: '🇵🇹 ', label: 'Portuguese Portugal', value: 'pt_pt' },
   { icon: '🇷🇴 ', label: 'Romanian', value: 'ro_ro' },
   { icon: '🇷🇺 ', label: 'Russian', value: 'ru_ru' },
+  { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs' },
   { icon: '🇸🇰 ', label: 'Slovak', value: 'sk_sk' },
   { icon: '🇸🇮 ', label: 'Slovenian', value: 'sl_si' },
   { icon: '🇪🇸 ', label: 'Spanish', value: 'es_es' },
@@ -38,10 +41,6 @@ const languages = [
   { icon: '🇺🇦 ', label: 'Ukrainian', value: 'uk_ua' },
   { icon: '🇵🇰 ', label: 'Urdu', value: 'ur_pk', isRtl: true },
   { icon: '🇻🇳 ', label: 'Vietnamese', value: 'vi_vn' },
-  { icon: '🇦🇱 ', label: 'Albanian', value: 'sq_al', disabled: true },
-  { icon: '🇷🇸 ', label: 'Serbian', value: 'sr_rs', disabled: true },
-  { icon: '🇪🇦 ', label: 'Catalonian', value: 'ca_es', disabled: true },
-  { icon: '🇮🇷 ', label: 'Persian', value: 'fa_ir', isRtl: true, disabled: true },
 ];
 
 export default languages;
