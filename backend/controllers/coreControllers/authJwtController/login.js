@@ -86,8 +86,7 @@ const login = async (req, res) => {
         httpOnly: true,
         secure: true,
         domain: req.hostname,
-        Path: '/',
-        Partitioned: true,
+        path: '/',
       })
       .json({
         success: true,
