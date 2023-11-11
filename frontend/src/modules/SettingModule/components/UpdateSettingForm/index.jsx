@@ -8,7 +8,7 @@ import { selectSettings } from '@/redux/settings/selectors';
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasEditAccess } from '@/utils/helpers';
 
 export default function UpdateSettingForm({ config, children }) {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -73,7 +73,7 @@ export default function UpdateSettingForm({ config, children }) {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+              disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
             >
               Save
             </Button>

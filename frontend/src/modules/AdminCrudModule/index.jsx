@@ -28,7 +28,7 @@ import UpdatePassword from './UpdatePassword';
 import { selectCurrentItem } from '@/redux/crud/selectors';
 
 import useLanguage from '@/locale/useLanguage';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
 function SidePanelTopContent({ config, formElements }) {
@@ -83,7 +83,7 @@ function SidePanelTopContent({ config, formElements }) {
               marginRight: '5px',
               marginLeft: '-5px',
             }}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasDeleteAccess(currentAdmin)}
           >
             {translate('remove')}
           </Button>
@@ -93,7 +93,7 @@ function SidePanelTopContent({ config, formElements }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'left', marginRight: '5px' }}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
           >
             {translate('edit')}
           </Button>
@@ -106,7 +106,7 @@ function SidePanelTopContent({ config, formElements }) {
             disabled={
               currentAdmin._id === currentItem._id
                 ? false
-                : currentAdmin && !doesAdminHaveEditAccess(currentAdmin)
+                : currentAdmin && !adminHasEditAccess(currentAdmin)
             }
           >
             {translate('Update Password')}
@@ -161,7 +161,7 @@ function FixHeaderPanel({ config }) {
             onClick={addNewItem}
             block={true}
             icon={<PlusOutlined />}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
           ></Button>
         </Col>
       </Row>

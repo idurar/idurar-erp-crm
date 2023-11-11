@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasCreateAccess } from '@/utils/helpers';
 import { useSelector } from 'react-redux';
 
 const CollapseBoxButton = ({ onChange, title }) => {
@@ -9,7 +9,7 @@ const CollapseBoxButton = ({ onChange, title }) => {
   return (
     <div
       className={`collapseBoxHeader ${
-        currentAdmin && !doesAdminHaveEditAccess(currentAdmin) && 'buttonDisabled'
+        currentAdmin && !adminHasCreateAccess(currentAdmin) && 'buttonDisabled'
       }`}
       onClick={onChange}
     >

@@ -14,10 +14,13 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { useNavigate } from 'react-router-dom';
 import useLanguage from '@/locale/useLanguage';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { adminHasEditAccess } from '@/utils/helpers';
 
 const { Title, Paragraph } = Typography;
 
 export default function ReadItem({ config, selectedItem }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
@@ -82,6 +85,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             type="primary"
             icon={<EditOutlined />}
+            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
           >
             {translate('Edit')}
           </Button>,

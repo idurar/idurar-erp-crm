@@ -12,7 +12,7 @@ import { generate as uniqueId } from 'shortid';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 import { useCrudContext } from '@/context/crud';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
 
 function AddNewItem({ config, currentAdmin = null }) {
   const { crudContextAction } = useCrudContext();
@@ -28,7 +28,7 @@ function AddNewItem({ config, currentAdmin = null }) {
     <Button
       onClick={handelClick}
       type="primary"
-      disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+      disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
     >
       {ADD_NEW_ENTITY}
     </Button>
@@ -45,7 +45,7 @@ export default function DataTable({ config, extra = [] }) {
     if (item.key === 'recordPayment' || item.key === 'updatePassword') {
       return {
         ...item,
-        disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+        disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
       };
     } else return item;
   });
@@ -60,7 +60,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
-      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+      disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
     },
     ...extra,
     {
@@ -71,7 +71,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
-      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+      disabled: currentAdmin && !adminHasDeleteAccess(currentAdmin),
     },
   ];
 

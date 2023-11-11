@@ -138,6 +138,29 @@ export function bindValue(obj, parentElement) {
   });
 }
 
-export function doesAdminHaveEditAccess(admin) {
-  return admin && admin.role !== 'readOnly';
+// Create enum of admin roles
+export const adminRoles = {
+  READ_ONLY: 'readOnly', // Read
+  CREATE_ONLY: 'createOnly', // Create, read
+  STAFF: 'staff', // Create, read, update
+  STAFF_ADMIN: 'staffAdmin', // Create, read, update, delete
+  SUPER_ADMIN: 'admin', // Full Access
+};
+
+export const accessTypes = {
+  EDIT: 'edit',
+  CREATE: 'create',
+  DELETE: 'delete',
+};
+
+export function adminHasEditAccess(admin) {
+  return admin && admin.role !== adminRoles.READ_ONLY && admin.role !== adminRoles.CREATE_ONLY;
+}
+
+export function adminHasCreateAccess(admin) {
+  return admin && admin.role !== adminRoles.READ_ONLY;
+}
+
+export function adminHasDeleteAccess(admin) {
+  return admin && (admin.role === adminRoles.STAFF_ADMIN || admin.role === adminRoles.SUPER_ADMIN);
 }

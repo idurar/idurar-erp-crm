@@ -18,7 +18,7 @@ import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -63,7 +63,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<DeleteOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '5px' }}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasDeleteAccess(currentAdmin)}
           >
             {translate('remove')}
           </Button>
@@ -73,7 +73,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '0px' }}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
           >
             {translate('edit')}
           </Button>
@@ -113,7 +113,7 @@ function FixHeaderPanel({ config }) {
           onClick={addNewItem}
           block={true}
           icon={<PlusOutlined />}
-          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+          disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
         ></Button>
       </Col>
     </Row>

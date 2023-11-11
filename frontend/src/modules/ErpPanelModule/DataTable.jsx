@@ -23,7 +23,7 @@ import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
 
 function AddNewItem({ config, hasCreate = true, currentAdmin = null }) {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ function AddNewItem({ config, hasCreate = true, currentAdmin = null }) {
         onClick={handleClick}
         type="primary"
         icon={<PlusOutlined />}
-        disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+        disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
       >
         {ADD_NEW_ENTITY}
       </Button>
@@ -64,7 +64,7 @@ export default function DataTable({ config, extra = [] }) {
     if (item.key === 'recordPayment' || item.key === 'updatePassword') {
       return {
         ...item,
-        disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+        disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
       };
     } else return item;
   });
@@ -79,7 +79,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
-      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+      disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
     },
     {
       label: translate('Download'),
@@ -95,7 +95,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
-      disabled: currentAdmin && !doesAdminHaveEditAccess(currentAdmin),
+      disabled: currentAdmin && !adminHasDeleteAccess(currentAdmin),
     },
   ];
 

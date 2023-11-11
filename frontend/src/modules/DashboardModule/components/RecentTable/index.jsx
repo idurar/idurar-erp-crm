@@ -11,8 +11,11 @@ import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { adminHasEditAccess } from '@/utils/helpers';
 
 export default function RecentTable({ ...props }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   let { entity, dataTableColumns } = props;
 
@@ -26,6 +29,7 @@ export default function RecentTable({ ...props }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
     },
     {
       label: translate('Download'),

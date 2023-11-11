@@ -24,7 +24,7 @@ import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasCreateAccess, adminHasEditAccess } from '@/utils/helpers';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -163,7 +163,7 @@ export default function ReadItem({ config, selectedItem }) {
               send(currentErp._id);
             }}
             icon={<MailOutlined />}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
           >
             {translate('Send by Email')}
           </Button>,
@@ -174,7 +174,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             icon={<RetweetOutlined />}
             style={{ display: entity === 'quote' ? 'inline-block' : 'none' }}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
           >
             {translate('Convert to Invoice')}
           </Button>,
@@ -192,7 +192,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             type="primary"
             icon={<EditOutlined />}
-            disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
           >
             {translate('Edit')}
           </Button>,

@@ -4,7 +4,7 @@ import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
 import { useSelector } from 'react-redux';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { doesAdminHaveEditAccess } from '@/utils/helpers';
+import { adminHasEditAccess } from '@/utils/helpers';
 
 export default function GeneralSettingForm() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -40,10 +40,7 @@ export default function GeneralSettingForm() {
           },
         ]}
       >
-        <Input
-          autoComplete="off"
-          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
-        />
+        <Input autoComplete="off" disabled={currentAdmin && !adminHasEditAccess(currentAdmin)} />
       </Form.Item>
       <Form.Item
         label={translate('language')}
@@ -62,7 +59,7 @@ export default function GeneralSettingForm() {
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
-          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+          disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
         >
           {languages.map((language) => (
             <Select.Option
@@ -96,7 +93,7 @@ export default function GeneralSettingForm() {
           }}
           tokenSeparators={[',']}
           tagRender={tagRender}
-          disabled={currentAdmin && !doesAdminHaveEditAccess(currentAdmin)}
+          disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
         ></Select>
       </Form.Item>
     </>
