@@ -35,9 +35,7 @@ const corsOptions = {
 //     cors()(req, res, next);
 //   }
 // });
-app.use(function (req, res, next) {
-  cors(corsOptions)(req, res, next);
-});
+app.use(cors());
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 
