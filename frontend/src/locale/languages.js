@@ -1,4 +1,5 @@
 const languages = [
+  { icon: '🇮🇳 ', label: 'Assamese', value: 'asm_in' },
   { icon: '🇩🇿 ', label: 'Arabic', value: 'ar_eg', isRtl: true },
   { icon: '🇧🇩 ', label: 'Bengali', value: 'bn_bd' },
   { icon: '🇧🇬 ', label: 'Bulgarian', value: 'bg_bg' },

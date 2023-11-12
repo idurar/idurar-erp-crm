@@ -1,3 +1,4 @@
+import asm_in from './asm_in';
 import en_us from './en_us';
 import fr_fr from './fr_fr';
 import zh_cn from './zh_cn';
@@ -42,6 +43,7 @@ import fa_ir from './fa_ir';
 import sr_rs from './sr_rs';
 
 const languages = {
+  asm_in,
   ar_eg,
   en_us,
   fr_fr,
