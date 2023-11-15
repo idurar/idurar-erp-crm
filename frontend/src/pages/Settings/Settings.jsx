@@ -39,43 +39,47 @@ export default function Settings() {
     {
       key: 'generalSettings',
       label: (
-        <span onClick={() => handleTabChange('generalSettings')}>
-          {translate('General Settings')}
-        </span>
+        <div onClick={() => handleTabChange('generalSettings')}>
+        <SettingOutlined />
+        <span>  {translate('General Settings')}</span>
+      </div>
       ),
-      icon: <SettingOutlined />,
     },
     {
       key: 'appSettings',
       label: (
-        <span onClick={() => handleTabChange('appSettings')}>{translate('App Settings')}</span>
+        <div onClick={() => handleTabChange('appSettings')}>
+        <SettingOutlined />
+        <span>{translate('App Settings')}</span>
+      </div>
       ),
-      icon: <SettingOutlined />,
     },
     {
       key: 'moneyFormatSettings',
       label: (
-        <span onClick={() => handleTabChange('moneyFormatSettings')}>
-          {translate('Currency Settings')}
-        </span>
+        <div onClick={() => handleTabChange('moneyFormatSettings')}>
+          <DollarOutlined />
+         <span>{translate('Currency Settings')}</span> 
+        </div>
       ),
-      icon: <DollarOutlined />,
     },
     {
       key: 'paymentSettings',
       label: (
-        <span onClick={() => handleTabChange('paymentSettings')}>
-          {translate('Finance Settings')}
-        </span>
+        <div onClick={() => handleTabChange('paymentSettings')}>
+          <CreditCardOutlined />
+          <span>{translate('Finance Settings')}</span>
+        </div>
       ),
-      icon: <CreditCardOutlined />,
     },
     {
       key: 'invoiceSettings',
       label: (
-        <span onClick={() => handleTabChange('invoiceSettings')}>{translate('Crm Settings')}</span>
+        <div onClick={() => handleTabChange('invoiceSettings')}>
+          <FileTextOutlined />
+      <span>{translate('Crm Settings')}</span>    
+        </div>
       ),
-      icon: <FileTextOutlined />,
     },
   ];
   const [tabKey, setTabKey] = useState(items[0].key);
