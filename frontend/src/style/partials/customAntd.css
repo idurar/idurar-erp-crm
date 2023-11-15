@@ -77,6 +77,14 @@ h6 {
   padding-bottom: 50px;
 }
 
+:where(.css-dev-only-do-not-override-2i2tap).ant-tabs-right > .ant-tabs-content-holder,
+:where(.css-dev-only-do-not-override-2i2tap).ant-tabs-right > div > .ant-tabs-content-holder {
+  border-right: none;
+}
+
+:where(.css-dev-only-do-not-override-2i2tap).ant-tabs .ant-tabs-tab + .ant-tabs-tab {
+  margin: 0;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
