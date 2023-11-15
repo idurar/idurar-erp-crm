@@ -7,7 +7,7 @@ import useLanguage from '@/locale/useLanguage';
 
 export default function Offer() {
   const translate = useLanguage();
-  const { moneyRowFormatter } = useMoney();
+  const { moneyFormatter } = useMoney();
 
   const searchConfig = {
     displayLabels: ['company'],
@@ -31,12 +31,28 @@ export default function Offer() {
     {
       title: translate('Sub Total'),
       dataIndex: 'subTotal',
-      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
+      render: (subTotal) => moneyFormatter({ amount: subTotal }),
     },
     {
       title: translate('Total'),
       dataIndex: 'total',
-      onCell: (total) => moneyRowFormatter({ amount: total }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
+      render: (total) => moneyFormatter({ amount: total }),
     },
 
     {

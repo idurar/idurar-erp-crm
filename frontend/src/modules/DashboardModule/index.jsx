@@ -48,7 +48,14 @@ export default function DashboardModule() {
     {
       title: translate('Total'),
       dataIndex: 'total',
-
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
       render: (total) => moneyFormatter({ amount: total }),
     },
     {

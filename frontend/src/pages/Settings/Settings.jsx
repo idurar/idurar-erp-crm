@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { Menu } from 'antd';
-import {SettingOutlined, FileTextOutlined, CreditCardOutlined, DollarOutlined} from '@ant-design/icons';
-import { SettingsLayout } from '@/layout';
-import Visibility from '@/components/Visibility';
+import {
+  SettingOutlined,
+  FileTextOutlined,
+  CreditCardOutlined,
+  DollarOutlined,
+} from '@ant-design/icons';
 
+import { Tabs, Row, Col } from 'antd';
 import AppSettings from './AppSettings';
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
@@ -12,24 +14,59 @@ import MoneyFormatSettings from './MoneyFormatSettings';
 
 import useLanguage from '@/locale/useLanguage';
 
-const settingsArray = [
-  <GeneralSettings />,
-  <AppSettings />,
-  <MoneyFormatSettings />,
-  <PaymentSettings />,
-  <InvoiceSettings />,
-];
-
-const RightMenu = ({ activeTab, items }) => {
+const TopCard = () => {
+  const translate = useLanguage();
   return (
-    <div className="pad20" style={{ width: '100%' }}>
-      <Menu
-        mode={'vertical'}
-        selectedKeys={[activeTab]}
-        items={items}
-        style={{ width: '100%' }}
-      ></Menu>
+    <div
+      className="whiteBox shadow"
+      style={{
+        color: '#595959',
+        fontSize: 13,
+        height: '70px',
+        minHeight: 'auto',
+        marginBottom: '24px',
+      }}
+    >
+      <div className="pad20 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
+        <h2 style={{ color: '#22075e', marginBottom: 0, marginTop: 0 }}>{translate('Settings')}</h2>
+      </div>
     </div>
+  );
+};
+
+const RightMenu = ({ children }) => {
+  return (
+    <Col
+      className="gutter-row"
+      xs={{ span: 24 }}
+      sm={{ span: 24 }}
+      md={{ span: 7 }}
+      lg={{ span: 6 }}
+      order={1}
+    >
+      <TopCard />
+      <div className="whiteBox shadow" style={{ minHeight: '260px' }}>
+        <div className="pad25" style={{ width: '100%', paddingBottom: 0 }}>
+          {children}
+        </div>
+      </div>
+    </Col>
+  );
+};
+
+const renderTabBar = (props, DefaultTabBar) => (
+  <RightMenu>
+    <DefaultTabBar {...props} />
+  </RightMenu>
+);
+
+const SettingsLayout = ({ children }) => {
+  return (
+    <Col order={0}>
+      <div className="whiteBox shadow" style={{ minHeight: '480px' }}>
+        <div className="pad40">{children}</div>
+      </div>
+    </Col>
   );
 };
 
@@ -39,73 +76,73 @@ export default function Settings() {
     {
       key: 'generalSettings',
       label: (
-        <div onClick={() => handleTabChange('generalSettings')}>
-        <SettingOutlined />
-        <span>  {translate('General Settings')}</span>
-      </div>
+        <>
+          <SettingOutlined /> <span>{translate('General Settings')}</span>
+        </>
+      ),
+      children: (
+        <SettingsLayout>
+          <GeneralSettings />
+        </SettingsLayout>
       ),
     },
     {
       key: 'appSettings',
       label: (
-        <div onClick={() => handleTabChange('appSettings')}>
-        <SettingOutlined />
-        <span>{translate('App Settings')}</span>
-      </div>
+        <>
+          <FileTextOutlined /> <span>{translate('App Settings')}</span>
+        </>
+      ),
+      children: (
+        <SettingsLayout>
+          <AppSettings />
+        </SettingsLayout>
       ),
     },
     {
       key: 'moneyFormatSettings',
       label: (
-        <div onClick={() => handleTabChange('moneyFormatSettings')}>
-          <DollarOutlined />
-         <span>{translate('Currency Settings')}</span> 
-        </div>
+        <>
+          <DollarOutlined /> <span>{translate('Currency Settings')}</span>
+        </>
+      ),
+      children: (
+        <SettingsLayout>
+          <MoneyFormatSettings />
+        </SettingsLayout>
       ),
     },
     {
       key: 'paymentSettings',
       label: (
-        <div onClick={() => handleTabChange('paymentSettings')}>
-          <CreditCardOutlined />
-          <span>{translate('Finance Settings')}</span>
-        </div>
+        <>
+          <CreditCardOutlined /> <span>{translate('Finance Settings')}</span>
+        </>
+      ),
+      children: (
+        <SettingsLayout>
+          <PaymentSettings />
+        </SettingsLayout>
       ),
     },
     {
       key: 'invoiceSettings',
       label: (
-        <div onClick={() => handleTabChange('invoiceSettings')}>
-          <FileTextOutlined />
-      <span>{translate('Crm Settings')}</span>    
-        </div>
+        <>
+          <FileTextOutlined /> <span>{translate('Crm Settings')}</span>
+        </>
+      ),
+      children: (
+        <SettingsLayout>
+          <InvoiceSettings />
+        </SettingsLayout>
       ),
     },
   ];
-  const [tabKey, setTabKey] = useState(items[0].key);
-  const [tabTitle, setTabTitle] = useState(items[0].label);
-
-  const isActive = (tab) => {
-    return tabKey === tab ? true : false;
-  };
-
-  const handleTabChange = (tab) => {
-    const menuItem = items.find((item) => item.key === tab);
-    setTabTitle(menuItem.label);
-    setTabKey(tab);
-  };
 
   return (
-    <SettingsLayout
-      topCardContent={tabTitle}
-      topCardTitle={translate('Settings')}
-      bottomCardContent={<RightMenu activeTab={tabKey} items={items} />}
-    >
-      {settingsArray.map((setting, index) => (
-        <Visibility key={items[index].key + index} isOpen={isActive(items[index].key)}>
-          {setting}
-        </Visibility>
-      ))}
-    </SettingsLayout>
+    <Row gutter={[24, 24]}>
+      <Tabs tabPosition="right" hideAdd={true} items={items} renderTabBar={renderTabBar} />
+    </Row>
   );
 }
