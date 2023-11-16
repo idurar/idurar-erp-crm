@@ -1,6 +1,6 @@
 {
   "name": "idurar-erp-crm",
-  "version": "3.0.0-beta.10",
+  "version": "3.0.0-beta.13",
   "engines": {
     "npm": "8.5.5",
     "node": "16.15.0"
