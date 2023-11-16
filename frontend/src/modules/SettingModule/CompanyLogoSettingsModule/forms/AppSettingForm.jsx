@@ -19,11 +19,16 @@ export default function AppSettingForm() {
     <>
       <Form.Item
         name="file"
-        label="File"
+        label="Logo File"
         valuePropName="fileList"
         getValueFromEvent={(e) => e.fileList}
       >
-        <Upload beforeUpload={beforeUpload}>
+        <Upload
+          beforeUpload={beforeUpload}
+          listType="picture"
+          accept="image/png, image/jpeg ,image/svg+xml"
+          maxCount={1}
+        >
           <Button icon={<UploadOutlined />}>Click to Upload</Button>
         </Upload>
       </Form.Item>

@@ -8,8 +8,8 @@ export default function GeneralSettingForm() {
   return (
     <>
       <Form.Item
-        label={translate('App Name')}
-        name="app_name"
+        label={translate('Company Name')}
+        name="company_name"
         rules={[
           {
             required: true,

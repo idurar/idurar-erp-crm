@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Form, Input, InputNumber, Select, Switch } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';

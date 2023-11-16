@@ -3,11 +3,12 @@ import {
   FileTextOutlined,
   CreditCardOutlined,
   DollarOutlined,
+  FileImageOutlined,
 } from '@ant-design/icons';
 
 import TabsContent from '@/components/TabsContent/TabsContent';
 
-import AppSettings from './AppSettings';
+import CompanyLogoSettings from './CompanyLogoSettings';
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
@@ -24,9 +25,9 @@ export default function Settings() {
       children: <GeneralSettings />,
     },
     {
-      label: translate('App Settings'),
-      icon: <FileTextOutlined />,
-      children: <AppSettings />,
+      label: translate('Company Logo'),
+      icon: <FileImageOutlined />,
+      children: <CompanyLogoSettings />,
     },
     {
       label: translate('Currency Settings'),

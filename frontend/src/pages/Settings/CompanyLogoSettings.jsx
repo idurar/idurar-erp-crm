@@ -1,6 +1,6 @@
 import useLanguage from '@/locale/useLanguage';
 
-import AppSettingsModule from '@/modules/SettingModule/AppSettingsModule';
+import CompanyLogoSettingsModule from '@/modules/SettingModule/CompanyLogoSettingsModule';
 
 export default function AppSettings() {
   const translate = useLanguage();
@@ -23,5 +23,5 @@ export default function AppSettings() {
     ...Labels,
   };
 
-  return <AppSettingsModule config={configPage} />;
+  return <CompanyLogoSettingsModule config={configPage} />;
 }
