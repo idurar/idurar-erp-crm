@@ -1,30 +1,10 @@
-import { Form, Input, Select, Tag } from 'antd';
+import { Form, Input, Select } from 'antd';
 
 import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
-  const tagRender = (props) => {
-    const { label, closable, onClose } = props;
-    const onPreventMouseDown = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    return (
-      <Tag
-        // color={tagColor[Math.floor(Math.random() * 11)]}
-        onMouseDown={onPreventMouseDown}
-        closable={closable}
-        onClose={onClose}
-        style={{
-          marginRight: 3,
-        }}
-      >
-        {label}
-      </Tag>
-    );
-  };
   return (
     <>
       <Form.Item
@@ -71,24 +51,6 @@ export default function GeneralSettingForm() {
             </Select.Option>
           ))}
         </Select>
-      </Form.Item>
-      <Form.Item
-        label={translate('Allowed Role')}
-        name="allowed_role"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          mode="tags"
-          style={{
-            width: '100%',
-          }}
-          tokenSeparators={[',']}
-          tagRender={tagRender}
-        ></Select>
       </Form.Item>
     </>
   );

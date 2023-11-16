@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import compare from 'just-compare';
+import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { settingsAction } from '@/redux/settings/actions';
@@ -7,23 +6,34 @@ import { selectSettings } from '@/redux/settings/selectors';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
+import useLanguage from '@/locale/useLanguage';
 
-export default function UploadSettingForm({ config, settingKey, children }) {
+export default function UpdateSettingForm({ config, children, withUpload, uploadSettingKey }) {
   let { entity, settingsCategory } = config;
   const dispatch = useDispatch();
-  const { result, isLoading, isSuccess } = useSelector(selectSettings);
-
+  const { result, isLoading } = useSelector(selectSettings);
+  const translate = useLanguage();
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    if (fieldsValue.file) {
-      fieldsValue.file = fieldsValue.file[0].originFileObj;
-    }
+    if (withUpload) {
+      if (fieldsValue.file) {
+        fieldsValue.file = fieldsValue.file[0].originFileObj;
+      }
+      dispatch(
+        settingsAction.upload({ entity, settingKey: uploadSettingKey, jsonData: fieldsValue })
+      );
+    } else {
+      const settings = [];
 
-    dispatch(settingsAction.upload({ entity, settingKey, jsonData: fieldsValue }));
+      for (const [key, value] of Object.entries(fieldsValue)) {
+        settings.push({ settingKey: key, settingValue: value });
+      }
+
+      dispatch(settingsAction.updateMany({ entity, jsonData: { settings } }));
+    }
   };
 
-  const handleValuesChange = (fieldsValue, allValues) => {};
   useEffect(() => {
     const current = result[settingsCategory];
 
@@ -36,7 +46,7 @@ export default function UploadSettingForm({ config, settingKey, children }) {
         <Form
           form={form}
           onFinish={onSubmit}
-          onValuesChange={handleValuesChange}
+          // onValuesChange={handleValuesChange}
           labelCol={{ span: 8 }}
           labelAlign="left"
           wrapperCol={{ span: 16 }}
@@ -49,7 +59,7 @@ export default function UploadSettingForm({ config, settingKey, children }) {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Save
+              {translate('Save')}
             </Button>
           </Form.Item>
           <Form.Item
@@ -58,7 +68,7 @@ export default function UploadSettingForm({ config, settingKey, children }) {
               paddingLeft: '5px',
             }}
           >
-            <Button onClick={() => console.log('Cancel clicked')}>Cancel</Button>
+            <Button onClick={() => console.log('Cancel clicked')}>{translate('Cancel')}</Button>
           </Form.Item>
         </Form>
       </Loading>

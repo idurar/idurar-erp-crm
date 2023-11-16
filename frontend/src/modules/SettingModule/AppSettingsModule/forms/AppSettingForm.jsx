@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import { Button, Form, Tag, message, Upload } from 'antd';
+import { Button, Form, message, Upload } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
 
@@ -9,13 +7,13 @@ export default function AppSettingForm() {
     const isJpgOrPng =
       file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/svg+xml';
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+      message.error('You can only upload JPG/PNG or SVG file!');
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 5;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error('Image must smaller than 5MB!');
     }
-    return isJpgOrPng && isLt2M;
+    return false;
   };
   return (
     <>
