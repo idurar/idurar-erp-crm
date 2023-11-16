@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
-  const modelName = directory.slice(0, 1).toUpperCase() + directory.slice(1);
-  const Model = mongoose.model(modelName);
-
   try {
+    if (!mongoose.models[modelName]) {
+      throw new Error(`Model '${modelName}' does not exist`);
+    }
+    const modelName = directory.slice(0, 1).toUpperCase() + directory.slice(1);
+    const Model = mongoose.model(modelName);
     const result = await Model.findById(ObjectId(id)).exec();
 
     // Throw error if no result

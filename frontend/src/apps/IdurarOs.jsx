@@ -4,15 +4,10 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
 import { AppContextProvider } from '@/context/appContext';
 import PageLoader from '@/components/PageLoader';
-
-// import AuthRouter from '@/router/AuthRouter';
-
-// const Localization = lazy(() => import('@/locale/Localization'));
-
 import Localization from '@/locale/Localization';
+import AuthRouter from '@/router/AuthRouter';
 
 const ErpApp = lazy(() => import('./ErpApp'));
-const AuthRouter = lazy(() => import('@/router/AuthRouter'));
 
 export default function IdurarOs() {
   const { isLoggedIn } = useSelector(selectAuth);
