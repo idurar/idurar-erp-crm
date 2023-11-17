@@ -5,34 +5,39 @@ const ObjectId = mongoose.Types.ObjectId;
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
   try {
     const modelName = directory.slice(0, 1).toUpperCase() + directory.slice(1);
-    if (!mongoose.models[modelName]) {
-      throw new Error(`Model '${modelName}' does not exist`);
-    }
-    const Model = mongoose.model(modelName);
-    const result = await Model.findById(ObjectId(id)).exec();
+    if (mongoose.models[modelName]) {
+      const Model = mongoose.model(modelName);
+      const result = await Model.findById(ObjectId(id)).exec();
 
-    // Throw error if no result
-    if (!result) {
-      throw { name: 'ValidationError' };
-    }
-
-    // Continue process if result is returned
-    await custom.generatePdf(
-      modelName,
-      { filename: modelName, format: 'A4' },
-      result,
-      async (fileLocation) => {
-        return res.download(fileLocation, (error) => {
-          if (error)
-            res.status(500).json({
-              success: false,
-              result: null,
-              message: "Couldn't find file",
-              error: error.message,
-            });
-        });
+      // Throw error if no result
+      if (!result) {
+        throw { name: 'ValidationError' };
       }
-    );
+
+      // Continue process if result is returned
+      await custom.generatePdf(
+        modelName,
+        { filename: modelName, format: 'A4' },
+        result,
+        async (fileLocation) => {
+          return res.download(fileLocation, (error) => {
+            if (error)
+              res.status(500).json({
+                success: false,
+                result: null,
+                message: "Couldn't find file",
+                error: error.message,
+              });
+          });
+        }
+      );
+    } else {
+      return res.status(404).json({
+        success: false,
+        result: null,
+        message: `Model '${modelName}' does not exist`,
+      });
+    }
   } catch (error) {
     // If error is thrown by Mongoose due to required validations
     if (error.name == 'ValidationError') {
