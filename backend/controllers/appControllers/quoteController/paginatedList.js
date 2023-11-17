@@ -14,7 +14,7 @@ const paginatedList = async (req, res) => {
       .sort({ created: 'desc' })
       .populate('createdBy', 'name');
     // Counting the total documents
-    const countPromise = Model.count({ removed: false });
+    const countPromise = Model.countDocuments({ removed: false });
     // Resolving both promises
     const [result, count] = await Promise.all([resultsPromise, countPromise]);
     // Calculating total pages
