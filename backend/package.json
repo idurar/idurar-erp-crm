@@ -6,42 +6,41 @@
     "node": "20.9.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js --ignore public/",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js --ignore public/",
     "production": "NODE_ENV=production",
-    "setup": "node setup/setup.js",
-    "reset": "node setup/reset.js"
+    "setup": "node src/setup/setup.js",
+    "reset": "node src/setup/reset.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.5",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "currency.js": "2.0.4",
-    "dotenv": "4.0.0",
+    "dotenv": "16.3.1",
     "express": "^4.18.2",
-    "glob": "7.1.1",
-    "helmet": "^4.6.0",
+    "glob": "10.3.10",
+    "helmet": "^7.1.0",
     "html-pdf": "^3.0.1",
-    "joi": "^17.10.1",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.20",
-    "module-alias": "^2.2.2",
-    "moment": "^2.26.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "module-alias": "^2.2.3",
+    "moment": "^2.29.4",
     "mongoose": "^8.0.1",
     "mongoose-autopopulate": "^1.1.0",
-    "multer": "^1.4.2",
+    "multer": "^1.4.4",
     "pug": "^3.0.2",
     "resend": "^0.17.2",
     "transliteration": "^2.3.5"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "nodemon": "3.0.1"
   },
   "_moduleAliases": {
-    "@": "."
+    "@": "src"
   },
-  "description": "Just you wait folks!",
-  "main": "app.js",
+  "main": "server.js",
   "keywords": [],
   "author": "IDURAR",
   "license": "Fair-code License",
