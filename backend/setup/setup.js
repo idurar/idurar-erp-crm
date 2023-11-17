@@ -1,9 +1,11 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
+require('dotenv').config({ path: __dirname + '/../.env.local' });
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 const fs = require('fs');
+
 async function setupApp() {
   try {
     const Admin = require('../models/coreModels/Admin');

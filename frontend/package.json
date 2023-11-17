@@ -1,8 +1,8 @@
 {
   "name": "idurar-erp-crm",
-  "version": "3.0.0-beta.13",
+  "version": "3.0.0-beta.14",
   "engines": {
-    "npm": "8.5.5"
+    "npm": "10.2.4"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",

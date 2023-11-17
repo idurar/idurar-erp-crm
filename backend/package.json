@@ -1,16 +1,16 @@
 {
   "name": "idurar-erp-crm",
-  "version": "3.0.0-beta.13",
+  "version": "3.0.0-beta.14",
   "engines": {
-    "npm": "8.5.5",
-    "node": "16.15.0"
+    "npm": "10.2.4",
+    "node": "20.9.0"
   },
   "scripts": {
-    "start": "node ./server.js",
-    "dev": "nodemon ./server.js --ignore public/",
+    "start": "node server.js",
+    "dev": "nodemon server.js --ignore public/",
     "production": "NODE_ENV=production",
-    "setup": "node ./setup/setup.js",
-    "reset": "node ./setup/reset.js"
+    "setup": "node setup/setup.js",
+    "reset": "node setup/reset.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,9 +27,8 @@
     "lodash": "^4.17.20",
     "module-alias": "^2.2.2",
     "moment": "^2.26.0",
-    "mongoose": "^6.3.3",
-    "mongoose-autopopulate": "^0.14.0",
-    "mongoose-sequence": "^5.2.2",
+    "mongoose": "^8.0.1",
+    "mongoose-autopopulate": "^1.1.0",
     "multer": "^1.4.2",
     "pug": "^3.0.2",
     "resend": "^0.17.2",
