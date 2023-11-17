@@ -1,4 +1,5 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
+require('dotenv').config({ path: __dirname + '/../.env.local' });
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);

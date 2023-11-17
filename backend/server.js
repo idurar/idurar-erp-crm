@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
-if (major < 14 || (major === 14 && minor <= 0)) {
-  console.log('Please go to nodejs.org and download version 8 or greater. 👌\n ');
+if (major < 16 || (major === 16 && minor <= 20)) {
+  console.log('Please upgrade your node.js version at least 16.20.2 or greater. 👌\n ');
   process.exit();
 }
 
@@ -19,9 +19,9 @@ mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (error) => {
   console.log(
-    `1. 🔥 Commun Error caused issue → : check your .env file first and add your mongodb url`
+    `1. 🔥 Common Error caused issue → : check your .env file first and add your mongodb url`
   );
-  console.error(`🚫 Error → : ${error.message}`);
+  console.error(`2. 🚫 Error → : ${error.message}`);
 });
 
 const glob = require('glob');
