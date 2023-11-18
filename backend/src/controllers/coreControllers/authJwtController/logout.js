@@ -22,7 +22,11 @@ const logout = async (req, res) => {
         domain: req.hostname,
         Path: '/',
       })
-      .json({ isLoggedOut: true });
+      .json({
+        success: true,
+        result: {},
+        message: 'Successfully logout',
+      });
   } catch (error) {
     res.status(500).json({ success: false, result: null, message: error.message, error: error });
   }

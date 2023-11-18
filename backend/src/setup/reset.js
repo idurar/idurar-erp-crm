@@ -1,9 +1,8 @@
-require('dotenv').config({ path: __dirname + '/../.env' });
-require('dotenv').config({ path: __dirname + '/../.env.local' });
+require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env.local' });
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 async function deleteData() {
   const Admin = require('../models/coreModels/Admin');

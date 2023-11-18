@@ -23,7 +23,7 @@ const createMultipleUpload = async (req, res, next) => {
         userID: userID,
         isSecure: true,
         removed: false,
-        path: `/upload/${modelName}/${uploadItem.fileName}${uploadItem.fieldExt}`,
+        path: `/src/upload/${modelName}/${uploadItem.fileName}${uploadItem.fieldExt}`,
       };
 
       _uploadsArray.push(uploadObject);

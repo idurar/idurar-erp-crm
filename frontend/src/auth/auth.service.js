@@ -29,9 +29,17 @@ export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {
     // window.localStorage.clear();
-    // window.localStorage.removeItem('isLoggedIn');
-    // window.localStorage.removeItem('auth');
-    await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
+    const response = await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
   } catch (error) {
     return errorHandler(error);
   }

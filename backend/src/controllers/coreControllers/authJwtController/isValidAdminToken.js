@@ -7,7 +7,6 @@ const Admin = mongoose.model('Admin');
 const isValidAdminToken = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-
     if (!token)
       return res.status(401).json({
         success: false,
@@ -34,7 +33,9 @@ const isValidAdminToken = async (req, res, next) => {
         message: "Admin doens't Exist, authorization denied.",
         jwtExpired: true,
       });
-    if (admin.isLoggedIn === 0)
+
+    const { loggedSessions } = admin;
+    if (!loggedSessions.includes(token))
       return res.status(401).json({
         success: false,
         result: null,

@@ -14,12 +14,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 configStore = composeEnhancers(applyMiddleware(...middleware));
 
-const INITIAL_LANG_STATE = {
-  ...lang,
-};
-
 const LANG_INITIAL_STATE = {
-  result: INITIAL_LANG_STATE,
+  result: lang,
   langCode: 'en_us',
   isLoading: false,
   isSuccess: false,
@@ -30,7 +26,7 @@ const lang_state = storePersist.get('translate')
   : LANG_INITIAL_STATE;
 
 const AUTH_INITIAL_STATE = {
-  current: null,
+  current: {},
   isLoggedIn: false,
   isLoading: false,
   isSuccess: false,

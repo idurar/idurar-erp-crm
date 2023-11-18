@@ -10,8 +10,8 @@ const storage = multer.diskStorage({
   //-->  public/upload/:model/:fieldId.
   destination: function (req, file, cb) {
     const modelName = req.params.model;
-    fs.mkdir(`upload/${modelName}`, (error) => {
-      return cb(null, `upload/${modelName}`);
+    fs.mkdir(`src/upload/${modelName}`, (error) => {
+      return cb(null, `src/upload/${modelName}`);
     });
   },
 
