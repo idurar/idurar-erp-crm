@@ -32,10 +32,10 @@ export const login =
 export const logout = () => async (dispatch) => {
   const data = await authService.logout();
   if (data.success === true) {
-    window.localStorage.removeItem('auth');
     dispatch({
       type: actionTypes.LOGOUT_SUCCESS,
     });
+    window.localStorage.removeItem('auth');
   }
 };
 
@@ -50,6 +50,10 @@ export const updateProfile =
     let data = await request.updateAndUpload({ entity, id, jsonData });
 
     if (data.success === true) {
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: data.result,
+      });
       const auth_state = {
         current: data.result,
         isLoggedIn: true,
@@ -57,9 +61,5 @@ export const updateProfile =
         isSuccess: true,
       };
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
-      dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        payload: data.result,
-      });
     }
   };
