@@ -4,7 +4,7 @@ const Admin = mongoose.model('Admin');
 
 const logout = async (req, res) => {
   const token = req.cookies.token;
-  const result = await Admin.findOneAndUpdate(
+  await Admin.findOneAndUpdate(
     { _id: req.admin._id },
     { $pull: { loggedSessions: token } },
     {
