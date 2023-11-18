@@ -49,7 +49,7 @@ export default function HeaderContent() {
           src={srcImgProfile}
           style={{ color: '#f56a00', backgroundColor: !hasPhotoprofile ? '#fde3cf' : '#f9fafc' }}
         >
-          {currentAdmin?.name.charAt(0).toUpperCase()}
+          {currentAdmin?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
         <div className="profileDropdownInfo">
           <p>
@@ -128,7 +128,7 @@ export default function HeaderContent() {
           }}
           size="large"
         >
-          {currentAdmin?.name.charAt(0).toUpperCase()}
+          {currentAdmin?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
         {/* </Badge> */}
       </Dropdown>

@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 import { useRoutes } from 'react-router-dom';
-import PublicRoute from './PublicRoute';
+import { Navigate } from 'react-router-dom';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
@@ -43,7 +43,7 @@ export default function AppRouter() {
   let element = useRoutes([
     {
       path: '/login',
-      element: <PublicRoute />,
+      element: <Navigate to="/" replace />,
     },
     {
       path: '/logout',

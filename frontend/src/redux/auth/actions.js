@@ -30,12 +30,25 @@ export const login =
   };
 
 export const logout = () => async (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGOUT_SUCCESS,
+  });
+  const result = window.localStorage.getItem('auth');
+  const tmpAuth = JSON.parse(result);
+  window.localStorage.removeItem('auth');
   const data = await authService.logout();
-  if (data.success === true) {
+  if (data.success === false) {
+    const auth_state = {
+      current: tmpAuth,
+      isLoggedIn: true,
+      isLoading: false,
+      isSuccess: true,
+    };
+    window.localStorage.setItem('auth', JSON.stringify(auth_state));
     dispatch({
-      type: actionTypes.LOGOUT_SUCCESS,
+      type: actionTypes.LOGOUT_FAILED,
+      payload: data.result,
     });
-    window.localStorage.removeItem('auth');
   }
 };
 
