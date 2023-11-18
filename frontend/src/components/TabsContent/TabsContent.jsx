@@ -54,9 +54,9 @@ export default function TabsContent({ content, pageTitle }) {
     return {
       key: item.key ? item.key : index + '_' + item.label.replace(/ /g, '_'),
       label: (
-        <>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           {item.icon} <span style={{ paddingRight: 30 }}>{item.label}</span>
-        </>
+        </div>
       ),
       children: <SettingsLayout>{item.children}</SettingsLayout>,
     };
