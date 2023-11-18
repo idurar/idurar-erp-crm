@@ -36,6 +36,7 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
 
   useEffect(() => {
     const current = result[settingsCategory];
+    console.log('🚀 ~ file: UpdateSettingForm.jsx:39 ~ useEffect ~ current:', current);
 
     form.setFieldsValue(current);
   }, [result]);

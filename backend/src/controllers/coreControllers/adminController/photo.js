@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const Admin = mongoose.model('Admin');
 
 const photo = async (req, res) => {
-  console.log('🚀 ~ file: photo.js:10 ~ photo ~ req.body:', req.body);
-
   const updates = {
     photo: req.body.photo,
   };

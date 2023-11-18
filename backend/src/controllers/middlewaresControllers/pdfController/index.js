@@ -35,7 +35,7 @@ exports.generatePdf = async (
           border: '12mm',
         })
         .toFile(targetLocation, function (error) {
-          if (error) return console.log('this pdf create error ' + error);
+          if (error) return false;
           if (callback) callback(targetLocation);
         });
     }

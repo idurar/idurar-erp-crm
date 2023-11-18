@@ -57,7 +57,6 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       });
     } else {
       // Server Error
-      console.log(error);
       return res.status(500).json({
         success: false,
         result: null,

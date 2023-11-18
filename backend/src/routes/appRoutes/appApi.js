@@ -331,7 +331,6 @@ const kycFileStorage = multer.diskStorage({
     cb(null, 'public/uploads/kyc');
   },
   filename: function (req, file, cb) {
-    console.log('🚀 ~ file: appApi.js:182 ~ file:', file);
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });

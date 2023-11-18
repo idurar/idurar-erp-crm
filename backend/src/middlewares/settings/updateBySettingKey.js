@@ -4,10 +4,6 @@ const Model = mongoose.model('Setting');
 
 const updateBySettingKey = async ({ settingKey, settingValue }) => {
   try {
-    console.log(
-      '🚀 ~ file: updateBySettingKey.js:8 ~ updateBySettingKey ~ settingKey:',
-      settingKey
-    );
     if (!settingKey || !settingValue) {
       return null;
     }
