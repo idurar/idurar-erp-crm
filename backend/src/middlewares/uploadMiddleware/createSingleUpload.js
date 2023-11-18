@@ -20,7 +20,7 @@ const createSingleUpload = async (req, res, next) => {
         userID: userID,
         isSecure: true,
         removed: false,
-        path: `/upload/${modelName}/${fileName}${fieldExt}`,
+        path: `/src/upload/${modelName}/${fileName}${fieldExt}`,
       });
 
       if (upload) {

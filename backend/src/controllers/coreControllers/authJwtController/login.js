@@ -72,7 +72,7 @@ const login = async (req, res) => {
 
     const result = await Admin.findOneAndUpdate(
       { _id: admin._id },
-      { $set: { isLoggedIn: 1 }, $push: { loggedSessions: token } },
+      { $push: { loggedSessions: token } },
       {
         new: true,
       }
@@ -98,7 +98,6 @@ const login = async (req, res) => {
           role: result.role,
           email: result.email,
           photo: result.photo,
-          isLoggedIn: result.isLoggedIn > 0 ? true : false,
         },
         message: 'Successfully login admin',
       });

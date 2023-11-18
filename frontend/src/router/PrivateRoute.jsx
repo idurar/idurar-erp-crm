@@ -1,7 +1,11 @@
 import { Navigate } from 'react-router-dom';
+import storePersist from '@/redux/storePersist';
 
 const PrivateRoute = ({ children }) => {
-  if (window.localStorage.getItem('isLoggedIn')) {
+  const { isLoggedIn } = storePersist.get('auth')
+    ? storePersist.get('auth')
+    : { isLoggedIn: false };
+  if (isLoggedIn) {
     return <>{children}</>;
   } else return <Navigate to="/login" replace />;
 };

@@ -38,7 +38,6 @@ const adminSchema = new Schema({
     default: 'staff',
     enum: ['admin', 'staffAdmin', 'staff', 'createOnly', 'readOnly'],
   },
-  isLoggedIn: { type: Number },
   loggedSessions: {
     type: [String],
     default: [],

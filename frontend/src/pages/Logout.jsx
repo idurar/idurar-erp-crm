@@ -12,7 +12,6 @@ const Logout = () => {
   }
   useEffect(() => {
     asyncLogout();
-    window.localStorage.removeItem('isLoggedIn');
     window.localStorage.removeItem('auth');
     navigate('/login');
   }, []);

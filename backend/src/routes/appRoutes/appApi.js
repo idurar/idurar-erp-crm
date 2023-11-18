@@ -30,6 +30,24 @@ const kycController = require('@/controllers/appControllers/kycController');
 const inventoryController = require('@/controllers/appControllers/inventoryController');
 
 // //_________________________________ API for employees_____________________
+
+// const routerMethods = ['create', 'update', 'delete', 'read', 'search', 'list', 'filter'];
+
+// const permissionMethods = {
+//   create: 'create',
+//   update: 'update',
+//   delete: 'delete',
+//   read: 'read',
+//   search: 'read',
+//   list: 'read',
+//   filter: 'read',
+// };
+
+// for (const method of routerMethods) {
+//   router
+//     .route('/employee/' + method)
+//     .post(hasPermission(permissionMethods[method]), catchErrors(employeeController[method]));
+// }
 router
   .route('/employee/create')
   .post(hasPermission('create'), catchErrors(employeeController.create));
