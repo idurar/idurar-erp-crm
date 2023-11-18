@@ -8,11 +8,26 @@
 
 exports.catchErrors = (fn) => {
   return function (req, res, next) {
-    const resp = fn(req, res, next);
-    if (resp instanceof Promise) {
-      return resp.catch(next);
-    }
-    return resp;
+    return fn(req, res, next).catch((error) => {
+      if (error.name == 'ValidationError') {
+        res.status(400).json({
+          success: false,
+          result: null,
+          message: 'Required fields are not supplied',
+          conttroller: fn.name,
+          error: error,
+        });
+      } else {
+        // Server Error
+        res.status(500).json({
+          success: false,
+          result: null,
+          message: error.message,
+          conttroller: fn.name,
+          error: error,
+        });
+      }
+    });
   };
 };
 
