@@ -77,7 +77,7 @@ const request = {
     }
   },
 
-  delete: async ({ entity, id, options = {} }) => {
+  delete: async ({ entity, id }) => {
     try {
       const response = await axios.delete(entity + '/delete/' + id);
       successHandler(response, {
@@ -160,7 +160,7 @@ const request = {
     }
   },
 
-  post: async ({ entity, jsonData, options = {} }) => {
+  post: async ({ entity, jsonData }) => {
     try {
       const response = await axios.post(entity, jsonData);
 
@@ -213,7 +213,7 @@ const request = {
     return source;
   },
 
-  summary: async ({ entity, options = {} }) => {
+  summary: async ({ entity }) => {
     try {
       const response = await axios.get(entity + '/summary');
 
