@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-
 import codeMessage from './codeMessage';
 
 const errorHandler = (error) => {
@@ -17,9 +16,13 @@ const errorHandler = (error) => {
       message: `Request error ${status}`,
       description: errorText,
     });
-    // if (response.data && response.data.jwtExpired) {
-    //   navigate('/logout');
-    // }
+    if (response.data && response.data.jwtExpired) {
+      const result = window.localStorage.getItem('auth');
+      if (result) {
+        window.localStorage.removeItem('auth');
+        window.location.href = '/logout';
+      }
+    }
     return response.data;
   } else {
     notification.config({
