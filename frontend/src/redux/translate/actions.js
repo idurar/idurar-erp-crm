@@ -31,6 +31,7 @@ export const translateAction = {
     const LANG_STATE = {
       result: data,
       isRtl: isRtl,
+      langDirection: isRtl ? 'rtl' : 'ltr',
       langCode: value,
       isLoading: false,
       isSuccess: false,
