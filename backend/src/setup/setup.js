@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
-
+const { globSync } = require('glob');
 const fs = require('fs');
 
 const mongoose = require('mongoose');
@@ -24,35 +24,23 @@ async function setupApp() {
 
     const Setting = require('../models/coreModels/Setting');
 
-    const appConfig = JSON.parse(fs.readFileSync(__dirname + '/config/appConfig.json', 'utf-8'));
-    const companyConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/companyConfig.json', 'utf-8')
-    );
-    const financeConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/financeConfig.json', 'utf-8')
-    );
-    const crmConfig = JSON.parse(fs.readFileSync(__dirname + '/config/crmConfig.json', 'utf-8'));
-    const customConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/customConfig.json', 'utf-8')
-    );
+    const settingFiles = [];
 
-    const moneyFormatConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/moneyFormatConfig.json', 'utf-8')
-    );
+    const settingsFiles = globSync('./src/setup/defaultSettings/**/*.json');
+    console.log('🚀 ~ file: setup.js:30 ~ setupApp ~ settingsFiles:', settingsFiles);
 
-    await Setting.insertMany([
-      ...appConfig,
-      ...companyConfig,
-      ...financeConfig,
-      ...crmConfig,
-      ...moneyFormatConfig,
-      ...customConfig,
-    ]);
+    for (const filePath of settingsFiles) {
+      const file = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      settingFiles.push(...file);
+    }
+
+    await Setting.insertMany(settingFiles);
+
     console.log('👍 Settings created : Done!');
 
     const Email = require('../models/coreModels/Email');
     const emailTemplate = JSON.parse(
-      fs.readFileSync(__dirname + '/config/emailTemplate.json', 'utf-8')
+      fs.readFileSync(__dirname + '/emailTemplate/index.json', 'utf-8')
     );
 
     await Email.insertMany([...emailTemplate]);

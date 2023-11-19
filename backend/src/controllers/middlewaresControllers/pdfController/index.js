@@ -1,45 +1,56 @@
-let pdf = require('html-pdf');
+const puppeteer = require('puppeteer');
 const pug = require('pug');
 const fs = require('fs');
 const moment = require('moment');
 
+const pugFiles = ['invoice', 'offer', 'quote', 'payment', 'quote', 'supplierOrder'];
+
 exports.generatePdf = async (
   modelName,
-  info = { filename: 'pdf_file', format: 'A5' },
+  info = { filename: 'pdf_file', format: 'A5', targetLocation: '' },
   result,
   callback
 ) => {
   try {
-    const fileId = info.filename + '-' + result._id + '.pdf';
-    const folderPath = modelName.toLowerCase();
-    const targetLocation = `./public/download/${folderPath}/${fileId}`;
+    const { targetLocation } = info;
+    console.log('🚀 ~ file: index.js:16 ~ fileId:', targetLocation);
 
-    // if PDF already exist, then delete it and create new PDF
+    // if PDF already exists, then delete it and create a new PDF
     if (fs.existsSync(targetLocation)) {
       fs.unlinkSync(targetLocation);
     }
 
     // render pdf html
 
-    const pugFiles = ['invoice', 'offer', 'quote', 'payment', 'quote', 'supplierOrder'];
     if (pugFiles.includes(modelName.toLowerCase())) {
-      const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
+      // Compile Pug template
+
+      const htmlContent = pug.renderFile('src/pdf/' + modelName.toLowerCase() + '.pug', {
         model: result,
         moment: moment,
       });
 
-      await pdf
-        .create(html, {
-          format: info.format,
-          orientation: 'portrait',
-          border: '12mm',
-        })
-        .toFile(targetLocation, function (error) {
-          if (error) return false;
-          if (callback) callback(targetLocation);
-        });
+      // Launch Puppeteer
+      const browser = await puppeteer.launch({ headless: 'new' });
+      const page = await browser.newPage();
+
+      // Set the HTML content on the page
+      await page.setContent(htmlContent);
+
+      // Generate PDF
+      await page.pdf({
+        path: targetLocation,
+        format: info.format,
+        landscape: false,
+        margin: { top: '12mm', right: '12mm', bottom: '12mm', left: '12mm' },
+      });
+
+      // Close the browser
+      await browser.close();
+
+      if (callback) callback();
     }
   } catch (error) {
-    throw new Error('Something went wrong! generatePdf');
+    throw new Error(error);
   }
 };

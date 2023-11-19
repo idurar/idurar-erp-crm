@@ -11,9 +11,9 @@ async function deleteData() {
   await Admin.deleteMany();
   console.log('👍 admin Deleted. To setup demo admin data, run\n\n\t npm run setup\n\n');
   await Setting.deleteMany();
-  console.log('👍 Setting Deleted. To setup demo admin data, run\n\n\t npm run setup\n\n');
+  console.log('👍 Setting Deleted. To setup Setting data, run\n\n\t npm run setup\n\n');
   await Email.deleteMany();
-  console.log('👍 Email Deleted. To setup demo admin data, run\n\n\t npm run setup\n\n');
+  console.log('👍 Email Deleted. To setup Email data, run\n\n\t npm run setup\n\n');
   process.exit();
 }
 

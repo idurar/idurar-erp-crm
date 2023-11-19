@@ -1,0 +1,16 @@
+[
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_type",
+    "settingValue": ["person", "company"],
+    "valueType": "array",
+    "isCoreSetting": true
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "offer_default_lead_type",
+    "settingValue": "company",
+    "valueType": "string",
+    "isCoreSetting": true
+  }
+]

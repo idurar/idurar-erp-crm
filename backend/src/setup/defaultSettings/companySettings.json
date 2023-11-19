@@ -75,5 +75,12 @@
     "settingValue": "00001231421",
     "valueType": "string",
     "isCoreSetting": true
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_custom_value",
+    "settingValue": "any other company custom value",
+    "valueType": "string",
+    "isCoreSetting": true
   }
 ]
