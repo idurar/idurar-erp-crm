@@ -1,21 +1,21 @@
 import React from 'react';
-import { Descriptions, Dropdown, Menu, Table } from 'antd';
+import { Descriptions, Dropdown, Table } from 'antd';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 
 import { EllipsisOutlined, EyeOutlined, EditOutlined, FilePdfOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 export default function RecentTable({ ...props }) {
-  const currentAdmin = useSelector(selectCurrentAdmin);
+  const { hasPermission } = usePermission();
   const translate = useLanguage();
   let { entity, dataTableColumns } = props;
 
@@ -29,7 +29,7 @@ export default function RecentTable({ ...props }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
-      disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
+      disabled: !hasPermission(accessTypes.EDIT),
     },
     {
       label: translate('Download'),

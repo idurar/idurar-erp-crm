@@ -1,16 +1,14 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasCreateAccess } from '@/utils/helpers';
-import { useSelector } from 'react-redux';
+import usePermission from '@/hooks/usePermission';
+import { accessTypes } from '@/utils/constants';
 
 const CollapseBoxButton = ({ onChange, title }) => {
-  const currentAdmin = useSelector(selectCurrentAdmin);
+  const { hasPermission } = usePermission();
+
   return (
     <div
-      className={`collapseBoxHeader ${
-        currentAdmin && !adminHasCreateAccess(currentAdmin) && 'buttonDisabled'
-      }`}
+      className={`collapseBoxHeader ${!hasPermission(accessTypes.CREATE) && 'buttonDisabled'}`}
       onClick={onChange}
     >
       {title}

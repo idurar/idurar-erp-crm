@@ -2,13 +2,12 @@ import { Form, Input, Select, Tag } from 'antd';
 
 import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
-import { useSelector } from 'react-redux';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 export default function GeneralSettingForm() {
-  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
+  const { hasPermission } = usePermission();
   const tagRender = (props) => {
     const { label, closable, onClose } = props;
     const onPreventMouseDown = (event) => {
@@ -40,7 +39,7 @@ export default function GeneralSettingForm() {
           },
         ]}
       >
-        <Input autoComplete="off" disabled={currentAdmin && !adminHasEditAccess(currentAdmin)} />
+        <Input autoComplete="off" disabled={!hasPermission(accessTypes.EDIT)} />
       </Form.Item>
       <Form.Item
         label={translate('language')}
@@ -59,7 +58,7 @@ export default function GeneralSettingForm() {
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
-          disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
+          disabled={!hasPermission(accessTypes.EDIT)}
         >
           {languages.map((language) => (
             <Select.Option
@@ -93,7 +92,7 @@ export default function GeneralSettingForm() {
           }}
           tokenSeparators={[',']}
           tagRender={tagRender}
-          disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
+          disabled={!hasPermission(accessTypes.EDIT)}
         ></Select>
       </Form.Item>
     </>

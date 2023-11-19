@@ -22,8 +22,8 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasCreateAccess, adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -69,11 +69,10 @@ const Item = ({ item }) => {
 };
 
 export default function ReadItem({ config, selectedItem }) {
-  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
-
+  const { hasPermission } = usePermission();
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
   const navigate = useNavigate();
@@ -145,7 +144,7 @@ export default function ReadItem({ config, selectedItem }) {
               send(currentErp._id);
             }}
             icon={<MailOutlined />}
-            disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
+            disabled={!hasPermission(accessTypes.CREATE)}
           >
             {translate('Send by email')}
           </Button>,
@@ -163,7 +162,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             type="primary"
             icon={<EditOutlined />}
-            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('Edit')}
           </Button>,

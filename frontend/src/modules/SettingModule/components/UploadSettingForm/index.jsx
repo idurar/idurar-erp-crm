@@ -7,15 +7,13 @@ import { selectSettings } from '@/redux/settings/selectors';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
 
 export default function UploadSettingForm({ config, settingKey, children }) {
-  const currentAdmin = useSelector(selectCurrentAdmin);
   let { entity, settingsCategory } = config;
   const dispatch = useDispatch();
   const { result, isLoading, isSuccess } = useSelector(selectSettings);
-
+  const { hasPermission } = usePermission();
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
@@ -51,11 +49,7 @@ export default function UploadSettingForm({ config, settingKey, children }) {
               paddingRight: '5px',
             }}
           >
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
-            >
+            <Button type="primary" htmlType="submit" disabled={!hasPermission(accessTypes.EDIT)}>
               Save
             </Button>
           </Form.Item>

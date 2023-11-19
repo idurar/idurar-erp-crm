@@ -22,12 +22,13 @@ import { useNavigate } from 'react-router-dom';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
-function AddNewItem({ config, hasCreate = true, currentAdmin = null }) {
+function AddNewItem({ config, hasCreate = true }) {
   const navigate = useNavigate();
   const { ADD_NEW_ENTITY, entity } = config;
+  const { hasPermission } = usePermission();
 
   const handleClick = () => {
     navigate(`/${entity.toLowerCase()}/create`);
@@ -39,7 +40,7 @@ function AddNewItem({ config, hasCreate = true, currentAdmin = null }) {
         onClick={handleClick}
         type="primary"
         icon={<PlusOutlined />}
-        disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
+        disabled={!hasPermission(accessTypes.CREATE)}
       >
         {ADD_NEW_ENTITY}
       </Button>
@@ -48,15 +49,12 @@ function AddNewItem({ config, hasCreate = true, currentAdmin = null }) {
 }
 
 export default function DataTable({ config, extra = [] }) {
-  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
+  const { hasPermission } = usePermission();
   let { entity, dataTableColumns, create = true } = config;
   const { DATATABLE_TITLE } = config;
-
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
-
   const { pagination, items: dataSource } = listResult;
-
   const { erpContextAction } = useErpContext();
   const { modal } = erpContextAction;
 
@@ -64,7 +62,7 @@ export default function DataTable({ config, extra = [] }) {
     if (item.key === 'recordPayment' || item.key === 'updatePassword') {
       return {
         ...item,
-        disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
+        disabled: !hasPermission(accessTypes.EDIT),
       };
     } else return item;
   });
@@ -79,7 +77,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
-      disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
+      disabled: !hasPermission(accessTypes.EDIT),
     },
     {
       label: translate('Download'),
@@ -95,7 +93,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
-      disabled: currentAdmin && !adminHasDeleteAccess(currentAdmin),
+      disabled: !hasPermission(accessTypes.DELETE),
     },
   ];
 
@@ -200,12 +198,7 @@ export default function DataTable({ config, extra = [] }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
               {translate('Refresh')}
             </Button>,
-            <AddNewItem
-              config={config}
-              key={`${uniqueId()}`}
-              hasCreate={create}
-              currentAdmin={currentAdmin}
-            />,
+            <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
           ]}
           style={{
             padding: '20px 0px',

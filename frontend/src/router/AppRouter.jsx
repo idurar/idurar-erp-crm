@@ -3,7 +3,7 @@ import { lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import AccessRestrictedRoute from './AccessRestrictedRoute';
-import { accessTypes } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
@@ -43,7 +43,7 @@ const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
 
 export default function AppRouter() {
   const getAccessRestrictedRoute = (el, type = accessTypes.EDIT) => (
-    <AccessRestrictedRoute type>{el}</AccessRestrictedRoute>
+    <AccessRestrictedRoute type={type}>{el}</AccessRestrictedRoute>
   );
 
   let element = useRoutes([

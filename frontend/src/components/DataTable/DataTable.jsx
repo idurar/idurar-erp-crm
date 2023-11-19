@@ -12,10 +12,12 @@ import { generate as uniqueId } from 'shortid';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 import { useCrudContext } from '@/context/crud';
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
-function AddNewItem({ config, currentAdmin = null }) {
+function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
+  const { hasPermission } = usePermission();
   const { collapsedBox, panel } = crudContextAction;
   const { ADD_NEW_ENTITY } = config;
 
@@ -25,27 +27,25 @@ function AddNewItem({ config, currentAdmin = null }) {
   };
 
   return (
-    <Button
-      onClick={handelClick}
-      type="primary"
-      disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
-    >
+    <Button onClick={handelClick} type="primary" disabled={!hasPermission(accessTypes.CREATE)}>
       {ADD_NEW_ENTITY}
     </Button>
   );
 }
+
 export default function DataTable({ config, extra = [] }) {
   const currentAdmin = useSelector(selectCurrentAdmin);
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
+  const { hasPermission } = usePermission();
 
   extra = extra.map((item) => {
     if (item.key === 'recordPayment' || item.key === 'updatePassword') {
       return {
         ...item,
-        disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
+        disabled: !hasPermission(accessTypes.EDIT),
       };
     } else return item;
   });
@@ -60,7 +60,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
-      disabled: currentAdmin && !adminHasEditAccess(currentAdmin),
+      disabled: !hasPermission(accessTypes.EDIT),
     },
     ...extra,
     {
@@ -71,7 +71,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
-      disabled: currentAdmin && !adminHasDeleteAccess(currentAdmin),
+      disabled: !hasPermission(accessTypes.DELETE),
     },
   ];
 
@@ -199,7 +199,7 @@ export default function DataTable({ config, extra = [] }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
               {translate('Refresh')}
             </Button>,
-            <AddNewItem key={`${uniqueId()}`} config={config} currentAdmin={currentAdmin} />,
+            <AddNewItem key={`${uniqueId()}`} config={config} />,
           ]}
           style={{
             padding: '20px 0px',

@@ -1,19 +1,17 @@
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
+import usePermission from '@/hooks/usePermission';
+import { accessTypes } from '@/utils/constants';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-const AccessRestrictedRoute = ({ type = 'edit', children }) => {
-  const currentAdmin = useSelector(selectCurrentAdmin);
+const AccessRestrictedRoute = ({ type = accessTypes.EDIT, children }) => {
+  const { hasPermission } = usePermission();
 
-  if (currentAdmin) {
-    if (type === 'edit' && !adminHasEditAccess(currentAdmin)) return <Navigate to="/" replace />;
-    else if (type === 'create' && !adminHasCreateAccess(currentAdmin))
-      return <Navigate to="/" replace />;
-    else if (type === 'delete' && !adminHasDeleteAccess(currentAdmin))
-      return <Navigate to="/" replace />;
-  }
+  if (type === accessTypes.EDIT && !hasPermission(accessTypes.EDIT))
+    return <Navigate to="/" replace />;
+  else if (type === accessTypes.CREATE && !hasPermission(accessTypes.CREATE))
+    return <Navigate to="/" replace />;
+  else if (type === accessTypes.DELETE && !hasPermission(accessTypes.DELETE))
+    return <Navigate to="/" replace />;
 
   return <>{children}</>;
 };

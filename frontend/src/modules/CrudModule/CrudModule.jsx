@@ -17,16 +17,15 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
-import { adminHasCreateAccess, adminHasDeleteAccess, adminHasEditAccess } from '@/utils/helpers';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
-  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
   const { modal, editBox } = crudContextAction;
-
+  const { hasPermission } = usePermission();
   const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
@@ -63,7 +62,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<DeleteOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '5px' }}
-            disabled={currentAdmin && !adminHasDeleteAccess(currentAdmin)}
+            disabled={!hasPermission(accessTypes.DELETE)}
           >
             {translate('remove')}
           </Button>
@@ -73,7 +72,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '0px' }}
-            disabled={currentAdmin && !adminHasEditAccess(currentAdmin)}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('edit')}
           </Button>
@@ -93,7 +92,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
   const { collapsedBox } = crudContextAction;
-  const currentAdmin = useSelector(selectCurrentAdmin);
+  const { hasPermission } = usePermission();
 
   const addNewItem = () => {
     collapsedBox.close();
@@ -113,7 +112,7 @@ function FixHeaderPanel({ config }) {
           onClick={addNewItem}
           block={true}
           icon={<PlusOutlined />}
-          disabled={currentAdmin && !adminHasCreateAccess(currentAdmin)}
+          disabled={!hasPermission(accessTypes.CREATE)}
         ></Button>
       </Col>
     </Row>
