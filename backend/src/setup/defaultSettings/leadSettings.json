@@ -4,13 +4,47 @@
     "settingKey": "lead_type",
     "settingValue": ["person", "company"],
     "valueType": "array",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
   },
   {
     "settingCategory": "lead_settings",
     "settingKey": "offer_default_lead_type",
     "settingValue": "company",
     "valueType": "string",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_server",
+    "settingValue": "mail.idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_username",
+    "settingValue": "hello@idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": true
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_password",
+    "settingValue": "password",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": true
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_port",
+    "settingValue": 993,
+    "valueType": "number",
+    "isCoreSetting": true,
+    "isPrivate": true
   }
 ]

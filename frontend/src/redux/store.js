@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import lang from '@/locale/translation/en_us';
 
 import rootReducer from './rootReducer';
-import storePersist from './storePersist';
+import storePersist, { localStorageHealthCheck } from './storePersist';
 
 let middleware = [thunk];
 
@@ -13,6 +13,7 @@ let configStore = applyMiddleware(...middleware);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 configStore = composeEnhancers(applyMiddleware(...middleware));
+localStorageHealthCheck();
 
 const LANG_INITIAL_STATE = {
   result: lang,

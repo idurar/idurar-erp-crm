@@ -4,34 +4,39 @@
     "settingKey": "client_type",
     "settingValue": ["person", "company"],
     "valueType": "array",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
   },
   {
     "settingCategory": "client_settings",
     "settingKey": "invoice_default_client_type",
     "settingValue": "company",
     "valueType": "string",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
   },
   {
     "settingCategory": "client_settings",
     "settingKey": "quote_default_client_type",
     "settingValue": "company",
     "valueType": "string",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
   },
   {
     "settingCategory": "client_settings",
     "settingKey": "pos_default_client_type",
     "settingValue": "person",
     "valueType": "string",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
   },
   {
     "settingCategory": "client_settings",
     "settingKey": "pos_default_client",
     "settingValue": "609e0057246f2359b0c4c31f",
     "valueType": "string",
-    "isCoreSetting": true
+    "isCoreSetting": true,
+    "isPrivate": false
   }
 ]

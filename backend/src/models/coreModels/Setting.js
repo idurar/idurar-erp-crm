@@ -29,6 +29,10 @@ const settingSchema = new mongoose.Schema({
     type: String,
     default: 'String',
   },
+  isPrivate: {
+    type: Boolean,
+    default: false,
+  },
   isCoreSetting: {
     type: Boolean,
     default: false,

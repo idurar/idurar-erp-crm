@@ -8,13 +8,21 @@ function isJsonString(str) {
   return true;
 }
 
-export const localStorageHealthCheck = () => {
-  for (var i = 0, len = localStorage.length; i < len; ++i) {
-    console.log(localStorage.getItem(localStorage.key(i)));
-    const result = window.localStorage.getItem(localStorage.key(i));
-    if (!isJsonString(result)) {
-      console.error('error parsing this localstorage key , removed  :', localStorage.key(i));
-      window.localStorage.removeItem(localStorage.key(i));
+export const localStorageHealthCheck = async () => {
+  for (var i = 0; i < localStorage.length; ++i) {
+    try {
+      const result = window.localStorage.getItem(localStorage.key(i));
+      if (!isJsonString(result)) {
+        window.localStorage.removeItem(localStorage.key(i));
+      }
+      if (result && Object.keys(localStorage.key(i)).length == 0) {
+        window.localStorage.removeItem(localStorage.key(i));
+      }
+    } catch (error) {
+      window.localStorage.clear();
+      // Handle the exception here
+      console.error('window.localStorage Exception occurred:', error);
+      // You can choose to ignore certain exceptions or take other appropriate actions
     }
   }
 };
@@ -24,11 +32,15 @@ export const storePersist = {
     window.localStorage.setItem(key, JSON.stringify(state));
   },
   get: (key) => {
-    // localStorageHealthCheck();
     const result = window.localStorage.getItem(key);
     if (!result) {
       return false;
-    } else return JSON.parse(result);
+    } else {
+      if (!isJsonString(result)) {
+        window.localStorage.removeItem(key);
+        return false;
+      } else return JSON.parse(result);
+    }
   },
   remove: (key) => {
     window.localStorage.removeItem(key);

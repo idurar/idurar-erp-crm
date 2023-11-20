@@ -4,12 +4,14 @@ import {
   CreditCardOutlined,
   DollarOutlined,
   FileImageOutlined,
+  TrophyOutlined,
 } from '@ant-design/icons';
 
 import TabsContent from '@/components/TabsContent/TabsContent';
 
 import CompanyLogoSettings from './CompanyLogoSettings';
 import GeneralSettings from './GeneralSettings';
+import CompanySettings from './CompanySettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
 import MoneyFormatSettings from './MoneyFormatSettings';
@@ -23,6 +25,11 @@ export default function Settings() {
       label: translate('General Settings'),
       icon: <SettingOutlined />,
       children: <GeneralSettings />,
+    },
+    {
+      label: translate('Company Settings'),
+      icon: <TrophyOutlined />,
+      children: <CompanySettings />,
     },
     {
       label: translate('Company Logo'),

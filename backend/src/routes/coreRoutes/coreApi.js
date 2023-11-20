@@ -52,18 +52,16 @@ router
 
 // //____________________________________________ API for Global Setting _________________
 
-router
-  .route('/setting/create')
-  .post(hasPermission('create'), catchErrors(settingController.create));
+router.route('/setting/create').post(hasPermission(), catchErrors(settingController.create));
 router.route('/setting/read/:id').get(hasPermission('read'), catchErrors(settingController.read));
 router
   .route('/setting/update/:id')
   .patch(hasPermission('update'), catchErrors(settingController.update));
 //router.route('/setting/delete/:id).delete(hasPermission(),catchErrors(settingController.delete));
-router.route('/setting/search').get(hasPermission('read'), catchErrors(settingController.search));
-router.route('/setting/list').get(hasPermission('read'), catchErrors(settingController.list));
+router.route('/setting/search').get(hasPermission(), catchErrors(settingController.search));
+router.route('/setting/list').get(hasPermission(), catchErrors(settingController.list));
 router.route('/setting/listAll').get(hasPermission('read'), catchErrors(settingController.listAll));
-router.route('/setting/filter').get(hasPermission('read'), catchErrors(settingController.filter));
+router.route('/setting/filter').get(hasPermission(), catchErrors(settingController.filter));
 router
   .route('/setting/readBySettingKey/:settingKey')
   .get(hasPermission('read'), catchErrors(settingController.readBySettingKey));

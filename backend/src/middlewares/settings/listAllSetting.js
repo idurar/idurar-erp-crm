@@ -6,7 +6,9 @@ const listAllSetting = async () => {
   const sort = parseInt(req.query.sort) || 'desc';
   try {
     //  Query the database for a list of all results
-    const result = await Model.find({ removed: false }).sort({ created: sort }).populate();
+    const result = await Model.find({ removed: false, isPrivate: false })
+      .sort({ created: sort })
+      .populate();
 
     if (result.length > 0) {
       return result;

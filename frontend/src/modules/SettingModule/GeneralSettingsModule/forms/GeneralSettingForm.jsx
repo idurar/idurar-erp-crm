@@ -31,7 +31,7 @@ export default function GeneralSettingForm() {
           showSearch
           placeholder={translate('select language')}
           optionFilterProp="children"
-          filterOption={(input, option) => (option?.label ?? '').includes(input)}
+          filterOption={(input, option) => (option?.label ?? '').includes(input.toLowerCase())}
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
