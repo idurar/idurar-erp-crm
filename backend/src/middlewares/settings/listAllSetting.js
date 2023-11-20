@@ -13,7 +13,7 @@ const listAllSetting = async () => {
     } else {
       return [];
     }
-  } catch (error) {
+  } catch {
     return [];
   }
 };

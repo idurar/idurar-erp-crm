@@ -27,8 +27,11 @@ module.exports = sendMail = async (req, res) => {
   const { client } = result;
   const { email, managerName } = await ClientModel.findById(client).exec();
 
-  await custom
-    .generatePdf('Quote', { filename: 'invoice', format: 'A4' }, result, async (fileLocation) => {
+  await custom.generatePdf(
+    'Quote',
+    { filename: 'invoice', format: 'A4' },
+    result,
+    async (fileLocation) => {
       // Send the mail using the details gotten from the client
       const { id: mailId } = await sendViaApi(email, managerName, fileLocation);
 
@@ -45,15 +48,8 @@ module.exports = sendMail = async (req, res) => {
             });
           });
       }
-    })
-    .catch((error) => {
-      return res.status(500).json({
-        success: false,
-        result: null,
-        error: error,
-        message: error.message,
-      });
-    });
+    }
+  );
 };
 
 const sendViaApi = async (email, name, filePath) => {

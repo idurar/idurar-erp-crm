@@ -4,10 +4,6 @@ const { catchErrors } = require('@/handlers/errorHandlers');
 
 const router = express.Router();
 
-const multer = require('multer');
-const path = require('path');
-const setFilePathToBody = require('@/middlewares/uploadMiddleware/setFilePathToBody');
-
 const { hasPermission } = require('@/middlewares/permission');
 
 const employeeController = require('@/controllers/appControllers/employeeController');
@@ -323,41 +319,5 @@ router.route('/inventory/list').get(hasPermission('read'), catchErrors(inventory
 router
   .route('/inventory/filter')
   .get(hasPermission('read'), catchErrors(inventoryController.filter));
-
-// //_________________________________________________________________API for Kyc________________
-
-const kycFileStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/kyc');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-const kycFileUpload = multer({ storage: kycFileStorage });
-
-router
-  .route('/kyc/create')
-  .post(
-    hasPermission('create'),
-    kycFileUpload.single('file'),
-    setFilePathToBody('filePath'),
-    catchErrors(kycController.create)
-  );
-router
-  .route('/kyc/update/:id')
-  .patch(
-    hasPermission('update'),
-    kycFileUpload.single('file'),
-    setFilePathToBody('filePath'),
-    catchErrors(kycController.update)
-  );
-
-router.route('/kyc/read/:id').get(hasPermission('read'), catchErrors(kycController.read));
-
-router.route('/kyc/delete/:id').delete(hasPermission('delete'), catchErrors(kycController.delete));
-router.route('/kyc/search').get(hasPermission('read'), catchErrors(kycController.search));
-router.route('/kyc/list').get(hasPermission('read'), catchErrors(kycController.list));
-router.route('/kyc/filter').get(hasPermission('read'), catchErrors(kycController.filter));
 
 module.exports = router;

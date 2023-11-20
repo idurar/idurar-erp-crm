@@ -1,39 +1,9 @@
 [
   {
     "setupCategory": "setup_config",
-    "setupKey": "DATABASE",
-    "setupValue": "",
+    "setupKey": "idurar_app_version",
+    "setupValue": "3.0.0",
     "valueType": "string"
-  },
-  {
-    "setupCategory": "setup_config",
-    "setupKey": "JWT_SECRET",
-    "setupValue": "",
-    "valueType": "string"
-  },
-  {
-    "setupCategory": "setup_config",
-    "setupKey": "NODE_ENV",
-    "setupValue": "production",
-    "valueType": "string"
-  },
-  {
-    "setupCategory": "setup_config",
-    "setupKey": "idurar_maintenance_mode",
-    "setupValue": false,
-    "valueType": "boolean"
-  },
-  {
-    "setupCategory": "setup_config",
-    "setupKey": "idurar_load_default_settings",
-    "setupValue": true,
-    "valueType": "boolean"
-  },
-  {
-    "setupCategory": "setup_config",
-    "setupKey": "idurar_load_demo_data",
-    "setupValue": false,
-    "valueType": "boolean"
   },
   {
     "setupCategory": "setup_config",
@@ -43,8 +13,20 @@
   },
   {
     "setupCategory": "setup_config",
-    "setupKey": "idurar_app_version",
-    "setupValue": "3.0.0",
+    "setupKey": "use_env_database",
+    "setupValue": false,
+    "valueType": "boolean"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "DATABASE",
+    "setupValue": "",
+    "valueType": "string"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "JWT_SECRET",
+    "setupValue": "your_jwt_secret",
     "valueType": "string"
   },
   {
@@ -73,12 +55,6 @@
   },
   {
     "setupCategory": "setup_config",
-    "setupKey": "idurar_setup_done",
-    "setupValue": false,
-    "valueType": "boolean"
-  },
-  {
-    "setupCategory": "setup_config",
     "setupKey": "idurar_app_licence_email",
     "setupValue": "",
     "valueType": "string"
@@ -104,6 +80,36 @@
   {
     "setupCategory": "setup_config",
     "setupKey": "idurar_app_licence_validate",
+    "setupValue": false,
+    "valueType": "boolean"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "idurar_setup_done",
+    "setupValue": false,
+    "valueType": "boolean"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "NODE_ENV",
+    "setupValue": "production",
+    "valueType": "string"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "idurar_maintenance_mode",
+    "setupValue": false,
+    "valueType": "boolean"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "idurar_load_default_settings",
+    "setupValue": true,
+    "valueType": "boolean"
+  },
+  {
+    "setupCategory": "setup_config",
+    "setupKey": "idurar_load_demo_data",
     "setupValue": false,
     "valueType": "boolean"
   }

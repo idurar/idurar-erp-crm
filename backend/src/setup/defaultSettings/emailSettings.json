@@ -8,29 +8,8 @@
   },
   {
     "settingCategory": "email_settings",
-    "settingKey": "email_domain_key",
-    "settingValue": "smtp server",
-    "valueType": "string",
-    "isCoreSetting": true
-  },
-  {
-    "settingCategory": "email_settings",
-    "settingKey": "email_domain_vlue",
-    "settingValue": "smtp.idurarapp.com",
-    "valueType": "string",
-    "isCoreSetting": true
-  },
-  {
-    "settingCategory": "email_settings",
-    "settingKey": "email_domain_username",
-    "settingValue": "hello@idurarapp.com",
-    "valueType": "string",
-    "isCoreSetting": true
-  },
-  {
-    "settingCategory": "email_settings",
-    "settingKey": "email_domain_password",
-    "settingValue": "your-email-password",
+    "settingKey": "email_reply_to",
+    "settingValue": "reply@idurarapp.com",
     "valueType": "string",
     "isCoreSetting": true
   }

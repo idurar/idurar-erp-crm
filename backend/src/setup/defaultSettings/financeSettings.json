@@ -44,7 +44,7 @@
   {
     "settingCategory": "finance_settings",
     "settingKey": "quote_prefix",
-    "settingValue": "qt-",
+    "settingValue": "qot-",
     "valueType": "string",
     "isCoreSetting": true
   },
@@ -58,11 +58,10 @@
   {
     "settingCategory": "finance_settings",
     "settingKey": "payment_prefix",
-    "settingValue": "pm-",
+    "settingValue": "pym-",
     "valueType": "string",
     "isCoreSetting": true
   },
-
   {
     "settingCategory": "finance_settings",
     "settingKey": "current_invoice_year",
