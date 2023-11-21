@@ -38,11 +38,11 @@ const AppTableStructureSchema = new mongoose.Schema({
   prefix: String,
   statusTypes: {
     type: Array,
-    default: ['new', 'active', 'draft', 'sent'],
+    default: ['new', 'active', 'unactive', 'draft', 'sent'],
   },
   progressStutusTypes: {
     type: Array,
-    default: ['in progress', 'paused', 'done'],
+    default: ['not started', 'in progress', 'paused', 'done'],
   },
   finalStatus: {
     type: Array,
@@ -96,6 +96,7 @@ const AppTableStructureSchema = new mongoose.Schema({
         lowercase: true,
         required: true,
       },
+      color: String,
       options: [
         {
           label: String,

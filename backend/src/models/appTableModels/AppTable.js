@@ -56,6 +56,7 @@ const AppTableSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  content: String,
   tags: [String],
   image: String,
   imagesList: [String],
