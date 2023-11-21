@@ -15,7 +15,11 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
     const fileName = file;
     res.sendFile(fileName, options, function (error) {
       if (error) {
-        res.sendStatus(404);
+        res.res.status(404).json({
+          success: false,
+          result: null,
+          message: 'we could not find : ' + file,
+        });
       }
     });
   } catch (error) {

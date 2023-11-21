@@ -28,8 +28,11 @@ export default function HeaderContent() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await checkImage(BASE_URL + currentAdmin?.photo);
-      setHasPhotoprofile(result);
+      if (currentAdmin?.photo) {
+        const result = await checkImage(BASE_URL + currentAdmin?.photo);
+        setHasPhotoprofile(result);
+      }
+      setHasPhotoprofile(false);
     }
     fetchData();
     return () => {

@@ -9,6 +9,59 @@
   },
   {
     "settingCategory": "client_settings",
+    "settingKey": "client_status",
+    "settingValue": ["active", "new", "premium", "unactive"],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "client_source",
+    "settingValue": [
+      "self checking",
+      "sales lead",
+      "recomendation",
+      "facebook",
+      "instagram",
+      "tiktok",
+      "youtube",
+      "blog",
+      "linkedin",
+      "newsletter",
+      "website",
+      "twitter"
+    ],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "client_category",
+    "settingValue": [
+      "Corporate",
+      "person",
+      "startup",
+      "small company",
+      "services business",
+      "retails",
+      "cafe & restaurant"
+    ],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "has_parent_company",
+    "settingValue": false,
+    "valueType": "boolean",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
     "settingKey": "invoice_default_client_type",
     "settingValue": "company",
     "valueType": "string",

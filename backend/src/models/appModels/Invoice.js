@@ -27,6 +27,10 @@ const invoiceSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  convertedFrom: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Quote',
+  },
   client: {
     type: mongoose.Schema.ObjectId,
     ref: 'Client',
@@ -49,6 +53,18 @@ const invoiceSchema = new mongoose.Schema({
       price: {
         type: Number,
         required: true,
+      },
+      taxRate: {
+        type: Number,
+        default: 0,
+      },
+      subTotal: {
+        type: Number,
+        default: 0,
+      },
+      taxTotal: {
+        type: Number,
+        default: 0,
       },
       total: {
         type: Number,
@@ -89,6 +105,11 @@ const invoiceSchema = new mongoose.Schema({
   paymentStatus: {
     type: String,
     default: 'unpaid',
+    enum: ['unpaid', 'paid', 'partially'],
+  },
+  isOverdue: {
+    type: Boolean,
+    default: false,
   },
   note: {
     type: String,

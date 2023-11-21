@@ -50,6 +50,18 @@ const quoteSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
+      taxRate: {
+        type: Number,
+        default: 0,
+      },
+      subTotal: {
+        type: Number,
+        default: 0,
+      },
+      taxTotal: {
+        type: Number,
+        default: 0,
+      },
       total: {
         type: Number,
         required: true,
@@ -82,6 +94,10 @@ const quoteSchema = new mongoose.Schema({
   status: {
     type: String,
     default: 'draft',
+  },
+  isExpired: {
+    type: Boolean,
+    default: false,
   },
   pdfPath: {
     type: String,

@@ -1,6 +1,14 @@
 [
   {
     "settingCategory": "company_settings",
+    "settingKey": "company_has_mutli_branch",
+    "settingValue": false,
+    "valueType": "boolean",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
     "settingKey": "company_name",
     "settingValue": "IDURAR",
     "valueType": "string",

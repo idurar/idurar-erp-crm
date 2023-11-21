@@ -4,6 +4,11 @@ import useLanguage from '@/locale/useLanguage';
 
 const formItems = [
   {
+    label: 'mutli_branch',
+    settingKey: 'company_has_mutli_branch',
+    valueType: 'boolean',
+  },
+  {
     settingKey: 'company_name',
     valueType: 'string',
   },
@@ -59,7 +64,7 @@ export default function SettingForm() {
         return (
           <Form.Item
             key={item.settingKey}
-            label={translate(item.settingKey)}
+            label={item.label ? translate(item.label) : translate(item.settingKey)}
             name={item.settingKey}
             rules={[
               {
