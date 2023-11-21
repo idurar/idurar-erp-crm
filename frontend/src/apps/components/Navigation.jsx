@@ -25,6 +25,12 @@ import {
 
 const { Sider } = Layout;
 
+const NAV_LINK_PATTERN = {
+  offer: /^\/offer(\/create)?$/i,
+  invoice: /^\/invoice(\/create)?$/i,
+  quote: /^\/quote(\/create)?$/i,
+};
+
 export default function Navigation() {
   return (
     <>
@@ -38,6 +44,7 @@ export default function Navigation() {
 
 function Sidebar({ collapsible }) {
   let location = useLocation();
+  let path = location.pathname.replace(/\/+$/, '').toLowerCase();
 
   const { state: stateApp, appContextAction } = useAppContext();
   const { isNavMenuClose } = stateApp;
@@ -50,17 +57,17 @@ function Sidebar({ collapsible }) {
 
   const items = [
     {
-      key: 'dashboard',
+      key: '/',
       icon: <DashboardOutlined />,
       label: <Link to={'/'}>{translate('dashboard')}</Link>,
     },
     {
-      key: 'lead',
+      key: '/lead',
       icon: <UserAddOutlined />,
       label: <Link to={'/lead'}>{translate('lead')}</Link>,
     },
     {
-      key: 'offer',
+      key: NAV_LINK_PATTERN['offer'].test(path) ? path : '/offer',
       icon: <FileOutlined />,
       label: <Link to={'/offer'}>{translate('offer')}</Link>,
     },
@@ -73,27 +80,27 @@ function Sidebar({ collapsible }) {
     // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
     // { key: 'kyc', icon: <ShoppingCartOutlined />, label: <Link to={'/'}>Lead</Link> Kyc },
     {
-      key: 'invoice',
+      key: NAV_LINK_PATTERN['invoice'].test(path) ? path : '/invoice',
       icon: <FileTextOutlined />,
       label: <Link to={'/invoice'}>{translate('invoice')}</Link>,
     },
     {
-      key: 'quote',
+      key: NAV_LINK_PATTERN['quote'].test(path) ? path : '/quote',
       icon: <FileSyncOutlined />,
       label: <Link to={'/quote'}>{translate('quote')}</Link>,
     },
     {
-      key: 'payment',
+      key: '/payment',
       icon: <CreditCardOutlined />,
       label: <Link to={'/payment'}>{translate('payment')}</Link>,
     },
     {
-      key: 'employee',
+      key: '/employee',
       icon: <UserOutlined />,
       label: <Link to={'/employee'}>{translate('employee')}</Link>,
     },
     {
-      key: 'admin',
+      key: '/admin',
       icon: <TeamOutlined />,
       label: <Link to={'/admin'}>{translate('admin')}</Link>,
     },
@@ -103,23 +110,23 @@ function Sidebar({ collapsible }) {
       icon: <SettingOutlined />,
       children: [
         {
-          key: 'generalSettings',
+          key: '/settings',
           label: <Link to={'/settings'}>{translate('general_settings')}</Link>,
         },
         {
-          key: 'emailTemplates',
+          key: '/email',
           label: <Link to={'/email'}>{translate('email_templates')}</Link>,
         },
         {
-          key: 'paymentMode',
+          key: '/payment/mode',
           label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,
         },
         {
-          key: 'taxes',
+          key: '/taxes',
           label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
         },
         {
-          key: 'advancedSettings',
+          key: '/settings/advanced',
           label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
         },
       ],
@@ -174,7 +181,7 @@ function Sidebar({ collapsible }) {
           />
         )}
       </div>
-      <Menu items={items} mode="inline" theme={'light'} />
+      <Menu selectedKeys={[path === '' ? '/' : path]} items={items} mode="inline" theme={'light'} />
     </Sider>
   );
 }
