@@ -18,6 +18,7 @@ export const login =
         isSuccess: true,
       };
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
+      window.localStorage.removeItem('isLogout');
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
@@ -39,6 +40,7 @@ export const logout = () => async (dispatch) => {
   const tmpSettings = JSON.parse(settings);
   window.localStorage.removeItem('auth');
   window.localStorage.removeItem('settings');
+  window.localStorage.setItem('isLogout', 'yes');
   const data = await authService.logout();
   if (data.success === false) {
     const auth_state = {
@@ -49,6 +51,7 @@ export const logout = () => async (dispatch) => {
     };
     window.localStorage.setItem('auth', JSON.stringify(auth_state));
     window.localStorage.setItem('settings', JSON.stringify(tmpSettings));
+    window.localStorage.removeItem('isLogout');
     dispatch({
       type: actionTypes.LOGOUT_FAILED,
       payload: data.result,

@@ -6,11 +6,9 @@ import { reducer as erpReducer } from './erp';
 import { reducer as settingsReducer } from './settings';
 import { reducer as translateReducer } from './translate';
 
-import * as actionTypes from './auth/types';
-
 // Combine all reducers.
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
   crud: crudReducer,
   erp: erpReducer,
@@ -18,11 +16,8 @@ const appReducer = combineReducers({
   translate: translateReducer,
 });
 
-const rootReducer = (state, action) => {
-  if (action.type === actionTypes.LOGOUT_SUCCESS) {
-    state = undefined;
-  }
-  return appReducer(state, action);
-};
+// const rootReducer = (state, action) => {
+//   return appReducer(state, action);
+// };
 
 export default rootReducer;

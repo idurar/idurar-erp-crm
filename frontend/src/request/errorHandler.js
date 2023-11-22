@@ -6,8 +6,10 @@ const errorHandler = (error) => {
 
   if (response.data && response.data.jwtExpired) {
     const result = window.localStorage.getItem('auth');
+    const isLogout = window.localStorage.getItem('isLogout');
     window.localStorage.removeItem('auth');
-    if (result) {
+    window.localStorage.removeItem('isLogout');
+    if (result || isLogout === 'yes') {
       window.location.href = '/logout';
     }
   }
