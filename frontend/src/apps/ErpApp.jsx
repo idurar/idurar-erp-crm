@@ -12,7 +12,7 @@ import { settingsAction } from '@/redux/settings/actions';
 
 import AppRouter from '@/router/AppRouter';
 
-import useIsMobile from '@/hooks/useIsMobile';
+import useResponsive from '@/hooks/useResponsive';
 
 export default function ErpCrmApp() {
   const { Content } = Layout;
@@ -20,9 +20,10 @@ export default function ErpCrmApp() {
   const { state: stateApp } = useAppContext();
   const { isNavMenuClose } = stateApp;
 
-  const isMobile = useIsMobile();
+  const { isMobile } = useResponsive();
 
   const dispatch = useDispatch();
+
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
   }, []);

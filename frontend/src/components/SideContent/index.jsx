@@ -67,6 +67,8 @@ export default function SideContent() {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            height={48}
+            width={48}
           />
           <img
             src={logo2}
@@ -80,6 +82,8 @@ export default function SideContent() {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            height={48}
+            width={48}
           />
           <img
             src={logo3}
@@ -93,6 +97,8 @@ export default function SideContent() {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            height={48}
+            width={48}
           />
           <img
             src={logo4}
@@ -106,6 +112,8 @@ export default function SideContent() {
               mixBlendMode: 'multiply',
               opacity: '0.8',
             }}
+            height={48}
+            width={48}
           />
         </div>
       </div>
