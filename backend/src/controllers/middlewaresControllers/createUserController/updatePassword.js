@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { generate: uniqueId } = require('shortid');
 
 const updatePassword = async (userModel, req, res) => {
+  console.log('🚀 ~ file: updatePassword.js:6 ~ updatePassword ~ userModel:', userModel);
   const UserPassword = mongoose.model(userModel + 'Password');
   let { password } = req.body;
 
@@ -31,7 +32,7 @@ const updatePassword = async (userModel, req, res) => {
   };
 
   const resultPassword = await UserPassword.findOneAndUpdate(
-    { _id: req.params.id, removed: false },
+    { user: req.params.id, removed: false },
     { $set: UserPasswordData },
     {
       new: true, // return the new result instead of the old one
@@ -42,7 +43,7 @@ const updatePassword = async (userModel, req, res) => {
     return res.status(403).json({
       success: false,
       result: null,
-      message: "User Paswword couldn't save correctly",
+      message: "User Password couldn't save correctly",
     });
   }
 
