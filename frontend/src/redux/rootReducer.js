@@ -8,7 +8,7 @@ import { reducer as translateReducer } from './translate';
 
 // Combine all reducers.
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth: authReducer,
   crud: crudReducer,
   erp: erpReducer,
@@ -16,8 +16,12 @@ const rootReducer = combineReducers({
   translate: translateReducer,
 });
 
-// const rootReducer = (state, action) => {
-//   return appReducer(state, action);
-// };
+const rootReducer = (state, action) => {
+  console.log('🚀 ~ file: rootReducer.js:47 ~ rootReducer ~ state:', state);
+  // need to clean redux on logout
+  // if (action.type === 'AUTH_LOGOUT_SUCCESS') {
+  // }
+  return appReducer(state, action);
+};
 
 export default rootReducer;
