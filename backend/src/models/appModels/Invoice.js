@@ -111,6 +111,10 @@ const invoiceSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  approved: {
+    type: Boolean,
+    default: false,
+  },
   note: {
     type: String,
   },

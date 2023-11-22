@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const updateProfile = async (req, res) => {
-  if (req.admin._id != req.params.id)
-    return res.status(403).json({
-      success: false,
-      result: null,
-      message: "you don't have permission to edit this profile",
-    });
+const updateProfile = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+  const userProfile = req[userModel];
 
   let updates = {
     email: req.body.email,
@@ -17,8 +12,8 @@ const updateProfile = async (req, res) => {
   };
 
   // Find document by id and updates with the required fields
-  const result = await Admin.findOneAndUpdate(
-    { _id: req.params.id, removed: false },
+  const result = await User.findOneAndUpdate(
+    { _id: userProfile._id, removed: false },
     { $set: updates },
     {
       new: true, // return the new result instead of the old one
@@ -29,7 +24,7 @@ const updateProfile = async (req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this id: ' + req.params.id,
+      message: 'No profile found by this id: ' + userProfile._id,
     });
   }
   return res.status(200).json({

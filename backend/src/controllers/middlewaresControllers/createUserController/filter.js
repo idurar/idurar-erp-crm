@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const filter = async (req, res) => {
+const filter = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+
   if (req.query.filter === undefined || req.query.equal === undefined) {
     return res.status(403).json({
       success: false,
@@ -9,13 +10,10 @@ const filter = async (req, res) => {
       message: 'filter not provided correctly',
     });
   }
-  const result = await Admin.find({ removed: false })
+  const result = await User.find({ removed: false })
     .where(req.query.filter)
     .equals(req.query.equal);
 
-  for (let admin of result) {
-    admin.password = undefined;
-  }
   return res.status(200).json({
     success: true,
     result,

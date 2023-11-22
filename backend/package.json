@@ -33,6 +33,7 @@
     "pug": "^3.0.2",
     "puppeteer": "^21.5.2",
     "resend": "^2.0.0",
+    "shortid": "^2.2.16",
     "transliteration": "^2.3.5"
   },
   "devDependencies": {

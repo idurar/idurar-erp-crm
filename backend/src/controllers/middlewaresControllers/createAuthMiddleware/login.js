@@ -1,34 +1,34 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
-const { stubFalse } = require('lodash');
-const url = require('url');
+// const { stubFalse } = require('lodash');
+// const url = require('url');
 
 const mongoose = require('mongoose');
 
-const Admin = mongoose.model('Admin');
-
-const login = async (req, res) => {
+const login = async (req, res, { userModel }) => {
+  const UserPassword = mongoose.model(userModel + 'Password');
+  const User = mongoose.model(userModel);
   const { email, password } = req.body;
 
   // URL address
-  const address = req.get('origin');
+  // const address = req.get('origin');
 
-  // Call parse() method using url module
-  let urlObject = url.parse(address, true);
+  // // Call parse() method using url module
+  // let urlObject = url.parse(address, true);
 
-  const orginalHostname = urlObject.hostname;
+  // const orginalHostname = urlObject.hostname;
 
-  let isLocalhost = false;
-  if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
-    // Connection is from localhost
-    isLocalhost = true;
-  }
+  // let isLocalhost = false;
+  // if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
+  //   // Connection is from localhost
+  //   isLocalhost = true;
+  // }
 
   // validate
   const objectSchema = Joi.object({
     email: Joi.string()
-      .email({ tlds: { allow: false } })
+      .email({ tlds: { allow: true } })
       .required(),
     password: Joi.string().required(),
   });
@@ -44,16 +44,19 @@ const login = async (req, res) => {
     });
   }
 
-  const admin = await Admin.findOne({ email: email, removed: false });
-  // console.log(admin);
-  if (!admin)
+  const user = await User.findOne({ email: email, removed: false });
+
+  // console.log(user);
+  if (!user)
     return res.status(404).json({
       success: false,
       result: null,
       message: 'No account with this email has been registered.',
     });
 
-  const isMatch = await bcrypt.compare(password, admin.password);
+  const userPassword = await UserPassword.findOne({ user: user._id, removed: false });
+
+  const isMatch = await bcrypt.compare(userPassword.salt + password, userPassword.password);
   if (!isMatch)
     return res.status(403).json({
       success: false,
@@ -63,14 +66,14 @@ const login = async (req, res) => {
 
   const token = jwt.sign(
     {
-      id: admin._id,
+      id: user._id,
     },
     process.env.JWT_SECRET,
     { expiresIn: req.body.remember ? 365 * 24 + 'h' : '24h' }
   );
 
-  const result = await Admin.findOneAndUpdate(
-    { _id: admin._id },
+  await UserPassword.findOneAndUpdate(
+    { user: user._id },
     { $push: { loggedSessions: token } },
     {
       new: true,
@@ -91,14 +94,14 @@ const login = async (req, res) => {
     .json({
       success: true,
       result: {
-        _id: result._id,
-        name: result.name,
-        surname: result.surname,
-        role: result.role,
-        email: result.email,
-        photo: result.photo,
+        _id: user._id,
+        name: user.name,
+        surname: user.surname,
+        role: user.role,
+        email: user.email,
+        photo: user.photo,
       },
-      message: 'Successfully login admin',
+      message: 'Successfully login user',
     });
 };
 

@@ -10,68 +10,71 @@ const leadSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  firstName: {
+  type: {
     type: String,
-    trim: true,
-    required: true,
+    default: 'company',
+    enum: ['company', 'people'],
   },
-  lastName: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  company: {
-    type: String,
-    trim: true,
-  },
-  jobTitle: {
-    type: String,
-    trim: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-  },
-  phone: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  address: {
-    type: String,
-    trim: true,
-  },
-  country: {
-    type: String,
-    trim: true,
-  },
-  customField: [
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  converted: { type: Boolean, default: false },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  adminOwner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  images: [
     {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
-      },
+      name: String,
+      path: String,
+      description: String,
+      tags: [
+        {
+          type: String,
+          trim: true,
+          lowercase: true,
+        },
+      ],
+      created: Date,
+      updated: Date,
     },
   ],
-  source: {
-    type: String,
-    trim: true,
+  files: [
+    {
+      name: String,
+      path: String,
+      description: String,
+      tags: [
+        {
+          type: String,
+          trim: true,
+          lowercase: true,
+        },
+      ],
+      created: Date,
+      updated: Date,
+    },
+  ],
+  category: String,
+  status: String,
+  progressStatus: String,
+  finalStatus: String,
+  notes: String,
+  source: String,
+  approved: {
+    type: Boolean,
+    default: false,
   },
-  notes: {
-    type: String,
-    trim: true,
-  },
-  status: {
-    type: String,
-    default: 'new',
-  },
+  tags: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },

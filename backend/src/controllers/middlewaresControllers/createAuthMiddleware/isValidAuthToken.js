@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
 
-const Admin = mongoose.model('Admin');
-
-const isValidAdminToken = async (req, res, next) => {
+const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SECRET' }) => {
   try {
+    const UserPassword = mongoose.model(userModel + 'Password');
+    const User = mongoose.model(userModel);
     const token = req.cookies.token;
     if (!token)
       return res.status(401).json({
@@ -15,7 +15,7 @@ const isValidAdminToken = async (req, res, next) => {
         jwtExpired: true,
       });
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    const verified = jwt.verify(token, process.env[jwtSecret]);
 
     if (!verified)
       return res.status(401).json({
@@ -25,25 +25,30 @@ const isValidAdminToken = async (req, res, next) => {
         jwtExpired: true,
       });
 
-    const admin = await Admin.findOne({ _id: verified.id, removed: false });
-    if (!admin)
+    const userPasswordPromise = UserPassword.findOne({ user: verified.id, removed: false });
+    const userPromise = User.findOne({ _id: verified.id, removed: false });
+
+    const [user, userPassword] = await Promise.all([userPromise, userPasswordPromise]);
+
+    if (!userPassword)
       return res.status(401).json({
         success: false,
         result: null,
-        message: "Admin doens't Exist, authorization denied.",
+        message: "User doens't Exist, authorization denied.",
         jwtExpired: true,
       });
 
-    const { loggedSessions } = admin;
+    const { loggedSessions } = userPassword;
     if (!loggedSessions.includes(token))
       return res.status(401).json({
         success: false,
         result: null,
-        message: 'Admin is already logout try to login, authorization denied.',
+        message: 'User is already logout try to login, authorization denied.',
         jwtExpired: true,
       });
     else {
-      req.admin = admin;
+      const reqUserName = userModel.toLowerCase();
+      req[reqUserName] = user;
       next();
     }
   } catch (error) {
@@ -52,8 +57,9 @@ const isValidAdminToken = async (req, res, next) => {
       result: null,
       message: error.message,
       error: error,
+      conttroller: 'isValidAuthToken',
     });
   }
 };
 
-module.exports = isValidAdminToken;
+module.exports = isValidAuthToken;

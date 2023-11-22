@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const remove = async (req, res) => {
+const remove = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+
   let updates = {
     removed: true,
   };
   // Find the document by id and delete it
-  const result = await Admin.findOneAndUpdate(
+  const result = await User.findOneAndUpdate(
     { _id: req.params.id, removed: false },
     { $set: updates },
     {

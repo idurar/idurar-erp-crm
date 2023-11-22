@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const status = async (req, res) => {
+const status = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+
   if (req.query.enabled === true || req.query.enabled === false) {
     let updates = {
       enabled: req.query.enabled,
     };
     // Find the document by id and delete it
-    const result = await Admin.findOneAndUpdate(
+    const result = await User.findOneAndUpdate(
       { _id: req.params.id, removed: false },
       { $set: updates },
       {

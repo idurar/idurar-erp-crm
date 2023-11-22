@@ -9,7 +9,7 @@ const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
 const coreApiRouter = require('./routes/coreRoutes/coreApi');
 const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
 const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
-const { isValidAdminToken } = require('./controllers/coreControllers/authJwtController');
+const adminAuth = require('./controllers/coreControllers/adminAuth');
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
@@ -31,8 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 // Here our API Routes
 app.use('/api', coreAuthRouter);
-app.use('/api', isValidAdminToken, coreApiRouter);
-app.use('/api', isValidAdminToken, erpApiRouter);
+app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
+app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
 

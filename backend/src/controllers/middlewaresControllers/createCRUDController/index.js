@@ -13,31 +13,14 @@ const createCRUDController = (modelName) => {
   const Model = mongoose.model(modelName);
   let crudMethods = {};
 
-  crudMethods.create = async (req, res) => {
-    create(Model, req, res);
-  };
-  crudMethods.read = async (req, res) => {
-    read(Model, req, res);
-  };
-  crudMethods.update = async (req, res) => {
-    update(Model, req, res);
-  };
-  crudMethods.delete = async (req, res) => {
-    remove(Model, req, res);
-  };
-  crudMethods.list = async (req, res) => {
-    paginatedList(Model, req, res);
-  };
-  crudMethods.listAll = async (req, res) => {
-    listAll(Model, req, res);
-  };
-  crudMethods.search = async (req, res) => {
-    search(Model, req, res);
-  };
-
-  crudMethods.filter = async (req, res) => {
-    filter(Model, req, res);
-  };
+  crudMethods.create = (req, res) => create(Model, req, res);
+  crudMethods.read = (req, res) => read(Model, req, res);
+  crudMethods.update = (req, res) => update(Model, req, res);
+  crudMethods.delete = (req, res) => remove(Model, req, res);
+  crudMethods.list = (req, res) => paginatedList(Model, req, res);
+  crudMethods.listAll = (req, res) => listAll(Model, req, res);
+  crudMethods.search = (req, res) => search(Model, req, res);
+  crudMethods.filter = (req, res) => filter(Model, req, res);
 
   return crudMethods;
 };

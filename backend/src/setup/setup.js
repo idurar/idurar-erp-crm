@@ -2,6 +2,7 @@ require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
 const { globSync } = require('glob');
 const fs = require('fs');
+const { generate: uniqueId } = require('shortid');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
@@ -9,16 +10,28 @@ mongoose.connect(process.env.DATABASE);
 async function setupApp() {
   try {
     const Admin = require('../models/coreModels/Admin');
-    var newAdmin = new Admin();
-    const passwordHash = newAdmin.generateHash('admin123');
+    const AdminPassword = require('../models/coreModels/AdminPassword');
+    const newAdminPassword = new AdminPassword();
 
-    await new Admin({
+    const salt = uniqueId();
+
+    const passwordHash = newAdminPassword.generateHash(salt, 'admin123');
+
+    const demoAdmin = {
       email: 'admin@demo.com',
-      password: passwordHash,
       name: 'Salah Eddine',
       surname: 'Lalami',
       role: 'admin',
-    }).save();
+    };
+    const result = await new Admin(demoAdmin).save();
+
+    const AdminPasswordData = {
+      password: passwordHash,
+      email: demoAdmin.email,
+      salt: salt,
+      user: result._id,
+    };
+    await new AdminPassword(AdminPasswordData).save();
 
     console.log('👍 Admin created : Done!');
 

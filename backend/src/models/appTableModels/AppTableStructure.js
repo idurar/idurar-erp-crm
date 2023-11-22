@@ -40,7 +40,7 @@ const AppTableStructureSchema = new mongoose.Schema({
     type: Array,
     default: ['new', 'active', 'unactive', 'draft', 'sent'],
   },
-  progressStutusTypes: {
+  progressStatusTypes: {
     type: Array,
     default: ['not started', 'in progress', 'paused', 'done'],
   },

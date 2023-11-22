@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const search = async (req, res) => {
+const search = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+
   // console.log(req.query.fields)
 
   // console.log(fields)
@@ -24,12 +25,8 @@ const search = async (req, res) => {
   for (const field of fieldsArray) {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
-  let result = await Admin.find(fields).where('removed', false).sort({ name: 'asc' }).limit(10);
+  let result = await User.find(fields).where('removed', false).sort({ name: 'asc' }).limit(10);
 
-  for (let admin of result) {
-    admin.password = undefined;
-    admin.loggedSessions = undefined;
-  }
   if (result.length >= 1) {
     return res.status(200).json({
       success: true,

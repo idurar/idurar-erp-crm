@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const listAll = async (req, res) => {
+const listAll = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+
   const limit = parseInt(req.query.items) || 100;
 
   //  Query the database for a list of all results
-  const result = await Admin.find({ removed: false })
+  const result = await User.find({ removed: false })
     .limit(limit)
     .sort({ created: 'desc' })
     .populate();
@@ -15,10 +16,6 @@ const listAll = async (req, res) => {
 
   // Getting Pagination Object
   if (result.length > 0) {
-    for (let admin of result) {
-      admin.password = undefined;
-      admin.loggedSessions = undefined;
-    }
     return res.status(200).json({
       success: true,
       result,

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const SupplierSchema = new mongoose.Schema({
+const CompanySchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -21,17 +21,17 @@ const SupplierSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  hasParentSupplier: {
+  hasParentCompany: {
     type: Boolean,
     default: false,
   },
-  parentSupplier: {
+  parentCompany: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Supplier',
+    ref: 'Company',
   },
   peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
   defaultContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
-  products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   icon: {
     type: String,
     trim: true,
@@ -183,6 +183,10 @@ const SupplierSchema = new mongoose.Schema({
   status: String,
   progressStatus: String,
   finalStatus: String,
+  approved: {
+    type: Boolean,
+    default: true,
+  },
   notes: String,
   tags: [
     {
@@ -205,4 +209,4 @@ const SupplierSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Supplier', SupplierSchema);
+module.exports = mongoose.model('Company', CompanySchema);

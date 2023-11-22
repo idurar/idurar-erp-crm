@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const SupplierSchema = new mongoose.Schema({
+const PeopleSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,33 +10,27 @@ const SupplierSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  name: {
-    type: String,
-    trim: true,
-    unique: true,
-    required: true,
-  },
-  legalName: {
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  firstname: {
     type: String,
     trim: true,
     required: true,
   },
-  hasParentSupplier: {
-    type: Boolean,
-    default: false,
-  },
-  parentSupplier: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Supplier',
-  },
-  peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
-  defaultContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
-  products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
-  icon: {
+  lastname: {
     type: String,
     trim: true,
+    required: true,
   },
-  logo: {
+  birthday: {
+    type: Date,
+  },
+  birthplace: {
+    type: String,
+  },
+  gender: {
+    type: String,
+  },
+  photo: {
     type: String,
     trim: true,
   },
@@ -57,26 +51,6 @@ const SupplierSchema = new mongoose.Schema({
     trim: true,
   },
   bankRouting: {
-    type: String,
-    trim: true,
-  },
-  bankCountry: {
-    type: String,
-    trim: true,
-  },
-  companyRegNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxId: {
-    type: String,
-    trim: true,
-  },
-  companyRegId: {
     type: String,
     trim: true,
   },
@@ -125,10 +99,6 @@ const SupplierSchema = new mongoose.Schema({
       trim: true,
     },
   ],
-  fax: {
-    type: String,
-    trim: true,
-  },
   email: {
     type: String,
     trim: true,
@@ -183,6 +153,10 @@ const SupplierSchema = new mongoose.Schema({
   status: String,
   progressStatus: String,
   finalStatus: String,
+  approved: {
+    type: Boolean,
+    default: true,
+  },
   notes: String,
   tags: [
     {
@@ -205,4 +179,4 @@ const SupplierSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Supplier', SupplierSchema);
+module.exports = mongoose.model('People', PeopleSchema);

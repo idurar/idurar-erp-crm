@@ -63,7 +63,7 @@ const AppTableSchema = new mongoose.Schema({
   file: String,
   fileList: [String],
   status: String,
-  progressStutus: String,
+  progressStatus: String,
   finalStatus: String,
   category: String,
   type: String,

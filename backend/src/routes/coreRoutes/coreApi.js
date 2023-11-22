@@ -40,10 +40,10 @@ router
 //_______________________________ Admin Profile _______________________________
 
 router
-  .route('/profile/password-update/:id')
-  .patch(hasPermission('update'), catchErrors(adminController.updatePassword));
+  .route('/profile/password-update')
+  .patch(hasPermission('update'), catchErrors(adminController.updateProfilePassword));
 router
-  .route('/profile/update/:id')
+  .route('/profile/update')
   .patch(
     hasPermission('update'),
     singleStorageUpload({ entity: 'admin', fieldName: 'photo', fileType: 'image' }),

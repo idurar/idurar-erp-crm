@@ -1,18 +1,13 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const photo = async (req, res) => {
-  const updates = {
-    photo: req.body.photo,
-  };
+const read = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
 
-  const tmpResult = await Admin.findOneAndUpdate(
-    { _id: req.admin._id, removed: false },
-
-    { $set: updates },
-    { new: true, runValidators: true }
-  );
-
+  // Find document by id
+  const tmpResult = await User.findOne({
+    _id: req.params.id,
+    removed: false,
+  });
   // If no results found, return document not found
   if (!tmpResult) {
     return res.status(404).json({
@@ -35,8 +30,9 @@ const photo = async (req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: 'we update this document photo by this id: ' + req.params.id,
+      message: 'we found this document by this id: ' + req.params.id,
     });
   }
 };
-module.exports = photo;
+
+module.exports = read;

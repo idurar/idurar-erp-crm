@@ -2,7 +2,7 @@
   {
     "settingCategory": "client_settings",
     "settingKey": "client_type",
-    "settingValue": ["person", "company"],
+    "settingValue": ["people", "company"],
     "valueType": "array",
     "isCoreSetting": true,
     "isPrivate": false
@@ -41,7 +41,6 @@
     "settingKey": "client_category",
     "settingValue": [
       "Corporate",
-      "person",
       "startup",
       "small company",
       "services business",
@@ -49,14 +48,6 @@
       "cafe & restaurant"
     ],
     "valueType": "array",
-    "isCoreSetting": true,
-    "isPrivate": false
-  },
-  {
-    "settingCategory": "client_settings",
-    "settingKey": "has_parent_company",
-    "settingValue": false,
-    "valueType": "boolean",
     "isCoreSetting": true,
     "isPrivate": false
   },
@@ -79,7 +70,7 @@
   {
     "settingCategory": "client_settings",
     "settingKey": "pos_default_client_type",
-    "settingValue": "person",
+    "settingValue": "people",
     "valueType": "string",
     "isCoreSetting": true,
     "isPrivate": false

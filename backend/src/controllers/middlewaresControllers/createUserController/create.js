@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
+const { generate: uniqueId } = require('shortid');
 
-const create = async (req, res) => {
+const create = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+  const UserPassword = mongoose.model(userModel + 'Password');
   let { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({
@@ -10,9 +12,9 @@ const create = async (req, res) => {
       message: "Email or password fields they don't have been entered.",
     });
 
-  const existingAdmin = await Admin.findOne({ email: email });
+  const existingUser = await User.findOne({ email: email });
 
-  if (existingAdmin)
+  if (existingUser)
     return res.status(400).json({
       success: false,
       result: null,
@@ -26,12 +28,16 @@ const create = async (req, res) => {
       message: 'The password needs to be at least 8 characters long.',
     });
 
-  var newAdmin = new Admin();
-  const passwordHash = newAdmin.generateHash(password);
-  req.body.password = passwordHash;
-  req.body.role = 'staff';
+  var newUserPassword = new UserPassword();
 
-  const result = await new Admin(req.body).save();
+  const salt = uniqueId();
+
+  const passwordHash = newUserPassword.generateHash(salt, password);
+
+  req.body.password = undefined;
+
+  const result = await new User(req.body).save();
+
   if (!result) {
     return res.status(403).json({
       success: false,
@@ -39,6 +45,24 @@ const create = async (req, res) => {
       message: "document couldn't save correctly",
     });
   }
+  const UserPasswordData = {
+    password: passwordHash,
+    email: req.body.email,
+    salt: salt,
+    user: result._id,
+  };
+  const resultPassword = await new UserPassword(UserPasswordData).save();
+
+  if (!resultPassword) {
+    await User.deleteOne({ _id: result._id }).exec();
+
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: "document couldn't save correctly",
+    });
+  }
+
   return res.status(200).send({
     success: true,
     result: {
@@ -50,7 +74,7 @@ const create = async (req, res) => {
       photo: result.photo,
       role: result.role,
     },
-    message: 'Admin document save correctly',
+    message: 'User document save correctly',
   });
 };
 module.exports = create;

@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
-const Admin = mongoose.model('Admin');
 
-const paginatedList = async (req, res) => {
+const paginatedList = async (userModel, req, res) => {
+  const User = mongoose.model(userModel);
+
   const page = req.query.page || 1;
   const limit = parseInt(req.query.items) || 10;
   const skip = page * limit - limit;
 
   //  Query the database for a list of all results
-  const resultsPromise = Admin.find({ removed: false })
+  const resultsPromise = User.find({ removed: false })
     .skip(skip)
     .limit(limit)
     .sort({ created: 'desc' })
     .populate();
   // Counting the total documents
-  const countPromise = Admin.countDocuments({ removed: false });
+  const countPromise = User.countDocuments({ removed: false });
   // Resolving both promises
   const [result, count] = await Promise.all([resultsPromise, countPromise]);
   // Calculating total pages
@@ -22,10 +23,6 @@ const paginatedList = async (req, res) => {
   // Getting Pagination Object
   const pagination = { page, pages, count };
   if (count > 0) {
-    for (let admin of result) {
-      admin.password = undefined;
-      admin.loggedSessions = undefined;
-    }
     return res.status(200).json({
       success: true,
       result,

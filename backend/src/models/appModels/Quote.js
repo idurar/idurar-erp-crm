@@ -95,6 +95,10 @@ const quoteSchema = new mongoose.Schema({
     type: String,
     default: 'draft',
   },
+  approved: {
+    type: Boolean,
+    default: false,
+  },
   isExpired: {
     type: Boolean,
     default: false,

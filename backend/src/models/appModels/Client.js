@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const clientSchema = new mongoose.Schema({
+const ClientSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,85 +10,74 @@ const clientSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
+  type: {
     type: String,
-    trim: true,
-    unique: true,
-    required: true,
+    default: 'company',
+    enum: ['company', 'people'],
   },
-  managerName: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  managerSurname: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  bankAccount: {
-    type: String,
-    trim: true,
-  },
-  companyRegNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxID: {
-    type: String,
-    trim: true,
-  },
-  customField: [
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  convertedFrom: { type: mongoose.Schema.ObjectId, ref: 'Lead' },
+  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  adminOwner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  images: [
     {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
-      },
+      name: String,
+      path: String,
+      description: String,
+      tags: [
+        {
+          type: String,
+          trim: true,
+          lowercase: true,
+        },
+      ],
+      created: Date,
+      updated: Date,
     },
   ],
-  address: {
-    type: String,
-    trim: true,
+  files: [
+    {
+      name: String,
+      path: String,
+      description: String,
+      tags: [
+        {
+          type: String,
+          trim: true,
+          lowercase: true,
+        },
+      ],
+      created: Date,
+      updated: Date,
+    },
+  ],
+  category: String,
+  status: String,
+  progressStatus: String,
+  finalStatus: String,
+  notes: String,
+  source: String,
+  approved: {
+    type: Boolean,
+    default: false,
   },
-  country: {
-    type: String,
-    trim: true,
-  },
-  phone: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
-    type: String,
-    trim: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-  },
-  website: {
-    type: String,
-    trim: true,
-  },
+  tags: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model('Client', clientSchema);
+module.exports = mongoose.model('Client', ClientSchema);
