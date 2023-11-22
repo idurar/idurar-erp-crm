@@ -40,7 +40,7 @@ export const logout = () => async (dispatch) => {
   const tmpSettings = JSON.parse(settings);
   window.localStorage.removeItem('auth');
   window.localStorage.removeItem('settings');
-  window.localStorage.setItem('isLogout', 'yes');
+  window.localStorage.setItem('isLogout', JSON.stringify({ isLogout: true }));
   const data = await authService.logout();
   if (data.success === false) {
     const auth_state = {
