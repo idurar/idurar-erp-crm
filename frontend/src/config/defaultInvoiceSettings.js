@@ -7,6 +7,6 @@ export default {
   taxType: 'exc',
   companyAddress: '',
   note: 'Thank You For Shopping',
-  currency: 'inr',
+  currency: 'eur',
   currentErpNum: '0001',
 };

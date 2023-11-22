@@ -1,6 +1,12 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import {
+  UserOutlined,
+  LockOutlined,
+  MailOutlined,
+  HomeOutlined,
+  IdcardOutlined,
+} from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
 
@@ -8,6 +14,21 @@ export default function RegisterForm() {
   const translate = useLanguage();
   return (
     <>
+      <Form.Item
+        name="company"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your company name!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<HomeOutlined className="site-form-item-ico" />}
+          placeholder="Company name"
+          size="large"
+        />
+      </Form.Item>
       <Form.Item
         name="name"
         rules={[
@@ -18,7 +39,37 @@ export default function RegisterForm() {
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Name"
+          placeholder="User name"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
+        name="companyRegNumber"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your company registration number!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<IdcardOutlined className="site-form-item-icon" />}
+          placeholder="Company registration number"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
+        name="BankAccount"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your bank account number!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<IdcardOutlined className="site-form-item-icon" />}
+          placeholder="Bank account number"
           size="large"
         />
       </Form.Item>
@@ -73,7 +124,7 @@ export default function RegisterForm() {
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder="Confirm_password"
+          placeholder="Confirm password"
           size="large"
         />
       </Form.Item>

@@ -276,6 +276,7 @@ const lang = {
   or: 'Or',
   sign_in: 'Sign In',
   sign_up: 'Sign Up',
+  register_now: 'register now',
 };
 
 export default lang;

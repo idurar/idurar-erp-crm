@@ -1,7 +1,7 @@
 import React from 'react';
-
+import { useDispatch } from 'react-redux';
 import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
-
+import { register } from '@/redux/auth/actions';
 import RegisterForm from '@/forms/RegisterForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
@@ -15,7 +15,12 @@ const { Title } = Typography;
 
 const RegisterPage = () => {
   const translate = useLanguage();
-  const onFinish = () => {};
+  const dispatch = useDispatch();
+  const onFinish = (values) => {
+    // TODO: Set the role on register to admin do backend call to get the
+    // admin rol this is set as default rol on backend setup
+    dispatch(register({ registerData: values }));
+  };
   return (
     <>
       <AuthLayout sideContent={<SideContent />}>

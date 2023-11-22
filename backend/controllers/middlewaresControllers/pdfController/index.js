@@ -5,6 +5,7 @@ const moment = require('moment');
 
 const mongoose = require('mongoose');
 const ClientModel = mongoose.model('Client');
+const InvoiceModel = mongoose.model('Invoice');
 
 exports.generatePdf = async (
   modelName,
@@ -29,6 +30,10 @@ exports.generatePdf = async (
   try {
     //Searche for client info in database
     const clientInfo = await ClientModel.findById(result.client).exec();
+    const invoice = await InvoiceModel.find({ _id: result._id }).exec();
+
+    const originalDate = new Date(invoice[0].expiredDate);
+    const formattedDate = originalDate.toLocaleDateString('en-GB');
 
     if (!clientInfo) {
       console.error('Client not found');
@@ -43,11 +48,20 @@ exports.generatePdf = async (
       address: clientInfo.address,
     };
 
+    const invoiceInfoObj = {
+      expiredDate: formattedDate,
+      number: invoice[0].number,
+      total: invoice[0].total,
+      company: invoice[0].client.company,
+      bankAccount: invoice[0].client?.bankAccount,
+    };
+
     //TODO: look at why there is client info now in the object. and before there was not
     const newResultObj = { ...result._doc, client: clientInfoObj };
 
     const html = pug.renderFile('views/pdf/' + modelName + '.pug', {
       model: newResultObj,
+      invoice: invoiceInfoObj,
       moment: moment,
       logo: dynamicLogoSrc,
       text: dynamicTextSrc,
