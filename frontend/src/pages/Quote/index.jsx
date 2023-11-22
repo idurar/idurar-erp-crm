@@ -8,7 +8,7 @@ import useLanguage from '@/locale/useLanguage';
 export default function Quote() {
   const translate = useLanguage();
   const entity = 'quote';
-  const { moneyRowFormatter } = useMoney();
+  const { moneyFormatter } = useMoney();
 
   const searchConfig = {
     displayLabels: ['name', 'surname'],
@@ -41,12 +41,28 @@ export default function Quote() {
     {
       title: translate('Sub Total'),
       dataIndex: 'subTotal',
-      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
+      render: (subTotal) => moneyFormatter({ amount: subTotal }),
     },
     {
       title: translate('Total'),
       dataIndex: 'total',
-      onCell: (total) => moneyRowFormatter({ amount: total }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
+      render: (total) => moneyFormatter({ amount: total }),
     },
 
     {

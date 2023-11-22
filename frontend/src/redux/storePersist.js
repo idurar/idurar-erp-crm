@@ -27,24 +27,8 @@ export const storePersist = {
     // localStorageHealthCheck();
     const result = window.localStorage.getItem(key);
     if (!result) {
-      if (key === 'auth') {
-        window.localStorage.removeItem('isLoggedIn');
-      }
       return false;
-    }
-    if (isJsonString(result)) {
-      return JSON.parse(result);
-    } else {
-      window.localStorage.removeItem(key);
-      if (key === 'auth') {
-        window.localStorage.removeItem('isLoggedIn');
-      }
-      console.error(
-        'error parsing in localStorage , all localstorage removed check this storage key :',
-        key
-      );
-      return false;
-    }
+    } else return JSON.parse(result);
   },
   remove: (key) => {
     window.localStorage.removeItem(key);

@@ -37,6 +37,8 @@ import etEE from 'antd/es/locale/et_EE';
 import elGR from 'antd/es/locale/el_GR';
 import ltLT from 'antd/es/locale/lt_LT';
 import caES from 'antd/es/locale/ca_ES';
+import faIR from 'antd/es/locale/fa_IR';
+import srRS from 'antd/es/locale/sr_RS';
 
 const antdLocale = {
   zh_cn: zhCN,
@@ -78,6 +80,8 @@ const antdLocale = {
   el_gr: elGR,
   lt_lt: ltLT,
   ca_es: caES,
+  fa_ir: faIR,
+  sr_rs: srRS,
 };
 
 export default antdLocale;
