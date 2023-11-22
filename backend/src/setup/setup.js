@@ -27,7 +27,6 @@ async function setupApp() {
 
     const AdminPasswordData = {
       password: passwordHash,
-      email: demoAdmin.email,
       salt: salt,
       user: result._id,
     };

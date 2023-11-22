@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 const updateProfile = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
-  const userProfile = req[userModel];
+
+  const reqUserName = userModel.toLowerCase();
+  const userProfile = req[reqUserName];
 
   let updates = {
     email: req.body.email,
@@ -38,7 +40,7 @@ const updateProfile = async (userModel, req, res) => {
       photo: result?.photo,
       role: result?.role,
     },
-    message: 'we update this document by this id: ' + req.params.id,
+    message: 'we update this profile by this id: ' + userProfile._id,
   });
 };
 
