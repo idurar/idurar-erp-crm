@@ -57,14 +57,9 @@ export const logout = () => async (dispatch) => {
 };
 
 export const updateProfile =
-  ({ entity, id, jsonData }) =>
+  ({ entity, jsonData }) =>
   async (dispatch) => {
-    dispatch({
-      type: actionTypes.REQUEST_LOADING,
-      payload: null,
-    });
-
-    let data = await request.updateAndUpload({ entity, id, jsonData });
+    let data = await request.updateAndUpload({ entity, id: '', jsonData });
 
     if (data.success === true) {
       dispatch({

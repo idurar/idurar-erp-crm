@@ -1,34 +1,30 @@
 import { useProfileContext } from '@/context/profileContext';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
-import { Button, Form, Input, Modal } from 'antd';
-import { useEffect } from 'react';
+import { Form, Input, Modal } from 'antd';
+
 import useLanguage from '@/locale/useLanguage';
 
-const PasswordModal = ({ config }) => {
+const PasswordModal = () => {
   const translate = useLanguage();
 
   const { state, profileContextAction } = useProfileContext();
-  const { modal, updatePanel } = profileContextAction;
-  const { update, read, passwordModal } = state;
+  const { modal } = profileContextAction;
+  const { passwordModal } = state;
   const modalTitle = translate('Update Password');
 
   const [passForm] = Form.useForm();
 
-  const { onFetch, result, isLoading, isSuccess } = useOnFetch();
-
-  useEffect(() => {
-    if (isSuccess) {
-      passForm.resetFields();
-    }
-  }, [isSuccess]);
+  const { onFetch } = useOnFetch();
 
   const handelSubmit = (fieldsValue) => {
-    const entity = 'admin/password-update/' + config.id;
-    const updateFn = () => {
-      return request.patch({ entity, jsonData: fieldsValue });
+    const entity = 'admin/profile/password/';
+    const updateFn = async () => {
+      return await request.patch({ entity, jsonData: fieldsValue });
     };
     onFetch(updateFn);
+    passForm.resetFields();
+    modal.close();
   };
   return (
     <Modal
@@ -38,7 +34,6 @@ const PasswordModal = ({ config }) => {
       okText="Update"
       onOk={() => {
         passForm.submit();
-        modal.close();
       }}
     >
       <Form form={passForm} layout="vertical" onFinish={handelSubmit}>
@@ -57,7 +52,7 @@ const PasswordModal = ({ config }) => {
         </Form.Item>
         <Form.Item
           label={translate('Confirm Password')}
-          name="repassword"
+          name="passwordCheck"
           hasFeedback
           rules={[
             {

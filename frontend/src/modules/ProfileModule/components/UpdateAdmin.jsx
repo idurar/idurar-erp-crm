@@ -33,8 +33,6 @@ const UpdateAdmin = ({ config }) => {
   };
 
   const onSubmit = (fieldsValue) => {
-    const { _id: id } = currentAdmin;
-
     if (fieldsValue.file) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
@@ -42,7 +40,8 @@ const UpdateAdmin = ({ config }) => {
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
       return acc;
     }, {});
-    dispatch(updateProfile({ entity: 'profile', id, jsonData: trimmedValues }));
+
+    dispatch(updateProfile({ entity: 'admin/profile', jsonData: trimmedValues }));
   };
 
   return (
