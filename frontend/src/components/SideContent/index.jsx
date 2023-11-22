@@ -1,8 +1,7 @@
-import React from 'react';
 import { Space, Layout, Divider } from 'antd';
 import { Typography } from 'antd';
 
-import logo from '@/style/images/logo.png';
+import logo from '@/style/images/idurar-crm-erp.svg';
 import logo1 from '@/style/images/logo1.png';
 import logo2 from '@/style/images/logo2.png';
 import logo3 from '@/style/images/logo3.png';
@@ -23,7 +22,13 @@ export default function SideContent() {
       className="sideContent"
     >
       <div style={{ width: '100%' }}>
-        <img src={logo} alt="Logo" style={{ margin: '0 auto 40px', display: 'block' }} />
+        <img
+          src={logo}
+          alt="IDURAR ERP CRM"
+          style={{ margin: '0 auto 40px', display: 'block' }}
+          height={63}
+          width={220}
+        />
         <div className="space40"></div>
         <Title level={3}>Manage your company with :</Title>
         <div className="space20"></div>

@@ -15,7 +15,7 @@ import SideContent from '@/components/SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
 import useIsMobile from '@/hooks/useIsMobile';
 
-import logo from '@/style/images/logo.png';
+import logo from '@/style/images/idurar-crm-erp.svg';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -59,6 +59,8 @@ const LoginPage = () => {
                 margin: '-70px auto 40px',
                 display: 'block',
               }}
+              height={63}
+              width={220}
             />
             {isMobile ? <div className="space20"></div> : <div className="space50"></div>}
           </Col>
