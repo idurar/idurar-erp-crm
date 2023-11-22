@@ -13,7 +13,6 @@ import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from '@/components/SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
-import useIsMobile from '@/hooks/useIsMobile';
 
 import logo from '@/style/images/idurar-crm-erp.svg';
 
@@ -24,7 +23,7 @@ const LoginPage = () => {
   const translate = useLanguage();
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
+  // const size = useSize();
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
@@ -62,7 +61,7 @@ const LoginPage = () => {
               height={63}
               width={220}
             />
-            {isMobile ? <div className="space20"></div> : <div className="space50"></div>}
+            <div className="space20" />
           </Col>
           <Title level={1}>{translate('Sign in')}</Title>
 
