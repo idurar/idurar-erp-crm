@@ -8,7 +8,7 @@ import {
   PlusOutlined,
   EllipsisOutlined,
 } from '@ant-design/icons';
-import { Descriptions, Dropdown, Table, Button } from 'antd';
+import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,8 +18,6 @@ import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import { generate as uniqueId } from 'shortid';
 import { useNavigate } from 'react-router-dom';
-
-import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
@@ -166,59 +164,30 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
-    dataTableColumns,
-    items
-  );
-
   return (
     <>
-      <div ref={tableHeader}>
-        <PageHeader
-          title={DATATABLE_TITLE}
-          ghost={true}
-          extra={[
-            <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-              {translate('Refresh')}
-            </Button>,
-            <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
-          ]}
-          style={{
-            padding: '20px 0px',
-          }}
-        ></PageHeader>
-      </div>
+      <PageHeader
+        title={DATATABLE_TITLE}
+        ghost={true}
+        extra={[
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+            {translate('Refresh')}
+          </Button>,
+          <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
+        ]}
+        style={{
+          padding: '20px 0px',
+        }}
+      ></PageHeader>
 
       <Table
-        columns={tableColumns}
+        columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
-        expandable={
-          expandedRowData.length
-            ? {
-                expandedRowRender: (record) => (
-                  <Descriptions title="" bordered column={1}>
-                    {expandedRowData.map((item, index) => {
-                      return (
-                        <Descriptions.Item key={index} label={item.title}>
-                          {item.render?.(record[item.dataIndex])?.children
-                            ? item.render?.(record[item.dataIndex])?.children
-                            : item.render?.(record[item.dataIndex])
-                            ? item.render?.(record[item.dataIndex])
-                            : Array.isArray(item.dataIndex)
-                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
-                            : record[item.dataIndex]}
-                        </Descriptions.Item>
-                      );
-                    })}
-                  </Descriptions>
-                ),
-              }
-            : null
-        }
+        scroll={{ x: true }}
       />
     </>
   );

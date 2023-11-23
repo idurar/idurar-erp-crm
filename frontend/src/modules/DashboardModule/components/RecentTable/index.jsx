@@ -1,4 +1,4 @@
-import { Descriptions, Dropdown, Table } from 'antd';
+import { Dropdown, Table } from 'antd';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
@@ -9,7 +9,6 @@ import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function RecentTable({ ...props }) {
   const translate = useLanguage();
@@ -72,7 +71,6 @@ export default function RecentTable({ ...props }) {
                 default:
                   break;
               }
-              // else if (key === '2')handleCloseTask
             },
           }}
           trigger={['click']}
@@ -95,43 +93,14 @@ export default function RecentTable({ ...props }) {
     return [];
   };
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
-    dataTableColumns,
-    firstFiveItems()
-  );
-
   return (
-    <div ref={tableHeader}>
-      <Table
-        columns={tableColumns}
-        rowKey={(item) => item._id}
-        dataSource={isSuccess && firstFiveItems()}
-        pagination={false}
-        loading={isLoading}
-        expandable={
-          expandedRowData.length
-            ? {
-                expandedRowRender: (record) => (
-                  <Descriptions title="" bordered column={1}>
-                    {expandedRowData.map((item, index) => {
-                      return (
-                        <Descriptions.Item key={index} label={item.title}>
-                          {item.render?.(record[item.dataIndex])?.children
-                            ? item.render?.(record[item.dataIndex])?.children
-                            : item.render?.(record[item.dataIndex])
-                            ? item.render?.(record[item.dataIndex])
-                            : Array.isArray(item.dataIndex)
-                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
-                            : record[item.dataIndex]}
-                        </Descriptions.Item>
-                      );
-                    })}
-                  </Descriptions>
-                ),
-              }
-            : null
-        }
-      />
-    </div>
+    <Table
+      columns={dataTableColumns}
+      rowKey={(item) => item._id}
+      dataSource={isSuccess && firstFiveItems()}
+      pagination={false}
+      loading={isLoading}
+      scroll={{ x: true }}
+    />
   );
 }
