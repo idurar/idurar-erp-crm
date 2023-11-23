@@ -328,5 +328,8 @@ const lang = {
   or: 'أو',
   sign_in: 'تسجيل الدخول',
   sign_up: 'انشاء حساب',
+    taxes: 'الضرئب',
+  taxes_list: 'قائمة الضرائب',
+  add_new_tax: 'اضافة ضريبة جديدة',
 };
 export default lang;
