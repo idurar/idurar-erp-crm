@@ -287,6 +287,9 @@ const lang = {
   staff_cru: 'স্টাফ (তৈরি',
   create_and_read_only: 'শুধু তৈরি করুন এবং পড়ুন',
   read_only: 'শুধু পড়ুন',
+   taxes: 'করের',
+  taxes_list: 'ট্যাক্স তালিকা',
+  add_new_tax: 'নতুন ট্যাক্স যোগ করুন',
 };
 
 export default lang;
