@@ -9,6 +9,16 @@ import AuthRouter from '@/router/AuthRouter';
 const ErpApp = lazy(() => import('./ErpApp'));
 const Localization = lazy(() => import('@/locale/Localization'));
 
+const DefaultApp = () => (
+  <Localization>
+    <AppContextProvider>
+      <Suspense fallback={<PageLoader />}>
+        <ErpApp />
+      </Suspense>
+    </AppContextProvider>
+  </Localization>
+);
+
 export default function IdurarOs() {
   const { isLoggedIn } = useSelector(selectAuth);
 
@@ -19,14 +29,6 @@ export default function IdurarOs() {
       </Localization>
     );
   else {
-    return (
-      <Localization>
-        <AppContextProvider>
-          <Suspense fallback={<PageLoader />}>
-            <ErpApp />
-          </Suspense>
-        </AppContextProvider>
-      </Localization>
-    );
+    return <DefaultApp />;
   }
 }

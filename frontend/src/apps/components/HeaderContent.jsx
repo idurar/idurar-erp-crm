@@ -32,15 +32,12 @@ export default function HeaderContent() {
         const result = await checkImage(BASE_URL + currentAdmin?.photo);
         setHasPhotoprofile(result);
       }
-      setHasPhotoprofile(false);
     }
     fetchData();
     return () => {
       return false;
     };
   }, []);
-
-  const srcImgProfile = hasPhotoprofile ? BASE_URL + currentAdmin?.photo : null;
 
   const ProfileDropdown = () => {
     const navigate = useNavigate();
@@ -49,7 +46,7 @@ export default function HeaderContent() {
         <Avatar
           size="large"
           className="last"
-          src={srcImgProfile}
+          src={hasPhotoprofile ? BASE_URL + currentAdmin?.photo : null}
           style={{ color: '#f56a00', backgroundColor: !hasPhotoprofile ? '#fde3cf' : '#f9fafc' }}
         >
           {currentAdmin?.name?.charAt(0)?.toUpperCase()}
@@ -123,7 +120,7 @@ export default function HeaderContent() {
         {/* <Badge dot> */}
         <Avatar
           className="last"
-          src={srcImgProfile}
+          src={hasPhotoprofile ? BASE_URL + currentAdmin?.photo : null}
           style={{
             color: '#f56a00',
             backgroundColor: !hasPhotoprofile ? '#fde3cf' : '#f9fafc',

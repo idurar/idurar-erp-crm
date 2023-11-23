@@ -31,7 +31,6 @@ const AdminInfo = ({ config }) => {
         const result = await checkImage(BASE_URL + currentAdmin?.photo);
         setHasPhotoprofile(result);
       }
-      setHasPhotoprofile(false);
     }
     fetchData();
     return () => {

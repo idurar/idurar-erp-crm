@@ -24,7 +24,7 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
 
         let _fileName = `${originalname}-${uniqueFileID}${fileExtension}`;
 
-        const filePath = `src/public/uploads/${entity}/${_fileName}`;
+        const filePath = `public/uploads/${entity}/${_fileName}`;
         // saving file name and extension in request upload object
         req.upload = {
           fileName: _fileName,
