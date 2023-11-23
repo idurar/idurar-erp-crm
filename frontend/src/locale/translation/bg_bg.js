@@ -287,6 +287,9 @@ const lang = {
   staff_cru: 'Персонал (Създаване, Четене, Актуализиране)',
   create_and_read_only: 'Създаване и четене само',
   read_only: 'Само за четене',
+    taxes: 'данъци',
+  taxes_list: 'Данъчен списък',
+  add_new_tax: 'Добавете нов данък',
 };
 
 export default lang;
