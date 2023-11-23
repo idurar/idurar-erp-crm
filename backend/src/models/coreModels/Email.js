@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const emailSchema = new mongoose.Schema({
   emailKey: {
@@ -10,11 +9,11 @@ const emailSchema = new mongoose.Schema({
   },
   emailName: {
     type: String,
-    unique:true,
-    required:true,
+    unique: true,
+    required: true,
   },
-  emailVariables:{
-    type:Array
+  emailVariables: {
+    type: Array,
   },
   emailBody: {
     type: String,
@@ -24,25 +23,25 @@ const emailSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  language:{
-    type:String,
-    default:"en"
+  language: {
+    type: String,
+    default: 'en',
   },
   removed: {
-  type: Boolean,
-  default: false,
+    type: Boolean,
+    default: false,
   },
   enabled: {
-  type: Boolean,
-  default: true,
+    type: Boolean,
+    default: true,
   },
   created: {
-  type: Date,
-  default: Date.now,
+    type: Date,
+    default: Date.now,
   },
   updated: {
-  type: Date,
-  default: Date.now,
+    type: Date,
+    default: Date.now,
   },
 });
 

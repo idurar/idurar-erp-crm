@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const AppTableSchema = new mongoose.Schema({
   removed: {

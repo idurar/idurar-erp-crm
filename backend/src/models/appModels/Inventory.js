@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const inventorySchema = new mongoose.Schema({
   removed: {
