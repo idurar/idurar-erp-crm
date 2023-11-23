@@ -126,6 +126,10 @@ export default function AppRouter() {
       element: <Settings />,
     },
     {
+      path: '/settings/edit/:settingsKey',
+      element: <Settings />,
+    },
+    {
       path: '/payment/mode',
       element: <PaymentMode />,
     },

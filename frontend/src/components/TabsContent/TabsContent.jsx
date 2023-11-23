@@ -49,7 +49,7 @@ const RightMenu = ({ children, pageTitle }) => {
   );
 };
 
-export default function TabsContent({ content, pageTitle }) {
+export default function TabsContent({ content, defaultActiveKey, pageTitle }) {
   const items = content.map((item, index) => {
     return {
       key: item.key ? item.key : index + '_' + item.label.replace(/ /g, '_'),
@@ -70,7 +70,13 @@ export default function TabsContent({ content, pageTitle }) {
 
   return (
     <Row gutter={[24, 24]} className="tabContent">
-      <Tabs tabPosition="right" hideAdd={true} items={items} renderTabBar={renderTabBar} />
+      <Tabs
+        tabPosition="right"
+        defaultActiveKey={defaultActiveKey}
+        hideAdd={true}
+        items={items}
+        renderTabBar={renderTabBar}
+      />
     </Row>
   );
 }
