@@ -286,6 +286,9 @@ const lang = {
   staff_cru: 'Personál (Vytvořit, Číst, Aktualizovat)',
   create_and_read_only: 'Vytvořit a číst pouze',
   read_only: 'Pouze pro čtení',
+    taxes: 'Daně',
+  taxes_list: 'Seznam daní',
+  add_new_tax: 'Přidat novou daň',
 };
 
 export default lang;
