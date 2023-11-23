@@ -3,14 +3,6 @@ const mongoose = require('mongoose');
 const update = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
 
-  // let { email } = req.body;
-
-  // if (email) {
-  //   const existingUser = await User.findOne({ email: email });
-
-  //   if (existingUser._id != req.params.id)
-  //     return res.status(400).json({ message: 'An account with this email already exists.' });
-  // }
   let updates = {
     role: req.body.role,
     email: req.body.email,

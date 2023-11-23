@@ -12,7 +12,7 @@ const AdminPasswordSchema = new Schema({
     type: Boolean,
     default: true,
   },
-  user: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  user: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true, unique: true },
   password: {
     type: String,
     required: true,
@@ -34,8 +34,6 @@ const AdminPasswordSchema = new Schema({
     default: [],
   },
 });
-
-AdminPasswordSchema.plugin(require('mongoose-autopopulate'));
 
 // generating a hash
 AdminPasswordSchema.methods.generateHash = function (salt, password) {

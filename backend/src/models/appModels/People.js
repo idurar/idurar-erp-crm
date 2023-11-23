@@ -21,15 +21,14 @@ const PeopleSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  birthday: {
-    type: Date,
-  },
-  birthplace: {
+  idCardNumber: {
     type: String,
+    trim: true,
   },
-  gender: {
-    type: String,
-  },
+  idCardType: String,
+  birthday: Date,
+  birthplace: String,
+  gender: String,
   photo: {
     type: String,
     trim: true,
@@ -149,15 +148,17 @@ const PeopleSchema = new mongoose.Schema({
       updated: Date,
     },
   ],
+  notes: String,
   category: String,
   status: String,
   progressStatus: String,
   finalStatus: String,
   approved: {
     type: Boolean,
-    default: true,
   },
-  notes: String,
+  verified: {
+    type: Boolean,
+  },
   tags: [
     {
       type: String,

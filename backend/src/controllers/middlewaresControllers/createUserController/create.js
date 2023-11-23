@@ -47,7 +47,6 @@ const create = async (userModel, req, res) => {
   }
   const UserPasswordData = {
     password: passwordHash,
-    email: req.body.email,
     salt: salt,
     user: result._id,
   };

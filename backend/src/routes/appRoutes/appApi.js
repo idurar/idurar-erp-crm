@@ -22,7 +22,6 @@ const paymentController = require('@/controllers/appControllers/paymentControlle
 const orderController = require('@/controllers/appControllers/orderController');
 const offerController = require('@/controllers/appControllers/offerController');
 
-const kycController = require('@/controllers/appControllers/kycController');
 const inventoryController = require('@/controllers/appControllers/inventoryController');
 
 // //_________________________________ API for employees_____________________

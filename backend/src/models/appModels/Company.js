@@ -134,7 +134,6 @@ const CompanySchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-
   otherEmail: [
     {
       type: String,
@@ -186,6 +185,9 @@ const CompanySchema = new mongoose.Schema({
   approved: {
     type: Boolean,
     default: true,
+  },
+  verified: {
+    type: Boolean,
   },
   notes: String,
   tags: [
