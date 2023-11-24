@@ -7,7 +7,7 @@ const errorHandler = (error) => {
   if (response.data && response.data.jwtExpired) {
     const result = window.localStorage.getItem('auth');
     const jsonFile = window.localStorage.getItem('isLogout');
-    const { isLogout } = JSON.parse(jsonFile);
+    const { isLogout } = (jsonFile && JSON.parse(jsonFile)) || false;
     window.localStorage.removeItem('auth');
     window.localStorage.removeItem('isLogout');
     if (result || isLogout) {
