@@ -20,7 +20,7 @@ const inventorySchema = new mongoose.Schema({
   },
   purchases: [
     {
-      purshase: { type: mongoose.Schema.ObjectId, ref: 'Purshase', required: true },
+      purchase: { type: mongoose.Schema.ObjectId, ref: 'Purchase', required: true },
       quantity: {
         type: Number,
         required: true,
