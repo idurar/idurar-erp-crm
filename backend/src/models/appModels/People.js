@@ -9,7 +9,7 @@ const PeopleSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
+
   firstname: {
     type: String,
     trim: true,
@@ -20,6 +20,8 @@ const PeopleSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
   bio: String,
   idCardNumber: {
     type: String,
