@@ -19,6 +19,4 @@ routesList.forEach(({ modelName, controllerName }) => {
   }
 });
 
-console.log('🚀 ~ file: index.js:6 ~ hasCustomeControllers:', hasCustomeControllers);
-
 module.exports = appControllers;
