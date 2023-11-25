@@ -91,8 +91,9 @@ const SupplierSchema = new mongoose.Schema({
         type: String,
         trim: true,
         lowercase: true,
+        default: 'string',
       },
-      fieldValue: String,
+      fieldValue: {},
     },
   ],
   location: {

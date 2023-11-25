@@ -5,6 +5,7 @@ const expenseSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   date: {
     type: Date,
     default: Date.now,

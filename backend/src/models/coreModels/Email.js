@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
 const emailSchema = new mongoose.Schema({
+  removed: {
+    type: Boolean,
+    default: false,
+  },
+  enabled: {
+    type: Boolean,
+    default: true,
+  },
   emailKey: {
     type: String,
     unique: true,
@@ -25,15 +33,7 @@ const emailSchema = new mongoose.Schema({
   },
   language: {
     type: String,
-    default: 'en',
-  },
-  removed: {
-    type: Boolean,
-    default: false,
-  },
-  enabled: {
-    type: Boolean,
-    default: true,
+    default: 'us_en',
   },
   created: {
     type: Date,

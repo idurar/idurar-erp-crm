@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema({
     ref: 'Admin',
     required: true,
   },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   assigned: {
     type: mongoose.Schema.ObjectId,
     ref: 'Employee',
@@ -81,6 +82,7 @@ const orderSchema = new mongoose.Schema({
     ],
     default: 'not started',
   },
+  processingStatus: String,
   pdf: {
     type: String,
   },
