@@ -9,6 +9,7 @@ const inventorySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   product: { type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
   quantity: {
     type: Number,
@@ -18,49 +19,57 @@ const inventorySchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  purchases: [
-    {
-      purchase: { type: mongoose.Schema.ObjectId, ref: 'Purchase', required: true },
-      quantity: {
+  order: {
+    type: Number,
+    default: 0,
+  },
+  purchase: {
+    type: Number,
+    default: 0,
+  },
+  adjustment: {
+    increase: {
+      returned: {
         type: Number,
-        required: true,
+        default: 0,
       },
-      date: {
-        type: Date,
-        default: Date.now,
+      change: {
+        type: Number,
+        default: 0,
+      },
+      refund: {
+        type: Number,
+        default: 0,
+      },
+      other: {
+        type: Number,
+        default: 0,
       },
     },
-  ],
-  Orders: [
-    {
-      order: { type: mongoose.Schema.ObjectId, ref: 'Order', required: true },
-      quantity: {
+    decrease: {
+      damaged: {
         type: Number,
-        required: true,
+        default: 0,
       },
-      date: {
-        type: Date,
-        default: Date.now,
+      change: {
+        type: Number,
+        default: 0,
+      },
+      refund: {
+        type: Number,
+        default: 0,
+      },
+      other: {
+        type: Number,
+        default: 0,
       },
     },
-  ],
-  adjustments: [
-    {
-      quantity: {
-        type: Number,
-        required: true,
-      },
-      reason: {
-        type: String,
-        required: true,
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+  },
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },

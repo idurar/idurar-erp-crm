@@ -10,6 +10,7 @@ const adminSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
   email: {
     type: String,
     unique: true,

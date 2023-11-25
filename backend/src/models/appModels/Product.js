@@ -9,7 +9,9 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
   productCategory: { type: mongoose.Schema.ObjectId, ref: 'ProductCategory', required: true },
+  suppliers: [{ type: mongoose.Schema.ObjectId, ref: 'Supplier' }],
   name: {
     type: String,
     required: true,
@@ -52,6 +54,22 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  customField: [
+    {
+      fieldName: {
+        type: String,
+        trim: true,
+        lowercase: true,
+      },
+      fieldType: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        default: 'string',
+      },
+      fieldValue: {},
+    },
+  ],
   created: {
     type: Date,
     default: Date.now,

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PeopleSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -9,69 +9,13 @@ const PeopleSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-
-  firstname: {
+  name: {
     type: String,
-    trim: true,
     required: true,
   },
-  lastname: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
-  bio: String,
-  idCardNumber: {
-    type: String,
-    trim: true,
-  },
-  idCardType: String,
-  securitySocialNbr: String,
-  taxNumber: String,
-  birthday: Date,
-  birthplace: String,
-  gender: String,
-  photo: {
-    type: String,
-  },
-  bankName: {
-    type: String,
-    trim: true,
-  },
-  bankIban: {
-    type: String,
-    trim: true,
-  },
-  bankSwift: {
-    type: String,
-    trim: true,
-  },
-  bankNumber: {
-    type: String,
-    trim: true,
-  },
-  bankRouting: {
-    type: String,
-    trim: true,
-  },
-  customField: [
-    {
-      fieldName: {
-        type: String,
-        trim: true,
-        lowercase: true,
-      },
-      fieldType: {
-        type: String,
-        trim: true,
-        lowercase: true,
-        default: 'string',
-      },
-      fieldValue: {},
-    },
-  ],
+  branchManager: { type: mongoose.Schema.ObjectId, ref: 'Employee', required: true },
+  branchAdmin: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  branchEmployees: { type: mongoose.Schema.ObjectId, ref: 'Employee', required: true },
   location: {
     latitude: Number,
     longitude: Number,
@@ -102,12 +46,15 @@ const PeopleSchema = new mongoose.Schema({
       trim: true,
     },
   ],
+  fax: {
+    type: String,
+    trim: true,
+  },
   email: {
     type: String,
     trim: true,
     lowercase: true,
   },
-
   otherEmail: [
     {
       type: String,
@@ -115,6 +62,11 @@ const PeopleSchema = new mongoose.Schema({
       lowercase: true,
     },
   ],
+  website: {
+    type: String,
+    trim: true,
+    lowercase: true,
+  },
   socialMedia: {
     facebook: String,
     instagram: String,
@@ -123,11 +75,6 @@ const PeopleSchema = new mongoose.Schema({
     tiktok: String,
     youtube: String,
     snapchat: String,
-  },
-  website: {
-    type: String,
-    trim: true,
-    lowercase: true,
   },
   images: [
     {
@@ -153,20 +100,22 @@ const PeopleSchema = new mongoose.Schema({
       },
     },
   ],
-  notes: String,
   category: String,
-  status: String,
-  approved: {
-    type: Boolean,
-  },
-  verified: {
-    type: Boolean,
-  },
-  tags: [
+  notes: String,
+  customField: [
     {
-      type: String,
-      trim: true,
-      lowercase: true,
+      fieldName: {
+        type: String,
+        trim: true,
+        lowercase: true,
+      },
+      fieldType: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        default: 'string',
+      },
+      fieldValue: {},
     },
   ],
   created: {
@@ -183,4 +132,4 @@ const PeopleSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('People', PeopleSchema);
+module.exports = mongoose.model('Branch', schema);

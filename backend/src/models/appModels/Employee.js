@@ -9,6 +9,7 @@ const employeeSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   isAdmin: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   firstname: {
     type: String,
@@ -74,8 +75,9 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         trim: true,
         lowercase: true,
+        default: 'string',
       },
-      fieldValue: String,
+      fieldValue: {},
     },
   ],
   location: {

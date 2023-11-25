@@ -9,6 +9,7 @@ const leadSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   type: {
     type: String,
     default: 'company',
