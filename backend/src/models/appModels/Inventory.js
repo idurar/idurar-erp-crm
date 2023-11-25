@@ -9,21 +9,57 @@ const inventorySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  product: {
-    type: String,
-    trim: true,
-    required: true,
-  },
+  product: { type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
   quantity: {
     type: Number,
-    required: true,
-    min: 0, // Ensure non-negative numbers
+    default: 0,
   },
-  unitPrice: {
+  threshold: {
     type: Number,
-    required: true,
-    min: 0, // Ensure non-negative numbers
+    default: 0,
   },
+  purchases: [
+    {
+      purshase: { type: mongoose.Schema.ObjectId, ref: 'Purshase', required: true },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  Orders: [
+    {
+      order: { type: mongoose.Schema.ObjectId, ref: 'Order', required: true },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  adjustments: [
+    {
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      reason: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   created: {
     type: Date,
     default: Date.now,

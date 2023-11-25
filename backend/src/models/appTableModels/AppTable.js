@@ -11,6 +11,8 @@ const AppTableSchema = new mongoose.Schema({
   },
   tableName: { type: mongoose.Schema.ObjectId, ref: 'AppTableStructure', required: true },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  assigned: { type: mongoose.Schema.ObjectId, ref: 'Employee', required: true },
 
   invoiceList: [{ type: mongoose.Schema.ObjectId, ref: 'Invoice' }],
   quoteList: [{ type: mongoose.Schema.ObjectId, ref: 'Quote' }],
@@ -71,7 +73,7 @@ const AppTableSchema = new mongoose.Schema({
   year: Number,
   recurring: {
     type: String,
-    default: '0',
+    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
   },
   date: {
     type: Date,

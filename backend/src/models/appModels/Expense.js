@@ -23,10 +23,11 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  supplier: {
-    type: mongoose.Schema.ObjectId,
+  recurring: {
+    type: String,
+    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
   },
-  OrderForm: {
+  supplier: {
     type: mongoose.Schema.ObjectId,
   },
   expenseCategory: {
@@ -50,9 +51,31 @@ const expenseSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'PaymentMode',
   },
-  attachedFile: {
-    type: String,
-  },
+  receipt: String,
+  images: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
   updated: {
     type: Date,
     default: Date.now,

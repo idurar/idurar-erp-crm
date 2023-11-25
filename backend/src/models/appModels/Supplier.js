@@ -79,6 +79,7 @@ const SupplierSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  securitySocialNbr: String,
   customField: [
     {
       fieldName: {
@@ -133,7 +134,6 @@ const SupplierSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-
   otherEmail: [
     {
       type: String,
@@ -141,6 +141,15 @@ const SupplierSchema = new mongoose.Schema({
       lowercase: true,
     },
   ],
+  socialMedia: {
+    facebook: String,
+    instagram: String,
+    twitter: String,
+    linkedin: String,
+    tiktok: String,
+    youtube: String,
+    snapchat: String,
+  },
   website: {
     type: String,
     trim: true,
@@ -148,41 +157,29 @@ const SupplierSchema = new mongoose.Schema({
   },
   images: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
     },
   ],
   files: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
     },
   ],
   category: String,
-  status: String,
-  progressStatus: String,
-  finalStatus: String,
-  notes: String,
   tags: [
     {
       type: String,

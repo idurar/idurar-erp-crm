@@ -9,7 +9,7 @@ const PeopleSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
   firstname: {
     type: String,
     trim: true,
@@ -20,17 +20,19 @@ const PeopleSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  bio: String,
   idCardNumber: {
     type: String,
     trim: true,
   },
   idCardType: String,
+  securitySocialNbr: String,
+  taxNumber: String,
   birthday: Date,
   birthplace: String,
   gender: String,
   photo: {
     type: String,
-    trim: true,
   },
   bankName: {
     type: String,
@@ -110,6 +112,15 @@ const PeopleSchema = new mongoose.Schema({
       lowercase: true,
     },
   ],
+  socialMedia: {
+    facebook: String,
+    instagram: String,
+    twitter: String,
+    linkedin: String,
+    tiktok: String,
+    youtube: String,
+    snapchat: String,
+  },
   website: {
     type: String,
     trim: true,
@@ -117,41 +128,31 @@ const PeopleSchema = new mongoose.Schema({
   },
   images: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   files: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   notes: String,
   category: String,
   status: String,
-  progressStatus: String,
-  finalStatus: String,
   approved: {
     type: Boolean,
   },

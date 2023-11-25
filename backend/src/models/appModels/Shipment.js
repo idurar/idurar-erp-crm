@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const orderSchema = new mongoose.Schema({
+const ShipmentSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -14,29 +14,58 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Employee',
   },
-  number: {
-    type: Number,
+  order: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Order',
   },
-  year: {
-    type: Number,
-  },
-  recurring: {
+  carrier: {
     type: String,
-    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
+    required: true,
   },
+  trackingNmber: String,
+  trackingLink: String,
   date: {
     type: Date,
-    default: Date.now,
     required: true,
+  },
+  estimatedDeliveryDate: {
+    type: Date,
   },
   client: {
     type: mongoose.Schema.ObjectId,
     ref: 'Client',
-    required: true,
   },
   invoice: {
     type: mongoose.Schema.ObjectId,
     ref: 'Ivoince',
+  },
+  recipient: {
+    name: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    postalCode: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+    },
   },
   products: [
     {
@@ -50,10 +79,6 @@ const orderSchema = new mongoose.Schema({
       },
     },
   ],
-  shipment: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Shipment',
-  },
   approved: {
     type: Boolean,
     default: false,
@@ -61,25 +86,19 @@ const orderSchema = new mongoose.Schema({
   note: {
     type: String,
   },
-  fulfillment: {
-    type: String,
-    enum: ['pending', 'in review', 'processing', 'packing', 'shipped', 'on hold', 'cancelled'],
-    default: 'pending',
-  },
   status: {
     type: String,
     enum: [
-      'not started',
-      'in progress',
-      'delayed',
-      'completed',
+      'pending',
+      'confirmed',
+      'in transit',
+      'out for delivery',
       'delivered',
       'returned',
+      'failed',
       'cancelled',
-      'on hold',
-      'refunded',
     ],
-    default: 'not started',
+    default: 'pending',
   },
   pdf: {
     type: String,
@@ -94,6 +113,6 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-orderSchema.plugin(require('mongoose-autopopulate'));
+ShipmentSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('Shipment', ShipmentSchema);

@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const { Mongoose } = require('mongoose');
 
 const TaxSchema = new mongoose.Schema({
+  removed: {
+    type: Boolean,
+    default: false,
+  },
+  enabled: {
+    type: Boolean,
+    default: true,
+  },
   taxName: {
     type: String,
     required: true,
@@ -17,14 +25,6 @@ const TaxSchema = new mongoose.Schema({
   created: {
     type: Date,
     default: Date.now,
-  },
-  removed: {
-    type: Boolean,
-    default: false,
-  },
-  enabled: {
-    type: Boolean,
-    default: true,
   },
 });
 

@@ -39,7 +39,7 @@ const update = async (req, res) => {
   body['taxTotal'] = taxTotal;
   body['total'] = total;
   body['items'] = items;
-  body['pdfPath'] = 'quote-' + req.params.id + '.pdf';
+  body['pdf'] = 'quote-' + req.params.id + '.pdf';
   // Find document by id and updates with the required fields
 
   const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {

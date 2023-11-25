@@ -19,45 +19,34 @@ const ClientSchema = new mongoose.Schema({
   convertedFrom: { type: mongoose.Schema.ObjectId, ref: 'Lead' },
   interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  adminOwner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   images: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   files: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
-  category: String,
-  status: String,
-  progressStatus: String,
-  finalStatus: String,
-  notes: String,
   source: String,
+  category: String,
+  notes: String,
   approved: {
     type: Boolean,
     default: false,
