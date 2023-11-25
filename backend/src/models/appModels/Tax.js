@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { Mongoose } = require('mongoose');
 
 const TaxSchema = new mongoose.Schema({
   removed: {
