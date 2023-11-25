@@ -1,10 +1,12 @@
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const methods = createCRUDController('Client');
-
 const remove = require('./remove');
 const summary = require('./summary');
 
-methods.delete = remove;
-methods.summary = summary;
+function modelController() {
+  const methods = createCRUDController('Client');
+  methods.delete = remove;
+  methods.summary = summary;
+  return methods;
+}
 
-module.exports = methods;
+module.exports = modelController();

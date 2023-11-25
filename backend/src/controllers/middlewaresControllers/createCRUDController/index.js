@@ -11,17 +11,16 @@ const paginatedList = require('./paginatedList');
 
 const createCRUDController = (modelName) => {
   const Model = mongoose.model(modelName);
-  let crudMethods = {};
-
-  crudMethods.create = (req, res) => create(Model, req, res);
-  crudMethods.read = (req, res) => read(Model, req, res);
-  crudMethods.update = (req, res) => update(Model, req, res);
-  crudMethods.delete = (req, res) => remove(Model, req, res);
-  crudMethods.list = (req, res) => paginatedList(Model, req, res);
-  crudMethods.listAll = (req, res) => listAll(Model, req, res);
-  crudMethods.search = (req, res) => search(Model, req, res);
-  crudMethods.filter = (req, res) => filter(Model, req, res);
-
+  let crudMethods = {
+    create: (req, res) => create(Model, req, res),
+    read: (req, res) => read(Model, req, res),
+    update: (req, res) => update(Model, req, res),
+    delete: (req, res) => remove(Model, req, res),
+    list: (req, res) => paginatedList(Model, req, res),
+    listAll: (req, res) => listAll(Model, req, res),
+    search: (req, res) => search(Model, req, res),
+    filter: (req, res) => filter(Model, req, res),
+  };
   return crudMethods;
 };
 

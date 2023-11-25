@@ -1,9 +1,6 @@
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
 const { routesList } = require('@/models/utils');
 
-const appControllers = {};
-const hasCustomeControllers = [];
-
 const { globSync } = require('glob');
 const path = require('path');
 
@@ -12,21 +9,26 @@ const controllerDirectories = globSync(pattern).map((filePath) => {
   return path.basename(filePath);
 });
 
-controllerDirectories.forEach((controllerName) => {
-  try {
-    const customController = require('@/controllers/appControllers/' + controllerName);
+const appControllers = () => {
+  const controller = {};
+  const hasCustomeControllers = [];
+  controllerDirectories.forEach((controllerName) => {
+    try {
+      const customController = require('@/controllers/appControllers/' + controllerName);
+      if (customController) {
+        hasCustomeControllers.push(controllerName);
+        controller[controllerName] = customController;
+      }
+    } catch (err) {}
+  });
 
-    if (customController) {
-      hasCustomeControllers.push(controllerName);
-      appControllers[controllerName] = customController;
+  routesList.forEach(({ modelName, controllerName }) => {
+    if (!hasCustomeControllers.includes(controllerName)) {
+      controller[controllerName] = createCRUDController(modelName);
     }
-  } catch (err) {}
-});
+  });
 
-routesList.forEach(({ modelName, controllerName }) => {
-  if (!hasCustomeControllers.includes(controllerName)) {
-    appControllers[controllerName] = createCRUDController(modelName);
-  }
-});
+  return controller;
+};
 
-module.exports = appControllers;
+module.exports = appControllers();
