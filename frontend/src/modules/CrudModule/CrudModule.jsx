@@ -49,17 +49,17 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
   const show = isReadBoxOpen || isEditBoxOpen ? { opacity: 1 } : { opacity: 0 };
   return (
     <>
-      <Row style={show}>
-        <Col span={13}>
+      <Row style={show} gutter={(24, 24)}>
+        <Col span={10}>
           <p style={{ marginBottom: '10px' }}>{labels}</p>
         </Col>
-        <Col span={11}>
+        <Col span={14}>
           <Button
             onClick={removeItem}
             type="text"
             icon={<DeleteOutlined />}
             size="small"
-            style={{ float: 'right', marginLeft: '5px' }}
+            style={{ float: 'right', marginLeft: '5px', marginTop: '10px' }}
           >
             {translate('remove')}
           </Button>
@@ -68,7 +68,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             type="text"
             icon={<EditOutlined />}
             size="small"
-            style={{ float: 'right', marginLeft: '0px' }}
+            style={{ float: 'right', marginLeft: '0px', marginTop: '10px' }}
           >
             {translate('edit')}
           </Button>
@@ -93,10 +93,6 @@ function FixHeaderPanel({ config }) {
   const addNewItem = () => {
     collapsedBox.close();
   };
-
-  // const collapsePanel = () => {
-  //   panel.collapse();
-  // };
 
   return (
     <Row gutter={8}>

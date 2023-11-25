@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Row, Col, Button } from 'antd';
+import { useEffect, useState } from 'react';
+import { Row, Col } from 'antd';
 import { useSelector } from 'react-redux';
 
 import dayjs from 'dayjs';
@@ -15,12 +15,7 @@ export default function ReadItem({ config }) {
   const { isReadBoxOpen } = state;
   const [listState, setListState] = useState([]);
 
-  const isFirstRun = useRef(true);
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
-      return;
-    }
     const list = [];
     readColumns.map((props) => {
       const propsKey = props.dataIndex;
