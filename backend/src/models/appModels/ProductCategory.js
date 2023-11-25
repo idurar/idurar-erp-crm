@@ -35,7 +35,7 @@ const productCategorySchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],
@@ -47,7 +47,7 @@ const productCategorySchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],

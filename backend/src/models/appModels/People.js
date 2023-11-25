@@ -134,7 +134,7 @@ const PeopleSchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],
@@ -146,7 +146,7 @@ const PeopleSchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],

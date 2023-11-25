@@ -138,7 +138,7 @@ const employeeSchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],
@@ -150,7 +150,7 @@ const employeeSchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],

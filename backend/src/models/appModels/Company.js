@@ -164,7 +164,7 @@ const CompanySchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],
@@ -176,7 +176,7 @@ const CompanySchema = new mongoose.Schema({
       description: String,
       isPublic: {
         type: Boolean,
-        default: fale,
+        default: false,
       },
     },
   ],
