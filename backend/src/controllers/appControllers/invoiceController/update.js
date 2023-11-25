@@ -57,7 +57,7 @@ const update = async (req, res) => {
   body['taxTotal'] = taxTotal;
   body['total'] = total;
   body['items'] = items;
-  body['pdfPath'] = 'invoice-' + req.params.id + '.pdf';
+  body['pdf'] = 'invoice-' + req.params.id + '.pdf';
   // Find document by id and updates with the required fields
 
   let paymentStatus =

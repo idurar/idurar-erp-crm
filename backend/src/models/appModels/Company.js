@@ -28,9 +28,9 @@ const CompanySchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Company',
   },
-  peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
+  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
+  people: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
   defaultContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   icon: {
     type: String,
     trim: true,
@@ -39,6 +39,7 @@ const CompanySchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  imageHeader: String,
   bankName: {
     type: String,
     trim: true,
@@ -79,6 +80,7 @@ const CompanySchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  securitySocialNbr: String,
   customField: [
     {
       fieldName: {
@@ -145,42 +147,40 @@ const CompanySchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  socialMedia: {
+    facebook: String,
+    instagram: String,
+    twitter: String,
+    linkedin: String,
+    tiktok: String,
+    youtube: String,
+    snapchat: String,
+  },
   images: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   files: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   category: String,
-  status: String,
-  progressStatus: String,
-  finalStatus: String,
   approved: {
     type: Boolean,
     default: true,

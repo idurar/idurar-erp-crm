@@ -8,10 +8,6 @@ const AdminPasswordSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  enabled: {
-    type: Boolean,
-    default: true,
-  },
   user: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true, unique: true },
   password: {
     type: String,
@@ -35,6 +31,7 @@ const AdminPasswordSchema = new Schema({
   },
 });
 
+AdminPasswordSchema.index({ user: 1 });
 // generating a hash
 AdminPasswordSchema.methods.generateHash = function (salt, password) {
   return bcrypt.hashSync(salt + password, bcrypt.genSaltSync(), null);

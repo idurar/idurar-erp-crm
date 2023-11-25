@@ -18,6 +18,7 @@ const quoteSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  content: String,
   date: {
     type: Date,
     required: true,
@@ -26,6 +27,7 @@ const quoteSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+
   client: {
     type: mongoose.Schema.ObjectId,
     ref: 'Client',
@@ -92,6 +94,7 @@ const quoteSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    enum: ['draft', 'pending', 'sent', 'accepted', 'rejected', 'cancelled', 'on hold'],
     default: 'draft',
   },
   approved: {
@@ -102,10 +105,21 @@ const quoteSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  pdfPath: {
+  pdf: {
     type: String,
-    default: '',
   },
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
+    },
+  ],
   updated: {
     type: Date,
     default: Date.now,

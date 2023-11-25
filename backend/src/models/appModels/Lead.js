@@ -17,45 +17,52 @@ const leadSchema = new mongoose.Schema({
   company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
   people: { type: mongoose.Schema.ObjectId, ref: 'People' },
   interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  offer: [{ type: mongoose.Schema.ObjectId, ref: 'Offer' }],
   converted: { type: Boolean, default: false },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  adminOwner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  subTotal: {
+    type: Number,
+    default: 0,
+  },
+  taxTotal: {
+    type: Number,
+    default: 0,
+  },
+  total: {
+    type: Number,
+    default: 0,
+  },
+  discount: {
+    type: Number,
+    default: 0,
+  },
   images: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   files: [
     {
+      id: String,
       name: String,
       path: String,
       description: String,
-      tags: [
-        {
-          type: String,
-          trim: true,
-          lowercase: true,
-        },
-      ],
-      created: Date,
-      updated: Date,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
     },
   ],
   category: String,
   status: String,
-  progressStatus: String,
-  finalStatus: String,
   notes: String,
   source: String,
   approved: {

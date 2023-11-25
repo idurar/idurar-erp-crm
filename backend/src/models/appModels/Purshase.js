@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const invoiceSchema = new mongoose.Schema({
+const purchaseSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -27,39 +27,17 @@ const invoiceSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  client: {
+  supplier: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Client',
+    ref: 'Supplier',
     required: true,
     autopopulate: true,
-  },
-  converted: {
-    from: {
-      type: String,
-      enum: ['quote', 'offer'],
-    },
-    offer: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Offer',
-    },
-    quote: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Quote',
-    },
   },
   items: [
     {
       product: {
         type: mongoose.Schema.ObjectId,
         ref: 'Product',
-        required: true,
-      },
-      itemName: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
       },
       quantity: {
         type: Number,
@@ -112,10 +90,10 @@ const invoiceSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  payment: [
+  expense: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: 'Payment',
+      ref: 'Expense',
     },
   ],
   paymentStatus: {
@@ -136,7 +114,7 @@ const invoiceSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['draft', 'pending', 'sent', 'refunded', 'cancelled', 'on hold'],
+    enum: ['draft', 'pending', 'ordred', 'received', 'refunded', 'cancelled', 'on hold'],
     default: 'draft',
   },
   pdf: {
@@ -164,5 +142,5 @@ const invoiceSchema = new mongoose.Schema({
   },
 });
 
-invoiceSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Invoice', invoiceSchema);
+purchaseSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Purchase', purchaseSchema);

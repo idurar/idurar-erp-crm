@@ -9,72 +9,176 @@ const employeeSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  name: {
+  isAdmin: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  firstname: {
     type: String,
     trim: true,
     required: true,
   },
-  surname: {
+  lastname: {
     type: String,
     trim: true,
     required: true,
   },
-  birthday: {
-    type: Date,
-    required: true,
-  },
-  birthplace: {
+  birthplace: String,
+  gender: String,
+  idCardNumber: {
     type: String,
+    trim: true,
   },
-  gender: {
+  idCardType: String,
+  birthday: Date,
+  securitySocialNbr: String,
+  taxNumber: String,
+  nationality: {
     type: String,
+    trim: true,
   },
   photo: {
     type: String,
     trim: true,
   },
-  department: {
-    type: String,
-    required: true,
-  },
-  position: {
-    type: String,
-    required: true,
-  },
-  address: {
+  headerImage: {
     type: String,
     trim: true,
   },
-  state: {
+
+  bankName: {
     type: String,
+    trim: true,
+  },
+  bankIban: {
+    type: String,
+    trim: true,
+  },
+  bankSwift: {
+    type: String,
+    trim: true,
+  },
+  bankNumber: {
+    type: String,
+    trim: true,
+  },
+  bankRouting: {
+    type: String,
+    trim: true,
+  },
+  customField: [
+    {
+      fieldName: {
+        type: String,
+        trim: true,
+        lowercase: true,
+      },
+      fieldType: {
+        type: String,
+        trim: true,
+        lowercase: true,
+      },
+      fieldValue: String,
+    },
+  ],
+  location: {
+    latitude: Number,
+    longitude: Number,
+  },
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  State: {
+    type: String,
+  },
+  postaCode: {
+    type: Number,
+  },
+  country: {
+    type: String,
+    trim: true,
   },
   phone: {
     type: String,
     trim: true,
   },
+  otherPhone: [
+    {
+      type: String,
+      trim: true,
+    },
+  ],
   email: {
     type: String,
     trim: true,
+    lowercase: true,
   },
-  urgentContact: {
-    type: String,
-    trim: true,
+
+  otherEmail: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
+  socialMedia: {
+    facebook: String,
+    instagram: String,
+    twitter: String,
+    linkedin: String,
+    tiktok: String,
+    youtube: String,
+    snapchat: String,
   },
-  status: {
-    type: String,
-    default: '1',
+  images: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
+    },
+  ],
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: fale,
+      },
+    },
+  ],
+  notes: String,
+  category: String,
+  status: String,
+  approved: {
+    type: Boolean,
   },
+  verified: {
+    type: Boolean,
+  },
+  tags: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },
 });
 employeeSchema.plugin(require('mongoose-autopopulate'));
-employeeSchema.index({
-  name: 'text',
-  surname: 'text',
-  birthday: 'text',
-  status: 'text',
-});
 
 module.exports = mongoose.model('Employee', employeeSchema);
