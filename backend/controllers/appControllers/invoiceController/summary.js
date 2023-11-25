@@ -31,10 +31,10 @@ const summary = async (req, res) => {
       {
         $match: {
           removed: false,
-          date: {
-            $gte: startDate.toDate(),
-            $lte: endDate.toDate(),
-          },
+          // date: {
+          //   $gte: startDate.toDate(),
+          //   $lte: endDate.toDate(),
+          // },
         },
       },
       {
@@ -163,18 +163,22 @@ const summary = async (req, res) => {
       {
         $match: {
           removed: false,
-          date: {
-            $gte: startDate.toDate(),
-            $lte: endDate.toDate(),
+          // date: {
+          //   $gte: startDate.toDate(),
+          //   $lte: endDate.toDate(),
+          // },
+          paymentStatus: {
+            $in: ['unpaid', 'partially'],
           },
-          paymentStatus: 'unpaid',
         },
       },
       {
         $group: {
           _id: null,
           total_amount: {
-            $sum: '$total',
+            $sum: {
+              $subtract: ['$total', '$credit'],
+            },
           },
         },
       },
@@ -187,8 +191,8 @@ const summary = async (req, res) => {
     ]);
 
     const finalResult = {
-      total: totalInvoices?.total.toFixed(2),
-      total_undue: unpaid.length > 0 ? unpaid[0].total_amount.toFixed(2) : 0,
+      total: totalInvoices?.total,
+      total_undue: unpaid.length > 0 ? unpaid[0].total_amount : 0,
       type,
       performance: result,
     };

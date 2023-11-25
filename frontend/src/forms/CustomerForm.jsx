@@ -31,7 +31,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         label={translate('Manager first Name')}
-        name="managerSurname"
+        name="managerName"
         rules={[
           {
             required: true,
@@ -50,7 +50,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         label={translate('Manager Last Name')}
-        name="managerName"
+        name="managerSurname"
         rules={[
           {
             required: true,
@@ -69,6 +69,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
+        name="phone"
         label={translate('Phone')}
         rules={[
           {

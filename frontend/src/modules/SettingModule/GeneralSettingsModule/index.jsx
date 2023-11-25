@@ -13,14 +13,6 @@ export default function GeneralSettingsModule({ config }) {
       >
         <GeneralSettingForm />
       </SetingsSection>
-
-      {/* <SetingsSection title="information" description="Update your company Email, phone and adress">
-        <GeneralSettingForm />
-      </SetingsSection>
-
-      <SetingsSection title="Other details" description="Add your website and other links">
-        <GeneralSettingForm />
-      </SetingsSection> */}
     </UpdateSettingModule>
   );
 }

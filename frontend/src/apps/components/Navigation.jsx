@@ -115,6 +115,10 @@ function Sidebar({ collapsible }) {
           label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,
         },
         {
+          key: 'taxes',
+          label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
+        },
+        {
           key: 'advancedSettings',
           label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
         },
@@ -185,8 +189,14 @@ function MobileSidebar() {
   };
   return (
     <>
-      <Button type="text" size="large" onClick={showDrawer} className="mobile-sidebar-btn">
-        <MenuOutlined />
+      <Button
+        type="text"
+        size="large"
+        onClick={showDrawer}
+        className="mobile-sidebar-btn"
+        style={{ marginLeft: 25 }}
+      >
+        <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
       <Drawer
         width={200}

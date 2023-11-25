@@ -4,10 +4,12 @@
     </a>
     <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
     <p align="center">
-        <p>IDURAR ERP CRM | Simple To Use </p>
+        <p>IDURAR ERP CRM | Simple To Use | 44 Languages </p>
     </p>
     
   [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
+
+## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮   
 
 IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
@@ -16,8 +18,22 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 **Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
 
 ```
-🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩
+🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
+
+## License
+
+IDURAR is [fair-code](http://faircode.io) distributed under the
+[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
+[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
+
+Commercial licenses are available : [Get in touch](mailto:hello@idurarapp.com)
+
+## How To Deploy IDURAR ERP CRM : 
+🔥 I would like to invite you for a weekly free IDURAR Webinar (Node.js React.js course), where you learn how to deploy IDURAR on cloud , and create a new api and new crud app with IDURAR in just one hour ?
+Please fill this form if you are interested : [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
+
+The Webinar will be this Wednesday at 1pm GMT.
 
 ## Our Sponsors
 
@@ -27,7 +43,7 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 #
 
-![Open "Fair-Code" Source ERP / CRM - MERN Stack (Node.js/React.js)](https://user-images.githubusercontent.com/50052356/141647096-dcb66696-6103-4850-ae21-9fc97a412252.png)
+<img width="1403" alt="Open Source ERP CRM" src="https://github.com/idurar/idurar-erp-crm/assets/136928179/a6712286-7ca6-4822-8902-fb7523533ee8">
 
 ## Open "Fair-Code" Source ERP / CRM App
 
@@ -86,7 +102,7 @@ This command will install all the required packages specified in the package.jso
 While still in the /backend directory of the project, execute the following command to run the setup script:
 
 ```bash
-node setup/setup.js
+npm run setup
 ```
 
 This setup script may perform necessary database migrations or any other initialization tasks required for the project.
@@ -113,14 +129,12 @@ cd frontend
 npm install
 ```
 
-This command will navigate to the frontend directory within the project and install all the required packages for the frontend.
-
 #### Step 9: Run the Frontend Server
 
 After installing the frontend dependencies, run the following command in the same terminal to start the frontend server:
 
 ```bash
-npm run start
+npm run dev
 ```
 
 This command will start the frontend server, and you'll be able to access the website on localhost:3000 in your web browser.
@@ -189,13 +203,6 @@ Now you should be all set to run the project locally on your machine and explore
 
 7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
 
-## Star History
-
-Here you can see the proxy of our growth on the platform and that we're only getting started.
-
-But if you'd like to check it out more news and website you can always check it out on: https://www.idurarapp.com/.
-
-[![](image.png)](https://star-history.com/#idurar/idurar-erp-crm)
 
 ## License
 
@@ -203,7 +210,7 @@ IDURAR is [fair-code](http://faircode.io) distributed under the
 [**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
 [**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
 
-Proprietary licenses are available for enterprise customers. [Get in touch](mailto:hello@idurarapp.com)
+Commercial licenses are available : [Get in touch](mailto:hello@idurarapp.com)
 
 ## Show your support
 

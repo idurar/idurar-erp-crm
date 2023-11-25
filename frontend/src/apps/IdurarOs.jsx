@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from '@/redux/auth/selectors';
 import { AppContextProvider } from '@/context/appContext';
 import PageLoader from '@/components/PageLoader';
-
+import Localization from '@/locale/Localization';
 import AuthRouter from '@/router/AuthRouter';
-
-const Localization = lazy(() => import('@/locale/Localization'));
 
 const ErpApp = lazy(() => import('./ErpApp'));
 
@@ -17,7 +15,9 @@ export default function IdurarOs() {
   if (!isLoggedIn)
     return (
       <Localization>
-        <AuthRouter />
+        <Suspense fallback={<PageLoader />}>
+          <AuthRouter />
+        </Suspense>
       </Localization>
     );
   else {

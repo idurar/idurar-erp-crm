@@ -8,7 +8,7 @@ import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModu
 export default function Invoice() {
   const translate = useLanguage();
   const entity = 'invoice';
-  const { moneyRowFormatter } = useMoney();
+  const { moneyFormatter } = useMoney();
 
   const searchConfig = {
     displayLabels: ['name', 'surname'],
@@ -41,12 +41,28 @@ export default function Invoice() {
     {
       title: translate('Total'),
       dataIndex: 'total',
-      onCell: (total) => moneyRowFormatter({ amount: total }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
+      render: (total) => moneyFormatter({ amount: total }),
     },
     {
       title: translate('credit'),
       dataIndex: 'credit',
-      onCell: (credit) => moneyRowFormatter({ amount: credit }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+          },
+        };
+      },
+      render: (credit) => moneyFormatter({ amount: credit }),
     },
     {
       title: translate('Status'),

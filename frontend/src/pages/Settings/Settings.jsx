@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import { Menu } from 'antd';
-import { SettingOutlined, FileTextOutlined, CreditCardOutlined } from '@ant-design/icons';
-import { SettingsLayout } from '@/layout';
-import Visibility from '@/components/Visibility';
+import {
+  SettingOutlined,
+  FileTextOutlined,
+  CreditCardOutlined,
+  DollarOutlined,
+  FileImageOutlined,
+} from '@ant-design/icons';
 
-import AppSettings from './AppSettings';
+import TabsContent from '@/components/TabsContent/TabsContent';
+
+import CompanyLogoSettings from './CompanyLogoSettings';
 import GeneralSettings from './GeneralSettings';
 import PaymentSettings from './PaymentSettings';
 import InvoiceSettings from './InvoiceSettings';
@@ -12,96 +16,37 @@ import MoneyFormatSettings from './MoneyFormatSettings';
 
 import useLanguage from '@/locale/useLanguage';
 
-const settingsArray = [
-  <GeneralSettings />,
-  <AppSettings />,
-  <MoneyFormatSettings />,
-  <PaymentSettings />,
-  <InvoiceSettings />,
-];
-
-const RightMenu = ({ activeTab, items }) => {
-  return (
-    <div className="pad20" style={{ width: '100%' }}>
-      <Menu
-        mode={'vertical'}
-        selectedKeys={[activeTab]}
-        items={items}
-        style={{ width: '100%' }}
-      ></Menu>
-    </div>
-  );
-};
-
 export default function Settings() {
   const translate = useLanguage();
-  const items = [
+  const content = [
     {
-      key: 'generalSettings',
-      label: (
-        <span onClick={() => handleTabChange('generalSettings')}>
-          {translate('General Settings')}
-        </span>
-      ),
+      label: translate('General Settings'),
       icon: <SettingOutlined />,
+      children: <GeneralSettings />,
     },
     {
-      key: 'appSettings',
-      label: (
-        <span onClick={() => handleTabChange('appSettings')}>{translate('App Settings')}</span>
-      ),
-      icon: <SettingOutlined />,
+      label: translate('Company Logo'),
+      icon: <FileImageOutlined />,
+      children: <CompanyLogoSettings />,
     },
     {
-      key: 'moneyFormatSettings',
-      label: (
-        <span onClick={() => handleTabChange('moneyFormatSettings')}>
-          {translate('Currency Settings')}
-        </span>
-      ),
-      icon: <SettingOutlined />,
+      label: translate('Currency Settings'),
+      icon: <DollarOutlined />,
+      children: <MoneyFormatSettings />,
     },
     {
-      key: 'paymentSettings',
-      label: (
-        <span onClick={() => handleTabChange('paymentSettings')}>
-          {translate('Finance Settings')}
-        </span>
-      ),
+      label: translate('Finance Settings'),
       icon: <CreditCardOutlined />,
+      children: <PaymentSettings />,
     },
     {
-      key: 'invoiceSettings',
-      label: (
-        <span onClick={() => handleTabChange('invoiceSettings')}>{translate('Crm Settings')}</span>
-      ),
+      label: translate('Crm Settings'),
       icon: <FileTextOutlined />,
+      children: <InvoiceSettings />,
     },
   ];
-  const [tabKey, setTabKey] = useState(items[0].key);
-  const [tabTitle, setTabTitle] = useState(items[0].label);
 
-  const isActive = (tab) => {
-    return tabKey === tab ? true : false;
-  };
+  const pageTitle = translate('Settings');
 
-  const handleTabChange = (tab) => {
-    const menuItem = items.find((item) => item.key === tab);
-    setTabTitle(menuItem.label);
-    setTabKey(tab);
-  };
-
-  return (
-    <SettingsLayout
-      topCardContent={tabTitle}
-      topCardTitle={translate('Settings')}
-      bottomCardContent={<RightMenu activeTab={tabKey} items={items} />}
-    >
-      {settingsArray.map((setting, index) => (
-        <Visibility key={items[index].key + index} isOpen={isActive(items[index].key)}>
-          {setting}
-        </Visibility>
-      ))}
-    </SettingsLayout>
-  );
+  return <TabsContent content={content} pageTitle={pageTitle} />;
 }

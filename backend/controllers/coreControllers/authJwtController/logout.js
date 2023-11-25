@@ -16,9 +16,9 @@ const logout = async (req, res) => {
     res
       .clearCookie('token', {
         maxAge: null,
-        sameSite: 'Lax',
+        sameSite: 'none',
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' ? true : false,
+        secure: true,
         domain: req.hostname,
         Path: '/',
       })

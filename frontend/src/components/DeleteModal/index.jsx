@@ -22,7 +22,7 @@ export default function DeleteModal({ config }) {
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
   const { state, crudContextAction } = useCrudContext();
   const { appContextAction } = useAppContext();
-  const { panel, collapsedBox, readBox } = crudContextAction;
+  const { panel, readBox } = crudContextAction;
   const { navMenu } = appContextAction;
   const { isModalOpen } = state;
   const { modal } = crudContextAction;
@@ -45,8 +45,10 @@ export default function DeleteModal({ config }) {
     const id = current._id;
     dispatch(crud.delete({ entity, id }));
     readBox.close();
+    modal.close();
     panel.close();
     navMenu.collapse();
+    dispatch(crud.list({ entity }));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();

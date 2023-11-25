@@ -77,6 +77,31 @@ h6 {
   padding-bottom: 50px;
 }
 
+.tabContent :where(.css-dev-only-do-not-override-2i2tap).ant-tabs-right > .ant-tabs-content-holder,
+.tabContent
+  :where(.css-dev-only-do-not-override-2i2tap).ant-tabs-right
+  > div
+  > .ant-tabs-content-holder {
+  border-right: none;
+}
+
+.tabContent :where(.css-dev-only-do-not-override-2i2tap).ant-tabs .ant-tabs-tab + .ant-tabs-tab {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .tabContent
+    :where(.css-dev-only-do-not-override-2i2tap).ant-tabs-right
+    > .ant-tabs-content-holder
+    > .ant-tabs-content
+    > .ant-tabs-tabpane {
+    padding-right: 0;
+    margin-top: 30px;
+  }
+  .tabContent :where(.css-dev-only-do-not-override-2i2tap).ant-tabs {
+    display: block;
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
