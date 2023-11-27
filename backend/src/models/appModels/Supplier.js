@@ -109,7 +109,7 @@ const SupplierSchema = new mongoose.Schema({
   State: {
     type: String,
   },
-  postaCode: {
+  postalCode: {
     type: Number,
   },
   country: {

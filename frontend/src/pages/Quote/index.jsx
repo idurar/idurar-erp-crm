@@ -14,7 +14,7 @@ export default function Quote() {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
   };
-  const entityDisplayLabels = ['number', 'client.company'];
+  const deleteModalLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -73,12 +73,12 @@ export default function Quote() {
           status === 'draft'
             ? 'cyan'
             : status === 'sent'
-            ? 'blue'
-            : status === 'accepted'
-            ? 'green'
-            : status === 'expired'
-            ? 'orange'
-            : 'red';
+              ? 'blue'
+              : status === 'accepted'
+                ? 'green'
+                : status === 'expired'
+                  ? 'orange'
+                  : 'red';
         return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
@@ -89,8 +89,6 @@ export default function Quote() {
     DATATABLE_TITLE: translate('quote_list'),
     ADD_NEW_ENTITY: translate('add_new_quote'),
     ENTITY_NAME: translate('quote'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -101,7 +99,7 @@ export default function Quote() {
     ...configPage,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return <QuoteDataTableModule config={config} />;
 }

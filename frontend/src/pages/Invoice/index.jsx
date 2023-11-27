@@ -14,7 +14,7 @@ export default function Invoice() {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
   };
-  const entityDisplayLabels = ['number', 'client.company'];
+  const deleteModalLabels = ['number', 'client.company'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -81,10 +81,10 @@ export default function Invoice() {
           paymentStatus === 'unpaid'
             ? 'volcano'
             : paymentStatus === 'paid'
-            ? 'green'
-            : paymentStatus === 'overdue'
-            ? 'red'
-            : 'purple';
+              ? 'green'
+              : paymentStatus === 'overdue'
+                ? 'red'
+                : 'purple';
 
         return <Tag color={color}>{paymentStatus && translate(paymentStatus)}</Tag>;
       },
@@ -105,8 +105,7 @@ export default function Invoice() {
     DATATABLE_TITLE: translate('invoice_list'),
     ADD_NEW_ENTITY: translate('add_new_invoice'),
     ENTITY_NAME: translate('invoice'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
+
     RECORD_ENTITY: translate('record_payment'),
   };
 
@@ -118,7 +117,7 @@ export default function Invoice() {
     ...configPage,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
 
   return <InvoiceDataTableModule config={config} />;

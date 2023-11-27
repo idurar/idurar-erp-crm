@@ -14,7 +14,7 @@ export default function DeleteModal({ config }) {
   const translate = useLanguage();
   let {
     entity,
-    entityDisplayLabels,
+    deleteModalLabels,
     deleteMessage = translate('are_you_sure_you_want_to_delete'),
     modalTitle = translate('delete_confirmation'),
   } = config;
@@ -35,7 +35,7 @@ export default function DeleteModal({ config }) {
       // dispatch(crud.resetAction({actionType:"delete"})); // check here maybe it wrong
     }
     if (current) {
-      let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
+      let labels = deleteModalLabels.map((x) => valueByString(current, x)).join(' ');
 
       setDisplayItem(labels);
     }

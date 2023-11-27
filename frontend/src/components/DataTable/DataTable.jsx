@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react';
+
 import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -7,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/locale/useLanguage';
+import { dataForTable } from '@/utils/dataStructure';
+import { useMoney } from '@/settings';
 
 import { generate as uniqueId } from 'shortid';
 
@@ -29,10 +32,11 @@ function AddNewItem({ config }) {
   );
 }
 export default function DataTable({ config, extra = [] }) {
-  let { entity, dataTableColumns, DATATABLE_TITLE } = config;
+  let { entity, dataTableColumns, DATATABLE_TITLE, fields } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
+  const { moneyFormatter } = useMoney();
 
   const items = [
     {
@@ -83,8 +87,15 @@ export default function DataTable({ config, extra = [] }) {
     collapsedBox.open();
   }
 
+  let dispatchColumns = [];
+  if (fields) {
+    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter })];
+  } else {
+    dispatchColumns = [...dataTableColumns];
+  }
+
   dataTableColumns = [
-    ...dataTableColumns,
+    ...dispatchColumns,
     {
       title: '',
       key: 'action',

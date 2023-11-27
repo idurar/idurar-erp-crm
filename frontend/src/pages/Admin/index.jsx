@@ -13,7 +13,7 @@ export default function Admin() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['email'];
+  const deleteModalLabels = ['email'];
 
   const readColumns = [
     { title: translate('first name'), dataIndex: 'name' },
@@ -34,8 +34,7 @@ export default function Admin() {
     DATATABLE_TITLE: translate('admin_list'),
     ADD_NEW_ENTITY: translate('add_new_admin'),
     ENTITY_NAME: translate('admin'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
+
     RECORD_ENTITY: translate('record_payment'),
   };
 
@@ -48,7 +47,7 @@ export default function Admin() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <AdminCrudModule

@@ -48,7 +48,7 @@ const noCodeCollectionsSchema = new mongoose.Schema({
         default: '_id',
       },
     },
-    entityDisplayLabels: [String],
+    deleteModalLabels: [String],
   },
 
   collectionLabels: [

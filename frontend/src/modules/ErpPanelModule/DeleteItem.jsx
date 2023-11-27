@@ -10,7 +10,7 @@ import { valueByString } from '@/utils/helpers';
 export default function Delete({ config }) {
   let {
     entity,
-    entityDisplayLabels,
+    deleteModalLabels,
     deleteMessage = 'Do you want delete : ',
     modalTitle = 'Remove Item',
   } = config;
@@ -27,7 +27,7 @@ export default function Delete({ config }) {
       dispatch(erp.list({ entity }));
     }
     if (current) {
-      let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
+      let labels = deleteModalLabels.map((x) => valueByString(current, x)).join(' ');
 
       setDisplayItem(labels);
     }

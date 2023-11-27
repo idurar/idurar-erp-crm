@@ -10,8 +10,6 @@ export default function Profile() {
   const Labels = {
     PANEL_TITLE: translate('profile'),
     ENTITY_NAME: translate('profile'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const config = {

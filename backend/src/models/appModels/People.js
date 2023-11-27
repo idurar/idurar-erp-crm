@@ -27,12 +27,25 @@ const PeopleSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  idCardType: String,
-  securitySocialNbr: String,
-  taxNumber: String,
-  birthday: Date,
-  birthplace: String,
-  gender: String,
+  idCardType: {
+    type: String,
+  },
+  securitySocialNbr: {
+    type: String,
+  },
+  taxNumber: {
+    type: String,
+  },
+  birthday: {
+    type: Date,
+  },
+  birthplace: {
+    type: String,
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+  },
   photo: {
     type: String,
   },
@@ -85,7 +98,7 @@ const PeopleSchema = new mongoose.Schema({
   State: {
     type: String,
   },
-  postaCode: {
+  postalCode: {
     type: Number,
   },
   country: {

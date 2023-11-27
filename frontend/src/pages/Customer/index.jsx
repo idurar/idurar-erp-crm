@@ -13,7 +13,7 @@ export default function Customer() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['company'];
+  const deleteModalLabels = ['company'];
 
   const readColumns = [
     {
@@ -61,8 +61,6 @@ export default function Customer() {
     DATATABLE_TITLE: translate('customer_list'),
     ADD_NEW_ENTITY: translate('add_new_customer'),
     ENTITY_NAME: translate('customer'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
   const configPage = {
     entity,
@@ -73,7 +71,7 @@ export default function Customer() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
 
   return (

@@ -10,7 +10,7 @@ export default function Payment() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['number'];
+  const deleteModalLabels = ['number'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -53,8 +53,6 @@ export default function Payment() {
     DATATABLE_TITLE: translate('payment_list'),
     ADD_NEW_ENTITY: translate('add_new_payment'),
     ENTITY_NAME: translate('payment'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -65,7 +63,7 @@ export default function Payment() {
     ...configPage,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return <PaymentDataTableModule config={config} />;
 }
