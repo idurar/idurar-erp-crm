@@ -6,7 +6,7 @@ import { countryList } from '@/utils/countryList';
 export const dataForRead = ({ fields, translate }) => {
   let columns = [];
 
-  Object.keys(fields).map((key) => {
+  Object.keys(fields).forEach((key) => {
     let field = fields[key];
     columns.push({
       title: field.label ? translate(field.label) : translate(key),
@@ -21,7 +21,7 @@ export const dataForRead = ({ fields, translate }) => {
 export function dataForTable({ fields, translate, moneyFormatter }) {
   let columns = [];
   const countries = countryList(translate);
-  Object.keys(fields).map((key) => {
+  Object.keys(fields).forEach((key) => {
     let field = fields[key];
     const keyIndex = field.dataIndex ? field.dataIndex : [key];
 
