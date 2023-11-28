@@ -43,7 +43,7 @@ export const countryList = (translate) => [
   { value: 'CG', label: translate('Congo') },
   { value: 'CR', label: translate('Costa Rica') },
   { value: 'HR', label: translate('Croatia') },
-  { value: 'CU', label: translate('Cuba') },s
+  { value: 'CU', label: translate('Cuba') },
   { value: 'CY', label: translate('Cyprus') },
   { value: 'CZ', label: translate('Czechia') },
   { value: 'CI', label: translate('Cote d Ivoire') },
