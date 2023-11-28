@@ -26,7 +26,7 @@ import useLanguage from '@/locale/useLanguage';
 function SidePanelTopContent({ config, formElements }) {
   const translate = useLanguage();
   const { crudContextAction } = useCrudContext();
-  // const { entityDisplayLabels } = config;
+  // const { deleteModalLabels } = config;
   const { advancedBox, modal, editBox } = crudContextAction;
 
   // const { isReadBoxOpen, isEditBoxOpen, isAdvancedBoxOpen } = state;

@@ -29,7 +29,7 @@ const SupplierSchema = new mongoose.Schema({
     ref: 'Supplier',
   },
   peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
-  defaultContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  mainContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
   products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
   icon: {
     type: String,
@@ -109,7 +109,7 @@ const SupplierSchema = new mongoose.Schema({
   State: {
     type: String,
   },
-  postaCode: {
+  postalCode: {
     type: Number,
   },
   country: {

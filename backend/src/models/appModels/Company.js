@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CompanySchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -18,7 +18,6 @@ const CompanySchema = new mongoose.Schema({
   legalName: {
     type: String,
     trim: true,
-    required: true,
   },
   hasParentCompany: {
     type: Boolean,
@@ -28,9 +27,8 @@ const CompanySchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Company',
   },
-  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
-  people: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
-  defaultContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
+  mainContact: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
   icon: {
     type: String,
     trim: true,
@@ -110,7 +108,7 @@ const CompanySchema = new mongoose.Schema({
   State: {
     type: String,
   },
-  postaCode: {
+  postalCode: {
     type: Number,
   },
   country: {
@@ -211,4 +209,5 @@ const CompanySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Company', CompanySchema);
+schema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Company', schema);

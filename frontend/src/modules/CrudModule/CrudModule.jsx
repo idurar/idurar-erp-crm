@@ -21,7 +21,7 @@ import { CrudLayout } from '@/layout';
 function SidePanelTopContent({ config, formElements, withUpload }) {
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
-  const { entityDisplayLabels } = config;
+  const { deleteModalLabels } = config;
   const { modal, editBox } = crudContextAction;
 
   const { isReadBoxOpen, isEditBoxOpen } = state;
@@ -31,7 +31,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
   const [labels, setLabels] = useState('');
   useEffect(() => {
     if (currentItem) {
-      const currentlabels = entityDisplayLabels.map((x) => currentItem[x]).join(' ');
+      const currentlabels = deleteModalLabels.map((x) => currentItem[x]).join(' ');
 
       setLabels(currentlabels);
     }

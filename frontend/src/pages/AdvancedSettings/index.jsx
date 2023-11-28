@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useLanguage from '@/locale/useLanguage';
 
 import { Switch } from 'antd';
@@ -16,7 +14,7 @@ export default function AdvancedSettings() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['name'];
+  const deleteModalLabels = ['name'];
 
   const readColumns = [
     {
@@ -44,7 +42,7 @@ export default function AdvancedSettings() {
     {
       title: translate('Value'),
       dataIndex: 'settingValue',
-      render: (text, row) => {
+      render: (text) => {
         return `${text}`;
       },
     },
@@ -52,7 +50,7 @@ export default function AdvancedSettings() {
       title: translate('enabled'),
       dataIndex: 'enabled',
       key: 'enabled',
-      onCell: (record, rowIndex) => {
+      onCell: () => {
         return {
           props: {
             style: {
@@ -79,8 +77,7 @@ export default function AdvancedSettings() {
     DATATABLE_TITLE: translate('settings_list'),
     ADD_NEW_ENTITY: translate('add_new_settings'),
     ENTITY_NAME: translate('setting'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
+
     RECORD_ENTITY: translate('record_payment'),
   };
 
@@ -93,7 +90,7 @@ export default function AdvancedSettings() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <CrudModule

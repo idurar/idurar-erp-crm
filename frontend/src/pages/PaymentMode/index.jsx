@@ -16,7 +16,7 @@ export default function PaymentMode() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['name'];
+  const deleteModalLabels = ['name'];
 
   const readColumns = [
     {
@@ -98,8 +98,6 @@ export default function PaymentMode() {
     DATATABLE_TITLE: translate('payment_mode_list'),
     ADD_NEW_ENTITY: translate('add_new_payment_mode'),
     ENTITY_NAME: translate('payment_mode'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -111,7 +109,7 @@ export default function PaymentMode() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <CrudModule

@@ -13,9 +13,9 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  branchManager: { type: mongoose.Schema.ObjectId, ref: 'Employee', required: true },
-  branchAdmin: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  branchEmployees: { type: mongoose.Schema.ObjectId, ref: 'Employee', required: true },
+  manager: { type: mongoose.Schema.ObjectId, ref: 'Employee', required: true },
+  admin: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  Employees: [{ type: mongoose.Schema.ObjectId, ref: 'Employee', required: true }],
   location: {
     latitude: Number,
     longitude: Number,
@@ -29,7 +29,7 @@ const schema = new mongoose.Schema({
   State: {
     type: String,
   },
-  postaCode: {
+  postalCode: {
     type: Number,
   },
   country: {

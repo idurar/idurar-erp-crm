@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ClientSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -14,13 +14,14 @@ const ClientSchema = new mongoose.Schema({
     type: String,
     default: 'company',
     enum: ['company', 'people'],
+    required: true,
   },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
-  people: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company', unique: true, autopopulate: true },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People', unique: true, autopopulate: true },
   convertedFrom: { type: mongoose.Schema.ObjectId, ref: 'Lead' },
-  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product', autopopulate: true }],
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true, autopopulate: true },
+  assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   images: [
     {
       id: String,
@@ -69,4 +70,6 @@ const ClientSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Client', ClientSchema);
+schema.plugin(require('mongoose-autopopulate'));
+
+module.exports = mongoose.model('Client', schema);

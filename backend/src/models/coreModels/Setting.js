@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const settingSchema = new mongoose.Schema({
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   removed: {
     type: Boolean,
     default: false,

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PeopleSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -20,19 +20,31 @@ const PeopleSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  isClient: { type: mongoose.Schema.ObjectId, ref: 'Client' },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company', autopopulate: true },
   bio: String,
   idCardNumber: {
     type: String,
     trim: true,
   },
-  idCardType: String,
-  securitySocialNbr: String,
-  taxNumber: String,
-  birthday: Date,
-  birthplace: String,
-  gender: String,
+  idCardType: {
+    type: String,
+  },
+  securitySocialNbr: {
+    type: String,
+  },
+  taxNumber: {
+    type: String,
+  },
+  birthday: {
+    type: Date,
+  },
+  birthplace: {
+    type: String,
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+  },
   photo: {
     type: String,
   },
@@ -85,7 +97,7 @@ const PeopleSchema = new mongoose.Schema({
   State: {
     type: String,
   },
-  postaCode: {
+  postalCode: {
     type: Number,
   },
   country: {
@@ -183,4 +195,5 @@ const PeopleSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('People', PeopleSchema);
+schema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('People', schema);

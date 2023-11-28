@@ -14,7 +14,7 @@ export default function Lead() {
     searchFields: 'firstname,company',
     outputValue: '_id',
   };
-  const entityDisplayLabels = ['number', 'company'];
+  const deleteModalLabels = ['number', 'company'];
 
   const readColumns = [
     {
@@ -73,12 +73,12 @@ export default function Lead() {
           status === 'new'
             ? 'cyan'
             : status === 'reached'
-            ? 'blue'
-            : status === 'interested'
-            ? 'green'
-            : status === 'not interested'
-            ? 'orange'
-            : 'red';
+              ? 'blue'
+              : status === 'interested'
+                ? 'green'
+                : status === 'not interested'
+                  ? 'orange'
+                  : 'red';
         return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
@@ -94,8 +94,6 @@ export default function Lead() {
     DATATABLE_TITLE: translate('lead_list'),
     ADD_NEW_ENTITY: translate('add_new_lead'),
     ENTITY_NAME: translate('lead'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
   const configPage = {
     entity,
@@ -106,7 +104,7 @@ export default function Lead() {
     dataTableColumns,
     readColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <CrudModule

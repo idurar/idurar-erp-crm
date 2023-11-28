@@ -21,6 +21,7 @@ import {
   MenuOutlined,
   UserAddOutlined,
   FileOutlined,
+  ShopOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -71,7 +72,16 @@ function Sidebar({ collapsible }) {
     },
     // { key: 'order', icon: <ShopOutlined />, label: <Link to={'/'}>Lead</Link> Order },
     // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
-    // { key: 'kyc', icon: <ShoppingCartOutlined />, label: <Link to={'/'}>Lead</Link> Kyc },
+    {
+      key: 'people',
+      icon: <UserOutlined />,
+      label: <Link to={'/people'}>{translate('people')}</Link>,
+    },
+    {
+      key: 'company',
+      icon: <ShopOutlined />,
+      label: <Link to={'/company'}>{translate('company')}</Link>,
+    },
     {
       key: 'invoice',
       icon: <FileTextOutlined />,

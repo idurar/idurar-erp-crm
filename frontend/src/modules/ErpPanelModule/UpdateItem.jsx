@@ -17,22 +17,21 @@ import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { StatusTag } from '@/components/Tag';
 
-function SaveForm({ form, config }) {
-  let { UPDATE_ENTITY } = config;
+function SaveForm({ form, translate }) {
   const handelClick = () => {
     form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {UPDATE_ENTITY}
+      {translate('update')}
     </Button>
   );
 }
 
 export default function UpdateItem({ config, UpdateForm }) {
   const translate = useLanguage();
-  let { entity, UPDATE_ENTITY } = config;
+  let { entity } = config;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -109,7 +108,7 @@ export default function UpdateItem({ config, UpdateForm }) {
         onBack={() => {
           navigate(`/${entity.toLowerCase()}`);
         }}
-        title={UPDATE_ENTITY}
+        title={translate('update')}
         ghost={false}
         // tags={StatusTag(form.getFieldValue().status)}
         extra={[
@@ -122,7 +121,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           >
             {translate('Cancel')}
           </Button>,
-          <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
+          <SaveForm translate={translate} form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',
