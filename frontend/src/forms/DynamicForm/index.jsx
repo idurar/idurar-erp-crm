@@ -6,6 +6,8 @@ import useMoney from '@/settings/useMoney';
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import SelectAsync from '@/components/SelectAsync';
 
+import { countryList } from '@/utils/countryList';
+
 export default function DynamicForm({ fields, isUpdateForm = false }) {
   return (
     <>
@@ -67,6 +69,22 @@ function FormElement({ field }) {
         }}
       />
     ),
+    country: (
+      <Select
+        showSearch
+        options={countryList(translate)}
+        defaultValue={field.defaultValue}
+        filterOption={(input, option) =>
+          (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+        }
+        filterSort={(optionA, optionB) =>
+          (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
+        }
+        style={{
+          width: '100%',
+        }}
+      />
+    ),
     async: (
       <SelectAsync
         entity={field.entity}
@@ -83,6 +101,7 @@ function FormElement({ field }) {
         entity={field.entity}
         displayLabels={field.displayLabels}
         searchFields={field.searchFields}
+        outputValue={field.outputValue}
       ></AutoCompleteAsync>
     ),
     currency: (

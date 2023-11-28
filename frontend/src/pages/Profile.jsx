@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfileModule from '@/modules/ProfileModule';
 
 import useLanguage from '@/locale/useLanguage';

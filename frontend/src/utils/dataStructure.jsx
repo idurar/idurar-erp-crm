@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { countryList } from '@/utils/countryList';
 
 export const dataForRead = ({ fields, translate }) => {
   let columns = [];
@@ -19,10 +20,10 @@ export const dataForRead = ({ fields, translate }) => {
 
 export function dataForTable({ fields, translate, moneyFormatter }) {
   let columns = [];
-
+  const countries = countryList(translate);
   Object.keys(fields).map((key) => {
     let field = fields[key];
-    const keyIndex = [key];
+    const keyIndex = field.dataIndex ? field.dataIndex : [key];
 
     const component = {
       boolean: {
@@ -47,7 +48,12 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          return dayjs(record[key]).format('DD/MM/YYYY');
+          const date = dayjs(record[key]).format('DD/MM/YYYY');
+          return (
+            <Tag bordered={false} color={field.color || getRandomColor()}>
+              {date}
+            </Tag>
+          );
         },
       },
       currency: {
@@ -67,8 +73,11 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          let color = field.colors[record[key]];
-          return <Tag color={color}>{record[key] && translate(record[key])}</Tag>;
+          return (
+            <Tag bordered={false} color={field.color}>
+              {record[key] && translate(record[key])}
+            </Tag>
+          );
         },
       },
       array: {
@@ -76,23 +85,58 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         dataIndex: keyIndex,
         render: (_, record) => {
           return record[key].map((x) => (
-            <Tag key={key} color={field.colors[x]}>
+            <Tag bordered={false} key={key} color={field.colors[x]}>
               {translate(x)}
             </Tag>
           ));
         },
       },
-      default: {
+      country: {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
+        render: (_, record) => {
+          const country = countries.find((obj) => obj.value === record[key]);
+          return (
+            <Tag bordered={false} color={field.color || getRandomColor()}>
+              {country.label}
+            </Tag>
+          );
+        },
       },
+    };
+
+    const defaultComponent = {
+      title: field.label ? translate(field.label) : translate(key),
+      dataIndex: keyIndex,
     };
 
     const type = field.type.toLowerCase();
 
-    ['boolean', 'date', 'currency', 'tag'].includes(type)
+    Object.keys(component).includes(type)
       ? columns.push(component[type])
-      : columns.push(component.default);
+      : columns.push(defaultComponent);
   });
   return columns;
+}
+
+function getRandomColor() {
+  const colors = [
+    'magenta',
+    'red',
+    'volcano',
+    'orange',
+    'gold',
+    'lime',
+    'green',
+    'cyan',
+    'blue',
+    'geekblue',
+    'purple',
+  ];
+
+  // Generate a random index between 0 and the length of the colors array
+  const randomIndex = Math.floor(Math.random() * colors.length);
+
+  // Return the color at the randomly generated index
+  return colors[randomIndex];
 }

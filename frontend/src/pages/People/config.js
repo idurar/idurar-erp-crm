@@ -7,8 +7,22 @@ export const fields = {
     type: 'string',
     required: true,
   },
-  isClient: { type: 'boolean' },
-  company: { type: 'search', entity: 'company' },
+  company: {
+    type: 'search',
+    entity: 'company',
+    displayLabels: ['name'],
+    searchFields: 'name',
+    dataIndex: ['company', 'name'],
+  },
+  country: {
+    type: 'country',
+  },
+  phone: {
+    type: 'phone',
+  },
+  email: {
+    type: 'email',
+  },
   // bio: {
   //   type: 'string',
   // },
@@ -70,15 +84,6 @@ export const fields = {
   // postalCode: {
   //   type: 'number',
   // },
-  country: {
-    type: 'string',
-  },
-  phone: {
-    type: 'phone',
-  },
-  email: {
-    type: 'email',
-  },
   // website: {
   //   type: 'string',
   // },

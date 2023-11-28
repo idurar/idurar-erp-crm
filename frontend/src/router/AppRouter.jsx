@@ -40,6 +40,7 @@ const OfferRead = lazy(() => import('@/pages/Offer/OfferRead'));
 const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
 
 const People = lazy(() => import('@/pages/People'));
+const Company = lazy(() => import('@/pages/Company'));
 
 export default function AppRouter() {
   let element = useRoutes([
@@ -62,6 +63,10 @@ export default function AppRouter() {
     {
       path: '/people',
       element: <People />,
+    },
+    {
+      path: '/company',
+      element: <Company />,
     },
     {
       path: '/inventory',
