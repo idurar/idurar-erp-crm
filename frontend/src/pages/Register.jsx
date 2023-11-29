@@ -4,6 +4,8 @@ import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
 import { register } from '@/redux/auth/actions';
 import RegisterForm from '@/forms/RegisterForm';
 import AuthLayout from '@/layout/AuthLayout';
+
+import logo from '@/style/images/logo.png';
 import SideContent from '@/components/SideContent';
 
 import useLanguage from '@/locale/useLanguage';
@@ -47,8 +49,8 @@ const RegisterPage = () => {
           <Divider />
           <div className="site-layout-content">
             <Form
-              name="signup"
-              className="login-form"
+              name="normal_register"
+              className="register-form"
               initialValues={{
                 remember: true,
               }}

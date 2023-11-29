@@ -9,6 +9,8 @@ export default function useOnFetch() {
     setIsLoading(true);
 
     const data = await fetchingFn();
+    console.log(data);
+
     setResult(data.result);
     if (data.success === true) {
       setIsSuccess(true);

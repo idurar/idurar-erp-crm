@@ -1,10 +1,4 @@
 .navigation {
-  position: sticky;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  top: 0;
-  left: 0;
   z-index: 1000;
   background: #fff;
   border-right: 1px solid #edf0f5;

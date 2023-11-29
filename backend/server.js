@@ -13,8 +13,7 @@ require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
 
 // Connect to our Database and handle any bad connections
-// mongoose.connect(process.env.DATABASE);
-
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (error) => {

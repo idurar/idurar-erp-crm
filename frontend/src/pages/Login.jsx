@@ -11,6 +11,8 @@ import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import AuthLayout from '@/layout/AuthLayout';
+
+import logo from '@/style/images/logo.png';
 import SideContent from '@/components/SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
 

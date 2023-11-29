@@ -15,6 +15,7 @@ const beforeUpload = (file) => {
   }
   return isJpgOrPng && isLt2M;
 };
+
 export default function UploadImg() {
   const translate = useLanguage();
   return (

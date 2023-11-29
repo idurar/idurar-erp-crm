@@ -74,6 +74,36 @@ export default function RegisterForm() {
         />
       </Form.Item>
       <Form.Item
+        name="surname"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your surname!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<UsergroupAddOutlined className="site-form-item-icon" />}
+          placeholder="Surname"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
+        name="companyRegNumber"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your company registration number!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<IdcardOutlined className="site-form-item-icon" />}
+          placeholder="Company registration number"
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item
         name="email"
         rules={[
           {
@@ -85,9 +115,9 @@ export default function RegisterForm() {
         ]}
       >
         <Input
-          prefix={<MailOutlined className="site-form-item-icon" />}
-          type="email"
+          prefix={<EditOutlined className="site-form-item-icon" />}
           placeholder="Email"
+          autoComplete="email"
           size="large"
         />
       </Form.Item>
