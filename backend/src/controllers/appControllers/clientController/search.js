@@ -1,4 +1,9 @@
-const search = async (Model, req, res) => {
+const { migrate } = require('./migrate');
+const mongoose = require('mongoose');
+
+const Model = mongoose.model('Client');
+
+const search = async (req, res) => {
   // console.log(req.query.fields)
   if (req.query.q === undefined || req.query.q.trim() === '') {
     return res
@@ -23,10 +28,12 @@ const search = async (Model, req, res) => {
 
   let results = await Model.find(fields).where('removed', false).limit(10).exec();
 
+  const migratedData = results.map((x) => migrate(x));
+
   if (results.length >= 1) {
     return res.status(200).json({
       success: true,
-      result: results,
+      result: migratedData,
       message: 'Successfully found all documents',
     });
   } else {

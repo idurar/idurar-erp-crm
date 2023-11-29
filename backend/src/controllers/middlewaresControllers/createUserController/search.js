@@ -25,7 +25,11 @@ const search = async (userModel, req, res) => {
   for (const field of fieldsArray) {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
-  let result = await User.find(fields).where('removed', false).sort({ name: 'asc' }).limit(10);
+  let result = await User.find(fields)
+    .where('removed', false)
+    .sort({ name: 'asc' })
+    .limit(10)
+    .exec();
 
   if (result.length >= 1) {
     return res.status(200).json({

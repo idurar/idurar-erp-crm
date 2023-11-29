@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from '@/utils/countryList';
+import { generate as uniqueId } from 'shortid';
 
 export const dataForRead = ({ fields, translate }) => {
   let columns = [];
@@ -20,7 +21,7 @@ export const dataForRead = ({ fields, translate }) => {
 
 export function dataForTable({ fields, translate, moneyFormatter }) {
   let columns = [];
-  const countries = countryList(translate);
+
   Object.keys(fields).forEach((key) => {
     let field = fields[key];
     const keyIndex = field.dataIndex ? field.dataIndex : [key];
@@ -85,7 +86,7 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         dataIndex: keyIndex,
         render: (_, record) => {
           return record[key].map((x) => (
-            <Tag bordered={false} key={key} color={field.colors[x]}>
+            <Tag bordered={false} key={`${uniqueId()}`} color={field.colors[x]}>
               {translate(x)}
             </Tag>
           ));
@@ -95,10 +96,10 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          const country = countries.find((obj) => obj.value === record[key]);
+          const selectedCountry = countryList(translate).find((obj) => obj.value === record[key]);
           return (
             <Tag bordered={false} color={field.color || getRandomColor()}>
-              {country.label}
+              {translate(selectedCountry.label)}
             </Tag>
           );
         },
@@ -112,10 +113,13 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
 
     const type = field.type.toLowerCase();
 
-    Object.keys(component).includes(type)
-      ? columns.push(component[type])
-      : columns.push(defaultComponent);
+    if (!field.disableForTable) {
+      Object.keys(component).includes(type)
+        ? columns.push(component[type])
+        : columns.push(defaultComponent);
+    }
   });
+
   return columns;
 }
 

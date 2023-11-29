@@ -53,7 +53,7 @@ const invoiceSchema = new mongoose.Schema({
       product: {
         type: mongoose.Schema.ObjectId,
         ref: 'Product',
-        required: true,
+        // required: true,
       },
       itemName: {
         type: String,

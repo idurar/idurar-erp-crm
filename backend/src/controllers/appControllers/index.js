@@ -11,19 +11,23 @@ const controllerDirectories = globSync(pattern).map((filePath) => {
 
 const appControllers = () => {
   const controllers = {};
-  const hasCustomeControllers = [];
+  const hasCustomControllers = [];
+
   controllerDirectories.forEach((controllerName) => {
     try {
       const customController = require('@/controllers/appControllers/' + controllerName);
+
       if (customController) {
-        hasCustomeControllers.push(controllerName);
+        hasCustomControllers.push(controllerName);
         controllers[controllerName] = customController;
       }
-    } catch (err) {}
+    } catch (err) {
+      throw new Error(err.message);
+    }
   });
 
   routesList.forEach(({ modelName, controllerName }) => {
-    if (!hasCustomeControllers.includes(controllerName)) {
+    if (!hasCustomControllers.includes(controllerName)) {
       controllers[controllerName] = createCRUDController(modelName);
     }
   });

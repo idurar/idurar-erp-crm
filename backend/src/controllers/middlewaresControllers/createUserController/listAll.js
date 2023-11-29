@@ -9,7 +9,8 @@ const listAll = async (userModel, req, res) => {
   const result = await User.find({ removed: false })
     .limit(limit)
     .sort({ created: 'desc' })
-    .populate();
+    .populate()
+    .exec();
   // Counting the total documents
   // Resolving both promises
   // Calculating total pages

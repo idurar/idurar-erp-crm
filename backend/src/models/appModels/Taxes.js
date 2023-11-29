@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TaxSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -27,4 +27,4 @@ const TaxSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Tax', TaxSchema);
+module.exports = mongoose.model('Taxes', schema);

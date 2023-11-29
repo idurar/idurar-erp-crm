@@ -11,10 +11,10 @@ export default function Invoice() {
   const { moneyFormatter } = useMoney();
 
   const searchConfig = {
-    displayLabels: ['name', 'surname'],
-    searchFields: 'name,surname,birthday',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-  const deleteModalLabels = ['number', 'client.company'];
+  const deleteModalLabels = ['number', 'client.name'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -22,7 +22,7 @@ export default function Invoice() {
     },
     {
       title: translate('Client'),
-      dataIndex: ['client', 'company'],
+      dataIndex: ['client', 'name'],
     },
     {
       title: translate('Date'),

@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company', autopopulate: true },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
   bio: String,
   idCardNumber: {
     type: String,
