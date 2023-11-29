@@ -1,0 +1,15 @@
+{
+  "name": "mnm-crm",
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ]
+}
