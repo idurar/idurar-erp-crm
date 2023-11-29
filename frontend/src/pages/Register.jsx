@@ -10,8 +10,6 @@ import SideContent from '@/components/SideContent';
 
 import useLanguage from '@/locale/useLanguage';
 
-import logo from '@/style/images/logo.png';
-
 const { Content } = Layout;
 const { Title } = Typography;
 

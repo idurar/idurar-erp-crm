@@ -16,8 +16,6 @@ import logo from '@/style/images/logo.png';
 import SideContent from '@/components/SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
 
-import logo from '@/style/images/logo.png';
-
 const { Content } = Layout;
 const { Title } = Typography;
 
