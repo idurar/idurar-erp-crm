@@ -1,66 +1,23 @@
 import CrudModule from '@/modules/CrudModule/CrudModule';
-import CustomerForm from '@/forms/CustomerForm';
+import DynamicForm from '@/forms/DynamicForm';
+import { fields } from './config';
 
 import useLanguage from '@/locale/useLanguage';
 
-export default function Customer() {
+export default function People() {
   const translate = useLanguage();
   const entity = 'client';
-
   const searchConfig = {
-    displayLabels: ['company'],
-    searchFields: 'company,managerSurname,managerName',
-    outputValue: '_id',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-
-  const deleteModalLabels = ['company'];
-
-  const readColumns = [
-    {
-      title: translate('Company'),
-      dataIndex: 'company',
-    },
-    {
-      title: translate('Manager first name'),
-      dataIndex: 'managerName',
-    },
-    {
-      title: translate('Manager last name'),
-      dataIndex: 'managerSurname',
-    },
-    {
-      title: translate('Email'),
-      dataIndex: 'email',
-    },
-    {
-      title: translate('Phone'),
-      dataIndex: 'phone',
-    },
-  ];
-  const dataTableColumns = [
-    {
-      title: translate('Company'),
-      dataIndex: 'company',
-    },
-    {
-      title: translate('Manager first name'),
-      dataIndex: 'managerName',
-    },
-    {
-      title: translate('Manager last name'),
-      dataIndex: 'managerSurname',
-    },
-    {
-      title: translate('Email'),
-      dataIndex: 'email',
-    },
-  ];
+  const deleteModalLabels = ['name'];
 
   const Labels = {
-    PANEL_TITLE: translate('customer'),
-    DATATABLE_TITLE: translate('customer_list'),
-    ADD_NEW_ENTITY: translate('add_new_customer'),
-    ENTITY_NAME: translate('customer'),
+    PANEL_TITLE: translate('client'),
+    DATATABLE_TITLE: translate('client_list'),
+    ADD_NEW_ENTITY: translate('add_new_client'),
+    ENTITY_NAME: translate('client'),
   };
   const configPage = {
     entity,
@@ -68,16 +25,14 @@ export default function Customer() {
   };
   const config = {
     ...configPage,
-    readColumns,
-    dataTableColumns,
+    fields,
     searchConfig,
     deleteModalLabels,
   };
-
   return (
     <CrudModule
-      createForm={<CustomerForm />}
-      updateForm={<CustomerForm isUpdateForm={true} />}
+      createForm={<DynamicForm fields={fields} />}
+      updateForm={<DynamicForm fields={fields} />}
       config={config}
     />
   );

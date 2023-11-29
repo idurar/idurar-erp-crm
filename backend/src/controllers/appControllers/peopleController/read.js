@@ -1,11 +1,7 @@
-const mongoose = require('mongoose');
-
-const Model = mongoose.model('Quote');
-
-const read = async (req, res) => {
+const read = async (Model, req, res) => {
   // Find document by id
   const result = await Model.findOne({ _id: req.params.id, removed: false })
-    .populate('createdBy', 'name')
+    .populate('company', 'name')
     .exec();
   // If no results found, return document not found
   if (!result) {

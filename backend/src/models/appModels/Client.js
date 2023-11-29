@@ -16,50 +16,18 @@ const schema = new mongoose.Schema({
     enum: ['company', 'people'],
     required: true,
   },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company', unique: true, autopopulate: true },
-  people: { type: mongoose.Schema.ObjectId, ref: 'People', unique: true, autopopulate: true },
+  name: {
+    type: String,
+    required: true,
+  },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company', autopopulate: true },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
   convertedFrom: { type: mongoose.Schema.ObjectId, ref: 'Lead' },
-  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product', autopopulate: true }],
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true, autopopulate: true },
+  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  images: [
-    {
-      id: String,
-      name: String,
-      path: String,
-      description: String,
-      isPublic: {
-        type: Boolean,
-        default: false,
-      },
-    },
-  ],
-  files: [
-    {
-      id: String,
-      name: String,
-      path: String,
-      description: String,
-      isPublic: {
-        type: Boolean,
-        default: false,
-      },
-    },
-  ],
   source: String,
   category: String,
-  notes: String,
-  approved: {
-    type: Boolean,
-    default: false,
-  },
-  tags: [
-    {
-      type: String,
-      trim: true,
-      lowercase: true,
-    },
-  ],
   created: {
     type: Date,
     default: Date.now,

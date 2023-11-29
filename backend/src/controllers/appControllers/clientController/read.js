@@ -1,15 +1,13 @@
+const { migrate } = require('./migrate');
 const mongoose = require('mongoose');
 
-const read = async (userModel, req, res) => {
-  const User = mongoose.model(userModel);
+const Model = mongoose.model('Client');
 
+const read = async (req, res) => {
   // Find document by id
-  const tmpResult = await User.findOne({
-    _id: req.params.id,
-    removed: false,
-  }).exec();
+  let result = await Model.findOne({ _id: req.params.id, removed: false }).exec();
   // If no results found, return document not found
-  if (!tmpResult) {
+  if (!result) {
     return res.status(404).json({
       success: false,
       result: null,
@@ -17,19 +15,12 @@ const read = async (userModel, req, res) => {
     });
   } else {
     // Return success resposne
-    let result = {
-      _id: tmpResult._id,
-      enabled: tmpResult.enabled,
-      email: tmpResult.email,
-      name: tmpResult.name,
-      surname: tmpResult.surname,
-      photo: tmpResult.photo,
-      role: tmpResult.role,
-    };
+
+    const migratedData = migrate(result);
 
     return res.status(200).json({
       success: true,
-      result,
+      result: migratedData,
       message: 'we found this document by this id: ' + req.params.id,
     });
   }

@@ -8,10 +8,10 @@ export default function People() {
   const translate = useLanguage();
   const entity = 'company';
   const searchConfig = {
-    displayLabels: ['firstname', 'lastname'],
-    searchFields: 'firstname,lastname',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-  const deleteModalLabels = ['firstname', 'lastname'];
+  const deleteModalLabels = ['name'];
 
   const Labels = {
     PANEL_TITLE: translate('company'),

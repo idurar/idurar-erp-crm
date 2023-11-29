@@ -8,7 +8,8 @@ const listAllSetting = async () => {
     //  Query the database for a list of all results
     const result = await Model.find({ removed: false, isPrivate: false })
       .sort({ created: sort })
-      .populate();
+      .populate()
+      .exec();
 
     if (result.length > 0) {
       return result;

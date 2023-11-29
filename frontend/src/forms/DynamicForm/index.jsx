@@ -13,6 +13,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
     <>
       {Object.keys(fields).map((key) => {
         let field = fields[key];
+
         if ((isUpdateForm && !field.disableForUpdate) || !field.disableForForm) {
           field.name = key;
           field.type = field.type.toLowerCase();

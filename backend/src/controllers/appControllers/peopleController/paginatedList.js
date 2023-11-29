@@ -1,8 +1,4 @@
-const mongoose = require('mongoose');
-
-const Model = mongoose.model('Offer');
-
-const paginatedList = async (req, res) => {
+const paginatedList = async (Model, req, res) => {
   const page = req.query.page || 1;
   const limit = parseInt(req.query.items) || 10;
   const skip = page * limit - limit;
@@ -12,12 +8,13 @@ const paginatedList = async (req, res) => {
     .skip(skip)
     .limit(limit)
     .sort({ created: 'desc' })
-    .populate('createdBy', 'name')
+    .populate('company', 'name')
     .exec();
   // Counting the total documents
   const countPromise = Model.countDocuments({ removed: false });
   // Resolving both promises
   const [result, count] = await Promise.all([resultsPromise, countPromise]);
+
   // Calculating total pages
   const pages = Math.ceil(count / limit);
 
@@ -32,7 +29,7 @@ const paginatedList = async (req, res) => {
     });
   } else {
     return res.status(203).json({
-      success: true,
+      success: false,
       result: [],
       pagination,
       message: 'Collection is Empty',

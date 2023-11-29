@@ -9,6 +9,9 @@ async function deleteData() {
   const AdminPassword = require('../models/coreModels/AdminPassword');
   const Setting = require('../models/coreModels/Setting');
   const Email = require('../models/coreModels/Email');
+  const Client = require('../models/appModels/Client');
+  await Client.deleteMany();
+  console.log('👍 client Deleted. To setup demo admin data, run\n\n\t npm run setup\n\n');
   await Admin.deleteMany();
   await AdminPassword.deleteMany();
   console.log('👍 admin Deleted. To setup demo admin data, run\n\n\t npm run setup\n\n');

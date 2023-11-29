@@ -1,14 +1,25 @@
 const { basename, extname } = require('path');
 const { globSync } = require('glob');
 
-const modelsFiles = globSync('./src/models/appModels/**/*.js');
+const appModelsFiles = globSync('./src/models/appModels/**/*.js');
+
+const pattern = './src/models/**/*.js';
+
+const modelsFiles = globSync(pattern).map((filePath) => {
+  const fileNameWithExtension = basename(filePath);
+  const fileNameWithoutExtension = fileNameWithExtension.replace(
+    extname(fileNameWithExtension),
+    ''
+  );
+  return fileNameWithoutExtension;
+});
 
 const constrollersList = [];
-const modelslist = [];
+const appModelsList = [];
 const entityList = [];
 const routesList = [];
 
-for (const filePath of modelsFiles) {
+for (const filePath of appModelsFiles) {
   const fileNameWithExtension = basename(filePath);
   const fileNameWithoutExtension = fileNameWithExtension.replace(
     extname(fileNameWithExtension),
@@ -24,7 +35,7 @@ for (const filePath of modelsFiles) {
 
   controllerName = fileNameLowerCaseFirstChar + 'Controller';
   constrollersList.push(controllerName);
-  modelslist.push(modelName);
+  appModelsList.push(modelName);
   entityList.push(entity);
 
   const route = {
@@ -35,4 +46,4 @@ for (const filePath of modelsFiles) {
   routesList.push(route);
 }
 
-module.exports = { constrollersList, modelslist, entityList, routesList };
+module.exports = { constrollersList, appModelsList, modelsFiles, entityList, routesList };
