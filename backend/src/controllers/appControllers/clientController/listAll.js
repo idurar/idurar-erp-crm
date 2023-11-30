@@ -19,7 +19,7 @@ const listAll = async (req, res) => {
     });
   } else {
     return res.status(203).json({
-      success: false,
+      success: true,
       result: [],
       message: 'Collection is Empty',
     });

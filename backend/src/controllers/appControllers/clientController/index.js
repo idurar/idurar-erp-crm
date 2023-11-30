@@ -5,6 +5,7 @@ const summary = require('./summary');
 const create = require('./create');
 const read = require('./read');
 const search = require('./search');
+const update = require('./update');
 
 const listAll = require('./listAll');
 const paginatedList = require('./paginatedList');
@@ -15,6 +16,7 @@ function modelController() {
   methods.summary = summary;
   methods.create = create;
   methods.read = read;
+  methods.update = update;
   methods.search = search;
   methods.list = paginatedList;
   methods.listAll = listAll;

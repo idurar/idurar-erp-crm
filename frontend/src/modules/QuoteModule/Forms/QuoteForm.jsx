@@ -16,7 +16,7 @@ import useLanguage from '@/locale/useLanguage';
 
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
-import SelectAsync from "@/components/SelectAsync";
+import SelectAsync from '@/components/SelectAsync';
 
 export default function QuoteForm({ subTotal = 0, current = null }) {
   const { last_quote_number } = useSelector(selectFinanceSettings);
@@ -38,13 +38,13 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
-    setTaxRate(value/100);
+    setTaxRate(value / 100);
   };
 
   useEffect(() => {
     if (current) {
       const { taxRate = 0, year, number } = current;
-      setTaxRate(taxRate);
+      setTaxRate(taxRate / 100);
       setCurrentYear(year);
       setLastNumber(number);
     }
@@ -76,8 +76,8 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
           >
             <AutoCompleteAsync
               entity={'client'}
-              displayLabels={['company']}
-              searchFields={'company'}
+              displayLabels={['name']}
+              searchFields={'name'}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
@@ -241,16 +241,16 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
               ]}
             >
               <SelectAsync
-                  value={taxRate}
-                  onChange={handelTaxChange}
-                  bordered={false}
-                  entity={'taxes'}
-                  outputValue={'taxValue'}
-                  displayLabels={['taxName']}
-                  loadDefault={true}
-                  withRedirect={true}
-                  urlToRedirect="/taxes"
-                  redirectLabel="Add New Tax"
+                value={taxRate}
+                onChange={handelTaxChange}
+                bordered={false}
+                entity={'taxes'}
+                outputValue={'taxValue'}
+                displayLabels={['taxName']}
+                loadDefault={true}
+                withRedirect={true}
+                urlToRedirect="/taxes"
+                redirectLabel="Add New Tax"
               />
             </Form.Item>
           </Col>

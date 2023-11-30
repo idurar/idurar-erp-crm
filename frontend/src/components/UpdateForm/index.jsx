@@ -48,31 +48,31 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       if (newValues.birthday) {
         newValues = {
           ...newValues,
-          birthday: dayjs(newValues['birthday']),
+          birthday: dayjs(newValues['birthday']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.date) {
         newValues = {
           ...newValues,
-          date: dayjs(newValues['date']),
+          date: dayjs(newValues['date']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.expiredDate) {
         newValues = {
           ...newValues,
-          expiredDate: dayjs(newValues['expiredDate']),
+          expiredDate: dayjs(newValues['expiredDate']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.created) {
         newValues = {
           ...newValues,
-          created: dayjs(newValues['created']),
+          created: dayjs(newValues['created']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.updated) {
         newValues = {
           ...newValues,
-          updated: dayjs(newValues['updated']),
+          updated: dayjs(newValues['updated']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
 

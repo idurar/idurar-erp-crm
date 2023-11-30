@@ -27,6 +27,10 @@ const schema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Company',
   },
+  isClient: {
+    type: Boolean,
+    default: false,
+  },
   peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true }],
   mainContact: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
   icon: {

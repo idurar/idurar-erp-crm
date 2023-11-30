@@ -23,49 +23,6 @@ import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 
-const Item = ({ item }) => {
-  const { moneyFormatter } = useMoney();
-  return (
-    <Row gutter={[12, 0]} key={item._id}>
-      <Col className="gutter-row" span={11}>
-        <p style={{ marginBottom: 5 }}>
-          <strong>{item.itemName}</strong>
-        </p>
-        <p>{item.description}</p>
-      </Col>
-      <Col className="gutter-row" span={4}>
-        <p
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          {moneyFormatter({ amount: item.price })}
-        </p>
-      </Col>
-      <Col className="gutter-row" span={4}>
-        <p
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          {item.quantity}
-        </p>
-      </Col>
-      <Col className="gutter-row" span={5}>
-        <p
-          style={{
-            textAlign: 'right',
-            fontWeight: '700',
-          }}
-        >
-          {moneyFormatter({ amount: item.total })}
-        </p>
-      </Col>
-      <Divider dashed style={{ marginTop: 0, marginBottom: 15 }} />
-    </Row>
-  );
-};
-
 export default function ReadItem({ config, selectedItem }) {
   const translate = useLanguage();
   const { entity, ENTITY_NAME } = config;
@@ -80,7 +37,7 @@ export default function ReadItem({ config, selectedItem }) {
   const resetErp = {
     status: '',
     client: {
-      company: '',
+      name: '',
       email: '',
       phone: '',
       address: '',

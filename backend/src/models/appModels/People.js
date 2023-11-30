@@ -20,6 +20,10 @@ const schema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  isClient: {
+    type: Boolean,
+    default: false,
+  },
   company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
   bio: String,
   idCardNumber: {
