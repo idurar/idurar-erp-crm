@@ -199,12 +199,15 @@ function MobileSidebar() {
         <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
       <Drawer
-        width={200}
+        width={250}
+        contentWrapperStyle={{
+          boxShadow: 'none',
+        }}
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
         placement="left"
         closable={false}
         onClose={onClose}
         open={visible}
-        rootClassName="mobile-sidebar-wraper"
       >
         <Sidebar collapsible={false} />
       </Drawer>
