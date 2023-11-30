@@ -52,6 +52,7 @@ export default function ReadItem({ config, selectedItem }) {
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
+  const [client, setClient] = useState({});
 
   useEffect(() => {
     const controller = new AbortController();
@@ -61,6 +62,12 @@ export default function ReadItem({ config, selectedItem }) {
     }
     return () => controller.abort();
   }, [currentResult]);
+
+  useEffect(() => {
+    if (currentErp?.client) {
+      setClient(currentErp.client[currentErp.client.type]);
+    }
+  }, [currentErp]);
 
   return (
     <>
@@ -150,12 +157,10 @@ export default function ReadItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`${translate('Client')} : ${currentErp.client.company}`}>
-        <Descriptions.Item label={translate('Address')}>
-          {currentErp.client.address}
-        </Descriptions.Item>
-        <Descriptions.Item label={translate('email')}>{currentErp.client.email}</Descriptions.Item>
-        <Descriptions.Item label={translate('Phone')}>{currentErp.client.phone}</Descriptions.Item>
+      <Descriptions title={`${translate('Client')} : ${currentErp.client.name}`}>
+        <Descriptions.Item label={translate('Address')}>{client.address}</Descriptions.Item>
+        <Descriptions.Item label={translate('email')}>{client.email}</Descriptions.Item>
+        <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row>
