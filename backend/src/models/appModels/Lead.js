@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const leadSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -9,14 +9,19 @@ const leadSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
   type: {
     type: String,
     default: 'company',
     enum: ['company', 'people'],
+    required: true,
   },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company' },
-  people: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  name: {
+    type: String,
+    required: true,
+  },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company', autopopulate: true },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
   interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
   offer: [{ type: mongoose.Schema.ObjectId, ref: 'Offer' }],
   converted: { type: Boolean, default: false },
@@ -24,19 +29,15 @@ const leadSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   subTotal: {
     type: Number,
-    default: 0,
   },
   taxTotal: {
     type: Number,
-    default: 0,
   },
   total: {
     type: Number,
-    default: 0,
   },
   discount: {
     type: Number,
-    default: 0,
   },
   images: [
     {
@@ -87,4 +88,5 @@ const leadSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Lead', leadSchema);
+schema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Lead', schema);

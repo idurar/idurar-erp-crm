@@ -4,17 +4,17 @@ const remove = require('./remove');
 const summary = require('./summary');
 
 const create = require('./create');
+const update = require('./update');
 const read = require('./read');
 const search = require('./search');
-const update = require('./update');
 
 const listAll = require('./listAll');
 const paginatedList = require('./paginatedList');
 
 function modelController() {
-  const Model = mongoose.model('Client');
-  const methods = createCRUDController('Client');
-
+  const modelName = 'Lead';
+  const Model = mongoose.model(modelName);
+  const methods = createCRUDController(modelName);
   methods.read = (req, res) => read(Model, req, res);
   methods.delete = (req, res) => remove(Model, req, res);
   methods.list = (req, res) => paginatedList(Model, req, res);

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-const Model = mongoose.model('Client');
 const QuoteModel = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
-const remove = async (req, res) => {
+const remove = async (Model, req, res) => {
   // cannot delete client it it have one invoice or quotes:
   // check if client have invoice or quotes:
   const { id } = req.params;

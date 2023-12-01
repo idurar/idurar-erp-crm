@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const update = async (req, res) => {
+const update = async (Model, req, res) => {
   // Find document by id and updates with the required fields
   return res.status(200).json({
     success: false,
