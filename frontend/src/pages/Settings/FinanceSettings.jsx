@@ -1,8 +1,8 @@
 import useLanguage from '@/locale/useLanguage';
 
-import GeneralSettingsModule from '@/modules/SettingModule/GeneralSettingsModule';
+import FinanceSettingsModule from '@/modules/SettingModule/FinanceSettingsModule';
 
-export default function GeneralSettings() {
+export default function FinanceSettings() {
   const translate = useLanguage();
 
   const entity = 'setting';
@@ -13,13 +13,13 @@ export default function GeneralSettings() {
     ADD_NEW_ENTITY: translate('add_new_settings'),
     ENTITY_NAME: translate('settings'),
 
-    SETTINGS_TITLE: translate('General Settings'),
+    SETTINGS_TITLE: translate('Finance Settings'),
   };
 
   const configPage = {
     entity,
-    settingsCategory: 'app_settings',
+    settingsCategory: 'finance_settings',
     ...Labels,
   };
-  return <GeneralSettingsModule config={configPage} />;
+  return <FinanceSettingsModule config={configPage} />;
 }

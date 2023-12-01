@@ -1,6 +1,5 @@
 import {
   SettingOutlined,
-  FileTextOutlined,
   CreditCardOutlined,
   DollarOutlined,
   FileImageOutlined,
@@ -12,8 +11,7 @@ import TabsContent from '@/components/TabsContent/TabsContent';
 import CompanyLogoSettings from './CompanyLogoSettings';
 import GeneralSettings from './GeneralSettings';
 import CompanySettings from './CompanySettings';
-import PaymentSettings from './PaymentSettings';
-import InvoiceSettings from './InvoiceSettings';
+import FinanceSettings from './FinanceSettings';
 import MoneyFormatSettings from './MoneyFormatSettings';
 
 import useLanguage from '@/locale/useLanguage';
@@ -51,13 +49,7 @@ export default function Settings() {
       key: 'finance_settings',
       label: translate('Finance Settings'),
       icon: <CreditCardOutlined />,
-      children: <PaymentSettings />,
-    },
-    {
-      key: 'crm_settings',
-      label: translate('Crm Settings'),
-      icon: <FileTextOutlined />,
-      children: <InvoiceSettings />,
+      children: <FinanceSettings />,
     },
   ];
 

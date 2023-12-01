@@ -125,6 +125,7 @@ export default function HeaderContent() {
             color: '#f56a00',
             backgroundColor: !hasPhotoprofile ? '#fde3cf' : '#f9fafc',
             float: 'right',
+            cursor: 'pointer',
           }}
           size="large"
         >

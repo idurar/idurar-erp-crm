@@ -22,7 +22,7 @@ const SelectLanguage = () => {
       showSearch
       placeholder={translate('select language')}
       defaultValue={langCode}
-      style={{ width: '120px', float: 'right', marginTop: '5px' }}
+      style={{ width: '120px', float: 'right', marginTop: '5px', cursor: 'pointer' }}
       optionFilterProp="children"
       filterOption={(input, option) => (option?.label ?? '').includes(input.toLowerCase())}
       filterSort={(optionA, optionB) =>
