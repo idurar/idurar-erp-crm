@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { DatePicker, Input, Form, Select, InputNumber, Switch } from 'antd';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -9,6 +10,7 @@ import SelectAsync from '@/components/SelectAsync';
 import { countryList } from '@/utils/countryList';
 
 export default function DynamicForm({ fields, isUpdateForm = false }) {
+  const [feedback, setFeedback] = useState();
   return (
     <>
       {Object.keys(fields).map((key) => {
@@ -18,14 +20,20 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
           field.name = key;
           field.type = field.type.toLowerCase();
           if (!field.label) field.label = key;
-          return <FormElement key={key} field={field} />;
+          if (field.hasFeedback)
+            return <FormElement setFeedback={setFeedback} key={key} field={field} />;
+          else if (feedback && field.feedback) {
+            if (feedback == field.feedback) return <FormElement key={key} field={field} />;
+          } else {
+            return <FormElement key={key} field={field} />;
+          }
         }
       })}
     </>
   );
 }
 
-function FormElement({ field }) {
+function FormElement({ field, setFeedback }) {
   const translate = useLanguage();
   const money = useMoney();
 
@@ -44,6 +52,16 @@ function FormElement({ field }) {
     ),
     select: (
       <Select
+        options={field.options}
+        defaultValue={field.defaultValue}
+        style={{
+          width: '100%',
+        }}
+      />
+    ),
+    selectwithfeedback: (
+      <Select
+        onChange={(value) => setFeedback(value)}
         options={field.options}
         defaultValue={field.defaultValue}
         style={{

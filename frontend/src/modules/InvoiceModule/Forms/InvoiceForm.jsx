@@ -36,6 +36,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
+
   const handelTaxChange = (value) => {
     setTaxRate(value / 100);
   };
@@ -43,7 +44,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   useEffect(() => {
     if (current) {
       const { taxRate = 0, year, number } = current;
-      setTaxRate(taxRate);
+      setTaxRate(taxRate / 100);
       setCurrentYear(year);
       setLastNumber(number);
     }

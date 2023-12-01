@@ -25,7 +25,7 @@
     "redux": "^4.2.1",
     "reselect": "^4.1.8",
     "shortid": "^2.2.16",
-    "vite": "^5.0.2"
+    "vite": "^5.0.4"
   },
   "scripts": {
     "dev": "vite",

@@ -1,7 +1,7 @@
 const { migrate } = require('./migrate');
 
 const search = async (Model, req, res) => {
-  // console.log(req.query.fields)
+  console.log('🚀 ~ file: search.js:6 ~ search ~ req.query.q :', req.query.q);
   if (req.query.q === undefined || req.query.q.trim() === '') {
     return res
       .status(202)

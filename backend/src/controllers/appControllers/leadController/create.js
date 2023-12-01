@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
@@ -13,17 +12,10 @@ const create = async (Model, req, res) => {
         message: 'Please select a people',
       });
     } else {
-      let { firstname, lastname } = await People.findOneAndUpdate(
-        {
-          _id: req.body.people,
-          removed: false,
-        },
-        { isClient: true },
-        {
-          new: true, // return the new result instead of the old one
-          runValidators: true,
-        }
-      ).exec();
+      let { firstname, lastname } = await People.findOne({
+        _id: req.body.people,
+        removed: false,
+      }).exec();
       req.body.name = firstname + ' ' + lastname;
       req.body.company = null;
     }
@@ -34,17 +26,10 @@ const create = async (Model, req, res) => {
         message: 'Please select a company',
       });
     } else {
-      let { name } = await Company.findOneAndUpdate(
-        {
-          _id: req.body.company,
-          removed: false,
-        },
-        { isClient: true },
-        {
-          new: true, // return the new result instead of the old one
-          runValidators: true,
-        }
-      ).exec();
+      let { name } = await Company.findOne({
+        _id: req.body.company,
+        removed: false,
+      }).exec();
       req.body.name = name;
       req.body.people = null;
     }

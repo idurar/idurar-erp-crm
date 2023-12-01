@@ -5,19 +5,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import { selectRecordPaymentItem } from '@/redux/erp/selectors';
 import useLanguage from '@/locale/useLanguage';
-import { useErpContext } from '@/context/erp';
 
 import Loading from '@/components/Loading';
 
 import PaymentForm from '@/forms/PaymentForm';
-
+import { useNavigate } from 'react-router-dom';
 import calculate from '@/utils/calculate';
 
 export default function RecordPayment({ config }) {
+  const navigate = useNavigate();
   const translate = useLanguage();
   let { entity } = config;
-  const { erpContextAction } = useErpContext();
-  const { recordPanel } = erpContextAction;
+
   const dispatch = useDispatch();
 
   const { isLoading, isSuccess, current: currentInvoice } = useSelector(selectRecordPaymentItem);
@@ -28,7 +27,6 @@ export default function RecordPayment({ config }) {
   useEffect(() => {
     if (currentInvoice) {
       const { credit, total, discount } = currentInvoice;
-
       setMaxAmount(calculate.sub(calculate.sub(total, discount), credit));
     }
   }, [currentInvoice]);
@@ -36,8 +34,8 @@ export default function RecordPayment({ config }) {
     if (isSuccess) {
       form.resetFields();
       dispatch(erp.resetAction({ actionType: 'recordPayment' }));
-      recordPanel.close();
       dispatch(erp.list({ entity }));
+      navigate(`/${entity}/`);
     }
   }, [isSuccess]);
 
@@ -61,17 +59,15 @@ export default function RecordPayment({ config }) {
   };
 
   return (
-    <>
-      <Loading isLoading={isLoading}>
-        <Form form={form} layout="vertical" onFinish={onSubmit}>
-          <PaymentForm maxAmount={maxAmount} />
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {translate('Record Payment')}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Loading>
-    </>
+    <Loading isLoading={isLoading}>
+      <Form form={form} layout="vertical" onFinish={onSubmit}>
+        <PaymentForm maxAmount={maxAmount} />
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            {translate('Record Payment')}
+          </Button>
+        </Form.Item>
+      </Form>
+    </Loading>
   );
 }

@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
-function AddNewItem({ config, hasCreate = true }) {
+function AddNewItem({ config }) {
   const navigate = useNavigate();
   const { ADD_NEW_ENTITY, entity } = config;
 
@@ -29,18 +29,17 @@ function AddNewItem({ config, hasCreate = true }) {
     navigate(`/${entity.toLowerCase()}/create`);
   };
 
-  if (hasCreate)
-    return (
-      <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
-        {ADD_NEW_ENTITY}
-      </Button>
-    );
-  else return null;
+  return (
+    <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
+      {ADD_NEW_ENTITY}
+    </Button>
+  );
 }
 
 export default function DataTable({ config, extra = [] }) {
   const translate = useLanguage();
-  let { entity, dataTableColumns, create = true } = config;
+  let { entity, dataTableColumns, disableAdd = false } = config;
+  console.log('🚀 ~ file: DataTable.jsx:44 ~ DataTable ~ disableAdd:', disableAdd);
   const { DATATABLE_TITLE } = config;
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
@@ -85,7 +84,8 @@ export default function DataTable({ config, extra = [] }) {
     navigate(`/${entity}/read/${record._id}`);
   };
   const handleEdit = (record) => {
-    dispatch(erp.currentAction({ actionType: 'update', data: record }));
+    const data = { ...record };
+    dispatch(erp.currentAction({ actionType: 'update', data }));
     navigate(`/${entity}/update/${record._id}`);
   };
   const handleDownload = (record) => {
@@ -107,6 +107,7 @@ export default function DataTable({ config, extra = [] }) {
     {
       title: '',
       key: 'action',
+      fixed: 'right',
       render: (_, record) => (
         <Dropdown
           menu={{
@@ -173,7 +174,7 @@ export default function DataTable({ config, extra = [] }) {
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
             {translate('Refresh')}
           </Button>,
-          <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
+          !disableAdd && <AddNewItem config={config} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',

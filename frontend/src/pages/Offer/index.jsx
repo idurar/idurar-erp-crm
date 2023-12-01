@@ -10,10 +10,10 @@ export default function Offer() {
   const { moneyFormatter } = useMoney();
 
   const searchConfig = {
-    displayLabels: ['company'],
-    searchFields: 'company',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-  const deleteModalLabels = ['number', 'lead.company'];
+  const deleteModalLabels = ['number', 'lead.name'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -21,7 +21,7 @@ export default function Offer() {
     },
     {
       title: translate('Company'),
-      dataIndex: ['lead', 'company'],
+      dataIndex: ['lead', 'name'],
     },
     {
       title: translate('Date'),

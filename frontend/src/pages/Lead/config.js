@@ -12,6 +12,26 @@ export const fields = {
     type: 'string',
     disableForForm: true,
   },
+  status: {
+    type: 'select',
+    options: [
+      { value: 'draft', label: 'draft' },
+      { value: 'new', label: 'new' },
+      { value: 'won', label: 'won' },
+      { value: 'loose', label: 'loose' },
+      { value: 'waiting', label: 'waiting' },
+    ],
+  },
+  source: {
+    type: 'select',
+    options: [
+      { value: 'linkedin', label: 'linkedin' },
+      { value: 'twitter', label: 'twitter' },
+      { value: 'website', label: 'website' },
+      { value: 'ads', label: 'ads' },
+      { value: 'sales', label: 'sales' },
+    ],
+  },
   country: {
     type: 'country',
     color: 'red',

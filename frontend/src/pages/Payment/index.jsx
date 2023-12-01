@@ -19,7 +19,7 @@ export default function Payment() {
     },
     {
       title: translate('Client'),
-      dataIndex: ['client', 'company'],
+      dataIndex: ['client', 'name'],
     },
     {
       title: translate('Amount'),
@@ -61,6 +61,7 @@ export default function Payment() {
   };
   const config = {
     ...configPage,
+    disableAdd: true,
     dataTableColumns,
     searchConfig,
     deleteModalLabels,

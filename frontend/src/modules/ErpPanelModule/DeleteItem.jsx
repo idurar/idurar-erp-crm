@@ -24,7 +24,8 @@ export default function Delete({ config }) {
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(erp.list({ entity }));
+      const options = { page: 1, items: 10 };
+      dispatch(erp.list({ entity, options }));
     }
     if (current) {
       let labels = deleteModalLabels.map((x) => valueByString(current, x)).join(' ');
