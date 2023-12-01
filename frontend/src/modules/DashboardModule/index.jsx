@@ -110,7 +110,7 @@ export default function DashboardModule() {
         }
         prefix={translate('This month')}
         isLoading={isLoading}
-        tagContent={result?.total && moneyFormatter({ amount: result?.total })}
+        tagContent={moneyFormatter({ amount: result?.total })}
       />
     );
   });
@@ -147,9 +147,7 @@ export default function DashboardModule() {
           tagColor={'red'}
           prefix={translate('Not Paid')}
           isLoading={invoiceLoading}
-          tagContent={
-            invoiceResult?.total_undue && moneyFormatter({ amount: invoiceResult?.total_undue })
-          }
+          tagContent={moneyFormatter({ amount: invoiceResult?.total_undue })}
         />
       </Row>
       <div className="space30"></div>
