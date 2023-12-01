@@ -36,7 +36,7 @@ export default function Navigation() {
   );
 }
 
-function Sidebar({ collapsible }) {
+function Sidebar({ collapsible, isMobile = false }) {
   let location = useLocation();
 
   const { state: stateApp, appContextAction } = useAppContext();
@@ -155,11 +155,13 @@ function Sidebar({ collapsible }) {
         overflow: 'auto',
         height: '100vh',
         position: 'fixed',
-        left: '20px',
-        top: '20px',
         bottom: '20px',
-        borderRadius: '8px',
         boxShadow: '0px 0px 20px 3px rgba(150, 190, 238, 0.15)',
+        ...(!isMobile && {
+          left: '20px',
+          top: '20px',
+          borderRadius: '8px',
+        }),
       }}
       theme={'light'}
     >
@@ -199,14 +201,17 @@ function MobileSidebar() {
         <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
       <Drawer
-        width={200}
+        width={250}
+        contentWrapperStyle={{
+          boxShadow: 'none',
+        }}
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
         placement="left"
         closable={false}
         onClose={onClose}
         open={visible}
-        rootClassName="mobile-sidebar-wraper"
       >
-        <Sidebar collapsible={false} />
+        <Sidebar collapsible={false} isMobile={true} />
       </Drawer>
     </>
   );
