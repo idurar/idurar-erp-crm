@@ -96,10 +96,11 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          const selectedCountry = countryList(translate).find((obj) => obj.value === record[key]);
+          const selectedCountry = countryList.find((obj) => obj.value === record[key]);
+
           return (
             <Tag bordered={false} color={field.color || getRandomColor()}>
-              {translate(selectedCountry.label)}
+              {selectedCountry?.label && translate(selectedCountry.label)}
             </Tag>
           );
         },

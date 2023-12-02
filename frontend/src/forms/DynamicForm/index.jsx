@@ -91,8 +91,8 @@ function FormElement({ field, setFeedback }) {
     country: (
       <Select
         showSearch
-        options={countryList(translate)}
         defaultValue={field.defaultValue}
+        optionFilterProp="children"
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
         }
@@ -102,7 +102,17 @@ function FormElement({ field, setFeedback }) {
         style={{
           width: '100%',
         }}
-      />
+      >
+        {countryList.map((language) => (
+          <Select.Option
+            key={language.value}
+            value={language.value}
+            label={translate(language.label)}
+          >
+            {translate(language.label)}
+          </Select.Option>
+        ))}
+      </Select>
     ),
     async: (
       <SelectAsync

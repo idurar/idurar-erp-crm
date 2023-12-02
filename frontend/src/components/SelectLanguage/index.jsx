@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import languages from '@/locale/languages';
 import { selectLangCode } from '@/redux/translate/selectors';
 
-// import Notifications from '@/components/Notification';
-
 import { translateAction } from '@/redux/translate/actions';
 
 import useLanguage from '@/locale/useLanguage';
@@ -21,7 +19,8 @@ const SelectLanguage = () => {
     <Select
       showSearch
       placeholder={translate('select language')}
-      defaultValue={langCode}
+      value={langCode}
+      defaultOpen={false}
       style={{ width: '120px', float: 'right', marginTop: '5px', cursor: 'pointer' }}
       optionFilterProp="children"
       filterOption={(input, option) => (option?.label ?? '').includes(input.toLowerCase())}

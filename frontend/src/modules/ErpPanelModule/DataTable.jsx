@@ -39,7 +39,7 @@ function AddNewItem({ config }) {
 export default function DataTable({ config, extra = [] }) {
   const translate = useLanguage();
   let { entity, dataTableColumns, disableAdd = false } = config;
-  console.log('🚀 ~ file: DataTable.jsx:44 ~ DataTable ~ disableAdd:', disableAdd);
+
   const { DATATABLE_TITLE } = config;
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);

@@ -19,6 +19,7 @@ export const login =
       };
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
       window.localStorage.removeItem('isLogout');
+      window.localStorage.setItem('firstLogin', JSON.stringify({ loadDefaultLang: false }));
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
@@ -56,6 +57,8 @@ export const logout = () => async (dispatch) => {
       type: actionTypes.LOGOUT_FAILED,
       payload: data.result,
     });
+  } else {
+    window.localStorage.removeItem('firstLogin');
   }
 };
 

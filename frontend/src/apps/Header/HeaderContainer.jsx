@@ -134,15 +134,6 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
-      {/* <Avatar
-        icon={<AppstoreOutlined />}
-        onClick={() => {
-        
-        }}
-        style={{ float: 'right' }}
-        size="large"
-      /> */}
-
       <SelectLanguage />
     </Header>
   );
