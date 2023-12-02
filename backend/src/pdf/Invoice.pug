@@ -16,12 +16,12 @@ html
         padding: 0px ;
         background: #ffffff;
         font-family: sans-serif;
-        font-size:10px;
-        color:#333
+        font-size:12px;
+        color:#222
       }
       *, *:before, *:after {
         box-sizing: inherit;
-        color:#333
+        color:#222
       }
 
       .clearfix {
@@ -55,7 +55,7 @@ html
       }
       .company-info{
         text-align: right;
-        font-size:8px;
+        font-size:12px;
       }
       h1.invoice{
         font-size:32px;
@@ -69,7 +69,7 @@ html
         text-align: right !important;
         float:right;
         display:block;
-        font-size:9px;
+        font-size:12px;
         width:100%;
         margin-top:0;
         margin-bottom:10px;
@@ -219,7 +219,7 @@ html
       .table-invoice td {
         padding: 10px ;
         text-align: right;
-        font-size: 9px;
+        font-size: 11px;
       }
       .table-invoice td.service, .table-invoice td.desc {
         vertical-align: top;
@@ -236,7 +236,7 @@ html
         width : 100%;
         color:#666;
         margin-top:5px;
-        font-size:8px;
+        font-size:10px;
       }
       .notice-invoice {
         padding: 15px;
@@ -260,11 +260,11 @@ html
     
       header.clearfix
         .top-area
-          img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
+          img.logo.left(src=settings.idurar_base_url+settings.company_logo)
           .right.company-info
-              p IDURAR WEB Agency
-              p Centre d’affaire Gold Tower Oran - Algerie
-              p RC: 16A5234245 /NIF: 198232345630567 /AI: 31009451343
+              p #{settings.company_name}
+              p #{settings.company_address}
+              p #{settings.company_reg_number}
               
         .col.col-24
           .space  
@@ -285,7 +285,7 @@ html
         .right.col-10
             .billTo
                 p Bill To :
-                p #{model.client.company}
+                p #{model.client.name}
                 p address : #{model.client.address}
                 p phone : #{model.client.phone}
                 p Tel : #{model.client.email}
@@ -305,22 +305,22 @@ html
                 td.service #{item.itemName}
                   span #{item.description}
                 td.qty #{item.quantity}  
-                td.unit $ #{item.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-                td.total $ #{item.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                td.unit $ #{item.price}
+                td.total $ #{item.total}
             tr
               td(colspan='3') SUBTOTAL
-              td.total $ #{model.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td.total $ #{model.subTotal}
             tr
               td(colspan='3') TAX #{model.taxRate*100} %
-              td.total $ #{model.taxTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td.total $ #{model.taxTotal}
             tr
               td.grand.total(colspan='3') GRAND TOTAL
-              td.grand.total $#{model.total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+              td.grand.total $#{model.total}
         
       .col.col-24
           .space     
       footer.footer-invoice
-        | Invoice was created on a computer and is valid without the signature and seal.
+        //- | Invoice was created on a computer and is valid without the signature and seal.
           
 
    

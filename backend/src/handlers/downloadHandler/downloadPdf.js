@@ -20,34 +20,51 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       const folderPath = modelName.toLowerCase();
       const targetLocation = `src/public/download/${folderPath}/${fileId}`;
 
-      if (fs.existsSync(targetLocation)) {
-        return res.download(targetLocation, (error) => {
-          if (error)
-            res.status(500).json({
-              success: false,
-              result: null,
-              message: "Couldn't find file",
-              error: error.message,
-            });
-        });
-      } else {
-        await custom.generatePdf(
-          modelName,
-          { filename: folderPath, format: 'A4', targetLocation },
-          result,
-          async () => {
-            return res.download(targetLocation, (error) => {
-              if (error)
-                res.status(500).json({
-                  success: false,
-                  result: null,
-                  message: "Couldn't find file",
-                  error: error.message,
-                });
-            });
-          }
-        );
-      }
+      await custom.generatePdf(
+        modelName,
+        { filename: folderPath, format: 'A4', targetLocation },
+        result,
+        async () => {
+          return res.download(targetLocation, (error) => {
+            if (error)
+              res.status(500).json({
+                success: false,
+                result: null,
+                message: "Couldn't find file",
+                error: error.message,
+              });
+          });
+        }
+      );
+
+      // if (fs.existsSync(targetLocation)) {
+      //   return res.download(targetLocation, (error) => {
+      //     if (error)
+      //       res.status(500).json({
+      //         success: false,
+      //         result: null,
+      //         message: "Couldn't find file",
+      //         error: error.message,
+      //       });
+      //   });
+      // } else {
+      //   await custom.generatePdf(
+      //     modelName,
+      //     { filename: folderPath, format: 'A4', targetLocation },
+      //     result,
+      //     async () => {
+      //       return res.download(targetLocation, (error) => {
+      //         if (error)
+      //           res.status(500).json({
+      //             success: false,
+      //             result: null,
+      //             message: "Couldn't find file",
+      //             error: error.message,
+      //           });
+      //       });
+      //     }
+      //   );
+      // }
     } else {
       return res.status(404).json({
         success: false,

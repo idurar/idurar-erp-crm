@@ -1,9 +1,11 @@
-const puppeteer = require('puppeteer');
 const pug = require('pug');
 const fs = require('fs');
 const moment = require('moment');
+const puppeteer = require('puppeteer');
 
-const pugFiles = ['invoice', 'offer', 'quote', 'payment', 'quote', 'supplierOrder'];
+const { listAllSettings } = require('@/middlewares/settings');
+
+const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 
 exports.generatePdf = async (
   modelName,
@@ -13,8 +15,7 @@ exports.generatePdf = async (
 ) => {
   try {
     const { targetLocation } = info;
-    console.log('🚀 ~ file: index.js:16 ~ fileId:', targetLocation);
-
+    let browser = await puppeteer.launch({ headless: 'new' });
     // if PDF already exists, then delete it and create a new PDF
     if (fs.existsSync(targetLocation)) {
       fs.unlinkSync(targetLocation);
@@ -25,13 +26,26 @@ exports.generatePdf = async (
     if (pugFiles.includes(modelName.toLowerCase())) {
       // Compile Pug template
 
+      const loadSettings = async () => {
+        const allSettings = {};
+        const datas = await listAllSettings();
+        datas.map((data) => {
+          allSettings[data.settingKey] = data.settingValue;
+        });
+
+        return allSettings;
+      };
+
+      const settings = await loadSettings();
+
       const htmlContent = pug.renderFile('src/pdf/' + modelName.toLowerCase() + '.pug', {
         model: result,
+        settings,
         moment: moment,
       });
 
       // Launch Puppeteer
-      const browser = await puppeteer.launch({ headless: 'new' });
+
       const page = await browser.newPage();
 
       // Set the HTML content on the page

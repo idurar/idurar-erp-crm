@@ -1,11 +1,11 @@
 const listBySettingKey = require('./listBySettingKey');
 const readBySettingKey = require('./readBySettingKey');
-const listAllSetting = require('./listAllSetting');
+const listAllSettings = require('./listAllSettings');
 const updateBySettingKey = require('./updateBySettingKey');
 const increaseBySettingKey = require('./increaseBySettingKey');
 
 module.exports = {
-  listAllSetting,
+  listAllSettings,
   listBySettingKey,
   readBySettingKey,
   updateBySettingKey,
