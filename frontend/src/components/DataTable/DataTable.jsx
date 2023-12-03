@@ -11,9 +11,13 @@ import useLanguage from '@/locale/useLanguage';
 import { generate as uniqueId } from 'shortid';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 import { useCrudContext } from '@/context/crud';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
+  const { hasPermission } = usePermission();
   const { collapsedBox, panel } = crudContextAction;
   const { ADD_NEW_ENTITY } = config;
 
@@ -23,16 +27,28 @@ function AddNewItem({ config }) {
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
+    <Button onClick={handelClick} type="primary" disabled={!hasPermission(accessTypes.CREATE)}>
       {ADD_NEW_ENTITY}
     </Button>
   );
 }
+
 export default function DataTable({ config, extra = [] }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
+  const { hasPermission } = usePermission();
+
+  extra = extra.map((item) => {
+    if (item.key === 'recordPayment' || item.key === 'updatePassword') {
+      return {
+        ...item,
+        disabled: !hasPermission(accessTypes.EDIT),
+      };
+    } else return item;
+  });
 
   const items = [
     {
@@ -44,6 +60,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled: !hasPermission(accessTypes.EDIT),
     },
     ...extra,
     {
@@ -54,6 +71,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
+      disabled: !hasPermission(accessTypes.DELETE),
     },
   ];
 
@@ -83,6 +101,23 @@ export default function DataTable({ config, extra = [] }) {
     collapsedBox.open();
   }
 
+  function preprocessItems(items, record) {
+    let newItems = items.map((item) => {
+      if (
+        record._id === currentAdmin._id &&
+        (item.key === 'updatePassword' || item.key === 'edit')
+      ) {
+        return {
+          ...item,
+          disabled: false,
+        };
+      }
+      return item;
+    });
+    if (!newItems) newItems = [];
+    return newItems;
+  }
+
   dataTableColumns = [
     ...dataTableColumns,
     {
@@ -91,7 +126,7 @@ export default function DataTable({ config, extra = [] }) {
       render: (_, record) => (
         <Dropdown
           menu={{
-            items,
+            items: preprocessItems(items, record),
             onClick: ({ key }) => {
               switch (key) {
                 case 'read':

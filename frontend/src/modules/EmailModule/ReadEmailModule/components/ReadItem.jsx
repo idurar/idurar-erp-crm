@@ -14,6 +14,8 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { useNavigate } from 'react-router-dom';
 import useLanguage from '@/locale/useLanguage';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 const { Title, Paragraph } = Typography;
 
@@ -23,6 +25,7 @@ export default function ReadItem({ config, selectedItem }) {
   const dispatch = useDispatch();
   const { erpContextAction } = useErpContext();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
@@ -82,6 +85,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             type="primary"
             icon={<EditOutlined />}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('Edit')}
           </Button>,

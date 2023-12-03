@@ -17,13 +17,15 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 
 import { CrudLayout } from '@/layout';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 function SidePanelTopContent({ config, formElements, withUpload }) {
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
   const { modal, editBox } = crudContextAction;
-
+  const { hasPermission } = usePermission();
   const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
@@ -60,6 +62,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<DeleteOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '5px' }}
+            disabled={!hasPermission(accessTypes.DELETE)}
           >
             {translate('remove')}
           </Button>
@@ -69,6 +72,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'right', marginLeft: '0px' }}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('edit')}
           </Button>
@@ -87,8 +91,8 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
 
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
-
   const { collapsedBox } = crudContextAction;
+  const { hasPermission } = usePermission();
 
   const addNewItem = () => {
     collapsedBox.close();
@@ -104,7 +108,12 @@ function FixHeaderPanel({ config }) {
         <SearchItem config={config} />
       </Col>
       <Col className="gutter-row" span={3}>
-        <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
+        <Button
+          onClick={addNewItem}
+          block={true}
+          icon={<PlusOutlined />}
+          disabled={!hasPermission(accessTypes.CREATE)}
+        ></Button>
       </Col>
     </Row>
   );

@@ -6,12 +6,14 @@ import { selectSettings } from '@/redux/settings/selectors';
 
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
+import { accessTypes } from '@/utils/constants';
 import useLanguage from '@/locale/useLanguage';
 
 export default function UpdateSettingForm({ config, children, withUpload, uploadSettingKey }) {
   let { entity, settingsCategory } = config;
   const dispatch = useDispatch();
-  const { result, isLoading } = useSelector(selectSettings);
+  const { result, isLoading, isSuccess } = useSelector(selectSettings);
+  const { hasPermission } = usePermission();
   const translate = useLanguage();
   const [form] = Form.useForm();
 
@@ -59,7 +61,7 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
               paddingRight: '5px',
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" disabled={!hasPermission(accessTypes.EDIT)}>
               {translate('Save')}
             </Button>
           </Form.Item>

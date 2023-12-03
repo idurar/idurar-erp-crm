@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import { useRoutes } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
+import AccessRestrictedRoute from './AccessRestrictedRoute';
+import { accessTypes } from '@/utils/constants';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
@@ -40,6 +42,10 @@ const OfferRead = lazy(() => import('@/pages/Offer/OfferRead'));
 const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
 
 export default function AppRouter() {
+  const getAccessRestrictedRoute = (el, type = accessTypes.EDIT) => (
+    <AccessRestrictedRoute type={type}>{el}</AccessRestrictedRoute>
+  );
+
   let element = useRoutes([
     {
       path: '/login',
@@ -71,7 +77,7 @@ export default function AppRouter() {
     },
     {
       path: '/invoice/create',
-      element: <InvoiceCreate />,
+      element: getAccessRestrictedRoute(<InvoiceCreate />, accessTypes.CREATE),
     },
     {
       path: '/invoice/read/:id',
@@ -79,11 +85,11 @@ export default function AppRouter() {
     },
     {
       path: '/invoice/update/:id',
-      element: <InvoiceUpdate />,
+      element: getAccessRestrictedRoute(<InvoiceUpdate />, accessTypes.EDIT),
     },
     {
       path: '/invoice/pay/:id',
-      element: <InvoiceRecordPayment />,
+      element: getAccessRestrictedRoute(<InvoiceRecordPayment />, accessTypes.EDIT),
     },
     {
       path: '/quote',
@@ -91,7 +97,7 @@ export default function AppRouter() {
     },
     {
       path: '/quote/create',
-      element: <QuoteCreate />,
+      element: getAccessRestrictedRoute(<QuoteCreate />, accessTypes.CREATE),
     },
     {
       path: '/quote/read/:id',
@@ -99,7 +105,7 @@ export default function AppRouter() {
     },
     {
       path: '/quote/update/:id',
-      element: <QuoteUpdate />,
+      element: getAccessRestrictedRoute(<QuoteUpdate />, accessTypes.EDIT),
     },
     {
       path: '/payment',
@@ -111,7 +117,7 @@ export default function AppRouter() {
     },
     {
       path: '/payment/update/:id',
-      element: <PaymentUpdate />,
+      element: getAccessRestrictedRoute(<PaymentUpdate />, accessTypes.EDIT),
     },
     {
       path: '/employee',
@@ -143,7 +149,7 @@ export default function AppRouter() {
     },
     {
       path: '/email/update/:id',
-      element: <EmailUpdate />,
+      element: getAccessRestrictedRoute(<EmailUpdate />, accessTypes.EDIT),
     },
     {
       path: '/settings/advanced',
@@ -163,7 +169,7 @@ export default function AppRouter() {
     },
     {
       path: '/offer/create',
-      element: <OfferCreate />,
+      element: getAccessRestrictedRoute(<OfferCreate />, accessTypes.CREATE),
     },
     {
       path: '/offer/read/:id',
@@ -171,7 +177,7 @@ export default function AppRouter() {
     },
     {
       path: '/offer/update/:id',
-      element: <OfferUpdate />,
+      element: getAccessRestrictedRoute(<OfferUpdate />, accessTypes.EDIT),
     },
     {
       path: '*',

@@ -22,10 +22,13 @@ import { useNavigate } from 'react-router-dom';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 function AddNewItem({ config, hasCreate = true }) {
   const navigate = useNavigate();
   const { ADD_NEW_ENTITY, entity } = config;
+  const { hasPermission } = usePermission();
 
   const handleClick = () => {
     navigate(`/${entity.toLowerCase()}/create`);
@@ -33,7 +36,12 @@ function AddNewItem({ config, hasCreate = true }) {
 
   if (hasCreate)
     return (
-      <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
+      <Button
+        onClick={handleClick}
+        type="primary"
+        icon={<PlusOutlined />}
+        disabled={!hasPermission(accessTypes.CREATE)}
+      >
         {ADD_NEW_ENTITY}
       </Button>
     );
@@ -42,15 +50,22 @@ function AddNewItem({ config, hasCreate = true }) {
 
 export default function DataTable({ config, extra = [] }) {
   const translate = useLanguage();
+  const { hasPermission } = usePermission();
   let { entity, dataTableColumns, create = true } = config;
   const { DATATABLE_TITLE } = config;
-
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
-
   const { pagination, items: dataSource } = listResult;
-
   const { erpContextAction } = useErpContext();
   const { modal } = erpContextAction;
+
+  extra = extra.map((item) => {
+    if (item.key === 'recordPayment' || item.key === 'updatePassword') {
+      return {
+        ...item,
+        disabled: !hasPermission(accessTypes.EDIT),
+      };
+    } else return item;
+  });
 
   const items = [
     {
@@ -62,6 +77,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled: !hasPermission(accessTypes.EDIT),
     },
     {
       label: translate('Download'),
@@ -77,6 +93,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
+      disabled: !hasPermission(accessTypes.DELETE),
     },
   ];
 

@@ -23,6 +23,8 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -72,7 +74,7 @@ export default function ReadItem({ config, selectedItem }) {
   const { entity, ENTITY_NAME } = config;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { hasPermission } = usePermission();
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
 
@@ -160,6 +162,7 @@ export default function ReadItem({ config, selectedItem }) {
               send(currentErp._id);
             }}
             icon={<MailOutlined />}
+            disabled={!hasPermission(accessTypes.CREATE)}
           >
             {translate('Send by Email')}
           </Button>,
@@ -170,6 +173,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             icon={<RetweetOutlined />}
             style={{ display: entity === 'quote' ? 'inline-block' : 'none' }}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('Convert to Invoice')}
           </Button>,
@@ -187,6 +191,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
             type="primary"
             icon={<EditOutlined />}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('Edit')}
           </Button>,

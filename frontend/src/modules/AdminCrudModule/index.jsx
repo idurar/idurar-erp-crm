@@ -28,12 +28,17 @@ import UpdatePassword from './UpdatePassword';
 import { selectCurrentItem } from '@/redux/crud/selectors';
 
 import useLanguage from '@/locale/useLanguage';
+import { accessTypes } from '@/utils/constants';
+import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import usePermission from '@/hooks/usePermission';
 
 function SidePanelTopContent({ config, formElements }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
   const { crudContextAction, state } = useCrudContext();
   const { entityDisplayLabels } = config;
   const { panel, advancedBox, modal, readBox, editBox } = crudContextAction;
+  const { hasPermission } = usePermission();
 
   const { isReadBoxOpen, isEditBoxOpen, isAdvancedBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
@@ -80,6 +85,7 @@ function SidePanelTopContent({ config, formElements }) {
               marginRight: '5px',
               marginLeft: '-5px',
             }}
+            disabled={!hasPermission(accessTypes.DELETE)}
           >
             {translate('remove')}
           </Button>
@@ -89,6 +95,7 @@ function SidePanelTopContent({ config, formElements }) {
             icon={<EditOutlined />}
             size="small"
             style={{ float: 'left', marginRight: '5px' }}
+            disabled={!hasPermission(accessTypes.EDIT)}
           >
             {translate('edit')}
           </Button>
@@ -98,6 +105,9 @@ function SidePanelTopContent({ config, formElements }) {
             icon={<LockOutlined />}
             size="small"
             style={{ float: 'left', marginRight: '0px' }}
+            disabled={
+              currentAdmin._id === currentItem._id ? false : !hasPermission(accessTypes.EDIT)
+            }
           >
             {translate('Update Password')}
           </Button>
@@ -114,8 +124,10 @@ function SidePanelTopContent({ config, formElements }) {
 }
 
 function FixHeaderPanel({ config }) {
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const { crudContextAction } = useCrudContext();
   const { collapsedBox, panel } = crudContextAction;
+  const { hasPermission } = usePermission();
 
   const addNewItem = () => {
     collapsedBox.close();
@@ -146,7 +158,12 @@ function FixHeaderPanel({ config }) {
           <SearchItem config={config} />
         </Col>
         <Col className="gutter-row" span={3}>
-          <Button onClick={addNewItem} block={true} icon={<PlusOutlined />}></Button>
+          <Button
+            onClick={addNewItem}
+            block={true}
+            icon={<PlusOutlined />}
+            disabled={!hasPermission(accessTypes.CREATE)}
+          ></Button>
         </Col>
       </Row>
     </div>

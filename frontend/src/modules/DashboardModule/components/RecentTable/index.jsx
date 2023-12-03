@@ -1,3 +1,4 @@
+import React from 'react';
 import { Descriptions, Dropdown, Table } from 'antd';
 
 import { request } from '@/request';
@@ -10,8 +11,11 @@ import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import useResponsiveTable from '@/hooks/useResponsiveTable';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 export default function RecentTable({ ...props }) {
+  const { hasPermission } = usePermission();
   const translate = useLanguage();
   let { entity, dataTableColumns } = props;
 
@@ -25,6 +29,7 @@ export default function RecentTable({ ...props }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled: !hasPermission(accessTypes.EDIT),
     },
     {
       label: translate('Download'),

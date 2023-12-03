@@ -1,9 +1,16 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import usePermission from '@/hooks/usePermission';
+import { accessTypes } from '@/utils/constants';
 
 const CollapseBoxButton = ({ onChange, title }) => {
+  const { hasPermission } = usePermission();
+
   return (
-    <div className="collapseBoxHeader" onClick={onChange}>
+    <div
+      className={`collapseBoxHeader ${!hasPermission(accessTypes.CREATE) && 'buttonDisabled'}`}
+      onClick={onChange}
+    >
       {title}
     </div>
   );

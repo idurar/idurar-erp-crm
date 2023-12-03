@@ -2,6 +2,8 @@ import { Form, Input, Select } from 'antd';
 
 import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
+import { accessTypes } from '@/utils/constants';
+import usePermission from '@/hooks/usePermission';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
@@ -16,7 +18,7 @@ export default function GeneralSettingForm() {
           },
         ]}
       >
-        <Input autoComplete="off" />
+        <Input autoComplete="off" disabled={!hasPermission(accessTypes.EDIT)} />
       </Form.Item>
       <Form.Item
         label={translate('language')}
@@ -35,6 +37,7 @@ export default function GeneralSettingForm() {
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
+          disabled={!hasPermission(accessTypes.EDIT)}
         >
           {languages.map((language) => (
             <Select.Option
