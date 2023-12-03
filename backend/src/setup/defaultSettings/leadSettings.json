@@ -1,0 +1,95 @@
+[
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_type",
+    "settingValue": ["person", "company"],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_source",
+    "settingValue": [
+      "self checking",
+      "sales lead",
+      "recomendation",
+      "facebook",
+      "instagram",
+      "tiktok",
+      "youtube",
+      "blog",
+      "linkedin",
+      "newsletter",
+      "website",
+      "twitter"
+    ],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_status",
+    "settingValue": ["draft", "new", "reached", "waiting", "in negosation", "won", "loose"],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_category",
+    "settingValue": [
+      "Corporate",
+      "person",
+      "startup",
+      "small company",
+      "services business",
+      "retails",
+      "cafe & restaurant"
+    ],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "offer_default_lead_type",
+    "settingValue": "company",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_server",
+    "settingValue": "mail.idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": true
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_username",
+    "settingValue": "hello@idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": true
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_password",
+    "settingValue": "password",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": true
+  },
+  {
+    "settingCategory": "lead_settings",
+    "settingKey": "lead_email_imap_port",
+    "settingValue": 993,
+    "valueType": "number",
+    "isCoreSetting": true,
+    "isPrivate": true
+  }
+]

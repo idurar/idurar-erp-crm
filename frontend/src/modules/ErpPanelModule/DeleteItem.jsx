@@ -10,7 +10,7 @@ import { valueByString } from '@/utils/helpers';
 export default function Delete({ config }) {
   let {
     entity,
-    entityDisplayLabels,
+    deleteModalLabels,
     deleteMessage = 'Do you want delete : ',
     modalTitle = 'Remove Item',
   } = config;
@@ -24,10 +24,11 @@ export default function Delete({ config }) {
   useEffect(() => {
     if (isSuccess) {
       modal.close();
-      dispatch(erp.list({ entity }));
+      const options = { page: 1, items: 10 };
+      dispatch(erp.list({ entity, options }));
     }
     if (current) {
-      let labels = entityDisplayLabels.map((x) => valueByString(current, x)).join(' ');
+      let labels = deleteModalLabels.map((x) => valueByString(current, x)).join(' ');
 
       setDisplayItem(labels);
     }

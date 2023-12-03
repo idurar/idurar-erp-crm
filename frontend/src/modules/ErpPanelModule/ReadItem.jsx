@@ -81,7 +81,7 @@ export default function ReadItem({ config, selectedItem }) {
   const resetErp = {
     status: '',
     client: {
-      company: '',
+      name: '',
       email: '',
       phone: '',
       address: '',
@@ -97,16 +97,11 @@ export default function ReadItem({ config, selectedItem }) {
 
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
+  const [client, setClient] = useState({});
 
   useEffect(() => {
     if (currentResult) {
       const { items, invoice, ...others } = currentResult;
-
-      // When it accesses the /payment/ endpoint,
-      // it receives an invoice.item instead of just item
-      // and breaks the code, but now we can check if items exists,
-      // and if it doesn't we can access invoice.items and bring
-      // out the neccessary propery alongside other properties
 
       if (items) {
         setItemsList(items);
@@ -121,6 +116,12 @@ export default function ReadItem({ config, selectedItem }) {
       setCurrentErp(resetErp);
     };
   }, [currentResult]);
+
+  useEffect(() => {
+    if (currentErp?.client) {
+      setClient(currentErp.client[currentErp.client.type]);
+    }
+  }, [currentErp]);
 
   return (
     <>
@@ -221,12 +222,10 @@ export default function ReadItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`Client : ${currentErp.client.company}`}>
-        <Descriptions.Item label={translate('Address')}>
-          {currentErp.client.address}
-        </Descriptions.Item>
-        <Descriptions.Item label={translate('email')}>{currentErp.client.email}</Descriptions.Item>
-        <Descriptions.Item label={translate('Phone')}>{currentErp.client.phone}</Descriptions.Item>
+      <Descriptions title={`Client : ${currentErp.client.name}`}>
+        <Descriptions.Item label={translate('Address')}>{client.address}</Descriptions.Item>
+        <Descriptions.Item label={translate('email')}>{client.email}</Descriptions.Item>
+        <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>

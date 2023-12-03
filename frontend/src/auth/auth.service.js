@@ -36,7 +36,7 @@ export const logout = async () => {
       { data, status },
       {
         notifyOnSuccess: false,
-        notifyOnFailed: false,
+        notifyOnFailed: true,
       }
     );
     return data;

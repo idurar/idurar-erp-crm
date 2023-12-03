@@ -1,7 +1,8 @@
 require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
-
+const { globSync } = require('glob');
 const fs = require('fs');
+const { generate: uniqueId } = require('shortid');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
@@ -9,50 +10,49 @@ mongoose.connect(process.env.DATABASE);
 async function setupApp() {
   try {
     const Admin = require('../models/coreModels/Admin');
-    var newAdmin = new Admin();
-    const passwordHash = newAdmin.generateHash('admin123');
+    const AdminPassword = require('../models/coreModels/AdminPassword');
+    const newAdminPassword = new AdminPassword();
 
-    await new Admin({
+    const salt = uniqueId();
+
+    const passwordHash = newAdminPassword.generateHash(salt, 'admin123');
+
+    const demoAdmin = {
       email: 'admin@demo.com',
-      password: passwordHash,
       name: 'Salah Eddine',
       surname: 'Lalami',
       role: 'admin',
-    }).save();
+    };
+    const result = await new Admin(demoAdmin).save();
+
+    const AdminPasswordData = {
+      password: passwordHash,
+      salt: salt,
+      user: result._id,
+    };
+    await new AdminPassword(AdminPasswordData).save();
 
     console.log('👍 Admin created : Done!');
 
     const Setting = require('../models/coreModels/Setting');
 
-    const appConfig = JSON.parse(fs.readFileSync(__dirname + '/config/appConfig.json', 'utf-8'));
-    const companyConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/companyConfig.json', 'utf-8')
-    );
-    const financeConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/financeConfig.json', 'utf-8')
-    );
-    const crmConfig = JSON.parse(fs.readFileSync(__dirname + '/config/crmConfig.json', 'utf-8'));
-    const customConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/customConfig.json', 'utf-8')
-    );
+    const settingFiles = [];
 
-    const moneyFormatConfig = JSON.parse(
-      fs.readFileSync(__dirname + '/config/moneyFormatConfig.json', 'utf-8')
-    );
+    const settingsFiles = globSync('./src/setup/defaultSettings/**/*.json');
+    console.log('🚀 ~ file: setup.js:30 ~ setupApp ~ settingsFiles:', settingsFiles);
 
-    await Setting.insertMany([
-      ...appConfig,
-      ...companyConfig,
-      ...financeConfig,
-      ...crmConfig,
-      ...moneyFormatConfig,
-      ...customConfig,
-    ]);
+    for (const filePath of settingsFiles) {
+      const file = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      settingFiles.push(...file);
+    }
+
+    await Setting.insertMany(settingFiles);
+
     console.log('👍 Settings created : Done!');
 
     const Email = require('../models/coreModels/Email');
     const emailTemplate = JSON.parse(
-      fs.readFileSync(__dirname + '/config/emailTemplate.json', 'utf-8')
+      fs.readFileSync(__dirname + '/emailTemplate/index.json', 'utf-8')
     );
 
     await Email.insertMany([...emailTemplate]);

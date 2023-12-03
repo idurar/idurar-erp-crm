@@ -1,15 +1,18 @@
 import { useCallback, useEffect } from 'react';
+
 import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Descriptions, Dropdown, Table, Button } from 'antd';
+import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/locale/useLanguage';
+import { dataForTable } from '@/utils/dataStructure';
+import { useMoney } from '@/settings';
 
 import { generate as uniqueId } from 'shortid';
-import useResponsiveTable from '@/hooks/useResponsiveTable';
+
 import { useCrudContext } from '@/context/crud';
 
 function AddNewItem({ config }) {
@@ -29,10 +32,11 @@ function AddNewItem({ config }) {
   );
 }
 export default function DataTable({ config, extra = [] }) {
-  let { entity, dataTableColumns, DATATABLE_TITLE } = config;
+  let { entity, dataTableColumns, DATATABLE_TITLE, fields } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
+  const { moneyFormatter } = useMoney();
 
   const items = [
     {
@@ -83,11 +87,19 @@ export default function DataTable({ config, extra = [] }) {
     collapsedBox.open();
   }
 
+  let dispatchColumns = [];
+  if (fields) {
+    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter })];
+  } else {
+    dispatchColumns = [...dataTableColumns];
+  }
+
   dataTableColumns = [
-    ...dataTableColumns,
+    ...dispatchColumns,
     {
       title: '',
       key: 'action',
+      fixed: 'right',
       render: (_, record) => (
         <Dropdown
           menu={{
@@ -148,59 +160,31 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
-    dataTableColumns,
-    items
-  );
-
   return (
     <>
-      <div ref={tableHeader}>
-        <PageHeader
-          onBack={() => window.history.back()}
-          title={DATATABLE_TITLE}
-          ghost={false}
-          extra={[
-            <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
-              {translate('Refresh')}
-            </Button>,
-            <AddNewItem key={`${uniqueId()}`} config={config} />,
-          ]}
-          style={{
-            padding: '20px 0px',
-          }}
-        ></PageHeader>
-      </div>
+      <PageHeader
+        onBack={() => window.history.back()}
+        title={DATATABLE_TITLE}
+        ghost={false}
+        extra={[
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
+            {translate('Refresh')}
+          </Button>,
+          <AddNewItem key={`${uniqueId()}`} config={config} />,
+        ]}
+        style={{
+          padding: '20px 0px',
+        }}
+      ></PageHeader>
+
       <Table
-        columns={tableColumns}
+        columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
-        expandable={
-          expandedRowData.length
-            ? {
-                expandedRowRender: (record) => (
-                  <Descriptions title="" bordered column={1}>
-                    {expandedRowData.map((item, index) => {
-                      return (
-                        <Descriptions.Item key={index} label={item.title}>
-                          {item.render?.(record[item.dataIndex])?.children
-                            ? item.render?.(record[item.dataIndex])?.children
-                            : item.render?.(record[item.dataIndex])
-                            ? item.render?.(record[item.dataIndex])
-                            : Array.isArray(item.dataIndex)
-                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
-                            : record[item.dataIndex]}
-                        </Descriptions.Item>
-                      );
-                    })}
-                  </Descriptions>
-                ),
-              }
-            : null
-        }
+        scroll={{ x: true }}
       />
     </>
   );

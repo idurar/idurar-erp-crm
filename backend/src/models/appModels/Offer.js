@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const offerSchema = new mongoose.Schema({
   removed: {
@@ -7,6 +6,11 @@ const offerSchema = new mongoose.Schema({
     default: false,
   },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+  converted: {
+    type: Boolean,
+    default: false,
+  },
   number: {
     type: Number,
     required: true,
@@ -15,6 +19,7 @@ const offerSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  content: String,
   date: {
     type: Date,
     required: true,
@@ -42,6 +47,18 @@ const offerSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
+      // taxRate: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      // subTotal: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      // taxTotal: {
+      //   type: Number,
+      //   default: 0,
+      // },
       total: {
         type: Number,
         required: true,
@@ -72,12 +89,32 @@ const offerSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'Draft',
+    enum: ['draft', 'pending', 'sent', 'accepted', 'rejected', 'cancelled', 'on hold'],
+    default: 'draft',
   },
-  pdfPath: {
+  approved: {
+    type: Boolean,
+    default: false,
+  },
+  isExpired: {
+    type: Boolean,
+    default: false,
+  },
+  pdf: {
     type: String,
-    default: '',
   },
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
+    },
+  ],
   updated: {
     type: Date,
     default: Date.now,

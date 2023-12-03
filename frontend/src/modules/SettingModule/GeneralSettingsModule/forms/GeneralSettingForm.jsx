@@ -8,8 +8,8 @@ export default function GeneralSettingForm() {
   return (
     <>
       <Form.Item
-        label={translate('Company Name')}
-        name="company_name"
+        label={translate('Application Name')}
+        name="idurar_app_name"
         rules={[
           {
             required: true,
@@ -20,7 +20,7 @@ export default function GeneralSettingForm() {
       </Form.Item>
       <Form.Item
         label={translate('language')}
-        name="language"
+        name="idurar_app_language"
         rules={[
           {
             required: true,
@@ -31,7 +31,7 @@ export default function GeneralSettingForm() {
           showSearch
           placeholder={translate('select language')}
           optionFilterProp="children"
-          filterOption={(input, option) => (option?.label ?? '').includes(input)}
+          filterOption={(input, option) => (option?.label ?? '').includes(input.toLowerCase())}
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }

@@ -50,14 +50,14 @@ const update = async (req, res) => {
     //item total
     item['total'] = total;
   });
-  taxTotal = calculate.multiply(subTotal, taxRate);
+  taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
 
   body['subTotal'] = subTotal;
   body['taxTotal'] = taxTotal;
   body['total'] = total;
   body['items'] = items;
-  body['pdfPath'] = 'invoice-' + req.params.id + '.pdf';
+  body['pdf'] = 'invoice-' + req.params.id + '.pdf';
   // Find document by id and updates with the required fields
 
   let paymentStatus =

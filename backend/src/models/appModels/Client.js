@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
-const clientSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,85 +9,35 @@ const clientSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
+  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
+  type: {
     type: String,
-    trim: true,
-    unique: true,
+    default: 'company',
+    enum: ['company', 'people'],
     required: true,
   },
-  managerName: {
+  name: {
     type: String,
-    trim: true,
     required: true,
   },
-  managerSurname: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  bankAccount: {
-    type: String,
-    trim: true,
-  },
-  companyRegNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxID: {
-    type: String,
-    trim: true,
-  },
-  customField: [
-    {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
-      },
-    },
-  ],
-  address: {
-    type: String,
-    trim: true,
-  },
-  country: {
-    type: String,
-    trim: true,
-  },
-  phone: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
-    type: String,
-    trim: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-  },
-  website: {
-    type: String,
-    trim: true,
-  },
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company', unique: true, autopopulate: true },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People', unique: true, autopopulate: true },
+  convertedFrom: { type: mongoose.Schema.ObjectId, ref: 'Lead' },
+  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  source: String,
+  category: String,
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model('Client', clientSchema);
+schema.plugin(require('mongoose-autopopulate'));
+
+module.exports = mongoose.model('Client', schema);

@@ -2,7 +2,7 @@ import { Form, Input, InputNumber, Select, Switch } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';
 
-export default function MoneyFormSettingForm() {
+export default function SettingsForm() {
   const translate = useLanguage();
   return (
     <>

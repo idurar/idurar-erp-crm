@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const inventorySchema = new mongoose.Schema({
   removed: {
@@ -10,22 +9,67 @@ const inventorySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  product: {
-    type: String,
-    trim: true,
-    required: true,
-  },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+  product: { type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
   quantity: {
     type: Number,
-    required: true,
-    min: 0, // Ensure non-negative numbers
+    default: 0,
   },
-  unitPrice: {
+  threshold: {
     type: Number,
-    required: true,
-    min: 0, // Ensure non-negative numbers
+    default: 0,
+  },
+  order: {
+    type: Number,
+    default: 0,
+  },
+  purchase: {
+    type: Number,
+    default: 0,
+  },
+  adjustment: {
+    increase: {
+      returned: {
+        type: Number,
+        default: 0,
+      },
+      change: {
+        type: Number,
+        default: 0,
+      },
+      refund: {
+        type: Number,
+        default: 0,
+      },
+      other: {
+        type: Number,
+        default: 0,
+      },
+    },
+    decrease: {
+      damaged: {
+        type: Number,
+        default: 0,
+      },
+      change: {
+        type: Number,
+        default: 0,
+      },
+      refund: {
+        type: Number,
+        default: 0,
+      },
+      other: {
+        type: Number,
+        default: 0,
+      },
+    },
   },
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },

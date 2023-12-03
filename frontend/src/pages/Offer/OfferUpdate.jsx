@@ -10,8 +10,6 @@ export default function OfferUpdate() {
     DATATABLE_TITLE: translate('offer_list'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
     ENTITY_NAME: translate('offer'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

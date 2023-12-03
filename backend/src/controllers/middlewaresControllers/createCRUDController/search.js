@@ -21,7 +21,7 @@ const search = async (Model, req, res) => {
   }
   // console.log(fields)
 
-  let results = await Model.find(fields).where('removed', false).limit(10);
+  let results = await Model.find(fields).where('removed', false).limit(10).exec();
 
   if (results.length >= 1) {
     return res.status(200).json({

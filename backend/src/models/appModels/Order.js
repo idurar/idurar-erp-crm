@@ -1,47 +1,101 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const orderSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
   },
-  enabled: {
+  createdBy: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Admin',
+    required: true,
+  },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+  assigned: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Employee',
+  },
+  number: {
+    type: Number,
+  },
+  year: {
+    type: Number,
+  },
+  recurring: {
+    type: String,
+    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+    required: true,
+  },
+  client: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Client',
+    required: true,
+  },
+  invoice: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Ivoince',
+  },
+  products: [
+    {
+      productId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Product',
+      },
+      quantity: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  shipment: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Shipment',
+  },
+  approved: {
     type: Boolean,
-    default: true,
+    default: false,
+  },
+  note: {
+    type: String,
+  },
+  fulfillment: {
+    type: String,
+    enum: ['pending', 'in review', 'processing', 'packing', 'shipped', 'on hold', 'cancelled'],
+    default: 'pending',
+  },
+  status: {
+    type: String,
+    enum: [
+      'not started',
+      'in progress',
+      'delayed',
+      'completed',
+      'delivered',
+      'returned',
+      'cancelled',
+      'on hold',
+      'refunded',
+    ],
+    default: 'not started',
+  },
+  processingStatus: String,
+  pdf: {
+    type: String,
+  },
+  updated: {
+    type: Date,
+    default: Date.now,
   },
   created: {
     type: Date,
     default: Date.now,
   },
-  // Fields for shipping
-  orderId: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  products: {
-    type: String, // Consider changing this to an array of objects if you have multiple products
-    trim: true,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: ['pending', 'shipped', 'delivered', 'cancelled'],
-    required: true,
-  },
-  notes: {
-    type: String,
-    trim: true,
-  },
 });
+
+orderSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model('Order', orderSchema);

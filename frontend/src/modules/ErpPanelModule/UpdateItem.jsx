@@ -17,28 +17,28 @@ import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { StatusTag } from '@/components/Tag';
 
-function SaveForm({ form, config }) {
-  let { UPDATE_ENTITY } = config;
+function SaveForm({ form, translate }) {
   const handelClick = () => {
     form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {UPDATE_ENTITY}
+      {translate('update')}
     </Button>
   );
 }
 
 export default function UpdateItem({ config, UpdateForm }) {
   const translate = useLanguage();
-  let { entity, UPDATE_ENTITY } = config;
+  let { entity } = config;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+
   const { id } = useParams();
 
   const handelValuesChange = (changedValues, values) => {
@@ -60,20 +60,25 @@ export default function UpdateItem({ config, UpdateForm }) {
   };
 
   const onSubmit = (fieldsValue) => {
+    let dataToUpdate = { ...fieldsValue };
     if (fieldsValue) {
+      if (fieldsValue.date || fieldsValue.expiredDate) {
+        dataToUpdate.date = dayjs(fieldsValue.date).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+        dataToUpdate.expiredDate = dayjs(fieldsValue.expiredDate).format(
+          'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        );
+      }
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
           item.total = item.quantity * item.price;
         });
-        fieldsValue = {
-          ...fieldsValue,
-          items: newList,
-        };
+        dataToUpdate.items = newList;
       }
     }
+    console.log('🚀 ~ file: UpdateItem.jsx:76 ~ onSubmit ~ dataToUpdate:', dataToUpdate);
 
-    dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
+    dispatch(erp.update({ entity, id, jsonData: dataToUpdate }));
   };
   useEffect(() => {
     if (isSuccess) {
@@ -86,19 +91,20 @@ export default function UpdateItem({ config, UpdateForm }) {
 
   useEffect(() => {
     if (current) {
-      if (current.date) {
-        current.date = dayjs(current.date);
+      let formData = { ...current };
+      if (formData.date) {
+        formData.date = dayjs(formData.date);
       }
-      if (current.expiredDate) {
-        current.expiredDate = dayjs(current.expiredDate);
+      if (formData.expiredDate) {
+        formData.expiredDate = dayjs(formData.expiredDate);
       }
-      if (!current.taxRate) {
-        current.taxRate = 0;
+      if (!formData.taxRate) {
+        formData.taxRate = 0;
       }
 
-      const { subTotal } = current;
+      const { subTotal } = formData;
 
-      form.setFieldsValue(current);
+      form.setFieldsValue(formData);
       setSubTotal(subTotal);
     }
   }, [current]);
@@ -109,7 +115,7 @@ export default function UpdateItem({ config, UpdateForm }) {
         onBack={() => {
           navigate(`/${entity.toLowerCase()}`);
         }}
-        title={UPDATE_ENTITY}
+        title={translate('update')}
         ghost={false}
         // tags={StatusTag(form.getFieldValue().status)}
         extra={[
@@ -122,7 +128,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           >
             {translate('Cancel')}
           </Button>,
-          <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
+          <SaveForm translate={translate} form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',

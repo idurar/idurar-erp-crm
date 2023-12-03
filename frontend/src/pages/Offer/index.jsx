@@ -10,10 +10,10 @@ export default function Offer() {
   const { moneyFormatter } = useMoney();
 
   const searchConfig = {
-    displayLabels: ['company'],
-    searchFields: 'company',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-  const entityDisplayLabels = ['number', 'lead.company'];
+  const deleteModalLabels = ['number', 'lead.name'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -21,7 +21,7 @@ export default function Offer() {
     },
     {
       title: translate('Company'),
-      dataIndex: ['lead', 'company'],
+      dataIndex: ['lead', 'name'],
     },
     {
       title: translate('Date'),
@@ -67,12 +67,12 @@ export default function Offer() {
           status === 'draft'
             ? 'cyan'
             : status === 'sent'
-            ? 'blue'
-            : status === 'accepted'
-            ? 'green'
-            : status === 'expired'
-            ? 'orange'
-            : 'red';
+              ? 'blue'
+              : status === 'accepted'
+                ? 'green'
+                : status === 'expired'
+                  ? 'orange'
+                  : 'red';
         return <Tag color={color}>{status && translate(status)}</Tag>;
       },
     },
@@ -84,8 +84,6 @@ export default function Offer() {
     DATATABLE_TITLE: translate('offer_list'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
     ENTITY_NAME: translate('offer'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -96,7 +94,7 @@ export default function Offer() {
     ...configPage,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return <OfferDataTableModule config={config} />;
 }

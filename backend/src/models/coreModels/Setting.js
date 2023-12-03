@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const settingSchema = new mongoose.Schema({
   removed: {
@@ -28,6 +27,10 @@ const settingSchema = new mongoose.Schema({
   valueType: {
     type: String,
     default: 'String',
+  },
+  isPrivate: {
+    type: Boolean,
+    default: false,
   },
   isCoreSetting: {
     type: Boolean,

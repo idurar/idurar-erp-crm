@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const paymentSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
   },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
   number: {
     type: Number,

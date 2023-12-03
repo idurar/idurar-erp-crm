@@ -1,0 +1,86 @@
+[
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "client_type",
+    "settingValue": ["people", "company"],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "client_status",
+    "settingValue": ["active", "new", "premium", "unactive"],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "client_source",
+    "settingValue": [
+      "self checking",
+      "sales lead",
+      "recomendation",
+      "facebook",
+      "instagram",
+      "tiktok",
+      "youtube",
+      "blog",
+      "linkedin",
+      "newsletter",
+      "website",
+      "twitter"
+    ],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "client_category",
+    "settingValue": [
+      "Corporate",
+      "startup",
+      "small company",
+      "services business",
+      "retails",
+      "cafe & restaurant"
+    ],
+    "valueType": "array",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "invoice_default_client_type",
+    "settingValue": "company",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "quote_default_client_type",
+    "settingValue": "company",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "pos_default_client_type",
+    "settingValue": "people",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "client_settings",
+    "settingKey": "pos_default_client",
+    "settingValue": "609e0057246f2359b0c4c31f",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  }
+]

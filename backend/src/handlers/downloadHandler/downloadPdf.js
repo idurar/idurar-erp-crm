@@ -1,13 +1,13 @@
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
+const fs = require('fs');
 
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
   try {
     const modelName = directory.slice(0, 1).toUpperCase() + directory.slice(1);
     if (mongoose.models[modelName]) {
       const Model = mongoose.model(modelName);
-      const result = await Model.findById(ObjectId(id)).exec();
+      const result = await Model.findOne({ _id: id }).exec();
 
       // Throw error if no result
       if (!result) {
@@ -15,12 +15,17 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       }
 
       // Continue process if result is returned
+
+      const fileId = modelName.toLowerCase() + '-' + result._id + '.pdf';
+      const folderPath = modelName.toLowerCase();
+      const targetLocation = `src/public/download/${folderPath}/${fileId}`;
+
       await custom.generatePdf(
         modelName,
-        { filename: modelName, format: 'A4' },
+        { filename: folderPath, format: 'A4', targetLocation },
         result,
-        async (fileLocation) => {
-          return res.download(fileLocation, (error) => {
+        async () => {
+          return res.download(targetLocation, (error) => {
             if (error)
               res.status(500).json({
                 success: false,
@@ -31,6 +36,35 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
           });
         }
       );
+
+      // if (fs.existsSync(targetLocation)) {
+      //   return res.download(targetLocation, (error) => {
+      //     if (error)
+      //       res.status(500).json({
+      //         success: false,
+      //         result: null,
+      //         message: "Couldn't find file",
+      //         error: error.message,
+      //       });
+      //   });
+      // } else {
+      //   await custom.generatePdf(
+      //     modelName,
+      //     { filename: folderPath, format: 'A4', targetLocation },
+      //     result,
+      //     async () => {
+      //       return res.download(targetLocation, (error) => {
+      //         if (error)
+      //           res.status(500).json({
+      //             success: false,
+      //             result: null,
+      //             message: "Couldn't find file",
+      //             error: error.message,
+      //           });
+      //       });
+      //     }
+      //   );
+      // }
     } else {
       return res.status(404).json({
         success: false,
@@ -62,6 +96,7 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
         result: null,
         error: error.message,
         message: error.message,
+        controller: 'downloadPDF.js',
       });
     }
   }

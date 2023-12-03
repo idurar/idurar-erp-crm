@@ -42,7 +42,7 @@ export default function DashboardModule() {
     },
     {
       title: translate('Client'),
-      dataIndex: ['client', 'company'],
+      dataIndex: ['client', 'name'],
     },
 
     {

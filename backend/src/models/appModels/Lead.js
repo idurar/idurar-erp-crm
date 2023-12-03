@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
-const leadSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,71 +9,84 @@ const leadSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  firstName: {
+  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
+  type: {
     type: String,
-    trim: true,
+    default: 'company',
+    enum: ['company', 'people'],
     required: true,
   },
-  lastName: {
+  name: {
     type: String,
-    trim: true,
     required: true,
   },
-  company: {
-    type: String,
-    trim: true,
+  company: { type: mongoose.Schema.ObjectId, ref: 'Company', autopopulate: true },
+  people: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
+  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  offer: [{ type: mongoose.Schema.ObjectId, ref: 'Offer' }],
+  converted: { type: Boolean, default: false },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  subTotal: {
+    type: Number,
   },
-  jobTitle: {
-    type: String,
-    trim: true,
+  taxTotal: {
+    type: Number,
   },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
+  total: {
+    type: Number,
   },
-  phone: {
-    type: String,
-    trim: true,
-    required: true,
+  discount: {
+    type: Number,
   },
-  address: {
-    type: String,
-    trim: true,
-  },
-  country: {
-    type: String,
-    trim: true,
-  },
-  customField: [
+  images: [
     {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: false,
       },
     },
   ],
-  source: {
-    type: String,
-    trim: true,
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
+  category: String,
+  status: String,
+  notes: String,
+  source: String,
+  approved: {
+    type: Boolean,
+    default: false,
   },
-  notes: {
-    type: String,
-    trim: true,
-  },
-  status: {
-    type: String,
-    default: 'new',
-  },
+  tags: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model('Lead', leadSchema);
+schema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Lead', schema);
