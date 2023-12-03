@@ -32,7 +32,9 @@ export default function Navigation() {
       <div className="sidebar-wraper">
         <Sidebar collapsible={true} />
       </div>
-      <MobileSidebar />
+      <div className="hidden-md">
+        <MobileSidebar />
+      </div>
     </>
   );
 }

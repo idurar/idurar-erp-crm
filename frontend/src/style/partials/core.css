@@ -157,6 +157,24 @@
   margin: 70px auto;
 }
 
+@media only screen and (min-width: 1100px) {
+  .hidden-lg {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .hidden-md {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .hidden-sm {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .layoutPadding {
     padding: 50px 20px;
