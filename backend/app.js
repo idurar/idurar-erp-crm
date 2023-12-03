@@ -21,7 +21,7 @@ const erpApiRouter = require('./routes/appRoutes/appApi');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://mnm-crm-frontend.vercel.app',
+  origin: true,
   credentials: true,
 };
 
@@ -38,6 +38,14 @@ const corsOptions = {
 app.use(function (req, res, next) {
   cors(corsOptions)(req, res, next);
 });
+
+// Enable CORS for a specific origin
+app.use(
+  cors({
+    origin: 'https://mnm-crm-frontend.vercel.app',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  })
+);
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 
