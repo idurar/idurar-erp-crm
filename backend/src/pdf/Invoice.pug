@@ -262,7 +262,7 @@ html
         .top-area
           img.logo.left(src=settings.idurar_base_url+settings.company_logo)
           .right.company-info
-              p #{settings.company_name}
+              p.strong #{settings.company_name}
               p #{settings.company_address}
               p #{settings.company_reg_number}
               
@@ -286,9 +286,9 @@ html
             .billTo
                 p Bill To :
                 p #{model.client.name}
-                p address : #{model.client.address}
-                p phone : #{model.client.phone}
-                p Tel : #{model.client.email}
+                p #{model.client.address}
+                p #{model.client.phone}
+                p #{model.client.email}
         .col.col-24
           .space  
       main
