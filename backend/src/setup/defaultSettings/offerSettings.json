@@ -30,5 +30,13 @@
     "valueType": "array",
     "isCoreSetting": true,
     "isPrivate": false
+  },
+  {
+    "settingCategory": "offer_settings",
+    "settingKey": "offer_pdf_footer",
+    "settingValue": "Offer was created on a computer and is valid without the signature and seal",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
   }
 ]

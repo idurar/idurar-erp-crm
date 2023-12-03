@@ -48,6 +48,7 @@ const create = async (req, res) => {
 
   body['paymentStatus'] = paymentStatus;
   body['createdBy'] = req.admin._id;
+  console.log('🚀 ~ file: create.js:51 ~ create ~  req.admin:', req.admin);
   // Creating a new document in the collection
   const result = await new Model(body).save();
   const fileId = 'invoice-' + result._id + '.pdf';
@@ -62,7 +63,7 @@ const create = async (req, res) => {
 
   increaseBySettingKey({ settingKey: 'last_invoice_number' });
 
-  custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
+  // custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
 
   // Returning successfull response
   return res.status(200).json({
