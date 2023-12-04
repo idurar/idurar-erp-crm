@@ -270,35 +270,35 @@ html
           .space  
         .left.col-12
             h1.invoice
-              | Payment Reciept 
+              | #{translate('Payment Reciept')} 
             div 
               .col.col-8
-                p.strong Date :
+                p.strong #{translate('Date')} :
                 p #{moment(model.date).format("DD/MM/YYYY")}
               .col.col-9 
-                p.strong Reciept Number :
+                p.strong #{translate('Reciept Reciept')}:
                 p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
             .billTo
-                p Client :
+                p #{translate('Client')} :
                 p #{model.client.name}
-                p address : #{model.client.address}
-                p phone : #{model.client.phone}
-                p Tel : #{model.client.email}
+                p #{model.client.address}
+                p #{model.client.phone}
+                p #{model.client.email}
         .col.col-24
           .space  
       main
         table.table-invoice
           tbody
             tr
-              td.strong TOTAL
+              td.strong #{translate('total paid')}
               td.total.price $ #{model.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
         
       .col.col-24
           .space     
       footer.footer-invoice
-        | This Payment Reciept was created on a computer and is valid without the signature and seal.
+        //- | This Payment Reciept was created on a computer and is valid without the signature and seal.
           
 
    
