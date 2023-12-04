@@ -284,7 +284,7 @@ export default function ReadItem({ config, selectedItem }) {
           </Col>
           <Col className="gutter-row" span={12}>
             <p>
-              {translate('Tax Total')} ({currentErp.taxRate * 100} %) :
+              {translate('Tax Total')} ({currentErp.taxRate} %) :
             </p>
           </Col>
           <Col className="gutter-row" span={12}>

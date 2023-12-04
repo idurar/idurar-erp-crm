@@ -255,6 +255,11 @@ html
         padding: 20px 0;
         text-align: center;
       }
+      .line{
+        width:100%;
+        border-top: 1px solid #ccc;
+        height: 5px;
+      }
  
   body
     
@@ -276,7 +281,7 @@ html
                 p.strong #{translate('Date')} :
                 p #{moment(model.date).format("DD/MM/YYYY")}
               .col.col-9 
-                p.strong #{translate('Reciept Reciept')}:
+                p.strong #{translate('Reciept Number')}:
                 p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
@@ -288,12 +293,12 @@ html
                 p #{model.client.email}
         .col.col-24
           .space  
-      main
-        table.table-invoice
-          tbody
-            tr
-              td.strong #{translate('total paid')}
-              td.total.price $ #{model.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+      main.clearfix
+        
+        .left.col-24
+              .line
+              h3 #{translate('total paid')} : #{moneyFormatter({amount:model.amount})}
+                
         
       .col.col-24
           .space     

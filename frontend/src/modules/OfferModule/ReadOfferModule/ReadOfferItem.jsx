@@ -286,7 +286,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             <p>{moneyFormatter({ amount: currentErp.subTotal })}</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>Tax Total ({currentErp.taxRate * 100} %) :</p>
+            <p>Tax Total ({currentErp.taxRate} %) :</p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>{moneyFormatter({ amount: currentErp.taxTotal })}</p>

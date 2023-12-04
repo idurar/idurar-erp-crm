@@ -43,7 +43,7 @@ const useSelector = (lang) => {
   } catch (err) {}
 };
 
-const useLanguage = (selectedLang) => {
+const useLanguage = ({ selectedLang }) => {
   const translate = (value) => {
     const lang = useSelector(selectedLang);
     const text = getLabel(lang, value);
