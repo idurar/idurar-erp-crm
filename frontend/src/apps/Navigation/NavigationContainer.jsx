@@ -8,6 +8,7 @@ import useLanguage from '@/locale/useLanguage';
 import logoIcon from '@/style/images/logo-icon.svg';
 import logoText from '@/style/images/logo-text.svg';
 import { useNavigate } from 'react-router-dom';
+import useResponsive from '@/hooks/useResponsive';
 
 import {
   SettingOutlined,
@@ -27,16 +28,9 @@ import {
 const { Sider } = Layout;
 
 export default function Navigation() {
-  return (
-    <>
-      <div className="sidebar-wraper">
-        <Sidebar collapsible={true} />
-      </div>
-      <div className="hidden-md">
-        <MobileSidebar />
-      </div>
-    </>
-  );
+  const { isMobile } = useResponsive();
+
+  return isMobile ? <MobileSidebar /> : <Sidebar collapsible={true} />;
 }
 
 function Sidebar({ collapsible, isMobile = false }) {
@@ -46,7 +40,7 @@ function Sidebar({ collapsible, isMobile = false }) {
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
-  const [currentPath, setCurrentPath] = useState(location.pathname);
+  const [currentPath, setCurrentPath] = useState(location.pathname.slice(1));
 
   const translate = useLanguage();
   const navigate = useNavigate();
@@ -139,7 +133,7 @@ function Sidebar({ collapsible, isMobile = false }) {
   ];
 
   useEffect(() => {
-    if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname);
+    if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname.slice(1));
   }, [location, currentPath]);
 
   useEffect(() => {
@@ -188,7 +182,7 @@ function Sidebar({ collapsible, isMobile = false }) {
           />
         )}
       </div>
-      <Menu items={items} mode="inline" theme={'light'} />
+      <Menu items={items} mode="inline" theme={'light'} selectedKeys={[currentPath]} />
     </Sider>
   );
 }
