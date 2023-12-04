@@ -1,4 +1,4 @@
-const lang = {
+module.exports = {
   edit: 'Editare',
   save: 'Salvare',
   cancel: 'Anulare',
@@ -278,5 +278,3 @@ const lang = {
   sign_in: 'Înregistrare',
   sign_up: 'Înregistrare',
 };
-
-export default lang;

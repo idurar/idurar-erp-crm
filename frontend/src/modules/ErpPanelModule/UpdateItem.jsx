@@ -76,7 +76,6 @@ export default function UpdateItem({ config, UpdateForm }) {
         dataToUpdate.items = newList;
       }
     }
-    console.log('🚀 ~ file: UpdateItem.jsx:76 ~ onSubmit ~ dataToUpdate:', dataToUpdate);
 
     dispatch(erp.update({ entity, id, jsonData: dataToUpdate }));
   };

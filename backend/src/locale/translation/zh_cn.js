@@ -1,4 +1,4 @@
-const lang = {
+module.exports = {
   edit: '编辑',
   save: '保存',
   cancel: '取消',
@@ -319,13 +319,13 @@ const lang = {
   active_customer: '活跃客户',
   customer_preview: '客户预览',
   new_customer_this_month: '本月新增客户',
-
   already_have_account_login: '已经拥有帐户 登录',
   forgot_password: '忘记密码',
   log_in: '登录',
   or: '或者',
   sign_in: '登录',
   sign_up: '注册',
+  taxes: '稅收',
+  taxes_list: '稅項清單',
+  add_new_tax: '新增稅',
 };
-
-export default lang;

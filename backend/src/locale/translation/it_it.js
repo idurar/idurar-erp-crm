@@ -1,4 +1,4 @@
-const lang = {
+module.exports = {
   edit: 'Modifica',
   save: 'Salva',
   cancel: 'Annulla',
@@ -155,7 +155,7 @@ const lang = {
   add_new_order: 'Aggiungi Nuovo Ordine',
   general_settings: 'Impostazioni Generali',
   email_templates: 'Modelli Email',
-  birthday: 'Data di nasita',
+  birthday: 'Data di nascita',
   birthplace: 'Luogo di Nascita',
   department: 'Reparto',
   gender: 'Genere',
@@ -224,7 +224,8 @@ const lang = {
   source: 'Fonte',
   tax_total: 'Totale Tasse',
   thousand_separator: 'Separatore delle Migliaia',
-  to_write_a_variable_name_use_the_convention: 'Per scrivere un nome di variabile, usa la convenzione',
+  to_write_a_variable_name_use_the_convention:
+    'Per scrivere un nome di variabile, usa la convenzione',
   total_paid: 'Totale Pagato',
   total_remaining: 'Totale Rimasto',
   type: 'Tipo',
@@ -276,6 +277,16 @@ const lang = {
   or: 'Oppure',
   sign_in: 'Accedi',
   sign_up: 'Registrati',
+  select_date: 'Seleziona Data',
+  men: 'Uomo',
+  women: 'Donna',
+  click_to_upload: 'Clicca per caricare',
+  admin_super_admin: 'Amministratore (Super Admin)',
+  staff_admin_crud: 'Staff Admin (Crea, leggi, aggiorna, cancella)',
+  staff_cru: 'Staff (Crea, leggi, aggiorna)',
+  create_and_read_only: 'Solo crea e leggi',
+  read_only: 'Sola lettura',
+  taxes: 'Tasse',
+  taxes_list: 'List Tasse',
+  add_new_tax: 'Aggiungi Nuova Tassa',
 };
-
-export default lang;

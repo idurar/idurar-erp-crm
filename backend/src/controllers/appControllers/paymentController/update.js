@@ -76,8 +76,6 @@ const update = async (req, res) => {
     }
   ).exec();
 
-  await custom.generatePdf('Payment', { filename: 'payment', format: 'A4' }, result);
-
   res.status(200).json({
     success: true,
     result,

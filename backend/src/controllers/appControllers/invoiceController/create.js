@@ -63,8 +63,6 @@ const create = async (req, res) => {
 
   increaseBySettingKey({ settingKey: 'last_invoice_number' });
 
-  // custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
-
   // Returning successfull response
   return res.status(200).json({
     success: true,

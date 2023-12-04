@@ -48,7 +48,6 @@ const create = async (req, res) => {
   // Returning successfull response
 
   increaseBySettingKey({ settingKey: 'last_offer_number' });
-  custom.generatePdf('Offer', { filename: 'offer', format: 'A4' }, result);
 
   // Returning successfull response
   return res.status(200).json({
