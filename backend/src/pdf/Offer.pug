@@ -270,7 +270,7 @@ html
           .space  
         .left.col-14
             h1.invoice
-              | #{translate('Offer')}
+              | #{translate('offer')}
             div 
               .col.col-7
                 p.strong #{translate('Date')} :
@@ -305,17 +305,17 @@ html
                 td.service #{item.itemName}
                   span #{item.description}
                 td.qty #{item.quantity}  
-                td.unit $ #{item.price}
-                td.total $ #{item.total}
+                td.unit  #{moneyFormatter({amount:item.price})}
+                td.total #{moneyFormatter({amount:item.total})}
             tr
               td(colspan='3') #{translate('SUB TOTAL')}
-              td.total $ #{model.subTotal}
+              td.total #{moneyFormatter({amount:model.subTotal})}
             tr
               td(colspan='3') #{translate('TAX')} #{model.taxRate} %
-              td.total $ #{model.taxTotal}
+              td.total #{moneyFormatter({amount:model.taxTotal})}
             tr
               td.grand.total(colspan='3')  #{translate('TOTAL')} 
-              td.grand.total $#{model.total}
+              td.grand.total #{moneyFormatter({amount:model.total})}
         
       .col.col-24
           .space     

@@ -48,7 +48,7 @@ export default function ItemRow({ field, remove, current = null }) {
   useEffect(() => {
     const currentTotal = calculate.multiply(price, quantity);
 
-    setTotal(currentTotal.toFixed(2));
+    setTotal(currentTotal);
   }, [price, quantity]);
 
   return (
@@ -76,18 +76,12 @@ export default function ItemRow({ field, remove, current = null }) {
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={3}>
-        <Form.Item
-          name={[field.name, 'quantity']}
-          rules={[{ required: true, message: 'Missing item quantity' }]}
-        >
+        <Form.Item name={[field.name, 'quantity']} rules={[{ required: true }]}>
           <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={4}>
-        <Form.Item
-          name={[field.name, 'price']}
-          rules={[{ required: true, message: 'Missing item price' }]}
-        >
+        <Form.Item name={[field.name, 'price']} rules={[{ required: true }]}>
           <InputNumber
             className="moneyInput"
             onChange={updatePrice}

@@ -4,6 +4,8 @@ const moment = require('moment');
 const puppeteer = require('puppeteer');
 const { listAllSettings } = require('@/middlewares/settings');
 const useLanguage = require('@/locale/useLanguage');
+const useMoney = require('@/settings/useMoney');
+
 const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 
 exports.generatePdf = (req, res) => {
@@ -36,14 +38,16 @@ exports.generatePdf = (req, res) => {
         };
 
         const settings = await loadSettings();
-        const lang = settings['idurar_app_language'];
-        const translate = useLanguage(lang);
+        const selectedLang = settings['idurar_app_language'];
+        const translate = useLanguage({ selectedLang });
+        const { moneyFormatter } = useMoney({ settings });
 
         const htmlContent = pug.renderFile('src/pdf/' + modelName.toLowerCase() + '.pug', {
           model: result,
           settings,
           translate,
-          moment: moment,
+          moneyFormatter,
+          moment,
         });
 
         // Launch Puppeteer
