@@ -61,7 +61,7 @@ const sendViaApi = async (email, name, filePath) => {
 
   // Send the mail using the send method
   const data = await resend.emails.send({
-    from: 'Idurar@onfranciis.dev',
+    from: 'hello@idurarapp.com',
     to: email,
     subject: 'Invoice From Idurar',
     attachments: [
