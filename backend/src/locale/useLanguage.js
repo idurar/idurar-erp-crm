@@ -32,20 +32,20 @@ const getLabel = (lang, key) => {
 const useSelector = (lang) => {
   const filePath = `./translation/${lang}`;
   const defaultfilePath = `./translation/en_us`;
-  try {
-    const currentTranslation = require(filePath);
-    if (currentTranslation) {
-      return currentTranslation;
-    } else {
-      const langFile = require(defaultfilePath);
-      return langFile;
-    }
-  } catch (err) {}
+
+  const currentTranslation = require(filePath);
+
+  if (currentTranslation) {
+    return currentTranslation;
+  } else {
+    const langFile = require(defaultfilePath);
+    return langFile;
+  }
 };
 
 const useLanguage = ({ selectedLang }) => {
+  const lang = useSelector(selectedLang);
   const translate = (value) => {
-    const lang = useSelector(selectedLang);
     const text = getLabel(lang, value);
     return text;
   };

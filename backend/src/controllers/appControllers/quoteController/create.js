@@ -47,7 +47,6 @@ const create = async (req, res) => {
   // Returning successfull response
 
   increaseBySettingKey({ settingKey: 'last_quote_number' });
-  custom.generatePdf('Quote', { filename: 'quote', format: 'A4' }, result);
 
   // Returning successfull response
   return res.status(200).json({

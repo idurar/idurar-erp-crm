@@ -48,7 +48,6 @@ const update = async (req, res) => {
 
   // Returning successfull response
 
-  custom.generatePdf('Offer', { filename: 'offer', format: 'A4' }, result);
   return res.status(200).json({
     success: true,
     result,
