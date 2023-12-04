@@ -268,23 +268,23 @@ html
               
         .col.col-24
           .space  
-        .left.col-12
+        .left.col-14
             h1.invoice
-              | INVOICE 
+              | #{translate('invoice')}
             div 
-              .col.col-8
-                p.strong Date :
+              .col.col-7
+                p.strong #{translate('Date')} :
                 p #{moment(model.date).format("DD/MM/YYYY")}
-              .col.col-8
-                p.strong Expired Date :
+              .col.col-9
+                p.strong #{translate('Expired Date')} :
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
-                p.strong Invoice Number :
+                p.strong #{translate('Number')} :
                 p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
             .billTo
-                p Bill To :
+                p #{translate('Client')} :
                 p #{model.client.name}
                 p #{model.client.address}
                 p #{model.client.phone}
@@ -295,10 +295,10 @@ html
         table.table-invoice
           thead
             tr.tableHeader
-              th.service ITEM
-              th QTY
-              th PRICE
-              th TOTAL
+              th.service #{translate('item')}
+              th #{translate('Quantity')}
+              th #{translate('PRICE')}
+              th #{translate('TOTAL')}
           tbody
             each item in model.items
               tr
@@ -308,13 +308,13 @@ html
                 td.unit $ #{item.price}
                 td.total $ #{item.total}
             tr
-              td(colspan='3') SUBTOTAL
+              td(colspan='3') #{translate('SUB TOTAL')}
               td.total $ #{model.subTotal}
             tr
-              td(colspan='3') TAX #{model.taxRate*100} %
+              td(colspan='3') #{translate('TAX')} #{model.taxRate} %
               td.total $ #{model.taxTotal}
             tr
-              td.grand.total(colspan='3') GRAND TOTAL
+              td.grand.total(colspan='3')  #{translate('TOTAL')} 
               td.grand.total $#{model.total}
         
       .col.col-24
