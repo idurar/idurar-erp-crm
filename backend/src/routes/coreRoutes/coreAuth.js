@@ -6,6 +6,7 @@ const { catchErrors } = require('@/handlers/errorHandlers');
 const adminAuth = require('@/controllers/coreControllers/adminAuth');
 
 router.route('/login').post(catchErrors(adminAuth.login));
+router.route('/register').post(catchErrors(adminAuth.register));
 router.route('/logout').post(adminAuth.isValidAuthToken, catchErrors(adminAuth.logout));
 
 module.exports = router;

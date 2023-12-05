@@ -1,8 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
-// const { stubFalse } = require('lodash');
-// const url = require('url');
 
 const mongoose = require('mongoose');
 
@@ -10,20 +8,6 @@ const login = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
   const User = mongoose.model(userModel);
   const { email, password } = req.body;
-
-  // URL address
-  // const address = req.get('origin');
-
-  // // Call parse() method using url module
-  // let urlObject = url.parse(address, true);
-
-  // const orginalHostname = urlObject.hostname;
-
-  // let isLocalhost = false;
-  // if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
-  //   // Connection is from localhost
-  //   isLocalhost = true;
-  // }
 
   // validate
   const objectSchema = Joi.object({
