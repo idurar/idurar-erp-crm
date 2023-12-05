@@ -21,6 +21,16 @@ const routerApp = (entity, controller) => {
   router.route(`/${entity}/list`).get(hasPermission('read'), catchErrors(controller['list']));
   router.route(`/${entity}/filter`).get(hasPermission('read'), catchErrors(controller['filter']));
   router.route(`/${entity}/summary`).get(hasPermission('read'), catchErrors(controller['summary']));
+
+  if (entity === 'invoice' || entity === 'quote') {
+    router.route(`/${entity}/mail`).post(hasPermission('update'), catchErrors(controller['mail']));
+  }
+
+  if (entity === 'quote') {
+    router
+      .route(`/${entity}/convert/:id`)
+      .get(hasPermission('update'), catchErrors(controller['convert']));
+  }
 };
 
 routesList.forEach(({ entity, controllerName }) => {

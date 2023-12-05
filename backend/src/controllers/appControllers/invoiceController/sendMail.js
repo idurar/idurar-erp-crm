@@ -1,14 +1,11 @@
 const fs = require('fs');
-const path = require('path');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 const { SendInvoice } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const InvoiceModel = mongoose.model('Invoice');
-const ClientModel = mongoose.model('Client');
-const ObjectId = mongoose.Types.ObjectId;
 const { Resend } = require('resend');
 
-const sendMail = async (req, res) => {
+const mail = async (req, res) => {
   const { id } = req.body;
 
   // Throw error if no id
@@ -16,7 +13,7 @@ const sendMail = async (req, res) => {
     throw { name: 'ValidationError' };
   }
 
-  const result = await InvoiceModel.findById(ObjectId(id)).exec();
+  const result = await InvoiceModel.findOne({ _id: id, removed: false }).exec();
 
   // Throw error if no result
   if (!result) {
@@ -25,19 +22,24 @@ const sendMail = async (req, res) => {
 
   // Continue process if result is returned
   const { client } = result;
-  const { email, managerName } = await ClientModel.findById(client).exec();
+  const { name } = client;
+  const email = client[client.type].email;
+
+  const modelName = 'invoice';
+
+  const fileId = modelName.toLowerCase() + '-' + result._id + '.pdf';
+  const folderPath = modelName.toLowerCase();
+  const targetLocation = `src/public/download/${folderPath}/${fileId}`;
 
   await custom.generatePdf(
-    'Invoice',
-    { filename: 'invoice', format: 'A4' },
+    modelName,
+    { filename: folderPath, format: 'A4', targetLocation },
     result,
-    async (fileLocation) => {
-      // Send the mail using the details gotten from the client
-      const { id: mailId } = await sendViaApi(email, managerName, fileLocation);
+    async () => {
+      const { id: mailId } = await sendViaApi(email, name, targetLocation);
 
-      // Update the status to sent if mail was successfull
       if (mailId) {
-        InvoiceModel.findByIdAndUpdate(id, { status: 'sent' })
+        InvoiceModel.findByIdAndUpdate({ _id: id, removed: false }, { status: 'sent' })
           .exec()
           .then((data) => {
             // Returning successfull response
@@ -53,14 +55,14 @@ const sendMail = async (req, res) => {
 };
 
 const sendViaApi = async (email, name, filePath) => {
-  const absolutePath = path.normalize(filePath);
+  // const absolutePath = path.normalize(filePath);
   const resend = new Resend(process.env.RESEND_API);
 
   // Read the file to be attatched
-  const attatchedFile = fs.readFileSync(absolutePath);
+  const attatchedFile = fs.readFileSync(filePath);
 
   // Send the mail using the send method
-  const data = await resend.emails.send({
+  const { data } = await resend.emails.send({
     from: 'hello@idurarapp.com',
     to: email,
     subject: 'Invoice From Idurar',
@@ -76,4 +78,4 @@ const sendViaApi = async (email, name, filePath) => {
   return data;
 };
 
-module.exports = sendMail;
+module.exports = mail;

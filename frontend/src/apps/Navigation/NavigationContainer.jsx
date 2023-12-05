@@ -93,11 +93,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <CreditCardOutlined />,
       label: <Link to={'/payment'}>{translate('payment')}</Link>,
     },
-    {
-      key: 'employee',
-      icon: <UserOutlined />,
-      label: <Link to={'/employee'}>{translate('employee')}</Link>,
-    },
+    // {
+    //   key: 'employee',
+    //   icon: <UserOutlined />,
+    //   label: <Link to={'/employee'}>{translate('employee')}</Link>,
+    // },
     {
       key: 'admin',
       icon: <TeamOutlined />,
@@ -112,10 +112,10 @@ function Sidebar({ collapsible, isMobile = false }) {
           key: 'generalSettings',
           label: <Link to={'/settings'}>{translate('general_settings')}</Link>,
         },
-        {
-          key: 'emailTemplates',
-          label: <Link to={'/email'}>{translate('email_templates')}</Link>,
-        },
+        // {
+        //   key: 'emailTemplates',
+        //   label: <Link to={'/email'}>{translate('email_templates')}</Link>,
+        // },
         {
           key: 'paymentMode',
           label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,
@@ -124,10 +124,10 @@ function Sidebar({ collapsible, isMobile = false }) {
           key: 'taxes',
           label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
         },
-        {
-          key: 'advancedSettings',
-          label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
-        },
+        // {
+        //   key: 'advancedSettings',
+        //   label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
+        // },
       ],
     },
   ];
