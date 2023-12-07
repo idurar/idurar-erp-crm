@@ -20,12 +20,12 @@ const erpApiRouter = require('./routes/appRoutes/appApi');
 // create our Express app
 const app = express();
 
-const corsOptions = {
-  origin: 'https://mnm-crm-frontend.vercel.app',
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: 'https://mnm-crm-frontend.vercel.app',
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // setting cors at one place for all the routes
 // putting cors as first in order to avoid unneccessary requests from unallowed origins
