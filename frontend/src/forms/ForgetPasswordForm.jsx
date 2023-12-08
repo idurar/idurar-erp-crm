@@ -2,10 +2,9 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 
-import useLanguage from '@/locale/useLanguage';
+// import useLanguage from '@/locale/useLanguage';
 
 export default function ForgetPasswordForm() {
-  const translate = useLanguage();
   return (
     <Form.Item
       name="email"

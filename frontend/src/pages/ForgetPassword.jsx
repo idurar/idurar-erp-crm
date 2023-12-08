@@ -5,7 +5,7 @@ import SelectLanguage from '@/components/SelectLanguage';
 
 import logo from '@/style/images/idurar-crm-erp.svg';
 
-import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
+import { Form, Result, Button, Layout, Col, Divider, Typography } from 'antd';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 
@@ -85,7 +85,7 @@ const ForgetPassword = () => {
                     className="login-form-button"
                     size="large"
                   >
-                    {translate('Register')}
+                    {translate('Request new Password')}
                   </Button>
                   {translate('Or')} <a href="/login"> {translate('already have account Login')} </a>
                 </Form.Item>
@@ -100,7 +100,7 @@ const ForgetPassword = () => {
       <Result
         status="success"
         title={translate('Password Reset in progress')}
-        subTitle={translate('Check your email address , to reset your password')}
+        subTitle={translate('Check your email address to reset your password')}
         extra={
           <Button
             type="primary"
@@ -108,7 +108,7 @@ const ForgetPassword = () => {
               navigate(`/login`);
             }}
           >
-            {translate('Back')}
+            {translate('Login')}
           </Button>
         }
       ></Result>

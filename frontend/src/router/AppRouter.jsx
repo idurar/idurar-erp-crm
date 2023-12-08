@@ -49,7 +49,11 @@ export default function AppRouter() {
       element: <Navigate to="/" replace />,
     },
     {
-      path: '/verify',
+      path: '/verify/*',
+      element: <Navigate to="/" replace />,
+    },
+    {
+      path: '/resetpassword/*',
       element: <Navigate to="/" replace />,
     },
     {

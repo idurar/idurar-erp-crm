@@ -78,12 +78,12 @@ export const verify =
   };
 
 export const resetPassword =
-  ({ userId, emailToken }) =>
+  ({ resetPasswordData }) =>
   async (dispatch) => {
     dispatch({
       type: actionTypes.REQUEST_LOADING,
     });
-    const data = await authService.verify({ userId, emailToken });
+    const data = await authService.resetPassword({ resetPasswordData });
 
     if (data.success === true) {
       const auth_state = {
