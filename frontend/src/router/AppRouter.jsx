@@ -49,6 +49,10 @@ export default function AppRouter() {
       element: <Navigate to="/" replace />,
     },
     {
+      path: '/verify',
+      element: <Navigate to="/" replace />,
+    },
+    {
       path: '/logout',
       element: <Logout />,
     },

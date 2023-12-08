@@ -4,6 +4,11 @@ const Joi = require('joi');
 
 const mongoose = require('mongoose');
 
+const checkAndCorrectURL = require('./checkAndCorrectURL');
+const sendMail = require('./sendMail');
+
+const { loadSettings } = require('@/middlewares/settings');
+
 const login = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
   const User = mongoose.model(userModel);
@@ -47,6 +52,24 @@ const login = async (req, res, { userModel }) => {
       result: null,
       message: 'Invalid credentials.',
     });
+
+  if (!user.enabled) {
+    const settings = await loadSettings();
+
+    const idurar_app_email = settings['idurar_app_email'];
+    const idurar_base_url = settings['idurar_base_url'];
+    const url = checkAndCorrectURL(idurar_base_url);
+
+    const link = url + '/verify/' + user._id + '/' + userPassword.emailToken;
+
+    await sendMail({ email, name: user.name, link, idurar_app_email });
+
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'your email account is not verified , check your email inbox',
+    });
+  }
 
   const token = jwt.sign(
     {

@@ -2,20 +2,18 @@ const bcrypt = require('bcryptjs');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const { generate: uniqueId } = require('shortid');
-const { listAllSettings } = require('@/middlewares/settings');
-const register = async (req, res, { userModel }) => {
-  const loadSettings = async () => {
-    const allSettings = {};
-    const datas = await listAllSettings();
-    datas.map((data) => {
-      allSettings[data.settingKey] = data.settingValue;
-    });
-    return allSettings;
-  };
+const { loadSettings } = require('@/middlewares/settings');
 
+const checkAndCorrectURL = require('./checkAndCorrectURL');
+const sendMail = require('./sendMail');
+
+const register = async (req, res, { userModel }) => {
   const settings = await loadSettings();
 
   const idurar_registration_allowed = settings['idurar_registration_allowed'];
+
+  const idurar_app_email = settings['idurar_app_email'];
+  const idurar_base_url = settings['idurar_base_url'];
 
   if (!idurar_registration_allowed) {
     return res.status(409).json({
@@ -60,6 +58,7 @@ const register = async (req, res, { userModel }) => {
 
   const salt = uniqueId();
   const hashedPassword = bcrypt.hashSync(salt + password);
+  const emailToken = uniqueId();
 
   const savedUser = await User.create({ email, name });
 
@@ -67,6 +66,7 @@ const register = async (req, res, { userModel }) => {
     user: savedUser._id,
     password: hashedPassword,
     salt: salt,
+    emailToken,
   });
 
   if (!registrationDone) {
@@ -79,6 +79,11 @@ const register = async (req, res, { userModel }) => {
     });
   }
 
+  const url = checkAndCorrectURL(idurar_base_url);
+
+  const link = url + '/verify/' + savedUser._id + '/' + emailToken;
+
+  await sendMail({ email, name, link, idurar_app_email });
   // Email verification logic here
 
   return res.status(200).json({

@@ -49,6 +49,62 @@ export const register =
     }
   };
 
+export const verify =
+  ({ userId, emailToken }) =>
+  async (dispatch) => {
+    dispatch({
+      type: actionTypes.REQUEST_LOADING,
+    });
+    const data = await authService.verify({ userId, emailToken });
+
+    if (data.success === true) {
+      const auth_state = {
+        current: data.result,
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: true,
+      };
+      window.localStorage.setItem('auth', JSON.stringify(auth_state));
+      window.localStorage.removeItem('isLogout');
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: data.result,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
+      });
+    }
+  };
+
+export const resetPassword =
+  ({ userId, emailToken }) =>
+  async (dispatch) => {
+    dispatch({
+      type: actionTypes.REQUEST_LOADING,
+    });
+    const data = await authService.verify({ userId, emailToken });
+
+    if (data.success === true) {
+      const auth_state = {
+        current: data.result,
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: true,
+      };
+      window.localStorage.setItem('auth', JSON.stringify(auth_state));
+      window.localStorage.removeItem('isLogout');
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: data.result,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
+      });
+    }
+  };
+
 export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,

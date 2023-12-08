@@ -8,7 +8,7 @@ const adminSchema = new Schema({
   },
   enabled: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
   email: {

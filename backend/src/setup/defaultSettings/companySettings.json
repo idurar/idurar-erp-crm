@@ -58,7 +58,7 @@
   {
     "settingCategory": "company_settings",
     "settingKey": "company_email",
-    "settingValue": "hello@idurarapp.com",
+    "settingValue": "support@idurarapp.com",
     "valueType": "string",
     "isCoreSetting": true,
     "isPrivate": false

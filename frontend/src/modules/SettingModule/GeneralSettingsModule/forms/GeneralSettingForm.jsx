@@ -45,6 +45,13 @@ export default function GeneralSettingForm() {
       >
         <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
       </Form.Item>
+
+      <Form.Item label={translate('Application Email')} name="idurar_app_email">
+        <Input autoComplete="off" />
+      </Form.Item>
+      <Form.Item label={translate('Application URl')} name="idurar_base_url">
+        <Input autoComplete="off" />
+      </Form.Item>
     </>
   );
 }
