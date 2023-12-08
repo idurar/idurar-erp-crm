@@ -5,19 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 import useLanguage from '@/locale/useLanguage';
 
-import { Form, Button, Layout, Col, Divider, Typography } from 'antd';
+import { Form, Button } from 'antd';
 
 import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
-import AuthLayout from '@/layout/AuthLayout';
-import SideContent from '@/components/SideContent';
-import SelectLanguage from '@/components/SelectLanguage';
-
-import logo from '@/style/images/idurar-crm-erp.svg';
-
-const { Content } = Layout;
-const { Title } = Typography;
+import Loading from '@/components/Loading';
+import AuthModule from '@/modules/AuthModule';
 
 const LoginPage = () => {
   const translate = useLanguage();
@@ -33,68 +27,38 @@ const LoginPage = () => {
   useEffect(() => {
     if (isSuccess) navigate('/');
   }, [isSuccess]);
-  return (
-    <>
-      <AuthLayout sideContent={<SideContent />}>
-        <Content
-          style={{
-            padding: '10px 20px',
-          }}
-        >
-          <SelectLanguage />
-        </Content>
-        <Content
-          style={{
-            padding: '140px 30px 30px',
-            maxWidth: '440px',
-            margin: '0 auto',
-          }}
-        >
-          <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 0 }} span={0}>
-            <img
-              src={logo}
-              alt="Logo"
-              style={{
-                margin: '-70px auto 40px',
-                display: 'block',
-              }}
-              height={63}
-              width={220}
-            />
-            <div className="space20" />
-          </Col>
-          <Title level={1}>{translate('Sign in')}</Title>
 
-          <Divider />
-          <div className="site-layout-content">
-            <Form
-              layout="vertical"
-              name="normal_login"
-              className="login-form"
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
+  const FormContainer = () => {
+    return (
+      <Loading isLoading={isLoading}>
+        <Form
+          layout="vertical"
+          name="normal_login"
+          className="login-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+        >
+          <LoginForm />
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              loading={isLoading}
+              size="large"
             >
-              <LoginForm />
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                  loading={isLoading}
-                  size="large"
-                >
-                  {translate('Log in')}
-                </Button>
-                {translate('Or')} <a href="/register">{translate('register now')}!</a>
-              </Form.Item>
-            </Form>
-          </div>
-        </Content>
-      </AuthLayout>
-    </>
-  );
+              {translate('Log in')}
+            </Button>
+            {translate('Or')} <a href="/register">{translate('register now')}!</a>
+          </Form.Item>
+        </Form>
+      </Loading>
+    );
+  };
+
+  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
 };
 
 export default LoginPage;
