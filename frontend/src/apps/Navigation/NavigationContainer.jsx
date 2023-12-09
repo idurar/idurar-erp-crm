@@ -20,7 +20,6 @@ import {
   UserOutlined,
   CreditCardOutlined,
   MenuOutlined,
-  UserAddOutlined,
   FileOutlined,
   ShopOutlined,
   FilterOutlined,
@@ -126,6 +125,10 @@ function Sidebar({ collapsible, isMobile = false }) {
         {
           key: 'taxes',
           label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
+        },
+        {
+          key: 'about',
+          label: <Link to={'/about'}>{translate('about')}</Link>,
         },
         // {
         //   key: 'advancedSettings',

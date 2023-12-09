@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown, Layout } from 'antd';
+import { Avatar, Dropdown, Layout, Popover, Button } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
-import { SettingOutlined, LogoutOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined, RocketOutlined } from '@ant-design/icons';
 
 import { checkImage } from '@/request';
 
@@ -63,6 +63,22 @@ export default function HeaderContent() {
 
   const DropdownMenu = ({ text }) => {
     return <span style={{}}>{text}</span>;
+  };
+
+  const content = () => {
+    return (
+      <>
+        <p>{translate('Do you need help on customize of this app')}</p>
+        <Button
+          type="primary"
+          onClick={() => {
+            window.open(`https://www.idurarapp.com/contact-us/`);
+          }}
+        >
+          {translate('Contact us')}
+        </Button>
+      </>
+    );
   };
 
   const items = [
@@ -134,6 +150,18 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
+      <Popover content={content} title={translate('Customize this application')} trigger="click">
+        <Avatar
+          icon={<RocketOutlined />}
+          style={{
+            color: '#f56a00',
+            backgroundColor: '#FFF',
+            float: 'right',
+            marginTop: '5px',
+            cursor: 'pointer',
+          }}
+        />
+      </Popover>
       <SelectLanguage />
     </Header>
   );
