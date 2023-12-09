@@ -13,6 +13,7 @@ import ResetPasswordForm from '@/forms/ResetPasswordForm';
 import useLanguage from '@/locale/useLanguage';
 
 import Loading from '@/components/Loading';
+import AuthModule from '@/modules/AuthModule';
 
 const ResetPassword = () => {
   const translate = useLanguage();

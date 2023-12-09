@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { register } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
-import { Form, Button } from 'antd';
+import { Form, Button, Result } from 'antd';
 import RegisterForm from '@/forms/RegisterForm';
 import useLanguage from '@/locale/useLanguage';
 import Loading from '@/components/Loading';
@@ -21,10 +21,6 @@ const RegisterPage = () => {
   const onFinish = (values) => {
     dispatch(register({ registerData: values }));
   };
-
-  useEffect(() => {
-    if (isSuccess) navigate('/login');
-  }, [isSuccess]);
 
   const FormContainer = () => {
     return (
@@ -49,7 +45,27 @@ const RegisterPage = () => {
     );
   };
 
-  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign up" />;
+  if (!isSuccess) {
+    return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign up" />;
+  } else {
+    return (
+      <Result
+        status="info"
+        title={translate('Verify your account')}
+        subTitle={translate('Check your email address to verify your account')}
+        // extra={
+        //   <Button
+        //     type="primary"
+        //     onClick={() => {
+        //       navigate(`/login`);
+        //     }}
+        //   >
+        //     {translate('Login')}
+        //   </Button>
+        // }
+      ></Result>
+    );
+  }
 };
 
 export default RegisterPage;
