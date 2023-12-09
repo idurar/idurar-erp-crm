@@ -1,9 +1,10 @@
 const fs = require('fs');
-const custom = require('@/controllers/middlewaresControllers/pdfController');
+const custom = require('@/controllers/pdfController');
 const { SendInvoice } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const InvoiceModel = mongoose.model('Invoice');
 const { Resend } = require('resend');
+const { loadSettings } = require('@/middlewares/settings');
 
 const mail = async (req, res) => {
   const { id } = req.body;
@@ -55,15 +56,16 @@ const mail = async (req, res) => {
 };
 
 const sendViaApi = async (email, name, filePath) => {
-  // const absolutePath = path.normalize(filePath);
   const resend = new Resend(process.env.RESEND_API);
 
+  const settings = await loadSettings();
+  const idurar_app_email = settings['idurar_app_email'];
   // Read the file to be attatched
   const attatchedFile = fs.readFileSync(filePath);
 
   // Send the mail using the send method
   const { data } = await resend.emails.send({
-    from: 'hello@idurarapp.com',
+    from: idurar_app_email,
     to: email,
     subject: 'Invoice From Idurar',
     attachments: [

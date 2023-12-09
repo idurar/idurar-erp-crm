@@ -1,9 +1,10 @@
 const fs = require('fs');
-const custom = require('@/controllers/middlewaresControllers/pdfController');
+const custom = require('@/controllers/pdfController');
 const { SendQuote } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
 const QuoteModel = mongoose.model('Quote');
 const { Resend } = require('resend');
+const { loadSettings } = require('@/middlewares/settings');
 
 const mail = async (req, res) => {
   const { id } = req.body;
@@ -55,7 +56,8 @@ const mail = async (req, res) => {
 };
 
 const sendViaApi = async (email, name, filePath) => {
-  // const absolutePath = path.normalize(filePath);
+  const settings = await loadSettings();
+  const idurar_app_email = settings['idurar_app_email'];
   const resend = new Resend(process.env.RESEND_API);
 
   // Read the file to be attatched
@@ -63,7 +65,7 @@ const sendViaApi = async (email, name, filePath) => {
 
   // Send the mail using the send method
   const { data } = await resend.emails.send({
-    from: 'hello@idurarapp.com',
+    from: idurar_app_email,
     to: email,
     subject: 'Quote From Idurar',
     attachments: [

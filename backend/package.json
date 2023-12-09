@@ -1,6 +1,6 @@
 {
   "name": "idurar-erp-crm",
-  "version": "3.0.0-beta.16",
+  "version": "3.0.0",
   "engines": {
     "npm": "10.2.4",
     "node": "20.9.0"
@@ -26,12 +26,12 @@
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",
     "moment": "^2.29.4",
-    "mongoose": "^8.0.2",
+    "mongoose": "^8.0.3",
     "mongoose-autopopulate": "^1.1.0",
     "multer": "^1.4.4",
     "node-cache": "^5.1.2",
     "pug": "^3.0.2",
-    "puppeteer": "^21.5.2",
+    "puppeteer": "^21.6.0",
     "resend": "^2.0.0",
     "shortid": "^2.2.16",
     "transliteration": "^2.3.5"

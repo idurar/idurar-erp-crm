@@ -19,14 +19,16 @@ async function setupApp() {
 
     const demoAdmin = {
       email: 'admin@demo.com',
-      name: 'Salah Eddine',
-      surname: 'Lalami',
+      name: 'IDURAR Admin',
+      surname: 'User',
+      enabled: true,
       role: 'admin',
     };
     const result = await new Admin(demoAdmin).save();
 
     const AdminPasswordData = {
       password: passwordHash,
+      emailVerified: true,
       salt: salt,
       user: result._id,
     };

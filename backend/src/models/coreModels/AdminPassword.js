@@ -17,9 +17,11 @@ const AdminPasswordSchema = new Schema({
     type: String,
     required: true,
   },
+  emailToken: String,
+  resetToken: String,
   emailVerified: {
     type: Boolean,
-    trim: true,
+    default: false,
   },
   authType: {
     type: String,
@@ -31,10 +33,10 @@ const AdminPasswordSchema = new Schema({
   },
 });
 
-AdminPasswordSchema.index({ user: 1 });
+// AdminPasswordSchema.index({ user: 1 });
 // generating a hash
 AdminPasswordSchema.methods.generateHash = function (salt, password) {
-  return bcrypt.hashSync(salt + password, bcrypt.genSaltSync(), null);
+  return bcrypt.hashSync(salt + password);
 };
 
 // checking if password is valid

@@ -46,7 +46,15 @@ export default function AppRouter() {
   let element = useRoutes([
     {
       path: '/login',
-      element: <Navigate to="/" replace />,
+      element: <Navigate to="/" />,
+    },
+    {
+      path: '/verify/*',
+      element: <Navigate to="/" />,
+    },
+    {
+      path: '/resetpassword/*',
+      element: <Navigate to="/" />,
     },
     {
       path: '/logout',

@@ -2,10 +2,6 @@ import { Space, Layout, Divider } from 'antd';
 import { Typography } from 'antd';
 
 import logo from '@/style/images/idurar-crm-erp.svg';
-import logo1 from '@/style/images/logo1.png';
-import logo2 from '@/style/images/logo2.png';
-import logo3 from '@/style/images/logo3.png';
-import logo4 from '@/style/images/logo4.png';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -55,7 +51,7 @@ export default function SideContent() {
             justifyContent: 'space-between',
           }}
         >
-          <img
+          {/* <img
             src={logo1}
             alt="Logo1"
             style={{
@@ -114,7 +110,7 @@ export default function SideContent() {
             }}
             height={48}
             width={48}
-          />
+          /> */}
         </div>
       </div>
     </Content>

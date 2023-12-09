@@ -9,8 +9,8 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-layout": "^7.17.16",
-    "@reduxjs/toolkit": "^2.0.0",
-    "@vitejs/plugin-react": "^4.2.0",
+    "@reduxjs/toolkit": "^2.0.1",
+    "@vitejs/plugin-react": "^4.2.1",
     "antd": "^5.12.1",
     "axios": "^1.6.2",
     "cross-env": "7.0.3",
@@ -20,12 +20,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
-    "react-redux": "^9.0.0",
+    "react-redux": "^9.0.2",
     "react-router-dom": "^6.20.1",
     "redux": "^5.0.0",
-    "reselect": "^5.0.0",
+    "reselect": "^5.0.1",
     "shortid": "^2.2.16",
-    "vite": "^5.0.5"
+    "vite": "^5.0.7"
   },
   "scripts": {
     "dev": "vite",

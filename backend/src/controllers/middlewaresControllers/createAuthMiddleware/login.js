@@ -1,29 +1,18 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
-// const { stubFalse } = require('lodash');
-// const url = require('url');
 
 const mongoose = require('mongoose');
+
+const checkAndCorrectURL = require('./checkAndCorrectURL');
+const sendMail = require('./sendMail');
+
+const { loadSettings } = require('@/middlewares/settings');
 
 const login = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
   const User = mongoose.model(userModel);
   const { email, password } = req.body;
-
-  // URL address
-  // const address = req.get('origin');
-
-  // // Call parse() method using url module
-  // let urlObject = url.parse(address, true);
-
-  // const orginalHostname = urlObject.hostname;
-
-  // let isLocalhost = false;
-  // if (orginalHostname === '127.0.0.1' || orginalHostname === 'localhost') {
-  //   // Connection is from localhost
-  //   isLocalhost = true;
-  // }
 
   // validate
   const objectSchema = Joi.object({
@@ -63,6 +52,24 @@ const login = async (req, res, { userModel }) => {
       result: null,
       message: 'Invalid credentials.',
     });
+
+  if (!user.enabled) {
+    const settings = await loadSettings();
+
+    const idurar_app_email = settings['idurar_app_email'];
+    const idurar_base_url = settings['idurar_base_url'];
+    const url = checkAndCorrectURL(idurar_base_url);
+
+    const link = url + '/verify/' + user._id + '/' + userPassword.emailToken;
+
+    await sendMail({ email, name: user.name, link, idurar_app_email });
+
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'your email account is not verified , check your email inbox',
+    });
+  }
 
   const token = jwt.sign(
     {
