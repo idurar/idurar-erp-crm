@@ -43,8 +43,8 @@
     "@": "src"
   },
   "main": "server.js",
-  "keywords": [],
   "author": "IDURAR",
+  "email": "hello@idurarapp.com",
   "license": "Fair-code License",
   "repository": {
     "type": "git",
