@@ -13,7 +13,7 @@ import useResponsive from '@/hooks/useResponsive';
 import {
   SettingOutlined,
   CustomerServiceOutlined,
-  FileTextOutlined,
+  ContainerOutlined,
   FileSyncOutlined,
   DashboardOutlined,
   TeamOutlined,
@@ -23,6 +23,7 @@ import {
   UserAddOutlined,
   FileOutlined,
   ShopOutlined,
+  FilterOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -52,22 +53,10 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/'}>{translate('dashboard')}</Link>,
     },
     {
-      key: 'lead',
-      icon: <UserAddOutlined />,
-      label: <Link to={'/lead'}>{translate('lead')}</Link>,
-    },
-    {
-      key: 'offer',
-      icon: <FileOutlined />,
-      label: <Link to={'/offer'}>{translate('offer')}</Link>,
-    },
-    {
       key: 'customer',
       icon: <CustomerServiceOutlined />,
       label: <Link to={'/customer'}>{translate('customer')}</Link>,
     },
-    // { key: 'order', icon: <ShopOutlined />, label: <Link to={'/'}>Lead</Link> Order },
-    // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
     {
       key: 'people',
       icon: <UserOutlined />,
@@ -79,8 +68,22 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/company'}>{translate('company')}</Link>,
     },
     {
+      key: 'lead',
+      icon: <FilterOutlined />,
+      label: <Link to={'/lead'}>{translate('lead')}</Link>,
+    },
+    {
+      key: 'offer',
+      icon: <FileOutlined />,
+      label: <Link to={'/offer'}>{translate('offer')}</Link>,
+    },
+
+    // { key: 'order', icon: <ShopOutlined />, label: <Link to={'/'}>Lead</Link> Order },
+    // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
+
+    {
       key: 'invoice',
-      icon: <FileTextOutlined />,
+      icon: <ContainerOutlined />,
       label: <Link to={'/invoice'}>{translate('invoice')}</Link>,
     },
     {

@@ -8,6 +8,7 @@ const update = require('./update');
 const remove = require('./remove');
 const search = require('./search');
 const filter = require('./filter');
+const summary = require('./summary');
 const listAll = require('./listAll');
 const paginatedList = require('./paginatedList');
 
@@ -26,6 +27,7 @@ const createCRUDController = (modelName) => {
     listAll: (req, res) => listAll(Model, req, res),
     search: (req, res) => search(Model, req, res),
     filter: (req, res) => filter(Model, req, res),
+    summary: (req, res) => summary(Model, req, res),
   };
   return crudMethods;
 };

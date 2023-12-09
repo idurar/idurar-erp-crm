@@ -22,7 +22,8 @@ const PasswordModal = () => {
     const updateFn = async () => {
       return await request.patch({ entity, jsonData: fieldsValue });
     };
-    onFetch(updateFn);
+    const callback = updateFn();
+    onFetch(callback);
     passForm.resetFields();
     modal.close();
   };
