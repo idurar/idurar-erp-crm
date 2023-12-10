@@ -1,20 +1,20 @@
 {
+  "name": "mnm-crm",
   "version": 2,
   "builds": [
     {
-      "src": "./index.py",
-      "use": "@vercel/python"
+      "src": "./index.js",
+      "use": "@vercel/node"
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "src/app.js" }],
-  "headers": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
-    },
-    {
-      "source": "/mnm-crm-frontend.vercel.app/(.*)",
-      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+      "src": "/(.*)",
+      "dest": "./index.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
