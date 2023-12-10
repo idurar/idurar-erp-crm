@@ -63,7 +63,7 @@ async function translate(language, langObject) {
       },
     ],
     temperature: 0.5,
-    max_tokens: 7000,
+    max_tokens: 12000,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
