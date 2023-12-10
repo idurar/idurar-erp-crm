@@ -21,7 +21,7 @@ const erpApiRouter = require('./routes/appRoutes/appApi');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://mnm-crm-frontend.vercel.app',
+  origin: true,
   credentials: true,
 };
 
