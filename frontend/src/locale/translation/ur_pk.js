@@ -524,6 +524,5 @@ firstname: "پہلا نام",
 lastname: "آخری نام",
 client_list: "کلائنٹ کی فہرست",
 add_new_client: "نیا کلائنٹ شامل کریں",
-idurar_app_title: "Open Code Source ERP CRM Invoicing Accounting Expenses",
 }
  export default lang

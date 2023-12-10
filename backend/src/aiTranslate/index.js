@@ -86,8 +86,8 @@ async function generateTranslation(language) {
 
   const newLanguageContent = { ...currentLang, ...missedWords };
 
-  generateBackendFile({ language: language.value, newLanguageContent });
-  generateFrontendFile({ language: language.value, newLanguageContent });
+  // generateBackendFile({ language: language.value, newLanguageContent });
+  generateFrontendFile({ language: language.value, newLanguageContent: currentLang });
 }
 
 languages.forEach(({ label, value }) => {

@@ -515,6 +515,5 @@ firstname: "Tên",
 lastname: "Họ",
 client_list: "Danh sách khách hàng",
 add_new_client: "Thêm khách hàng mới",
-idurar_app_title: "Open Code Source ERP CRM Invoicing Accounting Expenses",
 }
  export default lang

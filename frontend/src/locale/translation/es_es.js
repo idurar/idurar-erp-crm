@@ -524,6 +524,5 @@ firstname: "Nombre",
 lastname: "Apellido",
 client_list: "Lista de clientes",
 add_new_client: "Agregar nuevo cliente",
-idurar_app_title: "Open Code Source ERP CRM Invoicing Accounting Expenses",
 }
  export default lang
