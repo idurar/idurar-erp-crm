@@ -33,6 +33,9 @@ glob.sync('./models/**/*.js').forEach(function (file) {
 
 // Start our app!
 const app = require('./app');
+app.options('/*', (_, res) => {
+  res.sendStatus(200);
+});
 
 app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {

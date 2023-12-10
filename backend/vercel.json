@@ -11,7 +11,6 @@
     {
       "src": "/(.*)",
       "dest": "./index.js",
-      "methods": ["GET", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"],
       "headers": {
         "Access-Control-Allow-Origin": "https://mnm-crm-frontend.vercel.app",
         "Access-Control-Allow-Credentials": "true",
