@@ -9,6 +9,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore public/",
     "production": "NODE_ENV=production",
+    "translate": "node src/aiTranslate/index.js",
     "setup": "node src/setup/setup.js",
     "reset": "node src/setup/reset.js"
   },
@@ -30,6 +31,7 @@
     "mongoose-autopopulate": "^1.1.0",
     "multer": "^1.4.4",
     "node-cache": "^5.1.2",
+    "openai": "^4.20.1",
     "pug": "^3.0.2",
     "puppeteer": "^21.6.0",
     "resend": "^2.0.0",

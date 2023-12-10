@@ -16,6 +16,9 @@ require('dotenv').config({ path: '.env.local' });
 
 mongoose.connect(process.env.DATABASE);
 
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+console.log('🚀 ~ file: index.js:4 ~ OPENAI_API_KEY:', OPENAI_API_KEY);
+
 mongoose.connection.on('error', (error) => {
   console.log(
     `1. 🔥 Common Error caused issue → : check your .env file first and add your mongodb url`
