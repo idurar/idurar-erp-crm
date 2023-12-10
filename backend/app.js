@@ -26,6 +26,10 @@ const corsOptions = {
 };
 
 app.options('*', cors(corsOptions)); // preflight OPTIONS; put before other routes
+app.options('/*', (_, res) => {
+  res.sendStatus(200);
+});
+
 app.use(cors(corsOptions));
 
 // setting cors at one place for all the routes
