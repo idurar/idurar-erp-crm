@@ -11,8 +11,6 @@ export default function QuoteUpdate() {
     DATATABLE_TITLE: translate('quote_list'),
     ADD_NEW_ENTITY: translate('add_new_quote'),
     ENTITY_NAME: translate('quote'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

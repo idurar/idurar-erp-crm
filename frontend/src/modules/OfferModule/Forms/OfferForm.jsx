@@ -17,7 +17,7 @@ import { selectFinanceSettings } from '@/redux/settings/selectors';
 
 import { useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
-import SelectAsync from "@/components/SelectAsync";
+import SelectAsync from '@/components/SelectAsync';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
   const { last_offer_number } = useSelector(selectFinanceSettings);
@@ -38,13 +38,13 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
-    setTaxRate(value/100);
+    setTaxRate(value / 100);
   };
 
   useEffect(() => {
     if (current) {
       const { taxRate = 0, year, number } = current;
-      setTaxRate(taxRate);
+      setTaxRate(taxRate / 100);
       setCurrentYear(year);
       setLastNumber(number);
     }
@@ -74,12 +74,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <AutoCompleteAsync
-              entity={'lead'}
-              displayLabels={['company']}
-              searchFields={'company'}
-              // onUpdateValue={autoCompleteUpdate}
-            />
+            <AutoCompleteAsync entity={'lead'} displayLabels={['name']} searchFields={'name'} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -232,25 +227,25 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={4} offset={15}>
             <Form.Item
-                name="taxRate"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please choose the tax!',
-                  },
-                ]}
+              name="taxRate"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please choose the tax!',
+                },
+              ]}
             >
               <SelectAsync
-                  value={taxRate}
-                  onChange={handelTaxChange}
-                  bordered={false}
-                  entity={'taxes'}
-                  outputValue={'taxValue'}
-                  displayLabels={['taxName']}
-                  loadDefault={true}
-                  withRedirect={true}
-                  urlToRedirect="/taxes"
-                  redirectLabel="Add New Tax"
+                value={taxRate}
+                onChange={handelTaxChange}
+                bordered={false}
+                entity={'taxes'}
+                outputValue={'taxValue'}
+                displayLabels={['taxName']}
+                loadDefault={true}
+                withRedirect={true}
+                urlToRedirect="/taxes"
+                redirectLabel="Add New Tax"
               />
             </Form.Item>
           </Col>

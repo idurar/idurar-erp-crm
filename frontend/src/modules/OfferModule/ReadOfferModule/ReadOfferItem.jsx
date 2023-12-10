@@ -74,13 +74,14 @@ export default function ReadOfferItem({ config, selectedItem }) {
   const { moneyFormatter } = useMoney();
   const { send } = useMail({ entity });
   const navigate = useNavigate();
+  const [lead, setLead] = useState({});
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
   const resetErp = {
     status: '',
     lead: {
-      company: '',
+      name: '',
       email: '',
       phone: '',
       address: '',
@@ -118,6 +119,12 @@ export default function ReadOfferItem({ config, selectedItem }) {
     }
     return () => controller.abort();
   }, [currentResult]);
+
+  useEffect(() => {
+    if (currentErp?.lead) {
+      setLead(currentErp.lead[currentErp.lead.type]);
+    }
+  }, [currentErp]);
 
   return (
     <>
@@ -218,12 +225,10 @@ export default function ReadOfferItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`lead : ${currentErp.lead.company}`}>
-        <Descriptions.Item label={translate('Address')}>
-          {currentErp.lead.address}
-        </Descriptions.Item>
-        <Descriptions.Item label={translate('email')}>{currentErp.lead.email}</Descriptions.Item>
-        <Descriptions.Item label={translate('Phone')}>{currentErp.lead.phone}</Descriptions.Item>
+      <Descriptions title={`lead : ${currentErp.lead.name}`}>
+        <Descriptions.Item label={translate('Address')}>{lead.address}</Descriptions.Item>
+        <Descriptions.Item label={translate('email')}>{lead.email}</Descriptions.Item>
+        <Descriptions.Item label={translate('Phone')}>{lead.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>
@@ -281,7 +286,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
             <p>{moneyFormatter({ amount: currentErp.subTotal })}</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>Tax Total ({currentErp.taxRate * 100} %) :</p>
+            <p>Tax Total ({currentErp.taxRate} %) :</p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>{moneyFormatter({ amount: currentErp.taxTotal })}</p>

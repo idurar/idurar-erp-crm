@@ -10,8 +10,6 @@ export default function EmailRead() {
     DATATABLE_TITLE: translate('email_template_list'),
     ADD_NEW_ENTITY: translate('add_new_email_template'),
     ENTITY_NAME: translate('email_template'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

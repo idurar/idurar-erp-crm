@@ -26,10 +26,11 @@ export default function UpdatePassword({ config }) {
 
   const handelSubmit = (fieldsValue) => {
     const entity = 'admin/password-update/' + current._id;
-    const updateFn = () => {
-      return request.patch({ entity, jsonData: fieldsValue });
+    const updateFn = async () => {
+      return await request.patch({ entity, jsonData: fieldsValue });
     };
-    onFetch(updateFn);
+    const callback = updateFn();
+    onFetch(callback);
   };
 
   /////

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useLanguage from '@/locale/useLanguage';
 import CrudModule from '@/modules/CrudModule/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
@@ -13,7 +11,7 @@ export default function Employee() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['name', 'surname'];
+  const deleteModalLabels = ['name', 'surname'];
 
   const dataTableColumns = [
     {
@@ -102,8 +100,6 @@ export default function Employee() {
     DATATABLE_TITLE: translate('employee_list'),
     ADD_NEW_ENTITY: translate('add_new_employee'),
     ENTITY_NAME: translate('employee'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -115,7 +111,7 @@ export default function Employee() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <CrudModule

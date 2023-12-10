@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useProfileContext } from '@/context/profileContext';
 import { generate as uniqueId } from 'shortid';
 import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -22,9 +23,22 @@ const AdminInfo = ({ config }) => {
   const { ENTITY_NAME } = config;
   const currentAdmin = useSelector(selectCurrentAdmin);
 
-  const srcImgProfile = checkImage(BASE_URL + currentAdmin?.photo)
-    ? BASE_URL + currentAdmin?.photo
-    : undefined;
+  const [hasPhotoprofile, setHasPhotoprofile] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (currentAdmin?.photo) {
+        const result = await checkImage(BASE_URL + currentAdmin?.photo);
+        setHasPhotoprofile(result);
+      }
+    }
+    fetchData();
+    return () => {
+      return false;
+    };
+  }, []);
+
+  const srcImgProfile = hasPhotoprofile ? BASE_URL + currentAdmin?.photo : null;
 
   return (
     <>

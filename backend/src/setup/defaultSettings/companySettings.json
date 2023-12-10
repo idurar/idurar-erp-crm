@@ -1,0 +1,114 @@
+[
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_has_mutli_branch",
+    "settingValue": false,
+    "valueType": "boolean",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_name",
+    "settingValue": "IDURAR",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_logo",
+    "settingValue": "https://www.idurarapp.com/Theme/idurar-no-code-app/assets/img/idurar-ai-no-code-app-logo.svg",
+    "valueType": "image",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_icon",
+    "settingValue": "https://www.idurarapp.com/Theme/idurar-no-code-app/assets/img/idurar-ai-no-code-app-logo.svg",
+    "valueType": "image",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_address",
+    "settingValue": "25 , Rue de G",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_state",
+    "settingValue": "Oran",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_country",
+    "settingValue": "Algeria",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_email",
+    "settingValue": "support@idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_phone",
+    "settingValue": "+1 345234654",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_cell",
+    "settingValue": "+1 345234654",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_website",
+    "settingValue": "www.idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_tax_number",
+    "settingValue": "91231255234",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_vat_number",
+    "settingValue": "91231255234",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_reg_number",
+    "settingValue": "00001231421",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  }
+]

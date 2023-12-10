@@ -1,6 +1,6 @@
 import SetingsSection from '../components/SetingsSection';
 import UpdateSettingModule from '../components/UpdateSettingModule';
-import MoneyFormSettingForm from './SettingsForm';
+import SettingsForm from './SettingsForm';
 import useLanguage from '@/locale/useLanguage';
 
 export default function MoneyFormatSettingsModule({ config }) {
@@ -11,7 +11,7 @@ export default function MoneyFormatSettingsModule({ config }) {
         title={translate('Currency Format')}
         description={translate('Update Currency format')}
       >
-        <MoneyFormSettingForm />
+        <SettingsForm />
       </SetingsSection>
     </UpdateSettingModule>
   );

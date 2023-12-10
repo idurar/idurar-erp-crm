@@ -33,8 +33,8 @@ export default function AutoCompleteAsync({
     [valToSearch]
   );
 
-  const asyncSearch = (options) => {
-    return request.search({ entity, options });
+  const asyncSearch = async (options) => {
+    return await request.search({ entity, options });
   };
 
   let { onFetch, result, isSuccess, isLoading } = useOnFetch();
@@ -44,12 +44,13 @@ export default function AutoCompleteAsync({
   };
 
   useEffect(() => {
-    if (debouncedValue != '') {
+    if (debouncedValue != undefined) {
       const options = {
         q: debouncedValue,
         fields: searchFields,
       };
-      onFetch(() => asyncSearch(options));
+      const callback = asyncSearch(options);
+      onFetch(callback);
     }
 
     return () => {
@@ -58,7 +59,7 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText && searchText != '') {
+    if (searchText || searchText === '') {
       isSearching.current = true;
       setSearching(true);
       setOptions([]);
@@ -76,12 +77,19 @@ export default function AutoCompleteAsync({
         setCurrentValue(undefined);
         setOptions([]);
       }
+    } else if (valToSearch === '' && isSuccess) {
+      //As isSearching.current remains false when valToSearch
+      //is blank, we need to update options with result containing
+      //top 10 rows
+      setOptions(result);
     }
   }, [isSuccess, result]);
   useEffect(() => {
     // this for update Form , it's for setField
     if (value && isUpdating.current) {
-      if (!isSearching.current) {
+      //This is causing issue when valToSearch is blank
+      // because it is populating options array with value i.e id which should not be the case
+      if (!isSearching.current && valToSearch !== '') {
         setOptions([value]);
       }
       setCurrentValue(value[outputValue] || value); // set nested value or value
@@ -107,7 +115,9 @@ export default function AutoCompleteAsync({
         }
       }}
       onClear={() => {
-        setOptions([]);
+        //As we are showing top 10 records after clearing field,
+        //hence options don't need to be empty after clear
+        //setOptions([]);
         setCurrentValue(undefined);
         setSearching(false);
       }}

@@ -63,6 +63,7 @@ const INITIAL_STATE = {
 
 const erpReducer = (state = INITIAL_STATE, action) => {
   const { payload, keyState } = action;
+
   switch (action.type) {
     case actionTypes.RESET_STATE:
       return INITIAL_STATE;
