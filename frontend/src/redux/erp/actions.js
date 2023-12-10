@@ -162,7 +162,7 @@ export const erp = {
         payload: null,
       });
 
-      let data = await request.update({ entity, id, jsonData });
+      let data = await { entity, id, jsonData };
 
       if (data.success === true) {
         dispatch({
