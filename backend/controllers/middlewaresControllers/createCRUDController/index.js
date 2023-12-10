@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const create = require('./create');
+const clientcreate = require('./clientcreate');
 const read = require('./read');
 const update = require('./update');
 const remove = require('./remove');
@@ -8,6 +9,7 @@ const search = require('./search');
 const filter = require('./filter');
 const listAll = require('./listAll');
 const paginatedList = require('./paginatedList');
+const { json } = require('express');
 
 const createCRUDController = (modelName) => {
   const Model = mongoose.model(modelName);
@@ -15,6 +17,9 @@ const createCRUDController = (modelName) => {
 
   crudMethods.create = async (req, res) => {
     create(Model, req, res);
+  };
+  crudMethods.clientcreate = async (req, res) => {
+    await clientcreate(Model, req, res);
   };
   crudMethods.read = async (req, res) => {
     read(Model, req, res);

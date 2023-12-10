@@ -76,7 +76,9 @@ router.route('/taxes/list').get(hasPermission('read'), catchErrors(taxController
 router.route('/taxes/filter').get(hasPermission('read'), catchErrors(taxController.filter));
 
 // //_____________________________________ API for clients __________________________________________________
-router.route('/client/create').post(hasPermission('create'), catchErrors(clientController.create));
+router
+  .route('/client/create')
+  .post(hasPermission('create'), catchErrors(clientController.clientcreate));
 router.route('/client/read/:id').get(hasPermission('read'), catchErrors(clientController.read));
 router
   .route('/client/update/:id')
