@@ -524,4 +524,5 @@ firstname: "Förnamn",
 lastname: "Efternamn",
 client_list: "Klientlista",
 add_new_client: "Lägg till ny klient",
+idurar_app_title: "Öppen källkod ERP CRM Fakturering Redovisning Utgifter",
 }

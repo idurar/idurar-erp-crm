@@ -524,5 +524,6 @@ firstname: "Ім'я",
 lastname: "Прізвище",
 client_list: "Список клієнтів",
 add_new_client: "Додати нового клієнта",
+idurar_app_title: "Відкритий ERP CRM Фактурування Облік Витрат",
 }
  export default lang

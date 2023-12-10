@@ -524,4 +524,5 @@ firstname: "Imię",
 lastname: "Nazwisko",
 client_list: "Lista klientów",
 add_new_client: "Dodaj nowego klienta",
+idurar_app_title: "Otwarty system ERP CRM Fakturowanie Księgowość Wydatki",
 }

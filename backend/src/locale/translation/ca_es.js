@@ -527,4 +527,5 @@ firstname: "Nom",
 lastname: "Cognom",
 client_list: "Llista de clients",
 add_new_client: "Afegir nou client",
+idurar_app_title: "ERP CRM de codi obert facturació comptabilitat despeses",
 }

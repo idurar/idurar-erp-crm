@@ -524,5 +524,6 @@ firstname: "Nome",
 lastname: "Sobrenome",
 client_list: "Lista de Clientes",
 add_new_client: "Adicionar Novo Cliente",
+idurar_app_title: "ERP CRM de Código Aberto para Faturamento, Contabilidade e Despesas",
 }
  export default lang

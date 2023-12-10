@@ -527,4 +527,5 @@ firstname: "Име",
 lastname: "Фамилия",
 client_list: "Списък на клиентите",
 add_new_client: "Добавяне на нов клиент",
+idurar_app_title: "Отворен код ERP CRM Фактуриране Счетоводство Разходи",
 }

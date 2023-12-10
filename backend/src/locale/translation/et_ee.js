@@ -527,4 +527,5 @@ firstname: "Eesnimi",
 lastname: "Perekonnanimi",
 client_list: "Klientide nimekiri",
 add_new_client: "Lisa uus klient",
+idurar_app_title: "Avatud lähtekoodiga ERP CRM arveldusarvestus kulude haldamine",
 }

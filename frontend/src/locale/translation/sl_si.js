@@ -524,5 +524,6 @@ firstname: "Ime",
 lastname: "Priimek",
 client_list: "Seznam strank",
 add_new_client: "Dodaj novo stranko",
+idurar_app_title: "Odprtokodni ERP CRM Fakturiranje Računovodstvo Stroški",
 }
  export default lang

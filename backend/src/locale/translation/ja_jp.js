@@ -524,4 +524,5 @@ firstname: "名",
 lastname: "姓",
 client_list: "クライアントリスト",
 add_new_client: "新しいクライアントを追加",
+idurar_app_title: "オープンソースERP CRM 請求書会計経費",
 }

@@ -527,5 +527,6 @@ firstname: "Křestní jméno",
 lastname: "Příjmení",
 client_list: "Seznam klientů",
 add_new_client: "Přidat nového klienta",
+idurar_app_title: "Open Source ERP CRM Fakturace Účetnictví Výdaje",
 }
  export default lang

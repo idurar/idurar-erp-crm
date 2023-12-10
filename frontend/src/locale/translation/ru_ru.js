@@ -524,5 +524,6 @@ firstname: "Имя",
 lastname: "Фамилия",
 client_list: "Список клиентов",
 add_new_client: "Добавить нового клиента",
+idurar_app_title: "Открытая ERP CRM Система Учета, Фактурирования и Управления Расходами",
 }
  export default lang

@@ -524,5 +524,6 @@ firstname: "Име",
 lastname: "Презиме",
 client_list: "Листа на клиенти",
 add_new_client: "Додади нов клиент",
+idurar_app_title: "Отворен извор на ERP CRM Фактурирање Сметководство Трошоци",
 }
  export default lang

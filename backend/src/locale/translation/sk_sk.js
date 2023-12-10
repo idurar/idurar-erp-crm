@@ -524,4 +524,5 @@ firstname: "Krstné meno",
 lastname: "Priezvisko",
 client_list: "Zoznam klientov",
 add_new_client: "Pridať nového klienta",
+idurar_app_title: "Open Source ERP CRM Fakturácia Účtovníctvo Výdavky",
 }

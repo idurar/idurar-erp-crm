@@ -562,5 +562,6 @@ firstname: "Prénom",
 lastname: "Nom de famille",
 client_list: "Liste des clients",
 add_new_client: "Ajouter un nouveau client",
+idurar_app_title: "Logiciel ERP CRM Open Source Facturation Comptabilité Dépenses",
 }
  export default lang

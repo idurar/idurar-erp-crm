@@ -518,5 +518,6 @@ firstname: "Primeiro Nome",
 lastname: "Último Nome",
 client_list: "Lista de Clientes",
 add_new_client: "Adicionar Novo Cliente",
+idurar_app_title: "Software de gestão empresarial de código aberto ERP CRM Faturação Contabilidade Despesas",
 }
  export default lang

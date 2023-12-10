@@ -524,4 +524,5 @@ firstname: "Nama Depan",
 lastname: "Nama Belakang",
 client_list: "Daftar Klien",
 add_new_client: "Tambah Klien Baru",
+idurar_app_title: "Open Source ERP CRM Invoicing Akuntansi Pengeluaran",
 }

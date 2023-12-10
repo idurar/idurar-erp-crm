@@ -524,5 +524,6 @@ firstname: "Fornavn",
 lastname: "Efternavn",
 client_list: "Klientliste",
 add_new_client: "Tilføj ny klient",
+idurar_app_title: "Open Source ERP CRM Fakturering Regnskab Udgifter",
 }
  export default lang

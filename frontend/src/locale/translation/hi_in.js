@@ -524,5 +524,6 @@ firstname: "पहला नाम",
 lastname: "अंतिम नाम",
 client_list: "ग्राहक सूची",
 add_new_client: "नया ग्राहक जोड़ें",
+idurar_app_title: "ओपन सोर्स ईआरपी सीआरएम इनवॉइसिंग अकाउंटिंग खर्च",
 }
  export default lang

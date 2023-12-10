@@ -565,4 +565,5 @@ firstname: "名字",
 lastname: "姓氏",
 client_list: "客户列表",
 add_new_client: "添加新客户",
+idurar_app_title: "开源ERP CRM发票会计费用",
 }

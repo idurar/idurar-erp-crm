@@ -527,4 +527,5 @@ firstname: "Nome",
 lastname: "Cognome",
 client_list: "Elenco clienti",
 add_new_client: "Aggiungi nuovo cliente",
+idurar_app_title: "ERP CRM Open Source Fatturazione Contabilità Spese",
 }

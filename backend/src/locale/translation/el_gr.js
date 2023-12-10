@@ -527,4 +527,5 @@ firstname: "Όνομα",
 lastname: "Επώνυμο",
 client_list: "Λίστα πελατών",
 add_new_client: "Προσθήκη νέου πελάτη",
+idurar_app_title: "Ανοιχτού Κώδικα ERP CRM Τιμολόγηση Λογιστική Έξοδα",
 }

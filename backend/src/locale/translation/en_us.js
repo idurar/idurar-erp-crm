@@ -515,4 +515,5 @@ firstname: "Firstname",
 lastname: "Lastname",
 client_list: "Client List",
 add_new_client: "Add New Client",
+idurar_app_title: "Open Source ERP CRM Invoicing Accounting Expenses",
 }

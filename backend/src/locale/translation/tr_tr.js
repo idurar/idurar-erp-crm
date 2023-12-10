@@ -524,4 +524,5 @@ firstname: "Ad",
 lastname: "Soyad",
 client_list: "Müşteri Listesi",
 add_new_client: "Yeni Müşteri Ekle",
+idurar_app_title: "Açık Kaynaklı ERP CRM Fatura Muhasebe Giderleri",
 }

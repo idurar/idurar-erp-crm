@@ -527,4 +527,5 @@ firstname: "이름",
 lastname: "성",
 client_list: "고객 목록",
 add_new_client: "새로운 고객 추가",
+idurar_app_title: "오픈 소스 ERP CRM 인보이싱 회계 경비",
 }

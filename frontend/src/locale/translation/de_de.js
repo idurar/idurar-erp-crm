@@ -524,5 +524,6 @@ firstname: "Vorname",
 lastname: "Nachname",
 client_list: "Kundenliste",
 add_new_client: "Neuen Kunden hinzufügen",
+idurar_app_title: "Open Source ERP CRM Rechnungsstellung Buchhaltung Ausgaben",
 }
  export default lang

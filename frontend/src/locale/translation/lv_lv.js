@@ -527,5 +527,6 @@ firstname: "Vārds",
 lastname: "Uzvārds",
 client_list: "Klientu saraksts",
 add_new_client: "Pievienot jaunu klientu",
+idurar_app_title: "Atvērtā koda ERP CRM rēķinu veidošana grāmatvedība izdevumi",
 }
  export default lang

@@ -527,5 +527,6 @@ firstname: "নামের প্রথম অংশ",
 lastname: "নামের শেষাংশ",
 client_list: "ক্লায়েন্ট তালিকা",
 add_new_client: "নতুন ক্লায়েন্ট যোগ করুন",
+idurar_app_title: "ওপেন সোর্স ইআরপি সিআরএম ইনভয়েসিং অ্যাকাউন্টিং খরচ",
 }
  export default lang

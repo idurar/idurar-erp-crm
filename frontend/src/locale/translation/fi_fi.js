@@ -527,5 +527,6 @@ firstname: "Etunimi",
 lastname: "Sukunimi",
 client_list: "Asiakasluettelo",
 add_new_client: "Lisää uusi asiakas",
+idurar_app_title: "Avoin lähdekoodin ERP CRM Laskutus Kirjanpito Kulut",
 }
  export default lang

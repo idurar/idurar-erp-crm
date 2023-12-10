@@ -524,5 +524,6 @@ firstname: "Keresztnév",
 lastname: "Vezetéknév",
 client_list: "Ügyfél lista",
 add_new_client: "Új ügyfél hozzáadása",
+idurar_app_title: "Nyílt forráskódú ERP CRM számlázás könyvelési kiadások",
 }
  export default lang

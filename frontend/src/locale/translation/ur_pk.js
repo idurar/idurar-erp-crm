@@ -524,5 +524,6 @@ firstname: "پہلا نام",
 lastname: "آخری نام",
 client_list: "کلائنٹ کی فہرست",
 add_new_client: "نیا کلائنٹ شامل کریں",
+idurar_app_title: "آئی ڈور ای آر پی سی آر ایم ایس انوائسنگ اکاؤنٹنگ ایکسپینسز",
 }
  export default lang

@@ -515,4 +515,5 @@ firstname: "ชื่อ",
 lastname: "นามสกุล",
 client_list: "รายชื่อลูกค้า",
 add_new_client: "เพิ่มลูกค้าใหม่",
+idurar_app_title: "ระบบ ERP CRM Invoicing Accounting Expenses โอเพ่นซอร์ส",
 }

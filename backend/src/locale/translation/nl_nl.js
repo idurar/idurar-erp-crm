@@ -515,4 +515,5 @@ firstname: "Voornaam",
 lastname: "Achternaam",
 client_list: "Klantenlijst",
 add_new_client: "Nieuwe klant toevoegen",
+idurar_app_title: "Open Source ERP CRM Facturatie Boekhouding Uitgaven",
 }

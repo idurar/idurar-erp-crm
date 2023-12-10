@@ -80,14 +80,13 @@ async function generateTranslation(language) {
   const filePath = `../locale/translation/${language.value}`;
   const currentLang = require(filePath);
 
-  // const result = await translate(language.label, missedWords);
-  // const translatedFile = JSON.parse(result);
-  console.log('🚀 ~ file: index.js:87 ~ generateTranslation ~ translatedFile:', missedWords);
+  const result = await translate(language.label, missedWords);
+  const translatedFile = JSON.parse(result);
 
-  const newLanguageContent = { ...currentLang, ...missedWords };
+  const newLanguageContent = { ...currentLang, ...translatedFile };
 
-  // generateBackendFile({ language: language.value, newLanguageContent });
-  generateFrontendFile({ language: language.value, newLanguageContent: currentLang });
+  generateBackendFile({ language: language.value, newLanguageContent });
+  generateFrontendFile({ language: language.value, newLanguageContent });
 }
 
 languages.forEach(({ label, value }) => {

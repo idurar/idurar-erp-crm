@@ -517,5 +517,6 @@ firstname: "Vardas",
 lastname: "Pavardė",
 client_list: "Klientų sąrašas",
 add_new_client: "Pridėti naują klientą",
+idurar_app_title: "Atviro kodo ERP CRM Sąskaitų faktūrų apskaita Išlaidos",
 }
  export default lang

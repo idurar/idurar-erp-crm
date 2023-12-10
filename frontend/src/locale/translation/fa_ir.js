@@ -527,5 +527,6 @@ firstname: "نام",
 lastname: "نام خانوادگی",
 client_list: "لیست مشتریان",
 add_new_client: "اضافه کردن مشتری جدید",
+idurar_app_title: "نرم‌افزار متن‌باز ERP CRM فاکتوردهی حسابداری هزینه‌ها",
 }
  export default lang

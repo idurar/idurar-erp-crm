@@ -527,4 +527,5 @@ firstname: "Ime",
 lastname: "Prezime",
 client_list: "Lista klijenata",
 add_new_client: "Dodaj novog klijenta",
+idurar_app_title: "ERP CRM Fakturisanje Knjigovodstvo Troškovi otvorenog koda",
 }
