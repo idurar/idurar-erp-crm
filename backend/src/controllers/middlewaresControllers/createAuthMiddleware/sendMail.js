@@ -3,19 +3,12 @@ const { emailVerfication, passwordVerfication } = require('@/emailTemplate/email
 const { Resend } = require('resend');
 
 const sendMail = async ({ email, name, link, idurar_app_email, type = 'emailVerfication' }) => {
-  const resend = new Resend(process.env.RESEND_API);
-
-  const { data } = await resend.emails.send({
-    from: idurar_app_email,
-    to: email,
-    subject: 'Verify your email | idurar',
-    html:
-      type === 'emailVerfication'
-        ? emailVerfication({ name, link })
-        : passwordVerfication({ name, link }),
+  return res.status(200).json({
+    success: false,
+    result: null,
+    upgrade: true,
+    message: 'please upgrade to use all app features',
   });
-
-  return data;
 };
 
 module.exports = sendMail;
