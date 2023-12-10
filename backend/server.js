@@ -32,14 +32,6 @@ glob.sync('./models/**/*.js').forEach(function (file) {
 });
 
 // Start our app!
-const app = require('./app');
-const corsOptions = {
-  origin: 'https://mnm-crm-frontend.vercel.app',
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
 app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running → On PORT : ${server.address().port}`);
