@@ -1,16 +1,15 @@
 {
-  "name": "mnm-crm",
   "version": 2,
   "builds": [
     {
-      "src": "api/**/*.js",
+      "src": "./index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1",
+      "src": "/(.*)",
+      "dest": "./index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
