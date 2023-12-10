@@ -14,7 +14,7 @@
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "https://mnm-crm-frontend.vercel.app",
-        "Access-Control-Allow-Credentials": true
+        "Access-Control-Allow-Credentials": "true"
       }
     }
   ]
