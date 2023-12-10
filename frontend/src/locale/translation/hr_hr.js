@@ -525,5 +525,10 @@ lastname: "Prezime",
 client_list: "Popis klijenata",
 add_new_client: "Dodaj novog klijenta",
 idurar_app_title: "Open Source ERP CRM Fakturiranje Računovodstvo Troškovi",
+taxes: "Porezi",
+upgrade_now: "Nadogradnja sada",
+upgrade_for_one_time_lifetime_plan: "Nadogradnja za jednokratni doživotni plan",
+plus_1_year_free_update: "Plus 1 godina besplatnog ažuriranja",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Otkazivanje u bilo koje vrijeme uz besplatno korištenje Idurara zauvijek",
 }
  export default lang

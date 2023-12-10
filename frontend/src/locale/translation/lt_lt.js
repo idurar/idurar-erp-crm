@@ -518,5 +518,9 @@ lastname: "Pavardė",
 client_list: "Klientų sąrašas",
 add_new_client: "Pridėti naują klientą",
 idurar_app_title: "Atviro kodo ERP CRM Sąskaitų faktūrų apskaita Išlaidos",
+upgrade_now: "Atnaujinti dabar",
+upgrade_for_one_time_lifetime_plan: "Atnaujinti vieną kartą visam gyvenimui",
+plus_1_year_free_update: "Plius 1 metų nemokamas atnaujinimas",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Atšaukti bet kuriuo metu ir visam laikui naudotis Idurar nemokamai",
 }
  export default lang

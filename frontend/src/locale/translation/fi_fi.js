@@ -528,5 +528,9 @@ lastname: "Sukunimi",
 client_list: "Asiakasluettelo",
 add_new_client: "Lisää uusi asiakas",
 idurar_app_title: "Avoin lähdekoodin ERP CRM Laskutus Kirjanpito Kulut",
+upgrade_now: "Päivitä nyt",
+upgrade_for_one_time_lifetime_plan: "Päivitä kerran elinikäiseen suunnitelmaan",
+plus_1_year_free_update: "Ilmaiset päivitykset 1 vuoden ajan",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Peruuta milloin tahansa, samalla kun käytät Iduraria ilmaiseksi ikuisesti",
 }
  export default lang

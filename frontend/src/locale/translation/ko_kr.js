@@ -528,5 +528,9 @@ lastname: "성",
 client_list: "고객 목록",
 add_new_client: "새로운 고객 추가",
 idurar_app_title: "오픈 소스 ERP CRM 인보이싱 회계 경비",
+upgrade_now: "지금 업그레이드",
+upgrade_for_one_time_lifetime_plan: "일회성 평생 플랜 업그레이드",
+plus_1_year_free_update: "1년 무료 업데이트 추가",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "언제든지 무료로 Idurar를 계속 사용하면서 취소 가능",
 }
  export default lang

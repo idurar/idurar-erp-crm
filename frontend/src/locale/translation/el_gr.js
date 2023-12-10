@@ -528,5 +528,9 @@ lastname: "Επώνυμο",
 client_list: "Λίστα πελατών",
 add_new_client: "Προσθήκη νέου πελάτη",
 idurar_app_title: "Ανοιχτού Κώδικα ERP CRM Τιμολόγηση Λογιστική Έξοδα",
+upgrade_now: "Αναβάθμιση Τώρα",
+upgrade_for_one_time_lifetime_plan: "Αναβάθμιση για Μία Φορά Εφ' όρου ζωής Πλάνο",
+plus_1_year_free_update: "Πλέον 1 έτος δωρεάν ενημέρωση",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Ακύρωση οποιαδήποτε στιγμή ενώ συνεχίζετε να χρησιμοποιείτε το Idurar δωρεάν για πάντα",
 }
  export default lang

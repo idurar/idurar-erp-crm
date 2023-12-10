@@ -525,5 +525,10 @@ lastname: "Nazwisko",
 client_list: "Lista klientów",
 add_new_client: "Dodaj nowego klienta",
 idurar_app_title: "Otwarty system ERP CRM Fakturowanie Księgowość Wydatki",
+taxes: "Podatki",
+upgrade_now: "Aktualizuj teraz",
+upgrade_for_one_time_lifetime_plan: "Aktualizuj na plan na całe życie jednorazowo",
+plus_1_year_free_update: "Plus 1 rok darmowej aktualizacji",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Anuluj w dowolnym momencie, zachowując bezpłatne korzystanie z Idurar na zawsze",
 }
  export default lang

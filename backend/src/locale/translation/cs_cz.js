@@ -528,4 +528,8 @@ lastname: "Příjmení",
 client_list: "Seznam klientů",
 add_new_client: "Přidat nového klienta",
 idurar_app_title: "Open Source ERP CRM Fakturace Účetnictví Výdaje",
+upgrade_now: "Upgradovat nyní",
+upgrade_for_one_time_lifetime_plan: "Upgradovat na doživotní plán jednorázově",
+plus_1_year_free_update: "Plus 1 rok zdarma aktualizací",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Kdykoliv zrušit a nadále zdarma používat Idurar navždy",
 }

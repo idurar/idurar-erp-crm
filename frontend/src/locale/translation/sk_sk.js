@@ -525,5 +525,10 @@ lastname: "Priezvisko",
 client_list: "Zoznam klientov",
 add_new_client: "Pridať nového klienta",
 idurar_app_title: "Open Source ERP CRM Fakturácia Účtovníctvo Výdavky",
+taxes: "Daňové povinnosti",
+upgrade_now: "Aktualizovať teraz",
+upgrade_for_one_time_lifetime_plan: "Aktualizovať pre jednorazový doživotný plán",
+plus_1_year_free_update: "Plus 1 rok bezplatnej aktualizácie",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Zrušiť kedykoľvek a stále používať Idurar zadarmo navždy",
 }
  export default lang

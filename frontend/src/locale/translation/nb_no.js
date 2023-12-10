@@ -525,5 +525,10 @@ lastname: "Etternavn",
 client_list: "Klientliste",
 add_new_client: "Legg til ny klient",
 idurar_app_title: "Åpen kildekode ERP CRM Fakturering Regnskap Utgifter",
+taxes: "Skatter",
+upgrade_now: "Oppgrader nå",
+upgrade_for_one_time_lifetime_plan: "Oppgrader for en gang livstidsplan",
+plus_1_year_free_update: "Pluss 1 års gratis oppdatering",
+cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Kanseller når som helst mens du fortsetter å bruke Idurar gratis for alltid",
 }
  export default lang
