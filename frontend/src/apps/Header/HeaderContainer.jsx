@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Popover, Button } from 'antd';
+import { Avatar, Dropdown, Layout, Popover, Button, Badge } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
@@ -151,16 +151,18 @@ export default function HeaderContent() {
       </Dropdown>
 
       <Popover content={content} title={translate('Customize this application')} trigger="click">
-        <Avatar
-          icon={<RocketOutlined />}
-          style={{
-            color: '#f56a00',
-            backgroundColor: '#FFF',
-            float: 'right',
-            marginTop: '5px',
-            cursor: 'pointer',
-          }}
-        />
+        <Badge count={1} size="small">
+          <Avatar
+            icon={<RocketOutlined />}
+            style={{
+              color: '#f56a00',
+              backgroundColor: '#FFF',
+              float: 'right',
+              marginTop: '5px',
+              cursor: 'pointer',
+            }}
+          />
+        </Badge>
       </Popover>
       <SelectLanguage />
     </Header>
