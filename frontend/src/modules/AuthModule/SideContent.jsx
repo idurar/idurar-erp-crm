@@ -1,12 +1,12 @@
-import { Space, Layout, Divider } from 'antd';
-import { Typography } from 'antd';
-
+import { Space, Layout, Divider, Typography } from 'antd';
 import logo from '@/style/images/idurar-crm-erp.svg';
+import useLanguage from '@/locale/useLanguage';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
 export default function SideContent() {
+  const translate = useLanguage();
   return (
     <Content
       style={{
@@ -26,21 +26,21 @@ export default function SideContent() {
           width={220}
         />
         <div className="space40"></div>
-        <Title level={3}>Manage your company with :</Title>
+        <Title level={3}>{translate('Manage your company with')} :</Title>
         <div className="space20"></div>
         <ul className="list-checked">
           <li className="list-checked-item">
             <Space direction="vertical">
-              <Text strong>All-in-one tool</Text>
+              <Text strong>{translate('All-in-one tool')}</Text>
 
-              <Text>Build, run, and scale your apps - end to end</Text>
+              <Text>{translate('Run and scale your ERP CRM Apps')}</Text>
             </Space>
           </li>
 
           <li className="list-checked-item">
             <Space direction="vertical">
-              <Text strong>Easily add &amp; manage your services</Text>
-              <Text>It brings together your tasks, projects, timelines, files and more</Text>
+              <Text strong>{translate('Easily add and manage your services')}</Text>
+              <Text>{translate('It brings together your invoice clients and leads')}</Text>
             </Space>
           </li>
         </ul>

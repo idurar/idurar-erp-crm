@@ -3,7 +3,7 @@ import useLanguage from '@/locale/useLanguage';
 import { Layout, Col, Divider, Typography } from 'antd';
 
 import AuthLayout from '@/layout/AuthLayout';
-import SideContent from '@/components/SideContent';
+import SideContent from './SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
 
 import logo from '@/style/images/idurar-crm-erp.svg';
