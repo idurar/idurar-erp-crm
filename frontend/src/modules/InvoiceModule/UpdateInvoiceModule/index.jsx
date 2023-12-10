@@ -26,7 +26,8 @@ export default function UpdateInvoiceModule({ config }) {
 
   useLayoutEffect(() => {
     if (currentResult) {
-      dispatch(erp.currentAction({ actionType: 'update', data: currentResult }));
+      const data = { ...currentResult };
+      dispatch(erp.currentAction({ actionType: 'update', data }));
     }
   }, [currentResult]);
 

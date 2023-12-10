@@ -10,7 +10,7 @@ const Visibility = ({ isOpen, children }) => {
 
 export default function Profile({ config }) {
   const { state } = useProfileContext();
-  const { update, read, passwordModal } = state;
+  const { update, read } = state;
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default function Profile({ config }) {
       <Visibility isOpen={update.isOpen}>
         <UpdateAdmin config={config} />
       </Visibility>
-      <PasswordModal config={config} isOpen={passwordModal.isOpen} />
+      <PasswordModal />
     </div>
   );
 }

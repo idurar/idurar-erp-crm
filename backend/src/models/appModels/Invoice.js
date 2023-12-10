@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const invoiceSchema = new mongoose.Schema({
   removed: {
@@ -7,6 +6,7 @@ const invoiceSchema = new mongoose.Schema({
     default: false,
   },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   number: {
     type: Number,
     required: true,
@@ -15,9 +15,10 @@ const invoiceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  content: String,
   recurring: {
     type: String,
-    default: '0',
+    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
   },
   date: {
     type: Date,
@@ -33,8 +34,27 @@ const invoiceSchema = new mongoose.Schema({
     required: true,
     autopopulate: true,
   },
+  converted: {
+    from: {
+      type: String,
+      enum: ['quote', 'offer'],
+    },
+    offer: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Offer',
+    },
+    quote: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Quote',
+    },
+  },
   items: [
     {
+      // product: {
+      //   type: mongoose.Schema.ObjectId,
+      //   ref: 'Product',
+      //   // required: true,
+      // },
       itemName: {
         type: String,
         required: true,
@@ -44,12 +64,25 @@ const invoiceSchema = new mongoose.Schema({
       },
       quantity: {
         type: Number,
+        default: 1,
         required: true,
       },
       price: {
         type: Number,
         required: true,
       },
+      // taxRate: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      // subTotal: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      // taxTotal: {
+      //   type: Number,
+      //   default: 0,
+      // },
       total: {
         type: Number,
         required: true,
@@ -89,18 +122,39 @@ const invoiceSchema = new mongoose.Schema({
   paymentStatus: {
     type: String,
     default: 'unpaid',
+    enum: ['unpaid', 'paid', 'partially'],
+  },
+  isOverdue: {
+    type: Boolean,
+    default: false,
+  },
+  approved: {
+    type: Boolean,
+    default: false,
   },
   note: {
     type: String,
   },
   status: {
     type: String,
+    enum: ['draft', 'pending', 'sent', 'refunded', 'cancelled', 'on hold'],
     default: 'draft',
   },
-  pdfPath: {
+  pdf: {
     type: String,
-    default: '',
   },
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
+    },
+  ],
   updated: {
     type: Date,
     default: Date.now,

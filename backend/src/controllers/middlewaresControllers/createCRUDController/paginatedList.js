@@ -8,11 +8,13 @@ const paginatedList = async (Model, req, res) => {
     .skip(skip)
     .limit(limit)
     .sort({ created: 'desc' })
-    .populate();
+    .populate()
+    .exec();
   // Counting the total documents
   const countPromise = Model.countDocuments({ removed: false });
   // Resolving both promises
   const [result, count] = await Promise.all([resultsPromise, countPromise]);
+
   // Calculating total pages
   const pages = Math.ceil(count / limit);
 
@@ -27,7 +29,7 @@ const paginatedList = async (Model, req, res) => {
     });
   } else {
     return res.status(203).json({
-      success: true,
+      success: false,
       result: [],
       pagination,
       message: 'Collection is Empty',

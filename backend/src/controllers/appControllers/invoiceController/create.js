@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Model = mongoose.model('Invoice');
 
-const custom = require('@/controllers/middlewaresControllers/pdfController');
+const custom = require('@/controllers/pdfController');
 
 const { calculate } = require('@/helpers');
 const { increaseBySettingKey } = require('@/middlewares/settings');
@@ -36,7 +36,7 @@ const create = async (req, res) => {
     //item total
     item['total'] = total;
   });
-  taxTotal = calculate.multiply(subTotal, taxRate);
+  taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
 
   body['subTotal'] = subTotal;
@@ -48,12 +48,13 @@ const create = async (req, res) => {
 
   body['paymentStatus'] = paymentStatus;
   body['createdBy'] = req.admin._id;
+  console.log('🚀 ~ file: create.js:51 ~ create ~  req.admin:', req.admin);
   // Creating a new document in the collection
   const result = await new Model(body).save();
   const fileId = 'invoice-' + result._id + '.pdf';
   const updateResult = await Model.findOneAndUpdate(
     { _id: result._id },
-    { pdfPath: fileId },
+    { pdf: fileId },
     {
       new: true,
     }
@@ -61,8 +62,6 @@ const create = async (req, res) => {
   // Returning successfull response
 
   increaseBySettingKey({ settingKey: 'last_invoice_number' });
-
-  custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
 
   // Returning successfull response
   return res.status(200).json({

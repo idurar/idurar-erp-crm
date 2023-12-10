@@ -2,7 +2,7 @@ import { Result, Button } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
 
-export default function NotFound({ entity }) {
+export default function NotFound({ entity = '' }) {
   const translate = useLanguage();
 
   const navigate = useNavigate();

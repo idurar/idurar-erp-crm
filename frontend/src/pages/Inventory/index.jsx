@@ -11,7 +11,7 @@ export default function Inventory() {
     searchFields: 'product',
     outputValue: '_id',
   };
-  const entityDisplayLabels = ['product', 'quantity', 'unitPrice']; // Adjusted to display inventory item labels
+  const deleteModalLabels = ['product', 'quantity', 'unitPrice']; // Adjusted to display inventory item labels
 
   const readColumns = [
     {
@@ -48,8 +48,6 @@ export default function Inventory() {
     DATATABLE_TITLE: translate('product_list'),
     ADD_NEW_ENTITY: translate('add_new_product'),
     ENTITY_NAME: translate('product'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -61,7 +59,7 @@ export default function Inventory() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <CrudModule

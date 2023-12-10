@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 import { useRoutes } from 'react-router-dom';
-import PublicRoute from './PublicRoute';
+import { Navigate } from 'react-router-dom';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
@@ -39,15 +39,32 @@ const OfferCreate = lazy(() => import('@/pages/Offer/OfferCreate'));
 const OfferRead = lazy(() => import('@/pages/Offer/OfferRead'));
 const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
 
+const People = lazy(() => import('@/pages/People'));
+const Company = lazy(() => import('@/pages/Company'));
+
+const About = lazy(() => import('@/pages/About'));
+
 export default function AppRouter() {
   let element = useRoutes([
     {
       path: '/login',
-      element: <PublicRoute />,
+      element: <Navigate to="/" />,
+    },
+    {
+      path: '/verify/*',
+      element: <Navigate to="/" />,
+    },
+    {
+      path: '/resetpassword/*',
+      element: <Navigate to="/" />,
     },
     {
       path: '/logout',
       element: <Logout />,
+    },
+    {
+      path: '/about',
+      element: <About />,
     },
     {
       path: '/',
@@ -56,6 +73,14 @@ export default function AppRouter() {
     {
       path: '/customer',
       element: <Customer />,
+    },
+    {
+      path: '/people',
+      element: <People />,
+    },
+    {
+      path: '/company',
+      element: <Company />,
     },
     {
       path: '/inventory',
@@ -123,6 +148,10 @@ export default function AppRouter() {
     },
     {
       path: '/settings',
+      element: <Settings />,
+    },
+    {
+      path: '/settings/edit/:settingsKey',
       element: <Settings />,
     },
     {

@@ -16,12 +16,12 @@ html
         padding: 0px ;
         background: #ffffff;
         font-family: sans-serif;
-        font-size:10px;
-        color:#333
+        font-size:12px;
+        color:#222
       }
       *, *:before, *:after {
         box-sizing: inherit;
-        color:#333
+        color:#222
       }
 
       .clearfix {
@@ -55,7 +55,7 @@ html
       }
       .company-info{
         text-align: right;
-        font-size:8px;
+        font-size:12px;
       }
       h1.invoice{
         font-size:32px;
@@ -69,7 +69,7 @@ html
         text-align: right !important;
         float:right;
         display:block;
-        font-size:9px;
+        font-size:12px;
         width:100%;
         margin-top:0;
         margin-bottom:10px;
@@ -193,8 +193,7 @@ html
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
-        margin: 0 auto 20px;
-        justify-content: center;
+        margin-bottom: 20px;
       }
       .table-invoice tr:nth-child(2n-1) td {
         background: #fcfeff;
@@ -212,17 +211,15 @@ html
         text-align: right;
       }
       tbody{
-        //- border-bottom: 1px solid #c2e0f2;
-      }
-      td.strong{
-        font-weight:700;
+        border-bottom: 1px solid #c2e0f2;
       }
       .table-invoice .service, .table-invoice .desc {
-        //- text-align: left;
+        text-align: left;
       }
       .table-invoice td {
         padding: 10px ;
-        font-size: 9px;
+        text-align: right;
+        font-size: 11px;
       }
       .table-invoice td.service, .table-invoice td.desc {
         vertical-align: top;
@@ -231,7 +228,7 @@ html
         
       }
       .table-invoice td.grand {
-        //- border-top: 1px solid #5d6975;
+        border-top: 1px solid #5d6975;
       }
       .service span{
         display:block;
@@ -239,7 +236,7 @@ html
         width : 100%;
         color:#666;
         margin-top:5px;
-        font-size:8px;
+        font-size:10px;
       }
       .notice-invoice {
         padding: 15px;
@@ -247,9 +244,6 @@ html
       .notice-invoice .notice {
         color: #5d6975;
         
-      }
-      .total.price{
-        font-size: 18px;
       }
       .footer-invoice {
         margin-top:30px
@@ -261,50 +255,55 @@ html
         padding: 20px 0;
         text-align: center;
       }
+      .line{
+        width:100%;
+        border-top: 1px solid #ccc;
+        height: 5px;
+      }
  
   body
     
       header.clearfix
         .top-area
-          img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
+          img.logo.left(src=settings.idurar_base_url+settings.company_logo)
           .right.company-info
-              p IDURAR WEB Agency
-              p Centre d’affaire Gold Tower Oran - Algerie
-              p RC: 16A5234245 /NIF: 198232345630567 /AI: 31009451343
+              p.strong #{settings.company_name}
+              p #{settings.company_address}
+              p #{settings.company_reg_number}
               
         .col.col-24
           .space  
         .left.col-12
             h1.invoice
-              | Payment Reciept 
+              | #{translate('Payment Reciept')} 
             div 
               .col.col-8
-                p.strong Date :
+                p.strong #{translate('Date')} :
                 p #{moment(model.date).format("DD/MM/YYYY")}
               .col.col-9 
-                p.strong Reciept Number :
+                p.strong #{translate('Reciept Number')}:
                 p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
             .billTo
-                p Bill To :
-                p #{model.client.company}
-                p address : #{model.client.address}
-                p phone : #{model.client.phone}
-                p Tel : #{model.client.email}
+                p #{translate('Client')} :
+                p #{model.client.name}
+                p #{model.client.address}
+                p #{model.client.phone}
+                p #{model.client.email}
         .col.col-24
           .space  
-      main
-        table.table-invoice
-          tbody
-            tr
-              td.strong TOTAL
-              td.total.price $ #{model.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+      main.clearfix
+        
+        .left.col-24
+              .line
+              h3 #{translate('total paid')} : #{moneyFormatter({amount:model.amount})}
+                
         
       .col.col-24
           .space     
       footer.footer-invoice
-        | This Payment Reciept was created on a computer and is valid without the signature and seal.
+        //- | This Payment Reciept was created on a computer and is valid without the signature and seal.
           
 
    

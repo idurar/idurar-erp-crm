@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
-const supplierSchema = new mongoose.Schema({
+const SupplierSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,70 +9,197 @@ const supplierSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
+  name: {
+    type: String,
+    trim: true,
+    unique: true,
+    required: true,
+  },
+  legalName: {
     type: String,
     trim: true,
     required: true,
   },
-  managerName: {
-    type: String,
-    trim: true,
-    required: true,
+  hasParentSupplier: {
+    type: Boolean,
+    default: false,
   },
-  managerSurname: {
-    type: String,
-    trim: true,
-    required: true,
+  parentSupplier: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Supplier',
   },
-  bankAccount: {
-    type: String,
-    trim: true,
-  },
-  RC: {
+  peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People' }],
+  mainContact: { type: mongoose.Schema.ObjectId, ref: 'People' },
+  products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  icon: {
     type: String,
     trim: true,
   },
-  AI: {
+  logo: {
     type: String,
     trim: true,
   },
-  NIF: {
+  bankName: {
     type: String,
     trim: true,
   },
-  NIS: {
+  bankIban: {
     type: String,
     trim: true,
+  },
+  bankSwift: {
+    type: String,
+    trim: true,
+  },
+  bankNumber: {
+    type: String,
+    trim: true,
+  },
+  bankRouting: {
+    type: String,
+    trim: true,
+  },
+  bankCountry: {
+    type: String,
+    trim: true,
+  },
+  companyRegNumber: {
+    type: String,
+    trim: true,
+  },
+  companyTaxNumber: {
+    type: String,
+    trim: true,
+  },
+  companyTaxId: {
+    type: String,
+    trim: true,
+  },
+  companyRegId: {
+    type: String,
+    trim: true,
+  },
+  securitySocialNbr: String,
+  customField: [
+    {
+      fieldName: {
+        type: String,
+        trim: true,
+        lowercase: true,
+      },
+      fieldType: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        default: 'string',
+      },
+      fieldValue: {},
+    },
+  ],
+  location: {
+    latitude: Number,
+    longitude: Number,
   },
   address: {
     type: String,
-    trim: true,
   },
-  tel: {
+  city: {
+    type: String,
+  },
+  State: {
+    type: String,
+  },
+  postalCode: {
+    type: Number,
+  },
+  country: {
     type: String,
     trim: true,
-    required: true,
   },
+  phone: {
+    type: String,
+    trim: true,
+  },
+  otherPhone: [
+    {
+      type: String,
+      trim: true,
+    },
+  ],
   fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
     type: String,
     trim: true,
   },
   email: {
     type: String,
     trim: true,
+    lowercase: true,
+  },
+  otherEmail: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
+  socialMedia: {
+    facebook: String,
+    instagram: String,
+    twitter: String,
+    linkedin: String,
+    tiktok: String,
+    youtube: String,
+    snapchat: String,
   },
   website: {
     type: String,
     trim: true,
+    lowercase: true,
   },
+  images: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
+    },
+  ],
+  files: [
+    {
+      id: String,
+      name: String,
+      path: String,
+      description: String,
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
+    },
+  ],
+  category: String,
+  tags: [
+    {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+  ],
   created: {
     type: Date,
     default: Date.now,
   },
+  updated: {
+    type: Date,
+    default: Date.now,
+  },
+  isPublic: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-module.exports = mongoose.model('Supplier', supplierSchema);
+module.exports = mongoose.model('Supplier', SupplierSchema);

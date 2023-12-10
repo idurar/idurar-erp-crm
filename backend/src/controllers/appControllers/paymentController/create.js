@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Model = mongoose.model('Payment');
 const Invoice = mongoose.model('Invoice');
-const custom = require('@/controllers/middlewaresControllers/pdfController');
+const custom = require('@/controllers/pdfController');
 
 const { calculate } = require('@/helpers');
 
@@ -42,7 +42,7 @@ const create = async (req, res) => {
   const fileId = 'payment-' + result._id + '.pdf';
   const updatePath = await Model.findOneAndUpdate(
     { _id: result._id.toString(), removed: false },
-    { pdfPath: fileId },
+    { pdf: fileId },
     {
       new: true,
     }
@@ -71,8 +71,6 @@ const create = async (req, res) => {
       runValidators: true,
     }
   ).exec();
-
-  await custom.generatePdf('Payment', { filename: 'payment', format: 'A4' }, result);
 
   res.status(200).json({
     success: true,

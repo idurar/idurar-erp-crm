@@ -5,17 +5,16 @@ export default function useOnFetch() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  let onFetch = async (fetchingFn) => {
+  let onFetch = async (callback) => {
     setIsLoading(true);
 
-    const data = await fetchingFn();
+    const data = await callback;
     setResult(data.result);
     if (data.success === true) {
       setIsSuccess(true);
     } else {
       setIsSuccess(false);
     }
-
     setIsLoading(false);
   };
 

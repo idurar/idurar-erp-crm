@@ -33,8 +33,8 @@ export default function AutoCompleteAsync({
     [valToSearch]
   );
 
-  const asyncSearch = (options) => {
-    return request.search({ entity, options });
+  const asyncSearch = async (options) => {
+    return await request.search({ entity, options });
   };
 
   let { onFetch, result, isSuccess, isLoading } = useOnFetch();
@@ -49,7 +49,8 @@ export default function AutoCompleteAsync({
         q: debouncedValue,
         fields: searchFields,
       };
-      onFetch(() => asyncSearch(options));
+      const callback = asyncSearch(options);
+      onFetch(callback);
     }
 
     return () => {

@@ -13,7 +13,7 @@ export default function Order() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['orderId'];
+  const deleteModalLabels = ['orderId'];
 
   const readColumns = [
     {
@@ -74,8 +74,6 @@ export default function Order() {
     DATATABLE_TITLE: translate('order_list'),
     ADD_NEW_ENTITY: translate('add_new_order'),
     ENTITY_NAME: translate('order'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -87,7 +85,7 @@ export default function Order() {
     dataTableColumns,
     readColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return (
     <CrudModule

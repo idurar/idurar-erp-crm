@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Model = mongoose.model('Quote');
 
-const custom = require('@/controllers/middlewaresControllers/pdfController');
+const custom = require('@/controllers/pdfController');
 const { increaseBySettingKey } = require('@/middlewares/settings');
 const { calculate } = require('@/helpers');
 
@@ -23,7 +23,7 @@ const create = async (req, res) => {
     //item total
     item['total'] = total;
   });
-  taxTotal = calculate.multiply(subTotal, taxRate);
+  taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
 
   let body = req.body;
@@ -39,7 +39,7 @@ const create = async (req, res) => {
   const fileId = 'quote-' + result._id + '.pdf';
   const updateResult = await Model.findOneAndUpdate(
     { _id: result._id },
-    { pdfPath: fileId },
+    { pdf: fileId },
     {
       new: true,
     }
@@ -47,7 +47,6 @@ const create = async (req, res) => {
   // Returning successfull response
 
   increaseBySettingKey({ settingKey: 'last_quote_number' });
-  custom.generatePdf('Quote', { filename: 'quote', format: 'A4' }, result);
 
   // Returning successfull response
   return res.status(200).json({

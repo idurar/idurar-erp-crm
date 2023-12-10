@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.Promise = global.Promise;
-const bcrypt = require('bcryptjs');
 
 const adminSchema = new Schema({
   removed: {
@@ -10,12 +8,9 @@ const adminSchema = new Schema({
   },
   enabled: {
     type: Boolean,
-    default: true,
+    default: false,
   },
-  password: {
-    type: String,
-    required: true,
-  },
+  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
   email: {
     type: String,
     unique: true,
@@ -24,7 +19,7 @@ const adminSchema = new Schema({
     required: true,
   },
   name: { type: String, required: true, lowercase: true },
-  surname: { type: String, required: true, lowercase: true },
+  surname: { type: String, lowercase: true },
   photo: {
     type: String,
     trim: true,
@@ -36,24 +31,8 @@ const adminSchema = new Schema({
   role: {
     type: String,
     default: 'staff',
-    enum: ['admin', 'staffAdmin', 'staff', 'createOnly', 'readOnly'],
-  },
-  loggedSessions: {
-    type: [String],
-    default: [],
+    enum: ['superadmin', 'admin', 'staffAdmin', 'staff', 'createOnly', 'readOnly'],
   },
 });
-
-adminSchema.plugin(require('mongoose-autopopulate'));
-
-// generating a hash
-adminSchema.methods.generateHash = function (password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(), null);
-};
-
-// checking if password is valid
-adminSchema.methods.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
-};
 
 module.exports = mongoose.model('Admin', adminSchema);

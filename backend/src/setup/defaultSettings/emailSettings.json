@@ -1,0 +1,26 @@
+[
+  {
+    "settingCategory": "email_settings",
+    "settingKey": "email_domain",
+    "settingValue": "idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "email_settings",
+    "settingKey": "email_reply_to",
+    "settingValue": "reply@idurarapp.com",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "email_settings",
+    "settingKey": "email_from",
+    "settingValue": "IDURAR ERP CRM",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  }
+]

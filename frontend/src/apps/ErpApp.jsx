@@ -1,18 +1,23 @@
 import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
+import { selectAppSettings } from '@/redux/settings/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Layout } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
 
-import Navigation from '@/apps/components/Navigation';
-import HeaderContent from '@/apps/components/HeaderContent';
+import Navigation from '@/apps/Navigation/NavigationContainer';
+import HeaderContent from '@/apps/Header/HeaderContainer';
 
-import { useDispatch } from 'react-redux';
 import { settingsAction } from '@/redux/settings/actions';
+import { translateAction } from '@/redux/translate/actions';
 
 import AppRouter from '@/router/AppRouter';
 
-import useIsMobile from '@/hooks/useIsMobile';
+import useResponsive from '@/hooks/useResponsive';
+
+import storePersist from '@/redux/storePersist';
 
 export default function ErpCrmApp() {
   const { Content } = Layout;
@@ -20,12 +25,24 @@ export default function ErpCrmApp() {
   const { state: stateApp } = useAppContext();
   const { isNavMenuClose } = stateApp;
 
-  const isMobile = useIsMobile();
+  const { isMobile } = useResponsive();
 
   const dispatch = useDispatch();
+
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
   }, []);
+
+  const defaultLang = useSelector(selectAppSettings);
+
+  useEffect(() => {
+    const { idurar_app_language } = defaultLang;
+    const { loadDefaultLang } = storePersist.get('firstLogin');
+    if (idurar_app_language && !loadDefaultLang) {
+      dispatch(translateAction.translate(idurar_app_language));
+      window.localStorage.setItem('firstLogin', JSON.stringify({ loadDefaultLang: true }));
+    }
+  }, [defaultLang]);
 
   return (
     <Layout hasSider>

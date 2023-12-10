@@ -17,7 +17,7 @@ export default function Currency() {
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['name'];
+  const deleteModalLabels = ['name'];
 
   const readColumns = [
     {
@@ -86,8 +86,6 @@ export default function Currency() {
     DATATABLE_TITLE: translate('currency_list'),
     ADD_NEW_ENTITY: translate('add_new_currency'),
     ENTITY_NAME: translate('currency'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -99,7 +97,7 @@ export default function Currency() {
     readColumns,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
 
   return (
