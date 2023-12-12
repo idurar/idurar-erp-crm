@@ -112,12 +112,12 @@ function Sidebar({ collapsible, isMobile = false }) {
       children: [
         {
           key: 'generalSettings',
-          label: <Link to={'/settings'}>{translate('general_settings')}</Link>,
+          label: <Link to={'/settings/general_settings'}>{translate('general_settings')}</Link>,
         },
-        // {
-        //   key: 'emailTemplates',
-        //   label: <Link to={'/email'}>{translate('email_templates')}</Link>,
-        // },
+        {
+          key: 'emailTemplates',
+          label: <Link to={'/settings/email'}>{translate('email_templates')}</Link>,
+        },
         {
           key: 'paymentMode',
           label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,

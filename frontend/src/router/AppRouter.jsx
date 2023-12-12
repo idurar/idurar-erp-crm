@@ -146,6 +146,11 @@ export default function AppRouter() {
       path: '/admin',
       element: <Admin />,
     },
+
+    {
+      path: '/settings/general_settings',
+      element: <Settings />,
+    },
     {
       path: '/settings',
       element: <Settings />,
@@ -163,7 +168,7 @@ export default function AppRouter() {
       element: <Taxes />,
     },
     {
-      path: '/email',
+      path: '/settings/email',
       element: <Email />,
     },
     {
