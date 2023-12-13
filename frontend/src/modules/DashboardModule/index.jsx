@@ -1,4 +1,4 @@
-import { Tag, Row, Col } from 'antd';
+import { Tag, Row, Col, Tabs } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
 import { useMoney } from '@/settings';
@@ -115,6 +115,37 @@ export default function DashboardModule() {
     );
   });
 
+  const statisticCardsTabs = () => {
+    const previewCardMap = entityData.map((data, index) => {
+      const { result, entity, isLoading, title } = data;
+
+      if (entity === 'payment') return null;
+      return {
+        key: index.toString(),
+        label: title,
+        children: (
+          <PreviewCard
+            key={index}
+            title={title}
+            isLoading={isLoading}
+            entity={entity}
+            statistics={
+              !isLoading &&
+              result?.performance?.map((item) => ({
+                tag: item?.status,
+                color: 'blue',
+                value: item?.percentage,
+              }))
+            }
+          />
+        ),
+      };
+    });
+    return (
+      <Tabs defaultActiveKey="1" items={previewCardMap} className="w-full" tabPosition="top" />
+    );
+  };
+
   const statisticCards = entityData.map((data, index) => {
     const { result, entity, isLoading, title } = data;
 
@@ -152,10 +183,29 @@ export default function DashboardModule() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[32, 32]}>
-        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
+        <Col
+          className="gutter-row w-full"
+          xs={{ span: 0 }}
+          sm={{ span: 0 }}
+          md={{ span: 0 }}
+          lg={{ span: 18 }}
+        >
           <div className="whiteBox shadow" style={{ height: 458 }}>
             <Row className="pad20" gutter={[0, 0]}>
               {statisticCards}
+            </Row>
+          </div>
+        </Col>
+        <Col
+          className="gutter-row w-full"
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 24 }}
+          lg={{ span: 0 }}
+        >
+          <div className="whiteBox shadow" style={{ height: 458 }}>
+            <Row className="pad20" gutter={[0, 0]}>
+              {statisticCardsTabs()}
             </Row>
           </div>
         </Col>
