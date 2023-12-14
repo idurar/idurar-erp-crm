@@ -1,6 +1,6 @@
 const search = async (Model, req, res) => {
   // console.log(req.query.fields)
-  if (req.query.q === undefined) {
+  if (req.query.q === undefined || req.query.q.trim() === '') {
     return res
       .status(202)
       .json({

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+
 import { request } from '@/request';
 import useOnFetch from '@/hooks/useOnFetch';
 import useDebounce from '@/hooks/useDebounce';
@@ -44,7 +45,7 @@ export default function AutoCompleteAsync({
   };
 
   useEffect(() => {
-    if (debouncedValue != undefined) {
+    if (debouncedValue != '') {
       const options = {
         q: debouncedValue,
         fields: searchFields,
@@ -59,7 +60,7 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    if (searchText || searchText === '') {
+    if (searchText && searchText != '') {
       isSearching.current = true;
       setSearching(true);
       setOptions([]);
@@ -77,19 +78,12 @@ export default function AutoCompleteAsync({
         setCurrentValue(undefined);
         setOptions([]);
       }
-    } else if (valToSearch === '' && isSuccess) {
-      //As isSearching.current remains false when valToSearch
-      //is blank, we need to update options with result containing
-      //top 10 rows
-      setOptions(result);
     }
   }, [isSuccess, result]);
   useEffect(() => {
     // this for update Form , it's for setField
     if (value && isUpdating.current) {
-      //This is causing issue when valToSearch is blank
-      // because it is populating options array with value i.e id which should not be the case
-      if (!isSearching.current && valToSearch !== '') {
+      if (!isSearching.current) {
         setOptions([value]);
       }
       setCurrentValue(value[outputValue] || value); // set nested value or value
@@ -115,9 +109,7 @@ export default function AutoCompleteAsync({
         }
       }}
       onClear={() => {
-        //As we are showing top 10 records after clearing field,
-        //hence options don't need to be empty after clear
-        //setOptions([]);
+        setOptions([]);
         setCurrentValue(undefined);
         setSearching(false);
       }}

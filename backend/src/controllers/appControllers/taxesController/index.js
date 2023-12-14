@@ -19,6 +19,14 @@ methods.create = async (req, res) => {
   });
 };
 
+methods.delete = async (req, res) => {
+  return res.status(403).json({
+    success: false,
+    result: null,
+    message: "you can't delete tax after it has been created",
+  });
+};
+
 methods.update = async (req, res) => {
   const { id } = req.params;
   const tax = await Model.findById(id);

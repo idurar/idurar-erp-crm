@@ -3,20 +3,17 @@ import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { PlusCircleOutlined } from '@ant-design/icons';
 
-export default function SelectAsync({
+const SelectAsync = ({
   entity,
   displayLabels = ['name'],
   outputValue = '_id',
-  value,
-  onChange,
-  loadDefault = false,
-  defaultField = 'isDefault',
   redirectLabel = '',
   withRedirect = false,
   urlToRedirect = '/',
-}) {
+  value,
+  onChange,
+}) => {
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
 
@@ -34,36 +31,38 @@ export default function SelectAsync({
     return displayLabels.map((x) => optionField[x]).join(' ');
   };
   useEffect(() => {
-    // this for update Form , it's for setField
     if (value) {
-      setCurrentValue(value[outputValue] || value); // set nested value or value
-      onChange(value[outputValue] || value);
+      const val = value[outputValue] ?? value;
+      setCurrentValue(val);
+      onChange(val);
     }
   }, [value]);
 
   const handleSelectChange = (newValue) => {
     if (newValue === 'redirectURL') {
-      // Navigate to another page when "Add payment" is selected
       navigate(urlToRedirect);
     } else {
-      // Handle other select options
-      if (onChange) {
-        onChange(newValue[outputValue] || newValue);
-      }
+      const val = newValue[outputValue] ?? newValue;
+      onChange(val);
     }
   };
 
-  useEffect(() => {
-    if(loadDefault) {
-      const elem = selectOptions.find((option) => {
-        return option[defaultField] === true;
-      });
-      if (elem) {
-        setCurrentValue(elem[outputValue] || elem);
-        onChange(elem[outputValue] || elem);
-      }
+  const optionsList = () => {
+    const list = [];
+
+    if (selectOptions.length === 0 && withRedirect) {
+      const value = 'redirectURL';
+      const label = `+ ${redirectLabel}`;
+      list.push({ value, label });
     }
-  }, [selectOptions]);
+    selectOptions.map((optionField) => {
+      const value = optionField[outputValue] ?? optionField;
+      const label = labels(optionField);
+      list.push({ value, label });
+    });
+
+    return list;
+  };
 
   return (
     <Select
@@ -71,20 +70,9 @@ export default function SelectAsync({
       disabled={fetchIsLoading}
       value={currentValue}
       onChange={handleSelectChange}
-    >
-      {selectOptions.length === 0 && withRedirect && (
-        <Select.Option key="redirectURL" value="redirectURL">
-          <PlusCircleOutlined /> {redirectLabel}
-        </Select.Option>
-      )}
-      {selectOptions.map((optionField) => (
-        <Select.Option
-          key={optionField[outputValue] || optionField}
-          value={optionField[outputValue] || optionField}
-        >
-          {labels(optionField)}
-        </Select.Option>
-      ))}
-    </Select>
+      options={optionsList()}
+    />
   );
-}
+};
+
+export default SelectAsync;

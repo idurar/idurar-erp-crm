@@ -236,18 +236,15 @@ function LoadQuoteForm({ subTotal = 0, current = null }) {
               rules={[
                 {
                   required: true,
-                  message: 'Please choose the tax!',
                 },
               ]}
             >
               <SelectAsync
                 value={taxRate}
                 onChange={handelTaxChange}
-                bordered={false}
                 entity={'taxes'}
                 outputValue={'taxValue'}
                 displayLabels={['taxName']}
-                loadDefault={true}
                 withRedirect={true}
                 urlToRedirect="/taxes"
                 redirectLabel="Add New Tax"
