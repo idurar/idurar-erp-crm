@@ -1,3 +1,7 @@
+.hiddenLabel {
+  opacity: 0;
+  color: #fff;
+}
 .centerAbsolute {
   position: absolute;
   left: 50%;

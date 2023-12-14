@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
 import { selectAuth } from '@/redux/auth/selectors';
-import { Result, Button } from 'antd';
+import { Result, Button, Input, Space } from 'antd';
 
 import { verify as verifyAction } from '@/redux/auth/actions';
 
-import PageLoader from '@/components/PageLoader';
+import Loading from '@/components/Loading';
 
 const Verify = () => {
   const translate = useLanguage();
   const { userId, emailToken } = useParams();
   const { isLoading, isSuccess } = useSelector(selectAuth);
-  const [isActionDispatched, setActionDispatched] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,37 +23,31 @@ const Verify = () => {
   }
 
   useEffect(() => {
-    if (!isActionDispatched && !isSuccess) {
-      asyncVerify();
-      setActionDispatched(true);
-    }
-  }, [dispatch, isActionDispatched, isSuccess]);
-
-  useEffect(() => {
     if (isSuccess) navigate('/');
   }, [isSuccess]);
 
-  if (isLoading) {
-    return <PageLoader />;
-  } else if (!isSuccess) {
-    return (
-      <Result
-        status="403"
-        title={translate('Verification Failed')}
-        subTitle={translate('your verification email failed please try again')}
-        extra={
-          <Button
-            type="primary"
-            onClick={() => {
-              navigate(`/login`);
-            }}
-          >
-            {translate('Back')}
-          </Button>
-        }
-      ></Result>
-    );
-  }
+  return (
+    <Result
+      status="info"
+      title={translate('Verify your account')}
+      subTitle={translate('Complete verification by providing the code that you received by email')}
+      extra={
+        <Loading isLoading={isLoading}>
+          <Space>
+            <Input value={emailToken} style={{ width: 150 }} />
+            <Button
+              type="primary"
+              onClick={() => {
+                asyncVerify();
+              }}
+            >
+              {translate('Verify now')}
+            </Button>
+          </Space>
+        </Loading>
+      }
+    ></Result>
+  );
 };
 
 export default Verify;

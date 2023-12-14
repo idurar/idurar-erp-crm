@@ -36,6 +36,7 @@ const create = async (userModel, req, res) => {
 
   req.body.password = undefined;
   req.body.removed = false;
+  req.body.enabled = true;
   const result = await new User(req.body).save();
 
   if (!result) {
@@ -49,6 +50,7 @@ const create = async (userModel, req, res) => {
     password: passwordHash,
     salt: salt,
     user: result._id,
+    emailVerified: true,
   };
   const resultPassword = await new UserPassword(UserPasswordData).save();
 

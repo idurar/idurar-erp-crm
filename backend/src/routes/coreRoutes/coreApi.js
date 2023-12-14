@@ -29,10 +29,10 @@ router
     catchErrors(adminController.update)
   );
 router.route('/admin/delete/:id').delete(hasPermission(), catchErrors(adminController.delete));
-router.route('/admin/search').get(hasPermission('read'), catchErrors(adminController.search));
-router.route('/admin/list').get(hasPermission('read'), catchErrors(adminController.list));
-router.route('/admin/profile').get(hasPermission('read'), catchErrors(adminController.profile));
-router.route('/admin/status/:id').patch(hasPermission('read'), catchErrors(adminController.status));
+router.route('/admin/search').get(hasPermission(), catchErrors(adminController.search));
+router.route('/admin/list').get(hasPermission(), catchErrors(adminController.list));
+router.route('/admin/profile').get(hasPermission(), catchErrors(adminController.profile));
+router.route('/admin/status/:id').patch(hasPermission(), catchErrors(adminController.status));
 router
   .route('/admin/password-update/:id')
   .patch(hasPermission(), catchErrors(adminController.updatePassword));
@@ -70,17 +70,17 @@ router
   .get(hasPermission('read'), catchErrors(settingController.listBySettingKey));
 router
   .route('/setting/updateBySettingKey/:settingKey?')
-  .patch(hasPermission('update'), catchErrors(settingController.updateBySettingKey));
+  .patch(hasPermission(), catchErrors(settingController.updateBySettingKey));
 router
   .route('/setting/upload/:settingKey?')
   .patch(
-    hasPermission('update'),
+    hasPermission(),
     singleStorageUpload({ entity: 'setting', fieldName: 'settingValue', fileType: 'image' }),
     catchErrors(settingController.updateBySettingKey)
   );
 router
   .route('/setting/updateManySetting')
-  .patch(hasPermission('read'), catchErrors(settingController.updateManySetting));
+  .patch(hasPermission(), catchErrors(settingController.updateManySetting));
 
 // //____________________________________________ API for Email Templates _________________
 router.route('/email/create').post(hasPermission('create'), catchErrors(emailController.create));

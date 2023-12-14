@@ -7,6 +7,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { DatePicker } from 'antd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
+import SelectAsync from '@/components/SelectAsync';
 
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
@@ -17,7 +18,6 @@ import { selectFinanceSettings } from '@/redux/settings/selectors';
 
 import { useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
-import SelectAsync from '@/components/SelectAsync';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
   const { last_offer_number } = useSelector(selectFinanceSettings);
@@ -51,8 +51,8 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
   }, [current]);
   useEffect(() => {
     const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
-    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)));
-    setTotal(Number.parseFloat(currentTotal));
+    setTaxTotal(calculate.multiply(subTotal, taxRate));
+    setTotal(currentTotal);
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);
@@ -231,18 +231,15 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               rules={[
                 {
                   required: true,
-                  message: 'Please choose the tax!',
                 },
               ]}
             >
               <SelectAsync
                 value={taxRate}
                 onChange={handelTaxChange}
-                bordered={false}
-                entity={'taxes'}
-                outputValue={'taxValue'}
+                entity="taxes"
+                outputValue="taxValue"
                 displayLabels={['taxName']}
-                loadDefault={true}
                 withRedirect={true}
                 urlToRedirect="/taxes"
                 redirectLabel="Add New Tax"

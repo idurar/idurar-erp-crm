@@ -103,6 +103,7 @@ export default function UpdateItem({ config, UpdateForm }) {
 
       const { subTotal } = formData;
 
+      form.resetFields();
       form.setFieldsValue(formData);
       setSubTotal(subTotal);
     }

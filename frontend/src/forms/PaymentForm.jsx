@@ -62,7 +62,6 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
         <SelectAsync
           entity={'paymentMode'}
           displayLabels={['name']}
-          loadDefault={true}
           withRedirect={true}
           urlToRedirect="/payment/mode"
           redirectLabel="Add Payment Mode"
