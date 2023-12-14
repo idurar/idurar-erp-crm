@@ -2,20 +2,20 @@
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
     </a>
-    <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
+    <h1>Open Code Source ERP / CRM | Node.js React.js</h1>
     <p align="center">
-        <p>IDURAR ERP CRM | Simple To Use | 44 Languages </p>
+        <p>IDURAR ERP CRM | Simple To Use | 40 Languages </p>
     </p>
     
   [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮   
+## 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮   
 
 IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
 
-**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
+**Live App Demo** : [www.idurarapp.com/demo-erp-crm/](www.idurarapp.com/demo-erp-crm/)
 
 ```
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
@@ -49,9 +49,8 @@ The Webinar will be this Wednesday at 1pm GMT.
 
 IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
-**Live App Demo** : [https://idurarapp.com/demo/](https://idurarapp.com/demo/)
+**Live App Demo** : [www.idurarapp.com/demo-erp-crm/](www.idurarapp.com/demo-erp-crm/)
 
-`username : admin@demo.com password : admin123`
 
 ## Getting started
 
