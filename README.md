@@ -29,12 +29,6 @@ IDURAR is [fair-code](http://faircode.io) distributed under the
 
 Commercial licenses are available : [Get in touch](mailto:hello@idurarapp.com)
 
-## How To Deploy IDURAR ERP CRM : 
-🔥 I would like to invite you for a weekly free IDURAR Webinar (Node.js React.js course), where you learn how to deploy IDURAR on cloud , and create a new api and new crud app with IDURAR in just one hour ?
-Please fill this form if you are interested : [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
-
-The Webinar will be this Wednesday at 1pm GMT.
-
 ## Our Sponsors
 
   <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
@@ -44,6 +38,11 @@ The Webinar will be this Wednesday at 1pm GMT.
 #
 
 <img width="1403" alt="Open Source ERP CRM" src="https://github.com/idurar/idurar-erp-crm/assets/136928179/a6712286-7ca6-4822-8902-fb7523533ee8">
+
+## 100% Lighthouse score
+
+![Screenshot 2023-12-14 at 8 44 53 PM](https://github.com/idurar/idurar-erp-crm/assets/136928179/d8161bef-6a21-45a6-9f22-e54d1aaf1270)
+
 
 ## Open "Fair-Code" Source ERP / CRM App
 
