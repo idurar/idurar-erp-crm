@@ -1,28 +1,29 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.local' });
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-const OpenAI = require('openai');
-const fs = require('fs');
+import OpenAI from 'openai';
+import fs from 'fs';
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
 
-function objectToText(obj) {
+const objectToText = (obj) => {
   let text = '{\n';
   Object.entries(obj).forEach(([key, value]) => {
     text += `${key}: "${value}",\n`;
   });
   text += '}';
   return text;
-}
+};
 
 const generateBackendFile = ({ language, newLanguageContent }) => {
   const txt = objectToText(newLanguageContent);
   const fileContent = `module.exports = ${txt}`;
 
-  const filePath = '../backend/src/locale/translation/' + language + '.js';
+  const filePath = `../backend/src/locale/translation/${language}.js`;
 
   fs.writeFile(filePath, fileContent, (err) => {
     if (err) {
@@ -36,7 +37,7 @@ const generateFrontendFile = ({ language, newLanguageContent }) => {
   const txt = objectToText(newLanguageContent);
   const fileContent = `const lang = ${txt}\n export default lang`;
 
-  const filePath = '../frontend/src/locale/translation/' + language + '.js';
+  const filePath = `../frontend/src/locale/translation/${language}.js`;
 
   fs.writeFile(filePath, fileContent, (err) => {
     if (err) {
@@ -72,11 +73,10 @@ async function translate(language, langObject) {
   return list;
 }
 
-const languages = require('../locale/languages');
+import languages from '../locale/languages';
+import missedWords from './missedWords';
 
-const missedWords = require(`./missedWords`);
-
-async function generateTranslation(language) {
+const generateTranslation = async (language) => {
   const filePath = `../locale/translation/${language.value}`;
   const currentLang = require(filePath);
 
@@ -87,7 +87,7 @@ async function generateTranslation(language) {
 
   generateBackendFile({ language: language.value, newLanguageContent });
   generateFrontendFile({ language: language.value, newLanguageContent });
-}
+};
 
 languages.forEach(({ label, value }) => {
   generateTranslation({ label, value });

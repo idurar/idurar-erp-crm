@@ -1,4 +1,4 @@
-module.exports = {
+export const missedWords = {
   taxes: 'Taxes',
   upgrade_now: 'Upgrade Now',
   upgrade_for_one_time_lifetime_plan: 'Upgrade For One Time Lifetime Plan',
