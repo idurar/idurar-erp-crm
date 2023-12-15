@@ -530,4 +530,5 @@ upgrade_now: "Şimdi Yükselt",
 upgrade_for_one_time_lifetime_plan: "Tek Seferlik Ömür Boyu Plan İçin Yükselt",
 plus_1_year_free_update: "1 Yıl Ücretsiz Güncelleme Dahil",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Herhangi Bir Zaman İptal Et, İdurar'ı Ücretsiz Kullanmaya Devam Et",
+purchase_now: "Şimdi Satın Al",
 }

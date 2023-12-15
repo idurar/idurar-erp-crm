@@ -532,4 +532,5 @@ upgrade_now: "Millora ara",
 upgrade_for_one_time_lifetime_plan: "Millora per a un pla vitalici d'una sola vegada",
 plus_1_year_free_update: "Més 1 any d'actualització gratuïta",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Cancel·la en qualsevol moment mentre segueixes utilitzant Idurar de franc per sempre",
+purchase_now: "Comprar ara",
 }

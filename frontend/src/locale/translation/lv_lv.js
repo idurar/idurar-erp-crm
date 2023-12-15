@@ -532,5 +532,6 @@ upgrade_now: "Uzlabot tagad",
 upgrade_for_one_time_lifetime_plan: "Uzlabot vienreizēju mūža plānu",
 plus_1_year_free_update: "Papildus 1 gada bezmaksas atjauninājums",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Atcelt jebkurā laikā, vienlaikus turpinot bezmaksas izmantot Idurar uz visiem laikiem",
+purchase_now: "Iegādāties tagad",
 }
  export default lang

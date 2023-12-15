@@ -532,5 +532,6 @@ upgrade_now: "اکنون ارتقا دهید",
 upgrade_for_one_time_lifetime_plan: "برای طرح یکبار مصرف به مدت عمر ارتقا دهید",
 plus_1_year_free_update: "به همراه 1 سال به‌روزرسانی رایگان",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "هر زمان که می‌خواهید لغو کنید، همچنان از ایدورار به صورت رایگان استفاده کنید",
+purchase_now: "خرید کنید",
 }
  export default lang

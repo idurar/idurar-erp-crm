@@ -530,5 +530,6 @@ upgrade_now: "Надгради сега",
 upgrade_for_one_time_lifetime_plan: "Надгради за еднократен план за цел живот",
 plus_1_year_free_update: "Плус 1 година бесплатно надградување",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Откажи во било кој момент, додека продолжуваш да го користиш Idurar бесплатно засекогаш",
+purchase_now: "Купи сега",
 }
  export default lang

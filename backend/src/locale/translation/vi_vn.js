@@ -521,4 +521,5 @@ upgrade_now: "Nâng cấp ngay",
 upgrade_for_one_time_lifetime_plan: "Nâng cấp cho gói trọn đời một lần",
 plus_1_year_free_update: "Cộng thêm 1 năm cập nhật miễn phí",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Hủy bất kỳ lúc nào trong khi vẫn sử dụng Idurar miễn phí mãi mãi",
+purchase_now: "Mua Ngay",
 }

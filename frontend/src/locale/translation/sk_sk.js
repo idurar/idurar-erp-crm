@@ -530,5 +530,6 @@ upgrade_now: "Aktualizovať teraz",
 upgrade_for_one_time_lifetime_plan: "Aktualizovať pre jednorazový doživotný plán",
 plus_1_year_free_update: "Plus 1 rok bezplatnej aktualizácie",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Zrušiť kedykoľvek a stále používať Idurar zadarmo navždy",
+purchase_now: "Kúpiť teraz",
 }
  export default lang

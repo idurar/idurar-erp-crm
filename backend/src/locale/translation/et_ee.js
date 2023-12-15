@@ -532,4 +532,5 @@ upgrade_now: "Uuenda kohe",
 upgrade_for_one_time_lifetime_plan: "Uuenda ühekordse eluaegse plaani jaoks",
 plus_1_year_free_update: "Lisaks 1 aasta tasuta uuendust",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Tühista igal ajal, samal ajal jätkates Idurari tasuta kasutamist igavesti",
+purchase_now: "Osta kohe",
 }

@@ -570,4 +570,5 @@ upgrade_now: "立即升级",
 upgrade_for_one_time_lifetime_plan: "一次终身计划升级",
 plus_1_year_free_update: "免费更新1年",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "随时取消，仍可永久免费使用Idurar",
+purchase_now: "立即购买",
 }

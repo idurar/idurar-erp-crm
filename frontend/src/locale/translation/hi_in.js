@@ -530,5 +530,6 @@ upgrade_now: "अभी अपग्रेड करें",
 upgrade_for_one_time_lifetime_plan: "एक बार के लाइफटाइम प्लान के लिए अपग्रेड करें",
 plus_1_year_free_update: "1 साल के लिए मुफ्त अपडेट",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "हमेशा के लिए मुफ्त में आईडुरार का उपयोग करते रहें जब चाहें तब रद्द करें",
+purchase_now: "अभी खरीदें",
 }
  export default lang

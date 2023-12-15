@@ -530,5 +530,6 @@ upgrade_now: "今すぐアップグレード",
 upgrade_for_one_time_lifetime_plan: "ワンタイムライフタイムプランのアップグレード",
 plus_1_year_free_update: "1年間の無料アップデート付き",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "いつでもキャンセル可能で、永遠に無料でIdurarを使用し続ける",
+purchase_now: "今すぐ購入",
 }
  export default lang

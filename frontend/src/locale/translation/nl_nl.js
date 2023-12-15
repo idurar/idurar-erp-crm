@@ -521,5 +521,6 @@ upgrade_now: "Nu upgraden",
 upgrade_for_one_time_lifetime_plan: "Upgrade voor eenmalig levenslang plan",
 plus_1_year_free_update: "Plus 1 jaar gratis update",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Altijd gratis blijven gebruiken en op elk moment annuleren",
+purchase_now: "Koop nu",
 }
  export default lang

@@ -530,5 +530,6 @@ upgrade_now: "Atualizar Agora",
 upgrade_for_one_time_lifetime_plan: "Atualizar para o Plano Vitalício de Uma Vez",
 plus_1_year_free_update: "Mais 1 Ano de Atualização Gratuita",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Cancelar a Qualquer Momento, Continuando a Usar o Idurar Gratuitamente para Sempre",
+purchase_now: "Comprar Agora",
 }
  export default lang

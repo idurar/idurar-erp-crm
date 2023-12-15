@@ -530,5 +530,6 @@ upgrade_now: "Frissítés most",
 upgrade_for_one_time_lifetime_plan: "Frissítés egyszeri életidő tervre",
 plus_1_year_free_update: "Plusz 1 év ingyenes frissítés",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Bármikor lemondható, miközben ingyen használhatja az Idurart örökké",
+purchase_now: "Vásárlás most",
 }
  export default lang

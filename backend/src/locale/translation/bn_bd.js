@@ -532,4 +532,5 @@ upgrade_now: "এখনই আপগ্রেড করুন",
 upgrade_for_one_time_lifetime_plan: "একটি সময়ের জীবনকালীন পরিকল্পনা জন্য আপগ্রেড করুন",
 plus_1_year_free_update: "প্লাস ১ বছর ফ্রি আপডেট",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "কখনই বাতিল করুন, আরো ব্যবহার করতে থাকুন এইডুরার বিনামূল্যে চিরতরে",
+purchase_now: "এখনই ক্রয় করুন",
 }

@@ -530,5 +530,6 @@ upgrade_now: "Naik Taraf Sekarang",
 upgrade_for_one_time_lifetime_plan: "Naik Taraf Untuk Rancangan Seumur Hidup Sekali Sahaja",
 plus_1_year_free_update: "Tambahan 1 Tahun Kemas Kini Percuma",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Batal Bila-bila Masa Sambil Terus Menggunakan Idurar Secara Percuma Selama-lamanya",
+purchase_now: "Beli Sekarang",
 }
  export default lang

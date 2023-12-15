@@ -532,5 +532,6 @@ upgrade_now: "지금 업그레이드",
 upgrade_for_one_time_lifetime_plan: "일회성 평생 플랜 업그레이드",
 plus_1_year_free_update: "1년 무료 업데이트 추가",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "언제든지 무료로 Idurar를 계속 사용하면서 취소 가능",
+purchase_now: "지금 구매하기",
 }
  export default lang

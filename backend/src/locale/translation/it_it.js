@@ -532,4 +532,5 @@ upgrade_now: "Aggiorna Ora",
 upgrade_for_one_time_lifetime_plan: "Aggiorna per un Piano a Vita Unica",
 plus_1_year_free_update: "Più 1 Anno di Aggiornamenti Gratuiti",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Annulla in Qualsiasi Momento Continuando a Utilizzare Idurar Gratuitamente per Sempre",
+purchase_now: "Acquista ora",
 }

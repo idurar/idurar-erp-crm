@@ -532,5 +532,6 @@ upgrade_now: "Надграждане сега",
 upgrade_for_one_time_lifetime_plan: "Надграждане за еднократен пожизнен план",
 plus_1_year_free_update: "Плюс 1 година безплатно обновяване",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Отказване по всяко време, докато продължавате да използвате Idurar безплатно завинаги",
+purchase_now: "Купи сега",
 }
  export default lang

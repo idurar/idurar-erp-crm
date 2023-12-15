@@ -521,4 +521,5 @@ upgrade_now: "อัปเกรดตอนนี้",
 upgrade_for_one_time_lifetime_plan: "อัปเกรดสำหรับแผนชีวิตครั้งเดียว",
 plus_1_year_free_update: "รับอัปเดตฟรีเป็นเวลา 1 ปี",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "ยกเลิกได้ทุกเมื่อในขณะที่ยังคงใช้ Idurar ฟรีตลอดไป",
+purchase_now: "ซื้อเลย",
 }

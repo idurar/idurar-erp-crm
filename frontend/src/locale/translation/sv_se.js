@@ -530,5 +530,6 @@ upgrade_now: "Uppgradera Nu",
 upgrade_for_one_time_lifetime_plan: "Uppgradera För En Gång Livstidsplan",
 plus_1_year_free_update: "Plus 1 År Gratis Uppdatering",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Avbryt När Som Helst Medan Du Fortsätter Använda Idurar Gratis För Alltid",
+purchase_now: "Köp nu",
 }
  export default lang

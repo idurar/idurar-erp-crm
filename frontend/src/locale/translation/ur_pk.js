@@ -530,5 +530,6 @@ upgrade_now: "ابھاریڈ نو",
 upgrade_for_one_time_lifetime_plan: "ایک بار کی عمری منصوبہ کے لئے اپ گریڈ کریں",
 plus_1_year_free_update: "1 سال مفت اپ ڈیٹ کے ساتھ",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "کسی بھی وقت منسوخ کریں جبکہ مفت کے لئے ہمیشہ تک ادار استعمال کریں",
+purchase_now: "ابھی خریدیں",
 }
  export default lang

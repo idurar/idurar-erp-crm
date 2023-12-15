@@ -521,4 +521,5 @@ upgrade_now: "Upgrade acum",
 upgrade_for_one_time_lifetime_plan: "Upgrade pentru un singur plan pe viață",
 plus_1_year_free_update: "Plus 1 an de actualizări gratuite",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Anulează în orice moment în timp ce continui să folosești Idurar gratuit pentru totdeauna",
+purchase_now: "Cumpără acum",
 }

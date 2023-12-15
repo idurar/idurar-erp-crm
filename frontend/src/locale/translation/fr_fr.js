@@ -568,5 +568,6 @@ upgrade_now: "Mettre à niveau maintenant",
 upgrade_for_one_time_lifetime_plan: "Mettre à niveau pour un plan à vie unique",
 plus_1_year_free_update: "Plus 1 an de mise à jour gratuite",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Annulez à tout moment tout en continuant à utiliser Idurar gratuitement pour toujours",
+purchase_now: "Acheter maintenant",
 }
  export default lang

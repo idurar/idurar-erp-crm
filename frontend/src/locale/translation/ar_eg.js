@@ -570,5 +570,6 @@ upgrade_now: "ترقية الآن",
 upgrade_for_one_time_lifetime_plan: "ترقية لخطة مدى الحياة مرة واحدة",
 plus_1_year_free_update: "بالإضافة إلى تحديث مجاني لمدة عام واحد",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "إلغاء في أي وقت مع الاستمرار في استخدام إيدورار مجانًا إلى الأبد",
+purchase_now: "اشترِ الآن",
 }
  export default lang

@@ -530,4 +530,5 @@ upgrade_now: "Tingkatkan Sekarang",
 upgrade_for_one_time_lifetime_plan: "Tingkatkan Untuk Paket Seumur Hidup Satu Kali",
 plus_1_year_free_update: "Tambahkan 1 Tahun Pembaruan Gratis",
 cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Batalkan Kapan Saja Sambil Tetap Menggunakan Idurar Gratis Selamanya",
+purchase_now: "Beli Sekarang",
 }
