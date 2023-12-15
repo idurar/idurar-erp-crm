@@ -56,5 +56,8 @@
   "bugs": {
     "url": "https://github.com/idurar/idurar-erp-crm//issues"
   },
-  "homepage": "https://github.com/idurar/idurar-erp-crm/#readme"
+  "homepage": "https://github.com/idurar/idurar-erp-crm/#readme",
+  "imports": {
+    "#*": "./src/*"
+  }
 }
