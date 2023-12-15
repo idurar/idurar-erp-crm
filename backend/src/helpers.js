@@ -3,17 +3,15 @@
 */
 
 // FS is a built in module to node that let's us read files from the system we're running on
-const fs = require('fs');
-
-const currency = require('currency.js');
-
+import fs from 'fs';
+import currency from 'currency.js';
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
-exports.moment = require('moment');
+import moment from 'moment';
 
 // Making a static map is really long - this is a handy helper function to make one
 
 // inserting an SVG
-exports.icon = (name) => {
+export const icon = (name) => {
   try {
     return fs.readFileSync(`./public/images/icons/${name}.svg`);
   } catch (error) {
@@ -21,19 +19,14 @@ exports.icon = (name) => {
   }
 };
 
-exports.image = (name) => fs.readFileSync(`./public/images/photos/${name}.jpg`);
+export const image = (name) => fs.readFileSync(`./public/images/photos/${name}.jpg`);
 
 // Some details about the site
-exports.siteName = `Express.js / MongoBD / Rest Api`;
+export const siteName = `Express.js / MongoBD / Rest Api`;
 
-exports.timeRange = (start, end, format, interval) => {
-  if (format == undefined) {
-    format = 'HH:mm';
-  }
-
-  if (interval == undefined) {
-    interval = 60;
-  }
+export const timeRange = (start, end, format, interval) => {
+  format = format || 'HH:mm';
+  interval = interval || 60;
   interval = interval > 0 ? interval : 60;
 
   const range = [];
@@ -44,7 +37,7 @@ exports.timeRange = (start, end, format, interval) => {
   return range;
 };
 
-exports.calculate = {
+export const calculate = {
   add: (firstValue, secondValue) => {
     return currency(firstValue).add(secondValue).value;
   },
