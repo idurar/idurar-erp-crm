@@ -12,7 +12,6 @@ import adminAuth from './controllers/coreControllers/adminAuth/index.js';
 
 import errorHandlers from './handlers/errorHandlers.js';
 import erpApiRouter from './routes/appRoutes/appApi.js';
-//import { listAllSettings } from '@/middlewares/settings/index.js';
 import { listAllSettings } from '#middlewares/settings/index.js';
 import useLanguage from '#locale/useLanguage.js';
 
