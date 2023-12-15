@@ -2,7 +2,6 @@ require('module-alias/register');
 import mongoose from 'mongoose';
 import { globSync } from 'glob';
 import { resolve } from 'path';
-const { connect, connection } = mongoose;
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -16,9 +15,9 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 dotenv.config({ path: '.env.local' });
 
-connect(process.env.DATABASE);
+mongoose.connect(process.env.DATABASE);
 
-connection.on('error', (error) => {
+mongoose.connection.on('error', (error) => {
   console.log(
     `1. 🔥 Common Error caused issue → : check your .env file first and add your mongodb url`
   );
