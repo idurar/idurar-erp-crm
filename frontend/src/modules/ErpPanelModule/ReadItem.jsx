@@ -131,7 +131,14 @@ export default function ReadItem({ config, selectedItem }) {
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
+        tags={
+          <Tag color="volcano">{
+            (currentErp.paymentStatus && translate(currentErp.paymentStatus)) 
+            || 
+            (currentErp.status && translate(currentErp.status))
+            }
+          </Tag>
+        }
         // subTitle="This is cuurent erp page"
         extra={[
           <Button
