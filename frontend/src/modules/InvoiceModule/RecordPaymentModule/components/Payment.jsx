@@ -61,7 +61,11 @@ export default function Payment({ config, currentItem }) {
               currentErp.year || ''
             }`}
             ghost={false}
-            tags={<Tag color="volcano">{currentErp.status}</Tag>}
+            tags={
+              <Tag color="volcano">
+                {currentErp.status && translate(currentErp.status)}
+              </Tag>
+            }
             // subTitle="This is cuurent erp page"
             extra={[
               <Button
@@ -102,7 +106,7 @@ export default function Payment({ config, currentItem }) {
             <Descriptions.Item label={translate('phone')}>{client.phone}</Descriptions.Item>
             <Divider dashed />
             <Descriptions.Item label={translate('payment status')}>
-              {currentErp.paymentStatus}
+              {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
             </Descriptions.Item>
             <Descriptions.Item label={translate('sub total')}>
               {money.amountFormatter({ amount: currentErp.subTotal })}
