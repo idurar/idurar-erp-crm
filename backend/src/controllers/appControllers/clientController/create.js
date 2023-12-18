@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
@@ -13,7 +12,7 @@ const create = async (Model, req, res) => {
         message: 'Please select a people',
       });
     } else {
-      let { firstname, lastname } = await People.findOneAndUpdate(
+      const { firstname, lastname } = await People.findOneAndUpdate(
         {
           _id: req.body.people,
           removed: false,
@@ -24,7 +23,7 @@ const create = async (Model, req, res) => {
           runValidators: true,
         }
       ).exec();
-      req.body.name = firstname + ' ' + lastname;
+      req.body.name = `${firstname} ${lastname}`;
       req.body.company = null;
     }
   } else {
@@ -34,7 +33,7 @@ const create = async (Model, req, res) => {
         message: 'Please select a company',
       });
     } else {
-      let { name } = await Company.findOneAndUpdate(
+      const { name } = await Company.findOneAndUpdate(
         {
           _id: req.body.company,
           removed: false,
@@ -61,4 +60,4 @@ const create = async (Model, req, res) => {
   });
 };
 
-module.exports = create;
+export default create;
