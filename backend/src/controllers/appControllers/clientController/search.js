@@ -1,7 +1,6 @@
-const { migrate } = require('./migrate');
+import { migrate } from './migrate.js';
 
 const search = async (Model, req, res) => {
-  // console.log(req.query.fields)
   if (req.query.q === undefined || req.query.q.trim() === '') {
     return res
       .status(202)
@@ -16,12 +15,12 @@ const search = async (Model, req, res) => {
 
   const fields = { $or: [] };
 
-  for (const field of fieldsArray) {
+  fieldsArray.forEach((field) => {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
-  }
+  });
   // console.log(fields)
 
-  let results = await Model.find(fields).where('removed', false).limit(10).exec();
+  const results = await Model.find(fields).where('removed').equals(false).limit(10).exec();
 
   const migratedData = results.map((x) => migrate(x));
 
@@ -43,4 +42,4 @@ const search = async (Model, req, res) => {
   }
 };
 
-module.exports = search;
+export default search;
