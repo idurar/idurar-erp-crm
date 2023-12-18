@@ -1,4 +1,4 @@
-const { migrate } = require('./migrate');
+import { migrate } from './migrate.js';
 
 const read = async (Model, req, res) => {
   // Find document by id
@@ -23,4 +23,4 @@ const read = async (Model, req, res) => {
   }
 };
 
-module.exports = read;
+export default read;
