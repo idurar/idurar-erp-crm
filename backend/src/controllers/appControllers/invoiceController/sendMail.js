@@ -1,10 +1,10 @@
-const fs = require('fs');
-const custom = require('@/controllers/pdfController');
-const { SendInvoice } = require('@/emailTemplate/SendInvoice');
-const mongoose = require('mongoose');
+import fs from 'fs';
+import custom from '#controllers/pdfController/index.js';
+import { SendInvoice } from '#emailTemplate/SendInvoice.js';
+import mongoose from 'mongoose';
 const InvoiceModel = mongoose.model('Invoice');
-const { Resend } = require('resend');
-const { loadSettings } = require('@/middlewares/settings');
+import { Resend } from 'resend';
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const mail = async (req, res) => {
   return res.status(200).json({
@@ -15,4 +15,4 @@ const mail = async (req, res) => {
   });
 };
 
-module.exports = mail;
+export default mail;
