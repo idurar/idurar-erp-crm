@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Client = mongoose.model('Client');
 const People = mongoose.model('People');
@@ -11,4 +11,5 @@ const remove = async (Model, req, res) => {
     message: 'please upgrade to use all app features',
   });
 };
-module.exports = remove;
+
+export default remove;
