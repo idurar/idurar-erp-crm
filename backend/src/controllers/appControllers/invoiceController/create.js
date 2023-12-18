@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Invoice');
 
-const custom = require('@/controllers/pdfController');
+import * as custom from '#controllers/pdfController/index.js';
 
-const { calculate } = require('@/helpers');
-const { increaseBySettingKey } = require('@/middlewares/settings');
-const schema = require('./schemaValidate');
+import { calculate } from '#helpers.js';
+import { increaseBySettingKey } from '#middlewares/settings/index.js';
+import schema from './schemaValidate.js';
 
 const create = async (req, res) => {
   let body = req.body;
@@ -30,11 +30,11 @@ const create = async (req, res) => {
 
   //Calculate the items array with subTotal, total, taxTotal
   items.map((item) => {
-    let total = calculate.multiply(item['quantity'], item['price']);
+    let total = calculate.multiply(item.quantity, item.price);
     //sub total
     subTotal = calculate.add(subTotal, total);
     //item total
-    item['total'] = total;
+    item.total = total;
   });
   taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
@@ -46,12 +46,12 @@ const create = async (req, res) => {
 
   let paymentStatus = calculate.sub(total, discount) === 0 ? 'paid' : 'unpaid';
 
-  body['paymentStatus'] = paymentStatus;
-  body['createdBy'] = req.admin._id;
+  body.paymentStatus = paymentStatus;
+  body.createdBy = req.admin._id;
   console.log('🚀 ~ file: create.js:51 ~ create ~  req.admin:', req.admin);
   // Creating a new document in the collection
   const result = await new Model(body).save();
-  const fileId = 'invoice-' + result._id + '.pdf';
+  const fileId = `invoice-${result._id}.pdf`;
   const updateResult = await Model.findOneAndUpdate(
     { _id: result._id },
     { pdf: fileId },
@@ -71,4 +71,4 @@ const create = async (req, res) => {
   });
 };
 
-module.exports = create;
+export default create;
