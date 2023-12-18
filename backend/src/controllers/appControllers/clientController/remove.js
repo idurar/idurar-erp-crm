@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const QuoteModel = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
@@ -13,4 +13,5 @@ const remove = async (Model, req, res) => {
     message: 'please upgrade to use all app features',
   });
 };
-module.exports = remove;
+
+export default remove;
