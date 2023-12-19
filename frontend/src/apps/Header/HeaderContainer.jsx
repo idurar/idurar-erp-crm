@@ -68,7 +68,7 @@ export default function HeaderContent() {
   const content = () => {
     return (
       <div className="pad10">
-        <p style={{ fontSize: 12 }}>{translate('Upgrade for one time lifetime plan')}</p>
+        <p>{translate('Upgrade for one time lifetime plan')}</p>
         <p>{translate('Do you need help on customize of this app')}</p>
         <Button
           type="primary"
@@ -151,7 +151,7 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
-      <Popover content={content} title={translate('Upgrade Now')} trigger="click">
+      <Popover content={content} title={translate('Customize this application')} trigger="click">
         <Badge count={1} size="small">
           <Avatar
             icon={<RocketOutlined />}
