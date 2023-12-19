@@ -69,18 +69,14 @@ export default function HeaderContent() {
     return (
       <div className="pad10">
         <p style={{ fontSize: 12 }}>{translate('Upgrade for one time lifetime plan')}</p>
-        <p style={{ fontSize: 12 }}>{translate('Plus 1 year free update')}</p>
-        <p style={{ fontSize: 14, fontWeight: 900 }}>{translate('Price')} : $ 590</p>
-        <p style={{ fontSize: 12 }}>
-          {translate('Cancel any time while keep using IDURAR for free for ever')}
-        </p>
+        <p>{translate('Do you need help on customize of this app')}</p>
         <Button
           type="primary"
           onClick={() => {
-            window.open(`https://www.idurarapp.com/purchase-license/`);
+            window.open(`https://www.idurarapp.com/contact-us/`);
           }}
         >
-          {translate('purchase now')}
+          {translate('Contact us')}
         </Button>
       </div>
     );
