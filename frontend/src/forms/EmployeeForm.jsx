@@ -1,11 +1,13 @@
 import { Form, Input, Select } from 'antd';
 import { DatePicker } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
+import { useDate } from '@/settings';
 
 import useLanguage from '@/locale/useLanguage';
 
 export default function EmployeeForm() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
 
   return (
     <>
@@ -40,7 +42,7 @@ export default function EmployeeForm() {
           },
         ]}
       >
-        <DatePicker placeholder={translate('select_date')} format={'DD/MM/YYYY'} />
+        <DatePicker placeholder={translate('select_date')} format={dateFormat} />
       </Form.Item>
       <Form.Item
         name="birthplace"

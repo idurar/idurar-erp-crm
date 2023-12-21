@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Popover, Button, Badge } from 'antd';
+import { Avatar, Dropdown, Layout } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
-import { SettingOutlined, LogoutOutlined, RocketOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 
 import { checkImage } from '@/request';
 
@@ -17,6 +17,8 @@ import { BASE_URL } from '@/config/serverApiConfig';
 
 import useLanguage from '@/locale/useLanguage';
 import SelectLanguage from '@/components/SelectLanguage';
+
+import UpgradeButton from './UpgradeButton';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -63,23 +65,6 @@ export default function HeaderContent() {
 
   const DropdownMenu = ({ text }) => {
     return <span style={{}}>{text}</span>;
-  };
-
-  const content = () => {
-    return (
-      <div className="pad10">
-        <p>{translate('Upgrade for one time lifetime plan')}</p>
-        <p>{translate('Do you need help on customize of this app')}</p>
-        <Button
-          type="primary"
-          onClick={() => {
-            window.open(`https://www.idurarapp.com/contact-us/`);
-          }}
-        >
-          {translate('Contact us')}
-        </Button>
-      </div>
-    );
   };
 
   const items = [
@@ -151,20 +136,8 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
-      <Popover content={content} title={translate('Customize this application')} trigger="click">
-        <Badge count={1} size="small">
-          <Avatar
-            icon={<RocketOutlined />}
-            style={{
-              color: '#f56a00',
-              backgroundColor: '#FFF',
-              float: 'right',
-              marginTop: '5px',
-              cursor: 'pointer',
-            }}
-          />
-        </Badge>
-      </Popover>
+      <UpgradeButton />
+
       <SelectLanguage />
     </Header>
   );

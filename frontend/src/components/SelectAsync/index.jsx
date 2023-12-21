@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
-import { Select } from 'antd';
+import { Select, Tag } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { generate as uniqueId } from 'shortid';
+import color from '@/utils/color';
 
 const SelectAsync = ({
   entity,
@@ -43,6 +45,7 @@ const SelectAsync = ({
       navigate(urlToRedirect);
     } else {
       const val = newValue[outputValue] ?? newValue;
+      setCurrentValue(newValue);
       onChange(val);
     }
   };
@@ -58,7 +61,9 @@ const SelectAsync = ({
     selectOptions.map((optionField) => {
       const value = optionField[outputValue] ?? optionField;
       const label = labels(optionField);
-      list.push({ value, label });
+      const currentColor = optionField[outputValue]?.color ?? optionField?.color;
+      const labelColor = color.find((x) => x.color === currentColor);
+      list.push({ value, label, color: labelColor?.color });
     });
 
     return list;
@@ -70,8 +75,17 @@ const SelectAsync = ({
       disabled={fetchIsLoading}
       value={currentValue}
       onChange={handleSelectChange}
-      options={optionsList()}
-    />
+    >
+      {optionsList()?.map((option) => {
+        return (
+          <Select.Option key={`${uniqueId()}`} value={option.value}>
+            <Tag bordered={false} color={option.color}>
+              {option.label}
+            </Tag>
+          </Select.Option>
+        );
+      })}
+    </Select>
   );
 };
 

@@ -1,0 +1,50 @@
+[
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "last_order_number",
+    "settingValue": 0,
+    "valueType": "number",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "order_number_length",
+    "settingValue": 13,
+    "valueType": "number",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "order_number_type",
+    "settingValue": "date_uniqueid",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "product_number_type",
+    "settingValue": "barcode",
+    "valueType": "string",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "last_product_number",
+    "settingValue": 0,
+    "valueType": "number",
+    "isCoreSetting": true,
+    "isPrivate": false
+  },
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "generate_product_number",
+    "settingValue": false,
+    "valueType": "boolean",
+    "isCoreSetting": true,
+    "isPrivate": false
+  }
+]

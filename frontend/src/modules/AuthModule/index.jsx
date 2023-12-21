@@ -25,7 +25,7 @@ const AuthModule = ({ authContent, AUTH_TITLE }) => {
       </Content>
       <Content
         style={{
-          padding: '140px 30px 30px',
+          padding: '80px 30px 30px',
           maxWidth: '440px',
           margin: '0 auto',
         }}
@@ -41,7 +41,7 @@ const AuthModule = ({ authContent, AUTH_TITLE }) => {
             height={63}
             width={220}
           />
-          <div className="space20" />
+          <div className="space10" />
         </Col>
         <Title level={1}>{translate(AUTH_TITLE)}</Title>
 

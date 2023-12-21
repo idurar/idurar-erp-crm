@@ -1,6 +1,8 @@
 import useLanguage from '@/locale/useLanguage';
 import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
+import { Switch } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function Admin() {
   const translate = useLanguage();
@@ -25,6 +27,24 @@ export default function Admin() {
     { title: translate('last name'), dataIndex: 'surname' },
     { title: translate('Email'), dataIndex: 'email' },
     { title: translate('role'), dataIndex: 'role' },
+    {
+      title: translate('enabled'),
+      dataIndex: 'enabled',
+      onCell: () => ({
+        props: {
+          style: {
+            width: '60px',
+          },
+        },
+      }),
+      render: (text, record) => (
+        <Switch
+          checked={text}
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+        />
+      ),
+    },
   ];
 
   const Labels = {

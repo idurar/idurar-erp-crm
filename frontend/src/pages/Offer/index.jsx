@@ -1,13 +1,15 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
+import { tagColor } from '@/utils/statusTagColor';
 
 import OfferDataTableModule from '@/modules/OfferModule/OfferDataTableModule';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 
 export default function Offer() {
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
+  const { dateFormat } = useDate();
 
   const searchConfig = {
     displayLabels: ['name'],
@@ -26,7 +28,7 @@ export default function Offer() {
     {
       title: translate('Date'),
       dataIndex: 'date',
-      render: (date) => dayjs(date).format('DD/MM/YYYY'),
+      render: (date) => dayjs(date).format(dateFormat),
     },
     {
       title: translate('Sub Total'),
@@ -63,17 +65,14 @@ export default function Offer() {
       title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
-        let color =
-          status === 'draft'
-            ? 'cyan'
-            : status === 'sent'
-              ? 'blue'
-              : status === 'accepted'
-                ? 'green'
-                : status === 'expired'
-                  ? 'orange'
-                  : 'red';
-        return <Tag color={color}>{status && translate(status)}</Tag>;
+        let tagStatus = tagColor(status);
+
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {status && translate(tagStatus.label)}
+          </Tag>
+        );
       },
     },
   ];

@@ -20,7 +20,7 @@
     "settingKey": "quote_status",
     "settingValue": [
       "draft",
-      "pendding",
+      "pending",
       "sent",
       "negotiation",
       "accepted",

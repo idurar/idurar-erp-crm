@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { Form, Input, InputNumber } from 'antd';
 import { DatePicker } from 'antd';
 import SelectAsync from '@/components/SelectAsync';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 
 import useLanguage from '@/locale/useLanguage';
 
@@ -11,6 +11,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
   const translate = useLanguage();
   const { TextArea } = Input;
   const money = useMoney();
+  const { dateFormat } = useDate();
   return (
     <>
       <Form.Item
@@ -38,7 +39,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
         initialValue={dayjs().add(30, 'days')}
         style={{ width: '100%' }}
       >
-        <DatePicker format={'DD/MM/YYYY'} style={{ width: '100%' }} />
+        <DatePicker format={dateFormat} style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label={translate('amount')} name="amount" rules={[{ required: true }]}>
         <InputNumber
@@ -47,7 +48,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           controls={false}
           max={maxAmount}
           addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
-          addonBefore={money.currency_position === 'before' ? money.currency_symbol : null}
+          addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
         />
       </Form.Item>
       <Form.Item

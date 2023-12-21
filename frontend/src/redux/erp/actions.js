@@ -271,8 +271,28 @@ export const erp = {
 
   mail:
     ({ entity, jsonData }) =>
-    async () => {
-      await request.mail({ entity, jsonData });
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'mail',
+        payload: null,
+      });
+
+      const data = await request.mail({ entity, jsonData });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'mail',
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'mail',
+          payload: null,
+        });
+      }
     },
 
   convert:

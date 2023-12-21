@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { DatePicker, Input, Form, Select, InputNumber, Switch } from 'antd';
+import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
-import useMoney from '@/settings/useMoney';
+import { useMoney, useDate } from '@/settings';
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import SelectAsync from '@/components/SelectAsync';
+import { generate as uniqueId } from 'shortid';
 
 import { countryList } from '@/utils/countryList';
 
@@ -18,7 +19,6 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
 
         if ((isUpdateForm && !field.disableForUpdate) || !field.disableForForm) {
           field.name = key;
-          field.type = field.type.toLowerCase();
           if (!field.label) field.label = key;
           if (field.hasFeedback)
             return <FormElement setFeedback={setFeedback} key={key} field={field} />;
@@ -36,57 +36,123 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
 function FormElement({ field, setFeedback }) {
   const translate = useLanguage();
   const money = useMoney();
+  const { dateFormat } = useDate();
+
+  const { TextArea } = Input;
 
   const compunedComponent = {
     string: <Input autoComplete="off" />,
-    email: <Input autoComplete="off" placeholder="Email" />,
+    url: <Input addonBefore="http://" autoComplete="off" placeholder="www.website.com" />,
+    textarea: <TextArea rows={4} />,
+    email: <Input autoComplete="off" placeholder="email@gmail.com" />,
     number: <InputNumber style={{ width: '100%' }} />,
-    phone: <Input min={0} style={{ width: '100%' }} />,
+    phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
     boolean: <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />,
     date: (
       <DatePicker
         placeholder={translate('select_date')}
         style={{ width: '100%' }}
-        format={'DD/MM/YYYY'}
+        format={dateFormat}
       />
     ),
     select: (
       <Select
-        options={field.options}
         defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
-      />
+      >
+        {field.options?.map((option) => {
+          return (
+            <Select.Option key={`${uniqueId()}`} value={option.value}>
+              {option.label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+    selectWithTranslation: (
+      <Select
+        defaultValue={field.defaultValue}
+        style={{
+          width: '100%',
+        }}
+      >
+        {field.options?.map((option) => {
+          return (
+            <Select.Option key={`${uniqueId()}`} value={option.value}>
+              <Tag bordered={false} color={option.color}>
+                {translate(option.label)}
+              </Tag>
+            </Select.Option>
+          );
+        })}
+      </Select>
     ),
     selectwithfeedback: (
       <Select
         onChange={(value) => setFeedback(value)}
-        options={field.options}
         defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
-      />
+      >
+        {field.options?.map((option) => (
+          <Select.Option key={`${uniqueId()}`} value={option.value}>
+            {translate(option.label)}
+          </Select.Option>
+        ))}
+      </Select>
     ),
+    color: (
+      <Select
+        defaultValue={field.defaultValue}
+        style={{
+          width: '100%',
+        }}
+      >
+        {field.options?.map((option) => {
+          return (
+            <Select.Option key={`${uniqueId()}`} value={option.value}>
+              <Tag bordered={false} color={option.color}>
+                {translate(option.label)}
+              </Tag>
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+
     tag: (
       <Select
-        options={field.options}
         defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
-      />
+      >
+        {field.options?.map((option) => (
+          <Select.Option key={`${uniqueId()}`} value={option.value}>
+            <Tag bordered={false} color={option.color}>
+              {translate(option.label)}
+            </Tag>
+          </Select.Option>
+        ))}
+      </Select>
     ),
     array: (
       <Select
-        options={field.options}
         mode={'multiple'}
         defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
-      />
+      >
+        {field.options?.map((option) => (
+          <Select.Option key={`${uniqueId()}`} value={option.value}>
+            {option.label}
+          </Select.Option>
+        ))}
+      </Select>
     ),
     country: (
       <Select
@@ -109,6 +175,7 @@ function FormElement({ field, setFeedback }) {
             value={language.value}
             label={translate(language.label)}
           >
+            {language?.icon && language?.icon + ' '}
             {translate(language.label)}
           </Select.Option>
         ))}
@@ -139,9 +206,28 @@ function FormElement({ field, setFeedback }) {
         min={0}
         controls={false}
         addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
-        addonBefore={money.currency_position === 'before' ? money.currency_symbol : null}
+        addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
       />
     ),
+  };
+
+  const filedType = {
+    string: 'string',
+    textarea: 'string',
+    number: 'number',
+    phone: 'string',
+    //boolean: 'boolean',
+    // method: 'method',
+    // regexp: 'regexp',
+    // integer: 'integer',
+    // float: 'float',
+    // array: 'array',
+    // object: 'object',
+    // enum: 'enum',
+    // date: 'date',
+    url: 'url',
+    website: 'url',
+    email: 'email',
   };
 
   return (
@@ -151,12 +237,12 @@ function FormElement({ field, setFeedback }) {
       rules={[
         {
           required: field.required || false,
-          type: field.type === 'email' ? 'email' : undefined,
+          type: filedType[field.type] ?? 'any',
         },
       ]}
       valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
     >
-      {compunedComponent[field.type]}
+      {compunedComponent[field.type] ?? compunedComponent['string']}
     </Form.Item>
   );
 }

@@ -3,6 +3,7 @@ import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from '@/utils/countryList';
 import { generate as uniqueId } from 'shortid';
+import color from '@/utils/color';
 
 export const dataForRead = ({ fields, translate }) => {
   let columns = [];
@@ -19,7 +20,7 @@ export const dataForRead = ({ fields, translate }) => {
   return columns;
 };
 
-export function dataForTable({ fields, translate, moneyFormatter }) {
+export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) {
   let columns = [];
 
   Object.keys(fields).forEach((key) => {
@@ -49,9 +50,9 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          const date = dayjs(record[key]).format('DD/MM/YYYY');
+          const date = dayjs(record[key]).format(dateFormat);
           return (
-            <Tag bordered={false} color={field.color || getRandomColor()}>
+            <Tag bordered={false} color={field.color}>
               {date}
             </Tag>
           );
@@ -70,15 +71,93 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         },
         render: (_, record) => moneyFormatter({ amount: record[key] }),
       },
+      async: {
+        title: field.label ? translate(field.label) : translate(key),
+        dataIndex: keyIndex,
+        render: (text, record) => {
+          return (
+            <Tag bordered={false} color={field.color || record[key]?.color || record.color}>
+              {text}
+            </Tag>
+          );
+        },
+      },
+      color: {
+        title: field.label ? translate(field.label) : translate(key),
+        dataIndex: keyIndex,
+        render: (text, record) => {
+          return (
+            <Tag bordered={false} color={text}>
+              {translate(color.find((x) => x.value === text)?.label)}
+            </Tag>
+          );
+        },
+      },
+      stringWithColor: {
+        title: field.label ? translate(field.label) : translate(key),
+        dataIndex: keyIndex,
+        render: (text, record) => {
+          return (
+            <Tag bordered={false} color={record.color}>
+              {text}
+            </Tag>
+          );
+        },
+      },
       tag: {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
           return (
             <Tag bordered={false} color={field.color}>
-              {record[key] && translate(record[key])}
+              {record[key] && record[key]}
             </Tag>
           );
+        },
+      },
+      selectwithfeedback: {
+        title: field.label ? translate(field.label) : translate(key),
+        dataIndex: keyIndex,
+        render: (text, record) => {
+          if (field.renderAsTag) {
+            const selectedOption = field.options.find((x) => x.value === record[key]);
+
+            return (
+              <Tag bordered={false} color={selectedOption?.color}>
+                {record[key] && translate(record[key])}
+              </Tag>
+            );
+          } else return record[key] && translate(record[key]);
+        },
+      },
+      select: {
+        title: field.label ? translate(field.label) : translate(key),
+        dataIndex: keyIndex,
+        render: (_, record) => {
+          if (field.renderAsTag) {
+            const selectedOption = field.options.find((x) => x.value === record[key]);
+
+            return (
+              <Tag bordered={false} color={selectedOption?.color}>
+                {record[key] && record[key]}
+              </Tag>
+            );
+          } else return record[key] && record[key];
+        },
+      },
+      selectWithTranslation: {
+        title: field.label ? translate(field.label) : translate(key),
+        dataIndex: keyIndex,
+        render: (_, record) => {
+          if (field.renderAsTag) {
+            const selectedOption = field.options.find((x) => x.value === record[key]);
+
+            return (
+              <Tag bordered={false} color={selectedOption?.color}>
+                {record[key] && translate(record[key])}
+              </Tag>
+            );
+          } else return record[key] && translate(record[key]);
         },
       },
       array: {
@@ -87,7 +166,7 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
         render: (_, record) => {
           return record[key].map((x) => (
             <Tag bordered={false} key={`${uniqueId()}`} color={field.colors[x]}>
-              {translate(x)}
+              {x}
             </Tag>
           ));
         },
@@ -99,7 +178,8 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
           const selectedCountry = countryList.find((obj) => obj.value === record[key]);
 
           return (
-            <Tag bordered={false} color={field.color || getRandomColor()}>
+            <Tag bordered={false} color={field.color || undefined}>
+              {selectedCountry?.icon && selectedCountry?.icon + ' '}
               {selectedCountry?.label && translate(selectedCountry.label)}
             </Tag>
           );
@@ -112,7 +192,7 @@ export function dataForTable({ fields, translate, moneyFormatter }) {
       dataIndex: keyIndex,
     };
 
-    const type = field.type.toLowerCase();
+    const type = field.type;
 
     if (!field.disableForTable) {
       Object.keys(component).includes(type)

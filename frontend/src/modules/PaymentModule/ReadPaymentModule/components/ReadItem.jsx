@@ -20,6 +20,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
+import { tagColor } from '@/utils/statusTagColor';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +30,7 @@ export default function ReadItem({ config, selectedItem }) {
   const dispatch = useDispatch();
 
   const { moneyFormatter } = useMoney();
-  const { send } = useMail({ entity });
+  const { send, isLoading: mailInProgress } = useMail({ entity });
   const navigate = useNavigate();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
@@ -73,11 +74,13 @@ export default function ReadItem({ config, selectedItem }) {
     <>
       <PageHeader
         onBack={() => {
-          history.goBack();
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
+        tags={
+          <Tag color={tagColor(currentErp.paymentStatus)?.color}>{currentErp.paymentStatus}</Tag>
+        }
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -102,6 +105,7 @@ export default function ReadItem({ config, selectedItem }) {
           </Button>,
           <Button
             key={`${uniqueId()}`}
+            loading={mailInProgress}
             onClick={() => {
               send(currentErp._id);
             }}
@@ -168,7 +172,7 @@ export default function ReadItem({ config, selectedItem }) {
           <Typography.Title level={5}>{translate('Payment Information')} :</Typography.Title>
         </Col>
         <Col sm={24} md={12} style={{ textAlign: 'right' }}>
-          <Button icon={<ExportOutlined />}>label={translate('Show invoice')}</Button>
+          <Button icon={<ExportOutlined />}>{translate('Show invoice')}</Button>
         </Col>
       </Row>
       <div

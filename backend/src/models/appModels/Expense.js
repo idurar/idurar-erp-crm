@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const expenseSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -17,8 +17,6 @@ const expenseSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    trim: true,
-    required: true,
   },
   ref: {
     type: String,
@@ -30,10 +28,12 @@ const expenseSchema = new mongoose.Schema({
   },
   supplier: {
     type: mongoose.Schema.ObjectId,
+    autopopulate: true,
   },
   expenseCategory: {
     type: mongoose.Schema.ObjectId,
     ref: 'ExpenseCategory',
+    autopopulate: true,
     required: true,
   },
   taxRate: {
@@ -51,6 +51,7 @@ const expenseSchema = new mongoose.Schema({
   paymentMode: {
     type: mongoose.Schema.ObjectId,
     ref: 'PaymentMode',
+    autopopulate: true,
   },
   receipt: String,
   images: [
@@ -87,4 +88,5 @@ const expenseSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Expense', expenseSchema);
+schema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Expense', schema);

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Form, Input, InputNumber, Row, Col } from 'antd';
 
 import { DeleteOutlined } from '@ant-design/icons';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import calculate from '@/utils/calculate';
 
 export default function ItemRow({ field, remove, current = null }) {

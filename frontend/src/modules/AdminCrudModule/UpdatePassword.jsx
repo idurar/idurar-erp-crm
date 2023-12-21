@@ -65,7 +65,7 @@ export default function UpdatePassword({ config }) {
             rules={[
               {
                 required: true,
-                len: 8,
+                // len: 8,
               },
             ]}
           >

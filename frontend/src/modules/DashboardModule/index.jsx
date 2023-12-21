@@ -5,6 +5,7 @@ import { useMoney } from '@/settings';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
+import { tagColor } from '@/utils/statusTagColor';
 
 import RecentTable from './components/RecentTable';
 
@@ -62,9 +63,7 @@ export default function DashboardModule() {
       title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
-        let color = status === 'Draft' ? 'volcano' : 'green';
-
-        return <Tag color={color}>{translate(status)}</Tag>;
+        return <Tag color={tagColor(status)?.color}>{translate(status)}</Tag>;
       },
     },
   ];

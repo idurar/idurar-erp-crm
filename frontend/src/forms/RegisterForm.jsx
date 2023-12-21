@@ -10,20 +10,18 @@ export default function RegisterForm() {
     <>
       <Form.Item
         name="name"
+        label={translate('name')}
         rules={[
           {
             required: true,
           },
         ]}
       >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Name"
-          size="large"
-        />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} size="large" />
       </Form.Item>
       <Form.Item
         name="email"
+        label={translate('email')}
         rules={[
           {
             required: true,
@@ -36,26 +34,23 @@ export default function RegisterForm() {
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
           type="email"
-          placeholder="Email"
           size="large"
         />
       </Form.Item>
       <Form.Item
         name="password"
+        label={translate('password')}
         rules={[
           {
             required: true,
           },
         ]}
       >
-        <Input.Password
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder="Password"
-          size="large"
-        />
+        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
       </Form.Item>
       <Form.Item
         name="confirm_password"
+        label={translate('confirm_password')}
         rules={[
           {
             required: true,
@@ -71,11 +66,7 @@ export default function RegisterForm() {
         ]}
         hasFeedback
       >
-        <Input.Password
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder="Confirm_password"
-          size="large"
-        />
+        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
       </Form.Item>
     </>
   );

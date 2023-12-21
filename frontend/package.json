@@ -1,6 +1,6 @@
 {
   "name": "idurar-erp-crm",
-  "version": "3.0.1",
+  "version": "3.0.0-beta.16",
   "engines": {
     "npm": "10.2.4",
     "node": "20.9.0"
@@ -11,7 +11,8 @@
     "@ant-design/pro-layout": "^7.17.16",
     "@reduxjs/toolkit": "^2.0.1",
     "@vitejs/plugin-react": "^4.2.1",
-    "antd": "^5.12.2",
+    "antd": "^5.12.4",
+    "antd-phone-input": "^0.3.3",
     "axios": "^1.6.2",
     "cross-env": "7.0.3",
     "currency.js": "2.0.4",
@@ -25,7 +26,7 @@
     "redux": "^5.0.0",
     "reselect": "^5.0.1",
     "shortid": "^2.2.16",
-    "vite": "^5.0.9"
+    "vite": "^5.0.10"
   },
   "scripts": {
     "dev": "vite",
@@ -37,7 +38,7 @@
   "devDependencies": {
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
-    "eslint": "^8.53.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",

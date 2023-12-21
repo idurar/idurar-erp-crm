@@ -2,20 +2,20 @@
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
     </a>
-    <h1>Open Code Source ERP / CRM | Node.js React.js</h1>
+    <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
     <p align="center">
-        <p>IDURAR ERP CRM | Simple To Use | 40 Languages </p>
+        <p>IDURAR ERP CRM | Simple To Use | 44 Languages </p>
     </p>
     
   [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-## 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮   
+## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮
 
 IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
 
-**Live App Demo** : [www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
+**Live App Demo** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 
 ```
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
@@ -23,11 +23,24 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 ## License
 
-IDURAR is [fair-code](http://faircode.io) distributed under the
-[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
-[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
+IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
+[**IDURAR IDURAR License 1.0**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE)
 
-Commercial licenses are available :  [Purchase Now](https://www.idurarapp.com/purchase-license/)
+## License FAQ :
+
+- You can use IDURAR for free for personal or Commercial use.
+
+- May i can customize IDURAR as Saas and provide it to other users ?
+  No, you cannot customize IDURAR as a SaaS and provide it to other users , You are not allowed to provide IDURAR software to third parties as a hosted or managed service or as softwase as service (Saas), where the service provides users with access to any substantial set of the features or functionality of this software.
+
+For custom developement service : [Get in touch](mailto:hello@idurarapp.com)
+
+## How To Deploy IDURAR ERP CRM :
+
+🔥 I would like to invite you for a weekly free IDURAR Webinar (Node.js React.js course), where you learn how to deploy IDURAR on cloud , and create a new api and new crud app with IDURAR in just one hour ?
+Please fill this form if you are interested : [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
+
+The Webinar will be this Wednesday at 1pm GMT.
 
 ## Our Sponsors
 
@@ -39,17 +52,11 @@ Commercial licenses are available :  [Purchase Now](https://www.idurarapp.com/pu
 
 <img width="1403" alt="Open Source ERP CRM" src="https://github.com/idurar/idurar-erp-crm/assets/136928179/a6712286-7ca6-4822-8902-fb7523533ee8">
 
-## 100% Lighthouse score
-
-![Screenshot 2023-12-14 at 8 44 53 PM](https://github.com/idurar/idurar-erp-crm/assets/136928179/d8161bef-6a21-45a6-9f22-e54d1aaf1270)
-
-
-## Open "Fair-Code" Source ERP / CRM App
+## Free Open Source ERP / CRM App
 
 IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
-**Live App Demo** : [www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
-
+**Live App Demo** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 
 ## Getting started
 
@@ -201,14 +208,9 @@ Now you should be all set to run the project locally on your machine and explore
 
 7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
 
+## Custom Development Service
 
-## License
-
-IDURAR is [fair-code](http://faircode.io) distributed under the
-[**Developer Trial Use Licensee**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE) and the
-[**IDURAR Enterprise License**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE_EE).
-
-Commercial licenses are available : [Get in touch](mailto:hello@idurarapp.com)
+Custom Development Service are available : [Get in touch](mailto:hello@idurarapp.com)
 
 ## Show your support
 
