@@ -2,7 +2,7 @@
   {
     "settingCategory": "finance_settings",
     "settingKey": "last_invoice_number",
-    "settingValue": 1,
+    "settingValue": 0,
     "valueType": "number",
     "isCoreSetting": true,
     "isPrivate": false
@@ -10,7 +10,7 @@
   {
     "settingCategory": "finance_settings",
     "settingKey": "last_quote_number",
-    "settingValue": 1,
+    "settingValue": 0,
     "valueType": "number",
     "isCoreSetting": true,
     "isPrivate": false
@@ -18,7 +18,7 @@
   {
     "settingCategory": "finance_settings",
     "settingKey": "last_offer_number",
-    "settingValue": 1,
+    "settingValue": 0,
     "valueType": "number",
     "isCoreSetting": true,
     "isPrivate": false
@@ -26,7 +26,7 @@
   {
     "settingCategory": "finance_settings",
     "settingKey": "last_payment_number",
-    "settingValue": 1,
+    "settingValue": 0,
     "valueType": "number",
     "isCoreSetting": true,
     "isPrivate": false

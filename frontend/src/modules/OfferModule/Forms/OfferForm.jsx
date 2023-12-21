@@ -15,7 +15,7 @@ import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
-
+import { useDate } from '@/settings';
 import { useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
 
@@ -31,6 +31,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
 
 function LoadOfferForm({ subTotal = 0, current = null }) {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const { last_offer_number } = useSelector(selectFinanceSettings);
   const [lastNumber, setLastNumber] = useState(() => last_offer_number + 1);
   const [total, setTotal] = useState(0);
@@ -143,7 +144,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs()}
           >
-            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={7}>
@@ -158,7 +159,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs().add(30, 'days')}
           >
-            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
       </Row>

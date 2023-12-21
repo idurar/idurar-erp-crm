@@ -13,6 +13,11 @@ const productCategorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: String,
+  color: {
+    type: String,
+    trim: true,
+  },
   hasParentCategory: {
     type: Boolean,
     default: false,
@@ -21,7 +26,7 @@ const productCategorySchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'ProductCategory',
   },
-  description: String,
+
   title: String,
   tags: [String],
   icon: String,
@@ -59,13 +64,9 @@ const productCategorySchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  updated: {
-    type: Date,
-    default: Date.now,
-  },
   isPublic: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 

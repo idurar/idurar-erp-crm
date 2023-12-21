@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, theme } from 'antd';
 
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,19 @@ export default function Localization({ children }) {
   }, [langCode]);
 
   return (
-    <ConfigProvider direction={direction} locale={locale}>
+    <ConfigProvider
+      direction={direction}
+      locale={locale}
+      theme={{
+        // algorithm: theme.darkAlgorithm,
+        token: {
+          colorPrimary: '#1640D6',
+          colorLink: '#1640D6',
+
+          // borderRadius: 8,
+        },
+      }}
+    >
       {children}
     </ConfigProvider>
   );

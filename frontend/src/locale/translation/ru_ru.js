@@ -525,10 +525,8 @@ lastname: "Фамилия",
 client_list: "Список клиентов",
 add_new_client: "Добавить нового клиента",
 idurar_app_title: "Открытая ERP CRM Система Учета, Фактурирования и Управления Расходами",
-taxes: "налоги",
-upgrade_now: "Обновить сейчас",
-upgrade_for_one_time_lifetime_plan: "Обновить на пожизненный план один раз",
-plus_1_year_free_update: "Плюс 1 год бесплатного обновления",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Отменить в любое время, продолжая использовать Idurar бесплатно навсегда",
+verify_your_account: "Подтвердите ваш аккаунт",
+complete_verification_by_providing_the_code_that_you_received_by_email: "Завершите проверку, предоставив код, который вы получили по электронной почте",
+verify_now: "Подтвердить сейчас",
 }
  export default lang

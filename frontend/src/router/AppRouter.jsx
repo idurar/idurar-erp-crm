@@ -39,6 +39,11 @@ const OfferCreate = lazy(() => import('@/pages/Offer/OfferCreate'));
 const OfferRead = lazy(() => import('@/pages/Offer/OfferRead'));
 const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
 
+const ExpenseCategory = lazy(() => import('@/pages/ExpenseCategory'));
+const Expense = lazy(() => import('@/pages/Expense'));
+const ProductCategory = lazy(() => import('@/pages/ProductCategory'));
+const Product = lazy(() => import('@/pages/Product'));
+
 const People = lazy(() => import('@/pages/People'));
 const Company = lazy(() => import('@/pages/Company'));
 
@@ -81,6 +86,22 @@ export default function AppRouter() {
     {
       path: '/company',
       element: <Company />,
+    },
+    {
+      path: '/expenses',
+      element: <Expense />,
+    },
+    {
+      path: '/product',
+      element: <Product />,
+    },
+    {
+      path: '/category/product',
+      element: <ProductCategory />,
+    },
+    {
+      path: 'category/expenses',
+      element: <ExpenseCategory />,
     },
     {
       path: '/inventory',
@@ -174,6 +195,7 @@ export default function AppRouter() {
       path: '/email/update/:id',
       element: <EmailUpdate />,
     },
+
     {
       path: '/settings/advanced',
       element: <AdvancedSettings />,

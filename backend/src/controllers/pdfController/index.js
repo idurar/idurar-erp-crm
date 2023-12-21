@@ -1,10 +1,10 @@
 const pug = require('pug');
 const fs = require('fs');
 const moment = require('moment');
-const puppeteer = require('puppeteer');
+let pdf = require('html-pdf');
 const { listAllSettings } = require('@/middlewares/settings');
 const useLanguage = require('@/locale/useLanguage');
-const useMoney = require('@/settings/useMoney');
+const { useMoney, useDate } = require('@/settings');
 
 const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 
@@ -16,7 +16,7 @@ exports.generatePdf = async (
 ) => {
   try {
     const { targetLocation } = info;
-    let browser = await puppeteer.launch({ headless: 'new' });
+
     // if PDF already exists, then delete it and create a new PDF
     if (fs.existsSync(targetLocation)) {
       fs.unlinkSync(targetLocation);
@@ -40,34 +40,27 @@ exports.generatePdf = async (
       const selectedLang = settings['idurar_app_language'];
       const translate = useLanguage({ selectedLang });
       const { moneyFormatter } = useMoney({ settings });
+      const { dateFormat } = useDate({ settings });
 
-      const htmlContent = pug.renderFile('src/pdf/' + modelName.toLowerCase() + '.pug', {
+      const htmlContent = pug.renderFile('src/pdf/' + modelName + '.pug', {
         model: result,
         settings,
         translate,
+        dateFormat,
         moneyFormatter,
         moment: moment,
       });
 
-      // Launch Puppeteer
-
-      const page = await browser.newPage();
-
-      // Set the HTML content on the page
-      await page.setContent(htmlContent);
-
-      // Generate PDF
-      await page.pdf({
-        path: targetLocation,
-        format: info.format,
-        landscape: false,
-        margin: { top: '12mm', right: '12mm', bottom: '12mm', left: '12mm' },
-      });
-
-      // Close the browser
-      await browser.close();
-
-      if (callback) callback();
+      pdf
+        .create(htmlContent, {
+          format: info.format,
+          orientation: 'portrait',
+          border: '10mm',
+        })
+        .toFile(targetLocation, function (error) {
+          if (error) throw new Error(error);
+          if (callback) callback();
+        });
     }
   } catch (error) {
     throw new Error(error);

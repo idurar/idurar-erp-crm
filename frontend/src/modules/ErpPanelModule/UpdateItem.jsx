@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form, Divider } from 'antd';
 import dayjs from 'dayjs';
-import { Button } from 'antd';
+import { Button, Tag } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,6 +12,7 @@ import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
+import { tagColor } from '@/utils/statusTagColor';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -38,6 +39,25 @@ export default function UpdateItem({ config, UpdateForm }) {
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+
+  const resetErp = {
+    status: '',
+    client: {
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+    },
+    subTotal: 0,
+    taxTotal: 0,
+    taxRate: 0,
+    total: 0,
+    credit: 0,
+    number: 0,
+    year: 0,
+  };
+
+  const [currentErp, setCurrentErp] = useState(current ?? resetErp);
 
   const { id } = useParams();
 
@@ -90,6 +110,7 @@ export default function UpdateItem({ config, UpdateForm }) {
 
   useEffect(() => {
     if (current) {
+      setCurrentErp(current);
       let formData = { ...current };
       if (formData.date) {
         formData.date = dayjs(formData.date);
@@ -117,7 +138,16 @@ export default function UpdateItem({ config, UpdateForm }) {
         }}
         title={translate('update')}
         ghost={false}
-        // tags={StatusTag(form.getFieldValue().status)}
+        tags={[
+          <Tag color={tagColor(currentErp.status)?.color} key="status">
+            {currentErp.status && translate(currentErp.status)}
+          </Tag>,
+          currentErp.paymentStatus && (
+            <Tag color={tagColor(currentErp.paymentStatus)?.color} key="paymentStatus">
+              {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
+            </Tag>
+          ),
+        ]}
         extra={[
           <Button
             key={`${uniqueId()}`}

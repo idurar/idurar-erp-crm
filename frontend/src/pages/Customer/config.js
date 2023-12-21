@@ -1,9 +1,10 @@
 export const fields = {
   type: {
     type: 'selectwithfeedback',
+    renderAsTag: true,
     options: [
-      { value: 'people', label: 'people' },
-      { value: 'company', label: 'company' },
+      { value: 'people', label: 'people', color: 'magenta' },
+      { value: 'company', label: 'company', color: 'blue' },
     ],
     required: true,
     hasFeedback: true,
@@ -14,7 +15,7 @@ export const fields = {
   },
   country: {
     type: 'country',
-    color: 'red',
+    // color: 'red',
     disableForForm: true,
   },
   phone: {

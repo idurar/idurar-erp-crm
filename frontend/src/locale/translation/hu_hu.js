@@ -525,10 +525,8 @@ lastname: "Vezetéknév",
 client_list: "Ügyfél lista",
 add_new_client: "Új ügyfél hozzáadása",
 idurar_app_title: "Nyílt forráskódú ERP CRM számlázás könyvelési kiadások",
-taxes: "Adók",
-upgrade_now: "Frissítés most",
-upgrade_for_one_time_lifetime_plan: "Frissítés egyszeri életidő tervre",
-plus_1_year_free_update: "Plusz 1 év ingyenes frissítés",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Bármikor lemondható, miközben ingyen használhatja az Idurart örökké",
+verify_your_account: "Ellenőrizze fiókját",
+complete_verification_by_providing_the_code_that_you_received_by_email: "A teljes ellenőrzéshez adja meg az e-mailben kapott kódot",
+verify_now: "Ellenőrizze most",
 }
  export default lang

@@ -516,10 +516,8 @@ lastname: "Lastname",
 client_list: "Client List",
 add_new_client: "Add New Client",
 idurar_app_title: "Open Source ERP CRM Invoicing Accounting Expenses",
-taxes: "Taxes",
-upgrade_now: "Upgrade Now",
-upgrade_for_one_time_lifetime_plan: "Upgrade For One Time Lifetime Plan",
-plus_1_year_free_update: "Plus 1 Year Free Update",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Cancel Any Time While Keep Using Idurar For Free For Ever",
+verify_your_account: "Verify Your Account",
+complete_verification_by_providing_the_code_that_you_received_by_email: "Complete Verification By Providing The Code That You Received By Email",
+verify_now: "Verify Now",
 }
  export default lang

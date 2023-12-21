@@ -8,11 +8,61 @@ const shortid = require('shortid');
 const { loadSettings } = require('@/middlewares/settings');
 
 const forgetPassword = async (req, res, { userModel }) => {
+  const UserPassword = mongoose.model(userModel + 'Password');
+  const User = mongoose.model(userModel);
+  const { email } = req.body;
+
+  // validate
+  const objectSchema = Joi.object({
+    email: Joi.string()
+      .email({ tlds: { allow: true } })
+      .required(),
+  });
+
+  const { error, value } = objectSchema.validate({ email });
+  if (error) {
+    return res.status(409).json({
+      success: false,
+      result: null,
+      error: error,
+      message: 'Invalid email.',
+      errorMessage: error.message,
+    });
+  }
+
+  const user = await User.findOne({ email: email, removed: false });
+
+  // console.log(user);
+  if (!user)
+    return res.status(404).json({
+      success: false,
+      result: null,
+      message: 'No account with this email has been registered.',
+    });
+
+  const resetToken = shortid.generate();
+  await UserPassword.findOneAndUpdate(
+    { user: user._id },
+    { resetToken },
+    {
+      new: true,
+    }
+  ).exec();
+
+  const settings = await loadSettings();
+
+  const idurar_app_email = settings['idurar_app_email'];
+  const idurar_base_url = settings['idurar_base_url'];
+  const url = checkAndCorrectURL(idurar_base_url);
+
+  const link = url + '/resetpassword/' + user._id + '/' + resetToken;
+
+  await sendMail({ email, name: user.name, link, idurar_app_email, type: 'resetpassword' });
+
   return res.status(200).json({
-    success: false,
+    success: true,
     result: null,
-    upgrade: true,
-    message: 'please upgrade to use all app features',
+    message: 'Check your email inbox , to reset your password',
   });
 };
 

@@ -1,9 +1,11 @@
 import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
+import { useDate } from '@/settings';
 
 export default function Payment() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const searchConfig = {
     displayLabels: ['number'],
     searchFields: 'number',
@@ -29,7 +31,7 @@ export default function Payment() {
       title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {

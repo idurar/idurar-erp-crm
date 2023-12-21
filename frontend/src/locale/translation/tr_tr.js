@@ -525,10 +525,8 @@ lastname: "Soyad",
 client_list: "Müşteri Listesi",
 add_new_client: "Yeni Müşteri Ekle",
 idurar_app_title: "Açık Kaynaklı ERP CRM Fatura Muhasebe Giderleri",
-taxes: "Vergiler",
-upgrade_now: "Şimdi Yükselt",
-upgrade_for_one_time_lifetime_plan: "Tek Seferlik Ömür Boyu Plan İçin Yükselt",
-plus_1_year_free_update: "1 Yıl Ücretsiz Güncelleme Dahil",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Herhangi Bir Zaman İptal Et, İdurar'ı Ücretsiz Kullanmaya Devam Et",
+verify_your_account: "Hesabınızı Doğrulayın",
+complete_verification_by_providing_the_code_that_you_received_by_email: "E-posta ile aldığınız kodu girerek doğrulamayı tamamlayın",
+verify_now: "Şimdi Doğrula",
 }
  export default lang

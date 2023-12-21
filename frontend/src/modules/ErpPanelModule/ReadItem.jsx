@@ -20,9 +20,10 @@ import { generate as uniqueId } from 'shortid';
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
+import { tagColor } from '@/utils/statusTagColor';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -74,7 +75,7 @@ export default function ReadItem({ config, selectedItem }) {
   const navigate = useNavigate();
 
   const { moneyFormatter } = useMoney();
-  const { send } = useMail({ entity });
+  const { send, isLoading: mailInProgress } = useMail({ entity });
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
@@ -131,15 +132,16 @@ export default function ReadItem({ config, selectedItem }) {
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={
-          <Tag color="volcano">{
-            (currentErp.paymentStatus && translate(currentErp.paymentStatus)) 
-            || 
-            (currentErp.status && translate(currentErp.status))
-            }
-          </Tag>
-        }
-        // subTitle="This is cuurent erp page"
+        tags={[
+          <Tag color={tagColor(currentErp.status)?.color} key="status">
+            {currentErp.status && translate(currentErp.status)}
+          </Tag>,
+          currentErp.paymentStatus && (
+            <Tag color={tagColor(currentErp.paymentStatus)?.color} key="paymentStatus">
+              {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
+            </Tag>
+          ),
+        ]}
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -164,6 +166,7 @@ export default function ReadItem({ config, selectedItem }) {
           </Button>,
           <Button
             key={`${uniqueId()}`}
+            loading={mailInProgress}
             onClick={() => {
               send(currentErp._id);
             }}

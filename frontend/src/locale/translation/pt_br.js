@@ -525,10 +525,8 @@ lastname: "Sobrenome",
 client_list: "Lista de Clientes",
 add_new_client: "Adicionar Novo Cliente",
 idurar_app_title: "ERP CRM de Código Aberto para Faturamento, Contabilidade e Despesas",
-taxes: "Impostos",
-upgrade_now: "Atualizar Agora",
-upgrade_for_one_time_lifetime_plan: "Atualizar para o Plano Vitalício de Uma Vez",
-plus_1_year_free_update: "Mais 1 Ano de Atualização Gratuita",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Cancelar a Qualquer Momento, Continuando a Usar o Idurar Gratuitamente para Sempre",
+verify_your_account: "Verifique Sua Conta",
+complete_verification_by_providing_the_code_that_you_received_by_email: "Complete a Verificação Fornecendo o Código que Você Recebeu por E-mail",
+verify_now: "Verificar Agora",
 }
  export default lang

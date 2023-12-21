@@ -516,10 +516,8 @@ lastname: "นามสกุล",
 client_list: "รายชื่อลูกค้า",
 add_new_client: "เพิ่มลูกค้าใหม่",
 idurar_app_title: "ระบบ ERP CRM Invoicing Accounting Expenses โอเพ่นซอร์ส",
-taxes: "ภาษี",
-upgrade_now: "อัปเกรดตอนนี้",
-upgrade_for_one_time_lifetime_plan: "อัปเกรดสำหรับแผนชีวิตครั้งเดียว",
-plus_1_year_free_update: "รับอัปเดตฟรีเป็นเวลา 1 ปี",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "ยกเลิกได้ทุกเมื่อในขณะที่ยังคงใช้ Idurar ฟรีตลอดไป",
+verify_your_account: "ยืนยันบัญชีของคุณ",
+complete_verification_by_providing_the_code_that_you_received_by_email: "เสร็จสิ้นการยืนยันโดยให้ระบุรหัสที่คุณได้รับทางอีเมล",
+verify_now: "ยืนยันตอนนี้",
 }
  export default lang

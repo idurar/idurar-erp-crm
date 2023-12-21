@@ -525,10 +525,8 @@ lastname: "Nama Belakang",
 client_list: "Daftar Klien",
 add_new_client: "Tambah Klien Baru",
 idurar_app_title: "Open Source ERP CRM Invoicing Accounting Expenses",
-taxes: "Cukai",
-upgrade_now: "Naik Taraf Sekarang",
-upgrade_for_one_time_lifetime_plan: "Naik Taraf Untuk Rancangan Seumur Hidup Sekali Sahaja",
-plus_1_year_free_update: "Tambahan 1 Tahun Kemas Kini Percuma",
-cancel_any_time_while_keep_using_idurar_for_free_for_ever: "Batal Bila-bila Masa Sambil Terus Menggunakan Idurar Secara Percuma Selama-lamanya",
+verify_your_account: "Sahkan Akaun Anda",
+complete_verification_by_providing_the_code_that_you_received_by_email: "Lengkapkan Pengesahan Dengan Menyediakan Kod Yang Anda Terima Melalui E-mel",
+verify_now: "Sahkan Sekarang",
 }
  export default lang

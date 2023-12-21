@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Popover, Button, Badge } from 'antd';
+import { Avatar, Dropdown, Layout } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
-import { SettingOutlined, LogoutOutlined, RocketOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 
 import { checkImage } from '@/request';
 
@@ -17,6 +17,8 @@ import { BASE_URL } from '@/config/serverApiConfig';
 
 import useLanguage from '@/locale/useLanguage';
 import SelectLanguage from '@/components/SelectLanguage';
+
+import UpgradeButton from './UpgradeButton';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -63,59 +65,6 @@ export default function HeaderContent() {
 
   const DropdownMenu = ({ text }) => {
     return <span style={{}}>{text}</span>;
-  };
-
-  const PaypalButton = () => {
-    useEffect(() => {
-      const script = document.createElement('script');
-      script.src =
-        'https://www.paypal.com/sdk/js?client-id=AXy1YZNZsMCdiYVhh_jyoYW9_HkylFwgkL75WNGw924gL4jHcW5myCTH5JGOyyMiuZSabMWpovoarBnQ&vault=true&intent=subscription';
-      script.async = true;
-
-      script.onload = () => {
-        paypal
-          .Buttons({
-            style: {
-              shape: 'rect',
-              color: 'blue',
-              layout: 'vertical',
-              label: 'paypal',
-            },
-            createSubscription: function (data, actions) {
-              return actions.subscription.create({
-                /* Creates the subscription */
-                plan_id: 'P-6NV451935K3609258MV3DRUQ',
-              });
-            },
-            onApprove: function (data, actions) {
-              alert(data.subscriptionID); // You can add optional success message for the subscriber here
-            },
-          })
-          .render('#paypal-button-container-P-6NV451935K3609258MV3DRUQ'); // Renders the PayPal button
-      };
-
-      document.body.appendChild(script);
-
-      return () => {
-        document.body.removeChild(script);
-      };
-    }, []);
-
-    return <div id="paypal-button-container-P-6NV451935K3609258MV3DRUQ"></div>;
-  };
-
-  const content = () => {
-    return (
-      <div className="pad10">
-        <p style={{ fontSize: 12 }}>{translate('Upgrade for one time lifetime plan')}</p>
-        <p style={{ fontSize: 12 }}>{translate('Plus 1 year free update')}</p>
-        <p style={{ fontSize: 14, fontWeight: 900 }}>{translate('Price')} : $ 590</p>
-        <p style={{ fontSize: 12 }}>
-          {translate('Cancel any time while keep using IDURAR for free for ever')}
-        </p>
-        <PaypalButton />
-      </div>
-    );
   };
 
   const items = [
@@ -187,20 +136,8 @@ export default function HeaderContent() {
         {/* </Badge> */}
       </Dropdown>
 
-      <Popover content={content} title={translate('Upgrade Now')} trigger="click">
-        <Badge count={1} size="small">
-          <Avatar
-            icon={<RocketOutlined />}
-            style={{
-              color: '#f56a00',
-              backgroundColor: '#FFF',
-              float: 'right',
-              marginTop: '5px',
-              cursor: 'pointer',
-            }}
-          />
-        </Badge>
-      </Popover>
+      <UpgradeButton />
+
       <SelectLanguage />
     </Header>
   );

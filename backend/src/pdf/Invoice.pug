@@ -260,7 +260,7 @@ html
     
       header.clearfix
         .top-area
-          img.logo.left(src=settings.idurar_base_url+settings.company_logo)
+          //- img.logo.left(src=settings.idurar_server_url+settings.company_logo)
           .right.company-info
               p.strong #{settings.company_name}
               p #{settings.company_address}
@@ -274,10 +274,10 @@ html
             div 
               .col.col-7
                 p.strong #{translate('Date')} :
-                p #{moment(model.date).format("DD/MM/YYYY")}
+                p #{moment(model.date).format(dateFormat)}
               .col.col-9
                 p.strong #{translate('Expired Date')} :
-                p #{moment(model.expiredDate).format("DD/MM/YYYY")}
+                p #{moment(model.expiredDate).format(dateFormat)}
               .col.col-8 
                 p.strong #{translate('Number')} :
                 p # #{model.number}/#{model.year || ""} 

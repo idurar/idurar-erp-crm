@@ -1,9 +1,10 @@
 export const fields = {
   type: {
     type: 'selectwithfeedback',
+    renderAsTag: true,
     options: [
-      { value: 'people', label: 'people' },
-      { value: 'company', label: 'company' },
+      { value: 'people', label: 'people', color: 'magenta' },
+      { value: 'company', label: 'company', color: 'blue' },
     ],
     required: true,
     hasFeedback: true,
@@ -13,28 +14,31 @@ export const fields = {
     disableForForm: true,
   },
   status: {
-    type: 'select',
+    type: 'selectWithTranslation',
+    renderAsTag: true,
     options: [
       { value: 'draft', label: 'draft' },
-      { value: 'new', label: 'new' },
-      { value: 'won', label: 'won' },
-      { value: 'loose', label: 'loose' },
-      { value: 'waiting', label: 'waiting' },
+      { value: 'new', label: 'new', color: 'blue' },
+      { value: 'won', label: 'won', color: 'green' },
+      { value: 'loose', label: 'loose', color: 'red' },
+      { value: 'waiting', label: 'waiting', color: 'orange' },
     ],
   },
+
   source: {
-    type: 'select',
+    type: 'selectWithTranslation',
+    renderAsTag: true,
     options: [
-      { value: 'linkedin', label: 'linkedin' },
-      { value: 'twitter', label: 'twitter' },
-      { value: 'website', label: 'website' },
-      { value: 'ads', label: 'ads' },
-      { value: 'sales', label: 'sales' },
+      { value: 'linkedin', label: 'linkedin', color: 'geekblue' },
+      { value: 'twitter', label: 'twitter', color: 'cyan' },
+      { value: 'website', label: 'website', color: 'gold' },
+      { value: 'ads', label: 'ads', color: 'purple' },
+      { value: 'sales', label: 'sales', color: 'magenta' },
     ],
   },
   country: {
     type: 'country',
-    color: 'red',
+    color: null,
     disableForForm: true,
   },
   phone: {

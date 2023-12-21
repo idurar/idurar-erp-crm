@@ -2,8 +2,10 @@ import useLanguage from '@/locale/useLanguage';
 import CrudModule from '@/modules/CrudModule/CrudModule';
 import EmployeeForm from '@/forms/EmployeeForm';
 import dayjs from 'dayjs';
+import { useDate } from '@/settings';
 export default function Employee() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const entity = 'employee';
   const searchConfig = {
     displayLabels: ['name', 'surname'],
@@ -26,7 +28,7 @@ export default function Employee() {
       title: translate('Birthday'),
       dataIndex: 'birthday',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {

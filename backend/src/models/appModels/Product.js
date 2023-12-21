@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const productSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,13 +10,22 @@ const productSchema = new mongoose.Schema({
     default: true,
   },
   branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
-  productCategory: { type: mongoose.Schema.ObjectId, ref: 'ProductCategory', required: true },
+  productCategory: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'ProductCategory',
+    required: true,
+    autopopulate: true,
+  },
   suppliers: [{ type: mongoose.Schema.ObjectId, ref: 'Supplier' }],
   name: {
     type: String,
     required: true,
   },
   description: String,
+  number: {
+    type: Number,
+    unique: true,
+  },
   title: String,
   tags: [String],
   headerImage: String,
@@ -47,9 +56,8 @@ const productSchema = new mongoose.Schema({
   ],
   priceBeforeTax: {
     type: Number,
-    required: true,
   },
-  taxRate: { type: mongoose.Schema.ObjectId, ref: 'Tax' },
+  taxRate: { type: Number, default: 0 },
   price: {
     type: Number,
     required: true,
@@ -80,8 +88,10 @@ const productSchema = new mongoose.Schema({
   },
   isPublic: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+schema.plugin(require('mongoose-autopopulate'));
+
+module.exports = mongoose.model('Product', schema);
