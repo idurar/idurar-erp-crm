@@ -115,7 +115,7 @@ function FormElement({ field, setFeedback }) {
           return (
             <Select.Option key={`${uniqueId()}`} value={option.value}>
               <Tag bordered={false} color={option.color}>
-                {translate(option.label)}
+                {option.label}
               </Tag>
             </Select.Option>
           );
@@ -230,6 +230,7 @@ function FormElement({ field, setFeedback }) {
     email: 'email',
   };
 
+  const renderComponent = compunedComponent[field.type] ?? compunedComponent['string'];
   return (
     <Form.Item
       label={translate(field.label)}
@@ -242,7 +243,7 @@ function FormElement({ field, setFeedback }) {
       ]}
       valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
     >
-      {compunedComponent[field.type] ?? compunedComponent['string']}
+      {renderComponent}
     </Form.Item>
   );
 }
