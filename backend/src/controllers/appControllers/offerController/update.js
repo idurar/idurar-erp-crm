@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Offer');
 
-const custom = require('@/controllers/pdfController');
+import custom from '@/controllers/pdfController/index.js';
 
-const { calculate } = require('@/helpers');
+import { calculate } from '@/helpers.js';
 
 const update = async (req, res) => {
   return res.status(200).json({
@@ -14,4 +14,4 @@ const update = async (req, res) => {
     message: 'please upgrade to use all app features',
   });
 };
-module.exports = update;
+export default update;
