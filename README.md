@@ -155,7 +155,7 @@ Reason behind error: This is caused by the node.js V17 compatible issues with Op
 
 Try one of these and error will be solved
 
-- > Downgrade to Node.js v16.
+- > upgrade to Node.js v20.
 
 - > Enable legacy OpenSSL provider
 
@@ -184,18 +184,10 @@ Here is [reference](https://github.com/webpack/webpack/issues/14532#issuecomment
 After trying above solutions, run below command
 
 ```bash
-npm run start
+npm run dev
 ```
 
 > If you still facing issue, then follow [this stackoverflow thread](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported). It has so many different types of opinions. You definitely have solution after going through the thread.
-
-### Website Login Credentials
-
-Once the website is up and running, you can log in using the following credentials:
-
-`username : admin@demo.com - password : admin123`
-
-Now you should be all set to run the project locally on your machine and explore its features.
 
 ## Contributing
 
