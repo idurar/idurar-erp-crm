@@ -1,8 +1,8 @@
-const { migrate } = require('./migrate');
+import { migrate } from './migrate.js';
 
 const search = async (Model, req, res) => {
   console.log('🚀 ~ file: search.js:6 ~ search ~ req.query.q :', req.query.q);
-  if (req.query.q === undefined || req.query.q.trim() === '') {
+  if (!req.query.q || req.query.q.trim() === '') {
     return res
       .status(202)
       .json({
@@ -43,4 +43,4 @@ const search = async (Model, req, res) => {
   }
 };
 
-module.exports = search;
+export default search;
