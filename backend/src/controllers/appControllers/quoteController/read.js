@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Quote');
 
@@ -24,4 +24,4 @@ const read = async (req, res) => {
   }
 };
 
-module.exports = read;
+export default read;
