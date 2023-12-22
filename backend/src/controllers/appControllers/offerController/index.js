@@ -1,11 +1,11 @@
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const methods = createCRUDController('Offer');
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController.js';
+import create from './create.js';
+import summary from './summary.js';
+import update from './update.js';
+import paginatedList from './paginatedList.js';
+import read from './read.js';
 
-const create = require('./create');
-const summary = require('./summary');
-const update = require('./update');
-const paginatedList = require('./paginatedList');
-const read = require('./read');
+const methods = createCRUDController('Offer');
 
 methods.list = paginatedList;
 methods.read = read;
@@ -14,4 +14,4 @@ methods.create = create;
 methods.update = update;
 methods.summary = summary;
 
-module.exports = methods;
+export default methods;
