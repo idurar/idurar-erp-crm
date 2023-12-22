@@ -1,21 +1,25 @@
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const { routesList } = require('@/models/utils');
+const createCRUDController = require('#controllers/middlewaresControllers/createCRUDController');
+const { routesList } = require('#models/utils');
 
-const { globSync } = require('glob');
-const path = require('path');
+import { globSync } from 'glob';
+import path from 'path';
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
+import { routesList } from '#models/utils/index.js';
 
 const pattern = './src/controllers/appControllers/*/**/';
 const controllerDirectories = globSync(pattern).map((filePath) => {
   return path.basename(filePath);
 });
 
-const appControllers = () => {
+const appControllers = async () => {
   const controllers = {};
   const hasCustomControllers = [];
 
-  controllerDirectories.forEach((controllerName) => {
+  controllerDirectories.forEach(async (controllerName) => {
     try {
-      const customController = require('@/controllers/appControllers/' + controllerName);
+      const customController = await import(
+        `#controllers/appControllers/${controllerName}/index.js`
+      );
 
       if (customController) {
         hasCustomControllers.push(controllerName);
@@ -35,4 +39,4 @@ const appControllers = () => {
   return controllers;
 };
 
-module.exports = appControllers();
+export default appControllers();
