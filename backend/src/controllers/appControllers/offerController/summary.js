@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 const Model = mongoose.model('Offer');
 
@@ -21,8 +21,8 @@ const summary = async (req, res) => {
   }
 
   const currentDate = moment();
-  let startDate = currentDate.clone().startOf(defaultType);
-  let endDate = currentDate.clone().endOf(defaultType);
+  const startDate = currentDate.clone().startOf(defaultType);
+  const endDate = currentDate.clone().endOf(defaultType);
 
   const statuses = ['draft', 'pending', 'sent', 'expired', 'declined', 'accepted'];
 
@@ -105,4 +105,5 @@ const summary = async (req, res) => {
     message: `Successfully found all Offers for the last ${defaultType}`,
   });
 };
-module.exports = summary;
+
+export default summary;
