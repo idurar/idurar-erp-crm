@@ -543,4 +543,6 @@ expense_category: "Categoria de despesa",
 ref: "Referència",
 expense_category_list: "Llista de categories de despeses",
 add_new_expense_category: "Afegir nova categoria de despesa",
+date_format: "Format de data",
+server_url: "URL del servidor",
 }

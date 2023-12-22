@@ -543,4 +543,6 @@ expense_category_list: "Utgiftskategoriliste",
 add_new_expense_category: "Legg til ny utgiftskategori",
 taxes_list: "Skatteliste",
 add_new_tax: "Legg til ny skatt",
+date_format: "Datoformat",
+server_url: "Server-URL",
 }

@@ -543,5 +543,7 @@ expense_category: "Kulukategooria",
 ref: "Viide",
 expense_category_list: "Kulukategooria loend",
 add_new_expense_category: "Lisa uus kulukategooria",
+date_format: "Kuupäeva formaat",
+server_url: "Serveri URL",
 }
  export default lang

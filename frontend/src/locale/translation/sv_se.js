@@ -543,5 +543,7 @@ expense_category_list: "Kostnadskategorilista",
 add_new_expense_category: "Lägg till ny kostnadskategori",
 taxes_list: "Skattelista",
 add_new_tax: "Lägg till ny skatt",
+date_format: "Datumformat",
+server_url: "Serveradress",
 }
  export default lang

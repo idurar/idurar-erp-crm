@@ -543,5 +543,7 @@ expense_category: "Izdevumu kategorija",
 ref: "Atsauce",
 expense_category_list: "Izdevumu kategoriju saraksts",
 add_new_expense_category: "Pievienot jaunu izdevumu kategoriju",
+date_format: "Datuma formāts",
+server_url: "Servera URL",
 }
  export default lang

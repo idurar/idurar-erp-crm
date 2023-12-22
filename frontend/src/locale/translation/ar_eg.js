@@ -569,7 +569,7 @@ idurar_app_title: "نظام إدارة موارد المؤسسات مفتوح ا
 verify_your_account: "تحقق من حسابك",
 complete_verification_by_providing_the_code_that_you_received_by_email: "اكمل التحقق من خلال تقديم الرمز الذي تلقيته عبر البريد الإلكتروني",
 verify_now: "تحقق الآن",
-expense: "نفقة",
+expense: "مصاريف",
 product_category: "فئة المنتج",
 expenses_category: "فئة المصروفات",
 product_category_list: "قائمة فئة المنتج",
@@ -582,5 +582,7 @@ expense_category: "فئة المصروف",
 ref: "المرجع",
 expense_category_list: "قائمة فئة المصروف",
 add_new_expense_category: "إضافة فئة مصروف جديدة",
+date_format: "تنسيق التاريخ",
+server_url: "عنوان الخادم",
 }
  export default lang

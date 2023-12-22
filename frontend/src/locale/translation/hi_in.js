@@ -543,5 +543,7 @@ expense_category_list: "व्यय श्रेणी सूची",
 add_new_expense_category: "नई व्यय श्रेणी जोड़ें",
 taxes_list: "कर सूची",
 add_new_tax: "नया कर जोड़ें",
+date_format: "तारीख प्रारूप",
+server_url: "सर्वर URL",
 }
  export default lang

@@ -543,5 +543,7 @@ expense_category_list: "経費カテゴリリスト",
 add_new_expense_category: "新しい経費カテゴリを追加",
 taxes_list: "税金リスト",
 add_new_tax: "新しい税金を追加",
+date_format: "日付形式",
+server_url: "サーバーURL",
 }
  export default lang

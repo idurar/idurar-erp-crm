@@ -533,4 +533,6 @@ expense_category: "Išlaidų kategorija",
 ref: "Nuoroda",
 expense_category_list: "Išlaidų kategorijų sąrašas",
 add_new_expense_category: "Pridėti naują išlaidų kategoriją",
+date_format: "Datos formatas",
+server_url: "Serverio URL",
 }

@@ -535,4 +535,6 @@ expense_category_list: "Expense Category List",
 add_new_expense_category: "Add New Expense Category",
 taxes_list: "Taxes List",
 add_new_tax: "Add New Tax",
+date_format: "Date Format",
+server_url: "Server Url",
 }

@@ -543,5 +543,7 @@ expense_category_list: "Список категорій витрат",
 add_new_expense_category: "Додати нову категорію витрат",
 taxes_list: "Список податків",
 add_new_tax: "Додати новий податок",
+date_format: "Формат дати",
+server_url: "URL сервера",
 }
  export default lang

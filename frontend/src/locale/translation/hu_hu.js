@@ -543,5 +543,7 @@ expense_category_list: "Kiadáskategória lista",
 add_new_expense_category: "Új kiadáskategória hozzáadása",
 taxes_list: "Adó lista",
 add_new_tax: "Új adó hozzáadása",
+date_format: "Dátum formátum",
+server_url: "Szerver URL",
 }
  export default lang

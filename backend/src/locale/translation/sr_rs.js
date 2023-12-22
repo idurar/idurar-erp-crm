@@ -543,4 +543,6 @@ expense_category: "Kategorija troška",
 ref: "Referenca",
 expense_category_list: "Lista kategorija troškova",
 add_new_expense_category: "Dodaj novu kategoriju troška",
+date_format: "Формат датума",
+server_url: "URL сервера",
 }

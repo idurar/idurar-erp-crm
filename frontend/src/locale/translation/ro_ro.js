@@ -535,5 +535,7 @@ expense_category_list: "Lista categorii cheltuieli",
 add_new_expense_category: "Adăugați o nouă categorie de cheltuieli",
 taxes_list: "Lista taxe",
 add_new_tax: "Adăugați o nouă taxă",
+date_format: "Format dată",
+server_url: "URL server",
 }
  export default lang

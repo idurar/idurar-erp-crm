@@ -543,4 +543,6 @@ expense_category_list: "Popis kategorija troškova",
 add_new_expense_category: "Dodaj novu kategoriju troška",
 taxes_list: "Popis poreza",
 add_new_tax: "Dodaj novi porez",
+date_format: "Format datuma",
+server_url: "URL poslužitelja",
 }

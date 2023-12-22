@@ -543,4 +543,6 @@ expense_category: "دسته بندی هزینه",
 ref: "مرجع",
 expense_category_list: "لیست دسته بندی هزینه",
 add_new_expense_category: "افزودن دسته بندی جدید هزینه",
+date_format: "فرمت تاریخ",
+server_url: "آدرس سرور",
 }

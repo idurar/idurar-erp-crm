@@ -543,5 +543,7 @@ expense_category_list: "اخراجات کی قسم کی فہرست",
 add_new_expense_category: "نئی اخراجات کی قسم شامل کریں",
 taxes_list: "ٹیکس کی فہرست",
 add_new_tax: "نئے ٹیکس شامل کریں",
+date_format: "تاریخ کی شکل",
+server_url: "سرور کا URL",
 }
  export default lang

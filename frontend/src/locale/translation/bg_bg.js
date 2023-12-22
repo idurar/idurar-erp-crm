@@ -543,5 +543,7 @@ expense_category: "Категория на разходите",
 ref: "Референция",
 expense_category_list: "Списък на категории на разходите",
 add_new_expense_category: "Добавяне на нова категория на разходите",
+date_format: "Формат на датата",
+server_url: "URL на сървъра",
 }
  export default lang

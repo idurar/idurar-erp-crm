@@ -543,5 +543,7 @@ expense_category_list: "Seznam kategorij stroškov",
 add_new_expense_category: "Dodaj novo kategorijo stroškov",
 taxes_list: "Seznam davkov",
 add_new_tax: "Dodaj nov davek",
+date_format: "Oblika datuma",
+server_url: "URL strežnika",
 }
  export default lang

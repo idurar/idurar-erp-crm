@@ -543,4 +543,6 @@ expense_category: "Kategorie výdajů",
 ref: "Reference",
 expense_category_list: "Seznam kategorií výdajů",
 add_new_expense_category: "Přidat novou kategorii výdajů",
+date_format: "Formát data",
+server_url: "URL serveru",
 }

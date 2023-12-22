@@ -543,4 +543,6 @@ expense_category: "Categoria spesa",
 ref: "Riferimento",
 expense_category_list: "Elenco categorie spesa",
 add_new_expense_category: "Aggiungi nuova categoria spesa",
+date_format: "Formato data",
+server_url: "URL server",
 }

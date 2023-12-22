@@ -543,4 +543,6 @@ expense_category_list: "Список категорий расходов",
 add_new_expense_category: "Добавить новую категорию расходов",
 taxes_list: "Список налогов",
 add_new_tax: "Добавить новый налог",
+date_format: "Формат даты",
+server_url: "URL сервера",
 }

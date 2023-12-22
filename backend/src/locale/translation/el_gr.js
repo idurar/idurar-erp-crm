@@ -543,4 +543,6 @@ expense_category: "Κατηγορία εξόδου",
 ref: "Αναφορά",
 expense_category_list: "Λίστα κατηγορίας εξόδου",
 add_new_expense_category: "Προσθήκη νέας κατηγορίας εξόδου",
+date_format: "Μορφή Ημερομηνίας",
+server_url: "Διεύθυνση Εξυπηρετητή",
 }

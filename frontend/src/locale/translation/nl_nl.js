@@ -535,5 +535,7 @@ expense_category_list: "Lijst met uitgavecategorieën",
 add_new_expense_category: "Nieuwe uitgavecategorie toevoegen",
 taxes_list: "Lijst met belastingen",
 add_new_tax: "Nieuwe belasting toevoegen",
+date_format: "Datumnotatie",
+server_url: "Server URL",
 }
  export default lang

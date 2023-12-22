@@ -543,5 +543,7 @@ expense_category_list: "Листа на категории на трошоци",
 add_new_expense_category: "Додади нова категорија на трошоци",
 taxes_list: "Листа на даноци",
 add_new_tax: "Додади нов данок",
+date_format: "Формат на датум",
+server_url: "URL на сервер",
 }
  export default lang

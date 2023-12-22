@@ -543,5 +543,7 @@ expense_category_list: "Gider Kategori Listesi",
 add_new_expense_category: "Yeni Gider Kategorisi Ekle",
 taxes_list: "Vergi Listesi",
 add_new_tax: "Yeni Vergi Ekle",
+date_format: "Tarih Formatı",
+server_url: "Sunucu URL",
 }
  export default lang

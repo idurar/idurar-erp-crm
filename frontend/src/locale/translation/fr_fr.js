@@ -582,5 +582,7 @@ expense_category_list: "Liste des catégories de dépenses",
 add_new_expense_category: "Ajouter une nouvelle catégorie de dépenses",
 taxes_list: "Liste des impôts",
 add_new_tax: "Ajouter un nouvel impôt",
+date_format: "Format de date",
+server_url: "URL du serveur",
 }
  export default lang

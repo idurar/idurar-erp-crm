@@ -543,5 +543,7 @@ expense_category_list: "Senarai Kategori Perbelanjaan",
 add_new_expense_category: "Tambah Kategori Perbelanjaan Baru",
 taxes_list: "Senarai Cukai",
 add_new_tax: "Tambah Cukai Baru",
+date_format: "Format Tarikh",
+server_url: "URL Pelayan",
 }
  export default lang

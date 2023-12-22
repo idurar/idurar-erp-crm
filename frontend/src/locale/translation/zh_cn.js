@@ -582,5 +582,7 @@ expense_category: "费用类别",
 ref: "参考",
 expense_category_list: "费用类别列表",
 add_new_expense_category: "添加新的费用类别",
+date_format: "日期格式",
+server_url: "服务器网址",
 }
  export default lang

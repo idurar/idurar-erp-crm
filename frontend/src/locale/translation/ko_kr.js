@@ -543,5 +543,7 @@ expense_category: "지출 카테고리",
 ref: "참조",
 expense_category_list: "지출 카테고리 목록",
 add_new_expense_category: "새 지출 카테고리 추가",
+date_format: "날짜 형식",
+server_url: "서버 URL",
 }
  export default lang

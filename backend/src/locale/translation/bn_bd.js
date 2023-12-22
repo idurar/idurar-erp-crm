@@ -543,4 +543,6 @@ expense_category: "ব্যয়ের বিভাগ",
 ref: "রেফারেন্স",
 expense_category_list: "ব্যয়ের বিভাগ তালিকা",
 add_new_expense_category: "নতুন ব্যয়ের বিভাগ যোগ করুন",
+date_format: "তারিখের ফরম্যাট",
+server_url: "সার্ভার ইউআরএল",
 }

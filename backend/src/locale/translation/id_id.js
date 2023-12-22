@@ -543,4 +543,6 @@ expense_category_list: "Daftar Kategori Pengeluaran",
 add_new_expense_category: "Tambahkan Kategori Pengeluaran Baru",
 taxes_list: "Daftar Pajak",
 add_new_tax: "Tambahkan Pajak Baru",
+date_format: "Format Tanggal",
+server_url: "URL Server",
 }

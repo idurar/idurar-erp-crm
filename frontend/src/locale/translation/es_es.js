@@ -543,5 +543,7 @@ expense_category_list: "Lista de Categorías de Gasto",
 add_new_expense_category: "Agregar Nueva Categoría de Gasto",
 taxes_list: "Lista de Impuestos",
 add_new_tax: "Agregar Nuevo Impuesto",
+date_format: "Formato de fecha",
+server_url: "URL del servidor",
 }
  export default lang

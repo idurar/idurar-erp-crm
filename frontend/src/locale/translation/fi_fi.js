@@ -543,5 +543,7 @@ expense_category: "Kulukategoria",
 ref: "Viite",
 expense_category_list: "Kulukategorialista",
 add_new_expense_category: "Lisää uusi kulukategoria",
+date_format: "Päivämäärämuoto",
+server_url: "Palvelimen URL",
 }
  export default lang

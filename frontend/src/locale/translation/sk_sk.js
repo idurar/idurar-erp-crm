@@ -543,5 +543,7 @@ expense_category_list: "Zoznam kategórií výdavkov",
 add_new_expense_category: "Pridať novú kategóriu výdavkov",
 taxes_list: "Zoznam daní",
 add_new_tax: "Pridať novú daň",
+date_format: "Formát dátumu",
+server_url: "URL servera",
 }
  export default lang

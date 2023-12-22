@@ -534,5 +534,7 @@ expense_category_list: "Danh sách danh mục chi phí",
 add_new_expense_category: "Thêm danh mục chi phí mới",
 taxes_list: "Danh sách thuế",
 add_new_tax: "Thêm thuế mới",
+date_format: "Định dạng ngày",
+server_url: "Địa chỉ máy chủ",
 }
  export default lang
