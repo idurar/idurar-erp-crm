@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
@@ -11,4 +11,4 @@ const update = async (Model, req, res) => {
   });
 };
 
-module.exports = update;
+export default update;
