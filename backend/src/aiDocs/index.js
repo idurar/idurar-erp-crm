@@ -28,11 +28,11 @@ async function documentThisFile(file) {
       {
         role: 'system',
         content:
-          'You will be provided with js file , and your task is to create Tutorial for this file , the Tutorial should be long , you need include the repository of this code (in begining and end of this tuto) witch is IDUARR open source erp crm based on Mern-stack "### Github repo : https://github.com/idurar/idurar-erp-crm ", and return result as markdown file',
+          'You will be provided with js file , and your task is to create Tutorial for this file , the Tutorial should be long, you need include the repository of this code witch is IDUARR open source erp crm based on Mern-stack "### Github repo : https://github.com/idurar/idurar-erp-crm ", and return result as markdown file',
       },
       {
         role: 'user',
-        content: `Create long Tutorial for this js file : ${file}`,
+        content: `Create long Tutorial for this file : ${file}`,
       },
     ],
     temperature: 0.5,
@@ -70,18 +70,18 @@ async function generateFileName(file) {
 
 const jsFile = fs.readFileSync(`./src/aiDocs/function.js`, 'utf-8');
 
-const { globSync } = require('glob');
-const path = require('path');
+// const { globSync } = require('glob');
+// const path = require('path');
 
-const pattern = './src/controllers/appControllers/*/**/';
-const files = globSync(pattern).map((filePath) => {
-  return path.basename(filePath);
-});
+// const pattern = './src/controllers/appControllers/*/**/';
+// const files = globSync(pattern).map((filePath) => {
+//   return path.basename(filePath);
+// });
 
 async function generateDocs() {
-  // const newDocsContent = await documentThisFile(jsFile);
+  const newDocsContent = await documentThisFile(jsFile);
 
-  // const file_name = await generateFileName(newDocsContent);
+  const file_name = await generateFileName(newDocsContent);
   generateDocsFile({
     file_name,
     newDocsContent,
