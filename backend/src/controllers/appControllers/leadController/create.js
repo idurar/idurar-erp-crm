@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
@@ -12,11 +12,11 @@ const create = async (Model, req, res) => {
         message: 'Please select a people',
       });
     } else {
-      let { firstname, lastname } = await People.findOne({
+      const { firstname, lastname } = await People.findOne({
         _id: req.body.people,
         removed: false,
       }).exec();
-      req.body.name = firstname + ' ' + lastname;
+      req.body.name = `${firstname} ${lastname}`;
       req.body.company = null;
     }
   } else {
@@ -26,7 +26,7 @@ const create = async (Model, req, res) => {
         message: 'Please select a company',
       });
     } else {
-      let { name } = await Company.findOne({
+      const { name } = await Company.findOne({
         _id: req.body.company,
         removed: false,
       }).exec();
@@ -38,7 +38,7 @@ const create = async (Model, req, res) => {
   req.body.removed = false;
   const result = await new Model(req.body).save();
 
-  // Returning successfull response
+  // Returning successful response
   return res.status(200).json({
     success: true,
     result,
