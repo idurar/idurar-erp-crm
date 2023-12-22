@@ -11,7 +11,7 @@ export const dataForRead = ({ fields, translate }) => {
   Object.keys(fields).forEach((key) => {
     let field = fields[key];
     columns.push({
-      title: field.label ? translate(field.label) : translate(key),
+      title: field.label ? field.label : key,
       dataIndex: field.dataIndex ? field.dataIndex.join('.') : key,
       isDate: field.type === 'date',
     });
@@ -83,12 +83,12 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
         },
       },
       color: {
-        title: field.label ? translate(field.label) : translate(key),
+        title: field.label ? field.label : key,
         dataIndex: keyIndex,
         render: (text, record) => {
           return (
             <Tag bordered={false} color={text}>
-              {translate(color.find((x) => x.value === text)?.label)}
+              {color.find((x) => x.value === text)?.label}
             </Tag>
           );
         },
