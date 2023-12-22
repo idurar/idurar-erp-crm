@@ -531,5 +531,17 @@ idurar_app_title: "Atvērtā koda ERP CRM rēķinu veidošana grāmatvedība izd
 verify_your_account: "Pārbaudiet savu kontu",
 complete_verification_by_providing_the_code_that_you_received_by_email: "Pabeidziet verifikāciju, sniedzot kodu, ko saņēmāt pa e-pastu",
 verify_now: "Pārbaudīt tagad",
+expense: "Izdevumi",
+product_category: "Preču kategorija",
+expenses_category: "Izdevumu kategorija",
+product_category_list: "Preču kategoriju saraksts",
+add_new_product_category: "Pievienot jaunu preču kategoriju",
+color: "Krāsa",
+expense_list: "Izdevumu saraksts",
+add_new_expense: "Pievienot jaunu izdevumu",
+expense_category: "Izdevumu kategorija",
+ref: "Atsauce",
+expense_category_list: "Izdevumu kategoriju saraksts",
+add_new_expense_category: "Pievienot jaunu izdevumu kategoriju",
 }
  export default lang
