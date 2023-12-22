@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Model = mongoose.model('Taxes');
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
+
 const methods = createCRUDController('Taxes');
 
 delete methods['delete'];
@@ -55,4 +56,4 @@ methods.update = async (req, res) => {
   });
 };
 
-module.exports = methods;
+export default methods;
