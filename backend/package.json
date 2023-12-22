@@ -11,6 +11,7 @@
     "production": "NODE_ENV=production",
     "translate": "node src/aiTranslate/index.js",
     "features": "node src/aiFeatures/index.js",
+    "docs": "node src/aiDocs/index.js",
     "setup": "node src/setup/setup.js",
     "reset": "node src/setup/reset.js"
   },
