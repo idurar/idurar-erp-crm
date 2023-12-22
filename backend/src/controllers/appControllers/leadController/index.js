@@ -1,17 +1,18 @@
-const mongoose = require('mongoose');
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const remove = require('./remove');
-const summary = require('./summary');
+import mongoose from 'mongoose';
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
 
-const create = require('./create');
-const update = require('./update');
-const read = require('./read');
-const search = require('./search');
+import remove from './remove.js';
+import summary from './summary.js';
 
-const listAll = require('./listAll');
-const paginatedList = require('./paginatedList');
+import create from './create.js';
+import update from './update.js';
+import read from './read.js';
+import search from './search.js';
 
-function modelController() {
+import listAll from './listAll.js';
+import paginatedList from './paginatedList.js';
+
+const modelController = () => {
   const modelName = 'Lead';
   const Model = mongoose.model(modelName);
   const methods = createCRUDController(modelName);
@@ -24,6 +25,6 @@ function modelController() {
   methods.search = (req, res) => search(Model, req, res);
   methods.listAll = (req, res) => listAll(Model, req, res);
   return methods;
-}
+};
 
-module.exports = modelController();
+export default modelController();
