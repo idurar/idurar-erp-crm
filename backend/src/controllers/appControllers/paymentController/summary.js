@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 const Model = mongoose.model('Payment');
 
@@ -62,4 +62,4 @@ const summary = async (req, res) => {
   });
 };
 
-module.exports = summary;
+export default summary;
