@@ -1,10 +1,6 @@
-const mongoose = require('mongoose');
-
-const Model = mongoose.model('Payment');
-const Invoice = mongoose.model('Invoice');
-const custom = require('@/controllers/pdfController');
-
-const { calculate } = require('@/helpers');
+import mongoose from 'mongoose';
+import custom from '#controllers/pdfController/index.js';
+import { calculate } from '#helpers.js';
 
 const update = async (req, res) => {
   return res.status(200).json({
@@ -15,4 +11,4 @@ const update = async (req, res) => {
   });
 };
 
-module.exports = update;
+export default update;
