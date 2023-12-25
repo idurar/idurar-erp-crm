@@ -1,6 +1,5 @@
 require('module-alias/register');
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
