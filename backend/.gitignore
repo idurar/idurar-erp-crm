@@ -8,6 +8,8 @@ notes.md
 backend/.env
 .env.local
 
- 
+backend/env_vars.yaml
+env_vars.yaml
+
 backend/public
 *.pdf

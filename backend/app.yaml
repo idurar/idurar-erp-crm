@@ -1,0 +1,6 @@
+runtime: nodejs18
+
+service: api
+
+includes:
+  - env_vars.yaml
