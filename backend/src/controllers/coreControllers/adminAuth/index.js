@@ -1,2 +1,3 @@
-const createAuthMiddleware = require('@/controllers/middlewaresControllers/createAuthMiddleware');
-module.exports = createAuthMiddleware('Admin');
+import createAuthMiddleware from '#controllers/middlewaresControllers/createAuthMiddleware/index.js';
+
+export default createAuthMiddleware('Admin');
