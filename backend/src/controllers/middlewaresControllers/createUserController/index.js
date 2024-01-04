@@ -1,15 +1,15 @@
-const create = require('./create');
-const read = require('./read');
-const update = require('./update');
-const updateProfile = require('./updateProfile');
-const remove = require('./remove');
-const updatePassword = require('./updatePassword');
-const updateProfilePassword = require('./updateProfilePassword');
-const profile = require('./profile');
-const search = require('./search');
-const filter = require('./filter');
-const listAll = require('./listAll');
-const paginatedList = require('./paginatedList');
+import create from './create';
+import read from './read';
+import update from './update';
+import updateProfile from './updateProfile';
+import remove from './remove';
+import updatePassword from './updatePassword';
+import updateProfilePassword from './updateProfilePassword';
+import profile from './profile';
+import search from './search';
+import filter from './filter';
+import listAll from './listAll';
+import paginatedList from './paginatedList';
 
 const createUserController = (userModel) => {
   let userController = {};
@@ -29,4 +29,4 @@ const createUserController = (userModel) => {
   return userController;
 };
 
-module.exports = createUserController;
+export default createUserController;
