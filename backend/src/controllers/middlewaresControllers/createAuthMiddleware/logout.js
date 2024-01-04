@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const logout = async (req, res, { userModel }) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
+  const UserPassword = mongoose.model(`${userModel}Password`);
 
   const token = req.cookies.token;
   await UserPassword.findOneAndUpdate(
@@ -28,4 +28,4 @@ const logout = async (req, res, { userModel }) => {
     });
 };
 
-module.exports = logout;
+export default logout;
