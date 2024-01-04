@@ -1,11 +1,11 @@
-const bcrypt = require('bcryptjs');
-const Joi = require('joi');
-const mongoose = require('mongoose');
-const { generate: uniqueId } = require('shortid');
-const { loadSettings } = require('@/middlewares/settings');
+import bcrypt from 'bcryptjs';
+import Joi from 'joi';
+import mongoose from 'mongoose';
+import { generate as uniqueId } from 'shortid';
+import { loadSettings } from '@/middlewares/settings';
 
-const checkAndCorrectURL = require('./checkAndCorrectURL');
-const sendMail = require('./sendMail');
+import checkAndCorrectURL from './checkAndCorrectURL';
+import sendMail from './sendMail';
 
 const register = async (req, res, { userModel }) => {
   return res.status(200).json({
@@ -16,4 +16,4 @@ const register = async (req, res, { userModel }) => {
   });
 };
 
-module.exports = register;
+export default register;
