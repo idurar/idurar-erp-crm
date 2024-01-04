@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const remove = async (userModel, req, res) => {
   return res.status(200).json({
@@ -9,4 +9,4 @@ const remove = async (userModel, req, res) => {
   });
 };
 
-module.exports = remove;
+export default remove;
