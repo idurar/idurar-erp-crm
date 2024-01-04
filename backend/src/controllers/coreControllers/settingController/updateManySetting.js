@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Setting');
 
@@ -55,4 +55,4 @@ const updateManySetting = async (req, res) => {
   }
 };
 
-module.exports = updateManySetting;
+export default updateManySetting;
