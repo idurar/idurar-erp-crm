@@ -19,4 +19,4 @@ const listAll = async (Model, req, res) => {
   }
 };
 
-module.exports = listAll;
+export default listAll;
