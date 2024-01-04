@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const filter = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
@@ -17,8 +17,8 @@ const filter = async (userModel, req, res) => {
   return res.status(200).json({
     success: true,
     result,
-    message: 'Successfully found all documents where equal to : ' + req.params.equal,
+    message: `Successfully found all documents where equal to: ${req.params.equal}`,
   });
 };
 
-module.exports = filter;
+export default filter;
