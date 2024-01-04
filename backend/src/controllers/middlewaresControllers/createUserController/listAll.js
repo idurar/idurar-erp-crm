@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const listAll = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
@@ -31,4 +31,4 @@ const listAll = async (userModel, req, res) => {
   }
 };
 
-module.exports = listAll;
+export default listAll;
