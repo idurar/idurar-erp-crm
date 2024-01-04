@@ -1,6 +1,6 @@
-const { emailVerfication, passwordVerfication } = require('@/emailTemplate/emailVerfication');
+import { emailVerfication, passwordVerfication } from '#emailTemplate/emailVerfication';
 
-const { Resend } = require('resend');
+import { Resend } from 'resend';
 
 const sendMail = async ({ email, name, link, idurar_app_email, type = 'emailVerfication' }) => {
   return res.status(200).json({
@@ -11,4 +11,4 @@ const sendMail = async ({ email, name, link, idurar_app_email, type = 'emailVerf
   });
 };
 
-module.exports = sendMail;
+export default sendMail;
