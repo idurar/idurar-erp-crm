@@ -1,4 +1,4 @@
-exports.emailVerfication = ({
+const emailVerfication = ({
   title = 'Verify your email',
   name = '',
   link = '',
@@ -30,7 +30,7 @@ exports.emailVerfication = ({
     `;
 };
 
-exports.passwordVerfication = ({
+const passwordVerfication = ({
   title = 'Reset your Password',
   name = '',
   link = '',
@@ -60,3 +60,5 @@ exports.passwordVerfication = ({
     </div>
     `;
 };
+
+export { emailVerfication, passwordVerfication };
