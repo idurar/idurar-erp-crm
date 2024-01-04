@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-
-const { generate: uniqueId } = require('shortid');
+import mongoose from 'mongoose';
+import { generate as uniqueId } from 'shortid';
 
 const updatePassword = async (userModel, req, res) => {
   return res.status(200).json({
@@ -11,4 +10,4 @@ const updatePassword = async (userModel, req, res) => {
   });
 };
 
-module.exports = updatePassword;
+export default updatePassword;
