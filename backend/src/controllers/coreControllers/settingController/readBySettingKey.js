@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Setting');
 
@@ -21,16 +21,16 @@ const readBySettingKey = async (req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this settingKey: ' + settingKey,
+      message: `No document found by this settingKey: ${settingKey}`,
     });
   } else {
-    // Return success resposne
+    // Return success response
     return res.status(200).json({
       success: true,
       result,
-      message: 'we found this document by this settingKey: ' + settingKey,
+      message: `we found this document by this settingKey: ${settingKey}`,
     });
   }
 };
 
-module.exports = readBySettingKey;
+export default readBySettingKey;
