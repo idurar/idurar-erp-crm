@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const { generate: uniqueId } = require('shortid');
+import mongoose from 'mongoose';
+import { generate as uniqueId } from 'shortid';
 
 const create = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
-  const UserPassword = mongoose.model(userModel + 'Password');
+  const UserPassword = mongoose.model(`${userModel}Password`);
   let { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({
@@ -76,4 +76,4 @@ const create = async (userModel, req, res) => {
     message: 'User document save correctly',
   });
 };
-module.exports = create;
+export default create;
