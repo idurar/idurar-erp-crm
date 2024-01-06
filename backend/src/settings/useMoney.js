@@ -1,4 +1,4 @@
-const currency = require('currency.js');
+import currency from 'currency.js';
 
 const useMoney = ({ settings }) => {
   const {
@@ -10,7 +10,7 @@ const useMoney = ({ settings }) => {
     zero_format,
   } = settings;
 
-  function currencyFormat(amount) {
+  const currencyFormat = (amount) => {
     return currency(amount).dollars() > 0 || !zero_format
       ? currency(amount, {
           separator: thousand_sep,
@@ -25,17 +25,17 @@ const useMoney = ({ settings }) => {
             symbol: '',
             precision: cent_precision,
           }).format();
-  }
+  };
 
-  function moneyFormatter({ amount = 0 }) {
+  const moneyFormatter = ({ amount = 0 }) => {
     return currency_position === 'before'
       ? currency_symbol + ' ' + currencyFormat(amount)
       : currencyFormat(amount) + ' ' + currency_symbol;
-  }
+  };
 
-  function amountFormatter({ amount = 0 }) {
+  const amountFormatter = ({ amount = 0 }) => {
     return currencyFormat(amount);
-  }
+  };
 
   return {
     moneyFormatter,
@@ -49,4 +49,4 @@ const useMoney = ({ settings }) => {
   };
 };
 
-module.exports = useMoney;
+export default useMoney;
