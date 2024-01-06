@@ -1,16 +1,16 @@
-const express = require('express');
+import express from 'express';
 
-const { catchErrors } = require('@/handlers/errorHandlers');
+import { catchErrors } from '#handlers/errorHandlers';
 
 const router = express.Router();
 
-const adminController = require('@/controllers/coreControllers/adminController');
-const settingController = require('@/controllers/coreControllers/settingController');
-const emailController = require('@/controllers/coreControllers/emailController');
+import adminController from '#controllers/coreControllers/adminController/index.js';
+import settingController from '#controllers/coreControllers/settingController/index.js';
+import emailController from '#controllers/coreControllers/emailController/index.js';
 
-const { singleStorageUpload } = require('@/middlewares/uploadMiddleware');
+import { singleStorageUpload } from '#middlewares/uploadMiddleware/singleStorageUpload.js';
 
-const { hasPermission } = require('@/middlewares/permission');
+import { hasPermission } from '@/middlewares/permission';
 // //_______________________________ Admin management_______________________________
 
 router
@@ -93,4 +93,4 @@ router.route('/email/list').get(hasPermission('read'), catchErrors(emailControll
 router.route('/email/listAll').get(hasPermission('read'), catchErrors(emailController.listAll));
 router.route('/email/filter').get(hasPermission('read'), catchErrors(emailController.filter));
 
-module.exports = router;
+export default router;
