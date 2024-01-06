@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
-
 const shortid = require('shortid');
+const sendIdurarOffer = require('./sendIdurarOffer');
 
 const login = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
@@ -53,6 +53,11 @@ const login = async (req, res, { userModel }) => {
       new: true,
     }
   ).exec();
+
+  await sendIdurarOffer({
+    email: user.email,
+    name: user.name,
+  });
 
   res
     .status(200)

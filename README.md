@@ -28,12 +28,17 @@ IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed unde
 
 ## License FAQ :
 
-- You can use IDURAR for free for personal or Commercial use.
+### May i can use IDURAR for Commercail use :
 
-- May i can customize IDURAR as Saas and provide it to other users ?
-  No, you cannot customize IDURAR as a SaaS and provide it to other users , You are not allowed to provide IDURAR software to third parties as a hosted or managed service or as softwase as service (Saas), where the service provides users with access to any substantial set of the features or functionality of this software.
+- Yes You can use IDURAR for free for personal or Commercial use.
 
-For custom developement service : [Get in touch](mailto:hello@idurarapp.com)
+### May i can customize IDURAR as Saas and provide it to other users ?
+
+No, you cannot customize IDURAR as a SaaS and provide it to other users , You are not allowed to provide IDURAR software to third parties as a hosted or managed service or as softwase as service (Saas), where the service provides users with access to any substantial set of the features or functionality of this software.
+
+### For custom developement service or premium Support :
+
+[Get in touch](mailto:hello@idurarapp.com)
 
 ## How To Deploy IDURAR ERP CRM :
 
@@ -94,7 +99,8 @@ Replace "your-mongodb-uri" with the actual URI of your MongoDB database.
 
 #### Step 5: Install Backend Dependencies
 
-In your terminal, navigate to the /backend directory 
+In your terminal, navigate to the /backend directory
+
 ```bash
 cd backend
 ```

@@ -4,7 +4,7 @@ import { fields } from './config';
 
 import useLanguage from '@/locale/useLanguage';
 
-export default function People() {
+export default function Customer() {
   const translate = useLanguage();
   const entity = 'client';
   const searchConfig = {
