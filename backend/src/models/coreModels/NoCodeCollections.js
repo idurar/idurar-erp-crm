@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const noCodeCollectionsSchema = new mongoose.Schema({
   removed: {
@@ -200,4 +200,4 @@ const noCodeCollectionsSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model('NoCodeCollections', noCodeCollectionsSchema);
+export default mongoose.model('NoCodeCollections', noCodeCollectionsSchema);

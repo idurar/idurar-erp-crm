@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt-nodejs';
 
-const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema;
 
 const AdminPasswordSchema = new Schema({
   removed: {
@@ -44,4 +44,4 @@ AdminPasswordSchema.methods.validPassword = function (salt, userpassword) {
   return bcrypt.compareSync(salt + userpassword, this.password);
 };
 
-module.exports = mongoose.model('AdminPassword', AdminPasswordSchema);
+export default mongoose.model('AdminPassword', AdminPasswordSchema);
