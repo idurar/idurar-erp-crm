@@ -57,7 +57,7 @@ const forgetPassword = async (req, res, { userModel }) => {
 
   const link = url + '/resetpassword/' + user._id + '/' + resetToken;
 
-  await sendMail({ email, name: user.name, link, idurar_app_email, type: 'resetpassword' });
+  await sendMail({ email, name: user.name, link, idurar_app_email, type: 'passwordVerfication' });
 
   return res.status(200).json({
     success: true,
