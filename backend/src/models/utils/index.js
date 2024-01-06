@@ -1,5 +1,5 @@
-const { basename, extname } = require('path');
-const { globSync } = require('glob');
+import { basename, extname } from 'path';
+import { globSync } from 'glob';
 
 const appModelsFiles = globSync('./src/models/appModels/**/*.js');
 
@@ -33,17 +33,17 @@ for (const filePath of appModelsFiles) {
   );
   const entity = fileNameWithoutExtension.toLowerCase();
 
-  controllerName = fileNameLowerCaseFirstChar + 'Controller';
+  const controllerName = fileNameLowerCaseFirstChar + 'Controller';
   constrollersList.push(controllerName);
   appModelsList.push(modelName);
   entityList.push(entity);
 
   const route = {
-    entity: entity,
-    modelName: modelName,
-    controllerName: controllerName,
+    entity,
+    modelName,
+    controllerName,
   };
   routesList.push(route);
 }
 
-module.exports = { constrollersList, appModelsList, modelsFiles, entityList, routesList };
+export { constrollersList, appModelsList, modelsFiles, entityList, routesList };
