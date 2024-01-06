@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const AppTableStructureSchema = new mongoose.Schema({
   removed: {
@@ -242,4 +242,4 @@ const AppTableStructureSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('AppTableStructure', AppTableStructureSchema);
+export default mongoose.model('AppTableStructure', AppTableStructureSchema);
