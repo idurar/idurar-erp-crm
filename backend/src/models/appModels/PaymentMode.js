@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const paymentModeSchema = new mongoose.Schema({
   removed: {
@@ -30,4 +30,4 @@ const paymentModeSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('PaymentMode', paymentModeSchema);
+export default mongoose.model('PaymentMode', paymentModeSchema);

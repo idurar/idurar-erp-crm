@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const offerSchema = new mongoose.Schema({
   removed: {
@@ -126,4 +126,4 @@ const offerSchema = new mongoose.Schema({
 });
 
 offerSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Offer', offerSchema);
+export default mongoose.model('Offer', offerSchema);

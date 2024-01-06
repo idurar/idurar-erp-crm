@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const inventorySchema = new mongoose.Schema({
   removed: {
@@ -75,4 +75,4 @@ const inventorySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Inventory', inventorySchema);
+export default mongoose.model('Inventory', inventorySchema);

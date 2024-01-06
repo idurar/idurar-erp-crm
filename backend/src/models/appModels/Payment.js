@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
   removed: {
@@ -53,4 +53,4 @@ const paymentSchema = new mongoose.Schema({
   },
 });
 paymentSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Payment', paymentSchema);
+export default mongoose.model('Payment', paymentSchema);

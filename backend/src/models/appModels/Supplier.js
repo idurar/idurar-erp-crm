@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const SupplierSchema = new mongoose.Schema({
   removed: {
@@ -202,4 +202,4 @@ const SupplierSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Supplier', SupplierSchema);
+export default mongoose.model('Supplier', SupplierSchema);

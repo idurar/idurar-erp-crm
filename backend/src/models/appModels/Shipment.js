@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ShipmentSchema = new mongoose.Schema({
   removed: {
@@ -116,4 +116,4 @@ const ShipmentSchema = new mongoose.Schema({
 
 ShipmentSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('Shipment', ShipmentSchema);
+export default mongoose.model('Shipment', ShipmentSchema);

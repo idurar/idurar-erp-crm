@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const quoteSchema = new mongoose.Schema({
   removed: {
@@ -132,4 +132,4 @@ const quoteSchema = new mongoose.Schema({
 });
 
 quoteSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Quote', quoteSchema);
+export default mongoose.model('Quote', quoteSchema);

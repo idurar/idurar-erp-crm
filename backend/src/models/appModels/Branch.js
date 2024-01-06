@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
   removed: {
@@ -132,4 +132,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Branch', schema);
+export default mongoose.model('Branch', schema);

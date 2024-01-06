@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
   removed: {
@@ -200,4 +200,4 @@ const schema = new mongoose.Schema({
 });
 
 schema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('People', schema);
+export default mongoose.model('People', schema);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
   removed: {
@@ -98,4 +98,4 @@ const orderSchema = new mongoose.Schema({
 
 orderSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('Order', orderSchema);
+export default mongoose.model('Order', orderSchema);

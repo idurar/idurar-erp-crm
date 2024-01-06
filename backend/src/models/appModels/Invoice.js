@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const invoiceSchema = new mongoose.Schema({
   removed: {
@@ -166,4 +166,4 @@ const invoiceSchema = new mongoose.Schema({
 });
 
 invoiceSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Invoice', invoiceSchema);
+export default mongoose.model('Invoice', invoiceSchema);
