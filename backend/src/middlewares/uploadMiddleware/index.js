@@ -1,5 +1,3 @@
-const singleStorageUpload = require('./singleStorageUpload');
+import singleStorageUpload from './singleStorageUpload';
 
-module.exports = {
-  singleStorageUpload,
-};
+export { singleStorageUpload };
