@@ -82,12 +82,13 @@ exports.afterRegistrationSuccess = ({
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">I would like to invite you to book a call if you need : </p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0"> * Customize or adding new features to IDURAR ERP CRM for just $ 30 per hour.</p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0"> * For $ 5000 : create your own custom SaaS solution based on IDURAR ERP CRM , With IDURAR SaaS license you can save a significant amount of money by opting for our pre-order price of $5000 instead of investing $250,000 in an uncertain developer team. This opportunity allows you to build a tailored SaaS platform that meets your specific business needs.</p>
-            <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0"> Book a call here https://calendly.com/lalami/meeting /p>
+            <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0"> Book a call here  <a href="https://calendly.com/lalami/meeting">https://calendly.com/lalami/meeting</a></p>
             <hr data-id="react-email-hr" style="width:100%;border:none;border-top:1px solid #eaeaea" />
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Best regards,</p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Salah Eddine Lalami</p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Founder @ IDURAR</p>
         </body>
     </div>
+    
     `;
 };
