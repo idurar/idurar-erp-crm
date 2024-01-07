@@ -2,13 +2,20 @@ const { emailVerfication, passwordVerfication } = require('@/emailTemplate/email
 
 const { Resend } = require('resend');
 
-const sendMail = async ({ email, name, link, idurar_app_email, type = 'emailVerfication' }) => {
+const sendMail = async ({
+  email,
+  name,
+  link,
+  idurar_app_email,
+  subject = 'Verify your email | idurar',
+  type = 'emailVerfication',
+}) => {
   const resend = new Resend(process.env.RESEND_API);
 
   const { data } = await resend.emails.send({
     from: idurar_app_email,
     to: email,
-    subject: 'Verify your email | idurar',
+    subject,
     html:
       type === 'emailVerfication'
         ? emailVerfication({ name, link })
