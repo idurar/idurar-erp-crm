@@ -195,6 +195,24 @@ npm run dev
 
 > If you still facing issue, then follow [this stackoverflow thread](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported). It has so many different types of opinions. You definitely have solution after going through the thread.
 
+## Docker Compose for local development
+
+- setup additional env variables, if necessary in the below file
+
+```bash
+docker-compose.yml
+```
+
+- After the necessary configurations run below command :
+
+```bash
+docker-compose up -d
+```
+
+This will build the images and bring up the containers for frontend, backend and mongodb.
+
+**_NOTE:_** This docker-compose setup is associated for local development only.
+
 ## Contributing
 
 1.[How to contribute](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#how-to-contribute)
