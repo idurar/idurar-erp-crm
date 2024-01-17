@@ -57,7 +57,7 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
       result: null,
       message: error.message,
       error: error,
-      conttroller: 'isValidAuthToken',
+      controller: 'isValidAuthToken',
     });
   }
 };
