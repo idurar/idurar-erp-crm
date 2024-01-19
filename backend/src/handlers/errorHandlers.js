@@ -14,7 +14,7 @@ exports.catchErrors = (fn) => {
           success: false,
           result: null,
           message: 'Required fields are not supplied',
-          conttroller: fn.name,
+          controller: fn.name,
           error: error,
         });
       } else {
@@ -23,7 +23,7 @@ exports.catchErrors = (fn) => {
           success: false,
           result: null,
           message: error.message,
-          conttroller: fn.name,
+          controller: fn.name,
           error: error,
         });
       }
