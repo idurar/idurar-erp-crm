@@ -1,6 +1,3 @@
-const createCRUDController = require('#controllers/middlewaresControllers/createCRUDController');
-const { routesList } = require('#models/utils');
-
 import { globSync } from 'glob';
 import path from 'path';
 import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
