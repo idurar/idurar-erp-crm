@@ -2,13 +2,7 @@ import multer from 'multer';
 import path from 'path';
 import { slugify } from 'transliteration';
 
-import fileFilter from './utils/fileFilter';
-
-import multer from 'multer';
-import path from 'path';
-import { slugify } from 'transliteration';
-
-import fileFilter from './utils/fileFilter';
+import fileFilter from './utils/fileFilter.js';
 
 const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' }) => {
   const diskStorage = multer.diskStorage({
@@ -56,4 +50,4 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
   return multerStorage;
 };
 
-export default singleStorageUpload;
+export { singleStorageUpload };

@@ -1,4 +1,4 @@
-import custom from '#controllers/pdfController/index.js';
+import * as custom from '#controllers/pdfController/index.js';
 import mongoose from 'mongoose';
 
 const downloadPdf = async (req, res, { directory, id }) => {
