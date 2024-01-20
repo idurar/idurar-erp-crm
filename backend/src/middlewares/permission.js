@@ -6,4 +6,4 @@ const hasPermission =
     next();
   };
 
-export default hasPermission;
+export { hasPermission };

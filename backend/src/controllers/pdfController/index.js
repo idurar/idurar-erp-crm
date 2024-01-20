@@ -8,7 +8,7 @@ import useMoney from '#settings/useMoney.js';
 
 const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 
-export const generatePdf = async (
+const generatePdf = async (
   modelName,
   info = { filename: 'pdf_file', format: 'A5', targetLocation: '' },
   result,
@@ -73,3 +73,5 @@ export const generatePdf = async (
     throw new Error(error);
   }
 };
+
+export default generatePdf;
