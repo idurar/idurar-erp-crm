@@ -10,7 +10,7 @@ import coreDownloadRouter from './routes/coreRoutes/coreDownloadRouter.js';
 import corePublicRouter from './routes/coreRoutes/corePublicRouter.js';
 import adminAuth from './controllers/coreControllers/adminAuth/index.js';
 
-import errorHandlers from './handlers/errorHandlers.js';
+import * as errorHandlers from './handlers/errorHandlers.js';
 import erpApiRouter from './routes/appRoutes/appApi.js';
 import { listAllSettings } from '#middlewares/settings/index.js';
 import useLanguage from '#locale/useLanguage.js';
