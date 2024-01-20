@@ -1,4 +1,4 @@
-import { emailVerfication, passwordVerfication } from '#emailTemplate/emailVerfication';
+import { emailVerfication, passwordVerfication } from '#emailTemplate/emailVerfication.js';
 
 import { Resend } from 'resend';
 

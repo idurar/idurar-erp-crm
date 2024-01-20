@@ -1,9 +1,9 @@
-import listBySettingKey from './listBySettingKey';
-import readBySettingKey from './readBySettingKey';
-import listAllSettings from './listAllSettings';
-import updateBySettingKey from './updateBySettingKey';
-import increaseBySettingKey from './increaseBySettingKey';
-import loadSettings from './loadSettings';
+import listBySettingKey from './listBySettingKey.js';
+import readBySettingKey from './readBySettingKey.js';
+import listAllSettings from './listAllSettings.js';
+import updateBySettingKey from './updateBySettingKey.js';
+import increaseBySettingKey from './increaseBySettingKey.js';
+import loadSettings from './loadSettings.js';
 
 export {
   loadSettings,

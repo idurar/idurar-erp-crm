@@ -1,4 +1,4 @@
-import listAllSettings from './listAllSettings';
+import listAllSettings from './listAllSettings.js';
 
 const loadSettings = async () => {
   const allSettings = {};

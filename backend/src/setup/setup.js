@@ -5,11 +5,10 @@ import { globSync } from 'glob';
 import fs from 'fs';
 import { generate as uniqueId } from 'shortid';
 import mongoose from 'mongoose';
-import Admin from '../models/coreModels/Admin';
-import AdminPassword from '../models/coreModels/AdminPassword';
-import Setting from '../models/coreModels/Setting';
-import Email from '../models/coreModels/Email';
-
+import Admin from '../models/coreModels/Admin.js';
+import AdminPassword from '../models/coreModels/AdminPassword.js';
+import Setting from '../models/coreModels/Setting.js';
+import Email from '../models/coreModels/Email.js';
 mongoose.connect(process.env.DATABASE);
 
 async function setupApp() {

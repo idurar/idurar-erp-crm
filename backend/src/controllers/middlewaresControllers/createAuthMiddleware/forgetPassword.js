@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 import mongoose from 'mongoose';
 
-import checkAndCorrectURL from './checkAndCorrectURL';
-import sendMail from './sendMail';
+import checkAndCorrectURL from './checkAndCorrectURL.js';
+import sendMail from './sendMail.js';
 import shortid from 'shortid';
 import { loadSettings } from '#middlewares/settings/index.js';
 

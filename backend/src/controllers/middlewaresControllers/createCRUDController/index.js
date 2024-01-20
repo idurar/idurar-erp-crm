@@ -1,15 +1,15 @@
-import { modelsFiles } from '#models/utils/index.js';
 import mongoose from 'mongoose';
+import { modelsFiles } from '#models/utils/index.js';
 
-import create from './create';
-import read from './read';
-import update from './update';
-import remove from './remove';
-import search from './search';
-import filter from './filter';
-import summary from './summary';
-import listAll from './listAll';
-import paginatedList from './paginatedList';
+import create from './create.js';
+import read from './read.js';
+import update from './update.js';
+import remove from './remove.js';
+import search from './search.js';
+import filter from './filter.js';
+import summary from './summary.js';
+import listAll from './listAll.js';
+import paginatedList from './paginatedList.js';
 
 const createCRUDController = (modelName) => {
   if (!modelsFiles.includes(modelName)) {

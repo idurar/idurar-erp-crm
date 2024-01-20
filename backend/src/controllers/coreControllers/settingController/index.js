@@ -1,9 +1,9 @@
 import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
-import listBySettingKey from './listBySettingKey';
-import readBySettingKey from './readBySettingKey';
-import updateBySettingKey from './updateBySettingKey';
-import updateManySetting from './updateManySetting';
-import listAll from './listAll';
+import listBySettingKey from './listBySettingKey.js';
+import readBySettingKey from './readBySettingKey.js';
+import updateBySettingKey from './updateBySettingKey.js';
+import updateManySetting from './updateManySetting.js';
+import listAll from './listAll.js';
 
 const crudController = createCRUDController('Setting');
 

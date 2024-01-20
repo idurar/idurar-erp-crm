@@ -1,8 +1,8 @@
 import express from 'express';
-import { catchErrors } from '#handlers/errorHandlers';
+import { catchErrors } from '#handlers/errorHandlers.js';
 const router = express.Router();
 
-import { hasPermission } from '#middlewares/permission';
+import { hasPermission } from '#middlewares/permission.js';
 import appControllers from '#controllers/appControllers/index.js';
 import { routesList } from '#models/utils/index.js';
 

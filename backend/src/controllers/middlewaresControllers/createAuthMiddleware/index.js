@@ -1,10 +1,10 @@
-import isValidAuthToken from './isValidAuthToken';
-import login from './login';
-import logout from './logout';
-import register from './register';
-import verify from './verify';
-import forgetPassword from './forgetPassword';
-import resetPassword from './resetPassword';
+import isValidAuthToken from './isValidAuthToken.js';
+import login from './login.js';
+import logout from './logout.js';
+import register from './register.js';
+import verify from './verify.js';
+import forgetPassword from './forgetPassword.js';
+import resetPassword from './resetPassword.js';
 
 const createAuthMiddleware = (userModel) => {
   let authMethods = {};

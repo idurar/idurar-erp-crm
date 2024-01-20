@@ -1,15 +1,15 @@
-import create from './create';
-import read from './read';
-import update from './update';
-import updateProfile from './updateProfile';
-import remove from './remove';
-import updatePassword from './updatePassword';
-import updateProfilePassword from './updateProfilePassword';
-import profile from './profile';
-import search from './search';
-import filter from './filter';
-import listAll from './listAll';
-import paginatedList from './paginatedList';
+import create from './create.js';
+import read from './read.js';
+import update from './update.js';
+import updateProfile from './updateProfile.js';
+import remove from './remove.js';
+import updatePassword from './updatePassword.js';
+import updateProfilePassword from './updateProfilePassword.js';
+import profile from './profile.js';
+import search from './search.js';
+import filter from './filter.js';
+import listAll from './listAll.js';
+import paginatedList from './paginatedList.js';
 
 const createUserController = (userModel) => {
   let userController = {};

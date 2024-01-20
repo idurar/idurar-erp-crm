@@ -1,6 +1,6 @@
-import downloadPdf from '#handlers/downloadHandler/downloadPdf';
+import downloadPdf from '#handlers/downloadHandler/downloadPdf.js';
 import express from 'express';
-import { hasPermission } from '@/middlewares/permission';
+import { hasPermission } from '#middlewares/permission.js';
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { catchErrors } from '#handlers/errorHandlers';
+import { catchErrors } from '#handlers/errorHandlers.js';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ import emailController from '#controllers/coreControllers/emailController/index.
 
 import { singleStorageUpload } from '#middlewares/uploadMiddleware/singleStorageUpload.js';
 
-import { hasPermission } from '@/middlewares/permission';
+import { hasPermission } from '#middlewares/permission.js';
 // //_______________________________ Admin management_______________________________
 
 router
