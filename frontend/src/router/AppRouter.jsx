@@ -48,6 +48,7 @@ const People = lazy(() => import('@/pages/People'));
 const Company = lazy(() => import('@/pages/Company'));
 
 const About = lazy(() => import('@/pages/About'));
+const Verify = lazy(() => import('@/pages/Verify'));
 
 export default function AppRouter() {
   let element = useRoutes([
@@ -57,7 +58,7 @@ export default function AppRouter() {
     },
     {
       path: '/verify/*',
-      element: <Navigate to="/" />,
+      element: <Verify />,
     },
     {
       path: '/resetpassword/*',
