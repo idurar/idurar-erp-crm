@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
 import { selectAuth } from '@/redux/auth/selectors';
 import { Result, Button, Input, Space, Form, Select } from 'antd';
+import { verify as verifyAction } from '@/redux/auth/actions';
 
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
