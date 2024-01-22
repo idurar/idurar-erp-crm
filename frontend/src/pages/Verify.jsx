@@ -56,9 +56,9 @@ function Survey({ current }) {
             }}
             options={[
               { value: 'Freelance Developer', label: 'Freelance Developer' },
-              { value: 'Software Agency', label: 'Software Company' },
+              { value: 'Software Company', label: 'Software Company' },
               { value: 'Company (All kind of business)', label: 'Company (All kind of business)' },
-              { value: 'Studend', label: 'Studend' },
+              { value: 'Student', label: 'Student' },
             ]}
           />
         </Form.Item>
