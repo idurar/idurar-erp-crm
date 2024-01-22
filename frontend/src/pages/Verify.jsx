@@ -159,7 +159,7 @@ function Survey({ current }) {
         >
           <TextArea />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           name="features"
           label="What's features you are looking for ?"
           rules={[
@@ -169,7 +169,7 @@ function Survey({ current }) {
           ]}
         >
           <TextArea />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
