@@ -72,25 +72,55 @@ function Survey({ current }) {
           ]}
         >
           <Select
+            showSearch
+            filterOption={(input, option) =>
+              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
+            }
             options={[
+              { value: 'Aerospace', label: 'Aerospace' },
               { value: 'Automobile', label: 'Automobile' },
-              { value: 'Construction', label: 'Construction' },
+              { value: 'Banking & Insurance', label: 'Banking  & Insurance' },
+              { value: 'Biotechnology', label: 'Biotechnology' },
               { value: 'Chimical', label: 'Chimical' },
+              { value: 'Clothing & Textiles', label: 'Clothing & Textiles' },
+              { value: 'Cosmetics', label: 'Cosmetics' },
+              { value: 'Consulting', label: 'Consulting' },
+              { value: 'Construction', label: 'Construction' },
+              { value: 'Defense', label: 'Defense' },
               { value: 'Distribution', label: 'Distribution' },
-              { value: 'E-commerce', label: 'E-commerce' },
+              { value: 'Electronics', label: 'Electronics' },
+              { value: 'Energy', label: 'Energy' },
+              { value: 'E-commerce', label: 'Ecommerce / E-commerce' },
+              { value: 'Entertainment', label: 'Entertainment' },
               { value: 'Education & School', label: 'Education & School' },
               { value: 'Finance', label: 'Finance' },
-              { value: 'Healthcare', label: 'Healthcare' },
+              { value: 'Food & Beverages', label: 'Food & Beverages' },
+              { value: 'Healthcare', label: 'Healthcare , Hospital & Clinic' },
               { value: 'Hotel', label: 'Hotel' },
               { value: 'Logistics', label: 'Logistics' },
               { value: 'non profit & charities', label: 'non profit & charities' },
+              { value: 'Maritime & Fishing', label: 'Maritime & Fishing' },
               { value: 'Manufacturing', label: 'Manufacturing' },
+              { value: 'Pet', label: 'Pet' },
+              { value: 'Pharmaceuticals', label: 'Pharmaceuticals' },
+              { value: 'Photography', label: 'Photography' },
+              { value: 'Print & Editon', label: 'Print & Editon' },
               { value: 'Professional Services', label: 'Professional Services' },
+              { value: 'Real Estate', label: 'Real Estate' },
               { value: 'Retail', label: 'Retail' },
               { value: 'Restaurant & Cafe', label: 'Restaurant & Cafe' },
-              { value: 'Software , IT & Design Agency', label: 'Software , IT & Design Agency' },
+              {
+                value: 'Software , IT & Web , Design Agency',
+                label: 'Software , IT & Web , Design Agency',
+              },
+              { value: 'Sport', label: 'Sport' },
               { value: 'Travel & Tourism', label: 'Travel & Tourism' },
               { value: 'Trading & Import Export', label: 'Trading & Import Export' },
+              { value: 'Telecommunications', label: 'Telecommunications' },
+              { value: 'Transportation', label: 'Transportation' },
               { value: 'Other', label: 'Other' },
             ]}
           />
