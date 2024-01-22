@@ -43,7 +43,7 @@ function Survey({ current }) {
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
           name="are_you"
-          label="Are you"
+          label="Are you ?"
           rules={[
             {
               required: true,
@@ -63,8 +63,31 @@ function Survey({ current }) {
           />
         </Form.Item>
         <Form.Item
+          name="version"
+          label="How you want to use IDURAR ERP CRM ?"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            style={{
+              width: '100%',
+            }}
+            options={[
+              { value: 'online - one click deployement', label: 'Online (one click deployement)' },
+              {
+                value: 'Self-hosted',
+                label: 'Self-hosted (Require Tech Skills & Server & Database)',
+              },
+              { value: 'Both : online and self-hosted', label: 'Both : online and self-hosted' },
+            ]}
+          />
+        </Form.Item>
+        <Form.Item
           name="industry"
-          label="In witch Industry you want use IDURAR ERP CRM"
+          label="In witch Industry you want use IDURAR ERP CRM ?"
           rules={[
             {
               required: true,
@@ -98,6 +121,10 @@ function Survey({ current }) {
               { value: 'Education & School', label: 'Education & School' },
               { value: 'Finance', label: 'Finance' },
               { value: 'Food & Beverages', label: 'Food & Beverages' },
+              {
+                value: 'Jewelry & watches',
+                label: 'Jewelry & watches',
+              },
               { value: 'Healthcare', label: 'Healthcare , Hospital & Clinic' },
               { value: 'Hotel', label: 'Hotel' },
               { value: 'Logistics', label: 'Logistics' },
@@ -112,10 +139,6 @@ function Survey({ current }) {
               { value: 'Real Estate', label: 'Real Estate' },
               { value: 'Retail', label: 'Retail' },
               { value: 'Restaurant & Cafe', label: 'Restaurant & Cafe' },
-              {
-                value: 'Software , IT & Web , Design Agency',
-                label: 'Software , IT & Web , Design Agency',
-              },
               { value: 'Sport', label: 'Sport' },
               { value: 'Travel & Tourism', label: 'Travel & Tourism' },
               { value: 'Trading & Import Export', label: 'Trading & Import Export' },
@@ -127,7 +150,18 @@ function Survey({ current }) {
         </Form.Item>
         <Form.Item
           name="problem"
-          label="What's problem you are trying to solve by using ERP CRM"
+          label="What's problem you are trying to solve by using ERP CRM ?"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <TextArea />
+        </Form.Item>
+        <Form.Item
+          name="features"
+          label="What's features you are looking for ?"
           rules={[
             {
               required: true,
