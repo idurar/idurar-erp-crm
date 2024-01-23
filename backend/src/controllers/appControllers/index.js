@@ -36,4 +36,4 @@ const appControllers = async () => {
   return controllers;
 };
 
-export default appControllers();
+export default await appControllers();
