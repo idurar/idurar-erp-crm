@@ -1,6 +1,12 @@
 import { useCallback, useEffect } from 'react';
 
-import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  EllipsisOutlined,
+  RedoOutlined,
+} from '@ant-design/icons';
 import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
@@ -168,9 +174,8 @@ export default function DataTable({ config, extra = [] }) {
         title={DATATABLE_TITLE}
         ghost={false}
         extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
-            {translate('Refresh')}
-          </Button>,
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />} />,
+
           <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}
         style={{

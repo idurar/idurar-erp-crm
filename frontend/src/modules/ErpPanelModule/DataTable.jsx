@@ -171,9 +171,8 @@ export default function DataTable({ config, extra = [] }) {
         title={DATATABLE_TITLE}
         ghost={true}
         extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-            {translate('Refresh')}
-          </Button>,
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />} />,
+
           !disableAdd && <AddNewItem config={config} key={`${uniqueId()}`} />,
         ]}
         style={{
