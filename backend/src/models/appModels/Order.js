@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const orderSchema = new mongoose.Schema({
   removed: {
@@ -96,6 +97,6 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-orderSchema.plugin(require('mongoose-autopopulate'));
+orderSchema.plugin(mongooseAutoPopulate);
 
 export default mongoose.model('Order', orderSchema);

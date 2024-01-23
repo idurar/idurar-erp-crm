@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const paymentSchema = new mongoose.Schema({
   removed: {
@@ -52,5 +53,5 @@ const paymentSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-paymentSchema.plugin(require('mongoose-autopopulate'));
+paymentSchema.plugin(mongooseAutoPopulate);
 export default mongoose.model('Payment', paymentSchema);

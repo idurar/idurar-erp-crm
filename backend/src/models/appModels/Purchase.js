@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const purchaseSchema = new mongoose.Schema({
   removed: {
@@ -143,5 +144,5 @@ const purchaseSchema = new mongoose.Schema({
   },
 });
 
-purchaseSchema.plugin(require('mongoose-autopopulate'));
+purchaseSchema.plugin(mongooseAutoPopulate);
 export default mongoose.model('Purchase', purchaseSchema);

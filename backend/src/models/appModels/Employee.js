@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const employeeSchema = new mongoose.Schema({
   removed: {
@@ -181,6 +182,6 @@ const employeeSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-employeeSchema.plugin(require('mongoose-autopopulate'));
+employeeSchema.plugin(mongooseAutoPopulate);
 
 export default mongoose.model('Employee', employeeSchema);

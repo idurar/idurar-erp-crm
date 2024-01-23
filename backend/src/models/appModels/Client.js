@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const schema = new mongoose.Schema({
   removed: {
@@ -38,6 +39,6 @@ const schema = new mongoose.Schema({
   },
 });
 
-schema.plugin(require('mongoose-autopopulate'));
+schema.plugin(mongooseAutoPopulate);
 
 export default mongoose.model('Client', schema);

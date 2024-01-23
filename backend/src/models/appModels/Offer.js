@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const offerSchema = new mongoose.Schema({
   removed: {
@@ -125,5 +126,5 @@ const offerSchema = new mongoose.Schema({
   },
 });
 
-offerSchema.plugin(require('mongoose-autopopulate'));
+offerSchema.plugin(mongooseAutoPopulate);
 export default mongoose.model('Offer', offerSchema);

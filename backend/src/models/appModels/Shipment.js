@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const ShipmentSchema = new mongoose.Schema({
   removed: {
@@ -114,6 +115,6 @@ const ShipmentSchema = new mongoose.Schema({
   },
 });
 
-ShipmentSchema.plugin(require('mongoose-autopopulate'));
+ShipmentSchema.plugin(mongooseAutoPopulate);
 
 export default mongoose.model('Shipment', ShipmentSchema);
