@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Setting from '#models/coreModels/Setting.js';
 
 const Model = mongoose.model('Setting');
 

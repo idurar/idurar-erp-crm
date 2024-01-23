@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Taxes from '#models/appModels/Taxes.js';
 const Model = mongoose.model('Taxes');
 import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
 
