@@ -4,8 +4,8 @@ const Model = mongoose.model('Invoice');
 
 import custom from '#controllers/pdfController/index.js';
 
-import { calculate } from '#tst/helpers.js';
-import schema from './schemaValidate';
+import { calculate } from '#helpers.js';
+import schema from './schemaValidate.js';
 
 const update = async (req, res) => {
   return res.status(200).json({

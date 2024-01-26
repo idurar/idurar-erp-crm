@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const Model = mongoose.model('Offer');
 
-import custom from '@/controllers/pdfController/index.js';
+import custom from '#controllers/pdfController/index.js';
 
-import { calculate } from '@/helpers.js';
+import { calculate } from '#helpers.js';
 
 const update = async (req, res) => {
   return res.status(200).json({

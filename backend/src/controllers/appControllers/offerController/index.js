@@ -1,4 +1,4 @@
-import createCRUDController from '#controllers/middlewaresControllers/createCRUDController.js';
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
 import create from './create.js';
 import summary from './summary.js';
 import update from './update.js';
