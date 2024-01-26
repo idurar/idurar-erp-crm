@@ -1,4 +1,4 @@
-import { migrate } from './migrate.js';
+import migrate from './migrate.js';
 
 const search = async (Model, req, res) => {
   if (req.query.q === undefined || req.query.q.trim() === '') {

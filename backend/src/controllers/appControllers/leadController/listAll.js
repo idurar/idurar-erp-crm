@@ -1,4 +1,4 @@
-import { migrate } from './migrate.js';
+import migrate from './migrate.js';
 
 const listAll = async (Model, req, res) => {
   const sort = parseInt(req.query.sort) || 'desc';

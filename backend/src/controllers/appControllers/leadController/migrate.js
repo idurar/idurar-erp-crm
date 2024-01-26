@@ -17,4 +17,4 @@ const migrate = (result) => {
   return newData;
 };
 
-export { migrate };
+export default migrate;

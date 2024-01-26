@@ -1,4 +1,4 @@
-import { migrate } from './migrate.js';
+import migrate from './migrate.js';
 
 const paginatedList = async (Model, req, res) => {
   const page = req.query.page || 1;

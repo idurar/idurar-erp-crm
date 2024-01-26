@@ -1,4 +1,4 @@
-import { migrate } from './migrate.js';
+import migrate from './migrate.js';
 
 const read = async (Model, req, res) => {
   // Find document by id
