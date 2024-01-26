@@ -1,7 +1,5 @@
-require('module-alias/register');
 import mongoose from 'mongoose';
-import { globSync } from 'glob';
-import { resolve } from 'path';
+import modelsFilesImports from '#models/utils/exportAllModels.js';
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -23,12 +21,6 @@ mongoose.connection.on('error', (error) => {
   );
   console.error(`2. 🚫 Error → : ${error.message}`);
 });
-
-const modelsFiles = globSync('./src/models/**/*.js');
-
-for (const filePath of modelsFiles) {
-  require(resolve(filePath));
-}
 
 // Start our app!
 import app from './app.js';
