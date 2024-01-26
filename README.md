@@ -21,6 +21,29 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
 
+
+<p align="center">
+    <p align="center">
+        <a href="https://github.com/idurar/idurar-erp-crm/" target="blank">
+            <img src="https://img.shields.io/github/watchers/idurar/idurar-erp-crm?style=for-the-badge&logo=appveyor" alt="Watchers"/>
+        </a>
+        <a href="https://github.com/idurar/idurar-erp-crm/fork" target="blank">
+            <img src="https://img.shields.io/github/forks/idurar/idurar-erp-crm?style=for-the-badge&logo=appveyor" alt="Forks"/>
+        </a>
+        <a href="https://github.com/idurar/idurar-erp-crm/stargazers" target="blank">
+            <img src="https://img.shields.io/github/stars/idurar/idurar-erp-crm?style=for-the-badge&logo=appveyor" alt="Star"/>
+        </a>
+    </p>
+    <p align="center">
+        <a href="https://github.com/idurar/idurar-erp-crm/issues" target="blank">
+            <img src="https://img.shields.io/github/issues/idurar/idurar-erp-crm.svg?style=for-the-badge&logo=appveyor" alt="Issue"/>
+        </a>
+        <a href="https://github.com/idurar/idurar-erp-crm/pulls" target="blank">
+            <img src="https://img.shields.io/github/issues-pr/idurar/idurar-erp-crm.svg?style=for-the-badge&logo=appveyor" alt="Open Pull Request"/>
+        </a>
+    </p>
+</p>
+
 ## License
 
 IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
