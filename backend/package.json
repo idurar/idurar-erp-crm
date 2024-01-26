@@ -35,6 +35,7 @@
     "node-cache": "^5.1.2",
     "openai": "^4.22.0",
     "pug": "^3.0.2",
+    "punycode": "^2.3.1",
     "resend": "^2.0.0",
     "shortid": "^2.2.16",
     "transliteration": "^2.3.5"
