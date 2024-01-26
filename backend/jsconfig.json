@@ -2,7 +2,13 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"]
+      "#middlewares/*": ["./middlewares/*"],
+      "#locale/*": ["./locale/*"],
+      "#models/*": ["./models/*"],
+      "#controllers/*": ["./controllers/*"],
+      "#helpers*": ["./helpers.js"],
+      "#emailTemplate/*": ["./emailTemplate/*"],
+      "#handlers/*": ["./handlers/*"],
     }
   },
   "exclude": ["node_modules"]

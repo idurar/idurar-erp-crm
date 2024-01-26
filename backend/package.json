@@ -42,9 +42,6 @@
   "devDependencies": {
     "nodemon": "3.0.1"
   },
-  "_moduleAliases": {
-    "@": "src"
-  },
   "main": "server.js",
   "author": "IDURAR",
   "email": "hello@idurarapp.com",
