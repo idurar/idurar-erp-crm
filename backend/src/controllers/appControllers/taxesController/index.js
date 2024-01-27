@@ -17,7 +17,7 @@ methods.create = async (req, res) => {
   return res.status(200).json({
     success: true,
     result: result,
-    message: 'Tax created successfully',
+    message: `Tax created successfully`,
   });
 };
 
@@ -25,7 +25,7 @@ methods.delete = async (req, res) => {
   return res.status(403).json({
     success: false,
     result: null,
-    message: "you can't delete tax after it has been created",
+    message: `you can't delete tax after it has been created`,
   });
 };
 
@@ -52,7 +52,7 @@ methods.update = async (req, res) => {
     return res.status(422).json({
       success: false,
       result: null,
-      message: 'You cannot disable the tax because it is the only existing one',
+      message: `You cannot disable the tax because it is the only existing one`,
     });
   }
 
@@ -60,7 +60,7 @@ methods.update = async (req, res) => {
 
   return res.status(200).json({
     success: true,
-    message: 'Tax updated successfully',
+    message: `Tax updated successfully`,
     result,
   });
 };
