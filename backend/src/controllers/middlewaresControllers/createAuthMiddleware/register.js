@@ -19,11 +19,11 @@ const register = async (req, res, { userModel }) => {
     return res.status(409).json({
       success: false,
       result: null,
-      message: 'Registration is not allowed , please contact application administrator',
+      message: `Registration is not allowed, please contact application administrator`,
     });
   }
 
-  const UserPassword = mongoose.model(userModel + 'Password');
+  const UserPassword = mongoose.model(`${userModel}Password`);
   const User = mongoose.model(userModel);
   const { name, email, password } = req.body;
 
@@ -42,7 +42,7 @@ const register = async (req, res, { userModel }) => {
       success: false,
       result: null,
       error: error,
-      message: 'Invalid/Missing credentials.',
+      message: `Invalid/Missing credentials.`,
       errorMessage: error.message,
     });
   }
@@ -52,12 +52,12 @@ const register = async (req, res, { userModel }) => {
     return res.status(409).json({
       success: false,
       result: null,
-      message: 'An account with this email has already been registered.',
+      message: `An account with this email has already been registered.`,
     });
   }
 
   const salt = uniqueId();
-  const hashedPassword = bcrypt.hashSync(salt + password);
+  const hashedPassword = bcrypt.hashSync(`${salt}${password}`);
   const emailToken = uniqueId();
 
   const savedUser = await User.create({ email, name });
@@ -75,13 +75,13 @@ const register = async (req, res, { userModel }) => {
     return res.status(403).json({
       success: false,
       result: null,
-      message: "document couldn't save correctly",
+      message: `document couldn't save correctly`,
     });
   }
 
   const url = checkAndCorrectURL(idurar_base_url);
 
-  const link = url + '/verify/' + savedUser._id + '/' + emailToken;
+  const link = `${url}/verify/${savedUser._id}/${emailToken}`;
 
   await sendMail({ email, name, link, idurar_app_email });
   // Email verification logic here
@@ -93,7 +93,7 @@ const register = async (req, res, { userModel }) => {
       name: savedUser.name,
       email: savedUser.email,
     },
-    message: 'Account registered successfully. Please verify your email.',
+    message: `Account registered successfully. Please verify your email.`,
   });
 };
 
