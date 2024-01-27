@@ -1,14 +1,13 @@
-const { loadSettings, increaseBySettingKey } = require('@/middlewares/settings');
-
-const { generateUniqueNumber } = require('@/middlewares/inventory');
+import { loadSettings, increaseBySettingKey } from '#middlewares/settings';
+import { generateUniqueNumber } from '#middlewares/inventory';
 
 const create = async (Model, req, res) => {
   let body = req.body;
 
-  body['createdBy'] = req.admin._id;
+  body.createdBy = req.admin._id;
 
   const settings = await loadSettings();
-  const last_order_number = settings['last_order_number'];
+  const last_order_number = settings.last_order_number;
 
   body.number = generateUniqueNumber(last_order_number);
   // Creating a new document in the collection
@@ -25,4 +24,4 @@ const create = async (Model, req, res) => {
   });
 };
 
-module.exports = create;
+export default create;

@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+import mongoose from 'mongoose';
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController';
 
-const create = require('./create');
+import create from './create.js';
 
-function modelController() {
+const modelController = () => {
   const modelName = 'Order';
   const Model = mongoose.model(modelName);
   const methods = createCRUDController(modelName);
   methods.create = (req, res) => create(Model, req, res);
   return methods;
-}
+};
 
-module.exports = modelController();
+export default modelController();
