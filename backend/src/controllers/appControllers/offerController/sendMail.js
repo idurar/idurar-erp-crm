@@ -1,10 +1,10 @@
-const fs = require('fs');
-const custom = require('@/controllers/pdfController');
-const { SendOffer } = require('@/emailTemplate/SendEmailTemplate');
-const mongoose = require('mongoose');
+import fs from 'fs';
+import custom from '#controllers/pdfController';
+import { SendOffer } from '#emailTemplate/SendEmailTemplate';
+import mongoose from 'mongoose';
 const OfferModel = mongoose.model('Offer');
-const { Resend } = require('resend');
-const { loadSettings } = require('@/middlewares/settings');
+import { Resend } from 'resend';
+import { loadSettings } from '#middlewares/settings';
 
 const mail = async (req, res) => {
   const { id } = req.body;
@@ -28,7 +28,7 @@ const mail = async (req, res) => {
 
   const modelName = 'Offer';
 
-  const fileId = modelName.toLowerCase() + '-' + result._id + '.pdf';
+  const fileId = `${modelName.toLowerCase()}-${result._id}.pdf`;
   const folderPath = modelName.toLowerCase();
   const targetLocation = `src/public/download/${folderPath}/${fileId}`;
 
@@ -80,4 +80,4 @@ const sendViaApi = async (email, name, filePath) => {
   return data;
 };
 
-module.exports = mail;
+export default mail;
