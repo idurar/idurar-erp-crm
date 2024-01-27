@@ -2,8 +2,6 @@ import mongoose from 'mongoose';
 
 const Model = mongoose.model('Quote');
 
-import custom from '#controllers/pdfController/index.js';
-
 import { calculate } from '#helpers.js';
 
 const update = async (req, res) => {
@@ -24,22 +22,22 @@ const update = async (req, res) => {
 
   //Calculate the items array with subTotal, total, taxTotal
   items.map((item) => {
-    let total = calculate.multiply(item['quantity'], item['price']);
+    let total = calculate.multiply(item.quantity, item.price);
     //sub total
     subTotal = calculate.add(subTotal, total);
     //item total
-    item['total'] = total;
+    item.total = total;
   });
   taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
 
   let body = req.body;
 
-  body['subTotal'] = subTotal;
-  body['taxTotal'] = taxTotal;
-  body['total'] = total;
-  body['items'] = items;
-  body['pdf'] = 'quote-' + req.params.id + '.pdf';
+  body.subTotal = subTotal;
+  body.taxTotal = taxTotal;
+  body.total = total;
+  body.items = items;
+  body.pdf = `quote-${req.params.id}.pdf`;
   // Find document by id and updates with the required fields
 
   const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
@@ -51,7 +49,7 @@ const update = async (req, res) => {
   return res.status(200).json({
     success: true,
     result,
-    message: 'we update this document by this id: ' + req.params.id,
+    message: `we update this document by this id: ${req.params.id}`,
   });
 };
 
