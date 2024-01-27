@@ -26,6 +26,7 @@ const RegisterPage = () => {
     return (
       <Loading isLoading={isLoading}>
         <Form
+          layout="vertical"
           name="signup"
           className="login-form"
           initialValues={{

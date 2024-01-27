@@ -1,4 +1,4 @@
-export const missedWords = {
+export default {
   taxes: 'Taxes',
   upgrade_now: 'Upgrade Now',
   upgrade_for_one_time_lifetime_plan: 'Upgrade For One Time Lifetime Plan',

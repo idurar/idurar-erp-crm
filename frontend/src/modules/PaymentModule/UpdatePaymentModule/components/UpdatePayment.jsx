@@ -32,10 +32,11 @@ export default function UpdatePayment({ config, currentInvoice }) {
       setMaxAmount(
         calculate.sub(calculate.sub(total, discount), calculate.sub(calculate.sub(credit, amount)))
       );
-      if (currentInvoice.date) {
-        currentInvoice.date = dayjs(currentInvoice.date);
+      const newInvoiceValues = { ...currentInvoice };
+      if (newInvoiceValues.date) {
+        newInvoiceValues.date = dayjs(newInvoiceValues.date);
       }
-      form.setFieldsValue(currentInvoice);
+      form.setFieldsValue(newInvoiceValues);
     }
   }, [currentInvoice]);
 

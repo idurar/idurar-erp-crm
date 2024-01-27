@@ -10,13 +10,13 @@ export const fields = {
   company: {
     type: 'search',
     entity: 'company',
+    renderAsTag: true,
     displayLabels: ['name'],
     searchFields: 'name',
     dataIndex: ['company', 'name'],
   },
   country: {
     type: 'country',
-    color: 'red',
   },
   phone: {
     type: 'phone',

@@ -21,10 +21,10 @@ export default function UpdatePaymentModule({ config }) {
 
   const { result: currentResult } = useSelector(selectReadItem);
 
-  item = item ? item : currentResult;
+  const selectedItem = item ? { ...item } : { ...currentResult };
 
   useLayoutEffect(() => {
-    dispatch(erp.currentAction({ actionType: 'update', id, data: item }));
+    dispatch(erp.currentAction({ actionType: 'update', id, data: selectedItem }));
   }, []);
 
   return (

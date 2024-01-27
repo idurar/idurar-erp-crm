@@ -5,6 +5,7 @@ export const fields = {
   },
   mainContact: {
     type: 'search',
+    renderAsTag: true,
     label: 'Contact',
     entity: 'people',
     displayLabels: ['firstname', 'lastname'],
@@ -13,7 +14,6 @@ export const fields = {
   },
   country: {
     type: 'country',
-    color: 'success',
   },
   phone: {
     type: 'phone',
@@ -22,7 +22,7 @@ export const fields = {
     type: 'email',
   },
   website: {
-    type: 'string',
+    type: 'url',
   },
   // legalName: {
   //   type: 'string',

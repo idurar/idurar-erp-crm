@@ -9,7 +9,6 @@ const orderSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.ObjectId,
     ref: 'Admin',
-    required: true,
   },
   branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   assigned: {
@@ -18,9 +17,8 @@ const orderSchema = new mongoose.Schema({
   },
   number: {
     type: Number,
-  },
-  year: {
-    type: Number,
+    unique: true,
+    required: true,
   },
   recurring: {
     type: String,
@@ -35,20 +33,57 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Client',
     required: true,
+    autopopulate: true,
   },
   invoice: {
     type: mongoose.Schema.ObjectId,
     ref: 'Ivoince',
+    autopopulate: true,
   },
-  products: [
+  items: [
     {
-      productId: {
+      product: {
         type: mongoose.Schema.ObjectId,
         ref: 'Product',
+        required: true,
       },
-      quantity: {
+      itemName: {
         type: String,
         required: true,
+      },
+      description: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      discount: {
+        type: Number,
+        default: 0,
+      },
+      // taxRate: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      // subTotal: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      // taxTotal: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      total: {
+        type: Number,
+      },
+      note: {
+        type: String,
       },
     },
   ],

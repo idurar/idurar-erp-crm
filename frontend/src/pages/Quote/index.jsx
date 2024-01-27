@@ -1,12 +1,13 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-
+import { tagColor } from '@/utils/statusTagColor';
 import QuoteDataTableModule from '@/modules/QuoteModule/QuoteDataTableModule';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 
 export default function Quote() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const entity = 'quote';
   const { moneyFormatter } = useMoney();
 
@@ -28,14 +29,14 @@ export default function Quote() {
       title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
       title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
@@ -69,17 +70,14 @@ export default function Quote() {
       title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
-        let color =
-          status === 'draft'
-            ? 'cyan'
-            : status === 'sent'
-              ? 'blue'
-              : status === 'accepted'
-                ? 'green'
-                : status === 'expired'
-                  ? 'orange'
-                  : 'red';
-        return <Tag color={color}>{status && translate(status)}</Tag>;
+        let tagStatus = tagColor(status);
+
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {status && translate(tagStatus.label)}
+          </Tag>
+        );
       },
     },
   ];

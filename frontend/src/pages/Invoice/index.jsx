@@ -1,12 +1,14 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
 import useLanguage from '@/locale/useLanguage';
+import { tagColor } from '@/utils/statusTagColor';
 
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
 
 export default function Invoice() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const entity = 'invoice';
   const { moneyFormatter } = useMoney();
 
@@ -28,14 +30,14 @@ export default function Invoice() {
       title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
       title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
@@ -68,35 +70,33 @@ export default function Invoice() {
       title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
-        let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
+        let tagStatus = tagColor(status);
 
-        return <Tag color={color}>{status && translate(status)}</Tag>;
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {status && translate(tagStatus.label)}
+          </Tag>
+        );
       },
     },
     {
       title: translate('Payment'),
       dataIndex: 'paymentStatus',
       render: (paymentStatus) => {
-        let color =
-          paymentStatus === 'unpaid'
-            ? 'volcano'
-            : paymentStatus === 'paid'
-              ? 'green'
-              : paymentStatus === 'overdue'
-                ? 'red'
-                : 'purple';
+        let tagStatus = tagColor(paymentStatus);
 
-        return <Tag color={color}>{paymentStatus && translate(paymentStatus)}</Tag>;
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {paymentStatus && translate(paymentStatus)}
+          </Tag>
+        );
       },
     },
     {
       title: translate('Created By'),
       dataIndex: ['createdBy', 'name'],
-      // render: (name) => {
-      //   console.log('🚀 ~ file: index.jsx:81 ~ Invoice ~ name:', name);
-      //   let color = name !== '' ? 'blue' : 'gray';
-      //   return <Tag color={color}>{name ? name : 'Administrator'}</Tag>;
-      // },
     },
   ];
 

@@ -19,7 +19,16 @@ const expenseCategorySchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  color: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: {
     type: Date,
     default: Date.now,
   },

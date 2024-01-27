@@ -7,6 +7,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { DatePicker } from 'antd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
+import SelectAsync from '@/components/SelectAsync';
 
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
@@ -14,10 +15,9 @@ import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
-
+import { useDate } from '@/settings';
 import { useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
-import SelectAsync from '@/components/SelectAsync';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
   const { last_offer_number } = useSelector(selectFinanceSettings);
@@ -31,6 +31,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
 
 function LoadOfferForm({ subTotal = 0, current = null }) {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const { last_offer_number } = useSelector(selectFinanceSettings);
   const [lastNumber, setLastNumber] = useState(() => last_offer_number + 1);
   const [total, setTotal] = useState(0);
@@ -51,8 +52,8 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
   }, [current]);
   useEffect(() => {
     const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
-    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)));
-    setTotal(Number.parseFloat(currentTotal));
+    setTaxTotal(calculate.multiply(subTotal, taxRate));
+    setTotal(currentTotal);
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);
@@ -143,7 +144,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs()}
           >
-            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={7}>
@@ -158,7 +159,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs().add(30, 'days')}
           >
-            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
       </Row>
@@ -231,18 +232,15 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               rules={[
                 {
                   required: true,
-                  message: 'Please choose the tax!',
                 },
               ]}
             >
               <SelectAsync
                 value={taxRate}
                 onChange={handelTaxChange}
-                bordered={false}
-                entity={'taxes'}
-                outputValue={'taxValue'}
+                entity="taxes"
+                outputValue="taxValue"
                 displayLabels={['taxName']}
-                loadDefault={true}
                 withRedirect={true}
                 urlToRedirect="/taxes"
                 redirectLabel="Add New Tax"

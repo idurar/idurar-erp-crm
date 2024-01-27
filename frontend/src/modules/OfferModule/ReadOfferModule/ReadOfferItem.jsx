@@ -19,9 +19,10 @@ import { generate as uniqueId } from 'shortid';
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
+import { tagColor } from '@/utils/statusTagColor';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -72,7 +73,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
   const dispatch = useDispatch();
 
   const { moneyFormatter } = useMoney();
-  const { send } = useMail({ entity });
+  const { send, isLoading: mailInProgress } = useMail({ entity });
   const navigate = useNavigate();
   const [lead, setLead] = useState({});
 
@@ -134,7 +135,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
+        tags={<Tag color={tagColor(currentErp.status)?.color}>{translate(currentErp.status)}</Tag>}
         // subTitle="This is cuurent erp page"
         extra={[
           <Button
@@ -160,6 +161,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
           </Button>,
           <Button
             key={`${uniqueId()}`}
+            loading={mailInProgress}
             onClick={() => {
               send(currentErp._id);
             }}

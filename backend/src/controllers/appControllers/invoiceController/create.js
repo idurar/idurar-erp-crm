@@ -2,8 +2,6 @@ import mongoose from 'mongoose';
 
 const Model = mongoose.model('Invoice');
 
-import * as custom from '#controllers/pdfController/index.js';
-
 import { calculate } from '#helpers.js';
 import { increaseBySettingKey } from '#middlewares/settings/index.js';
 import schema from './schemaValidate.js';

@@ -1,6 +1,12 @@
 import { useCallback, useEffect } from 'react';
 
-import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  EllipsisOutlined,
+  RedoOutlined,
+} from '@ant-design/icons';
 import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
@@ -9,7 +15,7 @@ import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/locale/useLanguage';
 import { dataForTable } from '@/utils/dataStructure';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 
 import { generate as uniqueId } from 'shortid';
 
@@ -37,6 +43,7 @@ export default function DataTable({ config, extra = [] }) {
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
+  const { dateFormat } = useDate();
 
   const items = [
     {
@@ -89,7 +96,7 @@ export default function DataTable({ config, extra = [] }) {
 
   let dispatchColumns = [];
   if (fields) {
-    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter })];
+    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat })];
   } else {
     dispatchColumns = [...dataTableColumns];
   }
@@ -167,9 +174,8 @@ export default function DataTable({ config, extra = [] }) {
         title={DATATABLE_TITLE}
         ghost={false}
         extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
-            {translate('Refresh')}
-          </Button>,
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />} />,
+
           <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}
         style={{

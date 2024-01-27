@@ -1,6 +1,6 @@
 import { Form, Input, Select } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import { message, Upload, Button } from 'antd';
+import { UploadOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { message, Upload, Button, Switch } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';
 
@@ -70,6 +70,9 @@ export default function AdminForm({ isUpdateForm = false }) {
           <Input.Password autoComplete="new-password" />
         </Form.Item>
       )}
+      <Form.Item label={translate('enabled')} name="enabled" valuePropName={'checked'}>
+        <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
+      </Form.Item>
       <Form.Item
         label={translate('Role')}
         name="role"
@@ -80,11 +83,11 @@ export default function AdminForm({ isUpdateForm = false }) {
         ]}
       >
         <Select>
-          <Select.Option value="admin">{translate("admin_super_admin")}</Select.Option>
-          <Select.Option value="staffAdmin">{translate("staff_admin_crud")}</Select.Option>
-          <Select.Option value="staff">{translate("staff_cru")}</Select.Option>
-          <Select.Option value="createOnly">{translate("create_and_read_only")}</Select.Option>
-          <Select.Option value="readOnly">{translate("read_only")}</Select.Option>
+          <Select.Option value="admin">{translate('admin_super_admin')}</Select.Option>
+          <Select.Option value="staffAdmin">{translate('staff_admin_crud')}</Select.Option>
+          <Select.Option value="staff">{translate('staff_cru')}</Select.Option>
+          <Select.Option value="createOnly">{translate('create_and_read_only')}</Select.Option>
+          <Select.Option value="readOnly">{translate('read_only')}</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
@@ -94,7 +97,7 @@ export default function AdminForm({ isUpdateForm = false }) {
         getValueFromEvent={(e) => e.fileList}
       >
         <Upload beforeUpload={beforeUpload}>
-          <Button icon={<UploadOutlined />}>{translate("click_to_upload")}</Button>
+          <Button icon={<UploadOutlined />}>{translate('click_to_upload')}</Button>
         </Upload>
       </Form.Item>
     </>

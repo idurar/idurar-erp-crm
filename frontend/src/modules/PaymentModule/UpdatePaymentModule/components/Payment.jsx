@@ -4,10 +4,11 @@ import { Button, Row, Col, Descriptions, Tag, Divider } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 import { FileTextOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { generate as uniqueId } from 'shortid';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import { useNavigate } from 'react-router-dom';
 import useLanguage from '@/locale/useLanguage';
 import UpdatePayment from './UpdatePayment';
+import { tagColor } from '@/utils/statusTagColor';
 
 export default function Payment({ config, currentItem }) {
   const translate = useLanguage();
@@ -27,6 +28,14 @@ export default function Payment({ config, currentItem }) {
     return () => controller.abort();
   }, [currentItem]);
 
+  const [client, setClient] = useState({});
+
+  useEffect(() => {
+    if (currentErp?.client) {
+      setClient(currentErp.client[currentErp.client.type]);
+    }
+  }, [currentErp]);
+
   return (
     <>
       <Row gutter={[12, 12]}>
@@ -41,7 +50,11 @@ export default function Payment({ config, currentItem }) {
             onBack={() => navigate(`/${entity.toLowerCase()}`)}
             title={`Update  ${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
             ghost={false}
-            tags={<Tag color="volcano">{currentErp.paymentStatus}</Tag>}
+            tags={
+              <Tag color={tagColor(currentErp.paymentStatus)?.color}>
+                {currentErp.paymentStatus}
+              </Tag>
+            }
             // subTitle="This is cuurent erp page"
             extra={[
               <Button
@@ -58,7 +71,7 @@ export default function Payment({ config, currentItem }) {
                 onClick={() => navigate(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
-                label={translate('Show invoice')}
+                {translate('Show invoice')}
               </Button>,
             ]}
             style={{
@@ -77,16 +90,14 @@ export default function Payment({ config, currentItem }) {
           lg={{ span: 10, order: 2, push: 4 }}
         >
           <div className="space50"></div>
-          <Descriptions title={`${translate('Client')} : ${currentErp.client.company}`} column={1}>
-            <Descriptions.Item label={translate('email')}>
-              {currentErp.client.email}
-            </Descriptions.Item>
-            <Descriptions.Item label={translate('Phone')}>
-              {currentErp.client.phone}
-            </Descriptions.Item>
+          <Descriptions title={`${translate('Client')} : ${currentErp.client.name}`} column={1}>
+            <Descriptions.Item label={translate('email')}>{client.email}</Descriptions.Item>
+            <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
             <Divider dashed />
             <Descriptions.Item label={translate('Payment Status')}>
-              {currentErp.paymentStatus}
+              <Tag color={tagColor(currentErp.paymentStatus)?.color}>
+                {currentErp.paymentStatus}
+              </Tag>
             </Descriptions.Item>
             <Descriptions.Item label={translate('SubTotal')}>
               {money.amountFormatter({ amount: currentErp.subTotal })}

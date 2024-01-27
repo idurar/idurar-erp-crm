@@ -16,13 +16,15 @@ import {
   ContainerOutlined,
   FileSyncOutlined,
   DashboardOutlined,
-  TeamOutlined,
+  TagOutlined,
+  TagsOutlined,
   UserOutlined,
   CreditCardOutlined,
   MenuOutlined,
   FileOutlined,
   ShopOutlined,
   FilterOutlined,
+  WalletOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -30,7 +32,7 @@ const { Sider } = Layout;
 export default function Navigation() {
   const { isMobile } = useResponsive();
 
-  return isMobile ? <MobileSidebar /> : <Sidebar collapsible={true} />;
+  return isMobile ? <MobileSidebar /> : <Sidebar collapsible={false} />;
 }
 
 function Sidebar({ collapsible, isMobile = false }) {
@@ -95,24 +97,44 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <CreditCardOutlined />,
       label: <Link to={'/payment'}>{translate('payment')}</Link>,
     },
+    {
+      key: 'expenses',
+      icon: <WalletOutlined />,
+      label: <Link to={'/expenses'}>{translate('expense')}</Link>,
+    },
+    {
+      key: 'product',
+      icon: <TagOutlined />,
+      label: <Link to={'/product'}>{translate('product')}</Link>,
+    },
+    {
+      key: 'categoryproduct',
+      icon: <TagsOutlined />,
+      label: <Link to={'/category/product'}>{translate('product_category')}</Link>,
+    },
     // {
     //   key: 'employee',
     //   icon: <UserOutlined />,
     //   label: <Link to={'/employee'}>{translate('employee')}</Link>,
     // },
-    {
-      key: 'admin',
-      icon: <TeamOutlined />,
-      label: <Link to={'/admin'}>{translate('admin')}</Link>,
-    },
+
     {
       label: translate('Settings'),
       key: 'settings',
       icon: <SettingOutlined />,
       children: [
         {
+          key: 'admin',
+          // icon: <TeamOutlined />,
+          label: <Link to={'/admin'}>{translate('admin')}</Link>,
+        },
+        {
           key: 'generalSettings',
           label: <Link to={'/settings'}>{translate('general_settings')}</Link>,
+        },
+        {
+          key: 'expensesCategory',
+          label: <Link to={'/category/expenses'}>{translate('expenses_Category')}</Link>,
         },
         // {
         //   key: 'emailTemplates',
@@ -139,7 +161,12 @@ function Sidebar({ collapsible, isMobile = false }) {
   ];
 
   useEffect(() => {
-    if (location) if (currentPath !== location.pathname) setCurrentPath(location.pathname.slice(1));
+    if (location)
+      if (currentPath !== location.pathname) {
+        if (location.pathname === '/') {
+          setCurrentPath('dashboard');
+        } else setCurrentPath(location.pathname.slice(1));
+      }
   }, [location, currentPath]);
 
   useEffect(() => {
@@ -168,8 +195,9 @@ function Sidebar({ collapsible, isMobile = false }) {
         height: '100vh',
         position: 'fixed',
         bottom: '20px',
-        boxShadow: '0px 0px 20px 3px rgba(150, 190, 238, 0.15)',
         ...(!isMobile && {
+          background: 'none',
+          border: 'none',
           left: '20px',
           top: '20px',
           borderRadius: '8px',
@@ -178,17 +206,26 @@ function Sidebar({ collapsible, isMobile = false }) {
       theme={'light'}
     >
       <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-        <img src={logoIcon} alt="Logo" style={{ height: '32px' }} />
+        <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
 
         {!showLogoApp && (
           <img
             src={logoText}
             alt="Logo"
-            style={{ marginTop: '3px', marginLeft: '10px', height: '29px' }}
+            style={{ marginTop: '3px', marginLeft: '10px', height: '38px' }}
           />
         )}
       </div>
-      <Menu items={items} mode="inline" theme={'light'} selectedKeys={[currentPath]} />
+      <Menu
+        items={items}
+        mode="inline"
+        theme={'light'}
+        selectedKeys={[currentPath]}
+        style={{
+          background: 'none',
+          border: 'none',
+        }}
+      />
     </Sider>
   );
 }
