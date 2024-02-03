@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const schema = new mongoose.Schema({
+const surveySchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -27,4 +27,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Supplier', schema);
+export default mongoose.model('Survey', surveySchema);

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
 
-const adminSchema = new Schema({
+const adminSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,

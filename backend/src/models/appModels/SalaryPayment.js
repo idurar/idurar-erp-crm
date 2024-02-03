@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const SalaryPaymentSchema = new mongoose.Schema({
+const salaryPaymentSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -49,5 +49,5 @@ const SalaryPaymentSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-SalaryPaymentSchema.plugin(mongooseAutoPopulate);
-export default mongoose.model('SalaryPayment', SalaryPaymentSchema);
+salaryPaymentSchema.plugin(mongooseAutoPopulate);
+export default mongoose.model('SalaryPayment', salaryPaymentSchema);

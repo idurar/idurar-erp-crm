@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const schema = new mongoose.Schema({
+const peopleSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -200,5 +200,5 @@ const schema = new mongoose.Schema({
   },
 });
 
-schema.plugin(mongooseAutoPopulate);
-export default mongoose.model('People', schema);
+peopleSchema.plugin(mongooseAutoPopulate);
+export default mongoose.model('People', peopleSchema);
