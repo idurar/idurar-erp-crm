@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import modelsFilesImports from '#models/utils/exportAllModels.js';
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -12,7 +11,6 @@ if (major < 20) {
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 dotenv.config({ path: '.env.local' });
-
 mongoose.connect(process.env.DATABASE);
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
