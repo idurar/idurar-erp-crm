@@ -86,4 +86,4 @@ const SendPaymentReceipt = ({
     `;
 };
 
-export default { SendInvoice, SendQuote, SendOffer, SendPaymentReceipt };
+export { SendInvoice, SendQuote, SendOffer, SendPaymentReceipt };

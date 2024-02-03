@@ -8,7 +8,6 @@ const roles = {
   createOnly: ['create', 'read', 'download', 'upload'],
   readOnly: ['read', 'download'],
 };
-exports.roles = roles;
 
 const hasPermission = (permissionName = 'none') => {
   return function (req, res, next) {
@@ -30,4 +29,4 @@ const hasPermission = (permissionName = 'none') => {
   };
 };
 
-export { hasPermission };
+export { hasPermission, roles};

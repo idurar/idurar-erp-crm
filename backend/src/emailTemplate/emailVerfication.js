@@ -93,4 +93,4 @@ const afterRegistrationSuccess = ({
     `;
 };
 
-export { afterRegistrationSuccess };
+export { emailVerfication, passwordVerfication, afterRegistrationSuccess }
