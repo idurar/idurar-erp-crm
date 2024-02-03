@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import createCRUDController from '#controllers/middlewaresControllers/createCRUDController';
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
 
 import create from './create.js';
 

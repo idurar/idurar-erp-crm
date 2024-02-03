@@ -1,5 +1,5 @@
-import generateUniqueNumber from './generateUniqueNumber';
+import {generateUniqueNumber} from './generateUniqueNumber.js';
 
-export default {
+export {
   generateUniqueNumber,
 };

@@ -1,10 +1,9 @@
 import fs from 'fs';
-import custom from '#controllers/pdfController';
-import { SendPaymentReceipt } from '#emailTemplate/SendEmailTemplate';
-import mongoose from 'mongoose';
-import PaymentModel from '#models/Payment';
+import custom from '#controllers/pdfController/index.js';
+import { SendPaymentReceipt } from '#emailTemplate/SendEmailTemplate.js';
+import PaymentModel from '#models/appModels/Payment.js';
 import { Resend } from 'resend';
-import { loadSettings } from '#middlewares/settings';
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const mail = async (req, res) => {
   const { id } = req.body;

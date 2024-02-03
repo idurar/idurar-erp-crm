@@ -1,5 +1,5 @@
-import { loadSettings, increaseBySettingKey } from '#middlewares/settings';
-import { generateUniqueNumber } from '#middlewares/inventory';
+import { loadSettings, increaseBySettingKey } from '#middlewares/settings/index.js';
+import { generateUniqueNumber } from '#middlewares/inventory/index.js';
 
 const create = async (Model, req, res) => {
   let body = req.body;

@@ -1,4 +1,4 @@
-import { afterRegistrationSuccess } from '#emailTemplate/emailVerfication';
+import { afterRegistrationSuccess } from '#emailTemplate/emailVerfication.js';
 import { Resend } from 'resend';
 
 const sendIdurarOffer = async ({ email, name }) => {
