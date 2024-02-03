@@ -79,7 +79,7 @@ async function translateFileName(language, filename) {
   return list;
 }
 
-import { forEach } from '../locale/languages';
+import { languages } from '../locale/languages';
 
 const featuresContent = readFileSync(`./src/aiFeatures/featuresContent.md`, 'utf-8');
 
@@ -94,6 +94,6 @@ async function generateTranslation(language) {
   });
 }
 
-forEach(({ label, value }) => {
+languages.forEach(({ label, value }) => {
   generateTranslation({ label, value });
 });
