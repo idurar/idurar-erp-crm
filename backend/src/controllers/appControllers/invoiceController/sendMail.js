@@ -1,6 +1,6 @@
 import fs from 'fs';
 import custom from '#controllers/pdfController/index.js';
-import { SendInvoice } from '#emailTemplate/SendInvoice.js';
+import { SendInvoice } from '#emailTemplate/SendEmailTemplate.js';
 import mongoose from 'mongoose';
 const InvoiceModel = mongoose.model('Invoice');
 import { Resend } from 'resend';

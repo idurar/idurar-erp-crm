@@ -1,10 +1,10 @@
 import fs from 'fs';
-import custom from '#controllers/pdfController';
-import { SendOffer } from '#emailTemplate/SendEmailTemplate';
+import custom from '#controllers/pdfController/index.js';
+import { SendOffer } from '#emailTemplate/SendEmailTemplate.js';
 import mongoose from 'mongoose';
 const OfferModel = mongoose.model('Offer');
 import { Resend } from 'resend';
-import { loadSettings } from '#middlewares/settings';
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const mail = async (req, res) => {
   const { id } = req.body;
