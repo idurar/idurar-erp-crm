@@ -18,7 +18,7 @@ router.route('/:subPath/:directory/:file').get((req, res) => {
         res.status(404).json({
           success: false,
           result: null,
-          message: `we could not find: ${file}`,
+          message: `We could not find: ${file}`,
         });
       }
     });

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const schema = new mongoose.Schema({
+const branchSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -132,4 +132,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Branch', schema);
+export default mongoose.model('Branch', branchSchema);

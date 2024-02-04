@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const schema = new mongoose.Schema({
+const companySchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -215,4 +215,4 @@ const schema = new mongoose.Schema({
 });
 
 schema.plugin(mongooseAutoPopulate);
-export default mongoose.model('Company', schema);
+export default mongoose.model('Company', companySchema);
