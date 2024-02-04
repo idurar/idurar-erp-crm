@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import models from '#models/utils/exportAllModels.js';
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
