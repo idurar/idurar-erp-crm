@@ -214,5 +214,5 @@ const companySchema = new mongoose.Schema({
   },
 });
 
-schema.plugin(mongooseAutoPopulate);
+companySchema.plugin(mongooseAutoPopulate);
 export default mongoose.model('Company', companySchema);

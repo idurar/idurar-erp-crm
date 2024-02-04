@@ -39,6 +39,6 @@ const clientSchema = new mongoose.Schema({
   },
 });
 
-schema.plugin(mongooseAutoPopulate);
+clientSchema.plugin(mongooseAutoPopulate);
 
 export default mongoose.model('Client', clientSchema);
