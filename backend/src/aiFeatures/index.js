@@ -79,7 +79,7 @@ async function translateFileName(language, filename) {
   return list;
 }
 
-import { languages } from '../locale/languages';
+import languages from '../locale/languages.js';
 
 const featuresContent = readFileSync(`./src/aiFeatures/featuresContent.md`, 'utf-8');
 

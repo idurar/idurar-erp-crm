@@ -73,7 +73,7 @@ async function translate(language, langObject) {
   return list;
 }
 
-import languages from '../locale/languages';
+import languages from '../locale/languages.js';
 import missedWords from './missedWords';
 
 const generateTranslation = async (language) => {
