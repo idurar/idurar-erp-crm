@@ -12,8 +12,8 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
     filename: (req, file, cb) => {
       try {
         // fetching the file extension of the uploaded file
-        const fileExtension = path.extname(file.originalname);
-        const uniqueFileID = Math.random().toString(36).slice(2, 7); // generates unique ID of length 5
+        let fileExtension = path.extname(file.originalname);
+        let uniqueFileID = Math.random().toString(36).slice(2, 7); // generates unique ID of length 5
 
         let originalname = '';
         if (req.body.seotitle) {
@@ -22,7 +22,7 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
           originalname = slugify(file.originalname.split('.')[0].toLocaleLowerCase()); // convert any language to English characters
         }
 
-        const _fileName = `${originalname}-${uniqueFileID}${fileExtension}`;
+        let _fileName = `${originalname}-${uniqueFileID}${fileExtension}`;
 
         const filePath = `public/uploads/${entity}/${_fileName}`;
         // saving file name and extension in request upload object
@@ -44,7 +44,7 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
     },
   });
 
-  const filterType = fileFilter(fileType);
+  let filterType = fileFilter(fileType);
 
   const multerStorage = multer({ storage: diskStorage, fileFilter: filterType }).single('file');
   return multerStorage;

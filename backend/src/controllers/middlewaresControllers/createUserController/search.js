@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const search = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
 
-  if (!req.query.q || req.query.q.trim() === '') {
+  if (req.query.q === undefined || req.query.q === '' || req.query.q === ' ') {    
     return res
       .status(202)
       .json({

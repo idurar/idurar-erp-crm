@@ -43,7 +43,7 @@ const generatePdf = async (
       const { moneyFormatter } = useMoney({ settings });
       const { dateFormat } = useDate({ settings });
 
-      const htmlContent = pug.renderFile(`src/pdf/${modelName.toLowerCase()}.pug`, {
+      const htmlContent = pug.renderFile(`src/pdf/${modelName}.pug`, {
         model: result,
         settings,
         translate,
