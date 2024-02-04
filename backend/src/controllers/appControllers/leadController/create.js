@@ -12,7 +12,7 @@ const create = async (Model, req, res) => {
         message: 'Please select a people',
       });
     } else {
-      const { firstname, lastname } = await People.findOne({
+      let { firstname, lastname } = await People.findOne({
         _id: req.body.people,
         removed: false,
       }).exec();
@@ -26,7 +26,7 @@ const create = async (Model, req, res) => {
         message: 'Please select a company',
       });
     } else {
-      const { name } = await Company.findOne({
+      let { name } = await Company.findOne({
         _id: req.body.company,
         removed: false,
       }).exec();

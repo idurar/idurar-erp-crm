@@ -15,13 +15,12 @@ const search = async (Model, req, res) => {
 
   const fields = { $or: [] };
 
-  fieldsArray.forEach((field) => {
+  for (const field of fieldsArray) {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
-  });
+  }
   // console.log(fields)
 
-  const results = await Model.find(fields).where('removed').equals(false).limit(10).exec();
-
+  let results = await Model.find(fields).where('removed', false).limit(10).exec();
   const migratedData = results.map((x) => migrate(x));
 
   if (results.length >= 1) {

@@ -18,8 +18,8 @@ const summary = async (Model, req, res) => {
   }
 
   const currentDate = moment();
-  const startDate = currentDate.clone().startOf(defaultType);
-  const endDate = currentDate.clone().endOf(defaultType);
+  let startDate = currentDate.clone().startOf(defaultType);
+  let endDate = currentDate.clone().endOf(defaultType);
 
   const pipeline = [
     {
