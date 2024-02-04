@@ -36,7 +36,7 @@ const photo = async (userModel, req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: `we update this document photo by this id: ${req.params.id}`,
+      message: `We update this document photo by this id: ${req.params.id}`,
     });
   }
 };

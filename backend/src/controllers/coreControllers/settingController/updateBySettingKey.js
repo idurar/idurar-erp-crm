@@ -41,7 +41,7 @@ const updateBySettingKey = async (req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: `we update this document by this settingKey: ${settingKey}`,
+      message: `We update this document by this settingKey: ${settingKey}`,
     });
   }
 };

@@ -28,7 +28,7 @@ const readBySettingKey = async (req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: `we found this document by this settingKey: ${settingKey}`,
+      message: `We found this document by this settingKey: ${settingKey}`,
     });
   }
 };

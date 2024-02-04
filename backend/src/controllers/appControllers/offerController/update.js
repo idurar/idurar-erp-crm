@@ -49,7 +49,7 @@ const update = async (req, res) => {
   return res.status(200).json({
     success: true,
     result,
-    message: `we update this document by this id: ${req.params.id}`,
+    message: `We update this document by this id: ${req.params.id}`,
   });
 };
 export default update;
