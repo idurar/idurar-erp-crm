@@ -10,7 +10,7 @@ git clone https://github.com/idurar/idurar-erp-crm.git
 cd idurar-erp-crm
 ```
 
-#### Step 2: Create Your MongoDB Account and Database/Cluster
+#### Step 2: Create Your MongoDB Account and Database Cluster
 
 - Create your own MongoDB account by visiting the MongoDB website and signing up for a new account.
 
