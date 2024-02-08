@@ -79,7 +79,9 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 ## Getting started
 
 1.[Clone the repository](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
+
 2.[Create Your MongoDB Account and Database/Cluster](INSTALLATION-INSTRUCTIONS.md#Step-2:-Create-Your-MongoDB-Account-and-Database/Cluster)
+
 3.[Edit the Environment File](INSTALLATION-INSTRUCTIONS.md#Step-3:-Edit-the-Environment-File)
 4.[Update MongoDB URI](INSTALLATION-INSTRUCTIONS.md#Step-4:-Update-MongoDB-URI)
 5.[Install Backend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-5:-Install-Backend-Dependencies)
