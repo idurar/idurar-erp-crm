@@ -31,6 +31,9 @@ services:
       - REACT_APP_API_URL=http://backend:8888/api
       - NODE_OPTIONS=--openssl-legacy-provider
 
+    depends_on:
+      - backend
+
   mongo:
     image: mongo
     volumes:
