@@ -22,7 +22,7 @@ import SelectAsync from '@/components/SelectAsync';
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
 
-  if (!last_invoice_number) {
+  if (last_invoice_number === undefined) {
     return <></>;
   }
 
