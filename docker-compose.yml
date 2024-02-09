@@ -16,6 +16,9 @@ services:
 
     command: sh -c "npm run setup && npm run dev"
 
+    networks:
+      - server-mongo
+
     depends_on:
       - mongo
 
@@ -38,8 +41,11 @@ services:
     image: mongo
     volumes:
       - mongodb_data:/data/db
-    ports:
-      - "27017:27017"
+    networks:
+      - server-mongo
 
 volumes:
   mongodb_data:
+
+networks:
+  server-mongo:
