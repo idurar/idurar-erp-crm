@@ -16,6 +16,9 @@ services:
 
     command: sh -c "npm run setup && npm run dev"
 
+    networks:
+      - server-mongo
+
     depends_on:
       - mongo
 
@@ -31,12 +34,18 @@ services:
       - REACT_APP_API_URL=http://backend:8888/api
       - NODE_OPTIONS=--openssl-legacy-provider
 
+    depends_on:
+      - backend
+
   mongo:
     image: mongo
     volumes:
       - mongodb_data:/data/db
-    ports:
-      - "27017:27017"
+    networks:
+      - server-mongo
 
 volumes:
   mongodb_data:
+
+networks:
+  server-mongo:
