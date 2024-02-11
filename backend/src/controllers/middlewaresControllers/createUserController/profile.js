@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const profile = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
@@ -25,4 +25,4 @@ const profile = async (userModel, req, res) => {
     message: 'Successfully found Profile',
   });
 };
-module.exports = profile;
+export default profile;

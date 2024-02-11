@@ -1,4 +1,4 @@
-exports.migrate = (result) => {
+const migrate = (result) => {
   const client = result.type === 'people' ? result.people : result.company;
   let newData = {};
   newData._id = result._id;
@@ -13,3 +13,5 @@ exports.migrate = (result) => {
   newData.company = result.company;
   return newData;
 };
+
+export default migrate;

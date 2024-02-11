@@ -1,7 +1,5 @@
-require('module-alias/register');
-const mongoose = require('mongoose');
-const { globSync } = require('glob');
-const path = require('path');
+import mongoose from 'mongoose';
+import models from '#models/utils/exportAllModels.js';
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -11,9 +9,9 @@ if (major < 20) {
 }
 
 // import environmental variables from our variables.env file
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
-
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.local' });
 mongoose.connect(process.env.DATABASE);
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -25,14 +23,8 @@ mongoose.connection.on('error', (error) => {
   console.error(`2. 🚫 Error → : ${error.message}`);
 });
 
-const modelsFiles = globSync('./src/models/**/*.js');
-
-for (const filePath of modelsFiles) {
-  require(path.resolve(filePath));
-}
-
 // Start our app!
-const app = require('./app');
+import app from './app.js';
 app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running → On PORT : ${server.address().port}`);

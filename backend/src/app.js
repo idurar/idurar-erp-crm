@@ -1,20 +1,19 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+import compression from 'compression';
+// import NodeCache from 'node-cache';
+import cookieParser from 'cookie-parser';
 
-const cors = require('cors');
-const compression = require('compression');
-// const NodeCache = require('node-cache');
-const cookieParser = require('cookie-parser');
+import coreAuthRouter from './routes/coreRoutes/coreAuth.js';
+import coreApiRouter from './routes/coreRoutes/coreApi.js';
+import coreDownloadRouter from './routes/coreRoutes/coreDownloadRouter.js';
+import corePublicRouter from './routes/coreRoutes/corePublicRouter.js';
+import adminAuth from './controllers/coreControllers/adminAuth/index.js';
 
-const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
-const coreApiRouter = require('./routes/coreRoutes/coreApi');
-const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
-const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
-const adminAuth = require('./controllers/coreControllers/adminAuth');
-
-const errorHandlers = require('./handlers/errorHandlers');
-const erpApiRouter = require('./routes/appRoutes/appApi');
-const { listAllSettings } = require('@/middlewares/settings');
-const useLanguage = require('@/locale/useLanguage');
+import * as errorHandlers from './handlers/errorHandlers.js';
+import erpApiRouter from './routes/appRoutes/appApi.js';
+import { listAllSettings } from '#middlewares/settings/index.js';
+import useLanguage from '#locale/useLanguage.js';
 
 // create our Express app
 const app = express();
@@ -82,4 +81,4 @@ app.use(errorHandlers.notFound);
 app.use(errorHandlers.productionErrors);
 
 // done! we export it so we can start the site in start.js
-module.exports = app;
+export default app;

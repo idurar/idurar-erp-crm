@@ -1,14 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Invoice');
 
-const custom = require('@/controllers/pdfController');
-
-const { calculate } = require('@/helpers');
-const schema = require('./schemaValidate');
+import { calculate } from '#helpers.js';
+import schema from './schemaValidate.js';
 
 const update = async (req, res) => {
-  let body = req.body;
+  let { body } = req;
 
   const { error, value } = schema.validate(body);
   if (error) {
@@ -44,25 +42,25 @@ const update = async (req, res) => {
 
   //Calculate the items array with subTotal, total, taxTotal
   items.map((item) => {
-    let total = calculate.multiply(item['quantity'], item['price']);
+    let total = calculate.multiply(item.quantity, item.price);
     //sub total
     subTotal = calculate.add(subTotal, total);
     //item total
-    item['total'] = total;
+    item.total = total;
   });
   taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
 
-  body['subTotal'] = subTotal;
-  body['taxTotal'] = taxTotal;
-  body['total'] = total;
-  body['items'] = items;
-  body['pdf'] = 'invoice-' + req.params.id + '.pdf';
+  body.subTotal = subTotal;
+  body.taxTotal = taxTotal;
+  body.total = total;
+  body.items = items;
+  body.pdf = `invoice-${req.params.id}.pdf`;
   // Find document by id and updates with the required fields
 
   let paymentStatus =
     calculate.sub(total, discount) === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
-  body['paymentStatus'] = paymentStatus;
+  body.paymentStatus = paymentStatus;
 
   const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
     new: true, // return the new result instead of the old one
@@ -77,4 +75,4 @@ const update = async (req, res) => {
   });
 };
 
-module.exports = update;
+export default update;

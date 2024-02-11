@@ -1,11 +1,11 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const checkAndCorrectURL = require('./checkAndCorrectURL');
-const sendMail = require('./sendMail');
-const shortid = require('shortid');
-const { loadSettings } = require('@/middlewares/settings');
+import checkAndCorrectURL from './checkAndCorrectURL.js';
+import sendMail from './sendMail.js';
+import shortid from 'shortid';
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const forgetPassword = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
@@ -73,4 +73,4 @@ const forgetPassword = async (req, res, { userModel }) => {
   });
 };
 
-module.exports = forgetPassword;
+export default forgetPassword;

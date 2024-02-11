@@ -1,16 +1,16 @@
-const { modelsFiles } = require('@/models/utils');
+import mongoose from 'mongoose';
+import { modelsFiles } from '#models/utils/index.js';
 
-const mongoose = require('mongoose');
-
-const create = require('./create');
-const read = require('./read');
-const update = require('./update');
-const remove = require('./remove');
-const search = require('./search');
-const filter = require('./filter');
-const summary = require('./summary');
-const listAll = require('./listAll');
-const paginatedList = require('./paginatedList');
+import create from './create.js';
+import read from './read.js';
+import update from './update.js';
+import remove from './remove.js';
+import search from './search.js';
+import filter from './filter.js';
+import summary from './summary.js';
+import listAll from './listAll.js';
+import paginatedList from './paginatedList.js';
+import models from '#models/utils/exportAllModels.js';
 
 const createCRUDController = (modelName) => {
   if (!modelsFiles.includes(modelName)) {
@@ -32,4 +32,4 @@ const createCRUDController = (modelName) => {
   return crudMethods;
 };
 
-module.exports = createCRUDController;
+export default createCRUDController;

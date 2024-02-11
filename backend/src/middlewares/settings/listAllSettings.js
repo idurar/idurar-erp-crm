@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Setting');
 
@@ -17,4 +17,4 @@ const listAllSettings = async () => {
   }
 };
 
-module.exports = listAllSettings;
+export default listAllSettings;

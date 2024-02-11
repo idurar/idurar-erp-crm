@@ -1,10 +1,11 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
-const { globSync } = require('glob');
-const fs = require('fs');
-const { generate: uniqueId } = require('shortid');
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.local' });
+import { globSync } from 'glob';
+import fs from 'fs';
+import { generate as uniqueId } from 'shortid';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 mongoose.connect(process.env.DATABASE);
 
 async function setupApp() {

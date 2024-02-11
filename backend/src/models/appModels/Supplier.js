@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const SupplierSchema = new mongoose.Schema({
+const supplierSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -202,4 +202,4 @@ const SupplierSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Supplier', SupplierSchema);
+export default mongoose.model('Supplier', supplierSchema);

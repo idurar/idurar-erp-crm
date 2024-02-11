@@ -1,4 +1,4 @@
-const { migrate } = require('./migrate');
+import migrate from './migrate.js';
 
 const paginatedList = async (Model, req, res) => {
   const page = req.query.page || 1;
@@ -43,4 +43,4 @@ const paginatedList = async (Model, req, res) => {
   }
 };
 
-module.exports = paginatedList;
+export default paginatedList;

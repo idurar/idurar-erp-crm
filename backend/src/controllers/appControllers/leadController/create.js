@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
@@ -16,7 +16,7 @@ const create = async (Model, req, res) => {
         _id: req.body.people,
         removed: false,
       }).exec();
-      req.body.name = firstname + ' ' + lastname;
+      req.body.name = `${firstname} ${lastname}`;
       req.body.company = null;
     }
   } else {
@@ -38,7 +38,7 @@ const create = async (Model, req, res) => {
   req.body.removed = false;
   const result = await new Model(req.body).save();
 
-  // Returning successfull response
+  // Returning successful response
   return res.status(200).json({
     success: true,
     result,
@@ -46,4 +46,4 @@ const create = async (Model, req, res) => {
   });
 };
 
-module.exports = create;
+export default create;

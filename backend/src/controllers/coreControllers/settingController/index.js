@@ -1,11 +1,11 @@
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const crudController = createCRUDController('Setting');
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
+import listBySettingKey from './listBySettingKey.js';
+import readBySettingKey from './readBySettingKey.js';
+import updateBySettingKey from './updateBySettingKey.js';
+import updateManySetting from './updateManySetting.js';
+import listAll from './listAll.js';
 
-const listBySettingKey = require('./listBySettingKey');
-const readBySettingKey = require('./readBySettingKey');
-const updateBySettingKey = require('./updateBySettingKey');
-const updateManySetting = require('./updateManySetting');
-const listAll = require('./listAll');
+const crudController = createCRUDController('Setting');
 
 const settingMethods = {
   read: crudController.read,
@@ -14,11 +14,11 @@ const settingMethods = {
   list: crudController.list,
   filter: crudController.filter,
   search: crudController.search,
-  listAll: listAll,
+  listAll,
   listBySettingKey,
   readBySettingKey,
   updateBySettingKey,
   updateManySetting,
 };
 
-module.exports = settingMethods;
+export default settingMethods;

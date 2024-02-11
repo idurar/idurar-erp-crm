@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 const Model = mongoose.model('Invoice');
 
@@ -23,9 +23,7 @@ const summary = async (req, res) => {
   const currentDate = moment();
   let startDate = currentDate.clone().startOf(defaultType);
   let endDate = currentDate.clone().endOf(defaultType);
-
   const statuses = ['draft', 'pending', 'overdue', 'paid', 'unpaid', 'partially'];
-
   const response = await Model.aggregate([
     {
       $match: {
@@ -203,4 +201,4 @@ const summary = async (req, res) => {
   });
 };
 
-module.exports = summary;
+export default summary;

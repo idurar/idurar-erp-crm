@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const Model = mongoose.model('Payment');
 const Invoice = mongoose.model('Invoice');
 
@@ -64,4 +63,5 @@ const remove = async (req, res) => {
     message: 'Successfully Deleted the document by id: ' + req.params.id,
   });
 };
-module.exports = remove;
+
+export default remove;

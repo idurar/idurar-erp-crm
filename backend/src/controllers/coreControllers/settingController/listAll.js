@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Model = mongoose.model('Setting');
 
 const listAll = async (req, res) => {
@@ -22,4 +22,4 @@ const listAll = async (req, res) => {
   }
 };
 
-module.exports = listAll;
+export default listAll;

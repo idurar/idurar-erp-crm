@@ -1,4 +1,4 @@
-const { migrate } = require('./migrate');
+import migrate from './migrate.js';
 
 const read = async (Model, req, res) => {
   // Find document by id
@@ -8,19 +8,19 @@ const read = async (Model, req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this id: ' + req.params.id,
+      message: `No document found by this id: ${req.params.id}`,
     });
   } else {
-    // Return success resposne
+    // Return success response
 
     const migratedData = migrate(result);
 
     return res.status(200).json({
       success: true,
       result: migratedData,
-      message: 'we found this document by this id: ' + req.params.id,
+      message: `We found this document by this id: ${req.params.id}`,
     });
   }
 };
 
-module.exports = read;
+export default read;

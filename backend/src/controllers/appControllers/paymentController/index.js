@@ -1,11 +1,11 @@
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const methods = createCRUDController('Payment');
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
+import create from './create.js';
+import summary from './summary.js';
+import update from './update.js';
+import remove from './remove.js';
+import sendMail from './sendMail.js';
 
-const create = require('./create');
-const summary = require('./summary');
-const update = require('./update');
-const remove = require('./remove');
-const sendMail = require('./sendMail');
+const methods = createCRUDController('Payment');
 
 methods.mail = sendMail;
 methods.create = create;
@@ -13,4 +13,4 @@ methods.update = update;
 methods.delete = remove;
 methods.summary = summary;
 
-module.exports = methods;
+export default methods;

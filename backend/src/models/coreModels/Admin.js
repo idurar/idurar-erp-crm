@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const adminSchema = new Schema({
+const adminSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -35,4 +34,4 @@ const adminSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Admin', adminSchema);
+export default mongoose.model('Admin', adminSchema);

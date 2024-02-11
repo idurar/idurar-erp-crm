@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const expenseCategorySchema = new mongoose.Schema({
   removed: {
@@ -34,4 +34,4 @@ const expenseCategorySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('ExpenseCategory', expenseCategorySchema);
+export default mongoose.model('ExpenseCategory', expenseCategorySchema);

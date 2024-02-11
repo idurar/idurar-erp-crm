@@ -1,6 +1,6 @@
-const { emailVerfication, passwordVerfication } = require('@/emailTemplate/emailVerfication');
+import { emailVerfication, passwordVerfication } from '#emailTemplate/emailVerfication.js';
 
-const { Resend } = require('resend');
+import { Resend } from 'resend';
 
 const sendMail = async ({
   email,
@@ -25,4 +25,4 @@ const sendMail = async ({
   return data;
 };
 
-module.exports = sendMail;
+export default sendMail;

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const schema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -92,6 +92,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-schema.plugin(require('mongoose-autopopulate'));
-
-module.exports = mongoose.model('Product', schema);
+export default mongoose.model('Product', productSchema);

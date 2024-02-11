@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 const QuoteModel = mongoose.model('Quote');
 
@@ -77,9 +77,9 @@ const summary = async (Model, req, res) => {
   const aggregationResult = await Model.aggregate(pipeline);
 
   const result = aggregationResult[0];
-  const totalClients = result.totalClients[0] ? result.totalClients[0].count : 0;
-  const totalNewClients = result.newClients[0] ? result.newClients[0].count : 0;
-  const activeClients = result.activeClients[0] ? result.activeClients[0].count : 0;
+  const totalClients = result.totalClients[0]?.count || 0;
+  const totalNewClients = result.newClients[0]?.count || 0;
+  const activeClients = result.activeClients[0]?.count || 0;
 
   const totalActiveClientsPercentage = totalClients > 0 ? (activeClients / totalClients) * 100 : 0;
   const totalNewClientsPercentage = totalClients > 0 ? (totalNewClients / totalClients) * 100 : 0;
@@ -94,4 +94,4 @@ const summary = async (Model, req, res) => {
   });
 };
 
-module.exports = summary;
+export default summary;

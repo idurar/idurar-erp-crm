@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
 const salarySchema = new mongoose.Schema({
   removed: {
@@ -101,5 +102,5 @@ const salarySchema = new mongoose.Schema({
   },
 });
 
-salarySchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Salary', salarySchema);
+salarySchema.plugin(mongooseAutoPopulate);
+export default mongoose.model('Salary', salarySchema);

@@ -1,4 +1,4 @@
-exports.emailVerfication = ({
+const emailVerfication = ({
   title = 'Verify your email',
   name = '',
   link = '',
@@ -30,7 +30,7 @@ exports.emailVerfication = ({
     `;
 };
 
-exports.passwordVerfication = ({
+const passwordVerfication = ({
   title = 'Reset your Password',
   name = '',
   link = '',
@@ -61,7 +61,7 @@ exports.passwordVerfication = ({
     `;
 };
 
-exports.afterRegistrationSuccess = ({
+const afterRegistrationSuccess = ({
   title = 'Customize IDURAR ERP CRM or build your own SaaS',
   name = '',
 }) => {
@@ -92,3 +92,5 @@ exports.afterRegistrationSuccess = ({
     
     `;
 };
+
+export { emailVerfication, passwordVerfication, afterRegistrationSuccess }

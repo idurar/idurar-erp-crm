@@ -1,8 +1,7 @@
-const jwt = require('jsonwebtoken');
-
-const mongoose = require('mongoose');
-const shortid = require('shortid');
-const sendIdurarOffer = require('./sendIdurarOffer');
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+import shortid from 'shortid';
+import sendIdurarOffer from './sendIdurarOffer.js';
 
 const login = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
@@ -84,4 +83,4 @@ const login = async (req, res, { userModel }) => {
     });
 };
 
-module.exports = login;
+export default login;

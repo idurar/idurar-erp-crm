@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-
-const { generate: uniqueId } = require('shortid');
+import mongoose from 'mongoose';
+import { generate as uniqueId } from 'shortid';
 
 const updateProfilePassword = async (userModel, req, res) => {
   if (req.admin.email === 'admin@demo.com') {
@@ -73,4 +72,4 @@ const updateProfilePassword = async (userModel, req, res) => {
   });
 };
 
-module.exports = updateProfilePassword;
+export default updateProfilePassword;

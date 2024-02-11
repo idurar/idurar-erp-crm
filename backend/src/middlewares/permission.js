@@ -8,9 +8,8 @@ const roles = {
   createOnly: ['create', 'read', 'download', 'upload'],
   readOnly: ['read', 'download'],
 };
-exports.roles = roles;
 
-exports.hasPermission = (permissionName = 'none') => {
+const hasPermission = (permissionName = 'none') => {
   return function (req, res, next) {
     const currentUserRole = req.admin.role;
 
@@ -29,3 +28,5 @@ exports.hasPermission = (permissionName = 'none') => {
     }
   };
 };
+
+export { hasPermission, roles};

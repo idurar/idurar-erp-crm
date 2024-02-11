@@ -1,16 +1,16 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const Joi = require('joi');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import Joi from 'joi';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const checkAndCorrectURL = require('./checkAndCorrectURL');
-const sendMail = require('./sendMail');
+import checkAndCorrectURL from './checkAndCorrectURL.js';
+import sendMail from './sendMail.js';
 
-const { loadSettings } = require('@/middlewares/settings');
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const login = async (req, res, { userModel }) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
+  const UserPassword = mongoose.model(`${userModel}Password`);
   const User = mongoose.model(userModel);
   const { email, password } = req.body;
 
@@ -60,8 +60,7 @@ const login = async (req, res, { userModel }) => {
     const idurar_base_url = settings['idurar_base_url'];
     const url = checkAndCorrectURL(idurar_base_url);
 
-    const link = url + '/verify/' + user._id + '/' + userPassword.emailToken;
-
+    const link = `${url}/verify/${user._id}/${userPassword.emailToken}`;
     await sendMail({ email, name: user.name, link, idurar_app_email });
 
     return res.status(403).json({
@@ -112,4 +111,4 @@ const login = async (req, res, { userModel }) => {
     });
 };
 
-module.exports = login;
+export default login;

@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Payment');
 const Invoice = mongoose.model('Invoice');
-const custom = require('@/controllers/pdfController');
+import custom from '#controllers/pdfController/index.js';
 
-const { calculate } = require('@/helpers');
+import { calculate } from '#helpers.js';
 
 const create = async (req, res) => {
   // Creating a new document in the collection
@@ -39,7 +39,7 @@ const create = async (req, res) => {
   req.body['createdBy'] = req.admin._id;
   const result = await Model.create(req.body);
 
-  const fileId = 'payment-' + result._id + '.pdf';
+  const fileId = `payment-${result._id}.pdf`;
   const updatePath = await Model.findOneAndUpdate(
     { _id: result._id.toString(), removed: false },
     { pdf: fileId },
@@ -64,7 +64,7 @@ const create = async (req, res) => {
     {
       $push: { payment: paymentId.toString() },
       $inc: { credit: amount },
-      $set: { paymentStatus: paymentStatus },
+      $set: { paymentStatus },
     },
     {
       new: true, // return the new result instead of the old one
@@ -79,4 +79,4 @@ const create = async (req, res) => {
   });
 };
 
-module.exports = create;
+export default create;

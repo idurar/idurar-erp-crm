@@ -41,4 +41,4 @@ const search = async (Model, req, res) => {
   }
 };
 
-module.exports = search;
+export default search;

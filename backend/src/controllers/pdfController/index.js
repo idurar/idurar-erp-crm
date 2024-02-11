@@ -1,14 +1,15 @@
-const pug = require('pug');
-const fs = require('fs');
-const moment = require('moment');
-let pdf = require('html-pdf');
-const { listAllSettings } = require('@/middlewares/settings');
-const useLanguage = require('@/locale/useLanguage');
-const { useMoney, useDate } = require('@/settings');
+import pug from 'pug';
+import fs from 'fs';
+import moment from 'moment';
+import pdf from 'html-pdf';
+import { listAllSettings } from '#middlewares/settings/index.js';
+import useLanguage from '#locale/useLanguage.js';
+import useMoney from '#settings/useMoney.js';
+import useDate from '#settings/useDate.js';
 
 const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 
-exports.generatePdf = async (
+const generatePdf = async (
   modelName,
   info = { filename: 'pdf_file', format: 'A5', targetLocation: '' },
   result,
@@ -42,7 +43,7 @@ exports.generatePdf = async (
       const { moneyFormatter } = useMoney({ settings });
       const { dateFormat } = useDate({ settings });
 
-      const htmlContent = pug.renderFile('src/pdf/' + modelName + '.pug', {
+      const htmlContent = pug.renderFile(`src/pdf/${modelName}.pug`, {
         model: result,
         settings,
         translate,
@@ -66,3 +67,5 @@ exports.generatePdf = async (
     throw new Error(error);
   }
 };
+
+export default generatePdf;

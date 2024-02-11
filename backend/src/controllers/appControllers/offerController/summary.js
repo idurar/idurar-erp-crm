@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 const Model = mongoose.model('Offer');
 
@@ -105,4 +105,5 @@ const summary = async (req, res) => {
     message: `Successfully found all Offers for the last ${defaultType}`,
   });
 };
-module.exports = summary;
+
+export default summary;

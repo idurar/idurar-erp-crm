@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const ShipmentSchema = new mongoose.Schema({
+const shipmentSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -114,6 +115,6 @@ const ShipmentSchema = new mongoose.Schema({
   },
 });
 
-ShipmentSchema.plugin(require('mongoose-autopopulate'));
+shipmentSchema.plugin(mongooseAutoPopulate);
 
-module.exports = mongoose.model('Shipment', ShipmentSchema);
+export default mongoose.model('Shipment', shipmentSchema);

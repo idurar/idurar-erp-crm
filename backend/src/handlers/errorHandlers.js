@@ -6,16 +6,16 @@
   catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
 
-exports.catchErrors = (fn) => {
+const catchErrors = (fn) => {
   return function (req, res, next) {
     return fn(req, res, next).catch((error) => {
-      if (error.name == 'ValidationError') {
+      if (error.name === 'ValidationError') {
         res.status(400).json({
           success: false,
           result: null,
           message: 'Required fields are not supplied',
-          controller: fn.name,
-          error: error,
+          conttroller: fn.name,
+          error,
         });
       } else {
         // Server Error
@@ -23,8 +23,8 @@ exports.catchErrors = (fn) => {
           success: false,
           result: null,
           message: error.message,
-          controller: fn.name,
-          error: error,
+          conttroller: fn.name,
+          error,
         });
       }
     });
@@ -36,7 +36,7 @@ exports.catchErrors = (fn) => {
 
   If we hit a route that is not found, we mark it as 404 and pass it along to the next error handler to display
 */
-exports.notFound = (req, res, next) => {
+const notFound = (req, res, next) => {
   res.status(404).json({
     success: false,
     message: "Api url doesn't exist ",
@@ -48,7 +48,7 @@ exports.notFound = (req, res, next) => {
 
   In development we show good error messages so if we hit a syntax error or any other previously un-handled error, we can show good info on what happened
 */
-exports.developmentErrors = (error, req, res, next) => {
+const developmentErrors = (error, req, res, next) => {
   error.stack = error.stack || '';
   const errorDetails = {
     message: error.message,
@@ -59,7 +59,7 @@ exports.developmentErrors = (error, req, res, next) => {
   res.status(500).json({
     success: false,
     message: error.message,
-    error: error,
+    error,
   });
 };
 
@@ -68,10 +68,12 @@ exports.developmentErrors = (error, req, res, next) => {
 
   No stacktraces are leaked to admin
 */
-exports.productionErrors = (error, req, res, next) => {
+const productionErrors = (error, req, res, next) => {
   res.status(500).json({
     success: false,
     message: error.message,
-    error: error,
+    error,
   });
 };
+
+export { catchErrors, notFound, developmentErrors, productionErrors };

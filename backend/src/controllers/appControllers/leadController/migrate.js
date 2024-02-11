@@ -1,17 +1,20 @@
-exports.migrate = (result) => {
+const migrate = (result) => {
   let lead = result.type === 'people' ? result.people : result.company;
-  let newData = {};
-  newData._id = result._id;
-  newData.type = result.type;
-  newData.status = result.status;
-  newData.source = result.source;
-  newData.name = result.name;
-  newData.phone = lead.phone;
-  newData.email = lead.email;
-  newData.website = lead.website;
-  newData.country = lead.country;
-  newData.address = lead.address;
-  newData.people = result.people;
-  newData.company = result.company;
+  let newData = {
+    _id: result._id,
+    type: result.type,
+    status: result.status,
+    source: result.source,
+    name: result.name,
+    phone: lead.phone,
+    email: lead.email,
+    website: lead.website,
+    country: lead.country,
+    address: lead.address,
+    people: result.people,
+    company: result.company,
+  };
   return newData;
 };
+
+export default migrate;

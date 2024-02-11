@@ -1,16 +1,18 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
-const { globSync } = require('glob');
-const fs = require('fs');
-const { generate: uniqueId } = require('shortid');
-
-const mongoose = require('mongoose');
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.local' });
+import { globSync } from 'glob';
+import fs from 'fs';
+import { generate as uniqueId } from 'shortid';
+import mongoose from 'mongoose';
+import Admin from '../models/coreModels/Admin.js';
+import AdminPassword from '../models/coreModels/AdminPassword.js';
+import Setting from '../models/coreModels/Setting.js';
+import Email from '../models/coreModels/Email.js';
 mongoose.connect(process.env.DATABASE);
 
 async function setupApp() {
   try {
-    const Admin = require('../models/coreModels/Admin');
-    const AdminPassword = require('../models/coreModels/AdminPassword');
     const newAdminPassword = new AdminPassword();
 
     const salt = uniqueId();
@@ -36,8 +38,6 @@ async function setupApp() {
 
     console.log('👍 Admin created : Done!');
 
-    const Setting = require('../models/coreModels/Setting');
-
     const settingFiles = [];
 
     const settingsFiles = globSync('./src/setup/defaultSettings/**/*.json');
@@ -52,7 +52,6 @@ async function setupApp() {
 
     console.log('👍 Settings created : Done!');
 
-    const Email = require('../models/coreModels/Email');
     const emailTemplate = JSON.parse(
       fs.readFileSync(__dirname + '/emailTemplate/index.json', 'utf-8')
     );

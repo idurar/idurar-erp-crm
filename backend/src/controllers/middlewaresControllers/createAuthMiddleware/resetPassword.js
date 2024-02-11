@@ -1,9 +1,8 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const Joi = require('joi');
-const mongoose = require('mongoose');
-
-const shortid = require('shortid');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import Joi from 'joi';
+import mongoose from 'mongoose';
+import shortid from 'shortid';
 
 const resetPassword = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
@@ -102,4 +101,4 @@ const resetPassword = async (req, res, { userModel }) => {
     });
 };
 
-module.exports = resetPassword;
+export default resetPassword;

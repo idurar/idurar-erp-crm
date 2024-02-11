@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const AppTableSchema = new mongoose.Schema({
   removed: {
@@ -98,4 +98,4 @@ const AppTableSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('AppTable', AppTableSchema);
+export default mongoose.model('AppTable', AppTableSchema);

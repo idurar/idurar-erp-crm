@@ -1,11 +1,11 @@
-const listBySettingKey = require('./listBySettingKey');
-const readBySettingKey = require('./readBySettingKey');
-const listAllSettings = require('./listAllSettings');
-const updateBySettingKey = require('./updateBySettingKey');
-const increaseBySettingKey = require('./increaseBySettingKey');
-const loadSettings = require('./loadSettings');
+import listBySettingKey from './listBySettingKey.js';
+import readBySettingKey from './readBySettingKey.js';
+import listAllSettings from './listAllSettings.js';
+import updateBySettingKey from './updateBySettingKey.js';
+import increaseBySettingKey from './increaseBySettingKey.js';
+import loadSettings from './loadSettings.js';
 
-module.exports = {
+export {
   loadSettings,
   listAllSettings,
   listBySettingKey,

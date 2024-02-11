@@ -1,4 +1,4 @@
-exports.SendInvoice = ({ title = 'Invoice from Idurar', name = '', time = new Date() }) => {
+const SendInvoice = ({ title = 'Invoice from Idurar', name = '', time = new Date() }) => {
   return `
     <div>
 
@@ -19,7 +19,7 @@ exports.SendInvoice = ({ title = 'Invoice from Idurar', name = '', time = new Da
     `;
 };
 
-exports.SendQuote = ({ title = 'Quote from Idurar', name = '', time = new Date() }) => {
+const SendQuote = ({ title = 'Quote from Idurar', name = '', time = new Date() }) => {
   return `
     <div>
 
@@ -40,7 +40,7 @@ exports.SendQuote = ({ title = 'Quote from Idurar', name = '', time = new Date()
     `;
 };
 
-exports.SendOffer = ({ title = 'Offer from Idurar', name = '', time = new Date() }) => {
+const SendOffer = ({ title = 'Offer from Idurar', name = '', time = new Date() }) => {
   return `
     <div>
 
@@ -61,7 +61,7 @@ exports.SendOffer = ({ title = 'Offer from Idurar', name = '', time = new Date()
     `;
 };
 
-exports.SendPaymentReceipt = ({
+const SendPaymentReceipt = ({
   title = 'Payment Receipt from Idurar',
   name = '',
   time = new Date(),
@@ -85,3 +85,5 @@ exports.SendPaymentReceipt = ({
     </div>
     `;
 };
+
+export { SendInvoice, SendQuote, SendOffer, SendPaymentReceipt };

@@ -1,9 +1,10 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.local' });
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-const OpenAI = require('openai');
-const fs = require('fs');
+import OpenAI from 'openai';
+import { writeFile, readFileSync } from 'fs';
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
@@ -21,7 +22,7 @@ function objectToText(obj) {
 const generateFeaturesFile = ({ language, file_name, newFeaturesContent }) => {
   const filePath = '../features/' + language + '_' + file_name + '.md';
 
-  fs.writeFile(filePath, newFeaturesContent, (err) => {
+  writeFile(filePath, newFeaturesContent, (err) => {
     if (err) {
       console.error(err);
       return;
@@ -78,9 +79,9 @@ async function translateFileName(language, filename) {
   return list;
 }
 
-const languages = require('../locale/languages');
+import languages from '../locale/languages.js';
 
-const featuresContent = fs.readFileSync(`./src/aiFeatures/featuresContent.md`, 'utf-8');
+const featuresContent = readFileSync(`./src/aiFeatures/featuresContent.md`, 'utf-8');
 
 async function generateTranslation(language) {
   const newFeaturesContent = await translate(language.label, featuresContent);

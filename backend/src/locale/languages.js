@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   { label: 'Arabic', value: 'ar_eg', isRtl: true },
   { label: 'Bengali', value: 'bn_bd' },
   { label: 'Bulgarian', value: 'bg_bg' },

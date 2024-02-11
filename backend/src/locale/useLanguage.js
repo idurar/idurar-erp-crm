@@ -1,9 +1,9 @@
-const { readBySettingKey } = require('@/middlewares/settings');
+import { readBySettingKey } from '#middlewares/settings/index.js';
 
-async function getCurrentLanguage() {
+const getCurrentLanguage = async () => {
   const { settingValue } = await readBySettingKey({ settingKey: 'language' });
   return settingValue;
-}
+};
 
 const getLabel = (lang, key) => {
   try {
@@ -52,4 +52,4 @@ const useLanguage = ({ selectedLang }) => {
   return translate;
 };
 
-module.exports = useLanguage;
+export default useLanguage;

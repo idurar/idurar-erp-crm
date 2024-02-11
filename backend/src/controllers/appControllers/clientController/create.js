@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const People = mongoose.model('People');
 const Company = mongoose.model('Company');
 
@@ -37,7 +36,7 @@ const create = async (Model, req, res) => {
           runValidators: true,
         }
       ).exec();
-      req.body.name = firstname + ' ' + lastname;
+      req.body.name = `${firstname} ${lastname}`;
       req.body.company = undefined;
     }
   } else {
@@ -86,4 +85,4 @@ const create = async (Model, req, res) => {
   });
 };
 
-module.exports = create;
+export default create;

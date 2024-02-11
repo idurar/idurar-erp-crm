@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const update = async (Model, req, res) => {
   // Find document by id and updates with the required fields
@@ -9,4 +9,4 @@ const update = async (Model, req, res) => {
   });
 };
 
-module.exports = update;
+export default update;

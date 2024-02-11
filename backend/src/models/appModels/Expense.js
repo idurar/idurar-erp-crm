@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const schema = new mongoose.Schema({
+const expenseSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -88,5 +88,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-schema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Expense', schema);
+export default mongoose.model('Expense', expenseSchema);

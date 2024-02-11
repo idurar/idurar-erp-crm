@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const productCategorySchema = new mongoose.Schema({
   removed: {
@@ -70,4 +70,4 @@ const productCategorySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('ProductCategory', productCategorySchema);
+export default mongoose.model('ProductCategory', productCategorySchema);

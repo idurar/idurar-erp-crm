@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Client = mongoose.model('Client');
 const People = mongoose.model('People');
@@ -49,4 +49,5 @@ const remove = async (Model, req, res) => {
     message: 'Successfully Deleted the people by id: ' + id,
   });
 };
-module.exports = remove;
+
+export default remove;

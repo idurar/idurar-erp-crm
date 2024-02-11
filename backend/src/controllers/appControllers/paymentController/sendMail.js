@@ -1,10 +1,9 @@
-const fs = require('fs');
-const custom = require('@/controllers/pdfController');
-const { SendPaymentReceipt } = require('@/emailTemplate/SendEmailTemplate');
-const mongoose = require('mongoose');
-const PaymentModel = mongoose.model('Payment');
-const { Resend } = require('resend');
-const { loadSettings } = require('@/middlewares/settings');
+import fs from 'fs';
+import custom from '#controllers/pdfController/index.js';
+import { SendPaymentReceipt } from '#emailTemplate/SendEmailTemplate.js';
+import PaymentModel from '#models/appModels/Payment.js';
+import { Resend } from 'resend';
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const mail = async (req, res) => {
   const { id } = req.body;
@@ -28,7 +27,7 @@ const mail = async (req, res) => {
 
   const modelName = 'Payment';
 
-  const fileId = modelName.toLowerCase() + '-' + result._id + '.pdf';
+  const fileId = `${modelName.toLowerCase()}-${result._id}.pdf`;
   const folderPath = modelName.toLowerCase();
   const targetLocation = `src/public/download/${folderPath}/${fileId}`;
 
@@ -43,7 +42,7 @@ const mail = async (req, res) => {
         PaymentModel.findByIdAndUpdate({ _id: id, removed: false }, { status: 'sent' })
           .exec()
           .then((data) => {
-            // Returning successfull response
+            // Returning successful response
             return res.status(200).json({
               success: true,
               result: mailId,
@@ -60,7 +59,7 @@ const sendViaApi = async (email, name, filePath) => {
 
   const settings = await loadSettings();
   const idurar_app_email = settings['idurar_app_email'];
-  // Read the file to be attatched
+  // Read the file to be attached
   const attatchedFile = fs.readFileSync(filePath);
 
   // Send the mail using the send method
@@ -80,4 +79,4 @@ const sendViaApi = async (email, name, filePath) => {
   return data;
 };
 
-module.exports = mail;
+export default mail;

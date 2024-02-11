@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Quote');
 
-const custom = require('@/controllers/pdfController');
-const { increaseBySettingKey } = require('@/middlewares/settings');
-const { calculate } = require('@/helpers');
+import custom from '#controllers/pdfController/index.js';
+import { increaseBySettingKey } from '#middlewares/settings/index.js';
+import { calculate } from '#helpers.js';
 
 const create = async (req, res) => {
   const { items = [], taxRate = 0, discount = 0 } = req.body;
@@ -17,26 +17,27 @@ const create = async (req, res) => {
 
   //Calculate the items array with subTotal, total, taxTotal
   items.map((item) => {
-    let total = calculate.multiply(item['quantity'], item['price']);
+    let total = calculate.multiply(item.quantity, item.price);
     //sub total
     subTotal = calculate.add(subTotal, total);
     //item total
-    item['total'] = total;
+    item.total = total;
   });
   taxTotal = calculate.multiply(subTotal, taxRate / 100);
   total = calculate.add(subTotal, taxTotal);
 
-  let body = req.body;
-
-  body['subTotal'] = subTotal;
-  body['taxTotal'] = taxTotal;
-  body['total'] = total;
-  body['items'] = items;
-  body['createdBy'] = req.admin._id;
+  const body = {
+    ...req.body,
+    subTotal,
+    taxTotal,
+    total,
+    items,
+    createdBy: req.admin._id,
+  };
 
   // Creating a new document in the collection
   const result = await new Model(body).save();
-  const fileId = 'quote-' + result._id + '.pdf';
+  const fileId = `quote-${result._id}.pdf`;
   const updateResult = await Model.findOneAndUpdate(
     { _id: result._id },
     { pdf: fileId },
@@ -55,4 +56,5 @@ const create = async (req, res) => {
     message: 'Quote created successfully',
   });
 };
-module.exports = create;
+
+export default create;

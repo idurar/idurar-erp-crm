@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const photo = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
@@ -19,7 +19,7 @@ const photo = async (userModel, req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this id: ' + req.params.id,
+      message: `No document found by this id: ${req.params.id}`,
     });
   } else {
     // Return success resposne
@@ -36,8 +36,8 @@ const photo = async (userModel, req, res) => {
     return res.status(200).json({
       success: true,
       result,
-      message: 'we update this document photo by this id: ' + req.params.id,
+      message: `We update this document photo by this id: ${req.params.id}`,
     });
   }
 };
-module.exports = photo;
+export default photo;

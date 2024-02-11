@@ -37,4 +37,4 @@ const paginatedList = async (Model, req, res) => {
   }
 };
 
-module.exports = paginatedList;
+export default paginatedList;

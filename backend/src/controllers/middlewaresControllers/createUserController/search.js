@@ -1,13 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const search = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
 
-  // console.log(req.query.fields)
-
-  // console.log(fields)
-
-  if (req.query.q === undefined || req.query.q === '' || req.query.q === ' ') {
+  if (req.query.q === undefined || req.query.q === '' || req.query.q === ' ') {    
     return res
       .status(202)
       .json({
@@ -25,6 +21,7 @@ const search = async (userModel, req, res) => {
   for (const field of fieldsArray) {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
+
   let result = await User.find(fields)
     .where('removed', false)
     .sort({ name: 'asc' })
@@ -45,4 +42,5 @@ const search = async (userModel, req, res) => {
     });
   }
 };
-module.exports = search;
+
+export default search;

@@ -1,10 +1,9 @@
-const jwt = require('jsonwebtoken');
-
-const mongoose = require('mongoose');
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
 const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SECRET' }) => {
   try {
-    const UserPassword = mongoose.model(userModel + 'Password');
+    const UserPassword = mongoose.model(`${userModel}Password`);
     const User = mongoose.model(userModel);
     const token = req.cookies.token;
     if (!token)
@@ -62,4 +61,4 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
   }
 };
 
-module.exports = isValidAuthToken;
+export default isValidAuthToken;

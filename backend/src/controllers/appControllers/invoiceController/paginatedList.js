@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Invoice');
 
@@ -40,4 +40,4 @@ const paginatedList = async (req, res) => {
   }
 };
 
-module.exports = paginatedList;
+export default paginatedList;

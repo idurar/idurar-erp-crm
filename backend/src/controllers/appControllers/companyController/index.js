@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const { modelsFiles } = require('@/models/utils');
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
+import mongoose from 'mongoose';
+import { modelsFiles } from '#models/utils/index.js';
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
 
-const remove = require('./remove');
+import remove from './remove.js';
 
-function modelController() {
+const modelController = () => {
   const modelName = 'Company';
 
   if (!modelsFiles.includes(modelName)) {
@@ -17,6 +17,6 @@ function modelController() {
 
     return methods;
   }
-}
+};
 
-module.exports = modelController();
+export default modelController();

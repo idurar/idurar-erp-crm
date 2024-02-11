@@ -1,10 +1,10 @@
-const fs = require('fs');
-const custom = require('@/controllers/pdfController');
-const { SendQuote } = require('@/emailTemplate/SendEmailTemplate');
-const mongoose = require('mongoose');
+import fs from 'fs';
+import custom from '#controllers/pdfController/index.js';
+import { SendQuote } from '#emailTemplate/SendEmailTemplate.js';
+import mongoose from 'mongoose';
 const QuoteModel = mongoose.model('Quote');
-const { Resend } = require('resend');
-const { loadSettings } = require('@/middlewares/settings');
+import { Resend } from 'resend';
+import { loadSettings } from '#middlewares/settings/index.js';
 
 const mail = async (req, res) => {
   const { id } = req.body;
@@ -80,4 +80,4 @@ const sendViaApi = async (email, name, filePath) => {
   return data;
 };
 
-module.exports = mail;
+export default mail;

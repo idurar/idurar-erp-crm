@@ -1,4 +1,4 @@
-const { migrate } = require('./migrate');
+import migrate from './migrate.js';
 
 const search = async (Model, req, res) => {
   console.log('🚀 ~ file: search.js:6 ~ search ~ req.query.q :', req.query.q);
@@ -43,4 +43,4 @@ const search = async (Model, req, res) => {
   }
 };
 
-module.exports = search;
+export default search;

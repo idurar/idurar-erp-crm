@@ -1,15 +1,15 @@
-const multer = require('multer');
-const path = require('path');
-const { slugify } = require('transliteration');
+import multer from 'multer';
+import path from 'path';
+import { slugify } from 'transliteration';
 
-const fileFilter = require('./utils/fileFilter');
+import fileFilter from './utils/fileFilter.js';
 
 const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' }) => {
-  var diskStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
+  const diskStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
       cb(null, `src/public/uploads/${entity}`);
     },
-    filename: function (req, file, cb) {
+    filename: (req, file, cb) => {
       try {
         // fetching the file extension of the uploaded file
         let fileExtension = path.extname(file.originalname);
@@ -29,10 +29,10 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
         req.upload = {
           fileName: _fileName,
           fieldExt: fileExtension,
-          entity: entity,
-          fieldName: fieldName,
-          fileType: fileType,
-          filePath: filePath,
+          entity,
+          fieldName,
+          fileType,
+          filePath,
         };
 
         req.body[fieldName] = filePath;
@@ -50,4 +50,4 @@ const singleStorageUpload = ({ entity, fileType = 'default', fieldName = 'file' 
   return multerStorage;
 };
 
-module.exports = singleStorageUpload;
+export { singleStorageUpload };

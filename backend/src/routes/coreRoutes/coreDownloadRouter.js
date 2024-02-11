@@ -1,10 +1,10 @@
-const downloadPdf = require('@/handlers/downloadHandler/downloadPdf');
-const express = require('express');
+import downloadPdf from '#handlers/downloadHandler/downloadPdf.js';
+import express from 'express';
+import { hasPermission } from '#middlewares/permission.js';
 
 const router = express.Router();
-const { hasPermission } = require('@/middlewares/permission');
 
-router.route('/:directory/:file').get(function (req, res) {
+router.route('/:directory/:file').get((req, res) => {
   try {
     const { directory, file } = req.params;
     const id = file.slice(directory.length + 1).slice(0, -4); // extract id from file name
@@ -19,4 +19,4 @@ router.route('/:directory/:file').get(function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

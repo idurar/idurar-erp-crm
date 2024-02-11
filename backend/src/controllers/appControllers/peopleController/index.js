@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const read = require('./read');
-const remove = require('./remove');
-const paginatedList = require('./paginatedList');
+import createCRUDController from '#controllers/middlewaresControllers/createCRUDController/index.js';
+import read from './read.js';
+import remove from './remove.js';
+import paginatedList from './paginatedList.js';
 
-function modelController() {
+const modelController = () => {
   const Model = mongoose.model('People');
   const methods = createCRUDController('People');
 
@@ -14,6 +14,6 @@ function modelController() {
   methods.list = (req, res) => paginatedList(Model, req, res);
 
   return methods;
-}
+};
 
-module.exports = modelController();
+export default modelController();

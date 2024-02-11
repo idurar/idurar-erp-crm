@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 const Model = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
@@ -68,4 +68,4 @@ const convertQuoteToInvoice = async (req, res) => {
   });
 };
 
-module.exports = convertQuoteToInvoice;
+export default convertQuoteToInvoice;

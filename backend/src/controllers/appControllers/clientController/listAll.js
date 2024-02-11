@@ -1,4 +1,4 @@
-const { migrate } = require('./migrate');
+import migrate from './migrate.js';
 
 const listAll = async (Model, req, res) => {
   const sort = parseInt(req.query.sort) || 'desc';
@@ -22,4 +22,4 @@ const listAll = async (Model, req, res) => {
   }
 };
 
-module.exports = listAll;
+export default listAll;

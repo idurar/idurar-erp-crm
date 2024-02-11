@@ -1,4 +1,5 @@
-const Joi = require('joi');
+import Joi from 'joi';
+
 const schema = Joi.object({
   client: Joi.alternatives().try(Joi.string(), Joi.object()).required(),
   number: Joi.number().required(),
@@ -23,4 +24,4 @@ const schema = Joi.object({
   taxRate: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
 });
 
-module.exports = schema;
+export default schema;

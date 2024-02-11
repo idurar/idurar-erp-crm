@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Model = mongoose.model('Invoice');
 const ModalPayment = mongoose.model('Payment');
@@ -34,4 +34,4 @@ const remove = async (req, res) => {
   });
 };
 
-module.exports = remove;
+export default remove;

@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const schema = new mongoose.Schema({
+const surveySchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,10 +11,12 @@ const schema = new mongoose.Schema({
     default: true,
   },
   user: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  result: [{
-    question: String,
-    answer : String,
-  }],
+  result: [
+    {
+      question: String,
+      answer: String,
+    },
+  ],
   created: {
     type: Date,
     default: Date.now,
@@ -24,5 +27,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-schema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Survey', schema);
+export default mongoose.model('Survey', surveySchema);
