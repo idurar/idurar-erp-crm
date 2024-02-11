@@ -4,11 +4,12 @@ import useLanguage from '@/locale/useLanguage';
 
 export default function LeadForm() {
   const translate = useLanguage();
+
   return (
     <>
       <Form.Item
         label={translate('first name')}
-        name="firstName"
+        name='firstName'
         rules={[
           {
             required: true,
@@ -20,7 +21,7 @@ export default function LeadForm() {
 
       <Form.Item
         label={translate('last name')}
-        name="lastName"
+        name='lastName'
         rules={[
           {
             required: true,
@@ -32,9 +33,10 @@ export default function LeadForm() {
 
       <Form.Item
         label={translate('email')}
-        name="email"
+        name='email'
         rules={[
           {
+            type: 'email',
             required: true,
           },
         ]}
@@ -44,19 +46,20 @@ export default function LeadForm() {
 
       <Form.Item
         label={translate('phone')}
-        name="phone"
+        name='phone'
         rules={[
           {
             required: true,
+            pattern: new RegExp(/\d+/g)
           },
         ]}
       >
-        <Input type="tel" />
+        <Input type='tel' />
       </Form.Item>
 
       <Form.Item
         label={translate('company')}
-        name="company"
+        name='company'
         rules={[
           {
             required: true,
@@ -68,7 +71,7 @@ export default function LeadForm() {
 
       <Form.Item
         label={translate('position in company')}
-        name="jobTitle"
+        name='jobTitle'
         rules={[
           {
             required: true,
@@ -78,23 +81,23 @@ export default function LeadForm() {
         <Input />
       </Form.Item>
 
-      <Form.Item label={translate('address')} name="address">
+      <Form.Item label={translate('address')} name='address'>
         <Input />
       </Form.Item>
 
-      <Form.Item label={translate('country')} name="country">
+      <Form.Item label={translate('country')} name='country'>
         <Input />
       </Form.Item>
 
       <Form.Item
         label={translate('status')}
-        name="status"
+        name='status'
         rules={[
           {
             required: false,
           },
         ]}
-        initialValue={'new'}
+        initialValue='new'
       >
         <Select
           options={[
@@ -106,12 +109,12 @@ export default function LeadForm() {
         ></Select>
       </Form.Item>
 
-      <Form.Item label={translate('note')} name="note">
+      <Form.Item label={translate('note')} name='note'>
         <Input />
       </Form.Item>
 
-      <Form.Item label={translate('source')} name="source">
-        <Input placeholder="ex: linkedin, website, ads..." />
+      <Form.Item label={translate('source')} name='source'>
+        <Input placeholder='ex: linkedin, website, ads...' />
       </Form.Item>
     </>
   );
