@@ -9,295 +9,376 @@ export const erp = {
   },
   resetAction:
     ({ actionType }) =>
-    (dispatch) => {
-      dispatch({
-        type: actionTypes.RESET_ACTION,
-        keyState: actionType,
-        payload: null,
-      });
-    },
+      (dispatch) => {
+        dispatch({
+          type: actionTypes.RESET_ACTION,
+          keyState: actionType,
+          payload: null,
+        });
+      },
   currentItem:
     ({ data }) =>
-    (dispatch) => {
-      dispatch({
-        type: actionTypes.CURRENT_ITEM,
-        payload: { ...data },
-      });
-    },
+      (dispatch) => {
+        dispatch({
+          type: actionTypes.CURRENT_ITEM,
+          payload: { ...data },
+        });
+      },
   currentAction:
     ({ actionType, data }) =>
-    (dispatch) => {
-      dispatch({
-        type: actionTypes.CURRENT_ACTION,
-        keyState: actionType,
-        payload: { ...data },
-      });
-    },
+      (dispatch) => {
+        dispatch({
+          type: actionTypes.CURRENT_ACTION,
+          keyState: actionType,
+          payload: { ...data },
+        });
+      },
   list:
     ({ entity, options = { page: 1, items: 10 } }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'list',
-        payload: null,
-      });
-
-      let data = await request.list({ entity, options });
-
-      if (data.success === true) {
-        const result = {
-          items: data.result,
-          pagination: {
-            current: parseInt(data.pagination.page, 10),
-            pageSize: options?.items || 10,
-            total: parseInt(data.pagination.count, 10),
-          },
-        };
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'list',
-          payload: result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'list',
           payload: null,
         });
-      }
-    },
+
+        let data = await request.list({ entity, options });
+
+        if (data.success === true) {
+          const result = {
+            items: data.result,
+            pagination: {
+              current: parseInt(data.pagination.page, 10),
+              pageSize: options?.items || 10,
+              total: parseInt(data.pagination.count, 10),
+            },
+          };
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'list',
+            payload: result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'list',
+            payload: null,
+          });
+        }
+      },
   create:
     ({ entity, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'create',
-        payload: null,
-      });
-
-      let data = await request.create({ entity, jsonData });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'create',
-          payload: data.result,
-        });
-        dispatch({
-          type: actionTypes.CURRENT_ITEM,
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'create',
           payload: null,
         });
-      }
-    },
+
+        let data = await request.create({ entity, jsonData });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'create',
+            payload: data.result,
+          });
+          dispatch({
+            type: actionTypes.CURRENT_ITEM,
+            payload: data.result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'create',
+            payload: null,
+          });
+        }
+      },
   recordPayment:
     ({ entity, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'recordPayment',
-        payload: null,
-      });
-
-      let data = await request.create({ entity, jsonData });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'recordPayment',
-          payload: data.result,
-        });
-        dispatch({
-          type: actionTypes.CURRENT_ITEM,
-          payload: data.result.invoice,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'recordPayment',
           payload: null,
         });
-      }
-    },
+
+        let data = await request.create({ entity, jsonData });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'recordPayment',
+            payload: data.result,
+          });
+          dispatch({
+            type: actionTypes.CURRENT_ITEM,
+            payload: data.result.invoice,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'recordPayment',
+            payload: null,
+          });
+        }
+      },
   read:
     ({ entity, id }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'read',
-        payload: null,
-      });
-
-      let data = await request.read({ entity, id });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.CURRENT_ITEM,
-          payload: data.result,
-        });
-        dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'read',
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'read',
           payload: null,
         });
-      }
-    },
+
+        let data = await request.read({ entity, id });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.CURRENT_ITEM,
+            payload: data.result,
+          });
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'read',
+            payload: data.result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'read',
+            payload: null,
+          });
+        }
+      },
   update:
     ({ entity, id, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'update',
-        payload: null,
-      });
-
-      let data = await request.update({ entity, id, jsonData });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'update',
-          payload: data.result,
-        });
-        dispatch({
-          type: actionTypes.CURRENT_ITEM,
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'update',
           payload: null,
         });
-      }
-    },
+
+        let data = await request.update({ entity, id, jsonData });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'update',
+            payload: data.result,
+          });
+          dispatch({
+            type: actionTypes.CURRENT_ITEM,
+            payload: data.result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'update',
+            payload: null,
+          });
+        }
+      },
 
   delete:
     ({ entity, id }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.RESET_ACTION,
-        keyState: 'delete',
-      });
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'delete',
-        payload: null,
-      });
-
-      let data = await request.delete({ entity, id });
-
-      if (data.success === true) {
-        dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'delete',
-          payload: data.result,
-        });
+      async (dispatch) => {
         dispatch({
           type: actionTypes.RESET_ACTION,
           keyState: 'delete',
         });
-      } else {
         dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'delete',
           payload: null,
         });
-      }
-    },
 
+        let data = await request.delete({ entity, id });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'delete',
+            payload: data.result,
+          });
+          dispatch({
+            type: actionTypes.RESET_ACTION,
+            keyState: 'delete',
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'delete',
+            payload: null,
+          });
+        }
+      },
   search:
     ({ entity, options }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'search',
-        payload: null,
-      });
-
-      let data = await request.search({ entity, options });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'search',
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'search',
           payload: null,
         });
-      }
-    },
+        let data = await request.search({ entity, options });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'search',
+            payload: data.result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'search',
+            payload: null,
+          });
+        }
+      },
 
   summary:
     ({ entity, options }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'summary',
-        payload: null,
-      });
-
-      const data = await request.summary({ entity, options });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'summary',
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'summary',
           payload: null,
         });
-      }
-    },
+
+        const data = await request.summary({ entity, options });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'summary',
+            payload: data.result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'summary',
+            payload: null,
+          });
+        }
+      },
 
   mail:
     ({ entity, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-        keyState: 'mail',
-        payload: null,
-      });
-
-      const data = await request.mail({ entity, jsonData });
-
-      if (data.success === true) {
+      async (dispatch) => {
         dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'mail',
-          payload: data.result,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
+          type: actionTypes.REQUEST_LOADING,
           keyState: 'mail',
           payload: null,
         });
-      }
-    },
+
+        const data = await request.mail({ entity, jsonData });
+
+        if (data.success === true) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'mail',
+            payload: data.result,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.REQUEST_FAILED,
+            keyState: 'mail',
+            payload: null,
+          });
+        }
+      },
 
   convert:
     ({ entity, id }) =>
-    async () => {
-      await request.convert({ entity, id });
-    },
+      async () => {
+        await request.convert({ entity, id });
+      },
+  sort: ({ entity, sortBy }) => async (dispatch, getState) => {
+    dispatch({
+      type: actionTypes.REQUEST_LOADING,
+      keyState: 'sort',
+      payload: null,
+    });
+
+    const state = getState();
+    const currentItems = state.erp.list.result.items;
+
+    const sortedItems = currentItems.slice().sort((a, b) => {
+      if (sortBy.direction === 'asc') {
+        if (sortBy.field === 'number') {
+          return a[sortBy.field] - b[sortBy.field];
+        } else if (sortBy.field === 'client.name') {
+          const clientNameA = a.client.people.firstname + ' ' + a.client.people.lastname;
+          const clientNameB = b.client.people.firstname + ' ' + b.client.people.lastname;
+          return clientNameA.localeCompare(clientNameB);
+        }else if(sortBy.field === 'total'){
+          return a[sortBy.field] - b[sortBy.field];
+        }
+      } else {
+        if (sortBy.field === 'number') {
+          return b[sortBy.field] - a[sortBy.field];
+        } else if (sortBy.field === 'client.name') {
+          const clientNameA = a.client.people.firstname + ' ' + a.client.people.lastname;
+          const clientNameB = b.client.people.firstname + ' ' + b.client.people.lastname;
+          return clientNameB.localeCompare(clientNameA);
+        }else if(sortBy.field === 'total'){
+          return b[sortBy.field] - a[sortBy.field];
+        }
+      }
+    });
+
+    const data = { success: true, result: sortedItems };
+
+    if (data.success === true) {
+      dispatch({
+        type: actionTypes.SORT,
+        keyState: 'sort',
+        payload: data.result,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
+        keyState: 'sort',
+        payload: null,
+      });
+    }
+  },
+
+  filter: ({searchTerm }) => async (dispatch, getState) => {
+    dispatch({
+      type: actionTypes.REQUEST_LOADING,
+      keyState: 'sort',
+      payload: null,
+    });
+    const state = getState();
+    const currentItems = state.erp.list.result.items;
+    const filteredItems = currentItems.filter((e)=>{
+      return e.client.name.toLowerCase().includes(searchTerm)
+    })
+
+    const data = { success: true, result: filteredItems };
+
+    if (data.success === true) {
+      dispatch({
+        type: actionTypes.FILTER,
+        keyState: 'filtered',
+
+        payload: data.result,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
+        keyState: 'filtered',
+        payload: null,
+      });
+    }
+  },
+
+
+
 };

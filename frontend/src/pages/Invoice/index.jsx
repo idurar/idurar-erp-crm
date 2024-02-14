@@ -5,12 +5,40 @@ import { tagColor } from '@/utils/statusTagColor';
 
 import { useMoney, useDate } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
+import { SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { erp } from '@/redux/erp/actions';
+import { useDispatch } from 'react-redux';
 
 export default function Invoice() {
   const translate = useLanguage();
   const { dateFormat } = useDate();
   const entity = 'invoice';
   const { moneyFormatter } = useMoney();
+  const [sortDirectionName, setSortDirectionName] = useState('asc');
+  const [sortDirectionTotal, setSortDirectionTotal] = useState('asc');
+
+  const [sortDirectionNumber, setSortDirectionNumber] = useState('asc');
+
+  const dispatch = useDispatch()
+
+  //function to handle 
+  const handleSortByNumber = () => {
+    setSortDirectionNumber(sortDirectionNumber === 'asc' ? 'desc' : 'asc');
+    dispatch(erp.sort({ entity, sortBy: { field: 'number', direction: sortDirectionNumber } }));
+  };
+  const handleSortByClient = () => {
+    setSortDirectionName(sortDirectionName === 'asc' ? 'desc' : 'asc');
+    dispatch(erp.sort({ entity, sortBy: { field: 'client.name', direction: sortDirectionName } }));
+
+  };
+  const handleSortByTotal = () => {
+    setSortDirectionTotal(sortDirectionTotal === 'asc' ? 'desc' : 'asc');
+    dispatch(erp.sort({ entity, sortBy: { field: 'total', direction: sortDirectionTotal } }));
+  };
+
+
+
 
   const searchConfig = {
     displayLabels: ['name'],
@@ -19,11 +47,29 @@ export default function Invoice() {
   const deleteModalLabels = ['number', 'client.name'];
   const dataTableColumns = [
     {
-      title: translate('Number'),
+      title: <div style={{ display: "flex" }}><span style={{ paddingRight: 10 }}>{translate('Number')}</span>
+        {
+          sortDirectionNumber === "asc" ? <SortAscendingOutlined style={{ cursor: "pointer" }} onClick={() => {
+            handleSortByNumber()
+          }} /> : <SortDescendingOutlined style={{ cursor: "pointer" }} onClick={() => {
+            handleSortByNumber()
+          }} />
+
+        }
+      </div>,
       dataIndex: 'number',
     },
     {
-      title: translate('Client'),
+      title: <div style={{ display: "flex" }}><span style={{ paddingRight: 10 }}>{translate('Client')}</span>
+        {
+          sortDirectionName === "asc" ? <SortAscendingOutlined style={{ cursor: "pointer" }} onClick={() => {
+            handleSortByClient()
+          }} /> : <SortDescendingOutlined style={{ cursor: "pointer" }} onClick={() => {
+            handleSortByClient()
+          }} />
+
+        }
+      </div>,
       dataIndex: ['client', 'name'],
     },
     {
@@ -41,7 +87,16 @@ export default function Invoice() {
       },
     },
     {
-      title: translate('Total'),
+      title: <div style={{ display: "flex" }}><span style={{ paddingRight: 10 }}>{translate('Total')}</span>
+        {
+          sortDirectionTotal === "asc" ? <SortAscendingOutlined style={{ cursor: "pointer" }} onClick={() => {
+            handleSortByTotal()
+          }} /> : <SortDescendingOutlined style={{ cursor: "pointer" }} onClick={() => {
+            handleSortByTotal()
+          }} />
+
+        }
+      </div>,
       dataIndex: 'total',
       onCell: () => {
         return {
