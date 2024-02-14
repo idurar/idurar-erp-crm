@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   EyeOutlined,
   EditOutlined,
@@ -8,7 +8,7 @@ import {
   PlusOutlined,
   EllipsisOutlined,
 } from '@ant-design/icons';
-import { Dropdown, Table, Button } from 'antd';
+import { Dropdown, Table, Button, Input } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,7 +44,7 @@ export default function DataTable({ config, extra = [] }) {
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
-  const { pagination, items: dataSource } = listResult;
+  const { pagination, items: dataSource ,filteredItems:filteredSource} = listResult;
 
   const { erpContextAction } = useErpContext();
   const { modal } = erpContextAction;
@@ -77,6 +77,7 @@ export default function DataTable({ config, extra = [] }) {
     },
   ];
 
+  const [searchTerm,setSearchTerm]=useState("")
   const navigate = useNavigate();
 
   const handleRead = (record) => {
@@ -165,12 +166,20 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
+  const handleFilterChange=(searchTerm)=>{
+    setSearchTerm(searchTerm)
+    dispatch(erp.filter({searchTerm}))
+  }
+
   return (
     <>
       <PageHeader
         title={DATATABLE_TITLE}
         ghost={true}
         extra={[
+          <Input placeholder='Search ...' onChange={(e)=>{
+            handleFilterChange(e.target.value)
+          }}/>,
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />} />,
 
           !disableAdd && <AddNewItem config={config} key={`${uniqueId()}`} />,
@@ -183,7 +192,7 @@ export default function DataTable({ config, extra = [] }) {
       <Table
         columns={dataTableColumns}
         rowKey={(item) => item._id}
-        dataSource={dataSource}
+        dataSource={searchTerm!==""?filteredSource:dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}

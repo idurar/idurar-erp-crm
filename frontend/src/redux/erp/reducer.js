@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   list: {
     result: {
       items: [],
+      filteredItems:[],
       pagination: {
         current: 1,
         pageSize: 10,
@@ -121,6 +122,33 @@ const erpReducer = (state = INITIAL_STATE, action) => {
           ...INITIAL_STATE[keyState],
         },
       };
+
+      case actionTypes.SORT:
+        return {
+          ...state,
+          list: {
+            ...state.list,
+            result: {
+              ...state.list.result,
+              items: payload,
+            },
+            isLoading: false,
+            isSuccess: true,
+          },
+        };
+        case actionTypes.FILTER:
+          return {
+            ...state,
+            list: {
+              ...state.list,
+              result: {
+                ...state.list.result,
+                filteredItems: payload,
+              },
+              isLoading: false,
+              isSuccess: true,
+            },
+          };
     default:
       return state;
   }

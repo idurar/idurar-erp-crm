@@ -7,3 +7,5 @@ export const REQUEST_FAILED = 'ERP_REQUEST_FAILED';
 
 export const CURRENT_ACTION = 'ERP_CURRENT_ACTION';
 export const RESET_ACTION = 'ERP_RESET_ACTION';
+export const SORT = 'SORT';
+export const FILTER = 'FILTER';
