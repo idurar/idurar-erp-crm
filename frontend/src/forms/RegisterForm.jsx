@@ -1,11 +1,41 @@
-import React from 'react';
-import { Form, Input } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Progress } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
 
 export default function RegisterForm() {
   const translate = useLanguage();
+  const [passwordStrength,setPasswordStrength]=useState(0)
+
+  const calculatePasswordStrength = password => {
+    let strength = 0;
+    // Add points for each criteria met
+    strength += /[A-Z]/.test(password) ? 20 : 0; // Uppercase letters
+    strength += /[a-z]/.test(password) ? 20 : 0; // Lowercase letters
+    strength += /[0-9]/.test(password) ? 20 : 0; // Numbers
+    strength += /[^A-Za-z0-9]/.test(password) ? 20 : 0; // Special characters
+    strength += password.length >= 8 ? 20 : 0; // Length
+
+    return strength;
+  };
+
+  const handlePasswordChange = e => {
+    const password = e.target.value;
+    const strength = calculatePasswordStrength(password);
+    setPasswordStrength(strength);
+  };
+  const getTrailColor = () => {
+    if (passwordStrength >= 80) {
+      return '#95DE64';
+    } else if (passwordStrength >= 60) {
+      return '#1890FF';
+    } else if (passwordStrength >= 40) {
+      return '#FFA940';
+    } else {
+      return '#FF4D4F';
+    }
+  };
   return (
     <>
       <Form.Item
@@ -46,7 +76,14 @@ export default function RegisterForm() {
           },
         ]}
       >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
+        <div> {
+        //added this div because Form.item must have a single child element.
+              }
+        <Input.Password onChange={handlePasswordChange} prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
+        <Progress percent={passwordStrength} status="active" strokeColor={getTrailColor()} showInfo={false}/>
+
+        </div>
+      
       </Form.Item>
       <Form.Item
         name="confirm_password"
