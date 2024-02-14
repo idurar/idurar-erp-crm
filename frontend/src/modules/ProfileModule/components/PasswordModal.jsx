@@ -29,8 +29,9 @@ const PasswordModal = () => {
   };
   return (
     <Modal
-      title={modalTitle}
+    title={<div style={{ textAlign: 'center' }}>{modalTitle}</div>}
       open={passwordModal.isOpen}
+      closable={false} // Set closable prop to false to remove the close icon
       onCancel={modal.close}
       okText="Update"
       onOk={() => {
@@ -40,6 +41,7 @@ const PasswordModal = () => {
       <Form form={passForm} layout="vertical" onFinish={handelSubmit}>
         <Form.Item
           label={translate('New Password')}
+          
           name="password"
           rules={[
             {
@@ -49,7 +51,7 @@ const PasswordModal = () => {
           ]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password placeholder="New Password"/>
         </Form.Item>
         <Form.Item
           label={translate('Confirm Password')}
@@ -71,7 +73,7 @@ const PasswordModal = () => {
             }),
           ]}
         >
-          <Input.Password autoComplete="new-password" />
+          <Input.Password autoComplete="new-password" placeholder="Confirm Password"/>
         </Form.Item>
       </Form>
     </Modal>
