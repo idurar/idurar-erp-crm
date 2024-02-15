@@ -19,7 +19,7 @@ const useMoney = () => {
     thousand_sep,
     cent_precision,
     zero_format,
-  } = settingsState.money_format_settings;
+  } = settingsState.money_format_settings || {};
 
   function currencyFormat(amount) {
     return currency(amount).dollars() > 0 || !zero_format
