@@ -286,7 +286,7 @@ it_brings_together_your_invoice_clients_and_leads: "It Brings Together Your Invo
 run_and_scale_your_erp_crm_apps: "Run And Scale Your Erp Crm Apps",
 people: "People",
 customize_this_application: "Customize This Application",
-do_you_need_help_on_customize_of_this_app: "Do You Need Help On Customize Of This App",
+do_you_need_help_customizing_this_app: "Do You Need Help Customizing This App",
 contact_us: "Contact Us",
 company_logo: "Company Logo",
 application_name: "Application Name",
