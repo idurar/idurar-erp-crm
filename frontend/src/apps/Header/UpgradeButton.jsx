@@ -11,7 +11,7 @@ export default function UpgradeButton() {
   const Content = () => {
     return (
       <>
-        <p>{'Do you need help customizing this app ?'}</p>
+        <p>{translate('Do you need help customizing this app ?')}</p>
         <Button
           type="primary"
           onClick={() => {
