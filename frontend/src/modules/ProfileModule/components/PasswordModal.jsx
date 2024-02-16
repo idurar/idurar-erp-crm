@@ -2,7 +2,7 @@ import { useProfileContext } from '@/context/profileContext';
 import useOnFetch from '@/hooks/useOnFetch';
 import { request } from '@/request';
 import { Form, Input, Modal } from 'antd';
-
+import { useEffect } from 'react';
 import useLanguage from '@/locale/useLanguage';
 
 const PasswordModal = () => {
@@ -16,7 +16,11 @@ const PasswordModal = () => {
   const [passForm] = Form.useForm();
 
   const { onFetch } = useOnFetch();
-
+  const resetForm = () => {
+    passForm.resetFields(); // Reset form fields
+    passForm.setFields([{ name: 'password', errors: [] }]); // Clear password error message
+    passForm.setFields([{ name: 'passwordCheck', errors: [] }]); // Clear passwordCheck error message
+  };
   const handelSubmit = (fieldsValue) => {
     const entity = 'admin/profile/password/';
     const updateFn = async () => {
@@ -27,11 +31,22 @@ const PasswordModal = () => {
     passForm.resetFields();
     modal.close();
   };
+  useEffect(() => {
+    // Reset form when modal is closed
+    if (!passwordModal.isOpen) {
+      resetForm();
+    }
+  }, [passwordModal.isOpen]);
   return (
     <Modal
-      title={modalTitle}
+    title={<div style={{ textAlign: 'center' }}>{modalTitle}</div>}
       open={passwordModal.isOpen}
-      onCancel={modal.close}
+      closable={false} // Set closable prop to false to remove the close icon
+      visible={passwordModal.isOpen} // Use "visible" instead of "open" prop
+      onCancel={() => {
+        modal.close();
+        resetForm(); // Reset form when modal is canceled
+      }}
       okText="Update"
       onOk={() => {
         passForm.submit();
@@ -49,7 +64,7 @@ const PasswordModal = () => {
           ]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password placeholder="New Password"/>
         </Form.Item>
         <Form.Item
           label={translate('Confirm Password')}
@@ -71,7 +86,7 @@ const PasswordModal = () => {
             }),
           ]}
         >
-          <Input.Password autoComplete="new-password" />
+          <Input.Password autoComplete="new-password" placeholder="Confirm Password"/>
         </Form.Item>
       </Form>
     </Modal>
