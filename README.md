@@ -28,8 +28,7 @@ username : admin@demo.com  password : admin123
 
 ## Translation : 
 
-[French](doc/README.fr.md#French-Translation)
-
+[French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation)
 ## License
 
 IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
