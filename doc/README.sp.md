@@ -22,7 +22,7 @@ IDURAR es un ERP/CRM de Código Abierto y "Fair-Code" (Facturación/Inventario/C
 
 **Credenciales** :
 ```
-usuario: : admin@demo.com  contraseña: admin123
+usuario: admin@demo.com  contraseña: admin123
 ```
 
 ```
