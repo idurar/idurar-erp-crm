@@ -28,6 +28,7 @@ const LoginPage = () => {
     if (isSuccess) navigate('/');
   }, [isSuccess]);
 
+  console.log('On Finish', onFinish)
   const FormContainer = () => {
     return (
       <Loading isLoading={isLoading}>
