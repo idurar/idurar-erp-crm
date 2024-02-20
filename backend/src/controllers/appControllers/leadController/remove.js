@@ -11,7 +11,10 @@ const remove = async (Model, req, res) => {
   const { id } = req.params;
 
   // first find if there alt least one quote or invoice exist corresponding to the client
-  const offerQuotes = await Offer.findOne({ lead: id, removed: false }).exec();
+  const offerQuotes = await Offer.findOne({
+    lead: id,
+    removed: false,
+  }).exec();
 
   if (offerQuotes) {
     return res.status(400).json({
@@ -21,7 +24,10 @@ const remove = async (Model, req, res) => {
     });
   }
 
-  let result = await Model.findOneAndDelete({ _id: id, removed: false }).exec();
+  let result = await Model.findOneAndDelete({
+    _id: id,
+    removed: false,
+  }).exec();
 
   if (!result) {
     return res.status(404).json({

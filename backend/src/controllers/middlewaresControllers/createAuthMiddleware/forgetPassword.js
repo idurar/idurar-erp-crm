@@ -7,6 +7,8 @@ const sendMail = require('./sendMail');
 const shortid = require('shortid');
 const { loadSettings } = require('@/middlewares/settings');
 
+const { useAppSettings } = require('@/settings');
+
 const forgetPassword = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
   const User = mongoose.model(userModel);
@@ -31,6 +33,14 @@ const forgetPassword = async (req, res, { userModel }) => {
   }
 
   const user = await User.findOne({ email: email, removed: false });
+  const databasePassword = await UserPassword.findOne({ user: user._id, removed: false });
+
+  if (!user.enabled)
+    return res.status(409).json({
+      success: false,
+      result: null,
+      message: 'Your account is disabled, contact your account adminstrator',
+    });
 
   // console.log(user);
   if (!user)
@@ -49,10 +59,10 @@ const forgetPassword = async (req, res, { userModel }) => {
     }
   ).exec();
 
-  const settings = await loadSettings();
-
+  const settings = useAppSettings();
   const idurar_app_email = settings['idurar_app_email'];
   const idurar_base_url = settings['idurar_base_url'];
+
   const url = checkAndCorrectURL(idurar_base_url);
 
   const link = url + '/resetpassword/' + user._id + '/' + resetToken;

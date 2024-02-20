@@ -6,10 +6,10 @@ export default function OfferRead() {
 
   const entity = 'offer';
   const Labels = {
-    PANEL_TITLE: translate('offer'),
+    PANEL_TITLE: translate('Offer Leads'),
     DATATABLE_TITLE: translate('offer_list'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
-    ENTITY_NAME: translate('offer'),
+    ENTITY_NAME: translate('Offer Leads'),
   };
 
   const configPage = {

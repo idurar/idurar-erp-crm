@@ -99,6 +99,9 @@ h6 {
   cursor: pointer;
 }
 
+.ant-menu-item {
+  height: 36px !important;
+}
 @media (max-width: 768px) {
   .tabContent .ant-tabs-right > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
     padding-right: 0;

@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { Tag, Row, Col } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
@@ -5,6 +7,7 @@ import { useMoney } from '@/settings';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
+import useOnFetch from '@/hooks/useOnFetch';
 import { tagColor } from '@/utils/statusTagColor';
 
 import RecentTable from './components/RecentTable';
@@ -13,28 +16,51 @@ import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
 
+import { selectMoneyFormat } from '@/redux/settings/selectors';
+import { useSelector } from 'react-redux';
+
 export default function DashboardModule() {
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
-  const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
-    request.summary({ entity: 'invoice' })
-  );
+  const money_format_settings = useSelector(selectMoneyFormat);
 
-  const { result: quoteResult, isLoading: quoteLoading } = useFetch(() =>
-    request.summary({ entity: 'quote' })
-  );
+  const getStatsData = async ({ entity, currency }) => {
+    return await request.summary({
+      entity,
+      options: { currency },
+    });
+  };
 
-  const { result: offerResult, isLoading: offerLoading } = useFetch(() =>
-    request.summary({ entity: 'offer' })
-  );
+  const {
+    result: invoiceResult,
+    isLoading: invoiceLoading,
+    onFetch: fetchInvoicesStats,
+  } = useOnFetch();
 
-  const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
-    request.summary({ entity: 'payment' })
-  );
+  const { result: quoteResult, isLoading: quoteLoading, onFetch: fetchQuotesStats } = useOnFetch();
+
+  const { result: offerResult, isLoading: offerLoading, onFetch: fetchOffersStats } = useOnFetch();
+
+  const {
+    result: paymentResult,
+    isLoading: paymentLoading,
+    onFetch: fetchPayemntsStats,
+  } = useOnFetch();
 
   const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
     request.summary({ entity: 'client' })
   );
+
+  useEffect(() => {
+    const currency = money_format_settings.default_currency_code || null;
+
+    if (currency) {
+      fetchInvoicesStats(getStatsData({ entity: 'invoice', currency }));
+      fetchQuotesStats(getStatsData({ entity: 'quote', currency }));
+      fetchOffersStats(getStatsData({ entity: 'offer', currency }));
+      fetchPayemntsStats(getStatsData({ entity: 'payment', currency }));
+    }
+  }, [money_format_settings.default_currency_code]);
 
   const dataTableColumns = [
     {
@@ -54,10 +80,11 @@ export default function DashboardModule() {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (total) => moneyFormatter({ amount: total }),
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
     {
       title: translate('Status'),
@@ -73,51 +100,24 @@ export default function DashboardModule() {
       result: invoiceResult,
       isLoading: invoiceLoading,
       entity: 'invoice',
-      title: translate('Invoices preview'),
+      title: translate('Invoices'),
     },
     {
       result: quoteResult,
       isLoading: quoteLoading,
       entity: 'quote',
-      title: translate('quotes preview'),
+      title: translate('proforma invoices'),
     },
     {
       result: offerResult,
       isLoading: offerLoading,
       entity: 'offer',
-      title: translate('offers preview'),
-    },
-    {
-      result: paymentResult,
-      isLoading: paymentLoading,
-      entity: 'payment',
-      title: translate('payments preview'),
+      title: translate('offers'),
     },
   ];
 
-  const cards = entityData.map((data, index) => {
-    const { result, entity, isLoading } = data;
-
-    if (entity === 'offer') return null;
-
-    return (
-      <SummaryCard
-        key={index}
-        title={data?.entity === 'payment' ? translate('Payment') : translate(data?.entity)}
-        tagColor={
-          data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
-        }
-        prefix={translate('This month')}
-        isLoading={isLoading}
-        tagContent={moneyFormatter({ amount: result?.total })}
-      />
-    );
-  });
-
   const statisticCards = entityData.map((data, index) => {
     const { result, entity, isLoading, title } = data;
-
-    if (entity === 'payment') return null;
 
     return (
       <PreviewCard
@@ -137,56 +137,80 @@ export default function DashboardModule() {
     );
   });
 
-  return (
-    <>
-      <Row gutter={[32, 32]}>
-        {cards}
-        <SummaryCard
-          title={translate('Due Balance')}
-          tagColor={'red'}
-          prefix={translate('Not Paid')}
-          isLoading={invoiceLoading}
-          tagContent={moneyFormatter({ amount: invoiceResult?.total_undue })}
-        />
-      </Row>
-      <div className="space30"></div>
-      <Row gutter={[32, 32]}>
-        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
-          <div className="whiteBox shadow" style={{ height: 458 }}>
-            <Row className="pad20" gutter={[0, 0]}>
-              {statisticCards}
-            </Row>
-          </div>
-        </Col>
-        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
-          <CustomerPreviewCard
-            isLoading={clientLoading}
-            activeCustomer={clientResult?.active}
-            newCustomer={clientResult?.new}
+  if (money_format_settings) {
+    return (
+      <>
+        <Row gutter={[32, 32]}>
+          <SummaryCard
+            title={translate('Invoices')}
+            tagColor={'cyan'}
+            prefix={translate('This month')}
+            isLoading={invoiceLoading}
+            data={invoiceResult?.total}
           />
-        </Col>
-      </Row>
-      <div className="space30"></div>
-      <Row gutter={[32, 32]}>
-        <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
-          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
-            <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
-              {translate('Recent Invoices')}
-            </h3>
+          <SummaryCard
+            title={translate('proforma invoices')}
+            tagColor={'purple'}
+            prefix={translate('This month')}
+            isLoading={quoteLoading}
+            data={quoteResult?.total}
+          />
+          <SummaryCard
+            title={translate('offers')}
+            tagColor={'green'}
+            prefix={translate('This month')}
+            isLoading={offerLoading}
+            data={offerResult?.total}
+          />
+          <SummaryCard
+            title={translate('Unpaid')}
+            tagColor={'red'}
+            prefix={translate('Not Paid')}
+            isLoading={invoiceLoading}
+            data={invoiceResult?.total_undue}
+          />
+        </Row>
+        <div className="space30"></div>
+        <Row gutter={[32, 32]}>
+          <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
+            <div className="whiteBox shadow" style={{ height: 458 }}>
+              <Row className="pad20" gutter={[0, 0]}>
+                {statisticCards}
+              </Row>
+            </div>
+          </Col>
+          <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
+            <CustomerPreviewCard
+              isLoading={clientLoading}
+              activeCustomer={clientResult?.active}
+              newCustomer={clientResult?.new}
+            />
+          </Col>
+        </Row>
+        <div className="space30"></div>
+        <Row gutter={[32, 32]}>
+          <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
+            <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+              <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+                {translate('Recent Invoices')}
+              </h3>
 
-            <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
-          </div>
-        </Col>
+              <RecentTable entity={'invoice'} dataTableColumns={dataTableColumns} />
+            </div>
+          </Col>
 
-        <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
-          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
-            <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
-              {translate('Recent Quotes')}
-            </h3>
-            <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
-          </div>
-        </Col>
-      </Row>
-    </>
-  );
+          <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
+            <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+              <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+                {translate('Recent Quotes')}
+              </h3>
+              <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
+            </div>
+          </Col>
+        </Row>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 }

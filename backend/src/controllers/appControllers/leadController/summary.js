@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const QuoteModel = mongoose.model('Quote');
+const OfferModel = mongoose.model('Offer');
 
 const summary = async (Model, req, res) => {
   let defaultType = 'month';
@@ -50,15 +50,15 @@ const summary = async (Model, req, res) => {
         activeClients: [
           {
             $lookup: {
-              from: QuoteModel.collection.name,
+              from: OfferModel.collection.name,
               localField: '_id', // Match _id from ClientModel
-              foreignField: 'client', // Match client field in QuoteModel
-              as: 'quotes',
+              foreignField: 'lead', // Match client field in OfferModel
+              as: 'offer',
             },
           },
           {
             $match: {
-              'quotes.removed': false,
+              'offer.removed': false,
             },
           },
           {

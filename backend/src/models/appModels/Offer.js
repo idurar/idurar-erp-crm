@@ -5,8 +5,8 @@ const offerSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   converted: {
     type: Boolean,
     default: false,
@@ -65,6 +65,11 @@ const offerSchema = new mongoose.Schema({
       },
     },
   ],
+  currency: {
+    type: String,
+    uppercase: true,
+    required: true,
+  },
   taxRate: {
     type: Number,
   },
@@ -84,12 +89,12 @@ const offerSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  note: {
+  notes: {
     type: String,
   },
   status: {
     type: String,
-    enum: ['draft', 'pending', 'sent', 'accepted', 'rejected', 'cancelled', 'on hold'],
+    enum: ['draft', 'pending', 'sent', 'accepted', 'declined', 'cancelled', 'on hold'],
     default: 'draft',
   },
   approved: {

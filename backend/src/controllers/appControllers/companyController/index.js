@@ -3,6 +3,7 @@ const { modelsFiles } = require('@/models/utils');
 const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
 
 const remove = require('./remove');
+const update = require('./update');
 
 function modelController() {
   const modelName = 'Company';
@@ -14,6 +15,7 @@ function modelController() {
     const methods = createCRUDController(modelName);
 
     methods.delete = (req, res) => remove(Model, req, res);
+    methods.update = (req, res) => update(Model, req, res);
 
     return methods;
   }

@@ -6,7 +6,9 @@ const filter = async (Model, req, res) => {
       message: 'filter not provided correctly',
     });
   }
-  const result = await Model.find({ removed: false })
+  const result = await Model.find({
+    removed: false,
+  })
     .where(req.query.filter)
     .equals(req.query.equal)
     .exec();
@@ -14,14 +16,14 @@ const filter = async (Model, req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this id: ' + req.params.id,
+      message: 'No document found ',
     });
   } else {
     // Return success resposne
     return res.status(200).json({
       success: true,
       result,
-      message: 'Successfully found all documents where equal to : ' + req.params.equal,
+      message: 'Successfully found all documents  ',
     });
   }
 };

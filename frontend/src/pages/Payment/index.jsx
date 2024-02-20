@@ -1,12 +1,15 @@
 import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
-import { useDate } from '@/settings';
+
+import { useMoney, useDate } from '@/settings';
 
 export default function Payment() {
   const translate = useLanguage();
   const { dateFormat } = useDate();
+  const { moneyFormatter } = useMoney();
   const searchConfig = {
+    entity: 'client',
     displayLabels: ['number'],
     searchFields: 'number',
     outputValue: '_id',
@@ -26,6 +29,17 @@ export default function Payment() {
     {
       title: translate('Amount'),
       dataIndex: 'amount',
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (amount, record) =>
+        moneyFormatter({ amount: amount, currency_code: record.currency }),
     },
     {
       title: translate('Date'),

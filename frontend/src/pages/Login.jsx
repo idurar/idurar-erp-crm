@@ -51,7 +51,6 @@ const LoginPage = () => {
             >
               {translate('Log in')}
             </Button>
-            {translate('Or')} <a href="/register">{translate('register now')}!</a>
           </Form.Item>
         </Form>
       </Loading>

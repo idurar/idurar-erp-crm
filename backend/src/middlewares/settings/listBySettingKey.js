@@ -15,7 +15,7 @@ const listBySettingKey = async ({ settingKeyArray = [] }) => {
     for (const settingKey of settingKeyArray) {
       settingsToShow.$or.push({ settingKey });
     }
-    let results = await Model.find(settings).where('removed', false);
+    let results = await Model.find({ ...settings }).where('removed', false);
 
     // If no results found, return document not found
     if (results.length >= 1) {

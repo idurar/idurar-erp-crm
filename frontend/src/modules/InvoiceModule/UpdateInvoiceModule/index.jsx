@@ -13,6 +13,8 @@ import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { settingsAction } from '@/redux/settings/actions';
+
 export default function UpdateInvoiceModule({ config }) {
   const dispatch = useDispatch();
 
@@ -22,12 +24,22 @@ export default function UpdateInvoiceModule({ config }) {
     dispatch(erp.read({ entity: config.entity, id }));
   }, [id]);
 
+  const updateCurrency = (value) => {
+    console.log('🚀 ~ updateCurrency ~ value:', value);
+    dispatch(
+      settingsAction.updateCurrency({
+        data: { default_currency_code: value },
+      })
+    );
+  };
+
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
   useLayoutEffect(() => {
     if (currentResult) {
       const data = { ...currentResult };
       dispatch(erp.currentAction({ actionType: 'update', data }));
+      updateCurrency(currentResult.currency);
     }
   }, [currentResult]);
 

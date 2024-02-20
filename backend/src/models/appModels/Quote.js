@@ -6,7 +6,7 @@ const quoteSchema = new mongoose.Schema({
     default: false,
   },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   converted: {
     type: Boolean,
     default: false,
@@ -86,11 +86,16 @@ const quoteSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  currency: {
+    type: String,
+    uppercase: true,
+    required: true,
+  },
   discount: {
     type: Number,
     default: 0,
   },
-  note: {
+  notes: {
     type: String,
   },
   status: {

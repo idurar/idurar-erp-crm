@@ -8,8 +8,10 @@ const remove = async (Model, req, res) => {
   // check if client have invoice or quotes:
   const { id } = req.params;
 
-  // first find if there alt least one quote or invoice exist corresponding to the client
-  const client = await Client.findOne({ people: id, removed: false }).exec();
+  const client = await Client.findOne({
+    people: id,
+    removed: false,
+  }).exec();
   if (client) {
     return res.status(400).json({
       success: false,
@@ -17,7 +19,10 @@ const remove = async (Model, req, res) => {
       message: 'Cannot delete people if people attached to any company or he is client',
     });
   }
-  const company = await Company.findOne({ mainContact: id, removed: false }).exec();
+  const company = await Company.findOne({
+    mainContact: id,
+    removed: false,
+  }).exec();
   if (company) {
     return res.status(400).json({
       success: false,

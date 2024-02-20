@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const { generate: uniqueId } = require('shortid');
 
 const create = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
   const UserPassword = mongoose.model(userModel + 'Password');
-  let { email, password } = req.body;
+  let { email, password, enabled, name, surname, role } = req.body;
   if (!email || !password)
     return res.status(400).json({
       success: false,
@@ -12,7 +13,17 @@ const create = async (userModel, req, res) => {
       message: "Email or password fields they don't have been entered.",
     });
 
-  const existingUser = await User.findOne({ email: email });
+  if (req.body.role === 'owner') {
+    return res.status(403).send({
+      success: false,
+      result: null,
+      message: "you can't create user with role owner",
+    });
+  }
+
+  const existingUser = await User.findOne({
+    email: email,
+  });
 
   if (existingUser)
     return res.status(400).json({
@@ -28,16 +39,19 @@ const create = async (userModel, req, res) => {
       message: 'The password needs to be at least 8 characters long.',
     });
 
-  var newUserPassword = new UserPassword();
-
   const salt = uniqueId();
 
-  const passwordHash = newUserPassword.generateHash(salt, password);
+  const passwordHash = bcrypt.hashSync(salt + password);
 
-  req.body.password = undefined;
   req.body.removed = false;
-  req.body.enabled = true;
-  const result = await new User(req.body).save();
+
+  const result = await new User({
+    email,
+    enabled,
+    name,
+    surname,
+    role,
+  }).save();
 
   if (!result) {
     return res.status(403).json({

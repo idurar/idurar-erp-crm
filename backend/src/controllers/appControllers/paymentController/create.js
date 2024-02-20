@@ -37,11 +37,16 @@ const create = async (req, res) => {
     });
   }
   req.body['createdBy'] = req.admin._id;
+  req.req.req.body['currency'] = currentInvoice.currency;
+
   const result = await Model.create(req.body);
 
   const fileId = 'payment-' + result._id + '.pdf';
   const updatePath = await Model.findOneAndUpdate(
-    { _id: result._id.toString(), removed: false },
+    {
+      _id: result._id.toString(),
+      removed: false,
+    },
     { pdf: fileId },
     {
       new: true,
@@ -72,7 +77,7 @@ const create = async (req, res) => {
     }
   ).exec();
 
-  res.status(200).json({
+  return res.status(200).json({
     success: true,
     result: updatePath,
     message: 'Payment Invoice created successfully',

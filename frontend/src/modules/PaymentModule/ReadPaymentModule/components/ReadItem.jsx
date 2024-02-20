@@ -138,22 +138,28 @@ export default function ReadItem({ config, selectedItem }) {
         <Row>
           <Statistic title="Status" value={currentErp.status} />
           <Statistic
+            title={translate('Paid')}
+            value={moneyFormatter({
+              amount: currentErp.amount,
+              currency_code: currentErp.currency,
+            })}
+            style={{
+              margin: '0 32px',
+            }}
+          />
+          <Statistic
             title={translate('SubTotal')}
-            value={moneyFormatter({ amount: currentErp.subTotal })}
+            value={moneyFormatter({
+              amount: currentErp.subTotal,
+              currency_code: currentErp.currency,
+            })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
             title={translate('Total')}
-            value={moneyFormatter({ amount: currentErp.total })}
-            style={{
-              margin: '0 32px',
-            }}
-          />
-          <Statistic
-            title={translate('Amount')}
-            value={moneyFormatter({ amount: currentErp.amount })}
+            value={moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
             style={{
               margin: '0 32px',
             }}
@@ -185,31 +191,42 @@ export default function ReadItem({ config, selectedItem }) {
       >
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={12}>
-            <p>{translate('Amount')} :</p>
+            <p>{translate('Paid')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.amount })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.amount, currency_code: currentErp.currency })}
+            </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
             <p>{translate('Total')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.total })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
+            </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
             <p>{translate('Total Paid')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.credit })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.credit, currency_code: currentErp.currency })}
+            </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
             <p>{translate('Total Remaining')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.total - currentErp.credit })}</p>
+            <p>
+              {moneyFormatter({
+                amount: currentErp.total - currentErp.credit,
+                currency_code: currentErp.currency,
+              })}
+            </p>
           </Col>
         </Row>
       </div>

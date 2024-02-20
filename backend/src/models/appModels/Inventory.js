@@ -9,7 +9,7 @@ const inventorySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   product: { type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
   quantity: {
     type: Number,

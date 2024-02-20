@@ -20,6 +20,14 @@ export const settingsAction = {
       type: actionTypes.RESET_STATE,
     });
   },
+  updateCurrency:
+    ({ data }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.UPDATE_CURRENCY,
+        payload: data,
+      });
+    },
   update:
     ({ entity, settingKey, jsonData }) =>
     async (dispatch) => {
@@ -44,6 +52,7 @@ export const settingsAction = {
             'settings',
             JSON.stringify(dispatchSettingsData(data.result))
           );
+
           dispatch({
             type: actionTypes.REQUEST_SUCCESS,
             payload,
@@ -83,6 +92,19 @@ export const settingsAction = {
             'settings',
             JSON.stringify(dispatchSettingsData(data.result))
           );
+
+          // const { result: selectOptions } = request.listAll({
+          //   entity: 'currency',
+          //   options: { enabled: true },
+          // });
+
+          // const currency = selectOptions.find((x) => x.code === value);
+
+          // dispatch(
+          //   settingsAction.updateCurrency({
+          //     data: currency,
+          //   })
+          // );
           dispatch({
             type: actionTypes.REQUEST_SUCCESS,
             payload,
@@ -110,6 +132,7 @@ export const settingsAction = {
       if (data.success === true) {
         const payload = dispatchSettingsData(data.result);
         window.localStorage.setItem('settings', JSON.stringify(dispatchSettingsData(data.result)));
+
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           payload,

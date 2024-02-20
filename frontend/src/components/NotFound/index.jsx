@@ -1,6 +1,7 @@
 import { Result, Button } from 'antd';
-import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
+
+import useLanguage from '@/locale/useLanguage';
 
 export default function NotFound({ entity = '' }) {
   const translate = useLanguage();
@@ -16,7 +17,7 @@ export default function NotFound({ entity = '' }) {
         <Button
           type="primary"
           onClick={() => {
-            navigate(`/${entity?.toLowerCase()}`);
+            navigate('/');
           }}
         >
           {translate('Back')}

@@ -36,7 +36,6 @@ const update = async (Model, req, res) => {
     }
   }
 
-  console.log('🚀 ~ file: update.js:34 ~ update ~ req.body:', req.body);
   req.body.removed = false;
   const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, req.body, {
     new: true, // return the new result instead of the old one
@@ -46,13 +45,13 @@ const update = async (Model, req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this id: ' + req.params.id,
+      message: 'No document found ',
     });
   } else {
     return res.status(200).json({
       success: true,
       result,
-      message: 'we update this document by this id: ' + req.params.id,
+      message: 'we update this document ',
     });
   }
 };

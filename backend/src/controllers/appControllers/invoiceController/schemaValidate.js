@@ -4,9 +4,10 @@ const schema = Joi.object({
   number: Joi.number().required(),
   year: Joi.number().required(),
   status: Joi.string().required(),
-  note: Joi.string().allow(''),
+  notes: Joi.string().allow(''),
   expiredDate: Joi.date().required(),
   date: Joi.date().required(),
+  currency: Joi.string(),
   // array cannot be empty
   items: Joi.array()
     .items(

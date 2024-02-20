@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const { generate: uniqueId } = require('shortid');
 
@@ -29,26 +30,14 @@ const updateProfilePassword = async (userModel, req, res) => {
 
   // Find document by id and updates with the required fields
 
-  var newUserPassword = new UserPassword();
-
   const salt = uniqueId();
 
-  const passwordHash = newUserPassword.generateHash(salt, password);
+  const passwordHash = bcrypt.hashSync(salt + password);
 
   const UserPasswordData = {
     password: passwordHash,
     salt: salt,
   };
-
-  const user = await UserPassword.findOne({ user: userProfile._id, removed: false }).exec();
-
-  if (user._id !== req.admin._id) {
-    return res.status(404).json({
-      success: false,
-      result: null,
-      message: 'you cant update this demo profile',
-    });
-  }
 
   const resultPassword = await UserPassword.findOneAndUpdate(
     { user: userProfile._id, removed: false },

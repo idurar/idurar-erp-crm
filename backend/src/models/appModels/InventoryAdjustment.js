@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   product: { type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
   hasOrder: {
     type: Boolean,

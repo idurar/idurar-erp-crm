@@ -13,6 +13,7 @@ export default function Invoice() {
   const { moneyFormatter } = useMoney();
 
   const searchConfig = {
+    entity: 'client',
     displayLabels: ['name'],
     searchFields: 'name',
   };
@@ -48,23 +49,27 @@ export default function Invoice() {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (total) => moneyFormatter({ amount: total }),
+      render: (total, record) => {
+        return moneyFormatter({ amount: total, currency_code: record.currency });
+      },
     },
     {
-      title: translate('credit'),
+      title: translate('paid'),
       dataIndex: 'credit',
       onCell: () => {
         return {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (credit) => moneyFormatter({ amount: credit }),
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
     {
       title: translate('Status'),

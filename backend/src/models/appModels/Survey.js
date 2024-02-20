@@ -9,11 +9,14 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
   user: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  result: [{
-    question: String,
-    answer : String,
-  }],
+  result: [
+    {
+      question: String,
+      answer: String,
+    },
+  ],
   created: {
     type: Date,
     default: Date.now,

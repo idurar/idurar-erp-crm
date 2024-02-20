@@ -3,6 +3,7 @@ exports.emailVerfication = ({
   name = '',
   link = '',
   time = new Date(),
+  emailToken,
 }) => {
   return `
     <div>
@@ -17,7 +18,8 @@ exports.emailVerfication = ({
         <body data-id="__react-email-body">
             <h2 data-id="react-email-heading">${title}</h2>
             <hr data-id="react-email-hr" style="width:100%;border:none;border-top:1px solid #eaeaea" />
-            <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Hello ${name},</p>
+            <p data-id="react-email-text" style="font-size:16px;line-height:24px;margin:16px 0">Hello ${name},</p>
+            <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Code : <br>${emailToken}</br> </p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Thank you for signing up for IDURAR ! Before we can activate your account, we kindly ask you to verify your email address by clicking on the link provided below:</p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0"><a href="${link}">${link}</a></p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Thank you for choosing IDURAR. We look forward to having you as a valued user!</p>

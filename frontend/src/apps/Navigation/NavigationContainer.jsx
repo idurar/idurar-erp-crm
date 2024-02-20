@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
@@ -7,7 +7,7 @@ import { useAppContext } from '@/context/appContext';
 import useLanguage from '@/locale/useLanguage';
 import logoIcon from '@/style/images/logo-icon.svg';
 import logoText from '@/style/images/logo-text.svg';
-import { useNavigate } from 'react-router-dom';
+
 import useResponsive from '@/hooks/useResponsive';
 
 import {
@@ -25,6 +25,7 @@ import {
   ShopOutlined,
   FilterOutlined,
   WalletOutlined,
+  ReconciliationOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -56,61 +57,63 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'customer',
       icon: <CustomerServiceOutlined />,
-      label: <Link to={'/customer'}>{translate('customer')}</Link>,
+      label: <Link to={'/customer'}>{translate('customers')}</Link>,
     },
     {
       key: 'people',
       icon: <UserOutlined />,
-      label: <Link to={'/people'}>{translate('people')}</Link>,
+      label: <Link to={'/people'}>{translate('peoples')}</Link>,
     },
     {
       key: 'company',
       icon: <ShopOutlined />,
-      label: <Link to={'/company'}>{translate('company')}</Link>,
+      label: <Link to={'/company'}>{translate('companies')}</Link>,
     },
     {
       key: 'lead',
       icon: <FilterOutlined />,
-      label: <Link to={'/lead'}>{translate('lead')}</Link>,
+      label: <Link to={'/lead'}>{translate('leads')}</Link>,
     },
     {
       key: 'offer',
       icon: <FileOutlined />,
-      label: <Link to={'/offer'}>{translate('offer')}</Link>,
+      label: <Link to={'/offer'}>{translate('offers')}</Link>,
     },
-
-    // { key: 'order', icon: <ShopOutlined />, label: <Link to={'/'}>Lead</Link> Order },
-    // { key: 'inventory', icon: <InboxOutlined />, label: <Link to={'/'}>Lead</Link> Inventory },
-
     {
       key: 'invoice',
       icon: <ContainerOutlined />,
-      label: <Link to={'/invoice'}>{translate('invoice')}</Link>,
+      label: <Link to={'/invoice'}>{translate('invoices')}</Link>,
     },
     {
       key: 'quote',
       icon: <FileSyncOutlined />,
-      label: <Link to={'/quote'}>{translate('quote')}</Link>,
+      label: <Link to={'/quote'}>{translate('proforma invoices')}</Link>,
     },
     {
       key: 'payment',
       icon: <CreditCardOutlined />,
-      label: <Link to={'/payment'}>{translate('payment')}</Link>,
+      label: <Link to={'/payment'}>{translate('payments')}</Link>,
     },
-    {
-      key: 'expenses',
-      icon: <WalletOutlined />,
-      label: <Link to={'/expenses'}>{translate('expense')}</Link>,
-    },
+
     {
       key: 'product',
       icon: <TagOutlined />,
-      label: <Link to={'/product'}>{translate('product')}</Link>,
+      label: <Link to={'/product'}>{translate('products')}</Link>,
     },
     {
       key: 'categoryproduct',
       icon: <TagsOutlined />,
-      label: <Link to={'/category/product'}>{translate('product_category')}</Link>,
+      label: <Link to={'/category/product'}>{translate('products_category')}</Link>,
+    },
+    {
+      key: 'expenses',
+      icon: <WalletOutlined />,
+      label: <Link to={'/expenses'}>{translate('expenses')}</Link>,
+    },
+    {
+      key: 'expensesCategory',
+      icon: <ReconciliationOutlined />,
+      label: <Link to={'/category/expenses'}>{translate('expenses_Category')}</Link>,
     },
     // {
     //   key: 'employee',
@@ -130,19 +133,20 @@ function Sidebar({ collapsible, isMobile = false }) {
         },
         {
           key: 'generalSettings',
-          label: <Link to={'/settings'}>{translate('general_settings')}</Link>,
+          label: <Link to={'/settings'}>{translate('settings')}</Link>,
         },
         {
-          key: 'expensesCategory',
-          label: <Link to={'/category/expenses'}>{translate('expenses_Category')}</Link>,
+          key: 'currency',
+          label: <Link to={'/settings/currency'}>{translate('currencies')}</Link>,
         },
+
         // {
         //   key: 'emailTemplates',
         //   label: <Link to={'/email'}>{translate('email_templates')}</Link>,
         // },
         {
           key: 'paymentMode',
-          label: <Link to={'/payment/mode'}>{translate('payment_mode')}</Link>,
+          label: <Link to={'/payment/mode'}>{translate('payments_mode')}</Link>,
         },
         {
           key: 'taxes',
@@ -152,10 +156,6 @@ function Sidebar({ collapsible, isMobile = false }) {
           key: 'about',
           label: <Link to={'/about'}>{translate('about')}</Link>,
         },
-        // {
-        //   key: 'advancedSettings',
-        //   label: <Link to={'/settings/advanced'}>{translate('advanced_settings')}</Link>,
-        // },
       ],
     },
   ];
@@ -190,6 +190,7 @@ function Sidebar({ collapsible, isMobile = false }) {
       collapsed={collapsible ? isNavMenuClose : collapsible}
       onCollapse={onCollapse}
       className="navigation"
+      width={256}
       style={{
         overflow: 'auto',
         height: '100vh',
@@ -205,14 +206,24 @@ function Sidebar({ collapsible, isMobile = false }) {
       }}
       theme={'light'}
     >
-      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+      <div
+        className="logo"
+        onClick={() => navigate('/')}
+        style={{
+          cursor: 'pointer',
+        }}
+      >
         <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
 
         {!showLogoApp && (
           <img
             src={logoText}
             alt="Logo"
-            style={{ marginTop: '3px', marginLeft: '10px', height: '38px' }}
+            style={{
+              marginTop: '3px',
+              marginLeft: '10px',
+              height: '38px',
+            }}
           />
         )}
       </div>
@@ -224,6 +235,7 @@ function Sidebar({ collapsible, isMobile = false }) {
         style={{
           background: 'none',
           border: 'none',
+          width: 256,
         }}
       />
     </Sider>

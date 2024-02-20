@@ -1,6 +1,6 @@
 export const fields = {
   type: {
-    type: 'selectwithfeedback',
+    type: 'selectWithFeedback',
     renderAsTag: true,
     options: [
       { value: 'people', label: 'people', color: 'magenta' },
@@ -30,6 +30,9 @@ export const fields = {
     type: 'search',
     label: 'people',
     entity: 'people',
+    redirectLabel: 'Add New Person',
+    withRedirect: true,
+    urlToRedirect: '/people',
     displayLabels: ['firstname', 'lastname'],
     searchFields: 'firstname,lastname',
     dataIndex: ['people', 'firstname'],
@@ -40,6 +43,9 @@ export const fields = {
     type: 'search',
     label: 'company',
     entity: 'company',
+    redirectLabel: 'Add New Company',
+    withRedirect: true,
+    urlToRedirect: '/company',
     displayLabels: ['name'],
     searchFields: 'name',
     dataIndex: ['company', 'name'],

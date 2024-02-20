@@ -8,6 +8,9 @@ export const fields = {
     renderAsTag: true,
     label: 'Contact',
     entity: 'people',
+    redirectLabel: 'Add New Person',
+    withRedirect: true,
+    urlToRedirect: '/people',
     displayLabels: ['firstname', 'lastname'],
     searchFields: 'firstname,lastname',
     dataIndex: ['mainContact', 'firstname'],
@@ -20,6 +23,7 @@ export const fields = {
   },
   email: {
     type: 'email',
+    required: true,
   },
   website: {
     type: 'url',

@@ -5,6 +5,7 @@ const SalaryPaymentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
   employee: {
     type: mongoose.Schema.ObjectId,

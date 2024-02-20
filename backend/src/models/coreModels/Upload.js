@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 
 const uploadSchema = new mongoose.Schema({
+  removed: {
+    type: Boolean,
+    default: false,
+  },
+  enabled: {
+    type: Boolean,
+    default: true,
+  },
+
   modelName: {
     type: String,
     trim: true,
@@ -39,10 +48,6 @@ const uploadSchema = new mongoose.Schema({
     ],
     required: true,
   },
-  enabled: {
-    type: Boolean,
-    default: true,
-  },
   isPublic: {
     type: Boolean,
     required: true,
@@ -55,15 +60,13 @@ const uploadSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  removed: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
   path: {
     type: String,
-    unique: true,
     required: true,
+  },
+  created: {
+    type: Date,
+    default: Date.now,
   },
 });
 

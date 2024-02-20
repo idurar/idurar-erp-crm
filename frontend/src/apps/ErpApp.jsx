@@ -8,10 +8,14 @@ import { Layout } from 'antd';
 import { useAppContext } from '@/context/appContext';
 
 import Navigation from '@/apps/Navigation/NavigationContainer';
+import ExpensesNav from '@/apps/Navigation/ExpensesNav';
 import HeaderContent from '@/apps/Header/HeaderContainer';
+import PageLoader from '@/components/PageLoader';
 
 import { settingsAction } from '@/redux/settings/actions';
+import { currencyAction } from '@/redux/currency/actions';
 import { translateAction } from '@/redux/translate/actions';
+import { selectSettings } from '@/redux/settings/selectors';
 
 import AppRouter from '@/router/AppRouter';
 
@@ -22,8 +26,9 @@ import storePersist from '@/redux/storePersist';
 export default function ErpCrmApp() {
   const { Content } = Layout;
 
-  const { state: stateApp } = useAppContext();
-  const { isNavMenuClose } = stateApp;
+  const { state: stateApp, appContextAction } = useAppContext();
+  const { app } = appContextAction;
+  const { isNavMenuClose, currentApp } = stateApp;
 
   const { isMobile } = useResponsive();
 
@@ -31,54 +36,59 @@ export default function ErpCrmApp() {
 
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
+    dispatch(currencyAction.list());
   }, []);
 
-  const defaultLang = useSelector(selectAppSettings);
+  const appSettings = useSelector(selectAppSettings);
+
+  const { isSuccess: settingIsloaded } = useSelector(selectSettings);
 
   useEffect(() => {
-    const { idurar_app_language } = defaultLang;
-    const { loadDefaultLang } = storePersist.get('firstLogin');
-    if (idurar_app_language && !loadDefaultLang) {
-      dispatch(translateAction.translate(idurar_app_language));
-      window.localStorage.setItem('firstLogin', JSON.stringify({ loadDefaultLang: true }));
+    const { loadDefaultLang } = storePersist.get('firstVisit');
+    if (appSettings.idurar_app_language && !loadDefaultLang) {
+      dispatch(translateAction.translate(appSettings.idurar_app_language));
+      window.localStorage.setItem('firstVisit', JSON.stringify({ loadDefaultLang: true }));
     }
-  }, [defaultLang]);
+  }, [appSettings]);
 
-  return (
-    <Layout hasSider>
-      <Navigation />
+  if (settingIsloaded)
+    return (
+      <Layout hasSider>
+        {/* {currentApp === 'default' ? <Navigation /> : <ExpensesNav />} */}
+        <Navigation />
 
-      {isMobile ? (
-        <Layout style={{ marginLeft: 0 }}>
-          <HeaderContent />
-          <Content
-            style={{
-              margin: '40px auto 30px',
-              overflow: 'initial',
-              width: '100%',
-              padding: '0 25px',
-              maxWidth: 'none',
-            }}
-          >
-            <AppRouter />
-          </Content>
-        </Layout>
-      ) : (
-        <Layout style={{ marginLeft: isNavMenuClose ? 100 : 220 }}>
-          <HeaderContent />
-          <Content
-            style={{
-              margin: '40px auto 30px',
-              overflow: 'initial',
-              width: '100%',
-              padding: '0 25px',
-              maxWidth: isNavMenuClose ? 1200 : 1100,
-            }}
-          >
-            <AppRouter />
-          </Content>
-        </Layout>
-      )}
-    </Layout>
-  );
+        {isMobile ? (
+          <Layout style={{ marginLeft: 0 }}>
+            <HeaderContent />
+            <Content
+              style={{
+                margin: '40px auto 30px',
+                overflow: 'initial',
+                width: '100%',
+                padding: '0 25px',
+                maxWidth: 'none',
+              }}
+            >
+              <AppRouter />
+            </Content>
+          </Layout>
+        ) : (
+          <Layout style={{ marginLeft: 275 }}>
+            <HeaderContent />
+            <Content
+              style={{
+                margin: '40px auto 30px',
+                overflow: 'initial',
+                width: '100%',
+                padding: '0 50px',
+                maxWidth: 1400,
+              }}
+            >
+              <AppRouter />
+            </Content>
+          </Layout>
+        )}
+      </Layout>
+    );
+  else return <PageLoader />;
 }

@@ -13,13 +13,18 @@ const updateProfile = async (userModel, req, res) => {
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
 
-  let updates = {
-    email: req.body.email,
-    name: req.body.name,
-    surname: req.body.surname,
-    photo: req.body.photo,
-  };
-
+  let updates = req.body.photo
+    ? {
+        email: req.body.email,
+        name: req.body.name,
+        surname: req.body.surname,
+        photo: req.body.photo,
+      }
+    : {
+        email: req.body.email,
+        name: req.body.name,
+        surname: req.body.surname,
+      };
   // Find document by id and updates with the required fields
   const result = await User.findOneAndUpdate(
     { _id: userProfile._id, removed: false },

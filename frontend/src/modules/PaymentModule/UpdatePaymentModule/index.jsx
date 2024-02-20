@@ -2,32 +2,53 @@ import { ErpLayout } from '@/layout';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
-import { selectItemById } from '@/redux/erp/selectors';
-import { useLayoutEffect } from 'react';
+import NotFound from '@/components/NotFound';
+import { useLayoutEffect, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Payment from './components/Payment';
 import { selectReadItem } from '@/redux/erp/selectors';
+import { settingsAction } from '@/redux/settings/actions';
 
 export default function UpdatePaymentModule({ config }) {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  let item = useSelector(selectItemById(id));
+  useLayoutEffect(() => {
+    dispatch(erp.read({ entity: config.entity, id }));
+  }, [id]);
 
-  // useLayoutEffect(() => {
-  //   dispatch(erp.read({ entity: config.entity, id }));
-  // }, [item, id]);
+  const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
-  const { result: currentResult } = useSelector(selectReadItem);
-
-  const selectedItem = item ? { ...item } : { ...currentResult };
+  const updateCurrency = (value) => {
+    dispatch(
+      settingsAction.updateCurrency({
+        data: { default_currency_code: value },
+      })
+    );
+  };
 
   useLayoutEffect(() => {
-    dispatch(erp.currentAction({ actionType: 'update', id, data: selectedItem }));
-  }, []);
+    if (currentResult) {
+      dispatch(erp.currentAction({ actionType: 'update', id, data: currentResult }));
+      updateCurrency(currentResult.currency);
+    }
+  }, [currentResult]);
 
-  return (
-    <ErpLayout>{item ? <Payment config={config} currentItem={item} /> : <PageLoader />}</ErpLayout>
-  );
+  if (isLoading) {
+    return (
+      <ErpLayout>
+        <PageLoader />
+      </ErpLayout>
+    );
+  } else
+    return (
+      <ErpLayout>
+        {isSuccess ? (
+          <Payment config={config} currentItem={currentResult} />
+        ) : (
+          <NotFound entity={config.entity} />
+        )}
+      </ErpLayout>
+    );
 }

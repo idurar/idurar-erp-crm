@@ -9,7 +9,7 @@ export default function People() {
   const entity = 'people';
   const searchConfig = {
     displayLabels: ['firstname', 'lastname'],
-    searchFields: 'firstname,lastname',
+    searchFields: 'firstname,lastname,email',
   };
   const deleteModalLabels = ['firstname', 'lastname'];
 
