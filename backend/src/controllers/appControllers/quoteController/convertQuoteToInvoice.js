@@ -5,10 +5,12 @@ const Model = mongoose.model('Quote');
 const InvoiceModel = mongoose.model('Invoice');
 
 const convertQuoteToInvoice = async (req, res) => {
-  const quoteId = req.params.id; // Assuming the quote ID is passed in the URL
-
   // Fetch the quote from the database
-  const quote = await Model.findById(quoteId);
+  const quote = await Model.findOne({
+    _id: req.params.id,
+    removed: false,
+  }).exec();
+
   if (!quote) {
     return res.status(404).json({
       success: false,
@@ -46,7 +48,7 @@ const convertQuoteToInvoice = async (req, res) => {
     total: quote.total,
     credit: quote.credit,
     discount: quote.discount,
-    note: quote.note,
+    notes: quote.notes,
   };
 
   invoiceData['createdBy'] = req.admin._id;

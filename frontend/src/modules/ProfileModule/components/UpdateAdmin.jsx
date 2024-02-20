@@ -5,7 +5,7 @@ import { Button, Col, Form, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AdminForm from '@/forms/AdminForm';
+import ProfileAdminForm from './ProfileAdminForm';
 
 import { updateProfile } from '@/redux/auth/actions';
 
@@ -36,12 +36,8 @@ const UpdateAdmin = ({ config }) => {
     if (fieldsValue.file) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
-    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
-      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
-      return acc;
-    }, {});
 
-    dispatch(updateProfile({ entity: 'admin/profile', jsonData: trimmedValues }));
+    dispatch(updateProfile({ entity: 'admin/profile', jsonData: fieldsValue }));
   };
 
   return (
@@ -82,10 +78,10 @@ const UpdateAdmin = ({ config }) => {
             form={form}
             onFinish={onSubmit}
             labelAlign="left"
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 12 }}
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 10 }}
           >
-            <AdminForm isUpdateForm={true} />
+            <ProfileAdminForm isUpdateForm={true} />
           </Form>
         </Col>
       </Row>

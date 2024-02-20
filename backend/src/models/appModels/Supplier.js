@@ -9,10 +9,10 @@ const SupplierSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
   name: {
     type: String,
     trim: true,
-    unique: true,
     required: true,
   },
   legalName: {

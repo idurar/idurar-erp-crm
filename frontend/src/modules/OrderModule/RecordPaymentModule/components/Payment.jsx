@@ -119,7 +119,7 @@ export default function Payment({ config, currentItem }) {
             <Descriptions.Item label={translate('discount')}>
               {money.amountFormatter({ amount: currentErp.discount })}
             </Descriptions.Item>
-            <Descriptions.Item label={translate('Balance')}>
+            <Descriptions.Item label={translate('Paid')}>
               {money.amountFormatter({ amount: currentErp.credit })}
             </Descriptions.Item>
           </Descriptions>

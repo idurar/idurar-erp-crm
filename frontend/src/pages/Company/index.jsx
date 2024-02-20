@@ -9,7 +9,7 @@ export default function Company() {
   const entity = 'company';
   const searchConfig = {
     displayLabels: ['name'],
-    searchFields: 'name',
+    searchFields: 'name,phone,eamil',
   };
   const deleteModalLabels = ['name'];
 

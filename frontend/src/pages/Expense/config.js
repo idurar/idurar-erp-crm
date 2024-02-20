@@ -11,7 +11,9 @@ export const fields = {
     entity: 'expensecategory',
     required: true,
   },
-
+  currency: {
+    type: 'selectCurrency',
+  },
   total: {
     type: 'currency',
     required: true,

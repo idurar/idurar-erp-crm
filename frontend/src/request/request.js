@@ -146,9 +146,15 @@ const request = {
       return errorHandler(error);
     }
   },
-  listAll: async ({ entity }) => {
+  listAll: async ({ entity, options = {} }) => {
     try {
-      const response = await axios.get(entity + '/listAll');
+      let query = '?';
+      for (var key in options) {
+        query += key + '=' + options[key] + '&';
+      }
+      query = query.slice(0, -1);
+
+      const response = await axios.get(entity + '/listAll' + query);
 
       successHandler(response, {
         notifyOnSuccess: false,
@@ -213,9 +219,14 @@ const request = {
     return source;
   },
 
-  summary: async ({ entity }) => {
+  summary: async ({ entity, options = {} }) => {
     try {
-      const response = await axios.get(entity + '/summary');
+      let query = '?';
+      for (var key in options) {
+        query += key + '=' + options[key] + '&';
+      }
+      query = query.slice(0, -1);
+      const response = await axios.get(entity + '/summary' + query);
 
       successHandler(response, {
         notifyOnSuccess: false,

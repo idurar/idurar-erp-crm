@@ -3,18 +3,27 @@ const mongoose = require('mongoose');
 const Model = mongoose.model('Offer');
 
 const custom = require('@/controllers/pdfController');
+const { checkCurrency } = require('@/utils/currency');
 
 const { calculate } = require('@/helpers');
 const { increaseBySettingKey } = require('@/middlewares/settings');
 
 const create = async (req, res) => {
-  const { items = [], taxRate = 0, discount = 0 } = req.body;
+  const { items = [], taxRate = 0, discount = 0, currency } = req.body;
 
   // default
   let subTotal = 0;
   let taxTotal = 0;
   let total = 0;
   // let credit = 0;
+
+  if (!checkCurrency(currency)) {
+    return res.status(400).json({
+      success: false,
+      result: null,
+      message: "currency doesn't exist",
+    });
+  }
 
   //Calculate the items array with subTotal, total, taxTotal
   items.map((item) => {
@@ -47,7 +56,9 @@ const create = async (req, res) => {
   ).exec();
   // Returning successfull response
 
-  increaseBySettingKey({ settingKey: 'last_offer_number' });
+  increaseBySettingKey({
+    settingKey: 'last_offer_number',
+  });
 
   // Returning successfull response
   return res.status(200).json({

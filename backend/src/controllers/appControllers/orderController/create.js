@@ -15,7 +15,9 @@ const create = async (Model, req, res) => {
   const result = await new Model(body).save();
 
   // Returning successfull response
-  increaseBySettingKey({ settingKey: 'last_order_number' });
+  increaseBySettingKey({
+    settingKey: 'last_order_number',
+  });
 
   // Returning successfull response
   return res.status(200).json({

@@ -1,8 +1,17 @@
 import useLanguage from '@/locale/useLanguage';
 import AdminCrudModule from '@/modules/AdminCrudModule';
 import AdminForm from '@/forms/AdminForm';
-import { Switch } from 'antd';
+import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+
+const roleColr = {
+  owner: 'gold',
+  admin: 'magenta',
+  manager: 'purple',
+  employee: 'blue',
+  create_only: 'green',
+  read_only: null,
+};
 
 export default function Admin() {
   const translate = useLanguage();
@@ -26,7 +35,14 @@ export default function Admin() {
     { title: translate('first name'), dataIndex: 'name' },
     { title: translate('last name'), dataIndex: 'surname' },
     { title: translate('Email'), dataIndex: 'email' },
-    { title: translate('role'), dataIndex: 'role' },
+    {
+      title: translate('role'),
+      dataIndex: 'role',
+      render: (text, record) => {
+        const role = text === 'owner' ? 'Account owner' : text === 'admin' ? 'super admin' : text;
+        return <Tag color={roleColr[text]}>{translate(role)}</Tag>;
+      },
+    },
     {
       title: translate('enabled'),
       dataIndex: 'enabled',
@@ -70,7 +86,7 @@ export default function Admin() {
   return (
     <AdminCrudModule
       createForm={<AdminForm />}
-      updateForm={<AdminForm isUpdateForm={true} />}
+      // updateForm={<AdminForm isUpdateForm={true} isForAdminOwner />}
       config={config}
     />
   );

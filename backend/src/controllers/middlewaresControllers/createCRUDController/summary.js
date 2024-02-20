@@ -1,8 +1,12 @@
 const summary = async (Model, req, res) => {
   //  Query the database for a list of all results
-  const countPromise = Model.countDocuments({ removed: false });
+  const countPromise = Model.countDocuments({
+    removed: false,
+  });
 
-  const resultsPromise = await Model.countDocuments({ removed: false })
+  const resultsPromise = await Model.countDocuments({
+    removed: false,
+  })
     .where(req.query.filter)
     .equals(req.query.equal)
     .exec();

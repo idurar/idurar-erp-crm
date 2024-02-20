@@ -5,8 +5,8 @@ const invoiceSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
   number: {
     type: Number,
     required: true,
@@ -71,10 +71,10 @@ const invoiceSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      discount: {
-        type: Number,
-        default: 0,
-      },
+      // discount: {
+      //   type: Number,
+      //   default: 0,
+      // },
       // taxRate: {
       //   type: Number,
       //   default: 0,
@@ -109,6 +109,11 @@ const invoiceSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  currency: {
+    type: String,
+    uppercase: true,
+    required: true,
+  },
   credit: {
     type: Number,
     default: 0,
@@ -136,7 +141,7 @@ const invoiceSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  note: {
+  notes: {
     type: String,
   },
   status: {

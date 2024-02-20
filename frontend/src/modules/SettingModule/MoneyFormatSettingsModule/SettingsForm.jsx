@@ -1,23 +1,71 @@
+import { useState, useEffect } from 'react';
 import { Form, Input, InputNumber, Select, Switch } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';
 
+import { currencyOptions } from '@/utils/currencyList';
+
+import { request } from '@/request';
+import useFetch from '@/hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
+
 export default function SettingsForm() {
   const translate = useLanguage();
+
+  const [selectOptions, setOptions] = useState([]);
+
+  const navigate = useNavigate();
+  const handleSelectChange = (newValue) => {
+    if (newValue === 'redirectURL') {
+      navigate('/settings/currency');
+    }
+  };
+  const asyncList = () => {
+    return request.listAll({ entity: 'currency', options: { enabled: true } });
+  };
+  const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
+  useEffect(() => {
+    isSuccess && setOptions(result);
+  }, [isSuccess]);
+
+  const optionsList = () => {
+    const list = [];
+
+    const value = 'redirectURL';
+    const label = `+ Add New Currency`;
+
+    list.push(...currencyOptions(selectOptions));
+    list.push({ value, label });
+
+    return list;
+  };
+
   return (
     <>
       <Form.Item
-        label={translate('Currency Name')}
-        name="currency"
+        label={translate('Currency')}
+        name="default_currency_code"
         rules={[
           {
             required: true,
           },
         ]}
       >
-        <Input autoComplete="off" />
+        <Select
+          showSearch
+          loading={fetchIsLoading}
+          disabled={fetchIsLoading}
+          filterOption={(input, option) =>
+            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+          }
+          filterSort={(optionA, optionB) =>
+            (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
+          }
+          options={optionsList()}
+          onChange={handleSelectChange}
+        ></Select>
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label={translate('Currency Symbol')}
         name="currency_symbol"
         rules={[
@@ -26,7 +74,7 @@ export default function SettingsForm() {
           },
         ]}
       >
-        <Input autoComplete="off" />
+        <Input value={currency.currency_symbol} />
       </Form.Item>
 
       <Form.Item
@@ -87,7 +135,7 @@ export default function SettingsForm() {
         valuePropName="checked"
       >
         <Switch />
-      </Form.Item>
+      </Form.Item> */}
     </>
   );
 }

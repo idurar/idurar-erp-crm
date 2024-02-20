@@ -8,8 +8,8 @@ export default function MoneyFormatSettingsModule({ config }) {
   return (
     <UpdateSettingModule config={config}>
       <SetingsSection
-        title={translate('Currency Format')}
-        description={translate('Update Currency format')}
+        title={translate('Default Currency')}
+        description={translate('Select Default Currency')}
       >
         <SettingsForm />
       </SetingsSection>

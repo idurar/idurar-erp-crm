@@ -23,41 +23,26 @@ const formItems = [
     settingKey: 'last_payment_number',
     valueType: 'number',
   },
-  {
-    label: 'invoice_prefix',
-    settingKey: 'invoice_prefix',
-    valueType: 'string',
-  },
-  {
-    label: 'quote_prefix',
-    settingKey: 'quote_prefix',
-    valueType: 'string',
-  },
-  {
-    label: 'offer_prefix',
-    settingKey: 'offer_prefix',
-    valueType: 'string',
-  },
-  {
-    label: 'payment_prefix',
-    settingKey: 'payment_prefix',
-    valueType: 'string',
-  },
-  {
-    label: 'current_invoice_year',
-    settingKey: 'current_invoice_year',
-    valueType: 'number',
-  },
-  {
-    label: 'current_quote_year',
-    settingKey: 'current_quote_year',
-    valueType: 'number',
-  },
-  {
-    label: 'current_offer_year',
-    settingKey: 'current_offer_year',
-    valueType: 'number',
-  },
+  // {
+  //   label: 'invoice_prefix',
+  //   settingKey: 'invoice_prefix',
+  //   valueType: 'string',
+  // },
+  // {
+  //   label: 'quote_prefix',
+  //   settingKey: 'quote_prefix',
+  //   valueType: 'string',
+  // },
+  // {
+  //   label: 'offer_prefix',
+  //   settingKey: 'offer_prefix',
+  //   valueType: 'string',
+  // },
+  // {
+  //   label: 'payment_prefix',
+  //   settingKey: 'payment_prefix',
+  //   valueType: 'string',
+  // },
 ];
 
 export default function SettingForm() {

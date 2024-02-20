@@ -9,6 +9,7 @@ const expenseCategorySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
   name: {
     type: String,
     trim: true,
@@ -21,6 +22,7 @@ const expenseCategorySchema = new mongoose.Schema({
   },
   color: {
     type: String,
+    lowercase: true,
     trim: true,
     required: true,
   },

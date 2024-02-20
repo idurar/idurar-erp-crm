@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 
 const Model = mongoose.model('Offer');
+const { checkCurrency } = require('@/utils/currency');
 
 const summary = async (req, res) => {
   let defaultType = 'month';
 
-  const { type } = req.query;
+  const { type, currency } = req.query;
 
   if (type) {
     if (['week', 'month', 'year'].includes(type)) {
@@ -19,6 +20,9 @@ const summary = async (req, res) => {
       });
     }
   }
+  const currentCurrency = currency
+    ? currency.toUpperCase()
+    : settings['default_currency_code'].toUpperCase();
 
   const currentDate = moment();
   let startDate = currentDate.clone().startOf(defaultType);
@@ -26,10 +30,12 @@ const summary = async (req, res) => {
 
   const statuses = ['draft', 'pending', 'sent', 'expired', 'declined', 'accepted'];
 
-  const result = await Model.aggregate([
+  const response = await Model.aggregate([
     {
       $match: {
         removed: false,
+        currency: currentCurrency,
+
         // date: {
         //   $gte: startDate.toDate(),
         //   $lte: endDate.toDate(),
@@ -37,72 +43,86 @@ const summary = async (req, res) => {
       },
     },
     {
-      $group: {
-        _id: '$status',
-        count: {
-          $sum: 1,
-        },
-        total_amount: {
-          $sum: '$total',
-        },
-      },
-    },
-    {
-      $group: {
-        _id: null,
-        total_count: {
-          $sum: '$count',
-        },
-        results: {
-          $push: '$$ROOT',
-        },
-      },
-    },
-    {
-      $unwind: '$results',
-    },
-    {
-      $project: {
-        _id: 0,
-        status: '$results._id',
-        count: '$results.count',
-        percentage: {
-          $round: [{ $multiply: [{ $divide: ['$results.count', '$total_count'] }, 100] }, 0],
-        },
-        total_amount: '$results.total_amount',
-      },
-    },
-    {
-      $sort: {
-        status: 1,
+      $facet: {
+        totalOffer: [
+          {
+            $group: {
+              _id: null,
+              total: {
+                $sum: '$total',
+              },
+              count: {
+                $sum: 1,
+              },
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              total: '$total',
+              count: '$count',
+            },
+          },
+        ],
+        statusCounts: [
+          {
+            $group: {
+              _id: '$status',
+              count: {
+                $sum: 1,
+              },
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              status: '$_id',
+              count: '$count',
+            },
+          },
+        ],
       },
     },
   ]);
+  let result = [];
+
+  const totalOffers = response[0].totalOffer ? response[0].totalOffer[0] : 0;
+  const statusResult = response[0].statusCounts || [];
+  // const overdueResult = response[0].overdueCounts || [];
+
+  const statusResultMap = statusResult.map((item) => {
+    return {
+      ...item,
+      percentage: Math.round((item.count / totalOffers.count) * 100),
+    };
+  });
+
+  // const overdueResultMap = overdueResult.map((item) => {
+  //   return {
+  //     ...item,
+  //     status: 'expired',
+  //     percentage: Math.round((item.count / totalOffers.count) * 100),
+  //   };
+  // });
 
   statuses.forEach((status) => {
-    const found = result.find((item) => item.status === status);
-    if (!found) {
-      result.push({
-        status,
-        count: 0,
-        percentage: 0,
-        total_amount: 0,
-      });
+    const found = [...statusResultMap].find((item) => item.status === status);
+    if (found) {
+      result.push(found);
     }
   });
 
-  const total = result.reduce((acc, item) => acc + item.total_amount, 0);
-
   const finalResult = {
-    total,
-    type: defaultType,
+    total: totalOffers?.total,
+    type,
     performance: result,
   };
 
   return res.status(200).json({
     success: true,
     result: finalResult,
-    message: `Successfully found all Offers for the last ${defaultType}`,
+    message: `Successfully found all invoices for the last ${defaultType}`,
   });
 };
+
 module.exports = summary;

@@ -9,7 +9,7 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
+
   type: {
     type: String,
     default: 'company',
@@ -26,7 +26,7 @@ const schema = new mongoose.Schema({
   offer: [{ type: mongoose.Schema.ObjectId, ref: 'Offer' }],
   converted: { type: Boolean, default: false },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   subTotal: {
     type: Number,
   },

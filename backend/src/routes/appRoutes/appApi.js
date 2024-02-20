@@ -19,6 +19,7 @@ const routerApp = (entity, controller) => {
     .delete(hasPermission('delete'), catchErrors(controller['delete']));
   router.route(`/${entity}/search`).get(hasPermission('read'), catchErrors(controller['search']));
   router.route(`/${entity}/list`).get(hasPermission('read'), catchErrors(controller['list']));
+  router.route(`/${entity}/listAll`).get(hasPermission('read'), catchErrors(controller['listAll']));
   router.route(`/${entity}/filter`).get(hasPermission('read'), catchErrors(controller['filter']));
   router.route(`/${entity}/summary`).get(hasPermission('read'), catchErrors(controller['summary']));
 

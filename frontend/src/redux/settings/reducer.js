@@ -5,15 +5,7 @@ const INITIAL_SETTINGS_STATE = {
   finance_settings: {},
   company_settings: {},
   app_settings: {},
-  money_format_settings: {
-    currency: 'USD',
-    currency_symbol: '$',
-    currency_position: 'before',
-    decimal_sep: '.',
-    thousand_sep: ',',
-    cent_precision: 2,
-    zero_format: false,
-  },
+  money_format_settings: {},
 };
 
 const INITIAL_STATE = {
@@ -37,6 +29,16 @@ const settingsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isLoading: false,
         isSuccess: false,
+      };
+
+    case actionTypes.UPDATE_CURRENCY:
+      return {
+        result: {
+          ...state.result,
+          money_format_settings: payload,
+        },
+        isLoading: false,
+        isSuccess: true,
       };
 
     case actionTypes.REQUEST_SUCCESS:

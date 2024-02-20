@@ -11,9 +11,11 @@
 }
 
 .logo {
-  height: 32px;
-  margin: 16px 16px 30px 16px;
-  padding-left: 6px;
+  height: 45px;
+  margin: 15px 15px 30px 30px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 160px;
 }
 
 .sidebar-wraper {
@@ -54,7 +56,7 @@
   .ant-btn.mobile-sidebar-btn {
     display: block;
     position: absolute;
-    top: 10px;
+    top: 21px;
   }
 
   .mobile-sidebar-wraper {

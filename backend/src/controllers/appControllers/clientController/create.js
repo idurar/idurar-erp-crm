@@ -76,7 +76,9 @@ const create = async (Model, req, res) => {
   }
 
   req.body.removed = false;
-  const result = await new Model(req.body).save();
+  const result = await new Model({
+    ...req.body,
+  }).save();
 
   // Returning successfull response
   return res.status(200).json({

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcryptjs');
 const { generate: uniqueId } = require('shortid');
 
 const updatePassword = async (userModel, req, res) => {
@@ -7,6 +7,7 @@ const updatePassword = async (userModel, req, res) => {
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
+
   let { password } = req.body;
 
   if (password.length < 8)
@@ -16,11 +17,9 @@ const updatePassword = async (userModel, req, res) => {
 
   // Find document by id and updates with the required fields
 
-  var newUserPassword = new UserPassword();
-
   const salt = uniqueId();
 
-  const passwordHash = newUserPassword.generateHash(salt, password);
+  const passwordHash = bcrypt.hashSync(salt + password);
 
   const UserPasswordData = {
     password: passwordHash,
@@ -28,12 +27,14 @@ const updatePassword = async (userModel, req, res) => {
   };
 
   const resultPassword = await UserPassword.findOneAndUpdate(
-    { user: userProfile._id, removed: false },
+    { user: req.params.id, removed: false },
     { $set: UserPasswordData },
     {
       new: true, // return the new result instead of the old one
     }
   ).exec();
+
+  // Code to handle the successful response
 
   if (!resultPassword) {
     return res.status(403).json({

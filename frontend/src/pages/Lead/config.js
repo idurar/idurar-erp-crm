@@ -1,6 +1,7 @@
+import { selectColor } from '@/utils/color';
 export const fields = {
   type: {
-    type: 'selectwithfeedback',
+    type: 'selectWithFeedback',
     renderAsTag: true,
     options: [
       { value: 'people', label: 'people', color: 'magenta' },
@@ -19,8 +20,12 @@ export const fields = {
     options: [
       { value: 'draft', label: 'draft' },
       { value: 'new', label: 'new', color: 'blue' },
+      { value: 'in negociation', label: 'in negociation', color: 'purple' },
       { value: 'won', label: 'won', color: 'green' },
       { value: 'loose', label: 'loose', color: 'red' },
+      { value: 'canceled', label: 'canceled', color: selectColor.crimson },
+      { value: 'assigned', label: 'assigned', color: selectColor.mediumturquoise },
+      { value: 'on hold', label: 'on hold', color: selectColor.burlywood },
       { value: 'waiting', label: 'waiting', color: 'orange' },
     ],
   },
@@ -29,11 +34,20 @@ export const fields = {
     type: 'selectWithTranslation',
     renderAsTag: true,
     options: [
-      { value: 'linkedin', label: 'linkedin', color: 'geekblue' },
-      { value: 'twitter', label: 'twitter', color: 'cyan' },
-      { value: 'website', label: 'website', color: 'gold' },
-      { value: 'ads', label: 'ads', color: 'purple' },
-      { value: 'sales', label: 'sales', color: 'magenta' },
+      { value: 'linkedin', label: 'linkedin', color: selectColor.royalblue },
+      { value: 'socialmedia', label: 'social_media', color: selectColor.skyblue },
+      { value: 'website', label: 'website', color: selectColor.coral },
+      { value: 'advertising', label: 'advertising', color: selectColor.darkgreen },
+      { value: 'friend', label: 'friend', color: selectColor.firebrick },
+      {
+        value: 'professionals network',
+        label: 'professionals network',
+        color: selectColor.mediumvioletred,
+      },
+
+      { value: 'customer referral', label: 'customer referral', color: selectColor.violet },
+      { value: 'sales', label: 'sales', color: selectColor.deeppink },
+      { value: 'other', label: 'other', color: selectColor.darkgray },
     ],
   },
   country: {
@@ -68,5 +82,9 @@ export const fields = {
     dataIndex: ['company', 'name'],
     disableForTable: true,
     feedback: 'company',
+  },
+  notes: {
+    type: 'textarea',
+    disableForTable: true,
   },
 };

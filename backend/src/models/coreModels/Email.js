@@ -9,15 +9,14 @@ const emailSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
   emailKey: {
     type: String,
-    unique: true,
     lowercase: true,
     required: true,
   },
   emailName: {
     type: String,
-    unique: true,
     required: true,
   },
   emailVariables: {

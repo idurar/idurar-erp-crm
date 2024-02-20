@@ -8,9 +8,12 @@ const remove = async (userModel, req, res) => {
   };
 
   // Find the document by id and delete it
-  const user = await User.findOne({ _id: req.params.id, removed: false }).exec();
+  const user = await User.findOne({
+    _id: req.params.id,
+    removed: false,
+  }).exec();
 
-  if (user.role === 'admin' || user.role === 'superadmin') {
+  if (user.role === 'admin' || user.role === 'owner') {
     return res.status(403).json({
       success: false,
       result: null,
@@ -30,13 +33,13 @@ const remove = async (userModel, req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this id: ' + req.params.id,
+      message: 'No document found ',
     });
   } else {
     return res.status(200).json({
       success: true,
       result,
-      message: 'Successfully Deleted the document by id: ' + req.params.id,
+      message: 'Successfully Deleted the document ',
     });
   }
 };

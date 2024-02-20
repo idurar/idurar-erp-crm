@@ -11,6 +11,9 @@ export const fields = {
     entity: 'productcategory',
     required: true,
   },
+  currency: {
+    type: 'selectCurrency',
+  },
   price: {
     type: 'currency',
     required: true,

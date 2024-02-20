@@ -76,7 +76,14 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <AutoCompleteAsync entity={'client'} displayLabels={['name']} searchFields={'name'} />
+            <AutoCompleteAsync
+              entity={'client'}
+              displayLabels={['name']}
+              searchFields={'name'}
+              redirectLabel={'Add New Client'}
+              withRedirect
+              urlToRedirect={'/customer'}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -128,7 +135,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>
-          <Form.Item label={translate('Note')} name="note">
+          <Form.Item label={translate('Note')} name="notes">
             <Input />
           </Form.Item>
         </Col>
@@ -216,6 +223,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               style={{
                 paddingLeft: '12px',
                 paddingTop: '5px',
+                margin: 0,
+                textAlign: 'right',
               }}
             >
               {translate('Sub Total')} :
@@ -243,7 +252,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 displayLabels={['taxName']}
                 withRedirect={true}
                 urlToRedirect="/taxes"
-                redirectLabel="Add New Tax"
+                redirectLabel={translate('Add New Tax')}
+                placeholder={translate('Select Tax Value')}
               />
             </Form.Item>
           </Col>
@@ -257,6 +267,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               style={{
                 paddingLeft: '12px',
                 paddingTop: '5px',
+                margin: 0,
+                textAlign: 'right',
               }}
             >
               {translate('Total')} :

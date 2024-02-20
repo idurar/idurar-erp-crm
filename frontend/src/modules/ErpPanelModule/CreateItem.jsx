@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
 
 import { settingsAction } from '@/redux/settings/actions';
+import { currencyAction } from '@/redux/currency/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
@@ -39,6 +40,7 @@ export default function CreateItem({ config, CreateForm }) {
 
   useEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
+    dispatch(currencyAction.list());
   }, []);
   let { entity } = config;
 
@@ -82,6 +84,7 @@ export default function CreateItem({ config, CreateForm }) {
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
+    console.log('🚀 ~ onSubmit ~ fieldsValue:', fieldsValue);
     if (fieldsValue) {
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];

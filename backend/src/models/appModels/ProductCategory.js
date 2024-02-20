@@ -9,6 +9,7 @@ const productCategorySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
   name: {
     type: String,
     required: true,
@@ -16,7 +17,9 @@ const productCategorySchema = new mongoose.Schema({
   description: String,
   color: {
     type: String,
+    lowercase: true,
     trim: true,
+    required: true,
   },
   hasParentCategory: {
     type: Boolean,

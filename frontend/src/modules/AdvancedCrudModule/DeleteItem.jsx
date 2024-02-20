@@ -38,7 +38,6 @@ export default function Delete({ config }) {
     const id = current._id;
     dispatch(adavancedCrud.delete({ entity, id }));
     modal.close();
-    dispatch(adavancedCrud.list({ entity }));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
