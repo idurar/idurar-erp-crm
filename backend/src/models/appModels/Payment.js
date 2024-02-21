@@ -5,7 +5,7 @@ const paymentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
   number: {
     type: Number,
@@ -30,6 +30,11 @@ const paymentSchema = new mongoose.Schema({
   },
   amount: {
     type: Number,
+    required: true,
+  },
+  currency: {
+    type: String,
+    uppercase: true,
     required: true,
   },
   paymentMode: {

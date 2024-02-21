@@ -13,9 +13,9 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
       root: path.join(__dirname, `../../public/${subPath}/${directory}`),
     };
     const fileName = file;
-    res.sendFile(fileName, options, function (error) {
+    return res.sendFile(fileName, options, function (error) {
       if (error) {
-        res.status(404).json({
+        return res.status(404).json({
           success: false,
           result: null,
           message: 'we could not find : ' + file,
@@ -23,7 +23,7 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
       }
     });
   } catch (error) {
-    res.status(503).json({
+    return res.status(503).json({
       success: false,
       result: null,
       message: error.message,

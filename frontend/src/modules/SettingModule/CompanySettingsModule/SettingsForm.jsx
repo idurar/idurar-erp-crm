@@ -4,11 +4,6 @@ import useLanguage from '@/locale/useLanguage';
 
 const formItems = [
   {
-    label: 'mutli_branch',
-    settingKey: 'company_has_mutli_branch',
-    valueType: 'boolean',
-  },
-  {
     settingKey: 'company_name',
     valueType: 'string',
   },
@@ -33,10 +28,6 @@ const formItems = [
     valueType: 'string',
   },
   {
-    settingKey: 'company_cell',
-    valueType: 'string',
-  },
-  {
     settingKey: 'company_website',
     valueType: 'string',
   },
@@ -51,8 +42,7 @@ const formItems = [
   },
   {
     settingKey: 'company_reg_number',
-    settingValue: ['company_reg_number'],
-    valueType: 'number',
+    valueType: 'string',
   },
 ];
 
@@ -68,7 +58,7 @@ export default function SettingForm() {
             name={item.settingKey}
             rules={[
               {
-                required: true,
+                required: false,
               },
             ]}
             valuePropName={item.valueType === 'boolean' ? 'checked' : 'value'}

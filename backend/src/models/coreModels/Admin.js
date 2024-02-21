@@ -10,16 +10,15 @@ const adminSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
+
   email: {
     type: String,
-    unique: true,
     lowercase: true,
     trim: true,
     required: true,
   },
-  name: { type: String, required: true, lowercase: true },
-  surname: { type: String, lowercase: true },
+  name: { type: String, required: true },
+  surname: { type: String },
   photo: {
     type: String,
     trim: true,
@@ -30,8 +29,8 @@ const adminSchema = new Schema({
   },
   role: {
     type: String,
-    default: 'staff',
-    enum: ['superadmin', 'admin', 'staffAdmin', 'staff', 'createOnly', 'readOnly'],
+    default: 'employee',
+    enum: ['owner', 'admin', 'manager', 'employee', 'create_only', 'read_only'],
   },
 });
 

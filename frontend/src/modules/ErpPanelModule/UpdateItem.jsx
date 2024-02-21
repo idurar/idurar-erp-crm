@@ -16,6 +16,8 @@ import { tagColor } from '@/utils/statusTagColor';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import { settingsAction } from '@/redux/settings/actions';
 // import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, translate }) {
@@ -89,9 +91,11 @@ export default function UpdateItem({ config, UpdateForm }) {
         );
       }
       if (fieldsValue.items) {
-        let newList = [...fieldsValue.items];
-        newList.map((item) => {
-          item.total = item.quantity * item.price;
+        let newList = [];
+        fieldsValue.items.map((item) => {
+          const { quantity, price, itemName, description } = item;
+          const total = item.quantity * item.price;
+          newList.push({ total, quantity, price, itemName, description });
         });
         dataToUpdate.items = newList;
       }
@@ -108,6 +112,14 @@ export default function UpdateItem({ config, UpdateForm }) {
     }
   }, [isSuccess]);
 
+  const updateCurrency = (value) => {
+    dispatch(
+      settingsAction.updateCurrency({
+        data: { default_currency_code: value },
+      })
+    );
+  };
+
   useEffect(() => {
     if (current) {
       setCurrentErp(current);
@@ -121,6 +133,8 @@ export default function UpdateItem({ config, UpdateForm }) {
       if (!formData.taxRate) {
         formData.taxRate = 0;
       }
+
+      updateCurrency(current.currency);
 
       const { subTotal } = formData;
 

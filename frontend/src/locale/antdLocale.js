@@ -39,10 +39,51 @@ import ltLT from 'antd/es/locale/lt_LT';
 import caES from 'antd/es/locale/ca_ES';
 import faIR from 'antd/es/locale/fa_IR';
 import srRS from 'antd/es/locale/sr_RS';
+import he_IL from 'antd/es/locale/he_IL';
+import az_AZ from 'antd/es/locale/az_AZ';
+import ga_IE from 'antd/es/locale/ga_IE';
+import hy_AM from 'antd/es/locale/hy_AM';
+import is_IS from 'antd/es/locale/is_IS';
+import kk_KZ from 'antd/es/locale/kk_KZ';
+import mn_MN from 'antd/es/locale/mn_MN';
+import ne_NP from 'antd/es/locale/ne_NP';
+import ka_GE from 'antd/es/locale/ka_GE';
+import by_BY from 'antd/es/locale/by_BY';
+import eu_ES from 'antd/es/locale/eu_ES';
+import kmr_IQ from 'antd/es/locale/kmr_IQ';
+import ta_IN from 'antd/es/locale/ta_IN';
+import tk_TK from 'antd/es/locale/tk_TK';
+import si_LK from 'antd/es/locale/si_LK';
+import km_KH from 'antd/es/locale/km_KH';
+import ml_IN from 'antd/es/locale/ml_IN';
+import kn_IN from 'antd/es/locale/kn_IN';
+import gl_ES from 'antd/es/locale/gl_ES';
+import en_US from 'antd/es/locale/en_US';
 
 const antdLocale = {
+  en_us: en_US,
+  gl_es: gl_ES,
+  kn_in: kn_IN,
+  ml_in: ml_IN,
+  km_kh: km_KH,
+  si_lk: si_LK,
+  ta_in: ta_IN,
+  he_il: he_IL,
+  az_az: az_AZ,
+  ga_ie: ga_IE,
+  hy_am: hy_AM,
+  is_is: is_IS,
+  kk_kz: kk_KZ,
+  mn_mn: mn_MN,
+  ne_np: ne_NP,
+  ka_ge: ka_GE,
+  by_by: by_BY,
+  eu_es: eu_ES,
+  kmr_iq: kmr_IQ,
+  tk_tk: tk_TK,
   zh_cn: zhCN,
   fr_fr: frFR,
+  kb_dz: frFR,
   ar_eg: arEG,
   ro_ro: roRO,
   it_it: itIT,
@@ -82,6 +123,15 @@ const antdLocale = {
   ca_es: caES,
   fa_ir: faIR,
   sr_rs: srRS,
+  sq_al: en_US,
+  bs_bs: en_US,
+  fil_ph: en_US,
+  kn_in: en_US,
+  mt_mt: en_US,
+  me_me: en_US,
+  pa_in: en_US,
+  sw_ke: en_US,
+  uz_uz: en_US,
 };
 
 export default antdLocale;

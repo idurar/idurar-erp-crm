@@ -9,6 +9,7 @@ const settingSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
   settingCategory: {
     type: String,
     required: true,
@@ -16,13 +17,11 @@ const settingSchema = new mongoose.Schema({
   },
   settingKey: {
     type: String,
-    unique: true,
     lowercase: true,
     required: true,
   },
   settingValue: {
     type: mongoose.Schema.Types.Mixed,
-    required: true,
   },
   valueType: {
     type: String,

@@ -1,12 +1,13 @@
 //this middleware will check if the user has permission
 
 const roles = {
-  superadmin: ['create', 'read', 'update', 'delete', 'download', 'upload'],
-  admin: ['create', 'read', 'update', 'delete', 'download', 'upload'],
-  staffAdmin: ['create', 'read', 'update', 'delete', 'download', 'upload'],
+  owner: ['create', 'read', 'update', 'delete', 'download', 'upload'],
+  admin: ['admin', 'create', 'read', 'update', 'delete', 'download', 'upload'],
+  manager: ['create', 'read', 'update', 'delete', 'download', 'upload'],
+  employee: ['create', 'read', 'update', 'download', 'upload'],
   staff: ['create', 'read', 'update', 'download', 'upload'],
-  createOnly: ['create', 'read', 'download', 'upload'],
-  readOnly: ['read', 'download'],
+  create_only: ['create', 'read', 'download', 'upload'],
+  read_only: ['read', 'download'],
 };
 exports.roles = roles;
 
@@ -15,9 +16,9 @@ exports.hasPermission = (permissionName = 'none') => {
     const currentUserRole = req.admin.role;
 
     if (
-      roles[currentUserRole].includes(permissionName) ||
-      req.admin.role === 'admin' ||
-      req.admin.role === 'superadmin'
+      roles[currentUserRole]?.includes(permissionName) ||
+      req.admin.role === 'owner' ||
+      req.admin.role === 'admin'
     ) {
       next();
     } else {

@@ -103,7 +103,9 @@ export default function ItemRow({ field, remove, current = null }) {
               controls={false}
               addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
               addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
-              formatter={(value) => money.amountFormatter({ amount: value })}
+              formatter={(value) =>
+                money.amountFormatter({ amount: value, currency_code: money.currency_code })
+              }
             />
           </Form.Item>
         </Form.Item>

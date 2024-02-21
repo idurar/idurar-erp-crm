@@ -11,7 +11,17 @@ methods.create = async (req, res) => {
   if (isDefault) {
     await Model.updateMany({}, { isDefault: false });
   }
-  const result = await new Model(req.body).save();
+
+  const countDefault = await Model.countDocuments({
+    isDefault: true,
+  });
+
+  const result = await new Model({
+    ...req.body,
+
+    isDefault: countDefault < 1 ? true : false,
+  }).save();
+
   return res.status(200).json({
     success: true,
     result: result,
@@ -29,7 +39,10 @@ methods.delete = async (req, res) => {
 
 methods.update = async (req, res) => {
   const { id } = req.params;
-  const tax = await Model.findById(id);
+  const tax = await Model.findOne({
+    _id: req.params.id,
+    removed: false,
+  }).exec();
   const { isDefault = tax.isDefault, enabled = tax.enabled } = req.body;
 
   // if isDefault:false , we update first - isDefault:true
@@ -43,10 +56,10 @@ methods.update = async (req, res) => {
     await Model.updateMany({ _id: { $ne: id } }, { isDefault: false });
   }
 
-  const taxesCount = await Model.estimatedDocumentCount();
+  const taxesCount = await Model.countDocuments({});
 
   // if enabled:false and it's only one exist, we can't disable
-  if (!enabled && taxesCount <= 1) {
+  if ((!enabled || !isDefault) && taxesCount <= 1) {
     return res.status(422).json({
       success: false,
       result: null,
@@ -54,7 +67,9 @@ methods.update = async (req, res) => {
     });
   }
 
-  const result = await Model.findOneAndUpdate({ _id: id }, req.body, { new: true });
+  const result = await Model.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
 
   return res.status(200).json({
     success: true,

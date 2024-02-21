@@ -69,7 +69,8 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
             },
           };
         },
-        render: (_, record) => moneyFormatter({ amount: record[key] }),
+        render: (_, record) =>
+          moneyFormatter({ amount: record[key], currency_code: record.currency }),
       },
       async: {
         title: field.label ? translate(field.label) : translate(key),
@@ -83,7 +84,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
         },
       },
       color: {
-        title: field.label ? field.label : key,
+        title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (text, record) => {
           return (
@@ -98,7 +99,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
         dataIndex: keyIndex,
         render: (text, record) => {
           return (
-            <Tag bordered={false} color={record.color}>
+            <Tag bordered={false} color={record.color || field.color}>
               {text}
             </Tag>
           );
@@ -115,7 +116,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
           );
         },
       },
-      selectwithfeedback: {
+      selectWithFeedback: {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (text, record) => {

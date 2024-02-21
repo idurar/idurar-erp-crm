@@ -24,7 +24,7 @@ import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 import { tagColor } from '@/utils/statusTagColor';
 
-const Item = ({ item }) => {
+const Item = ({ item, currentErp }) => {
   const { moneyFormatter } = useMoney();
   return (
     <Row gutter={[12, 0]} key={item._id}>
@@ -40,7 +40,7 @@ const Item = ({ item }) => {
             textAlign: 'right',
           }}
         >
-          {moneyFormatter({ amount: item.price })}
+          {moneyFormatter({ amount: item.price, currency_code: currentErp.currency })}
         </p>
       </Col>
       <Col className="gutter-row" span={4}>
@@ -59,7 +59,7 @@ const Item = ({ item }) => {
             fontWeight: '700',
           }}
         >
-          {moneyFormatter({ amount: item.total })}
+          {moneyFormatter({ amount: item.total, currency_code: currentErp.currency })}
         </p>
       </Col>
       <Divider dashed style={{ marginTop: 0, marginBottom: 15 }} />
@@ -205,21 +205,27 @@ export default function ReadOfferItem({ config, selectedItem }) {
           <Statistic title="Status" value={currentErp.status} />
           <Statistic
             title={translate('SubTotal')}
-            value={moneyFormatter({ amount: currentErp.subTotal })}
+            value={moneyFormatter({
+              amount: currentErp.subTotal,
+              currency_code: currentErp.currency,
+            })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
             title={translate('Total')}
-            value={moneyFormatter({ amount: currentErp.total })}
+            value={moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
-            title={translate('Balance')}
-            value={moneyFormatter({ amount: currentErp.credit })}
+            title={translate('Paid')}
+            value={moneyFormatter({
+              amount: currentErp.credit,
+              currency_code: currentErp.currency,
+            })}
             style={{
               margin: '0 32px',
             }}
@@ -269,7 +275,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
         <Divider />
       </Row>
       {itemslist.map((item) => (
-        <Item key={item._id} item={item}></Item>
+        <Item key={item._id} item={item} currentErp={currentErp}></Item>
       ))}
       <div
         style={{
@@ -285,19 +291,25 @@ export default function ReadOfferItem({ config, selectedItem }) {
           </Col>
 
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.subTotal })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.subTotal, currency_code: currentErp.currency })}
+            </p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>Tax Total ({currentErp.taxRate} %) :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.taxTotal })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.taxTotal, currency_code: currentErp.currency })}
+            </p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>{translate('Total')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.total })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
+            </p>
           </Col>
         </Row>
       </div>

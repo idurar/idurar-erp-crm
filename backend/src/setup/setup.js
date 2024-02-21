@@ -22,7 +22,7 @@ async function setupApp() {
       name: 'IDURAR',
       surname: 'Admin',
       enabled: true,
-      role: 'superadmin',
+      role: 'owner',
     };
     const result = await new Admin(demoAdmin).save();
 
@@ -41,7 +41,6 @@ async function setupApp() {
     const settingFiles = [];
 
     const settingsFiles = globSync('./src/setup/defaultSettings/**/*.json');
-    console.log('🚀 ~ file: setup.js:30 ~ setupApp ~ settingsFiles:', settingsFiles);
 
     for (const filePath of settingsFiles) {
       const file = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
@@ -52,19 +51,30 @@ async function setupApp() {
 
     console.log('👍 Settings created : Done!');
 
-    const Email = require('../models/coreModels/Email');
-    const emailTemplate = JSON.parse(
-      fs.readFileSync(__dirname + '/emailTemplate/index.json', 'utf-8')
-    );
+    const Currency = require('../models/appModels/Currency');
+    const { currencyList } = require('../utils/currencyList');
+    const PaymentMode = require('../models/appModels/PaymentMode');
+    const Taxes = require('../models/appModels/Taxes');
 
-    await Email.insertMany([...emailTemplate]);
-    console.log('👍 Email Templates Created : Done !');
+    await Currency.insertMany(currencyList);
+    console.log('👍 Currency created : Done!');
+
+    await Taxes.insertMany([{ taxName: 'Tax 0%', taxValue: '0', isDefault: true }]);
+    console.log('👍 Taxes created : Done!');
+
+    await PaymentMode.insertMany([
+      {
+        name: 'Default Payment',
+        description: 'Default Payment Mode (Cash , Wire Transfert)',
+        isDefault: true,
+      },
+    ]);
+    console.log('👍 PaymentMode created : Done!');
+
     console.log('🥳 Setup completed :Success!');
-    process.exit();
   } catch (e) {
     console.log('\n🚫 Error! The Error info is below');
     console.log(e);
-    process.exit();
   }
 }
 

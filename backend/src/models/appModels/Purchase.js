@@ -6,7 +6,7 @@ const purchaseSchema = new mongoose.Schema({
     default: false,
   },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   number: {
     type: Number,
     required: true,
@@ -67,6 +67,11 @@ const purchaseSchema = new mongoose.Schema({
       },
     },
   ],
+  currency: {
+    type: String,
+    uppercase: true,
+    required: true,
+  },
   taxRate: {
     type: Number,
     default: 0,
@@ -110,7 +115,7 @@ const purchaseSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  note: {
+  notes: {
     type: String,
   },
   status: {

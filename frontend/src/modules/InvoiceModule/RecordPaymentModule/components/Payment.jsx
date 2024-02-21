@@ -111,16 +111,28 @@ export default function Payment({ config, currentItem }) {
               </Tag>
             </Descriptions.Item>
             <Descriptions.Item label={translate('sub total')}>
-              {money.amountFormatter({ amount: currentErp.subTotal })}
+              {money.moneyFormatter({
+                amount: currentErp.subTotal,
+                currency_code: currentErp.currency,
+              })}
             </Descriptions.Item>
             <Descriptions.Item label={translate('total')}>
-              {money.amountFormatter({ amount: currentErp.total })}
+              {money.moneyFormatter({
+                amount: currentErp.total,
+                currency_code: currentErp.currency,
+              })}
             </Descriptions.Item>
             <Descriptions.Item label={translate('discount')}>
-              {money.amountFormatter({ amount: currentErp.discount })}
+              {money.moneyFormatter({
+                amount: currentErp.discount,
+                currency_code: currentErp.currency,
+              })}
             </Descriptions.Item>
-            <Descriptions.Item label={translate('Balance')}>
-              {money.amountFormatter({ amount: currentErp.credit })}
+            <Descriptions.Item label={translate('Paid')}>
+              {money.moneyFormatter({
+                amount: currentErp.credit,
+                currency_code: currentErp.currency,
+              })}
             </Descriptions.Item>
           </Descriptions>
         </Col>

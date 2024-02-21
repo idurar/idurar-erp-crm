@@ -24,7 +24,9 @@ const listBySettingKey = async (req, res) => {
     settingsToShow.$or.push({ settingKey });
   }
 
-  let results = await Model.find(settingsToShow).where('removed', false);
+  let results = await Model.find({
+    ...settingsToShow,
+  }).where('removed', false);
 
   // If no results found, return document not found
   if (results.length >= 1) {

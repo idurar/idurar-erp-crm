@@ -13,7 +13,7 @@ const getLabel = (lang, key) => {
     else {
       // convert no found language label key to label
 
-      const remove_underscore_fromKey = lowerCaseKey.replace(/_/g, ' ').split(' ');
+      const remove_underscore_fromKey = key.replace(/_/g, ' ').split(' ');
 
       const conversionOfAllFirstCharacterofEachWord = remove_underscore_fromKey.map(
         (word) => word[0].toUpperCase() + word.substring(1)

@@ -12,6 +12,7 @@ export default function Offer() {
   const { dateFormat } = useDate();
 
   const searchConfig = {
+    entity: 'lead',
     displayLabels: ['name'],
     searchFields: 'name',
   };
@@ -38,10 +39,11 @@ export default function Offer() {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (subTotal) => moneyFormatter({ amount: subTotal }),
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
     {
       title: translate('Total'),
@@ -51,15 +53,16 @@ export default function Offer() {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (total) => moneyFormatter({ amount: total }),
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
 
     {
       title: translate('Note'),
-      dataIndex: 'note',
+      dataIndex: 'notes',
     },
     {
       title: translate('Status'),
@@ -79,10 +82,10 @@ export default function Offer() {
 
   const entity = 'offer';
   const Labels = {
-    PANEL_TITLE: translate('offer'),
+    PANEL_TITLE: translate('Offer Leads'),
     DATATABLE_TITLE: translate('offer_list'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
-    ENTITY_NAME: translate('offer'),
+    ENTITY_NAME: translate('Offer Leads'),
   };
 
   const configPage = {

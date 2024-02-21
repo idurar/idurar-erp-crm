@@ -36,11 +36,11 @@ export default function UpdateForm({ config, formElements, withUpload = false })
     if (fieldsValue.file && withUpload) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
-    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
-      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
-      return acc;
-    }, {});
-    dispatch(crud.update({ entity, id, jsonData: trimmedValues, withUpload }));
+    // const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+    //   acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+    //   return acc;
+    // }, {});
+    dispatch(crud.update({ entity, id, jsonData: fieldsValue, withUpload }));
   };
   useEffect(() => {
     if (current) {

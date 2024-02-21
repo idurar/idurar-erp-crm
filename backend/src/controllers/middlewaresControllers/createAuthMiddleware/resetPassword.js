@@ -10,22 +10,50 @@ const resetPassword = async (req, res, { userModel }) => {
   const User = mongoose.model(userModel);
   const { password, userId, resetToken } = req.body;
 
-  const userPasswordResult = await UserPassword.findOne({ user: userId, removed: false });
+  const databasePassword = await UserPassword.findOne({ user: userId, removed: false });
   const user = await User.findOne({ _id: userId, removed: false }).exec();
 
-  if (!userPasswordResult || !user)
+  if (!user.enabled && user.role === 'owner') {
+    const settings = useAppSettings();
+    const idurar_app_email = settings['idurar_app_email'];
+    const idurar_base_url = settings['idurar_base_url'];
+
+    const url = checkAndCorrectURL(idurar_base_url);
+
+    const link = url + '/verify/' + user._id + '/' + databasePassword.emailToken;
+
+    await sendMail({
+      email,
+      name: user.name,
+      link,
+      idurar_app_email,
+      emailToken: databasePassword.emailToken,
+    });
+
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message:
+        'your email account is not verified , check your email inbox to activate your account',
+    });
+  }
+
+  if (!user.enabled)
+    return res.status(409).json({
+      success: false,
+      result: null,
+      message: 'Your account is disabled, contact your account adminstrator',
+    });
+
+  if (!databasePassword || !user)
     return res.status(404).json({
       success: false,
       result: null,
       message: 'No account with this email has been registered.',
     });
 
-  const isMatch = resetToken === userPasswordResult.resetToken;
-  if (
-    !isMatch ||
-    userPasswordResult.resetToken === undefined ||
-    userPasswordResult.resetToken === null
-  )
+  const isMatch = resetToken === databasePassword.resetToken;
+  if (!isMatch || databasePassword.resetToken === undefined || databasePassword.resetToken === null)
     return res.status(403).json({
       success: false,
       result: null,
@@ -77,29 +105,34 @@ const resetPassword = async (req, res, { userModel }) => {
     }
   ).exec();
 
-  res
-    .status(200)
-    .cookie('token', token, {
-      maxAge: 24 * 60 * 60 * 1000,
-      sameSite: 'Lax',
-      httpOnly: true,
-      secure: false,
-      domain: req.hostname,
-      path: '/',
-      Partitioned: true,
-    })
-    .json({
-      success: true,
-      result: {
-        _id: user._id,
-        name: user.name,
-        surname: user.surname,
-        role: user.role,
-        email: user.email,
-        photo: user.photo,
-      },
-      message: 'Successfully resetPassword user',
-    });
+  if (
+    resetToken === databasePassword.resetToken &&
+    databasePassword.resetToken !== undefined &&
+    databasePassword.resetToken !== null
+  )
+    return res
+      .status(200)
+      .cookie('token', token, {
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: 'Lax',
+        httpOnly: true,
+        secure: false,
+        domain: req.hostname,
+        path: '/',
+        Partitioned: true,
+      })
+      .json({
+        success: true,
+        result: {
+          _id: user._id,
+          name: user.name,
+          surname: user.surname,
+          role: user.role,
+          email: user.email,
+          photo: user.photo,
+        },
+        message: 'Successfully resetPassword user',
+      });
 };
 
 module.exports = resetPassword;

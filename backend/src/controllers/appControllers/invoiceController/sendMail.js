@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const InvoiceModel = mongoose.model('Invoice');
 const { Resend } = require('resend');
 const { loadSettings } = require('@/middlewares/settings');
+const { useAppSettings } = require('@/settings');
 
 const mail = async (req, res) => {
   const { id } = req.body;
@@ -14,7 +15,10 @@ const mail = async (req, res) => {
     throw { name: 'ValidationError' };
   }
 
-  const result = await InvoiceModel.findOne({ _id: id, removed: false }).exec();
+  const result = await InvoiceModel.findOne({
+    _id: id,
+    removed: false,
+  }).exec();
 
   // Throw error if no result
   if (!result) {
@@ -25,6 +29,14 @@ const mail = async (req, res) => {
   const { client } = result;
   const { name } = client;
   const email = client[client.type].email;
+
+  if (!email) {
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'Client has no email , add new email and try again',
+    });
+  }
 
   const modelName = 'Invoice';
 
@@ -37,7 +49,11 @@ const mail = async (req, res) => {
     { filename: folderPath, format: 'A4', targetLocation },
     result,
     async () => {
-      const { id: mailId } = await sendViaApi(email, name, targetLocation);
+      const { id: mailId } = await sendViaApi({
+        email,
+        name,
+        targetLocation,
+      });
 
       if (mailId) {
         InvoiceModel.findByIdAndUpdate({ _id: id, removed: false }, { status: 'sent' })
@@ -47,7 +63,7 @@ const mail = async (req, res) => {
             return res.status(200).json({
               success: true,
               result: mailId,
-              message: `Successfully sent invoice ${id} to ${email}`,
+              message: `Successfully sent invoice to ${email}`,
             });
           });
       }
@@ -55,29 +71,36 @@ const mail = async (req, res) => {
   );
 };
 
-const sendViaApi = async (email, name, filePath) => {
-  const resend = new Resend(process.env.RESEND_API);
+const sendViaApi = async ({ email, name, targetLocation }) => {
+  try {
+    const resend = new Resend(process.env.RESEND_API);
 
-  const settings = await loadSettings();
-  const idurar_app_email = settings['idurar_app_email'];
-  // Read the file to be attatched
-  const attatchedFile = fs.readFileSync(filePath);
+    const settings = await loadSettings();
+    const idurar_app_email = 'noreply@idurarapp.com';
+    const idurar_app_company_email = settings['idurar_app_company_email'];
+    const company_name = settings['company_name'];
+    // Read the file to be attatched
+    const attatchedFile = fs.readFileSync(targetLocation);
 
-  // Send the mail using the send method
-  const { data } = await resend.emails.send({
-    from: idurar_app_email,
-    to: email,
-    subject: 'Invoice From Idurar',
-    attachments: [
-      {
-        filename: 'Invoice.pdf',
-        content: attatchedFile,
-      },
-    ],
-    html: SendInvoice({ name }),
-  });
+    // Send the mail using the send method
+    const { data } = await resend.emails.send({
+      from: idurar_app_email,
+      to: email,
+      subject: 'Invoice From ' + company_name,
+      reply_to: idurar_app_company_email,
+      attachments: [
+        {
+          filename: 'Invoice.pdf',
+          content: attatchedFile,
+        },
+      ],
+      html: SendInvoice({ name, title: 'Invoice From ' + company_name }),
+    });
 
-  return data;
+    return data;
+  } catch (error) {
+    throw new error('error while sending email ');
+  }
 };
 
 module.exports = mail;

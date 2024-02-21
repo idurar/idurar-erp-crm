@@ -10,7 +10,7 @@ exports.catchErrors = (fn) => {
   return function (req, res, next) {
     return fn(req, res, next).catch((error) => {
       if (error.name == 'ValidationError') {
-        res.status(400).json({
+        return res.status(400).json({
           success: false,
           result: null,
           message: 'Required fields are not supplied',
@@ -19,7 +19,7 @@ exports.catchErrors = (fn) => {
         });
       } else {
         // Server Error
-        res.status(500).json({
+        return res.status(500).json({
           success: false,
           result: null,
           message: error.message,
@@ -37,7 +37,7 @@ exports.catchErrors = (fn) => {
   If we hit a route that is not found, we mark it as 404 and pass it along to the next error handler to display
 */
 exports.notFound = (req, res, next) => {
-  res.status(404).json({
+  return res.status(404).json({
     success: false,
     message: "Api url doesn't exist ",
   });
@@ -56,7 +56,7 @@ exports.developmentErrors = (error, req, res, next) => {
     stackHighlighted: error.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
   };
 
-  res.status(500).json({
+  return res.status(500).json({
     success: false,
     message: error.message,
     error: error,
@@ -69,7 +69,7 @@ exports.developmentErrors = (error, req, res, next) => {
   No stacktraces are leaked to admin
 */
 exports.productionErrors = (error, req, res, next) => {
-  res.status(500).json({
+  return res.status(500).json({
     success: false,
     message: error.message,
     error: error,

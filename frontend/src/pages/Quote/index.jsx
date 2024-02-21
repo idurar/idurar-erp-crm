@@ -12,6 +12,7 @@ export default function Quote() {
   const { moneyFormatter } = useMoney();
 
   const searchConfig = {
+    entity: 'client',
     displayLabels: ['name'],
     searchFields: 'name',
   };
@@ -47,10 +48,11 @@ export default function Quote() {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (subTotal) => moneyFormatter({ amount: subTotal }),
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
     {
       title: translate('Total'),
@@ -60,10 +62,11 @@ export default function Quote() {
           style: {
             textAlign: 'right',
             whiteSpace: 'nowrap',
+            direction: 'ltr',
           },
         };
       },
-      render: (total) => moneyFormatter({ amount: total }),
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
 
     {
@@ -83,10 +86,10 @@ export default function Quote() {
   ];
 
   const Labels = {
-    PANEL_TITLE: translate('quote'),
-    DATATABLE_TITLE: translate('quote_list'),
-    ADD_NEW_ENTITY: translate('add_new_quote'),
-    ENTITY_NAME: translate('quote'),
+    PANEL_TITLE: translate('proforma invoice'),
+    DATATABLE_TITLE: translate('proforma invoice_list'),
+    ADD_NEW_ENTITY: translate('add_new_proforma invoice'),
+    ENTITY_NAME: translate('proforma invoice'),
   };
 
   const configPage = {

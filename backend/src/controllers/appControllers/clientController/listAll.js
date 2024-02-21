@@ -4,7 +4,12 @@ const listAll = async (Model, req, res) => {
   const sort = parseInt(req.query.sort) || 'desc';
 
   //  Query the database for a list of all results
-  const result = await Model.find({ removed: false }).sort({ created: sort }).populate().exec();
+  const result = await Model.find({
+    removed: false,
+  })
+    .sort({ created: sort })
+    .populate()
+    .exec();
 
   const migratedData = result.map((x) => migrate(x));
   if (result.length > 0) {

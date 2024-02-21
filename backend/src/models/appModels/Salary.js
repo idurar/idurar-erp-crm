@@ -5,7 +5,7 @@ const salarySchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
   number: {
     type: Number,
@@ -31,6 +31,11 @@ const salarySchema = new mongoose.Schema({
   },
   year: {
     type: Number,
+    required: true,
+  },
+  currency: {
+    type: String,
+    uppercase: true,
     required: true,
   },
   basicSalary: {
@@ -68,7 +73,7 @@ const salarySchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  note: {
+  notes: {
     type: String,
   },
   status: {

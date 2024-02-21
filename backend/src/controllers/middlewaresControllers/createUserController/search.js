@@ -7,16 +7,16 @@ const search = async (userModel, req, res) => {
 
   // console.log(fields)
 
-  if (req.query.q === undefined || req.query.q === '' || req.query.q === ' ') {
-    return res
-      .status(202)
-      .json({
-        success: false,
-        result: [],
-        message: 'No document found by this request',
-      })
-      .end();
-  }
+  // if (req.query.q === undefined || req.query.q === '' || req.query.q === ' ') {
+  //   return res
+  //     .status(202)
+  //     .json({
+  //       success: false,
+  //       result: [],
+  //       message: 'No document found by this request',
+  //     })
+  //     .end();
+  // }
 
   const fieldsArray = req.query.fields ? req.query.fields.split(',') : ['name', 'surname', 'email'];
 
@@ -25,10 +25,12 @@ const search = async (userModel, req, res) => {
   for (const field of fieldsArray) {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
-  let result = await User.find(fields)
+  let result = await User.find({
+    ...fields,
+  })
     .where('removed', false)
-    .sort({ name: 'asc' })
-    .limit(10)
+    .sort({ enabled: -1 })
+    .limit(20)
     .exec();
 
   if (result.length >= 1) {

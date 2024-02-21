@@ -5,6 +5,7 @@ import { Select, Tag } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { generate as uniqueId } from 'shortid';
 import color from '@/utils/color';
+import useLanguage from '@/locale/useLanguage';
 
 const SelectAsync = ({
   entity,
@@ -13,9 +14,11 @@ const SelectAsync = ({
   redirectLabel = '',
   withRedirect = false,
   urlToRedirect = '/',
+  placeholder = 'select',
   value,
   onChange,
 }) => {
+  const translate = useLanguage();
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
 
@@ -33,7 +36,7 @@ const SelectAsync = ({
     return displayLabels.map((x) => optionField[x]).join(' ');
   };
   useEffect(() => {
-    if (value) {
+    if (value !== undefined) {
       const val = value[outputValue] ?? value;
       setCurrentValue(val);
       onChange(val);
@@ -53,11 +56,11 @@ const SelectAsync = ({
   const optionsList = () => {
     const list = [];
 
-    if (selectOptions.length === 0 && withRedirect) {
-      const value = 'redirectURL';
-      const label = `+ ${redirectLabel}`;
-      list.push({ value, label });
-    }
+    // if (selectOptions.length === 0 && withRedirect) {
+    //   const value = 'redirectURL';
+    //   const label = `+ ${translate(redirectLabel)}`;
+    //   list.push({ value, label });
+    // }
     selectOptions.map((optionField) => {
       const value = optionField[outputValue] ?? optionField;
       const label = labels(optionField);
@@ -75,6 +78,7 @@ const SelectAsync = ({
       disabled={fetchIsLoading}
       value={currentValue}
       onChange={handleSelectChange}
+      placeholder={placeholder}
     >
       {optionsList()?.map((option) => {
         return (
@@ -85,6 +89,9 @@ const SelectAsync = ({
           </Select.Option>
         );
       })}
+      {withRedirect && (
+        <Select.Option value={'redirectURL'}>{`+ ` + translate(redirectLabel)}</Select.Option>
+      )}
     </Select>
   );
 };

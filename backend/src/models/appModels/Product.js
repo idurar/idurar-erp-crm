@@ -9,7 +9,7 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  branchs: [{ type: mongoose.Schema.ObjectId, ref: 'Branch' }],
+
   productCategory: {
     type: mongoose.Schema.ObjectId,
     ref: 'ProductCategory',
@@ -24,7 +24,6 @@ const schema = new mongoose.Schema({
   description: String,
   number: {
     type: Number,
-    unique: true,
   },
   title: String,
   tags: [String],
@@ -60,6 +59,11 @@ const schema = new mongoose.Schema({
   taxRate: { type: Number, default: 0 },
   price: {
     type: Number,
+    required: true,
+  },
+  currency: {
+    type: String,
+    uppercase: true,
     required: true,
   },
   customField: [

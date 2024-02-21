@@ -11,7 +11,7 @@ import logo from '@/style/images/idurar-crm-erp.svg';
 const { Content } = Layout;
 const { Title } = Typography;
 
-const AuthModule = ({ authContent, AUTH_TITLE }) => {
+const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
   const translate = useLanguage();
 
   return (
@@ -25,7 +25,7 @@ const AuthModule = ({ authContent, AUTH_TITLE }) => {
       </Content>
       <Content
         style={{
-          padding: '80px 30px 30px',
+          padding: isForRegistre ? '40px 30px 30px' : '100px 30px 30px',
           maxWidth: '440px',
           margin: '0 auto',
         }}
@@ -35,7 +35,7 @@ const AuthModule = ({ authContent, AUTH_TITLE }) => {
             src={logo}
             alt="Logo"
             style={{
-              margin: '-70px auto 40px',
+              margin: '0px auto 20px',
               display: 'block',
             }}
             height={63}

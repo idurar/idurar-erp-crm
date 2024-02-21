@@ -21,13 +21,11 @@ router
     catchErrors(adminController.create)
   );
 router.route('/admin/read/:id').get(hasPermission('read'), catchErrors(adminController.read));
-router
-  .route('/admin/update/:id')
-  .patch(
-    hasPermission(),
-    singleStorageUpload({ entity: 'setting', fieldName: 'photo', fileType: 'image' }),
-    catchErrors(adminController.update)
-  );
+router.route('/admin/update/:id').patch(
+  hasPermission(),
+  // singleStorageUpload({ entity: 'setting', fieldName: 'photo', fileType: 'image' }),
+  catchErrors(adminController.update)
+);
 router.route('/admin/delete/:id').delete(hasPermission(), catchErrors(adminController.delete));
 router.route('/admin/search').get(hasPermission(), catchErrors(adminController.search));
 router.route('/admin/list').get(hasPermission(), catchErrors(adminController.list));
@@ -46,7 +44,9 @@ router
   .route('/admin/profile/update')
   .patch(
     hasPermission('update'),
-    singleStorageUpload({ entity: 'admin', fieldName: 'photo', fileType: 'image' }),
+    catchErrors(
+      catchErrors(singleStorageUpload({ entity: 'admin', fieldName: 'photo', fileType: 'image' }))
+    ),
     catchErrors(adminController.updateProfile)
   );
 
@@ -75,7 +75,9 @@ router
   .route('/setting/upload/:settingKey?')
   .patch(
     hasPermission(),
-    singleStorageUpload({ entity: 'setting', fieldName: 'settingValue', fileType: 'image' }),
+    catchErrors(
+      singleStorageUpload({ entity: 'setting', fieldName: 'settingValue', fileType: 'image' })
+    ),
     catchErrors(settingController.updateBySettingKey)
   );
 router

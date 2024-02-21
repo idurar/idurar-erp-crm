@@ -6,9 +6,8 @@ const listAll = async (userModel, req, res) => {
   const limit = parseInt(req.query.items) || 100;
 
   //  Query the database for a list of all results
-  const result = await User.find({ removed: false })
-    .limit(limit)
-    .sort({ created: 'desc' })
+  const result = await User.find({ removed: false, enabled: true })
+    .sort({ enabled: -1 })
     .populate()
     .exec();
   // Counting the total documents

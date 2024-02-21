@@ -25,12 +25,12 @@ export default function CreateForm({ config, formElements, withUpload = false })
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
 
-    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
-      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
-      return acc;
-    }, {});
+    // const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+    //   acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+    //   return acc;
+    // }, {});
 
-    dispatch(crud.create({ entity, jsonData: trimmedValues, withUpload }));
+    dispatch(crud.create({ entity, jsonData: fieldsValue, withUpload }));
   };
 
   useEffect(() => {

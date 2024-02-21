@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('Invoice');
+const { checkCurrency } = require('@/utils/currency');
 
 const { calculate } = require('@/helpers');
 const { increaseBySettingKey } = require('@/middlewares/settings');
@@ -19,12 +20,20 @@ const create = async (req, res) => {
     });
   }
 
-  const { items = [], taxRate = 0, discount = 0 } = value;
+  const { items = [], taxRate = 0, discount = 0, currency } = value;
 
   // default
   let subTotal = 0;
   let taxTotal = 0;
   let total = 0;
+
+  if (!checkCurrency(currency)) {
+    return res.status(400).json({
+      success: false,
+      result: null,
+      message: "currency doesn't exist",
+    });
+  }
 
   //Calculate the items array with subTotal, total, taxTotal
   items.map((item) => {
@@ -59,7 +68,9 @@ const create = async (req, res) => {
   ).exec();
   // Returning successfull response
 
-  increaseBySettingKey({ settingKey: 'last_invoice_number' });
+  increaseBySettingKey({
+    settingKey: 'last_invoice_number',
+  });
 
   // Returning successfull response
   return res.status(200).json({

@@ -225,7 +225,7 @@ export default function ReadItem({ config, selectedItem }) {
             }}
           />
           <Statistic
-            title={translate('Balance')}
+            title={translate('Paid')}
             value={moneyFormatter({ amount: currentAdavancedCrud.credit })}
             style={{
               margin: '0 32px',

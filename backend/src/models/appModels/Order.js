@@ -5,18 +5,22 @@ const orderSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  enabled: {
+    type: Boolean,
+    default: true,
+  },
+
   createdBy: {
     type: mongoose.Schema.ObjectId,
     ref: 'Admin',
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   assigned: {
     type: mongoose.Schema.ObjectId,
     ref: 'Employee',
   },
   number: {
     type: Number,
-    unique: true,
     required: true,
   },
   recurring: {
@@ -81,7 +85,7 @@ const orderSchema = new mongoose.Schema({
       total: {
         type: Number,
       },
-      note: {
+      notes: {
         type: String,
       },
     },
@@ -94,7 +98,7 @@ const orderSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  note: {
+  notes: {
     type: String,
   },
   fulfillment: {

@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  branch: { type: mongoose.Schema.ObjectId, ref: 'Branch' },
+
   date: {
     type: Date,
     default: Date.now,
@@ -47,6 +47,11 @@ const schema = new mongoose.Schema({
   },
   total: {
     type: Number,
+  },
+  currency: {
+    type: String,
+    uppercase: true,
+    required: true,
   },
   paymentMode: {
     type: mongoose.Schema.ObjectId,

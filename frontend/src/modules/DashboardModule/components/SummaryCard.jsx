@@ -1,14 +1,11 @@
 import { Tag, Divider, Row, Col, Spin, Tooltip } from 'antd';
-import {useMoney} from "@/settings";
+import { useMoney } from '@/settings';
+import { selectMoneyFormat } from '@/redux/settings/selectors';
+import { useSelector } from 'react-redux';
 
-export default function AnalyticSummaryCard({
-  title,
-  tagContent,
-  tagColor,
-  prefix,
-  isLoading = false,
-}) {
-    const { moneyFormatter } = useMoney();
+export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isLoading = false }) {
+  const { moneyFormatter } = useMoney();
+  const money_format_settings = useSelector(selectMoneyFormat);
   return (
     <Col
       className="gutter-row"
@@ -62,7 +59,12 @@ export default function AnalyticSummaryCard({
               {isLoading ? (
                 <Spin />
               ) : (
-                <Tooltip title={tagContent}>
+                <Tooltip
+                  title={data}
+                  style={{
+                    direction: 'ltr',
+                  }}
+                >
                   <Tag
                     color={tagColor}
                     style={{
@@ -72,9 +74,18 @@ export default function AnalyticSummaryCard({
                       overflow: 'hidden',
                       whiteSpace: 'nowrap',
                       textOverflow: 'ellipsis',
+                      direction: 'ltr',
                     }}
                   >
-                    {tagContent ? tagContent : moneyFormatter({ amount: 0 })}
+                    {data
+                      ? moneyFormatter({
+                          amount: data,
+                          currency_code: money_format_settings?.default_currency_code,
+                        })
+                      : moneyFormatter({
+                          amount: 0,
+                          currency_code: money_format_settings?.default_currency_code,
+                        })}
                   </Tag>
                 </Tooltip>
               )}
