@@ -9,9 +9,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore public/",
     "production": "NODE_ENV=production",
-    "translate": "node src/aiTranslate/index.js",
-    "features": "node src/aiFeatures/index.js",
     "setup": "node src/setup/setup.js",
+    "upgrade": "node src/setup/upgrade.js",
     "reset": "node src/setup/reset.js"
   },
   "dependencies": {
