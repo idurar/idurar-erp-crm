@@ -4,13 +4,6 @@ const bcrypt = require('bcryptjs');
 const { generate: uniqueId } = require('shortid');
 
 const updateProfilePassword = async (userModel, req, res) => {
-  if (req.admin.email === 'admin@demo.com') {
-    return res.status(404).json({
-      success: false,
-      result: null,
-      message: 'you cant update this demo profile',
-    });
-  }
   const UserPassword = mongoose.model(userModel + 'Password');
 
   const reqUserName = userModel.toLowerCase();

@@ -31,8 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(compression());
 
-// default options
-app.use(fileUpload());
+// // default options
+// app.use(fileUpload());
 
 // Here our API Routes
 
