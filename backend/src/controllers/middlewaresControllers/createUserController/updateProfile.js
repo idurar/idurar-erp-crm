@@ -5,7 +5,6 @@ const updateProfile = async (userModel, req, res) => {
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
-  console.log('🚀 ~ updateProfile ~ updates:', req.body);
   let updates = req.body.photo
     ? {
         email: req.body.email,
