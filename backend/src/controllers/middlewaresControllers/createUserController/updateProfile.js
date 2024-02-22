@@ -1,18 +1,11 @@
 const mongoose = require('mongoose');
 
 const updateProfile = async (userModel, req, res) => {
-  if (req.body.email === 'admin@demo.com') {
-    return res.status(404).json({
-      success: false,
-      result: null,
-      message: 'you cant update this demo profile',
-    });
-  }
   const User = mongoose.model(userModel);
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
-
+  console.log('🚀 ~ updateProfile ~ updates:', req.body);
   let updates = req.body.photo
     ? {
         email: req.body.email,
