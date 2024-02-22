@@ -15,12 +15,7 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 </div>
 
-**Live App Demo** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
-
-**Credentials** :
-```
-username : admin@demo.com  password : admin123
-```
+**Live App Free Cloud Version** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 
 ```
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
@@ -28,8 +23,7 @@ username : admin@demo.com  password : admin123
 
 ## Translation : 
 
-[French](doc/README.fr.md#French-Translation)
-
+[French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation)
 ## License
 
 IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
