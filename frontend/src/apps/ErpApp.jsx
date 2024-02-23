@@ -22,6 +22,7 @@ import AppRouter from '@/router/AppRouter';
 import useResponsive from '@/hooks/useResponsive';
 
 import storePersist from '@/redux/storePersist';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function ErpCrmApp() {
   const { Content } = Layout;
@@ -50,10 +51,11 @@ export default function ErpCrmApp() {
       window.localStorage.setItem('firstVisit', JSON.stringify({ loadDefaultLang: true }));
     }
   }, [appSettings]);
+  const langDirection = useSelector(selectLangDirection);
 
   if (settingIsloaded)
     return (
-      <Layout hasSider>
+      <Layout hasSider style={{ flexDirection: langDirection === 'rtl' ? 'row-reverse' : 'row' }}>
         {/* {currentApp === 'default' ? <Navigation /> : <ExpensesNav />} */}
         <Navigation />
 
@@ -73,7 +75,7 @@ export default function ErpCrmApp() {
             </Content>
           </Layout>
         ) : (
-          <Layout style={{ marginLeft: 275 }}>
+          <Layout>
             <HeaderContent />
             <Content
               style={{
