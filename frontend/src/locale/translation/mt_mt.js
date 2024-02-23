@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Żid Taxxa Ġdida",
 account_owner: "Proprietarju tal-Kont",
 create_only: "Żieda Biss",
 enter_code: "Daħħal Ċikklu",
+search:"tfittxija"
 }
  export default lang

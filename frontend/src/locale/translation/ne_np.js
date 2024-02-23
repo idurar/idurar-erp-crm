@@ -453,5 +453,6 @@ ajouter_une_nouvelle_taxe: "नयाँ कर थप्नुहोस्",
 account_owner: "खाता मालिक",
 create_only: "मात्र सिर्जना गर्नुहोस्",
 enter_code: "कोड प्रविष्ट गर्नुहोस्",
+search:"खोज"
 }
  export default lang

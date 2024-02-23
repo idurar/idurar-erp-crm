@@ -457,5 +457,6 @@ const lang = {
   account_owner: 'Hesap Sahibi',
   create_only: 'Sadece Oluştur',
   enter_code: 'Kodu Gir',
+  search:"aramak"
 };
 export default lang;

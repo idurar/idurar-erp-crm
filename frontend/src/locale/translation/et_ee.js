@@ -453,5 +453,6 @@ const lang = {
   proforma_invoice_list: 'Proforma arvete nimekiri',
   add_new_proforma_invoice: 'Lisa uus proforma arve',
   ajouter_une_nouvelle_taxe: 'Lisa uus maks',
+  search:"otsing"
 };
 export default lang;

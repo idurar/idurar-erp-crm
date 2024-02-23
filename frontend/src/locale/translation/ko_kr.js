@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "새 세금 추가하기",
 account_owner: "계정 소유자",
 create_only: "만들기 전용",
 enter_code: "코드 입력",
+search:"찾다"
 }
  export default lang

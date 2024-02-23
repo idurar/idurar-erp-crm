@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Tambah Cukai Baru",
 account_owner: "Pemilik Akaun",
 create_only: "Cipta Sahaja",
 enter_code: "Masukkan Kod",
+search:"cari"
 }
  export default lang

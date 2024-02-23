@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Προσθήκη Νέου Φόρου",
 account_owner: "Κάτοχος Λογαριασμού",
 create_only: "Δημιουργία Μόνο",
 enter_code: "Εισαγωγή Κωδικού",
+search:"Αναζήτηση"
 }
  export default lang

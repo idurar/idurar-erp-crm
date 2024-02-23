@@ -453,5 +453,6 @@ pangalan_ng_may_ari_ng_account: "Pangalan ng May-ari ng Account",
 gumawa_lamang: "Gumawa Lamang",
 maglagay_ng_code: "Maglagay ng Code",
 mga_alok: "Mga Alokat",
+search:"paghahanap"
 }
  export default lang
