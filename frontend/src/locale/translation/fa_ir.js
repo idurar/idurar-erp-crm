@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "افزودن مالیات جدید",
 account_owner: "صاحب حساب",
 create_only: "فقط ایجاد کنید",
 enter_code: "کد را وارد کنید",
+search:"جستجو کردن"
 }
  export default lang

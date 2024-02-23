@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "添加新的税项",
 account_owner: "账户所有者",
 create_only: "仅创建",
 enter_code: "输入代码",
+search:"搜索",
 }
  export default lang

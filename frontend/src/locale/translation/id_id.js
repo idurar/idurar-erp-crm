@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Tambah Pajak Baru",
 account_owner: "Pemilik Akun",
 create_only: "Hanya Buat",
 enter_code: "Masukkan Kode",
+search:"mencari"
 }
  export default lang

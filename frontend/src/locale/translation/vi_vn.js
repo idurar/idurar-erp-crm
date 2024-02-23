@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Thêm một loại thuế mới",
 account_owner: "Chủ tài khoản",
 create_only: "Chỉ tạo",
 enter_code: "Nhập mã",
+search:"tìm kiếm"
 }
  export default lang

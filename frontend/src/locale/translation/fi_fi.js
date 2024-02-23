@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Lisää uusi vero",
 account_owner: "Tilin omistaja",
 create_only: "Luo vain",
 enter_code: "Syötä koodi",
+search:"Hae"
 }
  export default lang

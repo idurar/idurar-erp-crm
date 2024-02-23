@@ -456,5 +456,6 @@ const lang = {
   account_owner: 'Vlasnik računa',
   create_only: 'Samo stvaranje',
   enter_code: 'Unesite kod',
+  search:"traži"
 };
 export default lang;

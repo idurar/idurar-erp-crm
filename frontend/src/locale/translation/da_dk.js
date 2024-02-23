@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Tilføj ny skat",
 account_owner: "Kontoejer",
 create_only: "Opret kun",
 enter_code: "Indtast kode",
+search:"Søg"
 }
  export default lang

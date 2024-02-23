@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "புதிய வரி சேர்க்க",
 account_owner: "கணக்கு உரிமையாளர்",
 create_only: "மட்டும் உருவாக்கு",
 enter_code: "குறியீட்டை உள்ளிடவும்",
+search:"தேடல்"
 }
  export default lang

@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Yangi soliqlarni qo'shish",
 account_owner: "Hisobot egasi",
 create_only: "Faqat yaratish",
 enter_code: "Kodni kiriting",
+search:"qidirmoq"
 }
  export default lang

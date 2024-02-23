@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Új Adó Hozzáadása",
 account_owner: "Fiók Tulajdonosa",
 create_only: "Csak Létrehozás",
 enter_code: "Kód Beírása",
+search:"keresés"
 }
  export default lang
