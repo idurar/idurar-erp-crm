@@ -23,7 +23,7 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 ## Translation : 
 
-[French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation)
+[French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation), [Arabic](doc/README.ar.md#Arabic-Translation)
 ## License
 
 IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
