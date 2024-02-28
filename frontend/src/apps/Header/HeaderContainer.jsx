@@ -16,6 +16,7 @@ import ChooseCurrency from '@/components/ChooseCurrency';
 
 import UpgradeButton from './UpgradeButton';
 import AppsButton from './AppsButton';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -88,14 +89,16 @@ export default function HeaderContent() {
       label: <Link to={'/logout'}>{translate('logout')}</Link>,
     },
   ];
+
+  const langDirection=useSelector(selectLangDirection)
   return (
     <Header
       style={{
         padding: '20px',
         background: '#f9fafc',
-        display: ' flex',
-        flexDirection: ' row-reverse',
-        justifyContent: ' flex-start',
+        display: 'flex',
+        flexDirection: langDirection==="rtl"?"row":'row-reverse',
+        justifyContent: 'flex-start',
         gap: ' 15px',
       }}
     >

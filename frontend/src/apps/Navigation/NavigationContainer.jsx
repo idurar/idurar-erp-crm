@@ -27,6 +27,8 @@ import {
   WalletOutlined,
   ReconciliationOutlined,
 } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 const { Sider } = Layout;
 
@@ -184,6 +186,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     navMenu.collapse();
   };
 
+  const langDirection=useSelector(selectLangDirection)
   return (
     <Sider
       collapsible={collapsible}
@@ -194,12 +197,13 @@ function Sidebar({ collapsible, isMobile = false }) {
       style={{
         overflow: 'auto',
         height: '100vh',
-        position: 'fixed',
+        direction:langDirection,
+        position:isMobile?"absolute":"relative",
         bottom: '20px',
         ...(!isMobile && {
           background: 'none',
           border: 'none',
-          left: '20px',
+          [langDirection==="rtl"?"right":"left"]: '20px',
           top: '20px',
           borderRadius: '8px',
         }),
@@ -250,6 +254,8 @@ function MobileSidebar() {
   const onClose = () => {
     setVisible(false);
   };
+
+  const langDirection=useSelector(selectLangDirection)
   return (
     <>
       <Button
@@ -257,7 +263,9 @@ function MobileSidebar() {
         size="large"
         onClick={showDrawer}
         className="mobile-sidebar-btn"
-        style={{ marginLeft: 25 }}
+
+        
+        style={{ [langDirection==="rtl"?"marginRight":"marginLeft"]: 25 }}
       >
         <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
@@ -267,13 +275,16 @@ function MobileSidebar() {
           boxShadow: 'none',
         }}
         style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
-        placement="left"
+        placement={langDirection==="rtl"?"right":"left"}
+
         closable={false}
         onClose={onClose}
         open={visible}
+
       >
         <Sidebar collapsible={false} isMobile={true} />
       </Drawer>
+      
     </>
   );
 }
