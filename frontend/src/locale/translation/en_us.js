@@ -329,7 +329,7 @@ const lang = {
   firstname: 'Firstname',
   lastname: 'Lastname',
   company_list: 'Company List',
-  contact: 'Contact',
+  contact: 'Contact Person',
   website: 'Website',
   lead_list: 'Lead List',
   add_new_lead: 'Add New Lead',
