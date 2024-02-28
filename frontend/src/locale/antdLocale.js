@@ -39,7 +39,6 @@ import ltLT from 'antd/es/locale/lt_LT';
 import caES from 'antd/es/locale/ca_ES';
 import faIR from 'antd/es/locale/fa_IR';
 import srRS from 'antd/es/locale/sr_RS';
-import he_IL from 'antd/es/locale/he_IL';
 import az_AZ from 'antd/es/locale/az_AZ';
 import ga_IE from 'antd/es/locale/ga_IE';
 import hy_AM from 'antd/es/locale/hy_AM';
@@ -68,7 +67,6 @@ const antdLocale = {
   km_kh: km_KH,
   si_lk: si_LK,
   ta_in: ta_IN,
-  he_il: he_IL,
   az_az: az_AZ,
   ga_ie: ga_IE,
   hy_am: hy_AM,

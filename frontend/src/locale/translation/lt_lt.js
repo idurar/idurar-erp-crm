@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Pridėti naują mokesčių tarifą",
 account_owner: "Sąskaitos savininkas",
 create_only: "Kurti tik",
 enter_code: "Įveskite kodą",
+search:"Paieška"
 }
  export default lang

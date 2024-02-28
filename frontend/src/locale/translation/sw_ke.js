@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Ongeza Kodi Mpya",
 account_owner: "Mmiliki wa Akaunti",
 create_only: "Tengeneza Pekee",
 enter_code: "Ingiza Kanuni",
+search:"tafuta"
 }
  export default lang
