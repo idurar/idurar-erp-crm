@@ -1,4 +1,4 @@
-# IDURAR Nyílt forráskódú ERP & CRM szoftver
+# CIGNITI Nyílt forráskódú ERP & CRM szoftver
 
 GitHub : [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo : [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Weboldal : [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Szoftver technológia
 
-Az IDURAR ingyenes nyílt forráskódú erp & crm alkalmazás, amely a "mern-stack" alapján működik: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+Az CIGNITI ingyenes nyílt forráskódú erp & crm alkalmazás, amely a "mern-stack" alapján működik: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Felhasználókezelés:
 

@@ -8,7 +8,7 @@ const sendIdurarOffer = async ({ email, name }) => {
   const { data } = await resend.emails.send({
     from: 'hello@idurarapp.com',
     to: email,
-    subject: 'Customize IDURAR ERP CRM or build your own SaaS',
+    subject: 'Customize CIGNITI ERP CRM or build your own SaaS',
     html: afterRegistrationSuccess({ name }),
   });
 

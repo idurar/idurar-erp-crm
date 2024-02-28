@@ -1,4 +1,4 @@
-# IDURAR ओपन-सोर्स ईआरपी और सीआरएम सॉफ्टवेयर
+# CIGNITI ओपन-सोर्स ईआरपी और सीआरएम सॉफ्टवेयर
 
 गिटहब: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 डेमो: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@
 
 ## सॉफ्टवेयर स्टैक
 
-IDURAR मुफ्त ओपन-सोर्स ईआरपी और सीआरएम ऐप, "mern-stack" पर आधारित है: नोड.जेएस रिएक्ट.जेएस रीडक्स एक्सप्रेस.जेएस एमओएनजीबी एंटडिजाइन (एंटडी)
+CIGNITI मुफ्त ओपन-सोर्स ईआरपी और सीआरएम ऐप, "mern-stack" पर आधारित है: नोड.जेएस रिएक्ट.जेएस रीडक्स एक्सप्रेस.जेएस एमओएनजीबी एंटडिजाइन (एंटडी)
 
 ## उपयोगकर्ता प्रबंधन:
 

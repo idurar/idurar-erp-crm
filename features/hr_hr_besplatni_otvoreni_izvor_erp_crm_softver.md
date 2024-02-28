@@ -1,4 +1,4 @@
-# IDURAR Open-Source ERP & CRM Softver
+# CIGNITI Open-Source ERP & CRM Softver
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Web stranica: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Tehnološki skup
 
-IDURAR Besplatna open-source erp & crm aplikacija, bazirana na "mern-stack" : Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI Besplatna open-source erp & crm aplikacija, bazirana na "mern-stack" : Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Upravljanje korisnicima:
 

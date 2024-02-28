@@ -1,9 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-
-import lang from '@/locale/translation/en_us';
-
-import rootReducer from './rootReducer';
 import storePersist, { localStorageHealthCheck } from './storePersist';
+
+import { configureStore } from '@reduxjs/toolkit';
+import lang from '@/locale/translation/en_us';
+import rootReducer from './rootReducer';
 
 localStorageHealthCheck();
 
@@ -36,7 +35,7 @@ const store = configureStore({
 });
 
 //  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
 //  );
 
 export default store;

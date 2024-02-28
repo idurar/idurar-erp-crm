@@ -1,10 +1,13 @@
-import { Avatar, Popover, Button, Badge } from 'antd';
+import { Avatar, Badge, Button, Popover } from 'antd';
+
+import { RocketOutlined } from '@ant-design/icons';
+import useLanguage from '@/locale/useLanguage';
 
 // import Notifications from '@/components/Notification';
 
-import { RocketOutlined } from '@ant-design/icons';
 
-import useLanguage from '@/locale/useLanguage';
+
+
 
 export default function UpgradeButton() {
   const translate = useLanguage();
@@ -43,5 +46,5 @@ export default function UpgradeButton() {
 }
 
 //  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
 //  );
