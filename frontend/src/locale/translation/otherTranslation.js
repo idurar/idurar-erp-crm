@@ -1,7 +1,6 @@
 import az_az from './az_az';
 import gl_es from './gl_es';
 import ta_in from './ta_in';
-import he_il from './he_il';
 import hy_am from './hy_am';
 import is_is from './is_is';
 import kk_kz from './kk_kz';
@@ -39,7 +38,6 @@ const languages = {
   az_az,
   gl_es,
   ta_in,
-  he_il,
   hy_am,
   is_is,
   kk_kz,
