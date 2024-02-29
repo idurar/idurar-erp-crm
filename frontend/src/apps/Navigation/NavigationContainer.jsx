@@ -1,36 +1,34 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
+
+import { useAppContext } from '@/context/appContext';
+
+import useLanguage from '@/locale/useLanguage';
+import logoIcon from '@/style/images/logo-icon.svg';
+import logoText from '@/style/images/logo-text.svg';
+
+import useResponsive from '@/hooks/useResponsive';
+
 import {
-  ContainerOutlined,
-  CreditCardOutlined,
-  CustomerServiceOutlined,
-  DashboardOutlined,
-  FileOutlined,
-  FileSyncOutlined,
-  FilterOutlined,
-  MenuOutlined,
-  ReconciliationOutlined,
   SettingOutlined,
-  ShopOutlined,
+  CustomerServiceOutlined,
+  ContainerOutlined,
+  FileSyncOutlined,
+  DashboardOutlined,
   TagOutlined,
   TagsOutlined,
   UserOutlined,
+  CreditCardOutlined,
+  MenuOutlined,
+  FileOutlined,
+  ShopOutlined,
+  FilterOutlined,
   WalletOutlined,
+  ReconciliationOutlined,
 } from '@ant-design/icons';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
-import logoIcon from '@/style/images/download.png';
-import logoText from '@/style/images/logo-text.svg';
-import { useAppContext } from '@/context/appContext';
-import useLanguage from '@/locale/useLanguage';
-import useResponsive from '@/hooks/useResponsive';
-
-// import logoIcon from '@/style/images/logo-icon.svg';
-
-
-
-
-
+import { useSelector } from 'react-redux';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 const { Sider } = Layout;
 
@@ -188,7 +186,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     navMenu.collapse();
   };
 
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
   return (
     <Sider
       collapsible={collapsible}
@@ -199,13 +197,13 @@ function Sidebar({ collapsible, isMobile = false }) {
       style={{
         overflow: 'auto',
         height: '100vh',
-        direction:langDirection,
-        position:isMobile?"absolute":"relative",
+        direction: langDirection,
+        position: isMobile ? 'absolute' : 'relative',
         bottom: '20px',
         ...(!isMobile && {
           background: 'none',
           border: 'none',
-          [langDirection==="rtl"?"right":"left"]: '20px',
+          [langDirection === 'rtl' ? 'right' : 'left']: '20px',
           top: '20px',
           borderRadius: '8px',
         }),
@@ -222,16 +220,15 @@ function Sidebar({ collapsible, isMobile = false }) {
         <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
 
         {!showLogoApp && (
-          // <img
-          //   src={logoText}
-          //   alt="Logo"
-          //   style={{
-          //     marginTop: '3px',
-          //     marginLeft: '10px',
-          //     height: '38px',
-          //   }}
-          // />
-          <h1 style={{ marginTop: '-20px', marginLeft: '10px' }}>Tokyo Medical Agencies</h1>
+          <img
+            src={logoText}
+            alt="Logo"
+            style={{
+              marginTop: '3px',
+              marginLeft: '10px',
+              height: '38px',
+            }}
+          />
         )}
       </div>
       <Menu
@@ -258,7 +255,7 @@ function MobileSidebar() {
     setVisible(false);
   };
 
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
   return (
     <>
       <Button
@@ -266,9 +263,7 @@ function MobileSidebar() {
         size="large"
         onClick={showDrawer}
         className="mobile-sidebar-btn"
-
-        
-        style={{ [langDirection==="rtl"?"marginRight":"marginLeft"]: 25 }}
+        style={{ [langDirection === 'rtl' ? 'marginRight' : 'marginLeft']: 25 }}
       >
         <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
@@ -278,16 +273,13 @@ function MobileSidebar() {
           boxShadow: 'none',
         }}
         style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
-        placement={langDirection==="rtl"?"right":"left"}
-
+        placement={langDirection === 'rtl' ? 'right' : 'left'}
         closable={false}
         onClose={onClose}
         open={visible}
-
       >
         <Sidebar collapsible={false} isMobile={true} />
       </Drawer>
-      
     </>
   );
 }

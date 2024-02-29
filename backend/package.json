@@ -3,7 +3,7 @@
   "version": "4.0.0-beta.3",
   "engines": {
     "npm": "10.2.4",
-    "node": "20.9.0"
+    "node": "20.11.1"
   },
   "scripts": {
     "start": "node src/server.js",
