@@ -18,6 +18,7 @@ export default function Invoice() {
     searchFields: 'name',
   };
   const deleteModalLabels = ['number', 'client.name'];
+
   const dataTableColumns = [
     {
       title: translate('Inv. No.'),
