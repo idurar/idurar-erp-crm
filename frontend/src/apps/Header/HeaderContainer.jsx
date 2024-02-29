@@ -4,7 +4,7 @@ import { Avatar, Dropdown, Layout } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
-import { SettingOutlined, LogoutOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined, AppstoreOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
@@ -64,7 +64,7 @@ export default function HeaderContent() {
       type: 'divider',
     },
     {
-      icon: <SettingOutlined />,
+      icon: <UserOutlined />,
       key: 'settingProfile',
       label: (
         <Link to={'/profile'}>
@@ -73,7 +73,7 @@ export default function HeaderContent() {
       ),
     },
     {
-      icon: <SettingOutlined />,
+      icon: <ToolOutlined />,
       key: 'settingApp',
       label: <Link to={'/settings'}>{translate('app_settings')}</Link>,
     },
