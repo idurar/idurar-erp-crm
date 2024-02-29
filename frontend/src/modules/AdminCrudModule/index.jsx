@@ -107,7 +107,7 @@ function AdminCrudModule({ config, createForm, updateForm }) {
       config={config}
       fixHeaderPanel={<FixHeaderPanel config={config} />}
       sidePanelBottomContent={
-        <CreateForm config={config} formElements={createForm} withUpload={true} />
+        <CreateForm config={config} formElements={createForm} withUpload={false} />
       }
       sidePanelTopContent={<SidePanelTopContent config={config} formElements={updateForm} />}
     >
