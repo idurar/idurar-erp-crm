@@ -1,4 +1,4 @@
-# IDURAR Λογισμικό ERP & CRM ανοιχτού κώδικα
+# CIGNITI Λογισμικό ERP & CRM ανοιχτού κώδικα
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Επίδειξη: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idu
 
 ## Στοίβα Λογισμικού
 
-Το IDURAR είναι μια δωρεάν εφαρμογή ERP & CRM ανοιχτού κώδικα, βασισμένη στο "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+Το CIGNITI είναι μια δωρεάν εφαρμογή ERP & CRM ανοιχτού κώδικα, βασισμένη στο "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Διαχείριση Χρηστών:
 

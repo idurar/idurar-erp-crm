@@ -1,8 +1,8 @@
+import { useDate, useMoney } from '@/settings';
+
+import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
-import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
-
-import { useMoney, useDate } from '@/settings';
 
 export default function Payment() {
   const translate = useLanguage();

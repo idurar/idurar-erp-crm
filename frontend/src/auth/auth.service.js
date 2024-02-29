@@ -1,5 +1,4 @@
 import { API_BASE_URL } from '@/config/serverApiConfig';
-
 import axios from 'axios';
 import errorHandler from '@/request/errorHandler';
 import successHandler from '@/request/successHandler';
@@ -103,5 +102,5 @@ export const logout = async () => {
 };
 
 //  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
 //  );

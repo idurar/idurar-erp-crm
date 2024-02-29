@@ -1,4 +1,4 @@
-# IDURAR Açık Kaynaklı ERP ve CRM Yazılımı
+# CIGNITI Açık Kaynaklı ERP ve CRM Yazılımı
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Web sitesi: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Yazılım Yığını
 
-IDURAR Ücretsiz açık kaynaklı erp ve crm uygulaması, "mern-stack" üzerine kuruludur: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI Ücretsiz açık kaynaklı erp ve crm uygulaması, "mern-stack" üzerine kuruludur: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Kullanıcı Yönetimi:
 

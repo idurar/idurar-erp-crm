@@ -1,4 +1,4 @@
-# نرم‌افزار متن‌باز IDURAR ERP & CRM
+# نرم‌افزار متن‌باز CIGNITI ERP & CRM
 
 گیت‌هاب: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 نمایش آنلاین: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@
 
 ## مجموعه نرم‌افزاری
 
-IDURAR نرم‌افزار ERP & CRM متن‌باز رایگان است که بر اساس "mern-stack" ساخته شده است: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI نرم‌افزار ERP & CRM متن‌باز رایگان است که بر اساس "mern-stack" ساخته شده است: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## مدیریت کاربران:
 

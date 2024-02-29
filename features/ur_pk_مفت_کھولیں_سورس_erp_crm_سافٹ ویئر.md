@@ -1,4 +1,4 @@
-# IDURAR اوپن سورس ERP & CRM سافٹ ویئر
+# CIGNITI اوپن سورس ERP & CRM سافٹ ویئر
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 ڈیمو: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idu
 
 ## سافٹ ویئر اسٹیک
 
-IDURAR مفت اوپن سورس erp & crm ایپ، "mern-stack" پر مبنی ہے: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI مفت اوپن سورس erp & crm ایپ، "mern-stack" پر مبنی ہے: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## صارف کا نظم و ضبط:
 

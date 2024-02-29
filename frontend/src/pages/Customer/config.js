@@ -15,7 +15,7 @@ export const fields = {
   },
   country: {
     type: 'country',
-    // color: 'red',
+    color: 'red',
     disableForForm: true,
   },
   phone: {
