@@ -20,7 +20,7 @@ export default function Invoice() {
   const deleteModalLabels = ['number', 'client.name'];
   const dataTableColumns = [
     {
-      title: translate('Number'),
+      title: translate('Inv. No.'),
       dataIndex: 'number',
     },
     {
@@ -35,7 +35,7 @@ export default function Invoice() {
       },
     },
     {
-      title: translate('expired Date'),
+      title: translate('Due Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format(dateFormat);
