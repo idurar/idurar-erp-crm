@@ -21,7 +21,7 @@ const erpApiRouter = require('./routes/appRoutes/appApi');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://mnm-crm-frontend.vercel.app',
+  origin: 'https://mnm-crm.vercel.app/',
   credentials: true,
 };
 
@@ -30,7 +30,7 @@ app.options('*', cors(corsOptions)); // preflight OPTIONS; put before other rout
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://mnm-crm-frontend.vercel.app');
+  res.header('Access-Control-Allow-Origin', 'https://mnm-crm.vercel.app/');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
