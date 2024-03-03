@@ -16,7 +16,9 @@ import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 
 import Loading from '@/components/Loading';
-import { ArrowLeftOutlined, ArrowRightOutlined, CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+
+import { ArrowLeftOutlined, ArrowRightOutlined, CloseCircleOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons';
+
 
 import { useNavigate } from 'react-router-dom';
 import { selectLangDirection } from '@/redux/translate/selectors';
@@ -117,7 +119,7 @@ const langDirection=useSelector(selectLangDirection)
           <Button
             key={`${uniqueId()}`}
             onClick={() => navigate(`/${entity.toLowerCase()}`)}
-            icon={<CloseCircleOutlined />}
+            icon={<CloseOutlined />}
           >
             {translate('Cancel')}
           </Button>,
