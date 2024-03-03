@@ -16,7 +16,7 @@ import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 
 import Loading from '@/components/Loading';
-import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -114,7 +114,7 @@ export default function CreateItem({ config, CreateForm }) {
           <Button
             key={`${uniqueId()}`}
             onClick={() => navigate(`/${entity.toLowerCase()}`)}
-            icon={<CloseCircleOutlined />}
+            icon={<CloseOutlined />}
           >
             {translate('Cancel')}
           </Button>,
