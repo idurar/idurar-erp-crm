@@ -57,6 +57,8 @@ export default function UpdateItem({ config, UpdateForm }) {
     credit: 0,
     number: 0,
     year: 0,
+    discount: 0,
+    // discountTotal: 0,
   };
 
   const [currentErp, setCurrentErp] = useState(current ?? resetErp);
@@ -99,6 +101,9 @@ export default function UpdateItem({ config, UpdateForm }) {
         });
         dataToUpdate.items = newList;
       }
+
+      dataToUpdate.discount = fieldsValue.discount;
+      // dataToUpdate.discountTotal = fieldsValue.discountTotal;
     }
 
     dispatch(erp.update({ entity, id, jsonData: dataToUpdate }));

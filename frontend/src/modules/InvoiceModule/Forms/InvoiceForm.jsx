@@ -12,7 +12,7 @@ import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
-import { useDate } from '@/settings';
+import { useDate, useMoney } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 
 import calculate from '@/utils/calculate';
@@ -34,8 +34,10 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
 function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const translate = useLanguage();
   const { dateFormat } = useDate();
+  const money = useMoney();
   const { last_invoice_number } = useSelector(selectFinanceSettings);
   const [total, setTotal] = useState(0);
+  const [disc, setDiscount] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
@@ -47,17 +49,22 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
 
   useEffect(() => {
     if (current) {
-      const { taxRate = 0, year, number } = current;
+      const { taxRate = 0, year, number, discount } = current;
       setTaxRate(taxRate / 100);
       setCurrentYear(year);
       setLastNumber(number);
+      setDiscount(discount);
     }
   }, [current]);
   useEffect(() => {
-    const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
-    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)));
+    const discountedSubTotal = calculate.sub(subTotal, disc);
+    const currentTotal = calculate.add(
+      calculate.multiply(discountedSubTotal, taxRate),
+      discountedSubTotal
+    );
+    setTaxTotal(Number.parseFloat(calculate.multiply(discountedSubTotal, taxRate)));
     setTotal(Number.parseFloat(currentTotal));
-  }, [subTotal, taxRate]);
+  }, [subTotal, taxRate, disc]);
 
   const addField = useRef(false);
 
@@ -240,6 +247,37 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             <MoneyInputFormItem readOnly value={subTotal} />
           </Col>
         </Row>
+
+        <Row gutter={[12, -5]}>
+          <Col className="gutter-row" span={4} offset={15}>
+            <p
+              style={{
+                paddingLeft: '12px',
+                paddingTop: '5px',
+                margin: 0,
+                textAlign: 'right',
+              }}
+            >
+              {translate('Discount Amount')} :
+            </p>
+          </Col>
+
+          <Col className="gutter-row" span={5}>
+            <Form.Item name="discount" rules={[{ required: true }]}>
+              <InputNumber
+                className="moneyInput"
+                onChange={(value) => setDiscount(value)}
+                min={disc}
+                controls={false}
+                addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+                addonBefore={
+                  money.currency_position === 'before' ? money.currency_symbol : undefined
+                }
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={4} offset={15}>
             <Form.Item
