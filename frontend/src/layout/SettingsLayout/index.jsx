@@ -1,7 +1,7 @@
-import React from 'react';
+import { Col, Divider, Row } from 'antd';
 
 import { Layout } from 'antd';
-import { Divider, Row, Col } from 'antd';
+import React from 'react';
 
 const { Content } = Layout;
 

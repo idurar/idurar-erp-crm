@@ -1,25 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
-import dayjs from 'dayjs';
-import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
-
-import { PlusOutlined } from '@ant-design/icons';
-
-import { DatePicker } from 'antd';
+import { Button, Col, Divider, Form, Input, InputNumber, Row, Select } from 'antd';
+import { useEffect, useRef, useState } from 'react';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
-
+import { DatePicker } from 'antd';
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
-
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
+import { PlusOutlined } from '@ant-design/icons';
+import SelectAsync from '@/components/SelectAsync';
+import SelectCurrency from '@/components/SelectCurrency';
+import calculate from '@/utils/calculate';
+import dayjs from 'dayjs';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
 import { useDate } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
-
-import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
-import SelectAsync from '@/components/SelectAsync';
-
-import SelectCurrency from '@/components/SelectCurrency';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
@@ -81,7 +75,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             <AutoCompleteAsync
               entity={'client'}
               displayLabels={['name']}
-              searchFields={'name'}
+              searchFields={['name', 'total']}
               redirectLabel={'Add New Client'}
               withRedirect
               urlToRedirect={'/customer'}
@@ -99,7 +93,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <InputNumber min={1} style={{ width: '100%' }} />
+            <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={3}>
@@ -140,7 +134,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           </Form.Item>
         </Col>
 
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" span={4}>
           <Form.Item
             name="date"
             label={translate('Date')}
@@ -155,10 +149,10 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" span={4}>
           <Form.Item
             name="expiredDate"
-            label={translate('Expire Date')}
+            label={translate('Due Date')}
             rules={[
               {
                 required: true,
@@ -168,6 +162,26 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             initialValue={dayjs().add(30, 'days')}
           >
             <DatePicker style={{ width: '100%' }} format={dateFormat} />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={6}>
+          <Form.Item
+            label={translate('Document Type')}
+            name="documentType"
+            rules={[
+              {
+                required: false,
+              },
+            ]}
+            initialValue={'invoice'}
+          >
+            <Select
+              options={[
+                { value: 'invoice', label: translate('Invoice') },
+                { value: 'debit memo', label: translate('Debit Memo') },
+                { value: 'credit memo', label: translate('Credit Memo') },
+              ]}
+            ></Select>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={10}>

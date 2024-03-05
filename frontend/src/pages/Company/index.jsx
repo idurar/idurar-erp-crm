@@ -1,7 +1,6 @@
 import CrudModule from '@/modules/CrudModule/CrudModule';
 import DynamicForm from '@/forms/DynamicForm';
 import { fields } from './config';
-
 import useLanguage from '@/locale/useLanguage';
 
 export default function Company() {
@@ -9,13 +8,13 @@ export default function Company() {
   const entity = 'company';
   const searchConfig = {
     displayLabels: ['name'],
-    searchFields: 'name,phone,eamil',
+    searchFields: 'name,phone,email',
   };
   const deleteModalLabels = ['name'];
 
   const Labels = {
     PANEL_TITLE: translate('company'),
-    DATATABLE_TITLE: translate('company_list'),
+    DATATABLE_TITLE: translate('Enquiries received from companies'),
     ADD_NEW_ENTITY: translate('add_new_company'),
     ENTITY_NAME: translate('company'),
   };

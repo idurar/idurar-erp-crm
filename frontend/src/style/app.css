@@ -9,3 +9,7 @@
 @import './partials/sidePanel.css';
 @import './partials/collapseBox.css';
 @import './partials/erp.css';
+
+.ant-table-cell {
+  padding: 5px !important;
+}

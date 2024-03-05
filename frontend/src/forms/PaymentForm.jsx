@@ -1,10 +1,10 @@
-import React from 'react';
-import dayjs from 'dayjs';
 import { Form, Input, InputNumber } from 'antd';
-import { DatePicker } from 'antd';
-import SelectAsync from '@/components/SelectAsync';
-import { useMoney, useDate } from '@/settings';
+import { useDate, useMoney } from '@/settings';
 
+import { DatePicker } from 'antd';
+import React from 'react';
+import SelectAsync from '@/components/SelectAsync';
+import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
 
 export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) {
@@ -68,10 +68,10 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           redirectLabel="Add Payment Mode"
         ></SelectAsync>
       </Form.Item>
-      <Form.Item label={translate('Reference')} name="ref">
+      <Form.Item label={translate('Reference Cheque Number')} name="ref">
         <Input />
       </Form.Item>
-      <Form.Item label={translate('Description')} name="description">
+      <Form.Item label={translate('Bank Details')} name="description">
         <TextArea />
       </Form.Item>
     </>

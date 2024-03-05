@@ -1,11 +1,12 @@
 const Joi = require('joi');
 const schema = Joi.object({
   client: Joi.alternatives().try(Joi.string(), Joi.object()).required(),
-  number: Joi.number().required(),
+  number: Joi.string().required(),
   year: Joi.number().required(),
   status: Joi.string().required(),
   notes: Joi.string().allow(''),
   expiredDate: Joi.date().required(),
+  documentType: Joi.string().required(),
   date: Joi.date().required(),
   currency: Joi.string(),
   // array cannot be empty

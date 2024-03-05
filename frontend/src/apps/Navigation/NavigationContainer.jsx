@@ -27,11 +27,6 @@ import useResponsive from '@/hooks/useResponsive';
 
 // import logoIcon from '@/style/images/logo-icon.svg';
 
-
-
-
-
-
 const { Sider } = Layout;
 
 export default function Navigation() {
@@ -71,7 +66,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'company',
       icon: <ShopOutlined />,
-      label: <Link to={'/company'}>{translate('companies')}</Link>,
+      label: <Link to={'/company'}>{translate('Enquiries')}</Link>,
     },
     {
       key: 'lead',
@@ -81,7 +76,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'offer',
       icon: <FileOutlined />,
-      label: <Link to={'/offer'}>{translate('offers')}</Link>,
+      label: <Link to={'/offer'}>{translate('Discounts')}</Link>,
     },
     {
       key: 'invoice',

@@ -1,11 +1,10 @@
-import React from 'react';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
-import useLanguage from '@/locale/useLanguage';
-
-import { Switch } from 'antd';
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import CrudModule from '@/modules/CrudModule/CrudModule';
 import PaymentModeForm from '@/forms/PaymentModeForm';
+import React from 'react';
+import { Switch } from 'antd';
+import useLanguage from '@/locale/useLanguage';
 
 export default function PaymentMode() {
   const translate = useLanguage();

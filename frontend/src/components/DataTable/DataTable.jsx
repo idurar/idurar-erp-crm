@@ -1,25 +1,22 @@
-import { useCallback, useEffect } from 'react';
-
+import { Button, Dropdown, Input, Table } from 'antd';
 import {
-  EyeOutlined,
-  EditOutlined,
   DeleteOutlined,
+  EditOutlined,
   EllipsisOutlined,
+  EyeOutlined,
   RedoOutlined,
 } from '@ant-design/icons';
-import { Dropdown, Table, Button, Input } from 'antd';
+import { useCallback, useEffect } from 'react';
+import { useDate, useMoney } from '@/settings';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { PageHeader } from '@ant-design/pro-layout';
-
-import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
-import { selectListItems } from '@/redux/crud/selectors';
-import useLanguage from '@/locale/useLanguage';
 import { dataForTable } from '@/utils/dataStructure';
-import { useMoney, useDate } from '@/settings';
-
+import { selectListItems } from '@/redux/crud/selectors';
 import { generate as uniqueId } from 'shortid';
-
 import { useCrudContext } from '@/context/crud';
+import useLanguage from '@/locale/useLanguage';
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();

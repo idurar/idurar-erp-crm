@@ -1,26 +1,25 @@
-import { useEffect } from 'react';
+import { Button, Dropdown, Table } from 'antd';
 import {
-  EyeOutlined,
-  EditOutlined,
   DeleteOutlined,
-  FilePdfOutlined,
-  RedoOutlined,
-  PlusOutlined,
+  EditOutlined,
   EllipsisOutlined,
+  EyeOutlined,
+  FilePdfOutlined,
+  PlusOutlined,
+  RedoOutlined,
 } from '@ant-design/icons';
-import { Dropdown, Table, Button } from 'antd';
-import { PageHeader } from '@ant-design/pro-layout';
+import { useDispatch, useSelector } from 'react-redux';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
-import { useSelector, useDispatch } from 'react-redux';
-import useLanguage from '@/locale/useLanguage';
+import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { PageHeader } from '@ant-design/pro-layout';
 import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
-import { useErpContext } from '@/context/erp';
 import { generate as uniqueId } from 'shortid';
+import { useEffect } from 'react';
+import { useErpContext } from '@/context/erp';
+import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
-
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
 function AddNewItem({ config }) {
   const navigate = useNavigate();
@@ -38,6 +37,7 @@ function AddNewItem({ config }) {
 }
 
 export default function DataTable({ config, extra = [] }) {
+  console.log('config', config);
   const translate = useLanguage();
   let { entity, dataTableColumns, disableAdd = false, searchConfig } = config;
 

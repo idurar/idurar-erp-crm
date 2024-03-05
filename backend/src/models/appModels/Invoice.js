@@ -8,7 +8,7 @@ const invoiceSchema = new mongoose.Schema({
 
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
   number: {
-    type: Number,
+    type: String,
     required: true,
   },
   year: {
@@ -148,6 +148,11 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     enum: ['draft', 'pending', 'sent', 'refunded', 'cancelled', 'on hold'],
     default: 'draft',
+  },
+  documentType: {
+    type: String,
+    enum: ['invoice', 'debit memo', 'credit memo'],
+    default: 'invoice',
   },
   pdf: {
     type: String,

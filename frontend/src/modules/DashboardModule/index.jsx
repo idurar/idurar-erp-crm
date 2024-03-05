@@ -1,22 +1,17 @@
+import { Col, Row, Tag } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { Tag, Row, Col } from 'antd';
-import useLanguage from '@/locale/useLanguage';
-
-import { useMoney } from '@/settings';
-
-import { request } from '@/request';
-import useFetch from '@/hooks/useFetch';
-import useOnFetch from '@/hooks/useOnFetch';
-import { tagColor } from '@/utils/statusTagColor';
-
-import RecentTable from './components/RecentTable';
-
-import SummaryCard from './components/SummaryCard';
-import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
-
+import PreviewCard from './components/PreviewCard';
+import RecentTable from './components/RecentTable';
+import SummaryCard from './components/SummaryCard';
+import { request } from '@/request';
 import { selectMoneyFormat } from '@/redux/settings/selectors';
+import { tagColor } from '@/utils/statusTagColor';
+import useFetch from '@/hooks/useFetch';
+import useLanguage from '@/locale/useLanguage';
+import { useMoney } from '@/settings';
+import useOnFetch from '@/hooks/useOnFetch';
 import { useSelector } from 'react-redux';
 
 export default function DashboardModule() {
@@ -75,6 +70,9 @@ export default function DashboardModule() {
     {
       title: translate('Total'),
       dataIndex: 'total',
+      sorter: (a, b) => a.total - b.total,
+      sortOrder: sortedInfo.columnKey === 'total' ? sortedInfo.order : null,
+      ellipsis: true,
       onCell: () => {
         return {
           style: {
