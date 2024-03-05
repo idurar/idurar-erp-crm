@@ -7,14 +7,14 @@
     </a>
     <h1>ERP/CRM de Código Abierto y "Fair-Code" | Node.js React.js</h1>
     <p align="center">
-        <p>CIGNITI ERP CRM | Fácil de usar | 44 Idiomas</p>
+        <p>IDURAR ERP CRM | Fácil de usar | 44 Idiomas</p>
     </p>
     
   [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
 ## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮
 
-CIGNITI es un ERP/CRM de Código Abierto y "Fair-Code" (Facturación/Inventario/Contabilidad/RRHH) basado en Advanced Mern Stack (Node.js/Express.js/MongoDb/React.js) con Ant Design (AntD) y Redux
+IDURAR es un ERP/CRM de Código Abierto y "Fair-Code" (Facturación/Inventario/Contabilidad/RRHH) basado en Advanced Mern Stack (Node.js/Express.js/MongoDb/React.js) con Ant Design (AntD) y Redux
 
 </div>
 
@@ -31,8 +31,8 @@ usuario: admin@demo.com  contraseña: admin123
 
 ## Licencia
 
-CIGNITI es un Código Abierto Gratuito bajo [fair-code](http://faircode.io) distribuido bajo la
-[**CIGNITI License 1.0**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE)
+IDURAR es un Código Abierto Gratuito bajo [fair-code](http://faircode.io) distribuido bajo la
+[**IDURAR License 1.0**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE)
 
 ## Preguntas Frecuentes sobre la Licencia: :
 
@@ -50,22 +50,22 @@ Ant Design Framework(AntD) 🐜
 
 Basado en Mern Stack (Node.js / Express.js / MongoDb / React.js ) 👨‍💻
 
-### ¿Puedo usar CIGNITI con fines comerciales? :
+### ¿Puedo usar IDURAR con fines comerciales? :
 
-- Sí, puedes usar CIGNITI de forma gratuita para uso personal o comercial.
+- Sí, puedes usar IDURAR de forma gratuita para uso personal o comercial.
 
-### ¿Puedo personalizar CIGNITI como SaaS y ofrecerlo a otros usuarios?
+### ¿Puedo personalizar IDURAR como SaaS y ofrecerlo a otros usuarios?
 
-No, no puedes personalizar CIGNITI como SaaS y ofrecerlo a otros usuarios. No se permite proporcionar el software CIGNITI a terceros como un servicio hospedado o gestionado, o como software como servicio (SaaS), donde el servicio proporciona a los usuarios acceso a un conjunto sustancial de funciones o características de este software.
+No, no puedes personalizar IDURAR como SaaS y ofrecerlo a otros usuarios. No se permite proporcionar el software IDURAR a terceros como un servicio hospedado o gestionado, o como software como servicio (SaaS), donde el servicio proporciona a los usuarios acceso a un conjunto sustancial de funciones o características de este software.
 
 
 ### Para servicios de desarrollo personalizado o soporte premium:
 
 [Ponte en contacto](mailto:hello@idurarapp.com)
 
-## Cómo Desplegar CIGNITI ERP CRM :
+## Cómo Desplegar IDURAR ERP CRM :
 
-🔥 Me gustaría invitarte a un seminario web semanal gratuito de CIGNITI (curso Node.js React.js), donde aprenderás cómo desplegar CIGNITI en la nube y crear una nueva API y una nueva aplicación CRUD con CIGNITI en solo una hora.
+🔥 Me gustaría invitarte a un seminario web semanal gratuito de IDURAR (curso Node.js React.js), donde aprenderás cómo desplegar IDURAR en la nube y crear una nueva API y una nueva aplicación CRUD con IDURAR en solo una hora.
 Completa este formulario si estás interesado: [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
 
 El seminario web será este miércoles a la 1 pm GMT.
@@ -82,7 +82,7 @@ El seminario web será este miércoles a la 1 pm GMT.
 
 ## Aplicación ERP/CRM de Código Abierto y Gratuito
 
-CIGNITI es un ERP/CRM de Código Abierto y "Fair-Code" (Facturación/Inventario/Contabilidad/RRHH) basado en Advanced Mern Stack (Node.js/Express.js/MongoDb/React.js) con Ant Design (AntD) y Redux
+IDURAR es un ERP/CRM de Código Abierto y "Fair-Code" (Facturación/Inventario/Contabilidad/RRHH) basado en Advanced Mern Stack (Node.js/Express.js/MongoDb/React.js) con Ant Design (AntD) y Redux
 
 **Demo en Vivo** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 

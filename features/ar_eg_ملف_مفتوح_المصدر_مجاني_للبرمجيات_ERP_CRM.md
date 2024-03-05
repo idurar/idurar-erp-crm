@@ -1,4 +1,4 @@
-# CIGNITI برنامج إدارة الموارد التخطيطية وعلاقات العملاء مفتوح المصدر
+# IDURAR برنامج إدارة الموارد التخطيطية وعلاقات العملاء مفتوح المصدر
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 العرض التوضيحي: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idu
 
 ## تكوين البرنامج
 
-CIGNITI تطبيق ERP & CRM مفتوح المصدر ومجاني، يعتمد على "mern-stack" : Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR تطبيق ERP & CRM مفتوح المصدر ومجاني، يعتمد على "mern-stack" : Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## إدارة المستخدمين:
 

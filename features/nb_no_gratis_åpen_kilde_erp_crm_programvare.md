@@ -1,4 +1,4 @@
-# CIGNITI Åpen kildekode ERP og CRM-programvare
+# IDURAR Åpen kildekode ERP og CRM-programvare
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Nettsted: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Programvarestabel
 
-CIGNITI Gratis åpen kildekode ERP og CRM-app, basert på "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR Gratis åpen kildekode ERP og CRM-app, basert på "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Brukerstyring:
 

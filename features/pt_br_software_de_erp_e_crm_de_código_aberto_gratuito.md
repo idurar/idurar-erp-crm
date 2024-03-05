@@ -1,4 +1,4 @@
-# CIGNITI Software ERP & CRM de código aberto
+# IDURAR Software ERP & CRM de código aberto
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Website: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Pilha de Software
 
-CIGNITI é um aplicativo gratuito de ERP e CRM de código aberto, baseado na pilha "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR é um aplicativo gratuito de ERP e CRM de código aberto, baseado na pilha "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Gerenciamento de Usuários:
 

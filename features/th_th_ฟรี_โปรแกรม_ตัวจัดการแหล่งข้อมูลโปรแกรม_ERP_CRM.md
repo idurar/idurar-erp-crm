@@ -1,4 +1,4 @@
-# ซอฟต์แวร์ ERP & CRM โอเพ่นซอร์ส CIGNITI
+# ซอฟต์แวร์ ERP & CRM โอเพ่นซอร์ส IDURAR
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com
 
 ## สแต็กซอฟต์แวร์
 
-CIGNITI เป็นแอปฟรีเปิดตัว ERP & CRM ซึ่งอ้างอิงจาก "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR เป็นแอปฟรีเปิดตัว ERP & CRM ซึ่งอ้างอิงจาก "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## การจัดการผู้ใช้
 

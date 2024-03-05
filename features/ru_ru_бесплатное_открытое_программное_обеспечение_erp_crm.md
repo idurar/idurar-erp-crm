@@ -1,4 +1,4 @@
-# CIGNITI Открытое ERP и CRM программное обеспечение
+# IDURAR Открытое ERP и CRM программное обеспечение
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Демо: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idu
 
 ## Стек программного обеспечения
 
-CIGNITI Бесплатное открытое ERP и CRM приложение, основанное на "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR Бесплатное открытое ERP и CRM приложение, основанное на "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Управление пользователями:
 

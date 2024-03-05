@@ -15,7 +15,7 @@ export const fields = {
   },
   country: {
     type: 'country',
-    color: 'red',
+    // color: 'red',
     disableForForm: true,
   },
   phone: {
@@ -24,10 +24,6 @@ export const fields = {
   },
   email: {
     type: 'email',
-    disableForForm: true,
-  },
-  Address: {
-    type: 'address',
     disableForForm: true,
   },
   people: {

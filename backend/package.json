@@ -3,7 +3,7 @@
   "version": "4.0.0-beta.3",
   "engines": {
     "npm": "10.2.4",
-    "node": "20.11.1"
+    "node": "20.9.0"
   },
   "scripts": {
     "start": "node src/server.js",
@@ -48,8 +48,8 @@
     "@": "src"
   },
   "main": "server.js",
-  "author": "CIGNITI",
-  "email": "hello@cigniti.com",
+  "author": "IDURAR",
+  "email": "hello@idurarapp.com",
   "license": "Fair-code License",
   "repository": {
     "type": "git",
