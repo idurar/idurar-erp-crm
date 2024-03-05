@@ -37,7 +37,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
                   field={field}
                 />
               );
-            else if (feedback && field.feedback) {
+            else if (feedback && field.feedback) {  
               if (feedback == field.feedback) return <FormElement key={key} field={field} />;
             } else {
               return <FormElement key={key} field={field} />;

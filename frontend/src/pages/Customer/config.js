@@ -26,6 +26,10 @@ export const fields = {
     type: 'email',
     disableForForm: true,
   },
+  Address: {
+    type: 'address',
+    disableForForm: true,
+  },
   people: {
     type: 'search',
     label: 'people',
