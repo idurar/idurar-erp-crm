@@ -1,4 +1,4 @@
-# IDURAR オープンソース ERP＆CRMソフトウェア
+# CIGNITI オープンソース ERP＆CRMソフトウェア
 
 GitHub：[https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 デモ：[https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)

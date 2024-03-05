@@ -1,8 +1,9 @@
-import dayjs from 'dayjs';
-import { Tag } from 'antd';
-import { tagColor } from '@/utils/statusTagColor';
+import { useDate, useMoney } from '@/settings';
+
 import QuoteDataTableModule from '@/modules/QuoteModule/QuoteDataTableModule';
-import { useMoney, useDate } from '@/settings';
+import { Tag } from 'antd';
+import dayjs from 'dayjs';
+import { tagColor } from '@/utils/statusTagColor';
 import useLanguage from '@/locale/useLanguage';
 
 export default function Quote() {

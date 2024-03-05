@@ -1,10 +1,10 @@
-import dayjs from 'dayjs';
-import { Tag } from 'antd';
-import useLanguage from '@/locale/useLanguage';
-import { tagColor } from '@/utils/statusTagColor';
+import { useDate, useMoney } from '@/settings';
 
-import { useMoney, useDate } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
+import { Tag } from 'antd';
+import dayjs from 'dayjs';
+import { tagColor } from '@/utils/statusTagColor';
+import useLanguage from '@/locale/useLanguage';
 
 export default function Invoice() {
   const translate = useLanguage();
@@ -18,9 +18,10 @@ export default function Invoice() {
     searchFields: 'name',
   };
   const deleteModalLabels = ['number', 'client.name'];
+
   const dataTableColumns = [
     {
-      title: translate('Number'),
+      title: translate('Inv.No.'),
       dataIndex: 'number',
     },
     {
@@ -35,10 +36,26 @@ export default function Invoice() {
       },
     },
     {
-      title: translate('expired Date'),
+      title: translate('Due Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format(dateFormat);
+      },
+    },
+    {
+      title: translate('Discount'),
+      dataIndex: 'discount',
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (total, record) => {
+        return moneyFormatter({ amount: total, currency_code: record.currency });
       },
     },
     {

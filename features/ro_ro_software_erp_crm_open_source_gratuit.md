@@ -1,4 +1,4 @@
-# IDURAR Software ERP și CRM Open-Source
+# CIGNITI Software ERP și CRM Open-Source
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Website: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Stivă de software
 
-IDURAR este o aplicație ERP și CRM open-source gratuită, bazată pe "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI este o aplicație ERP și CRM open-source gratuită, bazată pe "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Managementul utilizatorilor:
 

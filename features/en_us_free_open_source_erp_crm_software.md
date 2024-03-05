@@ -1,4 +1,4 @@
-# IDURAR Open-Source ERP & CRM Software
+# CIGNITI Open-Source ERP & CRM Software
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Website: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Sofware Stack
 
-IDURAR is a free open-source ERP & CRM app based on the "mern-stack". It utilizes the following technologies: Node.js, React.js, Redux, Express.js, MongoDB, and AntDesign (AntD).
+CIGNITI is a free open-source ERP & CRM app based on the "mern-stack". It utilizes the following technologies: Node.js, React.js, Redux, Express.js, MongoDB, and AntDesign (AntD).
 
 ## User Management:
 

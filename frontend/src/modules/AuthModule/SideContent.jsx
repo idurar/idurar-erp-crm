@@ -1,5 +1,6 @@
-import { Space, Layout, Divider, Typography } from 'antd';
-import logo from '@/style/images/idurar-crm-erp.svg';
+import { Divider, Layout, Space, Typography } from 'antd';
+
+import logo from '@/style/images/Cigniti-New-Logo.png';
 import useLanguage from '@/locale/useLanguage';
 import { useSelector } from 'react-redux';
 import { selectLangDirection } from '@/redux/translate/selectors';
@@ -24,7 +25,7 @@ export default function SideContent() {
       <div style={{ width: '100%' }}>
         <img
           src={logo}
-          alt="IDURAR ERP CRM"
+          alt="CIGNITI ERP CRM"
           style={{ margin: '0 auto 40px', display: 'block' }}
           height={63}
           width={220}

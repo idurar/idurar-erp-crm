@@ -90,14 +90,14 @@ export default function HeaderContent() {
     },
   ];
 
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
   return (
     <Header
       style={{
         padding: '20px',
         background: '#f9fafc',
         display: 'flex',
-        flexDirection: langDirection==="rtl"?"row":'row-reverse',
+        flexDirection: langDirection === 'rtl' ? 'row' : 'row-reverse',
         justifyContent: 'flex-start',
         gap: ' 15px',
       }}

@@ -1,4 +1,4 @@
-# IDURAR Phần mềm ERP & CRM mã nguồn mở
+# CIGNITI Phần mềm ERP & CRM mã nguồn mở
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Trang web: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Cấu trúc phần mềm
 
-IDURAR là ứng dụng ERP & CRM mã nguồn mở miễn phí, dựa trên "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI là ứng dụng ERP & CRM mã nguồn mở miễn phí, dựa trên "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Quản lý người dùng:
 

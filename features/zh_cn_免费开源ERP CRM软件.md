@@ -1,4 +1,4 @@
-# IDURAR 开源 ERP & CRM 软件
+# CIGNITI 开源 ERP & CRM 软件
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 演示: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idu
 
 ## 软件堆栈
 
-IDURAR 免费开源的 ERP & CRM 应用，基于 "mern-stack"：Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI 免费开源的 ERP & CRM 应用，基于 "mern-stack"：Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## 用户管理:
 

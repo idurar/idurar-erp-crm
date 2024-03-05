@@ -1,4 +1,4 @@
-# IDURAR Open-Source ERP & CRM Tarkvara
+# CIGNITI Open-Source ERP & CRM Tarkvara
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Veebisait: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Tarkvara Stack
 
-IDURAR Tasuta avatud lähtekoodiga erp & crm rakendus, mis põhineb "mern-stack" tehnoloogial: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+CIGNITI Tasuta avatud lähtekoodiga erp & crm rakendus, mis põhineb "mern-stack" tehnoloogial: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Kasutajate haldamine:
 
