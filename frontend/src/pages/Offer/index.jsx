@@ -1,9 +1,9 @@
-import dayjs from 'dayjs';
-import { Tag } from 'antd';
-import { tagColor } from '@/utils/statusTagColor';
+import { useDate, useMoney } from '@/settings';
 
 import OfferDataTableModule from '@/modules/OfferModule/OfferDataTableModule';
-import { useMoney, useDate } from '@/settings';
+import { Tag } from 'antd';
+import dayjs from 'dayjs';
+import { tagColor } from '@/utils/statusTagColor';
 import useLanguage from '@/locale/useLanguage';
 
 export default function Offer() {
@@ -83,7 +83,7 @@ export default function Offer() {
   const entity = 'offer';
   const Labels = {
     PANEL_TITLE: translate('Offer Leads'),
-    DATATABLE_TITLE: translate('offer_list'),
+    DATATABLE_TITLE: translate('Discounts'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
     ENTITY_NAME: translate('Offer Leads'),
   };
