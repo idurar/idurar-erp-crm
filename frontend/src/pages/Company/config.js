@@ -6,7 +6,7 @@ export const fields = {
   mainContact: {
     type: 'search',
     renderAsTag: true,
-    label: 'Contact Person',
+    label: 'Contact',
     entity: 'people',
     redirectLabel: 'Add New Person',
     withRedirect: true,

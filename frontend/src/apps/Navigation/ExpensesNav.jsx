@@ -1,31 +1,31 @@
-import { Button, Drawer, Layout, Menu } from 'antd';
-import {
-  ContainerOutlined,
-  CreditCardOutlined,
-  CustomerServiceOutlined,
-  DashboardOutlined,
-  FileOutlined,
-  FileSyncOutlined,
-  FilterOutlined,
-  MenuOutlined,
-  SettingOutlined,
-  ShopOutlined,
-  TagOutlined,
-  TagsOutlined,
-  UserOutlined,
-  WalletOutlined,
-} from '@ant-design/icons';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Button, Drawer, Layout, Menu } from 'antd';
 
-import logoIcon from '@/style/images/download.png';
-import logoText from '@/style/images/logo-text.svg';
 import { useAppContext } from '@/context/appContext';
+
 import useLanguage from '@/locale/useLanguage';
+import logoIcon from '@/style/images/logo-icon.svg';
+import logoText from '@/style/images/logo-text.svg';
 import { useNavigate } from 'react-router-dom';
 import useResponsive from '@/hooks/useResponsive';
 
-// import logoIcon from '@/style/images/logo-icon.svg';
+import {
+  SettingOutlined,
+  CustomerServiceOutlined,
+  ContainerOutlined,
+  FileSyncOutlined,
+  DashboardOutlined,
+  TagOutlined,
+  TagsOutlined,
+  UserOutlined,
+  CreditCardOutlined,
+  MenuOutlined,
+  FileOutlined,
+  ShopOutlined,
+  FilterOutlined,
+  WalletOutlined,
+} from '@ant-design/icons';
 
 const { Sider } = Layout;
 

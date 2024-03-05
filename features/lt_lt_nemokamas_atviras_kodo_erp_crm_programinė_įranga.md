@@ -1,4 +1,4 @@
-# CIGNITI Atviro kodo ERP ir CRM programinė įranga
+# IDURAR Atviro kodo ERP ir CRM programinė įranga
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Tinklapis: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Programinės įrangos rinkinys
 
-CIGNITI Nemokama atviro kodo erp ir crm programa, pagrįsta "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR Nemokama atviro kodo erp ir crm programa, pagrįsta "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Vartotojų valdymas:
 

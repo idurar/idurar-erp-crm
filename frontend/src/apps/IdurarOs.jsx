@@ -1,12 +1,12 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
+import { useSelector } from 'react-redux';
+import { selectAuth } from '@/redux/auth/selectors';
 import { AppContextProvider } from '@/context/appContext';
+import PageLoader from '@/components/PageLoader';
 import AuthRouter from '@/router/AuthRouter';
 import Localization from '@/locale/Localization';
-import PageLoader from '@/components/PageLoader';
 import { notification } from 'antd';
-import { selectAuth } from '@/redux/auth/selectors';
-import { useSelector } from 'react-redux';
 
 const ErpApp = lazy(() => import('./ErpApp'));
 
@@ -24,7 +24,7 @@ export default function IdurarOs() {
   const { isLoggedIn } = useSelector(selectAuth);
 
   console.log(
-    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
   );
 
   // // Online state

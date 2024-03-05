@@ -1,4 +1,4 @@
-# CIGNITI Open-Source ERP & CRM Software
+# IDURAR Open-Source ERP & CRM Software
 
 GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
 Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
@@ -6,7 +6,7 @@ Webová stránka: [https://www.idurarapp.com](https://www.idurarapp.com)
 
 ## Softvérový stack
 
-CIGNITI Bezplatná open-source ERP & CRM aplikácia, založená na "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+IDURAR Bezplatná open-source ERP & CRM aplikácia, založená na "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Správa používateľov:
 

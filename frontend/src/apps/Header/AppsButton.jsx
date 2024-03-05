@@ -1,16 +1,12 @@
-import { Avatar, Button, Flex, Popover } from 'antd';
-
-import { AppstoreOutlined } from '@ant-design/icons';
-import { useAppContext } from '@/context/appContext';
-import useLanguage from '@/locale/useLanguage';
+import { Avatar, Popover, Button, Flex } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
+import { AppstoreOutlined } from '@ant-design/icons';
 
+import useLanguage from '@/locale/useLanguage';
 
-
-
-
+import { useAppContext } from '@/context/appContext';
 
 export default function AppsButton() {
   const { state: stateApp, appContextAction } = useAppContext();
@@ -63,5 +59,5 @@ export default function AppsButton() {
 }
 
 //  console.log(
-//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
 //  );

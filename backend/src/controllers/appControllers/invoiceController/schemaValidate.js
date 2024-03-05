@@ -8,7 +8,6 @@ const schema = Joi.object({
   expiredDate: Joi.date().required(),
   date: Joi.date().required(),
   currency: Joi.string(),
-  discount: Joi.number().required(),
   // array cannot be empty
   items: Joi.array()
     .items(
