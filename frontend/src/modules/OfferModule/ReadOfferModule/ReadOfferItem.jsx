@@ -94,6 +94,7 @@ export default function ReadOfferItem({ config, selectedItem }) {
     credit: 0,
     number: 0,
     year: 0,
+    discount: 0,
   };
 
   const [itemslist, setItemsList] = useState([]);

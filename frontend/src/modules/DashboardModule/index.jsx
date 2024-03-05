@@ -71,7 +71,7 @@ export default function DashboardModule() {
       title: translate('Total'),
       dataIndex: 'total',
       sorter: (a, b) => a.total - b.total,
-      sortOrder: sortedInfo.columnKey === 'total' ? sortedInfo.order : null,
+      // sortOrder: sortedInfo.columnKey === 'total' ? sortedInfo.order : null,
       ellipsis: true,
       onCell: () => {
         return {

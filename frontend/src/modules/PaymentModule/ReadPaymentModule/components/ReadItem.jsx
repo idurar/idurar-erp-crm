@@ -50,6 +50,7 @@ export default function ReadItem({ config, selectedItem }) {
     credit: 0,
     number: 0,
     year: 0,
+    discount: 0,
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);

@@ -95,6 +95,7 @@ export default function ReadItem({ config, selectedItem }) {
     credit: 0,
     number: 0,
     year: 0,
+    discount: 0,
   };
 
   const [itemslist, setItemsList] = useState([]);
@@ -309,6 +310,17 @@ export default function ReadItem({ config, selectedItem }) {
               {moneyFormatter({ amount: currentErp.subTotal, currency_code: currentErp.currency })}
             </p>
           </Col>
+
+          <Col className="gutter-row" span={12}>
+            <p>{translate('Discount Amount')} :</p>
+          </Col>
+
+          <Col className="gutter-row" span={12}>
+            <p>
+              {moneyFormatter({ amount: currentErp.discount, currency_code: currentErp.currency })}
+            </p>
+          </Col>
+
           <Col className="gutter-row" span={12}>
             <p>
               {translate('Tax Total')} ({currentErp.taxRate} %) :

@@ -9,6 +9,7 @@ const schema = Joi.object({
   documentType: Joi.string().required(),
   date: Joi.date().required(),
   currency: Joi.string(),
+  discount: Joi.number().required(),
   // array cannot be empty
   items: Joi.array()
     .items(

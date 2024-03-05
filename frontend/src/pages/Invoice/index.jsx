@@ -21,7 +21,7 @@ export default function Invoice() {
 
   const dataTableColumns = [
     {
-      title: translate('Inv. No.'),
+      title: translate('Inv.No.'),
       dataIndex: 'number',
       render: (invNo) => {
         var invNo = invNo.toString();
@@ -64,6 +64,22 @@ export default function Invoice() {
       dataIndex: 'expiredDate',
       render: (date) => {
         return dayjs(date).format(dateFormat);
+      },
+    },
+    {
+      title: translate('Discount'),
+      dataIndex: 'discount',
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (total, record) => {
+        return moneyFormatter({ amount: total, currency_code: record.currency });
       },
     },
     {

@@ -22,6 +22,10 @@ export const fields = {
     type: 'phone',
     disableForForm: true,
   },
+  Address: {
+    type: 'address',
+    disableForForm: true,
+  },
   email: {
     type: 'email',
     disableForForm: true,
