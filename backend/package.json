@@ -10,6 +10,7 @@
     "dev": "nodemon src/server.js --ignore public/",
     "production": "NODE_ENV=production",
     "setup": "node src/setup/setup.js",
+    "test":"jest --watch",
     "upgrade": "node src/setup/upgrade.js",
     "reset": "node src/setup/reset.js"
   },
