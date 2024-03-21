@@ -7,6 +7,7 @@ import {
   EllipsisOutlined,
   RedoOutlined,
   ArrowRightOutlined,
+  SearchOutlined,
   ArrowLeftOutlined,
 } from '@ant-design/icons';
 import { Dropdown, Table, Button, Input } from 'antd';
@@ -191,6 +192,7 @@ export default function DataTable({ config, extra = [] }) {
             onChange={filterTable}
             placeholder={translate('search')}
             allowClear
+            suffix={<SearchOutlined />}
           />,
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
             {translate('Refresh')}
