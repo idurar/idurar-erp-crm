@@ -20,7 +20,7 @@ import { generate as uniqueId } from 'shortid';
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney, useDate } from '@/settings';
+import { useMoney} from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 import { tagColor } from '@/utils/statusTagColor';

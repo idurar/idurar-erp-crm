@@ -8,7 +8,6 @@ import { Layout } from 'antd';
 import { useAppContext } from '@/context/appContext';
 
 import Navigation from '@/apps/Navigation/NavigationContainer';
-import ExpensesNav from '@/apps/Navigation/ExpensesNav';
 import HeaderContent from '@/apps/Header/HeaderContainer';
 import PageLoader from '@/components/PageLoader';
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { settingsAction } from '@/redux/settings/actions';
 
-import { Select, Form } from 'antd';
+import { Select} from 'antd';
 
 import { currencyOptions } from '@/utils/currencyList';
 

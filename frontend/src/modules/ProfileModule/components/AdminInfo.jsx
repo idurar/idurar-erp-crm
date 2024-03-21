@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+
 import { useProfileContext } from '@/context/profileContext';
 import { generate as uniqueId } from 'shortid';
 import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';

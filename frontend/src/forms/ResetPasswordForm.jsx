@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { LockOutlined} from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
 
