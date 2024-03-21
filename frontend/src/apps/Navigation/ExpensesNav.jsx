@@ -12,18 +12,8 @@ import useResponsive from '@/hooks/useResponsive';
 
 import {
   SettingOutlined,
-  CustomerServiceOutlined,
-  ContainerOutlined,
-  FileSyncOutlined,
-  DashboardOutlined,
-  TagOutlined,
-  TagsOutlined,
-  UserOutlined,
-  CreditCardOutlined,
   MenuOutlined,
-  FileOutlined,
-  ShopOutlined,
-  FilterOutlined,
+  
   WalletOutlined,
 } from '@ant-design/icons';
 
