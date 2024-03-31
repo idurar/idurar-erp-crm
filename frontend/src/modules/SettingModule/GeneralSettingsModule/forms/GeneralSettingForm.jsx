@@ -6,11 +6,13 @@ import languages from '@/locale/languages';
 import useLanguage from '@/locale/useLanguage';
 import { translateAction } from '@/redux/translate/actions';
 import { countryList } from '@/utils/countryList';
+import { selectLangCode } from '@/redux/translate/selectors';
+import { useEffect } from 'react';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
   const dispatch = useDispatch();
-
+  const langCode = useSelector(selectLangCode);
   return (
     <>
       <Form.Item
@@ -22,8 +24,10 @@ export default function GeneralSettingForm() {
           },
         ]}
       >
+        <p style={{display:"none"}}>{langCode}</p>
         <Select
           showSearch
+          value={langCode}
           placeholder={translate('select language')}
           optionFilterProp="children"
           filterOption={(input, option) =>
