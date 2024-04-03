@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const {z}  = require('zod');
+const { nanoid } = require('nanoid');
+const { z } = require('zod');
 const firstNameSchema = z.string().min(1).max(50);
 const lastNameSchema = z.string().min(1).max(50);
 const phoneNoschema = z.number().int().positive();
