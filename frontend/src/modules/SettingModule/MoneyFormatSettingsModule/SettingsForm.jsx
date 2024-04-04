@@ -8,6 +8,8 @@ import { currencyOptions } from '@/utils/currencyList';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function SettingsForm() {
   const translate = useLanguage();
@@ -39,9 +41,10 @@ export default function SettingsForm() {
 
     return list;
   };
+  const langDirection=useSelector(selectLangDirection)
 
   return (
-    <>
+    <div style={{direction:langDirection}}>
       <Form.Item
         label={translate('Currency')}
         name="default_currency_code"
@@ -136,6 +139,6 @@ export default function SettingsForm() {
       >
         <Switch />
       </Form.Item> */}
-    </>
+    </div>
   );
 }

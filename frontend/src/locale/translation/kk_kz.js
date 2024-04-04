@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Жаңа салықты қосу",
 account_owner: "Счетке ие",
 create_only: "Текше жасау",
 enter_code: "Кодты енгізіңіз",
+search:"іздеу"
 }
  export default lang

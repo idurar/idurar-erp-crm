@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Lägg till ny skatt",
 account_owner: "Kontoinnehavare",
 create_only: "Endast skapa",
 enter_code: "Ange kod",
+search:"Sök"
 }
  export default lang

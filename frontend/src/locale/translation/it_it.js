@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Aggiungi una nuova tassa",
 account_owner: "Proprietario dell'account",
 create_only: "Solo creazione",
 enter_code: "Inserisci il codice",
+search:"ricerca"
 }
  export default lang

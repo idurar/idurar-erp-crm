@@ -10,11 +10,15 @@ import { generate as uniqueId } from 'shortid';
 import SelectCurrency from '@/components/SelectCurrency';
 
 import { countryList } from '@/utils/countryList';
+import { selectLangDirection } from '@/redux/translate/selectors';
+import { useSelector } from 'react-redux';
 
 export default function DynamicForm({ fields, isUpdateForm = false }) {
   const [feedback, setFeedback] = useState();
+  const langDirection=useSelector(selectLangDirection)
+
   return (
-    <>
+    <div style={{direction:langDirection}}>
       {Object.keys(fields).map((key) => {
         let field = fields[key];
 
@@ -41,7 +45,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
           }
         }
       })}
-    </>
+    </div>
   );
 }
 

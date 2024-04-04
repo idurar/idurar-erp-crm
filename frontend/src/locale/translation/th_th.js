@@ -449,6 +449,6 @@ proforma_invoice: "ใบแจ้งหนี้เป็นล่วงหน�
 proforma_invoice_list: "รายการใบแจ้งหนี้เป็นล่วงหน้า",
 add_new_proforma_invoice: "เพิ่มใบแจ้งหนี้เป็นล่วงหน้าใหม่",
 ajouter_une_nouvelle_taxe: "เพิ่มภาษีใหม่",
-translated_text: "[object Object]",
+search:"ค้นหา"
 }
  export default lang

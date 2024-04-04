@@ -449,6 +449,7 @@ const lang = {
   enter_code: 'Enter Code',
   offers: 'Offers',
   proforma_invoices: 'Proforma Invoices',
+  search:"search"
 };
 
 export default lang;

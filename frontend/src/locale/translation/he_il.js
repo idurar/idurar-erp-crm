@@ -454,5 +454,6 @@ const lang = {
   account_owner: 'בעל חשבון',
   create_only: 'יצירה בלבד',
   enter_code: 'הזן קוד',
+  search:"לחפש"
 };
 export default lang;

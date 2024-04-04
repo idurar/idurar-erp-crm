@@ -8,13 +8,15 @@ import { translateAction } from '@/redux/translate/actions';
 import { countryList } from '@/utils/countryList';
 import { selectLangCode } from '@/redux/translate/selectors';
 import { useEffect } from 'react';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
   const dispatch = useDispatch();
   const langCode = useSelector(selectLangCode);
+  const langDirection=useSelector(selectLangDirection)
   return (
-    <>
+    <div style={{direction:langDirection}}>
       <Form.Item
         label={translate('language')}
         name="idurar_app_language"
@@ -160,6 +162,6 @@ export default function GeneralSettingForm() {
       >
         <Input />
       </Form.Item>
-    </>
+    </div>
   );
 }
