@@ -20,11 +20,13 @@ import { generate as uniqueId } from 'shortid';
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
+import { tagColor } from '@/utils/statusTagColor';
+import { settingsAction } from '@/redux/settings/actions';
 
-const Item = ({ item }) => {
+const Item = ({ item, currentErp }) => {
   const { moneyFormatter } = useMoney();
   return (
     <Row gutter={[12, 0]} key={item._id}>
@@ -40,7 +42,7 @@ const Item = ({ item }) => {
             textAlign: 'right',
           }}
         >
-          {moneyFormatter({ amount: item.price })}
+          {moneyFormatter({ amount: item.price, currency_code: currentErp.currency })}
         </p>
       </Col>
       <Col className="gutter-row" span={4}>
@@ -59,7 +61,7 @@ const Item = ({ item }) => {
             fontWeight: '700',
           }}
         >
-          {moneyFormatter({ amount: item.total })}
+          {moneyFormatter({ amount: item.total, currency_code: currentErp.currency })}
         </p>
       </Col>
       <Divider dashed style={{ marginTop: 0, marginBottom: 15 }} />
@@ -74,14 +76,14 @@ export default function ReadItem({ config, selectedItem }) {
   const navigate = useNavigate();
 
   const { moneyFormatter } = useMoney();
-  const { send } = useMail({ entity });
+  const { send, isLoading: mailInProgress } = useMail({ entity });
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 
   const resetErp = {
     status: '',
     client: {
-      company: '',
+      name: '',
       email: '',
       phone: '',
       address: '',
@@ -97,16 +99,18 @@ export default function ReadItem({ config, selectedItem }) {
 
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
+  const [client, setClient] = useState({});
 
+  const updateCurrency = (value) => {
+    dispatch(
+      settingsAction.updateCurrency({
+        data: { default_currency_code: value },
+      })
+    );
+  };
   useEffect(() => {
     if (currentResult) {
       const { items, invoice, ...others } = currentResult;
-
-      // When it accesses the /payment/ endpoint,
-      // it receives an invoice.item instead of just item
-      // and breaks the code, but now we can check if items exists,
-      // and if it doesn't we can access invoice.items and bring
-      // out the neccessary propery alongside other properties
 
       if (items) {
         setItemsList(items);
@@ -115,12 +119,19 @@ export default function ReadItem({ config, selectedItem }) {
         setItemsList(invoice.items);
         setCurrentErp({ ...invoice.items, ...others, ...invoice });
       }
+      updateCurrency(currentResult.currency);
     }
     return () => {
       setItemsList([]);
       setCurrentErp(resetErp);
     };
   }, [currentResult]);
+
+  useEffect(() => {
+    if (currentErp?.client) {
+      setClient(currentErp.client[currentErp.client.type]);
+    }
+  }, [currentErp]);
 
   return (
     <>
@@ -130,8 +141,16 @@ export default function ReadItem({ config, selectedItem }) {
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
-        // subTitle="This is cuurent erp page"
+        tags={[
+          <Tag color={tagColor(currentErp.status)?.color} key="status">
+            {currentErp.status && translate(currentErp.status)}
+          </Tag>,
+          currentErp.paymentStatus && (
+            <Tag color={tagColor(currentErp.paymentStatus)?.color} key="paymentStatus">
+              {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
+            </Tag>
+          ),
+        ]}
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -156,6 +175,7 @@ export default function ReadItem({ config, selectedItem }) {
           </Button>,
           <Button
             key={`${uniqueId()}`}
+            loading={mailInProgress}
             onClick={() => {
               send(currentErp._id);
             }}
@@ -199,21 +219,27 @@ export default function ReadItem({ config, selectedItem }) {
           <Statistic title="Status" value={currentErp.status} />
           <Statistic
             title={translate('SubTotal')}
-            value={moneyFormatter({ amount: currentErp.subTotal })}
+            value={moneyFormatter({
+              amount: currentErp.subTotal,
+              currency_code: currentErp.currency,
+            })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
             title={translate('Total')}
-            value={moneyFormatter({ amount: currentErp.total })}
+            value={moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
-            title={translate('Balance')}
-            value={moneyFormatter({ amount: currentErp.credit })}
+            title={translate('Paid')}
+            value={moneyFormatter({
+              amount: currentErp.credit,
+              currency_code: currentErp.currency,
+            })}
             style={{
               margin: '0 32px',
             }}
@@ -221,12 +247,10 @@ export default function ReadItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`Client : ${currentErp.client.company}`}>
-        <Descriptions.Item label={translate('Address')}>
-          {currentErp.client.address}
-        </Descriptions.Item>
-        <Descriptions.Item label={translate('email')}>{currentErp.client.email}</Descriptions.Item>
-        <Descriptions.Item label={translate('Phone')}>{currentErp.client.phone}</Descriptions.Item>
+      <Descriptions title={`Client : ${currentErp.client.name}`}>
+        <Descriptions.Item label={translate('Address')}>{client.address}</Descriptions.Item>
+        <Descriptions.Item label={translate('email')}>{client.email}</Descriptions.Item>
+        <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>
@@ -265,7 +289,7 @@ export default function ReadItem({ config, selectedItem }) {
         <Divider />
       </Row>
       {itemslist.map((item) => (
-        <Item key={item._id} item={item}></Item>
+        <Item key={item._id} item={item} currentErp={currentErp}></Item>
       ))}
       <div
         style={{
@@ -281,21 +305,27 @@ export default function ReadItem({ config, selectedItem }) {
           </Col>
 
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.subTotal })}</p>
-          </Col>
-          <Col className="gutter-row" span={12}>
             <p>
-              {translate('Tax Total')} ({currentErp.taxRate * 100} %) :
+              {moneyFormatter({ amount: currentErp.subTotal, currency_code: currentErp.currency })}
             </p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.taxTotal })}</p>
+            <p>
+              {translate('Tax Total')} ({currentErp.taxRate} %) :
+            </p>
+          </Col>
+          <Col className="gutter-row" span={12}>
+            <p>
+              {moneyFormatter({ amount: currentErp.taxTotal, currency_code: currentErp.currency })}
+            </p>
           </Col>
           <Col className="gutter-row" span={12}>
             <p>{translate('Total')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.total })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
+            </p>
           </Col>
         </Row>
       </div>

@@ -8,19 +8,11 @@ export default function GeneralSettingsModule({ config }) {
   return (
     <UpdateSettingModule config={config}>
       <SetingsSection
-        title={translate('Company')}
-        description={translate('Update your company informations')}
+        title={translate('App Settings')}
+        description={translate('Update your app configuration')}
       >
         <GeneralSettingForm />
       </SetingsSection>
-
-      {/* <SetingsSection title="information" description="Update your company Email, phone and adress">
-        <GeneralSettingForm />
-      </SetingsSection>
-
-      <SetingsSection title="Other details" description="Add your website and other links">
-        <GeneralSettingForm />
-      </SetingsSection> */}
     </UpdateSettingModule>
   );
 }

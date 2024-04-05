@@ -1,16 +1,28 @@
 import { useCallback, useEffect } from 'react';
-import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Descriptions, Dropdown, Table, Button } from 'antd';
+
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  EllipsisOutlined,
+  RedoOutlined,
+  ArrowRightOutlined,
+  ArrowLeftOutlined,
+} from '@ant-design/icons';
+import { Dropdown, Table, Button, Input } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/locale/useLanguage';
+import { dataForTable } from '@/utils/dataStructure';
+import { useMoney, useDate } from '@/settings';
 
 import { generate as uniqueId } from 'shortid';
-import useResponsiveTable from '@/hooks/useResponsiveTable';
+
 import { useCrudContext } from '@/context/crud';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
@@ -29,10 +41,12 @@ function AddNewItem({ config }) {
   );
 }
 export default function DataTable({ config, extra = [] }) {
-  let { entity, dataTableColumns, DATATABLE_TITLE } = config;
+  let { entity, dataTableColumns, DATATABLE_TITLE, fields, searchConfig } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
+  const { moneyFormatter } = useMoney();
+  const { dateFormat } = useDate();
 
   const items = [
     {
@@ -83,11 +97,19 @@ export default function DataTable({ config, extra = [] }) {
     collapsedBox.open();
   }
 
+  let dispatchColumns = [];
+  if (fields) {
+    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat })];
+  } else {
+    dispatchColumns = [...dataTableColumns];
+  }
+
   dataTableColumns = [
-    ...dataTableColumns,
+    ...dispatchColumns,
     {
       title: '',
       key: 'action',
+      fixed: 'right',
       render: (_, record) => (
         <Dropdown
           menu={{
@@ -136,6 +158,12 @@ export default function DataTable({ config, extra = [] }) {
     dispatch(crud.list({ entity, options }));
   }, []);
 
+  const filterTable = (e) => {
+    const value = e.target.value;
+    const options = { q: value, fields: searchConfig?.searchFields || '' };
+    dispatch(crud.list({ entity, options }));
+  };
+
   const dispatcher = () => {
     dispatch(crud.list({ entity }));
   };
@@ -148,59 +176,42 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
-    dataTableColumns,
-    items
-  );
+  const langDirection=useSelector(selectLangDirection)
 
   return (
     <>
-      <div ref={tableHeader}>
-        <PageHeader
-          onBack={() => window.history.back()}
-          title={DATATABLE_TITLE}
-          ghost={false}
-          extra={[
-            <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
-              {translate('Refresh')}
-            </Button>,
-            <AddNewItem key={`${uniqueId()}`} config={config} />,
-          ]}
-          style={{
-            padding: '20px 0px',
-          }}
-        ></PageHeader>
-      </div>
+      <PageHeader
+        onBack={() => window.history.back()}
+        backIcon={langDirection==="rtl"?<ArrowRightOutlined/>:<ArrowLeftOutlined />}
+        title={DATATABLE_TITLE}
+        ghost={false}
+        extra={[
+          <Input
+            key={`searchFilterDataTable}`}
+            onChange={filterTable}
+            placeholder={translate('search')}
+            allowClear
+          />,
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+            {translate('Refresh')}
+          </Button>,
+
+          <AddNewItem key={`${uniqueId()}`} config={config} />,
+        ]}
+        style={{
+          padding: '20px 0px',
+          direction:langDirection
+        }}
+      ></PageHeader>
+
       <Table
-        columns={tableColumns}
+        columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
-        expandable={
-          expandedRowData.length
-            ? {
-                expandedRowRender: (record) => (
-                  <Descriptions title="" bordered column={1}>
-                    {expandedRowData.map((item, index) => {
-                      return (
-                        <Descriptions.Item key={index} label={item.title}>
-                          {item.render?.(record[item.dataIndex])?.children
-                            ? item.render?.(record[item.dataIndex])?.children
-                            : item.render?.(record[item.dataIndex])
-                            ? item.render?.(record[item.dataIndex])
-                            : Array.isArray(item.dataIndex)
-                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
-                            : record[item.dataIndex]}
-                        </Descriptions.Item>
-                      );
-                    })}
-                  </Descriptions>
-                ),
-              }
-            : null
-        }
+        scroll={{ x: true }}
       />
     </>
   );

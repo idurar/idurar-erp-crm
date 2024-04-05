@@ -1,19 +1,22 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
+import { tagColor } from '@/utils/statusTagColor';
 
 import OfferDataTableModule from '@/modules/OfferModule/OfferDataTableModule';
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 
 export default function Offer() {
   const translate = useLanguage();
-  const { moneyRowFormatter } = useMoney();
+  const { moneyFormatter } = useMoney();
+  const { dateFormat } = useDate();
 
   const searchConfig = {
-    displayLabels: ['company'],
-    searchFields: 'company',
+    entity: 'lead',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-  const entityDisplayLabels = ['number', 'lead.company'];
+  const deleteModalLabels = ['number', 'lead.name'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -21,55 +24,68 @@ export default function Offer() {
     },
     {
       title: translate('Company'),
-      dataIndex: ['lead', 'company'],
+      dataIndex: ['lead', 'name'],
     },
     {
       title: translate('Date'),
       dataIndex: 'date',
-      render: (date) => dayjs(date).format('DD/MM/YYYY'),
+      render: (date) => dayjs(date).format(dateFormat),
     },
     {
       title: translate('Sub Total'),
       dataIndex: 'subTotal',
-      onCell: (subTotal) => moneyRowFormatter({ amount: subTotal }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
     {
       title: translate('Total'),
       dataIndex: 'total',
-      onCell: (total) => moneyRowFormatter({ amount: total }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
 
     {
       title: translate('Note'),
-      dataIndex: 'note',
+      dataIndex: 'notes',
     },
     {
       title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
-        let color =
-          status === 'draft'
-            ? 'cyan'
-            : status === 'sent'
-            ? 'blue'
-            : status === 'accepted'
-            ? 'green'
-            : status === 'expired'
-            ? 'orange'
-            : 'red';
-        return <Tag color={color}>{status && translate(status)}</Tag>;
+        let tagStatus = tagColor(status);
+
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {status && translate(tagStatus.label)}
+          </Tag>
+        );
       },
     },
   ];
 
   const entity = 'offer';
   const Labels = {
-    PANEL_TITLE: translate('offer'),
+    PANEL_TITLE: translate('Offer Leads'),
     DATATABLE_TITLE: translate('offer_list'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
-    ENTITY_NAME: translate('offer'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
+    ENTITY_NAME: translate('Offer Leads'),
   };
 
   const configPage = {
@@ -80,7 +96,7 @@ export default function Offer() {
     ...configPage,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return <OfferDataTableModule config={config} />;
 }

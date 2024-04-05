@@ -77,7 +77,7 @@ const request = {
     }
   },
 
-  delete: async ({ entity, id, options = {} }) => {
+  delete: async ({ entity, id }) => {
     try {
       const response = await axios.delete(entity + '/delete/' + id);
       successHandler(response, {
@@ -146,9 +146,15 @@ const request = {
       return errorHandler(error);
     }
   },
-  listAll: async ({ entity }) => {
+  listAll: async ({ entity, options = {} }) => {
     try {
-      const response = await axios.get(entity + '/listAll');
+      let query = '?';
+      for (var key in options) {
+        query += key + '=' + options[key] + '&';
+      }
+      query = query.slice(0, -1);
+
+      const response = await axios.get(entity + '/listAll' + query);
 
       successHandler(response, {
         notifyOnSuccess: false,
@@ -160,7 +166,7 @@ const request = {
     }
   },
 
-  post: async ({ entity, jsonData, options = {} }) => {
+  post: async ({ entity, jsonData }) => {
     try {
       const response = await axios.post(entity, jsonData);
 
@@ -215,7 +221,12 @@ const request = {
 
   summary: async ({ entity, options = {} }) => {
     try {
-      const response = await axios.get(entity + '/summary');
+      let query = '?';
+      for (var key in options) {
+        query += key + '=' + options[key] + '&';
+      }
+      query = query.slice(0, -1);
+      const response = await axios.get(entity + '/summary' + query);
 
       successHandler(response, {
         notifyOnSuccess: false,

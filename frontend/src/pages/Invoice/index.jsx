@@ -1,20 +1,23 @@
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
 import useLanguage from '@/locale/useLanguage';
+import { tagColor } from '@/utils/statusTagColor';
 
-import { useMoney } from '@/settings';
+import { useMoney, useDate } from '@/settings';
 import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
 
 export default function Invoice() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const entity = 'invoice';
-  const { moneyRowFormatter } = useMoney();
+  const { moneyFormatter } = useMoney();
 
   const searchConfig = {
-    displayLabels: ['name', 'surname'],
-    searchFields: 'name,surname,birthday',
+    entity: 'client',
+    displayLabels: ['name'],
+    searchFields: 'name',
   };
-  const entityDisplayLabels = ['number', 'client.company'];
+  const deleteModalLabels = ['number', 'client.name'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -22,65 +25,83 @@ export default function Invoice() {
     },
     {
       title: translate('Client'),
-      dataIndex: ['client', 'company'],
+      dataIndex: ['client', 'name'],
     },
     {
       title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
       title: translate('expired Date'),
       dataIndex: 'expiredDate',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
       title: translate('Total'),
       dataIndex: 'total',
-      onCell: (total) => moneyRowFormatter({ amount: total }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (total, record) => {
+        return moneyFormatter({ amount: total, currency_code: record.currency });
+      },
     },
     {
-      title: translate('credit'),
+      title: translate('paid'),
       dataIndex: 'credit',
-      onCell: (credit) => moneyRowFormatter({ amount: credit }),
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (total, record) => moneyFormatter({ amount: total, currency_code: record.currency }),
     },
     {
       title: translate('Status'),
       dataIndex: 'status',
       render: (status) => {
-        let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
+        let tagStatus = tagColor(status);
 
-        return <Tag color={color}>{status && translate(status)}</Tag>;
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {status && translate(tagStatus.label)}
+          </Tag>
+        );
       },
     },
     {
       title: translate('Payment'),
       dataIndex: 'paymentStatus',
       render: (paymentStatus) => {
-        let color =
-          paymentStatus === 'unpaid'
-            ? 'volcano'
-            : paymentStatus === 'paid'
-            ? 'green'
-            : paymentStatus === 'overdue'
-            ? 'red'
-            : 'purple';
+        let tagStatus = tagColor(paymentStatus);
 
-        return <Tag color={color}>{paymentStatus && translate(paymentStatus)}</Tag>;
+        return (
+          <Tag color={tagStatus.color}>
+            {/* {tagStatus.icon + ' '} */}
+            {paymentStatus && translate(paymentStatus)}
+          </Tag>
+        );
       },
     },
     {
       title: translate('Created By'),
       dataIndex: ['createdBy', 'name'],
-      // render: (name) => {
-      //   console.log('🚀 ~ file: index.jsx:81 ~ Invoice ~ name:', name);
-      //   let color = name !== '' ? 'blue' : 'gray';
-      //   return <Tag color={color}>{name ? name : 'Administrator'}</Tag>;
-      // },
     },
   ];
 
@@ -89,8 +110,7 @@ export default function Invoice() {
     DATATABLE_TITLE: translate('invoice_list'),
     ADD_NEW_ENTITY: translate('add_new_invoice'),
     ENTITY_NAME: translate('invoice'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
+
     RECORD_ENTITY: translate('record_payment'),
   };
 
@@ -102,7 +122,7 @@ export default function Invoice() {
     ...configPage,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
 
   return <InvoiceDataTableModule config={config} />;

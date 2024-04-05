@@ -11,8 +11,6 @@ export default function PaymentRead() {
     DATATABLE_TITLE: translate('payment_list'),
     ADD_NEW_ENTITY: translate('add_new_payment'),
     ENTITY_NAME: translate('payment'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {

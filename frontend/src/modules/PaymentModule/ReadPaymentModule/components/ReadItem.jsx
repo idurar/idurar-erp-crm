@@ -20,51 +20,9 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
+import { tagColor } from '@/utils/statusTagColor';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
-
-const Item = ({ item }) => {
-  const { moneyFormatter } = useMoney();
-  return (
-    <Row gutter={[12, 0]} key={item._id}>
-      <Col className="gutter-row" span={11}>
-        <p style={{ marginBottom: 5 }}>
-          <strong>{item.itemName}</strong>
-        </p>
-        <p>{item.description}</p>
-      </Col>
-      <Col className="gutter-row" span={4}>
-        <p
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          {moneyFormatter({ amount: item.price })}
-        </p>
-      </Col>
-      <Col className="gutter-row" span={4}>
-        <p
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          {item.quantity}
-        </p>
-      </Col>
-      <Col className="gutter-row" span={5}>
-        <p
-          style={{
-            textAlign: 'right',
-            fontWeight: '700',
-          }}
-        >
-          {moneyFormatter({ amount: item.total })}
-        </p>
-      </Col>
-      <Divider dashed style={{ marginTop: 0, marginBottom: 15 }} />
-    </Row>
-  );
-};
 
 export default function ReadItem({ config, selectedItem }) {
   const translate = useLanguage();
@@ -72,7 +30,7 @@ export default function ReadItem({ config, selectedItem }) {
   const dispatch = useDispatch();
 
   const { moneyFormatter } = useMoney();
-  const { send } = useMail({ entity });
+  const { send, isLoading: mailInProgress } = useMail({ entity });
   const navigate = useNavigate();
 
   const { result: currentResult } = useSelector(selectCurrentItem);
@@ -80,7 +38,7 @@ export default function ReadItem({ config, selectedItem }) {
   const resetErp = {
     status: '',
     client: {
-      company: '',
+      name: '',
       email: '',
       phone: '',
       address: '',
@@ -95,6 +53,7 @@ export default function ReadItem({ config, selectedItem }) {
   };
 
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
+  const [client, setClient] = useState({});
 
   useEffect(() => {
     const controller = new AbortController();
@@ -105,15 +64,23 @@ export default function ReadItem({ config, selectedItem }) {
     return () => controller.abort();
   }, [currentResult]);
 
+  useEffect(() => {
+    if (currentErp?.client) {
+      setClient(currentErp.client[currentErp.client.type]);
+    }
+  }, [currentErp]);
+
   return (
     <>
       <PageHeader
         onBack={() => {
-          history.goBack();
+          navigate(`/${entity.toLowerCase()}`);
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={<Tag color="volcano">{currentErp.paymentStatus || currentErp.status}</Tag>}
+        tags={
+          <Tag color={tagColor(currentErp.paymentStatus)?.color}>{currentErp.paymentStatus}</Tag>
+        }
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -138,6 +105,7 @@ export default function ReadItem({ config, selectedItem }) {
           </Button>,
           <Button
             key={`${uniqueId()}`}
+            loading={mailInProgress}
             onClick={() => {
               send(currentErp._id);
             }}
@@ -170,22 +138,28 @@ export default function ReadItem({ config, selectedItem }) {
         <Row>
           <Statistic title="Status" value={currentErp.status} />
           <Statistic
+            title={translate('Paid')}
+            value={moneyFormatter({
+              amount: currentErp.amount,
+              currency_code: currentErp.currency,
+            })}
+            style={{
+              margin: '0 32px',
+            }}
+          />
+          <Statistic
             title={translate('SubTotal')}
-            value={moneyFormatter({ amount: currentErp.subTotal })}
+            value={moneyFormatter({
+              amount: currentErp.subTotal,
+              currency_code: currentErp.currency,
+            })}
             style={{
               margin: '0 32px',
             }}
           />
           <Statistic
             title={translate('Total')}
-            value={moneyFormatter({ amount: currentErp.total })}
-            style={{
-              margin: '0 32px',
-            }}
-          />
-          <Statistic
-            title={translate('Amount')}
-            value={moneyFormatter({ amount: currentErp.amount })}
+            value={moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
             style={{
               margin: '0 32px',
             }}
@@ -193,12 +167,10 @@ export default function ReadItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`${translate('Client')} : ${currentErp.client.company}`}>
-        <Descriptions.Item label={translate('Address')}>
-          {currentErp.client.address}
-        </Descriptions.Item>
-        <Descriptions.Item label={translate('email')}>{currentErp.client.email}</Descriptions.Item>
-        <Descriptions.Item label={translate('Phone')}>{currentErp.client.phone}</Descriptions.Item>
+      <Descriptions title={`${translate('Client')} : ${currentErp.client.name}`}>
+        <Descriptions.Item label={translate('Address')}>{client.address}</Descriptions.Item>
+        <Descriptions.Item label={translate('email')}>{client.email}</Descriptions.Item>
+        <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row>
@@ -206,7 +178,7 @@ export default function ReadItem({ config, selectedItem }) {
           <Typography.Title level={5}>{translate('Payment Information')} :</Typography.Title>
         </Col>
         <Col sm={24} md={12} style={{ textAlign: 'right' }}>
-          <Button icon={<ExportOutlined />}>label={translate('Show invoice')}</Button>
+          <Button icon={<ExportOutlined />}>{translate('Show invoice')}</Button>
         </Col>
       </Row>
       <div
@@ -219,31 +191,42 @@ export default function ReadItem({ config, selectedItem }) {
       >
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={12}>
-            <p>{translate('Amount')} :</p>
+            <p>{translate('Paid')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.amount })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.amount, currency_code: currentErp.currency })}
+            </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
             <p>{translate('Total')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.total })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.total, currency_code: currentErp.currency })}
+            </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
             <p>{translate('Total Paid')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.credit })}</p>
+            <p>
+              {moneyFormatter({ amount: currentErp.credit, currency_code: currentErp.currency })}
+            </p>
           </Col>
 
           <Col className="gutter-row" span={12}>
             <p>{translate('Total Remaining')} :</p>
           </Col>
           <Col className="gutter-row" span={12}>
-            <p>{moneyFormatter({ amount: currentErp.total - currentErp.credit })}</p>
+            <p>
+              {moneyFormatter({
+                amount: currentErp.total - currentErp.credit,
+                currency_code: currentErp.currency,
+              })}
+            </p>
           </Col>
         </Row>
       </div>

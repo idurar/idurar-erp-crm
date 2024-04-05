@@ -1,13 +1,13 @@
 .wideAppContainer {
-  max-width: 1200px;
+  max-width: 1150px;
 }
 
 .appContainer {
-  max-width: 1100px;
+  max-width: 1050px;
 }
 
 .smallNavigation {
-  margin-left: 80px;
+  margin-left: 100px;
 }
 
 .wideNavigation {

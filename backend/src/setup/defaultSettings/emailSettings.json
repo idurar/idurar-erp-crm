@@ -1,0 +1,20 @@
+[
+  {
+    "settingCategory": "email_settings",
+    "settingKey": "email_domain",
+    "settingValue": "idurarapp.com",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "email_settings",
+    "settingKey": "email_reply_to",
+    "settingValue": "reply@idurarapp.com",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "email_settings",
+    "settingKey": "email_from",
+    "settingValue": "IDURAR ERP CRM",
+    "valueType": "string"
+  }
+]

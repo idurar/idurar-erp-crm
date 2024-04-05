@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form, Divider } from 'antd';
 import dayjs from 'dayjs';
-import { Button } from 'antd';
+import { Button, Tag } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,33 +12,55 @@ import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
+import { tagColor } from '@/utils/statusTagColor';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import { settingsAction } from '@/redux/settings/actions';
 // import { StatusTag } from '@/components/Tag';
 
-function SaveForm({ form, config }) {
-  let { UPDATE_ENTITY } = config;
+function SaveForm({ form, translate }) {
   const handelClick = () => {
     form.submit();
   };
 
   return (
     <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {UPDATE_ENTITY}
+      {translate('update')}
     </Button>
   );
 }
 
 export default function UpdateItem({ config, UpdateForm }) {
   const translate = useLanguage();
-  let { entity, UPDATE_ENTITY } = config;
+  let { entity } = config;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { current, isLoading, isSuccess } = useSelector(selectUpdatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
+
+  const resetErp = {
+    status: '',
+    client: {
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+    },
+    subTotal: 0,
+    taxTotal: 0,
+    taxRate: 0,
+    total: 0,
+    credit: 0,
+    number: 0,
+    year: 0,
+  };
+
+  const [currentErp, setCurrentErp] = useState(current ?? resetErp);
+
   const { id } = useParams();
 
   const handelValuesChange = (changedValues, values) => {
@@ -60,20 +82,26 @@ export default function UpdateItem({ config, UpdateForm }) {
   };
 
   const onSubmit = (fieldsValue) => {
+    let dataToUpdate = { ...fieldsValue };
     if (fieldsValue) {
+      if (fieldsValue.date || fieldsValue.expiredDate) {
+        dataToUpdate.date = dayjs(fieldsValue.date).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+        dataToUpdate.expiredDate = dayjs(fieldsValue.expiredDate).format(
+          'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        );
+      }
       if (fieldsValue.items) {
-        let newList = [...fieldsValue.items];
-        newList.map((item) => {
-          item.total = item.quantity * item.price;
+        let newList = [];
+        fieldsValue.items.map((item) => {
+          const { quantity, price, itemName, description } = item;
+          const total = item.quantity * item.price;
+          newList.push({ total, quantity, price, itemName, description });
         });
-        fieldsValue = {
-          ...fieldsValue,
-          items: newList,
-        };
+        dataToUpdate.items = newList;
       }
     }
 
-    dispatch(erp.update({ entity, id, jsonData: fieldsValue }));
+    dispatch(erp.update({ entity, id, jsonData: dataToUpdate }));
   };
   useEffect(() => {
     if (isSuccess) {
@@ -84,21 +112,34 @@ export default function UpdateItem({ config, UpdateForm }) {
     }
   }, [isSuccess]);
 
+  const updateCurrency = (value) => {
+    dispatch(
+      settingsAction.updateCurrency({
+        data: { default_currency_code: value },
+      })
+    );
+  };
+
   useEffect(() => {
     if (current) {
-      if (current.date) {
-        current.date = dayjs(current.date);
+      setCurrentErp(current);
+      let formData = { ...current };
+      if (formData.date) {
+        formData.date = dayjs(formData.date);
       }
-      if (current.expiredDate) {
-        current.expiredDate = dayjs(current.expiredDate);
+      if (formData.expiredDate) {
+        formData.expiredDate = dayjs(formData.expiredDate);
       }
-      if (!current.taxRate) {
-        current.taxRate = 0;
+      if (!formData.taxRate) {
+        formData.taxRate = 0;
       }
 
-      const { subTotal } = current;
+      updateCurrency(current.currency);
 
-      form.setFieldsValue(current);
+      const { subTotal } = formData;
+
+      form.resetFields();
+      form.setFieldsValue(formData);
       setSubTotal(subTotal);
     }
   }, [current]);
@@ -109,9 +150,18 @@ export default function UpdateItem({ config, UpdateForm }) {
         onBack={() => {
           navigate(`/${entity.toLowerCase()}`);
         }}
-        title={UPDATE_ENTITY}
+        title={translate('update')}
         ghost={false}
-        // tags={StatusTag(form.getFieldValue().status)}
+        tags={[
+          <Tag color={tagColor(currentErp.status)?.color} key="status">
+            {currentErp.status && translate(currentErp.status)}
+          </Tag>,
+          currentErp.paymentStatus && (
+            <Tag color={tagColor(currentErp.paymentStatus)?.color} key="paymentStatus">
+              {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
+            </Tag>
+          ),
+        ]}
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -122,7 +172,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           >
             {translate('Cancel')}
           </Button>,
-          <SaveForm config={config} form={form} key={`${uniqueId()}`} />,
+          <SaveForm translate={translate} form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
           padding: '20px 0px',

@@ -7,10 +7,13 @@ import {
   RedoOutlined,
   PlusOutlined,
   EllipsisOutlined,
+  ArrowRightOutlined,
+  ArrowLeftOutlined,
 } from '@ant-design/icons';
-import { Descriptions, Dropdown, Table, Button } from 'antd';
+import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
+import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import { useSelector, useDispatch } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
@@ -19,11 +22,10 @@ import { useErpContext } from '@/context/erp';
 import { generate as uniqueId } from 'shortid';
 import { useNavigate } from 'react-router-dom';
 
-import useResponsiveTable from '@/hooks/useResponsiveTable';
-
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
-function AddNewItem({ config, hasCreate = true }) {
+function AddNewItem({ config }) {
   const navigate = useNavigate();
   const { ADD_NEW_ENTITY, entity } = config;
 
@@ -31,18 +33,17 @@ function AddNewItem({ config, hasCreate = true }) {
     navigate(`/${entity.toLowerCase()}/create`);
   };
 
-  if (hasCreate)
-    return (
-      <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
-        {ADD_NEW_ENTITY}
-      </Button>
-    );
-  else return null;
+  return (
+    <Button onClick={handleClick} type="primary" icon={<PlusOutlined />}>
+      {ADD_NEW_ENTITY}
+    </Button>
+  );
 }
 
 export default function DataTable({ config, extra = [] }) {
   const translate = useLanguage();
-  let { entity, dataTableColumns, create = true } = config;
+  let { entity, dataTableColumns, disableAdd = false, searchConfig } = config;
+
   const { DATATABLE_TITLE } = config;
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
@@ -87,7 +88,8 @@ export default function DataTable({ config, extra = [] }) {
     navigate(`/${entity}/read/${record._id}`);
   };
   const handleEdit = (record) => {
-    dispatch(erp.currentAction({ actionType: 'update', data: record }));
+    const data = { ...record };
+    dispatch(erp.currentAction({ actionType: 'update', data }));
     navigate(`/${entity}/update/${record._id}`);
   };
   const handleDownload = (record) => {
@@ -109,6 +111,7 @@ export default function DataTable({ config, extra = [] }) {
     {
       title: '',
       key: 'action',
+      fixed: 'right',
       render: (_, record) => (
         <Dropdown
           menu={{
@@ -166,59 +169,50 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
-  const { expandedRowData, tableColumns, tableHeader } = useResponsiveTable(
-    dataTableColumns,
-    items
-  );
+  const filterTable = (value) => {
+    const options = { equal: value, filter: searchConfig?.entity };
+    dispatch(erp.list({ entity, options }));
+  };
+  const langDirection=useSelector(selectLangDirection)
 
   return (
     <>
-      <div ref={tableHeader}>
-        <PageHeader
-          title={DATATABLE_TITLE}
-          ghost={true}
-          extra={[
-            <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-              {translate('Refresh')}
-            </Button>,
-            <AddNewItem config={config} key={`${uniqueId()}`} hasCreate={create} />,
-          ]}
-          style={{
-            padding: '20px 0px',
-          }}
-        ></PageHeader>
-      </div>
+      <PageHeader
+        title={DATATABLE_TITLE}
+        ghost={true}
+        onBack={() => window.history.back()}
+        backIcon={langDirection==="rtl"?<ArrowRightOutlined/>:<ArrowLeftOutlined />}
+        extra={[
+          <AutoCompleteAsync
+            key={`${uniqueId()}`}
+            entity={searchConfig?.entity}
+            displayLabels={['name']}
+            searchFields={'name'}
+            onChange={filterTable}
+            // redirectLabel={'Add New Client'}
+            // withRedirect
+            // urlToRedirect={'/customer'}
+          />,
+          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+            {translate('Refresh')}
+          </Button>,
+
+          !disableAdd && <AddNewItem config={config} key={`${uniqueId()}`} />,
+        ]}
+        style={{
+          padding: '20px 0px',
+          direction:langDirection
+        }}
+      ></PageHeader>
 
       <Table
-        columns={tableColumns}
+        columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
-        expandable={
-          expandedRowData.length
-            ? {
-                expandedRowRender: (record) => (
-                  <Descriptions title="" bordered column={1}>
-                    {expandedRowData.map((item, index) => {
-                      return (
-                        <Descriptions.Item key={index} label={item.title}>
-                          {item.render?.(record[item.dataIndex])?.children
-                            ? item.render?.(record[item.dataIndex])?.children
-                            : item.render?.(record[item.dataIndex])
-                            ? item.render?.(record[item.dataIndex])
-                            : Array.isArray(item.dataIndex)
-                            ? record[item.dataIndex[0]]?.[item.dataIndex[1]]
-                            : record[item.dataIndex]}
-                        </Descriptions.Item>
-                      );
-                    })}
-                  </Descriptions>
-                ),
-              }
-            : null
-        }
+        scroll={{ x: true }}
       />
     </>
   );

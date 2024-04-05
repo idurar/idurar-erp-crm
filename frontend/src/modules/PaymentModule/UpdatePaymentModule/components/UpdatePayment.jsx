@@ -11,8 +11,11 @@ import Loading from '@/components/Loading';
 
 import calculate from '@/utils/calculate';
 import PaymentForm from '@/forms/PaymentForm';
+import { useNavigate } from 'react-router-dom';
+
 export default function UpdatePayment({ config, currentInvoice }) {
   const translate = useLanguage();
+  const navigate = useNavigate();
   let { entity } = config;
   const dispatch = useDispatch();
 
@@ -29,10 +32,11 @@ export default function UpdatePayment({ config, currentInvoice }) {
       setMaxAmount(
         calculate.sub(calculate.sub(total, discount), calculate.sub(calculate.sub(credit, amount)))
       );
-      if (currentInvoice.date) {
-        currentInvoice.date = dayjs(currentInvoice.date);
+      const newInvoiceValues = { ...currentInvoice };
+      if (newInvoiceValues.date) {
+        newInvoiceValues.date = dayjs(newInvoiceValues.date);
       }
-      form.setFieldsValue(currentInvoice);
+      form.setFieldsValue(newInvoiceValues);
     }
   }, [currentInvoice]);
 
@@ -41,6 +45,7 @@ export default function UpdatePayment({ config, currentInvoice }) {
       form.resetFields();
       dispatch(erp.resetAction({ actionType: 'recordPayment' }));
       dispatch(erp.list({ entity }));
+      navigate(`/${entity.toLowerCase()}/read/${currentInvoice._id}`);
     }
   }, [isSuccess]);
 

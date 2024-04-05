@@ -1,0 +1,80 @@
+[
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_name",
+    "settingValue": "COMPANY Name",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_logo",
+    "settingValue": "public/uploads/setting/company-logo.png",
+    "valueType": "image"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_icon",
+    "settingValue": "public/uploads/setting/company-logo.png",
+    "valueType": "image"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_address",
+    "settingValue": "25 , Your Company Address",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_state",
+    "settingValue": "New York",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_country",
+    "settingValue": "United State",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_email",
+    "settingValue": "youremail@example.com",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_phone",
+    "settingValue": "+1 345234654",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_website",
+    "settingValue": "www.example.com",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_tax_number",
+    "settingValue": "91231255234",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_vat_number",
+    "settingValue": "91231255234",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_reg_number",
+    "settingValue": "00001231421",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_bank_account",
+    "settingValue": "iban : 00001231421",
+    "valueType": "string"
+  }
+]

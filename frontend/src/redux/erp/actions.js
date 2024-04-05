@@ -204,10 +204,6 @@ export const erp = {
           keyState: 'delete',
           payload: data.result,
         });
-        dispatch({
-          type: actionTypes.RESET_ACTION,
-          keyState: 'delete',
-        });
       } else {
         dispatch({
           type: actionTypes.REQUEST_FAILED,
@@ -272,12 +268,32 @@ export const erp = {
   mail:
     ({ entity, jsonData }) =>
     async (dispatch) => {
-      await request.mail({ entity, jsonData });
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'mail',
+        payload: null,
+      });
+
+      const data = await request.mail({ entity, jsonData });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'mail',
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'mail',
+          payload: null,
+        });
+      }
     },
 
   convert:
     ({ entity, id }) =>
-    async (dispatch) => {
+    async () => {
       await request.convert({ entity, id });
     },
 };

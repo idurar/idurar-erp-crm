@@ -7,6 +7,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { DatePicker } from 'antd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
+import SelectAsync from '@/components/SelectAsync';
 
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
@@ -14,14 +15,15 @@ import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
-
+import { useDate } from '@/settings';
 import { useSelector } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
+import SelectCurrency from '@/components/SelectCurrency';
 
 export default function OfferForm({ subTotal = 0, current = null }) {
   const { last_offer_number } = useSelector(selectFinanceSettings);
 
-  if (!last_offer_number) {
+  if (last_offer_number === undefined) {
     return <></>;
   }
 
@@ -30,6 +32,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
 
 function LoadOfferForm({ subTotal = 0, current = null }) {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
   const { last_offer_number } = useSelector(selectFinanceSettings);
   const [lastNumber, setLastNumber] = useState(() => last_offer_number + 1);
   const [total, setTotal] = useState(0);
@@ -37,21 +40,21 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
-    setTaxRate(value);
+    setTaxRate(value / 100);
   };
 
   useEffect(() => {
     if (current) {
       const { taxRate = 0, year, number } = current;
-      setTaxRate(taxRate);
+      setTaxRate(taxRate / 100);
       setCurrentYear(year);
       setLastNumber(number);
     }
   }, [current]);
   useEffect(() => {
     const currentTotal = calculate.add(calculate.multiply(subTotal, taxRate), subTotal);
-    setTaxTotal(Number.parseFloat(calculate.multiply(subTotal, taxRate)).toFixed(2));
-    setTotal(Number.parseFloat(currentTotal).toFixed(2));
+    setTaxTotal(calculate.multiply(subTotal, taxRate));
+    setTotal(currentTotal);
   }, [subTotal, taxRate]);
 
   const addField = useRef(false);
@@ -63,7 +66,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={9}>
+        <Col className="gutter-row" span={8}>
           <Form.Item
             name="lead"
             label={translate('Lead')}
@@ -75,13 +78,15 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
           >
             <AutoCompleteAsync
               entity={'lead'}
-              displayLabels={['company']}
-              searchFields={'company'}
-              // onUpdateValue={autoCompleteUpdate}
+              displayLabels={['name']}
+              searchFields={'name'}
+              redirectLabel={'Add New Lead'}
+              withRedirect
+              urlToRedirect={'/lead'}
             />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={3}>
           <Form.Item
             label={translate('number')}
             name="number"
@@ -95,7 +100,7 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             <InputNumber min={1} style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={3}>
           <Form.Item
             label={translate('year')}
             name="year"
@@ -109,7 +114,10 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={6}>
+          <SelectCurrency />
+        </Col>
+        <Col className="gutter-row" span={4}>
           <Form.Item
             label={translate('status')}
             name="status"
@@ -124,17 +132,14 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               options={[
                 { value: 'draft', label: translate('Draft') },
                 { value: 'pending', label: translate('Pending') },
-                { value: 'sent', label: translate('Pending') },
+                { value: 'sent', label: translate('Sent') },
                 { value: 'accepted', label: translate('Accepted') },
+                { value: 'declined', label: translate('Declined') },
               ]}
             ></Select>
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={9}>
-          <Form.Item label={translate('Note')} name="note">
-            <Input />
-          </Form.Item>
-        </Col>
+
         <Col className="gutter-row" span={8}>
           <Form.Item
             name="date"
@@ -147,10 +152,10 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs()}
           >
-            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={7}>
+        <Col className="gutter-row" span={6}>
           <Form.Item
             name="expiredDate"
             label={translate('Expire Date')}
@@ -162,7 +167,12 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs().add(30, 'days')}
           >
-            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={10}>
+          <Form.Item label={translate('Note')} name="notes">
+            <Input />
           </Form.Item>
         </Col>
       </Row>
@@ -219,6 +229,8 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               style={{
                 paddingLeft: '12px',
                 paddingTop: '5px',
+                margin: 0,
+                textAlign: 'right',
               }}
             >
               {translate('Sub Total')} :
@@ -234,20 +246,21 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               name="taxRate"
               rules={[
                 {
-                  required: false,
+                  required: true,
                 },
               ]}
-              initialValue="0"
             >
-              <Select
+              <SelectAsync
                 value={taxRate}
                 onChange={handelTaxChange}
-                bordered={false}
-                options={[
-                  { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
-                ]}
-              ></Select>
+                entity="taxes"
+                outputValue="taxValue"
+                displayLabels={['taxName']}
+                withRedirect={true}
+                urlToRedirect="/taxes"
+                redirectLabel={translate('Add New Tax')}
+                placeholder={translate('Select Tax Value')}
+              />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={5}>
@@ -260,6 +273,8 @@ function LoadOfferForm({ subTotal = 0, current = null }) {
               style={{
                 paddingLeft: '12px',
                 paddingTop: '5px',
+                margin: 0,
+                textAlign: 'right',
               }}
             >
               {translate('Total')} :

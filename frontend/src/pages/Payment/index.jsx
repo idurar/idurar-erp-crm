@@ -2,15 +2,20 @@ import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
 import PaymentDataTableModule from '@/modules/PaymentModule/PaymentDataTableModule';
 
+import { useMoney, useDate } from '@/settings';
+
 export default function Payment() {
   const translate = useLanguage();
+  const { dateFormat } = useDate();
+  const { moneyFormatter } = useMoney();
   const searchConfig = {
+    entity: 'client',
     displayLabels: ['number'],
     searchFields: 'number',
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['number'];
+  const deleteModalLabels = ['number'];
   const dataTableColumns = [
     {
       title: translate('Number'),
@@ -19,17 +24,28 @@ export default function Payment() {
     },
     {
       title: translate('Client'),
-      dataIndex: ['client', 'company'],
+      dataIndex: ['client', 'name'],
     },
     {
       title: translate('Amount'),
       dataIndex: 'amount',
+      onCell: () => {
+        return {
+          style: {
+            textAlign: 'right',
+            whiteSpace: 'nowrap',
+            direction: 'ltr',
+          },
+        };
+      },
+      render: (amount, record) =>
+        moneyFormatter({ amount: amount, currency_code: record.currency }),
     },
     {
       title: translate('Date'),
       dataIndex: 'date',
       render: (date) => {
-        return dayjs(date).format('DD/MM/YYYY');
+        return dayjs(date).format(dateFormat);
       },
     },
     {
@@ -53,8 +69,6 @@ export default function Payment() {
     DATATABLE_TITLE: translate('payment_list'),
     ADD_NEW_ENTITY: translate('add_new_payment'),
     ENTITY_NAME: translate('payment'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
   };
 
   const configPage = {
@@ -63,9 +77,10 @@ export default function Payment() {
   };
   const config = {
     ...configPage,
+    disableAdd: true,
     dataTableColumns,
     searchConfig,
-    entityDisplayLabels,
+    deleteModalLabels,
   };
   return <PaymentDataTableModule config={config} />;
 }

@@ -6,12 +6,10 @@ export default function OfferCreate() {
 
   const entity = 'offer';
   const Labels = {
-    PANEL_TITLE: translate('offer'),
+    PANEL_TITLE: translate('Offer Leads'),
     DATATABLE_TITLE: translate('offer_list'),
     ADD_NEW_ENTITY: translate('add_new_offer'),
-    ENTITY_NAME: translate('offer'),
-    CREATE_ENTITY: translate('save'),
-    UPDATE_ENTITY: translate('update'),
+    ENTITY_NAME: translate('Offer Leads'),
   };
 
   const configPage = {

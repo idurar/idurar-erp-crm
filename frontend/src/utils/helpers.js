@@ -24,7 +24,7 @@ Object.byString = function (o, s) {
 };
 
 /* 
- To check only if a property exists, without getting its value. It similer get function.
+ To check only if a property exists, without getting its value. It similar get function.
 */
 export function has(obj, key) {
   return key.split('.').every(function (x) {
@@ -113,27 +113,3 @@ export const validatePhoneNumber = /^(?:[+\d()\-\s]+)$/;
 /*
  Set object value in html
 */
-export function bindValue(obj, parentElement) {
-  parentElement.querySelectorAll('[data-property]').forEach((element) => {
-    const type = element.dataset.type;
-    let value = valueByString(obj, element.dataset.property);
-    console.log({ type });
-    switch (type) {
-      case 'date':
-        value = formatDate(value);
-        break;
-
-      case 'datetime':
-        value = formatDatetime(value);
-        break;
-
-      case 'currency':
-        value = value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
-        break;
-
-      default:
-        break;
-    }
-    element.innerHTML = value;
-  });
-}

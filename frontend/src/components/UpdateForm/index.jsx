@@ -36,11 +36,11 @@ export default function UpdateForm({ config, formElements, withUpload = false })
     if (fieldsValue.file && withUpload) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
-    const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
-      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
-      return acc;
-    }, {});
-    dispatch(crud.update({ entity, id, jsonData: trimmedValues, withUpload }));
+    // const trimmedValues = Object.keys(fieldsValue).reduce((acc, key) => {
+    //   acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+    //   return acc;
+    // }, {});
+    dispatch(crud.update({ entity, id, jsonData: fieldsValue, withUpload }));
   };
   useEffect(() => {
     if (current) {
@@ -48,34 +48,34 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       if (newValues.birthday) {
         newValues = {
           ...newValues,
-          birthday: dayjs(newValues['birthday']),
+          birthday: dayjs(newValues['birthday']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.date) {
         newValues = {
           ...newValues,
-          date: dayjs(newValues['date']),
+          date: dayjs(newValues['date']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.expiredDate) {
         newValues = {
           ...newValues,
-          expiredDate: dayjs(newValues['expiredDate']),
+          expiredDate: dayjs(newValues['expiredDate']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.created) {
         newValues = {
           ...newValues,
-          created: dayjs(newValues['created']),
+          created: dayjs(newValues['created']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
       if (newValues.updated) {
         newValues = {
           ...newValues,
-          updated: dayjs(newValues['updated']),
+          updated: dayjs(newValues['updated']).format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         };
       }
-
+      form.resetFields();
       form.setFieldsValue(newValues);
     }
   }, [current]);

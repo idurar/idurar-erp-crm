@@ -106,7 +106,7 @@ export default function LeadForm() {
         ></Select>
       </Form.Item>
 
-      <Form.Item label={translate('note')} name="note">
+      <Form.Item label={translate('notes')} name="notes">
         <Input />
       </Form.Item>
 
