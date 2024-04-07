@@ -28,6 +28,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
           } else {
             field.name = key;
             if (!field.label) field.label = key;
+
             if (field.hasFeedback)
               return (
                 <FormElement
@@ -253,13 +254,6 @@ function FormElement({ field, feedback, setFeedback }) {
         style={{
           width: '100%',
         }}
-        onKeyDown={(e) => {
-          const char = e.key;
-          let alphabetic_check_regex = /^[a-zA-Z]+$/;
-          if (!alphabetic_check_regex.test(char)) {
-            e.preventDefault();
-          }
-        }}
       >
         {countryList.map((language) => (
           <Select.Option
@@ -286,15 +280,9 @@ function FormElement({ field, feedback, setFeedback }) {
             type: filedType[field.type] ?? 'any',
           },
         ]}
-        onKeyDown={(e) => {
-          const char = e.key;
-          console.log(char);
-          if (isNaN(char) && char != 'Backspace') {
-            e.preventDefault();
-          }
-        }}
       >
         <AutoCompleteAsync
+          label={field.label}
           entity={field.entity}
           displayLabels={field.displayLabels}
           searchFields={field.searchFields}
@@ -314,7 +302,6 @@ function FormElement({ field, feedback, setFeedback }) {
       <SelectWithFeedbackComponent lanchFeedback={setFeedback} feedbackValue={feedback} />
     ),
     color: <ColorComponent />,
-
     tag: <TagComponent />,
     array: <ArrayComponent />,
     country: <CountryComponent />,
@@ -323,13 +310,26 @@ function FormElement({ field, feedback, setFeedback }) {
 
   const compunedComponent = {
     string: (
-      <Input autoComplete="off" maxLength={field.maxLength} defaultValue={field.defaultValue} />
+      <Input
+        onKeyDown={(e) => {
+          const char = e.key;
+          const alphabetic_check_regex = /[a-zA-Z]/;
+          if (!alphabetic_check_regex.test(char)) {
+            e.preventDefault();
+          }
+        }}
+        autoComplete="off"
+        maxLength={field.maxLength}
+        defaultValue={field.defaultValue}
+      />
     ),
     url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
     textarea: <TextArea rows={4} />,
     email: <Input autoComplete="off" placeholder="email@example.com" />,
-    number: <InputNumber style={{ width: '100%' }} />,
-    phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
+    number: <InputNumber style={{ width: '50%' }} />,
+    phone: (
+      <Input style={{ width: '100%' }} type="number" min={0} max={9} placeholder="+1 123 456 789" />
+    ),
     boolean: (
       <Switch
         checkedChildren={<CheckOutlined />}

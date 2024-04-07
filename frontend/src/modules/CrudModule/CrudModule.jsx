@@ -27,8 +27,8 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
   const { isReadBoxOpen, isEditBoxOpen } = state;
   const { result: currentItem } = useSelector(selectCurrentItem);
   const dispatch = useDispatch();
-
   const [labels, setLabels] = useState('');
+
   useEffect(() => {
     if (currentItem) {
       const currentlabels = deleteModalLabels.map((x) => currentItem[x]).join(' ');
