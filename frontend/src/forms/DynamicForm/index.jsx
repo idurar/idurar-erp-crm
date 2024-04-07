@@ -15,10 +15,10 @@ import { useSelector } from 'react-redux';
 
 export default function DynamicForm({ fields, isUpdateForm = false }) {
   const [feedback, setFeedback] = useState();
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
 
   return (
-    <div style={{direction:langDirection}}>
+    <div style={{ direction: langDirection }}>
       {Object.keys(fields).map((key) => {
         let field = fields[key];
 
@@ -253,6 +253,13 @@ function FormElement({ field, feedback, setFeedback }) {
         style={{
           width: '100%',
         }}
+        onKeyDown={(e) => {
+          const char = e.key;
+          let alphabetic_check_regex = /^[a-zA-Z]+$/;
+          if (!alphabetic_check_regex.test(char)) {
+            e.preventDefault();
+          }
+        }}
       >
         {countryList.map((language) => (
           <Select.Option
@@ -279,6 +286,13 @@ function FormElement({ field, feedback, setFeedback }) {
             type: filedType[field.type] ?? 'any',
           },
         ]}
+        onKeyDown={(e) => {
+          const char = e.key;
+          console.log(char);
+          if (isNaN(char) && char != 'Backspace') {
+            e.preventDefault();
+          }
+        }}
       >
         <AutoCompleteAsync
           entity={field.entity}
