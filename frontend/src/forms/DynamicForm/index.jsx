@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
-
+import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag, notification } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
 import { useMoney, useDate } from '@/settings';
@@ -282,7 +281,6 @@ function FormElement({ field, feedback, setFeedback }) {
         ]}
       >
         <AutoCompleteAsync
-          label={field.label}
           entity={field.entity}
           displayLabels={field.displayLabels}
           searchFields={field.searchFields}
@@ -315,6 +313,11 @@ function FormElement({ field, feedback, setFeedback }) {
           const char = e.key;
           const alphabetic_check_regex = /[a-zA-Z]/;
           if (!alphabetic_check_regex.test(char)) {
+            notification.error({
+              message: 'Numbers Not Allowed',
+              description:
+                'Numbers are not allowed in this field. Please enter only alphabetical characters.',
+            });
             e.preventDefault();
           }
         }}

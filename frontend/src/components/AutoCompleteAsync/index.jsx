@@ -5,11 +5,10 @@ import useOnFetch from '@/hooks/useOnFetch';
 import useDebounce from '@/hooks/useDebounce';
 import { useNavigate } from 'react-router-dom';
 
-import { Select, Empty, Input } from 'antd';
+import { Select, Empty } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
 export default function AutoCompleteAsync({
-  label,
   entity,
   displayLabels,
   searchFields,
@@ -112,9 +111,6 @@ export default function AutoCompleteAsync({
     }
   }, [value]);
 
-  if (label === 'Contact') {
-    return <Input style={{ width: '100%' }} type="number" min={0} max={9} />;
-  }
   return (
     <Select
       loading={isLoading}
