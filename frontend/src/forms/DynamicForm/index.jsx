@@ -314,9 +314,8 @@ function FormElement({ field, feedback, setFeedback }) {
           const alphabetic_check_regex = /[a-zA-Z]/;
           if (!alphabetic_check_regex.test(char)) {
             notification.error({
-              message: 'Numbers Not Allowed',
-              description:
-                'Numbers are not allowed in this field. Please enter only alphabetical characters.',
+              message: 'Only Alphabetic values are allowed',
+              description: 'Please enter only alphabetical characters.',
             });
             e.preventDefault();
           }
@@ -331,7 +330,23 @@ function FormElement({ field, feedback, setFeedback }) {
     email: <Input autoComplete="off" placeholder="email@example.com" />,
     number: <InputNumber style={{ width: '50%' }} />,
     phone: (
-      <Input style={{ width: '100%' }} type="number" min={0} max={9} placeholder="+1 123 456 789" />
+      <Input
+        style={{ width: '100%' }}
+        type="number"
+        onKeyDown={(e) => {
+          const char = e.key;
+          if (isNaN(char) && char !== 'Backspace') {
+            notification.error({
+              message: 'Only Numeric values allowed',
+              description: 'Please enter only numeric value.',
+            });
+            e.preventDefault();
+          }
+        }}
+        min={0}
+        max={9}
+        placeholder="+1 123 456 789"
+      />
     ),
     boolean: (
       <Switch
