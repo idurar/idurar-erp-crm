@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
-
+import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag, notification } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
 import { useMoney, useDate } from '@/settings';
@@ -15,10 +14,10 @@ import { useSelector } from 'react-redux';
 
 export default function DynamicForm({ fields, isUpdateForm = false }) {
   const [feedback, setFeedback] = useState();
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
 
   return (
-    <div style={{direction:langDirection}}>
+    <div style={{ direction: langDirection }}>
       {Object.keys(fields).map((key) => {
         let field = fields[key];
 
@@ -28,6 +27,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
           } else {
             field.name = key;
             if (!field.label) field.label = key;
+
             if (field.hasFeedback)
               return (
                 <FormElement
@@ -300,7 +300,6 @@ function FormElement({ field, feedback, setFeedback }) {
       <SelectWithFeedbackComponent lanchFeedback={setFeedback} feedbackValue={feedback} />
     ),
     color: <ColorComponent />,
-
     tag: <TagComponent />,
     array: <ArrayComponent />,
     country: <CountryComponent />,
@@ -309,13 +308,46 @@ function FormElement({ field, feedback, setFeedback }) {
 
   const compunedComponent = {
     string: (
-      <Input autoComplete="off" maxLength={field.maxLength} defaultValue={field.defaultValue} />
+      <Input
+        onKeyDown={(e) => {
+          const char = e.key;
+          const alphabetic_check_regex = /[a-zA-Z]/;
+          if (!alphabetic_check_regex.test(char)) {
+            notification.error({
+              message: 'Only Alphabetic values are allowed',
+              description: 'Please enter only alphabetical characters.',
+            });
+            e.preventDefault();
+          }
+        }}
+        autoComplete="off"
+        maxLength={field.maxLength}
+        defaultValue={field.defaultValue}
+      />
     ),
     url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
     textarea: <TextArea rows={4} />,
     email: <Input autoComplete="off" placeholder="email@example.com" />,
-    number: <InputNumber style={{ width: '100%' }} />,
-    phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
+    number: <InputNumber style={{ width: '50%' }} />,
+    phone: (
+      <Input
+        style={{ width: '100%' }}
+        type="number"
+        onKeyDown={(e) => {
+          const char = e.key;
+          if (isNaN(char) && char !== 'Backspace') {
+            notification.error({
+              message: 'Only Numeric values allowed',
+              description: 'Please enter only numeric value.',
+            });
+            e.preventDefault();
+          }
+        }}
+        min={0}
+        max={9}
+        placeholder="+1 123 456 789"
+      />
+    ),
     boolean: (
       <Switch
         checkedChildren={<CheckOutlined />}
