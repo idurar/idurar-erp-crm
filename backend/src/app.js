@@ -1,28 +1,27 @@
+// import required packages
 const express = require('express');
-
 const cors = require('cors');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 
+// import routers and controllers
 const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
 const coreApiRouter = require('./routes/coreRoutes/coreApi');
 const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
 const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
 const coreAdminAuth = require('./controllers/coreControllers/adminAuth');
-
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
-
 const fileUpload = require('express-fileupload');
 
 // create our Express app
 const app = express();
 
-// enable CORS with specific options
+// enable CORS 
 app.use(
   cors({
-    origin: true,
-    credentials: true,
+    origin: true,          // allow request from any origin
+    credentials: true,     // allow sending cookies along with requests
   })
 );
 
@@ -30,6 +29,8 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// compressing HTTP request
 app.use(compression());
 
 // default options
