@@ -11,7 +11,7 @@ export default function Product() {
     displayLabels: ['name'],
     searchFields: 'name',
   };
-  const deleteModalLabels = ['name'];
+  const deleteModalLabels = [' ', 'name'];
 
   const Labels = {
     PANEL_TITLE: translate('Product'),

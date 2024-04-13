@@ -11,7 +11,7 @@ export default function People() {
     displayLabels: ['firstname', 'lastname'],
     searchFields: 'firstname,lastname,email',
   };
-  const deleteModalLabels = ['firstname', 'lastname'];
+  const deleteModalLabels = [' ', 'firstname', 'lastname'];
 
   const Labels = {
     PANEL_TITLE: translate('person'),

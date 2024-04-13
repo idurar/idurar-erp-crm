@@ -11,7 +11,7 @@ export default function Currency() {
     displayLabels: ['currency_name', 'currency_code', 'currency_symbol'],
     searchFields: 'currency_name,currency_code,currency_symbol',
   };
-  const deleteModalLabels = ['currency_name'];
+  const deleteModalLabels = [' ', 'currency_name'];
 
   const Labels = {
     PANEL_TITLE: translate('currency'),

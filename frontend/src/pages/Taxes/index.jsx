@@ -16,7 +16,7 @@ export default function Taxes() {
     outputValue: '_id',
   };
 
-  const deleteModalLabels = ['name'];
+  const deleteModalLabels = [' ', 'name'];
 
   const readColumns = [
     {
