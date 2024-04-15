@@ -2,7 +2,7 @@
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
     </a>
-    <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
+    <h1>Open "Fair-Code" Source ERP Software/ CRM | Node.js React.js</h1>
     <p align="center">
         <p>IDURAR ERP CRM | Simple To Use | 44 Languages </p>
     </p>
@@ -11,7 +11,7 @@
 
 ## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮
 
-IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open "Fair-Code" Source Software ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
 
@@ -21,17 +21,18 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
 
-## Translation : 
+## Translation :
 
 [French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation)
+
 ## License
 
-IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
+IDURAR is Free Open Code Source [fair-code](http://faircode.io) Software distributed under the
 [**IDURAR License 1.0**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE)
 
 ## License FAQ :
 
-## Features : 
+## Features :
 
 Invoice Management 💰
 
@@ -76,15 +77,13 @@ The Webinar will be this Wednesday at 1pm GMT.
 
 ## Free Open Source ERP / CRM App
 
-IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open "Fair-Code" Source Software ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 **Live App Demo** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 
 ## Getting started
 
-
 1.[Clone the repository](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
-
 
 2.[Create Your MongoDB Account and Database Cluster](INSTALLATION-INSTRUCTIONS.md#Step-2-Create-Your-MongoDB-Account-and-Database-Cluster)
 
