@@ -39,13 +39,13 @@ methods.delete = async (req, res) => {
 
 methods.update = async (req, res) => {
   const { id } = req.params;
-  const paymentMode = await Model.findOne({
+  const Tax = await Model.findOne({
     _id: req.params.id,
     removed: false,
   }).exec();
-  const { isDefault = paymentMode.isDefault, enabled = paymentMode.enabled } = req.body;
+  const { isDefault = Tax.isDefault, enabled = Tax.enabled } = req.body;
 
-  // Fetch the existing default payment mode
+  // Fetch the existing default Tax mode
   const existingDefault = await Model.findOne({ isDefault: true });
 
   // If the requested mode is being enabled and it's not already set as default,
@@ -60,14 +60,14 @@ methods.update = async (req, res) => {
     await Model.updateMany({ isDefault: true }, { isDefault: false });
   }
 
-  // Update the payment mode
+  // Update the Tax mode
   const result = await Model.findOneAndUpdate({ _id: id }, req.body, {
     new: true,
   });
 
   return res.status(200).json({
     success: true,
-    message: 'paymentMode updated successfully',
+    message: 'Tax updated successfully',
     result,
   });
 };
