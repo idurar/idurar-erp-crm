@@ -39,34 +39,28 @@ methods.delete = async (req, res) => {
 
 methods.update = async (req, res) => {
   const { id } = req.params;
-  const tax = await Model.findOne({
+  const Tax = await Model.findOne({
     _id: req.params.id,
     removed: false,
   }).exec();
-  const { isDefault = tax.isDefault, enabled = tax.enabled } = req.body;
+  const { isDefault = Tax.isDefault, enabled = Tax.enabled } = req.body;
 
-  // if isDefault:false , we update first - isDefault:true
-  // if enabled:false and isDefault:true , we update first - isDefault:true
-  if (!isDefault || (!enabled && isDefault)) {
-    await Model.findOneAndUpdate({ _id: { $ne: id }, enabled: true }, { isDefault: true });
+  // Fetch the existing default Tax mode
+  const existingDefault = await Model.findOne({ isDefault: true });
+
+  // If the requested mode is being enabled and it's not already set as default,
+  // and there is no other default mode, we set it as default.
+  if (!isDefault && enabled && !existingDefault) {
+    await Model.findOneAndUpdate({ _id: id }, { isDefault: true });
   }
 
-  // if isDefault:true and enabled:true, we update other taxes and make is isDefault:false
-  if (isDefault && enabled) {
-    await Model.updateMany({ _id: { $ne: id } }, { isDefault: false });
+  // If the requested mode is being set as default and there is an existing default mode,
+  // we make sure to unset the default status of the existing default mode.
+  if (isDefault && existingDefault && existingDefault._id.toString() !== id) {
+    await Model.updateMany({ isDefault: true }, { isDefault: false });
   }
 
-  const taxesCount = await Model.countDocuments({});
-
-  // if enabled:false and it's only one exist, we can't disable
-  if ((!enabled || !isDefault) && taxesCount <= 1) {
-    return res.status(422).json({
-      success: false,
-      result: null,
-      message: 'You cannot disable the tax because it is the only existing one',
-    });
-  }
-
+  // Update the Tax mode
   const result = await Model.findOneAndUpdate({ _id: id }, req.body, {
     new: true,
   });
