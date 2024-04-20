@@ -12,6 +12,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
+import Navigation from '@/apps/Navigation/ExpensesNav';
 
 const LoginPage = () => {
   const translate = useLanguage();
@@ -30,7 +31,7 @@ const LoginPage = () => {
 
   const FormContainer = () => {
     return (
-      <Loading isLoading={isLoading}>
+      <Loading isLoading={isLoading} >
         <Form
           layout="vertical"
           name="normal_login"
@@ -53,6 +54,7 @@ const LoginPage = () => {
             </Button>
           </Form.Item>
         </Form>
+        <text>don't have an account yet ? <text onClick={() => navigate("Register")}>Sign Up here</text></text>
       </Loading>
     );
   };
