@@ -313,9 +313,9 @@ function FormElement({ field, feedback, setFeedback }) {
     ),
     url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
     textarea: <TextArea rows={4} />,
-    email: <Input autoComplete="off" placeholder="email@example.com" />,
+    email: <Input autoComplete="off" type='email' placeholder="email@example.com" />,
     number: <InputNumber style={{ width: '100%' }} />,
-    phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
+    phone: <Input style={{ width: '100%' }} type='tel' placeholder="+1 123 456 789" />,
     boolean: (
       <Switch
         checkedChildren={<CheckOutlined />}
@@ -357,7 +357,7 @@ function FormElement({ field, feedback, setFeedback }) {
     string: 'string',
     textarea: 'string',
     number: 'number',
-    phone: 'string',
+    phone: 'phone',
     //boolean: 'boolean',
     // method: 'method',
     // regexp: 'regexp',
@@ -388,7 +388,11 @@ function FormElement({ field, feedback, setFeedback }) {
         rules={[
           {
             required: field.required || false,
-            type: filedType[field.type] ?? 'any',
+            //for the phone 
+            type: (filedType[field.type] != "phone" && filedType[field.type]) ?? 'any',
+            pattern: field.type=="phone" && "^[+]*[-/0-9]*$", //regex specefic //type should be any so the pattern is valid 
+            type: filedType[field.type] === 'string' ? 'string' : 'any', 
+            pattern: filedType[field.type] === 'string' ? /^[a-zA-Z].*$/ : undefined, // Validate pattern for name (string) type, it shouldn't be numerical
           },
         ]}
         valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
