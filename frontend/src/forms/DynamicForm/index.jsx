@@ -385,7 +385,7 @@ function FormElement({ field, feedback, setFeedback }) {
       <Form.Item
         label={translate(field.label)}
         name={field.name}
-        rules={[ //the change to prevent invalid input(numerical for names and last names and alphabetical for phone number)
+        rules={[ //the change to prevent invalid input( such as numerical for names and last names and alphabetical for phone number)
           {
             required: field.required || false,
             type: (field.type === 'phone' ? 'string' : (field.type === 'string' ? 'string' : 'any')), // Set type to 'string' for phone and name fields, 'any' for others
