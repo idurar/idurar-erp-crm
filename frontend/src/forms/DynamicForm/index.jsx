@@ -388,13 +388,13 @@ function FormElement({ field, feedback, setFeedback }) {
         rules={[
           {
             required: field.required || false,
-            //for the phone 
-            type: (filedType[field.type] != "phone" && filedType[field.type]) ?? 'any',
-            pattern: field.type=="phone" && "^[+]*[-/0-9]*$", //regex specefic //type should be any so the pattern is valid 
-            type: filedType[field.type] === 'string' ? 'string' : 'any', 
-            pattern: filedType[field.type] === 'string' ? /^[a-zA-Z].*$/ : undefined, // Validate pattern for name (string) type, it shouldn't be numerical
-          },
+            type: (field.type === 'phone' ? 'string' : (field.type === 'string' ? 'string' : 'any')), // Set type to 'string' for phone and name fields, 'any' for others
+            pattern: (field.type === 'phone' ? /^[+]*[-/0-9]*$/ : (field.type === 'string' ? /^[a-zA-Z\s]*$/ : undefined)), // Validate pattern for phone and name fields
+          }
         ]}
+        
+        
+        
         valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
       >
         {renderComponent}
