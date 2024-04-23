@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "新しい税金を追加",
 account_owner: "アカウントの所有者",
 create_only: "作成のみ",
 enter_code: "コードを入力",
+search:"検索"
 }
  export default lang

@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Tasa Berria Gehitu",
 account_owner: "Kontu Jabea",
 create_only: "Bakarrik Sortu",
 enter_code: "Kodea Sartu",
+search:"bilatu"
 }
  export default lang

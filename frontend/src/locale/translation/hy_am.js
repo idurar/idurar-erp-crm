@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Ավելացնել նոր արժեքավճար",
 account_owner: "Ակտիվացող Հաշիվ",
 create_only: "Միայն Ստեղծել",
 enter_code: "Մուտքագրեք Կոդը",
+search:"որոնում"
 }
  export default lang

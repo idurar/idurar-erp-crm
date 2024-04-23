@@ -4,7 +4,7 @@ import { Avatar, Dropdown, Layout } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
-import { SettingOutlined, LogoutOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined, AppstoreOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
@@ -16,6 +16,7 @@ import ChooseCurrency from '@/components/ChooseCurrency';
 
 import UpgradeButton from './UpgradeButton';
 import AppsButton from './AppsButton';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -64,7 +65,7 @@ export default function HeaderContent() {
       type: 'divider',
     },
     {
-      icon: <SettingOutlined />,
+      icon: <UserOutlined />,
       key: 'settingProfile',
       label: (
         <Link to={'/profile'}>
@@ -73,7 +74,7 @@ export default function HeaderContent() {
       ),
     },
     {
-      icon: <SettingOutlined />,
+      icon: <ToolOutlined />,
       key: 'settingApp',
       label: <Link to={'/settings'}>{translate('app_settings')}</Link>,
     },
@@ -88,14 +89,16 @@ export default function HeaderContent() {
       label: <Link to={'/logout'}>{translate('logout')}</Link>,
     },
   ];
+
+  const langDirection=useSelector(selectLangDirection)
   return (
     <Header
       style={{
         padding: '20px',
         background: '#f9fafc',
-        display: ' flex',
-        flexDirection: ' row-reverse',
-        justifyContent: ' flex-start',
+        display: 'flex',
+        flexDirection: langDirection==="rtl"?"row":'row-reverse',
+        justifyContent: 'flex-start',
         gap: ' 15px',
       }}
     >

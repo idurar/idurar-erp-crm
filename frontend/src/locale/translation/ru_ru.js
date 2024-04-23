@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Добавить новый налог",
 account_owner: "Владелец аккаунта",
 create_only: "Только создание",
 enter_code: "Введите код",
+search:"поиск"
 }
  export default lang

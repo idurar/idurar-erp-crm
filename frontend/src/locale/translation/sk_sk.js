@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Pridať novú daň",
 account_owner: "Vlastník účtu",
 create_only: "Vytvoriť iba",
 enter_code: "Zadať kód",
+search:"Vyhľadávanie"
 }
  export default lang

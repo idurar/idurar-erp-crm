@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "نئی ٹیکس شامل کریں",
 account_owner: "اکاؤنٹ مالک",
 create_only: "صرف تشکیل کریں",
 enter_code: "کوڈ درج کریں",
+search:"تلاش کریں"
 }
  export default lang

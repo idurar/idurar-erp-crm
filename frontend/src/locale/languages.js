@@ -22,7 +22,6 @@ const languages = [
   { icon: '🇬🇪 ', label: 'Georgian', value: 'ka_ge' },
   { icon: '🇩🇪 ', label: 'German', value: 'de_de' },
   { icon: '🇬🇷 ', label: 'Greek', value: 'el_gr' },
-  { icon: '🇮🇱 ', label: 'Hebrew', value: 'he_il', isRtl: true },
   { icon: '🇮🇳 ', label: 'Hindi', value: 'hi_in' },
   { icon: '🇭🇺 ', label: 'Hungarian', value: 'hu_hu' },
   { icon: '🇮🇩 ', label: 'Indonesian', value: 'id_id' },

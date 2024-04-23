@@ -452,5 +452,6 @@ ajouter_une_nouvelle_taxe: "Legg til ny skatt",
 account_owner: "Konto eier",
 create_only: "Kun opprett",
 enter_code: "Skriv inn kode",
+search:"Søk"
 }
  export default lang

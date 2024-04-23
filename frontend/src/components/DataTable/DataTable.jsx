@@ -6,6 +6,8 @@ import {
   DeleteOutlined,
   EllipsisOutlined,
   RedoOutlined,
+  ArrowRightOutlined,
+  ArrowLeftOutlined,
 } from '@ant-design/icons';
 import { Dropdown, Table, Button, Input } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -20,6 +22,7 @@ import { useMoney, useDate } from '@/settings';
 import { generate as uniqueId } from 'shortid';
 
 import { useCrudContext } from '@/context/crud';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
@@ -173,17 +176,20 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
+  const langDirection=useSelector(selectLangDirection)
+
   return (
     <>
       <PageHeader
         onBack={() => window.history.back()}
+        backIcon={langDirection==="rtl"?<ArrowRightOutlined/>:<ArrowLeftOutlined />}
         title={DATATABLE_TITLE}
         ghost={false}
         extra={[
           <Input
             key={`searchFilterDataTable}`}
             onChange={filterTable}
-            placeholder={translate('Search')}
+            placeholder={translate('search')}
             allowClear
           />,
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
@@ -194,6 +200,7 @@ export default function DataTable({ config, extra = [] }) {
         ]}
         style={{
           padding: '20px 0px',
+          direction:langDirection
         }}
       ></PageHeader>
 
