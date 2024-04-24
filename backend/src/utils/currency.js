@@ -111,6 +111,7 @@ const currencyList = [
   'UYU',
   'UZS',
   'VEF',
+  'VES',
   'VND',
   'XAF',
   'XOF',
