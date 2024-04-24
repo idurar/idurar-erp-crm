@@ -21,9 +21,10 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
 
-## Translation : 
+## Translation :
 
 [French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation)
+
 ## License
 
 IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
@@ -31,7 +32,7 @@ IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed unde
 
 ## License FAQ :
 
-## Features : 
+## Features :
 
 Invoice Management 💰
 
@@ -82,9 +83,7 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 ## Getting started
 
-
 1.[Clone the repository](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
-
 
 2.[Create Your MongoDB Account and Database Cluster](INSTALLATION-INSTRUCTIONS.md#Step-2-Create-Your-MongoDB-Account-and-Database-Cluster)
 
@@ -101,6 +100,8 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 8.[Install Frontend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-8-Install-Frontend-Dependencies)
 
 9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
+
+9.[Run Backend and Frontend Servers Concurrently](INSTALLATION-INSTRUCTIONS.md#Run-Backend-and-Frontend-Servers-Concurrently)
 
 ## Docker Compose for local development
 
