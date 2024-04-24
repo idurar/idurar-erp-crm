@@ -114,6 +114,7 @@ export const currencyList = [
   'VES',
   'VND',
   'XAF',
+  'XCD',
   'XOF',
   'YER',
   'ZAR',
