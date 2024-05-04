@@ -54,7 +54,7 @@ const LoginPage = () => {
             </Button>
           </Form.Item>
         </Form>
-        <text>don't have an account yet ? <text onClick={() => navigate("Register")}>Sign Up here</text></text>
+         <div>Don't have an account yet? <span onClick={() => navigate("Register")}>Sign Up here</span></div>
       </Loading>
     );
   };
