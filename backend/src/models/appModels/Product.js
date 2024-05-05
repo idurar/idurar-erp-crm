@@ -20,6 +20,7 @@ const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   description: String,
   number: {
@@ -95,6 +96,8 @@ const schema = new mongoose.Schema({
     default: true,
   },
 });
+
+schema.index({ name: 1 }, { unique: true });
 
 schema.plugin(require('mongoose-autopopulate'));
 
