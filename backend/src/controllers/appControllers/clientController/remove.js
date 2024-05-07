@@ -20,7 +20,7 @@ const remove = async (Model, req, res) => {
     removed: false,
   }).exec();
 
-  const [quotes, invoice] = await Promise.allSettled([resultQuotes, resultInvoice]);
+  const [quotes, invoice] = await Promise.all([resultQuotes, resultInvoice]);
   if (quotes) {
     return res.status(400).json({
       success: false,
