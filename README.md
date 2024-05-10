@@ -102,6 +102,13 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
 
+## How to Login 
+Once the website is up and running, you can log in using the following credentials:
+
+username : admin@demo.com - password : admin123
+
+Now you should be all set to run the project locally on your machine and explore its features.
+
 ## Docker Compose for local development
 
 - setup additional env variables, if necessary in the below file
