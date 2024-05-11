@@ -13,5 +13,6 @@ exports.migrate = (result) => {
   newData.address = lead.address;
   newData.people = result.people;
   newData.company = result.company;
+  newData.notes = result.notes;
   return newData;
 };
