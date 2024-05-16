@@ -11,7 +11,7 @@ export default function Company() {
     displayLabels: ['name'],
     searchFields: 'name,phone,eamil',
   };
-  const deleteModalLabels = ['name'];
+  const deleteModalLabels = [' ', 'name'];
 
   const Labels = {
     PANEL_TITLE: translate('company'),

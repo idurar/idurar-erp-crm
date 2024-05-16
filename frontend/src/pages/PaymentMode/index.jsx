@@ -16,7 +16,7 @@ export default function PaymentMode() {
     outputValue: '_id',
   };
 
-  const deleteModalLabels = ['name'];
+  const deleteModalLabels = [' ', 'name'];
 
   const readColumns = [
     {

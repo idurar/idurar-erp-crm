@@ -22,7 +22,7 @@ export default function Admin() {
     outputValue: '_id',
   };
 
-  const deleteModalLabels = ['email'];
+  const deleteModalLabels = [' ', 'email'];
 
   const readColumns = [
     { title: translate('first name'), dataIndex: 'name' },

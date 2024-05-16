@@ -15,7 +15,7 @@ export default function Payment() {
     outputValue: '_id',
   };
 
-  const deleteModalLabels = ['number'];
+  const deleteModalLabels = [' ', 'number'];
   const dataTableColumns = [
     {
       title: translate('Number'),
