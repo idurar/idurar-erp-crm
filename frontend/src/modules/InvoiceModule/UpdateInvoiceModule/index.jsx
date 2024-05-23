@@ -24,22 +24,12 @@ export default function UpdateInvoiceModule({ config }) {
     dispatch(erp.read({ entity: config.entity, id }));
   }, [id]);
 
-  const updateCurrency = (value) => {
-    console.log('🚀 ~ updateCurrency ~ value:', value);
-    dispatch(
-      settingsAction.updateCurrency({
-        data: { default_currency_code: value },
-      })
-    );
-  };
-
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
   useLayoutEffect(() => {
     if (currentResult) {
       const data = { ...currentResult };
       dispatch(erp.currentAction({ actionType: 'update', data }));
-      updateCurrency(currentResult.currency);
     }
   }, [currentResult]);
 

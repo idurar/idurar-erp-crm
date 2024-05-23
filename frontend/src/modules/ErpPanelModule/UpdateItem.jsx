@@ -112,14 +112,6 @@ export default function UpdateItem({ config, UpdateForm }) {
     }
   }, [isSuccess]);
 
-  const updateCurrency = (value) => {
-    dispatch(
-      settingsAction.updateCurrency({
-        data: { default_currency_code: value },
-      })
-    );
-  };
-
   useEffect(() => {
     if (current) {
       setCurrentErp(current);
@@ -133,8 +125,6 @@ export default function UpdateItem({ config, UpdateForm }) {
       if (!formData.taxRate) {
         formData.taxRate = 0;
       }
-
-      updateCurrency(current.currency);
 
       const { subTotal } = formData;
 

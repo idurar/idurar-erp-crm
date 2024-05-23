@@ -13,7 +13,7 @@ import HeaderContent from '@/apps/Header/HeaderContainer';
 import PageLoader from '@/components/PageLoader';
 
 import { settingsAction } from '@/redux/settings/actions';
-import { currencyAction } from '@/redux/currency/actions';
+
 import { translateAction } from '@/redux/translate/actions';
 import { selectSettings } from '@/redux/settings/selectors';
 
@@ -37,7 +37,6 @@ export default function ErpCrmApp() {
 
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
-    dispatch(currencyAction.list());
   }, []);
 
   const appSettings = useSelector(selectAppSettings);
