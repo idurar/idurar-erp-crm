@@ -31,21 +31,29 @@ exports.generatePdf = async (
     if (pugFiles.includes(modelName.toLowerCase())) {
       // Compile Pug template
 
-      const loadCurrency = async () => {
-        const datas = await getData({
-          model: 'Currency',
-        });
-        return datas;
-      };
-
       const settings = await loadSettings();
       const selectedLang = settings['idurar_app_language'];
       const translate = useLanguage({ selectedLang });
-      const currencyList = await loadCurrency();
-      const currentCurrency = currencyList.find(
-        (currency) => currency.currency_code.toLowerCase() == result.currency.toLowerCase()
-      );
-      const { moneyFormatter } = await useMoney({ settings: currentCurrency });
+
+      const {
+        currency_symbol,
+        currency_position,
+        decimal_sep,
+        thousand_sep,
+        cent_precision,
+        zero_format,
+      } = settings;
+
+      const { moneyFormatter } = useMoney({
+        settings: {
+          currency_symbol,
+          currency_position,
+          decimal_sep,
+          thousand_sep,
+          cent_precision,
+          zero_format,
+        },
+      });
       const { dateFormat } = useDate({ settings });
 
       settings.public_server_file = process.env.PUBLIC_SERVER_FILE;

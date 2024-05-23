@@ -51,13 +51,8 @@ async function setupApp() {
 
     console.log('👍 Settings created : Done!');
 
-    const Currency = require('../models/appModels/Currency');
-    const { currencyList } = require('../utils/currencyList');
     const PaymentMode = require('../models/appModels/PaymentMode');
     const Taxes = require('../models/appModels/Taxes');
-
-    await Currency.insertMany(currencyList);
-    console.log('👍 Currency created : Done!');
 
     await Taxes.insertMany([{ taxName: 'Tax 0%', taxValue: '0', isDefault: true }]);
     console.log('👍 Taxes created : Done!');

@@ -41,9 +41,6 @@ const update = async (req, res) => {
   body['items'] = items;
   body['pdf'] = 'offer-' + req.params.id + '.pdf';
 
-  if (body.hasOwnProperty('currency')) {
-    delete body.currency;
-  }
   // Find document by id and updates with the required fields
 
   const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {

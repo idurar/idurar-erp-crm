@@ -19,8 +19,6 @@ import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
 import SelectAsync from '@/components/SelectAsync';
 
-import SelectCurrency from '@/components/SelectCurrency';
-
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
 
@@ -116,10 +114,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={6}>
-          <SelectCurrency />
-        </Col>
-        <Col className="gutter-row" span={4}>
+
+        <Col className="gutter-row" span={5}>
           <Form.Item
             label={translate('status')}
             name="status"

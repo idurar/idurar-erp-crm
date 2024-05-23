@@ -58,9 +58,7 @@ const update = async (req, res) => {
   body['total'] = total;
   body['items'] = items;
   body['pdf'] = 'invoice-' + req.params.id + '.pdf';
-  if (body.hasOwnProperty('currency')) {
-    delete body.currency;
-  }
+
   // Find document by id and updates with the required fields
 
   let paymentStatus =

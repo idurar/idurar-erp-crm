@@ -7,7 +7,6 @@ import { useMoney, useDate } from '@/settings';
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import SelectAsync from '@/components/SelectAsync';
 import { generate as uniqueId } from 'shortid';
-import SelectCurrency from '@/components/SelectCurrency';
 
 import { countryList } from '@/utils/countryList';
 import { selectLangDirection } from '@/redux/translate/selectors';
@@ -15,33 +14,24 @@ import { useSelector } from 'react-redux';
 
 export default function DynamicForm({ fields, isUpdateForm = false }) {
   const [feedback, setFeedback] = useState();
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
 
   return (
-    <div style={{direction:langDirection}}>
+    <div style={{ direction: langDirection }}>
       {Object.keys(fields).map((key) => {
         let field = fields[key];
 
         if ((isUpdateForm && !field.disableForUpdate) || !field.disableForForm) {
-          if (field.type === 'selectCurrency') {
-            return <SelectCurrency />;
+          field.name = key;
+          if (!field.label) field.label = key;
+          if (field.hasFeedback)
+            return (
+              <FormElement feedback={feedback} setFeedback={setFeedback} key={key} field={field} />
+            );
+          else if (feedback && field.feedback) {
+            if (feedback == field.feedback) return <FormElement key={key} field={field} />;
           } else {
-            field.name = key;
-            if (!field.label) field.label = key;
-            if (field.hasFeedback)
-              return (
-                <FormElement
-                  feedback={feedback}
-                  setFeedback={setFeedback}
-                  key={key}
-                  field={field}
-                />
-              );
-            else if (feedback && field.feedback) {
-              if (feedback == field.feedback) return <FormElement key={key} field={field} />;
-            } else {
-              return <FormElement key={key} field={field} />;
-            }
+            return <FormElement key={key} field={field} />;
           }
         }
       })}

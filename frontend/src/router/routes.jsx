@@ -27,9 +27,6 @@ const Admin = lazy(() => import('@/pages/Admin'));
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
 const Taxes = lazy(() => import('@/pages/Taxes'));
-const Email = lazy(() => import('@/pages/Email/index'));
-const EmailRead = lazy(() => import('@/pages/Email/EmailRead'));
-const EmailUpdate = lazy(() => import('@/pages/Email/EmailUpdate'));
 const AdvancedSettings = lazy(() => import('@/pages/AdvancedSettings'));
 const Profile = lazy(() => import('@/pages/Profile'));
 const Lead = lazy(() => import('@/pages/Lead/index'));
@@ -47,7 +44,6 @@ const People = lazy(() => import('@/pages/People'));
 const Company = lazy(() => import('@/pages/Company'));
 
 const About = lazy(() => import('@/pages/About'));
-const Currency = lazy(() => import('@/pages/Currency'));
 
 let routes = {
   expense: [],
@@ -175,22 +171,6 @@ let routes = {
     {
       path: '/taxes',
       element: <Taxes />,
-    },
-    {
-      path: '/email',
-      element: <Email />,
-    },
-    {
-      path: '/email/read/:id',
-      element: <EmailRead />,
-    },
-    {
-      path: '/email/update/:id',
-      element: <EmailUpdate />,
-    },
-    {
-      path: '/settings/currency',
-      element: <Currency />,
     },
 
     {
