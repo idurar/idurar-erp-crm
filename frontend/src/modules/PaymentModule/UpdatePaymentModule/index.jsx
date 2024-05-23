@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Payment from './components/Payment';
 import { selectReadItem } from '@/redux/erp/selectors';
-import { settingsAction } from '@/redux/settings/actions';
 
 export default function UpdatePaymentModule({ config }) {
   const dispatch = useDispatch();
@@ -20,18 +19,9 @@ export default function UpdatePaymentModule({ config }) {
 
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
-  const updateCurrency = (value) => {
-    dispatch(
-      settingsAction.updateCurrency({
-        data: { default_currency_code: value },
-      })
-    );
-  };
-
   useLayoutEffect(() => {
     if (currentResult) {
       dispatch(erp.currentAction({ actionType: 'update', id, data: currentResult }));
-      updateCurrency(currentResult.currency);
     }
   }, [currentResult]);
 

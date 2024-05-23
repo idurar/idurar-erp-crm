@@ -24,7 +24,6 @@ import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 import { tagColor } from '@/utils/statusTagColor';
-import { settingsAction } from '@/redux/settings/actions';
 
 const Item = ({ item, currentErp }) => {
   const { moneyFormatter } = useMoney();
@@ -101,13 +100,6 @@ export default function ReadItem({ config, selectedItem }) {
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
   const [client, setClient] = useState({});
 
-  const updateCurrency = (value) => {
-    dispatch(
-      settingsAction.updateCurrency({
-        data: { default_currency_code: value },
-      })
-    );
-  };
   useEffect(() => {
     if (currentResult) {
       const { items, invoice, ...others } = currentResult;
@@ -119,7 +111,6 @@ export default function ReadItem({ config, selectedItem }) {
         setItemsList(invoice.items);
         setCurrentErp({ ...invoice.items, ...others, ...invoice });
       }
-      updateCurrency(currentResult.currency);
     }
     return () => {
       setItemsList([]);

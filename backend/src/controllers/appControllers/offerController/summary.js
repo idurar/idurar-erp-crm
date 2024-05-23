@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 
 const Model = mongoose.model('Offer');
-const { checkCurrency } = require('@/utils/currency');
 
 const summary = async (req, res) => {
   let defaultType = 'month';
 
-  const { type, currency } = req.query;
+  const { type } = req.query;
 
   if (type) {
     if (['week', 'month', 'year'].includes(type)) {
@@ -20,9 +19,6 @@ const summary = async (req, res) => {
       });
     }
   }
-  const currentCurrency = currency
-    ? currency.toUpperCase()
-    : settings['default_currency_code'].toUpperCase();
 
   const currentDate = moment();
   let startDate = currentDate.clone().startOf(defaultType);
@@ -34,7 +30,6 @@ const summary = async (req, res) => {
     {
       $match: {
         removed: false,
-        currency: currentCurrency,
 
         // date: {
         //   $gte: startDate.toDate(),

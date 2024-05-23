@@ -69,6 +69,7 @@ const purchaseSchema = new mongoose.Schema({
   ],
   currency: {
     type: String,
+    default: 'NA',
     uppercase: true,
     required: true,
   },
