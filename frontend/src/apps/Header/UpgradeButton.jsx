@@ -8,7 +8,7 @@ import useLanguage from '@/locale/useLanguage';
 
 const SelfHostedPlan = () => {
   const features = [
-    'Self-Hosted Version',
+    'Self-Hosted Premium Version',
     'ulimited Users',
     'Multi-Currency - ulimited currency',
     'Multi-Branch - ulimited branch',
