@@ -11,7 +11,6 @@ import { selectCurrentAdmin } from '@/redux/auth/selectors';
 import { FILE_BASE_URL } from '@/config/serverApiConfig';
 
 import useLanguage from '@/locale/useLanguage';
-import SelectLanguage from '@/components/SelectLanguage';
 
 import UpgradeButton from './UpgradeButton';
 
@@ -128,8 +127,6 @@ export default function HeaderContent() {
       {/* <AppsButton /> */}
 
       <UpgradeButton />
-
-      <SelectLanguage />
     </Header>
   );
 }
