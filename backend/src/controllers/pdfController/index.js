@@ -31,13 +31,6 @@ exports.generatePdf = async (
     if (pugFiles.includes(modelName.toLowerCase())) {
       // Compile Pug template
 
-      const loadCurrency = async () => {
-        const datas = await getData({
-          model: 'Currency',
-        });
-        return datas;
-      };
-
       const settings = await loadSettings();
       const selectedLang = settings['idurar_app_language'];
       const translate = useLanguage({ selectedLang });

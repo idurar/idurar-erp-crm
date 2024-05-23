@@ -6,7 +6,7 @@ const Model = mongoose.model('Offer');
 const summary = async (req, res) => {
   let defaultType = 'month';
 
-  const { type, currency } = req.query;
+  const { type } = req.query;
 
   if (type) {
     if (['week', 'month', 'year'].includes(type)) {

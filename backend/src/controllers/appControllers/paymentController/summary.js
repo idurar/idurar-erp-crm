@@ -7,7 +7,7 @@ const { loadSettings } = require('@/middlewares/settings');
 const summary = async (req, res) => {
   let defaultType = 'month';
 
-  const { type, currency } = req.query;
+  const { type } = req.query;
 
   const settings = await loadSettings();
 

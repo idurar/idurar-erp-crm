@@ -10,7 +10,7 @@ const setup = async (req, res) => {
   const Admin = mongoose.model('Admin');
   const AdminPassword = mongoose.model('AdminPassword');
   const Setting = mongoose.model('Setting');
-  const Currency = mongoose.model('Currency');
+
   const PaymentMode = mongoose.model('PaymentMode');
   const Taxes = mongoose.model('Taxes');
 
@@ -80,10 +80,6 @@ const setup = async (req, res) => {
   }
 
   await Setting.insertMany(settingData);
-
-  const { currencyList } = require('@/utils/currencyList');
-
-  await Currency.insertMany(currencyList);
 
   await Taxes.insertMany([{ taxName: 'Tax 0%', taxValue: '0', isDefault: true }]);
 
