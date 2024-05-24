@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import Loading from '@/components/Loading';
-import AuthModule from '@/modules/AuthModule';
+import AuthModule from '@/modules/AuthModule'; 
 
 const LoginPage = () => {
   const translate = useLanguage();
@@ -20,9 +20,18 @@ const LoginPage = () => {
   // const size = useSize();
 
   const dispatch = useDispatch();
-  const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+
+  const onFinish = async (values) => {
+    try {
+      const token = await grecaptcha.execute(YOUR_SITE_KEY, { action: 'submit' });
+      console.log(token);
+      dispatch(login({ loginData: values, recaptchaToken: token }));
+    } catch (error) {
+      console.error('Error executing reCAPTCHA:', error);
+    }
   };
+
+  
 
   useEffect(() => {
     if (isSuccess) navigate('/');
