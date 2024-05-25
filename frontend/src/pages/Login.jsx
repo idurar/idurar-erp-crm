@@ -19,9 +19,14 @@ const LoginPage = () => {
   const navigate = useNavigate();
   // const size = useSize();
 
-  const dispatch = useDispatch();
-  const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+  const onFinish = async (values) => {
+    try {
+      const token = await grecaptcha.execute(YOUR_SITE_KEY, { action: 'submit' });
+      console.log(token);
+      dispatch(login({ loginData: values, recaptchaToken: token }));
+    } catch (error) {
+      console.error('Error executing reCAPTCHA:', error);
+    }
   };
 
   useEffect(() => {
