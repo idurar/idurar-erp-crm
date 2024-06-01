@@ -7,8 +7,6 @@ const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
 
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Customer = lazy(() => import('@/pages/Customer'));
-const Inventory = lazy(() => import('@/pages/Inventory'));
-const Order = lazy(() => import('@/pages/Order'));
 const Invoice = lazy(() => import('@/pages/Invoice'));
 const InvoiceCreate = lazy(() => import('@/pages/Invoice/InvoiceCreate'));
 
@@ -22,14 +20,10 @@ const QuoteUpdate = lazy(() => import('@/pages/Quote/QuoteUpdate'));
 const Payment = lazy(() => import('@/pages/Payment/index'));
 const PaymentRead = lazy(() => import('@/pages/Payment/PaymentRead'));
 const PaymentUpdate = lazy(() => import('@/pages/Payment/PaymentUpdate'));
-const Employee = lazy(() => import('@/pages/Employee'));
-const Admin = lazy(() => import('@/pages/Admin'));
+
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
 const Taxes = lazy(() => import('@/pages/Taxes'));
-const Email = lazy(() => import('@/pages/Email/index'));
-const EmailRead = lazy(() => import('@/pages/Email/EmailRead'));
-const EmailUpdate = lazy(() => import('@/pages/Email/EmailUpdate'));
 const AdvancedSettings = lazy(() => import('@/pages/AdvancedSettings'));
 const Profile = lazy(() => import('@/pages/Profile'));
 const Lead = lazy(() => import('@/pages/Lead/index'));
@@ -47,7 +41,6 @@ const People = lazy(() => import('@/pages/People'));
 const Company = lazy(() => import('@/pages/Company'));
 
 const About = lazy(() => import('@/pages/About'));
-const Currency = lazy(() => import('@/pages/Currency'));
 
 let routes = {
   expense: [],
@@ -96,14 +89,7 @@ let routes = {
       path: '/category/product',
       element: <ProductCategory />,
     },
-    {
-      path: '/inventory',
-      element: <Inventory />,
-    },
-    {
-      path: '/order',
-      element: <Order />,
-    },
+
     {
       path: '/invoice',
       element: <Invoice />,
@@ -152,14 +138,7 @@ let routes = {
       path: '/payment/update/:id',
       element: <PaymentUpdate />,
     },
-    {
-      path: '/employee',
-      element: <Employee />,
-    },
-    {
-      path: '/admin',
-      element: <Admin />,
-    },
+
     {
       path: '/settings',
       element: <Settings />,
@@ -175,22 +154,6 @@ let routes = {
     {
       path: '/taxes',
       element: <Taxes />,
-    },
-    {
-      path: '/email',
-      element: <Email />,
-    },
-    {
-      path: '/email/read/:id',
-      element: <EmailRead />,
-    },
-    {
-      path: '/email/update/:id',
-      element: <EmailUpdate />,
-    },
-    {
-      path: '/settings/currency',
-      element: <Currency />,
     },
 
     {

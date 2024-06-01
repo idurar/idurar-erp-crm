@@ -21,14 +21,14 @@ const remove = async (Model, req, res) => {
   }).exec();
 
   const [quotes, invoice] = await Promise.allSettled([resultQuotes, resultInvoice]);
-  if (quotes) {
+  if (quotes?.value) {
     return res.status(400).json({
       success: false,
       result: null,
       message: 'Cannot delete client if client have any quote  or invoice',
     });
   }
-  if (invoice) {
+  if (invoice?.value) {
     return res.status(400).json({
       success: false,
       result: null,

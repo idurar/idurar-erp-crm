@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import useLanguage from '@/locale/useLanguage';
 
 import { settingsAction } from '@/redux/settings/actions';
-import { currencyAction } from '@/redux/currency/actions';
 import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
@@ -16,7 +15,12 @@ import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 
 import Loading from '@/components/Loading';
-import { ArrowLeftOutlined, ArrowRightOutlined, CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
+  CloseCircleOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
 
 import { useNavigate } from 'react-router-dom';
 import { selectLangDirection } from '@/redux/translate/selectors';
@@ -41,7 +45,6 @@ export default function CreateItem({ config, CreateForm }) {
 
   useEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
-    dispatch(currencyAction.list());
   }, []);
   let { entity } = config;
 
@@ -100,15 +103,14 @@ export default function CreateItem({ config, CreateForm }) {
     }
     dispatch(erp.create({ entity, jsonData: fieldsValue }));
   };
-const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
   return (
     <>
       <PageHeader
         onBack={() => {
           navigate(`/${entity.toLowerCase()}`);
         }}
-        backIcon={langDirection==="rtl"?<ArrowRightOutlined/>:<ArrowLeftOutlined />}
-
+        backIcon={langDirection === 'rtl' ? <ArrowRightOutlined /> : <ArrowLeftOutlined />}
         title={translate('New')}
         ghost={false}
         tags={<Tag>{translate('Draft')}</Tag>}

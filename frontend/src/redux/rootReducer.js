@@ -6,7 +6,6 @@ import { reducer as erpReducer } from './erp';
 import { reducer as adavancedCrudReducer } from './adavancedCrud';
 import { reducer as settingsReducer } from './settings';
 import { reducer as translateReducer } from './translate';
-import { reducer as currencyReducer } from './currency';
 
 // Combine all reducers.
 
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
   adavancedCrud: adavancedCrudReducer,
   settings: settingsReducer,
   translate: translateReducer,
-  currency: currencyReducer,
 });
 
 export default rootReducer;
