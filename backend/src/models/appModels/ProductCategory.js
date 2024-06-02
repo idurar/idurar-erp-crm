@@ -13,6 +13,7 @@ const productCategorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   description: String,
   color: {
@@ -72,5 +73,7 @@ const productCategorySchema = new mongoose.Schema({
     default: true,
   },
 });
+
+productCategorySchema.index({ name: 1 }, { unique: true });
 
 module.exports = mongoose.model('ProductCategory', productCategorySchema);
