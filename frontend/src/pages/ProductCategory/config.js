@@ -16,6 +16,5 @@ export const fields = {
   },
   enabled: {
     type: 'boolean',
-    required: true,
   },
 };
