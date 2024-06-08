@@ -115,6 +115,10 @@ This will build the images and bring up the containers for frontend, backend and
 
 **_NOTE:_** This docker-compose setup is associated for local development only.
 
+## One-Click Deployment
+
+[![Deploy to RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploylobe.svg)](https://repocloud.io/details/?app_id=295)
+
 ## Contributing
 
 1.[How to contribute](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#how-to-contribute)
