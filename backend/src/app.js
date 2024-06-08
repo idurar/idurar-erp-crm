@@ -1,8 +1,8 @@
 const express = require('express');
+const helmet = require('helmet');
 
 const cors = require('cors');
 const compression = require('compression');
-
 const cookieParser = require('cookie-parser');
 
 const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
@@ -24,6 +24,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(helmet());
 
 app.use(cookieParser());
 app.use(express.json());
