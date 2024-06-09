@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
-
+const { nanoid } = require('nanoid');
+const { z } = require('zod');
+const firstNameSchema = z.string().min(1).max(50);
+const lastNameSchema = z.string().min(1).max(50);
+const phoneNoschema = z.number().int().positive();
+const emailschema = z.string().email();
+const countrySchema = z.string().min(2).max(2);
 const schema = new mongoose.Schema({
   removed: {
     type: Boolean,
@@ -14,11 +20,19 @@ const schema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true,
+    validate: {
+      validator: (value) => firstNameSchema.safeParse(value).success,
+      message: (props) => `Invalid first name: ${firstNameSchema.safeParse(props.value).error}`,
+    },
   },
   lastname: {
     type: String,
     trim: true,
     required: true,
+    validate: {
+      validator: (value) => lastNameSchema.safeParse(value).success,
+      message: (props) => `Invalid last name: ${lastNameSchema.safeParse(props.value).error}`,
+    },
   },
   isClient: {
     type: Boolean,
@@ -107,10 +121,18 @@ const schema = new mongoose.Schema({
   country: {
     type: String,
     trim: true,
+    validate: {
+      validator: (value) => countrySchema.safeParse(value).success,
+      message: (props) => `Invalid country: ${countrySchema.safeParse(props.value).error}`,
+    },
   },
   phone: {
-    type: String,
+    type: Number,
     trim: true,
+    validate: {
+      validator: (value) => phoneNoschema.safeParse(value).success,
+      message: (props) => `Invalid phone number: ${phoneNoschema.safeParse(props.value).error}`,
+    },
   },
   otherPhone: [
     {
@@ -122,6 +144,10 @@ const schema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
+    validate: {
+      validator: (value) => emailschema.safeParse(value).success,
+      message: (props) => `Invalid email: ${emailschema.safeParse(props.value).error}`,
+    },
   },
 
   otherEmail: [
