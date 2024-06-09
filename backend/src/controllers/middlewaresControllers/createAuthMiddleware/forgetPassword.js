@@ -33,6 +33,13 @@ const forgetPassword = async (req, res, { userModel }) => {
   }
 
   const user = await User.findOne({ email: email, removed: false });
+  if (!user)
+    return res.status(404).json({
+      success: false,
+      result: null,
+      message: 'No account with this email has been registered.',
+    });
+  
   const databasePassword = await UserPassword.findOne({ user: user._id, removed: false });
 
   if (!user.enabled)
@@ -40,14 +47,6 @@ const forgetPassword = async (req, res, { userModel }) => {
       success: false,
       result: null,
       message: 'Your account is disabled, contact your account adminstrator',
-    });
-
-  // console.log(user);
-  if (!user)
-    return res.status(404).json({
-      success: false,
-      result: null,
-      message: 'No account with this email has been registered.',
     });
 
   const resetToken = shortid.generate();
