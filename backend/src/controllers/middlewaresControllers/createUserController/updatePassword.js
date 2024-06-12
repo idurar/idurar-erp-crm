@@ -3,52 +3,51 @@ const bcrypt = require('bcryptjs');
 const { generate: uniqueId } = require('shortid');
 
 const updatePassword = async (userModel, req, res) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
+  try {
+    const UserPasswordModel = mongoose.model(userModel + 'Password');
+    const reqUserName = userModel.toLowerCase();
+    const user = req[reqUserName];
+    const { password } = req.body;
 
-  const reqUserName = userModel.toLowerCase();
-  const userProfile = req[reqUserName];
-
-  let { password } = req.body;
-
-  if (password.length < 8)
-    return res.status(400).json({
-      msg: 'The password needs to be at least 8 characters long.',
-    });
-
-  // Find document by id and updates with the required fields
-
-  const salt = uniqueId();
-
-  const passwordHash = bcrypt.hashSync(salt + password);
-
-  const UserPasswordData = {
-    password: passwordHash,
-    salt: salt,
-  };
-
-  const resultPassword = await UserPassword.findOneAndUpdate(
-    { user: req.params.id, removed: false },
-    { $set: UserPasswordData },
-    {
-      new: true, // return the new result instead of the old one
+    if (password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: 'The password needs to be at least 8 characters long.',
+      });
     }
-  ).exec();
 
-  // Code to handle the successful response
+    const salt = await bcrypt.genSalt(10); // Generate a salt with cost factor 10
+    const passwordHash = await bcrypt.hash(password, salt);
 
-  if (!resultPassword) {
-    return res.status(403).json({
+    const userPasswordData = {
+      password: passwordHash,
+      salt: salt,
+    };
+
+    const updatedUserPassword = await UserPasswordModel.findOneAndUpdate(
+      { user: user._id, removed: false },
+      { $set: userPasswordData },
+      { new: true }
+    );
+
+    if (!updatedUserPassword) {
+      return res.status(404).json({
+        success: false,
+        message: "User's password couldn't be updated.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: `Password updated for user with ID: ${user._id}`,
+    });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).json({
       success: false,
-      result: null,
-      message: "User Password couldn't save correctly",
+      message: 'Internal server error.',
     });
   }
-
-  return res.status(200).json({
-    success: true,
-    result: {},
-    message: 'we update the password by this id: ' + userProfile._id,
-  });
 };
 
 module.exports = updatePassword;
