@@ -175,9 +175,9 @@ function Sidebar({ collapsible, isMobile = false }) {
       collapsed={collapsible ? isNavMenuClose : collapsible}
       onCollapse={onCollapse}
       className="navigation"
-      width={256}
+      width={270}
       style={{
-        overflow: 'auto',
+      
         height: '100vh',
         direction: langDirection,
         position: isMobile ? 'absolute' : 'relative',
@@ -185,6 +185,7 @@ function Sidebar({ collapsible, isMobile = false }) {
         ...(!isMobile && {
           background: 'none',
           border: 'none',
+          boxShadow:'0px 0px 20px 3px rgba(150, 190, 238, 0.15)',
           [langDirection === 'rtl' ? 'right' : 'left']: '20px',
           top: '20px',
           borderRadius: '8px',
