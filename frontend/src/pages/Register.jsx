@@ -9,20 +9,20 @@ import { Form, Button } from 'antd';
 
 import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
-import LoginForm from '@/forms/LoginForm';
+// import LoginForm from '@/forms/LoginForm';
+import RegisterForm from '@/forms/RegisterForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
-import RegisterForm from '@/forms/RegisterForm';
-
 import { Typography } from 'antd';
 
 const { Text } = Typography;
 
-const LoginPage = () => {
+
+const RegisterPage = () => {
   const translate = useLanguage();
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
-  // const size = useSize();
+//   const size = useSize();
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
@@ -45,7 +45,7 @@ const LoginPage = () => {
           }}
           onFinish={onFinish}
         >
-          <LoginForm />
+          <RegisterForm />
           <Form.Item>
             <Button
               type="primary"
@@ -54,13 +54,13 @@ const LoginPage = () => {
               loading={isLoading}
               size="large"
             >
-              {translate('Log in')}
+              {translate('Register')}
             </Button>
-            <Text style={{ color: 'grey',cursor:"pointer" }}>
-              Don't have an account? <Text strong style={{ color: 'black' ,cursor:"pointer"}} onClick={() => {
-                navigate("/register")
-              }} className="hover-underline">Register</Text>
-            </Text>          
+            <Text style={{ color: 'grey' }}>
+            Already have an account? <Text strong style={{ color: 'black',cursor:"pointer" }} onClick={() => {
+                navigate("/")
+            }} className="hover-underline">Login</Text>
+            </Text>
           </Form.Item>
         </Form>
       </Loading>
@@ -70,4 +70,4 @@ const LoginPage = () => {
   return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
 };
 
-export default LoginPage;
+export default RegisterPage;
