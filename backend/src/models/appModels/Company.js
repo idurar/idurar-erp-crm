@@ -31,7 +31,7 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  peoples: [{ type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true }],
+  people: [{ type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true }],
   mainContact: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
   icon: {
     type: String,

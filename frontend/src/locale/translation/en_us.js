@@ -432,7 +432,7 @@ const lang = {
   do_you_need_help_on_customize_of_this_app: 'Do You Need Help On Customize Of This App',
   contact_us: 'Contact Us',
   customers: 'Customers',
-  peoples: 'Peoples',
+  people: 'People',
   companies: 'Companies',
   leads: 'Leads',
   offer_leads: 'Offer Leads',

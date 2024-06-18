@@ -64,7 +64,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'people',
       icon: <UserOutlined />,
-      label: <Link to={'/people'}>{translate('peoples')}</Link>,
+      label: <Link to={'/people'}>{translate('people')}</Link>,
     },
     {
       key: 'company',
