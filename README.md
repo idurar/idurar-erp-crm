@@ -32,6 +32,7 @@ IDURAR is Free Open Source [fair-code](http://faircode.io) distributed under the
 
 ### Upgrade to IDURAR Premium :
 
+## Features :
 - [https://cloud.idurarapp.com/checkout/selfhosted/month/pri_01hyjjay1njx5vz1z6e1vdy1eg](https://cloud.idurarapp.com/checkout/selfhosted/month/pri_01hyjjay1njx5vz1z6e1vdy1eg)
 
 ## Features :
@@ -96,6 +97,8 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 8.[Install Frontend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-8-Install-Frontend-Dependencies)
 
 9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
+
+9.[Run Backend and Frontend Servers Concurrently](INSTALLATION-INSTRUCTIONS.md#Run-Backend-and-Frontend-Servers-Concurrently)
 
 ## Docker Compose for local development
 

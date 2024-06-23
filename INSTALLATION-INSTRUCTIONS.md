@@ -90,10 +90,23 @@ npm run dev
 
 This command will start the frontend server, and you'll be able to access the website on localhost:3000 in your web browser.
 
+#### Run Backend and Frontend Servers Concurrently
+
+To run both the backend and frontend servers concurrently, you
+have to follow these steps:
+
+```bash
+cd frontend
+```
+
+```bash
+npm run dev:concurrent
+```
+
+
 :exclamation: :warning:` If you encounter an OpenSSL error while running the frontend server, follow these additional steps:`
 
 Reason behind error: This is caused by the node.js V17 compatible issues with OpenSSL, see [this](https://github.com/nodejs/node/issues/40547) and [this](https://github.com/webpack/webpack/issues/14532) issue on GitHub.
-
 
 Try one of these and error will be solved
 
