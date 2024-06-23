@@ -29,8 +29,8 @@ const adminSchema = new Schema({
   },
   role: {
     type: String,
-    default: 'employee',
-    enum: ['owner', 'admin', 'manager', 'employee', 'create_only', 'read_only'],
+    default: 'owner',
+    enum: ['owner'],
   },
 });
 

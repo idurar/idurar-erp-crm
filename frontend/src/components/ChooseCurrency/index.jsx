@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { settingsAction } from '@/redux/settings/actions';
-
 import { Select, Form } from 'antd';
 
 import { currencyOptions } from '@/utils/currencyList';
@@ -35,16 +33,6 @@ export const ChooseCurrency = () => {
 
   const money_format_settings = useSelector(selectMoneyFormat);
 
-  const updateCurrency = (value) => {
-    const currency = selectOptions.find((x) => x.currency_code === value);
-
-    dispatch(
-      settingsAction.updateCurrency({
-        data: { default_currency_code: currency.currency_code },
-      })
-    );
-  };
-
   const handleSelectChange = (newValue) => {
     if (newValue === 'redirectURL') {
       navigate('/settings/currency');
@@ -76,7 +64,6 @@ export const ChooseCurrency = () => {
           (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
         }
         options={optionsList()}
-        onSelect={updateCurrency}
         onChange={handleSelectChange}
         style={{
           width: isMobile ? '90px' : '130px',

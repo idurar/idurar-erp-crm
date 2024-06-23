@@ -27,16 +27,17 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 ## License
 
-IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
+IDURAR is Free Open Source [fair-code](http://faircode.io) distributed under the
 [**IDURAR License 1.0**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE)
 
-## License FAQ :
+### Upgrade to IDURAR Premium :
+
+## Features :
+- [https://cloud.idurarapp.com/checkout/selfhosted/month/pri_01hyjjay1njx5vz1z6e1vdy1eg](https://cloud.idurarapp.com/checkout/selfhosted/month/pri_01hyjjay1njx5vz1z6e1vdy1eg)
 
 ## Features :
 
 Invoice Management 💰
-
-Inventory Management 🧳
 
 Accounting Management 📈
 
@@ -49,10 +50,6 @@ Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) 👨‍💻
 ### May i can use IDURAR for Commercial use :
 
 - Yes You can use IDURAR for free for personal or Commercial use.
-
-### May i can customize IDURAR as Saas and provide it to other users ?
-
-No, you cannot customize IDURAR as a SaaS and provide it to other users , You are not allowed to provide IDURAR software to third parties as a hosted or managed service or as softwase as service (Saas), where the service provides users with access to any substantial set of the features or functionality of this software.
 
 ### For custom developement service or premium Support :
 
