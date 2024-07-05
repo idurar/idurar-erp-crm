@@ -3,20 +3,12 @@ import { Layout, Row, Col } from 'antd';
 import { selectLangDirection } from '@/redux/translate/selectors';
 import { useSelector } from 'react-redux';
 import { Content } from 'antd/lib/layout/layout';
-import SelectLanguage from '@/components/SelectLanguage';
+
 export default function AuthLayout({ sideContent, children }) {
   const langDirection = useSelector(selectLangDirection)
 
   return (
     <Layout style={{ textAlign: langDirection === "rtl" ? "right" : "left",direction:langDirection}}>
-      <Content
-          style={{
-            padding: '10px 20px'
-          }}
-
-        >
-          <SelectLanguage />
-        </Content>
         <Row>
           <Col
             xs={{ span: 0, order: 2 }}
