@@ -42,7 +42,8 @@ const SelectLanguage = () => {
         style={{
           width: isMobile ? '100px' : '130px',
           float: 'right',
-          marginTop: '5px',
+          marginTop: '10px',
+          marginRight: '10px',
           cursor: 'pointer',
           direction: 'ltr',
         }}
