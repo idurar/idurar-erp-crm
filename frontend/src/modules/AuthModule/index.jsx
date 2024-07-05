@@ -5,7 +5,6 @@ import { Layout, Col, Divider, Typography } from 'antd';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from './SideContent';
 import SelectLanguage from '@/components/SelectLanguage';
-
 import logo from '@/style/images/idurar-crm-erp.svg';
 import { selectLangDirection } from '@/redux/translate/selectors';
 import { useSelector } from 'react-redux';
@@ -17,7 +16,7 @@ const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
   const translate = useLanguage();
   return (
       <AuthLayout sideContent={<SideContent />}>
-      
+        <SelectLanguage />
         <Content
           style={{
             padding: isForRegistre ? '40px 30px 30px' : '100px 30px 30px',
