@@ -20,11 +20,11 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    console.log("Finsihed")
+    console.log(values);
     dispatch(register({ registerData: values }));
-    navigate('/')
+    navigate('/');
   };
-  
+
   const FormContainer = () => {
     return (
       <Loading isLoading={isLoading}>

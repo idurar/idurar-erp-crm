@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
 const mongoose = require('mongoose');
-
 const checkAndCorrectURL = require('./checkAndCorrectURL');
 const sendMail = require('./sendMail');
-
 const { loadSettings } = require('@/middlewares/settings');
 const { useAppSettings } = require('@/settings');
+const AdminPassword = require('@/models/coreModels/AdminPassword');
 
 const register = async (req, res, { userModel }) => {
-  const UserPasswordModel = mongoose.model(userModel + 'Password');
-  const UserModel = mongoose.model(userModel);
+  const UserModel = new mongoose.model(userModel);
+  const PasswordInstance = new AdminPassword();
+
   const { name, email, password, country } = req.body;
 
   // validate
@@ -44,10 +44,8 @@ const register = async (req, res, { userModel }) => {
       message: 'An account with this email already exists.',
     });
 
-  //  authUser if your has correct password
   const salt = await bcrypt.genSalt(10);
-  console.log(salt)
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPassword = await PasswordInstance.generateHash(salt, password);
   const newUser = {
     name: name,
     email: email,
@@ -56,17 +54,31 @@ const register = async (req, res, { userModel }) => {
   };
 
   const createdUser = await UserModel.create(newUser);
-  const newUserPassword = {
+  const newUserPassword = new AdminPassword({
     removed: false,
     user: createdUser,
     password: hashedPassword,
     salt: salt,
     emailVerified: false,
-    authType: "email",
-    loggedSessions: []
-  }
-  const databasePassword = await UserPasswordModel.create(newUserPassword);
-  if (!createdUser || !databasePassword) {
+    authType: 'email',
+    loggedSessions: [],
+  });
+
+  const newPassword = await newUserPassword.save();
+  const settings = useAppSettings();
+  const idurar_app_email = settings['idurar_app_email'];
+  const idurar_base_url = settings['idurar_base_url'];
+  const url = checkAndCorrectURL(idurar_base_url);
+  const link = url + '/verify/' + createdUser._id + '/' + newPassword.emailToken;
+  await sendMail({
+    email,
+    name,
+    link,
+    idurar_app_email,
+    emailToken: newPassword.emailToken,
+  });
+
+  if (!createdUser || !newUserPassword) {
     return res.status(500).json({
       success: false,
       result: null,
@@ -74,9 +86,9 @@ const register = async (req, res, { userModel }) => {
     });
   } else {
     const success = {
-      success: true
-    }
-    const newUser = {...createdUser, ...success}
+      success: true,
+    };
+    const newUser = { ...createdUser, ...success };
     return res.status(200).json(newUser);
   }
 };
