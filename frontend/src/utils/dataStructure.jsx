@@ -20,7 +20,7 @@ export const dataForRead = ({ fields, translate }) => {
   return columns;
 };
 
-export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) {
+export function dataForTable({ fields, translate, moneyFormatter, dateFormat, handleSwitchEdit }) {
   let columns = [];
 
   Object.keys(fields).forEach((key) => {
@@ -43,6 +43,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
             checked={record[key]}
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
+            onChange={() => handleSwitchEdit(record, key)}
           />
         ),
       },
