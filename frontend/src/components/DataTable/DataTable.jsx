@@ -84,6 +84,16 @@ export default function DataTable({ config, extra = [] }) {
     panel.open();
     collapsedBox.open();
   }
+  function handleSwitchEdit(record, key) {
+    const newRecord = {
+      ...record,
+      [key]: !record[key]
+    }
+    dispatch(crud.update({ entity, id: newRecord._id, jsonData: newRecord }))
+      .then(() => {
+        dispatch(crud.list({ entity }));
+      });
+  }
   function handleDelete(record) {
     dispatch(crud.currentAction({ actionType: 'delete', data: record }));
     modal.open();
@@ -99,7 +109,7 @@ export default function DataTable({ config, extra = [] }) {
 
   let dispatchColumns = [];
   if (fields) {
-    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat })];
+    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat, handleSwitchEdit })];
   } else {
     dispatchColumns = [...dataTableColumns];
   }
