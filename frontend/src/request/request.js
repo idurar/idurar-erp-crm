@@ -48,13 +48,15 @@ const request = {
       return errorHandler(error);
     }
   },
-  update: async ({ entity, id, jsonData }) => {
+  update: async ({ entity, id, jsonData, switchUpdate }) => {
     try {
       const response = await axios.patch(entity + '/update/' + id, jsonData);
-      successHandler(response, {
-        notifyOnSuccess: true,
-        notifyOnFailed: true,
-      });
+      if(!switchUpdate) {
+        successHandler(response, {
+          notifyOnSuccess: true,
+          notifyOnFailed: true,
+        });
+      }
       return response.data;
     } catch (error) {
       return errorHandler(error);
