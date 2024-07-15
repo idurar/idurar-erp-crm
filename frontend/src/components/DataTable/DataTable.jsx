@@ -89,7 +89,7 @@ export default function DataTable({ config, extra = [] }) {
       ...record,
       [key]: !record[key]
     }
-    dispatch(crud.update({ entity, id: newRecord._id, jsonData: newRecord }))
+    dispatch(crud.update({ entity, id: newRecord._id, jsonData: newRecord, switchUpdate: true }))
       .then(() => {
         dispatch(crud.list({ entity }));
       });
