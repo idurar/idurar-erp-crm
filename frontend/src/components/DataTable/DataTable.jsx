@@ -159,7 +159,12 @@ export default function DataTable({ config, extra = [] }) {
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
-  const { pagination, items: dataSource } = listResult;
+  const sortedItems = [...listResult.items].sort((a, b) => a.name.localeCompare(b.name));
+
+  const { pagination, items: dataSource } = {
+    ...listResult,
+    items: sortedItems,
+  };
 
   const dispatch = useDispatch();
 
