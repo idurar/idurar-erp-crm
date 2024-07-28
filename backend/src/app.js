@@ -18,12 +18,7 @@ const fileUpload = require('express-fileupload');
 // create our Express app
 const app = express();
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());
@@ -35,7 +30,12 @@ app.use(compression());
 // app.use(fileUpload());
 
 // Here our API Routes
-
+// app.use('/', (req, res) => {
+//   res.json({
+//     message: 'Welcome page',
+//     status: true,
+//   });
+// });
 app.use('/api', coreAuthRouter);
 app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
 app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
