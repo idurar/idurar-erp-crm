@@ -9,9 +9,9 @@ import useLanguage from '@/locale/useLanguage';
 const SelfHostedPlan = () => {
   const features = [
     'Self-Hosted Premium Version',
-    'ulimited Users',
-    'Multi-Currency - ulimited currency',
-    'Multi-Branch - ulimited branch',
+    'Unlimited Users',
+    'Multi-Currency - Unlimited currency',
+    'Multi-Branch - Unlimited branch',
     'Free 1 year update',
     '24/7 priority support',
   ];
