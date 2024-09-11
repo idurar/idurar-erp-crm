@@ -23,8 +23,12 @@ export default function Settings() {
   const content = [
     {
       key: 'general_settings',
-      label: translate('General Settings'),
-      icon: <SettingOutlined />,
+      label: (
+        <span onClick={(e) => e.stopPropagation()}>
+          <SettingOutlined />
+          {translate('General Settings')}
+        </span>
+      ),
       children: <GeneralSettings />,
     },
     {
