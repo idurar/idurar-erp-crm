@@ -167,7 +167,8 @@ function Sidebar({ collapsible, isMobile = false }) {
   const onCollapse = () => {
     navMenu.collapse();
   };
-
+  
+  
   const langDirection = useSelector(selectLangDirection);
   return (
     <Sider
@@ -175,7 +176,7 @@ function Sidebar({ collapsible, isMobile = false }) {
       collapsed={collapsible ? isNavMenuClose : collapsible}
       onCollapse={onCollapse}
       className="navigation"
-      width={256}
+      width={240}
       style={{
         overflow: 'auto',
         height: '100vh',
