@@ -57,20 +57,22 @@ export default function UpgradeButton() {
   };
 
   return (
-    <Popover content={<Content />} trigger="click">
-      <Badge count={1} size="small">
-        <Avatar
-          icon={<RocketOutlined />}
-          style={{
-            color: '#f56a00',
-            backgroundColor: '#FFF',
-            float: 'right',
-            marginTop: '5px',
-            cursor: 'pointer',
-          }}
-        />
-      </Badge>
-    </Popover>
+    <Button
+      type="primary"
+      style={{
+        float: 'right',
+        marginTop: '5px',
+        cursor: 'pointer',
+        background: '#f56a00',
+        boxShadow: '0 2px 0 #f56a22',
+      }}
+      icon={<RocketOutlined />}
+      onClick={() => {
+        window.open(`https://cloud.idurarapp.com/`);
+      }}
+    >
+      {translate('Try Premium Version')}
+    </Button>
   );
 }
 

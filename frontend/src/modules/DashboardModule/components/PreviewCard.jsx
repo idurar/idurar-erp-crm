@@ -124,8 +124,8 @@ export default function PreviewCard({
       className="gutter-row"
       xs={{ span: 24 }}
       sm={{ span: 24 }}
-      md={{ span: 8 }}
-      lg={{ span: 8 }}
+      md={{ span: 12 }}
+      lg={{ span: 12 }}
     >
       <div className="pad20">
         <h3

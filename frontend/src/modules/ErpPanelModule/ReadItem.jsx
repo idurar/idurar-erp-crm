@@ -120,7 +120,7 @@ export default function ReadItem({ config, selectedItem }) {
 
   useEffect(() => {
     if (currentErp?.client) {
-      setClient(currentErp.client[currentErp.client.type]);
+      setClient(currentErp.client);
     }
   }, [currentErp]);
 

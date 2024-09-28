@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Dropdown, Layout } from 'antd';
+import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
@@ -13,8 +13,6 @@ import { FILE_BASE_URL } from '@/config/serverApiConfig';
 import useLanguage from '@/locale/useLanguage';
 
 import UpgradeButton from './UpgradeButton';
-
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -86,14 +84,13 @@ export default function HeaderContent() {
     },
   ];
 
-  const langDirection = useSelector(selectLangDirection);
   return (
     <Header
       style={{
         padding: '20px',
-        background: '#f9fafc',
+        background: '#ffffff',
         display: 'flex',
-        flexDirection: langDirection === 'rtl' ? 'row' : 'row-reverse',
+        flexDirection: 'row-reverse',
         justifyContent: 'flex-start',
         gap: ' 15px',
       }}
@@ -127,6 +124,34 @@ export default function HeaderContent() {
       {/* <AppsButton /> */}
 
       <UpgradeButton />
+
+      <Badge count={1} size="small">
+        <Button
+          type="primary"
+          style={{
+            float: 'right',
+            marginTop: '5px',
+            cursor: 'pointer',
+            background: '#16923e',
+            boxShadow: '0 2px 0 rgb(82 196 26 / 20%)',
+          }}
+          onClick={() => {
+            window.open(`https://www.idurarapp.com/contact-us/`);
+          }}
+        >
+          {translate('Customize this App')}
+        </Button>
+        {/* <Avatar
+          icon={<RocketOutlined />}
+          style={{
+            color: '#f56a00',
+            backgroundColor: '#FFF',
+            float: 'right',
+            marginTop: '5px',
+            cursor: 'pointer',
+          }}
+        /> */}
+      </Badge>
     </Header>
   );
 }

@@ -1,8 +1,6 @@
 import { Form, Input, InputNumber, Select, Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
-import { useSelector } from 'react-redux';
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 const formItems = [
   {
@@ -16,43 +14,17 @@ const formItems = [
     valueType: 'number',
   },
   {
-    label: 'last_offer_number',
-    settingKey: 'last_offer_number',
-    valueType: 'number',
-  },
-  {
     label: 'last_payment_number',
     settingKey: 'last_payment_number',
     valueType: 'number',
   },
-  // {
-  //   label: 'invoice_prefix',
-  //   settingKey: 'invoice_prefix',
-  //   valueType: 'string',
-  // },
-  // {
-  //   label: 'quote_prefix',
-  //   settingKey: 'quote_prefix',
-  //   valueType: 'string',
-  // },
-  // {
-  //   label: 'offer_prefix',
-  //   settingKey: 'offer_prefix',
-  //   valueType: 'string',
-  // },
-  // {
-  //   label: 'payment_prefix',
-  //   settingKey: 'payment_prefix',
-  //   valueType: 'string',
-  // },
 ];
 
 export default function SettingForm() {
   const translate = useLanguage();
-  const langDirection=useSelector(selectLangDirection)
 
   return (
-    <div style={{direction:langDirection}}>
+    <div>
       {formItems.map((item) => {
         return (
           <Form.Item

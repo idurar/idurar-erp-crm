@@ -26,7 +26,7 @@ export default function Payment({ config, currentItem }) {
   const [client, setClient] = useState({});
   useEffect(() => {
     if (currentErp?.client) {
-      setClient(currentErp.client[currentErp.client.type]);
+      setClient(currentErp.client);
     }
   }, [currentErp]);
 
@@ -40,10 +40,6 @@ export default function Payment({ config, currentItem }) {
     }
     return () => controller.abort();
   }, [currentItem]);
-
-  useEffect(() => {
-    console.info('itemslist', itemslist);
-  }, [itemslist]);
 
   return (
     <>

@@ -8,13 +8,12 @@ import { Layout } from 'antd';
 import { useAppContext } from '@/context/appContext';
 
 import Navigation from '@/apps/Navigation/NavigationContainer';
-import ExpensesNav from '@/apps/Navigation/ExpensesNav';
+
 import HeaderContent from '@/apps/Header/HeaderContainer';
 import PageLoader from '@/components/PageLoader';
 
 import { settingsAction } from '@/redux/settings/actions';
 
-import { translateAction } from '@/redux/translate/actions';
 import { selectSettings } from '@/redux/settings/selectors';
 
 import AppRouter from '@/router/AppRouter';
@@ -22,7 +21,6 @@ import AppRouter from '@/router/AppRouter';
 import useResponsive from '@/hooks/useResponsive';
 
 import storePersist from '@/redux/storePersist';
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function ErpCrmApp() {
   const { Content } = Layout;
@@ -46,16 +44,13 @@ export default function ErpCrmApp() {
   useEffect(() => {
     const { loadDefaultLang } = storePersist.get('firstVisit');
     if (appSettings.idurar_app_language && !loadDefaultLang) {
-      dispatch(translateAction.translate(appSettings.idurar_app_language));
       window.localStorage.setItem('firstVisit', JSON.stringify({ loadDefaultLang: true }));
     }
   }, [appSettings]);
-  const langDirection = useSelector(selectLangDirection);
 
   if (settingIsloaded)
     return (
-      <Layout hasSider style={{ flexDirection: langDirection === 'rtl' ? 'row-reverse' : 'row' }}>
-        {/* {currentApp === 'default' ? <Navigation /> : <ExpensesNav />} */}
+      <Layout hasSider>
         <Navigation />
 
         {isMobile ? (
