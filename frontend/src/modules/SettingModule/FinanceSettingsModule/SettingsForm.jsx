@@ -16,11 +16,6 @@ const formItems = [
     valueType: 'number',
   },
   {
-    label: 'last_offer_number',
-    settingKey: 'last_offer_number',
-    valueType: 'number',
-  },
-  {
     label: 'last_payment_number',
     settingKey: 'last_payment_number',
     valueType: 'number',
@@ -49,10 +44,10 @@ const formItems = [
 
 export default function SettingForm() {
   const translate = useLanguage();
-  const langDirection=useSelector(selectLangDirection)
+  const langDirection = useSelector(selectLangDirection);
 
   return (
-    <div style={{direction:langDirection}}>
+    <div style={{ direction: langDirection }}>
       {formItems.map((item) => {
         return (
           <Form.Item
