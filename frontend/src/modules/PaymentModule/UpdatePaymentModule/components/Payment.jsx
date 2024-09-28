@@ -32,7 +32,7 @@ export default function Payment({ config, currentItem }) {
 
   useEffect(() => {
     if (currentErp?.client) {
-      setClient(currentErp.client[currentErp.client.type]);
+      setClient(currentErp.client);
     }
   }, [currentErp]);
 

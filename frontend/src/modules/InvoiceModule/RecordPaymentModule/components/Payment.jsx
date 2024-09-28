@@ -26,7 +26,7 @@ export default function Payment({ config, currentItem }) {
   const [client, setClient] = useState({});
   useEffect(() => {
     if (currentErp?.client) {
-      setClient(currentErp.client[currentErp.client.type]);
+      setClient(currentErp.client);
     }
   }, [currentErp]);
 
