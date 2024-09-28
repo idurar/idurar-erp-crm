@@ -10,24 +10,15 @@ const schema = new mongoose.Schema({
     default: true,
   },
 
-  type: {
-    type: String,
-    default: 'company',
-    enum: ['company', 'people'],
-    required: true,
-  },
   name: {
     type: String,
     required: true,
   },
-  company: { type: mongoose.Schema.ObjectId, ref: 'Company', autopopulate: true },
-  people: { type: mongoose.Schema.ObjectId, ref: 'People', autopopulate: true },
-  convertedFrom: { type: mongoose.Schema.ObjectId, ref: 'Lead' },
-  interestedIn: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  phone: String,
+  country: String,
+  email: String,
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  source: String,
-  category: String,
   created: {
     type: Date,
     default: Date.now,

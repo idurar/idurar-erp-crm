@@ -61,16 +61,6 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <CustomerServiceOutlined />,
       label: <Link to={'/customer'}>{translate('customers')}</Link>,
     },
-    {
-      key: 'people',
-      icon: <UserOutlined />,
-      label: <Link to={'/people'}>{translate('peoples')}</Link>,
-    },
-    {
-      key: 'company',
-      icon: <ShopOutlined />,
-      label: <Link to={'/company'}>{translate('companies')}</Link>,
-    },
 
     {
       key: 'invoice',
@@ -80,7 +70,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'quote',
       icon: <FileSyncOutlined />,
-      label: <Link to={'/quote'}>{translate('proforma invoices')}</Link>,
+      label: <Link to={'/quote'}>{translate('quote')}</Link>,
     },
     {
       key: 'payment',
@@ -89,28 +79,24 @@ function Sidebar({ collapsible, isMobile = false }) {
     },
 
     {
-      label: translate('Settings'),
-      key: 'settings',
+      key: 'paymentMode',
+      label: <Link to={'/payment/mode'}>{translate('payments_mode')}</Link>,
+      icon: <WalletOutlined />,
+    },
+    {
+      key: 'taxes',
+      label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
+      icon: <ShopOutlined />,
+    },
+    {
+      key: 'generalSettings',
+      label: <Link to={'/settings'}>{translate('settings')}</Link>,
       icon: <SettingOutlined />,
-      children: [
-        {
-          key: 'generalSettings',
-          label: <Link to={'/settings'}>{translate('settings')}</Link>,
-        },
-
-        {
-          key: 'paymentMode',
-          label: <Link to={'/payment/mode'}>{translate('payments_mode')}</Link>,
-        },
-        {
-          key: 'taxes',
-          label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
-        },
-        {
-          key: 'about',
-          label: <Link to={'/about'}>{translate('about')}</Link>,
-        },
-      ],
+    },
+    {
+      key: 'about',
+      label: <Link to={'/about'}>{translate('about')}</Link>,
+      icon: <ReconciliationOutlined />,
     },
   ];
 
