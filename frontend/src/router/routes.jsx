@@ -24,18 +24,8 @@ const PaymentUpdate = lazy(() => import('@/pages/Payment/PaymentUpdate'));
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
 const Taxes = lazy(() => import('@/pages/Taxes'));
-const AdvancedSettings = lazy(() => import('@/pages/AdvancedSettings'));
-const Profile = lazy(() => import('@/pages/Profile'));
-const Lead = lazy(() => import('@/pages/Lead/index'));
-const Offer = lazy(() => import('@/pages/Offer/index'));
-const OfferCreate = lazy(() => import('@/pages/Offer/OfferCreate'));
-const OfferRead = lazy(() => import('@/pages/Offer/OfferRead'));
-const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
 
-const ExpenseCategory = lazy(() => import('@/pages/ExpenseCategory'));
-const Expense = lazy(() => import('@/pages/Expense'));
-const ProductCategory = lazy(() => import('@/pages/ProductCategory'));
-const Product = lazy(() => import('@/pages/Product'));
+const Profile = lazy(() => import('@/pages/Profile'));
 
 const People = lazy(() => import('@/pages/People'));
 const Company = lazy(() => import('@/pages/Company'));
@@ -47,14 +37,6 @@ let routes = {
   default: [
     {
       path: '/login',
-      element: <Navigate to="/" />,
-    },
-    {
-      path: '/verify/*',
-      element: <Navigate to="/" />,
-    },
-    {
-      path: '/resetpassword/*',
       element: <Navigate to="/" />,
     },
     {
@@ -80,14 +62,6 @@ let routes = {
     {
       path: '/company',
       element: <Company />,
-    },
-    {
-      path: '/product',
-      element: <Product />,
-    },
-    {
-      path: '/category/product',
-      element: <ProductCategory />,
     },
 
     {
@@ -157,40 +131,8 @@ let routes = {
     },
 
     {
-      path: '/settings/advanced',
-      element: <AdvancedSettings />,
-    },
-    {
       path: '/profile',
       element: <Profile />,
-    },
-    {
-      path: '/lead',
-      element: <Lead />,
-    },
-    {
-      path: '/offer',
-      element: <Offer />,
-    },
-    {
-      path: '/offer/create',
-      element: <OfferCreate />,
-    },
-    {
-      path: '/offer/read/:id',
-      element: <OfferRead />,
-    },
-    {
-      path: '/offer/update/:id',
-      element: <OfferUpdate />,
-    },
-    {
-      path: '/expenses',
-      element: <Expense />,
-    },
-    {
-      path: 'category/expenses',
-      element: <ExpenseCategory />,
     },
     {
       path: '*',
