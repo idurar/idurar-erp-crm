@@ -14,8 +14,6 @@ import useLanguage from '@/locale/useLanguage';
 
 import UpgradeButton from './UpgradeButton';
 
-import { selectLangDirection } from '@/redux/translate/selectors';
-
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const { Header } = Layout;
@@ -86,14 +84,13 @@ export default function HeaderContent() {
     },
   ];
 
-  const langDirection = useSelector(selectLangDirection);
   return (
     <Header
       style={{
         padding: '20px',
-        background: '#f9fafc',
+        background: '#ffffff',
         display: 'flex',
-        flexDirection: langDirection === 'rtl' ? 'row' : 'row-reverse',
+        flexDirection: 'row-reverse',
         justifyContent: 'flex-start',
         gap: ' 15px',
       }}

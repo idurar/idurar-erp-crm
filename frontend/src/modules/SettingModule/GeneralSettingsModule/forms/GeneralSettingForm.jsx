@@ -3,16 +3,13 @@ import { Input, Form, Select, Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
-import { translateAction } from '@/redux/translate/actions';
-import { countryList } from '@/utils/countryList';
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
   const dispatch = useDispatch();
-  const langDirection = useSelector(selectLangDirection);
+
   return (
-    <div style={{ direction: langDirection }}>
+    <div>
       <Form.Item
         label={translate('Date Format')}
         name="idurar_app_date_format"

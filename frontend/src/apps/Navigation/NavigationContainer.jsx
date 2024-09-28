@@ -27,8 +27,6 @@ import {
   WalletOutlined,
   ReconciliationOutlined,
 } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 const { Sider } = Layout;
 
@@ -124,7 +122,6 @@ function Sidebar({ collapsible, isMobile = false }) {
     navMenu.collapse();
   };
 
-  const langDirection = useSelector(selectLangDirection);
   return (
     <Sider
       collapsible={collapsible}
@@ -135,15 +132,14 @@ function Sidebar({ collapsible, isMobile = false }) {
       style={{
         overflow: 'auto',
         height: '100vh',
-        direction: langDirection,
+
         position: isMobile ? 'absolute' : 'relative',
         bottom: '20px',
         ...(!isMobile && {
-          background: 'none',
-          border: 'none',
-          [langDirection === 'rtl' ? 'right' : 'left']: '20px',
+          // border: 'none',
+          ['left']: '20px',
           top: '20px',
-          borderRadius: '8px',
+          // borderRadius: '8px',
         }),
       }}
       theme={'light'}
@@ -175,8 +171,6 @@ function Sidebar({ collapsible, isMobile = false }) {
         theme={'light'}
         selectedKeys={[currentPath]}
         style={{
-          background: 'none',
-          border: 'none',
           width: 256,
         }}
       />
@@ -193,7 +187,6 @@ function MobileSidebar() {
     setVisible(false);
   };
 
-  const langDirection = useSelector(selectLangDirection);
   return (
     <>
       <Button
@@ -201,17 +194,14 @@ function MobileSidebar() {
         size="large"
         onClick={showDrawer}
         className="mobile-sidebar-btn"
-        style={{ [langDirection === 'rtl' ? 'marginRight' : 'marginLeft']: 25 }}
+        style={{ ['marginLeft']: 25 }}
       >
         <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
       <Drawer
         width={250}
-        contentWrapperStyle={{
-          boxShadow: 'none',
-        }}
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
-        placement={langDirection === 'rtl' ? 'right' : 'left'}
+        // style={{ backgroundColor: 'rgba(255, 255, 255, 1)' }}
+        placement={'left'}
         closable={false}
         onClose={onClose}
         open={visible}
