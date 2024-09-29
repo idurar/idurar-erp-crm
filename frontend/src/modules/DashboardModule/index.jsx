@@ -8,7 +8,6 @@ import { useMoney } from '@/settings';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import useOnFetch from '@/hooks/useOnFetch';
-import { tagColor } from '@/utils/statusTagColor';
 
 import RecentTable from './components/RecentTable';
 
@@ -86,9 +85,6 @@ export default function DashboardModule() {
     {
       title: translate('Status'),
       dataIndex: 'status',
-      render: (status) => {
-        return <Tag color={tagColor(status)?.color}>{translate(status)}</Tag>;
-      },
     },
   ];
 
@@ -134,28 +130,24 @@ export default function DashboardModule() {
         <Row gutter={[32, 32]}>
           <SummaryCard
             title={translate('Invoices')}
-            tagColor={'cyan'}
             prefix={translate('This month')}
             isLoading={invoiceLoading}
             data={invoiceResult?.total}
           />
           <SummaryCard
             title={translate('Quote')}
-            tagColor={'purple'}
             prefix={translate('This month')}
             isLoading={quoteLoading}
             data={quoteResult?.total}
           />
           <SummaryCard
             title={translate('paid')}
-            tagColor={'green'}
             prefix={translate('This month')}
             isLoading={paymentLoading}
             data={paymentResult?.total}
           />
           <SummaryCard
             title={translate('Unpaid')}
-            tagColor={'red'}
             prefix={translate('Not Paid')}
             isLoading={invoiceLoading}
             data={invoiceResult?.total_undue}
