@@ -28,29 +28,29 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
       }
     ).exec();
 
-    res
-      .status(200)
-      .cookie('token', token, {
-        maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
-        sameSite: 'Lax',
-        httpOnly: true,
-        secure: false,
-        domain: req.hostname,
-        path: '/',
-        Partitioned: true,
-      })
-      .json({
-        success: true,
-        result: {
-          _id: user._id,
-          name: user.name,
-          surname: user.surname,
-          role: user.role,
-          email: user.email,
-          photo: user.photo,
-        },
-        message: 'Successfully login user',
-      });
+    // .cookie(`token_${user.cloud}`, token, {
+    //     maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
+    //     sameSite: 'None',
+    //     httpOnly: true,
+    //     secure: true,
+    //     domain: req.hostname,
+    //     path: '/',
+    //     Partitioned: true,
+    //   })
+    res.status(200).json({
+      success: true,
+      result: {
+        _id: user._id,
+        name: user.name,
+        surname: user.surname,
+        role: user.role,
+        email: user.email,
+        photo: user.photo,
+        token: token,
+        maxAge: req.body.remember ? 365 : null,
+      },
+      message: 'Successfully login user',
+    });
   } else {
     return res.status(403).json({
       success: false,

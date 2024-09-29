@@ -23,7 +23,6 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
-import { tagColor } from '@/utils/statusTagColor';
 
 const Item = ({ item, currentErp }) => {
   const { moneyFormatter } = useMoney();
@@ -133,13 +132,11 @@ export default function ReadItem({ config, selectedItem }) {
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
         tags={[
-          <Tag color={tagColor(currentErp.status)?.color} key="status">
-            {currentErp.status && translate(currentErp.status)}
-          </Tag>,
+          <span key="status">{currentErp.status && translate(currentErp.status)}</span>,
           currentErp.paymentStatus && (
-            <Tag color={tagColor(currentErp.paymentStatus)?.color} key="paymentStatus">
+            <span key="paymentStatus">
               {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
-            </Tag>
+            </span>
           ),
         ]}
         extra={[

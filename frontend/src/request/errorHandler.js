@@ -27,10 +27,10 @@ const errorHandler = (error) => {
       maxCount: 1,
     });
     // Code to execute when there is no internet connection
-    notification.error({
-      message: 'Problem connecting to server',
-      description: 'Cannot connect to the server, Try again later',
-    });
+    // notification.error({
+    //   message: 'Problem connecting to server',
+    //   description: 'Cannot connect to the server, Try again later',
+    // });
     return {
       success: false,
       result: null,

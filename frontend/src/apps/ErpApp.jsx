@@ -25,9 +25,9 @@ import storePersist from '@/redux/storePersist';
 export default function ErpCrmApp() {
   const { Content } = Layout;
 
-  const { state: stateApp, appContextAction } = useAppContext();
-  const { app } = appContextAction;
-  const { isNavMenuClose, currentApp } = stateApp;
+  // const { state: stateApp, appContextAction } = useAppContext();
+  // // const { app } = appContextAction;
+  // const { isNavMenuClose, currentApp } = stateApp;
 
   const { isMobile } = useResponsive();
 
@@ -37,16 +37,16 @@ export default function ErpCrmApp() {
     dispatch(settingsAction.list({ entity: 'setting' }));
   }, []);
 
-  const appSettings = useSelector(selectAppSettings);
+  // const appSettings = useSelector(selectAppSettings);
 
   const { isSuccess: settingIsloaded } = useSelector(selectSettings);
 
-  useEffect(() => {
-    const { loadDefaultLang } = storePersist.get('firstVisit');
-    if (appSettings.idurar_app_language && !loadDefaultLang) {
-      window.localStorage.setItem('firstVisit', JSON.stringify({ loadDefaultLang: true }));
-    }
-  }, [appSettings]);
+  // useEffect(() => {
+  //   const { loadDefaultLang } = storePersist.get('firstVisit');
+  //   if (appSettings.idurar_app_language && !loadDefaultLang) {
+  //     window.localStorage.setItem('firstVisit', JSON.stringify({ loadDefaultLang: true }));
+  //   }
+  // }, [appSettings]);
 
   if (settingIsloaded)
     return (

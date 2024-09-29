@@ -23,7 +23,6 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
-import { tagColor } from '@/utils/statusTagColor';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -135,13 +134,13 @@ export default function ReadItem({ config, selectedItem }) {
         title={`${ENTITY_NAME} # ${currentAdavancedCrud.number}/${currentAdavancedCrud.year || ''}`}
         ghost={false}
         tags={[
-          <Tag color={tagColor(currentAdavancedCrud.status)?.color} key="status">
+          <span key="status">
             {currentAdavancedCrud.status && translate(currentAdavancedCrud.status)}
-          </Tag>,
+          </span>,
           currentAdavancedCrud.paymentStatus && (
-            <Tag color={tagColor(currentAdavancedCrud.paymentStatus)?.color} key="paymentStatus">
+            <span key="paymentStatus">
               {currentAdavancedCrud.paymentStatus && translate(currentAdavancedCrud.paymentStatus)}
-            </Tag>
+            </span>
           ),
         ]}
         extra={[
