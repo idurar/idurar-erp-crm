@@ -71,7 +71,7 @@ const defaultInvoiceStatistics = [
   },
 ];
 
-const PreviewState = ({ tag, color, value }) => {
+const PreviewState = ({ tag, value }) => {
   const translate = useLanguage();
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
@@ -81,8 +81,8 @@ const PreviewState = ({ tag, color, value }) => {
         percent={value}
         showInfo={false}
         strokeColor={{
-          '0%': color,
-          '100%': color,
+          '0%': '#333',
+          '100%': '#333',
         }}
       />
     </div>
@@ -145,12 +145,7 @@ export default function PreviewCard({
         ) : (
           statisticsMap
             ?.map((status, index) => (
-              <PreviewState
-                key={index}
-                tag={status.tag}
-                color={colours[status.tag]}
-                value={status?.value}
-              />
+              <PreviewState key={index} tag={status.tag} value={status?.value} />
               // sort by colours
             ))
             .sort(customSort)
