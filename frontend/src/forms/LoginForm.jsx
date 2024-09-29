@@ -22,7 +22,7 @@ export default function LoginForm() {
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder={translate('email')}
+          placeholder={'admin@demo.com'}
           type="email"
           size="large"
         />
@@ -38,7 +38,7 @@ export default function LoginForm() {
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder={translate('password')}
+          placeholder={'admin123'}
           size="large"
         />
       </Form.Item>
