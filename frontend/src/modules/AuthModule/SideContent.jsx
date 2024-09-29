@@ -14,7 +14,7 @@ export default function SideContent() {
       style={{
         padding: '150px 30px 30px',
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '450px',
         margin: '0 auto',
       }}
       className="sideContent"
@@ -28,8 +28,12 @@ export default function SideContent() {
           width={220}
         />
 
-        <Title level={1}>Free Open Source ERP / CRM</Title>
-        <Title level={2}>Accounting / Invoicing / Quote App</Title>
+        <Title level={1} style={{ fontSize: 28 }}>
+          Free Open Source ERP / CRM
+        </Title>
+        <Text>
+          Accounting / Invoicing / Quote App <b /> based on Node.js React.js Ant Design
+        </Text>
 
         <div className="space20"></div>
       </div>
