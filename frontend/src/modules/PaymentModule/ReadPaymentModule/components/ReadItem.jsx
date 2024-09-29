@@ -20,7 +20,7 @@ import { selectCurrentItem } from '@/redux/erp/selectors';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney } from '@/settings';
-import { tagColor } from '@/utils/statusTagColor';
+
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
 
@@ -78,9 +78,7 @@ export default function ReadItem({ config, selectedItem }) {
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={
-          <Tag color={tagColor(currentErp.paymentStatus)?.color}>{currentErp.paymentStatus}</Tag>
-        }
+        tags={<span>{currentErp.paymentStatus}</span>}
         extra={[
           <Button
             key={`${uniqueId()}`}

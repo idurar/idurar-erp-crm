@@ -53,7 +53,7 @@ const errorHandler = (error) => {
     const message = response.data && response.data.message;
 
     const errorText = message || codeMessage[response.status];
-    const { status } = response;
+    const { status, error } = response;
     notification.config({
       duration: 20,
       maxCount: 2,
@@ -62,7 +62,12 @@ const errorHandler = (error) => {
       message: `Request error ${status}`,
       description: errorText,
     });
-    return response.data;
+
+    if (response?.data?.error?.name === 'JsonWebTokenError') {
+      window.localStorage.removeItem('auth');
+      window.localStorage.removeItem('isLogout');
+      window.location.href = '/logout';
+    } else return response.data;
   } else {
     notification.config({
       duration: 15,
