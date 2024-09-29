@@ -28,8 +28,8 @@ export default function SideContent() {
           width={220}
         />
 
-        <Title level={1}>Free Open Source</Title>
-        <Title level={4}>Accounting / Invoicing / Quote App</Title>
+        <Title level={1}>Free Open Source ERP / CRM</Title>
+        <Title level={2}>Accounting / Invoicing / Quote App</Title>
 
         <div className="space20"></div>
       </div>
