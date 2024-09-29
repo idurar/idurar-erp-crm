@@ -57,22 +57,24 @@ export default function UpgradeButton() {
   };
 
   return (
-    <Button
-      type="primary"
-      style={{
-        float: 'right',
-        marginTop: '5px',
-        cursor: 'pointer',
-        background: '#f56a00',
-        boxShadow: '0 2px 0 #f56a22',
-      }}
-      icon={<RocketOutlined />}
-      onClick={() => {
-        window.open(`https://cloud.idurarapp.com/`);
-      }}
-    >
-      {translate('Try Premium Version')}
-    </Button>
+    <Badge count={1} size="small">
+      <Button
+        type="primary"
+        style={{
+          float: 'right',
+          marginTop: '5px',
+          cursor: 'pointer',
+          // background: '#f56a00',
+          // boxShadow: '0 2px 0 #f56a22',
+        }}
+        icon={<RocketOutlined />}
+        onClick={() => {
+          window.open(`https://cloud.idurarapp.com/`);
+        }}
+      >
+        {translate('Try Entreprise Version')}
+      </Button>
+    </Badge>
   );
 }
 
