@@ -63,6 +63,7 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
       message: error.message,
       error: error,
       controller: 'isValidAuthToken',
+      jwtExpired: true,
     });
   }
 };
