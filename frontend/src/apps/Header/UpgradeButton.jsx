@@ -25,7 +25,7 @@ const SelfHostedPlan = () => {
           size="large"
           block
           onClick={() => {
-            window.open('https://cloud.idurarapp.com/pricing');
+            window.open('https://cloud.idurarapp.com');
           }}
         >
           Purchase Now
@@ -69,7 +69,7 @@ export default function UpgradeButton() {
         }}
         icon={<RocketOutlined />}
         onClick={() => {
-          window.open(`https://cloud.idurarapp.com/`);
+          window.open(`https://cloud.idurarapp.com`);
         }}
       >
         {translate('Try Entreprise Version')}
