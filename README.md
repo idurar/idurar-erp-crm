@@ -18,7 +18,7 @@ IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Advance
 
 **⭐️ Demo Open Source Version** : [https://opensource.idurarapp.com](https://opensource.idurarapp.com)
 <br/>
-**🚀 Cloud Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
+**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
 
 
 
@@ -98,7 +98,7 @@ Dont forget to give a ⭐️ to this project ... Happy coding!
 
 **⭐️ Demo Open Source Version** : [https://opensource.idurarapp.com](https://opensource.idurarapp.com)
 <br/>
-**🚀 Cloud Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
+**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
 
 ## License
 
