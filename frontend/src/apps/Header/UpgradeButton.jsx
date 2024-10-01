@@ -19,7 +19,7 @@ export default function UpgradeButton() {
         }}
         icon={<RocketOutlined />}
         onClick={() => {
-          window.open(`https://www.idurarapp.com`);
+          window.open(`https://cloud.idurarapp.com`);
         }}
       >
         {translate('Try Entreprise Version')}
