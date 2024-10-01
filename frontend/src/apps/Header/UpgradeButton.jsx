@@ -12,6 +12,7 @@ export default function UpgradeButton() {
   return (
     <Badge count={1} size="small">
       <Button
+        type="primary"
         style={{
           float: 'right',
           marginTop: '5px',
