@@ -8,6 +8,7 @@ const path = require('path');
 router.route('/:subPath/:directory/:file').get(function (req, res) {
   try {
     const { subPath, directory, file } = req.params;
+    //subPath sanitization check
     sanitizedPath = path.normalize(subPath).replace(/^(\.\.[\/\\])+/, '');
     const options = {
       root: path.join(__dirname, `../../public/${sanitizedPath}/${directory}`),
