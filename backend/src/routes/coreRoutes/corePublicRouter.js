@@ -8,9 +8,9 @@ const path = require('path');
 router.route('/:subPath/:directory/:file').get(function (req, res) {
   try {
     const { subPath, directory, file } = req.params;
-
+    sanitizedPath = path.normalize(subPath).replace(/^(\.\.[\/\\])+/, '');
     const options = {
-      root: path.join(__dirname, `../../public/${subPath}/${directory}`),
+      root: path.join(__dirname, `../../public/${sanitizedPath}/${directory}`),
     };
     const fileName = file;
     return res.sendFile(fileName, options, function (error) {
