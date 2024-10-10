@@ -23,7 +23,7 @@
     "dotenv": "16.3.1",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
-    "express-rate-limit": "^7.1.5",
+    "express-rate-limit": "^7.4.1",
     "glob": "10.3.10",
     "html-pdf": "^3.0.1",
     "joi": "^17.11.0",
@@ -37,6 +37,9 @@
     "node-cache": "^5.1.2",
     "openai": "^4.27.0",
     "pug": "^3.0.2",
+    "rate-limit-redis": "^4.2.0",
+    "redis": "^4.7.0",
+    "request-ip": "^3.3.0",
     "resend": "^2.0.0",
     "shortid": "^2.2.16",
     "transliteration": "^2.3.5"

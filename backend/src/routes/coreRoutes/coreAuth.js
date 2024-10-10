@@ -4,9 +4,12 @@ const router = express.Router();
 
 const { catchErrors } = require('@/handlers/errorHandlers');
 const adminAuth = require('@/controllers/coreControllers/adminAuth');
+// const {loginLimiter, logRequest} = require('@/middlewares/rateLimiter');
+
+// router.use(logRequest);
 
 router.route('/login').post(catchErrors(adminAuth.login));
-
+router.route('/register').post(catchErrors(adminAuth.register));
 router.route('/forgetpassword').post(catchErrors(adminAuth.forgetPassword));
 router.route('/resetpassword').post(catchErrors(adminAuth.resetPassword));
 

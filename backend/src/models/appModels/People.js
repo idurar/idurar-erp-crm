@@ -14,11 +14,23 @@ const schema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true,
+    validate: {
+      validator: function (v) {
+        return typeof v === 'string';
+      },
+      message: props => `${props.value} is not a valid string!`
+    },
   },
   lastname: {
     type: String,
     trim: true,
     required: true,
+    validate: {
+      validator: function (v) {
+        return typeof v === 'string';
+      },
+      message: props => `${props.value} is not a valid string!`
+    },
   },
   isClient: {
     type: Boolean,
@@ -109,8 +121,13 @@ const schema = new mongoose.Schema({
     trim: true,
   },
   phone: {
-    type: String,
-    trim: true,
+    type: Number,  // Use Number type to allow only integers
+    validate: {
+      validator: function (v) {
+        return Number.isInteger(v);
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    },
   },
   otherPhone: [
     {
