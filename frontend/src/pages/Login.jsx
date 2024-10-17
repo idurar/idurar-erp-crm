@@ -17,6 +17,7 @@ const LoginPage = () => {
   const translate = useLanguage();
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
+  const [form] = Form.useForm();
   // const size = useSize();
 
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const LoginPage = () => {
     return (
       <Loading isLoading={isLoading}>
         <Form
+          form={form}
           layout="vertical"
           name="normal_login"
           className="login-form"
@@ -40,7 +42,7 @@ const LoginPage = () => {
           }}
           onFinish={onFinish}
         >
-          <LoginForm />
+          <LoginForm form={form} />
           <Form.Item>
             <Button
               type="primary"
