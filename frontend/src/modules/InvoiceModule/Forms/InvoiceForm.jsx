@@ -63,18 +63,18 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
     addField.current.click();
   }, []);
 
+  const sm = 576;
+  const md = 768;
+  const lg = 992;
+
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" xs={24} sm={12} md={8}>
           <Form.Item
             name="client"
             label={translate('Client')}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <AutoCompleteAsync
               entity={'client'}
@@ -86,45 +86,32 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={3}>
+        <Col className="gutter-row" xs={24} sm={12} md={3}>
           <Form.Item
             label={translate('number')}
             name="number"
             initialValue={lastNumber}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <InputNumber min={1} style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={3}>
+        <Col className="gutter-row" xs={24} sm={12} md={3}>
           <Form.Item
             label={translate('year')}
             name="year"
             initialValue={currentYear}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" xs={24} sm={12} md={5}>
           <Form.Item
             label={translate('status')}
             name="status"
-            rules={[
-              {
-                required: false,
-              },
-            ]}
             initialValue={'draft'}
+            rules={[{ required: false }]}
           >
             <Select
               options={[
@@ -132,64 +119,53 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 { value: 'pending', label: translate('Pending') },
                 { value: 'sent', label: translate('Sent') },
               ]}
-            ></Select>
+            />
           </Form.Item>
         </Col>
-
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" xs={24} sm={12} md={8}>
           <Form.Item
             name="date"
             label={translate('Date')}
-            rules={[
-              {
-                required: true,
-                type: 'object',
-              },
-            ]}
+            rules={[{ required: true, type: 'object' }]}
             initialValue={dayjs()}
           >
             <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={24} sm={12} md={6}>
           <Form.Item
             name="expiredDate"
             label={translate('Expire Date')}
-            rules={[
-              {
-                required: true,
-                type: 'object',
-              },
-            ]}
+            rules={[{ required: true, type: 'object' }]}
             initialValue={dayjs().add(30, 'days')}
           >
             <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={10}>
+        <Col className="gutter-row" xs={24}>
           <Form.Item label={translate('Note')} name="notes">
             <Input />
           </Form.Item>
         </Col>
       </Row>
       <Divider dashed />
-      <Row gutter={[12, 12]} style={{ position: 'relative' }}>
-        <Col className="gutter-row" span={5}>
+      {/* <Row gutter={[12, 12]} style={{ position: 'relative' }}>
+        <Col className="gutter-row" xs={24} sm={5}>
           <p>{translate('Item')}</p>
         </Col>
-        <Col className="gutter-row" span={7}>
+        <Col className="gutter-row" xs={24} sm={7}>
           <p>{translate('Description')}</p>
         </Col>
-        <Col className="gutter-row" span={3}>
-          <p>{translate('Quantity')}</p>{' '}
+        <Col className="gutter-row" xs={24} sm={3}>
+          <p>{translate('Quantity')}</p>
         </Col>
-        <Col className="gutter-row" span={4}>
+        <Col className="gutter-row" xs={24} sm={4}>
           <p>{translate('Price')}</p>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" xs={24} sm={5}>
           <p>{translate('Total')}</p>
         </Col>
-      </Row>
+      </Row> */}
       <Form.List name="items">
         {(fields, { add, remove }) => (
           <>
@@ -211,16 +187,16 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         )}
       </Form.List>
       <Divider dashed />
-      <div style={{ position: 'relative', width: ' 100%', float: 'right' }}>
+      <div style={{ position: 'relative', width: '100%', float: 'right' }}>
         <Row gutter={[12, -5]}>
-          <Col className="gutter-row" span={5}>
+          <Col className="gutter-row" xs={24} sm={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
                 {translate('Save')}
               </Button>
             </Form.Item>
           </Col>
-          <Col className="gutter-row" span={4} offset={10}>
+          <Col className="gutter-row" xs={24} sm={4} offset={sm ? 10 : 0}>
             <p
               style={{
                 paddingLeft: '12px',
@@ -232,19 +208,15 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               {translate('Sub Total')} :
             </p>
           </Col>
-          <Col className="gutter-row" span={5}>
+          <Col className="gutter-row" xs={24} sm={5}>
             <MoneyInputFormItem readOnly value={subTotal} />
           </Col>
         </Row>
         <Row gutter={[12, -5]}>
-          <Col className="gutter-row" span={4} offset={15}>
+          <Col className="gutter-row" xs={24} sm={4} offset={sm ? 15 : 0}>
             <Form.Item
               name="taxRate"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+              rules={[{ required: true }]}
             >
               <SelectAsync
                 value={taxRate}
@@ -259,12 +231,12 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               />
             </Form.Item>
           </Col>
-          <Col className="gutter-row" span={5}>
+          <Col className="gutter-row" xs={24} sm={5}>
             <MoneyInputFormItem readOnly value={taxTotal} />
           </Col>
         </Row>
         <Row gutter={[12, -5]}>
-          <Col className="gutter-row" span={4} offset={15}>
+          <Col className="gutter-row" xs={24} sm={4} offset={sm ? 15 : 0}>
             <p
               style={{
                 paddingLeft: '12px',
@@ -276,7 +248,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               {translate('Total')} :
             </p>
           </Col>
-          <Col className="gutter-row" span={5}>
+          <Col className="gutter-row" xs={24} sm={5}>
             <MoneyInputFormItem readOnly value={total} />
           </Col>
         </Row>
