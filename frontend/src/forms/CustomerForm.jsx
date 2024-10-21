@@ -1,7 +1,9 @@
 import { Form, Input } from 'antd';
+import { getRawValue } from 'react-phone-hooks';
 import { validatePhoneNumber } from '@/utils/helpers';
 
 import useLanguage from '@/locale/useLanguage';
+import PhoneInput from 'antd-phone-input';
 
 export default function CustomerForm({ isUpdateForm = false }) {
   const translate = useLanguage();
@@ -70,21 +72,18 @@ export default function CustomerForm({ isUpdateForm = false }) {
 
       <Form.Item
         name="phone"
+        normalize={getRawValue}
         label={translate('Phone')}
         rules={[
           {
             required: true,
           },
           {
-            validator: validateEmptyString,
-          },
-          {
-            pattern: validatePhoneNumber,
-            message: 'Please enter a valid phone number',
+            validator: validatePhoneNumber,
           },
         ]}
       >
-        <Input />
+        <PhoneInput />
       </Form.Item>
       <Form.Item
         name="email"
