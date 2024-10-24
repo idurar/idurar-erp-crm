@@ -37,7 +37,7 @@ const SelectAsync = ({
   };
   useEffect(() => {
     if (value !== undefined) {
-      const val = value?.[outputValue] ?? value;
+      const val = value[outputValue] ?? value;
       setCurrentValue(val);
       onChange(val);
     }
@@ -47,7 +47,7 @@ const SelectAsync = ({
     if (newValue === 'redirectURL') {
       navigate(urlToRedirect);
     } else {
-      const val = newValue?.[outputValue] ?? newValue;
+      const val = newValue[outputValue] ?? newValue;
       setCurrentValue(newValue);
       onChange(val);
     }

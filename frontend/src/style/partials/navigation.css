@@ -31,9 +31,9 @@
   padding: 12px 0px !important;
 }
 
-/* .ant-btn.mobile-sidebar-btn {
+.ant-btn.mobile-sidebar-btn {
   display: none;
-} */
+}
 
 .tabsNavigation span {
   background-color: transparent;
@@ -53,11 +53,11 @@
     height: 100%;
   }
 
-  /* .ant-btn.mobile-sidebar-btn {
+  .ant-btn.mobile-sidebar-btn {
     display: block;
     position: absolute;
     top: 21px;
-  } */
+  }
 
   .mobile-sidebar-wraper {
     display: block;

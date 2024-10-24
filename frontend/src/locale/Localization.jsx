@@ -4,10 +4,11 @@ export default function Localization({ children }) {
   return (
     <ConfigProvider
       theme={{
+        // algorithm: theme.darkAlgorithm,
         token: {
-          colorPrimary: '#339393',
+          colorPrimary: '#1640D6',
           colorLink: '#1640D6',
-          borderRadius: 0,
+          borderRadius: 8,
         },
       }}
     >

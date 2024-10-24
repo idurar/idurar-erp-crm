@@ -5,15 +5,6 @@ const updateProfile = async (userModel, req, res) => {
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
-
-  if (userProfile.email === 'admin@demo.com') {
-    return res.status(403).json({
-      success: false,
-      result: null,
-      message: "you couldn't update demo informations",
-    });
-  }
-
   let updates = req.body.photo
     ? {
         email: req.body.email,

@@ -1,5 +1,6 @@
 import { Select, Tag } from 'antd';
 import { generate as uniqueId } from 'shortid';
+import { tagColor } from '@/utils/statusTagColor';
 
 export default function SelectTag({ options, defaultValue }) {
   return (
@@ -10,16 +11,19 @@ export default function SelectTag({ options, defaultValue }) {
       }}
     >
       {options?.map((value) => {
+        const option = tagColor(value);
         if (option)
           return (
             <Select.Option key={`${uniqueId()}`} value={option.value}>
-              {translate(option.label)}
+              <Tag bordered={false} color={option.color}>
+                {translate(option.label)}
+              </Tag>
             </Select.Option>
           );
         else
           return (
             <Select.Option key={`${uniqueId()}`} value={value}>
-              {value}
+              <Tag bordered={false}>{value}</Tag>
             </Select.Option>
           );
       })}
