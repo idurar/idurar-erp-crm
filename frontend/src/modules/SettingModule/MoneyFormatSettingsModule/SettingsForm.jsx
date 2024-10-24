@@ -4,11 +4,16 @@ import useLanguage from '@/locale/useLanguage';
 
 import { currencyOptions } from '@/utils/currencyList';
 
+import { useSelector } from 'react-redux';
+import { selectLangDirection } from '@/redux/translate/selectors';
+
 export default function SettingsForm() {
   const translate = useLanguage();
 
+  const langDirection = useSelector(selectLangDirection);
+
   return (
-    <div>
+    <div style={{ direction: langDirection }}>
       <Form.Item
         label={translate('Currency')}
         name="default_currency_code"

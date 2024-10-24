@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
+import { Avatar, Dropdown, Layout } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
@@ -13,6 +13,8 @@ import { FILE_BASE_URL } from '@/config/serverApiConfig';
 import useLanguage from '@/locale/useLanguage';
 
 import UpgradeButton from './UpgradeButton';
+
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -84,13 +86,14 @@ export default function HeaderContent() {
     },
   ];
 
+  const langDirection = useSelector(selectLangDirection);
   return (
     <Header
       style={{
         padding: '20px',
-        background: '#ffffff',
+        background: '#f9fafc',
         display: 'flex',
-        flexDirection: 'row-reverse',
+        flexDirection: langDirection === 'rtl' ? 'row' : 'row-reverse',
         justifyContent: 'flex-start',
         gap: ' 15px',
       }}

@@ -8,6 +8,25 @@ import { countryList } from '@/utils/countryList';
 export default function RegisterForm({ userLocation }) {
   const translate = useLanguage();
 
+  const validatePassword = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error('Password is required'));
+    }
+    if (value.length < 8) {
+      return Promise.reject(new Error('Password must be at least 8 characters long'));
+    }
+    if (!/[a-zA-Z]/.test(value)) {
+      return Promise.reject(new Error('Password must contain at least one letter'));
+    }
+    if (!/[0-9]/.test(value)) {
+      return Promise.reject(new Error('Password must contain at least one number'));
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+      return Promise.reject(new Error('Password must contain at least one special character'));
+    }
+    return Promise.resolve();
+  };
+
   return (
     <>
       <Form.Item
@@ -46,6 +65,10 @@ export default function RegisterForm({ userLocation }) {
           {
             required: true,
           },
+          {
+            validator: validatePassword,
+          },
+
         ]}
       >
         <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />

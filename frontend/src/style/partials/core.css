@@ -13,16 +13,17 @@
 }
 .whiteBox {
   background: #fff;
+  border-radius: 6px;
   width: 100%;
   min-height: 100px;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
 }
 .shadow {
-  border: 1px solid #e0e0e0;
+  box-shadow: 0px 0px 20px 3px rgba(150, 190, 238, 0.15);
 }
 .shadow:hover {
-  border: 1px solid #bdbdbd;
+  box-shadow: 0px 0px 30px 8px rgba(150, 190, 238, 0.25);
 }
 .line {
   border-top: 1px solid #edf0f5;

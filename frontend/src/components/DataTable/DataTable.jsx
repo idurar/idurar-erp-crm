@@ -22,6 +22,7 @@ import { useMoney, useDate } from '@/settings';
 import { generate as uniqueId } from 'shortid';
 
 import { useCrudContext } from '@/context/crud';
+import { selectLangDirection } from '@/redux/translate/selectors';
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
@@ -175,11 +176,13 @@ export default function DataTable({ config, extra = [] }) {
     };
   }, []);
 
+  const langDirection=useSelector(selectLangDirection)
+
   return (
     <>
       <PageHeader
         onBack={() => window.history.back()}
-        backIcon={<ArrowLeftOutlined />}
+        backIcon={langDirection==="rtl"?<ArrowRightOutlined/>:<ArrowLeftOutlined />}
         title={DATATABLE_TITLE}
         ghost={false}
         extra={[
@@ -197,6 +200,7 @@ export default function DataTable({ config, extra = [] }) {
         ]}
         style={{
           padding: '20px 0px',
+          direction:langDirection
         }}
       ></PageHeader>
 

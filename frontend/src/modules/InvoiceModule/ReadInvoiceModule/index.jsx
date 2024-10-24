@@ -20,6 +20,12 @@ export default function ReadInvoiceModule({ config }) {
 
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
+  // Function to encrypt the invoice ID and make it shorter
+  const encryptId = (id) => {
+    const encoded = btoa(id);
+    return encoded.substring(0, 8); // Take only the first 8 characters
+  };
+
   if (isLoading) {
     return (
       <ErpLayout>
@@ -29,6 +35,9 @@ export default function ReadInvoiceModule({ config }) {
   } else
     return (
       <ErpLayout>
+        <div>
+          <h1>Invoice Id: {encryptId(id)}</h1>
+        </div>
         {isSuccess ? (
           <ReadItem config={config} selectedItem={currentResult} />
         ) : (

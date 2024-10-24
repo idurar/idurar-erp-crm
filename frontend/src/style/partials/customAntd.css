@@ -1,11 +1,36 @@
 .ant-layout {
-  background: #ffffff !important;
+  background: #f9fafc !important;
 }
 .site-layout .site-layout-background {
   background: #fff;
 }
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
+}
+.ant-layout .ant-layout-sider-light .ant-layout-sider-trigger {
+  /* background: none !important; */
+  border-radius: 6px !important;
+  border: none !important;
+  margin-top: -10px !important;
+}
+.ant-layout-sider-trigger {
+  background: #fff;
+  border-top: 1px solid #edf0f5;
+  border-right: 1px solid #edf0f5;
+  color: #4f5d75;
+}
+.ant-layout-sider-zero-width-trigger {
+  top: 5px;
+  right: 10px;
+  color: #001529;
+  background: none;
+  font-size: 20px;
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border: none !important;
 }
 
 .headerIcon .ant-dropdown-menu {

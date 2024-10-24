@@ -12,6 +12,7 @@ import calculate from '@/utils/calculate';
 import { generate as uniqueId } from 'shortid';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
+import { tagColor } from '@/utils/statusTagColor';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -142,11 +143,13 @@ export default function UpdateItem({ config, UpdateForm }) {
         title={translate('update')}
         ghost={false}
         tags={[
-          <span key="status">{currentErp.status && translate(currentErp.status)}</span>,
+          <Tag color={tagColor(currentErp.status)?.color} key="status">
+            {currentErp.status && translate(currentErp.status)}
+          </Tag>,
           currentErp.paymentStatus && (
-            <span key="paymentStatus">
+            <Tag color={tagColor(currentErp.paymentStatus)?.color} key="paymentStatus">
               {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
-            </span>
+            </Tag>
           ),
         ]}
         extra={[
