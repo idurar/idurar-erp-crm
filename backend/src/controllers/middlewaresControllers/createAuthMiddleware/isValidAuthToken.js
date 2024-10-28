@@ -6,11 +6,7 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
   try {
     const UserPassword = mongoose.model(userModel + 'Password');
     const User = mongoose.model(userModel);
-
-    // const token = req.cookies[`token_${cloud._id}`];
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Extract the token
-
+    const token = req.cookies.token;
     if (!token)
       return res.status(401).json({
         success: false,
@@ -43,7 +39,6 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
       });
 
     const { loggedSessions } = userPassword;
-
     if (!loggedSessions.includes(token))
       return res.status(401).json({
         success: false,
@@ -57,13 +52,12 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
       next();
     }
   } catch (error) {
-    return res.status(500).json({
+    return res.status(503).json({
       success: false,
       result: null,
       message: error.message,
       error: error,
       controller: 'isValidAuthToken',
-      jwtExpired: true,
     });
   }
 };

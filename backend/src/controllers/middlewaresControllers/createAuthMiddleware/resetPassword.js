@@ -13,6 +13,31 @@ const resetPassword = async (req, res, { userModel }) => {
   const databasePassword = await UserPassword.findOne({ user: userId, removed: false });
   const user = await User.findOne({ _id: userId, removed: false }).exec();
 
+  if (!user.enabled && user.role === 'owner') {
+    const settings = useAppSettings();
+    const idurar_app_email = settings['idurar_app_email'];
+    const idurar_base_url = settings['idurar_base_url'];
+
+    const url = checkAndCorrectURL(idurar_base_url);
+
+    const link = url + '/verify/' + user._id + '/' + databasePassword.emailToken;
+
+    await sendMail({
+      email,
+      name: user.name,
+      link,
+      idurar_app_email,
+      emailToken: databasePassword.emailToken,
+    });
+
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message:
+        'your email account is not verified , check your email inbox to activate your account',
+    });
+  }
+
   if (!user.enabled)
     return res.status(409).json({
       success: false,
@@ -85,29 +110,29 @@ const resetPassword = async (req, res, { userModel }) => {
     databasePassword.resetToken !== undefined &&
     databasePassword.resetToken !== null
   )
-    //  .cookie(`token_${user.cloud}`, token, {
-    //       maxAge: 24 * 60 * 60 * 1000,
-    //       sameSite: 'None',
-    //       httpOnly: true,
-    //       secure: true,
-    //       domain: req.hostname,
-    //       path: '/',
-    //       Partitioned: true,
-    //     })
-    return res.status(200).json({
-      success: true,
-      result: {
-        _id: user._id,
-        name: user.name,
-        surname: user.surname,
-        role: user.role,
-        email: user.email,
-        photo: user.photo,
-        token: token,
-        maxAge: req.body.remember ? 365 : null,
-      },
-      message: 'Successfully resetPassword user',
-    });
+    return res
+      .status(200)
+      .cookie('token', token, {
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: 'Lax',
+        httpOnly: true,
+        secure: false,
+        domain: req.hostname,
+        path: '/',
+        Partitioned: true,
+      })
+      .json({
+        success: true,
+        result: {
+          _id: user._id,
+          name: user.name,
+          surname: user.surname,
+          role: user.role,
+          email: user.email,
+          photo: user.photo,
+        },
+        message: 'Successfully resetPassword user',
+      });
 };
 
 module.exports = resetPassword;

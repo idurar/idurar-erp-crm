@@ -27,10 +27,10 @@ const errorHandler = (error) => {
       maxCount: 1,
     });
     // Code to execute when there is no internet connection
-    // notification.error({
-    //   message: 'Problem connecting to server',
-    //   description: 'Cannot connect to the server, Try again later',
-    // });
+    notification.error({
+      message: 'Problem connecting to server',
+      description: 'Cannot connect to the server, Try again later',
+    });
     return {
       success: false,
       result: null,
@@ -53,7 +53,7 @@ const errorHandler = (error) => {
     const message = response.data && response.data.message;
 
     const errorText = message || codeMessage[response.status];
-    const { status, error } = response;
+    const { status } = response;
     notification.config({
       duration: 20,
       maxCount: 2,
@@ -62,12 +62,7 @@ const errorHandler = (error) => {
       message: `Request error ${status}`,
       description: errorText,
     });
-
-    if (response?.data?.error?.name === 'JsonWebTokenError') {
-      window.localStorage.removeItem('auth');
-      window.localStorage.removeItem('isLogout');
-      window.location.href = '/logout';
-    } else return response.data;
+    return response.data;
   } else {
     notification.config({
       duration: 15,

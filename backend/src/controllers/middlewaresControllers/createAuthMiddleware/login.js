@@ -1,6 +1,14 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
 const mongoose = require('mongoose');
+
+const checkAndCorrectURL = require('./checkAndCorrectURL');
+const sendMail = require('./sendMail');
+
+const { loadSettings } = require('@/middlewares/settings');
+const { useAppSettings } = require('@/settings');
 
 const authUser = require('./authUser');
 
@@ -48,12 +56,7 @@ const login = async (req, res, { userModel }) => {
     });
 
   //  authUser if your has correct password
-  authUser(req, res, {
-    user,
-    databasePassword,
-    password,
-    UserPasswordModel,
-  });
+  authUser(req, res, { user, databasePassword, password, UserPasswordModel });
 };
 
 module.exports = login;

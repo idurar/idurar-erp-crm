@@ -8,6 +8,7 @@ import { useMoney } from '@/settings';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import useOnFetch from '@/hooks/useOnFetch';
+import { tagColor } from '@/utils/statusTagColor';
 
 import RecentTable from './components/RecentTable';
 
@@ -38,6 +39,8 @@ export default function DashboardModule() {
 
   const { result: quoteResult, isLoading: quoteLoading, onFetch: fetchQuotesStats } = useOnFetch();
 
+  const { result: offerResult, isLoading: offerLoading, onFetch: fetchOffersStats } = useOnFetch();
+
   const {
     result: paymentResult,
     isLoading: paymentLoading,
@@ -54,6 +57,7 @@ export default function DashboardModule() {
     if (currency) {
       fetchInvoicesStats(getStatsData({ entity: 'invoice', currency }));
       fetchQuotesStats(getStatsData({ entity: 'quote', currency }));
+      fetchOffersStats(getStatsData({ entity: 'offer', currency }));
       fetchPayemntsStats(getStatsData({ entity: 'payment', currency }));
     }
   }, [money_format_settings.default_currency_code]);
@@ -85,6 +89,9 @@ export default function DashboardModule() {
     {
       title: translate('Status'),
       dataIndex: 'status',
+      render: (status) => {
+        return <Tag color={tagColor(status)?.color}>{translate(status)}</Tag>;
+      },
     },
   ];
 
@@ -99,7 +106,13 @@ export default function DashboardModule() {
       result: quoteResult,
       isLoading: quoteLoading,
       entity: 'quote',
-      title: translate('quote'),
+      title: translate('proforma invoices'),
+    },
+    {
+      result: offerResult,
+      isLoading: offerLoading,
+      entity: 'offer',
+      title: translate('offers'),
     },
   ];
 
@@ -130,24 +143,28 @@ export default function DashboardModule() {
         <Row gutter={[32, 32]}>
           <SummaryCard
             title={translate('Invoices')}
+            tagColor={'cyan'}
             prefix={translate('This month')}
             isLoading={invoiceLoading}
             data={invoiceResult?.total}
           />
           <SummaryCard
-            title={translate('Quote')}
+            title={translate('proforma invoices')}
+            tagColor={'purple'}
             prefix={translate('This month')}
             isLoading={quoteLoading}
             data={quoteResult?.total}
           />
           <SummaryCard
-            title={translate('paid')}
+            title={translate('offers')}
+            tagColor={'green'}
             prefix={translate('This month')}
-            isLoading={paymentLoading}
-            data={paymentResult?.total}
+            isLoading={offerLoading}
+            data={offerResult?.total}
           />
           <SummaryCard
             title={translate('Unpaid')}
+            tagColor={'red'}
             prefix={translate('Not Paid')}
             isLoading={invoiceLoading}
             data={invoiceResult?.total_undue}

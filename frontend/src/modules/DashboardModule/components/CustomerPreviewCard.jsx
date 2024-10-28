@@ -1,6 +1,6 @@
-import { Statistic, Progress, Divider, Row, Spin } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import useLanguage from '@/locale/useLanguage';
+import { Statistic, Progress, Divider, Row, Spin } from "antd";
+import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import useLanguage from "@/locale/useLanguage";
 
 export default function CustomerPreviewCard({
   isLoading = false,
@@ -14,12 +14,12 @@ export default function CustomerPreviewCard({
         <div
           className="pad20"
           style={{
-            textAlign: 'center',
-            justifyContent: 'center',
+            textAlign: "center",
+            justifyContent: "center",
           }}
         >
-          <h3 style={{ color: '#333', marginBottom: 40, marginTop: 15, fontSize: 'large' }}>
-            {translate('Customers')}
+          <h3 style={{ color: "#22075e", marginBottom: 40, marginTop: 15, fontSize: "large" }}>
+            {translate("Customers")}
           </h3>
 
           {isLoading ? (
@@ -27,23 +27,23 @@ export default function CustomerPreviewCard({
           ) : (
             <div
               style={{
-                display: 'grid',
-                justifyContent: 'center',
+                display: "grid",
+                justifyContent: "center",
               }}
             >
               <Progress type="dashboard" percent={newCustomer} size={148} />
-              <p>{translate('New Customer this Month')}</p>
+              <p>{translate("New Customer this Month")}</p>
               <Divider />
               <Statistic
-                title={translate('Active Customer')}
+                title={translate("Active Customer")}
                 value={activeCustomer}
                 precision={2}
                 valueStyle={
                   activeCustomer > 0
-                    ? { color: '#333' }
+                    ? { color: "#3f8600" }
                     : activeCustomer < 0
-                      ? { color: '#333' }
-                      : { color: '#000000' }
+                      ? { color: "#cf1322" }
+                      : { color: "#000000" }
                 }
                 prefix={
                   activeCustomer > 0 ? (

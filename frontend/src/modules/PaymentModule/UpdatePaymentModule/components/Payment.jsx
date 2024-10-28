@@ -32,7 +32,7 @@ export default function Payment({ config, currentItem }) {
 
   useEffect(() => {
     if (currentErp?.client) {
-      setClient(currentErp.client);
+      setClient(currentErp.client[currentErp.client.type]);
     }
   }, [currentErp]);
 
@@ -50,7 +50,11 @@ export default function Payment({ config, currentItem }) {
             onBack={() => navigate(`/${entity.toLowerCase()}`)}
             title={`Update  ${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
             ghost={false}
-            tags={<span>{currentErp.paymentStatus}</span>}
+            tags={
+              <Tag color={tagColor(currentErp.paymentStatus)?.color}>
+                {currentErp.paymentStatus}
+              </Tag>
+            }
             // subTitle="This is cuurent erp page"
             extra={[
               <Button
@@ -91,7 +95,9 @@ export default function Payment({ config, currentItem }) {
             <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
             <Divider dashed />
             <Descriptions.Item label={translate('Payment Status')}>
-              <span>{currentErp.paymentStatus}</span>
+              <Tag color={tagColor(currentErp.paymentStatus)?.color}>
+                {currentErp.paymentStatus}
+              </Tag>
             </Descriptions.Item>
             <Descriptions.Item label={translate('SubTotal')}>
               {money.moneyFormatter({
