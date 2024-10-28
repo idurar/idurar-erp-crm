@@ -35,6 +35,13 @@ const forgetPassword = async (req, res, { userModel }) => {
   const user = await User.findOne({ email: email, removed: false });
   const databasePassword = await UserPassword.findOne({ user: user._id, removed: false });
 
+  if (!user.enabled)
+    return res.status(409).json({
+      success: false,
+      result: null,
+      message: 'Your account is disabled, contact your account adminstrator',
+    });
+
   // console.log(user);
   if (!user)
     return res.status(404).json({

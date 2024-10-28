@@ -71,7 +71,7 @@ const defaultInvoiceStatistics = [
   },
 ];
 
-const PreviewState = ({ tag, value }) => {
+const PreviewState = ({ tag, color, value }) => {
   const translate = useLanguage();
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
@@ -81,8 +81,8 @@ const PreviewState = ({ tag, value }) => {
         percent={value}
         showInfo={false}
         strokeColor={{
-          '0%': '#333',
-          '100%': '#333',
+          '0%': color,
+          '100%': color,
         }}
       />
     </div>
@@ -124,8 +124,8 @@ export default function PreviewCard({
       className="gutter-row"
       xs={{ span: 24 }}
       sm={{ span: 24 }}
-      md={{ span: 12 }}
-      lg={{ span: 12 }}
+      md={{ span: 8 }}
+      lg={{ span: 8 }}
     >
       <div className="pad20">
         <h3
@@ -145,7 +145,12 @@ export default function PreviewCard({
         ) : (
           statisticsMap
             ?.map((status, index) => (
-              <PreviewState key={index} tag={status.tag} value={status?.value} />
+              <PreviewState
+                key={index}
+                tag={status.tag}
+                color={colours[status.tag]}
+                value={status?.value}
+              />
               // sort by colours
             ))
             .sort(customSort)

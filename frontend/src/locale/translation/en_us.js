@@ -448,8 +448,8 @@ const lang = {
   create_only: 'Create Only',
   enter_code: 'Enter Code',
   offers: 'Offers',
-  proforma_invoices: 'quote',
-  search: 'search',
+  proforma_invoices: 'Proforma Invoices',
+  search:"search"
 };
 
 export default lang;

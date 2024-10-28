@@ -448,5 +448,5 @@ module.exports = {
   create_only: 'Create Only',
   enter_code: 'Enter Code',
   offers: 'Offers',
-  proforma_invoices: 'quote',
+  proforma_invoices: 'Proforma Invoices',
 };
