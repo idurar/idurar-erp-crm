@@ -1,0 +1,12 @@
+[
+  {
+    "name": "__cf_bm",
+    "value": "q1Sy3f4cbDMYO3fEanlAgsjte3dEv7myRzw52V7f2tM-1730649517-1.0.1.1-VYbq5ugOdlbnc1zmhNTc4MSslIIAZQFpCha_Lc5SAeD2fBTRnCgRPt4nwqCR3YSAS6XBKS27SH1AMtkAi6AvQw",
+    "path": "/",
+    "secure": true,
+    "httpOnly": true,
+    "expiry": 1730651317.805419,
+    "domain": ".cloud.idurarapp.com",
+    "sameSite": "no_restriction"
+  }
+]
