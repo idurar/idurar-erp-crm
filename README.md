@@ -2,44 +2,33 @@
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
     </a>
-    <h1>Open "Fair-Code" Source ERP / CRM | Node.js React.js</h1>
+    <h1>Open Source ERP / CRM Accounting Invoice Quote</h1>
     <p align="center">
-        <p>IDURAR ERP CRM | Simple To Use | 44 Languages </p>
+        <p>IDURAR ERP CRM | Simple To Use</p>
     </p>
     
-  [www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
 
-## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮
+```
+ Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
+```
 
-IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
 </div>
 
-**Live App Free Cloud Version** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
+**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
 
-```
-🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
-```
 
-## Translation : 
 
-[French](doc/README.fr.md#French-Translation) , [Spanish](doc/README.sp.md#Spanish-Translation)
-## License
+## Features :
 
-IDURAR is Free Open Code Source [fair-code](http://faircode.io) distributed under the
-[**IDURAR License 1.0**](https://github.com/idurar/idurar-erp-crm/blob/master/LICENSE)
+Invoice Management
 
-## License FAQ :
+Payment Management
 
-## Features : 
+Quote Management
 
-Invoice Management 💰
-
-Inventory Management 🧳
-
-Accounting Management 📈
-
-HR Management 🧑‍🤝‍🧑
+Customer Management
 
 Ant Design Framework(AntD) 🐜
 
@@ -48,21 +37,6 @@ Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) 👨‍💻
 ### May i can use IDURAR for Commercial use :
 
 - Yes You can use IDURAR for free for personal or Commercial use.
-
-### May i can customize IDURAR as Saas and provide it to other users ?
-
-No, you cannot customize IDURAR as a SaaS and provide it to other users , You are not allowed to provide IDURAR software to third parties as a hosted or managed service or as softwase as service (Saas), where the service provides users with access to any substantial set of the features or functionality of this software.
-
-### For custom developement service or premium Support :
-
-[Get in touch](mailto:hello@idurarapp.com)
-
-## How To Deploy IDURAR ERP CRM :
-
-🔥 I would like to invite you for a weekly free IDURAR Webinar (Node.js React.js course), where you learn how to deploy IDURAR on cloud , and create a new api and new crud app with IDURAR in just one hour ?
-Please fill this form if you are interested : [https://forms.gle/qz2YZ3xQFQ77bGhS8](https://forms.gle/qz2YZ3xQFQ77bGhS8)
-
-The Webinar will be this Wednesday at 1pm GMT.
 
 ## Our Sponsors
 
@@ -78,13 +52,10 @@ The Webinar will be this Wednesday at 1pm GMT.
 
 IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
 
-**Live App Demo** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 
 ## Getting started
 
-
 1.[Clone the repository](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
-
 
 2.[Create Your MongoDB Account and Database Cluster](INSTALLATION-INSTRUCTIONS.md#Step-2-Create-Your-MongoDB-Account-and-Database-Cluster)
 
@@ -102,24 +73,6 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 
 9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
 
-## Docker Compose for local development
-
-- setup additional env variables, if necessary in the below file
-
-```bash
-docker-compose.yml
-```
-
-- After the necessary configurations run below command :
-
-```bash
-docker-compose up -d
-```
-
-This will build the images and bring up the containers for frontend, backend and mongodb.
-
-**_NOTE:_** This docker-compose setup is associated for local development only.
-
 ## Contributing
 
 1.[How to contribute](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#how-to-contribute)
@@ -136,10 +89,13 @@ This will build the images and bring up the containers for frontend, backend and
 
 7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
 
-## Custom Development Service
-
-Custom Development Service are available : [Get in touch](mailto:hello@idurarapp.com)
 
 ## Show your support
 
 Dont forget to give a ⭐️ to this project ... Happy coding!
+
+**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
+
+## License
+
+IDURAR is Free Open Source Released under the GNU Affero General Public License v3.0.

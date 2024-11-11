@@ -27,8 +27,6 @@ import {
   WalletOutlined,
   ReconciliationOutlined,
 } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 const { Sider } = Layout;
 
@@ -61,26 +59,7 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <CustomerServiceOutlined />,
       label: <Link to={'/customer'}>{translate('customers')}</Link>,
     },
-    {
-      key: 'people',
-      icon: <UserOutlined />,
-      label: <Link to={'/people'}>{translate('peoples')}</Link>,
-    },
-    {
-      key: 'company',
-      icon: <ShopOutlined />,
-      label: <Link to={'/company'}>{translate('companies')}</Link>,
-    },
-    {
-      key: 'lead',
-      icon: <FilterOutlined />,
-      label: <Link to={'/lead'}>{translate('leads')}</Link>,
-    },
-    {
-      key: 'offer',
-      icon: <FileOutlined />,
-      label: <Link to={'/offer'}>{translate('offers')}</Link>,
-    },
+
     {
       key: 'invoice',
       icon: <ContainerOutlined />,
@@ -89,7 +68,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'quote',
       icon: <FileSyncOutlined />,
-      label: <Link to={'/quote'}>{translate('proforma invoices')}</Link>,
+      label: <Link to={'/quote'}>{translate('quote')}</Link>,
     },
     {
       key: 'payment',
@@ -98,49 +77,24 @@ function Sidebar({ collapsible, isMobile = false }) {
     },
 
     {
-      key: 'product',
-      icon: <TagOutlined />,
-      label: <Link to={'/product'}>{translate('products')}</Link>,
-    },
-    {
-      key: 'categoryproduct',
-      icon: <TagsOutlined />,
-      label: <Link to={'/category/product'}>{translate('products_category')}</Link>,
-    },
-    {
-      key: 'expenses',
+      key: 'paymentMode',
+      label: <Link to={'/payment/mode'}>{translate('payments_mode')}</Link>,
       icon: <WalletOutlined />,
-      label: <Link to={'/expenses'}>{translate('expenses')}</Link>,
     },
     {
-      key: 'expensesCategory',
-      icon: <ReconciliationOutlined />,
-      label: <Link to={'/category/expenses'}>{translate('expenses_Category')}</Link>,
+      key: 'taxes',
+      label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
+      icon: <ShopOutlined />,
     },
-
     {
-      label: translate('Settings'),
-      key: 'settings',
+      key: 'generalSettings',
+      label: <Link to={'/settings'}>{translate('settings')}</Link>,
       icon: <SettingOutlined />,
-      children: [
-        {
-          key: 'generalSettings',
-          label: <Link to={'/settings'}>{translate('settings')}</Link>,
-        },
-
-        {
-          key: 'paymentMode',
-          label: <Link to={'/payment/mode'}>{translate('payments_mode')}</Link>,
-        },
-        {
-          key: 'taxes',
-          label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
-        },
-        {
-          key: 'about',
-          label: <Link to={'/about'}>{translate('about')}</Link>,
-        },
-      ],
+    },
+    {
+      key: 'about',
+      label: <Link to={'/about'}>{translate('about')}</Link>,
+      icon: <ReconciliationOutlined />,
     },
   ];
 
@@ -168,7 +122,6 @@ function Sidebar({ collapsible, isMobile = false }) {
     navMenu.collapse();
   };
 
-  const langDirection = useSelector(selectLangDirection);
   return (
     <Sider
       collapsible={collapsible}
@@ -179,15 +132,14 @@ function Sidebar({ collapsible, isMobile = false }) {
       style={{
         overflow: 'auto',
         height: '100vh',
-        direction: langDirection,
+
         position: isMobile ? 'absolute' : 'relative',
         bottom: '20px',
         ...(!isMobile && {
-          background: 'none',
-          border: 'none',
-          [langDirection === 'rtl' ? 'right' : 'left']: '20px',
+          // border: 'none',
+          ['left']: '20px',
           top: '20px',
-          borderRadius: '8px',
+          // borderRadius: '8px',
         }),
       }}
       theme={'light'}
@@ -219,8 +171,6 @@ function Sidebar({ collapsible, isMobile = false }) {
         theme={'light'}
         selectedKeys={[currentPath]}
         style={{
-          background: 'none',
-          border: 'none',
           width: 256,
         }}
       />
@@ -237,7 +187,6 @@ function MobileSidebar() {
     setVisible(false);
   };
 
-  const langDirection = useSelector(selectLangDirection);
   return (
     <>
       <Button
@@ -245,17 +194,14 @@ function MobileSidebar() {
         size="large"
         onClick={showDrawer}
         className="mobile-sidebar-btn"
-        style={{ [langDirection === 'rtl' ? 'marginRight' : 'marginLeft']: 25 }}
+        style={{ ['marginLeft']: 25 }}
       >
         <MenuOutlined style={{ fontSize: 18 }} />
       </Button>
       <Drawer
         width={250}
-        contentWrapperStyle={{
-          boxShadow: 'none',
-        }}
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
-        placement={langDirection === 'rtl' ? 'right' : 'left'}
+        // style={{ backgroundColor: 'rgba(255, 255, 255, 1)' }}
+        placement={'left'}
         closable={false}
         onClose={onClose}
         open={visible}

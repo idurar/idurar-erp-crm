@@ -23,7 +23,6 @@ import { generate as uniqueId } from 'shortid';
 import { useNavigate } from 'react-router-dom';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { selectLangDirection } from '@/redux/translate/selectors';
 
 function AddNewItem({ config }) {
   const navigate = useNavigate();
@@ -173,7 +172,6 @@ export default function DataTable({ config, extra = [] }) {
     const options = { equal: value, filter: searchConfig?.entity };
     dispatch(erp.list({ entity, options }));
   };
-  const langDirection=useSelector(selectLangDirection)
 
   return (
     <>
@@ -181,7 +179,7 @@ export default function DataTable({ config, extra = [] }) {
         title={DATATABLE_TITLE}
         ghost={true}
         onBack={() => window.history.back()}
-        backIcon={langDirection==="rtl"?<ArrowRightOutlined/>:<ArrowLeftOutlined />}
+        backIcon={<ArrowLeftOutlined />}
         extra={[
           <AutoCompleteAsync
             key={`${uniqueId()}`}
@@ -201,7 +199,6 @@ export default function DataTable({ config, extra = [] }) {
         ]}
         style={{
           padding: '20px 0px',
-          direction:langDirection
         }}
       ></PageHeader>
 

@@ -72,16 +72,6 @@ export default function Quote() {
     {
       title: translate('Status'),
       dataIndex: 'status',
-      render: (status) => {
-        let tagStatus = tagColor(status);
-
-        return (
-          <Tag color={tagStatus.color}>
-            {/* {tagStatus.icon + ' '} */}
-            {status && translate(tagStatus.label)}
-          </Tag>
-        );
-      },
     },
   ];
 

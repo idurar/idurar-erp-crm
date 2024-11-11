@@ -1,4 +1,4 @@
-import { Avatar, Popover, Button, Badge } from 'antd';
+import { Avatar, Popover, Button, Badge, Col, List } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
@@ -8,6 +8,7 @@ import useLanguage from '@/locale/useLanguage';
 
 export default function UpgradeButton() {
   const translate = useLanguage();
+
   const Content = () => {
     return (
       <>
@@ -24,24 +25,7 @@ export default function UpgradeButton() {
     );
   };
 
-  return (
-    <Popover content={<Content />} title={translate('Customize this application')} trigger="click">
-      <Badge count={1} size="small">
-        <Avatar
-          icon={<RocketOutlined />}
-          style={{
-            color: '#f56a00',
-            backgroundColor: '#FFF',
-            float: 'right',
-            marginTop: '5px',
-            cursor: 'pointer',
-          }}
-        />
-      </Badge>
-    </Popover>
-  );
-}
 
-//  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
-//  );
+console.log(
+  '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+);

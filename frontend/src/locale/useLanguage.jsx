@@ -1,46 +1,41 @@
-import { useSelector } from 'react-redux';
-
-import { selectCurrentLang } from '@/redux/translate/selectors';
-
-const getLabel = (lang, key) => {
+const getLabel = (key) => {
   try {
     const lowerCaseKey = key
       .toLowerCase()
       .replace(/[^a-zA-Z0-9]/g, '_')
       .replace(/ /g, '_');
 
-    if (lang[lowerCaseKey]) return lang[lowerCaseKey];
-    else {
-      // convert no found language label key to label
+    // if (lang[lowerCaseKey]) return lang[lowerCaseKey];
 
-      const remove_underscore_fromKey = key.replace(/_/g, ' ').split(' ');
+    // convert no found language label key to label
 
-      const conversionOfAllFirstCharacterofEachWord = remove_underscore_fromKey.map(
-        (word) => word[0].toUpperCase() + word.substring(1)
-      );
+    const remove_underscore_fromKey = key.replace(/_/g, ' ').split(' ');
 
-      const label = conversionOfAllFirstCharacterofEachWord.join(' ');
+    const conversionOfAllFirstCharacterofEachWord = remove_underscore_fromKey.map(
+      (word) => word[0].toUpperCase() + word.substring(1)
+    );
 
-      const result = window.localStorage.getItem('lang');
-      if (!result) {
-        let list = {};
-        list[lowerCaseKey] = label;
-        window.localStorage.setItem('lang', JSON.stringify(list));
-      } else {
-        let list = { ...JSON.parse(result) };
-        list[lowerCaseKey] = label;
-        window.localStorage.removeItem('lang');
-        window.localStorage.setItem('lang', JSON.stringify(list));
-      }
-      // console.error(
-      //   '🇩🇿 🇧🇷 🇻🇳 🇮🇩 🇨🇳 Language Label Warning : translate("' +
-      //     lowerCaseKey +
-      //     '") failed to get label for this key : ' +
-      //     lowerCaseKey +
-      //     ' please review your language config file and add this label'
-      // );
-      return label;
+    const label = conversionOfAllFirstCharacterofEachWord.join(' ');
+
+    const result = window.localStorage.getItem('lang');
+    if (!result) {
+      let list = {};
+      list[lowerCaseKey] = label;
+      window.localStorage.setItem('lang', JSON.stringify(list));
+    } else {
+      let list = { ...JSON.parse(result) };
+      list[lowerCaseKey] = label;
+      window.localStorage.removeItem('lang');
+      window.localStorage.setItem('lang', JSON.stringify(list));
     }
+    // console.error(
+    //   '🇩🇿 🇧🇷 🇻🇳 🇮🇩 🇨🇳 Language Label Warning : translate("' +
+    //     lowerCaseKey +
+    //     '") failed to get label for this key : ' +
+    //     lowerCaseKey +
+    //     ' please review your language config file and add this label'
+    // );
+    return label;
   } catch (error) {
     // console.error(
     //   '🚨 error getting this label : translate("' +
@@ -54,9 +49,7 @@ const getLabel = (lang, key) => {
 };
 
 const useLanguage = () => {
-  const lang = useSelector(selectCurrentLang);
-
-  const translate = (value) => getLabel(lang, value);
+  const translate = (value) => getLabel(value);
 
   return translate;
 };
