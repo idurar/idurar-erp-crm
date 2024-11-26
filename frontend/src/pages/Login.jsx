@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,9 +18,13 @@ const LoginPage = () => {
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
   // const size = useSize();
+  const [remember, setRemember] = useState(true);
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
+    if (!values.remember) {
+      setRemember(false);
+    }
     dispatch(login({ loginData: values }));
   };
 
@@ -36,7 +40,7 @@ const LoginPage = () => {
           name="normal_login"
           className="login-form"
           initialValues={{
-            remember: true,
+            remember: remember ? true : isLoading && false,
           }}
           onFinish={onFinish}
         >
