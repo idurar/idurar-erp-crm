@@ -32,13 +32,6 @@ const updateProfilePassword = async (userModel, req, res) => {
     salt: salt,
   };
 
-  if (userProfile.email === 'admin@demo.com') {
-    return res.status(403).json({
-      success: false,
-      result: null,
-      message: "you couldn't update demo password",
-    });
-  }
   const resultPassword = await UserPassword.findOneAndUpdate(
     { user: userProfile._id, removed: false },
     { $set: UserPasswordData },

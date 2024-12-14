@@ -17,14 +17,6 @@ const updatePassword = async (userModel, req, res) => {
 
   // Find document by id and updates with the required fields
 
-  if (userProfile.email === 'admin@demo.com') {
-    return res.status(403).json({
-      success: false,
-      result: null,
-      message: "you couldn't update demo password",
-    });
-  }
-
   const salt = uniqueId();
 
   const passwordHash = bcrypt.hashSync(salt + password);
