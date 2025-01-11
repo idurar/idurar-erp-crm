@@ -17,5 +17,5 @@ router.route('/logout').post(adminAuth.isValidAuthToken, catchErrors(adminAuth.l
 
 module.exports = router;
 
-const express = require('express');
+
 

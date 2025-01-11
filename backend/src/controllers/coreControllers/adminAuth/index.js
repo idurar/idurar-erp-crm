@@ -1,5 +1,6 @@
 const createAuthMiddleware = require('@/controllers/middlewaresControllers/createAuthMiddleware');
-module.exports = createAuthMiddleware('Admin');
+
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -75,5 +76,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = login;
-
+module.exports = login,createAuthMiddleware('Admin');
