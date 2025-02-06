@@ -1,20 +1,28 @@
 const express = require('express');
-
 const router = express.Router();
-const path = require('path');
 
-// Without middleware
+const path = require('path');
+const { isPathInside } = require('../../utils/is-path-inside');
 
 router.route('/:subPath/:directory/:file').get(function (req, res) {
   try {
     const { subPath, directory, file } = req.params;
-    //subPath sanitization check
-    sanitizedPath = path.normalize(subPath).replace(/^(\.\.[\/\\])+/, '');
-    const options = {
-      root: path.join(__dirname, `../../public/${sanitizedPath}/${directory}`),
-    };
-    const fileName = file;
-    return res.sendFile(fileName, options, function (error) {
+
+    // Define the trusted root directory
+    const rootDir = path.join(__dirname, '../../public');
+
+    const relativePath = path.join(subPath, directory, file);
+    const absolutePath = path.join(rootDir, relativePath);
+
+    // Check if the resulting path stays inside rootDir
+    if (!isPathInside(absolutePath, rootDir)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid filepath',
+      });
+    }
+
+    return res.sendFile(absolutePath, (error) => {
       if (error) {
         return res.status(404).json({
           success: false,
