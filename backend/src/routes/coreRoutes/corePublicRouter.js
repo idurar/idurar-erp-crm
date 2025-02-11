@@ -8,10 +8,16 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
   try {
     const { subPath, directory, file } = req.params;
 
+    // Decode each parameter separately
+    const decodedSubPath = decodeURIComponent(subPath);
+    const decodedDirectory = decodeURIComponent(directory);
+    const decodedFile = decodeURIComponent(file);
+
     // Define the trusted root directory
     const rootDir = path.join(__dirname, '../../public');
 
-    const relativePath = path.join(subPath, directory, file);
+    // Safely join the decoded path segments
+    const relativePath = path.join(decodedSubPath, decodedDirectory, decodedFile);
     const absolutePath = path.join(rootDir, relativePath);
 
     // Check if the resulting path stays inside rootDir
