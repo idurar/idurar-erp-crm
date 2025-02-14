@@ -10,7 +10,7 @@ import { useMoney } from '@/settings';
 
 import RecordPayment from './RecordPayment';
 import useLanguage from '@/locale/useLanguage';
-import { tagColor } from '@/utils/statusTagColor';
+
 import { useNavigate } from 'react-router-dom';
 
 export default function Payment({ config, currentItem }) {
@@ -26,7 +26,7 @@ export default function Payment({ config, currentItem }) {
   const [client, setClient] = useState({});
   useEffect(() => {
     if (currentErp?.client) {
-      setClient(currentErp.client[currentErp.client.type]);
+      setClient(currentErp.client);
     }
   }, [currentErp]);
 
@@ -40,10 +40,6 @@ export default function Payment({ config, currentItem }) {
     }
     return () => controller.abort();
   }, [currentItem]);
-
-  useEffect(() => {
-    console.info('itemslist', itemslist);
-  }, [itemslist]);
 
   return (
     <>
@@ -61,11 +57,7 @@ export default function Payment({ config, currentItem }) {
               currentErp.year || ''
             }`}
             ghost={false}
-            tags={
-              <Tag color={tagColor(currentErp.paymentStatus)?.color}>
-                {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
-              </Tag>
-            }
+            tags={<span>{currentErp.paymentStatus && translate(currentErp.paymentStatus)}</span>}
             // subTitle="This is cuurent erp page"
             extra={[
               <Button
@@ -106,9 +98,7 @@ export default function Payment({ config, currentItem }) {
             <Descriptions.Item label={translate('phone')}>{client.phone}</Descriptions.Item>
             <Divider dashed />
             <Descriptions.Item label={translate('payment status')}>
-              <Tag color={tagColor(currentErp.paymentStatus)?.color}>
-                {currentErp.paymentStatus && translate(currentErp.paymentStatus)}
-              </Tag>
+              <span>{currentErp.paymentStatus && translate(currentErp.paymentStatus)}</span>
             </Descriptions.Item>
             <Descriptions.Item label={translate('sub total')}>
               {money.moneyFormatter({
