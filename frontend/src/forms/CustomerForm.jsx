@@ -1,28 +1,43 @@
-import React from 'react';
-import { Button, Form, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { validatePhoneNumber } from '@/utils/helpers';
+
+import useLanguage from '@/locale/useLanguage';
 
 export default function CustomerForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
+  const validateEmptyString = (_, value) => {
+    if (value && value.trim() === '') {
+      return Promise.reject(new Error('Field cannot be empty'));
+    }
+
+    return Promise.resolve();
+  };
+
   return (
     <>
       <Form.Item
-        label="company Name"
+        label={translate('company')}
         name="company"
         rules={[
           {
             required: true,
-            message: 'Please input your company name!',
+          },
+          {
+            validator: validateEmptyString,
           },
         ]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="Sur Name"
-        name="managerSurname"
+        label={translate('Manager first Name')}
+        name="managerName"
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
+          },
+          {
+            validator: validateEmptyString,
           },
         ]}
         style={{
@@ -34,12 +49,14 @@ export default function CustomerForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
-        label="Name"
-        name="managerName"
+        label={translate('Manager Last Name')}
+        name="managerSurname"
         rules={[
           {
             required: true,
-            message: 'Please input your manager name!',
+          },
+          {
+            validator: validateEmptyString,
           },
         ]}
         style={{
@@ -53,11 +70,17 @@ export default function CustomerForm({ isUpdateForm = false }) {
 
       <Form.Item
         name="phone"
-        label="Phone"
+        label={translate('Phone')}
         rules={[
           {
             required: true,
-            message: 'Please input your phone!',
+          },
+          {
+            validator: validateEmptyString,
+          },
+          {
+            pattern: validatePhoneNumber,
+            message: 'Please enter a valid phone number',
           },
         ]}
       >
@@ -65,15 +88,16 @@ export default function CustomerForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         name="email"
-        label="E-mail"
+        label={translate('email')}
         rules={[
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
+          },
+          {
+            validator: validateEmptyString,
           },
         ]}
       >

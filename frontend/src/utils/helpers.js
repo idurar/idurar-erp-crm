@@ -1,30 +1,7 @@
-import { parse } from 'querystring';
-import dayjs from 'dayjs';
-function getPageQuery() {
-  parse(window.location.href.split('?')[1]);
-}
-
-/* 
- To get nested object properties.
- admin = {
-    location: {
-        lat: 50,
-        long: 9
-    }
- }
-
- get(admin, 'location.lat')     // 50
- get(admin, 'location.foo.bar') // undefined
-*/
-
 export function get(obj, key) {
   return key.split('.').reduce(function (o, x) {
     return o === undefined || o === null ? o : o[x];
   }, obj);
-
-  // key.split('.').reduce(function(o, x) {
-  //     return (o === undefined || o === null) ? o : o[x];
-  //   }, obj);
 }
 
 Object.byString = function (o, s) {
@@ -47,7 +24,7 @@ Object.byString = function (o, s) {
 };
 
 /* 
- To check only if a property exists, without getting its value. It similer get function.
+ To check only if a property exists, without getting its value. It similar get function.
 */
 export function has(obj, key) {
   return key.split('.').every(function (x) {
@@ -129,31 +106,10 @@ export function formatDatetime(param) {
 }
 
 /*
+  Regex to validate phone number format
+*/
+export const validatePhoneNumber = /^(?:[+\d()\-\s]+)$/;
+
+/*
  Set object value in html
 */
-export function bindValue(obj, parentElement) {
-  parentElement.querySelectorAll('[data-property]').forEach((element) => {
-    const type = element.dataset.type;
-    let value = valueByString(obj, element.dataset.property);
-    console.log({ type });
-    switch (type) {
-      case 'date':
-        value = formatDate(value);
-        break;
-
-      case 'datetime':
-        value = formatDatetime(value);
-        break;
-
-      case 'currency':
-        value = value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
-        break;
-
-      default:
-        break;
-    }
-    element.innerHTML = value;
-  });
-}
-
-export default getPageQuery;

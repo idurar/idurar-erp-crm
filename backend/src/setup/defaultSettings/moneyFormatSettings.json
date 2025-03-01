@@ -1,0 +1,50 @@
+[
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "default_currency_code",
+    "settingValue": "USD",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "currency_name",
+    "settingValue": "US Dollars",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "currency_symbol",
+    "settingValue": "$",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "currency_position",
+    "settingValue": "before",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "decimal_sep",
+    "settingValue": ".",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "thousand_sep",
+    "settingValue": ",",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "cent_precision",
+    "settingValue": 2,
+    "valueType": "number"
+  },
+  {
+    "settingCategory": "money_format_settings",
+    "settingKey": "zero_format",
+    "settingValue": false,
+    "valueType": "boolean"
+  }
+]

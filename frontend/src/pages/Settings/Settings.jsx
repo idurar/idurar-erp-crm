@@ -1,62 +1,59 @@
-import { useState, useEffect } from 'react';
-import { Menu, Tabs, Button, Divider } from 'antd';
-import { SettingsLayout } from '@/layout';
+import {
+  SettingOutlined,
+  CreditCardOutlined,
+  DollarOutlined,
+  FileImageOutlined,
+  TrophyOutlined,
+} from '@ant-design/icons';
 
+import TabsContent from '@/components/TabsContent/TabsContent';
+
+import CompanyLogoSettings from './CompanyLogoSettings';
 import GeneralSettings from './GeneralSettings';
-import PaymentSettings from './PaymentSettings';
-import InvoiceSettings from './InvoiceSettings';
+import CompanySettings from './CompanySettings';
+import FinanceSettings from './FinanceSettings';
+import MoneyFormatSettings from './MoneyFormatSettings';
 
-const RightMenu = ({ activeTab, handleTabChange }) => {
-  const menuItems = [
-    { key: 'generalSettings', label: 'generalSettings' },
-    { key: 'paymentSettings', label: 'paymentSettings' },
-    { key: 'invoiceSettings', label: 'invoiceSettings' },
-  ];
-  const menuList = menuItems.map((item, index) => (
-    <Button
-      type={item.key == activeTab ? 'default' : 'text'}
-      key={item.key}
-      style={{ marginBottom: '10px' }}
-      block
-      onClick={() => handleTabChange(item.key)}
-    >
-      {item.label}
-    </Button>
-  ));
-  return <div className="pad10">{menuList}</div>;
-};
-
-const Visibility = ({ isVisible = false, children }) => {
-  const show = isVisible ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
-  return <div style={show}>{children}</div>;
-};
+import useLanguage from '@/locale/useLanguage';
+import { useParams } from 'react-router-dom';
 
 export default function Settings() {
-  const [state, setState] = useState('generalSettings');
+  const translate = useLanguage();
+  const { settingsKey } = useParams();
+  const content = [
+    {
+      key: 'general_settings',
+      label: translate('General Settings'),
+      icon: <SettingOutlined />,
+      children: <GeneralSettings />,
+    },
+    {
+      key: 'company_settings',
+      label: translate('Company Settings'),
+      icon: <TrophyOutlined />,
+      children: <CompanySettings />,
+    },
+    {
+      key: 'company_logo',
+      label: translate('Company Logo'),
+      icon: <FileImageOutlined />,
+      children: <CompanyLogoSettings />,
+    },
+    {
+      key: 'currency_settings',
+      label: translate('Currency Settings'),
+      icon: <DollarOutlined />,
+      children: <MoneyFormatSettings />,
+    },
+    {
+      key: 'finance_settings',
+      label: translate('Finance Settings'),
+      icon: <CreditCardOutlined />,
+      children: <FinanceSettings />,
+    },
+  ];
 
-  const isActive = (tab) => {
-    return state === tab ? true : false;
-  };
+  const pageTitle = translate('Settings');
 
-  const handleTabChange = (tab) => {
-    setState(tab);
-  };
-
-  return (
-    <SettingsLayout
-      topCardContent="Generals Settings"
-      topCardTitle="Settings"
-      bottomCardContent={<RightMenu activeTab={state} handleTabChange={handleTabChange} />}
-    >
-      <Visibility isVisible={isActive('generalSettings')}>
-        <GeneralSettings />
-      </Visibility>
-      <Visibility isVisible={isActive('paymentSettings')}>
-        <PaymentSettings />
-      </Visibility>
-      <Visibility isVisible={isActive('invoiceSettings')}>
-        <InvoiceSettings />
-      </Visibility>
-    </SettingsLayout>
-  );
+  return <TabsContent defaultActiveKey={settingsKey} content={content} pageTitle={pageTitle} />;
 }

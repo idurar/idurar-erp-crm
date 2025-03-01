@@ -1,33 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Row, Col, Button } from 'antd';
+import { useEffect, useState } from 'react';
+import { Row, Col } from 'antd';
 import { useSelector } from 'react-redux';
 
 import dayjs from 'dayjs';
+import { dataForRead } from '@/utils/dataStructure';
 
 import { useCrudContext } from '@/context/crud';
 import { selectCurrentItem } from '@/redux/crud/selectors';
 import { valueByString } from '@/utils/helpers';
 
+import useLanguage from '@/locale/useLanguage';
+import { useDate } from '@/settings';
+
 export default function ReadItem({ config }) {
-  let { readColumns } = config;
+  const { dateFormat } = useDate();
+  let { readColumns, fields } = config;
+  const translate = useLanguage();
   const { result: currentResult } = useSelector(selectCurrentItem);
   const { state } = useCrudContext();
   const { isReadBoxOpen } = state;
   const [listState, setListState] = useState([]);
 
-  const isFirstRun = useRef(true);
+  if (fields) readColumns = [...dataForRead({ fields: fields, translate: translate })];
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
-      return;
-    }
     const list = [];
     readColumns.map((props) => {
       const propsKey = props.dataIndex;
       const propsTitle = props.title;
       const isDate = props.isDate || false;
       let value = valueByString(currentResult, propsKey);
-      value = isDate ? dayjs(value).format('DD/MM/YYYY') : value;
+      value = isDate ? dayjs(value).format(dateFormat) : value;
       list.push({ propsKey, label: propsTitle, value: value });
     });
     setListState(list);

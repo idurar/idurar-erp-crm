@@ -6,22 +6,12 @@ import successHandler from '@/request/successHandler';
 
 export const login = async ({ loginData }) => {
   try {
-    const response = await fetch(API_BASE_URL + `login?timestamp=${new Date().getTime()}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cache
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(loginData), // body data type must match "Content-Type" header
-    });
+    const response = await axios.post(
+      API_BASE_URL + `login?timestamp=${new Date().getTime()}`,
+      loginData
+    );
 
-    const { status } = response;
-    const data = await response.json();
+    const { status, data } = response;
 
     successHandler(
       { data, status },
@@ -35,12 +25,83 @@ export const login = async ({ loginData }) => {
     return errorHandler(error);
   }
 };
-export const logout = async () => {
-  axios.defaults.withCredentials = true;
+
+export const register = async ({ registerData }) => {
   try {
-    window.localStorage.clear();
-    await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
+    const response = await axios.post(API_BASE_URL + `register`, registerData);
+
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
   } catch (error) {
     return errorHandler(error);
   }
 };
+
+export const verify = async ({ userId, emailToken }) => {
+  try {
+    const response = await axios.get(API_BASE_URL + `verify/${userId}/${emailToken}`);
+
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    return errorHandler(error);
+  }
+};
+
+export const resetPassword = async ({ resetPasswordData }) => {
+  try {
+    const response = await axios.post(API_BASE_URL + `resetpassword`, resetPasswordData);
+
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    return errorHandler(error);
+  }
+};
+export const logout = async () => {
+  axios.defaults.withCredentials = true;
+  try {
+    // window.localStorage.clear();
+    const response = await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    return errorHandler(error);
+  }
+};
+
+//  console.log(
+//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//  );

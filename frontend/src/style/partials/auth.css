@@ -1,0 +1,41 @@
+.list-checked {
+  padding-left: 0px;
+  list-style: none;
+}
+.list-checked-item {
+  position: relative;
+  display: block;
+  color: #677788;
+  margin-bottom: 30px;
+  list-style: none;
+}
+
+.list-checked-item-right{
+  padding-right: 1.75rem;
+}
+
+.list-checked-item-left{
+  padding-left: 1.75rem;
+}
+
+.list-checked-item::before {
+  position: absolute;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../images/checklist.svg);
+  content: '';
+  margin-top: 0.125rem;
+}
+
+.list-checked-item-right::before{
+  right: 0;
+}
+.list-checked-item-left::before{
+  left: 0;
+}
+
+
+.sideContent * {
+  color: #4f5d75 !important;
+}

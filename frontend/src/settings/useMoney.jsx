@@ -1,59 +1,74 @@
-import React from 'react';
 import currency from 'currency.js';
+
 import { useSelector } from 'react-redux';
+import storePersist from '@/redux/storePersist';
 
 import { selectMoneyFormat } from '@/redux/settings/selectors';
 
 const useMoney = () => {
-  const { currencySymbol, currencyPosition, decimalSep, ThousandSep, centPrecision, zeroFormat } =
-    useSelector(selectMoneyFormat);
+  const money_format_settings = useSelector(selectMoneyFormat);
 
-  const currencyFormat = (amount) =>
-    currency(amount).dollars() > 0 || !zeroFormat
+  const money_format_state = money_format_settings
+    ? money_format_settings
+    : storePersist.get('settings')?.money_format_settings;
+
+  function currencyFormat({ amount, currency_code = money_format_state?.currency_code }) {
+    return currency(amount).dollars() > 0 || !money_format_state?.zero_format
       ? currency(amount, {
-          separator: ThousandSep,
-          decimal: decimalSep,
+          separator: money_format_state?.thousand_sep,
+          decimal: money_format_state?.decimal_sep,
           symbol: '',
-          precision: centPrecision,
+          precision: money_format_state?.cent_precision,
         }).format()
       : 0 +
-        currency(amount, {
-          separator: ThousandSep,
-          decimal: decimalSep,
-          symbol: '',
-          precision: centPrecision,
-        }).format();
+          currency(amount, {
+            separator: money_format_state?.thousand_sep,
+            decimal: money_format_state?.decimal_sep,
+            symbol: '',
+            precision: money_format_state?.cent_precision,
+          }).format();
+  }
 
-  let moneyFormatter = ({ amount = 0 }) => {
-    return currencyPosition === 'before'
-      ? currencySymbol + ' ' + currencyFormat(amount)
-      : currencyFormat(amount) + ' ' + currencySymbol;
-  };
+  function moneyFormatter({ amount = 0, currency_code = money_format_state?.currency_code }) {
+    return money_format_state?.currency_position === 'before'
+      ? money_format_state?.currency_symbol + ' ' + currencyFormat({ amount, currency_code })
+      : currencyFormat({ amount, currency_code }) + ' ' + money_format_state?.currency_symbol;
+  }
 
-  let amountFormatter = ({ amount = 0 }) => currencyFormat(amount);
+  function amountFormatter({ amount = 0, currency_code = money_format_state?.currency_code }) {
+    return currencyFormat({ amount: amount, currency_code });
+  }
 
-  let moneyRowFormatter = ({ amount = 0 }) => {
+  function moneyRowFormatter({ amount = 0, currency_code = money_format_state?.currency_code }) {
     return {
       props: {
         style: {
           textAlign: 'right',
           whiteSpace: 'nowrap',
+          direction: 'ltr',
         },
       },
-      children: <>{moneyFormatter({ amount })}</>,
+      children: (
+        <>
+          {money_format_state?.currency_position === 'before'
+            ? money_format_state?.currency_symbol + ' ' + currencyFormat({ amount, currency_code })
+            : currencyFormat({ amount, currency_code }) + ' ' + money_format_state?.currency_symbol}
+        </>
+      ),
     };
-  };
+  }
 
   return {
     moneyRowFormatter,
     moneyFormatter,
     amountFormatter,
-    currencySymbol,
-    currencyPosition,
-    decimalSep,
-    ThousandSep,
-    centPrecision,
-    zeroFormat,
+    currency_symbol: money_format_state?.currency_symbol,
+    currency_code: money_format_state?.currency_code,
+    currency_position: money_format_state?.currency_position,
+    decimal_sep: money_format_state?.decimal_sep,
+    thousand_sep: money_format_state?.thousand_sep,
+    cent_precision: money_format_state?.cent_precision,
+    zero_format: money_format_state?.zero_format,
   };
 };
 
