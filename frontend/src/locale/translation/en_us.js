@@ -227,6 +227,7 @@ const lang = {
   about: 'About',
   profile_settings: 'Profile Settings',
   app_settings: 'App Settings',
+  pdf_settings: 'PDF Settings',
   logout: 'Logout',
   number: 'Number',
   client: 'Client',
@@ -450,6 +451,9 @@ const lang = {
   offers: 'Offers',
   proforma_invoices: 'quote',
   search: 'search',
+  quote_settings_quote_pdf_footer: 'Footer PDF Quote',
+  invoice_settings_invoice_pdf_footer: 'Footer PDF Invoice',
+  offer_settings_offer_pdf_footer: 'Footer PDF Offering'
 };
 
 export default lang;

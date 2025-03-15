@@ -14,7 +14,7 @@ require('dotenv').config({ path: '.env.local' });
 
 exports.generatePdf = async (
   modelName,
-  info = { filename: 'pdf_file', format: 'A5', targetLocation: '' },
+  info = { filename: 'pdf_file', format: 'A4', targetLocation: '' },
   result,
   callback
 ) => {

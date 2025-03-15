@@ -1,3 +1,3 @@
-const coreTranslation = ['en_us'];
+const coreTranslation = ['id_id'];
 
 export default coreTranslation;

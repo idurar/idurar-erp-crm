@@ -16,15 +16,15 @@ async function setupApp() {
     const salt = uniqueId();
 
     const passwordHash = newAdminPassword.generateHash(salt, 'admin123');
-
-    const demoAdmin = {
-      email: 'admin@demo.com',
+    const filter = { email: 'admin@demo.com' };
+    const update = {
       name: 'IDURAR',
       surname: 'Admin',
       enabled: true,
       role: 'owner',
     };
-    const result = await new Admin(demoAdmin).save();
+    const options = { new: true, upsert: true };
+    const result = await Admin.findOneAndUpdate(filter, update, options);
 
     const AdminPasswordData = {
       password: passwordHash,

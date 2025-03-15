@@ -68,7 +68,7 @@ const setup = async (req, res) => {
       idurar_app_company_email: email,
       idurar_app_timezone: timezone,
       idurar_app_country: country,
-      idurar_app_language: language || 'en_us',
+      idurar_app_language: language || 'id_id',
     };
 
     const newSettings = file.map((x) => {

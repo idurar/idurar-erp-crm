@@ -2,7 +2,7 @@
   {
     "settingCategory": "company_settings",
     "settingKey": "company_name",
-    "settingValue": "COMPANY Name",
+    "settingValue": "Sapamoving",
     "valueType": "string"
   },
   {
@@ -26,13 +26,13 @@
   {
     "settingCategory": "company_settings",
     "settingKey": "company_state",
-    "settingValue": "New York",
+    "settingValue": "Jakarta",
     "valueType": "string"
   },
   {
     "settingCategory": "company_settings",
     "settingKey": "company_country",
-    "settingValue": "United State",
+    "settingValue": "Indonesia",
     "valueType": "string"
   },
   {
@@ -44,7 +44,7 @@
   {
     "settingCategory": "company_settings",
     "settingKey": "company_phone",
-    "settingValue": "+1 345234654",
+    "settingValue": "+6281234567890",
     "valueType": "string"
   },
   {
@@ -74,7 +74,7 @@
   {
     "settingCategory": "company_settings",
     "settingKey": "company_bank_account",
-    "settingValue": "iban : 00001231421",
+    "settingValue": "BCA : 491928818",
     "valueType": "string"
   }
 ]
