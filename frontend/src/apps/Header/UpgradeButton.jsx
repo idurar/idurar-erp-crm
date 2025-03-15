@@ -30,7 +30,3 @@ export default function UpgradeButton() {
     </Badge>
   );
 }
-
-console.log(
-  '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
-);
