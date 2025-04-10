@@ -13,14 +13,22 @@ export const login = async ({ loginData }) => {
 
     const { status, data } = response;
 
-    successHandler(
-      { data, status },
-      {
-        notifyOnSuccess: false,
-        notifyOnFailed: true,
-      }
-    );
-    return data;
+    if (data.success === true) {
+      successHandler(
+        { data, status },
+        {
+          notifyOnSuccess: false,
+          notifyOnFailed: true,
+        }
+      );
+      return data;
+    } else {
+      return {
+        success: false,
+        result: null,
+        message: data.message || 'Login failed',
+      };
+    }
   } catch (error) {
     return errorHandler(error);
   }
@@ -82,10 +90,10 @@ export const resetPassword = async ({ resetPasswordData }) => {
     return errorHandler(error);
   }
 };
+
 export const logout = async () => {
   axios.defaults.withCredentials = true;
   try {
-    // window.localStorage.clear();
     const response = await axios.post(API_BASE_URL + `logout?timestamp=${new Date().getTime()}`);
     const { status, data } = response;
 
@@ -101,7 +109,3 @@ export const logout = async () => {
     return errorHandler(error);
   }
 };
-
-//  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
-//  );

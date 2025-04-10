@@ -6,13 +6,15 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
     console.log('authUser received data:', {
       userId: user?._id,
       hasDatabasePassword: !!databasePassword,
-      passwordLength: password?.length
+      passwordLength: password?.length,
+      hasSalt: !!databasePassword?.salt,
+      hasPassword: !!databasePassword?.password
     });
 
     if (!databasePassword) {
       console.error('databasePassword is null or undefined');
       return res.status(500).json({
-        success: false,
+      success: false,
         result: null,
         message: 'Password record not found.',
       });
@@ -30,10 +32,23 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
       });
     }
 
+    // Log the values being compared
+    console.log('Comparing password with:', {
+      salt: databasePassword.salt,
+      passwordLength: password.length,
+      storedPasswordLength: databasePassword.password.length
+    });
+
+    // Use bcrypt.compare to properly compare the passwords
     const isMatch = await bcrypt.compare(databasePassword.salt + password, databasePassword.password);
     console.log('Password comparison result:', isMatch);
     
     if (!isMatch) {
+      console.log('Password mismatch. Details:', {
+        salt: databasePassword.salt,
+        passwordLength: password.length,
+        storedPasswordLength: databasePassword.password.length
+      });
       return res.status(403).json({
         success: false,
         result: null,
