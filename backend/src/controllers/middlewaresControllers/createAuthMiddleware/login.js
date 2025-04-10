@@ -8,7 +8,7 @@ const login = async (req, res, { userModel }) => {
   const UserPasswordModel = mongoose.model(userModel + 'Password');
   const UserModel = mongoose.model(userModel);
   const { email, password } = req.body;
-
+  console.log('====>', req.body);
   // validate
   const objectSchema = Joi.object({
     email: Joi.string()
@@ -30,7 +30,7 @@ const login = async (req, res, { userModel }) => {
 
   const user = await UserModel.findOne({ email: email, removed: false });
 
-  // console.log(user);
+  console.log('=== user', user);
   if (!user)
     return res.status(404).json({
       success: false,
@@ -38,7 +38,18 @@ const login = async (req, res, { userModel }) => {
       message: 'No account with this email has been registered.',
     });
 
+  console.log('Searching for password with user._id:', user._id);
   const databasePassword = await UserPasswordModel.findOne({ user: user._id, removed: false });
+  console.log('Raw databasePassword query result:', databasePassword);
+
+  if (!databasePassword) {
+    console.log('No password record found for user:', user._id);
+    return res.status(404).json({
+      success: false,
+      result: null,
+      message: 'No password record found for this user.',
+    });
+  }
 
   if (!user.enabled)
     return res.status(409).json({

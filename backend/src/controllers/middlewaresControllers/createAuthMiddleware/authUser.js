@@ -2,16 +2,45 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const authUser = async (req, res, { user, databasePassword, password, UserPasswordModel }) => {
-  const isMatch = await bcrypt.compare(databasePassword.salt + password, databasePassword.password);
-
-  if (!isMatch)
-    return res.status(403).json({
-      success: false,
-      result: null,
-      message: 'Invalid credentials.',
+  try {
+    console.log('authUser received data:', {
+      userId: user?._id,
+      hasDatabasePassword: !!databasePassword,
+      passwordLength: password?.length
     });
 
-  if (isMatch === true) {
+    if (!databasePassword) {
+      console.error('databasePassword is null or undefined');
+      return res.status(500).json({
+        success: false,
+        result: null,
+        message: 'Password record not found.',
+      });
+    }
+
+    if (!databasePassword.salt || !databasePassword.password) {
+      console.error('Invalid database password structure:', {
+        hasSalt: !!databasePassword.salt,
+        hasPassword: !!databasePassword.password
+      });
+      return res.status(500).json({
+        success: false,
+        result: null,
+        message: 'Invalid password record structure.',
+      });
+    }
+
+    const isMatch = await bcrypt.compare(databasePassword.salt + password, databasePassword.password);
+    console.log('Password comparison result:', isMatch);
+    
+    if (!isMatch) {
+      return res.status(403).json({
+        success: false,
+        result: null,
+        message: 'Invalid credentials.',
+      });
+    }
+
     const token = jwt.sign(
       {
         id: user._id,
@@ -51,11 +80,12 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
       },
       message: 'Successfully login user',
     });
-  } else {
-    return res.status(403).json({
+  } catch (error) {
+    console.error('Error in authUser:', error);
+    return res.status(500).json({
       success: false,
       result: null,
-      message: 'Invalid credentials.',
+      message: 'An error occurred while processing the request.',
     });
   }
 };
