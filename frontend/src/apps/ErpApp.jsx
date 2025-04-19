@@ -43,7 +43,7 @@ export default function ErpCrmApp() {
 
   // useEffect(() => {
   //   const { loadDefaultLang } = storePersist.get('firstVisit');
-  //   if (appSettings.idurar_app_language && !loadDefaultLang) {
+  //   if (appSettings.VERTEX_app_language && !loadDefaultLang) {
   //     window.localStorage.setItem('firstVisit', JSON.stringify({ loadDefaultLang: true }));
   //   }
   // }, [appSettings]);
