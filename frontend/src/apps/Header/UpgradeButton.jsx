@@ -22,7 +22,7 @@ export default function UpgradeButton() {
         }}
         icon={<RocketOutlined />}
         onClick={() => {
-          window.open(`https://cloud.idurarapp.com`);
+          window.open(`https://cloud.VERTEXapp.com`);
         }}
       >
         {translate('Try Entreprise Version')}
@@ -32,5 +32,5 @@ export default function UpgradeButton() {
 }
 
 console.log(
-  '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+  '🚀 Welcome to VERTEX ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@VERTEXapp.com for more information.'
 );

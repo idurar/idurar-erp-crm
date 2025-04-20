@@ -12,7 +12,7 @@ export default function GeneralSettingForm() {
     <div>
       <Form.Item
         label={translate('Date Format')}
-        name="idurar_app_date_format"
+        name="VERTEX_app_date_format"
         rules={[
           {
             required: true,
@@ -74,7 +74,7 @@ export default function GeneralSettingForm() {
       </Form.Item>
       <Form.Item
         label={translate('email')}
-        name="idurar_app_company_email"
+        name="VERTEX_app_company_email"
         rules={[
           {
             required: true,

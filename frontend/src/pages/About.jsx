@@ -7,23 +7,23 @@ const About = () => {
   return (
     <Result
       status="info"
-      title={'IDURAR'}
+      title={'VERTEX'}
       subTitle={translate('Do you need help on customize of this app')}
       extra={
         <>
           <p>
-            Website : <a href="https://www.idurarapp.com">www.idurarapp.com</a>{' '}
+            Website : <a href="https://www.VERTEXapp.com">www.VERTEXapp.com</a>{' '}
           </p>
           <p>
             GitHub :{' '}
-            <a href="https://github.com/idurar/idurar-erp-crm">
-              https://github.com/idurar/idurar-erp-crm
+            <a href="https://github.com/VERTEX/VERTEX-erp-crm">
+              https://github.com/VERTEX/VERTEX-erp-crm
             </a>
           </p>
           <Button
             type="primary"
             onClick={() => {
-              window.open(`https://www.idurarapp.com/contact-us/`);
+              window.open(`https://www.VERTEXapp.com/contact-us/`);
             }}
           >
             {translate('Contact us')}
