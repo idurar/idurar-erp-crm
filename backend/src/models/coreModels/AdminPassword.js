@@ -26,6 +26,7 @@ const AdminPasswordSchema = new Schema({
   authType: {
     type: String,
     default: 'email',
+    enum: ['email', 'google'],
   },
   loggedSessions: {
     type: [String],
@@ -42,6 +43,12 @@ AdminPasswordSchema.methods.generateHash = function (salt, password) {
 // checking if password is valid
 AdminPasswordSchema.methods.validPassword = function (salt, userpassword) {
   return bcrypt.compareSync(salt + userpassword, this.password);
+};
+
+// Static method to generate a hash from static context
+AdminPasswordSchema.statics.generateHash = function (password) {
+  const salt = require('shortid').generate();
+  return { passwordHash: bcrypt.hashSync(salt + password), salt };
 };
 
 module.exports = mongoose.model('AdminPassword', AdminPasswordSchema);
