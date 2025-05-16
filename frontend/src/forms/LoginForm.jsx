@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form, Input, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Checkbox, Button, Divider } from 'antd';
+import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons';
+import { API_BASE_URL } from '@/config/serverApiConfig';
 
 import useLanguage from '@/locale/useLanguage';
 
@@ -51,6 +52,27 @@ export default function LoginForm() {
           {translate('Forgot password')}
         </a>
       </Form.Item>
+       <Divider>{translate('Or')}</Divider>
+
+      <Form.Item>
+        <Button
+          icon={<GoogleOutlined />}
+          size="large"
+          block
+          href={`${API_BASE_URL}/api/auth/google`}
+          style={{ 
+            backgroundColor: '#4285F4', 
+            color: 'white',
+            height: '46px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            borderRadius: '4px'
+          }}
+        >
+          {translate('Continue with Google')}
+        </Button>
     </div>
   );
 }
