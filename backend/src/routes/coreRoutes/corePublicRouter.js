@@ -29,6 +29,14 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
     }
 
     return res.sendFile(absolutePath, (error) => {
+    //subPath sanitization check
+    sanitizedPath = path.normalize(subPath).replace(/^(\.\.[\/\\])+/, '');
+    const options = {
+      root: path.join(__dirname, `../../public/${sanitizedPath}/${directory}`),
+    };
+    const fileName = file;
+    return res.sendFile(fileName, options, function (error) {
+
       if (error) {
         return res.status(404).json({
           success: false,
