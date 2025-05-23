@@ -8,7 +8,7 @@ const About = () => {
     <Result
       status="info"
       title={'IDURAR'}
-      subTitle={translate('Do you need help on customize of this app')}
+      subTitle={translate('Do you require assistance with customizing this app?')}
       extra={
         <>
           <p>
