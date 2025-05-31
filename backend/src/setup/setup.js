@@ -1,8 +1,10 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const { globSync } = require('glob');
 const fs = require('fs');
 const { generate: uniqueId } = require('shortid');
+
+
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
