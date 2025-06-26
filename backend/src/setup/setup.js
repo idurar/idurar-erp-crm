@@ -1,5 +1,7 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+const path = require('path');
+require('dotenv').config({path: path.resolve(__dirname,'../../.env')});
+require('dotenv').config({path: path.resolve(__dirname,'../../.env.local')});
+
 const { globSync } = require('glob');
 const fs = require('fs');
 const { generate: uniqueId } = require('shortid');
