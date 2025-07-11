@@ -1,0 +1,110 @@
+# API Guide for CRM Backend (Django REST Framework)
+
+Base URL: `http://localhost:8000/api/`
+
+---
+
+## Endpoints
+
+| Action          | Method | URL                             |
+| --------------- | ------ | ------------------------------- |
+| Create Query    | POST   | `/queries/`                     |
+| List Queries    | GET    | `/queries/`                     |
+| Get Query by ID | GET    | `/queries/{id}/`                |
+| Update Query    | PUT    | `/queries/{id}/`                |
+| Add Note        | POST   | `/queries/{id}/add_note/`       |
+| Delete Note     | DELETE | `/queries/{id}/notes/{noteId}/` |
+
+---
+
+## Sample Query JSON
+
+```json
+{
+  "customer_name": "Alice Johnson",
+  "description": "Inquiry about invoice #456 and payment delay.",
+  "status": "Open",
+  "resolution": "Waiting for client confirmation."
+}
+```
+
+## Sample Note JSON
+
+```json
+{
+  "note_text": "Client will respond by next Monday."
+}
+
+---
+
+## Using Postman or cURL
+
+### 1. Create Query (POST)
+```
+
+curl -X POST [http://localhost:8000/api/queries/](http://localhost:8000/api/queries/)&#x20;
+-H "Content-Type: application/json"&#x20;
+-d '{
+"customer\_name": "Alice Johnson",
+"description": "Inquiry about invoice #456 and payment delay.",
+"status": "Open",
+"resolution": "Waiting for client confirmation."
+}'
+
+```
+
+### 2. Get All Queries (GET)
+```
+
+curl [http://localhost:8000/api/queries/](http://localhost:8000/api/queries/)
+
+```
+
+### 3. Get Single Query (GET)
+```
+
+curl [http://localhost:8000/api/queries/1/](http://localhost:8000/api/queries/1/)
+
+```
+
+### 4. Update Query (PUT)
+```
+
+curl -X PUT [http://localhost:8000/api/queries/1/](http://localhost:8000/api/queries/1/)&#x20;
+-H "Content-Type: application/json"&#x20;
+-d '{
+"customer\_name": "Alice Johnson",
+"description": "Updated description.",
+"status": "InProgress",
+"resolution": "Review in progress."
+}'
+
+```
+
+### 5. Add Note to Query (POST)
+```
+
+curl -X POST [http://localhost:8000/api/queries/1/add\_note/](http://localhost:8000/api/queries/1/add_note/)&#x20;
+-H "Content-Type: application/json"&#x20;
+-d '{
+"note\_text": "Client called back. Meeting scheduled."
+}'
+
+```
+
+### 6. Delete Note (DELETE)
+```
+
+curl -X DELETE [http://localhost:8000/api/queries/1/notes/2/](http://localhost:8000/api/queries/1/notes/2/)
+
+```
+
+---
+
+## Notes
+- Replace `{id}` and `{noteId}` with actual values from your database.
+- Make sure your backend server is running: `python manage.py runserver`
+- Use `Content-Type: application/json` header for POST and PUT requests.
+- Pagination: `GET /queries/?page=1&status=Open`
+
+```

@@ -1,101 +1,186 @@
-<div align="center">
-    <a href="https://www.idurarapp.com/">
-  <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
-    </a>
-    <h1>Open Source ERP / CRM Accounting Invoice Quote</h1>
-    <p align="center">
-        <p>IDURAR ERP CRM | Simple To Use</p>
-    </p>
-    
+# Fullstack CRM Project (Django + React + SQLite)
+
+## 📝 Overview
+
+A full-stack CRM application built with Django (REST API backend), SQLite (database), and React (frontend). Supports CRUD operations on customer queries and their notes.
+
+---
+
+## 📁 Project Structure
 
 ```
- Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
+fullstack-crm/
+├── backend/             # Django backend (DRF)
+│   ├── backend/         # Django settings
+│   ├── core/            # App for Queries & Notes
+│   ├── db.sqlite3
+│   └── manage.py
+├── frontend/            # React frontend
+│   ├── public/
+│   └── src/
+│       ├── components/  # QueryList, QueryForm, NoteSection
+│       └── App.js
+|
+├── README.md
+└── API_Guide.txt        # API usage and testing guide
 ```
 
-IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+---
 
-</div>
+## ⚙️ Backend Setup (Django + DRF)
 
-**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
+### 1. Create and activate virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+```
+
+### 2. Install dependencies and start project
+
+```bash
+pip install django djangorestframework django-filter django-cors-headers
+```
+
+### 3. Start Django project and app
+
+```bash
+django-admin startproject backend
+cd backend
+python manage.py startapp core
+```
+
+### 4. Update `settings.py`
+
+* Add to `INSTALLED_APPS`:
+
+```python
+'rest_framework',
+'django_filters',
+'corsheaders',
+'core',
+```
+
+* Add to `MIDDLEWARE`:
+
+```python
+'corsheaders.middleware.CorsMiddleware',
+```
+
+* Add CORS:
+
+```python
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+```
+
+* Add DRF config:
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+```
+
+### 5. Add models, serializers, views, and urls (see project code)
+
+### 6. Migrate & run server
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+Backend available at: `http://localhost:8000/api/`
+
+---
+
+## 🌐 Frontend Setup (React)
+
+### 1. Create app
+
+```bash
+npx create-react-app frontend
+cd frontend
+npm install axios react-router-dom
+```
+
+### 2. Add components:
+
+Create:
+
+* `QueryList.js`
+* `QueryForm.js`
+* `NoteSection.js`
+  Paste the code from the provided files.
+
+### 3. Update `App.js`:
+
+```jsx
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import QueryList from './components/QueryList';
+import QueryForm from './components/QueryForm';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<QueryList />} />
+        <Route path="/add" element={<QueryForm />} />
+        <Route path="/edit/:id" element={<QueryForm />} />
+      </Routes>
+    </Router>
+  );
+}
+export default App;
+```
+
+### 4. Run app
+
+```bash
+npm start
+```
+
+Frontend available at: `http://localhost:3000`
+
+---
+
+## 🔍 Features
+
+* Add, edit, and list customer queries
+* Filter by status and paginate results
+* Add/delete notes per query
+* Responsive UI with internal CSS styling
+* Django REST API with proper status codes and error messages
+
+---
+
+## 📬 API Testing
+
+See `API_Guide.txt` for full list of:
+
+* Endpoints
+* Sample JSON
+* cURL examples
 
 
+---
 
-## Features :
+## ✅ Technologies Used
 
-Invoice Management
+* **Frontend**: React, Axios, React Router
+* **Backend**: Django, Django REST Framework
+* **Database**: SQLite
+* **Other**: CORS, Pagination, Filtering
 
-Payment Management
+---
 
-Quote Management
+## 🧪 Testing Tips
 
-Customer Management
+* Use browser and Postman to test API endpoints
 
-Ant Design Framework(AntD) 🐜
+---
 
-Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) 👨‍💻
-
-### May i can use IDURAR for Commercial use :
-
-- Yes You can use IDURAR for free for personal or Commercial use.
-
-## Our Sponsors
-
-  <a href="https://m.do.co/c/4ead8370b905?ref=idurarapp.com">
-    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
-  </a>
-
-#
-
-<img width="1403" alt="Open Source ERP CRM" src="https://github.com/idurar/idurar-erp-crm/assets/136928179/a6712286-7ca6-4822-8902-fb7523533ee8">
-
-## Free Open Source ERP / CRM App
-
-IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
-
-
-## Getting started
-
-1.[Clone the repository](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
-
-2.[Create Your MongoDB Account and Database Cluster](INSTALLATION-INSTRUCTIONS.md#Step-2-Create-Your-MongoDB-Account-and-Database-Cluster)
-
-3.[Edit the Environment File](INSTALLATION-INSTRUCTIONS.md#Step-3-Edit-the-Environment-File)
-
-4.[Update MongoDB URI](INSTALLATION-INSTRUCTIONS.md#Step-4-Update-MongoDB-URI)
-
-5.[Install Backend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-5-Install-Backend-Dependencies)
-
-6.[Run Setup Script](INSTALLATION-INSTRUCTIONS.md#Step-6-Run-Setup-Script)
-
-7.[Run the Backend Server](INSTALLATION-INSTRUCTIONS.md#Step-7-Run-the-Backend-Server)
-
-8.[Install Frontend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-8-Install-Frontend-Dependencies)
-
-9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
-
-## Contributing
-
-1.[How to contribute](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#how-to-contribute)
-
-2.[Reporting issues](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#reporting-issues)
-
-3.[Working on issues ](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#working-on-issues)
-
-4.[Submitting pull requests](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#submitting-pull-requests)
-
-5.[Commit Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#commit-guidelines)
-
-6.[Coding Guidelines](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#coding-guidelines)
-
-7.[Questions](https://github.com/idurar/idurar-erp-crm/blob/master/CONTRIBUTING.md#questions)
-
-
-## Show your support
-
-Dont forget to give a ⭐️ to this project ... Happy coding!
-
-**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
-
-## License
-
-IDURAR is Free Open Source Released under the GNU Affero General Public License v3.0.
+Happy coding! 🚀

@@ -1,9 +1,0 @@
-.sidePanel {
-  border-right: 1px solid #edf0f5;
-  background: #fff;
-}
-
-.sidePanelContent {
-  transition: all 0.3s ease-in-out;
-  margin-top: 0;
-}

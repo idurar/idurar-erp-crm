@@ -1,5 +1,0 @@
-export const OPEN_MODAL = 'OPEN_PASSWORD_MODAL';
-export const CLOSE_MODAL = 'CLOSE_PASSWORD_MODAL';
-
-export const OPEN_PANEL = 'OPEN_PROFILE_PANEL';
-export const CLOSE_PANEL = 'CLOSE_PROFILE_PANEL';
