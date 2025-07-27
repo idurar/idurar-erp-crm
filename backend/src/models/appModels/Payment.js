@@ -38,11 +38,6 @@ const paymentSchema = new mongoose.Schema({
     uppercase: true,
     required: true,
   },
-  paymentMode: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'PaymentMode',
-    autopopulate: true,
-  },
   ref: {
     type: String,
   },
