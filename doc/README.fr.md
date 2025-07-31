@@ -22,7 +22,7 @@ IDURAR est un Open "Fair-Code" Source ERP / CRM (Facturation / Inventaire / Comp
 
 **Identifiants** :
 ```
-nom d'utilisateur : admin@demo.com  mot de passe : admin123
+nom d'utilisateur : admin@admin.com  mot de passe : admin123
 ```
 
 ```
