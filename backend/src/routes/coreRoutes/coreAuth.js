@@ -7,6 +7,9 @@ const adminAuth = require('@/controllers/coreControllers/adminAuth');
 
 router.route('/login').post(catchErrors(adminAuth.login));
 
+// ADDED THIS NEW LINE - Registration route
+router.route('/register').post(catchErrors(adminAuth.register));
+
 router.route('/forgetpassword').post(catchErrors(adminAuth.forgetPassword));
 router.route('/resetpassword').post(catchErrors(adminAuth.resetPassword));
 

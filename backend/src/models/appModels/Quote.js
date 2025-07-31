@@ -5,6 +5,15 @@ const quoteSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  // ADD THESE NEW FIELDS for better deletion tracking
+  removedAt: {
+    type: Date,
+  },
+  removedBy: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Admin',
+  },
+  
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
 
   converted: {
@@ -52,18 +61,6 @@ const quoteSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      // taxRate: {
-      //   type: Number,
-      //   default: 0,
-      // },
-      // subTotal: {
-      //   type: Number,
-      //   default: 0,
-      // },
-      // taxTotal: {
-      //   type: Number,
-      //   default: 0,
-      // },
       total: {
         type: Number,
         required: true,
