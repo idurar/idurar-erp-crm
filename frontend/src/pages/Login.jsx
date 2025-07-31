@@ -13,22 +13,9 @@ import LoginForm from '@/forms/LoginForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
 
-const LoginPage = () => {
-  const translate = useLanguage();
-  const { isLoading, isSuccess } = useSelector(selectAuth);
-  const navigate = useNavigate();
-  // const size = useSize();
-
-  const dispatch = useDispatch();
-  const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
-  };
-
-  useEffect(() => {
-    if (isSuccess) navigate('/');
-  }, [isSuccess]);
-
-  const FormContainer = () => {
+const FormContainer = (props) => {
+  const {isLoading, onFinish} = props
+  
     return (
       <Loading isLoading={isLoading}>
         <Form
@@ -57,7 +44,22 @@ const LoginPage = () => {
     );
   };
 
-  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
+const LoginPage = () => {
+  const translate = useLanguage();
+  const { isLoading, isSuccess } = useSelector(selectAuth);
+  const navigate = useNavigate();
+  // const size = useSize();
+
+  const dispatch = useDispatch();
+  const onFinish = (values) => {
+    dispatch(login({ loginData: values }));
+  };
+
+  useEffect(() => {
+    if (isSuccess) navigate('/');
+  }, [isSuccess]);
+
+  return <AuthModule authContent={<FormContainer isLoading={isLoading} onFinish={onFinish} />} AUTH_TITLE="Sign in" />;
 };
 
 export default LoginPage;
