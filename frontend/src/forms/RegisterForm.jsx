@@ -50,12 +50,13 @@ export default function RegisterForm({ userLocation }) {
       >
         <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
       </Form.Item>
-      {/* <Form.Item
+      <Form.Item
         name="confirm_password"
         label={translate('confirm_password')}
         rules={[
           {
             required: true,
+            message: 'Please confirm your password!',
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
@@ -69,7 +70,7 @@ export default function RegisterForm({ userLocation }) {
         hasFeedback
       >
         <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item> */}
+      </Form.Item>
       <Form.Item
         label={translate('country')}
         name="country"
