@@ -1,4 +1,5 @@
 import { Tag, Divider, Row, Col, Spin, Tooltip } from 'antd';
+import { motion } from 'framer-motion';
 import { useMoney } from '@/settings';
 import { selectMoneyFormat } from '@/redux/settings/selectors';
 import { useSelector } from 'react-redux';
@@ -14,9 +15,12 @@ export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isL
       md={{ span: 12 }}
       lg={{ span: 6 }}
     >
-      <div
+      <motion.div
         className="whiteBox shadow"
         style={{ color: '#595959', fontSize: 13, minHeight: '106px', height: '100%' }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
           <h3
@@ -92,7 +96,7 @@ export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isL
             </Col>
           </Row>
         </div>
-      </div>
+  </motion.div>
     </Col>
   );
 }
