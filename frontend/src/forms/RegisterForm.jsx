@@ -50,7 +50,7 @@ export default function RegisterForm({ userLocation }) {
       >
         <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
       </Form.Item>
-      {/* <Form.Item
+      <Form.Item
         name="confirm_password"
         label={translate('confirm_password')}
         rules={[
@@ -69,7 +69,7 @@ export default function RegisterForm({ userLocation }) {
         hasFeedback
       >
         <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item> */}
+      </Form.Item>
       <Form.Item
         label={translate('country')}
         name="country"
