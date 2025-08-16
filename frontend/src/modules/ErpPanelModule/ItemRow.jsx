@@ -11,11 +11,16 @@ export default function ItemRow({ field, remove, current = null }) {
   const [quantity, setQuantity] = useState(0);
 
   const money = useMoney();
+  
+  // Get form instance to update total field
+  const form = Form.useFormInstance();
+  
   const updateQt = (value) => {
-    setQuantity(value);
+    setQuantity(value || 0);
   };
+  
   const updatePrice = (value) => {
-    setPrice(value);
+    setPrice(value || 0);
   };
 
   useEffect(() => {
@@ -47,9 +52,13 @@ export default function ItemRow({ field, remove, current = null }) {
 
   useEffect(() => {
     const currentTotal = calculate.multiply(price, quantity);
-
     setTotal(currentTotal);
-  }, [price, quantity]);
+    
+    // IMPORTANT: Update the form field value for total
+    if (form) {
+      form.setFieldValue(['items', field.name, 'total'], currentTotal);
+    }
+  }, [price, quantity, form, field.name]);
 
   return (
     <Row gutter={[12, 12]} style={{ position: 'relative' }}>
@@ -72,42 +81,72 @@ export default function ItemRow({ field, remove, current = null }) {
       </Col>
       <Col className="gutter-row" span={7}>
         <Form.Item name={[field.name, 'description']}>
-          <Input placeholder="description Name" />
+          <Input placeholder="Description" />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={3}>
-        <Form.Item name={[field.name, 'quantity']} rules={[{ required: true }]}>
-          <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
+        <Form.Item 
+          name={[field.name, 'quantity']} 
+          rules={[
+            { 
+              required: true,
+              message: 'Quantity is required'
+            }
+          ]}
+        >
+          <InputNumber 
+            style={{ width: '100%' }} 
+            min={0} 
+            onChange={updateQt}
+            placeholder="0"
+          />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={4}>
-        <Form.Item name={[field.name, 'price']} rules={[{ required: true }]}>
+        <Form.Item 
+          name={[field.name, 'price']} 
+          rules={[
+            { 
+              required: true,
+              message: 'Price is required'
+            }
+          ]}
+        >
           <InputNumber
             className="moneyInput"
             onChange={updatePrice}
             min={0}
             controls={false}
+            placeholder="0.00"
             addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
             addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
           />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={5}>
-        <Form.Item name={[field.name, 'total']}>
-          <Form.Item>
-            <InputNumber
-              readOnly
-              className="moneyInput"
-              value={totalState}
-              min={0}
-              controls={false}
-              addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
-              addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
-              formatter={(value) =>
-                money.amountFormatter({ amount: value, currency_code: money.currency_code })
-              }
-            />
-          </Form.Item>
+        {/* FIXED: Remove nested Form.Item and properly bind total field */}
+        <Form.Item 
+          name={[field.name, 'total']}
+          rules={[
+            { 
+              required: true,
+              message: 'Total is required'
+            }
+          ]}
+        >
+          <InputNumber
+            readOnly
+            className="moneyInput"
+            value={totalState}
+            min={0}
+            controls={false}
+            placeholder="0.00"
+            addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+            addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
+            formatter={(value) =>
+              money.amountFormatter({ amount: value, currency_code: money.currency_code })
+            }
+          />
         </Form.Item>
       </Col>
 
