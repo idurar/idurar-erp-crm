@@ -8,7 +8,7 @@ import PageLoader from '@/components/PageLoader';
 
 const IdurarOs = lazy(() => import('./apps/IdurarOs'));
 
-export default function RoutApp() {
+export default function RootApp() {
   return (
     <BrowserRouter>
       <Provider store={store}>
