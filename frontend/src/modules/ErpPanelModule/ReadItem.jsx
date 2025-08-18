@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Divider } from 'antd';
+import { Divider, message } from 'antd';
 
 import { Button, Row, Col, Descriptions, Statistic, Tag } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -9,6 +9,7 @@ import {
   CloseCircleOutlined,
   RetweetOutlined,
   MailOutlined,
+  CopyOutlined,
 } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -123,6 +124,13 @@ export default function ReadItem({ config, selectedItem }) {
     }
   }, [currentErp]);
 
+  const copyNumber = () => {
+    const number = `${currentErp.number}/${currentErp.year || ''}`;
+    navigator.clipboard.writeText(number).then(() => {
+      message.success(translate('Number copied to clipboard'));
+    });
+  };
+
   return (
     <>
       <PageHeader
@@ -197,6 +205,13 @@ export default function ReadItem({ config, selectedItem }) {
             icon={<EditOutlined />}
           >
             {translate('Edit')}
+          </Button>,
+          <Button
+            key="copy"
+            onClick={copyNumber}
+            icon={<CopyOutlined />}
+          >
+            {translate('Copy Number')}
           </Button>,
         ]}
         style={{
