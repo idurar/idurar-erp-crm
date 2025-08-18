@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React from 'react';
 import { Form, Input, Select } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
@@ -9,75 +9,26 @@ export default function RegisterForm({ userLocation }) {
   const translate = useLanguage();
 
   return (
-    <>
+    <Form>
       <Form.Item
         name="name"
         label={translate('name')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+        rules={[{ required: true }]}
       >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} size="large" />
       </Form.Item>
       <Form.Item
         name="email"
         label={translate('email')}
-        rules={[
-          {
-            required: true,
-          },
-          {
-            type: 'email',
-          },
-        ]}
+        rules={[{ required: true }, { type: 'email' }]}
       >
-        <Input
-          prefix={<MailOutlined className="site-form-item-icon" />}
-          type="email"
-          size="large"
-        />
+        <Input prefix={<MailOutlined className="site-form-item-icon" />} type="email" size="large" />
       </Form.Item>
-      <Form.Item
-        name="password"
-        label={translate('password')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item>
-      {/* <Form.Item
-        name="confirm_password"
-        label={translate('confirm_password')}
-        rules={[
-          {
-            required: true,
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
-            },
-          }),
-        ]}
-        hasFeedback
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item> */}
+      
       <Form.Item
         label={translate('country')}
         name="country"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+        rules={[{ required: true }]}
         initialValue={userLocation}
       >
         <Select
@@ -90,9 +41,7 @@ export default function RegisterForm({ userLocation }) {
           filterSort={(optionA, optionB) =>
             (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
           }
-          style={{
-            width: '100%',
-          }}
+          style={{ width: '100%' }}
           size="large"
         >
           {countryList.map((language) => (
@@ -107,6 +56,32 @@ export default function RegisterForm({ userLocation }) {
           ))}
         </Select>
       </Form.Item>
-    </>
+      <Form.Item
+        name="password"
+        label={translate('password')}
+        rules={[{ required: true }]}
+      >
+        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
+      </Form.Item>
+      <Form.Item
+        name="confirm_password"
+        label={translate('confirm_password')}
+        dependencies={['password']}
+        rules={[
+          { required: true },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('Password and confirm password should be same'));
+            },
+          }),
+        ]}
+        hasFeedback
+      >
+        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
+      </Form.Item>
+    </Form>
   );
 }
