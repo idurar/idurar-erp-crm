@@ -5,12 +5,14 @@ import errorHandler from '@/request/errorHandler';
 import successHandler from '@/request/successHandler';
 
 export const login = async ({ loginData }) => {
+  console.log(loginData)
   try {
     const response = await axios.post(
       API_BASE_URL + `login?timestamp=${new Date().getTime()}`,
       loginData
     );
 
+    console.log(response)
     const { status, data } = response;
 
     successHandler(
@@ -28,7 +30,10 @@ export const login = async ({ loginData }) => {
 
 export const register = async ({ registerData }) => {
   try {
-    const response = await axios.post(API_BASE_URL + `register`, registerData);
+    const response = await axios.post(
+      API_BASE_URL + `register`, 
+      registerData
+    );
 
     const { status, data } = response;
 
@@ -41,6 +46,7 @@ export const register = async ({ registerData }) => {
     );
     return data;
   } catch (error) {
+    console.log(error)
     return errorHandler(error);
   }
 };
