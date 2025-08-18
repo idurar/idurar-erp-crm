@@ -62,8 +62,7 @@ export default function DeleteModal({ config }) {
       confirmLoading={isLoading}
     >
       <p>
-        {deleteMessage}
-        {displayItem}
+        {deleteMessage} {displayItem}
       </p>
     </Modal>
   );
