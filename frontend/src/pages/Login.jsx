@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import useLanguage from '@/locale/useLanguage';
 
 import { Form, Button } from 'antd';
 
-import { login } from '@/redux/auth/actions';
+import { login, handleGoogleAuthCallback } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import Loading from '@/components/Loading';
@@ -17,6 +17,7 @@ const LoginPage = () => {
   const translate = useLanguage();
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
+  const location = useLocation();
   // const size = useSize();
 
   const dispatch = useDispatch();
@@ -25,8 +26,15 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
+    // Check if this is a redirect from Google OAuth
+    if (location.search.includes('googleauth=success')) {
+      dispatch(handleGoogleAuthCallback());
+    }
+  }, [location, dispatch]);
+
+  useEffect(() => {
     if (isSuccess) navigate('/');
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   const FormContainer = () => {
     return (
