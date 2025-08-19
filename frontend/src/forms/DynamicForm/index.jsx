@@ -1,4 +1,4 @@
-import { useState } from 'react';
+ import { useState } from 'react';
 import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -300,9 +300,9 @@ function FormElement({ field, feedback, setFeedback }) {
     ),
     url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
     textarea: <TextArea rows={4} />,
-    email: <Input autoComplete="off" placeholder="email@example.com" />,
+    email: <Input autoComplete="off" type='email' placeholder="email@example.com" />,
     number: <InputNumber style={{ width: '100%' }} />,
-    phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
+    phone: <Input style={{ width: '100%' }} type='tel' placeholder="+1 123 456 789" />,
     boolean: (
       <Switch
         checkedChildren={<CheckOutlined />}
@@ -344,7 +344,7 @@ function FormElement({ field, feedback, setFeedback }) {
     string: 'string',
     textarea: 'string',
     number: 'number',
-    phone: 'string',
+    phone: 'phone',
     //boolean: 'boolean',
     // method: 'method',
     // regexp: 'regexp',
@@ -372,12 +372,14 @@ function FormElement({ field, feedback, setFeedback }) {
       <Form.Item
         label={translate(field.label)}
         name={field.name}
-        rules={[
+        rules={[ //the change to prevent invalid input( such as numerical for names and last names and alphabetical for phone number)
           {
             required: field.required || false,
-            type: filedType[field.type] ?? 'any',
-          },
+            type: (field.type === 'phone' ? 'string' : (field.type === 'string' ? 'string' : 'any')), // Set type to 'string' for phone and name fields, 'any' for others
+            pattern: (field.type === 'phone' ? /^[+]*[-/0-9]*$/ : (field.type === 'string' ? /^[a-zA-Z\s]*$/ : undefined)), // Validate pattern for phone and name fields
+          }
         ]}
+        
         valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
       >
         {renderComponent}
