@@ -9,6 +9,7 @@ export default function ItemRow({ field, remove, current = null }) {
   const [totalState, setTotal] = useState(undefined);
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [quantityError, setQuantityError] = useState('');
 
   const money = useMoney();
   const updateQt = (value) => {
@@ -59,7 +60,7 @@ export default function ItemRow({ field, remove, current = null }) {
           rules={[
             {
               required: true,
-              message: 'Missing itemName name',
+              message: 'Missing Item Name',
             },
             {
               pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
@@ -76,9 +77,19 @@ export default function ItemRow({ field, remove, current = null }) {
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={3}>
-        <Form.Item name={[field.name, 'quantity']} rules={[{ required: true }]}>
-          <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
-        </Form.Item>
+      <Form.Item name={[field.name, 'quantity']} rules={[
+  { 
+    required: true,
+    message: 'Please enter a quantity',
+  },
+  {
+    pattern: /^\d+$/, // Regular expression to match only integer numbers
+    message: 'Quantity must be an integer',
+  },
+]}>
+  <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
+</Form.Item>
+{quantityError && <p style={{ color: 'red' }}>{quantityError}</p>}
       </Col>
       <Col className="gutter-row" span={4}>
         <Form.Item name={[field.name, 'price']} rules={[{ required: true }]}>
