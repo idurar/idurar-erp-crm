@@ -16,7 +16,26 @@ IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Advance
 
 </div>
 
-**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com/)
+**🚀 Self-hosted Entreprise Version** : [https://cloud.idurarapp.com](https://cloud.idurarapp.com)
+
+
+## ⚠️ SECURITY WARNING for Developers & Web Agencies & Blockchain Developer
+
+We've been made aware of scammer contacting developers or web agencies, asking them to develop and run malicious or altered versions of IDURAR software.
+
+🚫 NEVER trust emails, messages, or DMs claiming to be from IDURAR unless they come from our official domain: **@idurarapp.com**  
+🚫 DO NOT run unknown versions of the app sent via email or third-party GitHub repositories.
+
+✅ Official GitHub Repo: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)  
+✅ Official Website: [https://idurarapp.com](https://idurarapp.com)
+
+🚨 WARNING: We have been informed that scammers are misusing this open-source project and falsely claiming to represent IDURAR.AI.
+
+⚠️ Only trust official information, updates, and licenses from our official website: [https://idurarapp.com](https://idurarapp.com). and official github repo: https://github.com/idurar/idurar-erp-crm
+We do **not** auhorize any third party to sell, license, or represent our software or brand.
+
+🚫 Never run versions of IDURAR downloaded from unofficial GitHub repositories.  
+These may be **fake**, **malicious**, or used to scam users.
 
 
 ## Features :
@@ -71,6 +90,14 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
 8.[Install Frontend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-8-Install-Frontend-Dependencies)
 
 9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
+
+## Documentation
+
+Comprehensive documentation is available to help you get started with IDURAR:
+
+1. [API Documentation](./doc/API-DOCUMENTATION.md) - Detailed information about the API endpoints, request/response formats, and authentication
+2. [User Guide](./doc/USER-GUIDE.md) - Complete guide for end-users on how to use the system effectively
+3. [Developer Guide](./doc/DEVELOPER-GUIDE.md) - In-depth guide for developers who want to understand the codebase and contribute
 
 ## Contributing
 
