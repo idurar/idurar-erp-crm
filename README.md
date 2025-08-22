@@ -37,7 +37,6 @@ We do **not** auhorize any third party to sell, license, or represent our softwa
 🚫 Never run versions of IDURAR downloaded from unofficial GitHub repositories.  
 These may be **fake**, **malicious**, or used to scam users.
 
-✅ Stay safe. Verify the source and always contact us through our website if in doubt.
 
 ## Features :
 
