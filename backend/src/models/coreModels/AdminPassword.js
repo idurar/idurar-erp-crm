@@ -11,7 +11,7 @@ const AdminPasswordSchema = new Schema({
   user: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true, unique: true },
   password: {
     type: String,
-    required: true,
+    required: false, //for google oAuth
   },
   salt: {
     type: String,

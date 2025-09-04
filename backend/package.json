@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js --ignore public/",
+    "dev": "node --watch  src/server.js --ignore public/",
     "production": "NODE_ENV=production",
     "setup": "node src/setup/setup.js",
     "upgrade": "node src/setup/upgrade.js",
@@ -25,6 +25,7 @@
     "express-fileupload": "^1.4.3",
     "express-rate-limit": "^7.1.5",
     "glob": "10.3.10",
+    "google-auth-library": "^10.3.0",
     "html-pdf": "^3.0.1",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",

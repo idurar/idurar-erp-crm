@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const authUser = require('./authUser');
 
+
 const login = async (req, res, { userModel }) => {
   const UserPasswordModel = mongoose.model(userModel + 'Password');
   const UserModel = mongoose.model(userModel);
@@ -16,6 +17,7 @@ const login = async (req, res, { userModel }) => {
       .required(),
     password: Joi.string().required(),
   });
+  // console.log(email, password);
 
   const { error, value } = objectSchema.validate({ email, password });
   if (error) {
@@ -28,9 +30,11 @@ const login = async (req, res, { userModel }) => {
     });
   }
 
+  console.log(email, password);
+
   const user = await UserModel.findOne({ email: email, removed: false });
 
-  // console.log(user);
+  console.log(user);
   if (!user)
     return res.status(404).json({
       success: false,

@@ -2,14 +2,15 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const authUser = async (req, res, { user, databasePassword, password, UserPasswordModel }) => {
+  console.log(user, databasePassword, password, UserPasswordModel);
   const isMatch = await bcrypt.compare(databasePassword.salt + password, databasePassword.password);
 
-  if (!isMatch)
-    return res.status(403).json({
-      success: false,
-      result: null,
-      message: 'Invalid credentials.',
-    });
+  // if (!isMatch)
+  //   return res.status(403).json({
+  //     success: false,
+  //     result: null,
+  //     message: 'Invalid credentials.1',
+  //   });
 
   if (isMatch === true) {
     const token = jwt.sign(
@@ -55,7 +56,7 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
     return res.status(403).json({
       success: false,
       result: null,
-      message: 'Invalid credentials.',
+      message: 'Invalid credentials.2',
     });
   }
 };

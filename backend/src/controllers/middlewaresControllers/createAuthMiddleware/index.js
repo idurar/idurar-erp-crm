@@ -3,10 +3,12 @@ const login = require('./login');
 const logout = require('./logout');
 const forgetPassword = require('./forgetPassword');
 const resetPassword = require('./resetPassword');
+const googleLogin = require('./googleLogin');
 
 const createAuthMiddleware = (userModel) => {
   let authMethods = {};
 
+  // Verifies if an auth token is valid
   authMethods.isValidAuthToken = (req, res, next) =>
     isValidAuthToken(req, res, next, {
       userModel,
@@ -14,6 +16,11 @@ const createAuthMiddleware = (userModel) => {
 
   authMethods.login = (req, res) =>
     login(req, res, {
+      userModel,
+    });
+
+  authMethods.googleLogin = (req, res) =>
+    googleLogin(req, res, {
       userModel,
     });
 
