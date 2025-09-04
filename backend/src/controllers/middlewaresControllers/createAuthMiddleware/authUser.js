@@ -5,12 +5,12 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
   console.log(user, databasePassword, password, UserPasswordModel);
   const isMatch = await bcrypt.compare(databasePassword.salt + password, databasePassword.password);
 
-  // if (!isMatch)
-  //   return res.status(403).json({
-  //     success: false,
-  //     result: null,
-  //     message: 'Invalid credentials.1',
-  //   });
+  if (!isMatch)
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'Invalid credentials.1',
+    });
 
   if (isMatch === true) {
     const token = jwt.sign(
