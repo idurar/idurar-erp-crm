@@ -3,11 +3,13 @@ import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
+import LoginWithGoogle from '@/pages/LoginWithGoogle';
 
 export default function LoginForm() {
   const translate = useLanguage();
   return (
     <div>
+      <LoginWithGoogle />
       <Form.Item
         label={translate('email')}
         name="email"

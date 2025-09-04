@@ -7,6 +7,7 @@ import ForgetPassword from '@/pages/ForgetPassword';
 import ResetPassword from '@/pages/ResetPassword';
 
 import { useDispatch } from 'react-redux';
+import LoginWithGoogle from '@/pages/LoginWithGoogle';
 
 export default function AuthRouter() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function AuthRouter() {
     <Routes>
       <Route element={<Login />} path="/" />
       <Route element={<Login />} path="/login" />
+      <Route element={<LoginWithGoogle />} path="/login-with-google" />
       <Route element={<Navigate to="/login" replace />} path="/logout" />
       <Route element={<ForgetPassword />} path="/forgetpassword" />
       <Route element={<ResetPassword />} path="/resetpassword/:userId/:resetToken" />

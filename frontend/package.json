@@ -9,6 +9,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.0",
     "@ant-design/pro-layout": "^7.17.19",
+    "@react-oauth/google": "^0.12.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@vitejs/plugin-react": "^4.3.1",
     "antd": "^5.14.1",
