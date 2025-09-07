@@ -246,7 +246,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 },
               ]}
             >
-              <SelectAsync
+              <Select
                 value={taxRate}
                 onChange={handelTaxChange}
                 entity={'taxes'}
