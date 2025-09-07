@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+    db:
+        image: mongo:6.0
+        container_name: mongodb_container
+        volumes:
+            - mongodb_data:/data/db
+        restart: always
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+        networks:
+            - mern_network
+
+    backend:
+        build:
+            context: ./backend
+        container_name: backend_container
+        ports:
+            - "${BACKEND_PORT}:8888"
+        depends_on:
+            - db
+        env_file:
+            - ./backend/.env
+        networks:
+            - mern_network
+
+    frontend:
+        build:
+            context: ./frontend
+        container_name: frontend_container
+        ports:
+            - "${FRONTEND_PORT}:80"
+        env_file:
+            - ./frontend/.env
+        depends_on:
+            - backend
+        networks:
+            - mern_network
+
+volumes:
+    mongodb_data:
+
+networks:
+    mern_network:
+        driver: bridge
