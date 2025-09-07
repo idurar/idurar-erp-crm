@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+    # Service for the MongoDB database.
+    db:
+        image: mongo:6.0
+        container_name: mongodb_container
+        volumes:
+            # Mount a named volume to save the database data permanently.
+            - mongodb_data:/data/db
+        restart: always
+        ports:
+            # Exposes the MongoDB port to the host.
+            - "27017:27017"
+        environment:
+            # Configures initial root user credentials from host environment variables.
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+        networks:
+            - mern_network
+
+    # Service for the Node.js backend.
+    backend:
+        build:
+            context: ./backend
+        container_name: backend_container
+        ports:
+            # Exposes the backend port to the host.
+            - "${BACKEND_PORT}:8888"
+        depends_on:
+            # Ensures the database is running before starting the backend.
+            - db
+        env_file:
+            - ./backend/.env
+        networks:
+            - mern_network
+
+    # Service for the React frontend.
+    frontend:
+        build:
+            context: ./frontend
+        container_name: frontend_container
+        ports:
+            # Exposes the frontend port to the host.
+            - "${FRONTEND_PORT}:80"
+        env_file:
+            - ./frontend/.env
+        depends_on:
+            # Ensures the backend is running before starting the frontend.
+            - backend
+        networks:
+            - mern_network
+
+# Named volume for persistent database storage.
+volumes:
+    mongodb_data:
+
+# Custom bridge network for communication between the services.
+networks:
+    mern_network:
+        driver: bridge
