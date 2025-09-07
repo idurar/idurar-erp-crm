@@ -1,5 +1,72 @@
 ## Getting started
 
+### Method 1: Docker Setup
+
+This is the recommended method for a quick and consistent setup. Docker will handle running all services (backend, frontend, and database) with a single command.
+
+#### Step 1: Clone the Repository
+
+Clone the project from GitHub and navigate into the project directory.
+
+#### Step 1: Clone the repository
+
+```bash
+git clone https://github.com/idurar/idurar-erp-crm.git
+cd idurar-erp-crm
+```
+
+#### Step 2: Configure Environment Files
+
+Create the necessary .env files for your backend and Docker Compose services.
+
+1. **Backend Environment File:**
+
+    - Create a file named .env inside the backend/ directory.
+    - Add the following line to the file:
+        ```text
+        DATABASE="mongodb://<username>:<password>@db:27017/erp-app?authSource=admin"
+        JWT_SECRET="your_private_jwt_secret_key"
+        ```
+    - This URI uses username as the root user, password as the root password and db as the hostname, which is the service name of the MongoDB container in docker-compose.yml.
+
+2. **Frontend Environment File:**
+    - Create a file named .env inside the frontend/ directory.
+    - Add the following line to the file:
+        ```text
+        VITE_FILE_BASE_URL="http://localhost:8888/"
+        VITE_BACKEND_SERVER="http://localhost:8888/"
+        PROD=false
+        ```
+3. **Docker Compose Environment File:**
+    - Create a file named .env in the root directory of your project (next to docker-compose.yml).
+    - Add the following variables to this file:
+        ```text
+        MONGO_ROOT_USERNAME=admin
+        MONGO_ROOT_PASSWORD=secret
+        FRONTEND_PORT=3000
+        BACKEND_PORT=8000
+        ```
+
+#### Step 3: Run the Application
+
+With Docker and Docker Compose installed, run the following command from the root directory of your project:
+
+```bash
+docker compose up --build
+```
+
+This command will build the Docker images for your services, and then start all the containers.
+
+#### Step 4: Access the Application
+
+Once the services are running, you can access the application in your web browser at `http://localhost:<your_frontend_port>` (e.g., `http://localhost:3000`).
+
+---
+
+### Method 2: Manual Setup
+
+This method guides you through setting up and running each service locally without using Docker.
+
 #### Step 1: Clone the repository
 
 ```bash
@@ -12,17 +79,17 @@ cd idurar-erp-crm
 
 #### Step 2: Create Your MongoDB Account and Database Cluster
 
-- Create your own MongoDB account by visiting the MongoDB website and signing up for a new account.
+-   Create your own MongoDB account by visiting the MongoDB website and signing up for a new account.
 
-- Create a new database or cluster by following the instructions provided in the MongoDB documentation. Remember to note down the "Connect to your application URI" for the database, as you will need it later. Also, make sure to change `<password>` with your own password
+-   Create a new database or cluster by following the instructions provided in the MongoDB documentation. Remember to note down the "Connect to your application URI" for the database, as you will need it later. Also, make sure to change `<password>` with your own password
 
-- add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
+-   add your current IP address to the MongoDB database's IP whitelist to allow connections (this is needed whenever your ip changes)
 
 #### Step 3: Edit the Environment File
 
-- Check a file named .env in the /backend directory.
+-   Check a file named .env in the /backend directory.
 
-  This file will store environment variables for the project to run.
+    This file will store environment variables for the project to run.
 
 #### Step 4: Update MongoDB URI
 
@@ -94,28 +161,27 @@ This command will start the frontend server, and you'll be able to access the we
 
 Reason behind error: This is caused by the node.js V17 compatible issues with OpenSSL, see [this](https://github.com/nodejs/node/issues/40547) and [this](https://github.com/webpack/webpack/issues/14532) issue on GitHub.
 
-
 Try one of these and error will be solved
 
-- > upgrade to Node.js v20.
+-   > upgrade to Node.js v20.
 
-- > Enable legacy OpenSSL provider
+-   > Enable legacy OpenSSL provider
 
 Here is how you can enable legacy OpenSSL provider
 
-- On Unix-like (Linux, macOS, Git bash, etc.)
+-   On Unix-like (Linux, macOS, Git bash, etc.)
 
 ```bash
 export NODE_OPTIONS=--openssl-legacy-provider
 ```
 
-- On Windows command prompt:
+-   On Windows command prompt:
 
 ```bash
 set NODE_OPTIONS=--openssl-legacy-provider
 ```
 
-- On PowerShell:
+-   On PowerShell:
 
 ```bash
 $env:NODE_OPTIONS = "--openssl-legacy-provider"
