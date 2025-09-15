@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-const Model = mongoose.model('Setting');
+const Setting=require("../../models/coreModels/Setting");
 
 const listBySettingKey = async ({ settingKeyArray = [] }) => {
   try {
