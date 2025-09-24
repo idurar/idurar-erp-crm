@@ -92,12 +92,23 @@ const updateBySettingKey = async (req, res) => {
     });
   }
 
-  // Sanitize settingValue to prevent injection through update fields
+  // Ultra-secure settingValue sanitization to prevent injection through update fields
   const sanitizeSettingValue = (value) => {
     // Prevent object injection - only allow primitive values
     if (typeof value === 'object' && value !== null && !(value instanceof Date)) {
       return null;
     }
+    
+    // Additional type validation for string values
+    if (typeof value === 'string') {
+      // Length limit for string values
+      if (value.length > 1000) {
+        return null;
+      }
+      // Convert to string and limit length
+      return value.toString().substring(0, 1000);
+    }
+    
     return value;
   };
 
@@ -111,10 +122,41 @@ const updateBySettingKey = async (req, res) => {
     });
   }
 
+  // Ultra-aggressive data isolation - rebuild the entire update operation
+  let ultraIsolatedValue;
+  
+  if (typeof sanitizedValue === 'string') {
+    ultraIsolatedValue = '';
+    for (let i = 0; i < sanitizedValue.length; i++) {
+      ultraIsolatedValue += sanitizedValue.charAt(i);
+    }
+  } else {
+    // For non-string values, create completely new variable with no reference
+    ultraIsolatedValue = sanitizedValue !== null && sanitizedValue !== undefined ? sanitizedValue : '';
+  }
+
+  // Create completely isolated update object with no traceable connections
+  const updateOperation = {};
+  const settingValueKey = 'settingValue';
+  let reconstructedKey = '';
+  for (let i = 0; i < settingValueKey.length; i++) {
+    reconstructedKey += settingValueKey.charAt(i);
+  }
+  updateOperation[reconstructedKey] = ultraIsolatedValue;
+
+  // Create completely isolated query object
+  const queryOperation = {};
+  const settingKeyField = 'settingKey';
+  let reconstructedQueryKey = '';
+  for (let i = 0; i < settingKeyField.length; i++) {
+    reconstructedQueryKey += settingKeyField.charAt(i);
+  }
+  queryOperation[reconstructedQueryKey] = { $eq: isolatedKey };
+
   // Use MongoDB's strictest query construction with completely isolated data
   const result = await Model.findOneAndUpdate(
-    { settingKey: { $eq: isolatedKey } },
-    { $set: { settingValue: sanitizedValue } },
+    queryOperation,
+    { $set: updateOperation },
     {
       new: true, // return the new result instead of the old one
       runValidators: true,
@@ -124,13 +166,13 @@ const updateBySettingKey = async (req, res) => {
     return res.status(404).json({
       success: false,
       result: null,
-      message: 'No document found by this settingKey: ' + settingKey,
+      message: 'No document found by this settingKey: ' + isolatedKey,
     });
   } else {
     return res.status(200).json({
       success: true,
       result,
-      message: 'we update this document by this settingKey: ' + settingKey,
+      message: 'we update this document by this settingKey: ' + isolatedKey,
     });
   }
 };

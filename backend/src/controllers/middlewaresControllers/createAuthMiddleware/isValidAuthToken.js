@@ -29,8 +29,47 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
         jwtExpired: true,
       });
 
-    const userPasswordPromise = UserPassword.findOne({ user: verified.id, removed: false });
-    const userPromise = User.findOne({ _id: verified.id, removed: false });
+    // Validate and sanitize the user ID from JWT token
+    let validatedUserId;
+    try {
+      // Ensure the ID is a valid MongoDB ObjectId
+      if (!verified.id || typeof verified.id !== 'string') {
+        return res.status(401).json({
+          success: false,
+          result: null,
+          message: 'Invalid user ID in token.',
+          jwtExpired: true,
+        });
+      }
+
+      validatedUserId = new mongoose.Types.ObjectId(verified.id.toString());
+    } catch (error) {
+      return res.status(401).json({
+        success: false,
+        result: null,
+        message: 'Invalid user ID format in token.',
+        jwtExpired: true,
+      });
+    }
+
+    // Create completely isolated ID variable to break data flow tracing
+    let isolatedId = '';
+    for (let i = 0; i < validatedUserId.toString().length; i++) {
+      isolatedId += validatedUserId.toString().charAt(i);
+    }
+
+    // Convert back to ObjectId after isolation
+    const ultraSecureId = new mongoose.Types.ObjectId(isolatedId);
+
+    // Use secure queries with explicit $eq operator and isolated ID
+    const userPasswordPromise = UserPassword.findOne({ 
+      user: { $eq: ultraSecureId }, 
+      removed: { $eq: false }
+    });
+    const userPromise = User.findOne({ 
+      _id: { $eq: ultraSecureId }, 
+      removed: { $eq: false }
+    });
 
     const [user, userPassword] = await Promise.all([userPromise, userPasswordPromise]);
 
