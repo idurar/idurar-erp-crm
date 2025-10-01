@@ -1,0 +1,63 @@
+version: '3.8'
+
+# Jenkins CI/CD Server Setup
+# Usage: docker-compose -f docker-compose.jenkins.yml up -d
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - "8080:8080"      # Jenkins web interface
+      - "50000:50000"    # Jenkins agent port
+    volumes:
+      # Jenkins home directory (persists all Jenkins data)
+      - jenkins_home:/var/jenkins_home
+      
+      # Docker socket - allows Jenkins to run Docker commands
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+      # Mount project directory (optional, for local testing)
+      - ./:/workspace
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - jenkins-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/login || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Optional: Docker-in-Docker (alternative to mounting docker.sock)
+  # Uncomment if you prefer Docker-in-Docker over socket mounting
+  # docker-dind:
+  #   image: docker:dind
+  #   container_name: jenkins-docker
+  #   privileged: true
+  #   networks:
+  #     jenkins-network:
+  #       aliases:
+  #         - docker
+  #   environment:
+  #     - DOCKER_TLS_CERTDIR=/certs
+  #   volumes:
+  #     - jenkins-docker-certs:/certs/client
+  #     - jenkins_home:/var/jenkins_home
+  #   ports:
+  #     - "2376:2376"
+
+networks:
+  jenkins-network:
+    driver: bridge
+
+volumes:
+  jenkins_home:
+    driver: local
+  # jenkins-docker-certs:
+  #   driver: local
+
