@@ -91,7 +91,9 @@ pipeline {
         }
         
         stage('Push to Registry') {
-       
+            // when {
+            //     branch 'main'  // Only push from main branch
+            // }
             steps {
                 script {
                     echo 'Pushing Docker images to registry...'
@@ -117,10 +119,18 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying application with Docker Compose...'
-                    sh """
-                        docker compose down || true
-                        docker compose up -d
-                    """
+                    sh '''
+                        # Install docker-compose if not available
+                        if ! command -v docker-compose &> /dev/null; then
+                            echo "Installing docker-compose..."
+                            curl -L "https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                            chmod +x /usr/local/bin/docker-compose
+                        fi
+                        
+                        # Deploy with docker-compose
+                        docker-compose down || true
+                        docker-compose up -d
+                    '''
                 }
             }
         }
@@ -148,7 +158,12 @@ pipeline {
             echo 'Pipeline failed!'
             // Add notification here (email, Slack, etc.)
             sh '''
-                docker compose logs || true
+                # Install docker-compose if not available
+                if ! command -v docker-compose &> /dev/null; then
+                    curl -L "https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                    chmod +x /usr/local/bin/docker-compose
+                fi
+                docker-compose logs || true
             '''
         }
         always {
