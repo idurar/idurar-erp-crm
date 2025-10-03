@@ -30,7 +30,7 @@ const listAll = async (Model, req, res) => {
     });
   } else {
     return res.status(200).json({
-      success: true,
+      success: false,
       result: [],
       message: 'Collection is Empty',
     });
