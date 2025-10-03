@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_REGISTRY = 'your-docker-registry'  // Change this to your Docker registry
+        DOCKER_REGISTRY = 'hjhahjha3987361'  // Change this to your Docker Hub username
         IMAGE_TAG = "${env.BUILD_NUMBER}"
         FRONTEND_IMAGE = "idurar-frontend"
         BACKEND_IMAGE = "idurar-backend"
@@ -20,15 +20,23 @@ pipeline {
             steps {
                 script {
                     echo 'Setting up environment variables...'
-                    // Create .env file from Jenkins credentials
-                    sh '''
-                        echo "MONGO_USERNAME=${MONGO_USERNAME}" > .env
-                        echo "MONGO_PASSWORD=${MONGO_PASSWORD}" >> .env
-                        echo "MONGO_DATABASE=${MONGO_DATABASE}" >> .env
-                        echo "JWT_SECRET=${JWT_SECRET}" >> .env
-                        echo "COOKIE_SECRET=${COOKIE_SECRET}" >> .env
-                        echo "VITE_BACKEND_SERVER=${VITE_BACKEND_SERVER}" >> .env
-                    '''
+                    withCredentials([
+                        string(credentialsId: 'MONGO_USERNAME', variable: 'MONGO_USERNAME'),
+                        string(credentialsId: 'MONGO_PASSWORD', variable: 'MONGO_PASSWORD'),
+                        string(credentialsId: 'MONGO_DATABASE', variable: 'MONGO_DATABASE'),
+                        string(credentialsId: 'JWT_SECRET', variable: 'JWT_SECRET'),
+                        string(credentialsId: 'COOKIE_SECRET', variable: 'COOKIE_SECRET'),
+                        string(credentialsId: 'VITE_BACKEND_SERVER', variable: 'VITE_BACKEND_SERVER')
+                    ]) {
+                        sh '''
+                            echo "MONGO_USERNAME=${MONGO_USERNAME}" > .env
+                            echo "MONGO_PASSWORD=${MONGO_PASSWORD}" >> .env
+                            echo "MONGO_DATABASE=${MONGO_DATABASE}" >> .env
+                            echo "JWT_SECRET=${JWT_SECRET}" >> .env
+                            echo "COOKIE_SECRET=${COOKIE_SECRET}" >> .env
+                            echo "VITE_BACKEND_SERVER=${VITE_BACKEND_SERVER}" >> .env
+                        '''
+                    }
                 }
             }
         }
@@ -83,24 +91,24 @@ pipeline {
         }
         
         stage('Push to Registry') {
-            when {
-                branch 'main'  // Only push to registry from main branch
-            }
+            // when {
+            //     branch 'main'  // Only push to registry from main branch
+            // }
             steps {
                 script {
                     echo 'Pushing Docker images to registry...'
                     withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh """
-                            echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin ${DOCKER_REGISTRY}
-                            docker tag ${BACKEND_IMAGE}:${IMAGE_TAG} ${DOCKER_REGISTRY}/${BACKEND_IMAGE}:${IMAGE_TAG}
-                            docker tag ${BACKEND_IMAGE}:latest ${DOCKER_REGISTRY}/${BACKEND_IMAGE}:latest
-                            docker push ${DOCKER_REGISTRY}/${BACKEND_IMAGE}:${IMAGE_TAG}
-                            docker push ${DOCKER_REGISTRY}/${BACKEND_IMAGE}:latest
+                            echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
+                            docker tag ${BACKEND_IMAGE}:${IMAGE_TAG} ${DOCKER_USER}/${BACKEND_IMAGE}:${IMAGE_TAG}
+                            docker tag ${BACKEND_IMAGE}:latest ${DOCKER_USER}/${BACKEND_IMAGE}:latest
+                            docker push ${DOCKER_USER}/${BACKEND_IMAGE}:${IMAGE_TAG}
+                            docker push ${DOCKER_USER}/${BACKEND_IMAGE}:latest
                             
-                            docker tag ${FRONTEND_IMAGE}:${IMAGE_TAG} ${DOCKER_REGISTRY}/${FRONTEND_IMAGE}:${IMAGE_TAG}
-                            docker tag ${FRONTEND_IMAGE}:latest ${DOCKER_REGISTRY}/${FRONTEND_IMAGE}:latest
-                            docker push ${DOCKER_REGISTRY}/${FRONTEND_IMAGE}:${IMAGE_TAG}
-                            docker push ${DOCKER_REGISTRY}/${FRONTEND_IMAGE}:latest
+                            docker tag ${FRONTEND_IMAGE}:${IMAGE_TAG} ${DOCKER_USER}/${FRONTEND_IMAGE}:${IMAGE_TAG}
+                            docker tag ${FRONTEND_IMAGE}:latest ${DOCKER_USER}/${FRONTEND_IMAGE}:latest
+                            docker push ${DOCKER_USER}/${FRONTEND_IMAGE}:${IMAGE_TAG}
+                            docker push ${DOCKER_USER}/${FRONTEND_IMAGE}:latest
                         """
                     }
                 }
@@ -108,15 +116,12 @@ pipeline {
         }
         
         stage('Deploy') {
-            when {
-                branch 'main'  // Only deploy from main branch
-            }
             steps {
                 script {
                     echo 'Deploying application with Docker Compose...'
                     sh """
-                        docker-compose down || true
-                        docker-compose up -d
+                        docker compose down || true
+                        docker compose up -d
                     """
                 }
             }
@@ -144,15 +149,16 @@ pipeline {
         failure {
             echo 'Pipeline failed!'
             // Add notification here (email, Slack, etc.)
-            sh 'docker-compose logs'
+            sh '''
+                docker compose logs || true
+            '''
         }
         always {
             echo 'Cleaning up...'
             sh '''
-                docker system prune -f
-                rm -f .env
+                docker system prune -f || true
+                rm -f .env || true
             '''
         }
     }
 }
-
