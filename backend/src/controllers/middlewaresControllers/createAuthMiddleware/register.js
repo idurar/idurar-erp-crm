@@ -47,7 +47,7 @@ const register = async (req, res, { userModel }) => {
       email,
       name,
       country: country || '',
-      role: 'admin',
+      role: 'owner',
       enabled: true,
     };
     
