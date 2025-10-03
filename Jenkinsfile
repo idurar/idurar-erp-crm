@@ -129,7 +129,8 @@ pipeline {
                         
                         # Deploy with docker-compose
                         docker-compose down || true
-                        docker-compose up -d
+                        docker-compose pull || true
+                        docker-compose up -d --build
                     '''
                 }
             }
