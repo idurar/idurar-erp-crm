@@ -91,9 +91,10 @@ pipeline {
         }
         
         stage('Push to Registry') {
-            // when {
-            //     branch 'main'  // Only push to registry from main branch
-            // }
+             anyOf {
+            branch 'main'
+            branch 'harsh-branch'  // Add your branch
+        }
             steps {
                 script {
                     echo 'Pushing Docker images to registry...'
