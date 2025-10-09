@@ -23,3 +23,12 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Express running → On PORT: ${PORT}`));
+
+
+const passport = require('passport');
+const cors = require('cors');
+app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000', credentials: true }));
+app.use(passport.initialize());
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
+
