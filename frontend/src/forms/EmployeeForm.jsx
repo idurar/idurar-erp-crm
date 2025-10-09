@@ -1,17 +1,22 @@
-import React from 'react';
-import { Form, Input, Button, Radio, Select, Switch } from 'antd';
-import { DatePicker, TimePicker, Calendar } from '@/components/CustomAntd';
+import { Form, Input, Select } from 'antd';
+import { DatePicker } from 'antd';
+import { validatePhoneNumber } from '@/utils/helpers';
+import { useDate } from '@/settings';
+
+import useLanguage from '@/locale/useLanguage';
 
 export default function EmployeeForm() {
+  const translate = useLanguage();
+  const { dateFormat } = useDate();
+
   return (
     <>
       <Form.Item
         name="name"
-        label="name"
+        label={translate('first name')}
         rules={[
           {
             required: true,
-            message: 'Please input your name!',
           },
         ]}
       >
@@ -19,11 +24,10 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="surname"
-        label="Surname"
+        label={translate('last name')}
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
           },
         ]}
       >
@@ -31,19 +35,18 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="birthday"
-        label="Birthday"
+        label={translate('birthday')}
         rules={[
           {
             required: true,
-            message: 'Please input your birthday!',
           },
         ]}
       >
-        <DatePicker format={'DD/MM/YYYY'} />
+        <DatePicker placeholder={translate('select_date')} format={dateFormat} />
       </Form.Item>
       <Form.Item
         name="birthplace"
-        label="Birthplace"
+        label={translate('birthplace')}
         rules={[
           {
             required: true,
@@ -54,7 +57,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="gender"
-        label="Gender"
+        label={translate('gender')}
         rules={[
           {
             required: true,
@@ -62,21 +65,19 @@ export default function EmployeeForm() {
         ]}
       >
         <Select>
-          <Select.Option value="men">Men</Select.Option>
-          <Select.Option value="women">Women</Select.Option>
+          <Select.Option value="men">{translate('men')}</Select.Option>
+          <Select.Option value="women">{translate('women')}</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
         name="email"
-        label="E-mail"
+        label={translate('email')}
         rules={[
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
           },
         ]}
       >
@@ -84,11 +85,13 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="phone"
-        label="Phone Number"
+        label={translate('phone')}
         rules={[
           {
             required: true,
-            message: 'Please input your phone!',
+          },
+          {
+            pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
           },
         ]}
       >
@@ -96,7 +99,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="department"
-        label="department"
+        label={translate('Department')}
         rules={[
           {
             required: true,
@@ -107,7 +110,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="position"
-        label="position"
+        label={translate('Position')}
         rules={[
           {
             required: true,
@@ -118,7 +121,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="address"
-        label="address"
+        label={translate('Address')}
         rules={[
           {
             required: true,
@@ -129,7 +132,7 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="state"
-        label="state"
+        label={translate('State')}
         rules={[
           {
             required: true,

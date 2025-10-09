@@ -1,0 +1,50 @@
+[
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_invoice_number",
+    "settingValue": 0,
+    "valueType": "number"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_quote_number",
+    "settingValue": 0,
+    "valueType": "number"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_offer_number",
+    "settingValue": 0,
+    "valueType": "number"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "last_payment_number",
+    "settingValue": 0,
+    "valueType": "number"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "invoice_prefix",
+    "settingValue": "inv-",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "quote_prefix",
+    "settingValue": "qot-",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "offer_prefix",
+    "settingValue": "ofr-",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "finance_settings",
+    "settingKey": "payment_prefix",
+    "settingValue": "pym-",
+    "valueType": "string"
+  }
+]

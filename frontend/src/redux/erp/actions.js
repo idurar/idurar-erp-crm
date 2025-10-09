@@ -2,14 +2,14 @@ import * as actionTypes from './types';
 import { request } from '@/request';
 
 export const erp = {
-  resetState: () => async (dispatch) => {
+  resetState: () => (dispatch) => {
     dispatch({
       type: actionTypes.RESET_STATE,
     });
   },
   resetAction:
     ({ actionType }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.RESET_ACTION,
         keyState: actionType,
@@ -18,7 +18,7 @@ export const erp = {
     },
   currentItem:
     ({ data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ITEM,
         payload: { ...data },
@@ -26,7 +26,7 @@ export const erp = {
     },
   currentAction:
     ({ actionType, data }) =>
-    async (dispatch) => {
+    (dispatch) => {
       dispatch({
         type: actionTypes.CURRENT_ACTION,
         keyState: actionType,
@@ -34,7 +34,7 @@ export const erp = {
       });
     },
   list:
-    ({ entity, options = { page: 1 } }) =>
+    ({ entity, options = { page: 1, items: 10 } }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -49,7 +49,7 @@ export const erp = {
           items: data.result,
           pagination: {
             current: parseInt(data.pagination.page, 10),
-            pageSize: 10,
+            pageSize: options?.items || 10,
             total: parseInt(data.pagination.count, 10),
           },
         };
@@ -74,7 +74,7 @@ export const erp = {
         keyState: 'create',
         payload: null,
       });
-      console.log('jsonData action redux', jsonData);
+
       let data = await request.create({ entity, jsonData });
 
       if (data.success === true) {
@@ -187,6 +187,10 @@ export const erp = {
     ({ entity, id }) =>
     async (dispatch) => {
       dispatch({
+        type: actionTypes.RESET_ACTION,
+        keyState: 'delete',
+      });
+      dispatch({
         type: actionTypes.REQUEST_LOADING,
         keyState: 'delete',
         payload: null,
@@ -233,5 +237,63 @@ export const erp = {
           payload: null,
         });
       }
+    },
+
+  summary:
+    ({ entity, options }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'summary',
+        payload: null,
+      });
+
+      const data = await request.summary({ entity, options });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'summary',
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'summary',
+          payload: null,
+        });
+      }
+    },
+
+  mail:
+    ({ entity, jsonData }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'mail',
+        payload: null,
+      });
+
+      const data = await request.mail({ entity, jsonData });
+
+      if (data.success === true) {
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'mail',
+          payload: data.result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'mail',
+          payload: null,
+        });
+      }
+    },
+
+  convert:
+    ({ entity, id }) =>
+    async () => {
+      await request.convert({ entity, id });
     },
 };

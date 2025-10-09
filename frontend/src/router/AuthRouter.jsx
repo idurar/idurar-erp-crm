@@ -1,24 +1,24 @@
-import React, { lazy, Suspense } from 'react';
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import PublicRoute from './PublicRoute';
-import PageLoader from '@/components/PageLoader';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-const Login = lazy(() => import(/*webpackChunkName:'LoginPage'*/ '@/pages/Login'));
+import Login from '@/pages/Login';
+import NotFound from '@/pages/NotFound';
 
-const NotFound = lazy(() => import(/*webpackChunkName:'NotFoundPage'*/ '@/pages/NotFound'));
+import ForgetPassword from '@/pages/ForgetPassword';
+import ResetPassword from '@/pages/ResetPassword';
+
+import { useDispatch } from 'react-redux';
 
 export default function AuthRouter() {
-  const location = useLocation();
+  const dispatch = useDispatch();
+
   return (
-    <Suspense fallback={<PageLoader />}>
-      <AnimatePresence exitBeforeEnter initial={false}>
-        <Switch location={location} key={location.pathname}>
-          <PublicRoute path="/" component={Login} render={() => <Redirect to="/login" />} exact />
-          <PublicRoute component={Login} path="/login" exact />
-          <Route path="*" component={NotFound} render={() => <Redirect to="/notfound" />} />
-        </Switch>
-      </AnimatePresence>
-    </Suspense>
+    <Routes>
+      <Route element={<Login />} path="/" />
+      <Route element={<Login />} path="/login" />
+      <Route element={<Navigate to="/login" replace />} path="/logout" />
+      <Route element={<ForgetPassword />} path="/forgetpassword" />
+      <Route element={<ResetPassword />} path="/resetpassword/:userId/:resetToken" />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }

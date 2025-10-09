@@ -1,0 +1,34 @@
+[
+  {
+    "settingCategory": "quote_settings",
+    "settingKey": "quote_show_product_tax",
+    "settingValue": false,
+    "valueType": "boolean"
+  },
+  {
+    "settingCategory": "quote_settings",
+    "settingKey": "quote_load_default_client",
+    "settingValue": false,
+    "valueType": "boolean"
+  },
+  {
+    "settingCategory": "quote_settings",
+    "settingKey": "quote_status",
+    "settingValue": [
+      "draft",
+      "pending",
+      "sent",
+      "negotiation",
+      "accepted",
+      "declined",
+      "cancelled"
+    ],
+    "valueType": "array"
+  },
+  {
+    "settingCategory": "quote_settings",
+    "settingKey": "quote_pdf_footer",
+    "settingValue": "Quote was created on a computer and is valid without the signature and seal",
+    "valueType": "string"
+  }
+]

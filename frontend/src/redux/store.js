@@ -1,24 +1,31 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import { configureStore } from '@reduxjs/toolkit';
+
+import lang from '@/locale/translation/en_us';
 
 import rootReducer from './rootReducer';
 import storePersist from './storePersist';
 
-const logger = createLogger();
-let middleware = [thunk];
+// localStorageHealthCheck();
 
-let configStore = applyMiddleware(...middleware);
+const AUTH_INITIAL_STATE = {
+  current: {},
+  isLoggedIn: false,
+  isLoading: false,
+  isSuccess: false,
+};
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const auth_state = storePersist.get('auth') ? storePersist.get('auth') : AUTH_INITIAL_STATE;
 
-if (process.env.NODE_ENV === 'development') {
-  middleware = [...middleware];
-  configStore = composeEnhancers(applyMiddleware(...middleware));
-}
+const initialState = { auth: auth_state };
 
-const initialState = storePersist.get('auth') ? { auth: storePersist.get('auth') } : {};
+const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: initialState,
+  devTools: import.meta.env.PROD === false, // Enable Redux DevTools in development mode
+});
 
-const store = createStore(rootReducer, initialState, configStore);
+console.log(
+  '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+);
 
 export default store;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Dropdown = ({ value, options, placeholder = 'Select', onChange }) => {
   const node = useRef();
