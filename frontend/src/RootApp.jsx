@@ -21,3 +21,5 @@ export default function RootApp() {
     </BrowserRouter>
   );
 }
+
+import MultiStepSelectDemo from '@/pages/MultiStepSelectDemo';
