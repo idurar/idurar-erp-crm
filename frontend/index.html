@@ -10,9 +10,49 @@
       name="description"
       content="IDURAR ERP CRM Open Source based on node.js react.js Antd Redux"
     />
+
+    <!-- Optional: small loading CSS -->
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f9ff;
+      }
+      #loading {
+        text-align: center;
+        color: #0078d7;
+      }
+      .spinner {
+        border: 4px solid #e0e0e0;
+        border-top: 4px solid #0078d7;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 10px;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
+
   <body>
+    <!-- Default visible content before React loads -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <p>Loading IDURAR ERP CRM...</p>
+    </div>
+
+    <!-- React app will replace this div when it loads -->
     <div id="root"></div>
+
+    <!-- React script -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
