@@ -1,112 +1,98 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Form, Input, Select } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import React from "react";
+import { Form, Input, Button, message } from "antd";
+import axios from "axios";
 
-import useLanguage from '@/locale/useLanguage';
-import { countryList } from '@/utils/countryList';
+const Register = () => {
+  const [form] = Form.useForm();
 
-export default function RegisterForm({ userLocation }) {
-  const translate = useLanguage();
+  const onFinish = async (values) => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/register", values);
+      if (res.data.success) {
+        message.success("Registration successful!");
+        form.resetFields();
+      } else {
+        message.error(res.data.message || "Registration failed");
+      }
+    } catch (err) {
+      message.error(err.response?.data?.message || "Server error");
+    }
+  };
+
+  const passwordRules = [
+    { required: true, message: "Please enter a password" },
+    { min: 6, message: "Password must be at least 6 characters" },
+    {
+      validator: (_, value) => {
+        if (!value) return Promise.reject("Please enter a password");
+        if (value.trim() === "" || /^["']+$/.test(value)) {
+          return Promise.reject("Password cannot be only quotes or spaces");
+        }
+        if (!/[A-Za-z]/.test(value) || !/[0-9]/.test(value)) {
+          return Promise.reject("Password must contain letters and numbers");
+        }
+        return Promise.resolve();
+      },
+    },
+  ];
 
   return (
-    <>
-      <Form.Item
-        name="name"
-        label={translate('name')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        label={translate('email')}
-        rules={[
-          {
-            required: true,
-          },
-          {
-            type: 'email',
-          },
-        ]}
-      >
-        <Input
-          prefix={<MailOutlined className="site-form-item-icon" />}
-          type="email"
-          size="large"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label={translate('password')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item>
-      {/* <Form.Item
-        name="confirm_password"
-        label={translate('confirm_password')}
-        rules={[
-          {
-            required: true,
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
-            },
-          }),
-        ]}
-        hasFeedback
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item> */}
-      <Form.Item
-        label={translate('country')}
-        name="country"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-        initialValue={userLocation}
-      >
-        <Select
-          showSearch
-          defaultOpen={false}
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-          }
-          filterSort={(optionA, optionB) =>
-            (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
-          }
-          style={{
-            width: '100%',
-          }}
-          size="large"
+    <div style={{ maxWidth: 400, margin: "50px auto" }}>
+      <h2>Register</h2>
+      <Form form={form} layout="vertical" onFinish={onFinish}>
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: "Please enter your name" }]}
         >
-          {countryList.map((language) => (
-            <Select.Option
-              key={language.value}
-              value={language.value}
-              label={translate(language.label)}
-            >
-              {language?.icon && language?.icon + ' '}
-              {translate(language.label)}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-    </>
+          <Input placeholder="Name" />
+        </Form.Item>
+
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: "Please enter your email" },
+            { type: "email", message: "Please enter a valid email" },
+          ]}
+        >
+          <Input placeholder="Email" />
+        </Form.Item>
+
+        <Form.Item label="Password" name="password" rules={passwordRules} hasFeedback>
+          <Input.Password placeholder="Password" />
+        </Form.Item>
+
+        <Form.Item
+          label="Confirm Password"
+          name="confirmPassword"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            { required: true, message: "Please confirm your password" },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject("Passwords do not match!");
+              },
+            }),
+          ]}
+        >
+          <Input.Password placeholder="Confirm Password" />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" block>
+            Register
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
-}
+};
+
+export default Register;
+
+

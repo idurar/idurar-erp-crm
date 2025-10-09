@@ -1,46 +1,18 @@
 {
-  "name": "idurar-erp-crm",
-  "version": "4.1.0",
-  "engines": {
-    "node": "20.9.0",
-    "npm": "10.2.4"
-  },
-  "type": "module",
-  "dependencies": {
-    "@ant-design/icons": "^5.3.0",
-    "@ant-design/pro-layout": "^7.17.19",
-    "@reduxjs/toolkit": "^2.2.1",
-    "@vitejs/plugin-react": "^4.3.1",
-    "antd": "^5.14.1",
-    "axios": "^1.6.2",
-    "cross-env": "7.0.3",
-    "currency.js": "2.0.4",
-    "dayjs": "^1.11.10",
-    "just-compare": "^2.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.2.0",
-    "react-quill": "^2.0.0",
-    "react-redux": "^9.1.0",
-    "react-router-dom": "^6.22.0",
-    "redux": "^5.0.1",
-    "reselect": "^5.1.0",
-    "shortid": "^2.2.16",
-    "vite": "^5.4.8"
-  },
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "dev:remote": "cross-env VITE_DEV_REMOTE=remote npm run dev"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    
   },
   "devDependencies": {
-    "@types/react": "^18.2.38",
-    "@types/react-dom": "^18.2.17",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "prettier": "3.1.0"
+
   }
 }
