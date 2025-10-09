@@ -16,6 +16,8 @@ export default function InvoiceCreate() {
   const configPage = {
     entity,
     ...Labels,
+    // add a register path so CreateItem can show a Register button in the header
+    registerPath: '/register',
   };
   return <CreateInvoiceModule config={configPage} />;
 }
