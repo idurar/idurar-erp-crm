@@ -1,112 +1,138 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Form, Input, Select } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
 
-import useLanguage from '@/locale/useLanguage';
-import { countryList } from '@/utils/countryList';
+const RegisterForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-export default function RegisterForm({ userLocation }) {
-  const translate = useLanguage();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    // ✅ Confirm Password Validation
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      // 👇 You can change this API URL if your backend uses a different route
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Registration failed");
+      } else {
+        alert("Registered successfully! Please login.");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-      <Form.Item
-        name="name"
-        label={translate('name')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        label={translate('email')}
-        rules={[
-          {
-            required: true,
-          },
-          {
-            type: 'email',
-          },
-        ]}
-      >
-        <Input
-          prefix={<MailOutlined className="site-form-item-icon" />}
-          type="email"
-          size="large"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label={translate('password')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item>
-      {/* <Form.Item
-        name="confirm_password"
-        label={translate('confirm_password')}
-        rules={[
-          {
-            required: true,
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
-            },
-          }),
-        ]}
-        hasFeedback
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item> */}
-      <Form.Item
-        label={translate('country')}
-        name="country"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-        initialValue={userLocation}
-      >
-        <Select
-          showSearch
-          defaultOpen={false}
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-          }
-          filterSort={(optionA, optionB) =>
-            (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
-          }
+    <div className="register-form" style={{ maxWidth: 400, margin: "auto" }}>
+      <h2>Create Account</h2>
+
+      {error && (
+        <p style={{ color: "red", fontSize: "14px", marginBottom: "8px" }}>
+          {error}
+        </p>
+      )}
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
           style={{
-            width: '100%',
+            marginTop: "10px",
+            padding: "8px 16px",
+            cursor: "pointer",
           }}
-          size="large"
         >
-          {countryList.map((language) => (
-            <Select.Option
-              key={language.value}
-              value={language.value}
-              label={translate(language.label)}
-            >
-              {language?.icon && language?.icon + ' '}
-              {translate(language.label)}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-    </>
+          {loading ? "Registering..." : "Sign Up"}
+        </button>
+      </form>
+    </div>
   );
-}
+};
+
+export default RegisterForm;

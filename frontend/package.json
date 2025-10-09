@@ -26,15 +26,15 @@
     "reselect": "^5.1.0",
     "shortid": "^2.2.16",
     "vite": "^5.4.8"
-  },
-  "scripts": {
+  },"scripts": {
   "start": "vite",
   "dev": "vite",
   "build": "vite build",
-  "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+  "lint": "eslint --ext js,jsx --report-unused-disable-directives --max-warnings 0",
   "preview": "vite preview",
   "dev:remote": "cross-env VITE_DEV_REMOTE=remote npm run dev"
 },
+
 
   "devDependencies": {
     "@types/react": "^18.2.38",
@@ -45,4 +45,5 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "prettier": "3.1.0"
   }
+  
 }
