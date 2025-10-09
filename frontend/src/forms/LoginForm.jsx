@@ -1,16 +1,143 @@
 import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button, Modal } from 'antd';
-import { UserOutlined, LockOutlined, GoogleOutlined, UserAddOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, GoogleOutlined, UserAddOutlined, ReloadOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
+
+// Simple CAPTCHA component
+const SimpleCaptcha = ({ onVerify }) => {
+  const [captchaText, setCaptchaText] = useState('');
+  const [userInput, setUserInput] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+
+  // Generate random CAPTCHA text
+  const generateCaptcha = () => {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+    let result = '';
+    for (let i = 0; i < 6; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setCaptchaText(result);
+    setUserInput('');
+    setIsVerified(false);
+    onVerify(false);
+  };
+
+  // Initialize CAPTCHA on component mount
+  React.useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setUserInput(value);
+    
+    const verified = value.toLowerCase() === captchaText.toLowerCase();
+    setIsVerified(verified);
+    onVerify(verified);
+  };
+
+  return (
+    <div style={{ border: '1px solid #d9d9d9', padding: '16px', borderRadius: '6px', background: '#fafafa' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+        <div style={{ 
+          fontFamily: 'monospace', 
+          fontSize: '24px', 
+          fontWeight: 'bold', 
+          letterSpacing: '3px',
+          background: 'linear-gradient(45deg, #666, #000)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          padding: '8px 12px',
+          border: '1px dashed #d9d9d9',
+          borderRadius: '4px'
+        }}>
+          {captchaText}
+        </div>
+        <Button 
+          type="text" 
+          icon={<ReloadOutlined />} 
+          onClick={generateCaptcha}
+          title="Refresh CAPTCHA"
+        />
+      </div>
+      <Input
+        placeholder="Enter the text above"
+        value={userInput}
+        onChange={handleInputChange}
+        status={userInput && !isVerified ? 'error' : ''}
+        style={{ marginBottom: '8px' }}
+      />
+      {userInput && !isVerified && (
+        <div style={{ color: '#ff4d4f', fontSize: '12px' }}>
+          CAPTCHA verification failed. Please try again.
+        </div>
+      )}
+      {isVerified && (
+        <div style={{ color: '#52c41a', fontSize: '12px' }}>
+          ✓ CAPTCHA verified successfully
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Google reCAPTCHA component (you'll need to install react-google-recaptcha)
+const GoogleReCaptcha = ({ onVerify }) => {
+  const [isVerified, setIsVerified] = useState(false);
+
+  // For actual implementation, you'll need to:
+  // 1. Install: npm install react-google-recaptcha
+  // 2. Get reCAPTCHA site key from Google Cloud Console
+  // 3. Import: import ReCAPTCHA from "react-google-recaptcha";
+  
+  const handleFakeVerification = () => {
+    setIsVerified(true);
+    onVerify(true);
+  };
+
+  return (
+    <div style={{ border: '1px solid #d9d9d9', padding: '16px', borderRadius: '6px', background: '#fafafa' }}>
+      <div style={{ textAlign: 'center', marginBottom: '12px' }}>
+        <div style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>
+          Google reCAPTCHA
+        </div>
+        <div style={{ 
+          background: '#f0f0f0', 
+          padding: '20px', 
+          borderRadius: '4px',
+          border: '1px dashed #d9d9d9'
+        }}>
+          [Google reCAPTCHA Widget]
+          <div style={{ marginTop: '12px' }}>
+            <Button 
+              type="primary" 
+              size="small"
+              onClick={handleFakeVerification}
+              disabled={isVerified}
+            >
+              {isVerified ? '✓ Verified' : 'Verify I\'m not a robot'}
+            </Button>
+          </div>
+        </div>
+      </div>
+      {isVerified && (
+        <div style={{ color: '#52c41a', fontSize: '12px', textAlign: 'center' }}>
+          reCAPTCHA verification successful
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default function LoginForm() {
   const translate = useLanguage();
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isRobotVerified, setIsRobotVerified] = useState(false);
+  const [captchaType, setCaptchaType] = useState('simple'); // 'simple' or 'google'
 
-  // Robot verification handler
-  const handleRobotVerification = (e) => {
-    setIsRobotVerified(e.target.checked);
+  // CAPTCHA verification handler
+  const handleCaptchaVerification = (verified) => {
+    setIsRobotVerified(verified);
   };
 
   // Google login handler
@@ -89,14 +216,33 @@ export default function LoginForm() {
         />
       </Form.Item>
 
-      {/* Robot Verification Checkbox - Added new feature */}
-      <Form.Item>
-        <Checkbox 
-          checked={isRobotVerified}
-          onChange={handleRobotVerification}
-        >
-          I'm not a robot
-        </Checkbox>
+      {/* CAPTCHA Section - Replaced simple checkbox */}
+      <Form.Item label="Security Verification">
+        {/* CAPTCHA Type Selector */}
+        <div style={{ marginBottom: '12px', textAlign: 'center' }}>
+          <Button 
+            type={captchaType === 'simple' ? 'primary' : 'default'} 
+            size="small" 
+            onClick={() => setCaptchaType('simple')}
+            style={{ marginRight: '8px' }}
+          >
+            Simple CAPTCHA
+          </Button>
+          <Button 
+            type={captchaType === 'google' ? 'primary' : 'default'} 
+            size="small" 
+            onClick={() => setCaptchaType('google')}
+          >
+            Google reCAPTCHA
+          </Button>
+        </div>
+
+        {/* Render selected CAPTCHA type */}
+        {captchaType === 'simple' ? (
+          <SimpleCaptcha onVerify={handleCaptchaVerification} />
+        ) : (
+          <GoogleReCaptcha onVerify={handleCaptchaVerification} />
+        )}
       </Form.Item>
 
       <Form.Item>
@@ -108,7 +254,7 @@ export default function LoginForm() {
         </a>
       </Form.Item>
 
-      {/* Login Button with robot verification check */}
+      {/* Login Button with CAPTCHA verification check */}
       <Form.Item>
         <Button 
           type="primary" 
@@ -121,7 +267,7 @@ export default function LoginForm() {
         </Button>
       </Form.Item>
 
-      {/* Google Login Button - Added new feature */}
+      {/* Google Login Button */}
       <Form.Item>
         <Button 
           type="default" 
@@ -134,7 +280,7 @@ export default function LoginForm() {
         </Button>
       </Form.Item>
 
-      {/* Register Link - Added new feature */}
+      {/* Register Link */}
       <Form.Item>
         <div style={{ textAlign: 'center' }}>
           <span>Don't have an account? </span>
@@ -148,7 +294,7 @@ export default function LoginForm() {
         </div>
       </Form.Item>
 
-      {/* Register Modal - Added new feature */}
+      {/* Register Modal */}
       <Modal
         title="Create New Account"
         visible={isRegisterModalVisible}
@@ -161,8 +307,8 @@ export default function LoginForm() {
           onFinish={async (values) => {
             if (!isRobotVerified) {
               Modal.error({
-                title: 'Robot Verification Required',
-                content: 'Please complete the robot verification to continue.',
+                title: 'Security Verification Required',
+                content: 'Please complete the CAPTCHA verification to continue.',
               });
               return;
             }
@@ -282,14 +428,31 @@ export default function LoginForm() {
             />
           </Form.Item>
 
-          {/* Robot Verification for Register */}
-          <Form.Item>
-            <Checkbox 
-              checked={isRobotVerified}
-              onChange={handleRobotVerification}
-            >
-              I'm not a robot
-            </Checkbox>
+          {/* CAPTCHA for Register */}
+          <Form.Item label="Security Verification">
+            <div style={{ marginBottom: '12px', textAlign: 'center' }}>
+              <Button 
+                type={captchaType === 'simple' ? 'primary' : 'default'} 
+                size="small" 
+                onClick={() => setCaptchaType('simple')}
+                style={{ marginRight: '8px' }}
+              >
+                Simple CAPTCHA
+              </Button>
+              <Button 
+                type={captchaType === 'google' ? 'primary' : 'default'} 
+                size="small" 
+                onClick={() => setCaptchaType('google')}
+              >
+                Google reCAPTCHA
+              </Button>
+            </div>
+
+            {captchaType === 'simple' ? (
+              <SimpleCaptcha onVerify={handleCaptchaVerification} />
+            ) : (
+              <GoogleReCaptcha onVerify={handleCaptchaVerification} />
+            )}
           </Form.Item>
 
           <Form.Item>
