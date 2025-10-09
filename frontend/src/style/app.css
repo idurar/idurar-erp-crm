@@ -1,7 +1,9 @@
+/* src/styles/app.css */
 @import './partials/rest.css';
 @import './partials/customAntd.css';
 @import './partials/layout.css';
 @import './partials/core.css';
+@import './partials/darkTheme.css'; /* Add this line */
 
 @import './partials/auth.css';
 @import './partials/navigation.css';
