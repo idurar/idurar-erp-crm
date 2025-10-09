@@ -28,13 +28,18 @@ const Taxes = lazy(() => import('@/pages/Taxes'));
 const Profile = lazy(() => import('@/pages/Profile'));
 
 const About = lazy(() => import('@/pages/About'));
+const Signup = lazy(() => import('@/pages/Signup'));
 
 let routes = {
   expense: [],
   default: [
     {
+      path: '/signup',
+      element: <Signup />,
+    },
+    {
       path: '/login',
-      element: <Navigate to="/" />,
+      element: lazy(() => import('@/pages/Login')),
     },
     {
       path: '/logout',
