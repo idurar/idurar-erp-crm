@@ -1,78 +1,130 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { Form, Input, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { settingsAction } from '@/redux/settings/actions';
-import { selectSettings } from '@/redux/settings/selectors';
 
-import { Button, Form } from 'antd';
-import Loading from '@/components/Loading';
 import useLanguage from '@/locale/useLanguage';
 
-export default function UpdateSettingForm({ config, children, withUpload, uploadSettingKey }) {
-  let { entity, settingsCategory } = config;
-  const dispatch = useDispatch();
-  const { result, isLoading } = useSelector(selectSettings);
+
+export default function SignupForm() {
   const translate = useLanguage();
-  const [form] = Form.useForm();
 
-  const onSubmit = (fieldsValue) => {
-    console.log('🚀 ~ onSubmit ~ fieldsValue:', fieldsValue);
-    if (withUpload) {
-      if (fieldsValue.file) {
-        fieldsValue.file = fieldsValue.file[0].originFileObj;
-      }
-      dispatch(
-        settingsAction.upload({ entity, settingKey: uploadSettingKey, jsonData: fieldsValue })
-      );
-    } else {
-      const settings = [];
-
-      for (const [key, value] of Object.entries(fieldsValue)) {
-        settings.push({ settingKey: key, settingValue: value });
-      }
-
-      dispatch(settingsAction.updateMany({ entity, jsonData: { settings } }));
-    }
-  };
-
-  useEffect(() => {
-    const current = result[settingsCategory];
-
-    form.setFieldsValue(current);
-  }, [result]);
 
   return (
     <div>
-      <Loading isLoading={isLoading}>
-        <Form
-          form={form}
-          onFinish={onSubmit}
-          // onValuesChange={handleValuesChange}
-          labelCol={{ span: 10 }}
-          labelAlign="left"
-          wrapperCol={{ span: 16 }}
+      <Form.Item
+        label={translate('Full Name')}
+        name="fullName"
+        rules={[
+          {
+            required: true,
+            message: translate('Please input your full name!'),
+          },
+        ]}
+      >
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder={translate('Enter your full name')}
+          size="large"
+        />
+      </Form.Item>
+
+
+      <Form.Item
+        label={translate('email')}
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: translate('Please input your email!'),
+          },
+          {
+            type: 'email',
+            message: translate('Please enter a valid email address!'),
+          },
+        ]}
+      >
+        <Input
+          prefix={<MailOutlined className="site-form-item-icon" />}
+          placeholder={'example@domain.com'}
+          type="email"
+          size="large"
+        />
+      </Form.Item>
+
+
+      <Form.Item
+        label={translate('password')}
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: translate('Please input your password!'),
+          },
+          {
+            min: 6,
+            message: translate('Password must be at least 6 characters!'),
+          },
+        ]}
+      >
+        <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          placeholder={translate('Create a password')}
+          size="large"
+        />
+      </Form.Item>
+
+
+      <Form.Item
+        label={translate('Confirm Password')}
+        name="confirmPassword"
+        dependencies={['password']}
+        rules={[
+          {
+            required: true,
+            message: translate('Please confirm your password!'),
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error(translate('The two passwords do not match!')));
+            },
+          }),
+        ]}
+      >
+        <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          placeholder={translate('Confirm your password')}
+          size="large"
+        />
+      </Form.Item>
+
+
+      <Form.Item>
+        <Form.Item name="agreeTerms" valuePropName="checked" noStyle
+          rules={[
+            {
+              validator: (_, value) =>
+                value ? Promise.resolve() : Promise.reject(new Error(translate('You must agree to the terms and conditions'))),
+            },
+          ]}
         >
-          {children}
-          <Form.Item
-            style={{
-              display: 'inline-block',
-              paddingRight: '5px',
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              {translate('Save')}
-            </Button>
-          </Form.Item>
-          <Form.Item
-            style={{
-              display: 'inline-block',
-              paddingLeft: '5px',
-            }}
-          >
-            {/* <Button onClick={() => console.log('Cancel clicked')}>{translate('Cancel')}</Button> */}
-          </Form.Item>
-        </Form>
-      </Loading>
+          <Checkbox>
+            {translate('I agree to the Terms and Conditions')}
+          </Checkbox>
+        </Form.Item>
+      </Form.Item>
+
+
+      <Form.Item>
+        <Form.Item name="newsletter" valuePropName="checked" noStyle>
+          <Checkbox defaultChecked>
+            {translate('Subscribe to newsletter')}
+          </Checkbox>
+        </Form.Item>
+      </Form.Item>
     </div>
   );
 }
