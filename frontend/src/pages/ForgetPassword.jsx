@@ -31,26 +31,38 @@ const ForgetPassword = () => {
     return (
       <Loading isLoading={isLoading}>
         <Form
-          name="signup"
+          name="forget-password"
           className="login-form"
           initialValues={{
             remember: true,
           }}
           onFinish={onFinish}
+          layout="vertical"
+          autoComplete="off"
         >
           <ForgetPasswordForm />
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button" size="large">
+            <Button 
+              type="primary" 
+              htmlType="submit" 
+              className="login-form-button" 
+              size="large"
+              loading={isLoading}
+              block
+            >
               {translate('Request new Password')}
             </Button>
-            {translate('Or')} <a href="/login"> {translate('already have account Login')} </a>
+            <div style={{ textAlign: 'center', marginTop: '16px' }}>
+              {translate('Or')} <a href="/login"> {translate('already have account Login')} </a>
+            </div>
           </Form.Item>
         </Form>
       </Loading>
     );
   };
+
   if (!isSuccess) {
-    return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Forget Password" />;
+    return <AuthModule authContent={<FormContainer />} AUTH_TITLE={translate('Forget Password')} />;
   } else {
     return (
       <Result
@@ -62,13 +74,13 @@ const ForgetPassword = () => {
           <Button
             type="primary"
             onClick={() => {
-              navigate(`/login`);
+              navigate('/login');
             }}
           >
             {translate('Login')}
           </Button>
         }
-      ></Result>
+      />
     );
   }
 };
