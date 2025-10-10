@@ -1,86 +1,78 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
-
-// import Notifications from '@/components/Notification';
-
+import { Avatar, Dropdown, Layout } from 'antd';
 import { LogoutOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
-
 import { FILE_BASE_URL } from '@/config/serverApiConfig';
-
 import useLanguage from '@/locale/useLanguage';
-
 import UpgradeButton from './UpgradeButton';
 
 export default function HeaderContent() {
-  const currentAdmin = useSelector(selectCurrentAdmin);
   const { Header } = Layout;
-
+  const navigate = useNavigate();
+  const currentAdmin = useSelector(selectCurrentAdmin);
   const translate = useLanguage();
 
-  const ProfileDropdown = () => {
-    const navigate = useNavigate();
-    return (
-      <div className="profileDropdown" onClick={() => navigate('/profile')}>
-        <Avatar
-          size="large"
-          className="last"
-          src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
-          style={{
-            color: '#f56a00',
-            backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
-            boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 6px 1px',
-          }}
-        >
-          {currentAdmin?.name?.charAt(0)?.toUpperCase()}
-        </Avatar>
-        <div className="profileDropdownInfo">
-          <p>
-            {currentAdmin?.name} {currentAdmin?.surname}
-          </p>
-          <p>{currentAdmin?.email}</p>
-        </div>
+  // --- Subcomponent: Profile Section inside Dropdown ---
+  const ProfileDropdown = () => (
+    <div className="profileDropdown" onClick={() => navigate('/profile')}>
+      <Avatar
+        size="large"
+        src={currentAdmin?.photo ? `${FILE_BASE_URL}${currentAdmin.photo}` : undefined}
+        style={{
+          color: '#f56a00',
+          backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
+          boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 6px 1px',
+          cursor: 'pointer',
+        }}
+      >
+        {currentAdmin?.name?.charAt(0)?.toUpperCase()}
+      </Avatar>
+
+      <div className="profileDropdownInfo">
+        <p>
+          {currentAdmin?.name} {currentAdmin?.surname}
+        </p>
+        <p>{currentAdmin?.email}</p>
       </div>
-    );
-  };
+    </div>
+  );
 
-  const DropdownMenu = ({ text }) => {
-    return <span style={{}}>{text}</span>;
-  };
-
-  const items = [
+  // --- Dropdown Menu Items ---
+  const menuItems = [
     {
-      label: <ProfileDropdown className="headerDropDownMenu" />,
-      key: 'ProfileDropdown',
+      label: <ProfileDropdown />,
+      key: 'profileDropdown',
     },
-    {
-      type: 'divider',
-    },
+    { type: 'divider' },
     {
       icon: <UserOutlined />,
-      key: 'settingProfile',
+      key: 'profileSettings',
       label: (
-        <Link to={'/profile'}>
-          <DropdownMenu text={translate('profile_settings')} />
+        <Link to="/profile">
+          {translate('profile_settings')}
         </Link>
       ),
     },
     {
       icon: <ToolOutlined />,
-      key: 'settingApp',
-      label: <Link to={'/settings'}>{translate('app_settings')}</Link>,
+      key: 'appSettings',
+      label: (
+        <Link to="/settings">
+          {translate('app_settings')}
+        </Link>
+      ),
     },
-
-    {
-      type: 'divider',
-    },
-
+    { type: 'divider' },
     {
       icon: <LogoutOutlined />,
       key: 'logout',
-      label: <Link to={'/logout'}>{translate('logout')}</Link>,
+      label: (
+        <Link to="/logout">
+          {translate('logout')}
+        </Link>
+      ),
     },
   ];
 
@@ -92,42 +84,29 @@ export default function HeaderContent() {
         display: 'flex',
         flexDirection: 'row-reverse',
         justifyContent: 'flex-start',
-        gap: ' 15px',
+        gap: '15px',
       }}
     >
       <Dropdown
-        menu={{
-          items,
-        }}
+        menu={{ items: menuItems }}
         trigger={['click']}
         placement="bottomRight"
-        stye={{ width: '280px', float: 'right' }}
       >
-        {/* <Badge dot> */}
         <Avatar
-          className="last"
-          src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
+          size="large"
+          src={currentAdmin?.photo ? `${FILE_BASE_URL}${currentAdmin.photo}` : undefined}
           style={{
             color: '#f56a00',
             backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
             boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 10px 2px',
-            float: 'right',
             cursor: 'pointer',
           }}
-          size="large"
         >
           {currentAdmin?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
-        {/* </Badge> */}
       </Dropdown>
-
-      {/* <AppsButton /> */}
 
       <UpgradeButton />
     </Header>
   );
 }
-
-//  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
-//  );
