@@ -1,0 +1,213 @@
+/* src/styles/partials/darkTheme.css */
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  /* Core colors */
+  --dark-bg-primary: #141414;
+  --dark-bg-secondary: #1f1f1f;
+  --dark-bg-card: #1f1f1f;
+  --dark-text-primary: #ffffff;
+  --dark-text-secondary: #a6a6a6;
+  --dark-border: #434343;
+  --dark-hover: #2d2d2d;
+}
+
+/* Dark Theme Styles */
+[data-theme="dark"] body {
+  background-color: var(--dark-bg-primary);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .whiteBox {
+  background-color: var(--dark-bg-card) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .layoutPadding {
+  background: var(--dark-bg-card);
+}
+
+[data-theme="dark"] .appContainer,
+[data-theme="dark"] .wideAppContainer {
+  background: var(--dark-bg-primary);
+}
+
+[data-theme="dark"] .ant-layout {
+  background: var(--dark-bg-primary);
+}
+
+[data-theme="dark"] .ant-layout-content {
+  background: var(--dark-bg-primary);
+}
+
+[data-theme="dark"] .ant-card {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-card .ant-card-head {
+  color: var(--dark-text-primary);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-table {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-table-thead > tr > th {
+  background: var(--dark-hover);
+  color: var(--dark-text-primary);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--dark-border);
+  color: var(--dark-text-primary);
+  background: var(--dark-bg-card);
+}
+
+[data-theme="dark"] .ant-table-tbody > tr:hover > td {
+  background: var(--dark-hover);
+}
+
+[data-theme="dark"] .ant-input {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-input:focus,
+[data-theme="dark"] .ant-input-focused {
+  border-color: #177ddc;
+  box-shadow: 0 0 0 2px rgba(23, 125, 220, 0.2);
+}
+
+[data-theme="dark"] .ant-select-selector {
+  background: var(--dark-bg-card) !important;
+  color: var(--dark-text-primary) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+
+[data-theme="dark"] .ant-select-dropdown {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-select-item {
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-select-item-option-selected {
+  background: var(--dark-hover);
+}
+
+[data-theme="dark"] .ant-btn {
+  background: var(--dark-bg-secondary);
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-btn-primary {
+  background: #1890ff;
+  border-color: #1890ff;
+  color: white;
+}
+
+[data-theme="dark"] .ant-switch {
+  background: var(--dark-border);
+}
+
+[data-theme="dark"] .ant-switch-checked {
+  background: #1890ff;
+}
+
+/* Header styles for dark theme */
+[data-theme="dark"] .headerIcon.ant-avatar {
+  color: var(--dark-text-secondary);
+  background: transparent;
+}
+
+[data-theme="dark"] .headerIcon.ant-avatar:hover {
+  background: var(--dark-hover);
+  box-shadow: 0px 0px 10px 4px rgba(150, 190, 238, 0.2);
+}
+
+[data-theme="dark"] .profileDropdown {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .profileDropdownInfo p {
+  color: var(--dark-text-primary);
+}
+
+/* Navigation styles for dark theme */
+[data-theme="dark"] .smallNavigation,
+[data-theme="dark"] .wideNavigation {
+  background: var(--dark-bg-primary);
+}
+
+/* ERP specific dark styles */
+[data-theme="dark"] .erp-container {
+  background: var(--dark-bg-primary);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-menu {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-menu-item {
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-menu-item:hover {
+  background: var(--dark-hover);
+}
+
+[data-theme="dark"] .ant-menu-item-selected {
+  background: var(--dark-hover);
+}
+
+/* Form elements */
+[data-theme="dark"] .ant-form-item-label > label {
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-picker {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-picker-input > input {
+  color: var(--dark-text-primary);
+}
+
+/* Modal styles */
+[data-theme="dark"] .ant-modal-content {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-modal-header {
+  background: var(--dark-bg-card);
+  color: var(--dark-text-primary);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .ant-modal-title {
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .ant-modal-close {
+  color: var(--dark-text-secondary);
+}

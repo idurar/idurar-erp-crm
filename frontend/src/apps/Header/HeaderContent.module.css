@@ -1,0 +1,99 @@
+.header {
+  padding: 20px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.toggleContainer:hover {
+  background: #f5f5f5;
+  border-color: #d9d9d9;
+}
+
+.toggleIcon {
+  color: #faad14;
+  font-size: 14px;
+}
+
+.toggleLabel {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.toggleSwitch {
+  background: #d9d9d9;
+}
+
+.toggleSwitch:hover {
+  background: #bfbfbf;
+}
+
+.toggleSwitch:global(.ant-switch-checked) {
+  background: #1890ff;
+}
+
+.profileDropdown {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+.profileDropdown:hover {
+  background-color: #f5f5f5;
+}
+
+.profileDropdownInfo p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.profileDropdownInfo p:first-child {
+  font-weight: 600;
+  color: #262626;
+}
+
+.profileDropdownInfo p:last-child {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.avatar {
+  color: #f56a00;
+  background-color: #fde3cf;
+  box-shadow: rgba(150, 190, 238, 0.35) 0px 0px 10px 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(150, 190, 238, 0.5) 0px 0px 15px 3px;
+}
+
+.dropdownMenu :global(.ant-dropdown-menu-item) {
+  padding: 8px 12px;
+}
+
+.dropdownMenu :global(.ant-dropdown-menu-item:hover) {
+  background-color: #f0f7ff;
+}
