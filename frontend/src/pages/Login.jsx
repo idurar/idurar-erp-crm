@@ -43,7 +43,11 @@ const LoginPage = () => {
           onFinish={onFinish}
         >
           <LoginForm />
-          <Form.Item>
+          <Form.Item style={{ textAlign: 'center', marginTop: 20 }}>
+            <span style={{ color: '#666' }}>Don't have an account?</span>{' '}
+            <Link to="/register" style={{ color: '#48a9a6', fontWeight: 600 }}>
+                Sign Up
+            </Link>
             <Button
               type="primary"
               htmlType="submit"
