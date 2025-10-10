@@ -21,7 +21,9 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+    // remove confirm_password before sending to backend
+    const { confirm_password, ...loginData } = values;
+    dispatch(login({ loginData }));
   };
 
   useEffect(() => {
