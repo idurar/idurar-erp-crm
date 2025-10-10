@@ -36,13 +36,39 @@ export const register =
     dispatch({
       type: actionTypes.REQUEST_LOADING,
     });
-    const data = await authService.register({ registerData });
 
-    if (data.success === true) {
-      dispatch({
-        type: actionTypes.REGISTER_SUCCESS,
+    try {
+      // POST data to backend
+      const response = await fetch('http://localhost:8888/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(registerData),
       });
-    } else {
+
+      if (response.ok) {
+        // Since backend doesn't return JSON, we store registerData in Redux
+        const auth_state = {
+          current: registerData,
+          isLoggedIn: true, // auto login after registration
+          isLoading: false,
+          isSuccess: true,
+        };
+
+        window.localStorage.setItem('auth', JSON.stringify(auth_state));
+        window.localStorage.removeItem('isLogout');
+
+        dispatch({
+          type: actionTypes.REGISTER_SUCCESS,
+          payload: registerData, // store the user data in Redux state
+        });
+
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+        });
+      }
+    } catch (err) {
+      console.error('Registration error:', err);
       dispatch({
         type: actionTypes.REQUEST_FAILED,
       });
