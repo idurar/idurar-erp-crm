@@ -1,0 +1,1 @@
+const { validatePassword } = require('../utils/passwordValidator');
