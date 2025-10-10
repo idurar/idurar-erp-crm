@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
+import { Avatar, Dropdown, Layout, Badge, Button, Switch } from 'antd';
+import styles from './HeaderContent.module.css';
 
 // import Notifications from '@/components/Notification';
 
-import { LogoutOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, ToolOutlined, UserOutlined, BulbOutlined } from '@ant-design/icons';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
@@ -20,23 +21,24 @@ export default function HeaderContent() {
 
   const translate = useLanguage();
 
+  // Example toggle handler - you can customize this based on your needs
+  const handleToggle = (checked) => {
+    console.log('Toggle switched:', checked);
+    // Add your toggle logic here (theme switch, feature toggle, etc.)
+  };
+
   const ProfileDropdown = () => {
     const navigate = useNavigate();
     return (
-      <div className="profileDropdown" onClick={() => navigate('/profile')}>
+      <div className={styles.profileDropdown} onClick={() => navigate('/profile')}>
         <Avatar
           size="large"
-          className="last"
           src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
-          style={{
-            color: '#f56a00',
-            backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
-            boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 6px 1px',
-          }}
+          className={styles.avatar}
         >
           {currentAdmin?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
-        <div className="profileDropdownInfo">
+        <div className={styles.profileDropdownInfo}>
           <p>
             {currentAdmin?.name} {currentAdmin?.surname}
           </p>
@@ -47,12 +49,12 @@ export default function HeaderContent() {
   };
 
   const DropdownMenu = ({ text }) => {
-    return <span style={{}}>{text}</span>;
+    return <span>{text}</span>;
   };
 
   const items = [
     {
-      label: <ProfileDropdown className="headerDropDownMenu" />,
+      label: <ProfileDropdown />,
       key: 'ProfileDropdown',
     },
     {
@@ -72,11 +74,9 @@ export default function HeaderContent() {
       key: 'settingApp',
       label: <Link to={'/settings'}>{translate('app_settings')}</Link>,
     },
-
     {
       type: 'divider',
     },
-
     {
       icon: <LogoutOutlined />,
       key: 'logout',
@@ -85,40 +85,34 @@ export default function HeaderContent() {
   ];
 
   return (
-    <Header
-      style={{
-        padding: '20px',
-        background: '#ffffff',
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-start',
-        gap: ' 15px',
-      }}
-    >
+    <Header className={styles.header}>
+      {/* Toggle Button */}
+      <div className={styles.toggleContainer}>
+        <BulbOutlined className={styles.toggleIcon} />
+        <span className={styles.toggleLabel}>Dark Mode</span>
+        <Switch 
+          size="small"
+          onChange={handleToggle}
+          defaultChecked={false}
+          className={styles.toggleSwitch}
+        />
+      </div>
+
       <Dropdown
         menu={{
           items,
         }}
         trigger={['click']}
         placement="bottomRight"
-        stye={{ width: '280px', float: 'right' }}
+        className={styles.dropdown}
       >
-        {/* <Badge dot> */}
         <Avatar
-          className="last"
           src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
-          style={{
-            color: '#f56a00',
-            backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
-            boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 10px 2px',
-            float: 'right',
-            cursor: 'pointer',
-          }}
+          className={styles.avatar}
           size="large"
         >
           {currentAdmin?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
-        {/* </Badge> */}
       </Dropdown>
 
       {/* <AppsButton /> */}
