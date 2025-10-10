@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Management</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input { padding: 5px; margin-right: 5px; }
+    button { padding: 5px 10px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+
+  <h1>Tax Management</h1>
+
+  <div>
+    <input type="text" id="taxName" placeholder="Tax Name">
+    <input type="number" id="taxRate" placeholder="Rate (%)">
+    <button onclick="addTax()">Add Tax</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Rate (%)</th>
+      </tr>
+    </thead>
+    <tbody id="taxTableBody">
+      <!-- Taxes will be added here -->
+    </tbody>
+  </table>
+
+  <script>
+    const apiUrl = 'http://localhost:5000/api/taxes';
+
+    // Fetch and display taxes
+    async function fetchTaxes() {
+      try {
+        const response = await fetch(apiUrl);
+        const taxes = await response.json();
+        const tbody = document.getElementById('taxTableBody');
+        tbody.innerHTML = '';
+        taxes.forEach(tax => {
+          const row = `<tr>
+                        <td>${tax.name}</td>
+                        <td>${tax.rate}</td>
+                      </tr>`;
+          tbody.innerHTML += row;
+        });
+      } catch (err) {
+        console.error('Error fetching taxes:', err);
+      }
+    }
+
+    // Add a new tax
+    async function addTax() {
+      const name = document.getElementById('taxName').value;
+      const rate = document.getElementById('taxRate').value;
+      if (!name || !rate) return alert('Enter name and rate');
+
+      try {
+        await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, rate })
+        });
+        document.getElementById('taxName').value = '';
+        document.getElementById('taxRate').value = '';
+        fetchTaxes();
+      } catch (err) {
+        console.error('Error adding tax:', err);
+      }
+    }
+
+    // Initial fetch
+    fetchTaxes();
+  </script>
+
+</body>
+</html>
