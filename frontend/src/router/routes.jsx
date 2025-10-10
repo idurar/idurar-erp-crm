@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-
 import { Navigate } from 'react-router-dom';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
@@ -20,6 +19,7 @@ const QuoteUpdate = lazy(() => import('@/pages/Quote/QuoteUpdate'));
 const Payment = lazy(() => import('@/pages/Payment/index'));
 const PaymentRead = lazy(() => import('@/pages/Payment/PaymentRead'));
 const PaymentUpdate = lazy(() => import('@/pages/Payment/PaymentUpdate'));
+const PaymentCreate = lazy(() => import('@/pages/Payment/PaymentCreate')); // Add this import
 
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
@@ -92,6 +92,10 @@ let routes = {
     {
       path: '/payment',
       element: <Payment />,
+    },
+    {
+      path: '/payment/create', // Add this route
+      element: <PaymentCreate />,
     },
     {
       path: '/payment/read/:id',
