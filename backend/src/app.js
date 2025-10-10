@@ -50,3 +50,6 @@ app.use(errorHandlers.productionErrors);
 
 // done! we export it so we can start the site in start.js
 module.exports = app;
+
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
