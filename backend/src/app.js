@@ -13,6 +13,8 @@ const adminAuth = require('./controllers/coreControllers/adminAuth');
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
+const projectRoutes = require('./routes/appRoutes/projectRoutes');
+const taskRoutes = require('./routes/appRoutes/taskRoutes');
 
 const fileUpload = require('express-fileupload');
 // create our Express app
@@ -39,6 +41,8 @@ app.use(compression());
 app.use('/api', coreAuthRouter);
 app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
 app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
+app.use('/api/project', adminAuth.isValidAuthToken, projectRoutes);
+app.use('/api/task', adminAuth.isValidAuthToken, taskRoutes);
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
 

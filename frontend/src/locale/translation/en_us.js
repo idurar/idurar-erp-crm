@@ -225,6 +225,7 @@ const lang = {
   payment_mode: 'Payment Mode',
   taxes: 'Taxes',
   about: 'About',
+  project: 'Project',
   profile_settings: 'Profile Settings',
   app_settings: 'App Settings',
   logout: 'Logout',

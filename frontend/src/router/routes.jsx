@@ -28,6 +28,7 @@ const Taxes = lazy(() => import('@/pages/Taxes'));
 const Profile = lazy(() => import('@/pages/Profile'));
 
 const About = lazy(() => import('@/pages/About'));
+const GanttChart = lazy(() => import('@/pages/Project/GanttChart'));
 
 let routes = {
   expense: [],
@@ -43,6 +44,10 @@ let routes = {
     {
       path: '/about',
       element: <About />,
+    },
+    {
+      path: '/project',
+      element: <GanttChart />,
     },
     {
       path: '/',
