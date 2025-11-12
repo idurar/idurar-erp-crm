@@ -1,133 +1,128 @@
-import { lazy } from 'react';
+import { lazy } from "react"
+import { Navigate } from "react-router-dom"
 
-import { Navigate } from 'react-router-dom';
+const Logout = lazy(() => import("@/pages/Logout.jsx"))
+const NotFound = lazy(() => import("@/pages/NotFound.jsx"))
+const Dashboard = lazy(() => import("@/pages/Dashboard"))
+const Customer = lazy(() => import("@/pages/Customer"))
+const Invoice = lazy(() => import("@/pages/Invoice"))
+const InvoiceCreate = lazy(() => import("@/pages/Invoice/InvoiceCreate"))
+const InvoiceRead = lazy(() => import("@/pages/Invoice/InvoiceRead"))
+const InvoiceUpdate = lazy(() => import("@/pages/Invoice/InvoiceUpdate"))
+const InvoiceRecordPayment = lazy(() => import("@/pages/Invoice/InvoiceRecordPayment"))
+const Quote = lazy(() => import("@/pages/Quote/index"))
+const QuoteCreate = lazy(() => import("@/pages/Quote/QuoteCreate"))
+const QuoteRead = lazy(() => import("@/pages/Quote/QuoteRead"))
+const QuoteUpdate = lazy(() => import("@/pages/Quote/QuoteUpdate"))
+const Payment = lazy(() => import("@/pages/Payment/index"))
+const PaymentRead = lazy(() => import("@/pages/Payment/PaymentRead"))
+const PaymentUpdate = lazy(() => import("@/pages/Payment/PaymentUpdate"))
+const Settings = lazy(() => import("@/pages/Settings/Settings"))
+const PaymentMode = lazy(() => import("@/pages/PaymentMode"))
+const Taxes = lazy(() => import("@/pages/Taxes"))
+const Profile = lazy(() => import("@/pages/Profile"))
+const About = lazy(() => import("@/pages/About"))
 
-const Logout = lazy(() => import('@/pages/Logout.jsx'));
-const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
+export const preloadDashboard = () => import("@/pages/Dashboard")
+export const preloadInvoice = () => import("@/pages/Invoice")
+export const preloadCustomer = () => import("@/pages/Customer")
 
-const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const Customer = lazy(() => import('@/pages/Customer'));
-const Invoice = lazy(() => import('@/pages/Invoice'));
-const InvoiceCreate = lazy(() => import('@/pages/Invoice/InvoiceCreate'));
-
-const InvoiceRead = lazy(() => import('@/pages/Invoice/InvoiceRead'));
-const InvoiceUpdate = lazy(() => import('@/pages/Invoice/InvoiceUpdate'));
-const InvoiceRecordPayment = lazy(() => import('@/pages/Invoice/InvoiceRecordPayment'));
-const Quote = lazy(() => import('@/pages/Quote/index'));
-const QuoteCreate = lazy(() => import('@/pages/Quote/QuoteCreate'));
-const QuoteRead = lazy(() => import('@/pages/Quote/QuoteRead'));
-const QuoteUpdate = lazy(() => import('@/pages/Quote/QuoteUpdate'));
-const Payment = lazy(() => import('@/pages/Payment/index'));
-const PaymentRead = lazy(() => import('@/pages/Payment/PaymentRead'));
-const PaymentUpdate = lazy(() => import('@/pages/Payment/PaymentUpdate'));
-
-const Settings = lazy(() => import('@/pages/Settings/Settings'));
-const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
-const Taxes = lazy(() => import('@/pages/Taxes'));
-
-const Profile = lazy(() => import('@/pages/Profile'));
-
-const About = lazy(() => import('@/pages/About'));
-
-let routes = {
+const routes = {
   expense: [],
   default: [
     {
-      path: '/login',
+      path: "/login",
       element: <Navigate to="/" />,
     },
     {
-      path: '/logout',
+      path: "/logout",
       element: <Logout />,
     },
     {
-      path: '/about',
+      path: "/about",
       element: <About />,
     },
     {
-      path: '/',
+      path: "/",
       element: <Dashboard />,
     },
     {
-      path: '/customer',
+      path: "/customer",
       element: <Customer />,
     },
-
     {
-      path: '/invoice',
+      path: "/invoice",
       element: <Invoice />,
     },
     {
-      path: '/invoice/create',
+      path: "/invoice/create",
       element: <InvoiceCreate />,
     },
     {
-      path: '/invoice/read/:id',
+      path: "/invoice/read/:id",
       element: <InvoiceRead />,
     },
     {
-      path: '/invoice/update/:id',
+      path: "/invoice/update/:id",
       element: <InvoiceUpdate />,
     },
     {
-      path: '/invoice/pay/:id',
+      path: "/invoice/pay/:id",
       element: <InvoiceRecordPayment />,
     },
     {
-      path: '/quote',
+      path: "/quote",
       element: <Quote />,
     },
     {
-      path: '/quote/create',
+      path: "/quote/create",
       element: <QuoteCreate />,
     },
     {
-      path: '/quote/read/:id',
+      path: "/quote/read/:id",
       element: <QuoteRead />,
     },
     {
-      path: '/quote/update/:id',
+      path: "/quote/update/:id",
       element: <QuoteUpdate />,
     },
     {
-      path: '/payment',
+      path: "/payment",
       element: <Payment />,
     },
     {
-      path: '/payment/read/:id',
+      path: "/payment/read/:id",
       element: <PaymentRead />,
     },
     {
-      path: '/payment/update/:id',
+      path: "/payment/update/:id",
       element: <PaymentUpdate />,
     },
-
     {
-      path: '/settings',
+      path: "/settings",
       element: <Settings />,
     },
     {
-      path: '/settings/edit/:settingsKey',
+      path: "/settings/edit/:settingsKey",
       element: <Settings />,
     },
     {
-      path: '/payment/mode',
+      path: "/payment/mode",
       element: <PaymentMode />,
     },
     {
-      path: '/taxes',
+      path: "/taxes",
       element: <Taxes />,
     },
-
     {
-      path: '/profile',
+      path: "/profile",
       element: <Profile />,
     },
     {
-      path: '*',
+      path: "*",
       element: <NotFound />,
     },
   ],
-};
+}
 
-export default routes;
+export default routes

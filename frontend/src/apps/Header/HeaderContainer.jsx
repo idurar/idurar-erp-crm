@@ -1,37 +1,40 @@
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
+"use client"
+
+import { memo } from "react"
+import { useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { Avatar, Dropdown, Layout } from "antd"
 
 // import Notifications from '@/components/Notification';
 
-import { LogoutOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, ToolOutlined, UserOutlined } from "@ant-design/icons"
 
-import { selectCurrentAdmin } from '@/redux/auth/selectors';
+import { selectCurrentAdmin } from "@/redux/auth/selectors"
 
-import { FILE_BASE_URL } from '@/config/serverApiConfig';
+import { FILE_BASE_URL } from "@/config/serverApiConfig"
 
-import useLanguage from '@/locale/useLanguage';
+import useLanguage from "@/locale/useLanguage"
 
-import UpgradeButton from './UpgradeButton';
+import UpgradeButton from "./UpgradeButton"
 
-export default function HeaderContent() {
-  const currentAdmin = useSelector(selectCurrentAdmin);
-  const { Header } = Layout;
+const HeaderContent = memo(function HeaderContent() {
+  const currentAdmin = useSelector(selectCurrentAdmin)
+  const { Header } = Layout
 
-  const translate = useLanguage();
+  const translate = useLanguage()
 
   const ProfileDropdown = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     return (
-      <div className="profileDropdown" onClick={() => navigate('/profile')}>
+      <div className="profileDropdown" onClick={() => navigate("/profile")}>
         <Avatar
           size="large"
           className="last"
           src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
           style={{
-            color: '#f56a00',
-            backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
-            boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 6px 1px',
+            color: "#f56a00",
+            backgroundColor: currentAdmin?.photo ? "none" : "#fde3cf",
+            boxShadow: "rgba(150, 190, 238, 0.35) 0px 0px 6px 1px",
           }}
         >
           {currentAdmin?.name?.charAt(0)?.toUpperCase()}
@@ -43,76 +46,76 @@ export default function HeaderContent() {
           <p>{currentAdmin?.email}</p>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   const DropdownMenu = ({ text }) => {
-    return <span style={{}}>{text}</span>;
-  };
+    return <span style={{}}>{text}</span>
+  }
 
   const items = [
     {
       label: <ProfileDropdown className="headerDropDownMenu" />,
-      key: 'ProfileDropdown',
+      key: "ProfileDropdown",
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
       icon: <UserOutlined />,
-      key: 'settingProfile',
+      key: "settingProfile",
       label: (
-        <Link to={'/profile'}>
-          <DropdownMenu text={translate('profile_settings')} />
+        <Link to={"/profile"}>
+          <DropdownMenu text={translate("profile_settings")} />
         </Link>
       ),
     },
     {
       icon: <ToolOutlined />,
-      key: 'settingApp',
-      label: <Link to={'/settings'}>{translate('app_settings')}</Link>,
+      key: "settingApp",
+      label: <Link to={"/settings"}>{translate("app_settings")}</Link>,
     },
 
     {
-      type: 'divider',
+      type: "divider",
     },
 
     {
       icon: <LogoutOutlined />,
-      key: 'logout',
-      label: <Link to={'/logout'}>{translate('logout')}</Link>,
+      key: "logout",
+      label: <Link to={"/logout"}>{translate("logout")}</Link>,
     },
-  ];
+  ]
 
   return (
     <Header
       style={{
-        padding: '20px',
-        background: '#ffffff',
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-start',
-        gap: ' 15px',
+        padding: "20px",
+        background: "#ffffff",
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "flex-start",
+        gap: " 15px",
       }}
     >
       <Dropdown
         menu={{
           items,
         }}
-        trigger={['click']}
+        trigger={["click"]}
         placement="bottomRight"
-        stye={{ width: '280px', float: 'right' }}
+        stye={{ width: "280px", float: "right" }}
       >
         {/* <Badge dot> */}
         <Avatar
           className="last"
           src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
           style={{
-            color: '#f56a00',
-            backgroundColor: currentAdmin?.photo ? 'none' : '#fde3cf',
-            boxShadow: 'rgba(150, 190, 238, 0.35) 0px 0px 10px 2px',
-            float: 'right',
-            cursor: 'pointer',
+            color: "#f56a00",
+            backgroundColor: currentAdmin?.photo ? "none" : "#fde3cf",
+            boxShadow: "rgba(150, 190, 238, 0.35) 0px 0px 10px 2px",
+            float: "right",
+            cursor: "pointer",
           }}
           size="large"
         >
@@ -125,8 +128,10 @@ export default function HeaderContent() {
 
       <UpgradeButton />
     </Header>
-  );
-}
+  )
+})
+
+export default HeaderContent
 
 //  console.log(
 //    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'

@@ -1,68 +1,154 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# IDURAR ERP/CRM - Enhanced Edition
 
-## Available Scripts
+Open Source ERP/CRM application built with React, Redux, and Ant Design.
 
-In the project directory, you can run:
+## Recent Improvements
 
-### `yarn start`
+This version includes comprehensive improvements:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. TypeScript Support
+- Full TypeScript configuration with strict type checking
+- Core type definitions for entities and Redux state
+- Gradual migration path from JavaScript
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 2. Performance Optimizations
+- Route-based code splitting with React.lazy
+- Vendor chunk splitting for better caching
+- Performance utility hooks (debounce, throttle)
+- Memoized components for reduced re-renders
+- Build-time optimizations with Vite
 
-### `yarn test`
+### 3. Error Handling
+- Error Boundary component for graceful error recovery
+- Centralized API error handling
+- Enhanced Axios instance with interceptors
+- Comprehensive error notifications
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4. Modern CSS Architecture
+- CSS variables for consistent theming
+- Full dark mode support with theme provider
+- System preference detection
+- Improved Ant Design customizations
 
-### `yarn build`
+### 5. Code Quality Tools
+- ESLint with React and TypeScript rules
+- Prettier for consistent code formatting
+- EditorConfig for cross-editor consistency
+- VSCode workspace settings
+- Pre-commit script for quality checks
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 6. Build Optimizations
+- Bundle size reduction with tree-shaking
+- Gzip and Brotli compression
+- Bundle analyzer for size monitoring
+- Optimized chunk splitting strategy
+- Minification with Terser
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js 20.9.0
+- npm 10.2.4
 
-### `yarn eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+\`\`\`bash
+# Install dependencies
+npm install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Start development server
+npm run dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Build for production
+npm run build
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Analyze bundle size
+npm run build:analyze
 
-## Learn More
+# Run linter
+npm run lint
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Fix linting issues
+npm run lint:fix
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Format code
+npm run format
 
-### Code Splitting
+# Type check
+npm run type-check
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+# Check dependencies
+npm run check-deps
+\`\`\`
 
-### Analyzing the Bundle Size
+### Development
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+The application runs on `http://localhost:3000` by default and proxies API requests to `http://localhost:8888`.
 
-### Making a Progressive Web App
+For remote backend:
+\`\`\`bash
+npm run dev:remote
+\`\`\`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Code Quality
 
-### Advanced Configuration
+Before committing:
+\`\`\`bash
+npm run pre-commit
+\`\`\`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+This runs formatting, linting, and type checking.
 
-### Deployment
+### Theme Support
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+The application includes light and dark mode support:
+- Automatically detects system preference
+- Manual toggle available in UI
+- Persists preference to localStorage
+- Full CSS variable system for consistent theming
 
-### `yarn build` fails to minify
+### Environment Variables
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Create a `.env` file:
+\`\`\`
+VITE_BACKEND_SERVER=http://your-backend-url
+\`\`\`
+
+## Project Structure
+
+\`\`\`
+src/
+├── apps/           # Application layouts and shells
+├── components/     # Reusable components
+├── context/        # React context providers
+├── forms/          # Form components
+├── hooks/          # Custom React hooks
+├── layout/         # Layout components
+├── locale/         # Internationalization
+├── modules/        # Feature modules
+├── pages/          # Page components
+├── redux/          # Redux store and slices
+├── router/         # Routing configuration
+├── style/          # CSS and styling
+├── types/          # TypeScript type definitions
+└── utils/          # Utility functions
+\`\`\`
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Run `npm run pre-commit` before committing
+4. Submit a pull request
+
+## Backend Compatibility
+
+All improvements maintain full backward compatibility with the existing backend API. No breaking changes were introduced to API endpoints or data structures.
+
+## License
+
+[Your License Here]
+
+## Support
+
+For commercial customization services, contact: hello@idurarapp.com

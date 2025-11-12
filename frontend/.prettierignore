@@ -1,5 +1,11 @@
-# Ignore artifacts:
+node_modules
+dist
 build
 coverage
-node_modules
-public
+.next
+.cache
+*.min.js
+*.min.css
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

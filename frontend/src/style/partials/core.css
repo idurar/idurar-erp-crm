@@ -1,7 +1,10 @@
+/* Modernize core CSS with variables */
+
 .hiddenLabel {
   opacity: 0;
-  color: #fff;
+  color: var(--text-inverse);
 }
+
 .centerAbsolute {
   position: absolute;
   left: 50%;
@@ -11,74 +14,94 @@
   margin-left: -16px;
   margin-top: -19px;
 }
+
 .whiteBox {
-  background: #fff;
+  background: var(--bg-primary);
   width: 100%;
   min-height: 100px;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--transition-base) ease-in-out;
 }
+
 .shadow {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color-light);
+  box-shadow: var(--shadow-sm);
 }
+
 .shadow:hover {
-  border: 1px solid #bdbdbd;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
 }
+
 .line {
-  border-top: 1px solid #edf0f5;
+  border-top: 1px solid var(--border-color-light);
   width: 100%;
-  margin: 5px auto;
+  margin: var(--spacing-xs) auto;
 }
 
 .left {
   float: left;
 }
+
 .right {
   float: right;
 }
 
+/* Spacing utilities - using variables */
 .pad5 {
-  padding: 5px;
+  padding: var(--spacing-xs);
 }
+
 .pad10 {
-  padding: 10px;
+  padding: var(--spacing-sm);
 }
+
 .pad15 {
-  padding: 15px;
+  padding: 12px;
 }
+
 .pad20 {
+  padding: var(--spacing-md);
+}
+
+.pad25 {
   padding: 20px;
 }
-.pad25 {
-  padding: 25px;
-}
+
 .pad30 {
-  padding: 30px;
+  padding: var(--spacing-lg);
 }
+
 .pad33 {
-  padding: 35px;
+  padding: 28px;
 }
+
 .pad40 {
-  padding: 40px;
+  padding: var(--spacing-xl);
 }
 
 .mrg5 {
-  margin: 5px;
+  margin: var(--spacing-xs);
 }
+
 .mrg10 {
-  margin: 10px;
+  margin: var(--spacing-sm);
 }
+
 .mrg15 {
-  margin: 15px;
+  margin: 12px;
 }
+
 .mrg20 {
-  margin: 20px;
+  margin: var(--spacing-md);
 }
+
 .mrg25 {
   margin: 20px;
 }
+
 .mrg30 {
-  margin: 20px;
+  margin: var(--spacing-lg);
 }
 
 .alignRight {
@@ -98,42 +121,49 @@
 }
 
 .space5 {
-  height: 5px;
+  height: var(--spacing-xs);
   width: 100%;
   display: block;
 }
+
 .space10 {
-  height: 10px;
+  height: var(--spacing-sm);
   width: 100%;
   display: block;
 }
+
 .space20 {
-  height: 20px;
+  height: var(--spacing-md);
   width: 100%;
   display: block;
 }
+
 .space30 {
-  height: 30px;
+  height: var(--spacing-lg);
   width: 100%;
   display: block;
 }
+
 .space40 {
+  height: var(--spacing-xl);
+  width: 100%;
+  display: block;
+}
+
+.space50 {
   height: 40px;
   width: 100%;
   display: block;
 }
-.space50 {
-  height: 50px;
-  width: 100%;
-  display: block;
-}
+
 .space60 {
-  height: 60px;
+  height: var(--spacing-2xl);
   width: 100%;
   display: block;
 }
+
 .space70 {
-  height: 70px;
+  height: 56px;
   width: 100%;
   display: block;
 }

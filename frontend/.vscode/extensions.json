@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "antfu.iconify",
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag",
+    "styled-components.vscode-styled-components"
+  ]
+}

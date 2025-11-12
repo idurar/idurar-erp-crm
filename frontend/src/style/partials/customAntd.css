@@ -1,19 +1,24 @@
+/* Modernize Ant Design customizations with variables */
+
 .ant-layout {
-  background: #ffffff !important;
+  background: var(--bg-primary) !important;
 }
+
 .site-layout .site-layout-background {
-  background: #fff;
+  background: var(--bg-primary);
 }
-[data-theme='dark'] .site-layout .site-layout-background {
-  background: #141414;
+
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: var(--bg-secondary);
 }
 
 .headerIcon .ant-dropdown-menu {
-  border-radius: 6px;
+  border-radius: var(--radius-lg);
   background: none;
   padding: 0;
   box-shadow: none;
 }
+
 .headerIcon .ant-dropdown-menu-item:hover,
 .headerIcon .ant-dropdown-menu-item.ant-dropdown-menu-item-active {
   background: none;
@@ -28,9 +33,10 @@
   pointer-events: none;
 }
 
-.login-form button[type='submit'] {
-  margin-bottom: 20px;
+.login-form button[type="submit"] {
+  margin-bottom: var(--spacing-md);
 }
+
 .login-form-forgot {
   float: right;
 }
@@ -41,10 +47,13 @@
 
 .ant-table-thead > tr > th {
   font-weight: 700;
+  background: var(--bg-secondary);
 }
+
 .ant-typography strong {
   font-weight: 700;
 }
+
 h1,
 h2,
 h3,
@@ -52,6 +61,7 @@ h4,
 h5,
 h6 {
   font-weight: 700 !important;
+  color: var(--text-primary);
 }
 
 .ant-menu-inline {
@@ -67,16 +77,43 @@ h6 {
   margin: 0;
 }
 
-.ant-select-show-search:where(.css-dev-only-do-not-override-2q8sxy).ant-select:not(
-    .ant-select-customize-input
-  )
+.ant-select-show-search:where(.css-dev-only-do-not-override-2q8sxy).ant-select:not(.ant-select-customize-input)
   .ant-select-selector {
   cursor: pointer;
 }
 
 .ant-menu-item {
   height: 36px !important;
+  transition: all var(--transition-fast) ease-in-out;
 }
+
+/* Add card improvements */
+.ant-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base) ease-in-out;
+}
+
+.ant-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Add button improvements */
+.ant-btn {
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast) ease-in-out;
+}
+
+/* Add table improvements */
+.ant-table {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.ant-table-wrapper {
+  background: var(--bg-primary);
+}
+
 @media (max-width: 768px) {
   .tabContent .ant-tabs-right > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
     padding-right: 0;
@@ -86,6 +123,7 @@ h6 {
     display: block;
   }
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

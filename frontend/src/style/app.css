@@ -1,11 +1,13 @@
-@import './partials/rest.css';
-@import './partials/customAntd.css';
-@import './partials/layout.css';
-@import './partials/core.css';
+/* Add variables import first */
+@import "./partials/variables.css";
+@import "./partials/rest.css";
+@import "./partials/customAntd.css";
+@import "./partials/layout.css";
+@import "./partials/core.css";
 
-@import './partials/auth.css';
-@import './partials/navigation.css';
-@import './partials/header.css';
-@import './partials/sidePanel.css';
-@import './partials/collapseBox.css';
-@import './partials/erp.css';
+@import "./partials/auth.css";
+@import "./partials/navigation.css";
+@import "./partials/header.css";
+@import "./partials/sidePanel.css";
+@import "./partials/collapseBox.css";
+@import "./partials/erp.css";
