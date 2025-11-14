@@ -23,6 +23,11 @@ const adminSchema = new Schema({
     type: String,
     trim: true,
   },
+  // flag indicating account created via Google OAuth (no password required)
+  isGoogleUser: {
+    type: Boolean,
+    default: false,
+  },
   created: {
     type: Date,
     default: Date.now,

@@ -136,6 +136,34 @@ export const logout = () => async (dispatch) => {
   }
 };
 
+export const googleLogin =
+  ({ token }) =>
+  async (dispatch) => {
+    dispatch({
+      type: actionTypes.REQUEST_LOADING,
+    });
+    const data = await authService.googleLogin({ token });
+
+    if (data.success === true) {
+      const auth_state = {
+        current: data.result,
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: true,
+      };
+      window.localStorage.setItem('auth', JSON.stringify(auth_state));
+      window.localStorage.removeItem('isLogout');
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: data.result,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.REQUEST_FAILED,
+      });
+    }
+  };
+
 export const updateProfile =
   ({ entity, jsonData }) =>
   async (dispatch) => {
