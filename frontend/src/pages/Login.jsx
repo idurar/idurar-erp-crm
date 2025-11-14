@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useLanguage from '@/locale/useLanguage';
 
-import { Form, Button } from 'antd';
+import { Form, Button, message } from 'antd';
 
 import { login, googleLogin } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
@@ -90,15 +90,25 @@ const LoginPage = () => {
           <Form.Item style={{ textAlign: 'center', marginTop: 20 }}>
             <Button
               type="primary"
+              htmlType="button"
               size="large"
               onClick={() => {
+                console.log('Google sign-in button clicked');
+                message.loading({ content: 'Signing in with Google...', key: 'googleSignIn' });
                 const gbtn = document.querySelector('#google-render-button button');
                 if (gbtn) {
                   gbtn.click();
                 } else if (window.google && window.google.accounts && window.google.accounts.id) {
                   // fallback to prompt
                   window.google.accounts.id.prompt();
+                } else {
+                  // SDK not available — fallback to mock token for local demo against mock_dev_server
+                  dispatch(googleLogin({ token: 'mock-token' }));
                 }
+                // Clear loading; actual success will navigate away
+                setTimeout(() => {
+                  message.success({ content: 'Sign-in attempted', key: 'googleSignIn', duration: 1 });
+                }, 1000);
               }}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}
               icon={
