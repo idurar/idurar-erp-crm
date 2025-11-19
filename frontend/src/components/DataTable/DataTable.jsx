@@ -47,6 +47,56 @@ export default function DataTable({ config, extra = [] }) {
   const { moneyFormatter } = useMoney();
   const { dateFormat } = useDate();
 
+  // Function to generate menu items based on record
+  const getMenuItems = (record) => {
+    const baseItems = [
+      {
+        label: translate('Show'),
+        key: 'read',
+        icon: <EyeOutlined />,
+      },
+      {
+        label: translate('Edit'),
+        key: 'edit',
+        icon: <EditOutlined />,
+      },
+      ...extra,
+    ];
+
+    // For admin entity, check if the record is an owner
+    const isOwner = entity === 'admin' && record?.role === 'owner';
+
+    if (isOwner) {
+      // Add divider and disabled delete option for owner with tooltip
+      return [
+        ...baseItems,
+        {
+          type: 'divider',
+        },
+        {
+          label: translate('Delete'),
+          key: 'delete',
+          icon: <DeleteOutlined />,
+          disabled: true,
+          title: translate('owner_accounts_cannot_be_deleted'),
+        },
+      ];
+    }
+
+    // Normal delete for non-owner records
+    return [
+      ...baseItems,
+      {
+        type: 'divider',
+      },
+      {
+        label: translate('Delete'),
+        key: 'delete',
+        icon: <DeleteOutlined />,
+      },
+    ];
+  };
+
   const items = [
     {
       label: translate('Show'),
@@ -112,7 +162,7 @@ export default function DataTable({ config, extra = [] }) {
       render: (_, record) => (
         <Dropdown
           menu={{
-            items,
+            items: getMenuItems(record),
             onClick: ({ key }) => {
               switch (key) {
                 case 'read':
