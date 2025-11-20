@@ -7,6 +7,7 @@ import { selectSettings } from '@/redux/settings/selectors';
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 import useLanguage from '@/locale/useLanguage';
+import { notification } from 'antd';
 
 export default function UpdateSettingForm({ config, children, withUpload, uploadSettingKey }) {
   let { entity, settingsCategory } = config;
@@ -20,7 +21,12 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
     if (withUpload) {
       if (fieldsValue.file) {
         fieldsValue.file = fieldsValue.file[0].originFileObj;
-      }
+      } else {
+        notification.error({
+          message: translate('Please select a file to upload.'),
+        });
+        return;
+      } 
       dispatch(
         settingsAction.upload({ entity, settingKey: uploadSettingKey, jsonData: fieldsValue })
       );
@@ -34,6 +40,9 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
       dispatch(settingsAction.updateMany({ entity, jsonData: { settings } }));
     }
   };
+
+
+
 
   useEffect(() => {
     const current = result[settingsCategory];
