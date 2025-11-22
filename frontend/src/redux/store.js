@@ -21,6 +21,13 @@ const getAuthState = () => {
       return null;
     }
     
+    // Verify the user has a valid token and current data
+    if (!stored.current || !stored.current.token) {
+      console.warn('⚠️ Clearing auth state without valid token');
+      storePersist.remove('auth');
+      return null;
+    }
+    
     console.log('📦 Loaded auth state from localStorage');
     // Ensure isLoading is always false on initialization
     return {
