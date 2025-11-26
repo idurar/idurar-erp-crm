@@ -6,6 +6,7 @@ const updateProfile = async (userModel, req, res) => {
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
 
+  // 1. Security Check: Prevent changing the Demo Admin
   if (userProfile.email === 'admin@admin.com') {
     return res.status(403).json({
       success: false,
@@ -14,19 +15,38 @@ const updateProfile = async (userModel, req, res) => {
     });
   }
 
-  let updates = req.body.photo
-    ? {
-        email: req.body.email,
-        name: req.body.name,
-        surname: req.body.surname,
-        photo: req.body.photo,
-      }
-    : {
-        email: req.body.email,
-        name: req.body.name,
-        surname: req.body.surname,
-      };
-  // Find document by id and updates with the required fields
+  // 2. Prepare basic updates (Text fields)
+  let updates = {
+    email: req.body.email,
+    name: req.body.name,
+    surname: req.body.surname,
+  };
+
+  // 3. === FIX: HANDLE FILE UPLOAD ===
+  // We check if a file was sent in req.files
+  if (req.files && req.files.photo) {
+    const file = req.files.photo; // Get the file object
+    
+    // Create a unique filename (timestamp + original name)
+    const fileName = new Date().getTime() + "_" + file.name;
+    
+    // Define where to save it (public/uploads/admin/filename.jpg)
+    const uploadPath = `public/uploads/${reqUserName}/${fileName}`;
+
+    try {
+      // Move the file to the server folder
+      await file.mv(uploadPath);
+      
+      // Add the new filename to the database updates
+      updates.photo = fileName;
+    } catch (err) {
+      console.error("File upload failed:", err);
+      // We continue even if image fails, to update text fields
+    }
+  }
+  // ==================================
+
+  // 4. Update the Database
   const result = await User.findOneAndUpdate(
     { _id: userProfile._id, removed: false },
     { $set: updates },
@@ -42,6 +62,8 @@ const updateProfile = async (userModel, req, res) => {
       message: 'No profile found by this id: ' + userProfile._id,
     });
   }
+
+  // 5. Send Response
   return res.status(200).json({
     success: true,
     result: {
@@ -53,7 +75,7 @@ const updateProfile = async (userModel, req, res) => {
       photo: result?.photo,
       role: result?.role,
     },
-    message: 'we update this profile by this id: ' + userProfile._id,
+    message: 'Profile updated successfully',
   });
 };
 
