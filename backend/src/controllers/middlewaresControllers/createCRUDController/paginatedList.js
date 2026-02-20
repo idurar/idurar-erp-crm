@@ -1,3 +1,7 @@
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const paginatedList = async (Model, req, res) => {
   const page = req.query.page || 1;
   const limit = parseInt(req.query.items) || 10;
@@ -12,7 +16,7 @@ const paginatedList = async (Model, req, res) => {
   fields = fieldsArray.length === 0 ? {} : { $or: [] };
 
   for (const field of fieldsArray) {
-    fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
+    fields.$or.push({ [field]: { $regex: new RegExp(escapeRegex(req.query.q || ''), 'i') } });
   }
 
   //  Query the database for a list of all results
