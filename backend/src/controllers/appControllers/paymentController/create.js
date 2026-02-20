@@ -16,26 +16,49 @@ const create = async (req, res) => {
     });
   }
 
-  const currentInvoice = await Invoice.findOne({
-    _id: req.body.invoice,
-    removed: false,
-  });
+  // Atomically check remaining balance and reserve credit in one operation.
+  // This prevents concurrent requests from each reading the same balance
+  // and all passing the check independently.
+  const invoiceUpdate = await Invoice.findOneAndUpdate(
+    {
+      _id: req.body.invoice,
+      removed: false,
+      $expr: {
+        $gte: [
+          { $subtract: [{ $subtract: ['$total', '$discount'] }, '$credit'] },
+          req.body.amount,
+        ],
+      },
+    },
+    {
+      $inc: { credit: req.body.amount },
+    },
+    { new: true }
+  );
 
-  const {
-    total: previousTotal,
-    discount: previousDiscount,
-    credit: previousCredit,
-  } = currentInvoice;
-
-  const maxAmount = calculate.sub(calculate.sub(previousTotal, previousDiscount), previousCredit);
-
-  if (req.body.amount > maxAmount) {
+  if (!invoiceUpdate) {
+    const invoice = await Invoice.findOne({
+      _id: req.body.invoice,
+      removed: false,
+    });
+    if (!invoice) {
+      return res.status(404).json({
+        success: false,
+        result: null,
+        message: 'Invoice not found',
+      });
+    }
+    const maxAmount = calculate.sub(
+      calculate.sub(invoice.total, invoice.discount),
+      invoice.credit
+    );
     return res.status(202).json({
       success: false,
       result: null,
       message: `The Max Amount you can add is ${maxAmount}`,
     });
   }
+
   req.body['createdBy'] = req.admin._id;
 
   const result = await Model.create(req.body);
@@ -51,27 +74,25 @@ const create = async (req, res) => {
       new: true,
     }
   ).exec();
-  // Returning successfull response
 
   const { _id: paymentId, amount } = result;
-  const { id: invoiceId, total, discount, credit } = currentInvoice;
+  const { total, discount, credit } = invoiceUpdate;
 
   let paymentStatus =
-    calculate.sub(total, discount) === calculate.add(credit, amount)
+    calculate.sub(total, discount) === credit
       ? 'paid'
-      : calculate.add(credit, amount) > 0
+      : credit > 0
       ? 'partially'
       : 'unpaid';
 
-  const invoiceUpdate = await Invoice.findOneAndUpdate(
+  await Invoice.findOneAndUpdate(
     { _id: req.body.invoice },
     {
       $push: { payment: paymentId.toString() },
-      $inc: { credit: amount },
       $set: { paymentStatus: paymentStatus },
     },
     {
-      new: true, // return the new result instead of the old one
+      new: true,
       runValidators: true,
     }
   ).exec();
