@@ -43,6 +43,12 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
         isSuccess: true,
       };
+    case actionTypes.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+      };
 
     default:
       return state;
