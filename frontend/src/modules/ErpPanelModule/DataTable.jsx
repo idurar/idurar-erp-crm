@@ -19,7 +19,6 @@ import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
-import { generate as uniqueId } from 'shortid';
 import { useNavigate } from 'react-router-dom';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
@@ -182,7 +181,7 @@ export default function DataTable({ config, extra = [] }) {
         backIcon={<ArrowLeftOutlined />}
         extra={[
           <AutoCompleteAsync
-            key={`${uniqueId()}`}
+            key="search-auto-complete"
             entity={searchConfig?.entity}
             displayLabels={['name']}
             searchFields={'name'}
@@ -191,11 +190,11 @@ export default function DataTable({ config, extra = [] }) {
             // withRedirect
             // urlToRedirect={'/customer'}
           />,
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+          <Button onClick={handelDataTableLoad} key="refresh-button" icon={<RedoOutlined />}>
             {translate('Refresh')}
           </Button>,
 
-          !disableAdd && <AddNewItem config={config} key={`${uniqueId()}`} />,
+          !disableAdd && <AddNewItem config={config} key="add-new-item" />,
         ]}
         style={{
           padding: '20px 0px',
