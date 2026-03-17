@@ -15,9 +15,11 @@ const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
 
 const fileUpload = require('express-fileupload');
+const path  = require('path')
+
+
 // create our Express app
 const app = express();
-
 app.use(
   cors({
     origin: true,
@@ -41,7 +43,20 @@ app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
 app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
+const buildPath = path.join(__dirname, "../../frontend/dist"); // defining the build path
 
+// Serve static files from the frontend build directory
+app.use(express.static(buildPath));
+
+// Catch-all route to serve the frontend SPA
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(buildPath, "index.html"), function (err) {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+  });
+});
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
 
