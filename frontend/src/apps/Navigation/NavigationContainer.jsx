@@ -59,6 +59,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <CustomerServiceOutlined />,
       label: <Link to={'/customer'}>{translate('customers')}</Link>,
     },
+    {
+      key: 'admin',
+      icon: <UserOutlined />,
+      label: <Link to={'/admin'}>{translate('admin')}</Link>,
+    },
 
     {
       key: 'invoice',
