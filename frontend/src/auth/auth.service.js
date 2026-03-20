@@ -102,6 +102,28 @@ export const logout = async () => {
   }
 };
 
+export const googleLogin = async ({ token }) => {
+  try {
+    const response = await axios.post(
+      API_BASE_URL + `google?timestamp=${new Date().getTime()}`,
+      { token }
+    );
+
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    return errorHandler(error);
+  }
+};
+
 //  console.log(
 //    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
 //  );
