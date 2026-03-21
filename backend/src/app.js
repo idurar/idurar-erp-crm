@@ -10,6 +10,15 @@ const coreApiRouter = require('./routes/coreRoutes/coreApi');
 const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
 const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
 const adminAuth = require('./controllers/coreControllers/adminAuth');
+// dev routes (only enabled when NODE_ENV !== 'production')
+let devSeedRouter;
+if ((process.env.NODE_ENV || 'development').toLowerCase() !== 'production') {
+  try {
+    devSeedRouter = require('./routes/devRoutes/seedTestAdmin');
+  } catch (e) {
+    // ignore if file missing
+  }
+}
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
@@ -41,6 +50,11 @@ app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
 app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
+
+if (devSeedRouter) {
+  // expose seed endpoint at root path (POST /__dev/seed-test-admin)
+  app.use('/', devSeedRouter);
+}
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
