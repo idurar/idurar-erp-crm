@@ -40,7 +40,7 @@ In your terminal, navigate to the /backend directory
 cd backend
 ```
 
-the urn the following command to install the backend dependencies:
+then run the following command to install the backend dependencies:
 
 ```bash
 npm install
