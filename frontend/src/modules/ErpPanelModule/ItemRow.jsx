@@ -51,6 +51,12 @@ export default function ItemRow({ field, remove, current = null }) {
     setTotal(currentTotal);
   }, [price, quantity]);
 
+  const validateItemName = (_, value) => {
+    if (value && /^[a-zA-Z]{3,}[\w\s\S]*$/.test(value)) {
+      return Promise.resolve();
+    }
+    return Promise.reject(new Error('Item Name must contain at least 3 alphabetical characters.'));
+  };
   return (
     <Row gutter={[12, 12]} style={{ position: 'relative' }}>
       <Col className="gutter-row" span={5}>
@@ -62,8 +68,7 @@ export default function ItemRow({ field, remove, current = null }) {
               message: 'Missing itemName name',
             },
             {
-              pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
-              message: 'Item Name must contain alphanumeric or special characters',
+              validator: validateItemName,
             },
           ]}
         >
