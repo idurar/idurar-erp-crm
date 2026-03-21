@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getRawValue } from 'react-phone-hooks';
 import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -6,6 +7,7 @@ import useLanguage from '@/locale/useLanguage';
 import { useMoney, useDate } from '@/settings';
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import SelectAsync from '@/components/SelectAsync';
+import PhoneInput from 'antd-phone-input';
 import { generate as uniqueId } from 'shortid';
 
 import { countryList } from '@/utils/countryList';
@@ -302,7 +304,7 @@ function FormElement({ field, feedback, setFeedback }) {
     textarea: <TextArea rows={4} />,
     email: <Input autoComplete="off" placeholder="email@example.com" />,
     number: <InputNumber style={{ width: '100%' }} />,
-    phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
+    phone: <PhoneInput />,
     boolean: (
       <Switch
         checkedChildren={<CheckOutlined />}
@@ -370,6 +372,7 @@ function FormElement({ field, feedback, setFeedback }) {
   else {
     return (
       <Form.Item
+        normalize={field.type === 'phone' ? getRawValue : undefined}
         label={translate(field.label)}
         name={field.name}
         rules={[

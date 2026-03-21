@@ -1,9 +1,10 @@
-import { Form, Input, Select } from 'antd';
-import { DatePicker } from 'antd';
+import { Form, Input, DatePicker, Select } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
+import { getRawValue } from 'react-phone-hooks';
 import { useDate } from '@/settings';
 
 import useLanguage from '@/locale/useLanguage';
+import PhoneInput from 'antd-phone-input';
 
 export default function EmployeeForm() {
   const translate = useLanguage();
@@ -85,17 +86,18 @@ export default function EmployeeForm() {
       </Form.Item>
       <Form.Item
         name="phone"
+        normalize={getRawValue}
         label={translate('phone')}
         rules={[
           {
             required: true,
           },
           {
-            pattern: validatePhoneNumber, // importing regex from helper.js utility file to validate
+            validator: validatePhoneNumber,
           },
         ]}
       >
-        <Input />
+        <PhoneInput />
       </Form.Item>
       <Form.Item
         name="department"
