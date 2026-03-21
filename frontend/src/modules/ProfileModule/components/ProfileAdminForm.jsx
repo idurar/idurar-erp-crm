@@ -17,6 +17,13 @@ const beforeUpload = (file) => {
 };
 
 export default function AdminForm({ isUpdateForm = false }) {
+  function validateFormInputs(_, value, name){
+    value = value.trim();
+    if(!value || value == ''){
+      return Promise.reject(new Error('Please enter your ' + name));
+    }
+    return Promise.resolve();
+  }
   const translate = useLanguage();
   return (
     <>
@@ -25,8 +32,8 @@ export default function AdminForm({ isUpdateForm = false }) {
         name="name"
         rules={[
           {
-            required: true,
-          },
+            validator: (_, value) => validateFormInputs(_, value, 'first Name')
+          }
         ]}
       >
         <Input autoComplete="off" />
@@ -36,8 +43,8 @@ export default function AdminForm({ isUpdateForm = false }) {
         name="surname"
         rules={[
           {
-            required: true,
-          },
+            validator: (_, value) => validateFormInputs(_, value, 'last Name')
+          }
         ]}
       >
         <Input autoComplete="off" />
@@ -51,7 +58,7 @@ export default function AdminForm({ isUpdateForm = false }) {
           },
           {
             type: 'email',
-          },
+          }
         ]}
       >
         <Input autoComplete="off" />
