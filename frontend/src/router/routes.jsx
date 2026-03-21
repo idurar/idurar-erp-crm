@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
+const Register = lazy(() => import('@/pages/Register.jsx'));
 
 
 const Customer = lazy(() => import('@/pages/Customer'));
@@ -122,6 +123,10 @@ let routes = {
     {
       path: '*',
       element: <NotFound />,
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ],
 };
