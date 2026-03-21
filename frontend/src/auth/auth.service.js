@@ -6,8 +6,10 @@ import successHandler from '@/request/successHandler';
 
 export const login = async ({ loginData }) => {
   try {
+    const endpoint = loginData.isGoogleLogin ? 'google-login' : 'login';
+    console.log('Attempting login with:', endpoint, loginData.email);
     const response = await axios.post(
-      API_BASE_URL + `login?timestamp=${new Date().getTime()}`,
+      API_BASE_URL + `${endpoint}?timestamp=${new Date().getTime()}`,
       loginData
     );
 
