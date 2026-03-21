@@ -37,6 +37,19 @@ function SaveForm({ form }) {
   );
 }
 
+function RegisterButton({ path }) {
+  const translate = useLanguage();
+  const navigate = useNavigate();
+  const handleRegister = () => {
+    if (path) navigate(path);
+  };
+  return (
+    <Button key="register-btn" onClick={handleRegister} type="default">
+      {translate('Register')}
+    </Button>
+  );
+}
+
 export default function CreateItem({ config, CreateForm }) {
   const translate = useLanguage();
   const dispatch = useDispatch();
@@ -115,6 +128,10 @@ export default function CreateItem({ config, CreateForm }) {
         tags={<Tag>{translate('Draft')}</Tag>}
         // subTitle="This is create page"
         extra={[
+          // If a registerPath is provided in config, show Register button
+          config && config.registerPath ? (
+            <RegisterButton path={config.registerPath} key={`${uniqueId()}-reg`} />
+          ) : null,
           <Button
             key={`${uniqueId()}`}
             onClick={() => navigate(`/${entity.toLowerCase()}`)}
