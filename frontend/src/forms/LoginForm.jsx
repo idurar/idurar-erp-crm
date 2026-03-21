@@ -43,6 +43,35 @@ export default function LoginForm() {
         />
       </Form.Item>
 
+      <Form.Item
+        name="confirm_password"
+        label={translate('confirm_password')}
+        dependencies={["password"]}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: translate('confirm_password_required') || 'Please confirm your password',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(
+                new Error(translate('passwords_do_not_match') || 'The two passwords that you entered do not match!')
+              );
+            },
+          }),
+        ]}
+      >
+        <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          placeholder={'admin123'}
+          size="large"
+        />
+      </Form.Item>
+
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>{translate('Remember me')}</Checkbox>
