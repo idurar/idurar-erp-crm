@@ -8,17 +8,28 @@ export const login =
     dispatch({
       type: actionTypes.REQUEST_LOADING,
     });
+
     const data = await authService.login({ loginData });
 
     if (data.success === true) {
+    
+      if (data?.result?.accessToken) {
+        window.localStorage.setItem('accessToken', data.result.accessToken);
+      }
+      if (data?.result?.refreshToken) {
+        window.localStorage.setItem('refreshToken', data.result.refreshToken);
+      }
+
       const auth_state = {
         current: data.result,
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
       };
+
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
       window.localStorage.removeItem('isLogout');
+
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
@@ -64,8 +75,10 @@ export const verify =
         isLoading: false,
         isSuccess: true,
       };
+
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
       window.localStorage.removeItem('isLogout');
+
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
@@ -94,6 +107,7 @@ export const resetPassword =
       };
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
       window.localStorage.removeItem('isLogout');
+
       dispatch({
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
@@ -109,14 +123,23 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
+
   const result = window.localStorage.getItem('auth');
   const tmpAuth = JSON.parse(result);
+
   const settings = window.localStorage.getItem('settings');
   const tmpSettings = JSON.parse(settings);
+
+  // clear auth + token storage
   window.localStorage.removeItem('auth');
   window.localStorage.removeItem('settings');
+  window.localStorage.removeItem('accessToken');
+  window.localStorage.removeItem('refreshToken');
+
   window.localStorage.setItem('isLogout', JSON.stringify({ isLogout: true }));
+
   const data = await authService.logout();
+
   if (data.success === false) {
     const auth_state = {
       current: tmpAuth,
@@ -124,15 +147,17 @@ export const logout = () => async (dispatch) => {
       isLoading: false,
       isSuccess: true,
     };
+
     window.localStorage.setItem('auth', JSON.stringify(auth_state));
     window.localStorage.setItem('settings', JSON.stringify(tmpSettings));
     window.localStorage.removeItem('isLogout');
+
     dispatch({
       type: actionTypes.LOGOUT_FAILED,
       payload: data.result,
     });
   } else {
-    // on lgout success
+    // optional: redirect, notify, etc
   }
 };
 
@@ -146,12 +171,14 @@ export const updateProfile =
         type: actionTypes.REQUEST_SUCCESS,
         payload: data.result,
       });
+
       const auth_state = {
         current: data.result,
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
       };
+
       window.localStorage.setItem('auth', JSON.stringify(auth_state));
     }
   };
