@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
-import { Switch, Tag } from 'antd';
+import { Switch, Tag, notification } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from '@/utils/countryList';
 import { generate as uniqueId } from 'shortid';
 import color from '@/utils/color';
+import errorHandler from '@/request/errorHandler';
 
 export const dataForRead = ({ fields, translate }) => {
   let columns = [];
@@ -39,11 +40,24 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
           },
         }),
         render: (_, record) => (
-          <Switch
+          
+            <Switch
+            onClick={()=>{
+              notification.config({
+                duration: 20,
+                maxCount: 1,
+              });
+              // Code to execute when there is no internet connection
+              notification.error({
+                message: 'Error',
+                description: 'Open using edit form',
+              });
+            }}
             checked={record[key]}
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
           />
+          
         ),
       },
       date: {
