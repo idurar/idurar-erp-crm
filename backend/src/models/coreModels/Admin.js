@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
 
 const adminSchema = new Schema({
   removed: {
@@ -23,6 +24,11 @@ const adminSchema = new Schema({
     type: String,
     trim: true,
   },
+   googleId: {
+    type: String,
+    sparse: true,
+    unique: true,
+  },
   created: {
     type: Date,
     default: Date.now,
@@ -33,5 +39,15 @@ const adminSchema = new Schema({
     enum: ['owner'],
   },
 });
+
+adminSchema.methods.generateToken = function() {
+  return jwt.sign(
+    {
+      id: this._id,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '24h' }
+  );
+};
 
 module.exports = mongoose.model('Admin', adminSchema);
