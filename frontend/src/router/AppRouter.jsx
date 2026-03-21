@@ -3,6 +3,7 @@ import { lazy, useEffect } from 'react';
 import {} from 'react-router-dom';
 import {} from 'react-router-dom';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
+import RegisterPage from '@/pages/auth/RegisterPage';
 import { useAppContext } from '@/context/appContext';
 
 import routes from './routes';
@@ -28,6 +29,8 @@ export default function AppRouter() {
     }
     // Return 'default' app  if the path is not found
     return 'default';
+    <Route path="/register" element={<RegisterPage />} />;
+
   }
   useEffect(() => {
     if (location.pathname === '/') {
