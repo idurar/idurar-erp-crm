@@ -132,7 +132,7 @@ export const crud = {
       }
     },
   update:
-    ({ entity, id, jsonData, withUpload = false }) =>
+    ({ entity, id, jsonData, withUpload = false, switchUpdate = false }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
@@ -145,15 +145,17 @@ export const crud = {
       if (withUpload) {
         data = await request.updateAndUpload({ entity, id, jsonData });
       } else {
-        data = await request.update({ entity, id, jsonData });
+        data = await request.update({ entity, id, jsonData, switchUpdate });
       }
 
       if (data.success === true) {
-        dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          keyState: 'update',
-          payload: data.result,
-        });
+        if(!switchUpdate) {
+          dispatch({
+            type: actionTypes.REQUEST_SUCCESS,
+            keyState: 'update',
+            payload: data.result,
+          });
+        }
         dispatch({
           type: actionTypes.CURRENT_ITEM,
           payload: data.result,
