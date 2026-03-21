@@ -1,65 +1,38 @@
-import { useEffect } from 'react';
+import { Form, Button, Input } from "antd";
+import { Link } from "react-router-dom";
+import useLanguage from "@/locale/useLanguage";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import useLanguage from '@/locale/useLanguage';
-
-import { Form, Button } from 'antd';
-
-import { login } from '@/redux/auth/actions';
-import { selectAuth } from '@/redux/auth/selectors';
-import LoginForm from '@/forms/LoginForm';
-import Loading from '@/components/Loading';
-import AuthModule from '@/modules/AuthModule';
-
-const LoginPage = () => {
+const RegisterPage = () => {
   const translate = useLanguage();
-  const { isLoading, isSuccess } = useSelector(selectAuth);
-  const navigate = useNavigate();
-  // const size = useSize();
 
-  const dispatch = useDispatch();
   const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+    console.log("Register values:", values);
+    // 👉 Later: hook into backend register API
   };
 
-  useEffect(() => {
-    if (isSuccess) navigate('/');
-  }, [isSuccess]);
+  return (
+    <div className="register-container">
+      <h2>{translate("Register")}</h2>
+      <Form layout="vertical" onFinish={onFinish}>
+        <Form.Item name="email" label="Email" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="password" label="Password" rules={[{ required: true }]}>
+          <Input.Password />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            {translate("Register")}
+          </Button>
+        </Form.Item>
+      </Form>
 
-  const FormContainer = () => {
-    return (
-      <Loading isLoading={isLoading}>
-        <Form
-          layout="vertical"
-          name="normal_login"
-          className="login-form"
-          initialValues={{
-            remember: true,
-            email:'admin@admin.com',
-            password:'admin123',
-          }}
-          onFinish={onFinish}
-        >
-          <LoginForm />
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-              loading={isLoading}
-              size="large"
-            >
-              {translate('Log in')}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Loading>
-    );
-  };
-
-  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
+      <p>
+        {translate("Already have an account?")}{" "}
+        <Link to="/login">{translate("Login here")}</Link>
+      </p>
+    </div>
+  );
 };
 
-export default LoginPage;
+export default RegisterPage;
