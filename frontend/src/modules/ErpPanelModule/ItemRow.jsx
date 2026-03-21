@@ -59,7 +59,7 @@ export default function ItemRow({ field, remove, current = null }) {
           rules={[
             {
               required: true,
-              message: 'Missing itemName name',
+              message: 'Not Specified',
             },
             {
               pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces
@@ -77,7 +77,7 @@ export default function ItemRow({ field, remove, current = null }) {
       </Col>
       <Col className="gutter-row" span={3}>
         <Form.Item name={[field.name, 'quantity']} rules={[{ required: true }]}>
-          <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
+          <InputNumber style={{ width: '100%' }} min={1} onChange={updateQt} />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={4}>
