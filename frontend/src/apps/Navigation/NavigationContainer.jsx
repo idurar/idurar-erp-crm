@@ -26,6 +26,7 @@ import {
   FilterOutlined,
   WalletOutlined,
   ReconciliationOutlined,
+  DollarOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -85,6 +86,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       key: 'taxes',
       label: <Link to={'/taxes'}>{translate('taxes')}</Link>,
       icon: <ShopOutlined />,
+    },
+    {
+      key: 'currency-tools',
+      label: <Link to={'/currency-tools'}>{translate('Currency Tools')}</Link>,
+      icon: <DollarOutlined />,
     },
     {
       key: 'generalSettings',
