@@ -1,76 +1,117 @@
-# IDURAR Software de ERP y CRM de código abierto
+# 🧩 IDURAR ઓપન-સોર્સ ERP અને CRM સોફ્ટવેર
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Sitio web: [https://www.idurarapp.com](https://www.idurarapp.com)
+**ગિટહબ:** [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)  
+**ડેમો:** [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)  
+**વેબસાઇટ:** [https://www.idurarapp.com](https://www.idurarapp.com)
 
-## Pila de software
+---
 
-IDURAR es una aplicación gratuita de ERP y CRM de código abierto, basada en "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+## ⚙️ સોફ્ટવેર સ્ટેક
 
-## Gestión de usuarios:
+**IDURAR** મફત ઓપન-સોર્સ ERP અને CRM ઍપ છે, જે **MERN Stack** (MongoDB, Express.js, React.js, Node.js) પર આધારિત છે.  
+તે નીચેની ટેક્નોલોજીનો ઉપયોગ કરે છે:
 
-- Permitir a los administradores crear, editar y eliminar cuentas de usuario.
-- Implementar control de acceso basado en roles para gestionar los permisos de los usuarios.
-- Proporcionar mecanismos de autenticación y autorización para garantizar un acceso seguro.
+- **નોડ.જેએસ (Node.js)**
+- **રિએક્ટ.જેએસ (React.js)**
+- **રીડક્સ (Redux)**
+- **એક્સપ્રેસ.જેએસ (Express.js)**
+- **મોંગોડીબી (MongoDB)**
+- **એન્ટ ડિઝાઇન (Ant Design - AntD)**
 
-## Gestión de relaciones con los clientes (CRM):
+---
 
-- Permitir a los usuarios crear y gestionar registros de contacto para clientes potenciales y clientes.
-- Implementar funcionalidades de generación y calificación de leads para rastrear oportunidades de venta potenciales.
-- Proporcionar herramientas para gestionar el historial de comunicación con los clientes, incluyendo correos electrónicos, llamadas y reuniones.
-- Permitir a los usuarios programar citas y enviar notificaciones o recordatorios a los clientes.
+## 👥 વપરાશકર્તા વ્યવસ્થાપન
 
-## Gestión de ventas:
+- સંચાલકોને વપરાશકર્તા ખાતાઓ બનાવવાની, સંપાદિત કરવાની અને કાઢી નાખવાની મંજૂરી આપે છે.  
+- વપરાશકર્તા પરવાનગીઓનું સંચાલન કરવા માટે ભૂમિકા-આધારિત ઍક્સેસ નિયંત્રણ (Role-Based Access Control) અમલમાં મૂકે છે.  
+- સુરક્ષિત ઍક્સેસ માટે પ્રમાણીકરણ (Authentication) અને અધિકૃતતા (Authorization) સુનિશ્ચિત કરે છે.
 
-- Permitir a los usuarios crear y gestionar pedidos de venta, asociándolos con clientes específicos.
-- Implementar seguimiento de inventario para verificar la disponibilidad de productos y actualizar los niveles de stock después de cada venta.
-- Generar facturas y gestionar la integración de pagos con pasarelas de pago populares.
-- Proporcionar paneles de control e informes para monitorear el rendimiento de las ventas y analizar las tendencias.
+---
 
-## Gestión de compras:
+## 🤝 ગ્રાહક સંબંધ વ્યવસ્થાપન (CRM)
 
-- Permitir a los usuarios crear y gestionar órdenes de compra, especificando la cantidad y los productos deseados.
-- Rastrear información de proveedores y gestionar las relaciones con los proveedores.
-- Recibir bienes y actualizar los niveles de inventario en consecuencia.
-- Gestionar facturas de compra y pagos a proveedores.
+- વપરાશકર્તાઓને લીડ્સ, સંભવિત ગ્રાહકો અને વર્તમાન ગ્રાહકોના સંપર્ક રેકોર્ડ્સ બનાવવા અને સંચાલિત કરવાની મંજૂરી આપે છે.  
+- વેચાણ તકોને ટ્રૅક કરવા અને લાયકાતની પ્રક્રિયા અમલમાં મૂકે છે.  
+- ગ્રાહક સંચાર ઇતિહાસ (ઇમેઇલ, કૉલ્સ, મીટિંગ્સ) ટ્રૅક કરવા માટે સાધનો પૂરા પાડે છે.  
+- એપોઇન્ટમેન્ટ શેડ્યૂલ કરવા અને સૂચનાઓ/રીમાઇન્ડર્સ મોકલવાની સુવિધા આપે છે.
 
-## Gestión de inventario:
+---
 
-- Proporcionar herramientas para gestionar y rastrear los niveles de inventario, incluyendo transferencias de stock y ajustes.
-- Configurar notificaciones automáticas para niveles de stock bajos y generar órdenes de compra cuando sea necesario reponer existencias.
-- Ofrecer capacidades de escaneo de códigos de barras para una gestión eficiente del inventario.
-- Permitir a los usuarios categorizar productos, definir atributos y establecer información de precios.
+## 💰 વેચાણ વ્યવસ્થાપન
 
-## Gestión financiera:
+- વપરાશકર્તાઓને વેચાણ ઓર્ડર બનાવવા અને સંચાલિત કરવાની મંજૂરી આપે છે.  
+- પ્રોડક્ટની ઉપલબ્ધતા તપાસવા અને વેચાણ પછી સ્ટોક અપડેટ કરવા માટે ઇન્વેન્ટરી ટ્રેકિંગ પૂરી પાડે છે.  
+- ઇન્વૉઇસ જનરેટ કરે છે અને લોકપ્રિય પેમેન્ટ ગેટવેઝ સાથે ચુકવણી પ્રક્રિયા કરે છે.  
+- વેચાણની કામગીરી અને ટ્રેન્ડ્સને મોનિટર કરવા માટે ડેશબોર્ડ અને રિપોર્ટ્સ પૂરા પાડે છે.
 
-- Implementar un sistema de libro mayor para rastrear transacciones financieras, incluyendo gastos e ingresos.
-- Gestionar cuentas por cobrar y cuentas por pagar, incluyendo facturación y seguimiento de pagos.
-- Generar informes financieros, incluyendo balances y estados de ingresos.
-- Integrar con software de contabilidad populares para una gestión financiera sin problemas.
+---
 
-## Gestión de proyectos:
+## 🛒 ખરીદી વ્યવસ્થાપન
 
-- Proporcionar capacidades de gestión de proyectos, permitiendo a los usuarios crear y rastrear proyectos.
-- Asignar tareas a los miembros del equipo, establecer plazos y monitorear el progreso.
-- Asignar recursos y rastrear los gastos del proyecto.
-- Ofrecer características de colaboración como compartir documentos y comunicación en tiempo real.
+- ખરીદી ઓર્ડર બનાવવા અને સંચાલિત કરવાની સુવિધા આપે છે.  
+- સપ્લાયરોની માહિતી ટ્રૅક કરે છે અને સંબંધોનું સંચાલન કરે છે.  
+- માલસામાન સ્વીકાર્યા બાદ ઇન્વેન્ટરી સ્તર અપડેટ કરે છે.  
+- સપ્લાયર ઇન્વૉઇસ અને ચુકવણી પ્રક્રિયાનો સંચાલન કરે છે.
 
-## Informes y análisis:
+---
 
-- Generar informes y análisis completos sobre diversos aspectos del negocio.
-- Proporcionar paneles de control personalizables para monitorear indicadores clave de rendimiento (KPI).
-- Permitir a los usuarios definir informes personalizados basados en requisitos específicos.
-- Implementar técnicas de visualización de datos para presentar información de manera visualmente atractiva.
+## 📦 ઇન્વેન્ટરી વ્યવસ્થાપન
 
-## Integración y personalización:
+- સ્ટોક સ્તર ટ્રૅક કરવા અને એડજસ્ટમેન્ટ્સ કરવા માટે સાધનો પૂરા પાડે છે.  
+- ઓછા સ્ટોક માટે આપોઆપ સૂચનાઓ મોકલે છે અને જરૂર હોય તો ખરીદી ઓર્ડર જનરેટ કરે છે.  
+- બારકોડ સ્કેનિંગ ક્ષમતાઓ સાથે વધુ કાર્યક્ષમ ઇન્વેન્ટરી મેનેજમેન્ટ પૂરો પાડે છે.  
+- પ્રોડક્ટ્સને વર્ગીકૃત કરવાની, લાક્ષણિકતાઓ નક્કી કરવાની અને કિંમત સેટ કરવાની મંજૂરી આપે છે.
 
-- Permitir la integración con aplicaciones o APIs de terceros populares, como herramientas de marketing por correo electrónico o plataformas de CRM.
-- Permitir la personalización de la funcionalidad y apariencia de la aplicación según las necesidades comerciales específicas.
-- Proporcionar una API o webhooks para facilitar el intercambio de datos entre la aplicación de ERP y CRM y otros sistemas.
+---
 
-## Interfaz amigable para el usuario:
+## 💳 નાણાકીય વ્યવસ્થાપન
 
-- Diseñar una interfaz intuitiva, receptiva y fácil de usar utilizando React.js y Ant Design.
-- Implementar menús de navegación fáciles de usar, funcionalidades de búsqueda y filtros.
-- Garantizar una interfaz de usuario consistente y visualmente atractiva en diferentes dispositivos y tamaños de pantalla.
+- ખર્ચ અને આવક સહિતના નાણાકીય વ્યવહારોનું ટ્રેકિંગ કરવા માટે નાણાકીય લેજર સિસ્ટમ પૂરી પાડે છે.  
+- એકાઉન્ટ્સ રિસીવેબલ (આવક) અને એકાઉન્ટ્સ પેયેબલ (ચુકવણી)નું ટ્રેકિંગ કરે છે.  
+- બેલેન્સ શીટ, આવક-ખર્ચ નિવેદન જેવી નાણાકીય રિપોર્ટ્સ જનરેટ કરે છે.  
+- લોકપ્રિય એકાઉન્ટિંગ સોફ્ટવેર સાથે એકીકરણ પૂરે છે.
+
+---
+
+## 📁 પ્રોજેક્ટ વ્યવસ્થાપન
+
+- પ્રોજેક્ટ્સ બનાવવાની અને ટ્રૅક કરવાની મંજૂરી આપે છે.  
+- ટીમ સભ્યોને કાર્યો સોંપે છે, સમયમર્યાદા સેટ કરે છે અને પ્રગતિ મોનિટર કરે છે.  
+- સંસાધનોનું ફાળવણી કરે છે અને ખર્ચ પર નિયંત્રણ રાખે છે.  
+- દસ્તાવેજ શેરિંગ અને વાસ્તવિક-સમય સંચાર જેવી સહયોગી સુવિધાઓ પૂરી પાડે છે.
+
+---
+
+## 📊 રિપોર્ટિંગ અને વિશ્લેષણ
+
+- વિવિધ વ્યવસાય ક્ષેત્રો પર વિગતવાર રિપોર્ટ્સ જનરેટ કરે છે.  
+- મુખ્ય કામગીરી સૂચકાંકો (KPIs) માટે કસ્ટમાઇઝેબલ ડેશબોર્ડ્સ પૂરા પાડે છે.  
+- વપરાશકર્તાઓને જરૂરિયાત મુજબ કસ્ટમ રિપોર્ટ્સ બનાવવા દે છે.  
+- ડેટા વિઝ્યુલાઇઝેશન દ્વારા માહિતી વધુ દૃશ્યમાન રીતે રજૂ કરે છે.
+
+---
+
+## 🔌 એકીકરણ અને કસ્ટમાઇઝેશન
+
+- થર્ડ-પાર્ટી એપ્લિકેશન્સ (જેમ કે ઇમેઇલ માર્કેટિંગ ટૂલ્સ, API) સાથે ઇન્ટિગ્રેશન પૂરે છે.  
+- બિઝનેસ જરૂરિયાતો મુજબ ઍપની ફંક્શનાલિટી અને દેખાવ કસ્ટમાઇઝ કરી શકાય છે.  
+- ERP/CRM અને અન્ય સિસ્ટમ વચ્ચે ડેટા વિનિમય માટે API અને વેબહૂક્સ પૂરા પાડે છે.
+
+---
+
+## 💻 વપરાશકર્તા-મૈત્રીપૂર્ણ ઇન્ટરફેસ
+
+- React.js અને Ant Design વડે સરળ, પ્રતિભાવશીલ અને વપરાશકર્તા-મૈત્રીપૂર્ણ ઇન્ટરફેસ બનાવ્યું છે.  
+- સરળ નેવિગેશન મેનૂ, શોધ સુવિધાઓ અને ફિલ્ટર્સ પૂરા પાડે છે.  
+- તમામ ઉપકરણો અને સ્ક્રીન માપ પર સુસંગત અને દૃશ્યમાન UI સુનિશ્ચિત કરે છે.
+
+---
+
+## 📜 લાયસન્સ
+આ પ્રોજેક્ટ **ઓપન-સોર્સ** છે અને **MIT License** હેઠળ ઉપલબ્ધ છે.
+
+---
+
+## 🙌 સમુદાય
+**IDURAR Open Source Community** દ્વારા પ્રેમપૂર્વક બનાવેલ ❤️  
+તમારા યોગદાન, બગ રિપોર્ટ્સ અને નવી સુવિધા સૂચનોનું સ્વાગત છે!
