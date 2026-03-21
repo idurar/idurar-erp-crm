@@ -7,6 +7,7 @@ import ForgetPassword from '@/pages/ForgetPassword';
 import ResetPassword from '@/pages/ResetPassword';
 
 import { useDispatch } from 'react-redux';
+import Register from '@/pages/Register';
 
 export default function AuthRouter() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function AuthRouter() {
   return (
     <Routes>
       <Route element={<Login />} path="/" />
+      <Route element={<Register />} path="/register" />
       <Route element={<Login />} path="/login" />
       <Route element={<Navigate to="/login" replace />} path="/logout" />
       <Route element={<ForgetPassword />} path="/forgetpassword" />
