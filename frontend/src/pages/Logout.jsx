@@ -1,28 +1,12 @@
-import { useEffect, useLayoutEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout as logoutAction } from '@/redux/auth/actions';
-import { crud } from '@/redux/crud/actions';
-import { erp } from '@/redux/erp/actions';
-import PageLoader from '@/components/PageLoader';
+import React from 'react';
+import { Card } from 'antd';
 
-const Logout = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  function asyncLogout() {
-    dispatch(logoutAction());
-  }
-
-  useLayoutEffect(() => {
-    dispatch(crud.resetState());
-    dispatch(erp.resetState());
-  }, []);
-
-  useEffect(() => {
-    asyncLogout();
-    navigate('/login');
-  }, []);
-
-  return <PageLoader />;
+const TaxPage = () => {
+  return (
+    <Card title="Tax Page">
+      <p>This is the new Tax page. You can build this out later.</p>
+    </Card>
+  );
 };
-export default Logout;
+
+export default TaxPage;
