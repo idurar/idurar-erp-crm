@@ -1,18 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="IDURAR" />
-    <link rel="icon" type="image/x-icon" href="./src/favicon.ico" />
-    <title>IDURAR ERP CRM | Free Open Source Accounting Invoice Quote</title>
+
+    <title>IDURAR ERP CRM: Free Open Source Accounting, Invoicing & Quoting</title>
+
+    <link rel="icon" type="image/svg+xml" href="./src/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./src/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./src/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./src/apple-touch-icon.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    
     <meta
       name="description"
-      content="IDURAR ERP CRM Open Source based on node.js react.js Antd Redux"
+      content="IDURAR ERP CRM: A free, open-source enterprise resource planning and customer relationship management solution based on Node.js, React.js, Ant Design, and Redux."
     />
-  </head>
+    
+    <meta property="og:title" content="IDURAR ERP CRM: Free Open Source Accounting Software" />
+    <meta property="og:description" content="A robust, free open-source ERP/CRM solution for modern business management." />
+    <meta property="og:image" content="./src/og-image.jpg" />
+    <meta property="og:url" content="https://www.yourwebsite.com" />
+    <meta property="og:type" content="website" />
+
+    </head>
   <body>
+    <div id="loading-spinner" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        font-size: 1.2rem;
+        color: #333;
+        z-index: 9999;
+    ">
+        Loading IDURAR ERP CRM...
+    </div>
+
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <script type="module" src="/src/main.jsx" defer></script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Simple script to hide the loading spinner once the main script is executed/app mounts
+        // In a real React app, you'd hide this from within your main component (e.g., App.jsx)
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+            spinner.style.display = 'none';
+        }
+      });
+    </script>
   </body>
 </html>
