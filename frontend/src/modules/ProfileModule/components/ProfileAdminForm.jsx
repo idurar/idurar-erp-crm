@@ -16,8 +16,17 @@ const beforeUpload = (file) => {
   return false;
 };
 
-export default function AdminForm({ isUpdateForm = false }) {
+export default function AdminForm({ isUpdateForm = false, form }) {
   const translate = useLanguage();
+  const handleInputChange = (e, fieldName) => {
+    const value = e.target.value.trim();
+    form.setFieldsValue({
+      [fieldName]: value === '' ? '' : e.target.value, // Set empty string if only whitespace
+    });
+
+    form.validateFields([fieldName]);
+  };
+
   return (
     <>
       <Form.Item
@@ -29,7 +38,7 @@ export default function AdminForm({ isUpdateForm = false }) {
           },
         ]}
       >
-        <Input autoComplete="off" />
+        <Input autoComplete="off" onChange={(e) => handleInputChange(e, 'name')} />
       </Form.Item>
       <Form.Item
         label={translate('last Name')}
@@ -40,7 +49,7 @@ export default function AdminForm({ isUpdateForm = false }) {
           },
         ]}
       >
-        <Input autoComplete="off" />
+        <Input autoComplete="off" onChange={(e) => handleInputChange(e, 'surname')} />
       </Form.Item>
       <Form.Item
         label={translate('email')}

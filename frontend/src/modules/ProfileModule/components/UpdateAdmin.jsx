@@ -81,7 +81,7 @@ const UpdateAdmin = ({ config }) => {
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 10 }}
           >
-            <ProfileAdminForm isUpdateForm={true} />
+            <ProfileAdminForm isUpdateForm={true} form={form} />
           </Form>
         </Col>
       </Row>
