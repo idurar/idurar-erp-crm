@@ -40,13 +40,22 @@ In your terminal, navigate to the /backend directory
 cd backend
 ```
 
-the urn the following command to install the backend dependencies:
+then run the following command to install the backend dependencies:
 
 ```bash
 npm install
 ```
 
 This command will install all the required packages specified in the package.json file.
+
+**Note Regarding Consistancy:**
+
+If you want to ensure all contributors and build environments are using the exact same versions of dependencies, reducing the chance of compatibility issues, run the command below.
+
+```bash
+npm ci
+```
+Please note that the usage of npm ci assumes that you have already generated the package-lock.json file by running npm install previously.
 
 #### Step 6: Run Setup Script
 
@@ -79,6 +88,15 @@ cd frontend
 ```bash
 npm install
 ```
+
+**Note Regarding Consistancy:**
+
+If you want to ensure all contributors and build environments are using the exact same versions of dependencies, reducing the chance of compatibility issues, run the command below.
+
+```bash
+npm ci
+```
+Please note that the usage of npm ci assumes that you have already generated the package-lock.json file by running npm install previously.
 
 #### Step 9: Run the Frontend Server
 
