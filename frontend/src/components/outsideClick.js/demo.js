@@ -14,7 +14,7 @@ function App() {
       <h2>Start editing to see some magic happen!</h2>
       <Dropdown
         placeholder="Select Vegetable"
-        value={vegetagle}
+        value={vegetable}
         onChange={(v) => setVegetable(v)}
         options={['Tomato', 'Cucumber', 'Potato']}
       />
