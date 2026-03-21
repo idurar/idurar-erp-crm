@@ -1,34 +1,28 @@
-import { lazy, useEffect } from 'react';
-
-import {} from 'react-router-dom';
-import {} from 'react-router-dom';
-import { Navigate, useLocation, useRoutes } from 'react-router-dom';
+import TaxPage from '@/pages/TaxPage';
+import { useEffect } from 'react';
+import { useLocation, useRoutes } from 'react-router-dom';
 import { useAppContext } from '@/context/appContext';
 
 import routes from './routes';
 
 export default function AppRouter() {
-  let location = useLocation();
+  const location = useLocation();
   const { state: stateApp, appContextAction } = useAppContext();
   const { app } = appContextAction;
 
-  const routesList = [];
+  // Flatten all route arrays into one array
+  const routesList = Object.values(routes).flat();
 
-  Object.entries(routes).forEach(([key, value]) => {
-    routesList.push(...value);
-  });
-
+  // Helper to find app name by current path
   function getAppNameByPath(path) {
-    for (let key in routes) {
-      for (let i = 0; i < routes[key].length; i++) {
-        if (routes[key][i].path === path) {
-          return key;
-        }
+    for (const key in routes) {
+      if (routes[key].some(route => route.path === path)) {
+        return key;
       }
     }
-    // Return 'default' app  if the path is not found
     return 'default';
   }
+
   useEffect(() => {
     if (location.pathname === '/') {
       app.default();
@@ -36,9 +30,10 @@ export default function AppRouter() {
       const path = getAppNameByPath(location.pathname);
       app.open(path);
     }
-  }, [location]);
+  }, [location.pathname, app]);
 
-  let element = useRoutes(routesList);
+  // Generate router element from routes list
+  const element = useRoutes(routesList);
 
   return element;
 }
