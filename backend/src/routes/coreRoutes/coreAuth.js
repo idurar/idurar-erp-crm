@@ -9,6 +9,7 @@ router.route('/login').post(catchErrors(adminAuth.login));
 
 router.route('/forgetpassword').post(catchErrors(adminAuth.forgetPassword));
 router.route('/resetpassword').post(catchErrors(adminAuth.resetPassword));
+router.route('/verify/:userId/:emailToken').get(catchErrors(adminAuth.verify));
 
 router.route('/logout').post(adminAuth.isValidAuthToken, catchErrors(adminAuth.logout));
 
