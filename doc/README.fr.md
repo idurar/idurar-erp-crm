@@ -1,6 +1,5 @@
 #### French Translation
 
-
 <div align="center">
     <a href="https://www.idurarapp.com/">
   <img src="https://avatars.githubusercontent.com/u/50052356?s=200&v=4" width="128px" />
@@ -14,13 +13,14 @@
 
 ## 🇦🇱 🇩🇿 🇧🇩 🇧🇬 🇨🇳 🇭🇷 🇨🇿 🇩🇰 🇳🇱 🇺🇸 🇪🇪 🇫🇷 🇩🇪 🇬🇷 🇮🇳 🇭🇺 🇮🇩 🇮🇹 🇯🇵 🇰🇷 🇱🇻 🇱🇹 🇲🇰 🇲🇾 🇳🇴 🇵🇱 🇧🇷 🇵🇹 🇮🇷 🇷🇴 🇷🇺 🇸🇰 🇸🇮 🇪🇸 🇸🇪 🇹🇭 🇹🇷 🇺🇦 🇵🇰 🇻🇳 🇷🇸 🇪🇦 🇵🇭 🇫🇮
 
-IDURAR est un Open "Fair-Code" Source ERP / CRM (Facturation / Inventaire / Comptabilité / RH) Basé sue le Mern Stack avancé (Node.js / Express.js / MongoDb / React.js ) avec Ant Design (AntD) et Redux
+IDURAR est un Open "Fair-Code" Source ERP / CRM (Facturation / Inventaire / Comptabilité / RH) Basé sur le Mern Stack avancé (Node.js / Express.js / MongoDb / React.js ) avec Ant Design (AntD) et Redux
 
 </div>
 
 **Démo de l'application en direct** : [https://www.idurarapp.com/demo-erp-crm/](https://www.idurarapp.com/demo-erp-crm/)
 
 **Identifiants** :
+
 ```
 nom d'utilisateur : admin@admin.com  mot de passe : admin123
 ```
@@ -36,7 +36,7 @@ IDURAR est un Open Code Source gratuit [fair-code](http://faircode.io) distribu�
 
 ## License FAQ :
 
-## Caractéristiques : 
+## Caractéristiques :
 
 Gestion des factures 💰
 
@@ -87,9 +87,7 @@ IDURAR est un ERP / CRM Open Source basé sur le "Fair-Code" (Facturation / Inve
 
 ## Premiers Pas
 
-
 1.[Cloner le dépôt](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
-
 
 2.[Créer votre compte MongoDB et votre cluster de base de données](INSTALLATION-INSTRUCTIONS.md#Step-2-Create-Your-MongoDB-Account-and-Database-Cluster)
 
@@ -110,7 +108,6 @@ IDURAR est un ERP / CRM Open Source basé sur le "Fair-Code" (Facturation / Inve
 ## Docker Compose pour le développement local
 
 - configurer les variables d'environnement supplémentaires, si nécessaire, dans le fichier ci-dessous
-
 
 ```bash
 docker-compose.yml
@@ -148,4 +145,4 @@ Des services de développement personnalisés sont disponibles : [Contactez-nous
 
 ## Montrez votre soutien
 
-N'oubliez pas de donner une  ⭐️ à ce projet ... Bonne programmation!
+N'oubliez pas de donner une ⭐️ à ce projet ... Bonne programmation!
