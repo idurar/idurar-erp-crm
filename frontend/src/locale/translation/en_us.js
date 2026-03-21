@@ -450,6 +450,9 @@ const lang = {
   offers: 'Offers',
   proforma_invoices: 'quote',
   search: 'search',
+  new_user: 'New user?',
+  register_here: 'Register here',
+  already_have_an_account: 'Already have an account?',
 };
 
 export default lang;
