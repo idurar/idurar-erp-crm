@@ -1,179 +1,154 @@
 const mongoose = require('mongoose');
 
-const invoiceSchema = new mongoose.Schema({
-  removed: {
-    type: Boolean,
-    default: false,
-  },
+// --- Define Sub-schemas for Embeded Documents ---
 
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
-  number: {
-    type: Number,
-    required: true,
-  },
-  year: {
-    type: Number,
-    required: true,
-  },
-  content: String,
-  recurring: {
-    type: String,
-    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  expiredDate: {
-    type: Date,
-    required: true,
-  },
-  client: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Client',
-    required: true,
-    autopopulate: true,
-  },
-  converted: {
-    from: {
-      type: String,
-      enum: ['quote', 'offer'],
+const fileSchema = new mongoose.Schema({
+    id: String,
+    name: String,
+    path: String, // Path or URL to the file
+    description: String,
+    isPublic: {
+        type: Boolean,
+        default: false,
     },
-    offer: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Offer',
-    },
-    quote: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Quote',
-    },
-  },
-  items: [
-    {
-      // product: {
-      //   type: mongoose.Schema.ObjectId,
-      //   ref: 'Product',
-      //   // required: true,
-      // },
-      itemName: {
+}, { _id: false }); // Disable _id for simple array items
+
+const customFieldSchema = new mongoose.Schema({
+    fieldName: {
         type: String,
-        required: true,
-      },
-      description: {
+        trim: true,
+        lowercase: true,
+        required: true, // 🔒 Enhanced: Custom fields must have a name
+    },
+    fieldType: {
         type: String,
-      },
-      quantity: {
-        type: Number,
-        default: 1,
-        required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-      // discount: {
-      //   type: Number,
-      //   default: 0,
-      // },
-      // taxRate: {
-      //   type: Number,
-      //   default: 0,
-      // },
-      // subTotal: {
-      //   type: Number,
-      //   default: 0,
-      // },
-      // taxTotal: {
-      //   type: Number,
-      //   default: 0,
-      // },
-      total: {
-        type: Number,
-        required: true,
-      },
+        enum: ['string', 'number', 'boolean', 'date', 'richtext'], // 💡 Enhanced: Restrict field types
+        trim: true,
+        lowercase: true,
+        default: 'string',
     },
-  ],
-  taxRate: {
-    type: Number,
-    default: 0,
-  },
-  subTotal: {
-    type: Number,
-    default: 0,
-  },
-  taxTotal: {
-    type: Number,
-    default: 0,
-  },
-  total: {
-    type: Number,
-    default: 0,
-  },
-  currency: {
-    type: String,
-    default: 'NA',
-    uppercase: true,
-    required: true,
-  },
-  credit: {
-    type: Number,
-    default: 0,
-  },
-  discount: {
-    type: Number,
-    default: 0,
-  },
-  payment: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Payment',
+    fieldValue: mongoose.Schema.Types.Mixed, // Allows flexible data type
+}, { _id: false });
+
+// --- Main Product Schema ---
+
+const schema = new mongoose.Schema({
+    // --- System/Audit Fields ---
+    removed: {
+        type: Boolean,
+        default: false,
+        index: true, // 📈 Enhanced: Index for soft-delete filtering
     },
-  ],
-  paymentStatus: {
-    type: String,
-    default: 'unpaid',
-    enum: ['unpaid', 'paid', 'partially'],
-  },
-  isOverdue: {
-    type: Boolean,
-    default: false,
-  },
-  approved: {
-    type: Boolean,
-    default: false,
-  },
-  notes: {
-    type: String,
-  },
-  status: {
-    type: String,
-    enum: ['draft', 'pending', 'sent', 'refunded', 'cancelled', 'on hold'],
-    default: 'draft',
-  },
-  pdf: {
-    type: String,
-  },
-  files: [
-    {
-      id: String,
-      name: String,
-      path: String,
-      description: String,
-      isPublic: {
+    enabled: {
         type: Boolean,
         default: true,
-      },
+        index: true, // 📈 Enhanced: Index for status filtering
     },
-  ],
-  updated: {
-    type: Date,
-    default: Date.now,
-  },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
+    isPublic: {
+        type: Boolean,
+        default: true,
+        index: true,
+    },
+
+    // --- Core Identifiers ---
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true, // 🧹 Enhanced: Trim whitespace
+        text: true, // 📈 Enhanced: For full-text search capability
+    },
+    number: {
+        type: String, // 💡 Enhanced: Product/SKU numbers are often strings (e.g., 'P-001', 'A1B2')
+        unique: true, // 🔒 Enhanced: Product number should likely be unique
+        trim: true,
+        sparse: true, // 💡 Enhanced: Allow nulls/undefined but enforce uniqueness on existing values
+    },
+    
+    // --- Relationships ---
+    productCategory: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'ProductCategory',
+        required: true,
+        autopopulate: true,
+    },
+    suppliers: [{ 
+        type: mongoose.Schema.ObjectId, 
+        ref: 'Supplier',
+        index: true, // 📈 Enhanced: Index suppliers for fast lookups
+    }],
+
+    // --- Media & Description ---
+    description: String,
+    title: String, // Redundant with 'name'/'description' but kept if needed
+    tags: [String],
+    headerImage: String, // Path/URL
+    photo: String,       // Path/URL
+    images: [fileSchema], // Reuses sub-schema
+    files: [fileSchema],  // Reuses sub-schema
+
+    // --- Pricing & Finance ---
+    currency: {
+        type: String,
+        uppercase: true,
+        required: true,
+        trim: true,
+        minlength: 3, // 🔒 Enhanced: Enforce 3-letter currency code (e.g., USD, EUR)
+    },
+    priceBeforeTax: {
+        type: Number,
+        min: 0, // 🔒 Enhanced: Price cannot be negative
+    },
+    taxRate: {
+        type: Number,
+        default: 0,
+        min: 0,
+        max: 100, // 🔒 Enhanced: Tax rate should be a percentage
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: 0, // 🔒 Enhanced: Price cannot be negative
+        // 💡 Recommendation: Consider using a Decimal type for financial data in a real ERP.
+    },
+    
+    // --- Customization ---
+    customField: [customFieldSchema],
+
+}, {
+    timestamps: { createdAt: 'created', updatedAt: 'updated' }, // 💡 Enhanced: Use Mongoose timestamps
+    collection: 'products', // 💡 Enhanced: Explicitly name collection
 });
 
-invoiceSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Invoice', invoiceSchema);
+// --- Schema Middleware/Plugins ---
+
+// 💡 Enhanced: Pre-save hook to calculate priceBeforeTax if missing, or ensure consistency
+schema.pre('save', function(next) {
+    if (this.isModified('price') || this.isModified('taxRate')) {
+        // If priceBeforeTax is not set, calculate it from price and taxRate
+        if (this.priceBeforeTax === undefined || this.priceBeforeTax === null) {
+            this.priceBeforeTax = this.price / (1 + this.taxRate / 100);
+        }
+        // Ensure precision (optional, but good practice for finance)
+        this.priceBeforeTax = parseFloat(this.priceBeforeTax.toFixed(2));
+    }
+    next();
+});
+
+// --- Schema Indexes ---
+
+// The original unique index on 'name' is preserved, but defined outside the schema object
+schema.index({ name: 1 }, { unique: true });
+
+// 📈 Enhanced: Compound index for filtering products by category and status
+schema.index({ productCategory: 1, enabled: 1, removed: 1 });
+
+// 📈 Enhanced: Full-text search index on name (requires 'text: true' on name field)
+schema.index({ name: 'text', description: 'text' });
+
+
+// --- Plugins ---
+schema.plugin(require('mongoose-autopopulate'));
+
+// --- Export Model ---
+module.exports = mongoose.model('Product', schema);
