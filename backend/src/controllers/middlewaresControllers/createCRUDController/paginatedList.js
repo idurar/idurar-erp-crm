@@ -15,11 +15,23 @@ const paginatedList = async (Model, req, res) => {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
 
+  // Build filter condition safely: reject MongoDB operators in values
+  let filterCondition = {};
+  if (filter && equal !== undefined) {
+    if (typeof equal === 'object') {
+      return res.status(400).json({
+        success: false,
+        result: [],
+        message: 'Invalid filter value',
+      });
+    }
+    filterCondition = { [filter]: equal };
+  }
+
   //  Query the database for a list of all results
   const resultsPromise = Model.find({
     removed: false,
-
-    [filter]: equal,
+    ...filterCondition,
     ...fields,
   })
     .skip(skip)
@@ -31,8 +43,7 @@ const paginatedList = async (Model, req, res) => {
   // Counting the total documents
   const countPromise = Model.countDocuments({
     removed: false,
-
-    [filter]: equal,
+    ...filterCondition,
     ...fields,
   });
   // Resolving both promises

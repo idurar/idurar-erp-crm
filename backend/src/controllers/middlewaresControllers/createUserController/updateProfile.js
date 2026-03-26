@@ -6,7 +6,11 @@ const updateProfile = async (userModel, req, res) => {
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
 
-  if (userProfile.email === 'admin@admin.com') {
+  // Get token from Authorization header
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (userProfile.email === 'admin@demo.com') {
     return res.status(403).json({
       success: false,
       result: null,
@@ -52,6 +56,7 @@ const updateProfile = async (userModel, req, res) => {
       surname: result?.surname,
       photo: result?.photo,
       role: result?.role,
+      token
     },
     message: 'we update this profile by this id: ' + userProfile._id,
   });
