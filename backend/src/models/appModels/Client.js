@@ -18,6 +18,17 @@ const schema = new mongoose.Schema({
   country: String,
   address: String,
   email: String,
+  company:{
+    type:String,
+    trim:true,
+    default:""
+  },
+  website: {
+    type: String,
+    trim: true,
+    default: '',
+    match: [/^https?:\/\/.+/, 'Please use a valid URL']
+  },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
   created: {
