@@ -298,7 +298,7 @@ function FormElement({ field, feedback, setFeedback }) {
     string: (
       <Input autoComplete="off" maxLength={field.maxLength} defaultValue={field.defaultValue} />
     ),
-    url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
+    url: <Input autoComplete="off" placeholder="https//:example.com" />,
     textarea: <TextArea rows={4} />,
     email: <Input autoComplete="off" placeholder="email@example.com" />,
     number: <InputNumber style={{ width: '100%' }} />,

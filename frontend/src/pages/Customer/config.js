@@ -15,4 +15,11 @@ export const fields = {
   email: {
     type: 'email',
   },
+  company: {
+    type: 'string',
+  },
+  website: {
+    type: 'url',
+    pattern: /^(https?:\/\/)([\w-]+(\.[\w-]+)+)(\/\S*)?$/,
+  }
 };
