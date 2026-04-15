@@ -8,6 +8,7 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       const Model = mongoose.model(modelName);
       const result = await Model.findOne({
         _id: id,
+        removed: false,
       }).exec();
 
       // Throw error if no result

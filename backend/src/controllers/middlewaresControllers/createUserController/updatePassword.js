@@ -35,7 +35,7 @@ const updatePassword = async (userModel, req, res) => {
   };
 
   const resultPassword = await UserPassword.findOneAndUpdate(
-    { user: req.params.id, removed: false },
+    { user: userProfile._id, removed: false },
     { $set: UserPasswordData },
     {
       new: true, // return the new result instead of the old one
