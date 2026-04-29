@@ -59,7 +59,6 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <CustomerServiceOutlined />,
       label: <Link to={'/customer'}>{translate('customers')}</Link>,
     },
-
     {
       key: 'invoice',
       icon: <ContainerOutlined />,
@@ -103,7 +102,9 @@ function Sidebar({ collapsible, isMobile = false }) {
       if (currentPath !== location.pathname) {
         if (location.pathname === '/') {
           setCurrentPath('dashboard');
-        } else setCurrentPath(location.pathname.slice(1));
+        } else {
+          setCurrentPath(location.pathname.split('/')[1]);
+        }
       }
   }, [location, currentPath]);
 
