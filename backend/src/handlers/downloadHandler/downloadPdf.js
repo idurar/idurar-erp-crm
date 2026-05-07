@@ -1,8 +1,19 @@
 const custom = require('@/controllers/pdfController');
 const mongoose = require('mongoose');
 
+const ALLOWED_PAPER_SIZES = new Map([
+  ['A3', 'A3'],
+  ['A4', 'A4'],
+  ['A5', 'A5'],
+  ['LEGAL', 'Legal'],
+  ['LETTER', 'Letter'],
+  ['TABLOID', 'Tabloid'],
+]);
+
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
   try {
+    const requestedPaperSize = String(req.query?.paperSize || 'A4').toUpperCase();
+    const paperSize = ALLOWED_PAPER_SIZES.get(requestedPaperSize) || 'A4';
     const modelName = directory.slice(0, 1).toUpperCase() + directory.slice(1);
     if (mongoose.models[modelName]) {
       const Model = mongoose.model(modelName);
@@ -17,12 +28,18 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
 
       // Continue process if result is returned
 
-      const fileId = modelName.toLowerCase() + '-' + result._id + '.pdf';
+      const fileId =
+        modelName.toLowerCase() +
+        '-' +
+        result._id +
+        '-' +
+        paperSize.toLowerCase() +
+        '.pdf';
       const folderPath = modelName.toLowerCase();
       const targetLocation = `src/public/download/${folderPath}/${fileId}`;
       await custom.generatePdf(
         modelName,
-        { filename: folderPath, format: 'A4', targetLocation },
+        { filename: folderPath, format: paperSize, targetLocation },
         result,
         async () => {
           return res.download(targetLocation, (error) => {

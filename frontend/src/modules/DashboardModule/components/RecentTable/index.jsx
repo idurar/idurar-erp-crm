@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { PDF_PAPER_SIZES, buildPdfDownloadUrl } from '@/utils/pdf';
 
 export default function RecentTable({ ...props }) {
   const translate = useLanguage();
@@ -29,6 +29,10 @@ export default function RecentTable({ ...props }) {
       label: translate('Download'),
       key: 'download',
       icon: <FilePdfOutlined />,
+      children: PDF_PAPER_SIZES.map((size) => ({
+        label: size,
+        key: `download-${size}`,
+      })),
     },
   ];
 
@@ -43,8 +47,8 @@ export default function RecentTable({ ...props }) {
     dispatch(erp.currentAction({ actionType: 'update', data: record }));
     navigate(`/${entity}/update/${record._id}`);
   };
-  const handleDownload = (record) => {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+  const handleDownload = (record, paperSize = 'A4') => {
+    window.open(buildPdfDownloadUrl(entity, record._id, paperSize), '_blank');
   };
 
   dataTableColumns = [
@@ -65,10 +69,13 @@ export default function RecentTable({ ...props }) {
                   handleEdit(record);
                   break;
                 case 'download':
-                  handleDownload(record);
+                  handleDownload(record, 'A4');
                   break;
 
                 default:
+                  if (key.startsWith('download-')) {
+                    handleDownload(record, key.replace('download-', ''));
+                  }
                   break;
               }
             },

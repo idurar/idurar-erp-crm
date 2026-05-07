@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Divider } from 'antd';
 
-import { Button, Row, Col, Descriptions, Statistic, Tag } from 'antd';
+import { Button, Row, Col, Descriptions, Statistic, Tag, Dropdown } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 import {
   EditOutlined,
@@ -19,7 +19,7 @@ import { generate as uniqueId } from 'shortid';
 
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { PDF_PAPER_SIZES, buildPdfDownloadUrl } from '@/utils/pdf';
 import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
@@ -123,6 +123,11 @@ export default function ReadItem({ config, selectedItem }) {
     }
   }, [currentErp]);
 
+  const paperSizeMenuItems = PDF_PAPER_SIZES.map((size) => ({
+    label: size,
+    key: size,
+  }));
+
   return (
     <>
       <PageHeader
@@ -149,18 +154,18 @@ export default function ReadItem({ config, selectedItem }) {
           >
             {translate('Close')}
           </Button>,
-          <Button
+          <Dropdown
             key={`${uniqueId()}`}
-            onClick={() => {
-              window.open(
-                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
-                '_blank'
-              );
+            menu={{
+              items: paperSizeMenuItems,
+              onClick: ({ key }) => {
+                window.open(buildPdfDownloadUrl(entity, currentErp._id, key), '_blank');
+              },
             }}
-            icon={<FilePdfOutlined />}
+            trigger={['click']}
           >
-            {translate('Download PDF')}
-          </Button>,
+            <Button icon={<FilePdfOutlined />}>{translate('Download PDF')}</Button>
+          </Dropdown>,
           <Button
             key={`${uniqueId()}`}
             loading={mailInProgress}
