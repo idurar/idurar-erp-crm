@@ -21,7 +21,7 @@ import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import { useNavigate } from 'react-router-dom';
 
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { PDF_PAPER_SIZES, buildPdfDownloadUrl } from '@/utils/pdf';
 
 function AddNewItem({ config }) {
   const navigate = useNavigate();
@@ -66,6 +66,10 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Download'),
       key: 'download',
       icon: <FilePdfOutlined />,
+      children: PDF_PAPER_SIZES.map((size) => ({
+        label: size,
+        key: `download-${size}`,
+      })),
     },
     ...extra,
     {
@@ -90,8 +94,8 @@ export default function DataTable({ config, extra = [] }) {
     dispatch(erp.currentAction({ actionType: 'update', data }));
     navigate(`/${entity}/update/${record._id}`);
   };
-  const handleDownload = (record) => {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+  const handleDownload = (record, paperSize = 'A4') => {
+    window.open(buildPdfDownloadUrl(entity, record._id, paperSize), '_blank');
   };
 
   const handleDelete = (record) => {
@@ -123,7 +127,6 @@ export default function DataTable({ config, extra = [] }) {
                   handleEdit(record);
                   break;
                 case 'download':
-                  handleDownload(record);
                   break;
                 case 'delete':
                   handleDelete(record);
@@ -132,6 +135,9 @@ export default function DataTable({ config, extra = [] }) {
                   handleRecordPayment(record);
                   break;
                 default:
+                  if (key.startsWith('download-')) {
+                    handleDownload(record, key.replace('download-', ''));
+                  }
                   break;
               }
               // else if (key === '2')handleCloseTask
