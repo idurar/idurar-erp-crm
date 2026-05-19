@@ -86,17 +86,8 @@ export const resetPassword =
     const data = await authService.resetPassword({ resetPasswordData });
 
     if (data.success === true) {
-      const auth_state = {
-        current: data.result,
-        isLoggedIn: true,
-        isLoading: false,
-        isSuccess: true,
-      };
-      window.localStorage.setItem('auth', JSON.stringify(auth_state));
-      window.localStorage.removeItem('isLogout');
       dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        payload: data.result,
+        type: actionTypes.RESET_PASSWORD_SUCCESS,
       });
     } else {
       dispatch({
