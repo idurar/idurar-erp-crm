@@ -72,7 +72,7 @@ export default function ItemRow({ field, remove, current = null }) {
       </Col>
       <Col className="gutter-row" span={7}>
         <Form.Item name={[field.name, 'description']}>
-          <Input placeholder="description Name" />
+          <Input placeholder="Item Description" />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={3}>
