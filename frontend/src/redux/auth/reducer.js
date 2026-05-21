@@ -14,10 +14,10 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isLoggedIn: false,
         isLoading: true,
+        isSuccess: false,
       };
     case actionTypes.REQUEST_FAILED:
       return INITIAL_STATE;
-
     case actionTypes.REQUEST_SUCCESS:
       return {
         current: action.payload,
@@ -25,7 +25,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
         isSuccess: true,
       };
-
     case actionTypes.REGISTER_SUCCESS:
       return {
         current: null,
@@ -35,7 +34,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
       };
     case actionTypes.LOGOUT_SUCCESS:
       return INITIAL_STATE;
-
     case actionTypes.LOGOUT_FAILED:
       return {
         current: action.payload,
@@ -43,7 +41,12 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
         isSuccess: true,
       };
-
+    case actionTypes.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+      };
     default:
       return state;
   }
