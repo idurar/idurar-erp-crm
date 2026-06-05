@@ -5,6 +5,10 @@ import { Navigate } from 'react-router-dom';
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
 
+const Quote = lazy(() => import('@/pages/Quote'));
+const QuoteCreate = lazy(() => import('@/pages/Quote/QuoteCreate'));
+const QuoteRead = lazy(() => import('@/pages/Quote/QuoteRead'));
+const QuoteUpdate = lazy(() => import('@/pages/Quote/QuoteUpdate'));
 
 const Customer = lazy(() => import('@/pages/Customer'));
 const Invoice = lazy(() => import('@/pages/Invoice'));
@@ -106,14 +110,14 @@ let routes = {
       path: '/settings/edit/:settingsKey',
       element: <Settings />,
     },
-    {
-      path: '/payment/mode',
-      element: <PaymentMode />,
-    },
-    {
-      path: '/taxes',
-      element: <Taxes />,
-    },
+    // {
+    //   path: '/payment/mode',
+    //   element: <PaymentMode />,
+    // },
+    // {
+    //   path: '/taxes',
+    //   element: <Taxes />,
+    // },
 
     {
       path: '/profile',
