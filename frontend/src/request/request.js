@@ -4,6 +4,7 @@ import { API_BASE_URL } from '@/config/serverApiConfig';
 import errorHandler from './errorHandler';
 import successHandler from './successHandler';
 import storePersist from '@/redux/storePersist';
+import { buildQueryString } from './buildQueryString';
 
 function findKeyByPrefix(object, prefix) {
   for (var property in object) {
@@ -116,9 +117,7 @@ const request = {
   filter: async ({ entity, options = {} }) => {
     try {
       includeToken();
-      let filter = options.filter ? 'filter=' + options.filter : '';
-      let equal = options.equal ? '&equal=' + options.equal : '';
-      let query = `?${filter}${equal}`;
+      const query = buildQueryString(options);
 
       const response = await axios.get(entity + '/filter' + query);
       successHandler(response, {
@@ -134,11 +133,7 @@ const request = {
   search: async ({ entity, options = {} }) => {
     try {
       includeToken();
-      let query = '?';
-      for (var key in options) {
-        query += key + '=' + options[key] + '&';
-      }
-      query = query.slice(0, -1);
+      const query = buildQueryString(options);
       // headersInstance.cancelToken = source.token;
       const response = await axios.get(entity + '/search' + query);
 
@@ -155,11 +150,7 @@ const request = {
   list: async ({ entity, options = {} }) => {
     try {
       includeToken();
-      let query = '?';
-      for (var key in options) {
-        query += key + '=' + options[key] + '&';
-      }
-      query = query.slice(0, -1);
+      const query = buildQueryString(options);
 
       const response = await axios.get(entity + '/list' + query);
 
@@ -175,11 +166,7 @@ const request = {
   listAll: async ({ entity, options = {} }) => {
     try {
       includeToken();
-      let query = '?';
-      for (var key in options) {
-        query += key + '=' + options[key] + '&';
-      }
-      query = query.slice(0, -1);
+      const query = buildQueryString(options);
 
       const response = await axios.get(entity + '/listAll' + query);
 
@@ -253,11 +240,7 @@ const request = {
   summary: async ({ entity, options = {} }) => {
     try {
       includeToken();
-      let query = '?';
-      for (var key in options) {
-        query += key + '=' + options[key] + '&';
-      }
-      query = query.slice(0, -1);
+      const query = buildQueryString(options);
       const response = await axios.get(entity + '/summary' + query);
 
       successHandler(response, {
