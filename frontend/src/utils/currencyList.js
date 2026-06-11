@@ -160,11 +160,67 @@ const currencyFlag = [
 //   });
 // };
 
+const currencyMeta = {
+  INR: {
+    name: 'Indian Rupee',
+    symbol: '₹',
+  },
+};
+
+const getCurrencyName = (currency_code) => {
+  const metadata = currencyMeta[currency_code];
+  if (metadata?.name) {
+    return metadata.name;
+  }
+
+  if (typeof Intl !== 'undefined' && Intl.DisplayNames) {
+    try {
+      return new Intl.DisplayNames('en', { type: 'currency' }).of(currency_code);
+    } catch (error) {
+      return undefined;
+    }
+  }
+
+  return undefined;
+};
+
+const getCurrencySymbol = (currency_code) => {
+  const metadata = currencyMeta[currency_code];
+  if (metadata?.symbol) {
+    return metadata.symbol;
+  }
+
+  if (typeof Intl !== 'undefined' && Intl.NumberFormat) {
+    try {
+      return new Intl.NumberFormat('en', {
+        style: 'currency',
+        currency: currency_code,
+        minimumFractionDigits: 0,
+      })
+        .formatToParts(1)
+        .find((part) => part.type === 'currency')?.value;
+    } catch (error) {
+      return undefined;
+    }
+  }
+
+  return undefined;
+};
+
 export const currencyOptions = () => {
   return currencyFlag.map((x) => {
+    const currencyName = getCurrencyName(x.currency_code);
+    const currencySymbol = getCurrencySymbol(x.currency_code);
+    const label =
+      x.flag +
+      ' ' +
+      x.currency_code +
+      (currencyName ? ' — ' + currencyName : '') +
+      (currencySymbol ? ' (' + currencySymbol + ')' : '');
+
     return {
       value: x.currency_code,
-      label: x.flag + ' ' + x.currency_code,
+      label,
     };
   });
 };
