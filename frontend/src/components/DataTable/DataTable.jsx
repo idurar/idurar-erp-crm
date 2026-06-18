@@ -6,47 +6,61 @@ import {
   DeleteOutlined,
   EllipsisOutlined,
   RedoOutlined,
-  ArrowRightOutlined,
   ArrowLeftOutlined,
+  DownloadOutlined,
 } from '@ant-design/icons';
+
 import { Dropdown, Table, Button, Input } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '@/redux/crud/actions';
 import { selectListItems } from '@/redux/crud/selectors';
+
 import useLanguage from '@/locale/useLanguage';
 import { dataForTable } from '@/utils/dataStructure';
 import { useMoney, useDate } from '@/settings';
 
-import { generate as uniqueId } from 'shortid';
-
 import { useCrudContext } from '@/context/crud';
+import { exportCSV } from '@/utils/exportCSV';
 
+/* -------------------- ADD NEW ITEM -------------------- */
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
-  const { collapsedBox, panel } = crudContextAction;
+  const { panel, collapsedBox } = crudContextAction;
   const { ADD_NEW_ENTITY } = config;
 
-  const handelClick = () => {
+  const handleClick = () => {
     panel.open();
     collapsedBox.close();
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
+    <Button onClick={handleClick} type="primary">
       {ADD_NEW_ENTITY}
     </Button>
   );
 }
+
+/* -------------------- MAIN TABLE -------------------- */
 export default function DataTable({ config, extra = [] }) {
-  let { entity, dataTableColumns, DATATABLE_TITLE, fields, searchConfig } = config;
+  const { entity, dataTableColumns, DATATABLE_TITLE, fields, searchConfig } = config;
+
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
+
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
   const { dateFormat } = useDate();
 
+  const dispatch = useDispatch();
+
+  const { result: listResult, isLoading: listIsLoading } =
+    useSelector(selectListItems);
+
+  const { pagination, items: dataSource } = listResult;
+
+  /* -------------------- ACTION MENU -------------------- */
   const items = [
     {
       label: translate('Show'),
@@ -62,7 +76,6 @@ export default function DataTable({ config, extra = [] }) {
     {
       type: 'divider',
     },
-
     {
       label: translate('Delete'),
       key: 'delete',
@@ -70,40 +83,41 @@ export default function DataTable({ config, extra = [] }) {
     },
   ];
 
+  /* -------------------- ACTION HANDLERS -------------------- */
   const handleRead = (record) => {
     dispatch(crud.currentItem({ data: record }));
     panel.open();
     collapsedBox.open();
     readBox.open();
   };
-  function handleEdit(record) {
+
+  const handleEdit = (record) => {
     dispatch(crud.currentItem({ data: record }));
     dispatch(crud.currentAction({ actionType: 'update', data: record }));
     editBox.open();
     panel.open();
     collapsedBox.open();
-  }
-  function handleDelete(record) {
+  };
+
+  const handleDelete = (record) => {
     dispatch(crud.currentAction({ actionType: 'delete', data: record }));
     modal.open();
-  }
+  };
 
-  function handleUpdatePassword(record) {
+  const handleUpdatePassword = (record) => {
     dispatch(crud.currentItem({ data: record }));
     dispatch(crud.currentAction({ actionType: 'update', data: record }));
     advancedBox.open();
     panel.open();
     collapsedBox.open();
-  }
+  };
 
-  let dispatchColumns = [];
-  if (fields) {
-    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat })];
-  } else {
-    dispatchColumns = [...dataTableColumns];
-  }
+  /* -------------------- TABLE DATA -------------------- */
+  let dispatchColumns = fields
+    ? dataForTable({ fields, translate, moneyFormatter, dateFormat })
+    : dataTableColumns;
 
-  dataTableColumns = [
+  dispatchColumns = [
     ...dispatchColumns,
     {
       title: '',
@@ -114,25 +128,10 @@ export default function DataTable({ config, extra = [] }) {
           menu={{
             items,
             onClick: ({ key }) => {
-              switch (key) {
-                case 'read':
-                  handleRead(record);
-                  break;
-                case 'edit':
-                  handleEdit(record);
-                  break;
-
-                case 'delete':
-                  handleDelete(record);
-                  break;
-                case 'updatePassword':
-                  handleUpdatePassword(record);
-                  break;
-
-                default:
-                  break;
-              }
-              // else if (key === '2')handleCloseTask
+              if (key === 'read') handleRead(record);
+              if (key === 'edit') handleEdit(record);
+              if (key === 'delete') handleDelete(record);
+              if (key === 'updatePassword') handleUpdatePassword(record);
             },
           }}
           trigger={['click']}
@@ -146,35 +145,48 @@ export default function DataTable({ config, extra = [] }) {
     },
   ];
 
-  const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
+  /* -------------------- DATA FETCH -------------------- */
+  const loadTable = useCallback(
+    (pagination) => {
+      const options = {
+        page: pagination?.current || 1,
+        items: pagination?.pageSize || 10,
+      };
 
-  const { pagination, items: dataSource } = listResult;
-
-  const dispatch = useDispatch();
-
-  const handelDataTableLoad = useCallback((pagination) => {
-    const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
-    dispatch(crud.list({ entity, options }));
-  }, []);
+      dispatch(crud.list({ entity, options }));
+    },
+    [dispatch, entity]
+  );
 
   const filterTable = (e) => {
     const value = e.target.value;
-    const options = { q: value, fields: searchConfig?.searchFields || '' };
-    dispatch(crud.list({ entity, options }));
+
+    dispatch(
+      crud.list({
+        entity,
+        options: {
+          q: value,
+          fields: searchConfig?.searchFields || '',
+        },
+      })
+    );
   };
 
-  const dispatcher = () => {
+  const dispatcher = useCallback(() => {
     dispatch(crud.list({ entity }));
-  };
+  }, [dispatch, entity]);
 
   useEffect(() => {
-    const controller = new AbortController();
     dispatcher();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  }, [dispatcher]);
 
+  /* -------------------- CSV EXPORT -------------------- */
+  const handleExportCSV = () => {
+    if (!dataSource?.length) return;
+    exportCSV(dataSource, `${entity}.csv`);
+  };
+
+  /* -------------------- RENDER -------------------- */
   return (
     <>
       <PageHeader
@@ -184,29 +196,39 @@ export default function DataTable({ config, extra = [] }) {
         ghost={false}
         extra={[
           <Input
-            key={`searchFilterDataTable}`}
+            key="search"
             onChange={filterTable}
             placeholder={translate('search')}
             allowClear
           />,
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
-            {translate('Refresh')}
+
+          <Button
+            key="refresh"
+            onClick={loadTable}
+            icon={<RedoOutlined />}
+          >
+            Refresh
           </Button>,
 
-          <AddNewItem key={`${uniqueId()}`} config={config} />,
+          <Button
+            key="export"
+            onClick={handleExportCSV}
+            icon={<DownloadOutlined />}
+          >
+            Export CSV
+          </Button>,
+
+          <AddNewItem key="add" config={config} />,
         ]}
-        style={{
-          padding: '20px 0px',
-        }}
-      ></PageHeader>
+      />
 
       <Table
-        columns={dataTableColumns}
+        columns={dispatchColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
-        onChange={handelDataTableLoad}
+        onChange={loadTable}
         scroll={{ x: true }}
       />
     </>
