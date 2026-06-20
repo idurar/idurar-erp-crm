@@ -69,51 +69,51 @@ let routes = {
       path: '/invoice/pay/:id',
       element: <InvoiceRecordPayment />,
     },
-    {
-      path: '/quote',
-      element: <Quote />,
-    },
-    {
-      path: '/quote/create',
-      element: <QuoteCreate />,
-    },
-    {
-      path: '/quote/read/:id',
-      element: <QuoteRead />,
-    },
-    {
-      path: '/quote/update/:id',
-      element: <QuoteUpdate />,
-    },
-    {
-      path: '/payment',
-      element: <Payment />,
-    },
-    {
-      path: '/payment/read/:id',
-      element: <PaymentRead />,
-    },
-    {
-      path: '/payment/update/:id',
-      element: <PaymentUpdate />,
-    },
+    // {
+    //   path: '/quote',
+    //   element: <Quote />,
+    // },
+    // {
+    //   path: '/quote/create',
+    //   element: <QuoteCreate />,
+    // },
+    // {
+    //   path: '/quote/read/:id',
+    //   element: <QuoteRead />,
+    // },
+    // {
+    //   path: '/quote/update/:id',
+    //   element: <QuoteUpdate />,
+    // },
+    // {
+    //   path: '/payment',
+    //   element: <Payment />,
+    // },
+    // {
+    //   path: '/payment/read/:id',
+    //   element: <PaymentRead />,
+    // },
+    // {
+    //   path: '/payment/update/:id',
+    //   element: <PaymentUpdate />,
+    // },
 
-    {
-      path: '/settings',
-      element: <Settings />,
-    },
-    {
-      path: '/settings/edit/:settingsKey',
-      element: <Settings />,
-    },
-    {
-      path: '/payment/mode',
-      element: <PaymentMode />,
-    },
-    {
-      path: '/taxes',
-      element: <Taxes />,
-    },
+    // {
+    //   path: '/settings',
+    //   element: <Settings />,
+    // },
+    // {
+    //   path: '/settings/edit/:settingsKey',
+    //   element: <Settings />,
+    // },
+    // {
+    //   path: '/payment/mode',
+    //   element: <PaymentMode />,
+    // },
+    // {
+    //   path: '/taxes',
+    //   element: <Taxes />,
+    // },
 
     {
       path: '/profile',
