@@ -7,6 +7,14 @@ const updatePassword = async (userModel, req, res) => {
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
+  
+  if (userProfile._id.toString() !== req.params.id) {
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: "Unauthorized: You can only update your own password.",
+    });
+  }
 
   let { password } = req.body;
 
