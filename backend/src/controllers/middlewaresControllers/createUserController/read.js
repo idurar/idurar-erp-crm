@@ -3,6 +3,17 @@ const mongoose = require('mongoose');
 const read = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
 
+  const reqUserName = userModel.toLowerCase();
+  const userProfile = req[reqUserName];
+
+  if (userProfile._id.toString() !== req.params.id) {
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'Unauthorized: You can only read your own profile.',
+    });
+  }
+
   // Find document by id
   const tmpResult = await User.findOne({
     _id: req.params.id,
