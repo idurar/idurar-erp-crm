@@ -3,9 +3,22 @@ const mongoose = require('mongoose');
 const read = async (userModel, req, res) => {
   const User = mongoose.model(userModel);
 
+  const reqUserName = userModel.toLowerCase();
+  const userProfile = req[reqUserName];
+
+  const authenticatedId = userProfile._id.toString();
+
+  if (req.params.id !== authenticatedId) {
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'Forbidden',
+    });
+  }
+
   // Find document by id
   const tmpResult = await User.findOne({
-    _id: req.params.id,
+    _id: authenticatedId,
     removed: false,
   }).exec();
   // If no results found, return document not found
