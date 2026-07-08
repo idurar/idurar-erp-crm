@@ -25,6 +25,16 @@ const updatePassword = async (userModel, req, res) => {
     });
   }
 
+  const authenticatedId = userProfile._id.toString();
+
+  if (req.params.id !== authenticatedId) {
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'Forbidden',
+    });
+  }
+
   const salt = uniqueId();
 
   const passwordHash = bcrypt.hashSync(salt + password);
@@ -35,7 +45,7 @@ const updatePassword = async (userModel, req, res) => {
   };
 
   const resultPassword = await UserPassword.findOneAndUpdate(
-    { user: req.params.id, removed: false },
+    { user: authenticatedId, removed: false },
     { $set: UserPasswordData },
     {
       new: true, // return the new result instead of the old one
