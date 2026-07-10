@@ -6,6 +6,7 @@ const custom = require('@/controllers/pdfController');
 
 const { calculate } = require('@/helpers');
 const schema = require('./schemaValidate');
+const calculateTotals = require('./calculateTotals');
 
 const update = async (req, res) => {
   let body = req.body;
@@ -37,21 +38,7 @@ const update = async (req, res) => {
     });
   }
 
-  // default
-  let subTotal = 0;
-  let taxTotal = 0;
-  let total = 0;
-
-  //Calculate the items array with subTotal, total, taxTotal
-  items.map((item) => {
-    let total = calculate.multiply(item['quantity'], item['price']);
-    //sub total
-    subTotal = calculate.add(subTotal, total);
-    //item total
-    item['total'] = total;
-  });
-  taxTotal = calculate.multiply(subTotal, taxRate / 100);
-  total = calculate.add(subTotal, taxTotal);
+  const { subTotal, taxTotal, total } = calculateTotals(items, taxRate);
 
   body['subTotal'] = subTotal;
   body['taxTotal'] = taxTotal;
