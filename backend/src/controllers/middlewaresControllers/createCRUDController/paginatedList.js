@@ -28,10 +28,24 @@ const paginatedList = async (Model, req, res) => {
     filterCondition = { [filter]: equal };
   }
 
+  // Optional date range filter on createdAt (dateFrom / dateTo query params)
+  const { dateFrom, dateTo } = req.query;
+  let dateFilter = {};
+  if (dateFrom || dateTo) {
+    dateFilter.createdAt = {};
+    if (dateFrom) {
+      dateFilter.createdAt.$gte = new Date(dateFrom);
+    }
+    if (dateTo) {
+      dateFilter.createdAt.$lte = new Date(dateTo);
+    }
+  }
+
   //  Query the database for a list of all results
   const resultsPromise = Model.find({
     removed: false,
     ...filterCondition,
+    ...dateFilter,
     ...fields,
   })
     .skip(skip)
@@ -44,6 +58,7 @@ const paginatedList = async (Model, req, res) => {
   const countPromise = Model.countDocuments({
     removed: false,
     ...filterCondition,
+    ...dateFilter,
     ...fields,
   });
   // Resolving both promises
