@@ -8,6 +8,17 @@ const updatePassword = async (userModel, req, res) => {
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
 
+  // Ownership check: an admin can only change their own password.
+  // Without this, any authenticated admin could reset any other admin's
+  // password via the :id URL parameter (full account takeover).
+  if (req.params.id !== userProfile._id.toString()) {
+    return res.status(403).json({
+      success: false,
+      result: null,
+      message: 'Forbidden',
+    });
+  }
+
   let { password } = req.body;
 
   if (password.length < 8)
