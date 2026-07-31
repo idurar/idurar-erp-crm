@@ -18,6 +18,14 @@ const Payment = lazy(() => import('@/pages/Payment/index'));
 const PaymentRead = lazy(() => import('@/pages/Payment/PaymentRead'));
 const PaymentUpdate = lazy(() => import('@/pages/Payment/PaymentUpdate'));
 
+const Quote = lazy(() => import('@/pages/Quote/index'));
+const QuoteCreate = lazy(() => import('@/pages/Quote/QuoteCreate'));
+const QuoteRead = lazy(() => import('@/pages/Quote/QuoteRead'));
+const QuoteUpdate = lazy(() => import('@/pages/Quote/QuoteUpdate'));
+
+const PaymentMode = lazy(() => import('@/pages/PaymentMode/index'));
+const Taxes = lazy(() => import('@/pages/Taxes/index'));
+
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 
 

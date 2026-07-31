@@ -3,6 +3,7 @@ node_modules/
 .DS_Store
 .idea
 notes.md
+.env
 .env.local
 
 *.pdf
