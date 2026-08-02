@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from '@/config/serverApiConfig';
+import { API_BASE_URL, DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
 import errorHandler from './errorHandler';
 import successHandler from './successHandler';
@@ -108,6 +108,25 @@ const request = {
         notifyOnFailed: true,
       });
       return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
+
+  download: async ({ entity, id }) => {
+    try {
+      includeToken();
+      const fileName = `${entity}-${id}.pdf`;
+      const response = await axios.get(`${DOWNLOAD_BASE_URL}${entity}/${fileName}`, {
+        responseType: 'blob',
+      });
+      const url = window.URL.createObjectURL(response.data);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      link.click();
+      window.URL.revokeObjectURL(url);
+      return true;
     } catch (error) {
       return errorHandler(error);
     }

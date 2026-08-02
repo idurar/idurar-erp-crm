@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
 export default function RecentTable({ ...props }) {
   const translate = useLanguage();
@@ -44,7 +43,7 @@ export default function RecentTable({ ...props }) {
     navigate(`/${entity}/update/${record._id}`);
   };
   const handleDownload = (record) => {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+    request.download({ entity, id: record._id });
   };
 
   dataTableColumns = [
