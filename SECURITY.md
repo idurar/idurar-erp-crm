@@ -29,23 +29,7 @@ This security policy covers the security of this repository and its code. If you
 
 5. **Disclosure**: We will coordinate with you regarding the public disclosure of the vulnerability. We aim to release a security advisory with information about the issue and the fix.
 
-6. **Credit**: If you report a vulnerability that is successfully fixed, we will credit you for your responsible disclosure in the security advisory unless you prefer to remain anonymous.
 
-#### Option 2: Reporting via Huntr.dev
-
-Alternatively, you can report vulnerabilities through [Huntr.dev](https://huntr.dev). Follow these steps:
-
-1. **Submit Report**: Create a report for this repository on Huntr.dev, providing details of the vulnerability. Include a link to this repository in your report.
-
-2. **Confirmation**: We will be notified of your report on Huntr.dev and will acknowledge it within [X] business days.
-
-3. **Investigation**: We will investigate the issue, which may involve reproducing the vulnerability or seeking further information from you.
-
-4. **Resolution**: Once the vulnerability is confirmed, we will work to address it promptly and develop a fix.
-
-5. **Disclosure**: We will coordinate with you regarding the public disclosure of the vulnerability. We aim to release a security advisory with information about the issue and the fix.
-
-6. **Credit**: If you report a vulnerability that is successfully fixed, we will credit you for your responsible disclosure in the security advisory unless you prefer to remain anonymous.
 
 ### Safe Harbor
 
