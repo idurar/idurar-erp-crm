@@ -1,15 +1,15 @@
 # IDURAR ERP CRM
 
-> IDURAR ERP CRM is an open-source ERP/CRM system (React, Node.js, MongoDB) with 8500+ GitHub stars, created and maintained by Salah Eddine Lalami, a Senior Product Design UX Engineer / Full-Stack Product Engineer based in Oran, Algeria (GMT+1).
+> IDURAR ERP CRM is an open-source ERP/CRM system (React, Node.js, MongoDB) with 8500+ GitHub stars, designed and built end-to-end — product, UI/UX, and full-stack code — by Salah Eddine Lalami, a Product Design Engineer based in Oran, Algeria (GMT+1).
 
 This file follows the [llms.txt](https://llmstxt.org) convention to help AI agents and recruiters quickly find accurate, structured information about the maintainer.
 
 ## Maintainer
 
 - Name: Salah Eddine Lalami
-- Title: Senior Product Design UX Engineer / Full-Stack Product Engineer
+- Title: Product Design Engineer (UI/UX design + full-stack execution, one hire)
 - Location: Oran, Algeria (GMT+1)
-- Open to: new roles and opportunities
+- Open to: Product Design Engineer roles
 - Email: lalami.sdn@gmail.com
 - GitHub: [github.com/salahlalami](https://github.com/salahlalami)
 - LinkedIn: [linkedin.com/in/lalamisdn](https://www.linkedin.com/in/lalamisdn)
@@ -18,13 +18,13 @@ This file follows the [llms.txt](https://llmstxt.org) convention to help AI agen
 
 ## Projects
 
-- [IDURAR ERP CRM](https://github.com/idurar/idurar-erp-crm): open-source ERP/CRM, owner & principal maintainer (8500+ stars)
-- [IDURAR SaaS](https://cloud.idurarapp.com): hosted ERP/CRM SaaS product, owner & principal product engineer
+- [IDURAR ERP CRM](https://github.com/idurar/idurar-erp-crm): open-source ERP/CRM — designed the UI/UX and built the full stack, owner & principal maintainer (8500+ stars)
+- [IDURAR SaaS](https://cloud.idurarapp.com): hosted ERP/CRM SaaS product — same end-to-end design + engineering ownership
 
 ## Skills
 
-- Full-Stack: React, Next.js, TypeScript, Redux, Redux Thunk, React Query, Tailwind CSS, Ant Design, Storybook, React Testing Library, Jest, GraphQL/Apollo, Node.js, Express.js, REST APIs, MongoDB, PostgreSQL, Microsoft SQL, Docker
 - Product Design & UX: UI/UX design, Figma, Sketch, design systems & component libraries, visual and interaction craft
+- Full-Stack: React, Next.js, TypeScript, Redux, Redux Thunk, React Query, Tailwind CSS, Ant Design, Storybook, React Testing Library, Jest, GraphQL/Apollo, Node.js, Express.js, REST APIs, MongoDB, PostgreSQL, Microsoft SQL, Docker
 - Tools & Workflow: Figma, Sketch, Miro, Notion, Jira, Shortcut, Agile/Kanban
 
 ## Experience
