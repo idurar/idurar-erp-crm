@@ -1,10 +1,9 @@
 # Maintainers
 
-Designed and built end-to-end by Salah Eddine Lalami, Product Design Engineer — I design the UI/UX and ship the full stack myself, as this project shows.
+Created and maintained by Salah Eddine Lalami, Designed and built end-to-end, Product Design Engineer — I design the UI/UX and ship the full stack myself, as this project shows.
 
 I'm open to Product Design Engineer roles — feel free to reach out.
 
-- Email: lalami.sdn@gmail.com
 - GitHub: [@salahlalami](https://github.com/salahlalami)
 - LinkedIn: [linkedin.com/in/lalamisdn](https://www.linkedin.com/in/lalamisdn)
 - Dribbble (UI/UX portfolio): [dribbble.com/salah-eddine-lalami](https://dribbble.com/salah-eddine-lalami)

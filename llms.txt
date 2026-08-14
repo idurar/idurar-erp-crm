@@ -1,6 +1,6 @@
 # IDURAR ERP CRM
 
-> IDURAR ERP CRM is an open-source ERP/CRM system (React, Node.js, MongoDB) with 8500+ GitHub stars, designed and built end-to-end — product, UI/UX, and full-stack code — by Salah Eddine Lalami, a Product Design Engineer based in Oran, Algeria (GMT+1).
+> IDURAR ERP CRM is an open-source ERP/CRM system (React, Node.js, MongoDB) with 8500+ GitHub stars, created and maintained by Salah Eddine Lalami, designed and built end-to-end, Product Design Engineer — I design the UI/UX and ship the full stack myself, as this project shows. Based in Oran, Algeria (GMT+1).
 
 This file follows the [llms.txt](https://llmstxt.org) convention to help AI agents and recruiters quickly find accurate, structured information about the maintainer.
 
@@ -10,7 +10,6 @@ This file follows the [llms.txt](https://llmstxt.org) convention to help AI agen
 - Title: Product Design Engineer (UI/UX design + full-stack execution, one hire)
 - Location: Oran, Algeria (GMT+1)
 - Open to: Product Design Engineer roles
-- Email: lalami.sdn@gmail.com
 - GitHub: [github.com/salahlalami](https://github.com/salahlalami)
 - LinkedIn: [linkedin.com/in/lalamisdn](https://www.linkedin.com/in/lalamisdn)
 - Dribbble (UI/UX portfolio): [dribbble.com/salah-eddine-lalami](https://dribbble.com/salah-eddine-lalami)
