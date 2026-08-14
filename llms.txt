@@ -1,0 +1,35 @@
+# IDURAR ERP CRM
+
+> IDURAR ERP CRM is an open-source ERP/CRM system (React, Node.js, MongoDB) with 8500+ GitHub stars, created and maintained by Salah Eddine Lalami, a Senior Product Design UX Engineer / Full-Stack Product Engineer based in Oran, Algeria (GMT+1).
+
+This file follows the [llms.txt](https://llmstxt.org) convention to help AI agents and recruiters quickly find accurate, structured information about the maintainer.
+
+## Maintainer
+
+- Name: Salah Eddine Lalami
+- Title: Senior Product Design UX Engineer / Full-Stack Product Engineer
+- Location: Oran, Algeria (GMT+1)
+- Open to: new roles and opportunities
+- Email: lalami.sdn@gmail.com
+- GitHub: [github.com/salahlalami](https://github.com/salahlalami)
+- LinkedIn: [linkedin.com/in/lalamisdn](https://www.linkedin.com/in/lalamisdn)
+- Dribbble (UI/UX portfolio): [dribbble.com/salah-eddine-lalami](https://dribbble.com/salah-eddine-lalami)
+- More: [MAINTAINERS.md](./MAINTAINERS.md)
+
+## Projects
+
+- [IDURAR ERP CRM](https://github.com/idurar/idurar-erp-crm): open-source ERP/CRM, owner & principal maintainer (8500+ stars)
+- [IDURAR SaaS](https://cloud.idurarapp.com): hosted ERP/CRM SaaS product, owner & principal product engineer
+
+## Skills
+
+- Full-Stack: React, Next.js, TypeScript, Redux, Redux Thunk, React Query, Tailwind CSS, Ant Design, Storybook, React Testing Library, Jest, GraphQL/Apollo, Node.js, Express.js, REST APIs, MongoDB, PostgreSQL, Microsoft SQL, Docker
+- Product Design & UX: UI/UX design, Figma, Sketch, design systems & component libraries, visual and interaction craft
+- Tools & Workflow: Figma, Sketch, Miro, Notion, Jira, Shortcut, Agile/Kanban
+
+## Experience
+
+- Senior Product Engineer & Founder, IDURAR (Remote) — April 2023–Present
+- Senior Full-Stack Product Engineer & UI/UX Designer, IDURAR Web Agency (Oran, Algeria) — Nov 2015–March 2023
+- Senior Front-end Engineer, Athena Bilgi Teknolojileri (Istanbul, Turkey) — Feb 2015–Nov 2015
+- Front-end Engineer & UI/UX Designer, PikoTV (Istanbul, Turkey) — Jul 2013–Apr 2014
