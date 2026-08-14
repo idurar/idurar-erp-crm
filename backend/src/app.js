@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: true,
+    origin: ["https://app.idurar.com", "http://localhost:3000"],
     credentials: true,
   })
 );
