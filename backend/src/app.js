@@ -18,12 +18,24 @@ const fileUpload = require('express-fileupload');
 // create our Express app
 const app = express();
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//   })
+// );
+
+const allowedOrigins = ['https://wonderful-sky-0ee46730f.2.azurestaticapps.net']; // or '*' for all origins
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+app.options('*', cors());
+
 
 app.use(cookieParser());
 app.use(express.json());
