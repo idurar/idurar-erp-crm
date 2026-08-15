@@ -1,6 +1,9 @@
 import { lazy } from 'react';
 
 import { Navigate } from 'react-router-dom';
+import RegisterPage from '@/pages/auth/RegisterPage';
+
+<Route path="/register" element={<RegisterPage />} />;
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
