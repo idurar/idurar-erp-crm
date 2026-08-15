@@ -1,5 +1,3 @@
-const { modelsFiles } = require('@/models/utils');
-
 const mongoose = require('mongoose');
 
 const create = require('./create');
@@ -13,7 +11,9 @@ const listAll = require('./listAll');
 const paginatedList = require('./paginatedList');
 
 const createCRUDController = (modelName) => {
-  if (!modelsFiles.includes(modelName)) {
+  const existingModels = Object.keys(mongoose.models);
+
+  if (!existingModels.includes(modelName)) {
     throw new Error(`Model ${modelName} does not exist`);
   }
 

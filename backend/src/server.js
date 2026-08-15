@@ -25,7 +25,7 @@ mongoose.connection.on('error', (error) => {
   console.error(`2. 🚫 Error → : ${error.message}`);
 });
 
-const modelsFiles = globSync('./src/models/**/*.js');
+const modelsFiles = globSync(path.join(__dirname, 'models/**/*.js'));
 
 for (const filePath of modelsFiles) {
   require(path.resolve(filePath));
