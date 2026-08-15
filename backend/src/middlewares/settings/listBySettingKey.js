@@ -1,3 +1,4 @@
+require("../../models/coreModels/Setting")
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('Setting');
