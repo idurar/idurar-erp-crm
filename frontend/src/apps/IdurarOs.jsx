@@ -7,15 +7,18 @@ import PageLoader from '@/components/PageLoader';
 import AuthRouter from '@/router/AuthRouter';
 import Localization from '@/locale/Localization';
 import { notification } from 'antd';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const ErpApp = lazy(() => import('./ErpApp'));
 
 const DefaultApp = () => (
   <Localization>
     <AppContextProvider>
+      <ErrorBoundary>
       <Suspense fallback={<PageLoader />}>
         <ErpApp />
       </Suspense>
+      </ErrorBoundary>
     </AppContextProvider>
   </Localization>
 );
