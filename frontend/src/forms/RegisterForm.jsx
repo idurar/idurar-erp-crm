@@ -1,112 +1,93 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Form, Input, Select } from 'antd';
+import React from 'react';
+import { Form, Input, Select, Button } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
 import { countryList } from '@/utils/countryList';
 
-export default function RegisterForm({ userLocation }) {
+export default function RegisterForm({ userLocation, onSubmit }) {
   const translate = useLanguage();
 
   return (
-    <>
+    <Form layout="vertical" onFinish={onSubmit}>
       <Form.Item
         name="name"
         label={translate('name')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+        rules={[{ required: true, message: 'Name is required' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} size="large" />
+        <Input
+          prefix={<UserOutlined />}
+          size="large"
+          placeholder={translate('name')}
+        />
       </Form.Item>
+
       <Form.Item
         name="email"
         label={translate('email')}
         rules={[
-          {
-            required: true,
-          },
-          {
-            type: 'email',
-          },
+          { required: true, message: 'Email is required' },
+          { type: 'email', message: 'Enter valid email' },
         ]}
       >
         <Input
-          prefix={<MailOutlined className="site-form-item-icon" />}
+          prefix={<MailOutlined />}
           type="email"
           size="large"
+          placeholder={translate('email')}
         />
       </Form.Item>
+
       <Form.Item
         name="password"
         label={translate('password')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+        rules={[{ required: true, message: 'Password is required' }]}
       >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
+        <Input.Password
+          prefix={<LockOutlined />}
+          size="large"
+          placeholder={translate('password')}
+        />
       </Form.Item>
-      {/* <Form.Item
-        name="confirm_password"
-        label={translate('confirm_password')}
-        rules={[
-          {
-            required: true,
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
-            },
-          }),
-        ]}
-        hasFeedback
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item> */}
+
       <Form.Item
-        label={translate('country')}
         name="country"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+        label={translate('country')}
         initialValue={userLocation}
+        rules={[{ required: true, message: 'Country is required' }]}
       >
         <Select
           showSearch
-          defaultOpen={false}
+          size="large"
           optionFilterProp="children"
           filterOption={(input, option) =>
             (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
           }
-          filterSort={(optionA, optionB) =>
-            (optionA?.label ?? '').toLowerCase().startsWith((optionB?.label ?? '').toLowerCase())
-          }
-          style={{
-            width: '100%',
-          }}
-          size="large"
         >
-          {countryList.map((language) => (
+          {countryList.map((country) => (
             <Select.Option
-              key={language.value}
-              value={language.value}
-              label={translate(language.label)}
+              key={country.value}
+              value={country.value}
+              label={translate(country.label)}
             >
-              {language?.icon && language?.icon + ' '}
-              {translate(language.label)}
+              {country.icon && country.icon + ' '}
+              {translate(country.label)}
             </Select.Option>
           ))}
         </Select>
       </Form.Item>
-    </>
+
+      {/* ✅ Submit button (ENTER works because of this) */}
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          size="large"
+          block
+        >
+          Register
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }
