@@ -1,4 +1,4 @@
-import { useProfileContext } from '@/context/profileContext';
+﻿import { useProfileContext } from '@/context/profileContext';
 import { generate as uniqueId } from 'shortid';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
@@ -90,3 +90,5 @@ const UpdateAdmin = ({ config }) => {
 };
 
 export default UpdateAdmin;
+
+
