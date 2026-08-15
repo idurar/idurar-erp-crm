@@ -9,3 +9,35 @@
 @import './partials/sidePanel.css';
 @import './partials/collapseBox.css';
 @import './partials/erp.css';
+/* ---------- AuthLayout responsive centering ---------- */
+
+/* outer container centers the auth area and stops it from growing too wide */
+.auth-layout .auth-container {
+  width: 100%;
+  max-width: 1200px;    /* change this number if you want wider/narrower */
+  margin: 0 auto;
+  padding: 32px;        /* keep some padding around content */
+  box-sizing: border-box;
+}
+
+/* inner form box — prevents form fields expanding too wide on large screens */
+.auth-layout .auth-box {
+  width: 100%;
+  max-width: 520px;     /* max width of the actual form card */
+  margin: 0 auto;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+/* small screens: ensure full width and small padding */
+@media (max-width: 768px) {
+  .auth-layout .auth-container { padding: 16px; }
+  .auth-layout .auth-box { padding: 6px; max-width: 100%; }
+}
+
+/* If using ant Layout.Content default padding, remove large padding for auth pages */
+.auth-layout .ant-layout {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
