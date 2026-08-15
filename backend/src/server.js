@@ -1,3 +1,9 @@
+// Set up module aliases
+const moduleAlias = require('module-alias');
+moduleAlias.addAliases({
+  '@': __dirname,
+});
+
 require('module-alias/register');
 const mongoose = require('mongoose');
 const { globSync } = require('glob');

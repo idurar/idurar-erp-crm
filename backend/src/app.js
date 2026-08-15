@@ -10,6 +10,8 @@ const coreApiRouter = require('./routes/coreRoutes/coreApi');
 const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
 const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
 const adminAuth = require('./controllers/coreControllers/adminAuth');
+// Temporarily comment out Google Auth to fix dependency issue
+// const googleAuth = require('./controllers/middlewaresControllers/createAuthMiddleware/googleAuth');
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
@@ -34,6 +36,9 @@ app.use(compression());
 // // default options
 // app.use(fileUpload());
 
+// Temporarily comment out Google Auth initialization
+// Initialize Google Authentication
+// googleAuth({ app, userModel: 'Admin' });
 // Here our API Routes
 
 app.use('/api', coreAuthRouter);
