@@ -445,6 +445,7 @@ const lang = {
   currencies: 'Currencies',
   payments_mode: 'Payments Mode',
   account_owner: 'Account Owner',
+  owner_accounts_cannot_be_deleted: 'Owner accounts cannot be deleted',
   create_only: 'Create Only',
   enter_code: 'Enter Code',
   offers: 'Offers',
