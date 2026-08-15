@@ -12,21 +12,42 @@ const useMoney = () => {
     ? money_format_settings
     : storePersist.get('settings')?.money_format_settings;
 
+  function formatIndianNumber(amount) {
+    const formatted = currency(amount, {
+      separator: '',
+      decimal: '.',
+      symbol: '',
+      precision: money_format_state?.cent_precision,
+    }).format();
+    const [integerPart, decimalPart] = formatted.split('.');
+    const sign = integerPart.startsWith('-') ? '-' : '';
+    const absoluteDigits = sign ? integerPart.slice(1) : integerPart;
+    if (absoluteDigits.length <= 3) {
+      return sign + absoluteDigits + (decimalPart ? money_format_state?.decimal_sep + decimalPart : '');
+    }
+    const lastThree = absoluteDigits.slice(-3);
+    const rest = absoluteDigits.slice(0, -3);
+    const groupedRest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, money_format_state?.thousand_sep || ',');
+    return (
+      sign + groupedRest + (groupedRest ? money_format_state?.thousand_sep : '') + lastThree +
+      (decimalPart ? money_format_state?.decimal_sep + decimalPart : '')
+    );
+  }
+
   function currencyFormat({ amount, currency_code = money_format_state?.currency_code }) {
-    return currency(amount).dollars() > 0 || !money_format_state?.zero_format
-      ? currency(amount, {
-          separator: money_format_state?.thousand_sep,
-          decimal: money_format_state?.decimal_sep,
-          symbol: '',
-          precision: money_format_state?.cent_precision,
-        }).format()
-      : 0 +
-          currency(amount, {
+    const formattedAmount =
+      currency_code?.toString().toUpperCase() === 'INR'
+        ? formatIndianNumber(amount)
+        : currency(amount, {
             separator: money_format_state?.thousand_sep,
             decimal: money_format_state?.decimal_sep,
             symbol: '',
             precision: money_format_state?.cent_precision,
           }).format();
+
+    return currency(amount).dollars() > 0 || !money_format_state?.zero_format
+      ? formattedAmount
+      : 0 + formattedAmount;
   }
 
   function moneyFormatter({ amount = 0, currency_code = money_format_state?.currency_code }) {
