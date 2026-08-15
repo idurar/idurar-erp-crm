@@ -56,6 +56,7 @@ const LoginPage = () => {
           </Form.Item>
         </Form>
       </Loading>
+      
     );
   };
 
@@ -63,3 +64,9 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+<p className="text-center text-gray-600 text-sm mt-4">
+  Don’t have an account?{" "}
+  <Link to="/signup" className="text-blue-500 hover:underline">
+    Create one
+  </Link>
+</p>
