@@ -9,3 +9,27 @@
 @import './partials/sidePanel.css';
 @import './partials/collapseBox.css';
 @import './partials/erp.css';
+
+/* src/App.css */
+body.light {
+    --background-color: white;
+    --text-color: black;
+  }
+  
+  body.dark {
+    --background-color: black;
+    --text-color: white;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  button {
+    margin: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
