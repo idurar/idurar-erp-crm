@@ -3,6 +3,8 @@ const login = require('./login');
 const logout = require('./logout');
 const forgetPassword = require('./forgetPassword');
 const resetPassword = require('./resetPassword');
+const register = require('./register');
+const googleAuth = require('./googleAuth');
 
 const createAuthMiddleware = (userModel) => {
   let authMethods = {};
@@ -14,6 +16,16 @@ const createAuthMiddleware = (userModel) => {
 
   authMethods.login = (req, res) =>
     login(req, res, {
+      userModel,
+    });
+
+  authMethods.register = (req, res) =>
+    register(req, res, {
+      userModel,
+    });
+
+  authMethods.googleAuth = (req, res) =>
+    googleAuth(req, res, {
       userModel,
     });
 

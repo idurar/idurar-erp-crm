@@ -32,6 +32,13 @@ const adminSchema = new Schema({
     default: 'owner',
     enum: ['owner'],
   },
+  isGoogleUser: {
+    type: Boolean,
+    default: false,
+  },
+  googleId: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Admin', adminSchema);
