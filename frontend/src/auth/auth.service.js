@@ -26,6 +26,50 @@ export const login = async ({ loginData }) => {
   }
 };
 
+export const googleLogin = async ({ idToken }) => {
+  try {
+    const response = await axios.post(
+      API_BASE_URL + `google/login?timestamp=${new Date().getTime()}`,
+      { idToken }
+    );
+
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    return errorHandler(error);
+  }
+};
+
+export const githubLogin = async ({ code }) => {
+  try {
+    const response = await axios.post(
+      API_BASE_URL + `github/login?timestamp=${new Date().getTime()}`,
+      { code }
+    );
+
+    const { status, data } = response;
+
+    successHandler(
+      { data, status },
+      {
+        notifyOnSuccess: false,
+        notifyOnFailed: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    return errorHandler(error);
+  }
+};
+
 export const register = async ({ registerData }) => {
   try {
     const response = await axios.post(API_BASE_URL + `register`, registerData);
