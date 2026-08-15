@@ -32,6 +32,9 @@ const adminSchema = new Schema({
     default: 'owner',
     enum: ['owner'],
   },
+   emailVerified: { type: Boolean, default: false },
+  emailVerificationToken: { type: String },
+  emailVerificationExpires: { type: Date },
 });
 
 module.exports = mongoose.model('Admin', adminSchema);
