@@ -33,7 +33,7 @@ const forgetPassword = async (req, res, { userModel }) => {
   }
 
   const user = await User.findOne({ email: email, removed: false });
-  const databasePassword = await UserPassword.findOne({ user: user._id, removed: false });
+ 
 
   // console.log(user);
   if (!user)
