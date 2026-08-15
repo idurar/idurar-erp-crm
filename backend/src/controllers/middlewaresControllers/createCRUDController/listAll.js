@@ -29,7 +29,7 @@ const listAll = async (Model, req, res) => {
       message: 'Successfully found all documents',
     });
   } else {
-    return res.status(203).json({
+    return res.status(200).json({
       success: false,
       result: [],
       message: 'Collection is Empty',

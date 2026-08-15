@@ -29,7 +29,7 @@ export default function SideContent() {
         />
 
         <Title level={1} style={{ fontSize: 28 }}>
-          Free Open Source ERP / CRM
+          Free Open Source ERP / CMR
         </Title>
         <Text>
           Accounting / Invoicing / Quote App <b /> based on Node.js React.js Ant Design

@@ -67,7 +67,7 @@ export default function Payment({ config, currentItem }) {
                 onClick={() => navigate(`/invoice/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
-                {translate('Show invoice')}
+                {translate('Show invoices')}
               </Button>,
             ]}
             style={{
