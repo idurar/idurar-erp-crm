@@ -1,39 +1,34 @@
-require('module-alias/register');
-const mongoose = require('mongoose');
-const { globSync } = require('glob');
+// src/server.js (CommonJS version)
+
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+const mongoose = require('mongoose');
+const express = require('express');
 
-// Make sure we are running node 7.6+
-const [major, minor] = process.versions.node.split('.').map(parseFloat);
-if (major < 20) {
-  console.log('Please upgrade your node.js version at least 20 or greater. 👌\n ');
-  process.exit();
-}
+const app = express();
+const PORT = process.env.PORT || 8888;
+const DATABASE = process.env.DATABASE;
 
-// import environmental variables from our variables.env file
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+console.log('DEBUG: Using Mongo URI =', DATABASE);
 
-mongoose.connect(process.env.DATABASE);
+mongoose.connect(DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => console.log('✅ Connected to MongoDB successfully!'))
+  .catch(err => console.error('❌ MongoDB connection error:', err.message));
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
-mongoose.connection.on('error', (error) => {
-  console.log(
-    `1. 🔥 Common Error caused issue → : check your .env file first and add your mongodb url`
-  );
-  console.error(`2. 🚫 Error → : ${error.message}`);
+app.get('/', (req, res) => {
+  res.send('Backend running successfully!');
 });
 
-const modelsFiles = globSync('./src/models/**/*.js');
+app.listen(PORT, () => console.log(`Express running → On PORT: ${PORT}`));
 
-for (const filePath of modelsFiles) {
-  require(path.resolve(filePath));
-}
 
-// Start our app!
-const app = require('./app');
-app.set('port', process.env.PORT || 8888);
-const server = app.listen(app.get('port'), () => {
-  console.log(`Express running → On PORT : ${server.address().port}`);
-});
+const passport = require('passport');
+const cors = require('cors');
+app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000', credentials: true }));
+app.use(passport.initialize());
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
+
