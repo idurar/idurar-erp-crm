@@ -1,0 +1,27 @@
+{
+  "name": "aman-school",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Aman School — Multi-tenant school-bus safety SaaS (monorepo)",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "backend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev -w backend",
+    "dev:mobile": "npm run start -w apps/mobile",
+    "dev:web": "npm run dev -w @aman-school/web",
+    "build:types": "npm run build -w @aman-school/types",
+    "build:api-client": "npm run build -w @aman-school/api-client",
+    "build:shared-ui": "npm run build -w @aman-school/shared-ui",
+    "build:web": "npm run build -w @aman-school/web"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "overrides": {
+    "react": "19.2.3",
+    "react-native-safe-area-context": "5.7.0"
+  }
+}

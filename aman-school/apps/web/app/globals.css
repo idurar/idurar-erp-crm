@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #0b2447;
+
+  /* Design tokens mirrored from packages/shared-ui/src/theme.ts so the web
+   * admin dashboard and the mobile app always agree on brand colors. */
+  --color-navy: #0b2447;
+  --color-gray-50: #f8f9fa;
+  --color-gray-100: #f1f3f4;
+  --color-gray-200: #e8eaed;
+  --color-gray-400: #9aa0a6;
+  --color-gray-600: #5f6368;
+  --color-gray-700: #3c4043;
+  --color-gray-900: #0f172a;
+
+  --grad-owner-from: #d97706;
+  --grad-owner-to: #92400e;
+  --grad-school_admin-from: #7c3aed;
+  --grad-school_admin-to: #5b21b6;
+  --grad-sysadmin-from: #475569;
+  --grad-sysadmin-to: #1e293b;
+  --grad-ops_room-from: #334155;
+  --grad-ops_room-to: #0f172a;
+  --grad-partner-from: #0891b2;
+  --grad-partner-to: #155e75;
+  --grad-regulator-from: #4f46e5;
+  --grad-regulator-to: #3730a3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-cairo);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-cairo), Arial, Helvetica, sans-serif;
+}
+
+.role-gradient-owner { background-image: linear-gradient(135deg, var(--grad-owner-from), var(--grad-owner-to)); }
+.role-gradient-school_admin { background-image: linear-gradient(135deg, var(--grad-school_admin-from), var(--grad-school_admin-to)); }
+.role-gradient-sysadmin { background-image: linear-gradient(135deg, var(--grad-sysadmin-from), var(--grad-sysadmin-to)); }
+.role-gradient-ops_room { background-image: linear-gradient(135deg, var(--grad-ops_room-from), var(--grad-ops_room-to)); }
+.role-gradient-partner { background-image: linear-gradient(135deg, var(--grad-partner-from), var(--grad-partner-to)); }
+.role-gradient-regulator { background-image: linear-gradient(135deg, var(--grad-regulator-from), var(--grad-regulator-to)); }
