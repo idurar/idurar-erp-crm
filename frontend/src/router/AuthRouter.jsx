@@ -5,6 +5,7 @@ import NotFound from '@/pages/NotFound';
 
 import ForgetPassword from '@/pages/ForgetPassword';
 import ResetPassword from '@/pages/ResetPassword';
+import Verify from '@/pages/Verify';
 
 import { useDispatch } from 'react-redux';
 
@@ -18,6 +19,7 @@ export default function AuthRouter() {
       <Route element={<Navigate to="/login" replace />} path="/logout" />
       <Route element={<ForgetPassword />} path="/forgetpassword" />
       <Route element={<ResetPassword />} path="/resetpassword/:userId/:resetToken" />
+      <Route element={<Verify />} path="/verify/:userId/:emailToken" />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
