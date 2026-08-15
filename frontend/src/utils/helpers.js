@@ -1,3 +1,5 @@
+import { getFormattedNumber, parsePhoneNumber, checkValidity } from 'react-phone-hooks';
+
 export function get(obj, key) {
   return key.split('.').reduce(function (o, x) {
     return o === undefined || o === null ? o : o[x];
@@ -108,8 +110,13 @@ export function formatDatetime(param) {
 /*
   Regex to validate phone number format
 */
-export const validatePhoneNumber = /^(?:[+\d()\-\s]+)$/;
-
-/*
- Set object value in html
-*/
+export const validatePhoneNumber = (_, rawValue) => {
+  let isValid;
+  if (rawValue?.valid) {
+    isValid = rawValue.valid();
+  } else {
+    isValid = checkValidity(parsePhoneNumber(getFormattedNumber(rawValue)));
+  }
+  if (isValid) return Promise.resolve();
+  return Promise.reject('Please enter a valid phone number');
+};

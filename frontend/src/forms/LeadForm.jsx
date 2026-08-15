@@ -1,6 +1,9 @@
 import { Form, Input, Select } from 'antd';
+import { getRawValue } from 'react-phone-hooks';
+import { validatePhoneNumber } from '@/utils/helpers';
 
 import useLanguage from '@/locale/useLanguage';
+import PhoneInput from 'antd-phone-input';
 
 export default function LeadForm() {
   const translate = useLanguage();
@@ -44,14 +47,18 @@ export default function LeadForm() {
 
       <Form.Item
         label={translate('phone')}
+        normalize={getRawValue}
         name="phone"
         rules={[
           {
             required: true,
           },
+          {
+            validator: validatePhoneNumber,
+          },
         ]}
       >
-        <Input type="tel" />
+        <PhoneInput />
       </Form.Item>
 
       <Form.Item
