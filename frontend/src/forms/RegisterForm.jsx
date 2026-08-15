@@ -40,16 +40,36 @@ export default function RegisterForm({ userLocation }) {
         />
       </Form.Item>
       <Form.Item
-        name="password"
-        label={translate('password')}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
-      </Form.Item>
+  name="password"
+  label={translate('password')}
+  rules={[
+    {
+      required: true,
+      message: 'Password is required',
+    },
+    {
+      validator: (_, value) => {
+        if (!value || value.trim().length === 0) {
+          return Promise.reject(new Error('Password cannot be empty or just spaces'));
+        }
+
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
+        if (!regex.test(value)) {
+          return Promise.reject(
+            new Error(
+              'Password must be at least 6 characters long and include at least one letter and one number'
+            )
+          );
+        }
+
+        return Promise.resolve();
+      },
+    },
+  ]}
+>
+  <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} size="large" />
+</Form.Item>
+
       {/* <Form.Item
         name="confirm_password"
         label={translate('confirm_password')}
