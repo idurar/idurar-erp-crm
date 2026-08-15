@@ -1,19 +1,10 @@
-import axios from 'axios';
-import { BASE_URL } from '@/config/serverApiConfig';
-export default async function checkImage(path) {
-  const result = await axios
-    .get(path, {
-      headers: {
-        'Access-Control-Allow-Origin': BASE_URL,
-      },
-    })
-    .then((response) => {
-      if (response.status === 200) return true;
-      else return false;
-    })
-    .catch(() => {
-      return false;
-    });
+import api from '@/request/httpTokenClient';
 
-  return result;
+export default async function checkImage(path) {
+  try {
+    const response = await api.get(path);
+    return response?.status === 200;
+  } catch {
+    return false;
+  }
 }
