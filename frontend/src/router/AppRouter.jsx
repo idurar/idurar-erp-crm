@@ -4,6 +4,7 @@ import {} from 'react-router-dom';
 import {} from 'react-router-dom';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 import { useAppContext } from '@/context/appContext';
+import ScrollToTop from '@/components/ScrollToTop';
 
 import routes from './routes';
 
@@ -40,5 +41,10 @@ export default function AppRouter() {
 
   let element = useRoutes(routesList);
 
-  return element;
+  return (
+    <>
+      <ScrollToTop />
+      {element}
+    </>
+  );
 }
