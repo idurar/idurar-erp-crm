@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Invoice');
+const Model = model('Invoice');
 
 const read = async (req, res) => {
   // Find document by id
@@ -27,4 +27,4 @@ const read = async (req, res) => {
   }
 };
 
-module.exports = read;
+export default read;

@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const mail = async (req, res) => {
   return res.status(200).json({
@@ -10,4 +10,4 @@ const mail = async (req, res) => {
   });
 };
 
-module.exports = mail;
+export default mail;

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Invoice');
-const ModelPayment = mongoose.model('Payment');
+const Model = model('Invoice');
+const ModelPayment = model('Payment');
 
 const remove = async (req, res) => {
   const deletedInvoice = await Model.findOneAndUpdate(
@@ -34,4 +34,4 @@ const remove = async (req, res) => {
   });
 };
 
-module.exports = remove;
+export default remove;

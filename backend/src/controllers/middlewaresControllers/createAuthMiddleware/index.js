@@ -1,8 +1,8 @@
-const isValidAuthToken = require('./isValidAuthToken');
-const login = require('./login');
-const logout = require('./logout');
-const forgetPassword = require('./forgetPassword');
-const resetPassword = require('./resetPassword');
+import isValidAuthToken from './isValidAuthToken';
+import login from './login';
+import logout from './logout';
+import forgetPassword from './forgetPassword';
+import resetPassword from './resetPassword';
 
 const createAuthMiddleware = (userModel) => {
   let authMethods = {};
@@ -34,4 +34,4 @@ const createAuthMiddleware = (userModel) => {
   return authMethods;
 };
 
-module.exports = createAuthMiddleware;
+export default createAuthMiddleware;

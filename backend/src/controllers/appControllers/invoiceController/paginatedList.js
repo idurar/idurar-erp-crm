@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Invoice');
+const Model = model('Invoice');
 
 const paginatedList = async (req, res) => {
   const page = req.query.page || 1;
@@ -64,4 +64,4 @@ const paginatedList = async (req, res) => {
   }
 };
 
-module.exports = paginatedList;
+export default paginatedList;

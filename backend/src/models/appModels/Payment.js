@@ -1,24 +1,24 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const paymentSchema = new mongoose.Schema({
+const paymentSchema = new Schema({
   removed: {
     type: Boolean,
     default: false,
   },
 
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
+  createdBy: { type: Schema.ObjectId, ref: 'Admin', autopopulate: true, required: true },
   number: {
     type: Number,
     required: true,
   },
   client: {
-    type: mongoose.Schema.ObjectId,
+    type: Schema.ObjectId,
     ref: 'Client',
     autopopulate: true,
     required: true,
   },
   invoice: {
-    type: mongoose.Schema.ObjectId,
+    type: Schema.ObjectId,
     ref: 'Invoice',
     required: true,
     autopopulate: true,
@@ -53,5 +53,5 @@ const paymentSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-paymentSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Payment', paymentSchema);
+paymentSchema.plugin(import('mongoose-autopopulate'));
+export default model('Payment', paymentSchema);

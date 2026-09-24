@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const settingSchema = new mongoose.Schema({
+const settingSchema = new Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -21,7 +21,7 @@ const settingSchema = new mongoose.Schema({
     required: true,
   },
   settingValue: {
-    type: mongoose.Schema.Types.Mixed,
+    type: Schema.Types.Mixed,
   },
   valueType: {
     type: String,
@@ -37,4 +37,4 @@ const settingSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Setting', settingSchema);
+export default model('Setting', settingSchema);

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
 const updateProfile = async (userModel, req, res) => {
-  const User = mongoose.model(userModel);
+  const User = model(userModel);
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
@@ -62,4 +62,4 @@ const updateProfile = async (userModel, req, res) => {
   });
 };
 
-module.exports = updateProfile;
+export default updateProfile;

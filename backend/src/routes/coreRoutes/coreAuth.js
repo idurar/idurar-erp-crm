@@ -1,9 +1,9 @@
-const express = require('express');
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
-const { catchErrors } = require('@/handlers/errorHandlers');
-const adminAuth = require('@/controllers/coreControllers/adminAuth');
+import { catchErrors } from '@/handlers/errorHandlers';
+import adminAuth from '@/controllers/coreControllers/adminAuth';
 
 router.route('/login').post(catchErrors(adminAuth.login));
 
@@ -12,4 +12,4 @@ router.route('/resetpassword').post(catchErrors(adminAuth.resetPassword));
 
 router.route('/logout').post(adminAuth.isValidAuthToken, catchErrors(adminAuth.logout));
 
-module.exports = router;
+export default router;

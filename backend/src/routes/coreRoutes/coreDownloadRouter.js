@@ -1,7 +1,7 @@
-const downloadPdf = require('@/handlers/downloadHandler/downloadPdf');
-const express = require('express');
+import downloadPdf from '@/handlers/downloadHandler/downloadPdf';
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
 router.route('/:directory/:file').get(function (req, res) {
   try {
@@ -18,4 +18,4 @@ router.route('/:directory/:file').get(function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Payment');
-const Invoice = mongoose.model('Invoice');
+const Model = model('Payment');
+const Invoice = model('Invoice');
 
 const remove = async (req, res) => {
   // Find document by id and updates with the required fields
@@ -64,4 +64,4 @@ const remove = async (req, res) => {
     message: 'Successfully Deleted the document ',
   });
 };
-module.exports = remove;
+export default remove;

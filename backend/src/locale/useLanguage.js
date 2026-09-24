@@ -1,4 +1,4 @@
-const { readBySettingKey } = require('@/middlewares/settings');
+import { readBySettingKey } from '@/middlewares/settings';
 
 const getLabel = (lang, key) => {
   try {
@@ -27,7 +27,7 @@ const getLabel = (lang, key) => {
 const useSelector = () => {
   const defaultfilePath = `./translation/en_us`;
 
-  const langFile = require(defaultfilePath);
+  const langFile = import(defaultfilePath);
   return langFile;
 };
 
@@ -40,4 +40,4 @@ const useLanguage = ({ selectedLang }) => {
   return translate;
 };
 
-module.exports = useLanguage;
+export default useLanguage;

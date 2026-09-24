@@ -1,13 +1,13 @@
-const express = require('express');
+import { Router } from 'express';
 
-const { catchErrors } = require('@/handlers/errorHandlers');
+import { catchErrors } from '@/handlers/errorHandlers';
 
-const router = express.Router();
+const router = Router();
 
-const adminController = require('@/controllers/coreControllers/adminController');
-const settingController = require('@/controllers/coreControllers/settingController');
+import adminController from '@/controllers/coreControllers/adminController';
+import settingController from '@/controllers/coreControllers/settingController';
 
-const { singleStorageUpload } = require('@/middlewares/uploadMiddleware');
+import { singleStorageUpload } from '@/middlewares/uploadMiddleware';
 
 // //_______________________________ Admin management_______________________________
 
@@ -49,4 +49,4 @@ router
     catchErrors(settingController.updateBySettingKey)
   );
 router.route('/setting/updateManySetting').patch(catchErrors(settingController.updateManySetting));
-module.exports = router;
+export default router;

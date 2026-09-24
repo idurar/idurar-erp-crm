@@ -6,4 +6,4 @@ const mail = async (req, res) => {
   });
 };
 
-module.exports = mail;
+export default mail;

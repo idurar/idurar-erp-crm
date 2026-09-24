@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const invoiceSchema = new mongoose.Schema({
+const invoiceSchema = new Schema({
   removed: {
     type: Boolean,
     default: false,
   },
 
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  createdBy: { type: Schema.ObjectId, ref: 'Admin', required: true },
   number: {
     type: Number,
     required: true,
@@ -29,7 +29,7 @@ const invoiceSchema = new mongoose.Schema({
     required: true,
   },
   client: {
-    type: mongoose.Schema.ObjectId,
+    type: Schema.ObjectId,
     ref: 'Client',
     required: true,
     autopopulate: true,
@@ -40,11 +40,11 @@ const invoiceSchema = new mongoose.Schema({
       enum: ['quote', 'offer'],
     },
     offer: {
-      type: mongoose.Schema.ObjectId,
+      type: Schema.ObjectId,
       ref: 'Offer',
     },
     quote: {
-      type: mongoose.Schema.ObjectId,
+      type: Schema.ObjectId,
       ref: 'Quote',
     },
   },
@@ -125,7 +125,7 @@ const invoiceSchema = new mongoose.Schema({
   },
   payment: [
     {
-      type: mongoose.Schema.ObjectId,
+      type: Schema.ObjectId,
       ref: 'Payment',
     },
   ],
@@ -175,5 +175,5 @@ const invoiceSchema = new mongoose.Schema({
   },
 });
 
-invoiceSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Invoice', invoiceSchema);
+invoiceSchema.plugin(import('mongoose-autopopulate'));
+export default model('Invoice', invoiceSchema);

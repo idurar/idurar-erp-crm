@@ -1,4 +1,4 @@
-const currency = require('currency.js');
+import currency from 'currency.js';
 
 const useMoney = ({ settings }) => {
   const {
@@ -49,4 +49,4 @@ const useMoney = ({ settings }) => {
   };
 };
 
-module.exports = useMoney;
+export default useMoney;

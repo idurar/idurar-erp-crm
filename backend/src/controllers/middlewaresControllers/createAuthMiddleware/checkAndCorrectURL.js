@@ -1,4 +1,3 @@
-function checkAndCorrectURL(url) {
   // detect if it has http or https:
   const hasHttps = url.startsWith('https://');
 
@@ -12,4 +11,4 @@ function checkAndCorrectURL(url) {
   return httpType + url;
 }
 
-module.exports = checkAndCorrectURL;
+export default checkAndCorrectURL;

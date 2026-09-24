@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Setting');
+const Model = model('Setting');
 
 const listBySettingKey = async (req, res) => {
   // Find document by id
@@ -47,4 +47,4 @@ const listBySettingKey = async (req, res) => {
   }
 };
 
-module.exports = listBySettingKey;
+export default listBySettingKey;

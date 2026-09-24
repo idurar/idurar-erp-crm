@@ -5,4 +5,4 @@ const useAppSettings = () => {
   return settings;
 };
 
-module.exports = useAppSettings;
+export default useAppSettings;

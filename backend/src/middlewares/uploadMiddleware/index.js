@@ -1,7 +1,7 @@
-const singleStorageUpload = require('./singleStorageUpload');
-const LocalSingleStorage = require('./LocalSingleStorage');
+import singleStorageUpload from './singleStorageUpload';
+import LocalSingleStorage from './LocalSingleStorage';
 
-module.exports = {
+export default {
   singleStorageUpload,
   LocalSingleStorage,
 };

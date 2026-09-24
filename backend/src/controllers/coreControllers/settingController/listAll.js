@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Model = mongoose.model('Setting');
+import { model } from 'mongoose';
+const Model = model('Setting');
 
 const listAll = async (req, res) => {
   const sort = parseInt(req.query.sort) || 'desc';
@@ -25,4 +25,4 @@ const listAll = async (req, res) => {
   }
 };
 
-module.exports = listAll;
+export default listAll;

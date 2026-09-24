@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, SchemaTypes, model } from 'mongoose';
 
-const uploadSchema = new mongoose.Schema({
+const uploadSchema = new Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -53,7 +53,7 @@ const uploadSchema = new mongoose.Schema({
     required: true,
   },
   userID: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: SchemaTypes.ObjectId,
     required: true,
   },
   isSecure: {
@@ -70,4 +70,4 @@ const uploadSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Upload ', uploadSchema);
+export default model('Upload ', uploadSchema);

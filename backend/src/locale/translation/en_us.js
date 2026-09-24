@@ -1,452 +1,446 @@
-module.exports = {
-  sign_up: 'Sign Up',
-  manage_your_company_with: 'Manage Your Company With',
-  all_in_one_tool: 'All In One Tool',
-  run_and_scale_your_erp_crm_apps: 'Run And Scale Your Erp Crm Apps',
-  easily_add_and_manage_your_services: 'Easily Add And Manage Your Services',
-  it_brings_together_your_invoice_clients_and_leads:
-    'It Brings Together Your Invoice Clients And Leads',
-  select_language: 'Select Language',
-  register: 'Register',
-  or: 'Or',
-  already_have_account_login: 'Already Have Account Login',
-  name: 'Name',
-  email: 'Email',
-  password: 'Password',
-  country: 'Country',
-  afghanistan: 'Afghanistan',
-  albania: 'Albania',
-  algeria: 'Algeria',
-  andorra: 'Andorra',
-  angola: 'Angola',
-  anguilla: 'Anguilla',
-  argentina: 'Argentina',
-  armenia: 'Armenia',
-  aruba: 'Aruba',
-  australia: 'Australia',
-  austria: 'Austria',
-  azerbaijan: 'Azerbaijan',
-  bahamas: 'Bahamas',
-  bahrain: 'Bahrain',
-  bangladesh: 'Bangladesh',
-  barbados: 'Barbados',
-  belarus: 'Belarus',
-  belgium: 'Belgium',
-  belize: 'Belize',
-  benin: 'Benin',
-  bermuda: 'Bermuda',
-  bhutan: 'Bhutan',
-  bolivia: 'Bolivia',
-  bosnia_and_herzegovina: 'Bosnia And Herzegovina',
-  botswana: 'Botswana',
-  brazil: 'Brazil',
-  brunei_darussalam: 'Brunei Darussalam',
-  bulgaria: 'Bulgaria',
-  burkina_faso: 'Burkina Faso',
-  burundi: 'Burundi',
-  cabo_verde: 'Cabo Verde',
-  cambodia: 'Cambodia',
-  cameroon: 'Cameroon',
-  canada: 'Canada',
-  central_african_republic: 'Central African Republic',
-  chad: 'Chad',
-  chile: 'Chile',
-  china: 'China',
-  colombia: 'Colombia',
-  comoros: 'Comoros',
-  congo: 'Congo',
-  costa_rica: 'Costa Rica',
-  croatia: 'Croatia',
-  cuba: 'Cuba',
-  cyprus: 'Cyprus',
-  czechia: 'Czechia',
-  cote_d_ivoire: 'Cote D Ivoire',
-  denmark: 'Denmark',
-  djibouti: 'Djibouti',
-  dominica: 'Dominica',
-  dominican_republic: 'Dominican Republic',
-  ecuador: 'Ecuador',
-  egypt: 'Egypt',
-  el_salvador: 'El Salvador',
-  eritrea: 'Eritrea',
-  estonia: 'Estonia',
-  eswatini: 'Eswatini',
-  ethiopia: 'Ethiopia',
-  fiji: 'Fiji',
-  finland: 'Finland',
-  france: 'France',
-  gabon: 'Gabon',
-  gambia: 'Gambia',
-  georgia: 'Georgia',
-  germany: 'Germany',
-  ghana: 'Ghana',
-  gibraltar: 'Gibraltar',
-  greece: 'Greece',
-  greenland: 'Greenland',
-  guadeloupe: 'Guadeloupe',
-  guam: 'Guam',
-  guatemala: 'Guatemala',
-  guernsey: 'Guernsey',
-  guinea: 'Guinea',
-  guinea_bissau: 'Guinea Bissau',
-  guyana: 'Guyana',
-  haiti: 'Haiti',
-  honduras: 'Honduras',
-  hong_kong: 'Hong Kong',
-  hungary: 'Hungary',
-  iceland: 'Iceland',
-  india: 'India',
-  indonesia: 'Indonesia',
-  iran: 'Iran',
-  iraq: 'Iraq',
-  ireland: 'Ireland',
-  israel: 'Israel',
-  italy: 'Italy',
-  jamaica: 'Jamaica',
-  japan: 'Japan',
-  jordan: 'Jordan',
-  kazakhstan: 'Kazakhstan',
-  kenya: 'Kenya',
-  korea: 'Korea',
-  kuwait: 'Kuwait',
-  kyrgyzstan: 'Kyrgyzstan',
-  latvia: 'Latvia',
-  lebanon: 'Lebanon',
-  lesotho: 'Lesotho',
-  liberia: 'Liberia',
-  libya: 'Libya',
-  liechtenstein: 'Liechtenstein',
-  lithuania: 'Lithuania',
-  luxembourg: 'Luxembourg',
-  madagascar: 'Madagascar',
-  malawi: 'Malawi',
-  malaysia: 'Malaysia',
-  maldives: 'Maldives',
-  mali: 'Mali',
-  malta: 'Malta',
-  martinique: 'Martinique',
-  mauritania: 'Mauritania',
-  mauritius: 'Mauritius',
-  mexico: 'Mexico',
-  moldova: 'Moldova',
-  monaco: 'Monaco',
-  mongolia: 'Mongolia',
-  montenegro: 'Montenegro',
-  montserrat: 'Montserrat',
-  morocco: 'Morocco',
-  mozambique: 'Mozambique',
-  myanmar: 'Myanmar',
-  namibia: 'Namibia',
-  nepal: 'Nepal',
-  netherlands: 'Netherlands',
-  new_caledonia: 'New Caledonia',
-  new_zealand: 'New Zealand',
-  nicaragua: 'Nicaragua',
-  niger: 'Niger',
-  nigeria: 'Nigeria',
-  norway: 'Norway',
-  oman: 'Oman',
-  pakistan: 'Pakistan',
-  palestine: 'Palestine',
-  panama: 'Panama',
-  papua_new_guinea: 'Papua New Guinea',
-  paraguay: 'Paraguay',
-  peru: 'Peru',
-  philippines: 'Philippines',
-  poland: 'Poland',
-  portugal: 'Portugal',
-  puerto_rico: 'Puerto Rico',
-  qatar: 'Qatar',
-  macedonia: 'Macedonia',
-  romania: 'Romania',
-  russia: 'Russia',
-  rwanda: 'Rwanda',
-  r_union: 'R Union',
-  saudi_arabia: 'Saudi Arabia',
-  senegal: 'Senegal',
-  serbia: 'Serbia',
-  singapore: 'Singapore',
-  slovakia: 'Slovakia',
-  slovenia: 'Slovenia',
-  somalia: 'Somalia',
-  south_africa: 'South Africa',
-  south_sudan: 'South Sudan',
-  spain: 'Spain',
-  sri_lanka: 'Sri Lanka',
-  sudan: 'Sudan',
-  suriname: 'Suriname',
-  sweden: 'Sweden',
-  switzerland: 'Switzerland',
-  syria: 'Syria',
-  taiwan: 'Taiwan',
-  tajikistan: 'Tajikistan',
-  tanzania: 'Tanzania',
-  thailand: 'Thailand',
-  timor_leste: 'Timor Leste',
-  togo: 'Togo',
-  tonga: 'Tonga',
-  tunisia: 'Tunisia',
-  turkey: 'Turkey',
-  turkmenistan: 'Turkmenistan',
-  uganda: 'Uganda',
-  ukraine: 'Ukraine',
-  united_arab_emirates: 'United Arab Emirates',
-  united_kingdom: 'United Kingdom',
-  united_states: 'United States',
-  uruguay: 'Uruguay',
-  uzbekistan: 'Uzbekistan',
-  venezuela: 'Venezuela',
-  vietnam: 'Vietnam',
-  yemen: 'Yemen',
-  zambia: 'Zambia',
-  zimbabwe: 'Zimbabwe',
-  verify_your_account: 'Verify Your Account',
-  check_your_email_address_to_verify_your_account:
-    'Check Your Email Address To Verify Your Account',
-  complete_verification_by_providing_the_code_that_you_received_by_email:
-    'Complete Verification By Providing The Code That You Received By Email',
-  verify_now: 'Verify Now',
-  dashboard: 'Dashboard',
-  customer: 'Customer',
-  people: 'People',
-  company: 'Company',
-  lead: 'Lead',
-  offer: 'Offer',
-  invoice: 'Invoice',
-  quote: 'Quote',
-  payment: 'Payment',
-  product: 'Product',
-  product_category: 'Product Category',
-  expense: 'Expense',
-  expenses_category: 'Expenses Category',
-  settings: 'Settings',
-  admin: 'Admin',
-  currency: 'Currency',
-  payment_mode: 'Payment Mode',
-  taxes: 'Taxes',
-  about: 'About',
-  profile_settings: 'Profile Settings',
-  app_settings: 'App Settings',
-  logout: 'Logout',
-  number: 'Number',
-  client: 'Client',
-  total: 'Total',
-  status: 'Status',
-  invoices_preview: 'Invoices Preview',
-  quotes_preview: 'Quotes Preview',
-  offers_preview: 'Offers Preview',
-  payments_preview: 'Payments Preview',
-  this_month: 'This Month',
-  unpaid: 'Unpaid',
-  not_paid: 'Not Paid',
-  recent_invoices: 'Recent Invoices',
-  recent_quotes: 'Recent Quotes',
-  customer_preview: 'Customer Preview',
-  show: 'Show',
-  edit: 'Edit',
-  download: 'Download',
-  draft: 'Draft',
-  pending: 'Pending',
-  sent: 'Sent',
-  declined: 'Declined',
-  accepted: 'Accepted',
-  expired: 'Expired',
-  new_customer_this_month: 'New Customer This Month',
-  active_customer: 'Active Customer',
-  overdue: 'Overdue',
-  partially: 'Partially',
-  paid: 'Paid',
-  sign_in: 'Sign In',
-  log_in: 'Log In',
-  register_now: 'Register Now',
-  remember_me: 'Remember Me',
-  forgot_password: 'Forgot Password',
-  forget_password: 'Forget Password',
-  request_new_password: 'Request New Password',
-  password_reset_in_progress: 'Password Reset In Progress',
-  check_your_email_address_to_reset_your_password:
-    'Check Your Email Address To Reset Your Password',
-  login: 'Login',
-  reset_password: 'Reset Password',
-  update_password: 'Update Password',
-  profile: 'Profile',
-  first_name: 'First Name',
-  last_name: 'Last Name',
-  role: 'Role',
-  close: 'Close',
-  save: 'Save',
-  photo: 'Photo',
-  click_to_upload: 'Click To Upload',
-  new_password: 'New Password',
-  confirm_password: 'Confirm Password',
-  general_settings: 'General Settings',
-  company_settings: 'Company Settings',
-  company_logo: 'Company Logo',
-  currency_settings: 'Currency Settings',
-  finance_settings: 'Finance Settings',
-  settings_list: 'Settings List',
-  add_new_settings: 'Add New Settings',
-  update_your_app_configuration: 'Update Your App Configuration',
-  language: 'Language',
-  date_format: 'Date Format',
-  update_your_company_informations: 'Update Your Company Informations',
-  company_name: 'Company Name',
-  company_address: 'Company Address',
-  company_state: 'Company State',
-  company_country: 'Company Country',
-  company_email: 'Company Email',
-  company_phone: 'Company Phone',
-  company_cell: 'Company Cell',
-  company_website: 'Company Website',
-  company_tax_number: 'Company Tax Number',
-  company_vat_number: 'Company Vat Number',
-  company_reg_number: 'Company Reg Number',
-  update_company_logo: 'Update Company Logo',
-  money_format_settings: 'Money Format Settings',
-  default_currency: 'Default Currency',
-  select_default_currency: 'Select Default Currency',
-  update_company_finance_settings: 'Update Company Finance Settings',
-  last_invoice_number: 'Last Invoice Number',
-  last_quote_number: 'Last Quote Number',
-  last_offer_number: 'Last Offer Number',
-  last_payment_number: 'Last Payment Number',
-  client_list: 'Client List',
-  add_new_client: 'Add New Client',
-  delete: 'Delete',
-  type: 'Type',
-  phone: 'Phone',
-  refresh: 'Refresh',
-  are_you_sure_you_want_to_delete: 'Are You Sure You Want To Delete',
-  delete_confirmation: 'Delete Confirmation',
-  remove: 'Remove',
-  cancel: 'Cancel',
-  select_date: 'Select Date',
-  add_new_person: 'Add New Person',
-  add_new_company: 'Add New Company',
-  submit: 'Submit',
-  person: 'Person',
-  people_list: 'People List',
-  firstname: 'Firstname',
-  lastname: 'Lastname',
-  company_list: 'Company List',
-  contact: 'Contact',
-  website: 'Website',
-  lead_list: 'Lead List',
-  add_new_lead: 'Add New Lead',
-  source: 'Source',
-  notes: 'Notes',
-  new: 'New',
-  in_negociation: 'In Negociation',
-  won: 'Won',
-  loose: 'Loose',
-  canceled: 'Canceled',
-  assigned: 'Assigned',
-  on_hold: 'On Hold',
-  waiting: 'Waiting',
-  linkedin: 'Linkedin',
-  social_media: 'Social Media',
-  advertising: 'Advertising',
-  friend: 'Friend',
-  professionals_network: 'Professionals Network',
-  customer_referral: 'Customer Referral',
-  sales: 'Sales',
-  other: 'Other',
-  add_new: 'Add New',
-  date: 'Date',
-  sub_total: 'Sub Total',
-  note: 'Note',
-  offer_list: 'Offer List',
-  add_new_offer: 'Add New Offer',
-  year: 'Year',
-  expire_date: 'Expire Date',
-  item: 'Item',
-  description: 'Description',
-  quantity: 'Quantity',
-  price: 'Price',
-  add_new_tax: 'Add New Tax',
-  select_tax_value: 'Select Tax Value',
-  add_field: 'Add Field',
-  error_404: 'Error 404',
-  sorry_the_page_you_requested_does_not_exist: 'Sorry The Page You Requested Does Not Exist',
-  back: 'Back',
-  download_pdf: 'Download Pdf',
-  send_by_email: 'Send By Email',
-  convert_to_invoice: 'Convert To Invoice',
-  subtotal: 'Subtotal',
-  address: 'Address',
-  update: 'Update',
-  expired_date: 'Expired Date',
-  created_by: 'Created By',
-  invoice_list: 'Invoice List',
-  add_new_invoice: 'Add New Invoice',
-  record_payment: 'Record Payment',
-  tax_total: 'Tax Total',
-  show_invoice: 'Show Invoice',
-  payment_status: 'Payment Status',
-  discount: 'Discount',
-  amount: 'Amount',
-  reference: 'Reference',
-  add_payment_mode: 'Add Payment Mode',
-  quote_list: 'Quote List',
-  add_new_quote: 'Add New Quote',
-  payment_list: 'Payment List',
-  add_new_payment: 'Add New Payment',
-  payment_information: 'Payment Information',
-  total_paid: 'Total Paid',
-  total_remaining: 'Total Remaining',
-  product_list: 'Product List',
-  add_new_product: 'Add New Product',
-  ref: 'Ref',
-  product_category_list: 'Product Category List',
-  add_new_product_category: 'Add New Product Category',
-  color: 'Color',
-  enabled: 'Enabled',
-  expense_list: 'Expense List',
-  add_new_expense: 'Add New Expense',
-  expense_category: 'Expense Category',
-  expense_category_list: 'Expense Category List',
-  add_new_expense_category: 'Add New Expense Category',
-  admin_list: 'Admin List',
-  add_new_admin: 'Add New Admin',
-  admin_super_admin: 'Admin Super Admin',
-  staff_admin_crud: 'Staff Admin Crud',
-  staff_cru: 'Staff Cru',
-  create_and_read_only: 'Create And Read Only',
-  read_only: 'Read Only',
-  currency_list: 'Currency List',
-  add_new_currency: 'Add New Currency',
-  currency_name: 'Currency Name',
-  currency_code: 'Currency Code',
-  currency_symbol: 'Currency Symbol',
-  currency_position: 'Currency Position',
-  decimal_separator: 'Decimal Separator',
-  thousand_separator: 'Thousand Separator',
-  cent_precision: 'Cent Precision',
-  zero_format: 'Zero Format',
-  default: 'Default',
-  payment_mode_list: 'Payment Mode List',
-  add_new_payment_mode: 'Add New Payment Mode',
-  default_mode: 'Default Mode',
-  value: 'Value',
-  taxes_list: 'Taxes List',
-  do_you_need_help_on_customize_of_this_app: 'Do You Need Help On Customize Of This App',
-  contact_us: 'Contact Us',
-  customers: 'Customers',
-  peoples: 'Peoples',
-  companies: 'Companies',
-  leads: 'Leads',
-  offer_leads: 'Offer Leads',
-  invoices: 'Invoices',
-  quotes: 'Quotes',
-  payments: 'Payments',
-  products: 'Products',
-  products_category: 'Products Category',
-  expenses: 'Expenses',
-  currencies: 'Currencies',
-  payments_mode: 'Payments Mode',
-  account_owner: 'Account Owner',
-  create_only: 'Create Only',
-  enter_code: 'Enter Code',
-  offers: 'Offers',
-  proforma_invoices: 'quote',
-};
+export const sign_up = 'Sign Up';
+export const manage_your_company_with = 'Manage Your Company With';
+export const all_in_one_tool = 'All In One Tool';
+export const run_and_scale_your_erp_crm_apps = 'Run And Scale Your Erp Crm Apps';
+export const easily_add_and_manage_your_services = 'Easily Add And Manage Your Services';
+export const it_brings_together_your_invoice_clients_and_leads = 'It Brings Together Your Invoice Clients And Leads';
+export const select_language = 'Select Language';
+export const register = 'Register';
+export const or = 'Or';
+export const already_have_account_login = 'Already Have Account Login';
+export const name = 'Name';
+export const email = 'Email';
+export const password = 'Password';
+export const country = 'Country';
+export const afghanistan = 'Afghanistan';
+export const albania = 'Albania';
+export const algeria = 'Algeria';
+export const andorra = 'Andorra';
+export const angola = 'Angola';
+export const anguilla = 'Anguilla';
+export const argentina = 'Argentina';
+export const armenia = 'Armenia';
+export const aruba = 'Aruba';
+export const australia = 'Australia';
+export const austria = 'Austria';
+export const azerbaijan = 'Azerbaijan';
+export const bahamas = 'Bahamas';
+export const bahrain = 'Bahrain';
+export const bangladesh = 'Bangladesh';
+export const barbados = 'Barbados';
+export const belarus = 'Belarus';
+export const belgium = 'Belgium';
+export const belize = 'Belize';
+export const benin = 'Benin';
+export const bermuda = 'Bermuda';
+export const bhutan = 'Bhutan';
+export const bolivia = 'Bolivia';
+export const bosnia_and_herzegovina = 'Bosnia And Herzegovina';
+export const botswana = 'Botswana';
+export const brazil = 'Brazil';
+export const brunei_darussalam = 'Brunei Darussalam';
+export const bulgaria = 'Bulgaria';
+export const burkina_faso = 'Burkina Faso';
+export const burundi = 'Burundi';
+export const cabo_verde = 'Cabo Verde';
+export const cambodia = 'Cambodia';
+export const cameroon = 'Cameroon';
+export const canada = 'Canada';
+export const central_african_republic = 'Central African Republic';
+export const chad = 'Chad';
+export const chile = 'Chile';
+export const china = 'China';
+export const colombia = 'Colombia';
+export const comoros = 'Comoros';
+export const congo = 'Congo';
+export const costa_rica = 'Costa Rica';
+export const croatia = 'Croatia';
+export const cuba = 'Cuba';
+export const cyprus = 'Cyprus';
+export const czechia = 'Czechia';
+export const cote_d_ivoire = 'Cote D Ivoire';
+export const denmark = 'Denmark';
+export const djibouti = 'Djibouti';
+export const dominica = 'Dominica';
+export const dominican_republic = 'Dominican Republic';
+export const ecuador = 'Ecuador';
+export const egypt = 'Egypt';
+export const el_salvador = 'El Salvador';
+export const eritrea = 'Eritrea';
+export const estonia = 'Estonia';
+export const eswatini = 'Eswatini';
+export const ethiopia = 'Ethiopia';
+export const fiji = 'Fiji';
+export const finland = 'Finland';
+export const france = 'France';
+export const gabon = 'Gabon';
+export const gambia = 'Gambia';
+export const georgia = 'Georgia';
+export const germany = 'Germany';
+export const ghana = 'Ghana';
+export const gibraltar = 'Gibraltar';
+export const greece = 'Greece';
+export const greenland = 'Greenland';
+export const guadeloupe = 'Guadeloupe';
+export const guam = 'Guam';
+export const guatemala = 'Guatemala';
+export const guernsey = 'Guernsey';
+export const guinea = 'Guinea';
+export const guinea_bissau = 'Guinea Bissau';
+export const guyana = 'Guyana';
+export const haiti = 'Haiti';
+export const honduras = 'Honduras';
+export const hong_kong = 'Hong Kong';
+export const hungary = 'Hungary';
+export const iceland = 'Iceland';
+export const india = 'India';
+export const indonesia = 'Indonesia';
+export const iran = 'Iran';
+export const iraq = 'Iraq';
+export const ireland = 'Ireland';
+export const israel = 'Israel';
+export const italy = 'Italy';
+export const jamaica = 'Jamaica';
+export const japan = 'Japan';
+export const jordan = 'Jordan';
+export const kazakhstan = 'Kazakhstan';
+export const kenya = 'Kenya';
+export const korea = 'Korea';
+export const kuwait = 'Kuwait';
+export const kyrgyzstan = 'Kyrgyzstan';
+export const latvia = 'Latvia';
+export const lebanon = 'Lebanon';
+export const lesotho = 'Lesotho';
+export const liberia = 'Liberia';
+export const libya = 'Libya';
+export const liechtenstein = 'Liechtenstein';
+export const lithuania = 'Lithuania';
+export const luxembourg = 'Luxembourg';
+export const madagascar = 'Madagascar';
+export const malawi = 'Malawi';
+export const malaysia = 'Malaysia';
+export const maldives = 'Maldives';
+export const mali = 'Mali';
+export const malta = 'Malta';
+export const martinique = 'Martinique';
+export const mauritania = 'Mauritania';
+export const mauritius = 'Mauritius';
+export const mexico = 'Mexico';
+export const moldova = 'Moldova';
+export const monaco = 'Monaco';
+export const mongolia = 'Mongolia';
+export const montenegro = 'Montenegro';
+export const montserrat = 'Montserrat';
+export const morocco = 'Morocco';
+export const mozambique = 'Mozambique';
+export const myanmar = 'Myanmar';
+export const namibia = 'Namibia';
+export const nepal = 'Nepal';
+export const netherlands = 'Netherlands';
+export const new_caledonia = 'New Caledonia';
+export const new_zealand = 'New Zealand';
+export const nicaragua = 'Nicaragua';
+export const niger = 'Niger';
+export const nigeria = 'Nigeria';
+export const norway = 'Norway';
+export const oman = 'Oman';
+export const pakistan = 'Pakistan';
+export const palestine = 'Palestine';
+export const panama = 'Panama';
+export const papua_new_guinea = 'Papua New Guinea';
+export const paraguay = 'Paraguay';
+export const peru = 'Peru';
+export const philippines = 'Philippines';
+export const poland = 'Poland';
+export const portugal = 'Portugal';
+export const puerto_rico = 'Puerto Rico';
+export const qatar = 'Qatar';
+export const macedonia = 'Macedonia';
+export const romania = 'Romania';
+export const russia = 'Russia';
+export const rwanda = 'Rwanda';
+export const r_union = 'R Union';
+export const saudi_arabia = 'Saudi Arabia';
+export const senegal = 'Senegal';
+export const serbia = 'Serbia';
+export const singapore = 'Singapore';
+export const slovakia = 'Slovakia';
+export const slovenia = 'Slovenia';
+export const somalia = 'Somalia';
+export const south_africa = 'South Africa';
+export const south_sudan = 'South Sudan';
+export const spain = 'Spain';
+export const sri_lanka = 'Sri Lanka';
+export const sudan = 'Sudan';
+export const suriname = 'Suriname';
+export const sweden = 'Sweden';
+export const switzerland = 'Switzerland';
+export const syria = 'Syria';
+export const taiwan = 'Taiwan';
+export const tajikistan = 'Tajikistan';
+export const tanzania = 'Tanzania';
+export const thailand = 'Thailand';
+export const timor_leste = 'Timor Leste';
+export const togo = 'Togo';
+export const tonga = 'Tonga';
+export const tunisia = 'Tunisia';
+export const turkey = 'Turkey';
+export const turkmenistan = 'Turkmenistan';
+export const uganda = 'Uganda';
+export const ukraine = 'Ukraine';
+export const united_arab_emirates = 'United Arab Emirates';
+export const united_kingdom = 'United Kingdom';
+export const united_states = 'United States';
+export const uruguay = 'Uruguay';
+export const uzbekistan = 'Uzbekistan';
+export const venezuela = 'Venezuela';
+export const vietnam = 'Vietnam';
+export const yemen = 'Yemen';
+export const zambia = 'Zambia';
+export const zimbabwe = 'Zimbabwe';
+export const verify_your_account = 'Verify Your Account';
+export const check_your_email_address_to_verify_your_account = 'Check Your Email Address To Verify Your Account';
+export const complete_verification_by_providing_the_code_that_you_received_by_email = 'Complete Verification By Providing The Code That You Received By Email';
+export const verify_now = 'Verify Now';
+export const dashboard = 'Dashboard';
+export const customer = 'Customer';
+export const people = 'People';
+export const company = 'Company';
+export const lead = 'Lead';
+export const offer = 'Offer';
+export const invoice = 'Invoice';
+export const quote = 'Quote';
+export const payment = 'Payment';
+export const product = 'Product';
+export const product_category = 'Product Category';
+export const expense = 'Expense';
+export const expenses_category = 'Expenses Category';
+export const settings = 'Settings';
+export const admin = 'Admin';
+export const currency = 'Currency';
+export const payment_mode = 'Payment Mode';
+export const taxes = 'Taxes';
+export const about = 'About';
+export const profile_settings = 'Profile Settings';
+export const app_settings = 'App Settings';
+export const logout = 'Logout';
+export const number = 'Number';
+export const client = 'Client';
+export const total = 'Total';
+export const status = 'Status';
+export const invoices_preview = 'Invoices Preview';
+export const quotes_preview = 'Quotes Preview';
+export const offers_preview = 'Offers Preview';
+export const payments_preview = 'Payments Preview';
+export const this_month = 'This Month';
+export const unpaid = 'Unpaid';
+export const not_paid = 'Not Paid';
+export const recent_invoices = 'Recent Invoices';
+export const recent_quotes = 'Recent Quotes';
+export const customer_preview = 'Customer Preview';
+export const show = 'Show';
+export const edit = 'Edit';
+export const download = 'Download';
+export const draft = 'Draft';
+export const pending = 'Pending';
+export const sent = 'Sent';
+export const declined = 'Declined';
+export const accepted = 'Accepted';
+export const expired = 'Expired';
+export const new_customer_this_month = 'New Customer This Month';
+export const active_customer = 'Active Customer';
+export const overdue = 'Overdue';
+export const partially = 'Partially';
+export const paid = 'Paid';
+export const sign_in = 'Sign In';
+export const log_in = 'Log In';
+export const register_now = 'Register Now';
+export const remember_me = 'Remember Me';
+export const forgot_password = 'Forgot Password';
+export const forget_password = 'Forget Password';
+export const request_new_password = 'Request New Password';
+export const password_reset_in_progress = 'Password Reset In Progress';
+export const check_your_email_address_to_reset_your_password = 'Check Your Email Address To Reset Your Password';
+export const login = 'Login';
+export const reset_password = 'Reset Password';
+export const update_password = 'Update Password';
+export const profile = 'Profile';
+export const first_name = 'First Name';
+export const last_name = 'Last Name';
+export const role = 'Role';
+export const close = 'Close';
+export const save = 'Save';
+export const photo = 'Photo';
+export const click_to_upload = 'Click To Upload';
+export const new_password = 'New Password';
+export const confirm_password = 'Confirm Password';
+export const general_settings = 'General Settings';
+export const company_settings = 'Company Settings';
+export const company_logo = 'Company Logo';
+export const currency_settings = 'Currency Settings';
+export const finance_settings = 'Finance Settings';
+export const settings_list = 'Settings List';
+export const add_new_settings = 'Add New Settings';
+export const update_your_app_configuration = 'Update Your App Configuration';
+export const language = 'Language';
+export const date_format = 'Date Format';
+export const update_your_company_informations = 'Update Your Company Informations';
+export const company_name = 'Company Name';
+export const company_address = 'Company Address';
+export const company_state = 'Company State';
+export const company_country = 'Company Country';
+export const company_email = 'Company Email';
+export const company_phone = 'Company Phone';
+export const company_cell = 'Company Cell';
+export const company_website = 'Company Website';
+export const company_tax_number = 'Company Tax Number';
+export const company_vat_number = 'Company Vat Number';
+export const company_reg_number = 'Company Reg Number';
+export const update_company_logo = 'Update Company Logo';
+export const money_format_settings = 'Money Format Settings';
+export const default_currency = 'Default Currency';
+export const select_default_currency = 'Select Default Currency';
+export const update_company_finance_settings = 'Update Company Finance Settings';
+export const last_invoice_number = 'Last Invoice Number';
+export const last_quote_number = 'Last Quote Number';
+export const last_offer_number = 'Last Offer Number';
+export const last_payment_number = 'Last Payment Number';
+export const client_list = 'Client List';
+export const add_new_client = 'Add New Client';
+export const delete = 'Delete';
+export const type = 'Type';
+export const phone = 'Phone';
+export const refresh = 'Refresh';
+export const are_you_sure_you_want_to_delete = 'Are You Sure You Want To Delete';
+export const delete_confirmation = 'Delete Confirmation';
+export const remove = 'Remove';
+export const cancel = 'Cancel';
+export const select_date = 'Select Date';
+export const add_new_person = 'Add New Person';
+export const add_new_company = 'Add New Company';
+export const submit = 'Submit';
+export const person = 'Person';
+export const people_list = 'People List';
+export const firstname = 'Firstname';
+export const lastname = 'Lastname';
+export const company_list = 'Company List';
+export const contact = 'Contact';
+export const website = 'Website';
+export const lead_list = 'Lead List';
+export const add_new_lead = 'Add New Lead';
+export const source = 'Source';
+export const notes = 'Notes';
+export const new = 'New';
+export const in_negociation = 'In Negociation';
+export const won = 'Won';
+export const loose = 'Loose';
+export const canceled = 'Canceled';
+export const assigned = 'Assigned';
+export const on_hold = 'On Hold';
+export const waiting = 'Waiting';
+export const linkedin = 'Linkedin';
+export const social_media = 'Social Media';
+export const advertising = 'Advertising';
+export const friend = 'Friend';
+export const professionals_network = 'Professionals Network';
+export const customer_referral = 'Customer Referral';
+export const sales = 'Sales';
+export const other = 'Other';
+export const add_new = 'Add New';
+export const date = 'Date';
+export const sub_total = 'Sub Total';
+export const note = 'Note';
+export const offer_list = 'Offer List';
+export const add_new_offer = 'Add New Offer';
+export const year = 'Year';
+export const expire_date = 'Expire Date';
+export const item = 'Item';
+export const description = 'Description';
+export const quantity = 'Quantity';
+export const price = 'Price';
+export const add_new_tax = 'Add New Tax';
+export const select_tax_value = 'Select Tax Value';
+export const add_field = 'Add Field';
+export const error_404 = 'Error 404';
+export const sorry_the_page_you_requested_does_not_exist = 'Sorry The Page You Requested Does Not Exist';
+export const back = 'Back';
+export const download_pdf = 'Download Pdf';
+export const send_by_email = 'Send By Email';
+export const convert_to_invoice = 'Convert To Invoice';
+export const subtotal = 'Subtotal';
+export const address = 'Address';
+export const update = 'Update';
+export const expired_date = 'Expired Date';
+export const created_by = 'Created By';
+export const invoice_list = 'Invoice List';
+export const add_new_invoice = 'Add New Invoice';
+export const record_payment = 'Record Payment';
+export const tax_total = 'Tax Total';
+export const show_invoice = 'Show Invoice';
+export const payment_status = 'Payment Status';
+export const discount = 'Discount';
+export const amount = 'Amount';
+export const reference = 'Reference';
+export const add_payment_mode = 'Add Payment Mode';
+export const quote_list = 'Quote List';
+export const add_new_quote = 'Add New Quote';
+export const payment_list = 'Payment List';
+export const add_new_payment = 'Add New Payment';
+export const payment_information = 'Payment Information';
+export const total_paid = 'Total Paid';
+export const total_remaining = 'Total Remaining';
+export const product_list = 'Product List';
+export const add_new_product = 'Add New Product';
+export const ref = 'Ref';
+export const product_category_list = 'Product Category List';
+export const add_new_product_category = 'Add New Product Category';
+export const color = 'Color';
+export const enabled = 'Enabled';
+export const expense_list = 'Expense List';
+export const add_new_expense = 'Add New Expense';
+export const expense_category = 'Expense Category';
+export const expense_category_list = 'Expense Category List';
+export const add_new_expense_category = 'Add New Expense Category';
+export const admin_list = 'Admin List';
+export const add_new_admin = 'Add New Admin';
+export const admin_super_admin = 'Admin Super Admin';
+export const staff_admin_crud = 'Staff Admin Crud';
+export const staff_cru = 'Staff Cru';
+export const create_and_read_only = 'Create And Read Only';
+export const read_only = 'Read Only';
+export const currency_list = 'Currency List';
+export const add_new_currency = 'Add New Currency';
+export const currency_name = 'Currency Name';
+export const currency_code = 'Currency Code';
+export const currency_symbol = 'Currency Symbol';
+export const currency_position = 'Currency Position';
+export const decimal_separator = 'Decimal Separator';
+export const thousand_separator = 'Thousand Separator';
+export const cent_precision = 'Cent Precision';
+export const zero_format = 'Zero Format';
+export const default = 'Default';
+export const payment_mode_list = 'Payment Mode List';
+export const add_new_payment_mode = 'Add New Payment Mode';
+export const default_mode = 'Default Mode';
+export const value = 'Value';
+export const taxes_list = 'Taxes List';
+export const do_you_need_help_on_customize_of_this_app = 'Do You Need Help On Customize Of This App';
+export const contact_us = 'Contact Us';
+export const customers = 'Customers';
+export const peoples = 'Peoples';
+export const companies = 'Companies';
+export const leads = 'Leads';
+export const offer_leads = 'Offer Leads';
+export const invoices = 'Invoices';
+export const quotes = 'Quotes';
+export const payments = 'Payments';
+export const products = 'Products';
+export const products_category = 'Products Category';
+export const expenses = 'Expenses';
+export const currencies = 'Currencies';
+export const payments_mode = 'Payments Mode';
+export const account_owner = 'Account Owner';
+export const create_only = 'Create Only';
+export const enter_code = 'Enter Code';
+export const offers = 'Offers';
+export const proforma_invoices = 'quote';

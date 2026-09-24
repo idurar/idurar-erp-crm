@@ -1,26 +1,26 @@
-const Joi = require('joi');
-const schema = Joi.object({
-  client: Joi.alternatives().try(Joi.string(), Joi.object()).required(),
-  number: Joi.number().required(),
-  year: Joi.number().required(),
-  status: Joi.string().required(),
-  notes: Joi.string().allow(''),
-  expiredDate: Joi.date().required(),
-  date: Joi.date().required(),
+import { object, alternatives, string, number as _number, date as _date, array } from 'joi';
+const schema = object({
+  client: alternatives().try(string(), object()).required(),
+  number: _number().required(),
+  year: _number().required(),
+  status: string().required(),
+  notes: string().allow(''),
+  expiredDate: _date().required(),
+  date: _date().required(),
   // array cannot be empty
-  items: Joi.array()
+  items: array()
     .items(
-      Joi.object({
-        _id: Joi.string().allow('').optional(),
-        itemName: Joi.string().required(),
-        description: Joi.string().allow(''),
-        quantity: Joi.number().required(),
-        price: Joi.number().required(),
-        total: Joi.number().required(),
+      object({
+        _id: string().allow('').optional(),
+        itemName: string().required(),
+        description: string().allow(''),
+        quantity: _number().required(),
+        price: _number().required(),
+        total: _number().required(),
       }).required()
     )
     .required(),
-  taxRate: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
+  taxRate: alternatives().try(_number(), string()).required(),
 });
 
-module.exports = schema;
+export default schema;

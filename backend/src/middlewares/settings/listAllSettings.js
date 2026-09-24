@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Setting');
+const Model = model('Setting');
 
 const listAllSettings = async () => {
   try {
@@ -19,4 +19,4 @@ const listAllSettings = async () => {
   }
 };
 
-module.exports = listAllSettings;
+export default listAllSettings;

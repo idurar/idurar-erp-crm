@@ -77,4 +77,4 @@ const fileFilterMiddleware = ({ type = 'default', mimetype }) => {
   }
 };
 
-module.exports = fileFilterMiddleware;
+export default fileFilterMiddleware;

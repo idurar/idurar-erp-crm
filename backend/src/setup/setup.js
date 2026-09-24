@@ -1,16 +1,16 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
-const { globSync } = require('glob');
-const fs = require('fs');
-const { generate: uniqueId } = require('shortid');
+import('dotenv').config({ path: '.env' });
+import('dotenv').config({ path: '.env.local' });
+import { globSync } from 'glob';
+import { readFileSync } from 'fs';
+import { generate as uniqueId } from 'shortid';
 
-const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE);
+import { connect } from 'mongoose';
+connect(process.env.DATABASE);
 
 async function setupApp() {
   try {
-    const Admin = require('../models/coreModels/Admin');
-    const AdminPassword = require('../models/coreModels/AdminPassword');
+    const Admin = await import('../models/coreModels/Admin');
+    const AdminPassword = await import('../models/coreModels/AdminPassword');
     const newAdminPassword = new AdminPassword();
 
     const salt = uniqueId();
@@ -36,14 +36,14 @@ async function setupApp() {
 
     console.log('👍 Admin created : Done!');
 
-    const Setting = require('../models/coreModels/Setting');
+    const Setting = await import('../models/coreModels/Setting');
 
     const settingFiles = [];
 
     const settingsFiles = globSync('./src/setup/defaultSettings/**/*.json');
 
     for (const filePath of settingsFiles) {
-      const file = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      const file = JSON.parse(readFileSync(filePath, 'utf-8'));
       settingFiles.push(...file);
     }
 
@@ -51,8 +51,8 @@ async function setupApp() {
 
     console.log('👍 Settings created : Done!');
 
-    const PaymentMode = require('../models/appModels/PaymentMode');
-    const Taxes = require('../models/appModels/Taxes');
+    const PaymentMode = await import('../models/appModels/PaymentMode');
+    const Taxes = await import('../models/appModels/Taxes');
 
     await Taxes.insertMany([{ taxName: 'Tax 0%', taxValue: '0', isDefault: true }]);
     console.log('👍 Taxes created : Done!');

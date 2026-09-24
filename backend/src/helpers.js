@@ -3,13 +3,12 @@
 */
 
 // FS is a built in module to node that let's us read files from the system we're running on
-const fs = require('fs');
-
-const currency = require('currency.js');
+import fs from "fs";
+import currency from "./utils/currency"
 
 // moment.js is a handy library for displaying dates. We need this in our templates to display things like "Posted 5 minutes ago"
-exports.moment = require('moment');
-
+import moment from 'moment';
+export { moment };
 // Making a static map is really long - this is a handy helper function to make one
 
 // inserting an SVG

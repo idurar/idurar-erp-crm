@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Setting');
+const Model = model('Setting');
 
 const updateBySettingKey = async (req, res) => {
   const settingKey = req.params.settingKey || undefined;
@@ -46,4 +46,4 @@ const updateBySettingKey = async (req, res) => {
   }
 };
 
-module.exports = updateBySettingKey;
+export default updateBySettingKey;

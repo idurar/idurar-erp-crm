@@ -1,13 +1,13 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const Joi = require('joi');
-const mongoose = require('mongoose');
+import { sign } from 'jsonwebtoken';
+import { hashSync } from 'bcryptjs';
+import { object, string } from 'joi';
+import { model } from 'mongoose';
 
-const shortid = require('shortid');
+import { generate } from 'shortid';
 
 const resetPassword = async (req, res, { userModel }) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
-  const User = mongoose.model(userModel);
+  const UserPassword = model(userModel + 'Password');
+  const User = model(userModel);
   const { password, userId, resetToken } = req.body;
 
   const databasePassword = await UserPassword.findOne({ user: userId, removed: false });
@@ -36,10 +36,10 @@ const resetPassword = async (req, res, { userModel }) => {
     });
 
   // validate
-  const objectSchema = Joi.object({
-    password: Joi.string().required(),
-    userId: Joi.string().required(),
-    resetToken: Joi.string().required(),
+  const objectSchema = object({
+    password: string().required(),
+    userId: string().required(),
+    resetToken: string().required(),
   });
 
   const { error, value } = objectSchema.validate({ password, userId, resetToken });
@@ -53,11 +53,11 @@ const resetPassword = async (req, res, { userModel }) => {
     });
   }
 
-  const salt = shortid.generate();
-  const hashedPassword = bcrypt.hashSync(salt + password);
-  const emailToken = shortid.generate();
+  const salt = generate();
+  const hashedPassword = hashSync(salt + password);
+  const emailToken = generate();
 
-  const token = jwt.sign(
+  const token = sign(
     {
       id: userId,
     },
@@ -72,7 +72,7 @@ const resetPassword = async (req, res, { userModel }) => {
       password: hashedPassword,
       salt: salt,
       emailToken: emailToken,
-      resetToken: shortid.generate(),
+      resetToken: generate(),
       emailVerified: true,
     },
     {
@@ -110,4 +110,4 @@ const resetPassword = async (req, res, { userModel }) => {
     });
 };
 
-module.exports = resetPassword;
+export default resetPassword;

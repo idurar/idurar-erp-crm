@@ -1,7 +1,7 @@
-require('module-alias/register');
-const mongoose = require('mongoose');
-const { globSync } = require('glob');
-const path = require('path');
+import 'module-alias/register';
+import { connect, connection } from 'mongoose';
+import { globSync } from 'glob';
+import { resolve } from 'path';
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -11,14 +11,14 @@ if (major < 20) {
 }
 
 // import environmental variables from our variables.env file
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+import('dotenv').config({ path: '.env' });
+import('dotenv').config({ path: '.env.local' });
 
-mongoose.connect(process.env.DATABASE);
+connect(process.env.DATABASE);
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-mongoose.connection.on('error', (error) => {
+connection.on('error', (error) => {
   console.log(
     `1. 🔥 Common Error caused issue → : check your .env file first and add your mongodb url`
   );
@@ -28,11 +28,11 @@ mongoose.connection.on('error', (error) => {
 const modelsFiles = globSync('./src/models/**/*.js');
 
 for (const filePath of modelsFiles) {
-  require(path.resolve(filePath));
+  import(resolve(filePath));
 }
 
 // Start our app!
-const app = require('./app');
+import app from './app';
 app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running → On PORT : ${server.address().port}`);

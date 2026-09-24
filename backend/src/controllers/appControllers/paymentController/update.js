@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Payment');
-const Invoice = mongoose.model('Invoice');
-const custom = require('@/controllers/pdfController');
+const Model = model('Payment');
+const Invoice = model('Invoice');
+import custom from '@/controllers/pdfController';
 
-const { calculate } = require('@/helpers');
+import { calculate } from '@/helpers';
 
 const update = async (req, res) => {
   if (req.body.amount === 0) {
@@ -83,4 +83,4 @@ const update = async (req, res) => {
   });
 };
 
-module.exports = update;
+export default update;

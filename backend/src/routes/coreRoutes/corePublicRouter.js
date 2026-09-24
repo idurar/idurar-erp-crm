@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const path = require('path');
-const { isPathInside } = require('../../utils/is-path-inside');
+import { join } from 'path';
+import { isPathInside } from '../../utils/is-path-inside';
 
 router.route('/:subPath/:directory/:file').get(function (req, res) {
   try {
@@ -14,11 +14,11 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
     const decodedFile = decodeURIComponent(file);
 
     // Define the trusted root directory
-    const rootDir = path.join(__dirname, '../../public');
+    const rootDir = join(__dirname, '../../public');
 
     // Safely join the decoded path segments
-    const relativePath = path.join(decodedSubPath, decodedDirectory, decodedFile);
-    const absolutePath = path.join(rootDir, relativePath);
+    const relativePath = join(decodedSubPath, decodedDirectory, decodedFile);
+    const absolutePath = join(rootDir, relativePath);
 
     // Check if the resulting path stays inside rootDir
     if (!isPathInside(absolutePath, rootDir)) {
@@ -47,4 +47,4 @@ router.route('/:subPath/:directory/:file').get(function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

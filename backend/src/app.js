@@ -1,20 +1,20 @@
-const express = require('express');
+import express, { json, urlencoded } from 'express';
 
-const cors = require('cors');
-const compression = require('compression');
+import cors from 'cors';
+import compression from 'compression';
 
-const cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser';
 
-const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
-const coreApiRouter = require('./routes/coreRoutes/coreApi');
-const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
-const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
-const adminAuth = require('./controllers/coreControllers/adminAuth');
+import coreAuthRouter from './routes/coreRoutes/coreAuth';
+import coreApiRouter from './routes/coreRoutes/coreApi';
+import coreDownloadRouter from './routes/coreRoutes/coreDownloadRouter';
+import corePublicRouter from './routes/coreRoutes/corePublicRouter';
+import { isValidAuthToken } from './controllers/coreControllers/adminAuth';
 
-const errorHandlers = require('./handlers/errorHandlers');
-const erpApiRouter = require('./routes/appRoutes/appApi');
+import { notFound, productionErrors } from './handlers/errorHandlers';
+import erpApiRouter from './routes/appRoutes/appApi';
 
-const fileUpload = require('express-fileupload');
+import fileUpload from 'express-fileupload';
 // create our Express app
 const app = express();
 
@@ -26,8 +26,8 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 app.use(compression());
 
@@ -37,16 +37,16 @@ app.use(compression());
 // Here our API Routes
 
 app.use('/api', coreAuthRouter);
-app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
-app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
+app.use('/api', isValidAuthToken, coreApiRouter);
+app.use('/api', isValidAuthToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler
-app.use(errorHandlers.notFound);
+app.use(notFound);
 
 // production error handler
-app.use(errorHandlers.productionErrors);
+app.use(productionErrors);
 
 // done! we export it so we can start the site in start.js
-module.exports = app;
+export default app;

@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Invoice');
+const Model = model('Invoice');
 
-const custom = require('@/controllers/pdfController');
+import custom from '@/controllers/pdfController';
 
-const { calculate } = require('@/helpers');
-const schema = require('./schemaValidate');
+import { calculate } from '@/helpers';
+import schema from './schemaValidate';
 
 const update = async (req, res) => {
   let body = req.body;
@@ -80,4 +80,4 @@ const update = async (req, res) => {
   });
 };
 
-module.exports = update;
+export default update;

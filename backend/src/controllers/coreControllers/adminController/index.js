@@ -1,2 +1,2 @@
-const createUserController = require('@/controllers/middlewaresControllers/createUserController');
-module.exports = createUserController('Admin');
+import createUserController from '@/controllers/middlewaresControllers/createUserController';
+export default createUserController('Admin');

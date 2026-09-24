@@ -1,9 +1,9 @@
-exports.passwordVerfication = ({
+export function passwordVerfication({
   title = 'Reset your Password',
   name = '',
   link = '',
   time = new Date(),
-}) => {
+}) {
   return `
     <div>
 
@@ -25,4 +25,4 @@ exports.passwordVerfication = ({
         </body>
     </div>
     `;
-};
+}

@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-exports.getData = ({ model }) => {
-  const Model = mongoose.model(model);
+import { model as _model } from 'mongoose';
+export function getData({ model }) {
+  const Model = _model(model);
   const result = Model.find({ removed: false, enabled: true });
   return result;
-};
+}
 
-exports.getOne = ({ model, id }) => {
-  const Model = mongoose.model(model);
+export function getOne({ model, id }) {
+  const Model = _model(model);
   const result = Model.findOne({ _id: id, removed: false });
   return result;
-};
+}

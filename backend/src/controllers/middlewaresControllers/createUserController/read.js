@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
 const read = async (userModel, req, res) => {
-  const User = mongoose.model(userModel);
+  const User = model(userModel);
 
   // Find document by id
   const tmpResult = await User.findOne({
@@ -35,4 +35,4 @@ const read = async (userModel, req, res) => {
   }
 };
 
-module.exports = read;
+export default read;

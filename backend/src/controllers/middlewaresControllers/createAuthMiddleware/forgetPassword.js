@@ -1,22 +1,22 @@
-const Joi = require('joi');
+import { object, string } from 'joi';
 
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const checkAndCorrectURL = require('./checkAndCorrectURL');
-const sendMail = require('./sendMail');
-const shortid = require('shortid');
-const { loadSettings } = require('@/middlewares/settings');
+import checkAndCorrectURL from './checkAndCorrectURL';
+import sendMail from './sendMail';
+import { generate } from 'shortid';
+import { loadSettings } from '@/middlewares/settings';
 
-const { useAppSettings } = require('@/settings');
+import { useAppSettings } from '@/settings';
 
 const forgetPassword = async (req, res, { userModel }) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
-  const User = mongoose.model(userModel);
+  const UserPassword = model(userModel + 'Password');
+  const User = model(userModel);
   const { email } = req.body;
 
   // validate
-  const objectSchema = Joi.object({
-    email: Joi.string()
+  const objectSchema = object({
+    email: string()
       .email({ tlds: { allow: true } })
       .required(),
   });
@@ -43,7 +43,7 @@ const forgetPassword = async (req, res, { userModel }) => {
       message: 'No account with this email has been registered.',
     });
 
-  const resetToken = shortid.generate();
+  const resetToken = generate();
   await UserPassword.findOneAndUpdate(
     { user: user._id },
     { resetToken },
@@ -76,4 +76,4 @@ const forgetPassword = async (req, res, { userModel }) => {
   });
 };
 
-module.exports = forgetPassword;
+export default forgetPassword;

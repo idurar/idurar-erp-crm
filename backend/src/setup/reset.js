@@ -1,15 +1,15 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+import('dotenv').config({ path: '.env' });
+import('dotenv').config({ path: '.env.local' });
 
-const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE);
+import { connect } from 'mongoose';
+connect(process.env.DATABASE);
 
 async function deleteData() {
-  const Admin = require('../models/coreModels/Admin');
-  const AdminPassword = require('../models/coreModels/AdminPassword');
-  const Setting = require('../models/coreModels/Setting');
-  const PaymentMode = require('../models/appModels/PaymentMode');
-  const Taxes = require('../models/appModels/Taxes');
+  const Admin = await import('../models/coreModels/Admin');
+  const AdminPassword = await import('../models/coreModels/AdminPassword');
+  const Setting = await import('../models/coreModels/Setting');
+  const PaymentMode = await import('../models/appModels/PaymentMode');
+  const Taxes = await import('../models/appModels/Taxes');
 
   await Admin.deleteMany();
   await AdminPassword.deleteMany();

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Setting');
+const Model = model('Setting');
 
 const updateManySetting = async (req, res) => {
   // req/body = [{settingKey:"",settingValue}]
@@ -55,4 +55,4 @@ const updateManySetting = async (req, res) => {
   }
 };
 
-module.exports = updateManySetting;
+export default updateManySetting;

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Setting');
+const Model = model('Setting');
 
 const readBySettingKey = async (req, res) => {
   // Find document by id
@@ -35,4 +35,4 @@ const readBySettingKey = async (req, res) => {
   }
 };
 
-module.exports = readBySettingKey;
+export default readBySettingKey;

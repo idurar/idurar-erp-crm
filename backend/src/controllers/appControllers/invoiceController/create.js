@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Invoice');
+const Model = model('Invoice');
 
-const { calculate } = require('@/helpers');
-const { increaseBySettingKey } = require('@/middlewares/settings');
-const schema = require('./schemaValidate');
+import { calculate } from '@/helpers';
+import { increaseBySettingKey } from '@/middlewares/settings';
+import { validate } from './schemaValidate';
 
 const create = async (req, res) => {
   let body = req.body;
 
-  const { error, value } = schema.validate(body);
+  const { error, value } = validate(body);
   if (error) {
     const { details } = error;
     return res.status(400).json({
@@ -71,4 +71,4 @@ const create = async (req, res) => {
   });
 };
 
-module.exports = create;
+export default create;

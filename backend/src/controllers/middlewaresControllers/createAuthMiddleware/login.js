@@ -1,20 +1,20 @@
-const Joi = require('joi');
+import { object, string } from 'joi';
 
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const authUser = require('./authUser');
+import authUser from './authUser';
 
 const login = async (req, res, { userModel }) => {
-  const UserPasswordModel = mongoose.model(userModel + 'Password');
-  const UserModel = mongoose.model(userModel);
+  const UserPasswordModel = model(userModel + 'Password');
+  const UserModel = model(userModel);
   const { email, password } = req.body;
 
   // validate
-  const objectSchema = Joi.object({
-    email: Joi.string()
+  const objectSchema = object({
+    email: string()
       .email({ tlds: { allow: true } })
       .required(),
-    password: Joi.string().required(),
+    password: string().required(),
   });
 
   const { error, value } = objectSchema.validate({ email, password });
@@ -56,4 +56,4 @@ const login = async (req, res, { userModel }) => {
   });
 };
 
-module.exports = login;
+export default login;

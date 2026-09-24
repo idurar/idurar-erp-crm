@@ -1,23 +1,23 @@
-const { modelsFiles } = require('@/models/utils');
+import { modelsFiles } from '@/models/utils';
 
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const create = require('./create');
-const read = require('./read');
-const update = require('./update');
-const remove = require('./remove');
-const search = require('./search');
-const filter = require('./filter');
-const summary = require('./summary');
-const listAll = require('./listAll');
-const paginatedList = require('./paginatedList');
+import create from './create';
+import read from './read';
+import update from './update';
+import remove from './remove';
+import search from './search';
+import filter from './filter';
+import summary from './summary';
+import listAll from './listAll';
+import paginatedList from './paginatedList';
 
 const createCRUDController = (modelName) => {
   if (!modelsFiles.includes(modelName)) {
     throw new Error(`Model ${modelName} does not exist`);
   }
 
-  const Model = mongoose.model(modelName);
+  const Model = model(modelName);
   let crudMethods = {
     create: (req, res) => create(Model, req, res),
     read: (req, res) => read(Model, req, res),
@@ -32,4 +32,4 @@ const createCRUDController = (modelName) => {
   return crudMethods;
 };
 
-module.exports = createCRUDController;
+export default createCRUDController;

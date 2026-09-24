@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken');
+import { verify } from 'jsonwebtoken';
 
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
 const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SECRET' }) => {
   try {
-    const UserPassword = mongoose.model(userModel + 'Password');
-    const User = mongoose.model(userModel);
+    const UserPassword = model(userModel + 'Password');
+    const User = model(userModel);
 
     // const token = req.cookies[`token_${cloud._id}`];
     const authHeader = req.headers['authorization'];
@@ -19,7 +19,7 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
         jwtExpired: true,
       });
 
-    const verified = jwt.verify(token, process.env[jwtSecret]);
+    const verified = verify(token, process.env[jwtSecret]);
 
     if (!verified)
       return res.status(401).json({
@@ -68,4 +68,4 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
   }
 };
 
-module.exports = isValidAuthToken;
+export default isValidAuthToken;

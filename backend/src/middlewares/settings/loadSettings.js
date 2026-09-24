@@ -1,4 +1,4 @@
-const listAllSettings = require('./listAllSettings');
+import listAllSettings from './listAllSettings';
 
 const loadSettings = async () => {
   const allSettings = {};
@@ -9,4 +9,4 @@ const loadSettings = async () => {
   return allSettings;
 };
 
-module.exports = loadSettings;
+export default loadSettings;

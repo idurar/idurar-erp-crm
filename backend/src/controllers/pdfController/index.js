@@ -1,29 +1,29 @@
-const pug = require('pug');
-const fs = require('fs');
-const moment = require('moment');
-let pdf = require('html-pdf');
-const { listAllSettings, loadSettings } = require('@/middlewares/settings');
-const { getData } = require('@/middlewares/serverData');
-const useLanguage = require('@/locale/useLanguage');
-const { useMoney, useDate } = require('@/settings');
+import { renderFile } from 'pug';
+import { existsSync, unlinkSync } from 'fs';
+import moment from 'moment';
+import { create } from 'html-pdf';
+import { listAllSettings, loadSettings } from '@/middlewares/settings';
+import { getData } from '@/middlewares/serverData';
+import useLanguage from '@/locale/useLanguage';
+import { useMoney, useDate } from '@/settings';
 
 const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+import('dotenv').config({ path: '.env' });
+import('dotenv').config({ path: '.env.local' });
 
-exports.generatePdf = async (
+export async function generatePdf(
   modelName,
   info = { filename: 'pdf_file', format: 'A5', targetLocation: '' },
-  result,
+  resultz,
   callback
-) => {
+) {
   try {
     const { targetLocation } = info;
 
     // if PDF already exists, then delete it and create a new PDF
-    if (fs.existsSync(targetLocation)) {
-      fs.unlinkSync(targetLocation);
+    if (existsSync(targetLocation)) {
+      unlinkSync(targetLocation);
     }
 
     // render pdf html
@@ -58,7 +58,7 @@ exports.generatePdf = async (
 
       settings.public_server_file = process.env.PUBLIC_SERVER_FILE;
 
-      const htmlContent = pug.renderFile('src/pdf/' + modelName + '.pug', {
+      const htmlContent = renderFile('src/pdf/' + modelName + '.pug', {
         model: result,
         settings,
         translate,
@@ -67,8 +67,7 @@ exports.generatePdf = async (
         moment: moment,
       });
 
-      pdf
-        .create(htmlContent, {
+      create(htmlContent, {
           format: info.format,
           orientation: 'portrait',
           border: '10mm',
@@ -81,4 +80,4 @@ exports.generatePdf = async (
   } catch (error) {
     throw new Error(error);
   }
-};
+}

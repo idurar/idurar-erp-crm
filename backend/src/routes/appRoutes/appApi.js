@@ -1,9 +1,9 @@
-const express = require('express');
-const { catchErrors } = require('@/handlers/errorHandlers');
-const router = express.Router();
+import { Router } from 'express';
+import { catchErrors } from '@/handlers/errorHandlers';
+const router = Router();
 
-const appControllers = require('@/controllers/appControllers');
-const { routesList } = require('@/models/utils');
+import appControllers from '@/controllers/appControllers';
+import { routesList } from '@/models/utils';
 
 const routerApp = (entity, controller) => {
   router.route(`/${entity}/create`).post(catchErrors(controller['create']));
@@ -30,4 +30,4 @@ routesList.forEach(({ entity, controllerName }) => {
   routerApp(entity, controller);
 });
 
-module.exports = router;
+export default router;

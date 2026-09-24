@@ -121,6 +121,6 @@ const currencyList = [
   'ZMK',
 ];
 
-exports.checkCurrency = (code) => {
+export function checkCurrency(code) {
   return currencyList.includes(code.toUpperCase());
-};
+}

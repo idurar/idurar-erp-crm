@@ -1,8 +1,8 @@
-const read = require('./read');
-const updateProfile = require('./updateProfile');
+import read from './read';
+import updateProfile from './updateProfile';
 
-const updatePassword = require('./updatePassword');
-const updateProfilePassword = require('./updateProfilePassword');
+import updatePassword from './updatePassword';
+import updateProfilePassword from './updateProfilePassword';
 
 const createUserController = (userModel) => {
   let userController = {};
@@ -16,4 +16,4 @@ const createUserController = (userModel) => {
   return userController;
 };
 
-module.exports = createUserController;
+export default createUserController;

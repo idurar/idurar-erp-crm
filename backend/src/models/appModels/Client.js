@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -18,8 +18,8 @@ const schema = new mongoose.Schema({
   country: String,
   address: String,
   email: String,
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
-  assigned: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  createdBy: { type: Schema.ObjectId, ref: 'Admin' },
+  assigned: { type: Schema.ObjectId, ref: 'Admin' },
   created: {
     type: Date,
     default: Date.now,
@@ -30,6 +30,6 @@ const schema = new mongoose.Schema({
   },
 });
 
-schema.plugin(require('mongoose-autopopulate'));
+schema.plugin(import('mongoose-autopopulate'));
 
-module.exports = mongoose.model('Client', schema);
+export default model('Client', schema);

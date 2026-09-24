@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import { model } from 'mongoose';
+import moment from 'moment';
 
-const Model = mongoose.model('Invoice');
+const Model = model('Invoice');
 
-const { loadSettings } = require('@/middlewares/settings');
+import { loadSettings } from '@/middlewares/settings';
 
 const summary = async (req, res) => {
   let defaultType = 'month';
@@ -208,4 +208,4 @@ const summary = async (req, res) => {
   });
 };
 
-module.exports = summary;
+export default summary;

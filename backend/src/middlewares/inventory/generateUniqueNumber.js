@@ -8,4 +8,4 @@ function generateUniqueNumber(uniqueId, numberLength = 13) {
   return day + month + year + randomNumber + number;
 }
 
-module.exports = generateUniqueNumber;
+export default generateUniqueNumber;

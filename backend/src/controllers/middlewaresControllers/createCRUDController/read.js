@@ -21,4 +21,4 @@ const read = async (Model, req, res) => {
   }
 };
 
-module.exports = read;
+export default read;

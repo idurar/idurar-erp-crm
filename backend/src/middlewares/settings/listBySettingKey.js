@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
-const Model = mongoose.model('Setting');
+const Model = model('Setting');
 
 const listBySettingKey = async ({ settingKeyArray = [] }) => {
   try {
@@ -28,4 +28,4 @@ const listBySettingKey = async ({ settingKeyArray = [] }) => {
   }
 };
 
-module.exports = listBySettingKey;
+export default listBySettingKey;

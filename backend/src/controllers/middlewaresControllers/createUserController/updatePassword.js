@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const { generate: uniqueId } = require('shortid');
+import { model } from 'mongoose';
+import { hashSync } from 'bcryptjs';
+import { generate as uniqueId } from 'shortid';
 
 const updatePassword = async (userModel, req, res) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
+  const UserPassword = model(userModel + 'Password');
 
   const reqUserName = userModel.toLowerCase();
   const userProfile = req[reqUserName];
@@ -27,7 +27,7 @@ const updatePassword = async (userModel, req, res) => {
 
   const salt = uniqueId();
 
-  const passwordHash = bcrypt.hashSync(salt + password);
+  const passwordHash = hashSync(salt + password);
 
   const UserPasswordData = {
     password: passwordHash,
@@ -59,4 +59,4 @@ const updatePassword = async (userModel, req, res) => {
   });
 };
 
-module.exports = updatePassword;
+export default updatePassword;

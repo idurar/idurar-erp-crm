@@ -1,11 +1,11 @@
-require('dotenv').config({ path: '.env' });
-require('dotenv').config({ path: '.env.local' });
+import('dotenv').config({ path: '.env' });
+import('dotenv').config({ path: '.env.local' });
 
-const path = require('path');
-const { slugify } = require('transliteration');
-const fileFilterMiddleware = require('./utils/fileFilterMiddleware');
+import { extname, parse } from 'path';
+import { slugify } from 'transliteration';
+import fileFilterMiddleware from './utils/fileFilterMiddleware';
 
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const secretAccessKey = process.env.DO_SPACES_SECRET;
 const accessKeyId = process.env.DO_SPACES_KEY;
@@ -40,8 +40,8 @@ const DoSingleStorage = ({
           throw new Error('Uploaded file type not supported');
           // next();
         }
-        let fileExtension = path.extname(req.files.file.name);
-        const fileNameWithoutExt = path.parse(req.files.file.name).name;
+        let fileExtension = extname(req.files.file.name);
+        const fileNameWithoutExt = parse(req.files.file.name).name;
 
         let uniqueFileID = Math.random().toString(36).slice(2, 7); // generates unique ID of length 5
 
@@ -91,4 +91,4 @@ const DoSingleStorage = ({
   };
 };
 
-module.exports = DoSingleStorage;
+export default DoSingleStorage;

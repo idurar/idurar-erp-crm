@@ -81,4 +81,4 @@ const fileFilter =
     }
   };
 
-module.exports = fileFilter;
+export default fileFilter;

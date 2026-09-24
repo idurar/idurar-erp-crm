@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { model } from 'mongoose';
 
 const logout = async (req, res, { userModel }) => {
-  const UserPassword = mongoose.model(userModel + 'Password');
+  const UserPassword = model(userModel + 'Password');
 
   // const token = req.cookies[`token_${cloud._id}`];
 
@@ -32,4 +32,4 @@ const logout = async (req, res, { userModel }) => {
   });
 };
 
-module.exports = logout;
+export default logout;

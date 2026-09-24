@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 const authUser = async (req, res, { user, databasePassword, password, UserPasswordModel }) => {
-  const isMatch = await bcrypt.compare(databasePassword.salt + password, databasePassword.password);
+  const isMatch = await compare(databasePassword.salt + password, databasePassword.password);
 
   if (!isMatch)
     return res.status(403).json({
@@ -12,7 +12,7 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
     });
 
   if (isMatch === true) {
-    const token = jwt.sign(
+    const token = sign(
       {
         id: user._id,
       },
@@ -60,4 +60,4 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
   }
 };
 
-module.exports = authUser;
+export default authUser;
