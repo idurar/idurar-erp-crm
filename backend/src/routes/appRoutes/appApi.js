@@ -11,6 +11,7 @@ const upload=multer({
 const appControllers = require('@/controllers/appControllers');
 const { routesList } = require('@/models/utils');
 const importClients = require('@/controllers/appControllers/clientController/import');
+const importInvoices=require('@/controllers/appControllers/invoiceController/import')
 
 const routerApp = (entity, controller) => {
   router.route(`/${entity}/create`).post(catchErrors(controller['create']));
@@ -38,5 +39,6 @@ routesList.forEach(({ entity, controllerName }) => {
 });
 
 router.route('/client/import').post(upload.single('file'), catchErrors(importClients));
+router.route('/invoice/import').post(upload.single('file'), catchErrors(importInvoices));
 
 module.exports = router;

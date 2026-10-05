@@ -20,6 +20,7 @@ import { erp } from '@/redux/erp/actions';
 import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import { useNavigate } from 'react-router-dom';
+import ImportInvoice from '@/components/ImportInvoice';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
@@ -193,6 +194,11 @@ export default function DataTable({ config, extra = [] }) {
           <Button onClick={handelDataTableLoad} key="refresh-button" icon={<RedoOutlined />}>
             {translate('Refresh')}
           </Button>,
+
+          entity === 'invoice' && (
+            <ImportInvoice key="import-invoice" onDone={dispatcher} />
+          ),
+
 
           !disableAdd && <AddNewItem config={config} key="add-new-item" />,
         ]}
