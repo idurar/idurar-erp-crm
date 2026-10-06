@@ -18,6 +18,7 @@ import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/locale/useLanguage';
 import { dataForTable } from '@/utils/dataStructure';
 import { useMoney, useDate } from '@/settings';
+import ImportClients from '@/components/ImportClients';
 
 import { generate as uniqueId } from 'shortid';
 
@@ -192,6 +193,11 @@ export default function DataTable({ config, extra = [] }) {
           <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
             {translate('Refresh')}
           </Button>,
+
+          entity === 'client' && (
+            <ImportClients key="importClients" onDone={dispatcher} />
+          ),
+
 
           <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}

@@ -1,9 +1,18 @@
 const express = require('express');
 const { catchErrors } = require('@/handlers/errorHandlers');
 const router = express.Router();
+const multer=require('multer');
+
+const upload=multer({
+  storage:multer.memoryStorage(),
+  limits:{fileSize:5*1024*1024},
+});
 
 const appControllers = require('@/controllers/appControllers');
 const { routesList } = require('@/models/utils');
+const importClients = require('@/controllers/appControllers/clientController/import');
+const importInvoices=require('@/controllers/appControllers/invoiceController/import');
+const importPayments = require('@/controllers/appControllers/paymentController/import');
 
 const routerApp = (entity, controller) => {
   router.route(`/${entity}/create`).post(catchErrors(controller['create']));
@@ -29,5 +38,9 @@ routesList.forEach(({ entity, controllerName }) => {
   const controller = appControllers[controllerName];
   routerApp(entity, controller);
 });
+
+router.route('/client/import').post(upload.single('file'), catchErrors(importClients));
+router.route('/invoice/import').post(upload.single('file'), catchErrors(importInvoices));
+router.route('/payment/import').post(upload.single('file'), catchErrors(importPayments));
 
 module.exports = router;
