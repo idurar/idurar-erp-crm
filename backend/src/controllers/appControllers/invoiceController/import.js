@@ -35,7 +35,6 @@ module.exports = async (req, res) => {
     if (c.email) clientMap.set(c.email.toLowerCase(), c._id);
   });
 
-  // existing "number-year"
   const used = new Set(
     (await Invoice.find({ removed: false }).select('number year')).map(
       (i) => `${i.number}-${i.year}`
@@ -57,8 +56,12 @@ module.exports = async (req, res) => {
     const { r: first, row } = group[0];
     const fail = (error) => errors.push({ row, invoice: key, error });
 
+    if (!/^\d+$/.test(String(key || '').trim())) {
+      fail('number must be digits only (e.g. 1001)');
+      continue;
+    }
     const number = Number(key);
-    if (!key || !Number.isInteger(number) || number <= 0) { fail('invalid number'); continue; }
+    if (number <= 0) { fail('invalid number'); continue; }
 
     const date = toDate(first.date);
     if (!date) { fail('invalid date'); continue; }
@@ -69,16 +72,24 @@ module.exports = async (req, res) => {
     const clientId = clientMap.get((first.client || '').toLowerCase());
     if (!clientId) { fail('client not found'); continue; }
 
-    const year = date.getFullYear();
+
+    const year = first.year ? Number(first.year) : date.getFullYear();
+    if (!Number.isInteger(year)) { fail('invalid year'); continue; }
     if (used.has(`${number}-${year}`)) { fail('invoice number already exists'); continue; }
 
-    const status = (first.status || 'draft').toLowerCase();
+    const rawStatus = (first.status || 'draft').toLowerCase();
+    let status = rawStatus;
+    let paymentStatus = 'unpaid';
+    let isOverdue = false;
+
+    if (rawStatus === 'paid') { status = 'sent'; paymentStatus = 'paid'; }
+    else if (rawStatus === 'overdue') { status = 'sent'; isOverdue = true; }
+
     if (!STATUSES.includes(status)) { fail(`invalid status "${first.status}"`); continue; }
 
     const taxRate = num(first.taxrate);
     const discount = num(first.discount);
     if ([taxRate, discount].some((n) => isNaN(n) || n < 0)) { fail('invalid taxRate/discount'); continue; }
-
 
     const items = [];
     let itemError = null;
@@ -114,6 +125,8 @@ module.exports = async (req, res) => {
       taxRate,
       discount,
       status,
+      paymentStatus,
+      isOverdue,
       notes: first.notes || '',
       items,
       subTotal,

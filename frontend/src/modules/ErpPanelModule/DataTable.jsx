@@ -21,6 +21,7 @@ import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import { useNavigate } from 'react-router-dom';
 import ImportInvoice from '@/components/ImportInvoice';
+import ImportPayment from '@/components/ImportPayment';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
@@ -197,6 +198,10 @@ export default function DataTable({ config, extra = [] }) {
 
           entity === 'invoice' && (
             <ImportInvoice key="import-invoice" onDone={dispatcher} />
+          ),
+
+          entity === 'payment' && (
+            <ImportPayment key="import-payment" onDone={dispatcher} />
           ),
 
 
