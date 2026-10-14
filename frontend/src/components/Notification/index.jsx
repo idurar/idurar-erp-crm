@@ -1,15 +1,17 @@
 import React from 'react';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import useLanguage from '@/locale/useLanguage';
 
 const Notifications = () => {
+  const translate = useLanguage();
   const [notifications, setNotifications] = React.useState([
-    { id: 1, text: 'First notificationnnnnnnnnnnnnnnnn' },
-    { id: 2, text: 'Second notification' },
-    { id: 3, text: 'Third ' },
-    { id: 4, text: 'Fourth notification' },
-    { id: 5, text: 'Fifth notification' },
-    { id: 6, text: 'Sixth notification' },
+    { id: 1, text: translate('First notification') },
+    { id: 2, text: translate('Second notification') },
+    { id: 3, text: translate('Third') },
+    { id: 4, text: translate('Fourth notification') },
+    { id: 5, text: translate('Fifth notification') },
+    { id: 6, text: translate('Sixth notification') },
   ]);
 
   const deleteNotification = (id) => {
@@ -20,7 +22,7 @@ const Notifications = () => {
   return (
     <div className="notifications whiteBox shadow">
       <div className="pad20">
-        <p className="strong">Notifications</p>
+        <p className="strong">{translate('Notifications')}</p>
         <Button type="text" shape="circle" className="del-notif">
           <DeleteOutlined />
         </Button>

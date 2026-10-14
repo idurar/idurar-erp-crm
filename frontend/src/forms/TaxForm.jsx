@@ -24,7 +24,7 @@ export default function TaxForm({isUpdateForm = false}) {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input tax value!',
+                        message: translate('Please input tax value'),
                         type: 'number',
                         min: 0,
                         max: 100

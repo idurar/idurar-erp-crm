@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   EyeOutlined,
   EditOutlined,
@@ -9,6 +9,7 @@ import {
   EllipsisOutlined,
   ArrowRightOutlined,
   ArrowLeftOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
 import { Dropdown, Table, Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -22,6 +23,7 @@ import { useErpContext } from '@/context/erp';
 import { useNavigate } from 'react-router-dom';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { enhanceTableColumns } from '@/utils/tableColumns';
 
 function AddNewItem({ config }) {
   const navigate = useNavigate();
@@ -43,6 +45,9 @@ export default function DataTable({ config, extra = [] }) {
   let { entity, dataTableColumns, disableAdd = false, searchConfig } = config;
 
   const { DATATABLE_TITLE } = config;
+  const [tableResetKey, setTableResetKey] = useState(0);
+  const [hasTableFilters, setHasTableFilters] = useState(false);
+  const [entityFilter, setEntityFilter] = useState(undefined);
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
@@ -105,7 +110,7 @@ export default function DataTable({ config, extra = [] }) {
   };
 
   dataTableColumns = [
-    ...dataTableColumns,
+    ...enhanceTableColumns(dataTableColumns),
     {
       title: '',
       key: 'action',
@@ -150,7 +155,11 @@ export default function DataTable({ config, extra = [] }) {
 
   const dispatch = useDispatch();
 
-  const handelDataTableLoad = (pagination) => {
+  const handelDataTableLoad = (pagination, filters, sorter, extra) => {
+    setHasTableFilters(
+      Object.values(filters || {}).some((value) => value?.length) || Boolean(sorter?.order)
+    );
+    if (extra?.action && extra.action !== 'paginate') return;
     const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
     dispatch(erp.list({ entity, options }));
   };
@@ -168,8 +177,16 @@ export default function DataTable({ config, extra = [] }) {
   }, []);
 
   const filterTable = (value) => {
+    setEntityFilter(value);
     const options = { equal: value, filter: searchConfig?.entity };
     dispatch(erp.list({ entity, options }));
+  };
+
+  const clearAllFilters = () => {
+    setEntityFilter(undefined);
+    setHasTableFilters(false);
+    setTableResetKey((key) => key + 1);
+    dispatcher();
   };
 
   return (
@@ -181,7 +198,7 @@ export default function DataTable({ config, extra = [] }) {
         backIcon={<ArrowLeftOutlined />}
         extra={[
           <AutoCompleteAsync
-            key="search-auto-complete"
+            key={`search-auto-complete-${tableResetKey}`}
             entity={searchConfig?.entity}
             displayLabels={['name']}
             searchFields={'name'}
@@ -201,7 +218,16 @@ export default function DataTable({ config, extra = [] }) {
         }}
       ></PageHeader>
 
+      {(hasTableFilters || entityFilter) && (
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 10 }}>
+          <Button type="text" danger icon={<CloseOutlined />} onClick={clearAllFilters}>
+            Alle Filter löschen
+          </Button>
+        </div>
+      )}
+
       <Table
+        key={`table-${tableResetKey}`}
         columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}

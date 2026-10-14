@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
+import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag, Typography } from 'antd';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
@@ -296,7 +296,12 @@ function FormElement({ field, feedback, setFeedback }) {
 
   const compunedComponent = {
     string: (
-      <Input autoComplete="off" maxLength={field.maxLength} defaultValue={field.defaultValue} />
+      <Input
+        autoComplete="off"
+        maxLength={field.maxLength}
+        defaultValue={field.defaultValue}
+        placeholder={field.placeholder ? translate(field.placeholder) : undefined}
+      />
     ),
     url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
     textarea: <TextArea rows={4} />,
@@ -369,19 +374,26 @@ function FormElement({ field, feedback, setFeedback }) {
   if (customFormItem) return <>{customFormItem}</>;
   else {
     return (
-      <Form.Item
-        label={translate(field.label)}
-        name={field.name}
-        rules={[
-          {
-            required: field.required || false,
-            type: filedType[field.type] ?? 'any',
-          },
-        ]}
-        valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
-      >
-        {renderComponent}
-      </Form.Item>
+      <>
+        {field.groupTitle && (
+          <Typography.Title level={5} style={{ marginTop: 8, marginBottom: 12 }}>
+            {translate(field.groupTitle)}
+          </Typography.Title>
+        )}
+        <Form.Item
+          label={field.hideLabel ? null : translate(field.label)}
+          name={field.name}
+          rules={[
+            {
+              required: field.required || false,
+              type: filedType[field.type] ?? 'any',
+            },
+          ]}
+          valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
+        >
+          {renderComponent}
+        </Form.Item>
+      </>
     );
   }
 }

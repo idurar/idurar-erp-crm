@@ -1,17 +1,19 @@
 import React from 'react';
 import { Form, Input, InputNumber } from 'antd';
+import useLanguage from '@/locale/useLanguage';
 
 export default function InventoryForm() {
-  // Renamed to InventoryForm for clarity
+  const translate = useLanguage();
+
   return (
     <>
       <Form.Item
-        label="Product"
+        label={translate('Product')}
         name="product"
         rules={[
           {
             required: true,
-            message: 'Please input Product name!',
+            message: translate('Please input Product name'),
           },
         ]}
       >
@@ -19,12 +21,12 @@ export default function InventoryForm() {
       </Form.Item>
 
       <Form.Item
-        label="Quantity"
+        label={translate('Quantity')}
         name="quantity"
         rules={[
           {
             required: true,
-            message: 'Please input Quantity!',
+            message: translate('Please input Quantity'),
             type: 'number',
             min: 0, // Ensure non-negative numbers
           },
@@ -34,12 +36,12 @@ export default function InventoryForm() {
       </Form.Item>
 
       <Form.Item
-        label="Unit Price"
+        label={translate('Unit Price')}
         name="unitPrice"
         rules={[
           {
             required: true,
-            message: 'Please input Unit Price!',
+            message: translate('Please input Unit Price'),
             type: 'number',
             min: 0, // Ensure non-negative numbers
           },

@@ -17,6 +17,7 @@ const SelectAsync = ({
   placeholder = 'select',
   value,
   onChange,
+  requestOptions = {},
 }) => {
   const translate = useLanguage();
   const [selectOptions, setOptions] = useState([]);
@@ -25,7 +26,7 @@ const SelectAsync = ({
   const navigate = useNavigate();
 
   const asyncList = () => {
-    return request.list({ entity });
+    return request.list({ entity, options: requestOptions });
   };
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {

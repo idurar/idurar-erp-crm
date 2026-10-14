@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Form, Divider } from 'antd';
+import { Form, Divider, Select } from 'antd';
 import dayjs from 'dayjs';
 import { Button, Tag } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -70,7 +70,10 @@ export default function UpdateItem({ config, UpdateForm }) {
       items.map((item) => {
         if (item) {
           if (item.quantity && item.price) {
-            let total = calculate.multiply(item['quantity'], item['price']);
+            let total = calculate.multiply(
+              calculate.multiply(item['quantity'], item['price']),
+              1 - (Number(item.discount) || 0) / 100
+            );
             //sub total
             subTotal = calculate.add(subTotal, total);
           }
@@ -82,6 +85,9 @@ export default function UpdateItem({ config, UpdateForm }) {
 
   const onSubmit = (fieldsValue) => {
     let dataToUpdate = { ...fieldsValue };
+    if (entity === 'invoice' && fieldsValue.date?.year) {
+      dataToUpdate.year = fieldsValue.date.year();
+    }
     if (fieldsValue) {
       if (fieldsValue.date || fieldsValue.expiredDate) {
         dataToUpdate.date = dayjs(fieldsValue.date).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
@@ -92,9 +98,9 @@ export default function UpdateItem({ config, UpdateForm }) {
       if (fieldsValue.items) {
         let newList = [];
         fieldsValue.items.map((item) => {
-          const { quantity, price, itemName, description } = item;
-          const total = item.quantity * item.price;
-          newList.push({ total, quantity, price, itemName, description });
+          const { quantity, price, itemName, description, article, unit, discount } = item;
+          const total = calculate.multiply(calculate.multiply(quantity, price), 1 - (Number(discount) || 0) / 100);
+          newList.push({ total, quantity, price, itemName, description, article, unit, discount });
         });
         dataToUpdate.items = newList;
       }
@@ -134,7 +140,7 @@ export default function UpdateItem({ config, UpdateForm }) {
   }, [current]);
 
   return (
-    <>
+    <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
       <PageHeader
         onBack={() => {
           navigate(`/${entity.toLowerCase()}`);
@@ -159,6 +165,18 @@ export default function UpdateItem({ config, UpdateForm }) {
           >
             {translate('Cancel')}
           </Button>,
+          entity === 'invoice' && (
+            <Form.Item key="invoice-status" name="status" style={{ margin: 0, minWidth: 150 }}>
+              <Select
+                aria-label="Rechnungsstatus"
+                options={[
+                  { value: 'draft', label: translate('Draft') },
+                  { value: 'pending', label: translate('Pending') },
+                  { value: 'sent', label: translate('Sent') },
+                ]}
+              />
+            </Form.Item>
+          ),
           <SaveForm translate={translate} form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
@@ -167,10 +185,8 @@ export default function UpdateItem({ config, UpdateForm }) {
       ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
-          <UpdateForm subTotal={subTotal} current={current} />
-        </Form>
+        <UpdateForm subTotal={subTotal} current={current} />
       </Loading>
-    </>
+    </Form>
   );
 }

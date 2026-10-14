@@ -8,7 +8,7 @@ const { loadSettings } = require('@/middlewares/settings');
 const summary = async (req, res) => {
   let defaultType = 'month';
 
-  const { type } = req.query;
+  const { type, period } = req.query;
 
   const settings = await loadSettings();
 
@@ -24,7 +24,9 @@ const summary = async (req, res) => {
     }
   }
 
-  const currentDate = moment();
+  const currentDate = period && moment(period, ['YYYY-MM', 'YYYY'], true).isValid()
+    ? moment(period, ['YYYY-MM', 'YYYY'], true)
+    : moment();
   let startDate = currentDate.clone().startOf(defaultType);
   let endDate = currentDate.clone().endOf(defaultType);
 
@@ -34,10 +36,10 @@ const summary = async (req, res) => {
     {
       $match: {
         removed: false,
-        // date: {
-        //   $gte: startDate.toDate(),
-        //   $lte: endDate.toDate(),
-        // },
+        date: {
+          $gte: startDate.toDate(),
+          $lte: endDate.toDate(),
+        },
       },
     },
     {
@@ -194,9 +196,33 @@ const summary = async (req, res) => {
     },
   ]);
 
+  const overdueDays = Math.max(0, Math.min(Number(req.query.overdueDays) || 7, 3650));
+  const overdueCutoff = moment().subtract(overdueDays, 'days').endOf('day').toDate();
+  const overdue = await Model.aggregate([
+    {
+      $match: {
+        removed: false,
+        paymentStatus: { $in: ['unpaid', 'partially'] },
+        expiredDate: { $lte: overdueCutoff },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        count: { $sum: 1 },
+        total_amount: {
+          $sum: { $subtract: [{ $subtract: ['$total', '$discount'] }, '$credit'] },
+        },
+      },
+    },
+  ]);
+
   const finalResult = {
     total: totalInvoices?.total,
     total_undue: unpaid.length > 0 ? unpaid[0].total_amount : 0,
+    total_overdue: overdue.length > 0 ? overdue[0].total_amount : 0,
+    overdue_count: overdue.length > 0 ? overdue[0].count : 0,
+    overdue_days: overdueDays,
     type,
     performance: result,
   };

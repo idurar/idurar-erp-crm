@@ -1,3 +1,10 @@
+// Node.js 25 removed SlowBuffer. A transitive JWT dependency still references
+// it while installing its constant-time Buffer comparison helpers.
+const buffer = require('buffer');
+if (!buffer.SlowBuffer) {
+  buffer.SlowBuffer = buffer.Buffer;
+}
+
 require('module-alias/register');
 const mongoose = require('mongoose');
 const { globSync } = require('glob');
@@ -14,9 +21,10 @@ if (major < 20) {
 require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
 
-mongoose.connect(process.env.DATABASE);
+const { validateEnvironment } = require('./config/environment');
+validateEnvironment();
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+mongoose.connect(process.env.DATABASE);
 
 mongoose.connection.on('error', (error) => {
   console.log(
@@ -37,3 +45,16 @@ app.set('port', process.env.PORT || 8888);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running → On PORT : ${server.address().port}`);
 });
+
+const shutdown = (signal) => {
+  console.log(`${signal} received, shutting down gracefully`);
+  server.close(async () => {
+    await mongoose.connection.close();
+    process.exit(0);
+  });
+
+  setTimeout(() => process.exit(1), 10000).unref();
+};
+
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));

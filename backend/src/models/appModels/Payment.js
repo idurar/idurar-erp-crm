@@ -32,6 +32,16 @@ const paymentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  paymentMode: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'PaymentMode',
+    autopopulate: true,
+  },
+  depositPercentage: {
+    type: Number,
+    min: 0,
+    max: 100,
+  },
   currency: {
     type: String,
     default: 'NA',

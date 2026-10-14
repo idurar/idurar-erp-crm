@@ -1,10 +1,12 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { LockOutlined } from '@ant-design/icons';
 
 import useLanguage from '@/locale/useLanguage';
 
 export default function ResetPasswordForm() {
+  const translate = useLanguage();
+
   return (
     <>
       <Form.Item
@@ -17,7 +19,7 @@ export default function ResetPasswordForm() {
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder="Password"
+          placeholder={translate('Password')}
           size="large"
         />
       </Form.Item>
@@ -32,7 +34,9 @@ export default function ResetPasswordForm() {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+              return Promise.reject(
+                new Error(translate('The two passwords that you entered do not match'))
+              );
             },
           }),
         ]}
@@ -40,7 +44,7 @@ export default function ResetPasswordForm() {
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
-          placeholder="Confirm password"
+          placeholder={translate('Confirm password')}
           size="large"
         />
       </Form.Item>

@@ -5,7 +5,7 @@ import { Layout, Col, Divider, Typography } from 'antd';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from './SideContent';
 
-import logo from '@/style/images/idurar-crm-erp.svg';
+import logo from '@/style/images/wiedesign-logo.png';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -24,13 +24,14 @@ const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
         <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 0 }} span={0}>
           <img
             src={logo}
-            alt="Logo"
+            alt="WIEdesign"
             style={{
               margin: '0px auto 20px',
               display: 'block',
+              maxWidth: '100%',
+              height: 'auto',
             }}
-            height={63}
-            width={220}
+            width={260}
           />
           <div className="space10" />
         </Col>

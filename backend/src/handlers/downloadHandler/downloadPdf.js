@@ -1,5 +1,6 @@
 const custom = require('@/controllers/pdfController');
 const mongoose = require('mongoose');
+const { bookInvoice } = require('@/services/inventoryService');
 
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
   try {
@@ -23,19 +24,18 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
       await custom.generatePdf(
         modelName,
         { filename: folderPath, format: 'A4', targetLocation },
-        result,
-        async () => {
-          return res.download(targetLocation, (error) => {
-            if (error)
-              return res.status(500).json({
-                success: false,
-                result: null,
-                message: "Couldn't find file",
-                error: error.message,
-              });
-          });
-        }
+        result
       );
+      if (modelName === 'Invoice') await bookInvoice(result, req.admin?._id);
+      return res.download(targetLocation, (error) => {
+        if (error && !res.headersSent)
+          return res.status(500).json({
+            success: false,
+            result: null,
+            message: "Couldn't find file",
+            error: error.message,
+          });
+      });
     } else {
       return res.status(404).json({
         success: false,

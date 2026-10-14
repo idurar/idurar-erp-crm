@@ -152,7 +152,7 @@
 
 .layoutPadding {
   position: relative;
-  padding: 50px 40px;
+  padding: 30px 24px;
 }
 
 .dashboardSpacing {
@@ -180,7 +180,7 @@
 
 @media only screen and (max-width: 600px) {
   .layoutPadding {
-    padding: 50px 20px;
+    padding: 24px 16px;
   }
 
   .dashboardSpacing {

@@ -68,7 +68,10 @@ const create = async (req, res) => {
     {
       $push: { payment: paymentId.toString() },
       $inc: { credit: amount },
-      $set: { paymentStatus: paymentStatus },
+      $set: {
+        paymentStatus: paymentStatus,
+        ...(paymentStatus === 'paid' && { isOverdue: false, nextReminderDate: null }),
+      },
     },
     {
       new: true, // return the new result instead of the old one

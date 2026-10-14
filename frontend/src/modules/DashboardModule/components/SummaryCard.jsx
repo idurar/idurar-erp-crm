@@ -13,15 +13,16 @@ export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isL
       sm={{ span: 12 }}
       md={{ span: 12 }}
       lg={{ span: 6 }}
+      xl={{ flex: '20%' }}
     >
       <div
         className="whiteBox shadow"
-        style={{ color: '#595959', fontSize: 13, minHeight: '106px', height: '100%' }}
+        style={{ color: 'var(--app-text)', fontSize: 13, minHeight: '106px', height: '100%' }}
       >
         <div className="pad15 strong" style={{ textAlign: 'center', justifyContent: 'center' }}>
           <h3
             style={{
-              color: '#22075e',
+              color: 'var(--app-heading)',
               fontSize: 'large',
               margin: '5px 0',
               textTransform: 'capitalize',

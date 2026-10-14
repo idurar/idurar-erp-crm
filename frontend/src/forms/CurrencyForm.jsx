@@ -1,29 +1,32 @@
 import React from 'react';
 import { Switch, Form, Input } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import useLanguage from '@/locale/useLanguage';
 
 export default function CurrencyForm({ isUpdateForm = false }) {
+  const translate = useLanguage();
+
   return (
     <>
       <Form.Item
-        label="Currency Name"
+        label={translate('Currency Name')}
         name="name"
         rules={[
           {
             required: true,
-            message: 'Please input your currency name!',
+            message: translate('Please input your currency name'),
           },
         ]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="Symbol"
+        label={translate('Symbol')}
         name="symbol"
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
+            message: translate('Please input your surname'),
           },
         ]}
         style={{
@@ -35,7 +38,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
-        label="Decimal Separator"
+        label={translate('Decimal Separator')}
         name="decimal_separator"
         rules={[
           {
@@ -52,7 +55,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
       </Form.Item>
 
       <Form.Item
-        label="Thousand Separator"
+        label={translate('Thousand Separator')}
         name="thousand_separator"
         rules={[
           {
@@ -68,7 +71,7 @@ export default function CurrencyForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
-        label="Is Default Currency"
+        label={translate('Is Default Currency')}
         name="isDefault"
         rules={[
           {

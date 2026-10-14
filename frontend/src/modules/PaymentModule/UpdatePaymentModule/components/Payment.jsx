@@ -50,7 +50,7 @@ export default function Payment({ config, currentItem }) {
             onBack={() => navigate(`/${entity.toLowerCase()}`)}
             title={`Update  ${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
             ghost={false}
-            tags={<span>{currentErp.paymentStatus}</span>}
+            tags={<span>{currentErp.paymentStatus && translate(currentErp.paymentStatus)}</span>}
             // subTitle="This is cuurent erp page"
             extra={[
               <Button
@@ -91,7 +91,7 @@ export default function Payment({ config, currentItem }) {
             <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
             <Divider dashed />
             <Descriptions.Item label={translate('Payment Status')}>
-              <span>{currentErp.paymentStatus}</span>
+              <span>{currentErp.paymentStatus && translate(currentErp.paymentStatus)}</span>
             </Descriptions.Item>
             <Descriptions.Item label={translate('SubTotal')}>
               {money.moneyFormatter({
@@ -105,13 +105,13 @@ export default function Payment({ config, currentItem }) {
                 currency_code: currentErp.currency,
               })}
             </Descriptions.Item>
-            <Descriptions.Item label="Discount">
+            <Descriptions.Item label={translate('Discount')}>
               {money.moneyFormatter({
                 amount: currentErp.discount,
                 currency_code: currentErp.currency,
               })}
             </Descriptions.Item>
-            <Descriptions.Item label="Balance">
+            <Descriptions.Item label={translate('Balance')}>
               {money.moneyFormatter({
                 amount: currentErp.credit,
                 currency_code: currentErp.currency,

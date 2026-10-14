@@ -7,15 +7,23 @@
   left: 0;
   z-index: 1000;
   background: #fff;
-  border-right: 1px solid #edf0f5;
+  border-right: 1px solid #dce5df;
 }
 
 .logo {
-  height: 45px;
-  margin: 15px 15px 30px 30px;
+  height: 38px;
+  margin: 16px 15px 24px 24px;
   display: flex;
   justify-content: space-evenly;
   width: 160px;
+}
+
+.navigation .ant-menu-item-selected {
+  font-weight: 600;
+}
+
+.navigation .ant-menu-item-selected::after {
+  border-inline-end-color: #205435 !important;
 }
 
 .sidebar-wraper {

@@ -9,6 +9,7 @@ import {
   CloseCircleOutlined,
   RetweetOutlined,
   MailOutlined,
+  WarningOutlined,
 } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,27 +24,21 @@ import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 import { useMoney, useDate } from '@/settings';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
+import { request } from '@/request';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
 
 const Item = ({ item, currentErp }) => {
   const { moneyFormatter } = useMoney();
   return (
     <Row gutter={[12, 0]} key={item._id}>
-      <Col className="gutter-row" span={11}>
+      <Col className="gutter-row" span={7}>
         <p style={{ marginBottom: 5 }}>
           <strong>{item.itemName}</strong>
         </p>
-        <p>{item.description}</p>
+        <ReactQuill value={item.description || ''} readOnly theme="bubble" modules={{ toolbar: false }} />
       </Col>
-      <Col className="gutter-row" span={4}>
-        <p
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          {moneyFormatter({ amount: item.price, currency_code: currentErp.currency })}
-        </p>
-      </Col>
-      <Col className="gutter-row" span={4}>
+      <Col className="gutter-row" span={3}>
         <p
           style={{
             textAlign: 'right',
@@ -52,6 +47,17 @@ const Item = ({ item, currentErp }) => {
           {item.quantity}
         </p>
       </Col>
+      <Col className="gutter-row" span={3}>
+        <p
+          style={{
+            textAlign: 'right',
+          }}
+        >
+          {moneyFormatter({ amount: item.price, currency_code: currentErp.currency })}
+        </p>
+      </Col>
+      <Col className="gutter-row" span={3}><p style={{ textAlign: 'right' }}>{item.unit || 'Stk.'}</p></Col>
+      <Col className="gutter-row" span={3}><p style={{ textAlign: 'right' }}>{item.discount || 0} %</p></Col>
       <Col className="gutter-row" span={5}>
         <p
           style={{
@@ -98,6 +104,27 @@ export default function ReadItem({ config, selectedItem }) {
   const [itemslist, setItemsList] = useState([]);
   const [currentErp, setCurrentErp] = useState(selectedItem ?? resetErp);
   const [client, setClient] = useState({});
+  const [reminderInProgress, setReminderInProgress] = useState(false);
+
+  const recordReminder = async () => {
+    setReminderInProgress(true);
+    const data = await request.patch({
+      entity: `invoice/remind/${currentErp._id}`,
+      jsonData: { paymentPeriodDays: 7 },
+    });
+    setReminderInProgress(false);
+    if (data.success) {
+      dispatch(erp.read({ entity: 'invoice', id: currentErp._id }));
+    }
+  };
+
+  const convertQuoteToInvoice = async () => {
+    const data = await request.convert({ entity: 'quote', id: currentErp._id });
+    if (data.success && data.result?._id) {
+      dispatch(erp.currentItem({ data: data.result }));
+      navigate(`/invoice/read/${data.result._id}`);
+    }
+  };
 
   useEffect(() => {
     if (currentResult) {
@@ -171,11 +198,20 @@ export default function ReadItem({ config, selectedItem }) {
           >
             {translate('Send by Email')}
           </Button>,
+          entity === 'invoice' && currentErp.paymentStatus !== 'paid' && (
+            <Button
+              key="record-reminder"
+              danger
+              loading={reminderInProgress}
+              onClick={recordReminder}
+              icon={<WarningOutlined />}
+            >
+              {currentErp.reminderLevel ? `Mahnstufe ${Math.min(currentErp.reminderLevel + 1, 3)}` : 'Mahnung erfassen'}
+            </Button>
+          ),
           <Button
             key={`${uniqueId()}`}
-            onClick={() => {
-              dispatch(erp.convert({ entity, id: currentErp._id }));
-            }}
+            onClick={convertQuoteToInvoice}
             icon={<RetweetOutlined />}
             style={{ display: entity === 'quote' ? 'inline-block' : 'none' }}
           >
@@ -204,7 +240,10 @@ export default function ReadItem({ config, selectedItem }) {
         }}
       >
         <Row>
-          <Statistic title="Status" value={currentErp.status} />
+          <Statistic
+            title={translate('Status')}
+            value={currentErp.status ? translate(currentErp.status) : currentErp.status}
+          />
           <Statistic
             title={translate('SubTotal')}
             value={moneyFormatter({
@@ -232,6 +271,13 @@ export default function ReadItem({ config, selectedItem }) {
               margin: '0 32px',
             }}
           />
+          {entity === 'invoice' && (
+            <Statistic
+              title="Mahnstatus"
+              value={currentErp.paymentStatus === 'paid' ? 'Bezahlt' : currentErp.reminderLevel ? `Mahnstufe ${currentErp.reminderLevel}` : 'Keine Mahnung'}
+              style={{ margin: '0 32px' }}
+            />
+          )}
         </Row>
       </PageHeader>
       <Divider dashed />
@@ -239,24 +285,16 @@ export default function ReadItem({ config, selectedItem }) {
         <Descriptions.Item label={translate('Address')}>{client.address}</Descriptions.Item>
         <Descriptions.Item label={translate('email')}>{client.email}</Descriptions.Item>
         <Descriptions.Item label={translate('Phone')}>{client.phone}</Descriptions.Item>
+        <Descriptions.Item label="UID-Nummer">{currentErp.clientVatNumber || client.vatNumber || '—'}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={11}>
+        <Col className="gutter-row" span={7}>
           <p>
-            <strong>{translate('Product')}</strong>
+            <strong>Beschreibung</strong>
           </p>
         </Col>
-        <Col className="gutter-row" span={4}>
-          <p
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <strong>{translate('Price')}</strong>
-          </p>
-        </Col>
-        <Col className="gutter-row" span={4}>
+        <Col className="gutter-row" span={3}>
           <p
             style={{
               textAlign: 'right',
@@ -265,6 +303,17 @@ export default function ReadItem({ config, selectedItem }) {
             <strong>{translate('Quantity')}</strong>
           </p>
         </Col>
+        <Col className="gutter-row" span={3}>
+          <p
+            style={{
+              textAlign: 'right',
+            }}
+          >
+            <strong>{translate('Price')}</strong>
+          </p>
+        </Col>
+        <Col span={3}><p style={{ textAlign: 'right' }}><strong>Einheit</strong></p></Col>
+        <Col span={3}><p style={{ textAlign: 'right' }}><strong>Rabatt</strong></p></Col>
         <Col className="gutter-row" span={5}>
           <p
             style={{
@@ -279,6 +328,10 @@ export default function ReadItem({ config, selectedItem }) {
       {itemslist.map((item) => (
         <Item key={item._id} item={item} currentErp={currentErp}></Item>
       ))}
+      {(currentErp.paymentTermsText || currentErp.footerText) && <Row gutter={24} style={{ clear: 'both', paddingTop: 24 }}>
+        <Col span={12}><strong>Zahlungskonditionen</strong><p>{currentErp.paymentTermsText}</p></Col>
+        <Col span={12}><strong>Fußzeilentext</strong><p>{currentErp.footerText}</p></Col>
+      </Row>}
       <div
         style={{
           width: '300px',

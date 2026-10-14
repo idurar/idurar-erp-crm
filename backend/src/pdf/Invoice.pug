@@ -1,326 +1,162 @@
 doctype html
 html
   head
-    link(rel="shortcut icon" type="image/png" href="/images/icons/favicon.png")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    style.
-      .sheet {
-        margin: 0;
-        width: 100%; 
-        height: 297mm;
-      }
-
-      body{
-        width: 100%; 
-        margin: 0;
-        padding: 0px ;
-        background: #ffffff;
-        font-family: sans-serif;
-        font-size:12px;
-        color:#222
-      }
-      *, *:before, *:after {
-        box-sizing: inherit;
-        color:#222
-      }
-
-      .clearfix {
-        display: block; }
-      //- .invoice-container {
-      //-   position: relative;
-      //-   margin: 0 auto;
-      //-   color: #001028;
-      //-   background: #fff;
-      //-   font-size: 10px;
-      //- }
-      .left{
-        float:left;
-      }
-      .right{
-        float:right;
-      }
-      .top-area {    
-        display: block;
-        width:100%;
-        
-      }
-      alignRight :{
-        text-align: right !important;
-      }
-      alignLeft :{
-        text-align: left;
-      }
-      .logo {
-        width: 150px;
-      }
-      .company-info{
-        text-align: right;
-        font-size:12px;
-      }
-      h1.invoice{
-        font-size:32px;
-        color:#52008c;
-        margin-top:0;
-      }
-      p.strong{
-        font-weight:700;
-      }
-      .billTo p {
-        text-align: right !important;
-        float:right;
-        display:block;
-        font-size:12px;
-        width:100%;
-        margin-top:0;
-        margin-bottom:10px;
-        
-      }
-
-      .tableHeader{
-        color:#52008c;
-      }
-      .clearfix {
-        display: block; }
-      .col {
-        float:left;
-      }
-      .col-1 {
-        width: 4.16667%; }
-
-      .col-2 {
-        width: 8.33333%; }
-
-      .col-3 {
-        width: 12.5%; }
-
-      .col-4 {
-        width: 16.66667%; }
-
-      .col-5 {
-        width: 20.83333%; }
-
-      .col-6 {
-        width: 25%; }
-
-      .col-7 {
-        width: 29.16667%; }
-
-      .col-8 {
-        width: 33.33333%; }
-
-      .col-9 {
-        width: 37.5%; }
-
-      .col-10 {
-        width: 41.66667%; }
-
-      .col-11 {
-        width: 45.83333%; }
-
-      .col-12 {
-        width: 50%; }
-
-      .col-13 {
-        width: 54.16667%; }
-
-      .col-14 {
-        width: 58.33333%; }
-
-      .col-15 {
-        width: 62.5%; }
-
-      .col-16 {
-        width: 66.66667%; }
-
-      .col-17 {
-        width: 70.83333%; }
-
-      .col-18 {
-        width: 75%; }
-
-      .col-19 {
-        width: 79.16667%; }
-
-      .col-20 {
-        width: 83.33333%; }
-
-      .col-21 {
-        width: 87.5%; }
-
-      .col-22 {
-        width: 91.66667%; }
-
-      .col-23 {
-        width: 95.83333%; }
-
-      .col-24 {
-        width: 100%; }
-      .space {
-        margin-top: 30px;
-        margin-bottom: 40px;
-        width:100%;
-      }
-      .top-area .number-invoice > h1 {
-        font-weight: 500;
-      }
-      .about-invoice {
-        padding: 0px 15px;
-        margin-top: 10px;
-        font-size: 13px;
-      }
-      .project-invoice {
-        float: left;
-        margin-bottom: 10px;
-      }
-      .project-invoice span {
-        color: #5d6975;
-        text-align: right;
-        width: 52px;
-        margin-right: 10px;
-        display: inline-block;
-        font-size: 0.8em;
-      }
-      .company-invoice {
-        float: right;
-        text-align: right;
-        margin-bottom: 60px;
-      }
-      .project-invoice div, .company-invoice div {
-        white-space: nowrap;
-        margin: 5px auto;
-      }
-      .table-invoice {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 20px;
-      }
-      .table-invoice tr:nth-child(2n-1) td {
-        background: #fcfeff;
-      }
-      .table-invoice th, .table-invoice td {
-        text-align: center;
-      }
-      .table-invoice th {
-        padding: 8px 10px;
-        border-bottom: 1px solid #c2e0f2;
-        color:#52008c;
-        white-space: nowrap;
-        font-weight: 700;
-        font-size: 12px;
-        text-align: right;
-      }
-      tbody{
-        border-bottom: 1px solid #c2e0f2;
-      }
-      .table-invoice .service, .table-invoice .desc {
-        text-align: left;
-      }
-      .table-invoice td {
-        padding: 10px ;
-        text-align: right;
-        font-size: 11px;
-      }
-      .table-invoice td.service, .table-invoice td.desc {
-        vertical-align: top;
-      }
-      .table-invoice td.unit, .table-invoice td.qty, .table-invoice td.total {
-        
-      }
-      .table-invoice td.grand {
-        border-top: 1px solid #5d6975;
-      }
-      .service span{
-        display:block;
-        clear:both;
-        width : 100%;
-        color:#666;
-        margin-top:5px;
-        font-size:10px;
-      }
-      .notice-invoice {
-        padding: 15px;
-      }
-      .notice-invoice .notice {
-        color: #5d6975;
-        
-      }
-      .footer-invoice {
-        margin-top:30px
-        color: #5d6975;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        
-        padding: 20px 0;
-        text-align: center;
-      }
- 
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    include documentStyles.pug
   body
-    
-      header.clearfix
-        .top-area
-          img.logo.left(src=settings.public_server_file+settings.company_logo)
-          .right.company-info
-              p.strong #{settings.company_name}
+    .document
+      table.header-table
+        tr
+          td
+            if companyLogo
+              img.logo(src=companyLogo alt='Firmenlogo')
+          td.issuer
+            if settings.company_name
+              p.issuer-name #{settings.company_name}
+            if settings.company_address
               p #{settings.company_address}
-              p #{settings.company_reg_number}
-              
-        .col.col-24
-          .space  
-        .left.col-14
-            h1.invoice
-              | #{translate('invoice')}
-            div 
-              .col.col-7
-                p.strong #{translate('Date')} :
-                p #{moment(model.date).format(dateFormat)}
-              .col.col-9
-                p.strong #{translate('Expired Date')} :
-                p #{moment(model.expiredDate).format(dateFormat)}
-              .col.col-8 
-                p.strong #{translate('Number')} :
-                p # #{model.number}/#{model.year || ""} 
-              
-        .right.col-10
-            .billTo
-                p #{translate('Client')} :
-                p #{model.client.name}
-                p #{model.client.address}
-                p #{model.client.phone}
-                p #{model.client.email}
-        .col.col-24
-          .space  
-      main
-        table.table-invoice
-          thead
-            tr.tableHeader
-              th.service #{translate('item')}
-              th #{translate('Quantity')}
-              th #{translate('PRICE')}
-              th #{translate('TOTAL')}
-          tbody
-            each item in model.items
-              tr
-                td.service #{item.itemName}
-                  span #{item.description}
-                td.qty #{item.quantity}  
-                td.unit  #{moneyFormatter({amount:item.price})}
-                td.total #{moneyFormatter({amount:item.total})}
-            tr
-              td(colspan='3') #{translate('SUB TOTAL')}
-              td.total #{moneyFormatter({amount:model.subTotal})}
-            tr
-              td(colspan='3') #{translate('TAX')} #{model.taxRate} %
-              td.total #{moneyFormatter({amount:model.taxTotal})}
-            tr
-              td.grand.total(colspan='3')  #{translate('TOTAL')} 
-              td.grand.total #{moneyFormatter({amount:model.total})}
-        
-      .col.col-24
-          .space     
-      footer.footer-invoice
-        //- | Invoice was created on a computer and is valid without the signature and seal.
-          
+            if settings.company_state || settings.company_country
+              p #{[settings.company_state, settings.company_country].filter(Boolean).join(', ')}
 
-   
+      table.details-table
+        tr
+          td.recipient
+            span.label Rechnungsempfänger
+            p.recipient-name #{model.client.name}
+            if model.client.address
+              p #{model.client.address}
+            if model.clientVatNumber || model.client.vatNumber
+              p UID: #{model.clientVatNumber || model.client.vatNumber}
+          td
+            table.document-data
+              tr
+                td Rechnungsnr.:
+                td #{model.number}/#{model.year || ''}
+              tr
+                td Datum:
+                td #{moment(model.date).format(dateFormat)}
+              tr
+                td Leistungsdatum:
+                td #{moment(model.serviceDate || model.date).format(dateFormat)}
+              tr
+                td Fällig am:
+                td #{moment(model.expiredDate).format(dateFormat)}
+
+      .title-row
+        h1 Rechnung #{model.number}/#{model.year || ''}
+
+      .intro
+        p Sehr geehrte Damen und Herren,
+        p Vielen Dank für Ihren Auftrag. Wir erlauben uns, folgende Leistungen in Rechnung zu stellen:
+
+      table.items
+        colgroup
+          col(style='width: 5%')
+          col(style='width: 38%')
+          col(style='width: 10%')
+          col(style='width: 10%')
+          col(style='width: 14%')
+          col(style='width: 10%')
+          col(style='width: 13%')
+        thead
+          tr
+            th Pos.
+            th Beschreibung
+            th Menge
+            th Einheit
+            th Einzelpreis
+            th USt.
+            th Gesamtpreis
+        tbody
+          each item, index in model.items
+            tr
+              td #{index + 1}.
+              td
+                .item-name #{item.itemName}
+                if item.description
+                  .description-rich!= safeRichText(item.description)
+              td #{item.quantity}
+              td #{item.unit || 'Stk.'}
+              td #{moneyFormatter({ amount: item.price })}
+              td #{model.taxRate} %
+              td #{moneyFormatter({ amount: item.total })}
+
+      table.settlement-table
+        tr
+          td
+            if model.paymentQrCode
+              .qr-payment
+                img(src=model.paymentQrCode alt='QR-Code zur Zahlung')
+                .qr-caption QR-Code scannen und bezahlen
+            else
+              .payment-hint
+                p Bitte überweisen Sie den offenen Betrag fristgerecht.
+                p Verwenden Sie die Rechnungsnummer als Zahlungsreferenz.
+          td
+            table.summary(style='width: 100%')
+              tr
+                td.sum-label Netto
+                td #{moneyFormatter({ amount: model.subTotal })}
+              tr
+                td.sum-label USt. #{model.taxRate} %
+                td #{moneyFormatter({ amount: model.taxTotal })}
+              tr.grand
+                td.sum-label Gesamtbetrag
+                td #{moneyFormatter({ amount: model.total })}
+              if model.credit
+                tr
+                  td.sum-label Bereits bezahlt
+                  td - #{moneyFormatter({ amount: model.credit })}
+                tr.grand
+                  td.sum-label Offener Betrag
+                  td #{moneyFormatter({ amount: model.total - model.credit })}
+
+      .info-box
+        h2 Zahlung & Bankverbindung
+        if model.paymentTermsText
+          p #{model.paymentTermsText}
+        else
+          p Bitte überweisen Sie den offenen Betrag fristgerecht unter Angabe der Rechnungsnummer.
+        if settings.company_iban || settings.company_bank_account
+          table.bank-table
+            tr
+              td
+                span.label Kontoinhaber
+                | #{settings.company_account_holder || settings.company_name || ''}
+              td
+                span.label IBAN
+                | #{settings.company_iban || settings.company_bank_account}
+            if settings.company_bank_name || settings.company_bic
+              tr
+                td
+                  span.label Bank
+                  | #{settings.company_bank_name || '—'}
+                td
+                  span.label BIC
+                  | #{settings.company_bic || '—'}
+
+      if model.footerText || settings.invoice_pdf_footer
+        .closing #{model.footerText || settings.invoice_pdf_footer}
+
+      .legal-footer
+        table.footer-table
+          tr
+            td
+              p.issuer-name #{settings.company_name || ''}
+              p #{settings.company_address || ''}
+              p #{[settings.company_state, settings.company_country].filter(Boolean).join(', ')}
+            td
+              if settings.company_vat_number
+                p UID: #{settings.company_vat_number}
+              if settings.company_tax_number
+                p Steuernummer: #{settings.company_tax_number}
+              if settings.company_reg_number
+                p Firmenbuchnummer: #{settings.company_reg_number}
+            td
+              if settings.company_email
+                p #{settings.company_email}
+              if settings.company_phone
+                p #{settings.company_phone}
+              if settings.company_website
+                p #{settings.company_website}

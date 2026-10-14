@@ -1,0 +1,44 @@
+services:
+  mongodb:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 8888
+      DATABASE: mongodb://mongodb:27017/idurar
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET to at least 32 random characters}
+      CORS_ORIGINS: ${APP_URL:?Set APP_URL, for example https://erp.example.com}
+      PUBLIC_SERVER_FILE: ${APP_URL}/
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - uploads_data:/app/src/public/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_BACKEND_SERVER: /
+        VITE_FILE_BASE_URL: /
+        VITE_WEBSITE_URL: ${APP_URL}
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data:
+  uploads_data:

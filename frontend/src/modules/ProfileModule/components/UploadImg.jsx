@@ -7,11 +7,11 @@ import useLanguage from '@/locale/useLanguage';
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
+    message.error('Sie können nur JPG- oder PNG-Dateien hochladen.');
   }
   const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
+    message.error('Das Bild muss kleiner als 2 MB sein.');
   }
   return isJpgOrPng && isLt2M;
 };
@@ -25,7 +25,7 @@ export default function UploadImg() {
       getValueFromEvent={(e) => e.fileList}
     >
       <Upload beforeUpload={beforeUpload}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        <Button icon={<UploadOutlined />}>{translate('click_to_upload')}</Button>
       </Upload>
     </Form.Item>
   );

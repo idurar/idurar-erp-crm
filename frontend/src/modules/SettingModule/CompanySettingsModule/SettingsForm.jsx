@@ -45,6 +45,26 @@ const formItems = [
     settingKey: 'company_reg_number',
     valueType: 'string',
   },
+  {
+    settingKey: 'company_account_holder',
+    label: 'Kontoinhaber',
+    valueType: 'string',
+  },
+  {
+    settingKey: 'company_bank_name',
+    label: 'Bank',
+    valueType: 'string',
+  },
+  {
+    settingKey: 'company_iban',
+    label: 'IBAN',
+    valueType: 'string',
+  },
+  {
+    settingKey: 'company_bic',
+    label: 'BIC / SWIFT',
+    valueType: 'string',
+  },
 ];
 
 export default function SettingForm() {

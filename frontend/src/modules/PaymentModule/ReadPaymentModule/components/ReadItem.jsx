@@ -78,7 +78,7 @@ export default function ReadItem({ config, selectedItem }) {
         }}
         title={`${ENTITY_NAME} # ${currentErp.number}/${currentErp.year || ''}`}
         ghost={false}
-        tags={<span>{currentErp.paymentStatus}</span>}
+        tags={<span>{currentErp.paymentStatus && translate(currentErp.paymentStatus)}</span>}
         extra={[
           <Button
             key={`${uniqueId()}`}
@@ -134,7 +134,10 @@ export default function ReadItem({ config, selectedItem }) {
         }}
       >
         <Row>
-          <Statistic title="Status" value={currentErp.status} />
+          <Statistic
+            title={translate('Status')}
+            value={currentErp.status ? translate(currentErp.status) : currentErp.status}
+          />
           <Statistic
             title={translate('Paid')}
             value={moneyFormatter({

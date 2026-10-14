@@ -7,7 +7,7 @@ const { loadSettings } = require('@/middlewares/settings');
 const summary = async (req, res) => {
   let defaultType = 'month';
 
-  const { type } = req.query;
+  const { type, period } = req.query;
 
   const settings = await loadSettings();
 
@@ -23,7 +23,9 @@ const summary = async (req, res) => {
     }
   }
 
-  const currentDate = moment();
+  const currentDate = period && moment(period, ['YYYY-MM', 'YYYY'], true).isValid()
+    ? moment(period, ['YYYY-MM', 'YYYY'], true)
+    : moment();
   let startDate = currentDate.clone().startOf(defaultType);
   let endDate = currentDate.clone().endOf(defaultType);
 
@@ -32,11 +34,10 @@ const summary = async (req, res) => {
     {
       $match: {
         removed: false,
-
-        // date: {
-        //   $gte: startDate.toDate(),
-        //   $lte: endDate.toDate(),
-        // },
+        date: {
+          $gte: startDate.toDate(),
+          $lte: endDate.toDate(),
+        },
       },
     },
     {

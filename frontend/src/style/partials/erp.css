@@ -5,3 +5,12 @@
 .moneyInput input {
   text-align: right;
 }
+
+.invoice-line-header { padding: 0 12px 8px; color: #667085; font-size: 12px; font-weight: 600; }
+.invoice-line { margin-bottom: 14px; padding: 14px 12px 6px; border: 1px solid #e8ebef; border-radius: 10px; background: #fff; }
+.invoice-line .ant-form-item { margin-bottom: 10px; }
+.invoice-description-editor .ql-toolbar { border-color: #e5e7eb; border-radius: 7px 7px 0 0; padding: 5px 8px; }
+.invoice-description-editor .ql-container { min-height: 76px; border-color: #e5e7eb; border-radius: 0 0 7px 7px; font-family: inherit; }
+.invoice-description-editor .ql-editor { min-height: 76px; }
+.invoice-template-texts { clear: both; padding-top: 8px; }
+@media (max-width: 991px) { .invoice-line-header { display: none; } }

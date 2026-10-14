@@ -1,6 +1,5 @@
-import React from 'react';
 import dayjs from 'dayjs';
-import { Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber, Space } from 'antd';
 import { DatePicker } from 'antd';
 import SelectAsync from '@/components/SelectAsync';
 import { useMoney, useDate } from '@/settings';
@@ -12,6 +11,13 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
   const { TextArea } = Input;
   const money = useMoney();
   const { dateFormat } = useDate();
+  const form = Form.useFormInstance();
+
+  const applyDepositPercentage = (percentage) => {
+    if (maxAmount === null || maxAmount === undefined || percentage === null) return;
+    const amount = Math.round(((maxAmount * percentage) / 100 + Number.EPSILON) * 100) / 100;
+    form.setFieldValue('amount', amount);
+  };
   return (
     <>
       <Form.Item
@@ -36,7 +42,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
             type: 'object',
           },
         ]}
-        initialValue={dayjs().add(30, 'days')}
+        initialValue={dayjs()}
         style={{ width: '100%' }}
       >
         <DatePicker format={dateFormat} style={{ width: '100%' }} />
@@ -51,6 +57,23 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
         />
       </Form.Item>
+      {!isUpdateForm && maxAmount !== null && (
+        <Space.Compact block style={{ marginTop: -12, marginBottom: 20 }}>
+          <Form.Item name="depositPercentage" noStyle>
+            <InputNumber
+              min={0}
+              max={100}
+              suffix="%"
+              placeholder={translate('deposit_percentage')}
+              onChange={applyDepositPercentage}
+              style={{ width: '100%' }}
+            />
+          </Form.Item>
+          <Button onClick={() => form.setFieldValue('amount', maxAmount)}>
+            {translate('use_remaining_amount')}
+          </Button>
+        </Space.Compact>
+      )}
       <Form.Item
         label={translate('payment Mode')}
         name="paymentMode"
@@ -66,6 +89,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
           withRedirect={true}
           urlToRedirect="/payment/mode"
           redirectLabel="Add Payment Mode"
+          requestOptions={{ filter: 'enabled', equal: true, items: 20 }}
         ></SelectAsync>
       </Form.Item>
       <Form.Item label={translate('Reference')} name="ref">

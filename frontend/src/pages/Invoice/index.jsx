@@ -74,10 +74,22 @@ export default function Invoice() {
     {
       title: translate('Status'),
       dataIndex: 'status',
+      render: (status) => (status ? translate(status) : status),
     },
     {
       title: translate('Payment'),
       dataIndex: 'paymentStatus',
+      render: (status) => (status ? translate(status) : status),
+    },
+    {
+      title: 'Mahnwesen',
+      key: 'dunning',
+      render: (_, record) => {
+        if (record.paymentStatus === 'paid') return <Tag color="green">Bezahlt</Tag>;
+        if (record.reminderLevel) return <Tag color="red">Mahnstufe {record.reminderLevel}</Tag>;
+        if (record.isOverdue) return <Tag color="orange">Überfällig</Tag>;
+        return <Tag>Offen</Tag>;
+      },
     },
   ];
 

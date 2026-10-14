@@ -3,17 +3,17 @@ import { Col, Progress, Spin } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
 const colours = {
-  draft: '#595959',
-  sent: '#1890ff',
-  pending: '#1890ff',
+  draft: '#19231A',
+  sent: '#3E885B',
+  pending: '#205435',
   unpaid: '#ffa940',
   overdue: '#ff4d4f',
-  partially: '#13c2c2',
-  paid: '#95de64',
+  partially: '#DCF763',
+  paid: '#3E885B',
   declined: '#ff4d4f',
-  accepted: '#95de64',
-  cyan: '#13c2c2',
-  purple: '#722ed1',
+  accepted: '#3E885B',
+  cyan: '#3E885B',
+  purple: '#205435',
   expired: '#614700',
 };
 
@@ -74,15 +74,15 @@ const defaultInvoiceStatistics = [
 const PreviewState = ({ tag, value }) => {
   const translate = useLanguage();
   return (
-    <div style={{ color: '#595959', marginBottom: 5 }}>
+    <div style={{ color: 'var(--app-text)', marginBottom: 5 }}>
       <div className="left alignLeft capitalize">{translate(tag)}</div>
       <div className="right alignRight">{value} %</div>
       <Progress
         percent={value}
         showInfo={false}
         strokeColor={{
-          '0%': '#333',
-          '100%': '#333',
+          '0%': '#3E885B',
+          '100%': '#205435',
         }}
       />
     </div>
@@ -130,7 +130,7 @@ export default function PreviewCard({
       <div className="pad20">
         <h3
           style={{
-            color: '#22075e',
+            color: 'var(--app-heading)',
             fontSize: 'large',
             marginBottom: 40,
             marginTop: 0,

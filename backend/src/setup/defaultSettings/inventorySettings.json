@@ -1,0 +1,14 @@
+[
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "article_number_prefix",
+    "settingValue": "ART-",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "inventory_settings",
+    "settingKey": "last_article_number",
+    "settingValue": 999,
+    "valueType": "number"
+  }
+]

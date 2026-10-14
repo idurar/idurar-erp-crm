@@ -7,7 +7,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
   const translate = useLanguage();
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {
-      return Promise.reject(new Error('Field cannot be empty'));
+      return Promise.reject(new Error(translate('Field cannot be empty')));
     }
 
     return Promise.resolve();
@@ -80,7 +80,7 @@ export default function CustomerForm({ isUpdateForm = false }) {
           },
           {
             pattern: validatePhoneNumber,
-            message: 'Please enter a valid phone number',
+            message: translate('Please enter a valid phone number'),
           },
         ]}
       >

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Select, Space } from 'antd';
 import { request } from '@/request';
 import errorHandler from '@/request/errorHandler';
+import useLanguage from '@/locale/useLanguage';
 
 const { Option } = Select;
 
@@ -28,6 +29,7 @@ const MultiStepSelectAsync = ({
   onChange,
   style,
 }) => {
+  const translate = useLanguage();
   const firstSelectedOption = value.firstSelectedOption;
   const [firstSelectOptions, setFirstSelectOptions] = useState([]);
   const [secondSelectOptions, setSecondSelectOptions] = useState([]);
@@ -60,7 +62,7 @@ const MultiStepSelectAsync = ({
   return (
     <Space direction="vertical" style={style}>
       <Select
-        placeholder="Select an option"
+        placeholder={translate('Select an option')}
         style={{ width: 200 }}
         {...firstSelectProps}
         loading={!firstSelectedOption ? loading : false}
@@ -82,7 +84,7 @@ const MultiStepSelectAsync = ({
       </Select>
       {firstSelectedOption && (
         <Select
-          placeholder="Select another option"
+          placeholder={translate('Select another option')}
           loading={loading}
           style={{ width: 200 }}
           {...secondSelectProps}

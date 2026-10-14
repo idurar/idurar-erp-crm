@@ -18,6 +18,10 @@ import useLanguage from '@/locale/useLanguage';
 import calculate from '@/utils/calculate';
 import { useSelector } from 'react-redux';
 import SelectAsync from '@/components/SelectAsync';
+import request from '@/request/request';
+
+const DEFAULT_PAYMENT_TERMS = 'Zahlbar innerhalb von 14 Tagen ab Rechnungsdatum ohne Abzug. Bitte geben Sie bei der Überweisung die Rechnungsnummer als Verwendungszweck an.';
+const DEFAULT_FOOTER = 'Vielen Dank für Ihren Auftrag. Es gelten unsere vereinbarten Geschäftsbedingungen.';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
@@ -34,10 +38,20 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const { dateFormat } = useDate();
   const { last_invoice_number } = useSelector(selectFinanceSettings);
   const [total, setTotal] = useState(0);
-  const [taxRate, setTaxRate] = useState(0);
+  const [taxRate, setTaxRate] = useState(0.2);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
+  const form = Form.useFormInstance();
+
+  const handleClientChange = async (clientId) => {
+    if (!clientId || clientId === 'redirectURL') return;
+    const response = await request.read({ entity: 'client', id: clientId });
+    const client = response?.result;
+    if (!client) return;
+    form.setFieldValue('clientVatNumber', client.vatNumber || '');
+    if (client.paymentTerms) form.setFieldValue('paymentTermsText', client.paymentTerms);
+  };
 
   const handelTaxChange = (value) => {
     setTaxRate(value / 100);
@@ -83,10 +97,16 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               redirectLabel={'Add New Client'}
               withRedirect
               urlToRedirect={'/customer'}
+              onChange={handleClientChange}
             />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={3}>
+        <Col className="gutter-row" span={8}>
+          <Form.Item name="clientVatNumber" label="UID-Nummer">
+            <Input placeholder="wird aus den Kundendaten übernommen" />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={5}>
           <Form.Item
             label={translate('number')}
             name="number"
@@ -100,41 +120,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             <InputNumber min={1} style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={3}>
-          <Form.Item
-            label={translate('year')}
-            name="year"
-            initialValue={currentYear}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <InputNumber style={{ width: '100%' }} />
-          </Form.Item>
-        </Col>
-
-        <Col className="gutter-row" span={5}>
-          <Form.Item
-            label={translate('status')}
-            name="status"
-            rules={[
-              {
-                required: false,
-              },
-            ]}
-            initialValue={'draft'}
-          >
-            <Select
-              options={[
-                { value: 'draft', label: translate('Draft') },
-                { value: 'pending', label: translate('Pending') },
-                { value: 'sent', label: translate('Sent') },
-              ]}
-            ></Select>
-          </Form.Item>
-        </Col>
+        <Form.Item name="year" initialValue={currentYear} hidden><InputNumber /></Form.Item>
 
         <Col className="gutter-row" span={8}>
           <Form.Item
@@ -173,22 +159,14 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         </Col>
       </Row>
       <Divider dashed />
-      <Row gutter={[12, 12]} style={{ position: 'relative' }}>
-        <Col className="gutter-row" span={5}>
-          <p>{translate('Item')}</p>
-        </Col>
-        <Col className="gutter-row" span={7}>
-          <p>{translate('Description')}</p>
-        </Col>
-        <Col className="gutter-row" span={3}>
-          <p>{translate('Quantity')}</p>{' '}
-        </Col>
-        <Col className="gutter-row" span={4}>
-          <p>{translate('Price')}</p>
-        </Col>
-        <Col className="gutter-row" span={5}>
-          <p>{translate('Total')}</p>
-        </Col>
+      <Row gutter={[10, 0]} className="invoice-line-header">
+        <Col span={7}>Beschreibung</Col>
+        <Col span={3}>Menge</Col>
+        <Col span={3}>Preis</Col>
+        <Col span={3}>Einheit</Col>
+        <Col span={3}>Rabatt</Col>
+        <Col span={4}>Gesamt</Col>
+        <Col span={1}></Col>
       </Row>
       <Form.List name="items">
         {(fields, { add, remove }) => (
@@ -240,23 +218,14 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={4} offset={15}>
             <Form.Item
               name="taxRate"
+              initialValue={20}
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Select
-                value={taxRate}
-                onChange={handelTaxChange}
-                entity={'taxes'}
-                outputValue={'taxValue'}
-                displayLabels={['taxName']}
-                withRedirect={true}
-                urlToRedirect="/taxes"
-                redirectLabel={translate('Add New Tax')}
-                placeholder={translate('Select Tax Value')}
-              />
+              <Select onChange={handelTaxChange} options={[0, 10, 13, 19, 20].map((value) => ({ value, label: `${value} % Umsatzsteuer` }))} />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={5}>
@@ -281,6 +250,19 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           </Col>
         </Row>
       </div>
+      <Divider dashed />
+      <Row gutter={20} className="invoice-template-texts">
+        <Col xs={24} lg={12}>
+          <Form.Item name="paymentTermsText" label="Zahlungskonditionen" initialValue={DEFAULT_PAYMENT_TERMS}>
+            <Input.TextArea autoSize={{ minRows: 3, maxRows: 7 }} />
+          </Form.Item>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Form.Item name="footerText" label="Fußzeilentext" initialValue={DEFAULT_FOOTER}>
+            <Input.TextArea autoSize={{ minRows: 3, maxRows: 7 }} />
+          </Form.Item>
+        </Col>
+      </Row>
     </>
   );
 }

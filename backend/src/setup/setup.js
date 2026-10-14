@@ -54,14 +54,27 @@ async function setupApp() {
     const PaymentMode = require('../models/appModels/PaymentMode');
     const Taxes = require('../models/appModels/Taxes');
 
-    await Taxes.insertMany([{ taxName: 'Tax 0%', taxValue: '0', isDefault: true }]);
+    await Taxes.insertMany([
+      { taxName: '0%', taxValue: 0, isDefault: false },
+      { taxName: '10%', taxValue: 10, isDefault: false },
+      { taxName: '20%', taxValue: 20, isDefault: true },
+    ]);
     console.log('👍 Taxes created : Done!');
 
     await PaymentMode.insertMany([
+      { name: 'Barzahlung', description: 'Zahlung in bar', isDefault: false },
+      { name: 'Überweisung', description: 'Zahlung per Banküberweisung', isDefault: true },
       {
-        name: 'Default Payment',
-        description: 'Default Payment Mode (Cash , Wire Transfer)',
-        isDefault: true,
+        name: 'Anzahlung',
+        description: 'Prozentuelle Anzahlung auf den Rechnungsbetrag',
+        supportsDeposit: true,
+        defaultDepositPercentage: 30,
+        isDefault: false,
+      },
+      {
+        name: 'Restzahlung',
+        description: 'Offener Rechnungsbetrag abzüglich bereits geleisteter Anzahlungen',
+        isDefault: false,
       },
     ]);
     console.log('👍 PaymentMode created : Done!');

@@ -4,7 +4,7 @@ import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
-import { LogoutOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, MoonOutlined, SunOutlined, ToolOutlined, UserOutlined } from '@ant-design/icons';
 
 import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
@@ -13,12 +13,14 @@ import { FILE_BASE_URL } from '@/config/serverApiConfig';
 import useLanguage from '@/locale/useLanguage';
 
 import UpgradeButton from './UpgradeButton';
+import { useColorMode } from '@/locale/Localization';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const { Header } = Layout;
 
   const translate = useLanguage();
+  const { isDark, toggleColorMode } = useColorMode();
 
   const ProfileDropdown = () => {
     const navigate = useNavigate();
@@ -88,13 +90,22 @@ export default function HeaderContent() {
     <Header
       style={{
         padding: '20px',
-        background: '#ffffff',
+        background: isDark ? '#171d19' : '#ffffff',
         display: 'flex',
         flexDirection: 'row-reverse',
         justifyContent: 'flex-start',
         gap: ' 15px',
       }}
     >
+      <Button
+        type="text"
+        size="large"
+        className="theme-toggle"
+        icon={isDark ? <SunOutlined /> : <MoonOutlined />}
+        onClick={toggleColorMode}
+        title={isDark ? 'Hellen Modus aktivieren' : 'Dark-Mode aktivieren'}
+        aria-label={isDark ? 'Hellen Modus aktivieren' : 'Dark-Mode aktivieren'}
+      />
       <Dropdown
         menu={{
           items,

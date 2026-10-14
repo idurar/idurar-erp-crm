@@ -74,7 +74,31 @@
   {
     "settingCategory": "company_settings",
     "settingKey": "company_bank_account",
-    "settingValue": "iban : 00001231421",
+    "settingValue": "",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_account_holder",
+    "settingValue": "",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_bank_name",
+    "settingValue": "",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_iban",
+    "settingValue": "",
+    "valueType": "string"
+  },
+  {
+    "settingCategory": "company_settings",
+    "settingKey": "company_bic",
+    "settingValue": "",
     "valueType": "string"
   }
 ]

@@ -152,7 +152,7 @@ export default function AdvancedSettingsForm({ isUpdateForm = false }) {
           <SelectType />
         ) : (
           <Form.Item
-            label="Value"
+            label={translate('Value')}
             name="settingValue"
             rules={[
               {

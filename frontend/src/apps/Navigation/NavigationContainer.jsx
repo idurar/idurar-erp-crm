@@ -5,10 +5,10 @@ import { Button, Drawer, Layout, Menu } from 'antd';
 import { useAppContext } from '@/context/appContext';
 
 import useLanguage from '@/locale/useLanguage';
-import logoIcon from '@/style/images/logo-icon.svg';
-import logoText from '@/style/images/logo-text.svg';
+import logo from '@/style/images/wiedesign-logo.png';
 
 import useResponsive from '@/hooks/useResponsive';
+import { useColorMode } from '@/locale/Localization';
 
 import {
   SettingOutlined,
@@ -16,16 +16,12 @@ import {
   ContainerOutlined,
   FileSyncOutlined,
   DashboardOutlined,
-  TagOutlined,
-  TagsOutlined,
-  UserOutlined,
   CreditCardOutlined,
   MenuOutlined,
-  FileOutlined,
   ShopOutlined,
-  FilterOutlined,
   WalletOutlined,
   ReconciliationOutlined,
+  InboxOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -37,6 +33,7 @@ export default function Navigation() {
 }
 
 function Sidebar({ collapsible, isMobile = false }) {
+  const { isDark } = useColorMode();
   let location = useLocation();
 
   const { state: stateApp, appContextAction } = useAppContext();
@@ -71,6 +68,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/quote'}>{translate('quote')}</Link>,
     },
     {
+      key: 'inventory',
+      icon: <InboxOutlined />,
+      label: <Link to={'/inventory'}>Lager</Link>,
+    },
+    {
       key: 'payment',
       icon: <CreditCardOutlined />,
       label: <Link to={'/payment'}>{translate('payments')}</Link>,
@@ -92,8 +94,8 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <SettingOutlined />,
     },
     {
-      key: 'about',
-      label: <Link to={'/about'}>{translate('about')}</Link>,
+      key: 'support',
+      label: <Link to={'/support'}>{translate('support')}</Link>,
       icon: <ReconciliationOutlined />,
     },
   ];
@@ -142,33 +144,34 @@ function Sidebar({ collapsible, isMobile = false }) {
           // borderRadius: '8px',
         }),
       }}
-      theme={'light'}
+      theme={isDark ? 'dark' : 'light'}
     >
       <div
         className="logo"
         onClick={() => navigate('/')}
         style={{
           cursor: 'pointer',
+          width: showLogoApp ? '34px' : '150px',
+          height: showLogoApp ? '34px' : '38px',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
         }}
       >
-        <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
-
-        {!showLogoApp && (
-          <img
-            src={logoText}
-            alt="Logo"
-            style={{
-              marginTop: '3px',
-              marginLeft: '10px',
-              height: '38px',
-            }}
-          />
-        )}
+        <img
+          src={logo}
+          alt="WIEdesign"
+          style={{
+            width: showLogoApp ? '34px' : '150px',
+            height: showLogoApp ? '34px' : '38px',
+            objectFit: 'contain',
+            objectPosition: 'left center',
+          }}
+        />
       </div>
       <Menu
         items={items}
         mode="inline"
-        theme={'light'}
+        theme={isDark ? 'dark' : 'light'}
         selectedKeys={[currentPath]}
         style={{
           width: 256,

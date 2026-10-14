@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Button, Tag, Form, Divider } from 'antd';
+import { Button, Tag, Form, Divider, Select } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -64,7 +64,10 @@ export default function CreateItem({ config, CreateForm }) {
             subOfferTotal = calculate.add(subOfferTotal, offerTotal);
           }
           if (item.quantity && item.price) {
-            let total = calculate.multiply(item['quantity'], item['price']);
+            let total = calculate.multiply(
+              calculate.multiply(item['quantity'], item['price']),
+              1 - (Number(item.discount) || 0) / 100
+            );
             //sub total
             subTotal = calculate.add(subTotal, total);
           }
@@ -87,12 +90,18 @@ export default function CreateItem({ config, CreateForm }) {
   }, [isSuccess]);
 
   const onSubmit = (fieldsValue) => {
+    if (entity === 'invoice' && fieldsValue.date?.year) {
+      fieldsValue.year = fieldsValue.date.year();
+    }
     console.log('🚀 ~ onSubmit ~ fieldsValue:', fieldsValue);
     if (fieldsValue) {
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
-          item.total = calculate.multiply(item.quantity, item.price);
+          item.total = calculate.multiply(
+            calculate.multiply(item.quantity, item.price),
+            1 - (Number(item.discount) || 0) / 100
+          );
         });
         fieldsValue = {
           ...fieldsValue,
@@ -104,7 +113,7 @@ export default function CreateItem({ config, CreateForm }) {
   };
 
   return (
-    <>
+    <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
       <PageHeader
         onBack={() => {
           navigate(`/${entity.toLowerCase()}`);
@@ -122,6 +131,18 @@ export default function CreateItem({ config, CreateForm }) {
           >
             {translate('Cancel')}
           </Button>,
+          entity === 'invoice' && (
+            <Form.Item key="invoice-status" name="status" initialValue="draft" style={{ margin: 0, minWidth: 150 }}>
+              <Select
+                aria-label="Rechnungsstatus"
+                options={[
+                  { value: 'draft', label: translate('Draft') },
+                  { value: 'pending', label: translate('Pending') },
+                  { value: 'sent', label: translate('Sent') },
+                ]}
+              />
+            </Form.Item>
+          ),
           <SaveForm form={form} key={`${uniqueId()}`} />,
         ]}
         style={{
@@ -130,10 +151,8 @@ export default function CreateItem({ config, CreateForm }) {
       ></PageHeader>
       <Divider dashed />
       <Loading isLoading={isLoading}>
-        <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
-          <CreateForm subTotal={subTotal} offerTotal={offerSubTotal} />
-        </Form>
+        <CreateForm subTotal={subTotal} offerTotal={offerSubTotal} />
       </Loading>
-    </>
+    </Form>
   );
 }

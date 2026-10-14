@@ -40,9 +40,8 @@ export default function AutoCompleteAsync({
     isUpdating.current = false;
     // setCurrentValue(value[outputValue] || value); // set nested value or value
     // onChange(newValue[outputValue] || newValue);
-    if (onChange) {
-      if (newValue) onChange(newValue[outputValue] || newValue);
-    }
+    if (onChange) onChange(newValue?.[outputValue] || newValue);
+    if (!newValue) setCurrentValue(undefined);
     if (newValue === 'redirectURL' && withRedirect) {
       navigate(urlToRedirect);
     }

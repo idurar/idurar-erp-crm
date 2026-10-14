@@ -42,6 +42,15 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
         jwtExpired: true,
       });
 
+    if (!userPassword) {
+      return res.status(401).json({
+        success: false,
+        result: null,
+        message: 'Authentication session is invalid.',
+        jwtExpired: true,
+      });
+    }
+
     const { loggedSessions } = userPassword;
 
     if (!loggedSessions.includes(token))
@@ -57,12 +66,15 @@ const isValidAuthToken = async (req, res, next, { userModel, jwtSecret = 'JWT_SE
       next();
     }
   } catch (error) {
-    return res.status(500).json({
+    const isAuthenticationError =
+      error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError';
+
+    return res.status(isAuthenticationError ? 401 : 500).json({
       success: false,
       result: null,
-      message: error.message,
-      error: error,
-      controller: 'isValidAuthToken',
+      message: isAuthenticationError
+        ? 'Authentication token is invalid or expired.'
+        : 'Authentication could not be verified.',
       jwtExpired: true,
     });
   }

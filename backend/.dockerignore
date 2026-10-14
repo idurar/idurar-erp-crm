@@ -1,0 +1,5 @@
+node_modules
+.env
+.env.local
+npm-debug.log*
+src/public/uploads/*

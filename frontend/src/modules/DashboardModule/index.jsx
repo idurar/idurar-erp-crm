@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { Tag, Row, Col } from 'antd';
+import { Row, Col, Card, DatePicker, InputNumber, Segmented, Space, Statistic } from 'antd';
+import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
 
 import { useMoney } from '@/settings';
@@ -22,11 +23,14 @@ export default function DashboardModule() {
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
   const money_format_settings = useSelector(selectMoneyFormat);
+  const [overdueDays, setOverdueDays] = useState(7);
+  const [revenueType, setRevenueType] = useState('month');
+  const [revenueDate, setRevenueDate] = useState(dayjs());
 
-  const getStatsData = async ({ entity, currency }) => {
+  const getStatsData = async ({ entity, currency, options = {} }) => {
     return await request.summary({
       entity,
-      options: { currency },
+      options: { currency, ...options },
     });
   };
 
@@ -34,6 +38,12 @@ export default function DashboardModule() {
     result: invoiceResult,
     isLoading: invoiceLoading,
     onFetch: fetchInvoicesStats,
+  } = useOnFetch();
+
+  const {
+    result: revenueResult,
+    isLoading: revenueLoading,
+    onFetch: fetchRevenue,
   } = useOnFetch();
 
   const { result: quoteResult, isLoading: quoteLoading, onFetch: fetchQuotesStats } = useOnFetch();
@@ -52,11 +62,24 @@ export default function DashboardModule() {
     const currency = money_format_settings.default_currency_code || null;
 
     if (currency) {
-      fetchInvoicesStats(getStatsData({ entity: 'invoice', currency }));
+      fetchInvoicesStats(getStatsData({ entity: 'invoice', currency, options: { overdueDays } }));
       fetchQuotesStats(getStatsData({ entity: 'quote', currency }));
       fetchPayemntsStats(getStatsData({ entity: 'payment', currency }));
     }
-  }, [money_format_settings.default_currency_code]);
+  }, [money_format_settings.default_currency_code, overdueDays]);
+
+  useEffect(() => {
+    const currency = money_format_settings.default_currency_code || null;
+    if (!currency) return;
+    fetchRevenue(getStatsData({
+      entity: 'payment',
+      currency,
+      options: {
+        type: revenueType,
+        period: revenueDate.format(revenueType === 'month' ? 'YYYY-MM' : 'YYYY'),
+      },
+    }));
+  }, [money_format_settings.default_currency_code, revenueType, revenueDate]);
 
   const dataTableColumns = [
     {
@@ -85,6 +108,7 @@ export default function DashboardModule() {
     {
       title: translate('Status'),
       dataIndex: 'status',
+      render: (status) => (status ? translate(status) : status),
     },
   ];
 
@@ -152,7 +176,63 @@ export default function DashboardModule() {
             isLoading={invoiceLoading}
             data={invoiceResult?.total_undue}
           />
+          <SummaryCard
+            title={`Fällig seit ${overdueDays} Tagen`}
+            prefix={`${invoiceResult?.overdue_count || 0} Rechnung(en)`}
+            isLoading={invoiceLoading}
+            data={invoiceResult?.total_overdue}
+          />
         </Row>
+        <div className="space30"></div>
+        <Card
+          className="whiteBox shadow"
+          bordered={false}
+          title="Umsatz"
+          extra={
+            <Space wrap>
+              <Segmented
+                value={revenueType}
+                onChange={setRevenueType}
+                options={[{ label: 'Monat', value: 'month' }, { label: 'Jahr', value: 'year' }]}
+              />
+              <DatePicker
+                value={revenueDate}
+                onChange={(value) => setRevenueDate(value || dayjs())}
+                picker={revenueType}
+                allowClear={false}
+                format={revenueType === 'month' ? 'MMMM YYYY' : 'YYYY'}
+              />
+            </Space>
+          }
+        >
+          <Row gutter={[24, 16]} align="middle">
+            <Col xs={24} md={8}>
+              <Statistic
+                title={revenueType === 'month' ? 'Umsatz im ausgewählten Monat' : 'Umsatz im ausgewählten Jahr'}
+                loading={revenueLoading}
+                value={moneyFormatter({
+                  amount: revenueResult?.total || 0,
+                  currency_code: money_format_settings.default_currency_code,
+                })}
+              />
+            </Col>
+            <Col xs={24} md={8}>
+              <Statistic title="Erfasste Zahlungen" value={revenueResult?.count || 0} loading={revenueLoading} />
+            </Col>
+            <Col xs={24} md={8}>
+              <Space direction="vertical" size={2}>
+                <span>Überfällig ab</span>
+                <InputNumber
+                  min={0}
+                  max={3650}
+                  value={overdueDays}
+                  onChange={(value) => setOverdueDays(value ?? 0)}
+                  addonAfter="Tagen"
+                />
+              </Space>
+            </Col>
+          </Row>
+        </Card>
         <div className="space30"></div>
         <Row gutter={[32, 32]}>
           <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
@@ -174,7 +254,7 @@ export default function DashboardModule() {
         <Row gutter={[32, 32]}>
           <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
             <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
-              <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+              <h3 style={{ color: 'var(--app-heading)', marginBottom: 5, padding: '0 20px 20px' }}>
                 {translate('Recent Invoices')}
               </h3>
 
@@ -184,7 +264,7 @@ export default function DashboardModule() {
 
           <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
             <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
-              <h3 style={{ color: '#22075e', marginBottom: 5, padding: '0 20px 20px' }}>
+              <h3 style={{ color: 'var(--app-heading)', marginBottom: 5, padding: '0 20px 20px' }}>
                 {translate('Recent Quotes')}
               </h3>
               <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />

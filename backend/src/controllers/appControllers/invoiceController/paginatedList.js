@@ -7,7 +7,7 @@ const paginatedList = async (req, res) => {
   const limit = parseInt(req.query.items) || 10;
   const skip = page * limit - limit;
 
-  const { sortBy = 'enabled', sortValue = -1, filter, equal } = req.query;
+  const { sortBy = 'created', sortValue = -1, filter, equal } = req.query;
 
   const fieldsArray = req.query.fields ? req.query.fields.split(',') : [];
 
@@ -41,7 +41,13 @@ const paginatedList = async (req, res) => {
   });
 
   // Resolving both promises
-  const [result, count] = await Promise.all([resultsPromise, countPromise]);
+  const [documents, count] = await Promise.all([resultsPromise, countPromise]);
+  const now = new Date();
+  const result = documents.map((document) => {
+    const item = document.toObject();
+    item.isOverdue = item.paymentStatus !== 'paid' && new Date(item.expiredDate) < now;
+    return item;
+  });
   // Calculating total pages
   const pages = Math.ceil(count / limit);
 

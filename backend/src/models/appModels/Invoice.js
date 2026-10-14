@@ -50,6 +50,7 @@ const invoiceSchema = new mongoose.Schema({
   },
   items: [
     {
+      article: { type: mongoose.Schema.ObjectId, ref: 'Article' },
       // product: {
       //   type: mongoose.Schema.ObjectId,
       //   ref: 'Product',
@@ -62,6 +63,8 @@ const invoiceSchema = new mongoose.Schema({
       description: {
         type: String,
       },
+      unit: { type: String, default: 'Stk.' },
+      discount: { type: Number, min: 0, max: 100, default: 0 },
       quantity: {
         type: Number,
         default: 1,
@@ -138,6 +141,22 @@ const invoiceSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  reminderLevel: {
+    type: Number,
+    min: 0,
+    max: 3,
+    default: 0,
+  },
+  nextReminderDate: Date,
+  reminderHistory: [
+    {
+      level: { type: Number, min: 1, max: 3, required: true },
+      sentAt: { type: Date, default: Date.now },
+      dueDate: Date,
+      fee: { type: Number, min: 0, default: 0 },
+      note: String,
+    },
+  ],
   approved: {
     type: Boolean,
     default: false,
@@ -145,6 +164,9 @@ const invoiceSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  clientVatNumber: { type: String, trim: true, uppercase: true },
+  paymentTermsText: { type: String },
+  footerText: { type: String },
   status: {
     type: String,
     enum: ['draft', 'pending', 'sent', 'refunded', 'cancelled', 'on hold'],

@@ -1,0 +1,99 @@
+style.
+  html { box-sizing: border-box; }
+  *, *:before, *:after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #20252a;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+  p { margin: 0 0 4px; }
+  .document { width: 100%; }
+  .header-table, .address-table, .meta-table, .items, .summary, .footer-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .header-table { height: 25mm; }
+  .header-table td { vertical-align: top; }
+  .logo { max-width: 150px; max-height: 65px; }
+  .issuer { text-align: right; color: #4b535a; }
+  .issuer-name { font-weight: 700; color: #20252a; }
+  .address-table { margin-top: 10mm; }
+  .address-table td { width: 50%; vertical-align: top; }
+  .sender-line { color: #667078; border-bottom: 1px solid #d9dde0; padding-bottom: 4px; margin-bottom: 9px; }
+  .recipient { min-height: 85px; }
+  .recipient-name { font-weight: 700; }
+  .document-heading { text-align: right; vertical-align: top; }
+  h1 { margin: 0 0 9px; font-size: 20pt; line-height: 1.2; color: #20252a; }
+  .document-number { font-weight: 700; }
+  .title-row { margin-top: 8mm; }
+  .title-row h1 { margin: 0; }
+  .details-table { width: 100%; height: 32mm; max-height: 40mm; border-collapse: collapse; margin-top: 10mm; }
+  .details-table td { vertical-align: top; }
+  .details-table > tbody > tr > td:first-child { width: 85mm; max-width: 85mm; }
+  .document-data { width: 100%; border-collapse: collapse; }
+  .document-data td { width: auto; padding: 2px 0 2px 12px; }
+  .document-data td:first-child { color: #596168; text-align: left; }
+  .document-data td:last-child { text-align: right; font-weight: 700; }
+  .meta-table { margin-top: 8mm; border-top: 2px solid #20252a; border-bottom: 1px solid #d9dde0; }
+  .meta-table td { width: 33.333%; padding: 8px 7px; vertical-align: top; }
+  .label { display: block; color: #667078; font-weight: 700; margin-bottom: 2px; }
+  .intro { margin: 7mm 0 5mm; }
+  .intro p + p { margin-top: 4mm; }
+  .items { margin-top: 5mm; page-break-inside: auto; }
+  .items thead { display: table-header-group; }
+  .items tr { page-break-inside: avoid; }
+  .items th {
+    background: #30363b;
+    color: #fff;
+    padding: 8px 7px;
+    text-align: right;
+    font-size: 10pt;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .items th:first-child, .items td:first-child { text-align: left; }
+  .items th:nth-child(2), .items td:nth-child(2) { text-align: left; }
+  .items th:first-child { border-radius: 4px 0 0 0; }
+  .items th:last-child { border-radius: 0 4px 0 0; }
+  .items td {
+    padding: 8px 7px;
+    border-bottom: 1px solid #e4e7e9;
+    text-align: right;
+    vertical-align: top;
+    font-size: 10pt;
+  }
+  .item-name { font-weight: 700; }
+  .description-rich, .description-rich * { font-size: 10pt !important; line-height: 1.5; }
+  .description-rich { margin-top: 4px; color: #41484e; }
+  .description-rich p { margin: 0 0 4px; }
+  .description-rich ul, .description-rich ol { margin: 4px 0; padding-left: 18px; }
+  .summary-wrap { margin-top: 6mm; page-break-inside: avoid; }
+  .summary { width: 43%; margin-left: auto; }
+  .summary td { padding: 5px 7px; text-align: right; }
+  .summary .sum-label { text-align: left; }
+  .summary .grand td { border-top: 2px solid #20252a; font-weight: 700; padding-top: 8px; }
+  .settlement-table { width: 100%; border-collapse: collapse; margin-top: 7mm; page-break-inside: avoid; }
+  .settlement-table > tbody > tr > td { width: 50%; vertical-align: top; }
+  .settlement-table > tbody > tr > td:last-child { padding-left: 28px; }
+  .payment-hint { padding-top: 5px; color: #4f575e; }
+  .qr-payment { width: 115px; text-align: center; }
+  .qr-payment img { display: block; width: 100px; height: 100px; margin-bottom: 5px; }
+  .qr-caption { font-size: 10pt; color: #596168; }
+  .info-box {
+    margin-top: 5mm;
+    padding: 3mm 4mm;
+    background: #f4f5f6;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+  .info-box h2 { margin: 0 0 3mm; font-size: 11pt; }
+  .bank-table { width: 100%; border-collapse: collapse; margin-top: 2mm; }
+  .bank-table td { width: 50%; padding: 2px 10px 2px 0; vertical-align: top; }
+  .closing { margin-top: 8mm; text-align: center; }
+  .legal-footer { margin-top: 5mm; padding-top: 3mm; border-top: 1px solid #d9dde0; color: #5b646b; page-break-inside: avoid; }
+  .footer-table td { width: 33.333%; padding-right: 12px; vertical-align: top; }
+  .footer-note { margin-bottom: 9px; }

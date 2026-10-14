@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import {
   EyeOutlined,
@@ -8,6 +8,7 @@ import {
   RedoOutlined,
   ArrowRightOutlined,
   ArrowLeftOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
 import { Dropdown, Table, Button, Input } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -18,6 +19,7 @@ import { selectListItems } from '@/redux/crud/selectors';
 import useLanguage from '@/locale/useLanguage';
 import { dataForTable } from '@/utils/dataStructure';
 import { useMoney, useDate } from '@/settings';
+import { enhanceTableColumns } from '@/utils/tableColumns';
 
 import { generate as uniqueId } from 'shortid';
 
@@ -46,6 +48,9 @@ export default function DataTable({ config, extra = [] }) {
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
   const { dateFormat } = useDate();
+  const [tableResetKey, setTableResetKey] = useState(0);
+  const [searchValue, setSearchValue] = useState('');
+  const [hasTableFilters, setHasTableFilters] = useState(false);
 
   const items = [
     {
@@ -104,7 +109,7 @@ export default function DataTable({ config, extra = [] }) {
   }
 
   dataTableColumns = [
-    ...dispatchColumns,
+    ...enhanceTableColumns(dispatchColumns),
     {
       title: '',
       key: 'action',
@@ -152,19 +157,31 @@ export default function DataTable({ config, extra = [] }) {
 
   const dispatch = useDispatch();
 
-  const handelDataTableLoad = useCallback((pagination) => {
+  const handelDataTableLoad = useCallback((pagination, filters, sorter, extra) => {
+    setHasTableFilters(
+      Object.values(filters || {}).some((value) => value?.length) || Boolean(sorter?.order)
+    );
+    if (extra?.action && extra.action !== 'paginate') return;
     const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
     dispatch(crud.list({ entity, options }));
   }, []);
 
   const filterTable = (e) => {
     const value = e.target.value;
+    setSearchValue(value);
     const options = { q: value, fields: searchConfig?.searchFields || '' };
     dispatch(crud.list({ entity, options }));
   };
 
   const dispatcher = () => {
     dispatch(crud.list({ entity }));
+  };
+
+  const clearAllFilters = () => {
+    setSearchValue('');
+    setHasTableFilters(false);
+    setTableResetKey((key) => key + 1);
+    dispatcher();
   };
 
   useEffect(() => {
@@ -186,6 +203,7 @@ export default function DataTable({ config, extra = [] }) {
           <Input
             key={`searchFilterDataTable}`}
             onChange={filterTable}
+            value={searchValue}
             placeholder={translate('search')}
             allowClear
           />,
@@ -200,7 +218,16 @@ export default function DataTable({ config, extra = [] }) {
         }}
       ></PageHeader>
 
+      {(hasTableFilters || searchValue) && (
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 10 }}>
+          <Button type="text" danger icon={<CloseOutlined />} onClick={clearAllFilters}>
+            Alle Filter löschen
+          </Button>
+        </div>
+      )}
+
       <Table
+        key={tableResetKey}
         columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
