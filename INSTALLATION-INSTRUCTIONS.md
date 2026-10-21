@@ -3,7 +3,7 @@
 #### Step 1: Clone the repository
 
 ```bash
-git clone https://github.com/idurar/idurar-erp-crm.git
+git clone https://github.com/WIEdesignAT/idurar-erp-crm.git
 ```
 
 ```bash
@@ -20,7 +20,7 @@ cd idurar-erp-crm
 
 #### Step 3: Edit the Environment File
 
-- Check a file named .env in the /backend directory.
+- Copy `/backend/.env.example` to `/backend/.env` and adjust the local values.
 
   This file will store environment variables for the project to run.
 

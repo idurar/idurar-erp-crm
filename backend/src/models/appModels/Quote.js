@@ -86,6 +86,10 @@ const quoteSchema = new mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: 'Invoice',
     },
+    orderConfirmation: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'OrderConfirmation',
+    },
   },
   pdf: String,
   files: [

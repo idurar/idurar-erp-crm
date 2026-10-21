@@ -5,8 +5,6 @@ import { crud } from '@/redux/crud/actions';
 import { useCrudContext } from '@/context/crud';
 import { selectCreatedItem } from '@/redux/crud/selectors';
 
-import useLanguage from '@/locale/useLanguage';
-
 import { Button, Form } from 'antd';
 import Loading from '@/components/Loading';
 
@@ -17,7 +15,6 @@ export default function CreateForm({ config, formElements, withUpload = false })
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, readBox } = crudContextAction;
   const [form] = Form.useForm();
-  const translate = useLanguage();
   const onSubmit = (fieldsValue) => {
     // Manually trim values before submission
 
@@ -42,7 +39,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
       dispatch(crud.resetAction({ actionType: 'create' }));
       dispatch(crud.list({ entity }));
     }
-  }, [isSuccess]);
+  }, [collapsedBox, dispatch, entity, form, isSuccess, panel, readBox]);
 
   return (
     <Loading isLoading={isLoading}>
@@ -50,7 +47,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
         {formElements}
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            {translate('Submit')}
+            {config.ENTITY_NAME} speichern
           </Button>
         </Form.Item>
       </Form>

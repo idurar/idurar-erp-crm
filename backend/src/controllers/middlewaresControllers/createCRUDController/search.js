@@ -1,4 +1,5 @@
 const search = async (Model, req, res) => {
+  const { escapeRegex, isSafeField } = require('@/helpers/search');
   // console.log(req.query.fields)
   // if (req.query.q === undefined || req.query.q.trim() === '') {
   //   return res
@@ -10,12 +11,15 @@ const search = async (Model, req, res) => {
   //     })
   //     .end();
   // }
-  const fieldsArray = req.query.fields ? req.query.fields.split(',') : ['name'];
+  const fieldsArray = (req.query.fields ? req.query.fields.split(',') : ['name']).filter(
+    isSafeField
+  );
+  const queryText = escapeRegex(req.query.q || '');
 
   const fields = { $or: [] };
 
   for (const field of fieldsArray) {
-    fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
+    fields.$or.push({ [field]: { $regex: new RegExp(queryText, 'i') } });
   }
   // console.log(fields)
 

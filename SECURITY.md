@@ -19,7 +19,7 @@ This security policy covers the security of this repository and its code. If you
 
 #### Option 1: Reporting via Github Security Advisors
 
-1. **Contact Us**: Submit your report to [https://github.com/idurar/idurar-erp-crm/security](https://github.com/idurar/idurar-erp-crm/security) with details of the vulnerability. Please provide a clear and concise description of the issue, any potential impact, and a step-by-step demonstration if possible. Please do not include sensitive information in your initial email.
+1. **Contact Us**: Submit your report to [https://github.com/WIEdesignAT/idurar-erp-crm/security](https://github.com/WIEdesignAT/idurar-erp-crm/security) with details of the vulnerability. Please provide a clear and concise description of the issue, any potential impact, and a step-by-step demonstration if possible. Please do not include sensitive information in your initial email.
 
 2. **Confirmation**: We will acknowledge receipt of your report within [X] business days and provide an estimated timeline for when you can expect a response.
 
@@ -42,3 +42,11 @@ We consider security research conducted under this policy to be:
 We appreciate your contributions to the security of this project and community.
 
 Thank you!
+
+## Secret handling and incident response
+
+- Runtime secrets belong in untracked `.env` files or the deployment platform's secret store.
+- Never commit database credentials, license keys, mail API keys, JWT secrets, or real customer data.
+- CI rejects tracked `.env` and `temp.env` files.
+- If a secret was committed, deleting the file in a later commit is not sufficient. Rotate the secret first, then remove it from Git history with a coordinated history rewrite.
+- Before rewriting shared history, create a backup and notify every contributor because all existing clones must be re-synchronized.

@@ -2,7 +2,7 @@ import { ErpLayout } from '@/layout';
 
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
-import { selectItemById, selectCurrentItem, selectRecordPaymentItem } from '@/redux/erp/selectors';
+import { selectItemById, selectCurrentItem } from '@/redux/erp/selectors';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -20,14 +20,14 @@ export default function RecordPaymentModule({ config }) {
     } else {
       dispatch(erp.read({ entity: config.entity, id }));
     }
-  }, [item, id]);
+  }, [config.entity, dispatch, id, item]);
 
   const { result: currentResult } = useSelector(selectCurrentItem);
   item = currentResult;
 
   useEffect(() => {
     dispatch(erp.currentAction({ actionType: 'recordPayment', data: item }));
-  }, [item]);
+  }, [dispatch, item]);
 
   return (
     <ErpLayout>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import Dropdown from './Dropdown';
 import './styles.css';
@@ -29,4 +29,4 @@ function App() {
 }
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+createRoot(rootElement).render(<App />);

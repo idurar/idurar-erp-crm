@@ -6,11 +6,11 @@ import {
   DeleteOutlined,
   EllipsisOutlined,
   RedoOutlined,
-  ArrowRightOutlined,
   ArrowLeftOutlined,
   CloseOutlined,
+  PlusOutlined,
 } from '@ant-design/icons';
-import { Dropdown, Table, Button, Input } from 'antd';
+import { Dropdown, Table, Button, Input, Empty } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,9 +21,40 @@ import { dataForTable } from '@/utils/dataStructure';
 import { useMoney, useDate } from '@/settings';
 import { enhanceTableColumns } from '@/utils/tableColumns';
 
-import { generate as uniqueId } from 'shortid';
-
 import { useCrudContext } from '@/context/crud';
+
+function ResizableHeaderCell({ onColumnResize, children, ...restProps }) {
+  const startResize = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const startX = event.clientX;
+    const startWidth = event.currentTarget.parentElement.getBoundingClientRect().width;
+    const previousUserSelect = document.body.style.userSelect;
+    document.body.style.userSelect = 'none';
+
+    const resize = (moveEvent) => onColumnResize(Math.max(80, startWidth + moveEvent.clientX - startX));
+    const stopResize = () => {
+      document.body.style.userSelect = previousUserSelect;
+      window.removeEventListener('pointermove', resize);
+      window.removeEventListener('pointerup', stopResize);
+    };
+    window.addEventListener('pointermove', resize);
+    window.addEventListener('pointerup', stopResize);
+  };
+
+  return (
+    <th {...restProps} style={{ ...restProps.style, position: 'relative' }}>
+      {children}
+      {onColumnResize && (
+        <span
+          aria-hidden="true"
+          onPointerDown={startResize}
+          style={{ position: 'absolute', top: 0, right: -4, zIndex: 2, width: 8, height: '100%', cursor: 'col-resize', touchAction: 'none' }}
+        />
+      )}
+    </th>
+  );
+}
 
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
@@ -36,13 +67,13 @@ function AddNewItem({ config }) {
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
+    <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
       {ADD_NEW_ENTITY}
     </Button>
   );
 }
 export default function DataTable({ config, extra = [] }) {
-  let { entity, dataTableColumns, DATATABLE_TITLE, fields, searchConfig } = config;
+  let { entity, dataTableColumns, DATATABLE_TITLE, fields, searchConfig, SEARCH_PLACEHOLDER, EMPTY_TEXT } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox, advancedBox } = crudContextAction;
   const translate = useLanguage();
@@ -51,6 +82,7 @@ export default function DataTable({ config, extra = [] }) {
   const [tableResetKey, setTableResetKey] = useState(0);
   const [searchValue, setSearchValue] = useState('');
   const [hasTableFilters, setHasTableFilters] = useState(false);
+  const [columnWidths, setColumnWidths] = useState({});
 
   const items = [
     {
@@ -62,6 +94,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      hidden: () => config.allowEdit === false,
     },
     ...extra,
     {
@@ -72,6 +105,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
+      hidden: () => config.allowDelete === false,
     },
   ];
 
@@ -102,10 +136,10 @@ export default function DataTable({ config, extra = [] }) {
   }
 
   let dispatchColumns = [];
-  if (fields) {
-    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat })];
-  } else {
+  if (dataTableColumns) {
     dispatchColumns = [...dataTableColumns];
+  } else if (fields) {
+    dispatchColumns = [...dataForTable({ fields, translate, moneyFormatter, dateFormat })];
   }
 
   dataTableColumns = [
@@ -117,7 +151,7 @@ export default function DataTable({ config, extra = [] }) {
       render: (_, record) => (
         <Dropdown
           menu={{
-            items,
+            items: items.filter((item) => !item?.hidden?.(record)),
             onClick: ({ key }) => {
               switch (key) {
                 case 'read':
@@ -135,6 +169,7 @@ export default function DataTable({ config, extra = [] }) {
                   break;
 
                 default:
+                  items.find((item) => item?.key === key)?.onClick?.(record, dispatcher);
                   break;
               }
               // else if (key === '2')handleCloseTask
@@ -150,6 +185,19 @@ export default function DataTable({ config, extra = [] }) {
       ),
     },
   ];
+  dataTableColumns = dataTableColumns.map((column, index) => {
+    if (column.key === 'action') return column;
+    const columnKey = String(column.key || (Array.isArray(column.dataIndex) ? column.dataIndex.join('.') : column.dataIndex) || index);
+    const width = columnWidths[columnKey] || column.width;
+    return {
+      ...column,
+      width,
+      onHeaderCell: () => ({
+        width,
+        onColumnResize: (nextWidth) => setColumnWidths((current) => ({ ...current, [columnKey]: nextWidth })),
+      }),
+    };
+  });
 
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
 
@@ -164,7 +212,7 @@ export default function DataTable({ config, extra = [] }) {
     if (extra?.action && extra.action !== 'paginate') return;
     const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
     dispatch(crud.list({ entity, options }));
-  }, []);
+  }, [dispatch, entity]);
 
   const filterTable = (e) => {
     const value = e.target.value;
@@ -173,9 +221,9 @@ export default function DataTable({ config, extra = [] }) {
     dispatch(crud.list({ entity, options }));
   };
 
-  const dispatcher = () => {
+  const dispatcher = useCallback(() => {
     dispatch(crud.list({ entity }));
-  };
+  }, [dispatch, entity]);
 
   const clearAllFilters = () => {
     setSearchValue('');
@@ -185,18 +233,14 @@ export default function DataTable({ config, extra = [] }) {
   };
 
   useEffect(() => {
-    const controller = new AbortController();
     dispatcher();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  }, [dispatcher]);
 
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
-        backIcon={<ArrowLeftOutlined />}
+        onBack={config.hideBackButton ? undefined : () => window.history.back()}
+        backIcon={config.hideBackButton ? false : <ArrowLeftOutlined />}
         title={DATATABLE_TITLE}
         ghost={false}
         extra={[
@@ -204,14 +248,14 @@ export default function DataTable({ config, extra = [] }) {
             key={`searchFilterDataTable}`}
             onChange={filterTable}
             value={searchValue}
-            placeholder={translate('search')}
+            placeholder={SEARCH_PLACEHOLDER || translate('search')}
             allowClear
           />,
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
+          !config.hideRefreshButton && <Button onClick={handelDataTableLoad} key="refresh" icon={<RedoOutlined />}>
             {translate('Refresh')}
           </Button>,
 
-          <AddNewItem key={`${uniqueId()}`} config={config} />,
+          <AddNewItem key="add" config={config} />,
         ]}
         style={{
           padding: '20px 0px',
@@ -228,13 +272,21 @@ export default function DataTable({ config, extra = [] }) {
 
       <Table
         key={tableResetKey}
+        components={{ header: { cell: ResizableHeaderCell } }}
         columns={dataTableColumns}
         rowKey={(item) => item._id}
         dataSource={dataSource}
         pagination={pagination}
         loading={listIsLoading}
         onChange={handelDataTableLoad}
-        scroll={{ x: true }}
+        scroll={{ x: 'max-content' }}
+        locale={{
+          emptyText: (
+            <Empty description={EMPTY_TEXT || `Noch keine Einträge in „${DATATABLE_TITLE}“ vorhanden`}>
+              <AddNewItem config={config} />
+            </Empty>
+          ),
+        }}
       />
     </>
   );

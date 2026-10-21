@@ -3,7 +3,7 @@ import { validatePhoneNumber } from '@/utils/helpers';
 
 import useLanguage from '@/locale/useLanguage';
 
-export default function CustomerForm({ isUpdateForm = false }) {
+export default function CustomerForm() {
   const translate = useLanguage();
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {

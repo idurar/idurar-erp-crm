@@ -13,11 +13,12 @@ function AppContextProvider({ children }) {
 
 function useAppContext() {
   const context = useContext(AppContext);
+  const state = context?.[0];
+  const dispatch = context?.[1];
+  const appContextAction = useMemo(() => (dispatch ? contextActions(dispatch) : null), [dispatch]);
   if (context === undefined) {
     throw new Error('useAppContext must be used within a AppContextProvider');
   }
-  const [state, dispatch] = context;
-  const appContextAction = contextActions(dispatch);
   // const appContextSelector = contextSelectors(state);
   return { state, appContextAction };
 }

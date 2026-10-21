@@ -1,22 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useCrudContext } from '@/context/crud';
-import { useAppContext } from '@/context/appContext';
-import { Grid, Layout, Drawer } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { Drawer } from 'antd';
 import CollapseBox from '../CollapseBox';
 
-const { useBreakpoint } = Grid;
-const { Sider } = Layout;
-
 export default function SidePanel({ config, topContent, bottomContent, fixHeaderPanel }) {
-  const screens = useBreakpoint();
-
   const { ADD_NEW_ENTITY } = config;
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose, isBoxCollapsed } = state;
   const { panel, collapsedBox } = crudContextAction;
-  const [isSidePanelClose, setSidePanel] = useState(isPanelClose);
-  const [leftSider, setLeftSider] = useState('-1px');
+  const [, setSidePanel] = useState(isPanelClose);
+  const [, setLeftSider] = useState('-1px');
   const [opacitySider, setOpacitySider] = useState(0);
   const [paddingTopSider, setPaddingTopSider] = useState('20px');
 

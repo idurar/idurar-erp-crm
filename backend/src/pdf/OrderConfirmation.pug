@@ -1,0 +1,139 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    include documentStyles.pug
+  body
+    .document
+      table.header-table
+        tr
+          td
+            if companyLogo
+              img.logo(src=companyLogo alt='Firmenlogo')
+          td.issuer
+            if settings.company_name
+              p.issuer-name #{settings.company_name}
+            if settings.company_address
+              p #{settings.company_address}
+            if settings.company_state || settings.company_country
+              p #{[settings.company_state, settings.company_country].filter(Boolean).join(', ')}
+
+      table.address-table
+        tr
+          td.recipient
+            p.sender-line #{[settings.company_name, settings.company_address].filter(Boolean).join(' · ')}
+            p.recipient-name #{model.client.name}
+            if model.client.address
+              p #{model.client.address}
+            if model.client.vatNumber
+              p UID: #{model.client.vatNumber}
+          td.document-heading
+            h1 Auftragsbestätigung
+            p.document-number Nr. #{model.number}
+
+      table.meta-table
+        tr
+          td
+            span.label Datum
+            | #{moment(model.date).format(dateFormat)}
+          td
+            span.label Kundennummer
+            | #{model.client.number || '—'}
+          td
+            span.label Status
+            | #{model.status || 'draft'}
+
+      .intro
+        p Sehr geehrte Damen und Herren,
+        p wir bedanken uns für Ihren Auftrag und bestätigen diesen wie folgt:
+
+      table.items
+        colgroup
+          col(style='width: 49%')
+          col(style='width: 14%')
+          col(style='width: 18%')
+          col(style='width: 19%')
+        thead
+          tr
+            th Beschreibung
+            th Menge
+            th Einzelpreis
+            th Gesamtpreis
+        tbody
+          each item in model.items
+            tr
+              td
+                .item-name #{item.itemName}
+                if item.description
+                  p #{item.description}
+              td #{item.quantity} #{item.unit || 'Stk.'}
+              td #{moneyFormatter({ amount: item.price })}
+              td #{moneyFormatter({ amount: item.total })}
+
+      .summary-wrap
+        table.summary
+          tr
+            td.sum-label Zwischensumme
+            td #{moneyFormatter({ amount: model.subTotal })}
+          tr
+            td.sum-label Umsatzsteuer #{model.taxRate} %
+            td #{moneyFormatter({ amount: model.taxTotal })}
+          tr.grand
+            td.sum-label Gesamtbetrag
+            td #{moneyFormatter({ amount: model.total })}
+
+      if model.paymentSchedule && model.paymentSchedule.length
+        .info-box
+          h2 Zahlungsplan
+          table.items
+            thead
+              tr
+                th Zahlung
+                th Anteil
+                th Betrag
+                th Fälligkeit
+            tbody
+              each stage in model.paymentSchedule
+                tr
+                  td #{stage.label}
+                  td #{stage.percentage} %
+                  td #{moneyFormatter({ amount: stage.amount })}
+                  td
+                    if stage.dueDate
+                      | #{moment(stage.dueDate).format(dateFormat)}
+                    else if stage.dueTrigger === 'confirmation'
+                      | bei Auftragsbestätigung
+                    else if stage.dueTrigger === 'work_start'
+                      | bei Arbeitsbeginn
+                    else if stage.dueTrigger === 'progress'
+                      | nach Baufortschritt
+                    else if stage.dueTrigger === 'completion'
+                      | bei Fertigstellung
+                    else
+                      | nach Vereinbarung
+
+      if model.notes
+        .info-box
+          h2 Hinweise
+          p #{model.notes}
+
+      .closing Wir freuen uns auf die Zusammenarbeit.
+
+      .legal-footer
+        table.footer-table
+          tr
+            td
+              p.issuer-name #{settings.company_name || ''}
+              p #{settings.company_address || ''}
+              p #{[settings.company_state, settings.company_country].filter(Boolean).join(', ')}
+            td
+              if settings.company_vat_number
+                p UID: #{settings.company_vat_number}
+              if settings.company_tax_number
+                p Steuernummer: #{settings.company_tax_number}
+            td
+              if settings.company_email
+                p #{settings.company_email}
+              if settings.company_phone
+                p #{settings.company_phone}

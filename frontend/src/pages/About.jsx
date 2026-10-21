@@ -11,7 +11,7 @@ const About = () => {
         bordered={false}
         style={{
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #01200F 0%, #205435 65%, #3E885B 100%)',
+          background: 'linear-gradient(135deg, #062653 0%, #12559B 65%, #3287CE 100%)',
           color: '#fff',
           boxShadow: '0 18px 50px rgba(1, 32, 15, 0.18)',
         }}
@@ -19,9 +19,9 @@ const About = () => {
         <Row gutter={[32, 28]} align="middle">
           <Col xs={24} md={15}>
             <Space direction="vertical" size={12}>
-              <CustomerServiceOutlined style={{ color: '#DCF763', fontSize: 42 }} />
+              <CustomerServiceOutlined style={{ color: '#87B7DE', fontSize: 42 }} />
               <Typography.Title level={2} style={{ color: '#fff', margin: 0 }}>
-                WIEdesign Support
+                WIEpilot Support
               </Typography.Title>
               <Typography.Paragraph style={{ color: 'rgba(255,255,255,.82)', fontSize: 16 }}>
                 Sie benötigen Hilfe mit dem ERP? Senden Sie uns ein Support-Ticket mit einer kurzen
@@ -31,7 +31,7 @@ const About = () => {
                 size="large"
                 icon={<SendOutlined />}
                 href={ticketUrl}
-                style={{ background: '#DCF763', borderColor: '#DCF763', color: '#01200F', fontWeight: 700 }}
+                style={{ background: '#FFFFFF', borderColor: '#FFFFFF', color: '#062653', fontWeight: 700 }}
               >
                 Ticket anfordern
               </Button>
@@ -41,7 +41,7 @@ const About = () => {
             <Card style={{ background: 'rgba(255,255,255,.96)', border: 0 }}>
               <Space direction="vertical" size="large">
                 <Space align="start">
-                  <MailOutlined style={{ color: '#205435', fontSize: 20 }} />
+                  <MailOutlined style={{ color: '#12559B', fontSize: 20 }} />
                   <div>
                     <Typography.Text type="secondary">Support-Mail</Typography.Text>
                     <br />
@@ -49,7 +49,7 @@ const About = () => {
                   </div>
                 </Space>
                 <Space align="start">
-                  <GlobalOutlined style={{ color: '#205435', fontSize: 20 }} />
+                  <GlobalOutlined style={{ color: '#12559B', fontSize: 20 }} />
                   <div>
                     <Typography.Text type="secondary">Website</Typography.Text>
                     <br />

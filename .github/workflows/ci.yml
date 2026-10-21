@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+      - name: Reject tracked environment secrets
+        shell: bash
+        run: test -z "$(git ls-files -- '.env' '*/.env' 'temp.env' '*/temp.env')"
+      - name: Install backend
+        run: npm ci --prefix backend
+      - name: Audit backend dependencies
+        run: npm audit --prefix backend --audit-level=high
+      - name: Test backend
+        run: npm test --prefix backend
+      - name: Install frontend
+        run: npm ci --prefix frontend
+      - name: Audit frontend dependencies
+        run: npm audit --prefix frontend --audit-level=high
+      - name: Test frontend utilities
+        run: npm test --prefix frontend
+      - name: Lint frontend
+        run: npm run lint --prefix frontend
+      - name: Build frontend
+        run: npm run build --prefix frontend

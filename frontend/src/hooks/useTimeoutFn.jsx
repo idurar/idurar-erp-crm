@@ -32,7 +32,7 @@ export default function useTimeoutFn(fn, ms = 0) {
     set();
 
     return clear;
-  }, [ms]);
+  }, [clear, set]);
 
   return [isReady, clear, set];
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Button, Tag, Form, Divider, Select } from 'antd';
+import { Alert, Button, Tag, Form, Divider } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,27 +12,26 @@ import { erp } from '@/redux/erp/actions';
 import { selectCreatedItem } from '@/redux/erp/selectors';
 
 import calculate from '@/utils/calculate';
-import { generate as uniqueId } from 'shortid';
+import dayjs from 'dayjs';
 
 import Loading from '@/components/Loading';
 import {
   ArrowLeftOutlined,
-  ArrowRightOutlined,
   CloseCircleOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { request } from '@/request';
 
-function SaveForm({ form }) {
-  const translate = useLanguage();
+function SaveForm({ form, label, disabled = false }) {
   const handelClick = () => {
     form.submit();
   };
 
   return (
-    <Button onClick={handelClick} type="primary" icon={<PlusOutlined />}>
-      {translate('Save')}
+    <Button disabled={disabled} onClick={handelClick} type="primary" icon={<PlusOutlined />}>
+      {label}
     </Button>
   );
 }
@@ -41,16 +40,77 @@ export default function CreateItem({ config, CreateForm }) {
   const translate = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { entity } = config;
+  const [searchParams] = useSearchParams();
+  const sourceInvoiceId = entity === 'invoice' ? searchParams.get('from') : null;
 
   useEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
-  }, []);
-  let { entity } = config;
-
+  }, [dispatch]);
   const { isLoading, isSuccess, result } = useSelector(selectCreatedItem);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(0);
   const [offerSubTotal, setOfferSubTotal] = useState(0);
+  const [template, setTemplate] = useState(null);
+  const [templateLoading, setTemplateLoading] = useState(Boolean(sourceInvoiceId));
+  const [templateError, setTemplateError] = useState('');
+
+  useEffect(() => {
+    if (!sourceInvoiceId) return;
+    let active = true;
+    const loadTemplate = async () => {
+      try {
+        const response = await request.read({ entity: 'invoice', id: sourceInvoiceId });
+        if (!active) return;
+        if (!response?.success || !response.result) {
+          setTemplateError('Die Rechnungsvorlage konnte nicht geladen werden.');
+          return;
+        }
+        const source = response.result;
+        const invoiceDate = dayjs();
+        const paymentTermDays = Math.max(
+          0,
+          dayjs(source.expiredDate).diff(dayjs(source.date), 'day')
+        );
+        const values = {
+          client: source.client,
+          clientVatNumber: source.clientVatNumber,
+          date: invoiceDate,
+          year: invoiceDate.year(),
+          serviceDate: invoiceDate,
+          expiredDate: invoiceDate.add(paymentTermDays || 14, 'day'),
+          items: source.items?.map(
+            ({ article, itemName, description, unit, discount, quantity, price }) => ({
+              article,
+              itemName,
+              description,
+              unit,
+              discount,
+              quantity,
+              price,
+            })
+          ),
+          taxRate: source.taxRate,
+          notes: source.notes,
+          paymentTermsText: source.paymentTermsText,
+          footerText: source.footerText,
+          recurring: 'none',
+          recurringActive: false,
+        };
+        setTemplate(values);
+        form.setFieldsValue(values);
+        setSubTotal(Number(source.subTotal || 0));
+      } catch {
+        if (active) setTemplateError('Die Rechnungsvorlage konnte nicht geladen werden.');
+      } finally {
+        if (active) setTemplateLoading(false);
+      }
+    };
+    loadTemplate();
+    return () => {
+      active = false;
+    };
+  }, [form, sourceInvoiceId]);
   const handelValuesChange = (changedValues, values) => {
     const items = values['items'];
     let subTotal = 0;
@@ -65,7 +125,7 @@ export default function CreateItem({ config, CreateForm }) {
           }
           if (item.quantity && item.price) {
             let total = calculate.multiply(
-              calculate.multiply(item['quantity'], item['price']),
+              calculate.multiply(item['quantity'], calculate.round(item['price'])),
               1 - (Number(item.discount) || 0) / 100
             );
             //sub total
@@ -87,21 +147,21 @@ export default function CreateItem({ config, CreateForm }) {
       navigate(`/${entity.toLowerCase()}/read/${result._id}`);
     }
     return () => {};
-  }, [isSuccess]);
+  }, [dispatch, entity, form, isSuccess, navigate, result?._id]);
 
   const onSubmit = (fieldsValue) => {
     if (entity === 'invoice' && fieldsValue.date?.year) {
       fieldsValue.year = fieldsValue.date.year();
     }
-    console.log('🚀 ~ onSubmit ~ fieldsValue:', fieldsValue);
     if (fieldsValue) {
       if (fieldsValue.items) {
         let newList = [...fieldsValue.items];
         newList.map((item) => {
           item.total = calculate.multiply(
-            calculate.multiply(item.quantity, item.price),
+            calculate.multiply(item.quantity, calculate.round(item.price)),
             1 - (Number(item.discount) || 0) / 100
           );
+          item.price = calculate.round(item.price);
         });
         fieldsValue = {
           ...fieldsValue,
@@ -119,39 +179,41 @@ export default function CreateItem({ config, CreateForm }) {
           navigate(`/${entity.toLowerCase()}`);
         }}
         backIcon={<ArrowLeftOutlined />}
-        title={translate('New')}
+        title={
+          entity === 'invoice'
+              ? sourceInvoiceId
+                ? 'Neue Rechnung aus Vorlage'
+                : 'Neue Rechnung'
+            : entity === 'quote'
+              ? 'Neues Angebot'
+              : `${translate('New')} ${config.ENTITY_NAME}`
+        }
         ghost={false}
         tags={<Tag>{translate('Draft')}</Tag>}
         // subTitle="This is create page"
         extra={[
           <Button
-            key={`${uniqueId()}`}
+            key="cancel"
             onClick={() => navigate(`/${entity.toLowerCase()}`)}
             icon={<CloseCircleOutlined />}
           >
             {translate('Cancel')}
           </Button>,
-          entity === 'invoice' && (
-            <Form.Item key="invoice-status" name="status" initialValue="draft" style={{ margin: 0, minWidth: 150 }}>
-              <Select
-                aria-label="Rechnungsstatus"
-                options={[
-                  { value: 'draft', label: translate('Draft') },
-                  { value: 'pending', label: translate('Pending') },
-                  { value: 'sent', label: translate('Sent') },
-                ]}
-              />
-            </Form.Item>
-          ),
-          <SaveForm form={form} key={`${uniqueId()}`} />,
+          <SaveForm
+            form={form}
+            label={entity === 'invoice' ? 'Als Entwurf speichern' : translate('Save')}
+            disabled={templateLoading || Boolean(templateError)}
+            key="save"
+          />,
         ]}
         style={{
           padding: '20px 0px',
         }}
       ></PageHeader>
       <Divider dashed />
-      <Loading isLoading={isLoading}>
-        <CreateForm subTotal={subTotal} offerTotal={offerSubTotal} />
+      {templateError && <Alert type="error" showIcon message={templateError} />}
+      <Loading isLoading={isLoading || templateLoading}>
+        <CreateForm subTotal={subTotal} offerTotal={offerSubTotal} current={template} />
       </Loading>
     </Form>
   );

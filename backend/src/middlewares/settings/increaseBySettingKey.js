@@ -2,20 +2,21 @@ const mongoose = require('mongoose');
 
 const Model = mongoose.model('Setting');
 
-const increaseBySettingKey = async ({ settingKey }) => {
+const increaseBySettingKey = async ({ settingKey, session = null }) => {
   try {
     if (!settingKey) {
       return null;
     }
 
     const result = await Model.findOneAndUpdate(
-      { settingKey },
+      { settingKey, removed: false, enabled: true },
       {
         $inc: { settingValue: 1 },
       },
       {
         new: true, // return the new result instead of the old one
         runValidators: true,
+        session,
       }
     ).exec();
 

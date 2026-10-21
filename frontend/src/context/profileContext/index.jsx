@@ -14,12 +14,19 @@ function ProfileContextProvider({ children }) {
 
 function useProfileContext() {
   const context = useContext(ProfileContext);
+  const state = context?.[0];
+  const dispatch = context?.[1];
+  const profileContextAction = useMemo(
+    () => (dispatch ? contextActions(dispatch) : null),
+    [dispatch]
+  );
+  const profileContextSelector = useMemo(
+    () => (state ? contextSelectors(state) : null),
+    [state]
+  );
   if (context === undefined) {
     throw new Error('useProfileContext must be used within a ProfileContextProvider');
   }
-  const [state, dispatch] = context;
-  const profileContextAction = contextActions(dispatch);
-  const profileContextSelector = contextSelectors(state);
   return { state, profileContextAction, profileContextSelector };
 }
 

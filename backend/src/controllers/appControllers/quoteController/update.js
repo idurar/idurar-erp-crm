@@ -30,11 +30,11 @@ const update = async (req, res) => {
       message: 'No document found',
     });
   }
-  if (quote.converted?.invoice) {
+  if (quote.converted?.invoice || quote.converted?.orderConfirmation) {
     return res.status(409).json({
       success: false,
       result: null,
-      message: 'A converted quote cannot be changed',
+      message: 'Ein bereits umgewandeltes Angebot kann nicht mehr geändert werden.',
     });
   }
 

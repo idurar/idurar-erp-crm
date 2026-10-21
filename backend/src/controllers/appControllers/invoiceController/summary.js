@@ -24,13 +24,25 @@ const summary = async (req, res) => {
     }
   }
 
-  const currentDate = period && moment(period, ['YYYY-MM', 'YYYY'], true).isValid()
-    ? moment(period, ['YYYY-MM', 'YYYY'], true)
-    : moment();
+  const currentDate =
+    period && moment(period, ['YYYY-MM', 'YYYY'], true).isValid()
+      ? moment(period, ['YYYY-MM', 'YYYY'], true)
+      : moment();
   let startDate = currentDate.clone().startOf(defaultType);
   let endDate = currentDate.clone().endOf(defaultType);
+  const previousStartDate = startDate.clone().subtract(1, defaultType);
+  const previousEndDate = endDate.clone().subtract(1, defaultType);
 
-  const statuses = ['draft', 'pending', 'overdue', 'paid', 'unpaid', 'partially'];
+  const statuses = [
+    'draft',
+    'pending',
+    'issued',
+    'sent',
+    'overdue',
+    'paid',
+    'unpaid',
+    'partially',
+  ];
 
   const response = await Model.aggregate([
     {
@@ -136,14 +148,14 @@ const summary = async (req, res) => {
   const statusResultMap = statusResult.map((item) => {
     return {
       ...item,
-      percentage: Math.round((item.count / totalInvoices.count) * 100),
+      percentage: totalInvoices?.count ? Math.round((item.count / totalInvoices.count) * 100) : 0,
     };
   });
 
   const paymentStatusResultMap = paymentStatusResult.map((item) => {
     return {
       ...item,
-      percentage: Math.round((item.count / totalInvoices.count) * 100),
+      percentage: totalInvoices?.count ? Math.round((item.count / totalInvoices.count) * 100) : 0,
     };
   });
 
@@ -151,7 +163,7 @@ const summary = async (req, res) => {
     return {
       ...item,
       status: 'overdue',
-      percentage: Math.round((item.count / totalInvoices.count) * 100),
+      percentage: totalInvoices?.count ? Math.round((item.count / totalInvoices.count) * 100) : 0,
     };
   });
 
@@ -217,12 +229,53 @@ const summary = async (req, res) => {
     },
   ]);
 
+  const [previousPeriod, upcoming] = await Promise.all([
+    Model.aggregate([
+      {
+        $match: {
+          removed: false,
+          date: { $gte: previousStartDate.toDate(), $lte: previousEndDate.toDate() },
+        },
+      },
+      { $group: { _id: null, total: { $sum: '$total' }, count: { $sum: 1 } } },
+    ]),
+    Model.aggregate([
+      {
+        $match: {
+          removed: false,
+          paymentStatus: { $in: ['unpaid', 'partially'] },
+          expiredDate: { $gte: new Date(), $lte: moment().add(14, 'days').endOf('day').toDate() },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total: { $sum: { $subtract: ['$total', '$credit'] } },
+          count: { $sum: 1 },
+        },
+      },
+    ]),
+  ]);
+
+  const currentTotal = totalInvoices?.total || 0;
+  const previousTotal = previousPeriod[0]?.total || 0;
+  const changePercentage = previousTotal
+    ? Math.round(((currentTotal - previousTotal) / previousTotal) * 100)
+    : currentTotal > 0
+      ? 100
+      : 0;
+
   const finalResult = {
     total: totalInvoices?.total,
+    count: totalInvoices?.count || 0,
     total_undue: unpaid.length > 0 ? unpaid[0].total_amount : 0,
     total_overdue: overdue.length > 0 ? overdue[0].total_amount : 0,
     overdue_count: overdue.length > 0 ? overdue[0].count : 0,
     overdue_days: overdueDays,
+    previous_total: previousTotal,
+    change_percentage: changePercentage,
+    upcoming_due_total: upcoming[0]?.total || 0,
+    upcoming_due_count: upcoming[0]?.count || 0,
     type,
     performance: result,
   };

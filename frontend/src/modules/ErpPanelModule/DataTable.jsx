@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   EyeOutlined,
   EditOutlined,
@@ -7,11 +7,11 @@ import {
   RedoOutlined,
   PlusOutlined,
   EllipsisOutlined,
-  ArrowRightOutlined,
   ArrowLeftOutlined,
   CloseOutlined,
+  DownloadOutlined,
 } from '@ant-design/icons';
-import { Dropdown, Table, Button } from 'antd';
+import { Dropdown, Table, Button, Empty, Modal } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
@@ -22,7 +22,7 @@ import { selectListItems } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 import { useNavigate } from 'react-router-dom';
 
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { request } from '@/request';
 import { enhanceTableColumns } from '@/utils/tableColumns';
 
 function AddNewItem({ config }) {
@@ -44,7 +44,7 @@ export default function DataTable({ config, extra = [] }) {
   const translate = useLanguage();
   let { entity, dataTableColumns, disableAdd = false, searchConfig } = config;
 
-  const { DATATABLE_TITLE } = config;
+  const { DATATABLE_TITLE, EMPTY_TEXT } = config;
   const [tableResetKey, setTableResetKey] = useState(0);
   const [hasTableFilters, setHasTableFilters] = useState(false);
   const [entityFilter, setEntityFilter] = useState(undefined);
@@ -53,10 +53,41 @@ export default function DataTable({ config, extra = [] }) {
 
   const { pagination, items: dataSource } = listResult;
 
+  const exportCsv = async () => {
+    const response = await request.listAll({
+      entity,
+      options:
+        entityFilter && searchConfig?.entity
+          ? { filter: searchConfig.entity, equal: entityFilter }
+          : {},
+    });
+    const exportData = response?.result || [];
+    if (!exportData.length) return;
+    const columns = dataTableColumns.filter((column) => column.dataIndex);
+    const valueAt = (row, key) => {
+      const path = Array.isArray(key) ? key : [key];
+      return path.reduce((value, part) => value?.[part], row) ?? '';
+    };
+    const escape = (value) => `"${String(value).replaceAll('"', '""')}"`;
+    const rows = [
+      columns.map((column) => escape(column.title)).join(';'),
+      ...exportData.map((row) =>
+        columns.map((column) => escape(valueAt(row, column.dataIndex))).join(';')
+      ),
+    ];
+    const blob = new Blob([`\uFEFF${rows.join('\n')}`], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${entity}-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   const { erpContextAction } = useErpContext();
   const { modal } = erpContextAction;
 
-  const items = [
+  const itemsForRecord = (record) => [
     {
       label: translate('Show'),
       key: 'read',
@@ -66,13 +97,25 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Edit'),
       key: 'edit',
       icon: <EditOutlined />,
+      disabled:
+        entity === 'invoice' &&
+        (record.issuedAt ||
+          record.paymentStatus === 'paid' ||
+          ['cancelled', 'refunded'].includes(record.status)),
     },
     {
-      label: translate('Download'),
+      label:
+        entity === 'invoice' && !record.issuedAt
+          ? 'Veröffentlichen & PDF'
+          : translate('Download'),
       key: 'download',
       icon: <FilePdfOutlined />,
     },
-    ...extra,
+    ...extra.map((item) => ({
+      ...item,
+      label: typeof item.label === 'function' ? item.label(record) : item.label,
+      disabled: item.disabled?.(record) || false,
+    })),
     {
       type: 'divider',
     },
@@ -81,6 +124,7 @@ export default function DataTable({ config, extra = [] }) {
       label: translate('Delete'),
       key: 'delete',
       icon: <DeleteOutlined />,
+      disabled: entity === 'invoice' && (record.status !== 'draft' || Number(record.credit) > 0),
     },
   ];
 
@@ -95,8 +139,33 @@ export default function DataTable({ config, extra = [] }) {
     dispatch(erp.currentAction({ actionType: 'update', data }));
     navigate(`/${entity}/update/${record._id}`);
   };
+  const downloadDocument = (record) =>
+    request.download({
+      path: `download/${entity}/${entity}-${record._id}.pdf`,
+      filename: `${entity}-${record.number || record._id}.pdf`,
+    });
+
   const handleDownload = (record) => {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+    if (entity !== 'invoice' || record.issuedAt) return downloadDocument(record);
+
+    return Modal.confirm({
+      title: `Rechnung ${record.number ? `${record.number}/${record.year || ''}` : 'Entwurf'} veröffentlichen und PDF herunterladen?`,
+      content:
+        'Danach ist die Rechnung nicht mehr bearbeitbar und enthaltene Lagerartikel werden ausgebucht.',
+      okText: 'Veröffentlichen & PDF',
+      cancelText: 'Abbrechen',
+      onOk: async () => {
+        const response = await request.patch({
+          entity: `invoice/issue/${record._id}`,
+          jsonData: {},
+        });
+        if (!response?.success) {
+          throw new Error(response?.message || 'Rechnung konnte nicht veröffentlicht werden');
+        }
+        await downloadDocument(response.result || record);
+        dispatcher();
+      },
+    });
   };
 
   const handleDelete = (record) => {
@@ -118,7 +187,7 @@ export default function DataTable({ config, extra = [] }) {
       render: (_, record) => (
         <Dropdown
           menu={{
-            items,
+            items: itemsForRecord(record),
             onClick: ({ key }) => {
               switch (key) {
                 case 'read':
@@ -137,6 +206,7 @@ export default function DataTable({ config, extra = [] }) {
                   handleRecordPayment(record);
                   break;
                 default:
+                  extra.find((item) => item.key === key)?.onClick?.(record, dispatcher);
                   break;
               }
               // else if (key === '2')handleCloseTask
@@ -160,21 +230,29 @@ export default function DataTable({ config, extra = [] }) {
       Object.values(filters || {}).some((value) => value?.length) || Boolean(sorter?.order)
     );
     if (extra?.action && extra.action !== 'paginate') return;
-    const options = { page: pagination.current || 1, items: pagination.pageSize || 10 };
+    const activeFilter = Object.entries(filters || {}).find(([, value]) => value?.length);
+    const sortField = Array.isArray(sorter?.field) ? sorter.field.join('.') : sorter?.field;
+    const options = {
+      page: pagination.current || 1,
+      items: pagination.pageSize || 10,
+      ...(activeFilter && { filter: activeFilter[0], equal: activeFilter[1][0] }),
+      ...(sortField && { sortBy: sortField, sortValue: sorter.order === 'ascend' ? 1 : -1 }),
+      ...(entityFilter &&
+        searchConfig?.entity && {
+          filter: searchConfig.entity,
+          equal: entityFilter,
+        }),
+    };
     dispatch(erp.list({ entity, options }));
   };
 
-  const dispatcher = () => {
+  const dispatcher = useCallback(() => {
     dispatch(erp.list({ entity }));
-  };
+  }, [dispatch, entity]);
 
   useEffect(() => {
-    const controller = new AbortController();
     dispatcher();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  }, [dispatcher]);
 
   const filterTable = (value) => {
     setEntityFilter(value);
@@ -203,12 +281,21 @@ export default function DataTable({ config, extra = [] }) {
             displayLabels={['name']}
             searchFields={'name'}
             onChange={filterTable}
+            placeholder={`${DATATABLE_TITLE} durchsuchen …`}
             // redirectLabel={'Add New Client'}
             // withRedirect
             // urlToRedirect={'/customer'}
           />,
           <Button onClick={handelDataTableLoad} key="refresh-button" icon={<RedoOutlined />}>
             {translate('Refresh')}
+          </Button>,
+          <Button
+            onClick={exportCsv}
+            key="export-button"
+            icon={<DownloadOutlined />}
+            disabled={!pagination?.count}
+          >
+            CSV Export
           </Button>,
 
           !disableAdd && <AddNewItem config={config} key="add-new-item" />,
@@ -235,6 +322,15 @@ export default function DataTable({ config, extra = [] }) {
         loading={listIsLoading}
         onChange={handelDataTableLoad}
         scroll={{ x: true }}
+        locale={{
+          emptyText: (
+            <Empty
+              description={EMPTY_TEXT || `Noch keine Einträge in „${DATATABLE_TITLE}“ vorhanden`}
+            >
+              {!disableAdd && <AddNewItem config={config} />}
+            </Empty>
+          ),
+        }}
       />
     </>
   );

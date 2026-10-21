@@ -1,7 +1,6 @@
 import { Form, Input, InputNumber, Select, Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
-import { useSelector } from 'react-redux';
 
 const formItems = [
   {
@@ -18,7 +17,7 @@ const formItems = [
   },
   {
     settingKey: 'company_country',
-    valueType: 'string',
+    valueType: 'country',
   },
   {
     settingKey: 'company_email',
@@ -86,6 +85,15 @@ export default function SettingForm() {
             valuePropName={item.valueType === 'boolean' ? 'checked' : 'value'}
           >
             {item.valueType === 'string' && <Input autoComplete="off" />}
+            {item.valueType === 'country' && (
+              <Select
+                options={[
+                  { value: 'Österreich', label: 'Österreich' },
+                  { value: 'Deutschland', label: 'Deutschland' },
+                  { value: 'Schweiz', label: 'Schweiz' },
+                ]}
+              />
+            )}
             {item.valueType === 'number' && <InputNumber min={0} style={{ width: '100%' }} />}
             {item.valueType === 'boolean' && (
               <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />

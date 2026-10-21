@@ -7,9 +7,11 @@ const invoiceSchema = new mongoose.Schema({
   },
 
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'Admin', required: true },
+  documentType: { type: String, enum: ['invoice', 'credit_note'], default: 'invoice' },
+  originalInvoice: { type: mongoose.Schema.ObjectId, ref: 'Invoice' },
+  creditReason: { type: String, trim: true },
   number: {
     type: Number,
-    required: true,
   },
   year: {
     type: Number,
@@ -18,9 +20,24 @@ const invoiceSchema = new mongoose.Schema({
   content: String,
   recurring: {
     type: String,
-    enum: ['daily', 'weekly', 'monthly', 'annually', 'quarter'],
+    enum: ['none', 'weekly', 'monthly', 'quarterly', 'annually'],
+    default: 'none',
   },
+  recurringActive: { type: Boolean, default: false },
+  nextRecurringDate: Date,
+  recurringAnchorDate: Date,
+  recurringEndDate: Date,
+  recurringSource: { type: mongoose.Schema.ObjectId, ref: 'Invoice' },
+  recurringOccurrenceDate: Date,
+  recurringProcessingAt: Date,
+  recurringFailedAt: Date,
+  recurringLastError: { type: String, maxlength: 500 },
+  issuingAt: Date,
   date: {
+    type: Date,
+    required: true,
+  },
+  serviceDate: {
     type: Date,
     required: true,
   },
@@ -148,6 +165,7 @@ const invoiceSchema = new mongoose.Schema({
     default: 0,
   },
   nextReminderDate: Date,
+  dunningFees: { type: Number, min: 0, default: 0 },
   reminderHistory: [
     {
       level: { type: Number, min: 1, max: 3, required: true },
@@ -157,6 +175,15 @@ const invoiceSchema = new mongoose.Schema({
       note: String,
     },
   ],
+  cancellation: {
+    cancelledAt: Date,
+    reason: { type: String, trim: true },
+    cancelledBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  },
+  sentAt: Date,
+  issuedAt: Date,
+  inventoryBookedAt: Date,
+  inventoryReversedAt: Date,
   approved: {
     type: Boolean,
     default: false,
@@ -169,7 +196,17 @@ const invoiceSchema = new mongoose.Schema({
   footerText: { type: String },
   status: {
     type: String,
-    enum: ['draft', 'pending', 'sent', 'refunded', 'cancelled', 'on hold'],
+    enum: [
+      'draft',
+      'pending',
+      'issued',
+      'sent',
+      'overdue',
+      'paid',
+      'refunded',
+      'cancelled',
+      'on hold',
+    ],
     default: 'draft',
   },
   pdf: {
@@ -198,4 +235,33 @@ const invoiceSchema = new mongoose.Schema({
 });
 
 invoiceSchema.plugin(require('mongoose-autopopulate'));
+invoiceSchema.index(
+  { number: 1, year: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { removed: false, number: { $type: 'number' } },
+  }
+);
+invoiceSchema.index(
+  { originalInvoice: 1, documentType: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { removed: false, documentType: 'credit_note' },
+  }
+);
+invoiceSchema.index(
+  { 'converted.quote': 1 },
+  {
+    unique: true,
+    partialFilterExpression: { removed: false, 'converted.from': 'quote' },
+  }
+);
+invoiceSchema.index(
+  { recurringSource: 1, recurringOccurrenceDate: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { removed: false, recurringSource: { $exists: true } },
+  }
+);
+invoiceSchema.index({ recurringActive: 1, nextRecurringDate: 1 });
 module.exports = mongoose.model('Invoice', invoiceSchema);

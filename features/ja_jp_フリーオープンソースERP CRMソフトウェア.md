@@ -1,12 +1,12 @@
-# IDURAR オープンソース ERP＆CRMソフトウェア
+# WIEpilot オープンソース ERP＆CRMソフトウェア
 
-GitHub：[https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-デモ：[https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-ウェブサイト：[https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub：[https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+デモ：[https://www.wiedesign.at/](https://www.wiedesign.at/)
+ウェブサイト：[https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## ソフトウェアスタック
 
-IDURARは、Node.js、React.js、Redux、Express.js、MongoDB、AntDesign（AntD）をベースにした無料のオープンソースERP＆CRMアプリです。
+WIEpilotは、Node.js、React.js、Redux、Express.js、MongoDB、AntDesign（AntD）をベースにした無料のオープンソースERP＆CRMアプリです。
 
 ## ユーザー管理：
 

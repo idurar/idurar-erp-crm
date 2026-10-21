@@ -3,7 +3,7 @@
   height: 60px;
 }
 .notification::-webkit-scrollbar-thumb {
-  background: #3e885b;
+  background: #3287ce;
   border-radius: 4px;
 }
 .headerIcon {
@@ -14,12 +14,12 @@
   float: right;
   margin-left: 10px;
   margin-top: 15px;
-  color: #205435;
+  color: #12559b;
   background: transparent;
 }
 .headerIcon.ant-avatar :hover {
   background: #fff;
-  box-shadow: 0 0 10px 4px rgba(62, 136, 91, 0.2);
+  box-shadow: 0 0 10px 4px rgba(50, 135, 206, 0.2);
   cursor: pointer;
 }
 

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Dropdown, Layout, Badge, Button } from 'antd';
+import { Avatar, Dropdown, Layout, Button } from 'antd';
 
 // import Notifications from '@/components/Notification';
 
@@ -12,7 +12,6 @@ import { FILE_BASE_URL } from '@/config/serverApiConfig';
 
 import useLanguage from '@/locale/useLanguage';
 
-import UpgradeButton from './UpgradeButton';
 import { useColorMode } from '@/locale/Localization';
 
 export default function HeaderContent() {
@@ -90,7 +89,7 @@ export default function HeaderContent() {
     <Header
       style={{
         padding: '20px',
-        background: isDark ? '#171d19' : '#ffffff',
+        background: isDark ? '#0D2744' : '#FFFFFF',
         display: 'flex',
         flexDirection: 'row-reverse',
         justifyContent: 'flex-start',
@@ -134,11 +133,10 @@ export default function HeaderContent() {
 
       {/* <AppsButton /> */}
 
-      <UpgradeButton />
     </Header>
   );
 }
 
 //  console.log(
-//    '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to WIEpilot ERP CRM! Did you know that we also offer commercial customization services? Contact us at hi@wiedesign.at for more information.'
 //  );

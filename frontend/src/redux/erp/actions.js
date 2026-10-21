@@ -184,7 +184,7 @@ export const erp = {
     },
 
   delete:
-    ({ entity, id }) =>
+    ({ entity, id, jsonData }) =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.RESET_ACTION,
@@ -196,7 +196,7 @@ export const erp = {
         payload: null,
       });
 
-      let data = await request.delete({ entity, id });
+      let data = await request.delete({ entity, id, jsonData });
 
       if (data.success === true) {
         dispatch({

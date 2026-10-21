@@ -1,12 +1,12 @@
-# IDURAR Відкритий ERP та CRM-софт
+# WIEpilot Відкритий ERP та CRM-софт
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Демо: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Веб-сайт: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Демо: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+Веб-сайт: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## Стек програмного забезпечення
 
-IDURAR Безкоштовний відкритий ERP та CRM-додаток, заснований на "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot Безкоштовний відкритий ERP та CRM-додаток, заснований на "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Управління користувачами:
 

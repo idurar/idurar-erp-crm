@@ -25,4 +25,9 @@ const taxesSchema = new mongoose.Schema({
   },
 });
 
+taxesSchema.index(
+  { taxName: 1 },
+  { unique: true, partialFilterExpression: { removed: false } }
+);
+
 module.exports = mongoose.model('Taxes', taxesSchema);

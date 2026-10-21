@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { Row, Col } from 'antd';
 import { useSelector } from 'react-redux';
 
@@ -19,21 +19,19 @@ export default function ReadItem({ config }) {
   const { result: currentResult } = useSelector(selectCurrentItem);
   const { state } = useCrudContext();
   const { isReadBoxOpen } = state;
-  const [listState, setListState] = useState([]);
-
   if (fields) readColumns = [...dataForRead({ fields: fields, translate: translate })];
-  useEffect(() => {
-    const list = [];
-    readColumns.map((props) => {
+  const listState = useMemo(
+    () =>
+      readColumns.map((props) => {
       const propsKey = props.dataIndex;
       const propsTitle = props.title;
       const isDate = props.isDate || false;
       let value = valueByString(currentResult, propsKey);
       value = isDate ? dayjs(value).format(dateFormat) : value;
-      list.push({ propsKey, label: propsTitle, value: value });
-    });
-    setListState(list);
-  }, [currentResult]);
+        return { propsKey, label: propsTitle, value };
+      }),
+    [currentResult, dateFormat, readColumns]
+  );
 
   const show = isReadBoxOpen ? { display: 'block', opacity: 1 } : { display: 'none', opacity: 0 };
 

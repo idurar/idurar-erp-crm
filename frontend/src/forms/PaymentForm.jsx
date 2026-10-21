@@ -20,19 +20,11 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
   };
   return (
     <>
-      <Form.Item
-        label={translate('number')}
-        name="number"
-        initialValue={1}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-        style={{ width: '50%', float: 'left', paddingRight: '20px' }}
-      >
-        <InputNumber min={1} style={{ width: '100%' }} />
-      </Form.Item>
+      {isUpdateForm && (
+        <Form.Item label={translate('number')} name="number">
+          <InputNumber disabled style={{ width: '100%' }} />
+        </Form.Item>
+      )}
       <Form.Item
         name="date"
         label={translate('date')}

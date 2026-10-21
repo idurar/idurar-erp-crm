@@ -14,12 +14,13 @@ function CrudContextProvider({ children }) {
 
 function useCrudContext() {
   const context = useContext(CrudContext);
+  const state = context?.[0];
+  const dispatch = context?.[1];
+  const crudContextAction = useMemo(() => (dispatch ? contextActions(dispatch) : null), [dispatch]);
+  const crudContextSelector = useMemo(() => (state ? contextSelectors(state) : null), [state]);
   if (context === undefined) {
     throw new Error('useCrudContext must be used within a CrudContextProvider');
   }
-  const [state, dispatch] = context;
-  const crudContextAction = contextActions(dispatch);
-  const crudContextSelector = contextSelectors(state);
   return { state, crudContextAction, crudContextSelector };
 }
 

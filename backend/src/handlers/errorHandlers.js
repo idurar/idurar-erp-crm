@@ -5,26 +5,37 @@
   Instead of using try{} catch(e) {} in each controller, we wrap the function in
   catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
+const { randomUUID } = require('crypto');
+const logger = require('@/utils/logger');
 
 exports.catchErrors = (fn) => {
   return function (req, res, next) {
     return fn(req, res, next).catch((error) => {
+      const errorId = randomUUID();
+      logger.error('Request failed', {
+        errorId,
+        method: req.method,
+        path: req.originalUrl,
+        controller: fn.name,
+        error: error.message,
+        stack: process.env.NODE_ENV === 'production' ? undefined : error.stack,
+      });
       if (error.name == 'ValidationError') {
         return res.status(400).json({
           success: false,
           result: null,
-          message: 'Required fields are not supplied',
+          message: 'Erforderliche Angaben fehlen oder sind ungültig.',
           controller: fn.name,
-          error: error,
+          errorId,
         });
       } else {
         // Server Error
         return res.status(500).json({
           success: false,
           result: null,
-          message: error.message,
+          message: process.env.NODE_ENV === 'production' ? 'Interner Serverfehler' : error.message,
           controller: fn.name,
-          error: error,
+          errorId,
         });
       }
     });
@@ -39,7 +50,7 @@ exports.catchErrors = (fn) => {
 exports.notFound = (req, res, next) => {
   return res.status(404).json({
     success: false,
-    message: "Api url doesn't exist ",
+    message: 'Die angeforderte Schnittstelle wurde nicht gefunden.',
   });
 };
 
@@ -69,9 +80,16 @@ exports.developmentErrors = (error, req, res, next) => {
   No stacktraces are leaked to admin
 */
 exports.productionErrors = (error, req, res, next) => {
+  const errorId = randomUUID();
+  logger.error('Unhandled request error', {
+    errorId,
+    method: req.method,
+    path: req.originalUrl,
+    error: error.message,
+  });
   return res.status(500).json({
     success: false,
-    message: error.message,
-    error: error,
+    message: 'Interner Serverfehler',
+    errorId,
   });
 };

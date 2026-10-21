@@ -1,18 +1,19 @@
 const paginatedList = async (Model, req, res) => {
+  const { escapeRegex, isSafeField } = require('@/helpers/search');
   const page = req.query.page || 1;
   const limit = parseInt(req.query.items) || 10;
   const skip = page * limit - limit;
 
   const { sortBy = 'enabled', sortValue = -1, filter, equal } = req.query;
 
-  const fieldsArray = req.query.fields ? req.query.fields.split(',') : [];
+  const fieldsArray = (req.query.fields ? req.query.fields.split(',') : []).filter(isSafeField);
 
   let fields;
 
   fields = fieldsArray.length === 0 ? {} : { $or: [] };
 
   for (const field of fieldsArray) {
-    fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
+    fields.$or.push({ [field]: { $regex: new RegExp(escapeRegex(req.query.q || ''), 'i') } });
   }
 
   // Build filter condition safely: reject MongoDB operators in values
@@ -25,6 +26,9 @@ const paginatedList = async (Model, req, res) => {
         message: 'Invalid filter value',
       });
     }
+    if (!isSafeField(filter)) {
+      return res.status(400).json({ success: false, result: [], message: 'Invalid filter field' });
+    }
     filterCondition = { [filter]: equal };
   }
 
@@ -36,7 +40,7 @@ const paginatedList = async (Model, req, res) => {
   })
     .skip(skip)
     .limit(limit)
-    .sort({ [sortBy]: sortValue })
+    .sort({ [isSafeField(sortBy) ? sortBy : 'created']: Number(sortValue) === 1 ? 1 : -1 })
     .populate()
     .exec();
 

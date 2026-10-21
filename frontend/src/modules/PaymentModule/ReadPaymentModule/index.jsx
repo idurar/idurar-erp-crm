@@ -20,7 +20,7 @@ export default function ReadPaymentModule({ config }) {
     } else {
       dispatch(erp.read({ entity: config.entity, id }));
     }
-  }, [item]);
+  }, [config.entity, dispatch, id, item]);
 
   const { result: currentResult } = useSelector(selectCurrentItem);
 

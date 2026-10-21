@@ -68,7 +68,7 @@ const resetPassword = async (req, res, { userModel }) => {
   await UserPassword.findOneAndUpdate(
     { user: userId },
     {
-      $push: { loggedSessions: token },
+      $push: { loggedSessions: { $each: [token], $slice: -10 } },
       password: hashedPassword,
       salt: salt,
       emailToken: emailToken,
@@ -104,7 +104,7 @@ const resetPassword = async (req, res, { userModel }) => {
         email: user.email,
         photo: user.photo,
         token: token,
-        maxAge: req.body.remember ? 365 : null,
+        maxAge: null,
       },
       message: 'Successfully resetPassword user',
     });

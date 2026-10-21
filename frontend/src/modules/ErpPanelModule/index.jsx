@@ -14,17 +14,9 @@ export default function ErpPanel({ config, extra }) {
   const { state } = useErpContext();
   const { deleteModal } = state;
 
-  const dispatcher = () => {
-    dispatch(erp.resetState());
-  };
-
   useLayoutEffect(() => {
-    const controller = new AbortController();
-    dispatcher();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+    dispatch(erp.resetState());
+  }, [dispatch]);
 
   return (
     <>

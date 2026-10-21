@@ -18,6 +18,8 @@ export default function Customer() {
     DATATABLE_TITLE: translate('client_list'),
     ADD_NEW_ENTITY: translate('add_new_client'),
     ENTITY_NAME: translate('client'),
+    SEARCH_PLACEHOLDER: 'Kunden suchen …',
+    EMPTY_TEXT: 'Noch keine Kunden vorhanden',
   };
   const configPage = {
     entity,

@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Welcome to the [idurar-erp-crm](<[idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)>) repository! We're excited that you're interested in contributing. Please take a moment to review this document to ensure a smooth collaboration process.
+Welcome to the [WIEpilot](<[WIEpilot](https://github.com/WIEdesignAT/idurar-erp-crm)>) repository! We're excited that you're interested in contributing. Please take a moment to review this document to ensure a smooth collaboration process.
 
 ## How to Contribute
 
@@ -8,9 +8,9 @@ Welcome to the [idurar-erp-crm](<[idurar-erp-crm](https://github.com/idurar/idur
 
 If you find a bug or have a suggestion for an enhancement :
 
-- please make sure it was not asked before here [issues](https://github.com/idurar/idurar-erp-crm/issues).
-- make sure it is not work in progress here [pull requests](https://github.com/idurar/idurar-erp-crm/pulls).
-- you can then [create an issue](https://github.com/idurar/idurar-erp-crm/issues/new/choose) with the following information:
+- please make sure it was not asked before here [issues](https://github.com/WIEdesignAT/idurar-erp-crm/issues).
+- make sure it is not work in progress here [pull requests](https://github.com/WIEdesignAT/idurar-erp-crm/pulls).
+- you can then [create an issue](https://github.com/WIEdesignAT/idurar-erp-crm/issues/new/choose) with the following information:
   - a short but descriptive title.
   - a detailed description of the issue or suggestion (if it is a bug include the steps to reproduce it).
 
@@ -53,4 +53,4 @@ Please follow this commit format for your commit messages:
 
 If you have any questions, feel free to reach out by creating an issue.
 
-Thank you for contributing to [idurar-erp-crm](https://github.com/idurar/idurar-erp-crm) dont forget to give us a :star: !
+Thank you for contributing to [WIEpilot](https://github.com/WIEdesignAT/idurar-erp-crm) dont forget to give us a :star: !

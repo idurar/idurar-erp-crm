@@ -24,6 +24,7 @@ const schema = new mongoose.Schema({
   salesPackPrice: { type: Number, min: 0, default: 0 },
   margin: { type: Number, default: 0 },
   stock: { type: Number, default: 0 },
+  minimumStock: { type: Number, min: 0, default: null },
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
 });

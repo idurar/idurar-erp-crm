@@ -35,7 +35,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
 
       setLabels(currentlabels);
     }
-  }, [currentItem]);
+  }, [currentItem, deleteModalLabels]);
 
   const removeItem = () => {
     dispatch(crud.currentAction({ actionType: 'delete', data: currentItem }));
@@ -54,7 +54,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
           <p style={{ marginBottom: '10px' }}>{labels}</p>
         </Col>
         <Col span={14}>
-          <Button
+          {config.allowDelete !== false && <Button
             onClick={removeItem}
             type="text"
             icon={<DeleteOutlined />}
@@ -62,8 +62,8 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             style={{ float: 'right', marginLeft: '5px', marginTop: '10px' }}
           >
             {translate('remove')}
-          </Button>
-          <Button
+          </Button>}
+          {config.allowEdit !== false && <Button
             onClick={editItem}
             type="text"
             icon={<EditOutlined />}
@@ -71,7 +71,7 @@ function SidePanelTopContent({ config, formElements, withUpload }) {
             style={{ float: 'right', marginLeft: '0px', marginTop: '10px' }}
           >
             {translate('edit')}
-          </Button>
+          </Button>}
         </Col>
 
         <Col span={24}>
@@ -111,7 +111,7 @@ function CrudModule({ config, createForm, updateForm, withUpload = false }) {
 
   useLayoutEffect(() => {
     dispatch(crud.resetState());
-  }, []);
+  }, [dispatch]);
 
   return (
     <CrudLayout
@@ -124,7 +124,7 @@ function CrudModule({ config, createForm, updateForm, withUpload = false }) {
         <SidePanelTopContent config={config} formElements={updateForm} withUpload={withUpload} />
       }
     >
-      <DataTable config={config} />
+      <DataTable config={config} extra={config.tableExtra || []} />
       <DeleteModal config={config} />
     </CrudLayout>
   );

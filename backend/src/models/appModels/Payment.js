@@ -11,6 +11,10 @@ const paymentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  year: {
+    type: Number,
+    required: true,
+  },
   client: {
     type: mongoose.Schema.ObjectId,
     ref: 'Client',
@@ -54,6 +58,11 @@ const paymentSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  reversal: {
+    reversedAt: Date,
+    reason: { type: String, trim: true },
+    reversedBy: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  },
   updated: {
     type: Date,
     default: Date.now,
@@ -64,4 +73,11 @@ const paymentSchema = new mongoose.Schema({
   },
 });
 paymentSchema.plugin(require('mongoose-autopopulate'));
+paymentSchema.index(
+  { number: 1, year: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { removed: false, year: { $type: 'number' } },
+  }
+);
 module.exports = mongoose.model('Payment', paymentSchema);

@@ -1,19 +1,29 @@
 const custom = require('@/controllers/pdfController');
 const mongoose = require('mongoose');
-const { bookInvoice } = require('@/services/inventoryService');
 
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
   try {
-    const modelName = directory.slice(0, 1).toUpperCase() + directory.slice(1);
+    const modelName =
+      mongoose.modelNames().find((name) => name.toLowerCase() === directory.toLowerCase()) ||
+      directory.slice(0, 1).toUpperCase() + directory.slice(1);
     if (mongoose.models[modelName]) {
       const Model = mongoose.model(modelName);
       const result = await Model.findOne({
         _id: id,
+        removed: false,
       }).exec();
 
       // Throw error if no result
       if (!result) {
         throw { name: 'ValidationError' };
+      }
+
+      if (modelName === 'Invoice' && !result.issuedAt) {
+        return res.status(409).json({
+          success: false,
+          result: null,
+          message: 'Die Rechnung muss vor dem PDF-Export veröffentlicht werden.',
+        });
       }
 
       // Continue process if result is returned
@@ -26,7 +36,6 @@ module.exports = downloadPdf = async (req, res, { directory, id }) => {
         { filename: folderPath, format: 'A4', targetLocation },
         result
       );
-      if (modelName === 'Invoice') await bookInvoice(result, req.admin?._id);
       return res.download(targetLocation, (error) => {
         if (error && !res.headersSent)
           return res.status(500).json({

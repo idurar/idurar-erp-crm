@@ -1,9 +1,8 @@
-import React from 'react';
 import { Form, Input, Select, InputNumber } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';
 
-export default function OrderForm({ isUpdateForm = false }) {
+export default function OrderForm() {
   const translate = useLanguage();
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {

@@ -48,17 +48,29 @@ const summary = async (Model, req, res) => {
           },
         ],
         activeClients: [
+          { $match: { removed: false, enabled: true } },
           {
             $lookup: {
               from: InvoiceModel.collection.name,
-              localField: '_id', // Match _id from ClientModel
-              foreignField: 'client', // Match client field in InvoiceModel
+              let: { clientId: '$_id' },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: { $eq: ['$client', '$$clientId'] },
+                    removed: false,
+                    documentType: 'invoice',
+                    issuedAt: { $ne: null },
+                    status: { $nin: ['cancelled', 'refunded'] },
+                  },
+                },
+                { $limit: 1 },
+              ],
               as: 'invoice',
             },
           },
           {
             $match: {
-              'invoice.removed': false,
+              'invoice.0': { $exists: true },
             },
           },
           {
@@ -81,6 +93,23 @@ const summary = async (Model, req, res) => {
   const totalNewClients = result.newClients[0] ? result.newClients[0].count : 0;
   const activeClients = result.activeClients[0] ? result.activeClients[0].count : 0;
 
+  const topClients = await InvoiceModel.aggregate([
+    {
+      $match: {
+        removed: false,
+        documentType: 'invoice',
+        issuedAt: { $ne: null },
+        status: { $nin: ['cancelled', 'refunded'] },
+      },
+    },
+    { $group: { _id: '$client', revenue: { $sum: '$credit' }, invoiced: { $sum: '$total' }, lastInvoice: { $max: '$date' } } },
+    { $sort: { revenue: -1, invoiced: -1 } },
+    { $lookup: { from: Model.collection.name, localField: '_id', foreignField: '_id', as: 'client' } },
+    { $unwind: '$client' },
+    { $match: { 'client.removed': false, 'client.enabled': true } },
+    { $project: { _id: 1, name: '$client.name', revenue: 1, invoiced: 1, open: { $subtract: ['$invoiced', '$revenue'] }, lastInvoice: 1 } },
+  ]);
+
   const totalActiveClientsPercentage = totalClients > 0 ? (activeClients / totalClients) * 100 : 0;
   const totalNewClientsPercentage = totalClients > 0 ? (totalNewClients / totalClients) * 100 : 0;
 
@@ -89,6 +118,10 @@ const summary = async (Model, req, res) => {
     result: {
       new: Math.round(totalNewClientsPercentage),
       active: Math.round(totalActiveClientsPercentage),
+      total: totalClients,
+      newCount: totalNewClients,
+      activeCount: activeClients,
+      topClients,
     },
     message: 'Successfully get summary of new clients',
   });

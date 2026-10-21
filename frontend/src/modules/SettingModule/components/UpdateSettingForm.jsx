@@ -17,7 +17,6 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
-    console.log('🚀 ~ onSubmit ~ fieldsValue:', fieldsValue);
     if (withUpload) {
       if (fieldsValue.file) {
         fieldsValue.file = fieldsValue.file[0].originFileObj;
@@ -48,7 +47,7 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
     const current = result[settingsCategory];
 
     form.setFieldsValue(current);
-  }, [result]);
+  }, [form, result, settingsCategory]);
 
   return (
     <div>
@@ -78,7 +77,6 @@ export default function UpdateSettingForm({ config, children, withUpload, upload
               paddingLeft: '5px',
             }}
           >
-            {/* <Button onClick={() => console.log('Cancel clicked')}>{translate('Cancel')}</Button> */}
           </Form.Item>
         </Form>
       </Loading>

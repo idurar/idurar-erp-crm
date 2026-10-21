@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { Select, Empty } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
+const EMPTY_SEARCH_OPTIONS = Object.freeze({});
+
 export default function AutoCompleteAsync({
   entity,
   displayLabels,
@@ -18,6 +20,9 @@ export default function AutoCompleteAsync({
   urlToRedirect = '/',
   value, /// this is for update
   onChange, /// this is for update
+  placeholder,
+  searchOptions = EMPTY_SEARCH_OPTIONS,
+  optionLabel,
 }) {
   const translate = useLanguage();
 
@@ -47,41 +52,35 @@ export default function AutoCompleteAsync({
     }
   };
 
-  const handleOnSelect = (value) => {
-    setCurrentValue(value[outputValue] || value); // set nested value or value
-  };
-
   const [, cancel] = useDebounce(
     () => {
       //  setState("Typing stopped");
       setDebouncedValue(valToSearch);
     },
     500,
-    [valToSearch]
+    valToSearch
   );
-
-  const asyncSearch = async (options) => {
-    return await request.search({ entity, options });
-  };
 
   let { onFetch, result, isSuccess, isLoading } = useOnFetch();
 
   const labels = (optionField) => {
+    if (optionLabel) return optionLabel(optionField);
     return displayLabels.map((x) => optionField[x]).join(' ');
   };
 
   useEffect(() => {
     const options = {
+      ...searchOptions,
       q: debouncedValue,
       fields: searchFields,
     };
-    const callback = asyncSearch(options);
+    const callback = request.search({ entity, options });
     onFetch(callback);
 
     return () => {
       cancel();
     };
-  }, [debouncedValue]);
+  }, [cancel, debouncedValue, entity, onFetch, searchFields, searchOptions]);
 
   const onSearch = (searchText) => {
     isSearching.current = true;
@@ -108,14 +107,14 @@ export default function AutoCompleteAsync({
       onChange(value[outputValue] || value);
       isUpdating.current = false;
     }
-  }, [value]);
+  }, [onChange, outputValue, value]);
 
   return (
     <Select
       loading={isLoading}
       showSearch
       allowClear
-      placeholder={translate('Search')}
+      placeholder={placeholder || translate('Search')}
       defaultActiveFirstOption={false}
       filterOption={false}
       notFoundContent={searching ? '... Searching' : <Empty />}

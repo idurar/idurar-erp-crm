@@ -36,7 +36,7 @@ function SearchItemComponent({ config, onRerender }) {
       setDebouncedValue(valToSearch);
     },
     500,
-    [valToSearch]
+    valToSearch
   );
 
   const labels = (optionField) => {
@@ -54,7 +54,7 @@ function SearchItemComponent({ config, onRerender }) {
     return () => {
       cancel();
     };
-  }, [debouncedValue]);
+  }, [cancel, debouncedValue, dispatch, entity, searchFields]);
 
   const onSearch = (searchText) => {
     if (searchText && searchText != '') {

@@ -1,0 +1,13 @@
+export const htmlToPlainText = (value = '') => String(value)
+  .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '')
+  .replace(/<br\s*\/?>/gi, '\n')
+  .replace(/<\/p\s*>/gi, '\n')
+  .replace(/<[^>]*>/g, '')
+  .replace(/&nbsp;/gi, ' ')
+  .replace(/&amp;/gi, '&')
+  .replace(/&lt;/gi, '<')
+  .replace(/&gt;/gi, '>')
+  .replace(/&quot;/gi, '"')
+  .replace(/&#39;/gi, "'")
+  .replace(/\n{3,}/g, '\n\n')
+  .trim();

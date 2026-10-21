@@ -12,44 +12,55 @@
 @import './partials/inventory.css';
 
 :root {
-  --app-text: #19231a;
-  --app-heading: #01200f;
+  --wie-navy: #062653;
+  --wie-primary: #12559b;
+  --wie-accent: #3287ce;
+  --wie-sky: #87b7de;
+  --wie-selected: #e8f3fc;
+  --wie-background: #f6f8fb;
+  --wie-surface: #ffffff;
+  --wie-border: #e1e7ef;
+  --wie-text: #1b2b42;
+  --wie-muted: #64748b;
+  --wie-success: #168568;
+  --wie-warning: #c58a22;
+  --wie-danger: #c8424c;
+  --wie-info: #2477bd;
+  --app-text: var(--wie-text);
+  --app-heading: var(--wie-navy);
+  --app-border-color: var(--wie-border);
+  --app-bg-color: var(--wie-surface);
+  --app-text-secondary: var(--wie-muted);
 }
 
 [data-theme='dark'] {
-  --app-text: #edf3ee;
+  --app-text: #e8f3fc;
   --app-heading: #ffffff;
 }
 
 [data-theme='dark'] body,
 [data-theme='dark'] #root,
 [data-theme='dark'] .ant-layout {
-  background: #0f1411 !important;
+  background: #071a32 !important;
 }
 
-[data-theme='dark'] .navigation,
-[data-theme='dark'] .sidebar-wraper,
 [data-theme='dark'] .whiteBox,
 [data-theme='dark'] .invoice-line,
 [data-theme='dark'] .collapseBox,
 [data-theme='dark'] .sidePanel {
-  background: #171d19 !important;
-  border-color: #35413a !important;
-}
-
-[data-theme='dark'] .navigation .logo img {
-  filter: brightness(0) invert(1);
+  background: #0d2744 !important;
+  border-color: #294866 !important;
 }
 
 [data-theme='dark'] .shadow,
 [data-theme='dark'] .line,
 [data-theme='dark'] .inventory-stats .ant-card {
-  border-color: #35413a !important;
+  border-color: #294866 !important;
 }
 
 [data-theme='dark'] .invoice-description-editor .ql-toolbar,
 [data-theme='dark'] .invoice-description-editor .ql-container {
-  border-color: #35413a;
+  border-color: #294866;
   background: #171d19;
   color: #edf3ee;
 }

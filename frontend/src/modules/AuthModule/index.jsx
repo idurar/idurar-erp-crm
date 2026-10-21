@@ -5,7 +5,7 @@ import { Layout, Col, Divider, Typography } from 'antd';
 import AuthLayout from '@/layout/AuthLayout';
 import SideContent from './SideContent';
 
-import logo from '@/style/images/wiedesign-logo.png';
+import logo from '@/style/images/wiepilot-logo.png';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -24,7 +24,7 @@ const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
         <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 0 }} span={0}>
           <img
             src={logo}
-            alt="WIEdesign"
+            alt="WIEpilot"
             style={{
               margin: '0px auto 20px',
               display: 'block',

@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
 import { Select, Tag } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { generate as uniqueId } from 'shortid';
 import color from '@/utils/color';
 import useLanguage from '@/locale/useLanguage';
+
+const EMPTY_REQUEST_OPTIONS = {};
 
 const SelectAsync = ({
   entity,
@@ -17,7 +18,7 @@ const SelectAsync = ({
   placeholder = 'select',
   value,
   onChange,
-  requestOptions = {},
+  requestOptions = EMPTY_REQUEST_OPTIONS,
 }) => {
   const translate = useLanguage();
   const [selectOptions, setOptions] = useState([]);
@@ -25,13 +26,13 @@ const SelectAsync = ({
 
   const navigate = useNavigate();
 
-  const asyncList = () => {
+  const asyncList = useCallback(() => {
     return request.list({ entity, options: requestOptions });
-  };
+  }, [entity, requestOptions]);
   const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
   useEffect(() => {
     isSuccess && setOptions(result);
-  }, [isSuccess]);
+  }, [isSuccess, result]);
 
   const labels = (optionField) => {
     return displayLabels.map((x) => optionField[x]).join(' ');
@@ -42,7 +43,7 @@ const SelectAsync = ({
       setCurrentValue(val);
       onChange(val);
     }
-  }, [value]);
+  }, [onChange, outputValue, value]);
 
   const handleSelectChange = (newValue) => {
     if (newValue === 'redirectURL') {
@@ -83,7 +84,7 @@ const SelectAsync = ({
     >
       {optionsList()?.map((option) => {
         return (
-          <Select.Option key={`${uniqueId()}`} value={option.value}>
+          <Select.Option key={option.value} value={option.value}>
             <Tag bordered={false} color={option.color}>
               {option.label}
             </Tag>

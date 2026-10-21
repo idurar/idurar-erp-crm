@@ -1,0 +1,114 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    include documentStyles.pug
+  body
+    .document
+      table.header-table
+        tr
+          td
+            if companyLogo
+              img.logo(src=companyLogo alt='Firmenlogo')
+          td.issuer
+            if settings.company_name
+              p.issuer-name #{settings.company_name}
+            if settings.company_address
+              p #{settings.company_address}
+            if settings.company_state || settings.company_country
+              p #{[settings.company_state, settings.company_country].filter(Boolean).join(', ')}
+
+      table.address-table
+        tr
+          td.recipient
+            p.sender-line #{[settings.company_name, settings.company_address].filter(Boolean).join(' · ')}
+            p.recipient-name #{model.supplier.name}
+            if model.supplier.contactName
+              p z. H. #{model.supplier.contactName}
+            if model.supplier.address
+              p #{model.supplier.address}
+            if model.supplier.postalCode || model.supplier.city
+              p #{[model.supplier.postalCode, model.supplier.city].filter(Boolean).join(' ')}
+            if model.supplier.vatNumber
+              p UID: #{model.supplier.vatNumber}
+          td.document-heading
+            h1 Bestellung
+            p.document-number Nr. #{model.number}
+
+      table.meta-table
+        tr
+          td
+            span.label Bestelldatum
+            | #{moment(model.orderDate).format(dateFormat)}
+          td
+            span.label Gewünschter Liefertermin
+            | #{model.expectedDate ? moment(model.expectedDate).format(dateFormat) : 'nach Vereinbarung'}
+          td
+            span.label Kommission
+            | #{model.commission || '—'}
+
+      .intro
+        p Sehr geehrte Damen und Herren,
+        p hiermit bestellen wir folgende Artikel und Leistungen:
+
+      table.items
+        colgroup
+          col(style='width: 44%')
+          col(style='width: 14%')
+          col(style='width: 18%')
+          col(style='width: 24%')
+        thead
+          tr
+            th Beschreibung
+            th Menge
+            th Einzelpreis
+            th Gesamt netto
+        tbody
+          each item in model.items
+            tr
+              td
+                .item-name #{item.description}
+              td #{item.quantity} #{item.unit || 'Stk.'}
+              td #{moneyFormatter({ amount: item.unitPrice })}
+              td #{moneyFormatter({ amount: item.netAmount })}
+
+      .summary-wrap
+        table.summary
+          tr
+            td.sum-label Nettosumme
+            td #{moneyFormatter({ amount: model.netTotal })}
+          tr
+            td.sum-label Umsatzsteuer
+            td #{moneyFormatter({ amount: model.taxTotal })}
+          tr.grand
+            td.sum-label Gesamtbetrag
+            td #{moneyFormatter({ amount: model.grossTotal })}
+
+      if model.reference || model.notes
+        .info-box
+          h2 Hinweise
+          if model.reference
+            p Referenz: #{model.reference}
+          if model.notes
+            p #{model.notes}
+
+      .closing Bitte bestätigen Sie uns diese Bestellung und den Liefertermin.
+
+      .legal-footer
+        table.footer-table
+          tr
+            td
+              p.issuer-name #{settings.company_name || ''}
+              p #{settings.company_address || ''}
+              p #{[settings.company_state, settings.company_country].filter(Boolean).join(', ')}
+            td
+              if settings.company_vat_number
+                p UID: #{settings.company_vat_number}
+              if settings.company_tax_number
+                p Steuernummer: #{settings.company_tax_number}
+            td
+              if settings.company_email
+                p #{settings.company_email}
+              if settings.company_phone
+                p #{settings.company_phone}

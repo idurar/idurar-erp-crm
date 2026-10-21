@@ -28,6 +28,16 @@ const Taxes = lazy(() => import('@/pages/Taxes'));
 
 const Settings = lazy(() => import('@/pages/Settings/Settings'));
 const Inventory = lazy(() => import('@/pages/Inventory'));
+const InventoryCategories = lazy(() => import('@/pages/InventoryCategories'));
+const Users = lazy(() => import('@/pages/Users'));
+const TimeEntries = lazy(() => import('@/pages/TimeEntries'));
+const Employees = lazy(() => import('@/pages/Employees'));
+const Suppliers = lazy(() => import('@/pages/Suppliers'));
+const PurchaseOrders = lazy(() => import('@/pages/PurchaseOrders'));
+const OrderConfirmations = lazy(() => import('@/pages/OrderConfirmations'));
+const Expenses = lazy(() => import('@/pages/Expenses'));
+const ExpenseCategories = lazy(() => import('@/pages/ExpenseCategories'));
+const GoodsReceipts = lazy(() => import('@/pages/GoodsReceipts'));
 
 
 const Profile = lazy(() => import('@/pages/Profile'));
@@ -116,8 +126,48 @@ let routes = {
       element: <Inventory />,
     },
     {
+      path: '/inventory/categories',
+      element: <InventoryCategories />,
+    },
+    {
+      path: '/time-entries',
+      element: <TimeEntries />,
+    },
+    {
+      path: '/time-entries/employees',
+      element: <Employees />,
+    },
+    {
+      path: '/suppliers',
+      element: <Suppliers />,
+    },
+    {
+      path: '/purchase-orders',
+      element: <PurchaseOrders />,
+    },
+    {
+      path: '/order-confirmations',
+      element: <OrderConfirmations />,
+    },
+    {
+      path: '/goods-receipts',
+      element: <GoodsReceipts />,
+    },
+    {
+      path: '/expenses',
+      element: <Expenses />,
+    },
+    {
+      path: '/expenses/categories',
+      element: <ExpenseCategories />,
+    },
+    {
       path: '/settings',
       element: <Settings />,
+    },
+    {
+      path: '/users',
+      element: <Users />,
     },
     {
       path: '/settings/edit/:settingsKey',

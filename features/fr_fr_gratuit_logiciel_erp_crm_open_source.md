@@ -1,12 +1,12 @@
-# IDURAR Logiciel ERP & CRM Open-Source
+# WIEpilot Logiciel ERP & CRM Open-Source
 
-GitHub : [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Démo : [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Site Web : [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub : [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Démo : [https://www.wiedesign.at/](https://www.wiedesign.at/)
+Site Web : [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## Stack logiciel
 
-IDURAR est une application ERP & CRM open-source gratuite, basée sur la pile "mern-stack" : Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot est une application ERP & CRM open-source gratuite, basée sur la pile "mern-stack" : Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Gestion des utilisateurs :
 

@@ -14,3 +14,5 @@
 .invoice-description-editor .ql-editor { min-height: 76px; }
 .invoice-template-texts { clear: both; padding-top: 8px; }
 @media (max-width: 991px) { .invoice-line-header { display: none; } }
+.invoice-stock-warning { margin:0 0 12px; }
+.invoice-stock-warning .ant-alert-action { align-self:center; white-space:nowrap; }

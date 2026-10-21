@@ -22,7 +22,7 @@ export const enhanceTableColumns = (columns) => columns.map((column) => {
   return {
     ...column,
     sorter: column.sorter || ((a, b) => compare(getColumnValue(a), getColumnValue(b))),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1677ff' : undefined }} />,
+    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#12559B' : undefined }} />,
     filterDropdown: ({ selectedKeys, setSelectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8, width: 230 }} onKeyDown={(event) => event.stopPropagation()}>
         <Input.Search

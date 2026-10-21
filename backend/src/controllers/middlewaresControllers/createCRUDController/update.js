@@ -1,6 +1,8 @@
 const update = async (Model, req, res) => {
   // Find document by id and updates with the required fields
   req.body.removed = false;
+  delete req.body.createdBy;
+  delete req.body.employee;
   const result = await Model.findOneAndUpdate(
     {
       _id: req.params.id,

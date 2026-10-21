@@ -33,4 +33,9 @@ const paymentModeSchema = new mongoose.Schema({
   },
 });
 
+paymentModeSchema.index(
+  { name: 1 },
+  { unique: true, partialFilterExpression: { removed: false } }
+);
+
 module.exports = mongoose.model('PaymentMode', paymentModeSchema);

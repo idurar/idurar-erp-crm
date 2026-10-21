@@ -9,19 +9,15 @@ import PageLoader from '@/components/PageLoader';
 const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  function asyncLogout() {
-    dispatch(logoutAction());
-  }
-
   useLayoutEffect(() => {
     dispatch(crud.resetState());
     dispatch(erp.resetState());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    asyncLogout();
+    dispatch(logoutAction());
     navigate('/login');
-  }, []);
+  }, [dispatch, navigate]);
 
   return <PageLoader />;
 };

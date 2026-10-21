@@ -13,8 +13,6 @@ import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { settingsAction } from '@/redux/settings/actions';
-
 export default function UpdateInvoiceModule({ config }) {
   const dispatch = useDispatch();
 
@@ -22,7 +20,7 @@ export default function UpdateInvoiceModule({ config }) {
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));
-  }, [id]);
+  }, [config.entity, dispatch, id]);
 
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
@@ -31,7 +29,7 @@ export default function UpdateInvoiceModule({ config }) {
       const data = { ...currentResult };
       dispatch(erp.currentAction({ actionType: 'update', data }));
     }
-  }, [currentResult]);
+  }, [currentResult, dispatch]);
 
   if (isLoading) {
     return (

@@ -1,6 +1,6 @@
-import { Form, Input, Select } from 'antd';
-import { UploadOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
-import { message, Upload, Button, Switch } from 'antd';
+import { Form, Input } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { message, Upload, Button } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';
 
@@ -16,7 +16,7 @@ const beforeUpload = (file) => {
   return false;
 };
 
-export default function AdminForm({ isUpdateForm = false }) {
+export default function AdminForm() {
   const translate = useLanguage();
   return (
     <>

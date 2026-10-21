@@ -10,13 +10,19 @@ const coreAuthRouter = require('./routes/coreRoutes/coreAuth');
 const coreApiRouter = require('./routes/coreRoutes/coreApi');
 const coreDownloadRouter = require('./routes/coreRoutes/coreDownloadRouter');
 const corePublicRouter = require('./routes/coreRoutes/corePublicRouter');
+const licenseRouter = require('./routes/coreRoutes/license');
+const requireActiveLicense = require('./controllers/middlewaresControllers/requireActiveLicense');
 const adminAuth = require('./controllers/coreControllers/adminAuth');
+const authorizeRole = require('./controllers/middlewaresControllers/authorizeRole');
+const auditMutation = require('./controllers/middlewaresControllers/auditMutation');
 
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
 
 const fileUpload = require('express-fileupload');
 const { isProduction, parseOrigins } = require('./config/environment');
+const { randomUUID } = require('crypto');
+const logger = require('./utils/logger');
 // create our Express app
 const app = express();
 
@@ -24,6 +30,22 @@ app.disable('x-powered-by');
 if (isProduction) app.set('trust proxy', 1);
 
 const allowedOrigins = parseOrigins(process.env.CORS_ORIGINS);
+
+app.use((req, res, next) => {
+  req.requestId = req.headers['x-request-id'] || randomUUID();
+  res.setHeader('X-Request-Id', req.requestId);
+  const startedAt = Date.now();
+  res.on('finish', () =>
+    logger.info('HTTP request', {
+      requestId: req.requestId,
+      method: req.method,
+      path: req.originalUrl,
+      status: res.statusCode,
+      durationMs: Date.now() - startedAt,
+    })
+  );
+  next();
+});
 
 app.use(
   cors({
@@ -41,7 +63,8 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  if (isProduction) res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  if (isProduction)
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   next();
 });
 
@@ -57,22 +80,54 @@ app.use(compression());
 // Here our API Routes
 
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+app.get('/ready', (_req, res) => {
+  const mongoose = require('mongoose');
+  const { supportsTransactions } = require('./services/transactionService');
+  const databaseReady = mongoose.connection.readyState === 1;
+  const emailRequired = process.env.EMAIL_DELIVERY_REQUIRED === 'true';
+  const emailReady = !emailRequired || Boolean(process.env.RESEND_API && process.env.RESEND_FROM);
+  const transactionSupported = supportsTransactions();
+  const transactionReady = !isProduction || transactionSupported;
+  const ready = databaseReady && emailReady && transactionReady;
+  return res.status(ready ? 200 : 503).json({
+    status: ready ? 'ready' : 'not-ready',
+    checks: {
+      database: databaseReady ? 'up' : 'down',
+      email: emailReady ? 'configured' : 'missing',
+      transactions: transactionSupported
+        ? 'available'
+        : isProduction
+          ? 'replica-set-required'
+          : 'development-fallback',
+    },
+  });
+});
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 20,
   standardHeaders: 'draft-7',
   legacyHeaders: false,
-  message: { success: false, message: 'Too many authentication attempts. Please try again later.' },
+  message: { success: false, message: 'Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut.' },
 });
 
 app.use('/api/login', authLimiter);
 app.use('/api/forgetpassword', authLimiter);
 app.use('/api/resetpassword', authLimiter);
+app.use('/api/license', licenseRouter);
+app.use('/api', errorHandlers.catchErrors(requireActiveLicense));
 app.use('/api', coreAuthRouter);
-app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
-app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
-app.use('/download', coreDownloadRouter);
+app.use('/api', adminAuth.isValidAuthToken, authorizeRole, auditMutation);
+app.use('/api', coreApiRouter);
+app.use('/api', erpApiRouter);
+app.use(
+  '/download',
+  errorHandlers.catchErrors(requireActiveLicense),
+  adminAuth.isValidAuthToken,
+  authorizeRole,
+  auditMutation,
+  coreDownloadRouter
+);
 app.use('/public', corePublicRouter);
 
 // If that above routes didnt work, we 404 them and forward to error handler

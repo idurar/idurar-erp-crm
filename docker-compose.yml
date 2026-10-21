@@ -1,11 +1,12 @@
 services:
   mongodb:
     image: mongo:7
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     restart: unless-stopped
     volumes:
       - mongodb_data:/data/db
     healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      test: ["CMD-SHELL", "mongosh --quiet --eval \"try { rs.status().ok } catch (e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongodb:27017'}]}).ok }\""]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -16,7 +17,11 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8888
-      DATABASE: mongodb://mongodb:27017/idurar
+      DATABASE: mongodb://mongodb:27017/wiepilot?replicaSet=rs0
+      LICENSE_DATABASE: ${LICENSE_DATABASE:-mongodb://mongodb:27017/wiepilot-licenses}
+      LICENSE_INSTANCE_ID: ${LICENSE_INSTANCE_ID:-}
+      LICENSE_ENFORCEMENT: "true"
+      LICENSE_REQUIRE_CENTRAL: ${LICENSE_REQUIRE_CENTRAL:-false}
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET to at least 32 random characters}
       CORS_ORIGINS: ${APP_URL:?Set APP_URL, for example https://erp.example.com}
       PUBLIC_SERVER_FILE: ${APP_URL}/

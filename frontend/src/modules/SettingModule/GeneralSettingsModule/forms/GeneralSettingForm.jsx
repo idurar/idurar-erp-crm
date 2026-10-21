@@ -1,13 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Input, Form, Select, Switch } from 'antd';
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { Input, Form, Select } from 'antd';
 
 import useLanguage from '@/locale/useLanguage';
 
 export default function GeneralSettingForm() {
   const translate = useLanguage();
-  const dispatch = useDispatch();
-
   return (
     <div>
       <Form.Item

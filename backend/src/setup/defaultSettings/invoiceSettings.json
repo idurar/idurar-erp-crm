@@ -20,7 +20,7 @@
   {
     "settingCategory": "invoice_settings",
     "settingKey": "invoice_status",
-    "settingValue": ["draft", "pending", "sent", "received", "refund", "cancelled", "on hold"],
+    "settingValue": ["draft", "pending", "issued", "sent", "overdue", "paid", "refunded", "cancelled", "on hold"],
     "valueType": "array"
   }
 ]

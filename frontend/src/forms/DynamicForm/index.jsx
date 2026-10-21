@@ -6,7 +6,6 @@ import useLanguage from '@/locale/useLanguage';
 import { useMoney, useDate } from '@/settings';
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import SelectAsync from '@/components/SelectAsync';
-import { generate as uniqueId } from 'shortid';
 
 import { countryList } from '@/utils/countryList';
 
@@ -19,7 +18,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
         let field = fields[key];
 
         if ((isUpdateForm && !field.disableForUpdate) || !field.disableForForm) {
-          field.name = key;
+          field.name = field.dataPath || key;
           if (!field.label) field.label = key;
           if (field.hasFeedback)
             return (
@@ -47,6 +46,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -56,14 +56,13 @@ function FormElement({ field, feedback, setFeedback }) {
     >
       <Select
         showSearch={field.showSearch}
-        defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
       >
         {field.options?.map((option) => {
           return (
-            <Select.Option key={`${uniqueId()}`} value={option.value}>
+            <Select.Option key={option.value} value={option.value}>
               {option.label}
             </Select.Option>
           );
@@ -76,6 +75,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -84,14 +84,13 @@ function FormElement({ field, feedback, setFeedback }) {
       ]}
     >
       <Select
-        defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
       >
         {field.options?.map((option) => {
           return (
-            <Select.Option key={`${uniqueId()}`} value={option.value}>
+            <Select.Option key={option.value} value={option.value}>
               <Tag bordered={false} color={option.color}>
                 {translate(option.label)}
               </Tag>
@@ -105,6 +104,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -120,7 +120,7 @@ function FormElement({ field, feedback, setFeedback }) {
         }}
       >
         {field.options?.map((option) => (
-          <Select.Option key={`${uniqueId()}`} value={option.value}>
+          <Select.Option key={option.value} value={option.value}>
             {translate(option.label)}
           </Select.Option>
         ))}
@@ -131,6 +131,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -140,7 +141,6 @@ function FormElement({ field, feedback, setFeedback }) {
     >
       <Select
         showSearch
-        defaultValue={field.defaultValue}
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
         }
@@ -153,7 +153,7 @@ function FormElement({ field, feedback, setFeedback }) {
       >
         {field.options?.map((option) => {
           return (
-            <Select.Option key={`${uniqueId()}`} value={option.value} label={option.label}>
+            <Select.Option key={option.value} value={option.value} label={option.label}>
               <Tag bordered={false} color={option.color}>
                 {option.label}
               </Tag>
@@ -167,6 +167,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -175,13 +176,12 @@ function FormElement({ field, feedback, setFeedback }) {
       ]}
     >
       <Select
-        defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
       >
         {field.options?.map((option) => (
-          <Select.Option key={`${uniqueId()}`} value={option.value}>
+          <Select.Option key={option.value} value={option.value}>
             <Tag bordered={false} color={option.color}>
               {translate(option.label)}
             </Tag>
@@ -194,6 +194,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -203,13 +204,12 @@ function FormElement({ field, feedback, setFeedback }) {
     >
       <Select
         mode={'multiple'}
-        defaultValue={field.defaultValue}
         style={{
           width: '100%',
         }}
       >
         {field.options?.map((option) => (
-          <Select.Option key={`${uniqueId()}`} value={option.value}>
+          <Select.Option key={option.value} value={option.value}>
             {option.label}
           </Select.Option>
         ))}
@@ -220,6 +220,7 @@ function FormElement({ field, feedback, setFeedback }) {
     <Form.Item
       label={translate(field.label)}
       name={field.name}
+      initialValue={field.defaultValue}
       rules={[
         {
           required: field.required || false,
@@ -229,7 +230,6 @@ function FormElement({ field, feedback, setFeedback }) {
     >
       <Select
         showSearch
-        defaultValue={field.defaultValue}
         optionFilterProp="children"
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
@@ -299,20 +299,18 @@ function FormElement({ field, feedback, setFeedback }) {
       <Input
         autoComplete="off"
         maxLength={field.maxLength}
-        defaultValue={field.defaultValue}
         placeholder={field.placeholder ? translate(field.placeholder) : undefined}
       />
     ),
     url: <Input addonBefore="http://" autoComplete="off" placeholder="www.example.com" />,
     textarea: <TextArea rows={4} />,
     email: <Input autoComplete="off" placeholder="email@example.com" />,
-    number: <InputNumber style={{ width: '100%' }} />,
+    number: <InputNumber style={{ width: '100%' }} decimalSeparator="," />,
     phone: <Input style={{ width: '100%' }} placeholder="+1 123 456 789" />,
     boolean: (
       <Switch
         checkedChildren={<CheckOutlined />}
         unCheckedChildren={<CloseOutlined />}
-        defaultValue={true}
       />
     ),
     date: (
@@ -383,6 +381,7 @@ function FormElement({ field, feedback, setFeedback }) {
         <Form.Item
           label={field.hideLabel ? null : translate(field.label)}
           name={field.name}
+          initialValue={field.type === 'boolean' ? (field.defaultValue ?? true) : field.defaultValue}
           rules={[
             {
               required: field.required || false,

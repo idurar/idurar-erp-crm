@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { useProfileContext } from '@/context/profileContext';
-import { generate as uniqueId } from 'shortid';
 import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -29,7 +27,7 @@ const AdminInfo = ({ config }) => {
         ghost={false}
         extra={[
           <Button
-            key={`${uniqueId()}`}
+            key="edit"
             onClick={() => {
               updatePanel.open();
             }}
@@ -39,7 +37,7 @@ const AdminInfo = ({ config }) => {
             {translate('Edit')}
           </Button>,
           <Button
-            key={`${uniqueId()}`}
+            key="password"
             icon={<LockOutlined />}
             onClick={() => {
               modal.open();
@@ -84,7 +82,7 @@ const AdminInfo = ({ config }) => {
       </Row>
       <Divider />
       <Button
-        key={`${uniqueId()}`}
+        key="logout"
         icon={<LogoutOutlined />}
         className="right"
         onClick={() => navigate('/logout')}

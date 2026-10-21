@@ -27,10 +27,13 @@ export default function UpdatePayment({ config, currentInvoice }) {
 
   useEffect(() => {
     if (currentInvoice) {
-      const { credit, total, discount, amount } = currentInvoice;
+      const { credit, total, discount, amount, dunningFees = 0 } = currentInvoice;
 
       setMaxAmount(
-        calculate.sub(calculate.sub(total, discount), calculate.sub(calculate.sub(credit, amount)))
+        calculate.sub(
+          calculate.sub(calculate.add(total, dunningFees), discount),
+          calculate.sub(credit, amount)
+        )
       );
       const newInvoiceValues = { ...currentInvoice };
       if (newInvoiceValues.date) {
@@ -38,7 +41,7 @@ export default function UpdatePayment({ config, currentInvoice }) {
       }
       form.setFieldsValue(newInvoiceValues);
     }
-  }, [currentInvoice]);
+  }, [currentInvoice, form]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -47,11 +50,11 @@ export default function UpdatePayment({ config, currentInvoice }) {
       dispatch(erp.list({ entity }));
       navigate(`/${entity.toLowerCase()}/read/${currentInvoice._id}`);
     }
-  }, [isSuccess]);
+  }, [currentInvoice?._id, dispatch, entity, form, isSuccess, navigate]);
 
   const onSubmit = (fieldsValue) => {
     if (currentInvoice) {
-      const { _id: invoice } = currentInvoice;
+      const { invoiceId: invoice } = currentInvoice;
       const client = currentInvoice.client && currentInvoice.client._id;
       fieldsValue = {
         ...fieldsValue,
@@ -73,7 +76,7 @@ export default function UpdatePayment({ config, currentInvoice }) {
     <>
       <Loading isLoading={isLoading}>
         <Form form={form} layout="vertical" onFinish={onSubmit}>
-          <PaymentForm maxAmount={maxAmount} />
+          <PaymentForm maxAmount={maxAmount} isUpdateForm />
           <Form.Item>
             <Button type="primary" htmlType="submit">
               {translate('Update')}

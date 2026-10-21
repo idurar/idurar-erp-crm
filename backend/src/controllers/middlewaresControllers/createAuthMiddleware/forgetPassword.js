@@ -64,7 +64,7 @@ const forgetPassword = async (req, res, { userModel }) => {
     email,
     name: user.name,
     link,
-    subject: 'Reset your password | idurar',
+    subject: 'Passwort zurücksetzen | WIEpilot',
     idurar_app_email,
     type: 'passwordVerfication',
   });

@@ -5,14 +5,6 @@ import errorHandler from './errorHandler';
 import successHandler from './successHandler';
 import storePersist from '@/redux/storePersist';
 
-function findKeyByPrefix(object, prefix) {
-  for (var property in object) {
-    if (object.hasOwnProperty(property) && property.toString().startsWith(prefix)) {
-      return property;
-    }
-  }
-}
-
 function includeToken() {
   axios.defaults.baseURL = API_BASE_URL;
 
@@ -99,10 +91,10 @@ const request = {
     }
   },
 
-  delete: async ({ entity, id }) => {
+  delete: async ({ entity, id, jsonData }) => {
     try {
       includeToken();
-      const response = await axios.delete(entity + '/delete/' + id);
+      const response = await axios.delete(entity + '/delete/' + id, { data: jsonData });
       successHandler(response, {
         notifyOnSuccess: true,
         notifyOnFailed: true,
@@ -209,6 +201,36 @@ const request = {
       const response = await axios.get(entity);
       return response.data;
     } catch (error) {
+      return errorHandler(error);
+    }
+  },
+  download: async ({ path, apiPath, filename, silentErrors = false }) => {
+    try {
+      includeToken();
+      const endpointUrl = apiPath
+        ? `${API_BASE_URL}${String(apiPath).replace(/^\/+/, '')}`
+        : `${API_BASE_URL.replace(/api\/$/, '')}${String(path || '').replace(/^\/+/, '')}`;
+      const response = await axios.get(endpointUrl, {
+        responseType: 'blob',
+      });
+      const blobUrl = URL.createObjectURL(response.data);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      return { success: true };
+    } catch (error) {
+      if (silentErrors) {
+        return {
+          success: false,
+          result: null,
+          status: error?.response?.status,
+          message: 'Die Sicherungsdatei konnte nicht heruntergeladen werden.',
+        };
+      }
       return errorHandler(error);
     }
   },

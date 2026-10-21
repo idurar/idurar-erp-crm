@@ -9,6 +9,10 @@ const remove = require('./remove');
 const paginatedList = require('./paginatedList');
 const read = require('./read');
 const remind = require('./remind');
+const cancel = require('./cancel');
+const issue = require('./issue');
+const creditNote = require('./creditNote');
+const recurrence = require('./recurrence');
 
 methods.mail = sendMail;
 methods.create = create;
@@ -18,5 +22,9 @@ methods.summary = summary;
 methods.list = paginatedList;
 methods.read = read;
 methods.remind = remind;
+methods.cancel = cancel;
+methods.issue = issue;
+methods.creditNote = creditNote;
+methods.recurrence = recurrence;
 
 module.exports = methods;

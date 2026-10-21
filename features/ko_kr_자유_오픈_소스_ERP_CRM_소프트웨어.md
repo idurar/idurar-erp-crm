@@ -1,12 +1,12 @@
-# IDURAR 오픈 소스 ERP & CRM 소프트웨어
+# WIEpilot 오픈 소스 ERP & CRM 소프트웨어
 
-GitHub : [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-데모 : [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-웹사이트 : [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub : [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+데모 : [https://www.wiedesign.at/](https://www.wiedesign.at/)
+웹사이트 : [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## 소프트웨어 스택
 
-IDURAR 무료 오픈 소스 erp & crm 앱, "mern-stack"을 기반으로 함: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot 무료 오픈 소스 erp & crm 앱, "mern-stack"을 기반으로 함: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## 사용자 관리:
 

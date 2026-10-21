@@ -1,5 +1,4 @@
 import { useProfileContext } from '@/context/profileContext';
-import { generate as uniqueId } from 'shortid';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
@@ -26,7 +25,7 @@ const UpdateAdmin = ({ config }) => {
 
   useEffect(() => {
     form.setFieldsValue(currentAdmin);
-  }, [currentAdmin]);
+  }, [currentAdmin, form]);
 
   const handleSubmit = () => {
     form.submit();
@@ -49,13 +48,13 @@ const UpdateAdmin = ({ config }) => {
         extra={[
           <Button
             onClick={() => updatePanel.close()}
-            key={`${uniqueId()}`}
+            key="close"
             icon={<CloseCircleOutlined />}
           >
             {translate('Close')}
           </Button>,
           <Button
-            key={`${uniqueId()}`}
+            key="save"
             onClick={() => {
               handleSubmit();
               updatePanel.close();

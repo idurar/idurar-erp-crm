@@ -26,8 +26,10 @@ export default function RecordPayment({ config }) {
   const [maxAmount, setMaxAmount] = useState(0);
   useEffect(() => {
     if (currentInvoice) {
-      const { credit, total, discount } = currentInvoice;
-      setMaxAmount(calculate.sub(calculate.sub(total, discount), credit));
+      const { credit, total, discount, dunningFees = 0 } = currentInvoice;
+      setMaxAmount(
+        calculate.sub(calculate.sub(calculate.add(total, dunningFees), discount), credit)
+      );
     }
   }, [currentInvoice]);
   useEffect(() => {
@@ -37,7 +39,7 @@ export default function RecordPayment({ config }) {
       dispatch(erp.list({ entity }));
       navigate(`/${entity}/`);
     }
-  }, [isSuccess]);
+  }, [dispatch, entity, form, isSuccess, navigate]);
 
   const onSubmit = (fieldsValue) => {
     if (currentInvoice) {

@@ -1,12 +1,12 @@
-# IDURAR Λογισμικό ERP & CRM ανοιχτού κώδικα
+# WIEpilot Λογισμικό ERP & CRM ανοιχτού κώδικα
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Επίδειξη: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Ιστοσελίδα: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Επίδειξη: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+Ιστοσελίδα: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## Στοίβα Λογισμικού
 
-Το IDURAR είναι μια δωρεάν εφαρμογή ERP & CRM ανοιχτού κώδικα, βασισμένη στο "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+Το WIEpilot είναι μια δωρεάν εφαρμογή ERP & CRM ανοιχτού κώδικα, βασισμένη στο "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Διαχείριση Χρηστών:
 

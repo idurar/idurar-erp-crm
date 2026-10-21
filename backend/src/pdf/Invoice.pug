@@ -22,7 +22,7 @@ html
       table.details-table
         tr
           td.recipient
-            span.label Rechnungsempfänger
+            span.label #{model.documentType === 'credit_note' ? 'Gutschriftsempfänger' : 'Rechnungsempfänger'}
             p.recipient-name #{model.client.name}
             if model.client.address
               p #{model.client.address}
@@ -31,7 +31,7 @@ html
           td
             table.document-data
               tr
-                td Rechnungsnr.:
+                td #{model.documentType === 'credit_note' ? 'Gutschriftnr.:' : 'Rechnungsnr.:'}
                 td #{model.number}/#{model.year || ''}
               tr
                 td Datum:
@@ -44,11 +44,14 @@ html
                 td #{moment(model.expiredDate).format(dateFormat)}
 
       .title-row
-        h1 Rechnung #{model.number}/#{model.year || ''}
+        h1 #{model.documentType === 'credit_note' ? 'Gutschrift' : 'Rechnung'} #{model.number}/#{model.year || ''}
 
       .intro
         p Sehr geehrte Damen und Herren,
-        p Vielen Dank für Ihren Auftrag. Wir erlauben uns, folgende Leistungen in Rechnung zu stellen:
+        if model.documentType === 'credit_note'
+          p Gutschrift zur ursprünglichen Rechnung. Grund: #{model.creditReason}
+        else
+          p Vielen Dank für Ihren Auftrag. Wir erlauben uns, folgende Leistungen in Rechnung zu stellen:
 
       table.items
         colgroup
@@ -104,13 +107,22 @@ html
               tr.grand
                 td.sum-label Gesamtbetrag
                 td #{moneyFormatter({ amount: model.total })}
+              if model.discount
+                tr
+                  td.sum-label Rabatt
+                  td - #{moneyFormatter({ amount: model.discount })}
+              if model.dunningFees
+                tr
+                  td.sum-label Mahngebühren
+                  td + #{moneyFormatter({ amount: model.dunningFees })}
               if model.credit
                 tr
                   td.sum-label Bereits bezahlt
                   td - #{moneyFormatter({ amount: model.credit })}
+              if model.credit || model.discount || model.dunningFees
                 tr.grand
                   td.sum-label Offener Betrag
-                  td #{moneyFormatter({ amount: model.total - model.credit })}
+                  td #{moneyFormatter({ amount: model.total + (model.dunningFees || 0) - (model.discount || 0) - model.credit })}
 
       .info-box
         h2 Zahlung & Bankverbindung

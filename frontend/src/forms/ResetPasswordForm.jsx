@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Input } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
 

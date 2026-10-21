@@ -3,7 +3,7 @@ import { ErpLayout } from '@/layout';
 import PageLoader from '@/components/PageLoader';
 import { erp } from '@/redux/erp/actions';
 import NotFound from '@/components/NotFound';
-import { useLayoutEffect, useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Payment from './components/Payment';
@@ -15,7 +15,7 @@ export default function UpdatePaymentModule({ config }) {
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));
-  }, [id]);
+  }, [config.entity, dispatch, id]);
 
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 
@@ -23,7 +23,7 @@ export default function UpdatePaymentModule({ config }) {
     if (currentResult) {
       dispatch(erp.currentAction({ actionType: 'update', id, data: currentResult }));
     }
-  }, [currentResult]);
+  }, [currentResult, dispatch, id]);
 
   if (isLoading) {
     return (

@@ -14,12 +14,19 @@ function AdavancedCrudContextProvider({ children }) {
 
 function useAdavancedCrudContext() {
   const context = useContext(AdavancedCrudContext);
+  const state = context?.[0];
+  const dispatch = context?.[1];
+  const adavancedCrudContextAction = useMemo(
+    () => (dispatch ? contextActions(dispatch) : null),
+    [dispatch]
+  );
+  const adavancedCrudContextSelector = useMemo(
+    () => (state ? contextSelectors(state) : null),
+    [state]
+  );
   if (context === undefined) {
     throw new Error('useAdavancedCrudContext must be used within a AdavancedCrudContextProvider');
   }
-  const [state, dispatch] = context;
-  const adavancedCrudContextAction = contextActions(dispatch);
-  const adavancedCrudContextSelector = contextSelectors(state);
   return { state, adavancedCrudContextAction, adavancedCrudContextSelector };
 }
 

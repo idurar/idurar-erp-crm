@@ -13,28 +13,34 @@ async function setupApp() {
     const AdminPassword = require('../models/coreModels/AdminPassword');
     const newAdminPassword = new AdminPassword();
 
-    const salt = uniqueId();
-
-    const passwordHash = newAdminPassword.generateHash(salt, 'admin123');
-
     const demoAdmin = {
-      email: 'admin@admin.com',
-      name: 'IDURAR',
-      surname: 'Admin',
+      email: (process.env.SETUP_ADMIN_EMAIL || 'admin@admin.com').trim().toLowerCase(),
+      name: process.env.SETUP_ADMIN_NAME || 'Administrator',
+      surname: process.env.SETUP_ADMIN_SURNAME || 'Admin',
       enabled: true,
       role: 'owner',
     };
-    const result = await new Admin(demoAdmin).save();
+    let result = await Admin.findOne({ email: demoAdmin.email, removed: false });
+    if (!result) {
+      const setupPassword = process.env.SETUP_ADMIN_PASSWORD;
+      if (!setupPassword || setupPassword.length < 12) {
+        throw new Error(
+          'For the first setup, SETUP_ADMIN_PASSWORD must contain at least 12 characters.'
+        );
+      }
+      const salt = uniqueId();
+      const passwordHash = newAdminPassword.generateHash(salt, setupPassword);
+      result = await new Admin(demoAdmin).save();
+      const AdminPasswordData = {
+        password: passwordHash,
+        emailVerified: true,
+        salt: salt,
+        user: result._id,
+      };
+      await new AdminPassword(AdminPasswordData).save();
+    }
 
-    const AdminPasswordData = {
-      password: passwordHash,
-      emailVerified: true,
-      salt: salt,
-      user: result._id,
-    };
-    await new AdminPassword(AdminPasswordData).save();
-
-    console.log('👍 Admin created : Done!');
+    console.log('👍 Admin checked : Done!');
 
     const Setting = require('../models/coreModels/Setting');
 
@@ -47,21 +53,43 @@ async function setupApp() {
       settingFiles.push(...file);
     }
 
-    await Setting.insertMany(settingFiles);
+    await Setting.bulkWrite(
+      settingFiles.map((setting) => ({
+        updateOne: {
+          filter: { settingKey: setting.settingKey, removed: false },
+          update: { $setOnInsert: setting },
+          upsert: true,
+        },
+      }))
+    );
 
     console.log('👍 Settings created : Done!');
+
+    const { importLicenseHashes } = require('../services/licenseService');
+    const initialLicenseHashes = require('./initialLicenseHashes');
+    await importLicenseHashes(initialLicenseHashes);
+    console.log('👍 License catalog checked : Done!');
 
     const PaymentMode = require('../models/appModels/PaymentMode');
     const Taxes = require('../models/appModels/Taxes');
 
-    await Taxes.insertMany([
+    const defaultTaxes = [
       { taxName: '0%', taxValue: 0, isDefault: false },
       { taxName: '10%', taxValue: 10, isDefault: false },
       { taxName: '20%', taxValue: 20, isDefault: true },
-    ]);
+    ];
+    await Taxes.bulkWrite(
+      defaultTaxes.map((tax) => ({
+        updateOne: {
+          filter: { taxName: tax.taxName, removed: false },
+          update: { $setOnInsert: tax },
+          upsert: true,
+        },
+      }))
+    );
     console.log('👍 Taxes created : Done!');
 
-    await PaymentMode.insertMany([
+    const defaultPaymentModes = [
       { name: 'Barzahlung', description: 'Zahlung in bar', isDefault: false },
       { name: 'Überweisung', description: 'Zahlung per Banküberweisung', isDefault: true },
       {
@@ -76,7 +104,16 @@ async function setupApp() {
         description: 'Offener Rechnungsbetrag abzüglich bereits geleisteter Anzahlungen',
         isDefault: false,
       },
-    ]);
+    ];
+    await PaymentMode.bulkWrite(
+      defaultPaymentModes.map((mode) => ({
+        updateOne: {
+          filter: { name: mode.name, removed: false },
+          update: { $setOnInsert: mode },
+          upsert: true,
+        },
+      }))
+    );
     console.log('👍 PaymentMode created : Done!');
 
     console.log('🥳 Setup completed :Success!');

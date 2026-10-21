@@ -94,7 +94,7 @@ const setup = async (req, res) => {
   return res.status(200).json({
     success: true,
     result: {},
-    message: 'Successfully IDURAR App Setup',
+    message: 'WIEpilot wurde erfolgreich eingerichtet.',
   });
 };
 

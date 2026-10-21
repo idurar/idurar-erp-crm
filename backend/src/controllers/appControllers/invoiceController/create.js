@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const Model = mongoose.model('Invoice');
 
 const { calculate } = require('@/helpers');
-const { increaseBySettingKey } = require('@/middlewares/settings');
+const { calculateInvoice } = require('@/helpers/invoice');
+const { loadSettings } = require('@/middlewares/settings');
 const schema = require('./schemaValidate');
 
 const create = async (req, res) => {
@@ -20,36 +21,66 @@ const create = async (req, res) => {
   }
 
   const { items = [], taxRate = 0, discount = 0 } = value;
+  if (
+    value.recurringActive &&
+    (value.recurring === 'none' ||
+      !value.nextRecurringDate ||
+      new Date(value.nextRecurringDate) <= new Date())
+  ) {
+    return res.status(400).json({
+      success: false,
+      result: null,
+      message: 'Für eine aktive Wiederholung sind Intervall und zukünftige Ausführung erforderlich.',
+    });
+  }
+  if (
+    value.recurringActive &&
+    value.recurringEndDate &&
+    new Date(value.recurringEndDate) < new Date(value.nextRecurringDate)
+  ) {
+    return res.status(400).json({
+      success: false,
+      result: null,
+      message: 'Das Enddatum darf nicht vor der nächsten Ausführung liegen.',
+    });
+  }
 
-  // default
-  let subTotal = 0;
-  let taxTotal = 0;
-  let total = 0;
+  delete value.number;
+  value.year = new Date(value.date).getFullYear();
+  body = { ...value };
+  if (value.recurring !== 'none' && value.nextRecurringDate) {
+    body.recurringAnchorDate = new Date(value.nextRecurringDate);
+  }
 
-  //Calculate the items array with subTotal, total, taxTotal
-  items.map((item) => {
-    const lineAmount = calculate.multiply(item['quantity'], item['price']);
-    let total = calculate.multiply(lineAmount, 1 - (Number(item.discount) || 0) / 100);
-    //sub total
-    subTotal = calculate.add(subTotal, total);
-    //item total
-    item['total'] = total;
-  });
-  taxTotal = calculate.multiply(subTotal, taxRate / 100);
-  total = calculate.add(subTotal, taxTotal);
+  const {
+    items: calculatedItems,
+    subTotal,
+    taxTotal,
+    total,
+  } = calculateInvoice({ items, taxRate });
 
   body['subTotal'] = subTotal;
   body['taxTotal'] = taxTotal;
   body['total'] = total;
-  body['items'] = items;
+  body['items'] = calculatedItems;
+  const settings = await loadSettings();
+  body['currency'] = settings.default_currency_code || 'EUR';
 
   let paymentStatus = calculate.sub(total, discount) === 0 ? 'paid' : 'unpaid';
 
   body['paymentStatus'] = paymentStatus;
+  // A newly saved invoice is always editable. Publishing is a separate,
+  // explicit operation handled by the issue endpoint.
+  body['status'] = 'draft';
   body['createdBy'] = req.admin._id;
 
   // Creating a new document in the collection
-  const result = await new Model(body).save();
+  let result;
+  try {
+    result = await new Model(body).save();
+  } catch (error) {
+    throw error;
+  }
   const fileId = 'invoice-' + result._id + '.pdf';
   const updateResult = await Model.findOneAndUpdate(
     { _id: result._id },
@@ -59,10 +90,6 @@ const create = async (req, res) => {
     }
   ).exec();
   // Returning successfull response
-
-  increaseBySettingKey({
-    settingKey: 'last_invoice_number',
-  });
 
   // Returning successfull response
   return res.status(200).json({

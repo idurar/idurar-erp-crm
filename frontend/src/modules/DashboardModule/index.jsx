@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Row, Col, Card, DatePicker, InputNumber, Segmented, Space, Statistic } from 'antd';
 import dayjs from 'dayjs';
@@ -15,11 +15,20 @@ import RecentTable from './components/RecentTable';
 import SummaryCard from './components/SummaryCard';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
+import './style.css';
 
 import { selectMoneyFormat } from '@/redux/settings/selectors';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+const getStatsData = ({ entity, currency, options = {} }) =>
+  request.summary({
+    entity,
+    options: { currency, ...options },
+  });
 
 export default function DashboardModule() {
+  const navigate = useNavigate();
   const translate = useLanguage();
   const { moneyFormatter } = useMoney();
   const money_format_settings = useSelector(selectMoneyFormat);
@@ -27,24 +36,13 @@ export default function DashboardModule() {
   const [revenueType, setRevenueType] = useState('month');
   const [revenueDate, setRevenueDate] = useState(dayjs());
 
-  const getStatsData = async ({ entity, currency, options = {} }) => {
-    return await request.summary({
-      entity,
-      options: { currency, ...options },
-    });
-  };
-
   const {
     result: invoiceResult,
     isLoading: invoiceLoading,
     onFetch: fetchInvoicesStats,
   } = useOnFetch();
 
-  const {
-    result: revenueResult,
-    isLoading: revenueLoading,
-    onFetch: fetchRevenue,
-  } = useOnFetch();
+  const { result: revenueResult, isLoading: revenueLoading, onFetch: fetchRevenue } = useOnFetch();
 
   const { result: quoteResult, isLoading: quoteLoading, onFetch: fetchQuotesStats } = useOnFetch();
 
@@ -54,9 +52,8 @@ export default function DashboardModule() {
     onFetch: fetchPayemntsStats,
   } = useOnFetch();
 
-  const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
-    request.summary({ entity: 'client' })
-  );
+  const fetchClientSummary = useCallback(() => request.summary({ entity: 'client' }), []);
+  const { result: clientResult, isLoading: clientLoading } = useFetch(fetchClientSummary);
 
   useEffect(() => {
     const currency = money_format_settings.default_currency_code || null;
@@ -66,20 +63,33 @@ export default function DashboardModule() {
       fetchQuotesStats(getStatsData({ entity: 'quote', currency }));
       fetchPayemntsStats(getStatsData({ entity: 'payment', currency }));
     }
-  }, [money_format_settings.default_currency_code, overdueDays]);
+  }, [
+    fetchInvoicesStats,
+    fetchPayemntsStats,
+    fetchQuotesStats,
+    money_format_settings.default_currency_code,
+    overdueDays,
+  ]);
 
   useEffect(() => {
     const currency = money_format_settings.default_currency_code || null;
     if (!currency) return;
-    fetchRevenue(getStatsData({
-      entity: 'payment',
-      currency,
-      options: {
-        type: revenueType,
-        period: revenueDate.format(revenueType === 'month' ? 'YYYY-MM' : 'YYYY'),
-      },
-    }));
-  }, [money_format_settings.default_currency_code, revenueType, revenueDate]);
+    fetchRevenue(
+      getStatsData({
+        entity: 'payment',
+        currency,
+        options: {
+          type: revenueType,
+          period: revenueDate.format(revenueType === 'month' ? 'YYYY-MM' : 'YYYY'),
+        },
+      })
+    );
+  }, [
+    fetchRevenue,
+    money_format_settings.default_currency_code,
+    revenueDate,
+    revenueType,
+  ]);
 
   const dataTableColumns = [
     {
@@ -151,38 +161,55 @@ export default function DashboardModule() {
   if (money_format_settings) {
     return (
       <>
-        <Row gutter={[32, 32]}>
+        <div className="dashboard-summary-grid">
           <SummaryCard
             title={translate('Invoices')}
-            prefix={translate('This month')}
+            prefix={`${translate('This month')} · ${
+              invoiceResult?.change_percentage >= 0 ? '+' : ''
+            }${invoiceResult?.change_percentage || 0}%`}
+            count={invoiceResult?.count || 0}
             isLoading={invoiceLoading}
             data={invoiceResult?.total}
+            onClick={() => navigate('/invoice')}
           />
           <SummaryCard
-            title={translate('Quote')}
+            title="Angebote"
             prefix={translate('This month')}
+            count={quoteResult?.count || 0}
             isLoading={quoteLoading}
             data={quoteResult?.total}
+            onClick={() => navigate('/quote')}
           />
           <SummaryCard
             title={translate('paid')}
             prefix={translate('This month')}
+            count={paymentResult?.count || 0}
             isLoading={paymentLoading}
             data={paymentResult?.total}
+            onClick={() => navigate('/payment')}
           />
           <SummaryCard
             title={translate('Unpaid')}
             prefix={translate('Not Paid')}
             isLoading={invoiceLoading}
             data={invoiceResult?.total_undue}
+            onClick={() => navigate('/invoice')}
           />
           <SummaryCard
-            title={`Fällig seit ${overdueDays} Tagen`}
+            title="In den nächsten 14 Tagen fällig"
+            prefix={`${invoiceResult?.upcoming_due_count || 0} Rechnung(en)`}
+            isLoading={invoiceLoading}
+            data={invoiceResult?.upcoming_due_total}
+            onClick={() => navigate('/invoice')}
+          />
+          <SummaryCard
+            title={`Seit mehr als ${overdueDays} Tagen überfällig`}
             prefix={`${invoiceResult?.overdue_count || 0} Rechnung(en)`}
             isLoading={invoiceLoading}
             data={invoiceResult?.total_overdue}
+            onClick={() => navigate('/invoice')}
           />
-        </Row>
+        </div>
         <div className="space30"></div>
         <Card
           className="whiteBox shadow"
@@ -193,7 +220,10 @@ export default function DashboardModule() {
               <Segmented
                 value={revenueType}
                 onChange={setRevenueType}
-                options={[{ label: 'Monat', value: 'month' }, { label: 'Jahr', value: 'year' }]}
+                options={[
+                  { label: 'Monat', value: 'month' },
+                  { label: 'Jahr', value: 'year' },
+                ]}
               />
               <DatePicker
                 value={revenueDate}
@@ -208,7 +238,11 @@ export default function DashboardModule() {
           <Row gutter={[24, 16]} align="middle">
             <Col xs={24} md={8}>
               <Statistic
-                title={revenueType === 'month' ? 'Umsatz im ausgewählten Monat' : 'Umsatz im ausgewählten Jahr'}
+                title={
+                  revenueType === 'month'
+                    ? 'Umsatz im ausgewählten Monat'
+                    : 'Umsatz im ausgewählten Jahr'
+                }
                 loading={revenueLoading}
                 value={moneyFormatter({
                   amount: revenueResult?.total || 0,
@@ -217,7 +251,11 @@ export default function DashboardModule() {
               />
             </Col>
             <Col xs={24} md={8}>
-              <Statistic title="Erfasste Zahlungen" value={revenueResult?.count || 0} loading={revenueLoading} />
+              <Statistic
+                title="Erfasste Zahlungen"
+                value={revenueResult?.count || 0}
+                loading={revenueLoading}
+              />
             </Col>
             <Col xs={24} md={8}>
               <Space direction="vertical" size={2}>
@@ -245,8 +283,11 @@ export default function DashboardModule() {
           <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
             <CustomerPreviewCard
               isLoading={clientLoading}
+              totalCustomer={clientResult?.total}
               activeCustomer={clientResult?.active}
-              newCustomer={clientResult?.new}
+              activeCustomerCount={clientResult?.activeCount}
+              newCustomerCount={clientResult?.newCount}
+              topClients={clientResult?.topClients || []}
             />
           </Col>
         </Row>

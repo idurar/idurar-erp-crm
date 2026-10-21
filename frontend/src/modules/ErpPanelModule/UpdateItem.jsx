@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Form, Divider, Select } from 'antd';
+import { Form, Divider } from 'antd';
 import dayjs from 'dayjs';
-import { Button, Tag } from 'antd';
+import { Button } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,14 +9,12 @@ import useLanguage from '@/locale/useLanguage';
 import { erp } from '@/redux/erp/actions';
 
 import calculate from '@/utils/calculate';
-import { generate as uniqueId } from 'shortid';
 import { selectUpdatedItem } from '@/redux/erp/selectors';
 import Loading from '@/components/Loading';
 
 import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { settingsAction } from '@/redux/settings/actions';
 // import { StatusTag } from '@/components/Tag';
 
 function SaveForm({ form, translate }) {
@@ -71,7 +69,7 @@ export default function UpdateItem({ config, UpdateForm }) {
         if (item) {
           if (item.quantity && item.price) {
             let total = calculate.multiply(
-              calculate.multiply(item['quantity'], item['price']),
+              calculate.multiply(item['quantity'], calculate.round(item['price'])),
               1 - (Number(item.discount) || 0) / 100
             );
             //sub total
@@ -95,12 +93,26 @@ export default function UpdateItem({ config, UpdateForm }) {
           'YYYY-MM-DDTHH:mm:ss.SSSZ'
         );
       }
+      if (fieldsValue.serviceDate) {
+        dataToUpdate.serviceDate = dayjs(fieldsValue.serviceDate).format(
+          'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        );
+      }
+      if (fieldsValue.nextRecurringDate) {
+        dataToUpdate.nextRecurringDate = dayjs(fieldsValue.nextRecurringDate).toISOString();
+      }
+      if (fieldsValue.recurringEndDate) {
+        dataToUpdate.recurringEndDate = dayjs(fieldsValue.recurringEndDate).toISOString();
+      }
       if (fieldsValue.items) {
         let newList = [];
         fieldsValue.items.map((item) => {
           const { quantity, price, itemName, description, article, unit, discount } = item;
-          const total = calculate.multiply(calculate.multiply(quantity, price), 1 - (Number(discount) || 0) / 100);
-          newList.push({ total, quantity, price, itemName, description, article, unit, discount });
+          const total = calculate.multiply(
+            calculate.multiply(quantity, calculate.round(price)),
+            1 - (Number(discount) || 0) / 100
+          );
+          newList.push({ total, quantity, price: calculate.round(price), itemName, description, article, unit, discount });
         });
         dataToUpdate.items = newList;
       }
@@ -115,7 +127,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       dispatch(erp.resetAction({ actionType: 'update' }));
       navigate(`/${entity.toLowerCase()}/read/${id}`);
     }
-  }, [isSuccess]);
+  }, [dispatch, entity, form, id, isSuccess, navigate]);
 
   useEffect(() => {
     if (current) {
@@ -127,6 +139,15 @@ export default function UpdateItem({ config, UpdateForm }) {
       if (formData.expiredDate) {
         formData.expiredDate = dayjs(formData.expiredDate);
       }
+      if (formData.serviceDate) {
+        formData.serviceDate = dayjs(formData.serviceDate);
+      }
+      if (formData.nextRecurringDate) {
+        formData.nextRecurringDate = dayjs(formData.nextRecurringDate);
+      }
+      if (formData.recurringEndDate) {
+        formData.recurringEndDate = dayjs(formData.recurringEndDate);
+      }
       if (!formData.taxRate) {
         formData.taxRate = 0;
       }
@@ -137,7 +158,7 @@ export default function UpdateItem({ config, UpdateForm }) {
       form.setFieldsValue(formData);
       setSubTotal(subTotal);
     }
-  }, [current]);
+  }, [current, form]);
 
   return (
     <Form form={form} layout="vertical" onFinish={onSubmit} onValuesChange={handelValuesChange}>
@@ -157,7 +178,7 @@ export default function UpdateItem({ config, UpdateForm }) {
         ]}
         extra={[
           <Button
-            key={`${uniqueId()}`}
+            key="cancel"
             onClick={() => {
               navigate(`/${entity.toLowerCase()}`);
             }}
@@ -165,19 +186,7 @@ export default function UpdateItem({ config, UpdateForm }) {
           >
             {translate('Cancel')}
           </Button>,
-          entity === 'invoice' && (
-            <Form.Item key="invoice-status" name="status" style={{ margin: 0, minWidth: 150 }}>
-              <Select
-                aria-label="Rechnungsstatus"
-                options={[
-                  { value: 'draft', label: translate('Draft') },
-                  { value: 'pending', label: translate('Pending') },
-                  { value: 'sent', label: translate('Sent') },
-                ]}
-              />
-            </Form.Item>
-          ),
-          <SaveForm translate={translate} form={form} key={`${uniqueId()}`} />,
+          <SaveForm translate={translate} form={form} key="save" />,
         ]}
         style={{
           padding: '20px 0px',

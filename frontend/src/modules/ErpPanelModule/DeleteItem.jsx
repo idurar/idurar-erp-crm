@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Modal } from 'antd';
+import { Input, Modal } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
@@ -20,6 +20,7 @@ export default function Delete({ config }) {
   const { deleteModal } = state;
   const { modal } = erpContextAction;
   const [displayItem, setDisplayItem] = useState('');
+  const [reason, setReason] = useState('');
 
   useEffect(() => {
     if (isSuccess) {
@@ -32,12 +33,12 @@ export default function Delete({ config }) {
 
       setDisplayItem(labels);
     }
-  }, [isSuccess, current]);
+  }, [current, deleteModalLabels, dispatch, entity, isSuccess, modal]);
 
   const handleOk = () => {
+    if (entity === 'payment' && reason.trim().length < 3) return;
     const id = current._id;
-    dispatch(erp.delete({ entity, id }));
-    modal.close();
+    dispatch(erp.delete({ entity, id, jsonData: entity === 'payment' ? { reason } : undefined }));
   };
   const handleCancel = () => {
     if (!isLoading) modal.close();
@@ -54,6 +55,15 @@ export default function Delete({ config }) {
         {deleteMessage}
         {displayItem}
       </p>
+      {entity === 'payment' && (
+        <Input.TextArea
+          value={reason}
+          onChange={(event) => setReason(event.target.value)}
+          placeholder="Stornogrund (mindestens 3 Zeichen)"
+          status={reason.length > 0 && reason.trim().length < 3 ? 'error' : undefined}
+          autoSize={{ minRows: 2, maxRows: 4 }}
+        />
+      )}
     </Modal>
   );
 }

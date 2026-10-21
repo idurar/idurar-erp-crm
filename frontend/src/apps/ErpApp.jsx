@@ -1,11 +1,7 @@
 import { useLayoutEffect } from 'react';
-import { useEffect } from 'react';
-import { selectAppSettings } from '@/redux/settings/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Layout } from 'antd';
-
-import { useAppContext } from '@/context/appContext';
 
 import Navigation from '@/apps/Navigation/NavigationContainer';
 
@@ -20,8 +16,6 @@ import AppRouter from '@/router/AppRouter';
 
 import useResponsive from '@/hooks/useResponsive';
 
-import storePersist from '@/redux/storePersist';
-
 export default function ErpCrmApp() {
   const { Content } = Layout;
 
@@ -35,7 +29,7 @@ export default function ErpCrmApp() {
 
   useLayoutEffect(() => {
     dispatch(settingsAction.list({ entity: 'setting' }));
-  }, []);
+  }, [dispatch]);
 
   // const appSettings = useSelector(selectAppSettings);
 

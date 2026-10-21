@@ -1,12 +1,12 @@
-# IDURAR Phần mềm ERP & CRM mã nguồn mở
+# WIEpilot Phần mềm ERP & CRM mã nguồn mở
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Trang web: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Demo: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+Trang web: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## Cấu trúc phần mềm
 
-IDURAR là ứng dụng ERP & CRM mã nguồn mở miễn phí, dựa trên "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot là ứng dụng ERP & CRM mã nguồn mở miễn phí, dựa trên "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Quản lý người dùng:
 

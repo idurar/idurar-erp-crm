@@ -13,6 +13,7 @@ const calculate = {
   divide: (firstValue, secondValue) => {
     return currency(firstValue).divide(secondValue).value;
   },
+  round: (value) => currency(value).value,
 };
 
 export default calculate;

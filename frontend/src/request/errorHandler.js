@@ -9,13 +9,13 @@ const errorHandler = (error) => {
     });
     // Code to execute when there is internet connection
     notification.error({
-      message: 'No internet connection',
-      description: 'Cannot connect to the Internet, Check your internet network',
+      message: 'Keine Internetverbindung',
+      description: 'Bitte prüfen Sie Ihre Netzwerkverbindung.',
     });
     return {
       success: false,
       result: null,
-      message: 'Cannot connect to the server, Check your internet network',
+      message: 'Der Server ist nicht erreichbar. Bitte prüfen Sie Ihre Netzwerkverbindung.',
     };
   }
 
@@ -34,7 +34,7 @@ const errorHandler = (error) => {
     return {
       success: false,
       result: null,
-      message: 'Cannot connect to the server, Contact your Account administrator',
+      message: 'Der Server ist nicht erreichbar. Bitte wenden Sie sich an den Administrator.',
     };
   }
 
@@ -53,13 +53,13 @@ const errorHandler = (error) => {
     const message = response.data && response.data.message;
 
     const errorText = message || codeMessage[response.status];
-    const { status, error } = response;
+    const { status } = response;
     notification.config({
       duration: 20,
       maxCount: 2,
     });
     notification.error({
-      message: `Request error ${status}`,
+      message: `Fehler ${status}`,
       description: errorText,
     });
 
@@ -77,24 +77,24 @@ const errorHandler = (error) => {
     if (navigator.onLine) {
       // Code to execute when there is internet connection
       notification.error({
-        message: 'Problem connecting to server',
-        description: 'Cannot connect to the server, Try again later',
+        message: 'Verbindungsfehler',
+        description: 'Der Server ist nicht erreichbar. Bitte versuchen Sie es später erneut.',
       });
       return {
         success: false,
         result: null,
-        message: 'Cannot connect to the server, Contact your Account administrator',
+        message: 'Der Server ist nicht erreichbar. Bitte wenden Sie sich an den Administrator.',
       };
     } else {
       // Code to execute when there is no internet connection
       notification.error({
-        message: 'No internet connection',
-        description: 'Cannot connect to the Internet, Check your internet network',
+        message: 'Keine Internetverbindung',
+        description: 'Bitte prüfen Sie Ihre Netzwerkverbindung.',
       });
       return {
         success: false,
         result: null,
-        message: 'Cannot connect to the server, Check your internet network',
+        message: 'Der Server ist nicht erreichbar. Bitte prüfen Sie Ihre Netzwerkverbindung.',
       };
     }
   }

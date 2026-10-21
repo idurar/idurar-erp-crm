@@ -12,7 +12,7 @@ const useMoney = () => {
     ? money_format_settings
     : storePersist.get('settings')?.money_format_settings;
 
-  function currencyFormat({ amount, currency_code = money_format_state?.currency_code }) {
+  function currencyFormat({ amount }) {
     return currency(amount).dollars() > 0 || !money_format_state?.zero_format
       ? currency(amount, {
           separator: money_format_state?.thousand_sep,

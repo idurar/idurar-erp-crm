@@ -16,7 +16,7 @@ export default function ReadQuoteModule({ config }) {
 
   useLayoutEffect(() => {
     dispatch(erp.read({ entity: config.entity, id }));
-  }, [id]);
+  }, [config.entity, dispatch, id]);
 
   const { result: currentResult, isSuccess, isLoading = true } = useSelector(selectReadItem);
 

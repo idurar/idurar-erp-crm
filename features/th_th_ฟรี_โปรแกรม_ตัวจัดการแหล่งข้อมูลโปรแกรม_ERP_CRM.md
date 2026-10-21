@@ -1,12 +1,12 @@
-# ซอฟต์แวร์ ERP & CRM โอเพ่นซอร์ส IDURAR
+# ซอฟต์แวร์ ERP & CRM โอเพ่นซอร์ส WIEpilot
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-เว็บไซต์: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Demo: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+เว็บไซต์: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## สแต็กซอฟต์แวร์
 
-IDURAR เป็นแอปฟรีเปิดตัว ERP & CRM ซึ่งอ้างอิงจาก "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot เป็นแอปฟรีเปิดตัว ERP & CRM ซึ่งอ้างอิงจาก "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## การจัดการผู้ใช้
 

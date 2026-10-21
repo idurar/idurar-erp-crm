@@ -18,7 +18,7 @@ exports.passwordVerfication = ({
             <h2 data-id="react-email-heading">${title}</h2>
             <hr data-id="react-email-hr" style="width:100%;border:none;border-top:1px solid #eaeaea" />
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">Hello ${name},</p>
-            <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">We have received a request to reset the password for your account on IDURAR. To proceed with the password reset, please click on the link provided below:</p>
+            <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0">We have received a request to reset the password for your account on WIEpilot. To proceed with the password reset, please click on the link provided below:</p>
             <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:16px 0"><a href="${link}">${link}</a></p>
             
            

@@ -1,12 +1,12 @@
-# IDURAR ओपन-सोर्स ईआरपी और सीआरएम सॉफ्टवेयर
+# WIEpilot ओपन-सोर्स ईआरपी और सीआरएम सॉफ्टवेयर
 
-गिटहब: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-डेमो: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-वेबसाइट: [https://www.idurarapp.com](https://www.idurarapp.com)
+गिटहब: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+डेमो: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+वेबसाइट: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## सॉफ्टवेयर स्टैक
 
-IDURAR मुफ्त ओपन-सोर्स ईआरपी और सीआरएम ऐप, "mern-stack" पर आधारित है: नोड.जेएस रिएक्ट.जेएस रीडक्स एक्सप्रेस.जेएस एमओएनजीबी एंटडिजाइन (एंटडी)
+WIEpilot मुफ्त ओपन-सोर्स ईआरपी और सीआरएम ऐप, "mern-stack" पर आधारित है: नोड.जेएस रिएक्ट.जेएस रीडक्स एक्सप्रेस.जेएस एमओएनजीबी एंटडिजाइन (एंटडी)
 
 ## उपयोगकर्ता प्रबंधन:
 

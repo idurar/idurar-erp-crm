@@ -14,12 +14,13 @@ function ErpContextProvider({ children }) {
 
 function useErpContext() {
   const context = useContext(ErpContext);
+  const state = context?.[0];
+  const dispatch = context?.[1];
+  const erpContextAction = useMemo(() => (dispatch ? contextActions(dispatch) : null), [dispatch]);
+  const erpContextSelector = useMemo(() => (state ? contextSelectors(state) : null), [state]);
   if (context === undefined) {
     throw new Error('useErpContext must be used within a ErpContextProvider');
   }
-  const [state, dispatch] = context;
-  const erpContextAction = contextActions(dispatch);
-  const erpContextSelector = contextSelectors(state);
   return { state, erpContextAction, erpContextSelector };
 }
 

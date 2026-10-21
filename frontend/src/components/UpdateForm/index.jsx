@@ -45,6 +45,14 @@ export default function UpdateForm({ config, formElements, withUpload = false })
   useEffect(() => {
     if (current) {
       let newValues = { ...current };
+      Object.entries(config.fields || {}).forEach(([fieldName, fieldConfig]) => {
+        if (fieldConfig.type === 'date' && newValues[fieldName]) {
+          newValues[fieldName] = dayjs(newValues[fieldName]);
+        }
+        if (fieldConfig.type === 'select' && newValues[fieldName]?._id) {
+          newValues[fieldName] = newValues[fieldName]._id;
+        }
+      });
       if (newValues.birthday) {
         newValues = {
           ...newValues,
@@ -78,7 +86,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       form.resetFields();
       form.setFieldsValue(newValues);
     }
-  }, [current]);
+  }, [config.fields, current, form]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -89,7 +97,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       dispatch(crud.resetAction({ actionType: 'update' }));
       dispatch(crud.list({ entity }));
     }
-  }, [isSuccess]);
+  }, [collapsedBox, dispatch, entity, form, isSuccess, panel, readBox]);
 
   const { isEditBoxOpen } = state;
 

@@ -1,6 +1,4 @@
 import { Col, Divider, Row, Typography } from 'antd';
-import { useSelector } from 'react-redux';
-
 const { Title, Text } = Typography;
 
 export default function SetingsSection({ title, description, children }) {

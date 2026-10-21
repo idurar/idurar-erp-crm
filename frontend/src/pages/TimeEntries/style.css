@@ -1,0 +1,235 @@
+.time-page {
+  width: 100%;
+}
+
+.time-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.time-page-header h2 {
+  margin: 3px 0 2px !important;
+}
+
+.time-eyebrow {
+  color: #12559b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.time-period-picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  padding: 0 8px 0 14px;
+  border: 1px solid #e1e7ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #12559b;
+}
+
+.time-metrics {
+  margin-bottom: 16px;
+}
+
+.time-metric-card,
+.time-overview-card,
+.time-personal-card {
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(6, 38, 83, 0.06);
+}
+
+.time-metric-card {
+  height: 100%;
+}
+
+.time-metric-card .ant-statistic-content-prefix {
+  margin-right: 10px;
+  color: #3287ce;
+  font-size: 20px;
+}
+
+.time-metric-card .ant-progress {
+  margin-top: 12px;
+}
+
+.time-balance-card.is-negative .ant-statistic-content {
+  color: #c8424c;
+}
+
+.time-balance-card.is-positive .ant-statistic-content {
+  color: #12559b;
+}
+
+.time-overview-card {
+  margin-bottom: 16px;
+}
+
+.time-overview-card .ant-card-head {
+  border-bottom-color: #e1e7ef;
+}
+
+.time-overview-card .ant-card-body {
+  padding: 0;
+}
+
+.time-overview-card .ant-table-thead > tr > th {
+  background: #f6f8fb;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.time-employee-name {
+  font-weight: 600;
+}
+
+.time-balance-tag {
+  min-width: 86px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-align: center;
+}
+
+.time-personal-card {
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #e8f3fc 0%, #fff 75%);
+}
+
+.time-personal-card h4 {
+  margin: 3px 0 0 !important;
+}
+
+.time-entry-section .whiteBox {
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(6, 38, 83, 0.06);
+}
+
+.time-entry-section .ant-page-header-heading {
+  align-items: center;
+}
+
+.time-entry-section .ant-page-header-heading-title {
+  font-size: 18px;
+}
+
+.time-capture-form {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.time-capture-form .ant-form-item-label > label {
+  color: #1b2b42;
+  font-weight: 600;
+}
+
+.time-clock-panel {
+  margin-bottom: 22px;
+  padding: 18px;
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  background: #f6f8fb;
+}
+
+.time-clock-heading {
+  display: block;
+  margin-bottom: 12px;
+  color: #062653;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.time-clock-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.time-total-box {
+  display: flex;
+  min-height: 76px;
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 9px;
+  background: #062653;
+  color: #fff;
+}
+
+.time-total-box span {
+  color: #87b7de;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.time-total-box strong {
+  margin-top: 2px;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.time-break-field { margin-bottom: 12px; }
+
+.time-calculation-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.time-calculation-summary div {
+  padding: 10px;
+  border: 1px solid #e1e7ef;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.time-calculation-summary span,
+.time-calculation-summary strong {
+  display: block;
+}
+
+.time-calculation-summary span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.time-calculation-summary strong {
+  margin-top: 2px;
+  color: #1b2b42;
+  font-size: 14px;
+}
+
+.time-calculation-summary div:last-child strong {
+  color: #12559b;
+}
+
+@media (max-width: 640px) {
+  .time-page-header {
+    flex-direction: column;
+  }
+
+  .time-period-picker {
+    width: 100%;
+  }
+
+  .time-period-picker .ant-picker {
+    flex: 1;
+  }
+
+  .time-clock-panel { padding: 14px; }
+
+  .time-clock-fields { grid-template-columns: 1fr; gap: 0; }
+
+  .time-calculation-summary { grid-template-columns: 1fr; }
+}

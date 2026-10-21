@@ -2,10 +2,9 @@ import dayjs from 'dayjs';
 import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from '@/utils/countryList';
-import { generate as uniqueId } from 'shortid';
 import color from '@/utils/color';
 
-export const dataForRead = ({ fields, translate }) => {
+export const dataForRead = ({ fields }) => {
   let columns = [];
 
   Object.keys(fields).forEach((key) => {
@@ -50,7 +49,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          const date = dayjs(record[key]).format(dateFormat);
+          const date = record[key] ? dayjs(record[key]).format(dateFormat) : '–';
           return (
             <Tag bordered={false} color={field.color}>
               {date}
@@ -86,7 +85,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
       color: {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
-        render: (text, record) => {
+        render: (text) => {
           return (
             <Tag bordered={false} color={text}>
               {color.find((x) => x.value === text)?.label}
@@ -143,7 +142,13 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
                 {record[key] && record[key]}
               </Tag>
             );
-          } else return record[key] && record[key];
+          } else {
+            const value = record[key];
+            if (value && typeof value === 'object') {
+              return [value.name, value.surname].filter(Boolean).join(' ') || value.email || value._id;
+            }
+            return value;
+          }
         },
       },
       selectWithTranslation: {
@@ -166,7 +171,7 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
         dataIndex: keyIndex,
         render: (_, record) => {
           return record[key].map((x) => (
-            <Tag bordered={false} key={`${uniqueId()}`} color={field.colors[x]}>
+            <Tag bordered={false} key={x} color={field.colors[x]}>
               {x}
             </Tag>
           ));
@@ -203,26 +208,4 @@ export function dataForTable({ fields, translate, moneyFormatter, dateFormat }) 
   });
 
   return columns;
-}
-
-function getRandomColor() {
-  const colors = [
-    'magenta',
-    'red',
-    'volcano',
-    'orange',
-    'gold',
-    'lime',
-    'green',
-    'cyan',
-    'blue',
-    'geekblue',
-    'purple',
-  ];
-
-  // Generate a random index between 0 and the length of the colors array
-  const randomIndex = Math.floor(Math.random() * colors.length);
-
-  // Return the color at the randomly generated index
-  return colors[randomIndex];
 }

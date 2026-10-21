@@ -1,14 +1,16 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default ({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
+  const env = loadEnv(mode, currentDirectory);
 
   const proxy_url =
-    process.env.VITE_DEV_REMOTE === 'remote'
-      ? process.env.VITE_BACKEND_SERVER
+    env.VITE_DEV_REMOTE === 'remote'
+      ? env.VITE_BACKEND_SERVER
       : 'http://localhost:8888/';
 
   const config = {
@@ -16,7 +18,7 @@ export default ({ mode }) => {
     resolve: {
       base: '/',
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '@': path.resolve(currentDirectory, 'src'),
       },
     },
     server: {

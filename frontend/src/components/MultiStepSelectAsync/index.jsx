@@ -57,7 +57,7 @@ const MultiStepSelectAsync = ({
       }
     }
     fetchData();
-  }, [firstSelectedOption]);
+  }, [entityName, firstSelectIdKey, firstSelectedOption, subEntityName]);
 
   return (
     <Space direction="vertical" style={style}>

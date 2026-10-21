@@ -17,12 +17,12 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
         id: user._id,
       },
       process.env.JWT_SECRET,
-      { expiresIn: req.body.remember ? 365 * 24 + 'h' : '24h' }
+      { expiresIn: req.body.remember ? '30d' : '24h' }
     );
 
     await UserPasswordModel.findOneAndUpdate(
       { user: user._id },
-      { $push: { loggedSessions: token } },
+      { $push: { loggedSessions: { $each: [token], $slice: -10 } } },
       {
         new: true,
       }
@@ -47,7 +47,7 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
         email: user.email,
         photo: user.photo,
         token: token,
-        maxAge: req.body.remember ? 365 : null,
+        maxAge: req.body.remember ? 30 : null,
       },
       message: 'Successfully login user',
     });

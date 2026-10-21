@@ -3,18 +3,18 @@ import { Col, Progress, Spin } from 'antd';
 import useLanguage from '@/locale/useLanguage';
 
 const colours = {
-  draft: '#19231A',
-  sent: '#3E885B',
-  pending: '#205435',
-  unpaid: '#ffa940',
-  overdue: '#ff4d4f',
-  partially: '#DCF763',
-  paid: '#3E885B',
-  declined: '#ff4d4f',
-  accepted: '#3E885B',
-  cyan: '#3E885B',
-  purple: '#205435',
-  expired: '#614700',
+  draft: '#64748B',
+  sent: '#2477BD',
+  pending: '#12559B',
+  unpaid: '#C58A22',
+  overdue: '#C8424C',
+  partially: '#C58A22',
+  paid: '#168568',
+  declined: '#C8424C',
+  accepted: '#168568',
+  cyan: '#3287CE',
+  purple: '#3287CE',
+  expired: '#64748B',
 };
 
 const defaultStatistics = [
@@ -81,8 +81,8 @@ const PreviewState = ({ tag, value }) => {
         percent={value}
         showInfo={false}
         strokeColor={{
-          '0%': '#3E885B',
-          '100%': '#205435',
+          '0%': '#3287CE',
+          '100%': '#12559B',
         }}
       />
     </div>

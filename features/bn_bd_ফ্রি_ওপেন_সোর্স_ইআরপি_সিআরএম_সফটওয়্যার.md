@@ -1,12 +1,12 @@
-# IDURAR ওপেন-সোর্স ইআরপি এবং সিআরএম সফটওয়্যার
+# WIEpilot ওপেন-সোর্স ইআরপি এবং সিআরএম সফটওয়্যার
 
-গিটহাব: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-ডেমো: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-ওয়েবসাইট: [https://www.idurarapp.com](https://www.idurarapp.com)
+গিটহাব: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+ডেমো: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+ওয়েবসাইট: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## সফটওয়্যার স্ট্যাক
 
-IDURAR ফ্রি ওপেন-সোর্স ইআরপি এবং সিআরএম অ্যাপ, "মার্ন-স্ট্যাক" ভিত্তিক: নোড.জেএস, রিয়েক্ট.জেএস, রিডাক্স, এক্সপ্রেস.জেএস, মঙ্গোডিবি, অ্যান্টডিজাইন (অ্যান্টডি)
+WIEpilot ফ্রি ওপেন-সোর্স ইআরপি এবং সিআরএম অ্যাপ, "মার্ন-স্ট্যাক" ভিত্তিক: নোড.জেএস, রিয়েক্ট.জেএস, রিডাক্স, এক্সপ্রেস.জেএস, মঙ্গোডিবি, অ্যান্টডিজাইন (অ্যান্টডি)
 
 ## ব্যবহারকারী ব্যবস্থাপনা:
 

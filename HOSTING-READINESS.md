@@ -30,6 +30,10 @@ funktioniert.
    müssen Nutzer grundsätzlich Zugang zum korrespondierenden Quellcode der betriebenen Version
    erhalten. Branding, Drittanbieter-Abhängigkeiten und eigene Änderungen sollten vor dem Verkauf
    rechtlich geprüft werden.
+7. **Lizenzdienst:** Die Anwendung besitzt nun eine Startaktivierung und serverseitige API-Sperre.
+   Für installationsübergreifende Einmal-Aktivierung muss `LICENSE_DATABASE` zentral und besonders
+   geschützt betrieben werden. Mittelfristig empfiehlt sich ein separater HTTPS-Lizenzdienst, damit
+   Kundensysteme keine Zugangsdaten zur Lizenzdatenbank erhalten.
 
 ## Empfohlene Zielarchitektur
 
@@ -83,8 +87,9 @@ Priorität C (Wachstum):
 
 1. `.env.hosting.example` nach `.env` kopieren und Werte ersetzen.
 2. Einen zufälligen `JWT_SECRET` mit mindestens 32 Zeichen setzen.
-3. `docker compose up --build` ausführen.
-4. Die App ist standardmäßig auf Port 8080 und der Healthcheck unter `/health` erreichbar.
+3. `LICENSE_DATABASE` und eine pro Installation eindeutige `LICENSE_INSTANCE_ID` setzen.
+4. `docker compose up --build` ausführen.
+5. Die App ist standardmäßig auf Port 8080 und der Healthcheck unter `/health` erreichbar.
 
 Die Compose-Datei stellt bewusst nur eine Staging-Grundlage dar. Für Produktion gehören davor ein
 TLS-Reverse-Proxy oder Load-Balancer, externe Backups, Monitoring und beschränkter Datenbankzugriff.

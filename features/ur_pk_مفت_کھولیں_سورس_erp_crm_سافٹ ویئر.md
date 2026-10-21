@@ -1,12 +1,12 @@
-# IDURAR اوپن سورس ERP & CRM سافٹ ویئر
+# WIEpilot اوپن سورس ERP & CRM سافٹ ویئر
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-ڈیمو: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-ویب سائٹ: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+ڈیمو: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+ویب سائٹ: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## سافٹ ویئر اسٹیک
 
-IDURAR مفت اوپن سورس erp & crm ایپ، "mern-stack" پر مبنی ہے: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot مفت اوپن سورس erp & crm ایپ، "mern-stack" پر مبنی ہے: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## صارف کا نظم و ضبط:
 

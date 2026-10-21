@@ -27,15 +27,15 @@ export default function Search({ config }) {
 
   const isTyping = useRef(false);
 
-  let delayTimer = null;
+  const delayTimer = useRef(null);
   useEffect(() => {
     isLoading && setOptions([{ label: '... Searching' }]);
   }, [isLoading]);
   const onSearch = (searchText) => {
     isTyping.current = true;
 
-    clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    clearTimeout(delayTimer.current);
+    delayTimer.current = setTimeout(function () {
       if (isTyping.current && searchText !== '') {
         dispatch(
           erp.search(entity, {
@@ -76,7 +76,14 @@ export default function Search({ config }) {
     });
 
     setOptions(optionResults);
-  }, [result]);
+  }, [displayLabels, outputValue, result]);
+
+  useEffect(
+    () => () => {
+      clearTimeout(delayTimer.current);
+    },
+    []
+  );
 
   return (
     <AutoComplete

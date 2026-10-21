@@ -36,7 +36,7 @@ const ResetPassword = () => {
 
   useEffect(() => {
     if (isSuccess) navigate('/');
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   const FormContainer = () => {
     return (

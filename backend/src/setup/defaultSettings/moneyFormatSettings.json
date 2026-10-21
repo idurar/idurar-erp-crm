@@ -2,37 +2,37 @@
   {
     "settingCategory": "money_format_settings",
     "settingKey": "default_currency_code",
-    "settingValue": "USD",
+    "settingValue": "EUR",
     "valueType": "string"
   },
   {
     "settingCategory": "money_format_settings",
     "settingKey": "currency_name",
-    "settingValue": "US Dollars",
+    "settingValue": "Euro",
     "valueType": "string"
   },
   {
     "settingCategory": "money_format_settings",
     "settingKey": "currency_symbol",
-    "settingValue": "$",
+    "settingValue": "€",
     "valueType": "string"
   },
   {
     "settingCategory": "money_format_settings",
     "settingKey": "currency_position",
-    "settingValue": "before",
+    "settingValue": "after",
     "valueType": "string"
   },
   {
     "settingCategory": "money_format_settings",
     "settingKey": "decimal_sep",
-    "settingValue": ".",
+    "settingValue": ",",
     "valueType": "string"
   },
   {
     "settingCategory": "money_format_settings",
     "settingKey": "thousand_sep",
-    "settingValue": ",",
+    "settingValue": ".",
     "valueType": "string"
   },
   {

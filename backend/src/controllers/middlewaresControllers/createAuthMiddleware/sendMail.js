@@ -7,7 +7,7 @@ const sendMail = async ({
   name,
   link,
   idurar_app_email,
-  subject = 'Verify your email | idurar',
+  subject = 'E-Mail bestätigen | WIEpilot',
   type = 'emailVerfication',
   emailToken,
 }) => {

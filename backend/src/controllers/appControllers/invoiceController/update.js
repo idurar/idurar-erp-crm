@@ -5,6 +5,7 @@ const Model = mongoose.model('Invoice');
 const custom = require('@/controllers/pdfController');
 
 const { calculate } = require('@/helpers');
+const { calculateInvoice } = require('@/helpers/invoice');
 const schema = require('./schemaValidate');
 
 const update = async (req, res) => {
@@ -25,7 +26,42 @@ const update = async (req, res) => {
     removed: false,
   });
 
+  if (!previousInvoice) {
+    return res.status(404).json({ success: false, result: null, message: 'Rechnung nicht gefunden' });
+  }
+  if (previousInvoice.issuedAt || previousInvoice.paymentStatus === 'paid' || ['cancelled', 'refunded'].includes(previousInvoice.status)) {
+    return res.status(409).json({
+      success: false,
+      result: previousInvoice,
+      message: 'Ausgestellte, bezahlte, stornierte oder rückerstattete Rechnungen können nicht geändert werden.',
+    });
+  }
+
   const { credit } = previousInvoice;
+
+  if (
+    value.recurringActive &&
+    (value.recurring === 'none' ||
+      !value.nextRecurringDate ||
+      new Date(value.nextRecurringDate) <= new Date())
+  ) {
+    return res.status(400).json({
+      success: false,
+      result: null,
+      message: 'Für eine aktive Wiederholung sind Intervall und zukünftige Ausführung erforderlich.',
+    });
+  }
+  if (
+    value.recurringActive &&
+    value.recurringEndDate &&
+    new Date(value.recurringEndDate) < new Date(value.nextRecurringDate)
+  ) {
+    return res.status(400).json({
+      success: false,
+      result: null,
+      message: 'Das Enddatum darf nicht vor der nächsten Ausführung liegen.',
+    });
+  }
 
   const { items = [], taxRate = 0, discount = 0 } = req.body;
 
@@ -37,28 +73,19 @@ const update = async (req, res) => {
     });
   }
 
-  // default
-  let subTotal = 0;
-  let taxTotal = 0;
-  let total = 0;
-
-  //Calculate the items array with subTotal, total, taxTotal
-  items.map((item) => {
-    const lineAmount = calculate.multiply(item['quantity'], item['price']);
-    let total = calculate.multiply(lineAmount, 1 - (Number(item.discount) || 0) / 100);
-    //sub total
-    subTotal = calculate.add(subTotal, total);
-    //item total
-    item['total'] = total;
-  });
-  taxTotal = calculate.multiply(subTotal, taxRate / 100);
-  total = calculate.add(subTotal, taxTotal);
+  const { items: calculatedItems, subTotal, taxTotal, total } = calculateInvoice({ items, taxRate });
 
   body['subTotal'] = subTotal;
   body['taxTotal'] = taxTotal;
   body['total'] = total;
-  body['items'] = items;
+  body['items'] = calculatedItems;
   body['pdf'] = 'invoice-' + req.params.id + '.pdf';
+  delete body.number;
+  body.year = new Date(body.date).getFullYear();
+  body.recurringAnchorDate =
+    body.recurring !== 'none' && body.nextRecurringDate
+      ? new Date(body.nextRecurringDate)
+      : undefined;
   if (body.hasOwnProperty('currency')) {
     delete body.currency;
   }
@@ -67,6 +94,8 @@ const update = async (req, res) => {
   let paymentStatus =
     calculate.sub(total, discount) === credit ? 'paid' : credit > 0 ? 'partially' : 'unpaid';
   body['paymentStatus'] = paymentStatus;
+  // Clients must not publish an invoice through the generic update endpoint.
+  body['status'] = 'draft';
 
   const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
     new: true, // return the new result instead of the old one

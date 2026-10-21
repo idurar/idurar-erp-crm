@@ -3,7 +3,7 @@ import { request } from '@/request';
 
 export const crud = {
   resetState:
-    (props = {}) =>
+    () =>
     async (dispatch) => {
       dispatch({
         type: actionTypes.RESET_STATE,

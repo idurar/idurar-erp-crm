@@ -6,12 +6,18 @@ const router = express.Router();
 
 const adminController = require('@/controllers/coreControllers/adminController');
 const settingController = require('@/controllers/coreControllers/settingController');
+const adminManagement = require('@/controllers/coreControllers/adminManagement');
+const auditController = require('@/controllers/coreControllers/auditController');
 
 const { singleStorageUpload } = require('@/middlewares/uploadMiddleware');
 
 // //_______________________________ Admin management_______________________________
 
 router.route('/admin/read/:id').get(catchErrors(adminController.read));
+router.route('/admin/list').get(catchErrors(adminManagement.list));
+router.route('/admin/create').post(catchErrors(adminManagement.create));
+router.route('/admin/update/:id').patch(catchErrors(adminManagement.update));
+router.route('/audit/list').get(catchErrors(auditController.list));
 
 router.route('/admin/password-update/:id').patch(catchErrors(adminController.updatePassword));
 

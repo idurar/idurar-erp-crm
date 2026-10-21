@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
-import { Form, Input, InputNumber, Button, Select, Divider, Row, Col } from 'antd';
+import { Form, Input, InputNumber, Button, Select, Divider, Row, Col, Switch } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -11,38 +11,32 @@ import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
-import { selectFinanceSettings } from '@/redux/settings/selectors';
 import { useDate } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 
 import calculate from '@/utils/calculate';
-import { useSelector } from 'react-redux';
-import SelectAsync from '@/components/SelectAsync';
 import request from '@/request/request';
 
-const DEFAULT_PAYMENT_TERMS = 'Zahlbar innerhalb von 14 Tagen ab Rechnungsdatum ohne Abzug. Bitte geben Sie bei der Überweisung die Rechnungsnummer als Verwendungszweck an.';
-const DEFAULT_FOOTER = 'Vielen Dank für Ihren Auftrag. Es gelten unsere vereinbarten Geschäftsbedingungen.';
+const DEFAULT_PAYMENT_TERMS =
+  'Zahlbar innerhalb von 14 Tagen ab Rechnungsdatum ohne Abzug. Bitte geben Sie bei der Überweisung die Rechnungsnummer als Verwendungszweck an.';
+const DEFAULT_FOOTER =
+  'Vielen Dank für Ihren Auftrag. Es gelten unsere vereinbarten Geschäftsbedingungen.';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
-  const { last_invoice_number } = useSelector(selectFinanceSettings);
-
-  if (last_invoice_number === undefined) {
-    return <></>;
-  }
-
   return <LoadInvoiceForm subTotal={subTotal} current={current} />;
 }
 
 function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const translate = useLanguage();
   const { dateFormat } = useDate();
-  const { last_invoice_number } = useSelector(selectFinanceSettings);
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0.2);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
-  const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
   const form = Form.useFormInstance();
+  const recurringActive = Form.useWatch('recurringActive', form);
+  const invoiceDate = Form.useWatch('date', form);
+  const nextRecurringDate = Form.useWatch('nextRecurringDate', form);
 
   const handleClientChange = async (clientId) => {
     if (!clientId || clientId === 'redirectURL') return;
@@ -53,16 +47,19 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
     if (client.paymentTerms) form.setFieldValue('paymentTermsText', client.paymentTerms);
   };
 
+  const handleInvoiceDateChange = (value) => {
+    if (!current && value) form.setFieldValue('expiredDate', value.add(14, 'days'));
+  };
+
   const handelTaxChange = (value) => {
     setTaxRate(value / 100);
   };
 
   useEffect(() => {
     if (current) {
-      const { taxRate = 0, year, number } = current;
+      const { taxRate = 0, year } = current;
       setTaxRate(taxRate / 100);
-      setCurrentYear(year);
-      setLastNumber(number);
+      if (year) setCurrentYear(year);
     }
   }, [current]);
   useEffect(() => {
@@ -80,7 +77,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" xs={24} lg={8}>
           <Form.Item
             name="client"
             label={translate('Client')}
@@ -101,28 +98,31 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" xs={24} lg={8}>
           <Form.Item name="clientVatNumber" label="UID-Nummer">
-            <Input placeholder="wird aus den Kundendaten übernommen" />
+            <Input readOnly placeholder="Wird aus den Kundendaten übernommen" />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" xs={24} md={12} lg={8}>
+          <Form.Item label={translate('number')}>
+            <Input value={current?.number || 'Wird bei Veröffentlichung vergeben'} readOnly />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" xs={24} md={12} lg={8}>
           <Form.Item
-            label={translate('number')}
-            name="number"
-            initialValue={lastNumber}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            name="serviceDate"
+            label="Leistungsdatum"
+            rules={[{ required: true, type: 'object' }]}
+            initialValue={dayjs()}
           >
-            <InputNumber min={1} style={{ width: '100%' }} />
+            <DatePicker style={{ width: '100%' }} format={dateFormat} />
           </Form.Item>
         </Col>
-        <Form.Item name="year" initialValue={currentYear} hidden><InputNumber /></Form.Item>
+        <Form.Item name="year" initialValue={currentYear} hidden>
+          <InputNumber />
+        </Form.Item>
 
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" xs={24} md={12} lg={8}>
           <Form.Item
             name="date"
             label={translate('Date')}
@@ -134,10 +134,14 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             ]}
             initialValue={dayjs()}
           >
-            <DatePicker style={{ width: '100%' }} format={dateFormat} />
+            <DatePicker
+              style={{ width: '100%' }}
+              format={dateFormat}
+              onChange={handleInvoiceDateChange}
+            />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={24} md={12} lg={8}>
           <Form.Item
             name="expiredDate"
             label={translate('Expire Date')}
@@ -147,12 +151,18 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 type: 'object',
               },
             ]}
-            initialValue={dayjs().add(30, 'days')}
+            initialValue={dayjs().add(14, 'days')}
           >
-            <DatePicker style={{ width: '100%' }} format={dateFormat} />
+            <DatePicker
+              style={{ width: '100%' }}
+              format={dateFormat}
+              disabledDate={(date) =>
+                Boolean(invoiceDate && date?.endOf('day').isBefore(invoiceDate.startOf('day')))
+              }
+            />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={10}>
+        <Col className="gutter-row" xs={24} md={12} lg={8}>
           <Form.Item label={translate('Note')} name="notes">
             <Input />
           </Form.Item>
@@ -162,8 +172,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
       <Row gutter={[10, 0]} className="invoice-line-header">
         <Col span={7}>Beschreibung</Col>
         <Col span={3}>Menge</Col>
-        <Col span={3}>Preis</Col>
         <Col span={3}>Einheit</Col>
+        <Col span={3}>Preis</Col>
         <Col span={3}>Rabatt</Col>
         <Col span={4}>Gesamt</Col>
         <Col span={1}></Col>
@@ -182,7 +192,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 icon={<PlusOutlined />}
                 ref={addField}
               >
-                {translate('Add field')}
+                Position hinzufügen
               </Button>
             </Form.Item>
           </>
@@ -191,14 +201,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
       <Divider dashed />
       <div style={{ position: 'relative', width: ' 100%', float: 'right' }}>
         <Row gutter={[12, -5]}>
-          <Col className="gutter-row" span={5}>
-            <Form.Item>
-              <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                {translate('Save')}
-              </Button>
-            </Form.Item>
-          </Col>
-          <Col className="gutter-row" span={4} offset={10}>
+          <Col className="gutter-row" span={4} offset={15}>
             <p
               style={{
                 paddingLeft: '12px',
@@ -225,7 +228,13 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 },
               ]}
             >
-              <Select onChange={handelTaxChange} options={[0, 10, 13, 19, 20].map((value) => ({ value, label: `${value} % Umsatzsteuer` }))} />
+              <Select
+                onChange={handelTaxChange}
+                options={[0, 10, 13, 19, 20].map((value) => ({
+                  value,
+                  label: `${value} % Umsatzsteuer`,
+                }))}
+              />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={5}>
@@ -253,7 +262,11 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
       <Divider dashed />
       <Row gutter={20} className="invoice-template-texts">
         <Col xs={24} lg={12}>
-          <Form.Item name="paymentTermsText" label="Zahlungskonditionen" initialValue={DEFAULT_PAYMENT_TERMS}>
+          <Form.Item
+            name="paymentTermsText"
+            label="Zahlungskonditionen"
+            initialValue={DEFAULT_PAYMENT_TERMS}
+          >
             <Input.TextArea autoSize={{ minRows: 3, maxRows: 7 }} />
           </Form.Item>
         </Col>
@@ -262,6 +275,67 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             <Input.TextArea autoSize={{ minRows: 3, maxRows: 7 }} />
           </Form.Item>
         </Col>
+      </Row>
+      <Divider dashed />
+      <Row gutter={20}>
+        <Col xs={24} lg={6}>
+          <Form.Item
+            name="recurringActive"
+            label="Wiederkehrende Rechnung"
+            valuePropName="checked"
+            initialValue={false}
+          >
+            <Switch checkedChildren="Aktiv" unCheckedChildren="Einmalig" />
+          </Form.Item>
+        </Col>
+        {recurringActive && (
+          <>
+            <Col xs={24} md={8} lg={6}>
+              <Form.Item
+                name="recurring"
+                label="Intervall"
+                initialValue="monthly"
+                rules={[{ required: true }]}
+              >
+                <Select
+                  options={[
+                    { value: 'weekly', label: 'Wöchentlich' },
+                    { value: 'monthly', label: 'Monatlich' },
+                    { value: 'quarterly', label: 'Vierteljährlich' },
+                    { value: 'annually', label: 'Jährlich' },
+                  ]}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} md={8} lg={6}>
+              <Form.Item
+                name="nextRecurringDate"
+                label="Nächste Erstellung"
+                initialValue={dayjs().add(1, 'month')}
+                rules={[{ required: true, type: 'object' }]}
+              >
+                <DatePicker
+                  style={{ width: '100%' }}
+                  format={dateFormat}
+                  disabledDate={(date) => date?.endOf('day').isBefore(dayjs())}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} md={8} lg={6}>
+              <Form.Item name="recurringEndDate" label="Enddatum (optional)">
+                <DatePicker
+                  style={{ width: '100%' }}
+                  format={dateFormat}
+                  disabledDate={(date) =>
+                    date?.endOf('day').isBefore(
+                      nextRecurringDate ? nextRecurringDate.startOf('day') : dayjs()
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+          </>
+        )}
       </Row>
     </>
   );

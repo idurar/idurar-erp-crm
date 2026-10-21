@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Button, Row, Col, Descriptions, Statistic, Tag, Divider, Typography } from 'antd';
+import { Button, Row, Col, Descriptions, Statistic, Divider, Typography } from 'antd';
 import { PageHeader } from '@ant-design/pro-layout';
 import {
   EditOutlined,
@@ -14,11 +14,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/locale/useLanguage';
 
-import { generate as uniqueId } from 'shortid';
-
 import { selectCurrentItem } from '@/redux/erp/selectors';
 
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import { request } from '@/request';
 import { useMoney } from '@/settings';
 
 import useMail from '@/hooks/useMail';
@@ -81,7 +79,7 @@ export default function ReadItem({ config, selectedItem }) {
         tags={<span>{currentErp.paymentStatus && translate(currentErp.paymentStatus)}</span>}
         extra={[
           <Button
-            key={`${uniqueId()}`}
+            key="close"
             onClick={() => {
               navigate(`/${entity.toLowerCase()}`);
             }}
@@ -90,19 +88,19 @@ export default function ReadItem({ config, selectedItem }) {
             {translate('Close')}
           </Button>,
           <Button
-            key={`${uniqueId()}`}
-            onClick={() => {
-              window.open(
-                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
-                '_blank'
-              );
-            }}
+            key="download"
+            onClick={() =>
+              request.download({
+                path: `download/${entity}/${entity}-${currentErp._id}.pdf`,
+                filename: `${entity}-${currentErp.number || currentErp._id}.pdf`,
+              })
+            }
             icon={<FilePdfOutlined />}
           >
             {translate('Download PDF')}
           </Button>,
           <Button
-            key={`${uniqueId()}`}
+            key="email"
             loading={mailInProgress}
             onClick={() => {
               send(currentErp._id);
@@ -113,7 +111,7 @@ export default function ReadItem({ config, selectedItem }) {
           </Button>,
 
           <Button
-            key={`${uniqueId()}`}
+            key="edit"
             onClick={() => {
               dispatch(
                 erp.currentAction({

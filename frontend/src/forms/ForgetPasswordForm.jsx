@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Input } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';

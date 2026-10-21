@@ -1,0 +1,15 @@
+node_modules/
+**/node_modules/
+
+.env
+.env.*
+!.env.example
+!*.env.example
+temp.env
+
+dist/
+backups/
+*.log
+*.zip
+.DS_Store
+.idea/

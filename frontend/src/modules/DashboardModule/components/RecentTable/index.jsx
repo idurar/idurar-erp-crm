@@ -1,4 +1,4 @@
-import { Dropdown, Table } from 'antd';
+import { Button, Dropdown, Empty, Table } from 'antd';
 
 import { request } from '@/request';
 import useFetch from '@/hooks/useFetch';
@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { erp } from '@/redux/erp/actions';
 import useLanguage from '@/locale/useLanguage';
 import { useNavigate } from 'react-router-dom';
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
 
 export default function RecentTable({ ...props }) {
   const translate = useLanguage();
@@ -43,9 +42,11 @@ export default function RecentTable({ ...props }) {
     dispatch(erp.currentAction({ actionType: 'update', data: record }));
     navigate(`/${entity}/update/${record._id}`);
   };
-  const handleDownload = (record) => {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
-  };
+  const handleDownload = (record) =>
+    request.download({
+      path: `download/${entity}/${entity}-${record._id}.pdf`,
+      filename: `${entity}-${record.number || record._id}.pdf`,
+    });
 
   dataTableColumns = [
     ...dataTableColumns,
@@ -101,6 +102,21 @@ export default function RecentTable({ ...props }) {
       pagination={false}
       loading={isLoading}
       scroll={{ x: true }}
+      locale={{
+        emptyText: (
+          <Empty
+            description={
+              entity === 'invoice'
+                ? 'Noch keine Rechnungen vorhanden'
+                : 'Noch keine Angebote vorhanden'
+            }
+          >
+            <Button type="primary" onClick={() => navigate(`/${entity}/create`)}>
+              {entity === 'invoice' ? 'Rechnung erstellen' : 'Angebot erstellen'}
+            </Button>
+          </Empty>
+        ),
+      }}
     />
   );
 }

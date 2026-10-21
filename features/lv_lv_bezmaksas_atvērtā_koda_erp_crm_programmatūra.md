@@ -1,12 +1,12 @@
-# IDURAR Atvērtā koda ERP un CRM programmatūra
+# WIEpilot Atvērtā koda ERP un CRM programmatūra
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Mājaslapa: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Demo: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+Mājaslapa: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## Programmatūras tehnoloģiju komplekts
 
-IDURAR bezmaksas atvērtā koda erp & crm lietotne, balstīta uz "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot bezmaksas atvērtā koda erp & crm lietotne, balstīta uz "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Lietotāju pārvaldība:
 

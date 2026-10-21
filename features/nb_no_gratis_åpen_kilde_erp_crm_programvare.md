@@ -1,12 +1,12 @@
-# IDURAR Åpen kildekode ERP og CRM-programvare
+# WIEpilot Åpen kildekode ERP og CRM-programvare
 
-GitHub: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-Demo: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-Nettsted: [https://www.idurarapp.com](https://www.idurarapp.com)
+GitHub: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+Demo: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+Nettsted: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## Programvarestabel
 
-IDURAR Gratis åpen kildekode ERP og CRM-app, basert på "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot Gratis åpen kildekode ERP og CRM-app, basert på "mern-stack": Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## Brukerstyring:
 

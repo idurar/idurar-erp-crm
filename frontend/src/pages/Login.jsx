@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isSuccess) navigate('/');
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   const FormContainer = () => {
     return (
@@ -37,8 +37,6 @@ const LoginPage = () => {
           className="login-form"
           initialValues={{
             remember: true,
-            email:'admin@admin.com',
-            password:'admin123',
           }}
           onFinish={onFinish}
         >

@@ -1,12 +1,12 @@
-# نرم‌افزار متن‌باز IDURAR ERP & CRM
+# نرم‌افزار متن‌باز WIEpilot ERP & CRM
 
-گیت‌هاب: [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-نمایش آنلاین: [https://www.idurarapp.com/open-source-erp-crm/](https://www.idurarapp.com/open-source-erp-crm/)
-وبسایت: [https://www.idurarapp.com](https://www.idurarapp.com)
+گیت‌هاب: [https://github.com/WIEdesignAT/idurar-erp-crm](https://github.com/WIEdesignAT/idurar-erp-crm)
+نمایش آنلاین: [https://www.wiedesign.at/](https://www.wiedesign.at/)
+وبسایت: [https://www.wiedesign.at](https://www.wiedesign.at)
 
 ## مجموعه نرم‌افزاری
 
-IDURAR نرم‌افزار ERP & CRM متن‌باز رایگان است که بر اساس "mern-stack" ساخته شده است: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
+WIEpilot نرم‌افزار ERP & CRM متن‌باز رایگان است که بر اساس "mern-stack" ساخته شده است: Node.js React.js Redux Express.js MongoDB AntDesign (AntD)
 
 ## مدیریت کاربران:
 

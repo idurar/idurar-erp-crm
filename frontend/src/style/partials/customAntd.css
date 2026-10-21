@@ -1,5 +1,5 @@
 .ant-layout {
-  background: #ffffff !important;
+  background: var(--wie-background, #f6f8fb) !important;
 }
 .site-layout .site-layout-background {
   background: #fff;

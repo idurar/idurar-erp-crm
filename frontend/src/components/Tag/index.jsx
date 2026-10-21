@@ -9,7 +9,7 @@ export function StatusTag({ status = 'draft' }) {
       : status === 'sent'
       ? 'blue'
       : status === 'accepted'
-      ? 'green'
+      ? '#168568'
       : status === 'expired'
       ? 'orange'
       : 'red';
